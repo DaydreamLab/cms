@@ -37,7 +37,7 @@ class CategoryAdminService extends CategoryService
         return $item->save();
     }
 
-    public function filterItems(Collection $items, $limit)
+    public function filterItems($items, $limit)
     {
         $user = Auth::guard('api')->user();
         $viewlevels = $user->viewlevels;

@@ -1,6 +1,7 @@
 <?php
 namespace DaydreamLab\Cms\Models\Item;
 
+use DaydreamLab\Cms\Models\Category\Category;
 use DaydreamLab\Cms\Models\Tag\Tag;
 use DaydreamLab\JJAJ\Models\BaseModel;
 
@@ -59,13 +60,26 @@ class Item extends BaseModel
      * @var array
      */
     protected $appends = [
-        'tags'
+        'tags',
+        'category',
     ];
+
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
 
 
     public function tag()
     {
         return $this->belongsToMany(Tag::class, 'items_tags_maps', 'item_id', 'tag_id');
+    }
+
+
+    public function getCategoryAttribute()
+    {
+        return $this->category()->first();
     }
 
 

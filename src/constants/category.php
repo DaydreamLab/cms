@@ -301,27 +301,27 @@ return [
     ],
 
     // Get Category
-    'CATEGORY_GET_CATEGORY_SUCCESS' => [
-            'code'      => 200,
-            'message'   => 'Category get item success'
+    'CATEGORY_GET_ITEM_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Category get item success'
     ],
-    'CATEGORY_ADMIN_GET_CATEGORY_SUCCESS' => [
+    'CATEGORY_ADMIN_GET_ITEM_SUCCESS' => [
         'code'      => 200,
         'message'   => 'Category admin get item success'
     ],
-    'CATEGORY_FRONT_GET_CATEGORY_SUCCESS' => [
+    'CATEGORY_FRONT_GET_ITEM_SUCCESS' => [
         'code'      => 200,
         'message'   => 'Category front get item success'
     ],
-    'CATEGORY_GET_CATEGORY_FAIL' => [
+    'CATEGORY_GET_ITEM_FAIL' => [
         'code'      => 500,
         'message'   => 'Category get item fail'
     ],
-    'CATEGORY_ADMIN_GET_CATEGORY_FAIL' => [
+    'CATEGORY_ADMIN_GET_ITEM_FAIL' => [
         'code'      => 500,
         'message'   => 'Category get item search fail'
     ],
-    'CATEGORY_FRONT_GET_CATEGORY_FAIL' => [
+    'CATEGORY_FRONT_GET_ITEM_FAIL' => [
         'code'      => 500,
         'message'   => 'Category front get item fail'
     ],
