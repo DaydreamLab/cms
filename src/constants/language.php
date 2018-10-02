@@ -223,30 +223,30 @@ return [
         'message'   => 'Language front search fail'
     ],
 
-    // Find
-    'LANGUAGE_FIND_SUCCESS' => [
+    // Get Item
+    'LANGUAGE_GET_ITEM_SUCCESS' => [
             'code'      => 200,
-            'message'   => 'Language find success'
+            'message'   => 'Language get item success'
     ],
-    'LANGUAGE_ADMIN_FIND_SUCCESS' => [
+    'LANGUAGE_ADMIN_GET_ITEM_SUCCESS' => [
         'code'      => 200,
-        'message'   => 'Language admin find success'
+        'message'   => 'Language admin get item success'
     ],
-    'LANGUAGE_FRONT_FIND_SUCCESS' => [
+    'LANGUAGE_FRONT_GET_ITEM_SUCCESS' => [
         'code'      => 200,
-        'message'   => 'Language front find success'
+        'message'   => 'Language front get item success'
     ],
-    'LANGUAGE_FIND_FAIL' => [
+    'LANGUAGE_GET_ITEM_FAIL' => [
         'code'      => 500,
-        'message'   => 'Language find fail'
+        'message'   => 'Language get item fail'
     ],
-    'LANGUAGE_ADMIN_FIND_FAIL' => [
+    'LANGUAGE_ADMIN_GET_ITEM_FAIL' => [
         'code'      => 500,
-        'message'   => 'Language find search fail'
+        'message'   => 'Language get item search fail'
     ],
-    'LANGUAGE_FRONT_FIND_FAIL' => [
+    'LANGUAGE_FRONT_GET_ITEM_FAIL' => [
         'code'      => 500,
-        'message'   => 'Language front find fail'
+        'message'   => 'Language front get item fail'
     ],
 
 

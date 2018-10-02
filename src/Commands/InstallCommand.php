@@ -36,7 +36,9 @@ class InstallCommand extends Command
 
     protected $seeders = [
         'CategoriesTableSeeder',
+        'ItemsTableSeeder',
         'LanguagesTableSeeder',
+        'TagsTableSeeder',
     ];
 
 

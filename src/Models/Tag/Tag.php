@@ -2,9 +2,11 @@
 namespace DaydreamLab\Cms\Models\Tag;
 
 use DaydreamLab\JJAJ\Models\BaseModel;
+use Kalnoy\Nestedset\NodeTrait;
 
 class Tag extends BaseModel
 {
+    use NodeTrait;
     /**
      * The table associated with the model.
      *
@@ -20,11 +22,22 @@ class Tag extends BaseModel
      */
     protected $fillable = [
         'title',
-        'category_id',
+        'alias',
         'state',
         'description',
+        'hits',
+        'access',
+        'language',
+        'ordering',
+        'metadata',
+        'metadesc',
+        'params',
+        'lock_by',
+        'lock_at',
         'created_by',
-        'updated_by'
+        'updated_by',
+        'publish_up',
+        'publish_down',
     ];
 
 

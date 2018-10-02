@@ -28,6 +28,32 @@ return [
         'message'   => 'Category front create fail'
     ],
 
+    // Create Nested
+    'CATEGORY_CREATE_NESTED_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Category create nested success'
+    ],
+    'CATEGORY_ADMIN_CREATE_NESTED_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Category admin create nested success'
+    ],
+    'CATEGORY_FRONT_CREATE_NESTED_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Category front create nested success'
+    ],
+    'CATEGORY_CREATE_NESTED_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Category create nested fail'
+    ],
+    'CATEGORY_ADMIN_CREATE_NESTED_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Category admin create nested fail'
+    ],
+    'CATEGORY_FRONT_CREATE_NESTED_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Category front create nested fail'
+    ],
+
 
 
     // Update
@@ -55,6 +81,34 @@ return [
     'CATEGORY_FRONT_UPDATE_FAIL' => [
         'code'      => 500,
         'message'   => 'Category front update fail'
+    ],
+
+
+    // Update
+    'CATEGORY_UPDATE_NESTED_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Category update nested success'
+    ],
+    'CATEGORY_ADMIN_UPDATE_NESTED_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Category admin update nested success'
+    ],
+    'CATEGORY_FRONT_UPDATE_NESTED_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Category front update nested success'
+    ],
+
+    'CATEGORY_UPDATE_NESTED_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Category update fail'
+    ],
+    'CATEGORY_ADMIN_UPDATE_NESTED_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Category admin update nested fail'
+    ],
+    'CATEGORY_FRONT_UPDATE_NESTED_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Category front update nested fail'
     ],
 
 
@@ -100,8 +154,6 @@ return [
         'code'      => 200,
         'message'   => 'Category front delete success'
     ],
-
-
     'CATEGORY_DELETE_FAIL' => [
         'code'      => 500,
         'message'   => 'Category delete fail'
@@ -115,6 +167,31 @@ return [
         'message'   => 'Category front delete fail'
     ],
 
+    // Delete Nested
+    'CATEGORY_DELETE_NESTED_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Category delete nested success'
+    ],
+    'CATEGORY_ADMIN_DELETE_NESTED_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Category admin delete nested success'
+    ],
+    'CATEGORY_FRONT_DELETE_NESTED_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Category front delete nested success'
+    ],
+    'CATEGORY_DELETE_NESTED_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Category delete nested fail'
+    ],
+    'CATEGORY_ADMIN_DELETE_NESTED_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Category admin delete nested fail'
+    ],
+    'CATEGORY_FRONT_DELETE_NESTED_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Category front delete nested fail'
+    ],
 
     // Publish
     'CATEGORY_PUBLISH_SUCCESS' => [
@@ -223,30 +300,30 @@ return [
         'message'   => 'Category front search fail'
     ],
 
-    // Find
-    'CATEGORY_FIND_SUCCESS' => [
+    // Get Category
+    'CATEGORY_GET_CATEGORY_SUCCESS' => [
             'code'      => 200,
-            'message'   => 'Category find success'
+            'message'   => 'Category get item success'
     ],
-    'CATEGORY_ADMIN_FIND_SUCCESS' => [
+    'CATEGORY_ADMIN_GET_CATEGORY_SUCCESS' => [
         'code'      => 200,
-        'message'   => 'Category admin find success'
+        'message'   => 'Category admin get item success'
     ],
-    'CATEGORY_FRONT_FIND_SUCCESS' => [
+    'CATEGORY_FRONT_GET_CATEGORY_SUCCESS' => [
         'code'      => 200,
-        'message'   => 'Category front find success'
+        'message'   => 'Category front get item success'
     ],
-    'CATEGORY_FIND_FAIL' => [
+    'CATEGORY_GET_CATEGORY_FAIL' => [
         'code'      => 500,
-        'message'   => 'Category find fail'
+        'message'   => 'Category get item fail'
     ],
-    'CATEGORY_ADMIN_FIND_FAIL' => [
+    'CATEGORY_ADMIN_GET_CATEGORY_FAIL' => [
         'code'      => 500,
-        'message'   => 'Category find search fail'
+        'message'   => 'Category get item search fail'
     ],
-    'CATEGORY_FRONT_FIND_FAIL' => [
+    'CATEGORY_FRONT_GET_CATEGORY_FAIL' => [
         'code'      => 500,
-        'message'   => 'Category front find fail'
+        'message'   => 'Category front get item fail'
     ],
 
     'CATEGORY_GET_TREE_SUCCESS' => [
@@ -260,5 +337,102 @@ return [
     'CATEGORY_FRONT_GET_TREE_SUCCESS' => [
         'code'      => 200,
         'message'   => 'Category front get tree success'
+    ],
+
+
+    // Checkout
+    'CATEGORY_CHECKOUT_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Category checkout success'
+    ],
+    'CATEGORY_ADMIN_CHECKOUT_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Category admin checkout success'
+    ],
+    'CATEGORY_FRONT_CHECKOUT_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Category front checkout success'
+    ],
+    'CATEGORY_CHECKOUT_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Category checkout fail'
+    ],
+    'CATEGORY_ADMIN_CHECKOUT_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Category admin checkout fail'
+    ],
+    'CATEGORY_FRONT_CHECKOUT_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Category front checkout fail'
+    ],
+
+
+
+    // Is Locked
+    'CATEGORY_IS_LOCKED' => [
+        'code'      => 403,
+        'message'   => 'Category is locked'
+    ],
+    'CATEGORY_ADMIN_IS_LOCKED' => [
+        'code'      => 403,
+        'message'   => 'Category admin is locked'
+    ],
+    'CATEGORY_FRONT_IS_LOCKED' => [
+        'code'      => 403,
+        'message'   => 'Category front is locked'
+    ],
+
+
+    // Featured
+    'CATEGORY_FEATURED_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Category featured success'
+    ],
+    'CATEGORY_ADMIN_FEATURED_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Category admin featured success'
+    ],
+    'CATEGORY_FRONT_FEATURED_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Category front featured success'
+    ],
+    'CATEGORY_FEATURED_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Category featured fail'
+    ],
+    'CATEGORY_ADMIN_FEATURED_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Category admin featured fail'
+    ],
+    'CATEGORY_FRONT_FEATURED_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Category front featured fail'
+    ],
+
+
+    // Ordering
+    'CATEGORY_UPDATE_ORDERING_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Category update ordering success'
+    ],
+    'CATEGORY_ADMIN_UPDATE_ORDERING_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Category admin update ordering success'
+    ],
+    'CATEGORY_FRONT_UPDATE_ORDERING_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Category front update ordering success'
+    ],
+    'CATEGORY_UPDATE_ORDERING_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Category update ordering fail'
+    ],
+    'CATEGORY_ADMIN_UPDATE_ORDERING_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Category admin update ordering fail'
+    ],
+    'CATEGORY_FRONT_UPDATE_ORDERING_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Category front update ordering fail'
     ],
 ];

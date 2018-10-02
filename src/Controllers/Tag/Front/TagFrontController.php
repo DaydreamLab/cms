@@ -10,6 +10,7 @@ use DaydreamLab\Cms\Requests\Tag\Front\TagFrontRemovePost;
 use DaydreamLab\Cms\Requests\Tag\Front\TagFrontStorePost;
 use DaydreamLab\Cms\Requests\Tag\Front\TagFrontStatePost;
 use DaydreamLab\Cms\Requests\Tag\Front\TagFrontSearchPost;
+use DaydreamLab\Cms\Requests\Tag\Front\TagFrontCheckoutPost;
 
 
 class TagFrontController extends BaseController
@@ -22,7 +23,7 @@ class TagFrontController extends BaseController
 
     public function getItem($id)
     {
-        $this->service->find($id);
+        $this->service->getItem($id);
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
@@ -31,6 +32,14 @@ class TagFrontController extends BaseController
     public function getItems()
     {
         $this->service->search(new Collection());
+
+        return ResponseHelper::response($this->service->status, $this->service->response);
+    }
+
+
+    public function checkout(TagFrontCheckoutPost $request)
+    {
+        $this->service->checkout($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }

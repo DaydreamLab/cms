@@ -26,8 +26,25 @@ class ItemStorePost extends AdminRequest
         return [
             'id'            => 'nullable|integer',
             'title'         => 'required|string',
+            'alias'         => 'nullable|string',
             'state'         => 'required|integer',
+            'introimage'    => 'nullable|string',
+            'introtext'     => 'nullable|string',
+            'image'         => 'nullable|string',
             'description'   => 'nullable|string',
+            'hits'          => 'nullable|integer',
+            'access'        => 'nullable|integer',
+            'featured'      => 'nullable|integer',
+            'featured_ordering'  => 'nullable|integer',
+            'language'      => 'nullable|string',
+            'metadesc'      => 'nullable|string',
+            'metadata'      => 'nullable|string',
+            'params'        => 'nullable|string',
+            'ordering'      => 'nullable|integer',
+            'tags'          => 'nullable|array',
+            'tags.*'        => 'nullable|array',
+            'tags.*.id'     => 'nullable|integer',
+            'tags.*.title'  => 'required|string'
         ];
     }
 }

@@ -10,6 +10,7 @@ use DaydreamLab\Cms\Requests\Category\Front\CategoryFrontRemovePost;
 use DaydreamLab\Cms\Requests\Category\Front\CategoryFrontStorePost;
 use DaydreamLab\Cms\Requests\Category\Front\CategoryFrontStatePost;
 use DaydreamLab\Cms\Requests\Category\Front\CategoryFrontSearchPost;
+use DaydreamLab\Cms\Requests\Category\Front\CategoryFrontCheckoutPost;
 
 
 class CategoryFrontController extends BaseController
@@ -22,7 +23,7 @@ class CategoryFrontController extends BaseController
 
     public function getItem($id)
     {
-        $this->service->find($id);
+        $this->service->getItem($id);
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
@@ -31,6 +32,14 @@ class CategoryFrontController extends BaseController
     public function getItems()
     {
         $this->service->search(new Collection());
+
+        return ResponseHelper::response($this->service->status, $this->service->response);
+    }
+
+
+    public function checkout(CategoryFrontCheckoutPost $request)
+    {
+        $this->service->checkout($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }

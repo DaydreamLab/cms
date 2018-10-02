@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Requests\Tag;
 
 use DaydreamLab\JJAJ\Requests\AdminRequest;
+use Illuminate\Validation\Rule;
 
 class TagStorePost extends AdminRequest
 {
@@ -25,9 +26,22 @@ class TagStorePost extends AdminRequest
     {
         return [
             'id'            => 'nullable|integer',
+            'parent_id'     => 'nullable|integer',
             'title'         => 'required|string',
-            'state'         => 'required|integer',
+            'alias'         => 'nullable|string',
+            'state'         => [
+                'required',
+                Rule::in([0,1,-1,-2])
+            ],
             'description'   => 'nullable|string',
+            'hits'          => 'nullable|integer',
+            'access'        => 'nullable|integer',
+            'language'      => 'nullable|string',
+            'metadesc'      => 'nullable|string',
+            'metadata'      => 'nullable|string',
+            'params'        => 'nullable|string',
+            'publish_up'    => 'nullable|datetime',
+            'publish_sown'  => 'nullable|datetime',
         ];
     }
 }

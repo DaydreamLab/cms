@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Repositories\Tag\Admin;
 
 use DaydreamLab\Cms\Repositories\Tag\TagRepository;
 use DaydreamLab\Cms\Models\Tag\Admin\TagAdmin;
+use Illuminate\Support\Collection;
 
 class TagAdminRepository extends TagRepository
 {
@@ -11,4 +12,5 @@ class TagAdminRepository extends TagRepository
     {
         parent::__construct($model);
     }
+
 }

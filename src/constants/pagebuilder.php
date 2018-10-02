@@ -197,29 +197,29 @@ return [
         'message'   => 'Pagebuilder front search fail'
     ],
 
-    // Find
-    'PAGEBUILDER_FIND_SUCCESS' => [
+    // Get Item
+    'PAGEBUILDER_GET_ITEM_SUCCESS' => [
             'code'      => 200,
-            'message'   => 'Pagebuilder find success'
+            'message'   => 'Pagebuilder get item success'
     ],
-    'PAGEBUILDER_ADMIN_FIND_SUCCESS' => [
+    'PAGEBUILDER_ADMIN_GET_ITEM_SUCCESS' => [
         'code'      => 200,
-        'message'   => 'Pagebuilder admin find success'
+        'message'   => 'Pagebuilder admin get item success'
     ],
-    'PAGEBUILDER_FRONT_FIND_SUCCESS' => [
+    'PAGEBUILDER_FRONT_GET_ITEM_SUCCESS' => [
         'code'      => 200,
-        'message'   => 'Pagebuilder front find success'
+        'message'   => 'Pagebuilder front get item success'
     ],
-    'PAGEBUILDER_FIND_FAIL' => [
+    'PAGEBUILDER_GET_ITEM_FAIL' => [
         'code'      => 500,
-        'message'   => 'Pagebuilder find fail'
+        'message'   => 'Pagebuilder get item fail'
     ],
-    'PAGEBUILDER_ADMIN_FIND_FAIL' => [
+    'PAGEBUILDER_ADMIN_GET_ITEM_FAIL' => [
         'code'      => 500,
-        'message'   => 'Pagebuilder find search fail'
+        'message'   => 'Pagebuilder get item search fail'
     ],
-    'PAGEBUILDER_FRONT_FIND_FAIL' => [
+    'PAGEBUILDER_FRONT_GET_ITEM_FAIL' => [
         'code'      => 500,
-        'message'   => 'Pagebuilder front find fail'
+        'message'   => 'Pagebuilder front get item fail'
     ],
 ];

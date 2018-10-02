@@ -10,6 +10,7 @@ use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminRemovePost;
 use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminStorePost;
 use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminStatePost;
 use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminSearchPost;
+use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminCheckoutPost;
 
 class CategoryAdminController extends BaseController
 {
@@ -20,7 +21,7 @@ class CategoryAdminController extends BaseController
 
     public function getItem($id)
     {
-        $this->service->find($id);
+        $this->service->getItem($id);
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
@@ -29,6 +30,14 @@ class CategoryAdminController extends BaseController
     public function getItems()
     {
         $this->service->search(new Collection());
+
+        return ResponseHelper::response($this->service->status, $this->service->response);
+    }
+
+
+    public function checkout(CategoryAdminCheckoutPost $request)
+    {
+        $this->service->checkout($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
@@ -69,6 +78,14 @@ class CategoryAdminController extends BaseController
     public function tree()
     {
         $this->service->tree('category');
+
+        return ResponseHelper::response($this->service->status, $this->service->response);
+    }
+
+
+    public function unlock($id)
+    {
+        $this->service->unlock($id);
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }

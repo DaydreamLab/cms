@@ -10,6 +10,10 @@ use DaydreamLab\Cms\Requests\Item\ItemRemovePost;
 use DaydreamLab\Cms\Requests\Item\ItemStorePost;
 use DaydreamLab\Cms\Requests\Item\ItemStatePost;
 use DaydreamLab\Cms\Requests\Item\ItemSearchPost;
+use DaydreamLab\Cms\Requests\Item\ItemCheckoutPost;
+use DaydreamLab\Cms\Requests\Item\ItemFeaturePost;
+use DaydreamLab\Cms\Requests\Item\ItemOrderingPost;
+
 
 class ItemController extends BaseController
 {
@@ -19,9 +23,25 @@ class ItemController extends BaseController
     }
 
 
+    public function checkout(ItemCheckoutPost $request)
+    {
+        $this->service->checkout($request->rulesInput());
+
+        return ResponseHelper::response($this->service->status, $this->service->response);
+    }
+
+
+    public function featured(ItemFeaturePost $request)
+    {
+        $this->service->featured($request->rulesInput());
+
+        return ResponseHelper::response($this->service->status, $this->service->response);
+    }
+
+
     public function getItem($id)
     {
-        $this->service->find($id);
+        $this->service->getItem($id);
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
@@ -30,6 +50,14 @@ class ItemController extends BaseController
     public function getItems()
     {
         $this->service->search(new Collection());
+
+        return ResponseHelper::response($this->service->status, $this->service->response);
+    }
+
+
+    public function ordering(ItemOrderingPost $request)
+    {
+        $this->service->ordering($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }

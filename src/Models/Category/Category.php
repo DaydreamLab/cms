@@ -1,7 +1,10 @@
 <?php
 namespace DaydreamLab\Cms\Models\Category;
 
+use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Models\BaseModel;
+use DaydreamLab\User\Models\User\UserGroup;
+use DaydreamLab\User\Models\Viewlevel\Viewlevel;
 use Kalnoy\Nestedset\NodeTrait;
 
 class Category extends BaseModel
@@ -14,7 +17,7 @@ class Category extends BaseModel
      */
     protected $table = 'categories';
 
-
+    protected $order = 'asc';
     /**
      * The attributes that are mass assignable.
      *
@@ -24,17 +27,26 @@ class Category extends BaseModel
         'title',
         'alias',
         'state',
+        'path',
+        'state',
         'introimage',
         'introtext',
         'image',
         'description',
         'extension',
-        'order',
+        'hits',
+        'access',
+        'ordering',
         'language',
+        'content_type',
+        'template',
         'metadesc',
         'metadata',
+        'params',
         'created_by',
-        'updated_by'
+        'updated_by',
+        'lock_by',
+        'lock_at',
     ];
 
 
@@ -44,6 +56,9 @@ class Category extends BaseModel
      * @var array
      */
     protected $hidden = [
+        '_lft',
+        '_rgt',
+        'ancestors'
     ];
 
 
@@ -53,8 +68,37 @@ class Category extends BaseModel
      * @var array
      */
     protected $appends = [
+        'creator',
+        'updater',
+        'tree_title',
+        //'viewlevels',
     ];
 
 
+    public function viewlevel()
+    {
+        return $this->hasOne(Viewlevel::class, 'id', 'access');
+    }
 
+
+    public function getViewlevelsAttribute()
+    {
+        $rules = $this->viewlevel()->first()->rules;
+        $canAccess = [];
+        foreach ($rules as $rule)
+        {
+            $group =   UserGroup::find($rule);
+            if (!in_array($rule, $canAccess) && $group->title!= 'ROOT') {
+                $canAccess[] = $rule;
+            }
+
+            foreach ($group->ancestors as $ancestor)
+            {
+                if (!in_array($ancestor->id, $canAccess) && $ancestor->title != 'ROOT') {
+                    $canAccess[] = $ancestor->id;
+                }
+            }
+        }
+        return $canAccess;
+    }
 }

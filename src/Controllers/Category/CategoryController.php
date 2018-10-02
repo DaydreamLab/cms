@@ -1,5 +1,4 @@
 <?php
-
 namespace DaydreamLab\Cms\Controllers\Category;
 
 use DaydreamLab\JJAJ\Controllers\BaseController;
@@ -10,6 +9,7 @@ use DaydreamLab\Cms\Requests\Category\CategoryRemovePost;
 use DaydreamLab\Cms\Requests\Category\CategoryStorePost;
 use DaydreamLab\Cms\Requests\Category\CategoryStatePost;
 use DaydreamLab\Cms\Requests\Category\CategorySearchPost;
+use DaydreamLab\Cms\Requests\Category\CategoryCheckoutPost;
 
 class CategoryController extends BaseController
 {
@@ -21,7 +21,7 @@ class CategoryController extends BaseController
 
     public function getItem($id)
     {
-        $this->service->find($id);
+        $this->service->getItem($id);
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
@@ -30,6 +30,14 @@ class CategoryController extends BaseController
     public function getItems()
     {
         $this->service->search(new Collection());
+
+        return ResponseHelper::response($this->service->status, $this->service->response);
+    }
+
+
+    public function checkout(CategoryCheckoutPost $request)
+    {
+        $this->service->checkout($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
@@ -65,4 +73,5 @@ class CategoryController extends BaseController
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
+
 }

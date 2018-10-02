@@ -10,6 +10,7 @@ use DaydreamLab\Cms\Requests\Tag\TagRemovePost;
 use DaydreamLab\Cms\Requests\Tag\TagStorePost;
 use DaydreamLab\Cms\Requests\Tag\TagStatePost;
 use DaydreamLab\Cms\Requests\Tag\TagSearchPost;
+use DaydreamLab\Cms\Requests\Tag\TagCheckoutPost;
 
 class TagController extends BaseController
 {
@@ -21,7 +22,7 @@ class TagController extends BaseController
 
     public function getItem($id)
     {
-        $this->service->find($id);
+        $this->service->getItem($id);
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
@@ -30,6 +31,14 @@ class TagController extends BaseController
     public function getItems()
     {
         $this->service->search(new Collection());
+
+        return ResponseHelper::response($this->service->status, $this->service->response);
+    }
+
+
+    public function checkout(TagCheckoutPost $request)
+    {
+        $this->service->checkout($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }

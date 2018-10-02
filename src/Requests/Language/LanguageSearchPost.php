@@ -25,7 +25,7 @@ class LanguageSearchPost extends ListRequest
             'state'     => [
                 'nullable',
                 'integer',
-                Rule::in([0,1,-2])
+                Rule::in([0,1,-1,-2])
             ]
         ];
 

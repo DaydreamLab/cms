@@ -4,13 +4,29 @@ namespace DaydreamLab\Cms\Services\Item;
 
 use DaydreamLab\Cms\Repositories\Item\ItemRepository;
 use DaydreamLab\JJAJ\Services\BaseService;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 class ItemService extends BaseService
 {
     protected $type = 'Item';
 
-    public function __construct(ItemRepository $repo)
+    protected $itemTagMapService;
+
+
+    public function featured(Collection $input)
     {
-        parent::__construct($repo);
+        $feature = $this->repo->featured($input);
+        if ($feature)
+        {
+            $this->status   = Str::upper(Str::snake($this->type.'FeaturedSuccess'));
+            $this->response = null;
+        }
+        else
+        {
+            $this->status   = Str::upper(Str::snake($this->type.'FeaturedSuccess'));
+            $this->response = null;
+        }
     }
+
 }

@@ -10,6 +10,9 @@ use DaydreamLab\Cms\Requests\Item\Front\ItemFrontRemovePost;
 use DaydreamLab\Cms\Requests\Item\Front\ItemFrontStorePost;
 use DaydreamLab\Cms\Requests\Item\Front\ItemFrontStatePost;
 use DaydreamLab\Cms\Requests\Item\Front\ItemFrontSearchPost;
+use DaydreamLab\Cms\Requests\Item\Front\ItemFrontCheckoutPost;
+use DaydreamLab\Cms\Requests\Item\Front\ItemFrontFeaturePost;
+use DaydreamLab\Cms\Requests\Item\Front\ItemFrontOrderingPost;
 
 
 class ItemFrontController extends BaseController
@@ -20,9 +23,25 @@ class ItemFrontController extends BaseController
     }
 
 
+    public function checkout(ItemFrontCheckoutPost $request)
+    {
+        $this->service->checkout($request->rulesInput());
+
+        return ResponseHelper::response($this->service->status, $this->service->response);
+    }
+
+
+    public function feature(ItemFrontFeaturePost $request)
+    {
+        $this->service->feature($request->rulesInput());
+
+        return ResponseHelper::response($this->service->status, $this->service->response);
+    }
+
+
     public function getItem($id)
     {
-        $this->service->find($id);
+        $this->service->getItem($id);
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
@@ -31,6 +50,14 @@ class ItemFrontController extends BaseController
     public function getItems()
     {
         $this->service->search(new Collection());
+
+        return ResponseHelper::response($this->service->status, $this->service->response);
+    }
+
+
+    public function ordering(ItemFrontOrderingPost $request)
+    {
+        $this->service->ordering($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }

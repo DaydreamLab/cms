@@ -30,7 +30,7 @@ class PagebuilderStatePost extends AdminRequest
             'state'     => [
                 'required',
                 'integer',
-                Rule::in([0,1,-2])
+                Rule::in([0,1,-1,-2])
             ]
         ];
     }

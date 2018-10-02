@@ -30,6 +30,33 @@ return [
 
 
 
+    // Create Nested
+    'TAG_CREATE_NESTED_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Tag create nested success'
+    ],
+    'TAG_ADMIN_CREATE_NESTED_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Tag admin create nested success'
+    ],
+    'TAG_FRONT_CREATE_NESTED_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Tag front create nested success'
+    ],
+    'TAG_CREATE_NESTED_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Tag create nested fail'
+    ],
+    'TAG_ADMIN_CREATE_NESTED_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Tag admin create nested fail'
+    ],
+    'TAG_FRONT_CREATE_NESTED_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Tag front create nested fail'
+    ],
+
+
     // Update
     'TAG_UPDATE_SUCCESS' => [
         'code'      => 200,
@@ -100,8 +127,6 @@ return [
         'code'      => 200,
         'message'   => 'Tag front delete success'
     ],
-
-
     'TAG_DELETE_FAIL' => [
         'code'      => 500,
         'message'   => 'Tag delete fail'
@@ -113,6 +138,33 @@ return [
     'TAG_FRONT_DELETE_FAIL' => [
         'code'      => 500,
         'message'   => 'Tag front delete fail'
+    ],
+
+
+    // Delete Nested
+    'TAG_DELETE_NESTED_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Tag delete nested success'
+    ],
+    'TAG_ADMIN_DELETE_NESTED_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Tag admin delete nested success'
+    ],
+    'TAG_FRONT_DELETE_NESTED_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Tag front delete nested success'
+    ],
+    'TAG_DELETE_NESTED_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Tag delete nested fail'
+    ],
+    'TAG_ADMIN_DELETE_NESTED_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Tag admin delete nested fail'
+    ],
+    'TAG_FRONT_DELETE_NESTED_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Tag front delete nested fail'
     ],
 
 
@@ -223,29 +275,98 @@ return [
         'message'   => 'Tag front search fail'
     ],
 
-    // Find
-    'TAG_FIND_SUCCESS' => [
+    // Get Item
+    'TAG_GET_ITEM_SUCCESS' => [
             'code'      => 200,
-            'message'   => 'Tag find success'
+            'message'   => 'Tag get item success'
     ],
-    'TAG_ADMIN_FIND_SUCCESS' => [
+    'TAG_ADMIN_GET_ITEM_SUCCESS' => [
         'code'      => 200,
-        'message'   => 'Tag admin find success'
+        'message'   => 'Tag admin get item success'
     ],
-    'TAG_FRONT_FIND_SUCCESS' => [
+    'TAG_FRONT_GET_ITEM_SUCCESS' => [
         'code'      => 200,
-        'message'   => 'Tag front find success'
+        'message'   => 'Tag front get item success'
     ],
-    'TAG_FIND_FAIL' => [
+    'TAG_GET_ITEM_FAIL' => [
         'code'      => 500,
-        'message'   => 'Tag find fail'
+        'message'   => 'Tag get item fail'
     ],
-    'TAG_ADMIN_FIND_FAIL' => [
+    'TAG_ADMIN_GET_ITEM_FAIL' => [
         'code'      => 500,
-        'message'   => 'Tag find search fail'
+        'message'   => 'Tag get item search fail'
     ],
-    'TAG_FRONT_FIND_FAIL' => [
+    'TAG_FRONT_GET_ITEM_FAIL' => [
         'code'      => 500,
-        'message'   => 'Tag front find fail'
+        'message'   => 'Tag front get item fail'
+    ],
+
+
+    // Checkout
+    'TAG_CHECKOUT_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Tag checkout success'
+    ],
+    'TAG_ADMIN_CHECKOUT_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Tag admin checkout success'
+    ],
+    'TAG_FRONT_CHECKOUT_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Tag front checkout success'
+    ],
+    'TAG_CHECKOUT_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Tag checkout fail'
+    ],
+    'TAG_ADMIN_CHECKOUT_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Tag admin checkout fail'
+    ],
+    'TAG_FRONT_CHECKOUT_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Tag front checkout fail'
+    ],
+
+
+    // Is Locked
+    'TAG_IS_LOCKED' => [
+        'code'      => 403,
+        'message'   => 'Tag is locked'
+    ],
+    'TAG_ADMIN_IS_LOCKED' => [
+        'code'      => 403,
+        'message'   => 'Tag admin is locked'
+    ],
+    'TAG_FRONT_IS_LOCKED' => [
+        'code'      => 403,
+        'message'   => 'Tag front is locked'
+    ],
+
+
+    // Ordering
+    'TAG_UPDATE_ORDERING_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Tag update ordering success'
+    ],
+    'TAG_ADMIN_UPDATE_ORDERING_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Tag admin update ordering success'
+    ],
+    'TAG_FRONT_UPDATE_ORDERING_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Tag front update ordering success'
+    ],
+    'TAG_UPDATE_ORDERING_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Tag update ordering fail'
+    ],
+    'TAG_ADMIN_UPDATE_ORDERING_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Tag admin update ordering fail'
+    ],
+    'TAG_FRONT_UPDATE_ORDERING_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Tag front update ordering fail'
     ],
 ];

@@ -12,5 +12,15 @@ class CategoryFront extends Category
      */
     protected $table = 'categories';
 
-
+    protected $hidden = [
+        'parent_id',
+        '_lft',
+        '_rgt',
+        'state',
+        'extension',
+        'access',
+        'created_by',
+        'updated_by',
+        'ancestors'
+    ];
 }
