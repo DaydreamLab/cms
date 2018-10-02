@@ -1,0 +1,156 @@
+[
+  {
+    "title": "Contents",
+    "path": "/content",
+    "component": "",
+    "type": "alias",
+    "redirect": "",
+    "icon": "",
+    "state": 1,
+    "showNav": 1,
+    "ordering": 8,
+    "created_by": 1,
+    "children": [
+      {
+        "title": "Items",
+        "path": "",
+        "component": "content/item/list",
+        "type": "menu",
+        "redirect": "",
+        "icon": "",
+        "state": 1,
+        "showNav": 1,
+        "ordering": 1,
+        "created_by": 1,
+        "children": [],
+        "apis": [
+          {
+            "method": "add",
+            "url": "/admin/item/store",
+            "created_by": 1
+          },
+          {
+            "method": "edit",
+            "url": "/admin/item/store",
+            "created_by": 1
+          },
+          {
+            "method": "delete",
+            "url": "/admin/item/remove",
+            "created_by": 1
+          },
+          {
+            "method": "updateState",
+            "url": "/admin/item/state",
+            "created_by": 1
+          },
+          {
+            "method": "updateFeatured",
+            "url": "/admin/item/featured",
+            "created_by": 1
+          }
+        ]
+      },
+      {
+        "title": "Edit Item",
+        "path": "/edit",
+        "component": "content/item/edit",
+        "type": "function",
+        "redirect": "",
+        "icon": "",
+        "state": 1,
+        "showNav": 0,
+        "ordering": 2,
+        "created_by": 1,
+        "children": [],
+        "apis": []
+      },
+      {
+        "title": "Categories",
+        "path": "/category/list",
+        "component": "content/category/list",
+        "type": "menu",
+        "redirect": "",
+        "icon": "",
+        "state": 1,
+        "showNav": 1,
+        "ordering": 3,
+        "created_by": 1,
+        "children": [],
+        "apis": [
+          {
+            "method": "add",
+            "url": "/admin/category/store",
+            "created_by": 1
+          },
+          {
+            "method": "edit",
+            "url": "/admin/category/store",
+            "created_by": 1
+          },
+          {
+            "method": "delete",
+            "url": "/admin/category/remove",
+            "created_by": 1
+          },
+          {
+            "method": "updateState",
+            "url": "/admin/category/state",
+            "created_by": 1
+          }
+        ]
+      },
+      {
+        "title": "Edit Category",
+        "path": "/category/edit",
+        "component": "content/category/edit",
+        "type": "function",
+        "redirect": "",
+        "icon": "",
+        "state": 1,
+        "showNav": 0,
+        "ordering": 4,
+        "created_by": 1,
+        "children": [],
+        "apis": []
+      },
+      {
+        "title": "Tags",
+        "path": "/tag/list",
+        "component": "content/tag/list",
+        "type": "menu",
+        "redirect": "",
+        "icon": "",
+        "state": 1,
+        "showNav": 1,
+        "ordering": 5,
+        "created_by": 1,
+        "children": [],
+        "apis": [
+          {
+            "method": "add",
+            "url": "/admin/tag/store",
+            "created_by": 1
+          },
+          {
+            "method": "edit",
+            "url": "/admin/tag/store",
+            "created_by": 1
+          },
+          {
+            "method": "delete",
+            "url": "/admin/tag/remove",
+            "created_by": 1
+          },
+          {
+            "method": "updateState",
+            "url": "/admin/tag/state",
+            "created_by": 1
+          }
+        ]
+      }
+    ],
+    "apis": []
+  }
+
+]
