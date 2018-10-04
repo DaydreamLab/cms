@@ -60,8 +60,15 @@ class Item extends BaseModel
      * @var array
      */
     protected $appends = [
+        'creator',
+        'updater',
         'tags',
         'category',
+    ];
+
+
+    protected $casts = [
+        'lock_at' => 'datetime:Y-m-d H:i:s',
     ];
 
 

@@ -1,6 +1,7 @@
 <?php
 namespace DaydreamLab\Cms\Models\Category;
 
+use Carbon\Carbon;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\User\Models\User\UserGroup;
@@ -74,11 +75,15 @@ class Category extends BaseModel
         //'viewlevels',
     ];
 
+    protected $casts = [
+        'lock_at' => 'datetime:Y-m-d H:i:s',
+    ];
 
     public function viewlevel()
     {
         return $this->hasOne(Viewlevel::class, 'id', 'access');
     }
+
 
 
     public function getViewlevelsAttribute()
