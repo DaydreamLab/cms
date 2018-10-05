@@ -100,8 +100,6 @@ return [
         'code'      => 200,
         'message'   => 'Item front delete success'
     ],
-
-
     'ITEM_DELETE_FAIL' => [
         'code'      => 500,
         'message'   => 'Item delete fail'
