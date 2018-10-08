@@ -38,8 +38,8 @@ class Item extends BaseModel
         'metadesc',
         'metadata',
         'params',
-        'lock_by',
-        'lock_at',
+        'locked_by',
+        'locked_at',
         'created_by',
         'updated_by'
     ];
@@ -68,7 +68,7 @@ class Item extends BaseModel
 
 
     protected $casts = [
-        'lock_at' => 'datetime:Y-m-d H:i:s',
+        'locked_at' => 'datetime:Y-m-d H:i:s',
     ];
 
 

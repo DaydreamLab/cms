@@ -26,7 +26,8 @@ class ItemSearchPost extends ListRequest
                 'nullable',
                 'integer',
                 Rule::in([0,1,-1,-2])
-            ]
+            ],
+            'category_id'   => 'nullable|integer',
         ];
 
         return array_merge(parent::rules(), $rules);

@@ -46,8 +46,8 @@ class Category extends BaseModel
         'params',
         'created_by',
         'updated_by',
-        'lock_by',
-        'lock_at',
+        'locked_by',
+        'locked_at',
     ];
 
 
@@ -71,12 +71,13 @@ class Category extends BaseModel
     protected $appends = [
         'creator',
         'updater',
+        'locker',
         'tree_title',
         //'viewlevels',
     ];
 
     protected $casts = [
-        'lock_at' => 'datetime:Y-m-d H:i:s',
+        'locked_at' => 'datetime:Y-m-d H:i:s',
     ];
 
     public function viewlevel()

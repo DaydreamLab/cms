@@ -22,15 +22,15 @@ class TagAdminService extends TagService
     public function getItem($id)
     {
         $item = parent::getItem($id);
-        if ($item->lock_by && $item->lock_by != $this->user->id)
+        if ($item->locked_by && $item->locked_by != $this->user->id)
         {
             $this->status   = Str::upper(Str::snake($this->type.'IsLocked'));
             $this->response = (object) $this->user->only('email', 'full_name', 'nickname');
             return false;
         }
 
-        $item->lock_by = $this->user->id;
-        $item->lock_at = now();
+        $item->locked_by = $this->user->id;
+        $item->locked_at = now();
 
         return $item->save();
     }

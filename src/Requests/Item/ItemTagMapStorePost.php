@@ -31,7 +31,7 @@ class ItemTagMapStorePost extends AdminRequest
                 'nullable',
                 'integer',
                 Rule::in([0,1,-2])
-            ]
+            ],
             'description'   => 'nullable|string',
         ];
     }
