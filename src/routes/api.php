@@ -55,6 +55,16 @@ Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
         });
 
 
+        Route::group(['prefix' => 'menu'], function (){
+            Route::post('remove', 'DaydreamLab\Cms\Controllers\Menu\Admin\MenuAdminController@remove');
+            Route::post('store','DaydreamLab\Cms\Controllers\Menu\Admin\MenuAdminController@store');
+            Route::post('search','DaydreamLab\Cms\Controllers\Menu\Admin\MenuAdminController@search');
+            Route::post('checkout','DaydreamLab\Cms\Controllers\Menu\Admin\MenuAdminController@checkout');
+            Route::post('ordering','DaydreamLab\Cms\Controllers\Menu\Admin\MenuAdminController@ordering');
+            Route::get('{id}', 'DaydreamLab\Cms\Controllers\Menu\Admin\MenuAdminController@getItem');
+        });
+
+
         Route::group(['prefix' => 'tag'], function (){
             Route::post('remove', 'DaydreamLab\Cms\Controllers\Tag\Admin\TagAdminController@remove');
             Route::post('store','DaydreamLab\Cms\Controllers\Tag\Admin\TagAdminController@store');

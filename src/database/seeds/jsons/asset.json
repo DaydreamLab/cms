@@ -148,6 +148,34 @@
             "created_by": 1
           }
         ]
+      },
+      {
+        "title": "Edit Tag",
+        "path": "/tag/edit",
+        "component": "content/tag/edit",
+        "type": "function",
+        "redirect": "",
+        "icon": "",
+        "state": 1,
+        "showNav": 0,
+        "ordering": 6,
+        "created_by": 1,
+        "children": [],
+        "apis": []
+      },
+      {
+        "title": "Media Manager",
+        "path": "/media",
+        "component": "content/media",
+        "type": "menu",
+        "redirect": "",
+        "icon": "",
+        "state": 1,
+        "showNav": 1,
+        "ordering": 7,
+        "created_by": 1,
+        "children": [],
+        "apis": []
       }
     ],
     "apis": []

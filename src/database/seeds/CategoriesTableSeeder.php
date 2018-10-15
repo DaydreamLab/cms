@@ -179,5 +179,42 @@ class CategoriesTableSeeder extends Seeder
             ],
         ]); //最外面
 
+
+
+
+        Category::create([
+            'title'         => 'ROOT',
+            'alias'         => 'root',
+            'path'          => '',
+            'state'         => 1,
+            'introimage'    => '',
+            'introtext'     => '',
+            'image'         => '',
+            'description'   => '',
+            'extension'     => 'menu',
+            'ordering'      => 1,
+            'access'        => 2,
+            'metadesc'      => '',
+            'metadata'      => '',
+            'created_by'    => 1,
+            'children'      =>[
+                [
+                    'title'         => 'Main Menu',
+                    'alias'         => 'main-menu',
+                    'path'          => '/main-menu',
+                    'state'         => 1,
+                    'introimage'    => '',
+                    'introtext'     => '',
+                    'image'         => '',
+                    'description'   => '',
+                    'extension'     => 'menu',
+                    'ordering'      => 1,
+                    'access'        => 2,
+                    'metadesc'      => '',
+                    'metadata'      => '',
+                    'created_by'    => 1,
+                ]
+            ]
+        ]);
     }
 }
