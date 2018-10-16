@@ -58,6 +58,7 @@ Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
         Route::group(['prefix' => 'menu'], function (){
             Route::post('remove', 'DaydreamLab\Cms\Controllers\Menu\Admin\MenuAdminController@remove');
             Route::post('store','DaydreamLab\Cms\Controllers\Menu\Admin\MenuAdminController@store');
+            Route::post('state', 'DaydreamLab\Cms\Controllers\Menu\Admin\MenuAdminController@state');
             Route::post('search','DaydreamLab\Cms\Controllers\Menu\Admin\MenuAdminController@search');
             Route::post('checkout','DaydreamLab\Cms\Controllers\Menu\Admin\MenuAdminController@checkout');
             Route::post('ordering','DaydreamLab\Cms\Controllers\Menu\Admin\MenuAdminController@ordering');

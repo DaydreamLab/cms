@@ -85,6 +85,34 @@ return [
     ],
 
 
+    // Update
+    'TAG_UPDATE_NESTED_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Tag update success'
+    ],
+    'TAG_ADMIN_UPDATE_NESTED_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Tag admin update success'
+    ],
+    'TAG_FRONT_UPDATE_NESTED_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Tag front update success'
+    ],
+
+    'TAG_UPDATE_NESTED_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Tag update fail'
+    ],
+    'TAG_ADMIN_UPDATE_NESTED_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Tag admin update fail'
+    ],
+    'TAG_FRONT_UPDATE_NESTED_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Tag front update fail'
+    ],
+
+
     // Trash
     'TAG_TRASH_SUCCESS' => [
         'code'      => 200,

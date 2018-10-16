@@ -27,7 +27,7 @@ class MenuStorePost extends AdminRequest
         return [
             'id'            => 'nullable|integer',
             'title'         => 'required|string',
-            'path'          => 'nullable|string',
+            'alias'         => 'nullable|string',
             'category_id'   => 'required|integer',
             'state'         => [
                 'nullable',

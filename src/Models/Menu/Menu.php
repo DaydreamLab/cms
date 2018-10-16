@@ -1,6 +1,7 @@
 <?php
 namespace DaydreamLab\Cms\Models\Menu;
 
+use DaydreamLab\Cms\Models\Category\Category;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use Kalnoy\Nestedset\NodeTrait;
 
@@ -23,6 +24,7 @@ class Menu extends BaseModel
     protected $fillable = [
         'title',
         'alias',
+        'ordering',
         'path',
         'category_id',
         'state',
@@ -42,6 +44,8 @@ class Menu extends BaseModel
      * @var array
      */
     protected $hidden = [
+        '_lft',
+        '_rgt'
     ];
 
 
@@ -51,8 +55,18 @@ class Menu extends BaseModel
      * @var array
      */
     protected $appends = [
+        'category'
     ];
 
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
 
+
+    public function getCategoryAttribute()
+    {
+        return $this->category()->first();
+    }
 }

@@ -11,8 +11,8 @@ class MenusTableSeeder extends Seeder
     public function run()
     {
         Menu::create([
-            'title'         => '橘色價值',
-            'alias'         => 'home',
+            'title'         => 'ROOT',
+            'alias'         => 'root',
             'path'          => '',
             'category_id'   => 12,
             'ordering'      => 1,
