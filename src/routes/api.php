@@ -19,6 +19,10 @@ Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
         Route::get('{id}', 'DaydreamLab\Cms\Controllers\Category\Front\CategoryFrontController@getItem');
     });
 
+    Route::group(['prefix' => 'menu'], function (){
+        Route::get('{path}', 'DaydreamLab\Cms\Controllers\Menu\Front\MenuFrontController@getItem')->where('path', '.*');
+    });
+
 
     Route::group(['middleware' => ['auth:api', 'expired', 'admin'], 'prefix' => 'admin'], function (){
 

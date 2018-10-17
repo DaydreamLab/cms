@@ -1,6 +1,7 @@
 <?php
 namespace DaydreamLab\Cms\Models\Module;
 
+use DaydreamLab\Cms\Models\Category\Category;
 use DaydreamLab\JJAJ\Models\BaseModel;
 
 class Module extends BaseModel
@@ -23,6 +24,11 @@ class Module extends BaseModel
         'category_id',
         'state',
         'description',
+        'access',
+        'language',
+        'params',
+        'locked_by',
+        'locked_at',
         'created_by',
         'updated_by'
     ];
@@ -46,5 +52,18 @@ class Module extends BaseModel
     ];
 
 
+    protected $casts = [
+        'params'   => 'array'
+    ];
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+
+
+    public function getCategoryAttribute()
+    {
+        return $this->category()->first();
+    }
 }

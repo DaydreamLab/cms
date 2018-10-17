@@ -40,6 +40,7 @@ class InstallCommand extends Command
         'ItemsTableSeeder',
         'LanguagesTableSeeder',
         'MenusTableSeeder',
+        'ModulesTableSeeder',
         'TagsTableSeeder',
     ];
 

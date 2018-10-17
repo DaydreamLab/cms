@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Controllers\Menu\Front;
 
 use DaydreamLab\JJAJ\Controllers\BaseController;
+use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\ResponseHelper;
 use Illuminate\Support\Collection;
 use DaydreamLab\Cms\Services\Menu\Front\MenuFrontService;
@@ -11,6 +12,7 @@ use DaydreamLab\Cms\Requests\Menu\Front\MenuFrontStorePost;
 use DaydreamLab\Cms\Requests\Menu\Front\MenuFrontStatePost;
 use DaydreamLab\Cms\Requests\Menu\Front\MenuFrontSearchPost;
 use DaydreamLab\Cms\Requests\Menu\Front\MenuFrontOrderingPost;
+use Zend\Diactoros\Request;
 
 
 class MenuFrontController extends BaseController
@@ -21,9 +23,9 @@ class MenuFrontController extends BaseController
     }
 
 
-    public function getItem($id)
+    public function getItem($path)
     {
-        $this->service->getItem($id);
+        $this->service->getItemByPath('/'.$path);
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
