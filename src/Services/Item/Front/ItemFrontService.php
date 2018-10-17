@@ -13,4 +13,10 @@ class ItemFrontService extends ItemService
     {
         parent::__construct($repo);
     }
+
+
+    public function getSelectedItems($ids)
+    {
+        return $this->repo->getSelectedItems($ids);
+    }
 }

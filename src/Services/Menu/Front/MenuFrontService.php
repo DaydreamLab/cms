@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Services\Menu\Front;
 
 use DaydreamLab\Cms\Repositories\Menu\Front\MenuFrontRepository;
 use DaydreamLab\Cms\Services\Menu\MenuService;
+use DaydreamLab\Cms\Services\Module\Front\ModuleFrontService;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use Illuminate\Support\Collection;
 
@@ -11,8 +12,13 @@ class MenuFrontService extends MenuService
 {
     protected $type = 'MenuFront';
 
-    public function __construct(MenuFrontRepository $repo)
+    protected $moduleFrontService;
+
+
+    public function __construct(MenuFrontRepository $repo,
+                                ModuleFrontService $moduleFrontService)
     {
+        $this->moduleFrontService = $moduleFrontService;
         parent::__construct($repo);
     }
 
@@ -20,7 +26,27 @@ class MenuFrontService extends MenuService
     public function getItemByPath($path)
     {
         $menu = parent::getItemByPath($path);
-        Helper::show($menu->toArray());
+
+        $modules = [];
+        foreach ($menu->params as $key => $param)
+        {
+            if ($key == 'module_ids')
+            {
+                foreach ($param as $module_id)
+                {
+
+                    $module = $this->moduleFrontService->find($module_id);
+
+                    $data = $this->moduleFrontService->loadModule($module);
+
+                    Helper::show($data);
+                    exit();
+                }
+
+            }
+        }
         exit();
     }
+
+
 }

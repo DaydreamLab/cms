@@ -13,14 +13,33 @@ class CategoryFront extends Category
     protected $table = 'categories';
 
     protected $hidden = [
+        'id',
         'parent_id',
-        '_lft',
-        '_rgt',
+        'ordering',
+        'path',
         'state',
+        'introimage',
+        'introtext',
+        'image',
+        'description',
         'extension',
         'access',
+        'language',
+        'content_type',
+        'template',
+        'metadesc',
+        'metadata',
+        'params',
         'created_by',
         'updated_by',
-        'ancestors'
+        'updated_at',
+        'locked_by',
+        'locked_at',
+        '_lft',
+        '_rgt',
+        'ancestors',
+        'updater',
+        'locker',
+        'tree_title',
     ];
 }

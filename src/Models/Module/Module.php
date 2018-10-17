@@ -49,6 +49,7 @@ class Module extends BaseModel
      * @var array
      */
     protected $appends = [
+        'category'
     ];
 
 
