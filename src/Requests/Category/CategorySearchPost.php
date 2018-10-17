@@ -29,7 +29,7 @@ class CategorySearchPost extends ListRequest
             ],
             'id'            => 'nullable|integer',
             'language'      => 'nullable|string',
-
+            'extension'     => 'required|string',
             'created_by'    => 'nullable|integer'
         ];
 

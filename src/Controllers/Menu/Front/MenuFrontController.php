@@ -25,7 +25,10 @@ class MenuFrontController extends BaseController
 
     public function getItem($path)
     {
-        $this->service->getItemByPath('/'.$path);
+        $menu = $this->service->getItemByPath('/'.$path);
+
+
+
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
