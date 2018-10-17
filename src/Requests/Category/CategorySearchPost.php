@@ -27,7 +27,7 @@ class CategorySearchPost extends ListRequest
                 'integer',
                 Rule::in([0,1,-1,-2])
             ],
-            'category_id'   => 'nullable|integer',
+            'id'            => 'nullable|integer',
             'language'      => 'nullable|string',
 
             'created_by'    => 'nullable|integer'

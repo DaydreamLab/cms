@@ -1,0 +1,76 @@
+[
+  {
+    "title"         : "Category Items(分類文章)",
+    "alias"         : "category-items",
+    "path"          : "/category-items",
+    "state"         : 1,
+    "introimage"    : "",
+    "introtext"     : "",
+    "image"         : "",
+    "description"   : "",
+    "extension"     : "module",
+    "access"        : 5,
+    "metadesc"      : "",
+    "metadata"      : "",
+    "created_by"    : 1,
+    "modules"       : []
+  },
+  {
+    "title"         : "Selected Items(選定文章)",
+    "alias"         : "selected-items",
+    "path"          : "/selected-items",
+    "state"         : 1,
+    "introimage"    : "",
+    "introtext"     : "",
+    "image"         : "",
+    "description"   : "",
+    "extension"     : "module",
+    "access"        : 5,
+    "metadesc"      : "",
+    "metadata"      : "",
+    "created_by"    : 1,
+    "modules"       : [
+      {
+        "title"       : "橘色價值",
+        "state"       : 1,
+        "description" : "",
+        "access"      : 5,
+        "language"    : "All",
+        "params"      : { "article_ids" : [1,2,3]},
+        "created_by"  : 1
+      }
+    ]
+  },
+  {
+    "title"         : "Item(特定文章)",
+    "alias"         : "item",
+    "path"          : "/item",
+    "state"         : 1,
+    "introimage"    : "",
+    "introtext"     : "",
+    "image"         : "",
+    "description"   : "",
+    "extension"     : "module",
+    "access"        : 5,
+    "metadesc"      : "",
+    "metadata"      : "",
+    "created_by"    : 1,
+    "modules"       : []
+  },
+  {
+    "title"         : "Item Categories (文章分類)",
+    "alias"         : "item-categories",
+    "path"          : "/item-categories",
+    "state"         : 1,
+    "introimage"    : "",
+    "introtext"     : "",
+    "image"         : "",
+    "description"   : "",
+    "extension"     : "module",
+    "access"        : 5,
+    "metadesc"      : "",
+    "metadata"      : "",
+    "created_by"    : 1,
+    "modules"       : []
+  }
+]

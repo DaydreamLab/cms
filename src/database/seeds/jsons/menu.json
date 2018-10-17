@@ -1,0 +1,72 @@
+{
+  "title"         : "主選單",
+  "alias"         : "main-menu",
+  "path"          : "/main-menu",
+  "state"         : 1,
+  "introimage"    : "",
+  "introtext"     : "",
+  "image"         : "",
+  "description"   : "",
+  "extension"     : "menu",
+  "access"        : 2,
+  "metadesc"      : "",
+  "metadata"      : "",
+  "created_by"    : 1,
+  "children"      : [],
+  "menus"         : [
+    {
+      "title"         : "橘色體驗",
+      "alias"         : "home",
+      "path"          : "/home",
+      "ordering"      : 1,
+      "state"         : 1,
+      "description"   : "",
+      "access"        : 2,
+      "language"      : "All",
+      "params"        : {"modules":[1]},
+      "created_by"    : 1,
+      "children"      : []
+    },
+    {
+      "title"         : "關於橘色",
+      "alias"         : "about",
+      "path"          : "/about",
+      "ordering"      : 2,
+      "state"         : 1,
+      "description"   : "",
+      "access"        : 2,
+      "language"      : "All",
+      "params"        : {},
+      "created_by"    : 1,
+      "children"      : []
+    },
+    {
+      "title"         : "橘色新訊",
+      "alias"         : "about",
+      "path"          : "/about",
+      "ordering"      : 3,
+      "state"         : 1,
+      "description"   : "",
+      "access"        : 2,
+      "language"      : "All",
+      "params"        : {},
+      "created_by"    : 1,
+      "children"      : []
+    },
+    {
+      "title"         : "橘色家庭",
+      "alias"         : "family",
+      "path"          : "/family",
+      "ordering"      : 4,
+      "state"         : 1,
+      "description"   : "",
+      "access"        : 2,
+      "language"      : "All",
+      "params"        : {},
+      "created_by"    : 1,
+      "children"      : []
+    }
+  ]
+}
+
+
