@@ -15,8 +15,10 @@ use Illuminate\Http\Request;
 
 Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
 
+    Route::get('json', 'DaydreamLab\Cms\Controllers\Category\Front\CategoryFrontController@json');
     Route::group(['prefix' => 'category'], function (){
         Route::get('{id}', 'DaydreamLab\Cms\Controllers\Category\Front\CategoryFrontController@getItem');
+
     });
 
     Route::group(['prefix' => 'menu'], function (){

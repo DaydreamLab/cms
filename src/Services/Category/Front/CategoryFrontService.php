@@ -24,6 +24,4 @@ class CategoryFrontService extends CategoryService
     }
 
 
-    p
-
 }
