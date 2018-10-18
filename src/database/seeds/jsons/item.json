@@ -1,5 +1,5 @@
 [
-  {
+    {
       "title"         : "橘色價值",
       "alias"         : "orange-value",
       "path"          : "/orange-value",
@@ -49,5 +49,34 @@
               "created_by"    : 1
           }
       ]
-  }
+    },
+    {
+        "title"         : "最新消息",
+        "alias"         : "news",
+        "path"          : "/news",
+        "state"         : 1,
+        "introimage"    : "",
+        "introtext"     : "",
+        "image"         : "",
+        "description"   : "",
+        "extension"     : "item",
+        "access"        : 2,
+        "metadesc"      : "",
+        "metadata"      : "",
+        "created_by"    : 1,
+        "children"      : [],
+        "items"         : [
+            {
+                "title"         : "顧客導向",
+                "alias"         : "customer-orientation",
+                "featured"      : 0,
+                "state"         : 1,
+                "introimage"    : "/images/bg_food_1.png",
+                "introtext"     : "<p class=\"line-top text-size-2\">頂級食材源自產地與挑選<br>只願意提供最美好的食材給每位客戶</p>",
+                "image"         : "/images/bg_food_1.png",
+                "description"   : "<div class=\"\"><p class=\"text-size-2 mb-2\">橘色美食背後的秘密</p><h4 class=\"text-food-title mb-4\">食材的<span class=\"text-black\">秘密</span></h4><p class=\"text-food-info\">測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字</p></div>",
+                "created_by"    : 1
+            }
+        ]
+    }
 ]

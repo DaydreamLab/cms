@@ -1,0 +1,65 @@
+[
+  {
+    "title"       : "橘色涮涮屋",
+    "description" : "橘色涮涮屋管理者",
+    "created_by"  : 1,
+    "users": [
+      {
+        "email": "orangeshabu@orangeshabu.com",
+        "password": "orangeshabu",
+        "first_name": "林",
+        "last_name": "大橘",
+        "nickname": "大橘",
+        "redirect": "/",
+        "activation": 1,
+        "activate_token": "o",
+        "created_by": 1,
+        "roles":[2]
+      },
+      {
+        "email": "orangegroup@orangegroup.com",
+        "password": "orangegroup",
+        "first_name": "林",
+        "last_name": "小橘",
+        "nickname": "小橘",
+        "redirect": "/",
+        "activation": 1,
+        "activate_token": "admin",
+        "created_by": 1,
+        "roles":[2]
+      }
+    ]
+  },
+  {
+    "title"       : "Extension 1 by 橘色",
+    "description" : "Extension 1管理者",
+    "created_by"  : 1,
+    "users": [
+      {
+        "email": "extension1@extension1.com",
+        "password": "extension1",
+        "first_name": "extension",
+        "last_name": "1",
+        "nickname": "測試帳號1",
+        "redirect": "/",
+        "activation": 1,
+        "activate_token": "o",
+        "created_by": 1,
+        "roles":[2]
+      },
+      {
+        "email": "extension2@extension1.com",
+        "password": "extension2",
+        "first_name": "extension",
+        "last_name": "2",
+        "nickname": "測試帳號2",
+        "redirect": "/",
+        "activation": 1,
+        "activate_token": "o",
+        "created_by": 1,
+        "roles":[2]
+      }
+    ]
+  }
+
+]
