@@ -25,7 +25,7 @@ class ModuleFrontService extends ModuleService
     {
         if ($module->category->alias == 'selected-items')
         {
-            $items = $this->itemFrontService->getSelectedItems(array_values($module->params['article_ids']));
+            $items = $this->itemFrontService->getSelectedItems(array_values($module->params['item_ids']));
             return $items;
         }
 

@@ -32,11 +32,12 @@
     "modules"       : [
       {
         "title"       : "橘色價值",
+        "alias"       : "orange-value",
         "state"       : 1,
         "description" : "",
         "access"      : 5,
         "language"    : "All",
-        "params"      : { "article_ids" : [1,2,3]},
+        "params"      : { "item_ids" : [1,2,3]},
         "created_by"  : 1
       }
     ]
@@ -72,5 +73,32 @@
     "metadata"      : "",
     "created_by"    : 1,
     "modules"       : []
+  },
+  {
+    "title"         : "News (最新消息)",
+    "alias"         : "news",
+    "path"          : "/news",
+    "state"         : 1,
+    "introimage"    : "",
+    "introtext"     : "",
+    "image"         : "",
+    "description"   : "",
+    "extension"     : "module",
+    "access"        : 5,
+    "metadesc"      : "",
+    "metadata"      : "",
+    "created_by"    : 1,
+    "modules"       : [
+      {
+        "title"       : "橘色新訊",
+        "alias"       : "orange-news",
+        "state"       : 1,
+        "description" : "",
+        "access"      : 5,
+        "language"    : "All",
+        "params"      : { "featured" : 1, "items" : 4, "creator": ["橘色涮涮屋", "Extension 1 by 橘色"]},
+        "created_by"  : 1
+      }
+    ]
   }
 ]

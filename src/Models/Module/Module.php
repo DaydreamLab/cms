@@ -21,6 +21,7 @@ class Module extends BaseModel
      */
     protected $fillable = [
         'title',
+        'alias',
         'category_id',
         'state',
         'description',

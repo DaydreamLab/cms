@@ -116,7 +116,8 @@ class ItemsTableSeeder extends Seeder
             $category = $this->categoryService->store(Collection::make($category));
 
             foreach ($items as $item)
-            {   $item['category_id'] = $category->id;
+            {
+                $item['category_id'] = $category->id;
                 $this->itemService->store(Collection::make($item));
             }
 

@@ -60,10 +60,13 @@ class Item extends BaseModel
      * @var array
      */
     protected $appends = [
+        'category_title',
         'creator',
         'updater',
+        'locker',
+        'creator_groups',
         'tags',
-        'category',
+        //'category',
     ];
 
 
@@ -89,6 +92,22 @@ class Item extends BaseModel
         return $this->category()->first();
     }
 
+
+    public function getCategoryTitleAttribute()
+    {
+        return $this->category()->first()->title;
+    }
+
+
+    public function getCreatorGroupsAttribute()
+    {
+        $groups = $this->creator()->groups;
+
+        return $groups->map(function ($item, $key) {
+            return $item->title;
+        });
+
+    }
 
     public function getTagsAttribute()
     {
