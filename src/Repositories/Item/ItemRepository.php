@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Repositories\Item;
 
+use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Repositories\BaseRepository;
 use DaydreamLab\Cms\Models\Item\Item;
 use Illuminate\Support\Collection;
@@ -22,16 +23,21 @@ class ItemRepository extends BaseRepository
             if ($item)
             {
                 $item->featured = 1;
-                $featured = $this->findFeatured();
-                if ($featured->count())
+                $other_items = $this->findOtherFeatured($id);
+                if ($other_items->count())
                 {
-                    $item->featured_ordering = $featured->first()->featured_ordering +1;
-                }
-                else
-                {
-                    $item->featured_ordering = 1;
+                    $counter = 1;
+                    foreach ($other_items as $other_item)
+                    {
+                        $other_item->featured_ordering = ++$counter;
+                        if (!$other_item->save())
+                        {
+                            return false;
+                        }
+                    }
                 }
 
+                $item->featured_ordering = 1;
                 if (!$item->save())
                 {
                     return false;
@@ -46,10 +52,65 @@ class ItemRepository extends BaseRepository
     }
 
 
-    public function findFeatured()
+    public function findOtherFeatured($id = null)
     {
-        $featured = $this->model->where('featured_ordering', '>', 0)
-            ->orderBy('featured_ordering', 'desc');
-        return $featured->get();
+        $query = $this->model;
+        if ($id)
+        {
+            $query = $query->where('id', '!=', $id);
+        }
+
+        $query = $query->where('featured', 1)->orderBy('featured_ordering', 'asc');
+
+
+        return $query->get();
+    }
+
+    public function featuredOrdering($other)
+    {
+        foreach ($other as $item)
+        {
+            $item->featured_ordering++;
+            if (!$item->save())
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public function unfeatured(Collection $input)
+    {
+        foreach ($input->ids as $id)
+        {
+            $item = $this->find($id);
+            if ($item)
+            {
+                $item->featured          = 0;
+                $item->featured_ordering = null;
+
+                $other_items = $this->findOtherFeatured($id);
+                $counter = 0;
+                foreach ($other_items as $other_item)
+                {
+                    $other_item->featured_ordering = ++$counter;
+                    if (!$other_item->save())
+                    {
+                        return false;
+                    }
+                }
+
+                if (!$item->save())
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }

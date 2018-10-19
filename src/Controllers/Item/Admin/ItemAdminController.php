@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Controllers\Item\Admin;
 
 use DaydreamLab\JJAJ\Controllers\BaseController;
+use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\ResponseHelper;
 use Illuminate\Support\Collection;
 use DaydreamLab\Cms\Services\Item\Admin\ItemAdminService;
@@ -33,7 +34,14 @@ class ItemAdminController extends BaseController
 
     public function featured(ItemAdminFeaturePost $request)
     {
-        $this->service->featured($request->rulesInput());
+        if($request->featured == 0)
+        {
+            $this->service->unfeatured($request->rulesInput());
+        }
+        else
+        {
+            $this->service->featured($request->rulesInput());
+        }
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }

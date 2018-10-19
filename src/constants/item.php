@@ -343,6 +343,32 @@ return [
         'message'   => 'Item front featured fail'
     ],
 
+    // Unfeatured
+    'ITEM_UNFEATURED_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Item featured success'
+    ],
+    'ITEM_ADMIN_UNFEATURED_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Item admin unfeatured success'
+    ],
+    'ITEM_FRONT_UNFEATURED_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Item front unfeatured success'
+    ],
+    'ITEM_UNFEATURED_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Item unfeatured fail'
+    ],
+    'ITEM_ADMIN_UNFEATURED_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Item admin unfeatured fail'
+    ],
+    'ITEM_FRONT_UNFEATURED_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Item front unfeatured fail'
+    ],
+
 
     //----- Item Tag Map -----
     // Create

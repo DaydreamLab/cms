@@ -29,6 +29,7 @@ class Item extends BaseModel
         'introtext',
         'image',
         'description',
+        'video',
         'hits',
         'access',
         'featured',

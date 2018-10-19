@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Requests\Item;
 
 use DaydreamLab\JJAJ\Requests\AdminRequest;
+use Illuminate\Validation\Rule;
 
 class ItemFeaturePost extends AdminRequest
 {
@@ -25,7 +26,11 @@ class ItemFeaturePost extends AdminRequest
     {
         return [
             'ids'       => 'required|array',
-            'ids.*'     => 'required|integer'
+            'ids.*'     => 'required|integer',
+            'featured'  => [
+                'required',
+                Rule::in([0,1])
+            ]
         ];
     }
 }

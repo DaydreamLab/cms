@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Item\Admin;
 
-use DaydreamLab\Cms\Requests\Item\ItemRemovePost;
+use DaydreamLab\Cms\Requests\Item\ItemFeaturePost;
 
-class ItemAdminFeaturePost extends ItemRemovePost
+class ItemAdminFeaturePost extends ItemFeaturePost
 {
     /**
      * Determine if the user is authorized to make this request.

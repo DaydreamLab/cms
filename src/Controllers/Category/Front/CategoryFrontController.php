@@ -85,6 +85,14 @@ class CategoryFrontController extends BaseController
         $taichung_data = json_decode(File::get(storage_path('taichung.json')));
 
 
+//        $counter = 0;
+//        foreach ($taichung_data as $protal)
+//        {
+//            $counter++;
+//        }
+//        Helper::show($counter);
+
+
         $merge = (object)[];
         $merge->definition = $jp_data->definition;
         $merge->portals = [];
@@ -94,8 +102,10 @@ class CategoryFrontController extends BaseController
         {
             foreach ($taichung_data as $guid => $taichung_p)
             {
+
                 if ($jp_p->guid == $guid)
                 {
+                    //Helper::show($taichung_p, $jp_p);
                     $jp_p->label = $taichung_p->codename;
                     $merge->portals[] = $jp_p;
                     break;
@@ -103,8 +113,13 @@ class CategoryFrontController extends BaseController
             }
         }
 
-
-        Helper::show($merge);
+//        $counter= 0;
+//        foreach ($merge->portals as $portal)
+//        {
+//            $counter++;
+//        }
+//
+//        Helper::show($counter);
         File::put(storage_path('merge.json'), json_encode($merge));
 
     }

@@ -28,6 +28,12 @@ class ItemAdminService extends ItemService
     }
 
 
+    public function findOtherFeatured($id = null)
+    {
+        return $this->repo->findOtherFeatured($id);
+    }
+
+
     public function getItem($id)
     {
         $item = parent::getItem($id);
@@ -44,6 +50,14 @@ class ItemAdminService extends ItemService
 
         return $item->save();
     }
+
+
+
+    public function featuredOrdering($other)
+    {
+        return $this->repo->featuredOrdering($other);
+    }
+
 
 
     public function store(Collection $input)
@@ -70,27 +84,29 @@ class ItemAdminService extends ItemService
             $input->forget('access');
         }
 
+
+        // featured = 0 or null
         if (InputHelper::null($input, 'featured'))
         {
             $input->forget('featured');
         }
-        elseif ($input->featured == 1)
+        else // featured = 1
         {
-            $featured = $this->repo->findFeatured();
-            if ($featured->count())
+            $input->forget('featured_ordering');
+            $input->put('featured_ordering', 1);
+
+
+            // 編輯文章
+            if (InputHelper::null($input, 'id'))
             {
-                $input->forget('featured_ordering');
-                $input->put('featured_ordering', $featured->first()->featured_ordering +1);
+                $other = $this->findOtherFeatured();
             }
             else
             {
-                $input->forget('featured_ordering');
-                $input->put('featured_ordering', 1);
+                $other = $this->findOtherFeatured($input->id);
             }
-        }
-        else
-        {
-            //do nothing
+
+            $this->featuredOrdering($other, 'add');
         }
 
         if (InputHelper::null($input, 'language'))
@@ -98,13 +114,15 @@ class ItemAdminService extends ItemService
             $input->forget('language');
             $input->put('language', 'All');
         }
-
+        $tags = $input->tags;
+        $input->forget('tags');
 
         $result    =  parent::store($input);
-        $item      = $this->find($input->id);
+
+        $item      = $this->find($result->id);
 
         $tag_ids = [];
-        foreach ($input->tags as $tag)
+        foreach ($tags  as $tag)
         {
             if (!array_key_exists('id',$tag) || $tag['id'] == '')
             {

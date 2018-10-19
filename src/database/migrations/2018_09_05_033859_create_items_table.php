@@ -24,6 +24,7 @@ class CreateItemsTable extends Migration
             $table->text('introtext')->nullable();
             $table->text('image')->nullable();
             $table->text('description')->nullable();
+            $table->text('video')->nullable();
             $table->unsignedInteger('hits')->nullable()->default(0);
             $table->unsignedInteger('access')->nullable()->default(2);
             $table->unsignedTinyInteger('featured')->nullable()->default(0);

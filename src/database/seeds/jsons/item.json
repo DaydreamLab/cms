@@ -24,7 +24,9 @@
               "introtext"     : "<p class=\"line-top text-size-2\">頂級食材源自產地與挑選<br>只願意提供最美好的食材給每位客戶</p>",
               "image"         : "/images/bg_food_1.png",
               "description"   : "<div class=\"\"><p class=\"text-size-2 mb-2\">橘色美食背後的秘密</p><h4 class=\"text-food-title mb-4\">食材的<span class=\"text-black\">秘密</span></h4><p class=\"text-food-info\">測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字</p></div>",
-              "created_by"    : 1
+              "created_by"    : 1,
+              "tags"          : []
+
           },
           {
               "title"         : "優雅空間",
@@ -35,7 +37,8 @@
               "introtext"     : "<p class=\"line-top text-size-2\">頂級食材源自產地與挑選<br>只願意提供最美好的食材給每位客戶</p>",
               "image"         : "/images/bg_brand_1.png",
               "description"   : "<div class=\"\"><p class=\"text-size-2 mb-2\">橘色美食背後的秘密</p><h4 class=\"text-food-title mb-4\">食材的<span class=\"text-black\">秘密</span></h4><p class=\"text-food-info\">測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字</p></div>",
-              "created_by"    : 1
+              "created_by"    : 1,
+              "tags"          : []
           },
           {
               "title"         : "專業服務",
@@ -46,7 +49,8 @@
               "introtext"     : "<p class=\"line-top text-size-2\">頂級食材源自產地與挑選<br>只願意提供最美好的食材給每位客戶</p>",
               "image"         : "/images/slideshow_1.png",
               "description"   : "<div class=\"\"><p class=\"text-size-2 mb-2\">橘色美食背後的秘密</p><h4 class=\"text-food-title mb-4\">食材的<span class=\"text-black\">秘密</span></h4><p class=\"text-food-info\">測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字</p></div>",
-              "created_by"    : 1
+              "created_by"    : 1,
+              "tags"          : []
           }
       ]
     },
@@ -67,15 +71,74 @@
         "children"      : [],
         "items"         : [
             {
-                "title"         : "顧客導向",
-                "alias"         : "customer-orientation",
+                "title"         : "日本黑毛和牛 豪華海陸雙饗一次滿足山珍海味!!!♥♥♥挑戰味蕾極限",
+                "alias"         : "black-gross-cow",
                 "featured"      : 0,
                 "state"         : 1,
-                "introimage"    : "/images/bg_food_1.png",
+                "introimage"    : "/images/news_v1.png",
                 "introtext"     : "<p class=\"line-top text-size-2\">頂級食材源自產地與挑選<br>只願意提供最美好的食材給每位客戶</p>",
                 "image"         : "/images/bg_food_1.png",
                 "description"   : "<div class=\"\"><p class=\"text-size-2 mb-2\">橘色美食背後的秘密</p><h4 class=\"text-food-title mb-4\">食材的<span class=\"text-black\">秘密</span></h4><p class=\"text-food-info\">測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字</p></div>",
-                "created_by"    : 1
+                "video"         : "https://www.youtube.com/watch?v=3Y0Ut5ozaKs&start_radio=1&list=RD3Y0Ut5ozaKs",
+                "created_by"    : 5,
+                "created_at"    : "2018-10-18 12:00:00",
+                "tags"          : []
+            },
+            {
+              "title"         : "日本黑毛和牛 豪華海陸雙饗一次滿足山珍海味!!!♥♥♥挑戰味蕾極限(1)",
+              "alias"         : "black-gross-cow1",
+              "featured"      : 0,
+              "state"         : 1,
+              "introimage"    : "/images/news_v1.png",
+              "introtext"     : "<p class=\"line-top text-size-2\">頂級食材源自產地與挑選<br>只願意提供最美好的食材給每位客戶</p>",
+              "image"         : "/images/bg_food_1.png",
+              "description"   : "<div class=\"\"><p class=\"text-size-2 mb-2\">橘色美食背後的秘密</p><h4 class=\"text-food-title mb-4\">食材的<span class=\"text-black\">秘密</span></h4><p class=\"text-food-info\">測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字</p></div>",
+              "video"         : "https://www.youtube.com/watch?v=3Y0Ut5ozaKs&start_radio=1&list=RD3Y0Ut5ozaKs",
+              "created_by"    : 5,
+              "created_at"    : "2018-10-18 01:00:00",
+              "tags"          : []
+            },
+            {
+              "title"         : "日本黑毛和牛 豪華海陸雙饗一次滿足山珍海味!!!♥♥♥挑戰味蕾極限(feature)",
+              "alias"         : "black-gross-cow-featured",
+              "featured"      : 1,
+              "state"         : 1,
+              "introimage"    : "/images/news_v1.png",
+              "introtext"     : "<p class=\"line-top text-size-2\">頂級食材源自產地與挑選<br>只願意提供最美好的食材給每位客戶</p>",
+              "image"         : "/images/bg_food_1.png",
+              "description"   : "<div class=\"\"><p class=\"text-size-2 mb-2\">橘色美食背後的秘密</p><h4 class=\"text-food-title mb-4\">食材的<span class=\"text-black\">秘密</span></h4><p class=\"text-food-info\">測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字</p></div>",
+              "video"         : "https://www.youtube.com/watch?v=3Y0Ut5ozaKs&start_radio=1&list=RD3Y0Ut5ozaKs",
+              "created_by"    : 5,
+              "created_at"    : "2018-10-17 02:44:25",
+              "tags"          : []
+            },
+            {
+              "title"         : "日本黑毛和牛 豪華海陸雙饗一次滿足山珍海味!!!♥♥♥挑戰味蕾極限(3)",
+              "alias"         : "black-gross-cow3",
+              "featured"      : 0,
+              "state"         : 1,
+              "introimage"    : "/images/news_v1.png",
+              "introtext"     : "<p class=\"line-top text-size-2\">頂級食材源自產地與挑選<br>只願意提供最美好的食材給每位客戶</p>",
+              "image"         : "/images/bg_food_1.png",
+              "description"   : "<div class=\"\"><p class=\"text-size-2 mb-2\">橘色美食背後的秘密</p><h4 class=\"text-food-title mb-4\">食材的<span class=\"text-black\">秘密</span></h4><p class=\"text-food-info\">測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字</p></div>",
+              "video"         : "https://www.youtube.com/watch?v=3Y0Ut5ozaKs&start_radio=1&list=RD3Y0Ut5ozaKs",
+              "created_by"    : 6,
+              "created_at"    : "2018-10-10 10:10:10",
+              "tags"          : []
+            },
+            {
+              "title"         : "日本黑毛和牛 豪華海陸雙饗一次滿足山珍海味!!!♥♥♥挑戰味蕾極限(3)",
+              "alias"         : "black-gross-cow4",
+              "featured"      : 1,
+              "state"         : 1,
+              "introimage"    : "/images/news_v1.png",
+              "introtext"     : "<p class=\"line-top text-size-2\">頂級食材源自產地與挑選<br>只願意提供最美好的食材給每位客戶</p>",
+              "image"         : "/images/bg_food_1.png",
+              "description"   : "<div class=\"\"><p class=\"text-size-2 mb-2\">橘色美食背後的秘密</p><h4 class=\"text-food-title mb-4\">食材的<span class=\"text-black\">秘密</span></h4><p class=\"text-food-info\">測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字測試描述文字</p></div>",
+              "video"         : "https://www.youtube.com/watch?v=3Y0Ut5ozaKs&start_radio=1&list=RD3Y0Ut5ozaKs",
+              "created_by"    : 6,
+              "created_at"    : "2018-10-19 11:11:11",
+              "tags"          : []
             }
         ]
     }

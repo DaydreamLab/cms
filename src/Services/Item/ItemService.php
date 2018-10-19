@@ -28,4 +28,21 @@ class ItemService extends BaseService
         }
     }
 
+
+    public function unfeatured(Collection $input)
+    {
+        $feature = $this->repo->unfeatured($input);
+        if ($feature)
+        {
+            $this->status   = Str::upper(Str::snake($this->type.'UnfeaturedSuccess'));
+            $this->response = null;
+        }
+        else
+        {
+            $this->status   = Str::upper(Str::snake($this->type.'UnfeaturedSuccess'));
+            $this->response = null;
+        }
+    }
+
+
 }
