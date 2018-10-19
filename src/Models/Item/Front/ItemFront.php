@@ -21,6 +21,8 @@ class ItemFront extends Item
         'access',
         'featured_ordering',
         'language',
+        'content_type',
+        'params',
         'locked_by',
         'locked_at',
         'created_by',

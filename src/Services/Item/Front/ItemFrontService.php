@@ -15,6 +15,12 @@ class ItemFrontService extends ItemService
     }
 
 
+    public function getNewsItems($params)
+    {
+        return $this->repo->getNewsItems($params);
+    }
+
+
     public function getSelectedItems($ids)
     {
         return $this->repo->getSelectedItems($ids);

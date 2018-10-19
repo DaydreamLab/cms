@@ -28,6 +28,10 @@ class ItemSearchPost extends ListRequest
                 Rule::in([0,1,-1,-2])
             ],
             'category_id'   => 'nullable|integer',
+            'featured'      =>[
+                'nullable',
+                Rule::in([0,1])
+            ],
         ];
 
         return array_merge(parent::rules(), $rules);

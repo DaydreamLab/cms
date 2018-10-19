@@ -32,12 +32,22 @@
     "modules"       : [
       {
         "title"       : "橘色價值",
-        "alias"       : "orange-value",
+        "alias"       : "about value",
         "state"       : 1,
         "description" : "",
-        "access"      : 5,
+        "access"      : 2,
         "language"    : "All",
         "params"      : { "item_ids" : [1,2,3]},
+        "created_by"  : 1
+      },
+      {
+        "title"       : "橘色版圖",
+        "alias"       : "orange brands",
+        "state"       : 1,
+        "description" : "",
+        "access"      : 2,
+        "language"    : "All",
+        "params"      : {"item_ids" : [14,15,16,17,18]},
         "created_by"  : 1
       }
     ]
@@ -91,12 +101,12 @@
     "modules"       : [
       {
         "title"       : "橘色新訊",
-        "alias"       : "orange-news",
+        "alias"       : "events & news",
         "state"       : 1,
         "description" : "",
-        "access"      : 5,
+        "access"      : 2,
         "language"    : "All",
-        "params"      : { "featured" : 1, "items" : 4, "creator": ["橘色涮涮屋", "Extension 1 by 橘色"]},
+        "params"      : { "featured" : 1, "items" : 4, "creators": ["橘色涮涮屋", "Extension 1 by 橘色"]},
         "created_by"  : 1
       }
     ]

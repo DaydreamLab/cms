@@ -23,7 +23,7 @@
       "description"   : "",
       "access"        : 2,
       "language"      : "All",
-      "params"        : {"module_ids":[1]},
+      "params"        : {"module_ids":[1,2,3]},
       "created_by"    : 1,
       "children"      : []
     },

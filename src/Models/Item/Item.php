@@ -30,6 +30,7 @@ class Item extends BaseModel
         'image',
         'description',
         'video',
+        'link',
         'hits',
         'access',
         'featured',
@@ -38,6 +39,7 @@ class Item extends BaseModel
         'language',
         'metadesc',
         'metadata',
+        'content_type',
         'params',
         'locked_by',
         'locked_at',
@@ -73,6 +75,7 @@ class Item extends BaseModel
 
     protected $casts = [
         'locked_at' => 'datetime:Y-m-d H:i:s',
+        'params'    => 'array'
     ];
 
 
