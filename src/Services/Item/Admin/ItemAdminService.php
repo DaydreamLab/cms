@@ -118,8 +118,15 @@ class ItemAdminService extends ItemService
         $input->forget('tags');
 
         $result    =  parent::store($input);
+        if (gettype($result) == 'boolean')
+        {
+            $item      = $this->find($input->id);
+        }
+        else
+        {
+            $item      = $this->find($result->id);
+        }
 
-        $item      = $this->find($input->id);
 
         $tag_ids = [];
         foreach ($tags  as $tag)
