@@ -32,7 +32,6 @@ class ItemFront extends Item
     ];
 
 
-
     public function category()
     {
         return $this->belongsTo(CategoryFront::class, 'category_id', 'id');

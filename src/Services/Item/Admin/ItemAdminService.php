@@ -119,7 +119,7 @@ class ItemAdminService extends ItemService
 
         $result    =  parent::store($input);
 
-        $item      = $this->find($result->id);
+        $item      = $this->find($input->id);
 
         $tag_ids = [];
         foreach ($tags  as $tag)
