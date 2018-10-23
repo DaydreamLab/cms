@@ -23,7 +23,7 @@
       "description"   : "",
       "access"        : 2,
       "language"      : "All",
-      "params"        : {"module_ids":[1,2,3]},
+      "params"        : {"module_ids":[1,2,3,7]},
       "created_by"    : 1,
       "children"      : []
     },
@@ -36,20 +36,20 @@
       "description"   : "",
       "access"        : 2,
       "language"      : "All",
-      "params"        : {},
+      "params"        : {"module_ids":[4,5,9]},
       "created_by"    : 1,
       "children"      : []
     },
     {
       "title"         : "橘色新訊",
-      "alias"         : "about",
-      "path"          : "/about",
+      "alias"         : "news",
+      "path"          : "/news",
       "ordering"      : 3,
       "state"         : 1,
       "description"   : "",
       "access"        : 2,
       "language"      : "All",
-      "params"        : {},
+      "params"        : {"module_ids":[8]},
       "created_by"    : 1,
       "children"      : []
     },
@@ -62,7 +62,7 @@
       "description"   : "",
       "access"        : 2,
       "language"      : "All",
-      "params"        : {},
+      "params"        : {"module_ids":[4]},
       "created_by"    : 1,
       "children"      : []
     }

@@ -32,6 +32,7 @@ class MenuFrontService extends MenuService
         }
 
         $modules = [];
+
         foreach ($menu->params as $key => $param)
         {
             if ($key == 'module_ids')

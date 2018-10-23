@@ -30,7 +30,14 @@ class ModuleFrontService extends ModuleService
         elseif ($module->category->alias == 'news')
         {
             $items = $this->itemFrontService->getNewsItems($module->params);
-
+        }
+        elseif ($module->category->alias == 'item')
+        {
+            $items = $this->itemFrontService->getSelectedItem($module->params);
+        }
+        elseif ($module->category->alias == 'item-timeline')
+        {
+            $items = $this->itemFrontService->getTimelineItems($module->params);
         }
         return $items;
     }

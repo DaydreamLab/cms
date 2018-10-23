@@ -405,16 +405,16 @@ return [
         'message'   => 'Module front checkout success'
     ],
     'MODULE_CHECKOUT_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Module checkout fail'
+        'code'      => 403,
+        'message'   => 'Module checkout insufficient permission'
     ],
     'MODULE_ADMIN_CHECKOUT_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Module admin checkout fail'
+        'code'      => 403,
+        'message'   => 'Module admin checkout insufficient permission'
     ],
     'MODULE_FRONT_CHECKOUT_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Module front checkout fail'
+        'code'      => 403,
+        'message'   => 'Module front checkout insufficient permission'
     ],
 
     

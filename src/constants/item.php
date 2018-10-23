@@ -246,6 +246,10 @@ return [
         'code'      => 500,
         'message'   => 'Item front get item fail'
     ],
+    'ITEM_FRONT_ITEM_NOT_EXIST' => [
+        'code'      => 403,
+        'message'   => 'Item front item not exist'
+    ],
 
 
     // Checkout
@@ -262,16 +266,16 @@ return [
         'message'   => 'Item front checkout success'
     ],
     'ITEM_CHECKOUT_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Item checkout fail'
+        'code'      => 403,
+        'message'   => 'Item checkout insufficient permission'
     ],
     'ITEM_ADMIN_CHECKOUT_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Item admin checkout fail'
+        'code'      => 403,
+        'message'   => 'Item admin checkout insufficient permission'
     ],
     'ITEM_FRONT_CHECKOUT_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Item front checkout fail'
+        'code'      => 403,
+        'message'   => 'Item front checkout insufficient permission'
     ],
 
 
@@ -774,16 +778,16 @@ return [
         'message'   => 'Item tag map front checkout success'
     ],
     'ITEM_TAG_MAP_CHECKOUT_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Item tag map checkout fail'
+        'code'      => 403,
+        'message'   => 'Item tag map checkout insufficient permission'
     ],
     'ITEM_TAG_MAP_ADMIN_CHECKOUT_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Item tag map admin checkout fail'
+        'code'      => 403,
+        'message'   => 'Item tag map admin checkout insufficient permission'
     ],
     'ITEM_TAG_MAP_FRONT_CHECKOUT_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Item tag map front checkout fail'
+        'code'      => 403,
+        'message'   => 'Item tag map front checkout insufficient permission'
     ],
 
 

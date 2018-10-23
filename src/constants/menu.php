@@ -405,16 +405,16 @@ return [
         'message'   => 'Menu front checkout success'
     ],
     'MENU_CHECKOUT_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Menu checkout fail'
+        'code'      => 403,
+        'message'   => 'Menu checkout insufficient permission'
     ],
     'MENU_ADMIN_CHECKOUT_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Menu admin checkout fail'
+        'code'      => 403,
+        'message'   => 'Menu admin checkout insufficient permission'
     ],
     'MENU_FRONT_CHECKOUT_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Menu front checkout fail'
+        'code'      => 403,
+        'message'   => 'Menu front checkout insufficient permission'
     ],
 
     

@@ -12,7 +12,6 @@ use DaydreamLab\Cms\Requests\Category\Front\CategoryFrontStorePost;
 use DaydreamLab\Cms\Requests\Category\Front\CategoryFrontStatePost;
 use DaydreamLab\Cms\Requests\Category\Front\CategoryFrontSearchPost;
 use DaydreamLab\Cms\Requests\Category\Front\CategoryFrontCheckoutPost;
-use Illuminate\Support\Facades\File;
 
 
 class CategoryFrontController extends BaseController
@@ -78,49 +77,4 @@ class CategoryFrontController extends BaseController
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
 
-    public function json()
-    {
-
-        $jp_data       = json_decode(File::get(storage_path('jp.json')));
-        $taichung_data = json_decode(File::get(storage_path('taichung.json')));
-
-
-//        $counter = 0;
-//        foreach ($taichung_data as $protal)
-//        {
-//            $counter++;
-//        }
-//        Helper::show($counter);
-
-
-        $merge = (object)[];
-        $merge->definition = $jp_data->definition;
-        $merge->portals = [];
-
-
-        foreach ($jp_data->portals as $jp_p)
-        {
-            foreach ($taichung_data as $guid => $taichung_p)
-            {
-
-                if ($jp_p->guid == $guid)
-                {
-                    //Helper::show($taichung_p, $jp_p);
-                    $jp_p->label = $taichung_p->codename;
-                    $merge->portals[] = $jp_p;
-                    break;
-                }
-            }
-        }
-
-//        $counter= 0;
-//        foreach ($merge->portals as $portal)
-//        {
-//            $counter++;
-//        }
-//
-//        Helper::show($counter);
-        File::put(storage_path('merge.json'), json_encode($merge));
-
-    }
 }

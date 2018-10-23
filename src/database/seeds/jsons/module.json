@@ -49,6 +49,26 @@
         "language"    : "All",
         "params"      : {"item_ids" : [14,15,16,17,18]},
         "created_by"  : 1
+      },
+      {
+        "title"       : "橘色體驗",
+        "alias"       : "orange experience",
+        "state"       : 1,
+        "description" : "",
+        "access"      : 2,
+        "language"    : "All",
+        "params"      : {"item_ids" : [19,20,21,22]},
+        "created_by"  : 1
+      },
+      {
+        "title"       : "橘色家庭",
+        "alias"       : "orange family",
+        "state"       : 1,
+        "description" : "",
+        "access"      : 2,
+        "language"    : "All",
+        "params"      : {"item_ids" : [25,26,27,28]},
+        "created_by"  : 1
       }
     ]
   },
@@ -66,7 +86,28 @@
     "metadesc"      : "",
     "metadata"      : "",
     "created_by"    : 1,
-    "modules"       : []
+    "modules"       : [
+      {
+        "title"       : "橘色秘密",
+        "alias"       : "secrets",
+        "state"       : 1,
+        "description" : "",
+        "access"      : 2,
+        "language"    : "All",
+        "params"      : {"item_id" : 23},
+        "created_by"  : 1
+      },
+      {
+        "title"       : "用心創造美好體驗",
+        "alias"       : "experience",
+        "state"       : 1,
+        "description" : "",
+        "access"      : 2,
+        "language"    : "All",
+        "params"      : {"item_id" : 24},
+        "created_by"  : 1
+      }
+    ]
   },
   {
     "title"         : "Item Categories (文章分類)",
@@ -106,7 +147,44 @@
         "description" : "",
         "access"      : 2,
         "language"    : "All",
-        "params"      : { "featured" : 1, "items" : 4, "creators": ["橘色涮涮屋", "Extension 1 by 橘色"]},
+        "params"      : { "featured" : {"per_page": 4, "order_by": "created_at", "ordering": "desc"}, "items" : {"per_page": 12, "order_by": "created_at", "ordering": "desc", "include_featured": false}, "creators": ["橘色涮涮屋", "Extension 1 by 橘色"]},
+        "created_by"  : 1
+      },
+      {
+        "title"       : "橘色新訊",
+        "alias"       : "news",
+        "state"       : 1,
+        "description" : "",
+        "access"      : 2,
+        "language"    : "All",
+        "params"      : { "featured" :  {"per_page": 0, "order_by": "created_at", "ordering": "desc"}, "items" : {"per_page": 12, "order_by": "created_at", "ordering": "desc", "include_featured": true}, "creators": ["橘色涮涮屋", "Extension 1 by 橘色"]},
+        "created_by"  : 1
+      }
+    ]
+  },
+  {
+    "title"         : "Timeline(時間軸)",
+    "alias"         : "item-timeline",
+    "path"          : "/item-timeline",
+    "state"         : 1,
+    "introimage"    : "",
+    "introtext"     : "",
+    "image"         : "",
+    "description"   : "",
+    "extension"     : "module",
+    "access"        : 5,
+    "metadesc"      : "",
+    "metadata"      : "",
+    "created_by"    : 1,
+    "modules"       : [
+      {
+        "title"       : "橘色歲月",
+        "alias"       : "timeline",
+        "state"       : 1,
+        "description" : "",
+        "access"      : 2,
+        "language"    : "All",
+        "params"      : {},
         "created_by"  : 1
       }
     ]
