@@ -60,7 +60,7 @@ class ItemFrontRepository extends ItemRepository
             $query = $query->whereIn('created_by', $created_by_ids);
         }
 
-        if ($params['include_featured'])
+        if (array_key_exists('include_featured',$params) && $params['include_featured'])
         {
             $query = $query->whereIn('featured', [0,1]);
         }
