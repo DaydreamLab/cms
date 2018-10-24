@@ -3,12 +3,8 @@
 namespace DaydreamLab\Cms\Database\Seeds;
 
 use DaydreamLab\Cms\Models\Category\Category;
-use DaydreamLab\Cms\Models\Module\Module;
 use DaydreamLab\Cms\Repositories\Category\CategoryRepository;
-use DaydreamLab\Cms\Repositories\Module\ModuleRepository;
 use DaydreamLab\Cms\Services\Category\CategoryService;
-use DaydreamLab\Cms\Services\Module\ModuleService;
-use DaydreamLab\JJAJ\Helpers\Helper;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
 
@@ -20,10 +16,6 @@ class ModulesTableSeeder extends Seeder
 
     public function run()
     {
-//        $this->categoryService  = new CategoryService(new CategoryRepository(new Category()));
-//        $this->moduleService      = new ModuleService(new ModuleRepository(new Module()));
-
-
         $category_root = Category::create([
             'title'         => 'ROOT',
             'alias'         => 'root',
@@ -42,9 +34,11 @@ class ModulesTableSeeder extends Seeder
             'children'      =>[]
         ]);
 
-//        $data = json_decode(file_get_contents(__DIR__.'/jsons/module.json'), true);
-//
-//        $this->migrate($data, Category::where('extension', 'module')->first());
+        $this->categoryService  = new CategoryService(new CategoryRepository(new Category()));
+
+        $data = json_decode(file_get_contents(__DIR__.'/jsons/module.json'), true);
+
+        $this->migrate($data, Category::where('extension', 'module')->first());
 
     }
 
