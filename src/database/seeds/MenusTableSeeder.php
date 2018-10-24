@@ -20,15 +20,15 @@ class MenusTableSeeder extends Seeder
 
     public function run()
     {
-        $this->categoryService = new CategoryService(new CategoryRepository(new Category()));
-        $this->menuService     = new MenuService(new MenuRepository(new Menu()));
-
+//        $this->categoryService = new CategoryService(new CategoryRepository(new Category()));
+//        $this->menuService     = new MenuService(new MenuRepository(new Menu()));
+//
 
         $root = $this->createMenuRoot();
 
-        $data = json_decode(file_get_contents(__DIR__.'/jsons/menu.json'), true);
-
-        $this->migrate($data, Category::where('extension', 'menu')->first());
+//        $data = json_decode(file_get_contents(__DIR__.'/jsons/menu.json'), true);
+//
+//        $this->migrate($data, Category::where('extension', 'menu')->first());
 
     }
 

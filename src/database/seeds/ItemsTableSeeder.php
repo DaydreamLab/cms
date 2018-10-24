@@ -29,12 +29,12 @@ class ItemsTableSeeder extends Seeder
 
     public function run()
     {
-        $this->categoryService  = new CategoryService(new CategoryRepository(new Category()));
-        $tagAdminService = new TagAdminService(new TagAdminRepository(new TagAdmin()));
-        $itemTagMapAdminService = new ItemTagMapAdminService(new ItemTagMapAdminRepository(new ItemTagMapAdmin()));
-
-        $this->itemAdminService = new ItemAdminService(new ItemAdminRepository(new ItemAdmin()), $tagAdminService,$itemTagMapAdminService);
-
+//        $this->categoryService  = new CategoryService(new CategoryRepository(new Category()));
+//        $tagAdminService = new TagAdminService(new TagAdminRepository(new TagAdmin()));
+//        $itemTagMapAdminService = new ItemTagMapAdminService(new ItemTagMapAdminRepository(new ItemTagMapAdmin()));
+//
+//        $this->itemAdminService = new ItemAdminService(new ItemAdminRepository(new ItemAdmin()), $tagAdminService,$itemTagMapAdminService);
+//
 
         $category_root = Category::create([
             'title'         => 'ROOT',
@@ -54,10 +54,10 @@ class ItemsTableSeeder extends Seeder
             'children'      =>[]
         ]);
 
-        $data = json_decode(file_get_contents(__DIR__.'/jsons/item.json'), true);
-
-
-        $this->migrate($data, Category::where('extension', 'item')->first());
+//        $data = json_decode(file_get_contents(__DIR__.'/jsons/item.json'), true);
+//
+//
+//        $this->migrate($data, Category::where('extension', 'item')->first());
 
 
 //

@@ -20,8 +20,8 @@ class ModulesTableSeeder extends Seeder
 
     public function run()
     {
-        $this->categoryService  = new CategoryService(new CategoryRepository(new Category()));
-        $this->moduleService      = new ModuleService(new ModuleRepository(new Module()));
+//        $this->categoryService  = new CategoryService(new CategoryRepository(new Category()));
+//        $this->moduleService      = new ModuleService(new ModuleRepository(new Module()));
 
 
         $category_root = Category::create([
@@ -42,9 +42,9 @@ class ModulesTableSeeder extends Seeder
             'children'      =>[]
         ]);
 
-        $data = json_decode(file_get_contents(__DIR__.'/jsons/module.json'), true);
-
-        $this->migrate($data, Category::where('extension', 'module')->first());
+//        $data = json_decode(file_get_contents(__DIR__.'/jsons/module.json'), true);
+//
+//        $this->migrate($data, Category::where('extension', 'module')->first());
 
     }
 
