@@ -125,7 +125,7 @@ class ItemsTableSeeder extends Seeder
             unset($category['children']);
             unset($category['items']);
 
-            $category = $this->categoryService->store(Collection::make($category));
+            $category = $this->categoryService->store(Helper::collect($category));
 
             foreach ($items as $item)
             {

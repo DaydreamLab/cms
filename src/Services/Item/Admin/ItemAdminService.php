@@ -65,7 +65,7 @@ class ItemAdminService extends ItemService
         if (InputHelper::null($input, 'alias'))
         {
             $input->forget('alias');
-            $input->put('alias', now()->format('Y-m-d-H-i-s'));
+            $input->put('alias', now()->format('Y-m-d-H-i-s'). '-'.Str::random(4));
         }
 
         if (InputHelper::null($input, 'category_id'))
@@ -120,7 +120,15 @@ class ItemAdminService extends ItemService
         $result    =  parent::store($input);
         if (gettype($result) == 'boolean')
         {
-            $item      = $this->find($input->id);
+            if ($result === true)
+            {
+                $item      = $this->find($input->id);
+            }
+            else
+            {
+                Helper::show($input);
+                return $result;
+            }
         }
         else
         {

@@ -27,6 +27,19 @@ return [
         'code'      => 500,
         'message'   => 'Module front create fail'
     ],
+    'MODULE_CREATE_WITH_EXIST_ALIAS' => [
+        'code'      => 403,
+        'message'   => 'Module create with exist alias'
+    ],
+    'MODULE_ADMIN_CREATE_WITH_EXIST_ALIAS' => [
+        'code'      => 403,
+        'message'   => 'Module admin create with exist alias'
+    ],
+    'MODULE_FRONT_CREATE_WITH_EXIST_ALIAS' => [
+        'code'      => 403,
+        'message'   => 'Module front create with exist alias'
+    ],
+
 
     // Create Nested
     'MODULE_CREATE_NESTED_SUCCESS' => [

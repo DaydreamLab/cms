@@ -53,6 +53,18 @@ return [
         'code'      => 500,
         'message'   => 'Category front create nested fail'
     ],
+    'CATEGORY_CREATE_NESTED_WITH_EXIST_PATH' => [
+        'code'      => 403,
+        'message'   => 'Category create nested with exist path'
+    ],
+    'CATEGORY_ADMIN_CREATE_NESTED_WITH_EXIST_PATH' => [
+        'code'      => 403,
+        'message'   => 'Category admin create nested with exist path'
+    ],
+    'CATEGORY_FRONT_CREATE_NESTED_WITH_EXIST_PATH' => [
+        'code'      => 403,
+        'message'   => 'Category front create nested with exist path'
+    ],
 
 
 

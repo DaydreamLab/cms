@@ -41,6 +41,7 @@ class Item extends BaseModel
         'metadata',
         'content_type',
         'params',
+        'extrafileds',
         'locked_by',
         'locked_at',
         'created_by',
@@ -74,8 +75,9 @@ class Item extends BaseModel
 
 
     protected $casts = [
-        'locked_at' => 'datetime:Y-m-d H:i:s',
-        'params'    => 'array'
+        'locked_at'     => 'datetime:Y-m-d H:i:s',
+        'params'        => 'array',
+        'extrafileds'   => 'array'
     ];
 
 

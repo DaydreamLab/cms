@@ -5,6 +5,7 @@ namespace DaydreamLab\Cms\Database\Seeds;
 use DaydreamLab\Cms\Models\Category\Category;
 use DaydreamLab\Cms\Repositories\Category\CategoryRepository;
 use DaydreamLab\Cms\Services\Category\CategoryService;
+use DaydreamLab\JJAJ\Helpers\Helper;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
 
@@ -19,7 +20,7 @@ class ModulesTableSeeder extends Seeder
         $category_root = Category::create([
             'title'         => 'ROOT',
             'alias'         => 'root',
-            'path'          => '',
+            'path'          => '/',
             'state'         => 1,
             'introimage'    => '',
             'introtext'     => '',
@@ -50,12 +51,12 @@ class ModulesTableSeeder extends Seeder
             $modules    = $category['modules'];
             unset($category['modules']);
 
-            $category = $this->categoryService->store(Collection::make($category));
+            $category = $this->categoryService->store(Helper::collect($category));
 
             foreach ($modules as $module)
             {
                 $module['category_id'] = $category->id;
-                $this->moduleService->store(Collection::make($module));
+                $this->moduleService->store(Helper::collect($module));
             }
 
             if ($parent)

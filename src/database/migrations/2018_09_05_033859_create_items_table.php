@@ -35,6 +35,7 @@ class CreateItemsTable extends Migration
             $table->string('metadata')->nullable();
             $table->string('content_type')->nullable()->default('article');
             $table->text('params')->nullable();
+            $table->text('extrafileds')->nullable();
             $table->unsignedInteger('locked_by')->nullable()->default(0);
             $table->timestamp('locked_at')->nullable();
             $table->unsignedInteger('created_by');

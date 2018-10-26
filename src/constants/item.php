@@ -27,6 +27,18 @@ return [
         'code'      => 500,
         'message'   => 'Item front create fail'
     ],
+    'ITEM_CREATE_WITH_EXIST_ALIAS' => [
+        'code'      => 403,
+        'message'   => 'Item create with exist alias'
+    ],
+    'ITEM_ADMIN_CREATE_WITH_EXIST_ALIAS' => [
+        'code'      => 403,
+        'message'   => 'Item admin create with exist alias'
+    ],
+    'ITEM_FRONT_CREATE_WITH_EXIST_ALIAS' => [
+        'code'      => 403,
+        'message'   => 'Item front create with exist alias'
+    ],
 
 
 

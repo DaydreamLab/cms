@@ -55,6 +55,18 @@ return [
         'code'      => 500,
         'message'   => 'Tag front create nested fail'
     ],
+    'TAG_CREATE_NESTED_WITH_EXIST_PATH' => [
+        'code'      => 403,
+        'message'   => 'Tag create nested with exist path'
+    ],
+    'TAG_ADMIN_CREATE_NESTED_WITH_EXIST_PATH' => [
+        'code'      => 403,
+        'message'   => 'Tag admin create nested with exist path'
+    ],
+    'TAG_FRONT_CREATE_NESTED_WITH_EXIST_PATH' => [
+        'code'      => 403,
+        'message'   => 'Tag front create nested with exist path'
+    ],
 
 
     // Update

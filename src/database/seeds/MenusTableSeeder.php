@@ -49,7 +49,7 @@ class MenusTableSeeder extends Seeder
         foreach ($menus as $menu)
         {
             $menu['category_id'] = $menu_category->id;
-            $this->menuService->store(Collection::make($menu));
+            $this->menuService->store(Helper::collect($menu));
         }
 
     }
