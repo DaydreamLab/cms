@@ -40,6 +40,10 @@ Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
             Route::post('search','DaydreamLab\Cms\Controllers\Category\Admin\CategoryAdminController@search');
             Route::post('checkout','DaydreamLab\Cms\Controllers\Category\Admin\CategoryAdminController@checkout');
             Route::post('ordering','DaydreamLab\Cms\Controllers\Category\Admin\CategoryAdminController@ordering');
+            Route::get('tree','DaydreamLab\Cms\Controllers\Category\Admin\CategoryAdminController@tree');
+            Route::get('tree/{extension}','DaydreamLab\Cms\Controllers\Category\Admin\CategoryAdminController@tree');
+            Route::get('treeList','DaydreamLab\Cms\Controllers\Category\Admin\CategoryAdminController@treeList');
+            Route::get('treeList/{extension}','DaydreamLab\Cms\Controllers\Category\Admin\CategoryAdminController@treeList');
             Route::get('{id}', 'DaydreamLab\Cms\Controllers\Category\Admin\CategoryAdminController@getItem');
         });
 

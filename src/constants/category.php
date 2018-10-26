@@ -326,6 +326,7 @@ return [
         'message'   => 'Category front get item fail'
     ],
 
+    // Get Tree
     'CATEGORY_GET_TREE_SUCCESS' => [
         'code'      => 200,
         'message'   => 'Category get tree success'
@@ -337,6 +338,21 @@ return [
     'CATEGORY_FRONT_GET_TREE_SUCCESS' => [
         'code'      => 200,
         'message'   => 'Category front get tree success'
+    ],
+
+
+    // Get Tree List
+    'CATEGORY_GET_TREE_LIST_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Category get tree list success'
+    ],
+    'CATEGORY_ADMIN_GET_TREE_LIST_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Category admin get tree list success'
+    ],
+    'CATEGORY_FRONT_GET_TREE_LIST_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Category front get tree list success'
     ],
 
 

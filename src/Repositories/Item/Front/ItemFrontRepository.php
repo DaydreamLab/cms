@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Repositories\Item\Front;
 
+use DaydreamLab\Cms\Repositories\Category\Front\CategoryFrontRepository;
 use DaydreamLab\Cms\Repositories\Item\ItemRepository;
 use DaydreamLab\Cms\Models\Item\Front\ItemFront;
 use DaydreamLab\JJAJ\Helpers\Helper;
@@ -16,12 +17,16 @@ class ItemFrontRepository extends ItemRepository
 
     protected $userGroupMapRepository;
 
+    protected $categoryFrontRepository;
+
     public function __construct(ItemFront $model,
                                 UserGroupFrontRepository $userGroupRepository,
-                                UserGroupMapFrontRepository $userGroupMapRepository)
+                                UserGroupMapFrontRepository $userGroupMapRepository,
+                                CategoryFrontRepository $categoryFrontRepository)
     {
         $this->userGroupRepository = $userGroupRepository;
         $this->userGroupMapRepository = $userGroupMapRepository;
+        $this->categoryFrontRepository = $categoryFrontRepository;
         parent::__construct($model);
     }
 
@@ -100,6 +105,37 @@ class ItemFrontRepository extends ItemRepository
         $data['filter'] = $filter;
 
         return $data;
+    }
+
+
+    public function getMenuItems($params)
+    {
+        $items = $this->model->where('content_type', 'menu')
+                             ->whereIn('category_id', $params['category_ids'])
+                             ->get();
+        $categories = $this->categoryFrontRepository->model->whereIn('id', $params['category_ids'])->get();
+
+        foreach ($categories as $category)
+        {
+            $category->items = [];
+        }
+
+
+        $data = [];
+        foreach ($items as $item)
+        {
+            foreach ($categories as $category)
+            {
+                if($category->title == $item->category_title)
+                {
+                    $category->items[] = $item->toArray();
+                }
+            }
+        }
+
+        Helper::show($categories->toTree()->toArray());
+
+        exit();
     }
 
 

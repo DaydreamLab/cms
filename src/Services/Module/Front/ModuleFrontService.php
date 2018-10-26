@@ -39,6 +39,10 @@ class ModuleFrontService extends ModuleService
         {
             $items = $this->itemFrontService->getTimelineItems($module->params);
         }
+        elseif ($module->category->alias == 'item-menu')
+        {
+            $items = $this->itemFrontService->getMenuItems($module->params);
+        }
         return $items;
     }
 }

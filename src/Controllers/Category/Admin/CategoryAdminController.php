@@ -76,9 +76,17 @@ class CategoryAdminController extends BaseController
     }
 
 
-    public function tree()
+    public function tree($extension = 'item')
     {
-        $this->service->tree('category');
+        $this->service->tree($extension);
+
+        return ResponseHelper::response($this->service->status, $this->service->response);
+    }
+
+
+    public function treeList($extension = 'item')
+    {
+        $this->service->treeList($extension);
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }

@@ -31,6 +31,7 @@ class InstallCommand extends Command
         'language',
         'pagebuilder',
         'tag',
+        'extrafield'
     ];
 
 

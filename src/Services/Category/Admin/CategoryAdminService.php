@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Services\Category\Admin;
 
+use DaydreamLab\Cms\Models\Category\Category;
 use DaydreamLab\Cms\Repositories\Category\Admin\CategoryAdminRepository;
 use DaydreamLab\Cms\Services\Category\CategoryService;
 use DaydreamLab\JJAJ\Helpers\Helper;
@@ -102,5 +103,6 @@ class CategoryAdminService extends CategoryService
         }
         return parent::search($input);
     }
+
 
 }

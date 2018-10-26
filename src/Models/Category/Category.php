@@ -73,6 +73,7 @@ class Category extends BaseModel
         'updater',
         'locker',
         'tree_title',
+        'tree_list_title'
         //'viewlevels',
     ];
 
