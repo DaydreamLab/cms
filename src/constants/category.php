@@ -399,6 +399,34 @@ return [
     ],
 
 
+    // Ordering
+    'CATEGORY_UPDATE_ORDERING_NESTED_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Category update ordering success'
+    ],
+    'CATEGORY_ADMIN_UPDATE_ORDERING_NESTED_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Category admin update ordering success'
+    ],
+    'CATEGORY_FRONT_UPDATE_ORDERING_NESTED_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Category front update ordering success'
+    ],
+    'CATEGORY_UPDATE_ORDERING_NESTED_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Category update ordering fail'
+    ],
+    'CATEGORY_ADMIN_UPDATE_ORDERING_NESTED_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Category admin update ordering fail'
+    ],
+    'CATEGORY_FRONT_UPDATE_ORDERING_NESTED_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Category front update ordering fail'
+    ],
+
+
+
     // Featured
     'CATEGORY_FEATURED_SUCCESS' => [
         'code'      => 200,

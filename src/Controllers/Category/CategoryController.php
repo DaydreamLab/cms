@@ -1,6 +1,7 @@
 <?php
 namespace DaydreamLab\Cms\Controllers\Category;
 
+use DaydreamLab\Cms\Requests\Item\CategoryOrderingPost;
 use DaydreamLab\JJAJ\Controllers\BaseController;
 use DaydreamLab\JJAJ\Helpers\ResponseHelper;
 use Illuminate\Support\Collection;
@@ -43,7 +44,15 @@ class CategoryController extends BaseController
     }
 
 
-    public function remove(CategoryRemovePost $request)
+    public function ordering(CategoryOrderingPost $request)
+    {
+        $this->service->ordering($request->rulesInput());
+
+        return ResponseHelper::response($this->service->status, $this->service->response);
+    }
+
+
+        public function remove(CategoryRemovePost $request)
     {
         $this->service->remove($request->rulesInput());
 

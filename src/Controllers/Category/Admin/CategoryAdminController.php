@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Controllers\Category\Admin;
 
+use DaydreamLab\Cms\Requests\Item\Admin\CategoryAdminOrderingPost;
 use DaydreamLab\JJAJ\Controllers\BaseController;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\ResponseHelper;
@@ -39,6 +40,14 @@ class CategoryAdminController extends BaseController
     public function checkout(CategoryAdminCheckoutPost $request)
     {
         $this->service->checkout($request->rulesInput());
+
+        return ResponseHelper::response($this->service->status, $this->service->response);
+    }
+
+
+    public function ordering(CategoryAdminOrderingPost $request)
+    {
+        $this->service->ordering($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
