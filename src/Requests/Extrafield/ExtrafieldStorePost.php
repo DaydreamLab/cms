@@ -28,16 +28,19 @@ class ExtrafieldStorePost extends AdminRequest
             'id'            => 'nullable|integer',
             'title'         => 'required|string',
             'alias'         => 'nullable|string',
-            'group_id'      => 'required|integer',
+            'group_id'      => 'nullable|integer',
             'state'         => [
                 'nullable',
                 'integer',
                 Rule::in([0,1,-2])
             ],
             'type'          => 'required|string',
+            'required'      => 'required|boolean',
             'value'         => 'nullable|string',
             'description'   => 'nullable|string',
-            'params'        => 'nullable|string',
+            'params'        => 'nullable|array',
+            'params.*'      => 'nullable|array',
+            'params.*.*'    => 'nullable|string',
             'ordering'      => 'nullable|integer'
         ];
     }

@@ -114,8 +114,12 @@ class ItemAdminService extends ItemService
             $input->forget('language');
             $input->put('language', 'All');
         }
-        $tags = $input->tags;
+        $tags = $input->get('tags') ? $input->get('tags') : [];
         $input->forget('tags');
+
+        $extrafields = $input->get('extrafields') ? $input->get('extrafields') : [];
+        $input->extrafields = json_encode($extrafields);
+
 
         $result    =  parent::store($input);
         if (gettype($result) == 'boolean')
@@ -126,7 +130,6 @@ class ItemAdminService extends ItemService
             }
             else
             {
-                Helper::show($input);
                 return $result;
             }
         }

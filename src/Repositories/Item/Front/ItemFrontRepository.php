@@ -118,24 +118,32 @@ class ItemFrontRepository extends ItemRepository
         foreach ($categories as $category)
         {
             $category->items = [];
+            foreach ($category->extrafields as $extrafield)
+            {
+                if (array_key_exists('alias', $extrafield))
+                {
+                    $category->{$extrafield['alias']} = $extrafield['value'];
+
+                }
+            }
+            $category->makeHidden(['extrafields']);
         }
 
 
-        $data = [];
         foreach ($items as $item)
         {
             foreach ($categories as $category)
             {
+                $category->makeHidden(['hits', 'created_at', 'creator']);
                 if($category->title == $item->category_title)
                 {
-                    $category->items[] = $item->toArray();
+                    $category->items= array_merge($category->items, array($item->only(['title', 'description'])));
+                    break;
                 }
             }
         }
 
-        Helper::show($categories->toTree()->toArray());
-
-        exit();
+        return $categories->toTree();
     }
 
 

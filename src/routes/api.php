@@ -48,6 +48,24 @@ Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
         });
 
 
+        Route::group(['prefix' => 'extrafield'], function (){
+            Route::post('remove', 'DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldAdminController@remove');
+            Route::post('state', 'DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldAdminController@state');
+            Route::post('store','DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldAdminController@store');
+            Route::post('search','DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldAdminController@search');
+            Route::get('{id}', 'DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldAdminController@getItem');
+
+            Route::group(['prefix' => 'group'], function (){
+                Route::post('remove', 'DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldGroupAdminController@remove');
+                Route::post('state', 'DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldGroupAdminController@state');
+                Route::post('store','DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldGroupAdminController@store');
+                Route::post('search','DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldGroupAdminController@search');
+                Route::get('{id}', 'DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldGroupAdminController@getItem');
+
+            });
+        });
+
+
         Route::group(['prefix' => 'language'], function (){
             Route::post('remove', 'DaydreamLab\Cms\Controllers\Language\Admin\LanguageAdminController@remove');
             Route::post('state', 'DaydreamLab\Cms\Controllers\Language\Admin\LanguageAdminController@state');

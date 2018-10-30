@@ -35,6 +35,7 @@ class CreateCategoriesTable extends Migration
             $table->string('metadesc')->nullable();
             $table->string('metadata')->nullable();
             $table->text('params')->nullable();
+            $table->text('extrafields')->nullable();
             $table->unsignedInteger('locked_by')->nullable()->default(0);
             $table->timestamp('locked_at')->nullable();
             $table->unsignedInteger('created_by');

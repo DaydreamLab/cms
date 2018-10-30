@@ -44,10 +44,14 @@ class ItemStorePost extends AdminRequest
             'content_type'  => 'nullable|string',
             'params'        => 'nullable|string',
             'ordering'      => 'nullable|integer',
+            'extrafields'   => 'nullable|array',
+            'extrafields.*' => 'nullable|array',
+            'extrafields.*.id'=> 'required|integer',
+            'extrafields.*.value'=> 'required|string',
             'tags'          => 'nullable|array',
             'tags.*'        => 'nullable|array',
             'tags.*.id'     => 'nullable|integer',
-            'tags.*.title'  => 'required|string'
+            'tags.*.title'  => 'nullable|string'
         ];
     }
 }

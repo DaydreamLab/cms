@@ -24,6 +24,7 @@ class Extrafield extends BaseModel
         'group_id',
         'state',
         'type',
+        'required',
         'value',
         'description',
         'params',
@@ -39,6 +40,10 @@ class Extrafield extends BaseModel
      * @var array
      */
     protected $hidden = [
+        'created_by',
+        'updated_by',
+        'created_at',
+        'updated_at'
     ];
 
 

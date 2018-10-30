@@ -41,5 +41,6 @@ class CategoryFront extends Category
         'updater',
         'locker',
         'tree_title',
+        'tree_list_title'
     ];
 }

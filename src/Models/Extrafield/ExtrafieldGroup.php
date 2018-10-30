@@ -41,8 +41,18 @@ class ExtrafieldGroup extends BaseModel
      * @var array
      */
     protected $appends = [
+        'extrafields'
     ];
 
 
+    public function extrafield()
+    {
+        return $this->hasMany(Extrafield::class, 'group_id','id');
+    }
 
+
+    public function getExtrafieldsAttribute()
+    {
+        return $this->extrafield()->where('state', 1)->get();
+    }
 }

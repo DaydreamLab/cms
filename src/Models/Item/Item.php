@@ -2,7 +2,9 @@
 namespace DaydreamLab\Cms\Models\Item;
 
 use DaydreamLab\Cms\Models\Category\Category;
+use DaydreamLab\Cms\Models\Extrafield\Extrafield;
 use DaydreamLab\Cms\Models\Tag\Tag;
+use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Models\BaseModel;
 
 class Item extends BaseModel
@@ -41,7 +43,7 @@ class Item extends BaseModel
         'metadata',
         'content_type',
         'params',
-        'extrafileds',
+        'extrafields',
         'locked_by',
         'locked_at',
         'created_by',
@@ -77,7 +79,7 @@ class Item extends BaseModel
     protected $casts = [
         'locked_at'     => 'datetime:Y-m-d H:i:s',
         'params'        => 'array',
-        'extrafileds'   => 'array'
+        'extrafields'   => 'array'
     ];
 
 
@@ -114,6 +116,21 @@ class Item extends BaseModel
         });
 
     }
+
+
+    public function getExtrafieldsAttribute($value)
+    {
+        $data = [];
+        foreach (json_decode($value) as $extra_field)
+        {
+            $extra_field_data = Extrafield::find($extra_field->id);
+            $extra_field_data->value = $extra_field->value;
+            $data[] = $extra_field_data->toArray();
+        }
+
+        return $data;
+    }
+
 
     public function getTagsAttribute()
     {

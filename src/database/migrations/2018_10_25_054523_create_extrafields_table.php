@@ -20,6 +20,7 @@ class CreateExtrafieldsTable extends Migration
             $table->unsignedInteger('group_id')->nullable();
             $table->string('type');
             $table->unsignedTinyInteger('state')->default(1)->nullable();
+            $table->unsignedTinyInteger('required');
             $table->string('value');
             $table->text('description')->nullable();
             $table->text('params')->nullable();

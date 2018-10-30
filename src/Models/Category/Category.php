@@ -2,6 +2,7 @@
 namespace DaydreamLab\Cms\Models\Category;
 
 use Carbon\Carbon;
+use DaydreamLab\Cms\Models\Extrafield\Extrafield;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\User\Models\User\UserGroup;
@@ -44,6 +45,7 @@ class Category extends BaseModel
         'metadesc',
         'metadata',
         'params',
+        'extrafields',
         'created_by',
         'updated_by',
         'locked_by',
@@ -77,15 +79,31 @@ class Category extends BaseModel
         //'viewlevels',
     ];
 
+
     protected $casts = [
-        'locked_at' => 'datetime:Y-m-d H:i:s',
+        'locked_at'     => 'datetime:Y-m-d H:i:s',
+        'extrafields'   => 'array'
     ];
+
 
     public function viewlevel()
     {
         return $this->hasOne(Viewlevel::class, 'id', 'access');
     }
 
+
+    public function getExtrafieldsAttribute($value)
+    {
+        $data = [];
+        foreach (json_decode($value) as $extra_field)
+        {
+            $extra_field_data = Extrafield::find($extra_field->id);
+            $extra_field_data->value = $extra_field->value ;
+            $data[] = $extra_field_data->toArray();
+        }
+
+        return $data;
+    }
 
 
     public function getViewlevelsAttribute()
