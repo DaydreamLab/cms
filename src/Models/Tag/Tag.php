@@ -30,7 +30,7 @@ class Tag extends BaseModel
         'language',
         'ordering',
         'metadata',
-        'metadesc',
+        'metakeywords',
         'params',
         'locked_by',
         'locked_at',

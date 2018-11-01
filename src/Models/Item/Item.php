@@ -40,14 +40,16 @@ class Item extends BaseModel
         'ordering',
         'language',
         'metadesc',
-        'metadata',
+        'metakeywords',
         'content_type',
         'params',
         'extrafields',
         'locked_by',
         'locked_at',
         'created_by',
-        'updated_by'
+        'updated_by',
+        'publish_up',
+        'publish_down',
     ];
 
 

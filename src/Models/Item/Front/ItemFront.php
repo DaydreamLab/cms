@@ -16,7 +16,6 @@ class ItemFront extends Item
 
     protected $hidden = [
         'category_id',
-        'ordering',
         'state',
         'access',
         'featured_ordering',

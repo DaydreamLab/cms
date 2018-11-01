@@ -25,7 +25,7 @@ class CreateTagsTable extends Migration
             $table->unsignedInteger('access')->nullable()->default(2);
             $table->string('language')->nullable()->default('All');
             $table->string('metadesc')->nullable();
-            $table->string('metadata')->nullable();
+            $table->string('metakeywords')->nullable();
             $table->text('params')->nullable();
             $table->unsignedInteger('locked_by')->nullable()->default(0);
             $table->timestamp('locked_at')->nullable();

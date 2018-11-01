@@ -2,8 +2,7 @@
 
 namespace DaydreamLab\Cms\Controllers\Item\Front;
 
-use DaydreamLab\Cms\Requests\Item\Front\ItemFrontGetNextPost;
-use DaydreamLab\Cms\Requests\Item\Front\ItemFrontGetPreviousPost;
+use DaydreamLab\Cms\Requests\Item\Front\ItemFrontGetPreviousAndNextPost;
 use DaydreamLab\JJAJ\Controllers\BaseController;
 use DaydreamLab\JJAJ\Helpers\ResponseHelper;
 use Illuminate\Support\Collection;
@@ -57,17 +56,9 @@ class ItemFrontController extends BaseController
     }
 
 
-    public function getNext(ItemFrontGetNextPost $request)
+    public function getPreviousAndNext(ItemFrontGetPreviousAndNextPost $request)
     {
-        $this->service->getNext($request->rulesInput());
-
-        return ResponseHelper::response($this->service->status, $this->service->response);
-    }
-
-
-    public function getPrevious(ItemFrontGetPreviousPost $request)
-    {
-        $this->service->getPrevious($request->rulesInput());
+        $this->service->getPreviousAndNext($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }

@@ -43,13 +43,15 @@ class Category extends BaseModel
         'content_type',
         'template',
         'metadesc',
-        'metadata',
+        'metakeywords',
         'params',
         'extrafields',
         'created_by',
         'updated_by',
         'locked_by',
         'locked_at',
+        'publish_up',
+        'publish_down',
     ];
 
 

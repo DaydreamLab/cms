@@ -31,10 +31,14 @@ class Menu extends BaseModel
         'description',
         'language',
         'params',
+        'metadata',
+        'metakeywords',
         'locked_by',
         'locked_at',
         'created_by',
-        'updated_by'
+        'updated_by',
+        'publish_up',
+        'publish_down',
     ];
 
 

@@ -32,7 +32,7 @@ class CreateItemsTable extends Migration
             $table->unsignedInteger('featured_ordering')->nullable();
             $table->string('language')->nullable()->default('All');
             $table->string('metadesc')->nullable();
-            $table->string('metadata')->nullable();
+            $table->string('metakeywords')->nullable();
             $table->string('content_type')->nullable()->default('article');
             $table->text('params')->nullable();
             $table->text('extrafields')->nullable();
@@ -41,6 +41,8 @@ class CreateItemsTable extends Migration
             $table->unsignedInteger('created_by');
             $table->unsignedInteger('updated_by')->nullable();
             $table->timestamps();
+            $table->timestamp('publish_up')->nullable();
+            $table->timestamp('publish_down')->nullable();
         });
     }
 

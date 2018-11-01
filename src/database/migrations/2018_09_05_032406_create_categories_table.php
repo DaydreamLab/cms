@@ -33,7 +33,7 @@ class CreateCategoriesTable extends Migration
             $table->string('content_type')->nullable();
             $table->string('template')->nullable();
             $table->string('metadesc')->nullable();
-            $table->string('metadata')->nullable();
+            $table->string('metakeywords')->nullable();
             $table->text('params')->nullable();
             $table->text('extrafields')->nullable();
             $table->unsignedInteger('locked_by')->nullable()->default(0);
@@ -41,6 +41,8 @@ class CreateCategoriesTable extends Migration
             $table->unsignedInteger('created_by');
             $table->unsignedInteger('updated_by')->nullable();
             $table->timestamps();
+            $table->timestamp('publish_up')->nullable();
+            $table->timestamp('publish_down')->nullable();
         });
     }
 

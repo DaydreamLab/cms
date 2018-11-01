@@ -5,6 +5,7 @@ namespace DaydreamLab\Cms\Services\Item\Front;
 use DaydreamLab\Cms\Repositories\Item\Front\ItemFrontRepository;
 use DaydreamLab\Cms\Services\Item\ItemService;
 use DaydreamLab\JJAJ\Helpers\Helper;
+use DaydreamLab\JJAJ\Helpers\InputHelper;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
@@ -18,9 +19,31 @@ class ItemFrontService extends ItemService
     }
 
 
+    public function getItem($id)
+    {
+        $item = parent::getItem($id);
+        if ($item)
+        {
+            $prev_and_next  = $this->repo->getPreviousAndNext($item);
+            $item->previous =  $prev_and_next['previous'];
+            $item->next     =  $prev_and_next['next'];
+            $this->response = $item;
+            return $item;
+        }
+        return false;
+    }
+
+
     public function getMenuItems($params)
     {
         return $this->repo->getMenuItems($params);
+    }
+
+
+    public function getPreviousAndNext($item)
+    {
+
+
     }
 
 
@@ -41,6 +64,7 @@ class ItemFrontService extends ItemService
         {
             $this->status = Str::upper(Str::snake($this->type.'ItemNotExist'));
             $this->response = null;
+            return false;
         }
     }
 

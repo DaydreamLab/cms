@@ -4,8 +4,8 @@
     "path": "/content",
     "component": "",
     "type": "alias",
-    "redirect": "",
-    "icon": "",
+    "redirect": "/content/item",
+    "icon": "cube",
     "state": 1,
     "showNav": 1,
     "ordering": 8,
@@ -13,7 +13,7 @@
     "children": [
       {
         "title": "Items",
-        "path": "",
+        "path": "/item",
         "component": "content/item/list",
         "type": "menu",
         "redirect": "",
@@ -22,7 +22,22 @@
         "showNav": 1,
         "ordering": 1,
         "created_by": 1,
-        "children": [],
+        "children": [
+          {
+            "title": "Edit Item",
+            "path": "/edit",
+            "component": "content/item/edit",
+            "type": "function",
+            "redirect": "",
+            "icon": "",
+            "state": 1,
+            "showNav": 0,
+            "ordering": 1,
+            "created_by": 1,
+            "children": [],
+            "apis": []
+          }
+        ],
         "apis": [
           {
             "method": "add",
@@ -51,23 +66,10 @@
           }
         ]
       },
-      {
-        "title": "Edit Item",
-        "path": "/edit",
-        "component": "content/item/edit",
-        "type": "function",
-        "redirect": "",
-        "icon": "",
-        "state": 1,
-        "showNav": 0,
-        "ordering": 2,
-        "created_by": 1,
-        "children": [],
-        "apis": []
-      },
+
       {
         "title": "Categories",
-        "path": "/category/list",
+        "path": "/category",
         "component": "content/category/list",
         "type": "menu",
         "redirect": "",
@@ -76,7 +78,22 @@
         "showNav": 1,
         "ordering": 3,
         "created_by": 1,
-        "children": [],
+        "children": [
+          {
+            "title": "Edit Category",
+            "path": "/edit",
+            "component": "content/category/edit",
+            "type": "function",
+            "redirect": "",
+            "icon": "",
+            "state": 1,
+            "showNav": 0,
+            "ordering": 4,
+            "created_by": 1,
+            "children": [],
+            "apis": []
+          }
+        ],
         "apis": [
           {
             "method": "add",
@@ -100,23 +117,10 @@
           }
         ]
       },
-      {
-        "title": "Edit Category",
-        "path": "/category/edit",
-        "component": "content/category/edit",
-        "type": "function",
-        "redirect": "",
-        "icon": "",
-        "state": 1,
-        "showNav": 0,
-        "ordering": 4,
-        "created_by": 1,
-        "children": [],
-        "apis": []
-      },
+
       {
         "title": "Tags",
-        "path": "/tag/list",
+        "path": "/tag",
         "component": "content/tag/list",
         "type": "menu",
         "redirect": "",
@@ -125,7 +129,22 @@
         "showNav": 1,
         "ordering": 5,
         "created_by": 1,
-        "children": [],
+        "children": [
+          {
+            "title": "Edit Tag",
+            "path": "/edit",
+            "component": "content/tag/edit",
+            "type": "function",
+            "redirect": "",
+            "icon": "",
+            "state": 1,
+            "showNav": 0,
+            "ordering": 6,
+            "created_by": 1,
+            "children": [],
+            "apis": []
+          }
+        ],
         "apis": [
           {
             "method": "add",
@@ -150,18 +169,39 @@
         ]
       },
       {
-        "title": "Edit Tag",
-        "path": "/tag/edit",
-        "component": "content/tag/edit",
-        "type": "function",
+        "title": "Languages",
+        "path": "/language",
+        "component": "content/language/list",
+        "type": "menu",
         "redirect": "",
         "icon": "",
         "state": 1,
-        "showNav": 0,
+        "showNav": 1,
         "ordering": 6,
         "created_by": 1,
-        "children": [],
-        "apis": []
+        "children": [
+          {
+            "title": "Edit Language",
+            "path": "/edit",
+            "component": "content/language/edit",
+            "type": "function",
+            "redirect": "",
+            "icon": "",
+            "state": 1,
+            "showNav": 0,
+            "ordering": 6,
+            "created_by": 1,
+            "children": [],
+            "apis": []
+          }
+        ],
+        "apis": [
+          {
+            "method": "setDefault",
+            "url": "/admin/language/default",
+            "created_by": 1
+          }
+        ]
       },
       {
         "title": "Media Manager",
@@ -180,5 +220,4 @@
     ],
     "apis": []
   }
-
 ]

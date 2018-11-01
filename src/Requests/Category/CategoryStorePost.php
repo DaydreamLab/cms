@@ -45,7 +45,7 @@ class CategoryStorePost extends AdminRequest
             'content_type'  => 'nullable|string',
             'template'      => 'nullable|string',
             'metadesc'      => 'nullable|string',
-            'metadata'      => 'nullable|string',
+            'metakeywords'  => 'nullable|string',
             'params'        => 'nullable|string',
         ];
     }

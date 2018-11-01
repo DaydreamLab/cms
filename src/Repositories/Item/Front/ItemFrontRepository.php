@@ -54,7 +54,6 @@ class ItemFrontRepository extends ItemRepository
 
     public function getItems($params, $featured, $created_by_ids = null)
     {
-
         $limit      = $params['per_page'];
         $order_by   = $params['order_by'];
         $ordering   = $params['ordering'];
@@ -75,7 +74,7 @@ class ItemFrontRepository extends ItemRepository
         }
 
         $query = $query->where('content_type', 'article')
-            ->orderBy($order_by, $ordering);
+                    ->orderBy($order_by, $ordering);
 
         $items = $query->paginate($limit)->toArray();
 
@@ -178,6 +177,24 @@ class ItemFrontRepository extends ItemRepository
 
         return $data;
     }
+
+
+    public function getPreviousAndNext($item)
+    {
+        $data['previous'] = $this->model->where('category_id', $item->category_id)
+                            ->where('content_type', $item->content_type)
+                            ->where('ordering', $item->ordering + 1 )
+                            ->first()
+                            ->only(['id','title']);
+
+        $data['next'] = $this->model->where('category_id', $item->category_id)
+                            ->where('content_type', $item->content_type)
+                            ->where('ordering', $item->ordering - 1 )
+                            ->first()
+                            ->only(['id','title']);;
+       return $data;
+    }
+
 
 
     public function getPreviousOrNext(Collection $input, $previous = true)

@@ -40,7 +40,7 @@ class ItemStorePost extends AdminRequest
             'featured_ordering'  => 'nullable|integer',
             'language'      => 'nullable|string',
             'metadesc'      => 'nullable|string',
-            'metadata'      => 'nullable|string',
+            'metakeywords'  => 'nullable|string',
             'content_type'  => 'nullable|string',
             'params'        => 'nullable|string',
             'ordering'      => 'nullable|integer',
