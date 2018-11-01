@@ -40,13 +40,6 @@ class ItemFrontService extends ItemService
     }
 
 
-    public function getPreviousAndNext($item)
-    {
-
-
-    }
-
-
     public function getNewsItems($params)
     {
         return $this->repo->getNewsItems($params);

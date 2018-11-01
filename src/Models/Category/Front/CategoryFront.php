@@ -28,7 +28,7 @@ class CategoryFront extends Category
         'content_type',
         'template',
         'metadesc',
-        'metadata',
+        'metakeywords',
         'params',
         'created_by',
         'updated_by',

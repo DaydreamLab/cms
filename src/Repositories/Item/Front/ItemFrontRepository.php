@@ -215,7 +215,6 @@ class ItemFrontRepository extends ItemRepository
             $query = $query->whereIn('created_by', $user_ids);
         }
 
-
         $query = $query->orderBy('created_at', 'desc');
         $items = $query->get();
 
