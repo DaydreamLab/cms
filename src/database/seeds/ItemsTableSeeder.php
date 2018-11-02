@@ -48,9 +48,10 @@ class ItemsTableSeeder extends Seeder
             'ordering'      => 1,
             'access'        => 4,
             'metadesc'      => '',
-            'metakeywords'      => '',
+            'metakeywords'  => '',
+            'extrafields'   => [],
             'created_by'    => 1,
-            'children'      =>[]
+            'children'      => []
         ]);
 
 //        $data = json_decode(file_get_contents(__DIR__.'/jsons/item.json'), true);

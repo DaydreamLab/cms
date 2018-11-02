@@ -80,7 +80,6 @@ class CronCommand extends Command
                    $item->delete();
                }
            }
-
         });
     }
 }
