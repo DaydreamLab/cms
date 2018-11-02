@@ -25,13 +25,12 @@ class CreateCategoriesTable extends Migration
             $table->text('introtext')->nullable();
             $table->text('image')->nullable();
             $table->text('description')->nullable();
-            $table->text('content_type');
+            $table->text('content_type')->nullable();
             $table->string('extension');
             $table->unsignedInteger('hits')->nullable()->default(0);
             $table->unsignedInteger('access')->nullalbe()->default(2);
 
             $table->string('language')->nullable()->default('All');
-            $table->string('content_type')->nullable();
             $table->string('template')->nullable();
             $table->string('metadesc')->nullable();
             $table->string('metakeywords')->nullable();

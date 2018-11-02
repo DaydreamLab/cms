@@ -33,7 +33,7 @@ class CreateItemsTable extends Migration
             $table->string('language')->nullable()->default('All');
             $table->string('metadesc')->nullable();
             $table->string('metakeywords')->nullable();
-            $table->string('content_type')->nullable()->default('article');
+            //$table->string('content_type')->nullable()->default('article');
             $table->text('params')->nullable();
             $table->text('extrafields')->nullable();
             $table->unsignedInteger('locked_by')->nullable()->default(0);

@@ -41,7 +41,7 @@ class Item extends BaseModel
         'language',
         'metadesc',
         'metakeywords',
-        'content_type',
+        //'content_type',
         'params',
         'extrafields',
         'locked_by',

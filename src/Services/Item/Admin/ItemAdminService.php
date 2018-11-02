@@ -25,9 +25,9 @@ class ItemAdminService extends ItemService
                                 TagAdminService $tagAdminService,
                                 ItemTagMapAdminService $itemTagMapAdminService)
     {
-        $this->tagAdminService = $tagAdminService;
-        $this->itemTagMapAdminService = $itemTagMapAdminService;
-        $this->cmsCronJobModel = new CmsCronJob();
+        $this->tagAdminService          = $tagAdminService;
+        $this->itemTagMapAdminService   = $itemTagMapAdminService;
+        $this->cmsCronJobModel          = new CmsCronJob();
         parent::__construct($repo);
     }
 
@@ -96,7 +96,6 @@ class ItemAdminService extends ItemService
         {
             $input->forget('featured_ordering');
             $input->put('featured_ordering', 1);
-
 
             // 編輯文章
             if (InputHelper::null($input, 'id'))
