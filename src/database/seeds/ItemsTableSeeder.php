@@ -35,7 +35,6 @@ class ItemsTableSeeder extends Seeder
 //
 //        $this->itemAdminService = new ItemAdminService(new ItemAdminRepository(new ItemAdmin()), $tagAdminService,$itemTagMapAdminService);
 //
-
         $category_root = Category::create([
             'title'         => 'ROOT',
             'alias'         => 'root',

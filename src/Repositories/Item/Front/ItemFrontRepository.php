@@ -181,17 +181,38 @@ class ItemFrontRepository extends ItemRepository
 
     public function getPreviousAndNext($item)
     {
-        $data['previous'] = $this->model->where('category_id', $item->category_id)
-                            ->where('content_type', $item->content_type)
-                            ->where('ordering', $item->ordering + 1 )
-                            ->first()
-                            ->only(['id','title']);
+        $previous = $this->model->where('category_id', $item->category_id)
+                                ->where('state', 1)
+                                ->where('content_type', $item->content_type)
+                                ->where('ordering', '<', $item->ordering)
+                                ->limit(1)
+                                ->first();
 
-        $data['next'] = $this->model->where('category_id', $item->category_id)
-                            ->where('content_type', $item->content_type)
-                            ->where('ordering', $item->ordering - 1 )
-                            ->first()
-                            ->only(['id','title']);;
+        $next     = $this->model->where('category_id', $item->category_id)
+                                ->where('state', 1)
+                                ->where('content_type', $item->content_type)
+                                ->where('ordering', '>', $item->ordering )
+                                ->limit(1)
+                                ->first();
+
+        if ($previous)
+        {
+            $data['previous'] = $previous->only(['id','title']);
+        }
+        else
+        {
+            $data['previous'] = null;
+        }
+
+        if ($next)
+        {
+            $data['next'] = $next ->only(['id','title']);
+        }
+        else
+        {
+            $data['next'] = null;
+        }
+
        return $data;
     }
 

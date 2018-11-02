@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Services\Category\Admin;
 
 use DaydreamLab\Cms\Models\Category\Category;
+use DaydreamLab\Cms\Models\Cms\CmsCronJob;
 use DaydreamLab\Cms\Repositories\Category\Admin\CategoryAdminRepository;
 use DaydreamLab\Cms\Services\Category\CategoryService;
 use DaydreamLab\JJAJ\Helpers\Helper;
@@ -15,8 +16,11 @@ class CategoryAdminService extends CategoryService
 {
     protected $type = 'CategoryAdmin';
 
+    protected $cmsCronJobModel;
+
     public function __construct(CategoryAdminRepository $repo)
     {
+        $this->cmsCronJobModel = new CmsCronJob();
         parent::__construct($repo);
     }
 
@@ -85,12 +89,71 @@ class CategoryAdminService extends CategoryService
             $input->put('extension', 'item');
         }
 
+
+        if (InputHelper::null($input, 'publish_up'))
+        {
+            $input->forget('publish_up');
+            $input->put('publish_up', now());
+            $input->publish_up = now()->toDateTimeString();
+        }
+
+
         if (InputHelper::null($input, 'language')){
             $input->forget('language');
             $input->put('language', 'All');
         }
 
-        return parent::storeNested($input);
+
+        if (!InputHelper::null($input, 'description'))
+        {
+            $desc = $input->description;
+            $input->forget('description');
+            $input->put('description', nl2br($desc));
+        }
+
+
+        $result = parent::storeNested($input);
+        if (gettype($result) == 'boolean')
+        {
+            if ($result === true)
+            {
+                $item      = $this->find($input->id);
+            }
+            else
+            {
+                // Something error
+                return $result;
+            }
+        }
+        else
+        {
+            $item      = $this->find($result->id);
+        }
+
+
+        if ($input->publish_up > now())
+        {
+            $this->cmsCronJobModel->create([
+                'table'     => 'categories',
+                'item_id'   => $item->id,
+                'type'      => 'up',
+                'time'      => $item->publish_up
+            ]);
+        }
+
+        if (!InputHelper::null($input, 'publish_down'))
+        {
+            if ($input->publish_down > now())
+            {
+                $this->cmsCronJobModel->create([
+                    'table'     => 'categories',
+                    'item_id'   => $item->id,
+                    'type'      => 'down',
+                    'time'      => $item->publish_down
+                ]);
+            }
+        }
+        return $result;
     }
 
 

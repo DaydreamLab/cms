@@ -27,6 +27,7 @@ class InstallCommand extends Command
 
     protected $constants = [
         'category',
+        'cron',
         'item',
         'language',
         'pagebuilder',

@@ -51,7 +51,9 @@ class ItemStorePost extends AdminRequest
             'tags'          => 'nullable|array',
             'tags.*'        => 'nullable|array',
             'tags.*.id'     => 'nullable|integer',
-            'tags.*.title'  => 'nullable|string'
+            'tags.*.title'  => 'nullable|string',
+            'publish_up'    => 'nullable|datetime',
+            'publish_down'  => 'nullable|datetime',
         ];
     }
 }

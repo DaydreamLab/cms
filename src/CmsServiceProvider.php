@@ -9,6 +9,7 @@ class CmsServiceProvider extends ServiceProvider
 {
     protected $commands = [
         'DaydreamLab\Cms\Commands\InstallCommand',
+        'DaydreamLab\Cms\Commands\CronCommand',
     ];
     /**
      * Bootstrap services.
@@ -19,7 +20,6 @@ class CmsServiceProvider extends ServiceProvider
     {
         $this->publishes([__DIR__. '/constants' => config_path('constants')], 'cms-configs');
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
-
         $this->loadRoutesFrom(__DIR__.'/routes/api.php');
     }
 

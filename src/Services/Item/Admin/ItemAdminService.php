@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Services\Item\Admin;
 
+use DaydreamLab\Cms\Models\Cms\CmsCronJob;
 use DaydreamLab\Cms\Repositories\Item\Admin\ItemAdminRepository;
 use DaydreamLab\Cms\Services\Tag\Admin\TagAdminService;
 use DaydreamLab\JJAJ\Helpers\Helper;
@@ -18,12 +19,15 @@ class ItemAdminService extends ItemService
 
     protected $itemTagMapAdminService;
 
+    protected $cmsCronJobModel;
+
     public function __construct(ItemAdminRepository $repo,
                                 TagAdminService $tagAdminService,
                                 ItemTagMapAdminService $itemTagMapAdminService)
     {
         $this->tagAdminService = $tagAdminService;
         $this->itemTagMapAdminService = $itemTagMapAdminService;
+        $this->cmsCronJobModel = new CmsCronJob();
         parent::__construct($repo);
     }
 
@@ -83,7 +87,6 @@ class ItemAdminService extends ItemService
             $input->forget('access');
         }
 
-
         // featured = 0 or null
         if (InputHelper::null($input, 'featured'))
         {
@@ -107,6 +110,19 @@ class ItemAdminService extends ItemService
 
             $this->featuredOrdering($other, 'add');
         }
+
+
+        $desc = $input->description;
+        $input->forget('description');
+        $input->put('description', nl2br($desc));
+
+        if (InputHelper::null($input, 'publish_up'))
+        {
+            $input->forget('publish_up');
+            $input->put('publish_up', now());
+            $input->publish_up = now()->toDateTimeString();
+        }
+
 
         if (InputHelper::null($input, 'language'))
         {
@@ -138,6 +154,29 @@ class ItemAdminService extends ItemService
         }
 
 
+        if ($input->publish_up > now())
+        {
+            $this->cmsCronJobModel->create([
+                'table'     => 'items',
+                'item_id'   => $item->id,
+                'type'      => 'up',
+                'time'      => $item->publish_up
+            ]);
+        }
+
+        if (!InputHelper::null($input, 'publish_down'))
+        {
+            if ($input->publish_down > now())
+            {
+                $this->cmsCronJobModel->create([
+                    'table'     => 'items',
+                    'item_id'   => $item->id,
+                    'type'      => 'down',
+                    'time'      => $item->publish_down
+                ]);
+            }
+        }
+        
         $tag_ids = [];
         foreach ($tags  as $tag)
         {
