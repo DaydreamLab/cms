@@ -14,8 +14,8 @@
       {
         "title": "Items",
         "path": "/item",
-        "component": "content/item/list",
-        "type": "menu",
+        "component": "",
+        "type": "alias",
         "redirect": "",
         "icon": "",
         "state": 1,
@@ -23,6 +23,46 @@
         "ordering": 1,
         "created_by": 1,
         "children": [
+          {
+            "title": "Item Manage",
+            "path": "",
+            "component": "content/item/list",
+            "type": "menu",
+            "redirect": "",
+            "icon": "",
+            "state": 1,
+            "showNav": 1,
+            "ordering": 1,
+            "created_by": 1,
+            "children": [],
+            "apis": [
+              {
+                "method": "add",
+                "url": "/admin/item/store",
+                "created_by": 1
+              },
+              {
+                "method": "edit",
+                "url": "/admin/item/store",
+                "created_by": 1
+              },
+              {
+                "method": "delete",
+                "url": "/admin/item/remove",
+                "created_by": 1
+              },
+              {
+                "method": "updateState",
+                "url": "/admin/item/state",
+                "created_by": 1
+              },
+              {
+                "method": "updateFeatured",
+                "url": "/admin/item/featured",
+                "created_by": 1
+              }
+            ]
+          },
           {
             "title": "Edit Item",
             "path": "/edit",
@@ -38,40 +78,14 @@
             "apis": []
           }
         ],
-        "apis": [
-          {
-            "method": "add",
-            "url": "/admin/item/store",
-            "created_by": 1
-          },
-          {
-            "method": "edit",
-            "url": "/admin/item/store",
-            "created_by": 1
-          },
-          {
-            "method": "delete",
-            "url": "/admin/item/remove",
-            "created_by": 1
-          },
-          {
-            "method": "updateState",
-            "url": "/admin/item/state",
-            "created_by": 1
-          },
-          {
-            "method": "updateFeatured",
-            "url": "/admin/item/featured",
-            "created_by": 1
-          }
-        ]
+        "apis": []
       },
 
       {
         "title": "Categories",
         "path": "/category",
-        "component": "content/category/list",
-        "type": "menu",
+        "component": "",
+        "type": "alias",
         "redirect": "",
         "icon": "",
         "state": 1,
@@ -79,6 +93,41 @@
         "ordering": 3,
         "created_by": 1,
         "children": [
+          {
+            "title": "Category Manage",
+            "path": "",
+            "component": "content/category/list",
+            "type": "menu",
+            "redirect": "",
+            "icon": "",
+            "state": 1,
+            "showNav": 1,
+            "ordering": 1,
+            "created_by": 1,
+            "children": [],
+            "apis": [
+              {
+                "method": "add",
+                "url": "/admin/category/store",
+                "created_by": 1
+              },
+              {
+                "method": "edit",
+                "url": "/admin/category/store",
+                "created_by": 1
+              },
+              {
+                "method": "delete",
+                "url": "/admin/category/remove",
+                "created_by": 1
+              },
+              {
+                "method": "updateState",
+                "url": "/admin/category/state",
+                "created_by": 1
+              }
+            ]
+          },
           {
             "title": "Edit Category",
             "path": "/edit",
@@ -94,35 +143,14 @@
             "apis": []
           }
         ],
-        "apis": [
-          {
-            "method": "add",
-            "url": "/admin/category/store",
-            "created_by": 1
-          },
-          {
-            "method": "edit",
-            "url": "/admin/category/store",
-            "created_by": 1
-          },
-          {
-            "method": "delete",
-            "url": "/admin/category/remove",
-            "created_by": 1
-          },
-          {
-            "method": "updateState",
-            "url": "/admin/category/state",
-            "created_by": 1
-          }
-        ]
+        "apis": []
       },
 
       {
         "title": "Tags",
         "path": "/tag",
-        "component": "content/tag/list",
-        "type": "menu",
+        "component": "",
+        "type": "alias",
         "redirect": "",
         "icon": "",
         "state": 1,
@@ -130,6 +158,41 @@
         "ordering": 5,
         "created_by": 1,
         "children": [
+          {
+            "title": "Tag Manage",
+            "path": "",
+            "component": "content/tag/list",
+            "type": "menu",
+            "redirect": "",
+            "icon": "",
+            "state": 1,
+            "showNav": 1,
+            "ordering": 1,
+            "created_by": 1,
+            "children": [],
+            "apis": [
+              {
+                "method": "add",
+                "url": "/admin/tag/store",
+                "created_by": 1
+              },
+              {
+                "method": "edit",
+                "url": "/admin/tag/store",
+                "created_by": 1
+              },
+              {
+                "method": "delete",
+                "url": "/admin/tag/remove",
+                "created_by": 1
+              },
+              {
+                "method": "updateState",
+                "url": "/admin/tag/state",
+                "created_by": 1
+              }
+            ]
+          },
           {
             "title": "Edit Tag",
             "path": "/edit",
@@ -145,34 +208,13 @@
             "apis": []
           }
         ],
-        "apis": [
-          {
-            "method": "add",
-            "url": "/admin/tag/store",
-            "created_by": 1
-          },
-          {
-            "method": "edit",
-            "url": "/admin/tag/store",
-            "created_by": 1
-          },
-          {
-            "method": "delete",
-            "url": "/admin/tag/remove",
-            "created_by": 1
-          },
-          {
-            "method": "updateState",
-            "url": "/admin/tag/state",
-            "created_by": 1
-          }
-        ]
+        "apis": []
       },
       {
         "title": "Languages",
         "path": "/language",
-        "component": "content/language/list",
-        "type": "menu",
+        "component": "",
+        "type": "alias",
         "redirect": "",
         "icon": "",
         "state": 1,
@@ -180,6 +222,46 @@
         "ordering": 6,
         "created_by": 1,
         "children": [
+          {
+            "title": "Language Manage",
+            "path": "",
+            "component": "content/language/list",
+            "type": "menu",
+            "redirect": "",
+            "icon": "",
+            "state": 1,
+            "showNav": 1,
+            "ordering": 1,
+            "created_by": 1,
+            "children": [],
+            "apis": [
+              {
+                "method": "add",
+                "url": "/admin/language/store",
+                "created_by": 1
+              },
+              {
+                "method": "edit",
+                "url": "/admin/language/store",
+                "created_by": 1
+              },
+              {
+                "method": "delete",
+                "url": "/admin/language/remove",
+                "created_by": 1
+              },
+              {
+                "method": "updateState",
+                "url": "/admin/language/state",
+                "created_by": 1
+              },
+              {
+                "method": "setDefault",
+                "url": "/admin/language/default",
+                "created_by": 1
+              }
+            ]
+          },
           {
             "title": "Edit Language",
             "path": "/edit",
@@ -195,33 +277,7 @@
             "apis": []
           }
         ],
-        "apis": [
-          {
-            "method": "add",
-            "url": "/admin/language/store",
-            "created_by": 1
-          },
-          {
-            "method": "edit",
-            "url": "/admin/language/store",
-            "created_by": 1
-          },
-          {
-            "method": "delete",
-            "url": "/admin/language/remove",
-            "created_by": 1
-          },
-          {
-            "method": "updateState",
-            "url": "/admin/language/state",
-            "created_by": 1
-          },
-          {
-            "method": "setDefault",
-            "url": "/admin/language/default",
-            "created_by": 1
-          }
-        ]
+        "apis": []
       },
       {
         "title": "Media Manager",
