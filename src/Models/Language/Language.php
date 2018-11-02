@@ -12,6 +12,9 @@ class Language extends BaseModel
      */
     protected $table = 'languages';
 
+    protected $order_by = 'id';
+
+    protected $order = 'asc';
 
     /**
      * The attributes that are mass assignable.
