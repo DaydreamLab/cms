@@ -52,11 +52,13 @@ class ItemFrontRepository extends ItemRepository
 
 
 
-    public function getItems($params, $featured, $created_by_ids = null)
+    public function getItems($category_id, $params, $featured, $created_by_ids = null)
     {
         $limit      = $params['per_page'];
         $order_by   = $params['order_by'];
         $ordering   = $params['ordering'];
+
+        $category_ids   = $this->categoryFrontRepository->findSubTreeIds($category_id);
 
         $query = $this->model->where('state', 1);
         if ($created_by_ids !== null)
@@ -73,8 +75,9 @@ class ItemFrontRepository extends ItemRepository
             $query = $query->where('featured',$featured);
         }
 
-        $query = $query->where('content_type', 'article')
-                    ->orderBy($order_by, $ordering);
+        $query = $query->whereIn('category_id', $category_ids);
+
+        $query = $query->orderBy($order_by, $ordering);
 
         $items = $query->paginate($limit)->toArray();
 
@@ -84,24 +87,39 @@ class ItemFrontRepository extends ItemRepository
         $data['pagination'] = $items;
 
 
-        $filter = [];
+        $filters = [];
         foreach ($data['data'] as $item)
         {
-            $time = strtotime($item['created_at']);
-            $year = date('Y', $time);
-            $month = date('m', $time);
+            $item_created_at = strtotime($item['created_at']);
+            $item_year       = date('Y', $item_created_at);
+            $item_month      = date('m', $item_created_at);
 
-            if (!array_key_exists($year, $filter))
+            $find_year = false;
+            foreach ($filters as $key => $filter)
             {
-                $filter[$year] = [];
+                if($filter['year'] == $item_year)
+                {
+                    $find_year  = true;
+                    if (in_array($item_month, $filter['month']))
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        $filters[$key]['month'][] = $item_month;
+                        break;
+                    }
+                }
             }
 
-            if (!in_array($month, $filter[$year]) )
+            if (!$find_year)
             {
-                $filter[$year][] = $month;
+                $obj['year']    = $item_year;
+                $obj['month'][] = $item_month;
+                $filters[]      = $obj;
             }
         }
-        $data['filter'] = $filter;
+        $data['filter'] = $filters;
 
         return $data;
     }
@@ -109,8 +127,7 @@ class ItemFrontRepository extends ItemRepository
 
     public function getMenuItems($params)
     {
-        $items = $this->model->where('content_type', 'menu')
-                             ->whereIn('category_id', $params['category_ids'])
+        $items = $this->model->whereIn('category_id', $params['category_ids'])
                              ->get();
         $categories = $this->categoryFrontRepository->model->whereIn('id', $params['category_ids'])->get();
 
@@ -152,10 +169,10 @@ class ItemFrontRepository extends ItemRepository
 
         if ($params['featured']['per_page'] > 0)
         {
-            $data['all']['featured'] = $this->getItems($params['featured'], 1);
+            $data['all']['featured'] = $this->getItems($params['category_id'], $params['featured'], 1);
         }
 
-        $data['all']['items'] = $this->getItems($params['items'], 0);
+        $data['all']['items'] = $this->getItems($params['category_id'],$params['items'], 0);
 
 
         foreach ($params['creators'] as $creator)
@@ -169,9 +186,9 @@ class ItemFrontRepository extends ItemRepository
                 $user_ids[] = $map->user_id;
             }
             if ($params['featured']['per_page'] > 0) {
-                $data[$creator]['featured'] = $this->getItems($params['featured'], 1, $user_ids);
+                $data[$creator]['featured'] = $this->getItems($params['category_id'], $params['featured'], 1, $user_ids);
             }
-            $data[$creator]['items']    = $this->getItems($params['items'], 0, $user_ids);
+            $data[$creator]['items']    = $this->getItems($params['category_id'], $params['items'], 0, $user_ids);
 
         }
 
@@ -183,14 +200,12 @@ class ItemFrontRepository extends ItemRepository
     {
         $previous = $this->model->where('category_id', $item->category_id)
                                 ->where('state', 1)
-                                ->where('content_type', $item->content_type)
                                 ->where('ordering', '<', $item->ordering)
                                 ->limit(1)
                                 ->first();
 
         $next     = $this->model->where('category_id', $item->category_id)
                                 ->where('state', 1)
-                                ->where('content_type', $item->content_type)
                                 ->where('ordering', '>', $item->ordering )
                                 ->limit(1)
                                 ->first();
@@ -220,7 +235,7 @@ class ItemFrontRepository extends ItemRepository
 
     public function getPreviousOrNext(Collection $input, $previous = true)
     {
-        $query = $this->model->where('content_type', 'article')->where('state', 1);
+        $query = $this->model->where('state', 1);
 
         if ($input->group != 'all')
         {
@@ -288,8 +303,7 @@ class ItemFrontRepository extends ItemRepository
 
     public function getTimelineItems($params)
     {
-        $items = $this->model->where('content_type', 'timeline')
-                             ->where('state', 1)
+        $items = $this->model->where('state', 1)
                              ->get();
 
         $items = $this->appendParams($items);

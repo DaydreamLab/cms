@@ -13,20 +13,4 @@ class CategoryAdminRepository extends CategoryRepository
         parent::__construct($model);
     }
 
-
-    public function findSubTreeIds($id)
-    {
-        $category = $this->find($id);
-
-        $subs = $this->model->where('_lft', '>=', $category->_lft)
-                            ->where('_rgt', '<=', $category->_rgt)
-                            ->get();
-        $ids = [];
-        foreach ($subs as $sub)
-        {
-            $ids[] = $sub->id;
-        }
-
-        return $ids;
-    }
 }

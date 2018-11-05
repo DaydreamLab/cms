@@ -23,23 +23,23 @@ class ModuleFrontService extends ModuleService
 
     public function loadModule($module)
     {
-        if ($module->category->alias == 'selected-items')
+        if ($module->category->alias == 'module-selected-items')
         {
             $items = $this->itemFrontService->getSelectedItems(array_values($module->params['item_ids']));
         }
-        elseif ($module->category->alias == 'news')
+        elseif ($module->category->alias == 'module-news')
         {
             $items = $this->itemFrontService->getNewsItems($module->params);
         }
-        elseif ($module->category->alias == 'item')
+        elseif ($module->category->alias == 'module-item')
         {
             $items = $this->itemFrontService->getSelectedItem($module->params);
         }
-        elseif ($module->category->alias == 'item-timeline')
+        elseif ($module->category->alias == 'module-item-timeline')
         {
             $items = $this->itemFrontService->getTimelineItems($module->params);
         }
-        elseif ($module->category->alias == 'item-menu')
+        elseif ($module->category->alias == 'module-item-menu')
         {
             $items = $this->itemFrontService->getMenuItems($module->params);
         }
