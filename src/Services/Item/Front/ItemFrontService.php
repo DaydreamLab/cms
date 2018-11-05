@@ -99,17 +99,29 @@ class ItemFrontService extends ItemService
 
     public function search(Collection $input)
     {
+        $special_queries = [];
         if (!InputHelper::null($input, 'year'))
         {
             $year = $input->year;
             $input->forget('year');
+            $obj['type']        = 'whereYear';
+            $obj['key']         = 'created_at';
+            $obj['value']       = $year;
+            $special_queries[]  = $obj;
         }
 
         if (!InputHelper::null($input, 'month'))
         {
-            $year = $input->month;
+            $month = $input->month;
             $input->forget('month');
+            $obj['type']        = 'whereMonth';
+            $obj['key']         = 'created_at';
+            $obj['value']       = $month;
+            $special_queries[]  = $obj;
         }
+
+
+        $input->put('special_queries', $special_queries);
 
         return parent::search($input);
     }

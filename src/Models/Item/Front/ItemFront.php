@@ -13,6 +13,11 @@ class ItemFront extends Item
      */
     protected $table = 'items';
 
+    protected $order_by = 'publish_up';
+
+    protected $order = 'desc';
+
+    protected $limit = 12;
 
     protected $hidden = [
         'category_id',
