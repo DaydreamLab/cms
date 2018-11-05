@@ -10,7 +10,6 @@ class CategoriesTableSeeder extends Seeder
 {
     public function run()
     {
-
 //        Category::create([
 //            'title'         => 'ROOT',
 //            'alias'         => 'root',

@@ -49,6 +49,12 @@ class CategoryAdminService extends CategoryService
     }
 
 
+    public function findSubTreeIds($id)
+    {
+        return $this->repo->findSubTreeIds($id);
+    }
+
+
     public function getItem($id)
     {
         $item = parent::getItem($id);

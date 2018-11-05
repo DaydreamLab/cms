@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Services\Item\Admin;
 
 use DaydreamLab\Cms\Models\Cms\CmsCronJob;
 use DaydreamLab\Cms\Repositories\Item\Admin\ItemAdminRepository;
+use DaydreamLab\Cms\Services\Category\Admin\CategoryAdminService;
 use DaydreamLab\Cms\Services\Tag\Admin\TagAdminService;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
@@ -21,13 +22,17 @@ class ItemAdminService extends ItemService
 
     protected $cmsCronJobModel;
 
+    protected $categoryAdminService;
+
     public function __construct(ItemAdminRepository $repo,
                                 TagAdminService $tagAdminService,
-                                ItemTagMapAdminService $itemTagMapAdminService)
+                                ItemTagMapAdminService $itemTagMapAdminService,
+                                CategoryAdminService $categoryAdminService)
     {
         $this->tagAdminService          = $tagAdminService;
         $this->itemTagMapAdminService   = $itemTagMapAdminService;
         $this->cmsCronJobModel          = new CmsCronJob();
+        $this->categoryAdminService     = $categoryAdminService;
         parent::__construct($repo);
     }
 
@@ -35,6 +40,12 @@ class ItemAdminService extends ItemService
     public function findOtherFeatured($id = null)
     {
         return $this->repo->findOtherFeatured($id);
+    }
+
+
+    public function featuredOrdering($other)
+    {
+        return $this->repo->featuredOrdering($other);
     }
 
 
@@ -55,12 +66,17 @@ class ItemAdminService extends ItemService
     }
 
 
-
-    public function featuredOrdering($other)
+    public function search(Collection $input)
     {
-        return $this->repo->featuredOrdering($other);
-    }
+        if (!InputHelper::null($input, 'category_id'))
+        {
+            $category_ids = $this->categoryAdminService->findSubTreeIds($input->category_id);
+            $input->forget('category_id');
+            $input->put('category_id', $category_ids);
+        }
 
+        return parent::search($input);
+    }
 
 
     public function store(Collection $input)
