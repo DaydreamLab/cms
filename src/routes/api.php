@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
 
     Route::group(['prefix' => 'item'], function (){
-        Route::post('previousandnext', 'DaydreamLab\Cms\Controllers\Item\Front\ItemFrontController@getPreviousAndNext');
+        Route::post('search', 'DaydreamLab\Cms\Controllers\Item\Front\ItemFrontController@search');
         Route::get('{id}', 'DaydreamLab\Cms\Controllers\Item\Front\ItemFrontController@getItem');
     });
 

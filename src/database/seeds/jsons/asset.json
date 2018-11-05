@@ -22,9 +22,7 @@
         "showNav": 1,
         "ordering": 1,
         "created_by": 1,
-        "children": [
-
-        ],
+        "children": [],
         "apis": [
           {
             "method": "add",
@@ -79,9 +77,7 @@
         "showNav": 1,
         "ordering": 3,
         "created_by": 1,
-        "children": [
-
-        ],
+        "children": [],
         "apis": [
           {
             "method": "add",
@@ -131,9 +127,7 @@
         "showNav": 1,
         "ordering": 5,
         "created_by": 1,
-        "children": [
-
-        ],
+        "children": [],
         "apis": [
           {
             "method": "add",
@@ -182,10 +176,28 @@
         "showNav": 1,
         "ordering": 7,
         "created_by": 1,
-        "children": [
-
-        ],
+        "children": [],
         "apis": [
+          {
+            "method": "add",
+            "url": "/admin/language/store",
+            "created_by": 1
+          },
+          {
+            "method": "edit",
+            "url": "/admin/language/store",
+            "created_by": 1
+          },
+          {
+            "method": "delete",
+            "url": "/admin/language/remove",
+            "created_by": 1
+          },
+          {
+            "method": "updateState",
+            "url": "/admin/language/state",
+            "created_by": 1
+          },
           {
             "method": "setDefault",
             "url": "/admin/language/default",
@@ -216,7 +228,7 @@
         "icon": "",
         "state": 1,
         "showNav": 1,
-        "ordering":9,
+        "ordering": 9,
         "created_by": 1,
         "children": [],
         "apis": []

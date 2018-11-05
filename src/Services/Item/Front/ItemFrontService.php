@@ -95,4 +95,22 @@ class ItemFrontService extends ItemService
     {
         return $this->repo->getTimelineItems($params);
     }
+
+
+    public function search(Collection $input)
+    {
+        if (!InputHelper::null($input, 'year'))
+        {
+            $year = $input->year;
+            $input->forget('year');
+        }
+
+        if (!InputHelper::null($input, 'month'))
+        {
+            $year = $input->month;
+            $input->forget('month');
+        }
+
+        return parent::search($input);
+    }
 }

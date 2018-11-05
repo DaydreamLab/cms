@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Controllers\Item\Front;
 
 use DaydreamLab\Cms\Requests\Item\Front\ItemFrontGetPreviousAndNextPost;
 use DaydreamLab\JJAJ\Controllers\BaseController;
+use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\ResponseHelper;
 use Illuminate\Support\Collection;
 use DaydreamLab\Cms\Services\Item\Front\ItemFrontService;

@@ -24,8 +24,9 @@ class ItemFrontSearchPost extends ItemSearchPost
     public function rules()
     {
         $rules = [
-            //
+            'year'  => 'nullable|integer',
+            'month' => 'nullable|integer'
         ];
-        return array_merge($rules, parent::rules());
+        return $rules;
     }
 }
