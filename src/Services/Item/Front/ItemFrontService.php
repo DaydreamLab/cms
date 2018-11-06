@@ -105,7 +105,7 @@ class ItemFrontService extends ItemService
             $year = $input->year;
             $input->forget('year');
             $obj['type']        = 'whereYear';
-            $obj['key']         = 'created_at';
+            $obj['key']         = 'publish_up';
             $obj['value']       = $year;
             $special_queries[]  = $obj;
         }
@@ -115,7 +115,7 @@ class ItemFrontService extends ItemService
             $month = $input->month;
             $input->forget('month');
             $obj['type']        = 'whereMonth';
-            $obj['key']         = 'created_at';
+            $obj['key']         = 'publish_up';
             $obj['value']       = $month;
             $special_queries[]  = $obj;
         }
