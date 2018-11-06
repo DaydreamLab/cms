@@ -153,7 +153,7 @@ class ItemFrontRepository extends ItemRepository
                 $category->makeHidden(['hits', 'created_at', 'creator']);
                 if($category->title == $item->category_title)
                 {
-                    $category->items= array_merge($category->items, array($item->only(['title', 'description'])));
+                    $category->items= array_merge($category->items, array($item->only(['title', 'introtext', 'description'])));
                     break;
                 }
             }
