@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Services\Item\Front;
 
 use DaydreamLab\Cms\Repositories\Item\Front\ItemFrontRepository;
+use DaydreamLab\Cms\Services\Category\Front\CategoryFrontService;
 use DaydreamLab\Cms\Services\Item\ItemService;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
@@ -13,8 +14,12 @@ class ItemFrontService extends ItemService
 {
     protected $type = 'ItemFront';
 
-    public function __construct(ItemFrontRepository $repo)
+    protected $categoryFrontService;
+
+    public function __construct(ItemFrontRepository $repo,
+                                CategoryFrontService $categoryFrontService)
     {
+        $this->categoryFrontService = $categoryFrontService;
         parent::__construct($repo);
     }
 
@@ -119,6 +124,17 @@ class ItemFrontService extends ItemService
             $obj['value']       = $month;
             $special_queries[]  = $obj;
         }
+
+        $categories = $this->categoryFrontService->findBy('content_type', '=', 'article');
+        $category_ids = [];
+        foreach ($categories as $category)
+        {
+            $category_ids[] = $category->id;
+        }
+        $obj['type']        = 'whereIn';
+        $obj['key']         = 'category_id';
+        $obj['value']       = $category_ids;
+        $special_queries[]  = $obj;
 
 
         $input->put('special_queries', $special_queries);
