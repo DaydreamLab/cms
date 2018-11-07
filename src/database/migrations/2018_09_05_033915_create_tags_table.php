@@ -17,6 +17,7 @@ class CreateTagsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('alias');
+            $table->string('path');
             $table->nestedSet();
             $table->unsignedInteger('ordering')->nullable()->default(1);
             $table->tinyInteger('state')->nullable()->default(1);

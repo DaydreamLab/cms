@@ -77,7 +77,7 @@ class CategoryAdminService extends CategoryService
     {
         if (InputHelper::null($input, 'alias')){
             $input->forget('alias');
-            $input->put('alias', now()->format('Y-m-d-H-i-ss'));
+            $input->put('alias', Str::lower(now()->format('Y-m-d-H-i-ss')));
         }
 
 

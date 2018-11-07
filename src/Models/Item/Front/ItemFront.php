@@ -17,8 +17,6 @@ class ItemFront extends Item
 
     protected $order = 'desc';
 
-    protected $limit = 12;
-
     protected $hidden = [
         'category_id',
         'state',

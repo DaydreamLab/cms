@@ -40,7 +40,7 @@ class TagAdminService extends TagService
     {
         if (InputHelper::null($input, 'alias')){
             $input->forget('alias');
-            $input->put('alias', now()->format('Y-m-d-H-i-s'));
+            $input->put('alias', Str::lower(now()->format('Y-m-d-H-i-s')));
         }
 
 

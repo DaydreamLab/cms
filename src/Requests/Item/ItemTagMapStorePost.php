@@ -25,14 +25,8 @@ class ItemTagMapStorePost extends AdminRequest
     public function rules()
     {
         return [
-            'id'            => 'nullable|integer',
-            'title'         => 'required|string',
-            'state'         => [
-                'nullable',
-                'integer',
-                Rule::in([0,1,-2])
-            ],
-            'description'   => 'nullable|string',
+            'item_id'   => 'required|integer',
+            'tag_id'    => 'required|integer',
         ];
     }
 }

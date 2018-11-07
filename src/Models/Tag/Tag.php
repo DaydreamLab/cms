@@ -23,6 +23,7 @@ class Tag extends BaseModel
     protected $fillable = [
         'title',
         'alias',
+        'path',
         'state',
         'description',
         'hits',
@@ -47,6 +48,7 @@ class Tag extends BaseModel
      * @var array
      */
     protected $hidden = [
+        'pivot'
     ];
 
 

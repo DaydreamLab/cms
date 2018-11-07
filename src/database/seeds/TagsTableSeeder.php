@@ -13,6 +13,7 @@ class TagsTableSeeder extends Seeder
         Tag::create([
             'title'         => 'ROOT',
             'alias'         => 'root',
+            'path'         => '/root',
             'state'         => 1,
             'description'   => '',
             'ordering'      => 1,

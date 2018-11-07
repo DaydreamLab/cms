@@ -84,7 +84,7 @@ class ItemAdminService extends ItemService
         if (InputHelper::null($input, 'alias'))
         {
             $input->forget('alias');
-            $input->put('alias', now()->format('Y-m-d-H-i-s'). '-'.Str::random(4));
+            $input->put('alias', Str::lower(now()->format('Y-m-d-H-i-s'). '-'.Str::random(4)));
         }
 
         if (InputHelper::null($input, 'category_id'))
@@ -147,6 +147,7 @@ class ItemAdminService extends ItemService
         $tags = $input->get('tags') ? $input->get('tags') : [];
         $input->forget('tags');
 
+
         $extrafields = $input->get('extrafields') ? $input->get('extrafields') : [];
         $input->extrafields = json_encode($extrafields);
 
@@ -191,7 +192,8 @@ class ItemAdminService extends ItemService
                 ]);
             }
         }
-        
+
+
         $tag_ids = [];
         foreach ($tags  as $tag)
         {
@@ -202,11 +204,14 @@ class ItemAdminService extends ItemService
             $tag_ids[] = $tag['id'];
         }
 
-        $this->itemTagMapAdminService->storeKeysMap(Helper::collect([
-            'item_id'   => $item->id,
-            'tag_ids'   => $tag_ids
-        ]));
-
+        if(count($tag_ids))
+        {
+            $this->itemTagMapAdminService->storeKeysMap(Helper::collect([
+                'item_id'   => $item->id,
+                'tag_ids'   => $tag_ids,
+                'created_by'=> $input->created_by
+            ]));
+        }
 
         return $item;
     }

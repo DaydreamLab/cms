@@ -24,6 +24,45 @@ class ItemFrontService extends ItemService
     }
 
 
+    public function filterYearMonth($data)
+    {
+        $filters = [];
+        foreach ($data['data'] as $item)
+        {
+            $item_publish_up = strtotime($item['publish_up']);
+            $item_year       = date('Y', $item_publish_up);
+            $item_month      = date('m', $item_publish_up);
+
+            $find_year = false;
+            foreach ($filters as $key => $filter)
+            {
+                if($filter['year'] == $item_year)
+                {
+                    $find_year  = true;
+                    if (in_array($item_month, $filter['month']))
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        $filters[$key]['month'][] = $item_month;
+                        break;
+                    }
+                }
+            }
+
+            if (!$find_year)
+            {
+                $obj['year']    = $item_year;
+                $obj['month'][] = $item_month;
+                $filters[]      = $obj;
+            }
+        }
+
+        return $filters;
+    }
+
+
     public function getItem($id)
     {
         $item = parent::getItem($id);
@@ -136,9 +175,20 @@ class ItemFrontService extends ItemService
         $obj['value']       = $category_ids;
         $special_queries[]  = $obj;
 
-
         $input->put('special_queries', $special_queries);
+        $input->put('state', 1);
 
-        return parent::search($input);
+        $items = parent::search($input);
+
+        $data = $this->paginationFormat($items->toArray());
+
+        if (config('cms.item.front.year_month_filter'))
+        {
+            $data['filter'] = $this->filterYearMonth($data);
+        }
+
+        $this->response = $data;
+
+        return $items;
     }
 }
