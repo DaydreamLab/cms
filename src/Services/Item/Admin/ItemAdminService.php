@@ -197,10 +197,27 @@ class ItemAdminService extends ItemService
         $tag_ids = [];
         foreach ($tags  as $tag)
         {
-            if (!array_key_exists('id',$tag) || $tag['id'] == '')
+            if (array_key_exists('id',$tag) && $tag['id'] == '')
+            {
+                $tag_ids[] = $tag['id'];
+            }
+            else if(array_key_exists('title',$tag))
+            {
+                $db_tag = $this->tagAdminService->findBy('title', '=', $tag['title'])->first();
+                if (!$db_tag)
+                {
+                    $tag = $this->tagAdminService->store(Helper::collect($tag));
+                }
+                else
+                {
+                    $tag = $db_tag;
+                }
+            }
+            else
             {
                 $tag = $this->tagAdminService->store(Helper::collect($tag));
             }
+
             $tag_ids[] = $tag['id'];
         }
 

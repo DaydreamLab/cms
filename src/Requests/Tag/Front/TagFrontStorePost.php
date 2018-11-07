@@ -24,8 +24,8 @@ class TagFrontStorePost extends TagStorePost
     public function rules()
     {
         $rules = [
-            //
+                'title' => 'required|string'
         ];
-        return array_merge($rules, parent::rules());
+        return $rules;
     }
 }

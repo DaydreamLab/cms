@@ -200,13 +200,13 @@ class ItemFrontRepository extends ItemRepository
     {
         $previous = $this->model->where('category_id', $item->category_id)
                                 ->where('state', 1)
-                                ->where('ordering', '<', $item->ordering)
+                                ->where('ordering', '>', $item->ordering)
                                 ->limit(1)
                                 ->first();
 
         $next     = $this->model->where('category_id', $item->category_id)
                                 ->where('state', 1)
-                                ->where('ordering', '>', $item->ordering )
+                                ->where('ordering', '<', $item->ordering )
                                 ->limit(1)
                                 ->first();
 

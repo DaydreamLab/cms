@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Controllers\Tag\Front;
 
 use DaydreamLab\JJAJ\Controllers\BaseController;
+use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\ResponseHelper;
 use Illuminate\Support\Collection;
 use DaydreamLab\Cms\Services\Tag\Front\TagFrontService;
@@ -69,9 +70,9 @@ class TagFrontController extends BaseController
     }
 
 
-    public function search(TagFrontSearchPost $request)
+    public function search($title)
     {
-        $this->service->search($request->rulesInput());
+        $this->service->search(Helper::collect(['title' => $title]));
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }

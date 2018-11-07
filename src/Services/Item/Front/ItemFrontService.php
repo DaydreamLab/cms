@@ -144,6 +144,11 @@ class ItemFrontService extends ItemService
     public function search(Collection $input)
     {
         $special_queries = [];
+        if (!InputHelper::null($input, 'special_queries'))
+        {
+            $special_queries = array_merge($special_queries, $input->special_queries);
+        }
+
         if (!InputHelper::null($input, 'year'))
         {
             $year = $input->year;
@@ -175,6 +180,7 @@ class ItemFrontService extends ItemService
         $obj['value']       = $category_ids;
         $special_queries[]  = $obj;
 
+        $input->forget('special_queries');
         $input->put('special_queries', $special_queries);
         $input->put('state', 1);
 
@@ -190,5 +196,11 @@ class ItemFrontService extends ItemService
         $this->response = $data;
 
         return $items;
+    }
+
+
+    public function pureSearch(Collection $input)
+    {
+        return parent::search($input);
     }
 }

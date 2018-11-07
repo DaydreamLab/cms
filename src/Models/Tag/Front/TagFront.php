@@ -12,5 +12,24 @@ class TagFront extends Tag
      */
     protected $table = 'tags';
 
-
+    protected $hidden = [
+        '_lft',
+        '_rgt',
+        'path',
+        'parent_id',
+        'ordering',
+        'state',
+        'description',
+        'access',
+        'language',
+        'locked_by',
+        'locked_at',
+        'created_by',
+        'created_at',
+        'updated_at',
+        'updated_by',
+        'locker',
+        'publish_up',
+        'publish_down'
+    ];
 }

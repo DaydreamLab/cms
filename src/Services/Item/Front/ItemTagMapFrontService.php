@@ -13,4 +13,5 @@ class ItemTagMapFrontService extends ItemTagMapService
     {
         parent::__construct($repo);
     }
+
 }
