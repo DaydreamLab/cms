@@ -123,9 +123,10 @@ class ItemFrontService extends ItemService
     }
 
 
-    public function getSelectedItem($id)
+    public function getSelectedItem($params)
     {
-        return $this->repo->getSelectedItem($id);
+        Helper::show($params);
+        return $this->repo->getSelectedItem($params['item_id']);
     }
 
 
