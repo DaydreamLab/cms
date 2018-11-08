@@ -2,6 +2,7 @@
 namespace DaydreamLab\Cms\Models\Tag;
 
 use DaydreamLab\JJAJ\Models\BaseModel;
+use DaydreamLab\User\Models\Viewlevel\Viewlevel;
 use Kalnoy\Nestedset\NodeTrait;
 
 class Tag extends BaseModel
@@ -60,9 +61,19 @@ class Tag extends BaseModel
     protected $appends = [
         'creator',
         'updater',
-        'locker'
+        'locker',
+        'viewlevels'
     ];
 
+    public function getViewlevelsAttribute()
+    {
+        return $this->viewlevel()->first()->rules;
+    }
 
+
+    public function viewlevel()
+    {
+        return $this->hasOne(Viewlevel::class, 'id', 'access');
+    }
 
 }

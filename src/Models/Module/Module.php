@@ -3,6 +3,7 @@ namespace DaydreamLab\Cms\Models\Module;
 
 use DaydreamLab\Cms\Models\Category\Category;
 use DaydreamLab\JJAJ\Models\BaseModel;
+use DaydreamLab\User\Models\Viewlevel\Viewlevel;
 
 class Module extends BaseModel
 {
@@ -50,7 +51,8 @@ class Module extends BaseModel
      * @var array
      */
     protected $appends = [
-        'category'
+        'category',
+        'viewlevels'
     ];
 
 
@@ -67,5 +69,17 @@ class Module extends BaseModel
     public function getCategoryAttribute()
     {
         return $this->category()->first();
+    }
+
+
+    public function getViewlevelsAttribute()
+    {
+        return $this->viewlevel()->first()->rules;
+    }
+
+
+    public function viewlevel()
+    {
+        return $this->hasOne(Viewlevel::class, 'id', 'access');
     }
 }

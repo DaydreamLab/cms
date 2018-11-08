@@ -3,6 +3,7 @@ namespace DaydreamLab\Cms\Models\Menu;
 
 use DaydreamLab\Cms\Models\Category\Category;
 use DaydreamLab\JJAJ\Models\BaseModel;
+use DaydreamLab\User\Models\Viewlevel\Viewlevel;
 use Kalnoy\Nestedset\NodeTrait;
 
 class Menu extends BaseModel
@@ -59,7 +60,8 @@ class Menu extends BaseModel
      * @var array
      */
     protected $appends = [
-        'category'
+        'category',
+        'viewlevels'
     ];
 
 
@@ -76,5 +78,17 @@ class Menu extends BaseModel
     public function getCategoryAttribute()
     {
         return $this->category()->first();
+    }
+
+
+    public function getViewlevelsAttribute()
+    {
+        return $this->viewlevel()->first()->rules;
+    }
+
+
+    public function viewlevel()
+    {
+        return $this->hasOne(Viewlevel::class, 'id', 'access');
     }
 }

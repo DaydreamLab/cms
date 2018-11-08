@@ -39,6 +39,10 @@ return [
         'code'      => 403,
         'message'   => 'Module front create with exist alias'
     ],
+    'MODULE_ADMIN_INSUFFICIENT_PERMISSION' => [
+        'code'      => 403,
+        'message'   => 'Module admin insufficient permission'
+    ],
 
 
     // Create Nested

@@ -8,6 +8,7 @@ use DaydreamLab\Cms\Repositories\Category\Admin\CategoryAdminRepository;
 use DaydreamLab\Cms\Services\Category\CategoryService;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
+use DaydreamLab\User\Services\Viewlevel\Admin\ViewlevelAdminService;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -18,34 +19,11 @@ class CategoryAdminService extends CategoryService
 
     protected $cmsCronJobModel;
 
+
     public function __construct(CategoryAdminRepository $repo)
     {
         $this->cmsCronJobModel = new CmsCronJob();
         parent::__construct($repo);
-    }
-
-
-    public function filterItems($items, $limit)
-    {
-        $user = Auth::guard('api')->user();
-        $viewlevels = $user->viewlevels;
-
-        // Super User
-        if (!in_array(5, $viewlevels))
-        {
-            $items = $items->filter(function ($value, $key) use ($viewlevels){
-                foreach ($viewlevels as $viewlevel)
-                {
-                    if(in_array($viewlevel, $value->viewlevels))
-                    {
-                        return $value;
-                    }
-                }
-                return false;
-            });
-        }
-
-        return $this->repo->paginate($items, $limit);
     }
 
 
@@ -58,6 +36,14 @@ class CategoryAdminService extends CategoryService
     public function getItem($id)
     {
         $item = parent::getItem($id);
+
+        if (!Helper::hasPermission($item->viewlevels, $this->user->viewlevels))
+        {
+            $this->status   = Str::upper(Str::snake($this->type.'InsufficientPermission'));
+            $this->response = null;
+            return false;
+        }
+
 
         if ($item->locked_by && $item->locked_by != $this->user->id)
         {

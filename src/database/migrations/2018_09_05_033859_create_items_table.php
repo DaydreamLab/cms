@@ -27,7 +27,7 @@ class CreateItemsTable extends Migration
             $table->text('video')->nullable();
             $table->text('link')->nullable();
             $table->unsignedInteger('hits')->nullable()->default(0);
-            $table->unsignedInteger('access')->nullable()->default(2);
+            $table->unsignedInteger('access')->nullable()->default(1);
             $table->unsignedTinyInteger('featured')->nullable()->default(0);
             $table->unsignedInteger('featured_ordering')->nullable();
             $table->string('language')->nullable()->default('All');

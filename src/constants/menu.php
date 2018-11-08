@@ -27,6 +27,10 @@ return [
         'code'      => 500,
         'message'   => 'Menu front create fail'
     ],
+    'MENU_ADMIN_INSUFFICIENT_PERMISSION' => [
+        'code'      => 403,
+        'message'   => 'Menu admin insufficient permission'
+    ],
 
     // Create Nested
     'MENU_CREATE_NESTED_SUCCESS' => [

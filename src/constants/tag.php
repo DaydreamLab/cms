@@ -27,6 +27,10 @@ return [
         'code'      => 500,
         'message'   => 'Tag front create fail'
     ],
+    'TAG_ADMIN_INSUFFICIENT_PERMISSION' => [
+        'code'      => 403,
+        'message'   => 'Tag admin insufficient permission'
+    ],
 
 
 

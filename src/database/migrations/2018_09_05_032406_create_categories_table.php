@@ -28,7 +28,7 @@ class CreateCategoriesTable extends Migration
             $table->text('content_type')->nullable();
             $table->string('extension');
             $table->unsignedInteger('hits')->nullable()->default(0);
-            $table->unsignedInteger('access')->nullalbe()->default(2);
+            $table->unsignedInteger('access')->nullalbe()->default(1);
 
             $table->string('language')->nullable()->default('All');
             $table->string('template')->nullable();

@@ -77,8 +77,8 @@ class Category extends BaseModel
         'updater',
         'locker',
         'tree_title',
-        'tree_list_title'
-        //'viewlevels',
+        'tree_list_title',
+        'viewlevels',
     ];
 
 
@@ -110,22 +110,6 @@ class Category extends BaseModel
 
     public function getViewlevelsAttribute()
     {
-        $rules = $this->viewlevel()->first()->rules;
-        $canAccess = [];
-        foreach ($rules as $rule)
-        {
-            $group =   UserGroup::find($rule);
-            if (!in_array($rule, $canAccess) && $group->title!= 'ROOT') {
-                $canAccess[] = $rule;
-            }
-
-            foreach ($group->ancestors as $ancestor)
-            {
-                if (!in_array($ancestor->id, $canAccess) && $ancestor->title != 'ROOT') {
-                    $canAccess[] = $ancestor->id;
-                }
-            }
-        }
-        return $canAccess;
+        return $this->viewlevel()->first()->rules;
     }
 }

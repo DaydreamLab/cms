@@ -18,12 +18,11 @@ class TagsTableSeeder extends Seeder
             'description'   => '',
             'ordering'      => 1,
             'hits'          => 0,
-            'access'        => 2,
+            'access'        => 5,
             'language'      => 'All',
             'metadesc'      => '',
             'metakeywords'      => '',
             'params'        => '',
-            'created_by'    => 1,
             'publish_up'    => null,
             'publish_down'  => null,
             'children'      =>[]

@@ -40,7 +40,10 @@ return [
         'message'   => 'Item front create with exist alias'
     ],
 
-
+    'ITEM_ADMIN_INSUFFICIENT_PERMISSION' => [
+        'code'      => 403,
+        'message'   => 'Item admin insufficient permission'
+    ],
 
     // Update
     'ITEM_UPDATE_SUCCESS' => [

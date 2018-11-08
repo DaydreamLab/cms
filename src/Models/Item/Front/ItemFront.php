@@ -21,6 +21,7 @@ class ItemFront extends Item
         'category_id',
         'state',
         'access',
+        'ordering',
         'featured_ordering',
         'language',
         'content_type',

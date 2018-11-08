@@ -6,6 +6,7 @@ use DaydreamLab\Cms\Models\Extrafield\Extrafield;
 use DaydreamLab\Cms\Models\Tag\Tag;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Models\BaseModel;
+use DaydreamLab\User\Models\Viewlevel\Viewlevel;
 
 class Item extends BaseModel
 {
@@ -41,7 +42,6 @@ class Item extends BaseModel
         'language',
         'metadesc',
         'metakeywords',
-        //'content_type',
         'params',
         'extrafields',
         'locked_by',
@@ -74,7 +74,7 @@ class Item extends BaseModel
         'locker',
         'creator_groups',
         'tags',
-        //'category',
+        'viewlevels'
     ];
 
 
@@ -88,12 +88,6 @@ class Item extends BaseModel
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
-    }
-
-
-    public function tag()
-    {
-        return $this->belongsToMany(Tag::class, 'items_tags_maps', 'item_id', 'tag_id');
     }
 
 
@@ -137,5 +131,22 @@ class Item extends BaseModel
     public function getTagsAttribute()
     {
         return $this->tag()->get();
+    }
+
+    public function getViewlevelsAttribute()
+    {
+        return $this->viewlevel()->first()->rules;
+    }
+
+
+    public function tag()
+    {
+        return $this->belongsToMany(Tag::class, 'items_tags_maps', 'item_id', 'tag_id');
+    }
+
+
+    public function viewlevel()
+    {
+        return $this->hasOne(Viewlevel::class, 'id', 'access');
     }
 }

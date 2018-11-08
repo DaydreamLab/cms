@@ -52,6 +52,15 @@ class ItemAdminService extends ItemService
     public function getItem($id)
     {
         $item = parent::getItem($id);
+
+        if (!Helper::hasPermission($item->viewlevels, $this->user->viewlevels))
+        {
+            $this->status   = Str::upper(Str::snake($this->type.'InsufficientPermission'));
+            $this->response = null;
+            return false;
+        }
+
+
         if ($item->locked_by && $item->locked_by != $this->user->id)
         {
             $this->status   = Str::upper(Str::snake($this->type.'IsLocked'));

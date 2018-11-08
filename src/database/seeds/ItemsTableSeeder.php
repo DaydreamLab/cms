@@ -46,11 +46,10 @@ class ItemsTableSeeder extends Seeder
             'description'   => '',
             'extension'     => 'item',
             'ordering'      => 1,
-            'access'        => 4,
+            'access'        => 5,
             'metadesc'      => '',
             'metakeywords'  => '',
             'extrafields'   => [],
-            'created_by'    => 1,
             'children'      => []
         ]);
 

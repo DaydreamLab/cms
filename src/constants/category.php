@@ -27,6 +27,10 @@ return [
         'code'      => 500,
         'message'   => 'Category front create fail'
     ],
+    'CATEGORY_ADMIN_INSUFFICIENT_PERMISSION' => [
+        'code'      => 403,
+        'message'   => 'Category admin insufficient permission'
+    ],
 
     // Create Nested
     'CATEGORY_CREATE_NESTED_SUCCESS' => [

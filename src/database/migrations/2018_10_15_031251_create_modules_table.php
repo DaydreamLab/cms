@@ -20,7 +20,7 @@ class CreateModulesTable extends Migration
             $table->unsignedInteger('category_id')->nullable();
             $table->tinyInteger('state')->default(1);
             $table->text('description')->nullable();
-            $table->unsignedInteger('access')->nullalbe()->default(2);
+            $table->unsignedInteger('access')->nullalbe()->default(1);
             $table->string('language')->nullable()->default('All');
             $table->text('params')->nullable();
             $table->unsignedInteger('locked_by')->nullable()->default(0);
