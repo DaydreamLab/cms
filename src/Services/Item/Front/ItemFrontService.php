@@ -66,6 +66,7 @@ class ItemFrontService extends ItemService
     public function getItem($id)
     {
         $item = parent::getItem($id);
+
         if ($item)
         {
             $prev_and_next  = $this->repo->getPreviousAndNext($item);
@@ -81,9 +82,18 @@ class ItemFrontService extends ItemService
     public function getItemByAlias(Collection $input)
     {
         $item = $this->search($input);
+
         if ($item->count())
         {
             $item = $item->first();
+
+            if (!Helper::hasPermission($item->viewlevels, $this->viewlevels))
+            {
+                $this->status   = Str::upper(Str::snake($this->type.'InsufficientPermission'));
+                $this->response = null;
+                return false;
+            }
+
             $prev_and_next  = $this->repo->getPreviousAndNext($item);
             $item->previous =  $prev_and_next['previous'];
             $item->next     =  $prev_and_next['next'];

@@ -21,7 +21,7 @@ class ModuleAdminService extends ModuleService
     {
         $item = parent::getItem($id);
 
-        if (!Helper::hasPermission($item->viewlevels, $this->user->viewlevels))
+        if (!Helper::hasPermission($item->viewlevels, $this->viewlevels))
         {
             $this->status   = Str::upper(Str::snake($this->type.'InsufficientPermission'));
             $this->response = null;

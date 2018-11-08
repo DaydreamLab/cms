@@ -43,6 +43,10 @@ return [
         'code'      => 403,
         'message'   => 'Module admin insufficient permission'
     ],
+    'MODULE_FRONT_INSUFFICIENT_PERMISSION' => [
+        'code'      => 403,
+        'message'   => 'Module front insufficient permission'
+    ],
 
 
     // Create Nested

@@ -44,6 +44,10 @@ return [
         'code'      => 403,
         'message'   => 'Item admin insufficient permission'
     ],
+    'ITEM_FRONT_INSUFFICIENT_PERMISSION' => [
+        'code'      => 403,
+        'message'   => 'Item front insufficient permission'
+    ],
 
     // Update
     'ITEM_UPDATE_SUCCESS' => [

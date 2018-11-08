@@ -31,6 +31,10 @@ return [
         'code'      => 403,
         'message'   => 'Category admin insufficient permission'
     ],
+    'CATEGORY_FRONT_INSUFFICIENT_PERMISSION' => [
+        'code'      => 403,
+        'message'   => 'Category front insufficient permission'
+    ],
 
     // Create Nested
     'CATEGORY_CREATE_NESTED_SUCCESS' => [
