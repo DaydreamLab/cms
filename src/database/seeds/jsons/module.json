@@ -11,7 +11,8 @@
     "extension"     : "module",
     "access"        : 5,
     "metadesc"      : "",
-    "metakeywords"      : "",
+    "metakeywords"  : "",
+    "extrafields"   : [],
     "created_by"    : 1,
     "modules"       : []
   },
@@ -27,7 +28,8 @@
     "extension"     : "module",
     "access"        : 5,
     "metadesc"      : "",
-    "metakeywords"      : "",
+    "metakeywords"  : "",
+    "extrafields"   : [],
     "created_by"    : 1,
     "modules"       : []
   },
@@ -43,7 +45,8 @@
     "extension"     : "module",
     "access"        : 5,
     "metadesc"      : "",
-    "metakeywords"      : "",
+    "metakeywords"  : "",
+    "extrafields"   : [],
     "created_by"    : 1,
     "modules"       : []
   },
@@ -59,7 +62,8 @@
     "extension"     : "module",
     "access"        : 5,
     "metadesc"      : "",
-    "metakeywords"      : "",
+    "metakeywords"  : "",
+    "extrafields"   : [],
     "created_by"    : 1,
     "modules"       : []
   },
@@ -75,7 +79,8 @@
     "extension"     : "module",
     "access"        : 5,
     "metadesc"      : "",
-    "metakeywords"      : "",
+    "metakeywords"  : "",
+    "extrafields"   : [],
     "created_by"    : 1,
     "modules"       : []
   },
@@ -91,7 +96,8 @@
     "extension"     : "module",
     "access"        : 5,
     "metadesc"      : "",
-    "metakeywords"      : "",
+    "metakeywords"  : "",
+    "extrafields"   : [],
     "created_by"    : 1,
     "modules"       : []
   },
@@ -108,6 +114,7 @@
     "access"        : 5,
     "metadesc"      : "",
     "metakeywords"  : "",
+    "extrafields"   : [],
     "created_by"    : 1,
     "modules"       : []
   }

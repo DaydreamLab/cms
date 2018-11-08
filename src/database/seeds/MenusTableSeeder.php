@@ -70,7 +70,8 @@ class MenusTableSeeder extends Seeder
             'extension'     => 'menu',
             'access'        => 2,
             'metadesc'      => '',
-            'metakeywords'      => '',
+            'metakeywords'  => '',
+            "extrafields"   => [],
             'created_by'    => 1,
         ]);
 
