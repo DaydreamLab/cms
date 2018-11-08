@@ -17,7 +17,8 @@ Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
 
     Route::group(['prefix' => 'item'], function (){
         Route::post('search', 'DaydreamLab\Cms\Controllers\Item\Front\ItemFrontController@search');
-        Route::get('{id}', 'DaydreamLab\Cms\Controllers\Item\Front\ItemFrontController@getItem');
+        Route::get('{alias}', 'DaydreamLab\Cms\Controllers\Item\Front\ItemFrontController@getItemByAlias');
+        //Route::get('{id}', 'DaydreamLab\Cms\Controllers\Item\Front\ItemFrontController@getItem');
     });
 
     Route::group(['prefix' => 'category'], function (){

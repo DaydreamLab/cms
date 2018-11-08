@@ -23,4 +23,17 @@ class CategoryFrontService extends CategoryService
         return $item->save();
     }
 
+
+    public function getContentTypeIds($content_type)
+    {
+        $categories = $this->findByChain(['content_type', 'extension', 'state', 'access'], ['=', '=', '=', '='], [$content_type, 'item', '1', '2']);
+        $category_ids = [];
+        foreach ($categories as $category)
+        {
+            $category_ids[] = $category->id;
+        }
+
+        return $category_ids;
+    }
+
 }

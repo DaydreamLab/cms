@@ -49,7 +49,6 @@ class ModulesTableSeeder extends Seeder
     {
         foreach ($data as $category)
         {
-
             $modules    = $category['modules'];
             unset($category['modules']);
 

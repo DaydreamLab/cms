@@ -49,6 +49,14 @@ class ItemFrontController extends BaseController
     }
 
 
+    public function getItemByAlias($alias)
+    {
+        $this->service->getItemByAlias(Helper::collect(['alias'=>$alias]));
+
+        return ResponseHelper::response($this->service->status, $this->service->response);
+    }
+
+
     public function getItems()
     {
         $this->service->search(new Collection());

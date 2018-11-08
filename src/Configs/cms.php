@@ -3,7 +3,7 @@
 return [
     'item' => [
         'front' => [
-            'year_month_filter' => 1
+            'year_month_filter' => 1,
         ]
     ]
 ];

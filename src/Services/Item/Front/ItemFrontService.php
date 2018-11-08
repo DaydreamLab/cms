@@ -78,6 +78,28 @@ class ItemFrontService extends ItemService
     }
 
 
+    public function getItemByAlias(Collection $input)
+    {
+        $item = $this->search($input);
+        if ($item->count())
+        {
+            $item = $item->first();
+            $prev_and_next  = $this->repo->getPreviousAndNext($item);
+            $item->previous =  $prev_and_next['previous'];
+            $item->next     =  $prev_and_next['next'];
+            $this->status   = Str::upper(Str::snake($this->type.'GetItemSuccess'));
+            $this->response = $item;
+        }
+        else
+        {
+            $this->status = Str::upper(Str::snake($this->type.'ItemNotExist'));
+            $this->response = null;
+        }
+
+        return $this->response;
+    }
+
+
     public function getMenuItems($params)
     {
         return $this->repo->getMenuItems($params);
@@ -125,7 +147,6 @@ class ItemFrontService extends ItemService
 
     public function getSelectedItem($params)
     {
-        Helper::show($params);
         return $this->repo->getSelectedItem($params['item_id']);
     }
 

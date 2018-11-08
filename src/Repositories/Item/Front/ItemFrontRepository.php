@@ -212,7 +212,7 @@ class ItemFrontRepository extends ItemRepository
 
         if ($previous)
         {
-            $data['previous'] = $previous->only(['id','title']);
+            $data['previous'] = $previous->only(['title', 'alias']);
         }
         else
         {
