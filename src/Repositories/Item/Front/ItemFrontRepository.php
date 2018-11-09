@@ -221,7 +221,7 @@ class ItemFrontRepository extends ItemRepository
 
         if ($next)
         {
-            $data['next'] = $next ->only(['id','title']);
+            $data['next'] = $next ->only(['title', 'alias']);
         }
         else
         {
