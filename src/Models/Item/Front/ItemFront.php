@@ -3,6 +3,7 @@ namespace DaydreamLab\Cms\Models\Item\Front;
 
 use DaydreamLab\Cms\Models\Category\Front\CategoryFront;
 use DaydreamLab\Cms\Models\Item\Item;
+use DaydreamLab\Cms\Models\Tag\Front\TagFront;
 
 class ItemFront extends Item
 {
@@ -38,5 +39,11 @@ class ItemFront extends Item
     public function category()
     {
         return $this->belongsTo(CategoryFront::class, 'category_id', 'id');
+    }
+
+
+    public function tag()
+    {
+        return $this->belongsToMany(TagFront::class, 'items_tags_maps', 'item_id', 'tag_id');
     }
 }

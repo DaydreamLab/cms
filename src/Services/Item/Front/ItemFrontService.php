@@ -175,6 +175,7 @@ class ItemFrontService extends ItemService
 
     public function search(Collection $input)
     {
+
         $special_queries = [];
         if (!InputHelper::null($input, 'special_queries'))
         {

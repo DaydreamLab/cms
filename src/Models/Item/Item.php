@@ -74,7 +74,7 @@ class Item extends BaseModel
         'locker',
         'creator_groups',
         'tags',
-        'viewlevels'
+        'viewlevels',
     ];
 
 

@@ -200,13 +200,17 @@ class ItemFrontRepository extends ItemRepository
     {
         $previous = $this->model->where('category_id', $item->category_id)
                                 ->where('state', 1)
-                                ->where('ordering', '>', $item->ordering)
+                                ->where('id', '!=', $item->id)
+                                ->where('publish_up', '>', $item->publish_up)
+                                ->orderBy('publish_up', 'desc')
                                 ->limit(1)
                                 ->first();
 
         $next     = $this->model->where('category_id', $item->category_id)
                                 ->where('state', 1)
-                                ->where('ordering', '<', $item->ordering )
+                                ->where('id', '!=', $item->id)
+                                ->where('publish_up', '<', $item->publish_up )
+                                ->orderBy('publish_up', 'desc')
                                 ->limit(1)
                                 ->first();
 

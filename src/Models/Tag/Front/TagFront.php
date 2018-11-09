@@ -30,6 +30,7 @@ class TagFront extends Tag
         'updated_by',
         'locker',
         'publish_up',
-        'publish_down'
+        'publish_down',
+        'pivot',
     ];
 }

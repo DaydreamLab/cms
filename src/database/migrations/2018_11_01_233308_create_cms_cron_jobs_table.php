@@ -19,6 +19,8 @@ class CreateCmsCronJobsTable extends Migration
             $table->unsignedInteger('item_id');
             $table->string('type');
             $table->timestamp('time');
+            $table->unsignedInteger('created_by');
+            $table->unsignedInteger('updated_by')->nullable();
             $table->timestamps();
         });
     }
