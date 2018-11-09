@@ -29,10 +29,12 @@ class ItemFront extends Item
         'params',
         'locked_by',
         'locked_at',
+        'locker',
         'created_by',
         'updated_by',
         'updated_at',
         'updater',
+        'viewlevels'
     ];
 
 

@@ -51,6 +51,7 @@ class ItemFrontService extends ItemService
                 }
             }
 
+            $obj = [];
             if (!$find_year)
             {
                 $obj['year']    = $item_year;
