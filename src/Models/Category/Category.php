@@ -96,6 +96,10 @@ class Category extends BaseModel
 
     public function getExtrafieldsAttribute($value)
     {
+        if (!$value)
+        {
+            $value = json_encode([]);
+        }
         $data = [];
         foreach (json_decode($value) as $extra_field)
         {
