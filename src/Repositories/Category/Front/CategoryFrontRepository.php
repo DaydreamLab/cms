@@ -11,4 +11,11 @@ class CategoryFrontRepository extends CategoryRepository
     {
         parent::__construct($model);
     }
+
+
+    public function findArticleCategoryWithAccess($access_ids)
+    {
+        return $this->model->where('content_type', '=', 'article')
+            ->whereIn('access', $access_ids)->get();
+    }
 }

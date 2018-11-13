@@ -203,7 +203,7 @@ class ItemFrontService extends ItemService
             $special_queries[]  = $obj;
         }
 
-        $categories = $this->categoryFrontService->findBy('content_type', '=', 'article');
+        $categories = $this->categoryFrontService->findArticleCategoryWithAccess();
         $category_ids = [];
         foreach ($categories as $category)
         {

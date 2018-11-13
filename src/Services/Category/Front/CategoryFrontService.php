@@ -16,6 +16,12 @@ class CategoryFrontService extends CategoryService
     }
 
 
+    public function findArticleCategoryWithAccess()
+    {
+        return $this->repo->findArticleCategoryWithAccess($this->access_ids);
+    }
+
+
     public function getItem($id)
     {
         $item = parent::getItem($id);
