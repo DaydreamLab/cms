@@ -52,13 +52,17 @@ class ItemFrontRepository extends ItemRepository
 
 
 
-    public function getItems($category_id, $params, $featured, $created_by_ids = null)
+    public function getItems($category_ids, $params, $featured, $created_by_ids = null)
     {
         $limit      = $params['per_page'];
         $order_by   = $params['order_by'];
         $ordering   = $params['ordering'];
 
-        $category_ids   = $this->categoryFrontRepository->findSubTreeIds($category_id);
+        $ids = [];
+        foreach ( $category_ids as $category_id)
+        {
+            $ids = array_merge($ids, $this->categoryFrontRepository->findSubTreeIds($category_id));
+        }
 
         $query = $this->model->where('state', 1);
         if ($created_by_ids !== null)
@@ -169,10 +173,10 @@ class ItemFrontRepository extends ItemRepository
 
         if ($params['featured']['per_page'] > 0)
         {
-            $data['all']['featured'] = $this->getItems($params['category_id'], $params['featured'], 1);
+            $data['all']['featured'] = $this->getItems($params['category_ids'], $params['featured'], 1);
         }
 
-        $data['all']['items'] = $this->getItems($params['category_id'],$params['items'], 0);
+        $data['all']['items'] = $this->getItems($params['category_ids'],$params['items'], 0);
 
 
         foreach ($params['creators'] as $creator)
@@ -186,9 +190,9 @@ class ItemFrontRepository extends ItemRepository
                 $user_ids[] = $map->user_id;
             }
             if ($params['featured']['per_page'] > 0) {
-                $data[$creator]['featured'] = $this->getItems($params['category_id'], $params['featured'], 1, $user_ids);
+                $data[$creator]['featured'] = $this->getItems($params['category_ids'], $params['featured'], 1, $user_ids);
             }
-            $data[$creator]['items']    = $this->getItems($params['category_id'], $params['items'], 0, $user_ids);
+            $data[$creator]['items']    = $this->getItems($params['category_ids'], $params['items'], 0, $user_ids);
 
         }
 
