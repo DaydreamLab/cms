@@ -206,7 +206,7 @@ class ItemFrontRepository extends ItemRepository
                                 ->where('state', 1)
                                 ->where('id', '!=', $item->id)
                                 ->where('publish_up', '>', $item->publish_up)
-                                ->orderBy('publish_up', 'desc')
+                                ->orderBy('publish_up', 'asc')
                                 ->limit(1)
                                 ->first();
 
