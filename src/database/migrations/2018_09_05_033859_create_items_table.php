@@ -30,7 +30,7 @@ class CreateItemsTable extends Migration
             $table->unsignedInteger('access')->nullable()->default(1);
             $table->unsignedTinyInteger('featured')->nullable()->default(0);
             $table->unsignedInteger('featured_ordering')->nullable();
-            $table->string('language')->nullable()->default('All');
+            $table->string('language')->nullable()->default('*');
             $table->string('metadesc')->nullable();
             $table->string('metakeywords')->nullable();
             //$table->string('content_type')->nullable()->default('article');

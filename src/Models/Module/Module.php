@@ -32,7 +32,9 @@ class Module extends BaseModel
         'locked_by',
         'locked_at',
         'created_by',
-        'updated_by'
+        'updated_by',
+        'publish_up',
+        'publish_down'
     ];
 
 

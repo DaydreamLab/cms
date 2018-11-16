@@ -24,7 +24,7 @@ class MenuFrontSearchPost extends MenuSearchPost
     public function rules()
     {
         $rules = [
-            //
+            'language'  => 'nullable|alpha|min:2|max:2',
         ];
         return array_merge($rules, parent::rules());
     }

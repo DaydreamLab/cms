@@ -19,7 +19,7 @@ class TagsTableSeeder extends Seeder
             'ordering'      => 1,
             'hits'          => 0,
             'access'        => 5,
-            'language'      => 'All',
+            'language'      => '*',
             'metadesc'      => '',
             'metakeywords'      => '',
             'params'        => '',

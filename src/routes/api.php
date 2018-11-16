@@ -15,6 +15,10 @@ use Illuminate\Http\Request;
 
 Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
 
+    Route::group(['prefix' => 'setting'], function (){
+        Route::get('', 'DaydreamLab\Cms\Controllers\Setting\Front\SettingFrontController@getItem');
+    });
+
     Route::group(['prefix' => 'item'], function (){
         Route::post('search', 'DaydreamLab\Cms\Controllers\Item\Front\ItemFrontController@search');
         Route::get('{alias}', 'DaydreamLab\Cms\Controllers\Item\Front\ItemFrontController@getItemByAlias');
@@ -35,6 +39,11 @@ Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
     });
 
     Route::group(['middleware' => ['auth:api', 'expired', 'admin'], 'prefix' => 'admin'], function (){
+
+        Route::group(['prefix' => 'setting'], function (){
+            Route::get('', 'DaydreamLab\Cms\Controllers\Setting\Admin\SettingAdminController@getItem');
+        });
+
 
         Route::group(['prefix' => 'category'], function (){
             Route::post('remove', 'DaydreamLab\Cms\Controllers\Category\Admin\CategoryAdminController@remove');

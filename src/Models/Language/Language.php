@@ -28,6 +28,8 @@ class Language extends BaseModel
         'image',
         'state',
         'description',
+        'metadesc',
+        'metakeywords',
         'order',
         'created_by',
         'updated_by'

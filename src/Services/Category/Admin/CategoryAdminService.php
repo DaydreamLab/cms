@@ -92,7 +92,7 @@ class CategoryAdminService extends CategoryService
 
         if (InputHelper::null($input, 'language')){
             $input->forget('language');
-            $input->put('language', 'All');
+            $input->put('language', '*');
         }
 
 

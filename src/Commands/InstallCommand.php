@@ -34,7 +34,8 @@ class InstallCommand extends Command
         'tag',
         'menu',
         'module',
-        'extrafield'
+        'extrafield',
+        'setting',
     ];
 
 

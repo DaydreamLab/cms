@@ -66,7 +66,7 @@ class MenuAdminService extends MenuService
 
         if (InputHelper::null($input, 'language')){
             $input->forget('language');
-            $input->put('language', 'All');
+            $input->put('language', '*');
         }
 
         return parent::storeNested($input);

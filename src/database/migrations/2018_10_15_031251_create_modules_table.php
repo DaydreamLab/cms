@@ -21,13 +21,15 @@ class CreateModulesTable extends Migration
             $table->tinyInteger('state')->default(1);
             $table->text('description')->nullable();
             $table->unsignedInteger('access')->nullalbe()->default(1);
-            $table->string('language')->nullable()->default('All');
+            $table->string('language')->nullable()->default('*');
             $table->text('params')->nullable();
             $table->unsignedInteger('locked_by')->nullable()->default(0);
             $table->timestamp('locked_at')->nullable();
             $table->unsignedInteger('created_by');
             $table->unsignedInteger('updated_by')->nullable();
             $table->timestamps();
+            $table->timestamp('publish_up')->nullable();
+            $table->timestamp('publish_down')->nullable();
         });
     }
 

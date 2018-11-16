@@ -24,7 +24,7 @@ class CreateTagsTable extends Migration
             $table->text('description')->nullable();
             $table->unsignedInteger('hits')->nullable()->default(0);
             $table->unsignedInteger('access')->nullable()->default(1);
-            $table->string('language')->nullable()->default('All');
+            $table->string('language')->nullable()->default('*');
             $table->string('metadesc')->nullable();
             $table->string('metakeywords')->nullable();
             $table->text('params')->nullable();

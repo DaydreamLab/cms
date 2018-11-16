@@ -24,9 +24,10 @@ class ItemFrontSearchPost extends ItemSearchPost
     public function rules()
     {
         $rules = [
-            'year'  => 'nullable|integer',
-            'month' => 'nullable|integer',
-            'limit' => 'nullable|integer'
+            'year'      => 'nullable|integer',
+            'month'     => 'nullable|integer',
+            'language'  => 'nullable|alpha|min:2|max:2',
+            'limit'     => 'nullable|integer'
         ];
         return $rules;
     }

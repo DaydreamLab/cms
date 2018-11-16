@@ -21,6 +21,9 @@ class CreateLanguagesTable extends Migration
             $table->string('image')->nullable();
             $table->tinyInteger('state')->default(1);
             $table->text('description')->nullable();
+            $table->string('metadesc')->nullable();
+            $table->string('metakeywords')->nullable();
+            $table->string('sitename')->nullable();
             $table->integer('order')->nullable()->default(1);
             $table->unsignedInteger('created_by');
             $table->unsignedInteger('updated_by')->nullable();

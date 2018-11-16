@@ -151,7 +151,7 @@ class ItemAdminService extends ItemService
         if (InputHelper::null($input, 'language'))
         {
             $input->forget('language');
-            $input->put('language', 'All');
+            $input->put('language', '*');
         }
         $tags = $input->get('tags') ? $input->get('tags') : [];
         $input->forget('tags');

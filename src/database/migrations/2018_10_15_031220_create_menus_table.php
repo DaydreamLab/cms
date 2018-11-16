@@ -25,7 +25,7 @@ class CreateMenusTable extends Migration
             $table->text('description')->nullable();
             $table->unsignedInteger('access')->nullalbe()->default(1);
 
-            $table->string('language')->nullable()->default('All');
+            $table->string('language')->nullable()->default('*');
             $table->text('params')->nullable();
             $table->text('metadata')->nullable();
             $table->text('metakeywords')->nullable();

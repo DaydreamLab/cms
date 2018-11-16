@@ -83,7 +83,7 @@ class MenusTableSeeder extends Seeder
             'state'         => 1,
             'description'   => '',
             'access'        => 5,
-            'language'      => 'All',
+            'language'      => '*',
             'params'        => '',
         ]);
     }
