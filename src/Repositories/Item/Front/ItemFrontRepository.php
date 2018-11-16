@@ -51,6 +51,20 @@ class ItemFrontRepository extends ItemRepository
     }
 
 
+    public function getCreatorGroupUserIds($creator_group)
+    {
+        $group = $this->userGroupRepository->findBy('title', '=', $creator_group)->first();
+        $user_group_map = $this->userGroupMapRepository->findBy('group_id', '=', $group->id);
+
+        $user_ids = [];
+        foreach ($user_group_map as $map)
+        {
+            $user_ids[] = $map->user_id;
+        }
+
+        return $user_ids;
+    }
+
 
     public function getItems($category_ids, $params, $featured, $created_by_ids = null)
     {
@@ -179,22 +193,23 @@ class ItemFrontRepository extends ItemRepository
         $data['all']['items'] = $this->getItems($params['category_ids'],$params['items'], 0);
 
 
-        foreach ($params['creators'] as $creator)
+//        foreach ($params['creators'] as $creator)
+
+        if (config('cms.item.front.creator_group_filter.enabled'))
         {
-            $group = $this->userGroupRepository->findBy('title', '=', $creator)->first();
-            $user_group_map = $this->userGroupMapRepository->findBy('group_id', '=', $group->id);
-
-            $user_ids = [];
-            foreach ($user_group_map as $map)
+            foreach (config('cms.item.front.creator_group_filter.groups') as $creator_group)
             {
-                $user_ids[] = $map->user_id;
-            }
-            if ($params['featured']['per_page'] > 0) {
-                $data[$creator]['featured'] = $this->getItems($params['category_ids'], $params['featured'], 1, $user_ids);
-            }
-            $data[$creator]['items']    = $this->getItems($params['category_ids'], $params['items'], 0, $user_ids);
+                $user_ids = $this->getCreatorGroupUserIds($creator_group);
 
+                if ($params['featured']['per_page'] > 0) {
+                    $data[$creator_group]['featured'] = $this->getItems($params['category_ids'], $params['featured'], 1, $user_ids);
+                }
+                $data[$creator_group]['items']    = $this->getItems($params['category_ids'], $params['items'], 0, $user_ids);
+
+            }
         }
+
+
 
         return $data;
     }
