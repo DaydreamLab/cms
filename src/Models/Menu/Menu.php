@@ -75,6 +75,12 @@ class Menu extends BaseModel
     }
 
 
+    public function getAccessTitleAttribute()
+    {
+        return $this->viewlevel->title;
+    }
+
+
     public function getCategoryAttribute()
     {
         return $this->category()->first();

@@ -75,6 +75,7 @@ class Item extends BaseModel
         'creator_groups',
         'tags',
         'viewlevels',
+        'access_title'
     ];
 
 
@@ -88,6 +89,12 @@ class Item extends BaseModel
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+
+
+    public function getAccessTitleAttribute()
+    {
+        return $this->viewlevel->title;
     }
 
 

@@ -79,6 +79,7 @@ class Category extends BaseModel
         'tree_title',
         'tree_list_title',
         'viewlevels',
+        'access_title'
     ];
 
 
@@ -88,9 +89,9 @@ class Category extends BaseModel
     ];
 
 
-    public function viewlevel()
+    public function getAccessTitleAttribute()
     {
-        return $this->hasOne(Viewlevel::class, 'id', 'access');
+        return $this->viewlevel->title;
     }
 
 
@@ -115,5 +116,11 @@ class Category extends BaseModel
     public function getViewlevelsAttribute()
     {
         return $this->viewlevel()->first()->rules;
+    }
+
+
+    public function viewlevel()
+    {
+        return $this->hasOne(Viewlevel::class, 'id', 'access');
     }
 }

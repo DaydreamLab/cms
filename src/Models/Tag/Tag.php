@@ -62,12 +62,20 @@ class Tag extends BaseModel
         'creator',
         'updater',
         'locker',
-        'viewlevels'
+        'viewlevels',
+        'access_title'
     ];
+
+
+    public function getAccessTitleAttribute()
+    {
+        return $this->viewlevel->title;
+    }
+
 
     public function getViewlevelsAttribute()
     {
-        return $this->viewlevel()->first()->rules;
+        return $this->viewlevel->rules;
     }
 
 
