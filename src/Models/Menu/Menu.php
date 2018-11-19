@@ -69,6 +69,7 @@ class Menu extends BaseModel
         'params'   => 'array'
     ];
 
+
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
@@ -89,7 +90,7 @@ class Menu extends BaseModel
 
     public function getViewlevelsAttribute()
     {
-        return $this->viewlevel()->first()->rules;
+        return $this->viewlevel->rules;
     }
 
 

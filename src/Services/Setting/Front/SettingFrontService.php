@@ -32,9 +32,8 @@ class SettingFrontService extends SettingService
         $data['sitename']       = $lang_setting->sitename       ?: $global['sitename'];
         $data['locale']         = $global['frontend_locale'];
 
-
         $this->status   = Str::upper(Str::snake($this->type.'GetItemSuccess'));
-        $this->response = $data;
+        $this->response = (object)$data;
 
         return $this->response;
     }

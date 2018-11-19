@@ -27,6 +27,6 @@ class SettingService
 
     public function getItem()
     {
-        return true;
+
     }
 }

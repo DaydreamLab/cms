@@ -100,7 +100,7 @@ class Item extends BaseModel
 
     public function getCategoryAttribute()
     {
-        return $this->category()->first();
+        return $this->category;
     }
 
 
@@ -137,12 +137,12 @@ class Item extends BaseModel
 
     public function getTagsAttribute()
     {
-        return $this->tag()->get();
+        return $this->tag;
     }
 
     public function getViewlevelsAttribute()
     {
-        return $this->viewlevel()->first()->rules;
+        return $this->viewlevel->rules;
     }
 
 

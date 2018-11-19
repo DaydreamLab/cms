@@ -30,7 +30,8 @@ class CategorySearchPost extends ListRequest
             'id'            => 'nullable|integer',
             'language'      => 'nullable|string',
             'extension'     => 'nullable|string',
-            'created_by'    => 'nullable|integer'
+            'created_by'    => 'nullable|integer',
+            'access'        => 'nullable|integer'
         ];
 
         return array_merge(parent::rules(), $rules);

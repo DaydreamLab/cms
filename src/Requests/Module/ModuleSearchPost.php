@@ -26,7 +26,8 @@ class ModuleSearchPost extends ListRequest
                 'nullable',
                 'integer',
                 Rule::in([0,1,-2])
-            ]
+            ],
+            'access'        => 'nullable|integer'
         ];
 
         return array_merge(parent::rules(), $rules);

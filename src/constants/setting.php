@@ -58,5 +58,15 @@ return [
     ],
 
 
+    // Store
+    'SETTING_ADMIN_STORE_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Setting admin store success'
+    ],
+    'SETTING_ADMIN_STORE_FAIL' => [
+        'code'      => 500,
+        'message'   => 'Setting admin store search fail'
+    ],
+
 
 ];

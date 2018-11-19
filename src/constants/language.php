@@ -263,4 +263,10 @@ return [
         'code'      => 200,
         'message'   => 'Language front get tree success'
     ],
+
+    // Get List
+    'LANGUAGE_ADMIN_GET_LIST_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Language admin get list success'
+    ],
 ];

@@ -41,6 +41,7 @@ Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
     Route::group(['middleware' => ['auth:api', 'expired', 'admin'], 'prefix' => 'admin'], function (){
 
         Route::group(['prefix' => 'setting'], function (){
+            Route::post('store', 'DaydreamLab\Cms\Controllers\Setting\Admin\SettingAdminController@store');
             Route::get('', 'DaydreamLab\Cms\Controllers\Setting\Admin\SettingAdminController@getItem');
         });
 
@@ -83,6 +84,7 @@ Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
             Route::post('state', 'DaydreamLab\Cms\Controllers\Language\Admin\LanguageAdminController@state');
             Route::post('store','DaydreamLab\Cms\Controllers\Language\Admin\LanguageAdminController@store');
             Route::post('search','DaydreamLab\Cms\Controllers\Language\Admin\LanguageAdminController@search');
+            Route::get('list','DaydreamLab\Cms\Controllers\Language\Admin\LanguageAdminController@getList');
             Route::get('{id}', 'DaydreamLab\Cms\Controllers\Language\Admin\LanguageAdminController@getItem');
         });
 
