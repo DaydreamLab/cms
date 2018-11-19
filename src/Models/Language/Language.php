@@ -30,6 +30,7 @@ class Language extends BaseModel
         'description',
         'metadesc',
         'metakeywords',
+        'sitename',
         'order',
         'created_by',
         'updated_by'

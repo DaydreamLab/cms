@@ -33,7 +33,8 @@ class LanguageStorePost extends AdminRequest
             'image'         => 'nullable|string',
             'order'         => 'nullable|integer',
             'metadesc'      => 'nullable|string',
-            'metakeywords'  => 'nullable|string'
+            'metakeywords'  => 'nullable|string',
+            'sitename'      => 'nullable|string',
         ];
     }
 }
