@@ -21,7 +21,7 @@ class ModuleSearchPost extends ListRequest
     public function rules()
     {
         $rules = [
-            'title' => 'nullable|string',
+            'search' => 'nullable|string',
             'state'     => [
                 'nullable',
                 'integer',

@@ -21,8 +21,8 @@ class ItemSearchPost extends ListRequest
     public function rules()
     {
         $rules = [
-            'title' => 'nullable|string',
-            'state'     => [
+            'search'        => 'nullable|string',
+            'state'         => [
                 'nullable',
                 'integer',
                 Rule::in([0,1,-1,-2])
