@@ -235,7 +235,7 @@ class ItemAdminService extends ItemService
             $this->itemTagMapAdminService->storeKeysMap(Helper::collect([
                 'item_id'   => $item->id,
                 'tag_ids'   => $tag_ids,
-                'created_by'=> $input->created_by
+                //'created_by'=> $input->created_by
             ]));
         }
 
