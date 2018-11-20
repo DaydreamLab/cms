@@ -83,7 +83,7 @@ class ItemAdminService extends ItemService
             $input->forget('category_id');
             $input->put('category_id', $category_ids);
         }
-        Helper::show($input);
+
         return parent::search($input);
     }
 
