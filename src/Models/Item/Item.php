@@ -94,7 +94,7 @@ class Item extends BaseModel
 
     public function getAccessTitleAttribute()
     {
-        return $this->viewlevel->title;
+        return $this->viewlevel->title ?: null;
     }
 
 
@@ -142,7 +142,7 @@ class Item extends BaseModel
 
     public function getViewlevelsAttribute()
     {
-        return $this->viewlevel->rules;
+        return $this->viewlevel->rules ?: [];
     }
 
 

@@ -232,6 +232,20 @@
         "created_by": 1,
         "children": [],
         "apis": []
+      },
+      {
+        "title": "Settings",
+        "path": "/setting",
+        "component": "content/setting",
+        "type": "menu",
+        "redirect": "",
+        "icon": "",
+        "state": 1,
+        "showNav": 1,
+        "ordering": 10,
+        "created_by": 1,
+        "children": [],
+        "apis": []
       }
     ],
     "apis": []

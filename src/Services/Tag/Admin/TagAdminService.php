@@ -61,11 +61,16 @@ class TagAdminService extends TagService
         }
 
 
+        if (InputHelper::null($input, 'access')){
+            $input->forget('access');
+            $input->put('access', 1);
+        }
+
         if (InputHelper::null($input, 'language')){
             $input->forget('language');
             $input->put('language', '*');
         }
 
-        return parent::storeNested($input);
+        return   parent::storeNested($input);
     }
 }

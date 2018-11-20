@@ -91,7 +91,7 @@ class Category extends BaseModel
 
     public function getAccessTitleAttribute()
     {
-        return $this->viewlevel->title;
+        return $this->viewlevel->title ?: null;
     }
 
 
