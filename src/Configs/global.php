@@ -9,7 +9,7 @@ return [
     'metakeywords'  => [
     ],
 
-    'frontend_locale'    => 'tw',
+    'locale'            => 'tw',
     
-    'backend_locale'     => 'tw',
+    'locale_admin'      => 'tw',
 ];

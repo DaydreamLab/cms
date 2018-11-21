@@ -36,14 +36,20 @@ class SettingAdminService extends SettingService
 
     public function store(Collection $input)
     {
-
         $config     = config('global');
 
         $file_str   = '<?php return [' . PHP_EOL;
 
         foreach ($config as $key => $value)
         {
-            $file_str .= '\'' . $key . '\' => ' .  '\'' . $input->{$key} . '\', '. PHP_EOL;
+            if ($input->has($key)) {
+                $output = $input->{$key};
+            }
+            else {
+                $output = $config[$key];
+            }
+
+            $file_str .= '\'' . $key . '\' => ' .  '\'' . $output . '\', '. PHP_EOL;
         }
 
         $file_str .= '];';
@@ -53,12 +59,12 @@ class SettingAdminService extends SettingService
 
         if ($result)
         {
-            $this->status = Str::upper(Str::snake($this->type.'StoreSuccess'));
+            $this->status = Str::upper(Str::snake($this->type.'UpdateSuccess'));
             $this->response = null;
         }
         else
         {
-            $this->status = Str::upper(Str::snake($this->type.'StoreFail'));
+            $this->status = Str::upper(Str::snake($this->type.'UpdateFail'));
             $this->response = null;
         }
     }

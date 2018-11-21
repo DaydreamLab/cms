@@ -15,25 +15,38 @@ class SettingFrontService extends SettingService
     protected $languageService;
 
 
+
     public function __construct(LanguageFrontService $languageService)
     {
         parent::__construct($languageService);
     }
 
 
-    public function getItem()
+    public function getItem($locale)
     {
         $global = config('global');
 
-        $lang_setting = $this->languageService->findBy('sef', '=', $global['frontend_locale'])->first();
+        $lang_setting = $this->languageService->findByChain(
+            ['sef', 'site_id'],
+            ['=', '='],
+            [$locale, $global['site_id']]
+        )->first();
 
-        $data['metadesc']       = $lang_setting->metadesc       ?: $global['metadesc'];
-        $data['metakeywords']   = $lang_setting->metakeywords   ?: $global['metakeywords'];
-        $data['sitename']       = $lang_setting->sitename       ?: $global['sitename'];
-        $data['locale']         = $global['frontend_locale'];
+        if($lang_setting)
+        {
+            $data['metadesc']       = $lang_setting->metadesc       ?: $global['metadesc'];
+            $data['metakeywords']   = $lang_setting->metakeywords   ?: $global['metakeywords'];
+            $data['sitename']       = $lang_setting->sitename       ?: $global['sitename'];
+            $data['locale']         = $global['locale'];
 
-        $this->status   = Str::upper(Str::snake($this->type.'GetItemSuccess'));
-        $this->response = (object)$data;
+            $this->status   = Str::upper(Str::snake($this->type.'GetItemSuccess'));
+            $this->response = (object)$data;
+        }
+        else
+        {
+            $this->status   = Str::upper(Str::snake($this->type.'NotFound'));
+            $this->response = null;
+        }
 
         return $this->response;
     }

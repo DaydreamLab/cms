@@ -1,6 +1,7 @@
 <?php
 namespace DaydreamLab\Cms\Models\Language;
 
+use DaydreamLab\Cms\Models\Site\Site;
 use DaydreamLab\JJAJ\Models\BaseModel;
 
 class Language extends BaseModel
@@ -31,6 +32,7 @@ class Language extends BaseModel
         'metadesc',
         'metakeywords',
         'sitename',
+        'site_id',
         'order',
         'created_by',
         'updated_by'
@@ -52,6 +54,7 @@ class Language extends BaseModel
      * @var array
      */
     protected $appends = [
+        'site',
         'creator',
         'updater'
     ];
@@ -63,8 +66,20 @@ class Language extends BaseModel
     }
 
 
+    public function getSiteAttribute()
+    {
+        return $this->site()->first();
+    }
+
+
     public function getUpdaterAttribute()
     {
         return $this->updater();
+    }
+
+
+    public function site()
+    {
+        return $this->belongsTo(Site::class, 'site_id', 'id');
     }
 }

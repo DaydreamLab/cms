@@ -61,17 +61,17 @@ return [
         'code'      => 500,
         'message'   => 'Category front create nested fail'
     ],
-    'CATEGORY_CREATE_NESTED_WITH_EXIST_PATH' => [
+    'CATEGORY_STORE_NESTED_WITH_EXIST_PATH' => [
         'code'      => 403,
-        'message'   => 'Category create nested with exist path'
+        'message'   => 'Category create nested with exist alias'
     ],
-    'CATEGORY_ADMIN_CREATE_NESTED_WITH_EXIST_PATH' => [
+    'CATEGORY_ADMIN_STORE_NESTED_WITH_EXIST_PATH' => [
         'code'      => 403,
-        'message'   => 'Category admin create nested with exist path'
+        'message'   => 'Category admin create nested with exist alias'
     ],
-    'CATEGORY_FRONT_CREATE_NESTED_WITH_EXIST_PATH' => [
+    'CATEGORY_FRONT_STORE_NESTED_WITH_EXIST_PATH' => [
         'code'      => 403,
-        'message'   => 'Category front create nested with exist path'
+        'message'   => 'Category front create nested with exist alias'
     ],
 
 

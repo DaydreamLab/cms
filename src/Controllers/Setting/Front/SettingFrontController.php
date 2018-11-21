@@ -15,9 +15,9 @@ class SettingFrontController
         $this->service = $service;
     }
 
-    public function getItem()
+    public function getItem($locale)
     {
-        $this->service->getItem();
+        $this->service->getItem($locale);
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }

@@ -27,15 +27,15 @@ return [
         'code'      => 500,
         'message'   => 'Module front create fail'
     ],
-    'MODULE_CREATE_WITH_EXIST_ALIAS' => [
+    'MODULE_STORE_WITH_EXIST_ALIAS' => [
         'code'      => 403,
         'message'   => 'Module create with exist alias'
     ],
-    'MODULE_ADMIN_CREATE_WITH_EXIST_ALIAS' => [
+    'MODULE_ADMIN_STORE_WITH_EXIST_ALIAS' => [
         'code'      => 403,
         'message'   => 'Module admin create with exist alias'
     ],
-    'MODULE_FRONT_CREATE_WITH_EXIST_ALIAS' => [
+    'MODULE_FRONT_STORE_WITH_EXIST_ALIAS' => [
         'code'      => 403,
         'message'   => 'Module front create with exist alias'
     ],

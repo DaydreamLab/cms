@@ -61,17 +61,17 @@ return [
         'code'      => 500,
         'message'   => 'Menu front create nested fail'
     ],
-    'MENU_CREATE_NESTED_WITH_EXIST_PATH' => [
+    'MENU_STORE_NESTED_WITH_EXIST_PATH' => [
         'code'      => 403,
-        'message'   => 'Menu create nested with exist path'
+        'message'   => 'Menu create nested with exist alias'
     ],
-    'MENU_ADMIN_CREATE_NESTED_WITH_EXIST_PATH' => [
+    'MENU_ADMIN_STORE_NESTED_WITH_EXIST_PATH' => [
         'code'      => 403,
-        'message'   => 'Menu admin create nested with exist path'
+        'message'   => 'Menu admin create nested with exist alias'
     ],
-    'MENU_FRONT_CREATE_NESTED_WITH_EXIST_PATH' => [
+    'MENU_FRONT_STORE_NESTED_WITH_EXIST_PATH' => [
         'code'      => 403,
-        'message'   => 'Menu front create nested with exist path'
+        'message'   => 'Menu front create nested with exist alias'
     ],
 
 

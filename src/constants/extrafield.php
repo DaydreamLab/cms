@@ -28,15 +28,15 @@ return [
         'code'      => 500,
         'message'   => 'Extrafield front create fail'
     ],
-    'EXTRAFIELD_CREATE_WITH_EXIST_ALIAS' => [
+    'EXTRAFIELD_STORE_WITH_EXIST_ALIAS' => [
         'code'      => 403,
         'message'   => 'Extrafield create with exist alias'
     ],
-    'EXTRAFIELD_ADMIN_CREATE_WITH_EXIST_ALIAS' => [
+    'EXTRAFIELD_ADMIN_STORE_WITH_EXIST_ALIAS' => [
         'code'      => 403,
         'message'   => 'Extrafield admin create with exist alias'
     ],
-    'EXTRAFIELD_FRONT_CREATE_WITH_EXIST_ALIAS' => [
+    'EXTRAFIELD_FRONT_STORE_WITH_EXIST_ALIAS' => [
         'code'      => 403,
         'message'   => 'Extrafield front create with exist alias'
     ],
