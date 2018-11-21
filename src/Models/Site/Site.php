@@ -20,6 +20,7 @@ class Site extends BaseModel
      */
     protected $fillable = [
         'title',
+        'url',
         'created_by',
         'updated_by'
     ];

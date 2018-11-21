@@ -5,7 +5,6 @@ namespace DaydreamLab\Cms\Controllers\Setting\Front;
 use DaydreamLab\Cms\Services\Setting\Front\SettingFrontService;
 use DaydreamLab\JJAJ\Helpers\ResponseHelper;
 
-
 class SettingFrontController
 {
     protected $service;

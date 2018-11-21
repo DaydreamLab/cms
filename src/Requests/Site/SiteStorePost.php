@@ -27,6 +27,7 @@ class SiteStorePost extends AdminRequest
         return [
             'id'            => 'nullable|integer',
             'title'         => 'required|string',
+            'url'           => 'required|string'
         ];
     }
 }

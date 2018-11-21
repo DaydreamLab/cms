@@ -6,6 +6,7 @@ use DaydreamLab\Cms\Repositories\Menu\Front\MenuFrontRepository;
 use DaydreamLab\Cms\Services\Menu\MenuService;
 use DaydreamLab\Cms\Services\Module\Front\ModuleFrontService;
 use DaydreamLab\JJAJ\Helpers\Helper;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 class MenuFrontService extends MenuService
@@ -23,9 +24,10 @@ class MenuFrontService extends MenuService
     }
 
 
-    public function getItemByPath($path)
+    public function getItemByPath(Collection $input)
     {
-        $menu = parent::getItemByPath($path);
+        $menu = parent::getItemByPath($input);
+
         if (!$menu)
         {
             return false;

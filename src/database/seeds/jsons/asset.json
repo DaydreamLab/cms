@@ -1,6 +1,6 @@
 [
   {
-    "title": "Contents",
+    "title": "ASSET_CMS_CONTENTS_TITLE",
     "path": "/content",
     "component": "",
     "type": "alias",
@@ -12,7 +12,7 @@
     "created_by": 1,
     "children": [
       {
-        "title": "Items",
+        "title": "ASSET_CMS_ITEMS_TITLE",
         "path": "/item",
         "component": "content/item/list",
         "type": "menu",
@@ -52,7 +52,7 @@
         ]
       },
       {
-        "title": "Edit Item",
+        "title": "ASSET_CMS_ITEM_EDIT_TITLE",
         "path": "/item/edit",
         "component": "content/item/edit",
         "type": "function",
@@ -67,7 +67,7 @@
       },
 
       {
-        "title": "Categories",
+        "title": "ASSET_CMS_CATEGORIES_TITLE",
         "path": "/category",
         "component": "content/category/list",
         "type": "menu",
@@ -102,7 +102,7 @@
         ]
       },
       {
-        "title": "Edit Category",
+        "title": "ASSET_CMS_CATEGORY_EDIT_TITLE",
         "path": "/category/edit",
         "component": "content/category/edit",
         "type": "function",
@@ -117,7 +117,7 @@
       },
 
       {
-        "title": "Tags",
+        "title": "ASSET_CMS_TAGS_TITLE",
         "path": "/tag",
         "component": "content/tag/list",
         "type": "menu",
@@ -152,7 +152,7 @@
         ]
       },
       {
-        "title": "Edit Tag",
+        "title": "ASSET_CMS_TAG_EDIT_TITLE",
         "path": "/tag/edit",
         "component": "content/tag/edit",
         "type": "function",
@@ -166,7 +166,7 @@
         "apis": []
       },
       {
-        "title": "Languages",
+        "title": "ASSET_CMS_LANGUAGES_TITLE",
         "path": "/language",
         "component": "content/language/list",
         "type": "menu",
@@ -206,7 +206,7 @@
         ]
       },
       {
-        "title": "Edit Language",
+        "title": "ASSET_CMS_LANGUAGE_EDIT_TITLE",
         "path": "/language/edit",
         "component": "content/language/edit",
         "type": "function",
@@ -220,7 +220,7 @@
         "apis": []
       },
       {
-        "title": "Media Manager",
+        "title": "ASSET_CMS_MEDIA_MANAGER_TITLE",
         "path": "/media",
         "component": "content/media",
         "type": "menu",
@@ -234,7 +234,7 @@
         "apis": []
       },
       {
-        "title": "Settings",
+        "title": "ASSET_CMS_SETTINGS_TITLE",
         "path": "/setting",
         "component": "content/setting",
         "type": "menu",
@@ -243,6 +243,34 @@
         "state": 1,
         "showNav": 1,
         "ordering": 10,
+        "created_by": 1,
+        "children": [],
+        "apis": []
+      },
+      {
+        "title": "ASSET_CMS_SITES_TITLE",
+        "path": "/site",
+        "component": "content/site/list",
+        "type": "menu",
+        "redirect": "",
+        "icon": "",
+        "state": 1,
+        "showNav": 1,
+        "ordering": 11,
+        "created_by": 1,
+        "children": [],
+        "apis": []
+      },
+      {
+        "title": "ASSET_CMS_SITE_EDIT_TITLE",
+        "path": "/site/edit",
+        "component": "content/site/edit",
+        "type": "function",
+        "redirect": "",
+        "icon": "",
+        "state": 1,
+        "showNav": 0,
+        "ordering": 12,
         "created_by": 1,
         "children": [],
         "apis": []
