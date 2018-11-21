@@ -23,7 +23,7 @@ class SettingAdminService extends SettingService
     }
 
 
-    public function getItem()
+    public function getItem($locale = '')
     {
         $global = config('global');
 
