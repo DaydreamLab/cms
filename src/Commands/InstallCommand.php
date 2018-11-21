@@ -28,14 +28,15 @@ class InstallCommand extends Command
     protected $constants = [
         'category',
         'cron',
+        'extrafield',
         'item',
         'language',
-        'pagebuilder',
-        'tag',
         'menu',
         'module',
-        'extrafield',
+        'pagebuilder',
         'setting',
+        'site',
+        'tag',
     ];
 
 
