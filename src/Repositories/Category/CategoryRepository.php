@@ -31,4 +31,12 @@ class CategoryRepository extends BaseRepository
 
         return $ids;
     }
+
+
+    public function treeList($extension, $access_ids)
+    {
+        return $this->model->where('extension', $extension)
+                            ->whereIn('access', $access_ids)
+                            ->get();
+    }
 }

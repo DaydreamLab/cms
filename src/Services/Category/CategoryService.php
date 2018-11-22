@@ -52,7 +52,7 @@ class CategoryService extends BaseService
 
     public function treeList($extension)
     {
-        $tree = $this->findBy('extension', '=', $extension)->toFlatTree();
+        $tree = $this->repo->treeList($extension, $this->access_ids)->toFlatTree();
 
         $tree = $tree->map(function ($item, $key) {
             return $item->only(['id', 'tree_list_title']);
