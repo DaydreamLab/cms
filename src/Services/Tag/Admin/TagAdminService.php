@@ -13,6 +13,8 @@ class TagAdminService extends TagService
 {
     protected $type = 'TagAdmin';
 
+    protected $search_keys = ['title', 'description'];
+
     public function __construct(TagAdminRepository $repo)
     {
         parent::__construct($repo);

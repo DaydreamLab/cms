@@ -32,7 +32,9 @@ class ItemSearchPost extends ListRequest
                 'nullable',
                 Rule::in([0,1])
             ],
-            'access'        => 'nullable|integer'
+            'access'        => 'nullable|integer',
+            'language'      => 'nullable|string|min:1|max:2'
+
         ];
 
         return array_merge(parent::rules(), $rules);

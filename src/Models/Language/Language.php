@@ -54,7 +54,7 @@ class Language extends BaseModel
      * @var array
      */
     protected $appends = [
-        'site',
+        'site_title',
         'creator',
         'updater'
     ];
@@ -69,6 +69,12 @@ class Language extends BaseModel
     public function getSiteAttribute()
     {
         return $this->site()->first();
+    }
+
+
+    public function getSiteTitleAttribute()
+    {
+        return $this->site->title;
     }
 
 

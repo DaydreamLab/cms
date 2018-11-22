@@ -12,6 +12,8 @@ class LanguageAdminService extends LanguageService
 {
     protected $type = 'LanguageAdmin';
 
+    protected $search_keys = ['title', 'description'];
+
     public function __construct(LanguageAdminRepository $repo)
     {
         parent::__construct($repo);

@@ -19,6 +19,7 @@ class CategoryAdminService extends CategoryService
 
     protected $cmsCronJobModel;
 
+    protected $search_keys = ['title', 'introtext', 'description'];
 
     public function __construct(CategoryAdminRepository $repo)
     {

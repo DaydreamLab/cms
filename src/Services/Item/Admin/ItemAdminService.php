@@ -24,6 +24,8 @@ class ItemAdminService extends ItemService
 
     protected $categoryAdminService;
 
+    protected $search_keys = ['title', 'introtext', 'description'];
+
     public function __construct(ItemAdminRepository $repo,
                                 TagAdminService $tagAdminService,
                                 ItemTagMapAdminService $itemTagMapAdminService,
