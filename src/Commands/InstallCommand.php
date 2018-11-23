@@ -33,6 +33,7 @@ class InstallCommand extends Command
         'language',
         'menu',
         'module',
+        'option',
         'pagebuilder',
         'setting',
         'site',

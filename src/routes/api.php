@@ -40,10 +40,6 @@ Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
 
     Route::group(['middleware' => ['auth:api', 'expired', 'admin'], 'prefix' => 'admin'], function (){
 
-        Route::group(['prefix' => 'setting'], function (){
-            Route::post('store', 'DaydreamLab\Cms\Controllers\Setting\Admin\SettingAdminController@store');
-            Route::get('', 'DaydreamLab\Cms\Controllers\Setting\Admin\SettingAdminController@getItem');
-        });
 
 
         Route::group(['prefix' => 'category'], function (){
@@ -59,6 +55,7 @@ Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
             Route::get('treeList/{extension}','DaydreamLab\Cms\Controllers\Category\Admin\CategoryAdminController@treeList');
             Route::get('{id}', 'DaydreamLab\Cms\Controllers\Category\Admin\CategoryAdminController@getItem');
         });
+
 
 
         Route::group(['prefix' => 'extrafield'], function (){
@@ -79,15 +76,6 @@ Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
         });
 
 
-        Route::group(['prefix' => 'language'], function (){
-            Route::post('remove', 'DaydreamLab\Cms\Controllers\Language\Admin\LanguageAdminController@remove');
-            Route::post('state', 'DaydreamLab\Cms\Controllers\Language\Admin\LanguageAdminController@state');
-            Route::post('store','DaydreamLab\Cms\Controllers\Language\Admin\LanguageAdminController@store');
-            Route::post('search','DaydreamLab\Cms\Controllers\Language\Admin\LanguageAdminController@search');
-            Route::get('list','DaydreamLab\Cms\Controllers\Language\Admin\LanguageAdminController@getList');
-            Route::get('{id}', 'DaydreamLab\Cms\Controllers\Language\Admin\LanguageAdminController@getItem');
-        });
-
 
         Route::group(['prefix' => 'item'], function (){
             Route::post('remove', 'DaydreamLab\Cms\Controllers\Item\Admin\ItemAdminController@remove');
@@ -102,6 +90,17 @@ Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
         });
 
 
+
+        Route::group(['prefix' => 'language'], function (){
+            Route::post('remove', 'DaydreamLab\Cms\Controllers\Language\Admin\LanguageAdminController@remove');
+            Route::post('state', 'DaydreamLab\Cms\Controllers\Language\Admin\LanguageAdminController@state');
+            Route::post('store','DaydreamLab\Cms\Controllers\Language\Admin\LanguageAdminController@store');
+            Route::post('search','DaydreamLab\Cms\Controllers\Language\Admin\LanguageAdminController@search');
+            Route::get('list','DaydreamLab\Cms\Controllers\Language\Admin\LanguageAdminController@getList');
+            Route::get('{id}', 'DaydreamLab\Cms\Controllers\Language\Admin\LanguageAdminController@getItem');
+        });
+
+
         Route::group(['prefix' => 'menu'], function (){
             Route::post('remove', 'DaydreamLab\Cms\Controllers\Menu\Admin\MenuAdminController@remove');
             Route::post('store','DaydreamLab\Cms\Controllers\Menu\Admin\MenuAdminController@store');
@@ -113,12 +112,28 @@ Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
         });
 
 
+
+        Route::group(['prefix' => 'option'], function (){
+            Route::post('list', 'DaydreamLab\Cms\Controllers\Option\OptionController@getList');
+        });
+
+
+
+        Route::group(['prefix' => 'setting'], function (){
+            Route::post('store', 'DaydreamLab\Cms\Controllers\Setting\Admin\SettingAdminController@store');
+            Route::get('', 'DaydreamLab\Cms\Controllers\Setting\Admin\SettingAdminController@getItem');
+        });
+
+
+
         Route::group(['prefix' => 'site'], function (){
             Route::post('remove','DaydreamLab\Cms\Controllers\Site\Admin\SiteAdminController@remove');
             Route::post('store','DaydreamLab\Cms\Controllers\Site\Admin\SiteAdminController@store');
             Route::post('search','DaydreamLab\Cms\Controllers\Site\Admin\SiteAdminController@search');
             Route::get('{id}', 'DaydreamLab\Cms\Controllers\Site\Admin\SiteAdminController@getItem');
         });
+
+
 
         Route::group(['prefix' => 'tag'], function (){
             Route::post('remove', 'DaydreamLab\Cms\Controllers\Tag\Admin\TagAdminController@remove');
