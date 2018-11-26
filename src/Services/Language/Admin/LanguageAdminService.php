@@ -23,12 +23,29 @@ class LanguageAdminService extends LanguageService
     public function getList(Collection $input)
     {
         $result = parent::search($input);
+        $languages = $result->groupBy('sef')->keys();
+
 
         $data = [];
-        foreach ($result as $item)
+        foreach ($languages as $language)
         {
-            $data[] = $item->only(['id', 'title', 'sef']);
+            $temp = [];
+            $temp['sef'] = $language;
+            if ($temp['sef'] == 'tw')
+            {
+                $temp['title'] = '繁體中文';
+            }
+            elseif ($temp['sef'] == 'en')
+            {
+                $temp['title'] = 'English';
+            }
+            elseif ($temp['sef'] == 'cn')
+            {
+                $temp['title'] = '简体中文';
+            }
+            $data[] = $temp;
         }
+
 
         $this->status = Str::upper(Str::snake($this->type.'GetListSuccess'));
         $this->response = $data;
