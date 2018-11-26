@@ -48,6 +48,11 @@
             "method": "updateFeatured",
             "url": "/admin/item/featured",
             "created_by": 1
+          },
+          {
+            "method": "checkout",
+            "url": "/admin/item/checkout",
+            "created_by": 1
           }
         ]
       },
@@ -97,6 +102,11 @@
           {
             "method": "updateState",
             "url": "/admin/category/state",
+            "created_by": 1
+          },
+          {
+            "method": "checkout",
+            "url": "/admin/category/checkout",
             "created_by": 1
           }
         ]
