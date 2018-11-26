@@ -32,6 +32,7 @@ class OptionService
     public function getList(Collection $input)
     {
         $data = [];
+
         foreach ($input->types as $type)
         {
             $service = $this->map[$type];

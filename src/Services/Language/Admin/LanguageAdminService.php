@@ -22,9 +22,8 @@ class LanguageAdminService extends LanguageService
 
     public function getList(Collection $input)
     {
-        $result = parent::search($input);
+        $result = parent::all();
         $languages = $result->groupBy('sef')->keys();
-
 
         $data = [];
         foreach ($languages as $language)
@@ -45,7 +44,6 @@ class LanguageAdminService extends LanguageService
             }
             $data[] = $temp;
         }
-
 
         $this->status = Str::upper(Str::snake($this->type.'GetListSuccess'));
         $this->response = $data;
