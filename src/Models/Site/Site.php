@@ -14,6 +14,8 @@ class Site extends BaseModel
 
     protected $order = 'asc';
 
+    protected $order_by = 'ordering';
+
     /**
      * The attributes that are mass assignable.
      *

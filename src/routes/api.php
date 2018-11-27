@@ -133,6 +133,7 @@ Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
             Route::post('store','DaydreamLab\Cms\Controllers\Site\Admin\SiteAdminController@store');
             Route::post('state','DaydreamLab\Cms\Controllers\Site\Admin\SiteAdminController@state');
             Route::post('search','DaydreamLab\Cms\Controllers\Site\Admin\SiteAdminController@search');
+            Route::post('ordering','DaydreamLab\Cms\Controllers\Site\Admin\SiteAdminController@ordering');
             Route::get('{id}', 'DaydreamLab\Cms\Controllers\Site\Admin\SiteAdminController@getItem');
         });
 
