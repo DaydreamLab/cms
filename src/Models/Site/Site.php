@@ -1,6 +1,8 @@
 <?php
 namespace DaydreamLab\Cms\Models\Site;
 
+use DaydreamLab\Cms\Models\Language\Admin\LanguageAdmin;
+use DaydreamLab\Cms\Models\Language\Language;
 use DaydreamLab\JJAJ\Models\BaseModel;
 
 class Site extends BaseModel
@@ -51,8 +53,20 @@ class Site extends BaseModel
      * @var array
      */
     protected $appends = [
+        'language'
     ];
 
 
+
+    public function language()
+    {//
+        return $this->belongsTo(Language::class, 'sef', 'sef')->where('type', '=', 'system');
+    }
+
+
+    public function getLanguageAttribute()
+    {
+        return $this->language()->first()->title;
+    }
 
 }

@@ -21,7 +21,7 @@ class CreateLanguagesTable extends Migration
             $table->string('sef');
             $table->string('image')->nullable();
 //            $table->string('image')->nullable();
-//            $table->tinyInteger('state')->default(1);
+            $table->tinyInteger('state')->default(1);
             $table->text('description')->nullable();
 //            $table->unsignedInteger('access')->nullable()->default(1);
 //            $table->string('metadesc')->nullable();

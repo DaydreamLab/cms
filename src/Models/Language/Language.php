@@ -28,7 +28,7 @@ class Language extends BaseModel
         'sef',
         'image',
         'type',
-//        'state',
+        'state',
         'description',
 //        'metadesc',
 //        'metakeywords',

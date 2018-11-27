@@ -29,7 +29,7 @@ class LanguageStorePost extends AdminRequest
             'type'          => 'required|string',
             'code'          => 'required|string',
             'sef'           => 'required|string',
-            //'state'         => 'required|integer',
+            'state'         => 'required|integer',
             'description'   => 'nullable|string',
             'image'         => 'nullable|string',
             //'order'         => 'nullable|integer',
