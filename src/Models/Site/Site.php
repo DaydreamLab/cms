@@ -12,6 +12,7 @@ class Site extends BaseModel
      */
     protected $table = 'sites';
 
+    protected $order = 'asc';
 
     /**
      * The attributes that are mass assignable.
