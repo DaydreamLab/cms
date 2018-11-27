@@ -22,7 +22,7 @@ class SiteAdminService extends SiteService
 
     public function getList(Collection $input)
     {
-        $result = $this->all();
+        $result = $this->findBy('state', '=', 1);
 
         $data = [];
         foreach ($result as $item)

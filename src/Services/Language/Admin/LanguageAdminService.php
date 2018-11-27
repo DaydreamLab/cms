@@ -22,7 +22,7 @@ class LanguageAdminService extends LanguageService
 
     public function getList(Collection $input)
     {
-        $data = $this->findBy('type', '=', $input->get('type') ?: 'content');
+        $data = $this->findByChain(['type', 'state'], ['=', '='], [$input->get('type') ?: 'content' , 1]);
 
         $this->status = Str::upper(Str::snake($this->type.'GetListSuccess'));
         $this->response = $data;

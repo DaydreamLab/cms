@@ -436,6 +436,6 @@ return [
     // Get List
     'SITE_ADMIN_GET_LIST_SUCCESS' => [
         'code'      => 200,
-        'message'   => 'SITE admin get list success'
+        'message'   => 'Site admin get list success'
     ],
 ];

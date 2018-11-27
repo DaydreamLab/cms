@@ -3,6 +3,7 @@ namespace DaydreamLab\Cms\Models\Site;
 
 use DaydreamLab\Cms\Models\Language\Admin\LanguageAdmin;
 use DaydreamLab\Cms\Models\Language\Language;
+use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Models\BaseModel;
 
 class Site extends BaseModel
@@ -59,8 +60,8 @@ class Site extends BaseModel
 
 
     public function language()
-    {//
-        return $this->belongsTo(Language::class, 'sef', 'sef')->where('type', '=', 'system');
+    {
+        return $this->belongsTo(Language::class, 'sef', 'sef')->where('type', '=', 'content');
     }
 
 
