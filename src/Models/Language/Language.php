@@ -27,13 +27,14 @@ class Language extends BaseModel
         'code',
         'sef',
         'image',
-        'state',
+        'type',
+//        'state',
         'description',
-        'metadesc',
-        'metakeywords',
-        'sitename',
-        'site_id',
-        'order',
+//        'metadesc',
+//        'metakeywords',
+//        'sitename',
+//        'site_id',
+//        'order',
         'created_by',
         'updated_by'
     ];
@@ -54,9 +55,9 @@ class Language extends BaseModel
      * @var array
      */
     protected $appends = [
-        'site_title',
-        'creator',
-        'updater'
+        //'site_title',
+        //'creator',
+        //'updater'
     ];
 
 
@@ -66,16 +67,16 @@ class Language extends BaseModel
     }
 
 
-    public function getSiteAttribute()
-    {
-        return $this->site()->first();
-    }
+//    public function getSiteAttribute()
+//    {
+//        return $this->site()->first();
+//    }
 
 
-    public function getSiteTitleAttribute()
-    {
-        return $this->site->title;
-    }
+//    public function getSiteTitleAttribute()
+//    {
+//        return $this->site->title;
+//    }
 
 
     public function getUpdaterAttribute()
@@ -84,8 +85,8 @@ class Language extends BaseModel
     }
 
 
-    public function site()
-    {
-        return $this->belongsTo(Site::class, 'site_id', 'id');
-    }
+//    public function site()
+//    {
+//        return $this->belongsTo(Site::class, 'site_id', 'id');
+//    }
 }

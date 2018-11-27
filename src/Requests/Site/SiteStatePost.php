@@ -2,12 +2,16 @@
 
 namespace DaydreamLab\Cms\Requests\Site;
 
-use DaydreamLab\JJAJ\Requests\ListRequest;
+use DaydreamLab\JJAJ\Requests\AdminRequest;
 use Illuminate\Validation\Rule;
 
-class SiteSearchPost extends ListRequest
+class SiteStatePost extends AdminRequest
 {
-
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
     public function authorize()
     {
         return parent::authorize();
@@ -20,15 +24,14 @@ class SiteSearchPost extends ListRequest
      */
     public function rules()
     {
-        $rules = [
-            'search'    => 'nullable|string',
+        return [
+            'ids'       => 'required|array',
+            'ids.*'     => 'required|integer',
             'state'     => [
-                'nullable',
+                'required',
                 'integer',
-                Rule::in([0,1,-2])
+                Rule::in([0,1,-1,-2])
             ]
         ];
-
-        return array_merge(parent::rules(), $rules);
     }
 }

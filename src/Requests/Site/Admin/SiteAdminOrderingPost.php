@@ -1,12 +1,11 @@
 <?php
 
-namespace DaydreamLab\Cms\Requests\Language\Admin;
+namespace DaydreamLab\Cms\Requests\Site\Admin;
 
-use DaydreamLab\Cms\Requests\Language\LanguageSearchPost;
-use DaydreamLab\JJAJ\Helpers\Helper;
-use Illuminate\Validation\Rule;
 
-class LanguageAdminSearchPost extends LanguageSearchPost
+use DaydreamLab\Cms\Requests\Site\SiteOrderingPost;
+
+class SiteAdminOrderingPost extends SiteOrderingPost
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,10 +25,7 @@ class LanguageAdminSearchPost extends LanguageSearchPost
     public function rules()
     {
         $rules = [
-            'type'  => [
-                'nullable',
-                Rule::in(['content', 'system'])
-            ]
+            //
         ];
         return array_merge($rules, parent::rules());
     }

@@ -26,16 +26,17 @@ class LanguageStorePost extends AdminRequest
         return [
             'id'            => 'nullable|integer',
             'title'         => 'required|string',
+            'type'          => 'required|string',
             'code'          => 'required|string',
             'sef'           => 'required|string',
-            'state'         => 'required|integer',
+            //'state'         => 'required|integer',
             'description'   => 'nullable|string',
             'image'         => 'nullable|string',
-            'order'         => 'nullable|integer',
-            'metadesc'      => 'nullable|string',
-            'metakeywords'  => 'nullable|string',
-            'sitename'      => 'nullable|string',
-            'access'        => 'nullable|integer'
+            //'order'         => 'nullable|integer',
+            //'metadesc'      => 'nullable|string',
+            //'metakeywords'  => 'nullable|string',
+            //'sitename'      => 'nullable|string',
+            //'access'        => 'nullable|integer'
         ];
     }
 }

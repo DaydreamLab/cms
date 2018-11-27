@@ -37,7 +37,15 @@ class LanguageAdminController extends BaseController
 
     public function getList()
     {
-        $this->service->getList(new Collection());
+        $this->service->getList(Helper::collect(['type'=> 'content']));
+
+        return ResponseHelper::response($this->service->status, $this->service->response);
+    }
+
+
+    public function getSystemList()
+    {
+        $this->service->getList(Helper::collect(['type'=> 'system']));
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }

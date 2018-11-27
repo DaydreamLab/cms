@@ -27,7 +27,17 @@ class SiteStorePost extends AdminRequest
         return [
             'id'            => 'nullable|integer',
             'title'         => 'required|string',
-            'url'           => 'required|string'
+            'url'           => 'required|string',
+            'sitename'      => 'required|string',
+            'sef'           => 'required|string',
+            'metadesc'      => 'nullable|string',
+            'metakeywords'  => 'nullable|string',
+            'state'         => [
+                'nullable',
+                Rule::in([0,1])
+            ],
+            'access'        => 'nullable|integer',
+            'ordering'      => 'nullable|integer',
         ];
     }
 }

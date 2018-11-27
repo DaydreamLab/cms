@@ -35,6 +35,14 @@ class SiteAdminController extends BaseController
     }
 
 
+    public function getList()
+    {
+        $this->service->getList(new Collection());
+
+        return ResponseHelper::response($this->service->status, $this->service->response);
+    }
+
+
     public function checkout($id)
     {
         $this->service->checkout($id);

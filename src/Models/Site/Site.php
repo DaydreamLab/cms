@@ -22,6 +22,13 @@ class Site extends BaseModel
     protected $fillable = [
         'title',
         'url',
+        'sitename',
+        'sef',
+        'metakeywords',
+        'metadesc',
+        'state',
+        'access',
+        'ordering',
         'created_by',
         'updated_by'
     ];
