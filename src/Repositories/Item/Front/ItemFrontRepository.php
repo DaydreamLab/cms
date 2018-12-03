@@ -153,16 +153,18 @@ class ItemFrontRepository extends ItemRepository
 
         if (count($creator_groups) == 0)
         {
-            return $query->get();
+            $items = $query->get();
         }
         else
         {
-            $user_maps =  $this->userGroupMapRepository->findBy('group_id', '=', $creator_groups);
+            $user_maps =  $this->userGroupMapRepository->findBySpecial('whereIn', 'group_id', $creator_groups);
             $user_ids = $user_maps->map(function ($value, $key){
                 return $value->id;
             });
-            return $query->whereIn('created_by', $user_ids)->get();
+            $items = $query->whereIn('created_by', $user_ids)->get();
         }
+
+        return $items;
     }
 
     public function getPreviousAndNext($item)

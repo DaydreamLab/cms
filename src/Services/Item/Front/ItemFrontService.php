@@ -98,7 +98,7 @@ class ItemFrontService extends ItemService
     {
         $data = [];
 
-        $data['all'] = $this->getLatestItems($params);
+        $data['all'] = $this->getLatestItems($params, $params['creator_groups'] );
 
         foreach ($params['creator_groups'] as $creator_group)
         {
@@ -129,7 +129,7 @@ class ItemFrontService extends ItemService
         else {
             $data['items'] = $this->repo->getLatestItems(0, $params['category_ids'], $item_setting, $this->access_ids, $creator_groups);
         }
-
+        
         return $data;
     }
 
