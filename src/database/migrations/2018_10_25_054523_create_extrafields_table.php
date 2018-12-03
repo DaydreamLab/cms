@@ -21,9 +21,10 @@ class CreateExtrafieldsTable extends Migration
             $table->string('type');
             $table->unsignedTinyInteger('state')->default(1)->nullable();
             $table->unsignedTinyInteger('required');
-            $table->string('value');
+            $table->string('value')->nullable();
             $table->text('description')->nullable();
             $table->text('params')->nullable();
+            $table->unsignedInteger('access')->nullable()->default(1);
             $table->unsignedInteger('ordering')->nullable();
             $table->unsignedInteger('created_by');
             $table->unsignedInteger('updated_by')->nullable();

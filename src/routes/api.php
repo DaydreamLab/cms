@@ -70,6 +70,7 @@ Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
                 Route::post('state', 'DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldGroupAdminController@state');
                 Route::post('store','DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldGroupAdminController@store');
                 Route::post('search','DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldGroupAdminController@search');
+                Route::get('list','DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldGroupAdminController@getList');
                 Route::get('{id}', 'DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldGroupAdminController@getItem');
 
             });
@@ -97,7 +98,7 @@ Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
             Route::post('store','DaydreamLab\Cms\Controllers\Language\Admin\LanguageAdminController@store');
             Route::post('search','DaydreamLab\Cms\Controllers\Language\Admin\LanguageAdminController@search');
             Route::get('list','DaydreamLab\Cms\Controllers\Language\Admin\LanguageAdminController@getList');
-            Route::get('systemList','DaydreamLab\Cms\Controllers\Language\Admin\LanguageAdminController@getSystemList');
+            Route::post('list/{type}','DaydreamLab\Cms\Controllers\Language\Admin\LanguageAdminController@getTypeList');
             Route::get('{id}', 'DaydreamLab\Cms\Controllers\Language\Admin\LanguageAdminController@getItem');
         });
 
@@ -115,7 +116,7 @@ Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
 
 
         Route::group(['prefix' => 'option'], function (){
-            Route::post('list', 'DaydreamLab\Cms\Controllers\Option\OptionController@getList');
+            Route::post('list', 'DaydreamLab\Cms\Controllers\Option\OptionController@mergeList');
         });
 
 

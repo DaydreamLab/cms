@@ -20,7 +20,7 @@ class SiteAdminService extends SiteService
     }
 
 
-    public function getList(Collection $input)
+    public function getList()
     {
         $result = $this->findBy('state', '=', 1);
 

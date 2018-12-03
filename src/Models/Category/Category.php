@@ -3,6 +3,7 @@ namespace DaydreamLab\Cms\Models\Category;
 
 use Carbon\Carbon;
 use DaydreamLab\Cms\Models\Extrafield\Extrafield;
+use DaydreamLab\Cms\Models\Extrafield\ExtrafieldGroup;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\User\Models\User\UserGroup;
@@ -45,6 +46,7 @@ class Category extends BaseModel
         'metadesc',
         'metakeywords',
         'params',
+        'extrafield_group_id',
         'extrafields',
         'created_by',
         'updated_by',
@@ -63,7 +65,11 @@ class Category extends BaseModel
     protected $hidden = [
         '_lft',
         '_rgt',
-        'ancestors'
+        'ancestors',
+        'viewlevel',
+        'viewlevels',
+        //'extrafield_group',
+        //'extrafield_group_title'
     ];
 
 
@@ -78,8 +84,9 @@ class Category extends BaseModel
         'locker',
         'tree_title',
         'tree_list_title',
-        'viewlevels',
-        'access_title'
+        //'viewlevels',
+        'access_title',
+        'extrafield_group_title'
     ];
 
 
@@ -87,6 +94,12 @@ class Category extends BaseModel
         'locked_at'     => 'datetime:Y-m-d H:i:s',
         'extrafields'   => 'array'
     ];
+
+
+    public function extrafieldGroup()
+    {
+        return $this->hasOne(ExtrafieldGroup::class, 'id', 'extrafield_group_id');
+    }
 
 
     public function getAccessTitleAttribute()
@@ -97,10 +110,7 @@ class Category extends BaseModel
 
     public function getExtrafieldsAttribute($value)
     {
-        if (!$value)
-        {
-            $value = json_encode([]);
-        }
+        $value = $value ? $value : json_encode([]);
         $data = [];
         foreach (json_decode($value) as $extra_field)
         {
@@ -109,7 +119,16 @@ class Category extends BaseModel
             $data[] = $extra_field_data->toArray();
         }
 
+
         return $data;
+    }
+
+
+    public function getExtrafieldGroupTitleAttribute()
+    {
+        $group = $this->extrafieldGroup()->first();
+
+        return $group ? $group->title : null;
     }
 
 

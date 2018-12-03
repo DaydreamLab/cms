@@ -20,15 +20,30 @@ class LanguageAdminService extends LanguageService
     }
 
 
-    public function getList(Collection $input)
+    public function getList()
     {
-        $data = $this->findByChain(['type', 'state'], ['=', '='], [$input->get('type') ?: 'content' , 1]);
+        $data = $this->findBy('state','=', 1);
 
         $this->status = Str::upper(Str::snake($this->type.'GetListSuccess'));
         $this->response = $data;
 
         return $data;
     }
+
+
+    public function getTypeList($type)
+    {
+        $items = $this->getList();
+
+        $items = $items->filter(function ($value, $key) use ($type){
+            return $value->type == $type;
+        });
+
+        $this->response = $items->values();
+
+        return $items->values();
+    }
+
 
     public function search(Collection $input)
     {

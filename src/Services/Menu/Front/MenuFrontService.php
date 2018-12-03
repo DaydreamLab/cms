@@ -33,6 +33,13 @@ class MenuFrontService extends MenuService
             return false;
         }
 
+        if (!Helper::hasPermission($menu->viewlevels, $this->viewlevels)) {
+            $this->status = Str::upper(Str::snake($this->type . 'InsufficientPermission'));
+            $this->response = null;
+            return false;
+        }
+
+
         $modules = [];
 
         foreach ($menu->params as $key => $param)

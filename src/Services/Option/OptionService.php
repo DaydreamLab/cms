@@ -29,7 +29,7 @@ class OptionService
     }
 
 
-    public function getList(Collection $input)
+    public function mergeList(Collection $input)
     {
         $data = [];
 
@@ -37,14 +37,19 @@ class OptionService
         {
             $service = $this->map[$type];
 
-            if ($service->getRepo()->isNested())
+            if ($type == 'category')
             {
                 $data[$type] = $service->treeList('item');
             }
-            else
+            elseif ($type == 'language')
             {
-                $data[$type] = $service->getList(new Collection());
+                $data[$type] = $service->getTypeList('content');
             }
+            elseif ($type == 'viewlevel')
+            {
+                $data[$type] = $service->getList();
+            }
+
         }
 
         $this->status = Str::upper(Str::snake($this->type.'GetListSuccess'));

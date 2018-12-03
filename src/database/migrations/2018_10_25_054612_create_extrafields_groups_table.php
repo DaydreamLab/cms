@@ -17,6 +17,7 @@ class CreateExtrafieldsGroupsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('description')->nullable();
+            $table->unsignedInteger('access')->nullable()->default(1);
             $table->unsignedInteger('created_by');
             $table->unsignedInteger('updated_by')->nullable();
             $table->timestamps();

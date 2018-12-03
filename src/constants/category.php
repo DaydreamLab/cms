@@ -403,22 +403,6 @@ return [
     ],
 
 
-
-    // Is Locked
-    'CATEGORY_IS_LOCKED' => [
-        'code'      => 403,
-        'message'   => 'Category is locked'
-    ],
-    'CATEGORY_ADMIN_IS_LOCKED' => [
-        'code'      => 403,
-        'message'   => 'Category admin is locked'
-    ],
-    'CATEGORY_FRONT_IS_LOCKED' => [
-        'code'      => 403,
-        'message'   => 'Category front is locked'
-    ],
-
-
     // Ordering
     'CATEGORY_UPDATE_ORDERING_NESTED_SUCCESS' => [
         'code'      => 200,
@@ -499,4 +483,35 @@ return [
         'code'      => 500,
         'message'   => 'Category front update ordering fail'
     ],
+
+
+    // Is Locked
+    'CATEGORY_IS_LOCKED' => [
+        'code'      => 403,
+        'message'   => 'Category is locked'
+    ],
+    'CATEGORY_ADMIN_IS_LOCKED' => [
+        'code'      => 403,
+        'message'   => 'Category admin is locked'
+    ],
+    'CATEGORY_FRONT_IS_LOCKED' => [
+        'code'      => 403,
+        'message'   => 'Category front is locked'
+    ],
+
+
+    // Get List
+    'CATEGORY_GET_LIST_SUCCESS' => [
+        'code'      => 403,
+        'message'   => 'Category get list success'
+    ],
+    'CATEGORY_ADMIN_GET_LIST_SUCCESS' => [
+        'code'      => 403,
+        'message'   => 'Category admin get list success'
+    ],
+    'CATEGORY_FRONT_GET_LIST_SUCCESS' => [
+        'code'      => 403,
+        'message'   => 'Category front get list success'
+    ],
+
 ];

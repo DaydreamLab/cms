@@ -2,6 +2,7 @@
 namespace DaydreamLab\Cms\Models\Category\Front;
 
 use DaydreamLab\Cms\Models\Category\Category;
+use DaydreamLab\Cms\Models\Extrafield\Front\ExtrafieldFront;
 
 class CategoryFront extends Category
 {
@@ -18,11 +19,14 @@ class CategoryFront extends Category
         'ordering',
         'path',
         'state',
-
         'extension',
         'access',
         'language',
         'params',
+        //'extrafields',
+        'extrafield_group_id',
+        'extrafield_group_title',
+        'viewlevel',
         'created_by',
         'updated_by',
         'updated_at',
@@ -34,6 +38,23 @@ class CategoryFront extends Category
         'updater',
         'locker',
         'tree_title',
-        'tree_list_title'
+        'tree_list_title',
+        'access_title',
     ];
+
+
+    public function getExtrafieldsAttribute($value)
+    {
+        $value = $value ? $value : json_encode([]);
+        $data = [];
+        foreach (json_decode($value) as $extra_field)
+        {
+            $extra_field_data = ExtrafieldFront::find($extra_field->id);
+            $extra_field_data->value = $extra_field->value ;
+            $data[] = $extra_field_data->toArray();
+        }
+
+
+        return $data;
+    }
 }

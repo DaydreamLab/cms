@@ -19,6 +19,15 @@ class LanguageAdminController extends BaseController
         parent::__construct($service);
     }
 
+
+    public function getTypeList($type)
+    {
+        $this->service->getTypeList($type);
+
+        return ResponseHelper::response($this->service->status, $this->service->response);
+    }
+
+
     public function getItem($id)
     {
         $this->service->getItem($id);
@@ -37,7 +46,7 @@ class LanguageAdminController extends BaseController
 
     public function getList()
     {
-        $this->service->getList(Helper::collect(['type'=> 'content']));
+        $this->service->getList();
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
@@ -45,7 +54,7 @@ class LanguageAdminController extends BaseController
 
     public function getSystemList()
     {
-        $this->service->getList(Helper::collect(['type'=> 'system']));
+        $this->service->getTypeList('system');
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }

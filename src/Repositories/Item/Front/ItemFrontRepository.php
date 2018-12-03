@@ -31,23 +31,13 @@ class ItemFrontRepository extends ItemRepository
     }
 
 
-    public function appendParams($items)
-    {
-        $data = [];
-        foreach ($items as $item)
-        {
-            $temp = $item->toArray();
-            if (!is_null($item->params) && array_key_exists('extra_fields', $item->params))
-            {
-                foreach ($item->params['extra_fields'] as $key => $extra_field)
-                {
 
-                    $temp[$key] = $extra_field;
-                }
-            }
-            $data[] = $temp;
-        }
-        return $data;
+    public function getCategoriesItems($category_ids, $access_ids)
+    {
+        return $this->model->whereIn('category_id', $category_ids)
+                            ->where('state', 1)
+                            ->whereIn('access', $access_ids)
+                            ->get();
     }
 
 
@@ -143,77 +133,37 @@ class ItemFrontRepository extends ItemRepository
     }
 
 
-    public function getMenuItems($params)
+    public function getItemsByCategoryIds($category_ids, $access_ids)
     {
-        $items = $this->model->whereIn('category_id', $params['category_ids'])
-                             ->get();
-        $categories = $this->categoryFrontRepository->model->whereIn('id', $params['category_ids'])->get();
-
-        foreach ($categories as $category)
-        {
-            $category->items = [];
-            foreach ($category->extrafields as $extrafield)
-            {
-                if (array_key_exists('alias', $extrafield))
-                {
-                    $category->{$extrafield['alias']} = $extrafield['value'];
-
-                }
-            }
-            $category->makeHidden(['extrafields']);
-        }
-
-
-        foreach ($items as $item)
-        {
-            foreach ($categories as $category)
-            {
-                $category->makeHidden(['hits', 'created_at', 'creator']);
-                if($category->title == $item->category_title)
-                {
-                    $category->items= array_merge($category->items, array($item->only(['title', 'introtext', 'description'])));
-                    break;
-                }
-            }
-        }
-
-        return $categories->toTree();
+        return $this->model->whereIn('category_id', $category_ids)
+                            ->where('state', 1)
+                            ->whereIn('access', $access_ids)
+                            ->get();
     }
 
 
-    public function getNewsItems($params)
+    public function getLatestItems($featured, $category_ids, $setting, $access_ids, $creator_groups)
     {
-        $data = [];
+        $query = $this->model->where('featured', $featured)
+                                ->where('state', 1)
+                                ->whereIn('access', $access_ids)
+                                ->whereIn('category_id', $category_ids)
+                                ->orderBy($setting['order_by'], $setting['ordering'])
+                                ->limit($setting['limit']);
 
-        if ($params['featured']['per_page'] > 0)
+        if (count($creator_groups) == 0)
         {
-            $data['all']['featured'] = $this->getItems($params['category_ids'], $params['featured'], 1);
+            return $query->get();
         }
-
-        $data['all']['items'] = $this->getItems($params['category_ids'],$params['items'], 0);
-
-
-//        foreach ($params['creators'] as $creator)
-
-        if (config('cms.item.front.creator_group_filter.enabled'))
+        else
         {
-            foreach (config('cms.item.front.creator_group_filter.groups') as $creator_group)
-            {
-                $user_ids = $this->getCreatorGroupUserIds($creator_group);
-
-                if ($params['featured']['per_page'] > 0) {
-                    $data[$creator_group]['featured'] = $this->getItems($params['category_ids'], $params['featured'], 1, $user_ids);
-                }
-                $data[$creator_group]['items']    = $this->getItems($params['category_ids'], $params['items'], 0, $user_ids);
-
-            }
+            $user_maps =  $this->userGroupMapRepository->findBy('group_id', '=', $creator_groups);
+            $user_ids = $user_maps->map(function ($value, $key){
+                return $value->id;
+            });
+            return $query->whereIn('created_by', $user_ids)->get();
         }
-
-
-
-        return $data;
     }
-
 
     public function getPreviousAndNext($item)
     {
@@ -304,60 +254,49 @@ class ItemFrontRepository extends ItemRepository
     }
 
 
-    public function getSelectedItem($id)
+    public function getSelectedItems($ids, $access_ids)
     {
-        $items = $this->model->where('id', $id)->get();
-
-        $items = $this->appendParams($items);
-
-        return $items[0];
+        return  $this->model->whereIn('id', $ids)
+                            ->where('state', 1)
+                            ->whereIn('access', $access_ids)
+                            ->get();
     }
 
 
-    public function getSelectedItems($ids)
-    {
-        $items = $this->model->whereIn('id', $ids)->where('state', 1)->get();
-
-        $this->appendParams($items);
-
-        return $items->toArray();
-    }
-
-
-    public function getTimelineItems($params)
-    {
-        $items = $this->model->where('state', 1)
-                             ->get();
-
-        $items = $this->appendParams($items);
-
-        $data = [];
-        foreach ($items as $item)
-        {
-            $year_value     = $item['year']['value'];
-            $year_title     = $item['year']['title'];
-            $year_key       = $year_value.$year_title;
-            $month_value    = $item['month']['value'];
-            $month_title    = $item['month']['title'];
-            $month_key      = $month_value.$month_title;
-
-            if (!array_key_exists($year_key, $data))
-            {
-                $data[$year_key] = [];
-            }
-
-            if (!array_key_exists($month_key, $data[$year_key]))
-            {
-                $data[$year_key][$month_key] = [];
-            }
-
-            $temp['title'] = $item['title'];
-            $temp['description'] = $item['description'];
-            $data[$year_key][$month_key][] = $temp;
-            krsort($data[$year_key]);
-        }
-        krsort($data);
-
-        return $data;
-    }
+//    public function getTimelineItems($params)
+//    {
+//        $items = $this->model->where('state', 1)
+//                             ->get();
+//
+//        $items = $this->appendParams($items);
+//
+//        $data = [];
+//        foreach ($items as $item)
+//        {
+//            $year_value     = $item['year']['value'];
+//            $year_title     = $item['year']['title'];
+//            $year_key       = $year_value.$year_title;
+//            $month_value    = $item['month']['value'];
+//            $month_title    = $item['month']['title'];
+//            $month_key      = $month_value.$month_title;
+//
+//            if (!array_key_exists($year_key, $data))
+//            {
+//                $data[$year_key] = [];
+//            }
+//
+//            if (!array_key_exists($month_key, $data[$year_key]))
+//            {
+//                $data[$year_key][$month_key] = [];
+//            }
+//
+//            $temp['title'] = $item['title'];
+//            $temp['description'] = $item['description'];
+//            $data[$year_key][$month_key][] = $temp;
+//            krsort($data[$year_key]);
+//        }
+//        krsort($data);
+//
+//        return $data;
+//    }
 }

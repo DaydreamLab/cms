@@ -13,6 +13,7 @@ class TagFront extends Tag
     protected $table = 'tags';
 
     protected $hidden = [
+        'id',
         '_lft',
         '_rgt',
         'path',
@@ -32,5 +33,8 @@ class TagFront extends Tag
         'publish_up',
         'publish_down',
         'pivot',
+        'viewlevels',
+        'access_title',
+        'viewlevel',
     ];
 }

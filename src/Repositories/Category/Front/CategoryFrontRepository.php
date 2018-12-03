@@ -13,9 +13,21 @@ class CategoryFrontRepository extends CategoryRepository
     }
 
 
-    public function findArticleCategoryWithAccess($access_ids)
+    public function getItemsByIds($ids, $access_ids)
     {
-        return $this->model->where('content_type', '=', 'article')
-            ->whereIn('access', $access_ids)->get();
+        return $this->model->whereIn('id', $ids)
+                            ->where('state', 1)
+                            ->whereIn('access', $access_ids)
+                            ->get();
+    }
+
+
+    public function getContentTypeItems($extension, $type, $access_ids)
+    {
+        return $this->model->where('extension', $extension)
+                            ->where('content_type', $type)
+                            ->whereIn('access', $access_ids)
+                            ->where('state', 1)
+                            ->get();
     }
 }

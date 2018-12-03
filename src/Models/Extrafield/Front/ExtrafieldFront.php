@@ -13,4 +13,29 @@ class ExtrafieldFront extends Extrafield
     protected $table = 'extrafields';
 
 
+    protected $hidden = [
+        'id',
+        'group_id',
+        'state',
+        'access',
+        'ordering',
+        'created_by',
+        'updated_by',
+        'created_at',
+        'updated_at'
+    ];
+
+
+    /**
+     * The attributes that should be append for arrays
+     *
+     * @var array
+     */
+    protected $appends = [
+    ];
+
+
+    protected $casts = [
+        'params'    => 'array'
+    ];
 }

@@ -159,11 +159,14 @@ class ItemAdminService extends ItemService
         $input->forget('tags');
 
 
-        $extrafields = $input->get('extrafields') ? $input->get('extrafields') : [];
-        $input->extrafields = json_encode($extrafields);
-
+        if (InputHelper::null($input, 'language'))
+        {
+            $input->forget('extrafields');
+            $input->put('extrafields', []);
+        }
 
         $result    =  parent::store($input);
+
         if (gettype($result) == 'boolean')
         {
             if ($result === true)
@@ -172,7 +175,8 @@ class ItemAdminService extends ItemService
             }
             else
             {
-                return $result;
+                // Something error alias重複
+                return $this->response;
             }
         }
         else
@@ -204,15 +208,24 @@ class ItemAdminService extends ItemService
             }
         }
 
+        $this->storeTags($tags, $item->id);
 
+
+        return $item;
+    }
+
+
+
+    public function storeTags($tags = [], $item_id)
+    {
         $tag_ids = [];
         foreach ($tags  as $tag)
         {
-            if (array_key_exists('id',$tag) && $tag['id'] == '')
+            if (array_key_exists('id', $tag) && $tag['id'] == '')
             {
-                $tag_ids[] = $tag['id'];
+                //$tag_ids[] = $tag['id'];
             }
-            else if(array_key_exists('title',$tag))
+            else if(array_key_exists('title', $tag))
             {
                 $db_tag = $this->tagAdminService->findBy('title', '=', $tag['title'])->first();
                 if (!$db_tag)
@@ -235,12 +248,9 @@ class ItemAdminService extends ItemService
         if(count($tag_ids))
         {
             $this->itemTagMapAdminService->storeKeysMap(Helper::collect([
-                'item_id'   => $item->id,
+                'item_id'   => $item_id,
                 'tag_ids'   => $tag_ids,
-                //'created_by'=> $input->created_by
             ]));
         }
-
-        return $item;
     }
 }

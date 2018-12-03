@@ -28,6 +28,7 @@ class Extrafield extends BaseModel
         'value',
         'description',
         'params',
+        'access',
         'ordering',
         'created_by',
         'updated_by'

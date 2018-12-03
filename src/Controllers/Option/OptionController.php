@@ -17,9 +17,9 @@ class OptionController
         $this->service = $service;
     }
 
-    public function getList(OptionGetListPost $request)
+    public function mergeList(OptionGetListPost $request)
     {
-        $this->service->getList($request->rulesInput());
+        $this->service->mergeList($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }

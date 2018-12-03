@@ -7,6 +7,7 @@ use DaydreamLab\Cms\Services\Category\Front\CategoryFrontService;
 use DaydreamLab\Cms\Services\Item\ItemService;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
+use DaydreamLab\User\Services\User\Front\UserGroupFrontService;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
@@ -16,11 +17,32 @@ class ItemFrontService extends ItemService
 
     protected $categoryFrontService;
 
+    protected $userGroupFrontService;
+
     public function __construct(ItemFrontRepository $repo,
-                                CategoryFrontService $categoryFrontService)
+                                CategoryFrontService $categoryFrontService,
+                                UserGroupFrontService $userGroupFrontService)
     {
         $this->categoryFrontService = $categoryFrontService;
+        $this->userGroupFrontService = $userGroupFrontService;
+
         parent::__construct($repo);
+        $this->repo = $repo;
+    }
+
+
+    public function appendExtrafileds($items)
+    {
+        return $items->each(function ($value, $key){
+            foreach ($value->extrafields as $extrafield)
+            {
+                if (array_key_exists('alias', $extrafield))
+                {
+                    $value->{$extrafield['alias']} = $extrafield['value'];
+                }
+            }
+            $value->items = [];
+        });
     }
 
 
@@ -64,9 +86,64 @@ class ItemFrontService extends ItemService
     }
 
 
+    public function getCategoriesItems($categories_ids)
+    {
+        $items = $this->repo->getCategoriesItems($categories_ids, $this->access_ids);
+
+        return $this->appendExtrafileds($items);
+    }
+
+
+    public function getLatestItemsModule($params)
+    {
+        $data = [];
+
+        $data['all'] = $this->getLatestItems($params);
+
+        foreach ($params['creator_groups'] as $creator_group)
+        {
+            $group = $this->userGroupFrontService->find($creator_group);
+            $data[$group->title] = $this->getLatestItems($params, [$creator_group]);
+        }
+        return $data;
+    }
+
+
+    public function getLatestItems($params, $creator_groups = [])
+    {
+        $data = [];
+
+        $featured_setting   = $params['featured'];
+        $item_setting       = $params['item'];
+
+        if ($featured_setting['limit']  == 0) {
+            $data['featured'] = [];
+        }
+        else {
+            $data['featured'] = $this->repo->getLatestItems(1, $params['category_ids'], $featured_setting, $this->access_ids, $creator_groups);
+        }
+
+        if ($item_setting['limit']  == 0) {
+            $data['items'] = [];
+        }
+        else {
+            $data['items'] = $this->repo->getLatestItems(0, $params['category_ids'], $item_setting, $this->access_ids, $creator_groups);
+        }
+
+        return $data;
+    }
+
+
     public function getItem($id)
     {
         $item = parent::getItem($id);
+
+        if (!Helper::hasPermission($item->viewlevels, $this->viewlevels))
+        {
+            $this->status   = Str::upper(Str::snake($this->type.'InsufficientPermission'));
+            $this->response = null;
+            return false;
+        }
 
         if ($item)
         {
@@ -77,6 +154,14 @@ class ItemFrontService extends ItemService
             return $item;
         }
         return false;
+    }
+
+
+    public function getItemsByCategoryIds($category_ids)
+    {
+        $items = $this->repo->getItemsByCategoryIds($category_ids, $this->access_ids);
+
+        return $this->appendExtrafileds($items);
     }
 
 
@@ -111,16 +196,16 @@ class ItemFrontService extends ItemService
     }
 
 
-    public function getMenuItems($params)
-    {
-        return $this->repo->getMenuItems($params);
-    }
+//    public function getMenuItems($params)
+//    {
+//        return $this->repo->getMenuItems($params);
+//    }
 
 
-    public function getNewsItems($params)
-    {
-        return $this->repo->getNewsItems($params);
-    }
+//    public function getNewsItems($params)
+//    {
+//        return $this->repo->getNewsItems($params);
+//    }
 
 
     public function getNext(Collection $input)
@@ -156,21 +241,11 @@ class ItemFrontService extends ItemService
     }
 
 
-    public function getSelectedItem($params)
-    {
-        return $this->repo->getSelectedItem($params['item_id']);
-    }
-
-
     public function getSelectedItems($ids)
     {
-        return $this->repo->getSelectedItems($ids);
-    }
+        $items = $this->repo->getSelectedItems($ids, $this->access_ids);
 
-
-    public function getTimelineItems($params)
-    {
-        return $this->repo->getTimelineItems($params);
+        return $this->appendExtrafileds($items);
     }
 
 
@@ -202,7 +277,7 @@ class ItemFrontService extends ItemService
             $special_queries[]  = $obj;
         }
 
-        $categories = $this->categoryFrontService->findArticleCategoryWithAccess();
+        $categories = $this->categoryFrontService->getContentTypeItems('item', 'article');
         $category_ids = [];
         foreach ($categories as $category)
         {

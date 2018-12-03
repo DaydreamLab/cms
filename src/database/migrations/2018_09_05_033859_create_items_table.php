@@ -35,6 +35,7 @@ class CreateItemsTable extends Migration
             $table->string('metakeywords')->nullable();
             //$table->string('content_type')->nullable()->default('article');
             $table->text('params')->nullable();
+            $table->unsignedInteger('extrafield_group_id')->nullable();
             $table->text('extrafields')->nullable();
             $table->unsignedInteger('locked_by')->nullable()->default(0);
             $table->timestamp('locked_at')->nullable();

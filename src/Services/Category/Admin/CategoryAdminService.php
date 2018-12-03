@@ -105,24 +105,30 @@ class CategoryAdminService extends CategoryService
         }
 
 
+        if (InputHelper::null($input, 'extrafields'))
+        {
+            $input->put('extrafields', []);
+        }
+
+
         $result = parent::storeNested($input);
+
         if (gettype($result) == 'boolean')
         {
             if ($result === true)
             {
-                $item      = $this->find($input->id);
+                $item  = $this->find($input->id);
             }
             else
             {
-                // Something error
-                return $result;
+                // Something error 有可能是路徑已經存在
+                return $this->response;
             }
         }
         else
         {
             $item      = $this->find($result->id);
         }
-
 
         if ($input->publish_up > now())
         {

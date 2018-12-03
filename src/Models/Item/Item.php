@@ -3,6 +3,7 @@ namespace DaydreamLab\Cms\Models\Item;
 
 use DaydreamLab\Cms\Models\Category\Category;
 use DaydreamLab\Cms\Models\Extrafield\Extrafield;
+use DaydreamLab\Cms\Models\Extrafield\ExtrafieldGroup;
 use DaydreamLab\Cms\Models\Tag\Tag;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Models\BaseModel;
@@ -43,6 +44,7 @@ class Item extends BaseModel
         'metadesc',
         'metakeywords',
         'params',
+        'extrafield_group_id',
         'extrafields',
         'locked_by',
         'locked_at',
@@ -59,6 +61,10 @@ class Item extends BaseModel
      * @var array
      */
     protected $hidden = [
+        'created_by',
+        'updated_by',
+        'viewlevels',
+        'viewlevel',
     ];
 
 
@@ -89,6 +95,12 @@ class Item extends BaseModel
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+
+
+    public function extrafieldGroup()
+    {
+        return $this->hasOne(ExtrafieldGroup::class, 'id', 'extrafield_group_id');
     }
 
 
@@ -123,6 +135,7 @@ class Item extends BaseModel
 
     public function getExtrafieldsAttribute($value)
     {
+        $value = $value ? $value : json_encode([]);
         $data = [];
         foreach (json_decode($value) as $extra_field)
         {
@@ -135,9 +148,16 @@ class Item extends BaseModel
     }
 
 
+    public function getExtrafieldGroupTitleAttribute()
+    {
+        $group = $this->extrafieldGroup()->first();
+
+        return $group ? $group->title : null;
+    }
+
     public function getTagsAttribute()
     {
-        return $this->tag;
+        return $this->tag()->get();
     }
 
     public function getViewlevelsAttribute()
@@ -148,7 +168,8 @@ class Item extends BaseModel
 
     public function tag()
     {
-        return $this->belongsToMany(Tag::class, 'items_tags_maps', 'item_id', 'tag_id');
+        return $this->belongsToMany(Tag::class, 'items_tags_maps', 'item_id', 'tag_id')
+                    ->where('state', 1);
     }
 
 

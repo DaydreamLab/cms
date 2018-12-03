@@ -1,6 +1,7 @@
 <?php
 namespace DaydreamLab\Cms\Models\Extrafield;
 
+use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Models\BaseModel;
 
 class ExtrafieldGroup extends BaseModel
@@ -21,6 +22,7 @@ class ExtrafieldGroup extends BaseModel
     protected $fillable = [
         'title',
         'description',
+        'access',
         'created_by',
         'updated_by'
     ];
@@ -32,6 +34,10 @@ class ExtrafieldGroup extends BaseModel
      * @var array
      */
     protected $hidden = [
+        'created_by',
+        'updated_by',
+        'created_at',
+        'updated_at'
     ];
 
 
@@ -47,12 +53,12 @@ class ExtrafieldGroup extends BaseModel
 
     public function extrafield()
     {
-        return $this->hasMany(Extrafield::class, 'group_id','id');
+        return $this->hasMany(Extrafield::class, 'group_id','id')->where('state',1);
     }
 
 
     public function getExtrafieldsAttribute()
     {
-        return $this->extrafield()->where('state', 1)->get();
+        return $this->extrafield()->get();
     }
 }
