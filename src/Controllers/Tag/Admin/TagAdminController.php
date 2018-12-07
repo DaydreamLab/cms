@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Controllers\Tag\Admin;
 
+use DaydreamLab\Cms\Requests\Item\Admin\ItemTagMapAdminOrderingPost;
 use DaydreamLab\JJAJ\Controllers\BaseController;
 use DaydreamLab\JJAJ\Helpers\ResponseHelper;
 use Illuminate\Support\Collection;
@@ -39,6 +40,14 @@ class TagAdminController extends BaseController
     public function checkout(TagAdminCheckoutPost $request)
     {
         $this->service->checkout($request->rulesInput());
+
+        return ResponseHelper::response($this->service->status, $this->service->response);
+    }
+
+
+    public function ordering(ItemTagMapAdminOrderingPost $request)
+    {
+        $this->service->ordering($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }

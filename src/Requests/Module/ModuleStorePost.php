@@ -27,12 +27,19 @@ class ModuleStorePost extends AdminRequest
         return [
             'id'            => 'nullable|integer',
             'title'         => 'required|string',
+            'alias'         => 'nullable|string',
+            'category_id'   => 'required|integer',
             'state'         => [
                 'nullable',
                 'integer',
-                Rule::in([0,1,-2])
+                Rule::in([0,1,-1,-2])
             ],
             'description'   => 'nullable|string',
+            'access'        => 'nullable|integer',
+            'language'      => 'nullable|string',
+            'params'        => 'nullable|array',
+            'publish_up'    => 'nullable|datetime',
+            'publish_down'  => 'nullable|datetime',
         ];
     }
 }

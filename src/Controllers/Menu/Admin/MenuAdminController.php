@@ -35,9 +35,9 @@ class MenuAdminController extends BaseController
     }
 
 
-    public function checkout($id)
+    public function checkout(MenuAdminRemovePost $request)
     {
-        $this->service->checkout($id);
+        $this->service->checkout($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }

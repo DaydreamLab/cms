@@ -69,6 +69,13 @@ class MenuAdminService extends MenuService
             $input->put('language', '*');
         }
 
+
+        if (InputHelper::null($input, 'access')){
+            $input->forget('access');
+            $input->put('access', 1);
+        }
+
+
         return parent::storeNested($input);
     }
 }

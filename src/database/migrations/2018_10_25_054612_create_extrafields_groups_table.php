@@ -16,6 +16,7 @@ class CreateExtrafieldsGroupsTable extends Migration
         Schema::create('extrafields_groups', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
+            $table->tinyInteger('state')->default(1);
             $table->text('description')->nullable();
             $table->unsignedInteger('access')->nullable()->default(1);
             $table->unsignedInteger('created_by');

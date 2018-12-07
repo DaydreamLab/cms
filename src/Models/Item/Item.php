@@ -18,7 +18,6 @@ class Item extends BaseModel
      */
     protected $table = 'items';
 
-
     /**
      * The attributes that are mass assignable.
      *

@@ -89,6 +89,10 @@ class ItemAdminService extends ItemService
         return parent::search($input);
     }
 
+    public function state(Collection $input)
+    {
+        return parent::state($input);
+    }
 
     public function store(Collection $input)
     {
@@ -107,11 +111,13 @@ class ItemAdminService extends ItemService
         if (InputHelper::null($input, 'hits'))
         {
             $input->forget('hits');
+            $input->put('hits', 0);
         }
 
         if (InputHelper::null($input, 'access'))
         {
             $input->forget('access');
+            $input->put('access', 1);
         }
 
         // featured = 0 or null
@@ -171,7 +177,7 @@ class ItemAdminService extends ItemService
         {
             if ($result === true)
             {
-                $item      = $this->find($input->id);
+                $item = $this->find($input->id);
             }
             else
             {
@@ -181,7 +187,7 @@ class ItemAdminService extends ItemService
         }
         else
         {
-            $item      = $this->find($result->id);
+            $item = $this->find($result->id);
         }
 
 
@@ -221,7 +227,7 @@ class ItemAdminService extends ItemService
         $tag_ids = [];
         foreach ($tags  as $tag)
         {
-            if (array_key_exists('id', $tag) && $tag['id'] == '')
+            if (array_key_exists('id', $tag) && $tag['id'] != '')
             {
                 //$tag_ids[] = $tag['id'];
             }

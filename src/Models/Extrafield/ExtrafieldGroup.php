@@ -21,6 +21,7 @@ class ExtrafieldGroup extends BaseModel
      */
     protected $fillable = [
         'title',
+        'state',
         'description',
         'access',
         'created_by',

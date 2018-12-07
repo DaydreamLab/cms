@@ -15,8 +15,14 @@ use Illuminate\Http\Request;
 
 Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
 
-    Route::group(['prefix' => 'setting'], function (){
-        Route::get('{locale}', 'DaydreamLab\Cms\Controllers\Setting\Front\SettingFrontController@getItem');
+    Route::group(['prefix' => 'category'], function (){
+        Route::get('{id}', 'DaydreamLab\Cms\Controllers\Category\Front\CategoryFrontController@getItem');
+
+    });
+
+
+    Route::group(['prefix' => 'form'], function (){
+        Route::post('post', 'DaydreamLab\Cms\Controllers\Form\Front\FormFrontController@store');
     });
 
     Route::group(['prefix' => 'item'], function (){
@@ -25,14 +31,14 @@ Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
         //Route::get('{id}', 'DaydreamLab\Cms\Controllers\Item\Front\ItemFrontController@getItem');
     });
 
-    Route::group(['prefix' => 'category'], function (){
-        Route::get('{id}', 'DaydreamLab\Cms\Controllers\Category\Front\CategoryFrontController@getItem');
-
-    });
-
     Route::group(['prefix' => 'menu'], function (){
         Route::get('{path}', 'DaydreamLab\Cms\Controllers\Menu\Front\MenuFrontController@getItem')->where('path', '.*');
     });
+
+    Route::group(['prefix' => 'setting'], function (){
+        Route::get('{locale}', 'DaydreamLab\Cms\Controllers\Setting\Front\SettingFrontController@getItem');
+    });
+
 
     Route::group(['prefix' => 'tag'], function (){
         Route::get('search/{id}', 'DaydreamLab\Cms\Controllers\Tag\Front\TagFrontController@search');
@@ -77,6 +83,14 @@ Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
         });
 
 
+        Route::group(['prefix' => 'form'], function (){
+            Route::post('remove','DaydreamLab\Cms\Controllers\Form\Admin\FormAdminController@remove');
+            Route::post('store','DaydreamLab\Cms\Controllers\Form\Admin\FormAdminController@store');
+            Route::post('search','DaydreamLab\Cms\Controllers\Form\Admin\FormAdminController@search');
+            Route::get('{id}', 'DaydreamLab\Cms\Controllers\Form\Admin\FormAdminController@getItem');
+        });
+
+
 
         Route::group(['prefix' => 'item'], function (){
             Route::post('remove', 'DaydreamLab\Cms\Controllers\Item\Admin\ItemAdminController@remove');
@@ -114,6 +128,17 @@ Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
         });
 
 
+        Route::group(['prefix' => 'module'], function (){
+            Route::post('remove', 'DaydreamLab\Cms\Controllers\Module\Admin\ModuleAdminController@remove');
+            Route::post('store','DaydreamLab\Cms\Controllers\Module\Admin\ModuleAdminController@store');
+            Route::post('state', 'DaydreamLab\Cms\Controllers\Module\Admin\ModuleAdminController@state');
+            Route::post('search','DaydreamLab\Cms\Controllers\Module\Admin\ModuleAdminController@search');
+            Route::post('checkout','DaydreamLab\Cms\Controllers\Module\Admin\ModuleAdminController@checkout');
+            Route::get('{id}', 'DaydreamLab\Cms\Controllers\Module\Admin\ModuleAdminController@getItem');
+        });
+
+
+
 
         Route::group(['prefix' => 'option'], function (){
             Route::post('list', 'DaydreamLab\Cms\Controllers\Option\OptionController@mergeList');
@@ -144,6 +169,7 @@ Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
             Route::post('remove', 'DaydreamLab\Cms\Controllers\Tag\Admin\TagAdminController@remove');
             Route::post('store','DaydreamLab\Cms\Controllers\Tag\Admin\TagAdminController@store');
             Route::post('search','DaydreamLab\Cms\Controllers\Tag\Admin\TagAdminController@search');
+            Route::post('state','DaydreamLab\Cms\Controllers\Tag\Admin\TagAdminController@state');
             Route::post('checkout','DaydreamLab\Cms\Controllers\Tag\Admin\TagAdminController@checkout');
             Route::post('ordering','DaydreamLab\Cms\Controllers\Tag\Admin\TagAdminController@ordering');
             Route::get('{id}', 'DaydreamLab\Cms\Controllers\Tag\Admin\TagAdminController@getItem');

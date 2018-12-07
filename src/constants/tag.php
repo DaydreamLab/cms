@@ -393,27 +393,27 @@ return [
 
 
     // Ordering
-    'TAG_UPDATE_ORDERING_SUCCESS' => [
+    'TAG_UPDATE_ORDERING_NESTED_SUCCESS' => [
         'code'      => 200,
         'message'   => 'Tag update ordering success'
     ],
-    'TAG_ADMIN_UPDATE_ORDERING_SUCCESS' => [
+    'TAG_ADMIN_UPDATE_ORDERING_NESTED_SUCCESS' => [
         'code'      => 200,
         'message'   => 'Tag admin update ordering success'
     ],
-    'TAG_FRONT_UPDATE_ORDERING_SUCCESS' => [
+    'TAG_FRONT_UPDATE_ORDERING_NESTED_SUCCESS' => [
         'code'      => 200,
         'message'   => 'Tag front update ordering success'
     ],
-    'TAG_UPDATE_ORDERING_FAIL' => [
+    'TAG_UPDATE_ORDERING_NESTED_FAIL' => [
         'code'      => 500,
         'message'   => 'Tag update ordering fail'
     ],
-    'TAG_ADMIN_UPDATE_ORDERING_FAIL' => [
+    'TAG_ADMIN_UPDATE_ORDERING_NESTED_FAIL' => [
         'code'      => 500,
         'message'   => 'Tag admin update ordering fail'
     ],
-    'TAG_FRONT_UPDATE_ORDERING_FAIL' => [
+    'TAG_FRONT_UPDATE_ORDERING_NESTED_FAIL' => [
         'code'      => 500,
         'message'   => 'Tag front update ordering fail'
     ],

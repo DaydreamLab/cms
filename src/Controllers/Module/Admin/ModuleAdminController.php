@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Controllers\Module\Admin;
 
 use DaydreamLab\JJAJ\Controllers\BaseController;
+use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\ResponseHelper;
 use Illuminate\Support\Collection;
 use DaydreamLab\Cms\Services\Module\Admin\ModuleAdminService;
@@ -35,9 +36,9 @@ class ModuleAdminController extends BaseController
     }
 
 
-    public function checkout($id)
+    public function checkout(ModuleAdminRemovePost $request)
     {
-        $this->service->checkout($id);
+        $this->service->checkout($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }

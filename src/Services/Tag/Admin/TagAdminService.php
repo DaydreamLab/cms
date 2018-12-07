@@ -73,6 +73,6 @@ class TagAdminService extends TagService
             $input->put('language', '*');
         }
 
-        return   parent::storeNested($input);
+        return  parent::store($input);
     }
 }

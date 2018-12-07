@@ -2,6 +2,7 @@
 namespace DaydreamLab\Cms\Models\Menu;
 
 use DaydreamLab\Cms\Models\Category\Category;
+use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\User\Models\Viewlevel\Viewlevel;
 use Kalnoy\Nestedset\NodeTrait;
@@ -78,7 +79,9 @@ class Menu extends BaseModel
 
     public function getAccessTitleAttribute()
     {
-        return $this->viewlevel->title ?: null;
+        $viewlevel = $this->viewlevel()->first();
+
+        return $viewlevel ? $viewlevel->title : null;
     }
 
 
@@ -90,7 +93,9 @@ class Menu extends BaseModel
 
     public function getViewlevelsAttribute()
     {
-        return $this->viewlevel->rules ?: [];
+        $viewlevel = $this->viewlevel()->first();
+
+        return $viewlevel ? $viewlevel->rules : null;
     }
 
 

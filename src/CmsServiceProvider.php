@@ -7,6 +7,7 @@ use Illuminate\Support\ServiceProvider;
 
 class CmsServiceProvider extends ServiceProvider
 {
+
     protected $commands = [
         'DaydreamLab\Cms\Commands\InstallCommand',
         'DaydreamLab\Cms\Commands\CronCommand',
@@ -31,6 +32,7 @@ class CmsServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->register(CmsEventServiceProvider::class);
         $this->commands($this->commands);
     }
 }
