@@ -167,11 +167,11 @@ class ItemFrontService extends ItemService
 
     public function getItemByAlias(Collection $input)
     {
-        $item = $this->search($input);
+        $items = $this->search($input);
 
-        if ($item->count())
+        if ($items->count())
         {
-            $item = $item->first();
+            $item = $items->first();
 
             if (!Helper::hasPermission($item->viewlevels, $this->viewlevels))
             {
@@ -280,7 +280,7 @@ class ItemFrontService extends ItemService
         $input->put('special_queries', $special_queries);
         $input->put('state', 1);
 
-        $items = parent::search($input);
+        $original_items = $items = parent::search($input);
 
         $data = $this->paginationFormat($items->toArray());
 
@@ -294,10 +294,9 @@ class ItemFrontService extends ItemService
         $all['all'] = $data;
         if (config('cms.item.front.creator_group_filter.enabled'))
         {
-
             foreach (config('cms.item.front.creator_group_filter.groups') as $creator_group)
             {
-                $special_queries  = $special_queries_copy;
+                $special_queries  =  $special_queries_copy;
 
                 $user_ids = $this->repo->getCreatorGroupUserIds($creator_group);
                 $obj['type']        = 'whereIn';
@@ -309,6 +308,7 @@ class ItemFrontService extends ItemService
                 $input->put('special_queries', $special_queries);
 
                 $items = parent::search($input);
+
                 $paginate_data = $this->paginationFormat($items->toArray());
 
                 if (config('cms.item.front.year_month_filter'))
@@ -317,11 +317,14 @@ class ItemFrontService extends ItemService
                 }
                 $all[$creator_group] = $paginate_data;
             }
+            $this->response = $all;
+        }
+        else
+        {
+            $this->response = $items;
         }
 
-        $this->response = $all;
-
-        return $items;
+        return $original_items;
     }
 
 
