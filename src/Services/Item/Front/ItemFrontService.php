@@ -292,32 +292,32 @@ class ItemFrontService extends ItemService
 
         $special_queries_copy = $input->get('special_queries');
         $all['all'] = $data;
-//        if (config('cms.item.front.creator_group_filter.enabled'))
-//        {
-//
-//            foreach (config('cms.item.front.creator_group_filter.groups') as $creator_group)
-//            {
-//                $special_queries  = $special_queries_copy;
-//
-//                $user_ids = $this->repo->getCreatorGroupUserIds($creator_group);
-//                $obj['type']        = 'whereIn';
-//                $obj['key']         = 'created_by';
-//                $obj['value']       = $user_ids;
-//                $special_queries[]  = $obj;
-//
-//                $input->forget('special_queries');
-//                $input->put('special_queries', $special_queries);
-//
-//                $items = parent::search($input);
-//                $paginate_data = $this->paginationFormat($items->toArray());
-//
-//                if (config('cms.item.front.year_month_filter'))
-//                {
-//                    $paginate_data['filter'] = $this->filterYearMonth($paginate_data);
-//                }
-//                $all[$creator_group] = $paginate_data;
-//            }
-//        }
+        if (config('cms.item.front.creator_group_filter.enabled'))
+        {
+
+            foreach (config('cms.item.front.creator_group_filter.groups') as $creator_group)
+            {
+                $special_queries  = $special_queries_copy;
+
+                $user_ids = $this->repo->getCreatorGroupUserIds($creator_group);
+                $obj['type']        = 'whereIn';
+                $obj['key']         = 'created_by';
+                $obj['value']       = $user_ids;
+                $special_queries[]  = $obj;
+
+                $input->forget('special_queries');
+                $input->put('special_queries', $special_queries);
+
+                $items = parent::search($input);
+                $paginate_data = $this->paginationFormat($items->toArray());
+
+                if (config('cms.item.front.year_month_filter'))
+                {
+                    $paginate_data['filter'] = $this->filterYearMonth($paginate_data);
+                }
+                $all[$creator_group] = $paginate_data;
+            }
+        }
 
         $this->response = $all;
 
