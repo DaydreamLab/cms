@@ -165,7 +165,7 @@ class ItemAdminService extends ItemService
         $input->forget('tags');
 
 
-        if (InputHelper::null($input, 'language'))
+        if (InputHelper::null($input, 'extrafields'))
         {
             $input->forget('extrafields');
             $input->put('extrafields', []);

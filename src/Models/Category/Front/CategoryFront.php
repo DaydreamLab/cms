@@ -51,6 +51,13 @@ class CategoryFront extends Category
         {
             $extra_field_data = ExtrafieldFront::find($extra_field->id);
             $extra_field_data->value = $extra_field->value ;
+
+            foreach ($extra_field->params as $key => $param)
+            {
+                $extra_field_data->{$key} = $param->value;
+                $this->{$extra_field_data->alias . '_' . $key} = $param->value;
+            }
+
             $data[] = $extra_field_data->toArray();
         }
 
