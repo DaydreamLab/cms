@@ -29,7 +29,10 @@ class SettingStorePost extends AdminRequest
             'metadesc'      => 'nullable|string',
             'metakeywords'  => 'nullable|string',
             'locale'        => 'required|string',
-            'locale_admin'  => 'required|string'
+            'locale_admin'  => 'required|string',
+            'custom_head'   => 'nullable|string',
+            'custom_body'   => 'nullable|string',
+            'custom_footer' => 'nullable|string',
         ];
     }
 }
