@@ -26,6 +26,7 @@ class Tag extends BaseModel
         'path',
         'state',
         'description',
+        'extension',
         'hits',
         'access',
         'language',

@@ -134,6 +134,7 @@ class Item extends BaseModel
 
     public function getExtrafieldsAttribute($value)
     {
+
         $value = $value ? $value : json_encode([]);
         $data = [];
         foreach (json_decode($value) as $extra_field)
@@ -145,6 +146,7 @@ class Item extends BaseModel
             {
                 $extra_field_data->{$key} = $param->value;
                 $this->{$extra_field_data->alias . '_' . $key} = $param->value;
+                Helper::show($extra_field_data->alias . '_' . $key);
             }
 
             $data[] = $extra_field_data->toArray();

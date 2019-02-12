@@ -126,7 +126,6 @@ class Category extends BaseModel
             $data[] = $extra_field_data->toArray();
         }
 
-
         return $data;
     }
 

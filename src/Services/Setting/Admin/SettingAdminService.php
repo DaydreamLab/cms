@@ -67,5 +67,7 @@ class SettingAdminService extends SettingService
             $this->status = Str::upper(Str::snake($this->type.'UpdateFail'));
             $this->response = null;
         }
+
+        return $result;
     }
 }
