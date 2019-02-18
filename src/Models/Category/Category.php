@@ -91,8 +91,11 @@ class Category extends BaseModel
 
 
     protected $casts = [
+        'extrafields'   => 'array',
+        'params'        => 'array',
         'locked_at'     => 'datetime:Y-m-d H:i:s',
-        'extrafields'   => 'array'
+        'publish_up'    => 'datetime:Y-m-d H:i:s',
+        'publish_down'  => 'datetime:Y-m-d H:i:s',
     ];
 
 

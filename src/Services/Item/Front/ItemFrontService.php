@@ -289,7 +289,6 @@ class ItemFrontService extends ItemService
             $data['filter'] = $this->filterYearMonth($data);
         }
 
-
         $special_queries_copy = $input->get('special_queries');
         $all['all'] = $data;
         if (config('cms.item.front.creator_group_filter.enabled'))

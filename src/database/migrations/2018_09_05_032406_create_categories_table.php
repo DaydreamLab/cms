@@ -20,7 +20,7 @@ class CreateCategoriesTable extends Migration
             $table->nestedSet();
             $table->unsignedInteger('ordering')->nullable();
             $table->string('path');
-            $table->tinyInteger('state')->nullable()->default(1);
+            $table->tinyInteger('state')->default(1);
             $table->text('introimage')->nullable();
             $table->text('introtext')->nullable();
             $table->text('image')->nullable();
@@ -28,9 +28,9 @@ class CreateCategoriesTable extends Migration
             $table->text('content_type')->nullable();
             $table->string('extension');
             $table->unsignedInteger('hits')->nullable()->default(0);
-            $table->unsignedInteger('access')->nullalbe()->default(1);
+            $table->unsignedInteger('access');
 
-            $table->string('language')->nullable()->default('*');
+            $table->string('language')->default('*');
             $table->string('template')->nullable();
             $table->string('metadesc')->nullable();
             $table->string('metakeywords')->nullable();

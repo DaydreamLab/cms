@@ -32,6 +32,7 @@ class CategoryService extends BaseService
     public function __construct(CategoryRepository $repo)
     {
         parent::__construct($repo);
+        $this->repo = $repo;
     }
 
     public function addNested(Collection $input)
@@ -76,19 +77,19 @@ class CategoryService extends BaseService
             }
 
             $subtree = $this->findByChain(['_lft', '_rgt'], ['>', '<'], [$item->_lft, $item->_rgt]);
-            foreach ($subtree as $value)
+            foreach ($subtree as $node)
             {
-                if (!in_array($value->id, $tree_ids))
+                if (!in_array($node->id, $tree_ids))
                 {
-                    $tree_ids[] = $value->id;
+                    $tree_ids[] = $node->id;
                 }
             }
         }
 
-        $result = $this->traitRemoveNested($input);
-
         $input->forget('ids');
-        $input->ids = $tree_ids;
+        $input->put('ids', $tree_ids);
+
+        $result = $this->traitRemoveNested($input);
 
         event(new Remove($this->model_name, $result, $input, $this->user));
 
@@ -121,10 +122,10 @@ class CategoryService extends BaseService
         return $this->traitStoreNested($input);
     }
 
+
     public function tree($extension)
     {
         $tree = $this->findBy('extension', '=', $extension)->toTree();
-
 
         $this->status =  Str::upper(Str::snake($this->type . 'GetTreeSuccess'));
         $this->response = $tree;

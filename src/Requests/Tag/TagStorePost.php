@@ -35,7 +35,7 @@ class TagStorePost extends AdminRequest
                 Rule::in([0,1,-1,-2])
             ],
             'description'   => 'nullable|string',
-            'extension'     => [
+            'content_type'     => [
                 'nullable',
                 Rule::in(['item', 'category', 'product'])
             ],

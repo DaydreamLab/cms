@@ -29,29 +29,44 @@ class TagFrontService extends TagService
     public function search(Collection $input)
     {
         $tags =  parent::search($input);
+
         if($tags->count())
         {
-            $tag = $tags->first();
-            $maps = $this->itemTagMapFrontService->findBy('tag_id', '=', $tag->id);
-            if ($maps->count())
+            $items = Collection::make([]);
+            foreach ($tags as $tag)
             {
-                $map_ids = [];
-                foreach ($maps as $map)
-                {
-                    $map_ids[] = $map->item_id;
-                }
+                $tag->hits++;
+                $this->update($tag, $tag);
 
-                $items = $this->itemFrontService->search(Helper::collect([
-                    'special_queries' => [
-                        [
-                            'type'  => 'whereIn',
-                            'key'   => 'id',
-                            'value' => $map_ids
+                $maps = $this->itemTagMapFrontService->findBy('tag_id', '=', $tag->id);
+                if ($maps->count())
+                {
+                    $map_ids = $maps->map(function($item, $key){
+                       return $item->item_id;
+                    })->all();
+
+                    $tag_items = $this->itemFrontService->search(Helper::collect([
+                        'special_queries' => [
+                            [
+                                'type'  => 'whereIn',
+                                'key'   => 'id',
+                                'value' => $map_ids
+                            ]
                         ]
-                    ]
-                ]));
-                $this->response = $items;
+                    ]));
+
+                    foreach ($tag_items as $tag_item)
+                    {
+                        if(!$items->contains('id', $tag_item->id))
+                        {
+                            $items->push($tag_item);
+                        }
+                    }
+                }
             }
+
+            $limit= $input->get('limit') ?: 15;
+            $this->response = $this->repo->paginate($items, (int)$limit, '', ['limit' => $limit]);
         }
 
         return $this->response;

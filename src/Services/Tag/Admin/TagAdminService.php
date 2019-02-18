@@ -3,7 +3,9 @@
 namespace DaydreamLab\Cms\Services\Tag\Admin;
 
 use DaydreamLab\Cms\Repositories\Tag\Admin\TagAdminRepository;
+use DaydreamLab\Cms\Services\Cms\CmsCronJobService;
 use DaydreamLab\Cms\Services\Tag\TagService;
+use DaydreamLab\Cms\Traits\CmsCronJob;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
 use Illuminate\Support\Collection;
@@ -11,13 +13,20 @@ use Illuminate\Support\Str;
 
 class TagAdminService extends TagService
 {
+    use CmsCronJob;
+
     protected $type = 'TagAdmin';
 
     protected $search_keys = ['title', 'description'];
 
-    public function __construct(TagAdminRepository $repo)
+    protected $cmsCronJobService;
+
+    public function __construct(TagAdminRepository  $repo,
+                                CmsCronJobService   $cmsCronJobService)
     {
         parent::__construct($repo);
+        $this->repo                 = $repo;
+        $this->cmsCronJobService    = $cmsCronJobService;
     }
 
 
@@ -42,37 +51,33 @@ class TagAdminService extends TagService
         $item->locked_by = $this->user->id;
         $item->locked_at = now();
 
-        return $item->save();
+        return $this->update($item, $item);
     }
 
 
     public function store(Collection $input)
     {
-        if (InputHelper::null($input, 'alias')){
-            $input->forget('alias');
-            $input->put('alias', Str::lower(now()->format('Y-m-d-H-i-s').'-'.Str::random(5)));
+        $result = parent::storeNested($input);
+
+        if (gettype($result) == 'boolean')
+        {
+            if ($result === true)
+            {
+                $item  = $this->find($input->id);
+            }
+            else
+            {
+                // Something error 有可能是路徑已經存在
+                return $this->response;
+            }
+        }
+        else
+        {
+            $item      = $this->find($result->id);
         }
 
+        $this->setCronJob($input, $item);
 
-        if (InputHelper::null($input, 'parent_id')) {
-            $input->put('path', '/'.$input->get('alias'));
-        }
-        else {
-            $parent = $this->find($input->parent_id);
-            $input->put('path', $parent->path . '/' .$input->get('alias'));
-        }
-
-
-        if (InputHelper::null($input, 'access')){
-            $input->forget('access');
-            $input->put('access', 1);
-        }
-
-        if (InputHelper::null($input, 'language')){
-            $input->forget('language');
-            $input->put('language', '*');
-        }
-
-        return  parent::store($input);
+        return $result;
     }
 }

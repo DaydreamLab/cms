@@ -23,7 +23,7 @@ class CreateTagsTable extends Migration
             $table->unsignedInteger('ordering')->nullable()->default(1);
             $table->tinyInteger('state')->nullable()->default(1);
             $table->text('description')->nullable();
-            $table->string('extension')->nullable()->default('item');
+            $table->string('content_type')->nullable()->default('item');
             $table->unsignedInteger('hits')->nullable()->default(0);
             $table->unsignedInteger('access')->nullable()->default(1);
             $table->string('language')->nullable()->default('*');

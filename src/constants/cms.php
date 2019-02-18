@@ -4,8 +4,12 @@ return [
     'item' => [
         'front' => [
             'year_month_filter' => 1,
-            'access_ids'        => [7],
-            'viewlevels'        => [8]
+            'creator_group_filter'  => [
+                'enabled'   => 0,
+                'groups'    => []
+            ],
+            'access_ids'    => [1],
+            'viewlevels'    => [1],
         ]
     ]
 ];

@@ -59,8 +59,8 @@ class MenusTableSeeder extends Seeder
     {
         $category_root = Category::create( [
             'title'         => 'ROOT',
-            'alias'         => 'root',
-            'path'          => '',
+            'alias'         => 'menu',
+            'path'          => '/menu',
             'state'         => 1,
             'introimage'    => '',
             'introtext'     => '',
@@ -68,6 +68,7 @@ class MenusTableSeeder extends Seeder
             'ordering'      => 1,
             'description'   => '',
             'extension'     => 'menu',
+            'params'        => [],
             'access'        => 5,
             'metadesc'      => '',
             'metakeywords'  => '',
@@ -76,15 +77,15 @@ class MenusTableSeeder extends Seeder
 
         $menu_root = Menu::create([
             'title'         => 'ROOT',
-            'alias'         => 'root',
-            'path'          => '',
+            'alias'         => 'menu',
+            'path'          => '/menu',
             'category_id'   => $category_root->id,
             'ordering'      => 1,
             'state'         => 1,
             'description'   => '',
             'access'        => 5,
             'language'      => '*',
-            'params'        => '',
+            'params'        => [],
         ]);
     }
 

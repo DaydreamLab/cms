@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Commands;
 
+use DaydreamLab\JJAJ\Helpers\Helper;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 
@@ -73,6 +74,7 @@ class InstallCommand extends Command
     {
         //$this->call('jjaj:refresh');
         $this->call('user:install');
+
         foreach ($this->seeders as $seeder) {
             $this->call('db:seed', [
                 '--class' => $this->seeder_namespace . $seeder

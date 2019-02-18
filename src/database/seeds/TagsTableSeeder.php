@@ -13,7 +13,7 @@ class TagsTableSeeder extends Seeder
         Tag::create([
             'title'         => 'ROOT',
             'alias'         => 'root',
-            'path'         => '/root',
+            'path'         => '/item',
             'state'         => 1,
             'description'   => '',
             'ordering'      => 1,
@@ -22,7 +22,7 @@ class TagsTableSeeder extends Seeder
             'language'      => '*',
             'metadesc'      => '',
             'metakeywords'      => '',
-            'params'        => '',
+            'params'        => [],
             'publish_up'    => null,
             'publish_down'  => null,
             'children'      =>[]

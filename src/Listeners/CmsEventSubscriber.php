@@ -8,9 +8,7 @@ use DaydreamLab\Observer\Services\Log\LogService;
 
 class CmsEventSubscriber
 {
-
     protected $logService;
-
 
     public function __construct(LogService $logService)
     {
@@ -135,37 +133,37 @@ class CmsEventSubscriber
     public function subscribe($events)
     {
         $events->listen(
-            'DaydreamLab\JJAJ\Events\Add',
+            'DaydreamLab\Cms\Events\Add',
             'DaydreamLab\Cms\Listeners\CmsEventSubscriber@onAdd'
         );
 
 
         $events->listen(
-            'DaydreamLab\JJAJ\Events\Checkout',
+            'DaydreamLab\Cms\Events\Checkout',
             'DaydreamLab\Cms\Listeners\CmsEventSubscriber@onCheckout'
         );
 
 
         $events->listen(
-            'DaydreamLab\JJAJ\Events\Modify',
+            'DaydreamLab\Cms\Events\Modify',
             'DaydreamLab\Cms\Listeners\CmsEventSubscriber@onModify'
         );
 
 
         $events->listen(
-            'DaydreamLab\JJAJ\Events\Ordering',
+            'DaydreamLab\Cms\Events\Ordering',
             'DaydreamLab\Cms\Listeners\CmsEventSubscriber@onOrdering'
         );
 
 
         $events->listen(
-            'DaydreamLab\JJAJ\Events\Remove',
+            'DaydreamLab\Cms\Events\Remove',
             'DaydreamLab\Cms\Listeners\CmsEventSubscriber@onRemove'
         );
 
 
         $events->listen(
-            'DaydreamLab\JJAJ\Events\State',
+            'DaydreamLab\Cms\Events\State',
             'DaydreamLab\Cms\Listeners\CmsEventSubscriber@onState'
         );
     }

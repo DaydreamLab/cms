@@ -15,6 +15,7 @@ class Tag extends BaseModel
      */
     protected $table = 'tags';
 
+
     /**
      * The attributes that are mass assignable.
      *
@@ -26,7 +27,7 @@ class Tag extends BaseModel
         'path',
         'state',
         'description',
-        'extension',
+        'content_type',
         'hits',
         'access',
         'language',
@@ -64,6 +65,15 @@ class Tag extends BaseModel
         'locker',
         'viewlevels',
         'access_title'
+    ];
+
+
+    protected $casts = [
+        'params'        => 'array',
+        'extrafields'   => 'array',
+        'locked_at'     => 'datetime:Y-m-d H:i:s',
+        'publish_up'    => 'datetime:Y-m-d H:i:s',
+        'publish_down'  => 'datetime:Y-m-d H:i:s',
     ];
 
 

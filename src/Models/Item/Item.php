@@ -18,6 +18,7 @@ class Item extends BaseModel
      */
     protected $table = 'items';
 
+
     /**
      * The attributes that are mass assignable.
      *
@@ -85,9 +86,11 @@ class Item extends BaseModel
 
 
     protected $casts = [
-        'locked_at'     => 'datetime:Y-m-d H:i:s',
         'params'        => 'array',
-        'extrafields'   => 'array'
+        'extrafields'   => 'array',
+        'locked_at'     => 'datetime:Y-m-d H:i:s',
+        'publish_up'    => 'datetime:Y-m-d H:i:s',
+        'publish_down'  => 'datetime:Y-m-d H:i:s',
     ];
 
 
@@ -146,7 +149,6 @@ class Item extends BaseModel
             {
                 $extra_field_data->{$key} = $param->value;
                 $this->{$extra_field_data->alias . '_' . $key} = $param->value;
-                Helper::show($extra_field_data->alias . '_' . $key);
             }
 
             $data[] = $extra_field_data->toArray();

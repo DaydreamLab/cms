@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Requests\Item;
 
 use DaydreamLab\JJAJ\Requests\AdminRequest;
+use Illuminate\Validation\Rule;
 
 class ItemStorePost extends AdminRequest
 {
@@ -27,7 +28,11 @@ class ItemStorePost extends AdminRequest
             'id'                    => 'nullable|integer',
             'title'                 => 'required|string',
             'alias'                 => 'nullable|string',
-            'state'                 => 'required|integer',
+            'category_id'           => 'required|integer',
+            'state'                 => [
+                'required',
+                Rule::in([0,1])
+            ],
             'introimage'            => 'nullable|string',
             'introtext'             => 'nullable|string',
             'image'                 => 'nullable|string',
@@ -36,13 +41,16 @@ class ItemStorePost extends AdminRequest
             'link'                  => 'nullable|string',
             'hits'                  => 'nullable|integer',
             'access'                => 'nullable|integer',
-            'featured'              => 'nullable|integer',
+            'featured'              => [
+                'required',
+                Rule::in([0,1])
+            ],
             'featured_ordering'     => 'nullable|integer',
             'language'              => 'nullable|string',
             'metadesc'              => 'nullable|string',
             'metakeywords'          => 'nullable|string',
             //'content_type'  => 'nullable|string',
-            'params'                => 'nullable|string',
+            'params'                => 'nullable|array',
             'ordering'              => 'nullable|integer',
             'extrafield_group_id'   => 'nullable|integer',
             'extrafields'           => 'nullable|array',
@@ -53,8 +61,8 @@ class ItemStorePost extends AdminRequest
             'tags.*'                => 'nullable|array',
             'tags.*.id'             => 'nullable|integer',
             'tags.*.title'          => 'nullable|string',
-            'publish_up'            => 'nullable|datetime',
-            'publish_down'          => 'nullable|datetime',
+            'publish_up'            => 'nullable|date_format:Y-m-d H:i:s',
+            'publish_down'          => 'nullable|date_format:Y-m-d H:i:s',
         ];
     }
 }

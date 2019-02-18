@@ -1,10 +1,10 @@
 <?php
 
-namespace DaydreamLab\Cms\Requests\Tag\Front;
+namespace DaydreamLab\Cms\Requests\Cms;
 
-use DaydreamLab\Cms\Requests\Tag\TagSearchPost;
+use DaydreamLab\JJAJ\Requests\AdminRequest;
 
-class TagFrontSearchPost extends TagSearchPost
+class CmsCronJobOrderingPost extends AdminRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +23,9 @@ class TagFrontSearchPost extends TagSearchPost
      */
     public function rules()
     {
-        $rules = [
-            'limit' => 'nullable|integer'
+        return [
+            'id'            => 'required|integer',
+            'index_diff'    => 'required|integer',
         ];
-        return array_merge($rules, parent::rules());
     }
 }

@@ -55,13 +55,10 @@ class ItemRepository extends BaseRepository
     public function findOtherFeatured($id = null)
     {
         $query = $this->model;
-        if ($id)
-        {
-            $query = $query->where('id', '!=', $id);
-        }
+
+        $query = $id ? $query->where('id', '!=', $id) : $query;
 
         $query = $query->where('featured', 1)->orderBy('featured_ordering', 'asc');
-
 
         return $query->get();
     }
@@ -71,7 +68,7 @@ class ItemRepository extends BaseRepository
         foreach ($other as $item)
         {
             $item->featured_ordering++;
-            if (!$item->save())
+            if (!$this->update($item, $item))
             {
                 return false;
             }

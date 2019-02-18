@@ -2,25 +2,28 @@
 
 namespace DaydreamLab\Cms\Database\Seeds;
 
+use DaydreamLab\Cms\Models\Category\Admin\CategoryAdmin;
 use DaydreamLab\Cms\Models\Category\Category;
-use DaydreamLab\Cms\Repositories\Category\CategoryRepository;
-use DaydreamLab\Cms\Services\Category\CategoryService;
+use DaydreamLab\Cms\Models\Cms\CmsCronJob;
+use DaydreamLab\Cms\Repositories\Category\Admin\CategoryAdminRepository;
+use DaydreamLab\Cms\Repositories\Cms\CmsCronJobRepository;
+use DaydreamLab\Cms\Services\Category\Admin\CategoryAdminService;
+use DaydreamLab\Cms\Services\Cms\CmsCronJobService;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Collection;
 
 class ModulesTableSeeder extends Seeder
 {
-    protected $categoryService;
+    protected $categoryAdminService;
 
-    protected $moduleService;
+    protected $moduleAdminService;
 
     public function run()
     {
         $category_root = Category::create([
             'title'         => 'ROOT',
-            'alias'         => 'root',
-            'path'          => '/',
+            'alias'         => 'module',
+            'path'          => '/module',
             'state'         => 1,
             'introimage'    => '',
             'introtext'     => '',
@@ -32,10 +35,14 @@ class ModulesTableSeeder extends Seeder
             'metadesc'      => '',
             'metakeywords'  => '',
             'extrafields'   => [],
-            'children'      =>[]
+            'params'        => [],
+            'children'      => []
         ]);
 
-        $this->categoryService  = new CategoryService(new CategoryRepository(new Category()));
+        $this->categoryAdminService  = new CategoryAdminService(
+            new CategoryAdminRepository(new CategoryAdmin()),
+            new CmsCronJobService(new CmsCronJobRepository(new CmsCronJob()))
+        );
 
         $data = json_decode(file_get_contents(__DIR__.'/jsons/module.json'), true);
 
@@ -51,12 +58,12 @@ class ModulesTableSeeder extends Seeder
             $modules    = $category['modules'];
             unset($category['modules']);
 
-            $category = $this->categoryService->store(Helper::collect($category));
+            $category = $this->categoryAdminService->store(Helper::collect($category));
 
             foreach ($modules as $module)
             {
                 $module['category_id'] = $category->id;
-                $this->moduleService->store(Helper::collect($module));
+                $this->moduleAdminService->store(Helper::collect($module));
             }
 
             if ($parent)

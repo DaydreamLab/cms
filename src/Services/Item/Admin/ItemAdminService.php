@@ -2,10 +2,11 @@
 
 namespace DaydreamLab\Cms\Services\Item\Admin;
 
-use DaydreamLab\Cms\Models\Cms\CmsCronJob;
 use DaydreamLab\Cms\Repositories\Item\Admin\ItemAdminRepository;
 use DaydreamLab\Cms\Services\Category\Admin\CategoryAdminService;
+use DaydreamLab\Cms\Services\Cms\CmsCronJobService;
 use DaydreamLab\Cms\Services\Tag\Admin\TagAdminService;
+use DaydreamLab\Cms\Traits\CmsCronJob;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
 use DaydreamLab\Cms\Services\Item\ItemService;
@@ -14,28 +15,45 @@ use Illuminate\Support\Str;
 
 class ItemAdminService extends ItemService
 {
+    use CmsCronJob;
+
     protected $type = 'ItemAdmin';
 
     protected $tagAdminService;
 
     protected $itemTagMapAdminService;
 
-    protected $cmsCronJobModel;
+    protected $cmsCronJobService;
 
     protected $categoryAdminService;
 
     protected $search_keys = ['title', 'introtext', 'description'];
 
-    public function __construct(ItemAdminRepository $repo,
-                                TagAdminService $tagAdminService,
-                                ItemTagMapAdminService $itemTagMapAdminService,
-                                CategoryAdminService $categoryAdminService)
+    public function __construct(ItemAdminRepository     $repo,
+                                TagAdminService         $tagAdminService,
+                                ItemTagMapAdminService  $itemTagMapAdminService,
+                                CategoryAdminService    $categoryAdminService,
+                                CmsCronJobService       $cmsCronJobService)
     {
+        parent::__construct($repo);
+        $this->repo                     = $repo;
         $this->tagAdminService          = $tagAdminService;
         $this->itemTagMapAdminService   = $itemTagMapAdminService;
-        $this->cmsCronJobModel          = new CmsCronJob();
         $this->categoryAdminService     = $categoryAdminService;
-        parent::__construct($repo);
+        $this->cmsCronJobService        = $cmsCronJobService;
+    }
+
+
+    public function add(Collection $input)
+    {
+        if (!InputHelper::null($input, 'featured'))
+        {
+            $input->put('featured_ordering', 1);
+            $other = $this->findOtherFeatured();
+            $this->featuredOrdering($other);
+        }
+
+        return parent::add($input);
     }
 
 
@@ -62,7 +80,6 @@ class ItemAdminService extends ItemService
             return false;
         }
 
-
         if ($item->locked_by && $item->locked_by != $this->user->id)
         {
             $this->status   = Str::upper(Str::snake($this->type.'IsLocked'));
@@ -76,6 +93,18 @@ class ItemAdminService extends ItemService
         return $item->save();
     }
 
+
+    public function modify(Collection $input)
+    {
+        if (!InputHelper::null($input, 'featured'))
+        {
+            $input->put('featured_ordering', 1);
+            $other = $this->findOtherFeatured($input->id);
+            $this->featuredOrdering($other);
+        }
+
+        return parent::modify($input);
+    }
 
     public function search(Collection $input)
     {
@@ -96,80 +125,19 @@ class ItemAdminService extends ItemService
 
     public function store(Collection $input)
     {
-        if (InputHelper::null($input, 'alias'))
-        {
-            $input->forget('alias');
-            $input->put('alias', Str::lower(now()->format('Y-m-d-H-i-s'). '-'.Str::random(4)));
-        }
-
-        if (InputHelper::null($input, 'category_id'))
-        {
-            $input->forget('category_id');
-            $input->put('category_id', 1);
-        }
-
         if (InputHelper::null($input, 'hits'))
         {
-            $input->forget('hits');
             $input->put('hits', 0);
         }
 
-        if (InputHelper::null($input, 'access'))
+        if ($input->state == 1 && InputHelper::null($input, 'publish_up'))
         {
-            $input->forget('access');
-            $input->put('access', 1);
-        }
-
-        // featured = 0 or null
-        if (InputHelper::null($input, 'featured'))
-        {
-            $input->forget('featured');
-        }
-        else // featured = 1
-        {
-            $input->forget('featured_ordering');
-            $input->put('featured_ordering', 1);
-
-            // 編輯文章
-            if (InputHelper::null($input, 'id'))
-            {
-                $other = $this->findOtherFeatured();
-            }
-            else
-            {
-                $other = $this->findOtherFeatured($input->id);
-            }
-
-            $this->featuredOrdering($other, 'add');
-        }
-
-
-        $desc = $input->description;
-        $input->forget('description');
-        $input->put('description', nl2br($desc));
-
-        if (InputHelper::null($input, 'publish_up'))
-        {
-            $input->forget('publish_up');
             $input->put('publish_up', now());
             $input->publish_up = now()->toDateTimeString();
         }
 
-
-        if (InputHelper::null($input, 'language'))
-        {
-            $input->forget('language');
-            $input->put('language', '*');
-        }
         $tags = $input->get('tags') ? $input->get('tags') : [];
         $input->forget('tags');
-
-
-        if (InputHelper::null($input, 'extrafields'))
-        {
-            $input->forget('extrafields');
-            $input->put('extrafields', []);
-        }
 
         $result    =  parent::store($input);
 
@@ -190,32 +158,9 @@ class ItemAdminService extends ItemService
             $item = $this->find($result->id);
         }
 
-
-        if ($input->publish_up > now())
-        {
-            $this->cmsCronJobModel->create([
-                'table'     => 'items',
-                'item_id'   => $item->id,
-                'type'      => 'up',
-                'time'      => $item->publish_up
-            ]);
-        }
-
-        if (!InputHelper::null($input, 'publish_down'))
-        {
-            if ($input->publish_down > now())
-            {
-                $this->cmsCronJobModel->create([
-                    'table'     => 'items',
-                    'item_id'   => $item->id,
-                    'type'      => 'down',
-                    'time'      => $item->publish_down
-                ]);
-            }
-        }
-
         $this->storeTags($tags, $item->id);
 
+        $this->setCronJob($input, $item);
 
         return $item;
     }

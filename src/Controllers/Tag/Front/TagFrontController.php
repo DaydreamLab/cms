@@ -70,9 +70,11 @@ class TagFrontController extends BaseController
     }
 
 
-    public function search($title)
+    public function search(TagFrontSearchPost $input, $title)
     {
-        $this->service->search(Helper::collect(['title' => $title]));
+        $input = $input->rulesInput()->put('title', $title);
+
+        $this->service->search($input);
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }

@@ -17,8 +17,8 @@ class CreateItemsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('alias');
-            $table->unsignedInteger('category_id')->nullable()->default(1);
-            $table->unsignedInteger('ordering')->nullable()->default(1);
+            $table->unsignedInteger('category_id');
+            $table->unsignedInteger('ordering')->nullable();
             $table->tinyInteger('state')->default(1);
             $table->text('introimage')->nullable();
             $table->text('introtext')->nullable();
@@ -26,11 +26,11 @@ class CreateItemsTable extends Migration
             $table->text('description')->nullable();
             $table->text('video')->nullable();
             $table->text('link')->nullable();
-            $table->unsignedInteger('hits')->nullable()->default(0);
-            $table->unsignedInteger('access')->nullable()->default(1);
-            $table->unsignedTinyInteger('featured')->nullable()->default(0);
+            $table->unsignedInteger('hits');
+            $table->unsignedInteger('access');
+            $table->unsignedTinyInteger('featured')->default(0);
             $table->unsignedInteger('featured_ordering')->nullable();
-            $table->string('language')->nullable()->default('*');
+            $table->string('language')->default('*');
             $table->string('metadesc')->nullable();
             $table->string('metakeywords')->nullable();
             //$table->string('content_type')->nullable()->default('article');

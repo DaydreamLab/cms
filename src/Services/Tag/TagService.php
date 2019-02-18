@@ -9,6 +9,7 @@ use DaydreamLab\JJAJ\Events\Modify;
 use DaydreamLab\JJAJ\Events\Ordering;
 use DaydreamLab\JJAJ\Events\Remove;
 use DaydreamLab\JJAJ\Events\State;
+use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Services\BaseService;
 use DaydreamLab\JJAJ\Traits\NestedServiceTrait;
 use Illuminate\Support\Collection;
@@ -35,8 +36,9 @@ class TagService extends BaseService
 
     public function addNested(Collection $input)
     {
-        $item = $this->traitAddNested($input);
 
+        $item = $this->traitAddNested($input);
+        Helper::show($item->toArray());
         event(new Add($item, $this->model_name, $input, $this->user));
 
         return $item;
@@ -117,7 +119,9 @@ class TagService extends BaseService
 
     public function store(Collection $input)
     {
-        return $this->traitStoreNested($input);
+        $result = $this->traitStoreNested($input);
+
+        return $result;
     }
 
 }

@@ -34,6 +34,8 @@ class CreateMenusTable extends Migration
             $table->unsignedInteger('created_by');
             $table->unsignedInteger('updated_by')->nullable();
             $table->timestamps();
+            $table->timestamp('publish_up')->nullable();
+            $table->timestamp('publish_down')->nullable();
         });
     }
 

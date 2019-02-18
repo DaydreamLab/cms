@@ -59,7 +59,7 @@ class Module extends BaseModel
 
 
     protected $casts = [
-        'params'   => 'array'
+        'params'        => 'array'
     ];
 
     public function category()

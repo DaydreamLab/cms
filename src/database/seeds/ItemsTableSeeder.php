@@ -37,8 +37,8 @@ class ItemsTableSeeder extends Seeder
 //
         $category_root = Category::create([
             'title'         => 'ROOT',
-            'alias'         => 'root',
-            'path'          => '',
+            'alias'         => 'item',
+            'path'          => '/item',
             'state'         => 1,
             'introimage'    => '',
             'introtext'     => '',
@@ -49,6 +49,7 @@ class ItemsTableSeeder extends Seeder
             'access'        => 5,
             'metadesc'      => '',
             'metakeywords'  => '',
+            'params'        => [],
             'extrafields'   => [],
             'children'      => []
         ]);
