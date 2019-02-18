@@ -20,7 +20,7 @@ class CreateFormsTable extends Migration
             $table->string('phone')->nullable();
             $table->string('restaurant')->nullable();
             $table->string('question_type')->nullable();
-            $table->text('question');
+            $table->text('description');
             $table->text('note')->nullable();
             $table->unsignedInteger('created_by')->nullable();
             $table->unsignedInteger('updated_by')->nullable();

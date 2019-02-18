@@ -38,7 +38,7 @@ class TagService extends BaseService
     {
 
         $item = $this->traitAddNested($input);
-        Helper::show($item->toArray());
+
         event(new Add($item, $this->model_name, $input, $this->user));
 
         return $item;

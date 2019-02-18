@@ -29,7 +29,7 @@ class FormStorePost extends AdminRequest
             'email'         => 'required|email',
             'phone'         => 'required|string',
             'question_type' => 'required|string',
-            'question'      => 'required|string',
+            'description'   => 'required|string',
         ];
     }
 }
