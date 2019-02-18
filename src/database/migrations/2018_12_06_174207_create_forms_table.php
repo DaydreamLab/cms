@@ -18,7 +18,7 @@ class CreateFormsTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('phone')->nullable();
-            $table->string('restaurant')->nullable();
+            $table->string('location')->nullable();
             $table->string('question_type')->nullable();
             $table->text('description');
             $table->text('note')->nullable();

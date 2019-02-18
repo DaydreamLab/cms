@@ -25,7 +25,7 @@ class Form extends BaseModel
         'name',
         'email',
         'phone',
-        'restaurant',
+        'location',
         'question_type',
         'description',
         'note',

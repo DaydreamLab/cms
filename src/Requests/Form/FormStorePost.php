@@ -28,8 +28,20 @@ class FormStorePost extends AdminRequest
             'name'          => 'required|string',
             'email'         => 'required|email',
             'phone'         => 'required|string',
+            'location'      => 'nullable|string',
             'question_type' => 'required|string',
             'description'   => 'required|string',
+            'brand'         => [
+                'required',
+                Rule::in([
+                    'orangeshabu',
+                    'orangeshabushabu',
+                    'extension1byorange',
+                    'monecafe',
+                    'sakura',
+                    'monespa',
+                ])
+            ],
         ];
     }
 }
