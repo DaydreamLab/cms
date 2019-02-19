@@ -29,8 +29,6 @@ class Form extends BaseModel
         'question_type',
         'description',
         'note',
-        'created_by',
-        'updated_by',
     ];
 
 

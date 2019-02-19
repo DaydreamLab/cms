@@ -6,13 +6,16 @@ use DaydreamLab\Cms\Models\Extrafield\Extrafield;
 use DaydreamLab\Cms\Models\Extrafield\ExtrafieldGroup;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Models\BaseModel;
+use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\User\Models\User\UserGroup;
 use DaydreamLab\User\Models\Viewlevel\Viewlevel;
 use Kalnoy\Nestedset\NodeTrait;
 
 class Category extends BaseModel
 {
-    use NodeTrait;
+    use NodeTrait, RecordChanger {
+        RecordChanger::boot as traitBoot;
+    }
     /**
      * The table associated with the model.
      *
@@ -97,6 +100,12 @@ class Category extends BaseModel
         'publish_up'    => 'datetime:Y-m-d H:i:s',
         'publish_down'  => 'datetime:Y-m-d H:i:s',
     ];
+
+
+    public static function boot()
+    {
+        self::traitBoot();
+    }
 
 
     public function extrafieldGroup()

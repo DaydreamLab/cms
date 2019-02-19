@@ -3,10 +3,14 @@ namespace DaydreamLab\Cms\Models\Module;
 
 use DaydreamLab\Cms\Models\Category\Category;
 use DaydreamLab\JJAJ\Models\BaseModel;
+use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\User\Models\Viewlevel\Viewlevel;
 
 class Module extends BaseModel
 {
+    use RecordChanger {
+        RecordChanger::boot as traitBoot;
+    }
     /**
      * The table associated with the model.
      *
@@ -61,6 +65,13 @@ class Module extends BaseModel
     protected $casts = [
         'params'        => 'array'
     ];
+
+
+    public static function boot()
+    {
+        self::traitBoot();
+    }
+
 
     public function category()
     {

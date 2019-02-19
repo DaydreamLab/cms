@@ -22,8 +22,6 @@ class CreateFormsTable extends Migration
             $table->string('question_type')->nullable();
             $table->text('description');
             $table->text('note')->nullable();
-            $table->unsignedInteger('created_by')->nullable();
-            $table->unsignedInteger('updated_by')->nullable();
             $table->timestamps();
         });
     }

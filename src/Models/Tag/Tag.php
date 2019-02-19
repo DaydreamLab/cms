@@ -4,10 +4,14 @@ namespace DaydreamLab\Cms\Models\Tag;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\User\Models\Viewlevel\Viewlevel;
 use Kalnoy\Nestedset\NodeTrait;
+use DaydreamLab\JJAJ\Traits\RecordChanger;
 
 class Tag extends BaseModel
 {
-    use NodeTrait;
+    use NodeTrait,
+        RecordChanger {
+        RecordChanger::boot as traitBoot;
+    }
     /**
      * The table associated with the model.
      *
@@ -75,6 +79,12 @@ class Tag extends BaseModel
         'publish_up'    => 'datetime:Y-m-d H:i:s',
         'publish_down'  => 'datetime:Y-m-d H:i:s',
     ];
+
+
+    public static function boot()
+    {
+        self::traitBoot();
+    }
 
 
     public function getAccessTitleAttribute()

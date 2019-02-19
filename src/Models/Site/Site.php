@@ -1,13 +1,15 @@
 <?php
 namespace DaydreamLab\Cms\Models\Site;
 
-use DaydreamLab\Cms\Models\Language\Admin\LanguageAdmin;
 use DaydreamLab\Cms\Models\Language\Language;
-use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Models\BaseModel;
+use DaydreamLab\JJAJ\Traits\RecordChanger;
 
 class Site extends BaseModel
 {
+    use RecordChanger {
+        RecordChanger::boot as traitBoot;
+    }
     /**
      * The table associated with the model.
      *
@@ -57,6 +59,11 @@ class Site extends BaseModel
         'language'
     ];
 
+
+    public static function boot()
+    {
+        self::traitBoot();
+    }
 
 
     public function language()

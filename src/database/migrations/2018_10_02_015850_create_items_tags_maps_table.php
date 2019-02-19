@@ -17,8 +17,6 @@ class CreateItemsTagsMapsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('item_id');
             $table->unsignedInteger('tag_id');
-            $table->unsignedInteger('created_by');
-            $table->unsignedInteger('updated_by')->nullable();
             $table->timestamps();
         });
     }

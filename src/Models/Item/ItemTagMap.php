@@ -21,8 +21,6 @@ class ItemTagMap extends BaseModel
     protected $fillable = [
         'item_id',
         'tag_id',
-        'created_by',
-        'updated_by'
     ];
 
 

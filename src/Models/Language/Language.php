@@ -1,11 +1,14 @@
 <?php
 namespace DaydreamLab\Cms\Models\Language;
 
-use DaydreamLab\Cms\Models\Site\Site;
 use DaydreamLab\JJAJ\Models\BaseModel;
+use DaydreamLab\JJAJ\Traits\RecordChanger;
 
 class Language extends BaseModel
 {
+    use RecordChanger {
+        RecordChanger::boot as traitBoot;
+    }
     /**
      * The table associated with the model.
      *
@@ -30,11 +33,6 @@ class Language extends BaseModel
         'type',
         'state',
         'description',
-//        'metadesc',
-//        'metakeywords',
-//        'sitename',
-//        'site_id',
-//        'order',
         'created_by',
         'updated_by'
     ];
@@ -55,10 +53,13 @@ class Language extends BaseModel
      * @var array
      */
     protected $appends = [
-        //'site_title',
-        //'creator',
-        //'updater'
     ];
+
+
+    public static function boot()
+    {
+        self::traitBoot();
+    }
 
 
     public function getCreatorAttribute()
@@ -67,26 +68,9 @@ class Language extends BaseModel
     }
 
 
-//    public function getSiteAttribute()
-//    {
-//        return $this->site()->first();
-//    }
-
-
-//    public function getSiteTitleAttribute()
-//    {
-//        return $this->site->title;
-//    }
-
-
     public function getUpdaterAttribute()
     {
         return $this->updater();
     }
 
-
-//    public function site()
-//    {
-//        return $this->belongsTo(Site::class, 'site_id', 'id');
-//    }
 }

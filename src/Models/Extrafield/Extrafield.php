@@ -1,10 +1,14 @@
 <?php
 namespace DaydreamLab\Cms\Models\Extrafield;
 
+use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\JJAJ\Models\BaseModel;
 
 class Extrafield extends BaseModel
 {
+    use RecordChanger {
+        RecordChanger::boot as traitBoot;
+    }
     /**
      * The table associated with the model.
      *
@@ -62,5 +66,8 @@ class Extrafield extends BaseModel
     ];
 
 
-
+    public static function boot()
+    {
+        self::traitBoot();
+    }
 }
