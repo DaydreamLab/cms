@@ -63,7 +63,6 @@ class AssetsTableSeeder extends Seeder
             RoleAssetMap::create([
                 'role_id'   => $super_user->id,
                 'asset_id'  => $asset->id,
-                'created_by'=> 1
             ]);
 
             if ($parent)
@@ -81,7 +80,6 @@ class AssetsTableSeeder extends Seeder
                 RoleApiMap::create([
                     'role_id'   => $super_user->id,
                     'api_id'    => $asset_api->id,
-                    'created_by'=> 1
                 ]);
             }
 
