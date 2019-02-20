@@ -20,6 +20,7 @@ class CreateMenusTable extends Migration
             $table->nestedSet();
             $table->unsignedInteger('ordering')->nullable();
             $table->string('path');
+            $table->string('host');
             $table->unsignedInteger('category_id')->nullable();
             $table->tinyInteger('state')->default(1);
             $table->text('description')->nullable();

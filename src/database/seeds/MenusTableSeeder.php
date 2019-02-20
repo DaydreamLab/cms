@@ -79,6 +79,7 @@ class MenusTableSeeder extends Seeder
             'title'         => 'ROOT',
             'alias'         => 'menu',
             'path'          => '/menu',
+            'host'          => '',
             'category_id'   => $category_root->id,
             'ordering'      => 1,
             'state'         => 1,

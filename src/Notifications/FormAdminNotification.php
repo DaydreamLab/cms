@@ -20,7 +20,7 @@ class FormAdminNotification extends Notification implements ShouldQueue
      */
     public function __construct($input)
     {
-
+        $this->input = $input;
     }
 
     /**

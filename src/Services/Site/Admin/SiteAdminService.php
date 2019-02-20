@@ -5,6 +5,7 @@ namespace DaydreamLab\Cms\Services\Site\Admin;
 use DaydreamLab\Cms\Repositories\Site\Admin\SiteAdminRepository;
 use DaydreamLab\Cms\Services\Site\SiteService;
 use DaydreamLab\JJAJ\Helpers\Helper;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
@@ -22,15 +23,20 @@ class SiteAdminService extends SiteService
 
     public function getList()
     {
-        $result = $this->findBy('state', '=', 1);
+        /**
+         * @var $result LengthAwarePaginator
+         */
+        $result = $this->search(Helper::collect([
+            'state' => 1,
+            'limit' => 100,
+        ]));
+
 
         $data = [];
-        foreach ($result as $item)
+        $items = $result->items();
+        foreach ($items as $item)
         {
-            if (in_array($item->access, $this->access_ids))
-            {
-                $data[] = $item;
-            }
+            $data[] = $item->only('id', 'title');
         }
 
         $this->status = Str::upper(Str::snake($this->type.'GetListSuccess'));

@@ -20,8 +20,6 @@ class MenuAdminService extends MenuService
     }
 
 
-
-
     public function getItem($id)
     {
         $item = parent::getItem($id);
@@ -51,16 +49,17 @@ class MenuAdminService extends MenuService
     {
         if (InputHelper::null($input, 'alias')){
             $input->forget('alias');
-            $input->put('alias', Str::lower(now()->format('Y-m-d-H-i-s')));
+            $input->put('alias', Str::lower(now()->format('Y-m-d-H-i-s')) . '-' . Str::random(4));
         }
 
 
         if (InputHelper::null($input, 'parent_id')) {
-            $input->put('path', '/'.$input->get('alias'));
+            $parent = $this->find(1);
+            $input->put('path', $input->get('host') . $parent->path . '/'.$input->get('alias'));
         }
         else {
             $parent = $this->find($input->parent_id);
-            $input->put('path', $parent->path . '/' .$input->get('alias'));
+            $input->put('path', $input->get('host') . $parent->path . '/' .$input->get('alias'));
         }
 
 
@@ -74,7 +73,6 @@ class MenuAdminService extends MenuService
             $input->forget('access');
             $input->put('access', 1);
         }
-
 
         return parent::storeNested($input);
     }

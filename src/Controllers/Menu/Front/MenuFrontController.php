@@ -12,7 +12,7 @@ use DaydreamLab\Cms\Requests\Menu\Front\MenuFrontStorePost;
 use DaydreamLab\Cms\Requests\Menu\Front\MenuFrontStatePost;
 use DaydreamLab\Cms\Requests\Menu\Front\MenuFrontSearchPost;
 use DaydreamLab\Cms\Requests\Menu\Front\MenuFrontOrderingPost;
-use Zend\Diactoros\Request;
+use Symfony\Component\HttpFoundation\Request;
 
 
 class MenuFrontController extends BaseController
@@ -23,9 +23,13 @@ class MenuFrontController extends BaseController
     }
 
 
-    public function getItem($path)
+    public function getItem(Request $request, $alias)
     {
-        $menu = $this->service->getItemByPath(Helper::collect(['path' => '/'. $path]));
+        $menu = $this->service->getMenu(Helper::collect([
+            'alias' => $alias,
+            'host'  => $request->getHttpHost(),
+            'sef'   => $request->sef
+        ]));
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }

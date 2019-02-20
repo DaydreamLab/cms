@@ -69,7 +69,10 @@ class MenuAdminController extends BaseController
 
     public function store(MenuAdminStorePost $request)
     {
-        $this->service->store($request->rulesInput());
+        $input = $request->rulesInput();
+        $input->put('host', $request->getHttpHost());
+
+        $this->service->store($input);
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }

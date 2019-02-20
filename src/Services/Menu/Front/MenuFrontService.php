@@ -19,14 +19,15 @@ class MenuFrontService extends MenuService
     public function __construct(MenuFrontRepository $repo,
                                 ModuleFrontService $moduleFrontService)
     {
-        $this->moduleFrontService = $moduleFrontService;
         parent::__construct($repo);
+        $this->moduleFrontService = $moduleFrontService;
+        $this->repo = $repo;
     }
 
 
-    public function getItemByPath(Collection $input)
+    public function getMenu(Collection $input)
     {
-        $menu = parent::getItemByPath($input);
+        $menu = $this->repo->getMenu($input);
 
         if (!$menu)
         {
@@ -38,7 +39,6 @@ class MenuFrontService extends MenuService
             $this->response = null;
             return false;
         }
-
 
         $modules = [];
 
