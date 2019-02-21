@@ -2,11 +2,7 @@
 
 namespace DaydreamLab\Cms\Services\Setting;
 
-use DaydreamLab\Cms\Repositories\Setting\SettingRepository;
 use DaydreamLab\Cms\Services\Language\LanguageService;
-use DaydreamLab\JJAJ\Helpers\Helper;
-use DaydreamLab\JJAJ\Services\BaseService;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
 class SettingService

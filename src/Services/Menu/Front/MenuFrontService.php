@@ -31,6 +31,7 @@ class MenuFrontService extends MenuService
 
         if (!$menu)
         {
+            $this->status = Str::upper(Str::snake($this->type.'GetItemFail'));
             return false;
         }
 

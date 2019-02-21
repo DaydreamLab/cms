@@ -36,7 +36,7 @@ class SiteAdminService extends SiteService
         $items = $result->items();
         foreach ($items as $item)
         {
-            $data[] = $item->only('id', 'title');
+            $data[] = $item->only('id', 'title', 'url');
         }
 
         $this->status = Str::upper(Str::snake($this->type.'GetListSuccess'));

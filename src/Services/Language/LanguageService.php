@@ -3,10 +3,10 @@
 namespace DaydreamLab\Cms\Services\Language;
 
 use DaydreamLab\Cms\Repositories\Language\LanguageRepository;
-use DaydreamLab\JJAJ\Events\Add;
-use DaydreamLab\JJAJ\Events\Modify;
-use DaydreamLab\JJAJ\Events\Remove;
-use DaydreamLab\JJAJ\Events\State;
+use DaydreamLab\Cms\Events\Add;
+use DaydreamLab\Cms\Events\Modify;
+use DaydreamLab\Cms\Events\Remove;
+use DaydreamLab\Cms\Events\State;
 use DaydreamLab\JJAJ\Services\BaseService;
 use Illuminate\Support\Collection;
 

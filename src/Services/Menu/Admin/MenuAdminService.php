@@ -7,6 +7,7 @@ use DaydreamLab\Cms\Services\Menu\MenuService;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Fluent;
 use Illuminate\Support\Str;
 
 class MenuAdminService extends MenuService
@@ -52,26 +53,19 @@ class MenuAdminService extends MenuService
             $input->put('alias', Str::lower(now()->format('Y-m-d-H-i-s')) . '-' . Str::random(4));
         }
 
+        if (!InputHelper::null($input, 'url'))
+        {
+            $result = parse_url($input->url);
+            $input->put('host', $result['host']);
+        }
 
         if (InputHelper::null($input, 'parent_id')) {
             $parent = $this->find(1);
-            $input->put('path', $input->get('host') . $parent->path . '/'.$input->get('alias'));
+            $input->put('path', $parent->path . '/'.$input->get('alias'));
         }
         else {
             $parent = $this->find($input->parent_id);
-            $input->put('path', $input->get('host') . $parent->path . '/' .$input->get('alias'));
-        }
-
-
-        if (InputHelper::null($input, 'language')){
-            $input->forget('language');
-            $input->put('language', '*');
-        }
-
-
-        if (InputHelper::null($input, 'access')){
-            $input->forget('access');
-            $input->put('access', 1);
+            $input->put('path', $parent->path . '/' .$input->get('alias'));
         }
 
         return parent::storeNested($input);

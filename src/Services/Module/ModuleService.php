@@ -3,12 +3,11 @@
 namespace DaydreamLab\Cms\Services\Module;
 
 use DaydreamLab\Cms\Repositories\Module\ModuleRepository;
-use DaydreamLab\JJAJ\Events\Add;
-use DaydreamLab\JJAJ\Events\Checkout;
-use DaydreamLab\JJAJ\Events\Modify;
-use DaydreamLab\JJAJ\Events\Ordering;
-use DaydreamLab\JJAJ\Events\Remove;
-use DaydreamLab\JJAJ\Events\State;
+use DaydreamLab\Cms\Events\Add;
+use DaydreamLab\Cms\Events\Checkout;
+use DaydreamLab\Cms\Events\Modify;
+use DaydreamLab\Cms\Events\Remove;
+use DaydreamLab\Cms\Events\State;
 use DaydreamLab\JJAJ\Services\BaseService;
 use Illuminate\Support\Collection;
 

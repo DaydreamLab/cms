@@ -23,6 +23,16 @@
     "require-dev": {
         "phpunit/phpunit": "^7.0"
     },
+    "repositories" : [
+        {
+            "type": "vcs",
+            "url":  "git@bitbucket.org:DaydreamLab/JJAJ.git"
+        },
+        {
+            "type": "vcs",
+            "url":  "git@bitbucket.org:DaydreamLab/user.git"
+        }
+    ],
     "extra": {
         "laravel": {
             "providers": [

@@ -3,13 +3,12 @@
 namespace DaydreamLab\Cms\Services\Tag;
 
 use DaydreamLab\Cms\Repositories\Tag\TagRepository;
-use DaydreamLab\JJAJ\Events\Add;
-use DaydreamLab\JJAJ\Events\Checkout;
-use DaydreamLab\JJAJ\Events\Modify;
-use DaydreamLab\JJAJ\Events\Ordering;
-use DaydreamLab\JJAJ\Events\Remove;
-use DaydreamLab\JJAJ\Events\State;
-use DaydreamLab\JJAJ\Helpers\Helper;
+use DaydreamLab\Cms\Events\Add;
+use DaydreamLab\Cms\Events\Checkout;
+use DaydreamLab\Cms\Events\Modify;
+use DaydreamLab\Cms\Events\Ordering;
+use DaydreamLab\Cms\Events\Remove;
+use DaydreamLab\Cms\Events\State;
 use DaydreamLab\JJAJ\Services\BaseService;
 use DaydreamLab\JJAJ\Traits\NestedServiceTrait;
 use Illuminate\Support\Collection;
@@ -36,7 +35,6 @@ class TagService extends BaseService
 
     public function addNested(Collection $input)
     {
-
         $item = $this->traitAddNested($input);
 
         event(new Add($item, $this->model_name, $input, $this->user));
