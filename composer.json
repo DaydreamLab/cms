@@ -26,19 +26,19 @@
     "repositories" : [
         {
             "type": "vcs",
-            "url":  "git@bitbucket.org:DaydreamLab/JJAJ.git"
+            "url":  "git@github.com:DaydreamLab/JJAJ.git"
         },
         {
             "type": "vcs",
-            "url":  "git@bitbucket.org:DaydreamLab/user.git"
+            "url":  "git@github.com:DaydreamLab/user.git"
         },
         {
             "type": "vcs",
-            "url":  "git@bitbucket.org:DaydreamLab/media.git"
+            "url":  "git@github.com:DaydreamLab/media.git"
         },
         {
             "type": "vcs",
-            "url":  "git@bitbucket.org:DaydreamLab/observer.git"
+            "url":  "git@github.com:DaydreamLab/observer.git"
         }
     ],
     "extra": {
