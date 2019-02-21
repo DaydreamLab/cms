@@ -33,6 +33,16 @@
             "type": "vcs",
             "url":  "https://github.com/DaydreamLab/user",
             "no-api": true
+        },
+        {
+            "type": "vcs",
+            "url":  "https://github.com/DaydreamLab/media",
+            "no-api": true
+        },
+        {
+            "type": "vcs",
+            "url":  "https://github.com/DaydreamLab/observer",
+            "no-api": true
         }
     ],
     "extra": {
