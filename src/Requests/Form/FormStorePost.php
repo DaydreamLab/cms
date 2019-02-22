@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Requests\Form;
 
 use DaydreamLab\JJAJ\Requests\AdminRequest;
 use Illuminate\Validation\Rule;
+use TimeHunter\LaravelGoogleReCaptchaV3\Validations\GoogleReCaptchaV3ValidationRule;
 
 class FormStorePost extends AdminRequest
 {
@@ -42,6 +43,7 @@ class FormStorePost extends AdminRequest
                     'monespa',
                 ])
             ],
+            'g-recaptcha-response' => [new GoogleReCaptchaV3ValidationRule('contact_us')]
         ];
     }
 }

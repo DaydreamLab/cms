@@ -38,12 +38,6 @@ class FormFrontService extends FormService
             $this->response = null;
         }
 
-
-
-
-
-
-
         return $result;
     }
 }
