@@ -43,7 +43,7 @@ class FormStorePost extends AdminRequest
                     'monespa',
                 ])
             ],
-            'g-recaptcha-response' => [new GoogleReCaptchaV3ValidationRule('contact_us')]
+            'g_recaptcha_response' => [new GoogleReCaptchaV3ValidationRule('contact_us')]
         ];
     }
 }
