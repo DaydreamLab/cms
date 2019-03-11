@@ -5,7 +5,7 @@ namespace DaydreamLab\Cms\Services\Category\Admin;
 use DaydreamLab\Cms\Repositories\Category\Admin\CategoryAdminRepository;
 use DaydreamLab\Cms\Services\Category\CategoryService;
 use DaydreamLab\Cms\Services\Cms\CmsCronJobService;
-use DaydreamLab\Cms\Traits\CmsCronJob;
+use DaydreamLab\Cms\Traits\Service\CmsCronJob;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
 use Illuminate\Support\Collection;
@@ -19,7 +19,7 @@ class CategoryAdminService extends CategoryService
 
     protected $cmsCronJobService;
 
-    protected $search_keys = ['title', 'introtext', 'description'];
+    protected $search_keys = ['title', 'introtext', 'description', 'extrafields_search'];
 
     public function __construct(CategoryAdminRepository $repo,
                                 CmsCronJobService       $cmsCronJobService)
@@ -74,7 +74,8 @@ class CategoryAdminService extends CategoryService
             $input->publish_up = now()->toDateTimeString();
         }
 
-        $result = parent::storeNested($input);
+
+        $result = parent::store($input);
 
         if (gettype($result) == 'boolean')
         {

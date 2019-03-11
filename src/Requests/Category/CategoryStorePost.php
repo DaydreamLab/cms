@@ -51,7 +51,7 @@ class CategoryStorePost extends AdminRequest
             'template'              => 'nullable|string',
             'metadesc'              => 'nullable|string',
             'metakeywords'          => 'nullable|string',
-            'params'                => 'nullable|string',
+            'params'                => 'nullable|array',
             'publish_up'            => 'nullable|datetime',
             'publish_down'          => 'nullable|datetime',
         ];

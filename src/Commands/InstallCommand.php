@@ -75,6 +75,9 @@ class InstallCommand extends Command
         //$this->call('jjaj:refresh');
         $this->call('user:install');
 
+        $this->call('ec:install');
+
+
         foreach ($this->seeders as $seeder) {
             $this->call('db:seed', [
                 '--class' => $this->seeder_namespace . $seeder

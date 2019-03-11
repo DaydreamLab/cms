@@ -2,16 +2,19 @@
 namespace DaydreamLab\Cms\Models\Item;
 
 use DaydreamLab\Cms\Models\Category\Category;
+use DaydreamLab\Cms\Models\Extrafield\Admin\ExtrafieldAdmin;
 use DaydreamLab\Cms\Models\Extrafield\Extrafield;
 use DaydreamLab\Cms\Models\Extrafield\ExtrafieldGroup;
 use DaydreamLab\Cms\Models\Tag\Tag;
+use DaydreamLab\Cms\Traits\WithExtrafield;
+use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\User\Models\Viewlevel\Viewlevel;
 
 class Item extends BaseModel
 {
-    use RecordChanger {
+    use WithExtrafield, RecordChanger {
         RecordChanger::boot as traitBoot;
     }
 
@@ -50,6 +53,7 @@ class Item extends BaseModel
         'params',
         'extrafield_group_id',
         'extrafields',
+        'extrafields_search',
         'locked_by',
         'locked_at',
         'created_by',
@@ -69,6 +73,7 @@ class Item extends BaseModel
         'updated_by',
         'viewlevels',
         'viewlevel',
+        'extrafields_search'
     ];
 
 
@@ -85,16 +90,17 @@ class Item extends BaseModel
         'creator_groups',
         'tags',
         'viewlevels',
-        'access_title'
+        'access_title',
+        'extrafield_group_title'
     ];
 
 
     protected $casts = [
-        'params'        => 'array',
-        'extrafields'   => 'array',
-        'locked_at'     => 'datetime:Y-m-d H:i:s',
-        'publish_up'    => 'datetime:Y-m-d H:i:s',
-        'publish_down'  => 'datetime:Y-m-d H:i:s',
+        'params' => 'array',
+        'extrafields' => 'array',
+        'locked_at' => 'datetime:Y-m-d H:i:s',
+        'publish_up' => 'datetime:Y-m-d H:i:s',
+        'publish_down' => 'datetime:Y-m-d H:i:s',
     ];
 
 
@@ -107,12 +113,6 @@ class Item extends BaseModel
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
-    }
-
-
-    public function extrafieldGroup()
-    {
-        return $this->hasOne(ExtrafieldGroup::class, 'id', 'extrafield_group_id');
     }
 
 
@@ -141,39 +141,8 @@ class Item extends BaseModel
         return $groups->map(function ($item, $key) {
             return $item->title;
         });
-
     }
 
-
-    public function getExtrafieldsAttribute($value)
-    {
-
-        $value = $value ? $value : json_encode([]);
-        $data = [];
-        foreach (json_decode($value) as $extra_field)
-        {
-            $extra_field_data = Extrafield::find($extra_field->id);
-            $extra_field_data->value = $extra_field->value;
-
-            foreach ($extra_field->params as $key => $param)
-            {
-                $extra_field_data->{$key} = $param->value;
-                $this->{$extra_field_data->alias . '_' . $key} = $param->value;
-            }
-
-            $data[] = $extra_field_data->toArray();
-        }
-
-        return $data;
-    }
-
-
-    public function getExtrafieldGroupTitleAttribute()
-    {
-        $group = $this->extrafieldGroup()->first();
-
-        return $group ? $group->title : null;
-    }
 
     public function getTagsAttribute()
     {
@@ -189,7 +158,7 @@ class Item extends BaseModel
     public function tag()
     {
         return $this->belongsToMany(Tag::class, 'items_tags_maps', 'item_id', 'tag_id')
-                    ->where('state', 1);
+            ->where('state', 1);
     }
 
 
@@ -197,4 +166,5 @@ class Item extends BaseModel
     {
         return $this->hasOne(Viewlevel::class, 'id', 'access');
     }
+
 }

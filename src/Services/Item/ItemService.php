@@ -10,6 +10,7 @@ use DaydreamLab\Cms\Events\Remove;
 use DaydreamLab\Cms\Events\State;
 use DaydreamLab\Cms\Events\Modify;
 use DaydreamLab\JJAJ\Helpers\Helper;
+use DaydreamLab\JJAJ\Repositories\BaseRepository;
 use DaydreamLab\JJAJ\Services\BaseService;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
@@ -22,6 +23,11 @@ class ItemService extends BaseService
 
     protected $itemTagMapService;
 
+    public function __construct(BaseRepository $repo)
+    {
+        parent::__construct($repo);
+        $this->repo = $repo;
+    }
 
     public function add(Collection $input)
     {
@@ -47,14 +53,15 @@ class ItemService extends BaseService
     {
         $result = $this->repo->featured($input);
 
+        $action = $input->featured == 0 ? 'Unfeatured' : 'Featured';
         if ($result)
         {
-            $this->status   = Str::upper(Str::snake($this->type.'FeaturedSuccess'));
+            $this->status   = Str::upper(Str::snake($this->type.$action.'Success'));
             $this->response = null;
         }
         else
         {
-            $this->status   = Str::upper(Str::snake($this->type.'FeaturedSuccess'));
+            $this->status   = Str::upper(Str::snake($this->type.$action.'Fail'));
             $this->response = null;
         }
 
@@ -102,21 +109,4 @@ class ItemService extends BaseService
 
         return $result;
     }
-
-
-    public function unfeatured(Collection $input)
-    {
-        $feature = $this->repo->unfeatured($input);
-        if ($feature)
-        {
-            $this->status   = Str::upper(Str::snake($this->type.'UnfeaturedSuccess'));
-            $this->response = null;
-        }
-        else
-        {
-            $this->status   = Str::upper(Str::snake($this->type.'UnfeaturedSuccess'));
-            $this->response = null;
-        }
-    }
-
 }

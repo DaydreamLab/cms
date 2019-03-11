@@ -45,29 +45,4 @@ class MenuAdminService extends MenuService
         return $item->save();
     }
 
-
-    public function store(Collection $input)
-    {
-        if (InputHelper::null($input, 'alias')){
-            $input->forget('alias');
-            $input->put('alias', Str::lower(now()->format('Y-m-d-H-i-s')) . '-' . Str::random(4));
-        }
-
-        if (!InputHelper::null($input, 'url'))
-        {
-            $result = parse_url($input->url);
-            $input->put('host', $result['host']);
-        }
-
-        if (InputHelper::null($input, 'parent_id')) {
-            $parent = $this->find(1);
-            $input->put('path', $parent->path . '/'.$input->get('alias'));
-        }
-        else {
-            $parent = $this->find($input->parent_id);
-            $input->put('path', $parent->path . '/' .$input->get('alias'));
-        }
-
-        return parent::storeNested($input);
-    }
 }

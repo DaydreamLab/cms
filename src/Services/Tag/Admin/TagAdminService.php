@@ -5,7 +5,7 @@ namespace DaydreamLab\Cms\Services\Tag\Admin;
 use DaydreamLab\Cms\Repositories\Tag\Admin\TagAdminRepository;
 use DaydreamLab\Cms\Services\Cms\CmsCronJobService;
 use DaydreamLab\Cms\Services\Tag\TagService;
-use DaydreamLab\Cms\Traits\CmsCronJob;
+use DaydreamLab\Cms\Traits\Service\CmsCronJob;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
 use Illuminate\Support\Collection;

@@ -34,14 +34,7 @@ class ItemAdminController extends BaseController
 
     public function featured(ItemAdminFeaturePost $request)
     {
-        if($request->featured == 0)
-        {
-            $this->service->unfeatured($request->rulesInput());
-        }
-        else
-        {
-            $this->service->featured($request->rulesInput());
-        }
+        $this->service->featured($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }

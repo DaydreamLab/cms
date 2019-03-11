@@ -6,7 +6,7 @@ use DaydreamLab\Cms\Repositories\Item\Admin\ItemAdminRepository;
 use DaydreamLab\Cms\Services\Category\Admin\CategoryAdminService;
 use DaydreamLab\Cms\Services\Cms\CmsCronJobService;
 use DaydreamLab\Cms\Services\Tag\Admin\TagAdminService;
-use DaydreamLab\Cms\Traits\CmsCronJob;
+use DaydreamLab\Cms\Traits\Service\CmsCronJob;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
 use DaydreamLab\Cms\Services\Item\ItemService;
@@ -27,7 +27,7 @@ class ItemAdminService extends ItemService
 
     protected $categoryAdminService;
 
-    protected $search_keys = ['title', 'introtext', 'description'];
+    protected $search_keys = ['title', 'introtext', 'description', 'extrafields_search'];
 
     public function __construct(ItemAdminRepository     $repo,
                                 TagAdminService         $tagAdminService,
@@ -48,24 +48,11 @@ class ItemAdminService extends ItemService
     {
         if (!InputHelper::null($input, 'featured'))
         {
-            $input->put('featured_ordering', 1);
-            $other = $this->findOtherFeatured();
-            $this->featuredOrdering($other);
+            $newest = $this->repo->findNewestFeatured();
+            $input->put('featured_ordering', $newest ? $newest->featured_ordering + 1 : 1);
         }
 
         return parent::add($input);
-    }
-
-
-    public function findOtherFeatured($id = null)
-    {
-        return $this->repo->findOtherFeatured($id);
-    }
-
-
-    public function featuredOrdering($other)
-    {
-        return $this->repo->featuredOrdering($other);
     }
 
 
@@ -98,9 +85,12 @@ class ItemAdminService extends ItemService
     {
         if (!InputHelper::null($input, 'featured'))
         {
-            $input->put('featured_ordering', 1);
-            $other = $this->findOtherFeatured($input->id);
-            $this->featuredOrdering($other);
+            $item = $this->repo->find($input->id);
+            if ($item && $item->featured != $input->featured)
+            {
+                $newest = $this->repo->findNewestFeatured();
+                $input->put('featured_ordering', $newest->featured_ordering++);
+            }
         }
 
         return parent::modify($input);

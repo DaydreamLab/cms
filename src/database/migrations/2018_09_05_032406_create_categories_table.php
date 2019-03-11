@@ -37,6 +37,7 @@ class CreateCategoriesTable extends Migration
             $table->text('params')->nullable();
             $table->unsignedInteger('extrafield_group_id')->nullable();
             $table->text('extrafields')->nullable();
+            $table->text('extrafields_search')->nullable();
             $table->unsignedInteger('locked_by')->nullable()->default(0);
             $table->timestamp('locked_at')->nullable();
             $table->unsignedInteger('created_by');

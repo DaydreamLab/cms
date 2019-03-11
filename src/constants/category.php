@@ -2,40 +2,6 @@
 
 return [
 
-    // Create
-    'CATEGORY_CREATE_SUCCESS' => [
-        'code'      => 200,
-        'message'   => 'Category create success'
-    ],
-    'CATEGORY_ADMIN_CREATE_SUCCESS' => [
-        'code'      => 200,
-        'message'   => 'Category admin create success'
-    ],
-    'CATEGORY_FRONT_CREATE_SUCCESS' => [
-        'code'      => 200,
-        'message'   => 'Category front create success'
-    ],
-    'CATEGORY_CREATE_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Category create fail'
-    ],
-    'CATEGORY_ADMIN_CREATE_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Category admin create fail'
-    ],
-    'CATEGORY_FRONT_CREATE_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Category front create fail'
-    ],
-    'CATEGORY_ADMIN_INSUFFICIENT_PERMISSION' => [
-        'code'      => 403,
-        'message'   => 'Category admin insufficient permission'
-    ],
-    'CATEGORY_FRONT_INSUFFICIENT_PERMISSION' => [
-        'code'      => 403,
-        'message'   => 'Category front insufficient permission'
-    ],
-
     // Create Nested
     'CATEGORY_CREATE_NESTED_SUCCESS' => [
         'code'      => 200,
@@ -74,34 +40,6 @@ return [
         'message'   => 'Category front create nested with exist alias'
     ],
 
-
-
-    // Update
-    'CATEGORY_UPDATE_SUCCESS' => [
-        'code'      => 200,
-        'message'   => 'Category update success'
-    ],
-    'CATEGORY_ADMIN_UPDATE_SUCCESS' => [
-        'code'      => 200,
-        'message'   => 'Category admin update success'
-    ],
-    'CATEGORY_FRONT_UPDATE_SUCCESS' => [
-        'code'      => 200,
-        'message'   => 'Category front update success'
-    ],
-
-    'CATEGORY_UPDATE_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Category update fail'
-    ],
-    'CATEGORY_ADMIN_UPDATE_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Category admin update fail'
-    ],
-    'CATEGORY_FRONT_UPDATE_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Category front update fail'
-    ],
 
 
     // Update
@@ -159,33 +97,6 @@ return [
         'message'   => 'Category front trash fail'
     ],
 
-
-
-    // Delete
-    'CATEGORY_DELETE_SUCCESS' => [
-        'code'      => 200,
-        'message'   => 'Category delete success'
-    ],
-    'CATEGORY_ADMIN_DELETE_SUCCESS' => [
-        'code'      => 200,
-        'message'   => 'Category admin delete success'
-    ],
-    'CATEGORY_FRONT_DELETE_SUCCESS' => [
-        'code'      => 200,
-        'message'   => 'Category front delete success'
-    ],
-    'CATEGORY_DELETE_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Category delete fail'
-    ],
-    'CATEGORY_ADMIN_DELETE_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Category admin delete fail'
-    ],
-    'CATEGORY_FRONT_DELETE_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Category front delete fail'
-    ],
 
     // Delete Nested
     'CATEGORY_DELETE_NESTED_SUCCESS' => [

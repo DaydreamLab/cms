@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Models\Category;
 use Carbon\Carbon;
 use DaydreamLab\Cms\Models\Extrafield\Extrafield;
 use DaydreamLab\Cms\Models\Extrafield\ExtrafieldGroup;
+use DaydreamLab\Cms\Traits\WithExtrafield;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
@@ -13,7 +14,7 @@ use Kalnoy\Nestedset\NodeTrait;
 
 class Category extends BaseModel
 {
-    use NodeTrait, RecordChanger {
+    use NodeTrait, WithExtrafield, RecordChanger {
         RecordChanger::boot as traitBoot;
     }
     /**
@@ -51,6 +52,7 @@ class Category extends BaseModel
         'params',
         'extrafield_group_id',
         'extrafields',
+        'extrafields_search',
         'created_by',
         'updated_by',
         'locked_by',
@@ -70,7 +72,7 @@ class Category extends BaseModel
         '_rgt',
         'ancestors',
         'viewlevel',
-        'viewlevels',
+        'extrafields_search',
         //'extrafield_group',
         //'extrafield_group_title'
     ];
@@ -87,7 +89,6 @@ class Category extends BaseModel
         'locker',
         'tree_title',
         'tree_list_title',
-        //'viewlevels',
         'access_title',
         'extrafield_group_title'
     ];
@@ -108,45 +109,9 @@ class Category extends BaseModel
     }
 
 
-    public function extrafieldGroup()
-    {
-        return $this->hasOne(ExtrafieldGroup::class, 'id', 'extrafield_group_id');
-    }
-
-
     public function getAccessTitleAttribute()
     {
         return $this->viewlevel->title ?: null;
-    }
-
-
-    public function getExtrafieldsAttribute($value)
-    {
-        $value = $value ? $value : json_encode([]);
-        $data = [];
-        foreach (json_decode($value) as $extra_field)
-        {
-            $extra_field_data = Extrafield::find($extra_field->id);
-            $extra_field_data->value = $extra_field->value ;
-
-            foreach ($extra_field->params as $key => $param)
-            {
-                $extra_field_data->{$key} = $param->value;
-                $this->{$extra_field_data->alias . '_' . $key} = $param->value;
-            }
-
-            $data[] = $extra_field_data->toArray();
-        }
-
-        return $data;
-    }
-
-
-    public function getExtrafieldGroupTitleAttribute()
-    {
-        $group = $this->extrafieldGroup()->first();
-
-        return $group ? $group->title : null;
     }
 
 

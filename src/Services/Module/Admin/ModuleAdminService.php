@@ -43,29 +43,4 @@ class ModuleAdminService extends ModuleService
         return $item->save();
     }
 
-
-    public function store(Collection $input)
-    {
-        if (InputHelper::null($input, 'alias')){
-            $input->forget('alias');
-            $input->put('alias', Str::lower(now()->format('Y-m-d-H-i-s')));
-        }
-
-
-        if (InputHelper::null($input, 'language')){
-            $input->forget('language');
-            $input->put('language', '*');
-        }
-
-
-        if (InputHelper::null($input, 'access')){
-            $input->forget('access');
-            $input->put('access', 1);
-        }
-
-
-        return parent::store($input);
-    }
-
-
 }

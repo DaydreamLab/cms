@@ -1,6 +1,6 @@
 <?php
 
-namespace DaydreamLab\Cms\Traits;
+namespace DaydreamLab\Cms\Traits\Service;
 
 use DaydreamLab\JJAJ\Helpers\InputHelper;
 use Illuminate\Support\Collection;
