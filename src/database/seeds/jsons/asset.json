@@ -1,18 +1,32 @@
 [
   {
-    "title": "ASSET_CMS_CONTENTS_TITLE",
+    "title": "COM_CONTENT",
+    "path": "",
+    "component": "",
+    "type": "separator",
+    "redirect": "",
+    "icon": "",
+    "state": 1,
+    "showNav": 1,
+    "ordering": 8,
+    "created_by": 1,
+    "children": [],
+    "apis": []
+  },
+  {
+    "title": "COM_CONTENT",
     "path": "/content",
     "component": "",
     "type": "alias",
     "redirect": "/content/item",
     "icon": "cube",
     "state": 1,
-    "showNav": 1,
-    "ordering": 8,
+    "showNav": 0,
+    "ordering": 9,
     "created_by": 1,
     "children": [
       {
-        "title": "ASSET_CMS_ITEMS_TITLE",
+        "title": "COM_CONTENT_ITEM_MANAGER_TITLE",
         "path": "/item",
         "component": "content/item/list",
         "type": "menu",
@@ -57,7 +71,7 @@
         ]
       },
       {
-        "title": "ASSET_CMS_ITEM_EDIT_TITLE",
+        "title": "COM_CONTENT_ITEM_EDIT_TITLE",
         "path": "/item/edit",
         "component": "content/item/edit",
         "type": "function",
@@ -72,7 +86,7 @@
       },
 
       {
-        "title": "ASSET_CMS_CATEGORIES_TITLE",
+        "title": "COM_CONTENT_CATEGORY_MANAGER_TITLE",
         "path": "/category",
         "component": "content/category/list",
         "type": "menu",
@@ -112,7 +126,7 @@
         ]
       },
       {
-        "title": "ASSET_CMS_CATEGORY_EDIT_TITLE",
+        "title": "COM_CONTENT_CATEGORY_EDIT_TITLE",
         "path": "/category/edit",
         "component": "content/category/edit",
         "type": "function",
@@ -127,7 +141,7 @@
       },
 
       {
-        "title": "ASSET_CMS_TAGS_TITLE",
+        "title": "COM_CONTENT_TAG_MANAGER_TITLE",
         "path": "/tag",
         "component": "content/tag/list",
         "type": "menu",
@@ -162,7 +176,7 @@
         ]
       },
       {
-        "title": "ASSET_CMS_TAG_EDIT_TITLE",
+        "title": "COM_CONTENT_TAG_EDIT_TITLE",
         "path": "/tag/edit",
         "component": "content/tag/edit",
         "type": "function",
@@ -176,7 +190,7 @@
         "apis": []
       },
       {
-        "title": "ASSET_CMS_LANGUAGES_TITLE",
+        "title": "COM_CONTENT_LANGUAGE_MANAGER_TITLE",
         "path": "/language",
         "component": "content/language/list",
         "type": "menu",
@@ -216,7 +230,7 @@
         ]
       },
       {
-        "title": "ASSET_CMS_LANGUAGE_EDIT_TITLE",
+        "title": "COM_CONTENT_LANGUAGE_EDIT_TITLE",
         "path": "/language/edit",
         "component": "content/language/edit",
         "type": "function",
@@ -230,7 +244,7 @@
         "apis": []
       },
       {
-        "title": "ASSET_CMS_MEDIA_MANAGER_TITLE",
+        "title": "COM_CONTENT_MEDIA_MANAGER_TITLE",
         "path": "/media",
         "component": "content/media",
         "type": "menu",
@@ -244,7 +258,7 @@
         "apis": []
       },
       {
-        "title": "ASSET_CMS_SETTINGS_TITLE",
+        "title": "COM_CONTENT_SETTINGS_TITLE",
         "path": "/setting",
         "component": "content/setting",
         "type": "menu",
@@ -258,7 +272,7 @@
         "apis": []
       },
       {
-        "title": "ASSET_CMS_SITES_TITLE",
+        "title": "COM_CONTENT_SITE_MANAGER_TITLE",
         "path": "/site",
         "component": "content/site/list",
         "type": "menu",
@@ -272,7 +286,7 @@
         "apis": []
       },
       {
-        "title": "ASSET_CMS_SITE_EDIT_TITLE",
+        "title": "COM_CONTENT_SITE_EDIT_TITLE",
         "path": "/site/edit",
         "component": "content/site/edit",
         "type": "function",

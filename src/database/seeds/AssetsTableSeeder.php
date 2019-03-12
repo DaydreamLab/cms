@@ -8,6 +8,9 @@ use DaydreamLab\User\Models\Asset\AssetApi;
 use DaydreamLab\User\Models\Role\Role;
 use DaydreamLab\User\Models\Role\RoleApiMap;
 use DaydreamLab\User\Models\Role\RoleAssetMap;
+use DaydreamLab\User\Models\User\UserGroup;
+use DaydreamLab\User\Models\User\UserGroupApiMap;
+use DaydreamLab\User\Models\User\UserGroupAssetMap;
 use DaydreamLab\User\Repositories\Asset\AssetRepository;
 use DaydreamLab\User\Services\Asset\AssetService;
 use Illuminate\Database\Seeder;
@@ -60,6 +63,7 @@ class AssetsTableSeeder extends Seeder
             unset($item['apis']);
 
             $asset = Asset::create($item);
+            //UserGroupAssetMap::create([
             RoleAssetMap::create([
                 'role_id'   => $super_user->id,
                 'asset_id'  => $asset->id,
@@ -76,7 +80,7 @@ class AssetsTableSeeder extends Seeder
                 $api['asset_id'] = $asset->id;
                 $asset_api = AssetApi::create($api);
                 $api_ids[] = $asset_api->id;
-
+//                UserGroupApiMap::create([
                 RoleApiMap::create([
                     'role_id'   => $super_user->id,
                     'api_id'    => $asset_api->id,
