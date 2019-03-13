@@ -5,9 +5,6 @@ namespace DaydreamLab\Cms\Database\Seeds;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\User\Models\Asset\Asset;
 use DaydreamLab\User\Models\Asset\AssetApi;
-use DaydreamLab\User\Models\Role\Role;
-use DaydreamLab\User\Models\Role\RoleApiMap;
-use DaydreamLab\User\Models\Role\RoleAssetMap;
 use DaydreamLab\User\Models\User\UserGroup;
 use DaydreamLab\User\Models\User\UserGroupApiMap;
 use DaydreamLab\User\Models\User\UserGroupAssetMap;
@@ -53,7 +50,7 @@ class AssetsTableSeeder extends Seeder
 
     public function migrate($data, $parent)
     {
-        $super_user = Role::where('title','Super User')->first();
+        $super_user = UserGroup::where('title','Super User')->first();
 
         foreach ($data as $item)
         {
@@ -64,8 +61,8 @@ class AssetsTableSeeder extends Seeder
 
             $asset = Asset::create($item);
             //UserGroupAssetMap::create([
-            RoleAssetMap::create([
-                'role_id'   => $super_user->id,
+            UserGroupAssetMap::create([
+                'group_id'   => $super_user->id,
                 'asset_id'  => $asset->id,
             ]);
 
@@ -80,9 +77,8 @@ class AssetsTableSeeder extends Seeder
                 $api['asset_id'] = $asset->id;
                 $asset_api = AssetApi::create($api);
                 $api_ids[] = $asset_api->id;
-//                UserGroupApiMap::create([
-                RoleApiMap::create([
-                    'role_id'   => $super_user->id,
+                UserGroupApiMap::create([
+                    'group_id'   => $super_user->id,
                     'api_id'    => $asset_api->id,
                 ]);
             }

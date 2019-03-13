@@ -1,7 +1,7 @@
 [
   {
-    "title": "COM_CONTENT",
-    "path": "",
+    "title": "MOD_GLOBAL_MENU_SYSTEM",
+    "path": "/system",
     "component": "",
     "type": "separator",
     "redirect": "",
@@ -10,19 +10,217 @@
     "showNav": 1,
     "ordering": 8,
     "created_by": 1,
+    "children": [
+      {
+        "title": "COM_SYSTEM_SETTINGS_TITLE",
+        "path": "/setting",
+        "component": "system/setting",
+        "type": "menu",
+        "redirect": "",
+        "icon": "sliders-h",
+        "state": 1,
+        "showNav": 1,
+        "ordering": 10,
+        "created_by": 1,
+        "children": [],
+        "apis": []
+      },
+
+      {
+        "title": "COM_SYSTEM_LANGUAGE_MANAGER_TITLE",
+        "path": "/language",
+        "component": "system/language/list",
+        "type": "menu",
+        "redirect": "",
+        "icon": "language",
+        "state": 1,
+        "showNav": 1,
+        "ordering": 7,
+        "created_by": 1,
+        "children": [],
+        "apis": [
+          {
+            "method": "add",
+            "url": "/admin/language/store",
+            "created_by": 1
+          },
+          {
+            "method": "edit",
+            "url": "/admin/language/store",
+            "created_by": 1
+          },
+          {
+            "method": "delete",
+            "url": "/admin/language/remove",
+            "created_by": 1
+          },
+          {
+            "method": "updateState",
+            "url": "/admin/language/state",
+            "created_by": 1
+          },
+          {
+            "method": "setDefault",
+            "url": "/admin/language/default",
+            "created_by": 1
+          }
+        ]
+      },
+      {
+        "title": "COM_SYSTEM_LANGUAGE_EDIT_TITLE",
+        "path": "/language/edit",
+        "component": "system/language/edit",
+        "type": "function",
+        "redirect": "",
+        "icon": "",
+        "state": 1,
+        "showNav": 0,
+        "ordering": 8,
+        "created_by": 1,
+        "children": [],
+        "apis": []
+      },
+      {
+        "title": "COM_SYSTEM_SITE_MANAGER_TITLE",
+        "path": "/site",
+        "component": "system/site/list",
+        "type": "menu",
+        "redirect": "",
+        "icon": "sitemap",
+        "state": 1,
+        "showNav": 1,
+        "ordering": 11,
+        "created_by": 1,
+        "children": [],
+        "apis": []
+      },
+      {
+        "title": "COM_SYSTEM_SITE_EDIT_TITLE",
+        "path": "/site/edit",
+        "component": "system/site/edit",
+        "type": "function",
+        "redirect": "",
+        "icon": "",
+        "state": 1,
+        "showNav": 0,
+        "ordering": 12,
+        "created_by": 1,
+        "children": [],
+        "apis": []
+      }
+    ],
+    "apis": []
+  },
+  {
+    "title": "MOD_GLOBAL_MENU_PAGE",
+    "path": "",
+    "component": "",
+    "type": "separator",
+    "redirect": "",
+    "icon": "",
+    "state": 1,
+    "showNav": 1,
+    "ordering": 9,
+    "created_by": 1,
     "children": [],
+    "apis": []
+  },
+  {
+    "title": "COM_MENUS",
+    "path": "/menu",
+    "component": "",
+    "type": "separator",
+    "redirect": "",
+    "icon": "",
+    "state": 1,
+    "showNav": 1,
+    "ordering": 9,
+    "created_by": 1,
+    "children": [
+      {
+        "title": "COM_MENUS_ITEM_MANAGER_TITLE",
+        "path": "",
+        "component": "menu/list",
+        "type": "menu",
+        "redirect": "",
+        "icon": "th-list",
+        "state": 1,
+        "showNav": 1,
+        "ordering": 1,
+        "created_by": 1,
+        "children": [],
+        "apis": []
+      },
+      {
+        "title": "COM_MENUS_ITEM_EDIT_TITLE",
+        "path": "/edit",
+        "component": "menu/edit",
+        "type": "function",
+        "redirect": "",
+        "icon": "",
+        "state": 1,
+        "showNav": 0,
+        "ordering": 2,
+        "created_by": 1,
+        "children": [],
+        "apis": []
+      }
+    ],
+    "apis": []
+  },
+  {
+    "title": "COM_MODULES",
+    "path": "/module",
+    "component": "",
+    "type": "separator",
+    "redirect": "",
+    "icon": "",
+    "state": 1,
+    "showNav": 1,
+    "ordering": 10,
+    "created_by": 1,
+    "children": [
+      {
+        "title": "COM_MENUS_ITEM_MANAGER_TITLE",
+        "path": "",
+        "component": "module/list",
+        "type": "menu",
+        "redirect": "",
+        "icon": "cube",
+        "state": 1,
+        "showNav": 1,
+        "ordering": 1,
+        "created_by": 1,
+        "children": [],
+        "apis": []
+      },
+      {
+        "title": "COM_MODULES_ITEM_EDIT_TITLE",
+        "path": "/edit",
+        "component": "module/edit",
+        "type": "function",
+        "redirect": "",
+        "icon": "",
+        "state": 1,
+        "showNav": 0,
+        "ordering": 2,
+        "created_by": 1,
+        "children": [],
+        "apis": []
+      }
+    ],
     "apis": []
   },
   {
     "title": "COM_CONTENT",
     "path": "/content",
     "component": "",
-    "type": "alias",
+    "type": "separator",
     "redirect": "/content/item",
-    "icon": "cube",
+    "icon": "",
     "state": 1,
-    "showNav": 0,
-    "ordering": 9,
+    "showNav": 1,
+    "ordering": 11,
     "created_by": 1,
     "children": [
       {
@@ -31,7 +229,7 @@
         "component": "content/item/list",
         "type": "menu",
         "redirect": "",
-        "icon": "",
+        "icon": "file-alt",
         "state": 1,
         "showNav": 1,
         "ordering": 1,
@@ -91,7 +289,7 @@
         "component": "content/category/list",
         "type": "menu",
         "redirect": "",
-        "icon": "",
+        "icon": "folder-open",
         "state": 1,
         "showNav": 1,
         "ordering": 3,
@@ -141,15 +339,71 @@
       },
 
       {
+        "title": "COM_CONTENT_FIELD_MANAGER_TITLE",
+        "path": "/field/list",
+        "component": "content/field/list",
+        "type": "menu",
+        "redirect": "",
+        "icon": "layer-plus",
+        "state": 1,
+        "showNav": 1,
+        "ordering": 5,
+        "created_by": 1,
+        "children": [],
+        "apis": []
+      },
+      {
+        "title": "COM_CONTENT_FIELD_EDIT_TITLE",
+        "path": "/field/edit",
+        "component": "content/field/edit",
+        "type": "function",
+        "redirect": "",
+        "icon": "",
+        "state": 1,
+        "showNav": 0,
+        "ordering": 6,
+        "created_by": 1,
+        "children": [],
+        "apis": []
+      },
+      {
+        "title": "COM_CONTENT_FIELD_GROUP_MANAGER_TITLE",
+        "path": "/field/group/list",
+        "component": "content/field/group/list",
+        "type": "menu",
+        "redirect": "",
+        "icon": "layer-group",
+        "state": 1,
+        "showNav": 1,
+        "ordering": 7,
+        "created_by": 1,
+        "children": [],
+        "apis": []
+      },
+      {
+        "title": "COM_CONTENT_FIELD_GROUP_EDIT_TITLE",
+        "path": "/field/group/edit",
+        "component": "content/field/group/edit",
+        "type": "function",
+        "redirect": "",
+        "icon": "",
+        "state": 1,
+        "showNav": 0,
+        "ordering": 8,
+        "created_by": 1,
+        "children": [],
+        "apis": []
+      },
+      {
         "title": "COM_CONTENT_TAG_MANAGER_TITLE",
         "path": "/tag",
         "component": "content/tag/list",
         "type": "menu",
         "redirect": "",
-        "icon": "",
+        "icon": "tags",
         "state": 1,
         "showNav": 1,
-        "ordering": 5,
+        "ordering": 9,
         "created_by": 1,
         "children": [],
         "apis": [
@@ -184,61 +438,7 @@
         "icon": "",
         "state": 1,
         "showNav": 0,
-        "ordering": 6,
-        "created_by": 1,
-        "children": [],
-        "apis": []
-      },
-      {
-        "title": "COM_CONTENT_LANGUAGE_MANAGER_TITLE",
-        "path": "/language",
-        "component": "content/language/list",
-        "type": "menu",
-        "redirect": "",
-        "icon": "",
-        "state": 1,
-        "showNav": 1,
-        "ordering": 7,
-        "created_by": 1,
-        "children": [],
-        "apis": [
-          {
-            "method": "add",
-            "url": "/admin/language/store",
-            "created_by": 1
-          },
-          {
-            "method": "edit",
-            "url": "/admin/language/store",
-            "created_by": 1
-          },
-          {
-            "method": "delete",
-            "url": "/admin/language/remove",
-            "created_by": 1
-          },
-          {
-            "method": "updateState",
-            "url": "/admin/language/state",
-            "created_by": 1
-          },
-          {
-            "method": "setDefault",
-            "url": "/admin/language/default",
-            "created_by": 1
-          }
-        ]
-      },
-      {
-        "title": "COM_CONTENT_LANGUAGE_EDIT_TITLE",
-        "path": "/language/edit",
-        "component": "content/language/edit",
-        "type": "function",
-        "redirect": "",
-        "icon": "",
-        "state": 1,
-        "showNav": 0,
-        "ordering": 8,
+        "ordering": 10,
         "created_by": 1,
         "children": [],
         "apis": []
@@ -249,52 +449,10 @@
         "component": "content/media",
         "type": "menu",
         "redirect": "",
-        "icon": "",
-        "state": 1,
-        "showNav": 1,
-        "ordering": 9,
-        "created_by": 1,
-        "children": [],
-        "apis": []
-      },
-      {
-        "title": "COM_CONTENT_SETTINGS_TITLE",
-        "path": "/setting",
-        "component": "content/setting",
-        "type": "menu",
-        "redirect": "",
-        "icon": "",
-        "state": 1,
-        "showNav": 1,
-        "ordering": 10,
-        "created_by": 1,
-        "children": [],
-        "apis": []
-      },
-      {
-        "title": "COM_CONTENT_SITE_MANAGER_TITLE",
-        "path": "/site",
-        "component": "content/site/list",
-        "type": "menu",
-        "redirect": "",
-        "icon": "",
+        "icon": "images",
         "state": 1,
         "showNav": 1,
         "ordering": 11,
-        "created_by": 1,
-        "children": [],
-        "apis": []
-      },
-      {
-        "title": "COM_CONTENT_SITE_EDIT_TITLE",
-        "path": "/site/edit",
-        "component": "content/site/edit",
-        "type": "function",
-        "redirect": "",
-        "icon": "",
-        "state": 1,
-        "showNav": 0,
-        "ordering": 12,
         "created_by": 1,
         "children": [],
         "apis": []
