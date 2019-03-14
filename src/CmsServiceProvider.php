@@ -25,6 +25,7 @@ class CmsServiceProvider extends ServiceProvider
             __DIR__. '/../resources'             => resource_path(),
             __DIR__. '/../webpack.admin.mix.js'  => base_path().'/webpack.admin.mix.js',
             __DIR__. '/../package.json'          => base_path(). '/package.json'  ,
+            __DIR__. '/../.npmrc'                => base_path(). '/.npmrc'  ,
         ], 'cms-frontend');
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
         $this->loadRoutesFrom(__DIR__.'/routes/api.php');
