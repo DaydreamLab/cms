@@ -23,8 +23,8 @@ class CmsServiceProvider extends ServiceProvider
         $this->publishes([__DIR__. '/Configs' => config_path()], 'cms-configs');
         $this->publishes([
             __DIR__. '/../resources'             => resource_path(),
-            __DIR__. '/../webpack.admin.mix.js'  => base_path(),
-            __DIR__. '/../package.json'          => base_path(),
+            __DIR__. '/../webpack.admin.mix.js'  => base_path().'/webpack.admin.mix.js',
+            __DIR__. '/../package.json'          => base_path(). '/package.json'  ,
         ], 'cms-frontend');
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
         $this->loadRoutesFrom(__DIR__.'/routes/api.php');
