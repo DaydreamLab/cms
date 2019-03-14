@@ -1,0 +1,43 @@
+.el-menu-item.is-active
+  color: $color-white
+  background: $color-primary
+
+.el-submenu.is-active
+  background: $color-primary
+  .el-submenu__title, .el-submenu__icon-arrow
+    color: $color-white
+  .el-menu
+    background-color: #fcfcfd
+  .el-menu-item.is-active
+    color: $color-secondary
+    background: none
+ 
+.el-tabs--border-card
+  box-shadow: none
+  border: none
+  & > .el-tabs__header 
+    background-color: $color-white
+    .el-tabs__item.is-active
+      background: $color-primary
+      color: $color-white
+      &:hover
+        color: $color-white
+
+.el-tabs__item
+  height: $tab-item-height
+  line-height: $tab-item-height
+
+
+.el-button
+  &.btn--checkout
+    padding: 5px
+
+.el-tree--highlight-current .el-tree-node.is-current > .el-tree-node__content
+  background-color:  $color-primary
+  color: $color-white
+
+.el-message
+  top: 150px
+
+.el-tag
+  margin-right: 5px

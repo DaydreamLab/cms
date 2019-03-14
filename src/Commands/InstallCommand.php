@@ -43,8 +43,6 @@ class InstallCommand extends Command
 
 
     protected $seeders = [
-        //'UsersTableSeeder',
-        //'ViewlevelsTableSeeder',
         'AssetsTableSeeder',
         'ItemsTableSeeder',
         'LanguagesTableSeeder',
@@ -72,11 +70,7 @@ class InstallCommand extends Command
      */
     public function handle()
     {
-        //$this->call('jjaj:refresh');
         $this->call('user:install');
-
-        $this->call('ec:install');
-
 
         foreach ($this->seeders as $seeder) {
             $this->call('db:seed', [
@@ -86,9 +80,17 @@ class InstallCommand extends Command
 
         $this->deleteConstants();
 
+        $this->deleteResources();
+
         $this->call('vendor:publish', [
             '--tag' => 'cms-configs'
         ]);
+
+        $this->call('vendor:publish', [
+            '--tag'     => 'cms-frontend',
+            '--force'   => true
+        ]);
+
     }
 
 
@@ -98,5 +100,12 @@ class InstallCommand extends Command
         foreach ($this->constants as $constant) {
             File::delete($constants_path . $constant . '.php');
         }
+    }
+
+
+    public function deleteResources()
+    {
+        File::deleteDirectory('resources/assets');
+        File::deleteDirectory('resources/views');
     }
 }

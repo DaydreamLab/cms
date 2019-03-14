@@ -1,0 +1,51 @@
+@import "../../../../theme/reset.css"
+@import "../../../../theme/index.css"
+
+@import "variables"
+
+@import "override-element"
+
+body
+  background: none repeat scroll 0 0 $background-color-base
+  margin: 0 auto
+
+.content-aside__header
+  border-bottom: 1px solid $border-color-light
+  height: $tab-item-height
+  line-height: $tab-item-height
+  color: $color-primary
+  box-sizing: border-box
+
+.content-aside__header, .content-aside__content
+  padding: 0 $navbar-padding
+
+.form-item__inner
+  border: 1px solid $border-color-base
+  border-radius: $border-radius-base
+  display: inline-block
+  width: 100%
+  .el-input__inner
+    border: none
+    padding: 0
+.form-item-tags__wrapper
+  padding: 0 15px
+
+
+.text-label
+  +item_state
+  padding: 5px
+  color: $color-white
+  border-radius: $border-radius-base
+
+.text-right
+  text-align: right
+
+.is-block
+  display: block
+  width: 100%
+
+.ck-editor__editable
+  min-height: 400px
+
+.svg-inline--fa
+  margin-right: $icon-margin-right
