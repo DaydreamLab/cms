@@ -170,7 +170,6 @@ export default {
         }
       },
       list_actions: {
-        show: true,
         btns: [
           {
             text: "Assign Group",

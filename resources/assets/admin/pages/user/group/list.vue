@@ -63,10 +63,9 @@ export default {
         }
       },
       list_actions: {
-        show: true,
         btns: [
           {
-            text: this.$t("ASSET_USER_ROLE_ASSIGN_ASSET_TITLE"),
+            text: this.$t("COM_USERS_GROUPS_ASSIGN_ASSET_TITLE"),
             type: "primary",
             method: "grant_asset",
             fn: ({ data }) => {
@@ -80,7 +79,7 @@ export default {
             }
           },
           {
-            text: this.$t("ASSET_USER_ROLE_ASSIGN_API_TITLE"),
+            text: this.$t("COM_USERS_GROUPS_ASSIGN_API_TITLE"),
             type: "primary",
             method: "grant_api",
             fn: ({ data }) => {

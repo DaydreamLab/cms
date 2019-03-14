@@ -102,7 +102,6 @@ export default {
         }
       },
       list_actions: {
-        show: true,
         btns: [
           {
             text: this.$t("ASSET_USER_ROLE_ASSIGN_ASSET_TITLE"),
