@@ -108,6 +108,7 @@ class InstallCommand extends Command
     public function deleteResources()
     {
         File::deleteDirectory('resources/js');
+        File::deleteDirectory('resources/assets');
         File::deleteDirectory('resources/views');
     }
 }
