@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Services\Item\Front;
 
+use DaydreamLab\Cms\Events\Search;
 use DaydreamLab\Cms\Repositories\Item\Front\ItemFrontRepository;
 use DaydreamLab\Cms\Services\Category\Front\CategoryFrontService;
 use DaydreamLab\Cms\Services\Item\ItemService;
@@ -18,6 +19,8 @@ class ItemFrontService extends ItemService
     protected $categoryFrontService;
 
     protected $userGroupFrontService;
+
+    protected $search_keys = ['title', 'introtext', 'description', 'extrafields_search'];
 
     public function __construct(ItemFrontRepository $repo,
                                 CategoryFrontService $categoryFrontService,
@@ -322,6 +325,8 @@ class ItemFrontService extends ItemService
         {
             $this->response = $items;
         }
+
+        event(new Search($input, $this->user));
 
         return $original_items;
     }

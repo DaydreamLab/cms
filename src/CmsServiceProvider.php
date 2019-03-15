@@ -21,12 +21,12 @@ class CmsServiceProvider extends ServiceProvider
     {
         $this->publishes([__DIR__. '/constants' => config_path('constants')], 'cms-configs');
         $this->publishes([__DIR__. '/Configs' => config_path()], 'cms-configs');
-        $this->publishes([
-            __DIR__. '/../resources'             => resource_path(),
-            __DIR__. '/../webpack.admin.mix.js'  => base_path().'/webpack.admin.mix.js',
-            __DIR__. '/../package.json'          => base_path(). '/package.json'  ,
-            __DIR__. '/../.npmrc'                => base_path(). '/.npmrc'  ,
-        ], 'cms-frontend');
+//        $this->publishes([
+//            __DIR__. '/../resources'             => resource_path(),
+//            __DIR__. '/../webpack.admin.mix.js'  => base_path().'/webpack.admin.mix.js',
+//            __DIR__. '/../package.json'          => base_path(). '/package.json'  ,
+//            __DIR__. '/../.npmrc'                => base_path(). '/.npmrc'  ,
+//        ], 'cms-frontend');
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
         $this->loadRoutesFrom(__DIR__.'/routes/api.php');
         $this->loadRoutesFrom(__DIR__.'/routes/web.php');

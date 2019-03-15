@@ -65,6 +65,16 @@ class CategoryService extends BaseService
     }
 
 
+    public function ordering(Collection $input, $orderingKey = 'ordering')
+    {
+        $result = $this->traitOrderingNested($input, $orderingKey);
+
+        event(new Ordering($this->model_name, $result, $input, $orderingKey, $this->user));
+
+        return $result;
+    }
+
+
     public function remove(Collection $input)
     {
         $tree_ids = [];
@@ -102,16 +112,6 @@ class CategoryService extends BaseService
         $result = parent::state($input);
 
         event(new State($this->model_name, $result, $input, $this->user));
-
-        return $result;
-    }
-
-
-    public function ordering(Collection $input, $orderingKey = 'ordering')
-    {
-        $result = $this->traitOrderingNested($input, $orderingKey);
-
-        event(new Ordering($this->model_name, $result, $input, $orderingKey, $this->user));
 
         return $result;
     }

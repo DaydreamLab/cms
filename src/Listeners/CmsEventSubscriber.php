@@ -2,7 +2,6 @@
 
 namespace DaydreamLab\Cms\Listeners;
 
-
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\Observer\Services\Log\LogService;
 

@@ -80,16 +80,16 @@ class InstallCommand extends Command
 
         $this->deleteConstants();
 
-        $this->deleteResources();
+//        $this->deleteResources();
 
         $this->call('vendor:publish', [
             '--tag' => 'cms-configs'
         ]);
 
-        $this->call('vendor:publish', [
-            '--tag'     => 'cms-frontend',
-            '--force'   => true
-        ]);
+//        $this->call('vendor:publish', [
+//            '--tag'     => 'cms-frontend',
+//            '--force'   => true
+//        ]);
 
     }
 
