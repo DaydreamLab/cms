@@ -11,6 +11,7 @@ class CmsServiceProvider extends ServiceProvider
     protected $commands = [
         'DaydreamLab\Cms\Commands\InstallCommand',
         'DaydreamLab\Cms\Commands\CronCommand',
+        'DaydreamLab\Cms\Commands\PublishCommand',
     ];
     /**
      * Bootstrap services.
