@@ -27,9 +27,9 @@ class SettingFrontService extends SettingService
         $global = config('global');
 
         $lang_setting = $this->languageService->findByChain(
-            ['sef', 'site_id'],
+            ['sef', 'type'],
             ['=', '='],
-            [$locale, $global['site_id']]
+            [$locale ?: 'tw', 'content']
         )->first();
 
         if($lang_setting)

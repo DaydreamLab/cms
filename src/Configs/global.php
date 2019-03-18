@@ -17,6 +17,8 @@ return [
 
     'custom_body'       => '',
 
-    'custom_footer'       => '',
+    'custom_footer'     => '',
+
+    'site_id'           => 1,
 
 ];

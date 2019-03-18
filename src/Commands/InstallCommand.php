@@ -46,6 +46,7 @@ class InstallCommand extends Command
         'AssetsTableSeeder',
         'ItemsTableSeeder',
         'LanguagesTableSeeder',
+        'SitesTableSeeder',
         'MenusTableSeeder',
         'ModulesTableSeeder',
         'TagsTableSeeder',
