@@ -20,7 +20,7 @@ class InstallCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Install DaydreamLab user component';
+    protected $description = 'Install DaydreamLab cms component';
 
 
     protected $seeder_namespace = 'DaydreamLab\\Cms\\Database\\Seeds\\';
@@ -85,11 +85,6 @@ class InstallCommand extends Command
         $this->call('vendor:publish', [
             '--tag' => 'cms-configs'
         ]);
-
-//        $this->call('vendor:publish', [
-//            '--tag'     => 'cms-frontend',
-//            '--force'   => true
-//        ]);
 
     }
 
