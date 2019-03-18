@@ -1,4 +1,6 @@
 <?php
+namespace DaydreamLab\Cms\Database\Seeds;
+
 use Illuminate\Database\Seeder;
 use DaydreamLab\Cms\Services\Site\Admin\SiteAdminService;
 use DaydreamLab\Cms\Repositories\Site\Admin\SiteAdminRepository;
