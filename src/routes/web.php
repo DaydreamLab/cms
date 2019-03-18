@@ -11,7 +11,8 @@
 |
  */
 
-Route::view('/dashboard/{vue?}', 'admin.index')->where('vue', '.*');
 
-Route::get('/{vue?}', 'DaydreamLab\Cms\Controllers\HomeController@index')->where('vue', '.*');
+Route::get('/dashboard/{vue?}', 'DaydreamLab\Cms\Controllers\HomeController@adminIndex')->where('vue', '.*');
+
+//Route::get('/{vue?}', 'DaydreamLab\Cms\Controllers\HomeController@siteIndex')->where('vue', '.*');
 

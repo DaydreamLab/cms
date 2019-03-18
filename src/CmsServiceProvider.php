@@ -21,14 +21,16 @@ class CmsServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([__DIR__. '/constants' => config_path('constants')], 'cms-configs');
-        $this->publishes([__DIR__. '/Configs' => config_path()], 'cms-configs');
+        $this->publishes([__DIR__. '/Configs'   => config_path()], 'cms-configs');
 
         $this->publishes([
-            __DIR__. '/../public/admin' => public_path('vendor'),
+            __DIR__. '/../public/admin'     => public_path('vendor/admin'),
+            __DIR__. '/../resources/admin'  => resource_path('views/admin'),
         ], 'cms-frontend-admin');
 
         $this->publishes([
-            __DIR__. '/../public/site' => public_path('vendor'),
+            __DIR__. '/../public/site'      => public_path('vendor/site'),
+            __DIR__. '/../resources/site'   => resource_path('views/site'),
         ], 'cms-frontend-site');
 
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');

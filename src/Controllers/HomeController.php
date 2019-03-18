@@ -6,8 +6,16 @@ use Illuminate\Routing\Controller;
 
 class HomeController extends Controller
 {
-    public function index()
+
+    public function adminIndex()
     {
-        return view('admin::index');
+        return view('admin.index');
     }
+
+
+    public function siteIndex()
+    {
+        return view('site.index');
+    }
+
 }
