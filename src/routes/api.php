@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
 
     Route::group(['prefix' => 'category'], function (){
+        Route::post('search', 'DaydreamLab\Cms\Controllers\Category\Front\CategoryFrontController@search');
         Route::get('{id}', 'DaydreamLab\Cms\Controllers\Category\Front\CategoryFrontController@getItem');
 
     });

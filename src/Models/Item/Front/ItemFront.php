@@ -57,26 +57,4 @@ class ItemFront extends Item
         return $this->belongsToMany(TagFront::class, 'items_tags_maps', 'item_id', 'tag_id');
     }
 
-
-    public function getExtrafieldsAttribute($value)
-    {
-        $value = $value ? $value : json_encode([]);
-        $data = [];
-        foreach (json_decode($value) as $extra_field)
-        {
-            $extra_field_data = ExtrafieldFront::find($extra_field->id);
-            $extra_field_data->value = $extra_field->value;
-
-            foreach ($extra_field->params as $key => $param)
-            {
-                $extra_field_data->{$key} = $param->value;
-                $this->{$extra_field_data->alias . '_' . $key} = $param->value;
-            }
-
-            $data[] = $extra_field_data->toArray();
-            $this->{$extra_field_data->alias} = $extra_field->value;
-        }
-
-        return $data;
-    }
 }

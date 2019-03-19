@@ -5,11 +5,14 @@ namespace DaydreamLab\Cms\Services\Category\Front;
 use DaydreamLab\Cms\Repositories\Category\Front\CategoryFrontRepository;
 use DaydreamLab\Cms\Services\Category\CategoryService;
 use DaydreamLab\JJAJ\Helpers\Helper;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 class CategoryFrontService extends CategoryService
 {
     protected $type = 'CategoryFront';
+
+    protected $search_keys = ['title', 'introtext', 'description', 'extrafields_search'];
 
     public function __construct(CategoryFrontRepository $repo)
     {
@@ -74,5 +77,12 @@ class CategoryFrontService extends CategoryService
         $items = $this->repo->getContentTypeItems($extension, $type, $this->access_ids);
 
         return $this->appendExtrafileds($items);
+    }
+
+
+    public function search(Collection $input)
+    {
+        $input->put('content_type', 'article');
+        return parent::search($input);
     }
 }
