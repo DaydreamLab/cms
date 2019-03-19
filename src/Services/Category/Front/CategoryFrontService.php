@@ -2,9 +2,17 @@
 
 namespace DaydreamLab\Cms\Services\Category\Front;
 
+use DaydreamLab\Cms\Models\Item\Front\ItemFront;
 use DaydreamLab\Cms\Repositories\Category\Front\CategoryFrontRepository;
+use DaydreamLab\Cms\Repositories\Item\Front\ItemFrontRepository;
 use DaydreamLab\Cms\Services\Category\CategoryService;
+use DaydreamLab\Cms\Services\Item\Front\ItemFrontService;
 use DaydreamLab\JJAJ\Helpers\Helper;
+use DaydreamLab\User\Models\User\Front\UserGroupFront;
+use DaydreamLab\User\Models\User\Front\UserGroupMapFront;
+use DaydreamLab\User\Repositories\User\Front\UserGroupFrontRepository;
+use DaydreamLab\User\Repositories\User\Front\UserGroupMapFrontRepository;
+use DaydreamLab\User\Services\User\Front\UserGroupFrontService;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
@@ -14,9 +22,29 @@ class CategoryFrontService extends CategoryService
 
     protected $search_keys = ['title', 'introtext', 'description', 'extrafields_search'];
 
+
+    protected $itemFrontService;
+
     public function __construct(CategoryFrontRepository $repo)
     {
         parent::__construct($repo);
+        $this->repo = $repo;
+
+        /*
+         * Deal with nested relation bug
+         */
+        $userGroupFrontService = new UserGroupFrontService(new UserGroupFrontRepository(new UserGroupFront()));
+
+        $this->itemFrontService = new ItemFrontService(
+            new ItemFrontRepository(
+                new ItemFront(),
+                $userGroupFrontService->repo,
+                new UserGroupMapFrontRepository(new UserGroupMapFront()),
+                $this->repo
+            ),
+            $this,
+            $userGroupFrontService
+        );
     }
 
 

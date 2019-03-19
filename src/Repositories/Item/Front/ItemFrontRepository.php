@@ -24,10 +24,10 @@ class ItemFrontRepository extends ItemRepository
                                 UserGroupMapFrontRepository $userGroupMapRepository,
                                 CategoryFrontRepository $categoryFrontRepository)
     {
+        parent::__construct($model);
         $this->userGroupRepository = $userGroupRepository;
         $this->userGroupMapRepository = $userGroupMapRepository;
         $this->categoryFrontRepository = $categoryFrontRepository;
-        parent::__construct($model);
     }
 
 
