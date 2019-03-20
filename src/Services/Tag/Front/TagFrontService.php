@@ -30,9 +30,10 @@ class TagFrontService extends TagService
     {
         $tags =  parent::search($input);
 
+        $items = Collection::make([]);
         if($tags->count())
         {
-            $items = Collection::make([]);
+
             foreach ($tags as $tag)
             {
                 $tag->hits++;
