@@ -326,6 +326,7 @@ class ItemFrontService extends ItemService
             $this->response = $items;
         }
 
+        //hide
         //event(new Search($input, $this->user));
 
         return $original_items;
