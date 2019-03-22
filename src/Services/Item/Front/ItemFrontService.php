@@ -240,14 +240,15 @@ class ItemFrontService extends ItemService
     }
 
 
-    public function search(Collection $input)
+    public function getSpecialQueries(Collection $input)
     {
         $special_queries = [];
+        // 取得後門的 special queries
         if (!InputHelper::null($input, 'special_queries'))
         {
-            $special_queries = array_merge($special_queries, $input->special_queries);
+            $special_queries = array_merge($special_queries, $input->get('special_queries'));
         }
-
+        // 取得年份 special queries
         if (!InputHelper::null($input, 'year'))
         {
             $year = $input->year;
@@ -257,7 +258,7 @@ class ItemFrontService extends ItemService
             $obj['value']       = $year;
             $special_queries[]  = $obj;
         }
-
+        // 取得月份 special queries
         if (!InputHelper::null($input, 'month'))
         {
             $month = $input->month;
@@ -268,16 +269,25 @@ class ItemFrontService extends ItemService
             $special_queries[]  = $obj;
         }
 
-        $categories = $this->categoryFrontService->getContentTypeItems('item', 'article');
-        $category_ids = [];
-        foreach ($categories as $category)
-        {
-            $category_ids[] = $category->id;
-        }
+        // 取得文章類型 special queries
+        $categories = $this->categoryFrontService->getContentTypeItems();
+        $category_ids = $categories->map(function ($item, $key){
+            return $item->id;
+        });
+
         $obj['type']        = 'whereIn';
         $obj['key']         = 'category_id';
         $obj['value']       = $category_ids;
         $special_queries[]  = $obj;
+
+        return $special_queries;
+    }
+
+
+    public function search(Collection $input, $paginate = true)
+    {
+        $input->put('paginate', $paginate);
+        $special_queries = $this->getSpecialQueries($input);
 
         $input->forget('special_queries');
         $input->put('special_queries', $special_queries);

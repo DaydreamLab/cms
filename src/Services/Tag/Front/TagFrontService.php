@@ -8,6 +8,7 @@ use DaydreamLab\Cms\Services\Item\Front\ItemTagMapFrontService;
 use DaydreamLab\Cms\Services\Tag\TagService;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 class TagFrontService extends TagService
 {
@@ -16,6 +17,8 @@ class TagFrontService extends TagService
     protected $itemFrontService;
 
     protected $itemTagMapFrontService;
+
+    protected $search_keys = ['title'];
 
     public function __construct(TagFrontRepository $repo,
                                 ItemFrontService $itemFrontService,
@@ -26,50 +29,73 @@ class TagFrontService extends TagService
         parent::__construct($repo);
     }
 
-    public function search(Collection $input)
+
+    public function getRelatedItems($tags)
     {
-        $tags =  parent::search($input);
+        $items = collect([]);
 
-        if($tags->count())
+        $tag_ids = $tags->map(function($item, $key){
+            return $item->id;
+        })->all();
+
+        $maps = $this->itemTagMapFrontService->search(Helper::collect([
+            'special_queries' => [
+                [
+                    'type'  => 'whereIn',
+                    'key'   => 'tag_id',
+                    'value' => $tag_ids
+                ]
+            ],
+            'paginate'  => false
+        ]));
+
+        $map_ids = $maps->map(function($item, $key){
+            return $item->item_id;
+        })->all();
+
+        $tag_items = $this->itemFrontService->search(Helper::collect([
+            'special_queries' => [
+                [
+                    'type'  => 'whereIn',
+                    'key'   => 'id',
+                    'value' => $map_ids
+                ]
+            ],
+            'paginate'  => false
+        ]));
+
+
+        foreach ($tag_items as $tag_item)
         {
-            $items = Collection::make([]);
-            foreach ($tags as $tag)
+            if(!$items->contains('id', $tag_item->id))
             {
-                $tag->hits++;
-                $this->update($tag, $tag);
-
-                $maps = $this->itemTagMapFrontService->findBy('tag_id', '=', $tag->id);
-                if ($maps->count())
-                {
-                    $map_ids = $maps->map(function($item, $key){
-                       return $item->item_id;
-                    })->all();
-
-                    $tag_items = $this->itemFrontService->search(Helper::collect([
-                        'special_queries' => [
-                            [
-                                'type'  => 'whereIn',
-                                'key'   => 'id',
-                                'value' => $map_ids
-                            ]
-                        ]
-                    ]));
-
-                    foreach ($tag_items as $tag_item)
-                    {
-                        if(!$items->contains('id', $tag_item->id))
-                        {
-                            $items->push($tag_item);
-                        }
-                    }
-                }
+                $items->push($tag_item);
             }
-
-            $limit= $input->get('limit') ?: 15;
-            $this->response = $this->repo->paginate($items, (int)$limit, '', ['limit' => $limit]);
         }
 
-        return $this->response;
+
+        return $items;
     }
 
+
+    public function search(Collection $input)
+    {
+        return parent::search($input);
+    }
+
+
+    public function searchItems(Collection $input, $paginate = true)
+    {
+        $input->put('paginate', $paginate);
+        $limit = $input->get('limit') ?: $this->repo->getModel()->getPerPage();
+
+        $tags = $this->search($input);
+
+        $items = $this->getRelatedItems($tags);
+
+        $this->status = Str::upper(Str::snake($this->type . 'SearchItemsSuccess'));
+        $this->response = $paginate ? $this->repo->paginate($items, $limit, 1, []) : $items;
+
+        return $items;
+    }
 }

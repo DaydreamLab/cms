@@ -90,6 +90,7 @@ class Category extends BaseModel
         'tree_title',
         'tree_list_title',
         'access_title',
+        'viewlevels',
         'extrafield_group_title'
     ];
 

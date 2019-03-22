@@ -22,16 +22,6 @@ class CategorySearchPost extends ListRequest
     {
         $rules = [
             'search'        => 'nullable|string',
-            'state'         => [
-                'nullable',
-                'integer',
-                Rule::in([0,1,-1,-2])
-            ],
-            'id'            => 'nullable|integer',
-            'language'      => 'nullable|string',
-            'extension'     => 'nullable|string',
-            'created_by'    => 'nullable|integer',
-            'access'        => 'nullable|integer'
         ];
 
         return array_merge(parent::rules(), $rules);

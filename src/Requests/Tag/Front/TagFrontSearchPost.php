@@ -24,7 +24,6 @@ class TagFrontSearchPost extends TagSearchPost
     public function rules()
     {
         $rules = [
-            'limit' => 'nullable|integer'
         ];
         return array_merge($rules, parent::rules());
     }

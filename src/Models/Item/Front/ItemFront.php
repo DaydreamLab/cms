@@ -42,7 +42,9 @@ class ItemFront extends Item
         'updater',
         'viewlevels',
         'viewlevel',
-        'access_title'
+        'access_title',
+        'extrafields_search',
+        'extrafield_group_title'
     ];
 
 
