@@ -32,8 +32,6 @@ class TagFrontService extends TagService
 
     public function getRelatedItems($tags)
     {
-        $items = collect([]);
-
         $tag_ids = $tags->map(function($item, $key){
             return $item->id;
         })->all();
@@ -64,7 +62,7 @@ class TagFrontService extends TagService
             'paginate'  => false
         ]));
 
-
+        $items = collect([]);
         foreach ($tag_items as $tag_item)
         {
             if(!$items->contains('id', $tag_item->id))

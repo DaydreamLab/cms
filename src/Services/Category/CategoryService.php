@@ -57,8 +57,7 @@ class CategoryService extends BaseService
 
     public function getRelatedItems($itemService, $categories)
     {
-
-        $category_ids = $categories instanceof Collection || $categories instanceof \Kalnoy\Nestedset\Collection ?
+        $category_ids = $categories instanceof \Illuminate\Support\Collection || $categories instanceof \Kalnoy\Nestedset\Collection ?
             $categories->map(function($item, $key){
             return $item->id;
         })->all() : [$categories->id];
