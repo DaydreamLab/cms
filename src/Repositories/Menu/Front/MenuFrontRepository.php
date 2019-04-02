@@ -34,4 +34,24 @@ class MenuFrontRepository extends MenuRepository
 
         return $query->first();
     }
+
+
+    public function getTree(Collection $input)
+    {
+        $query = $this->model;
+        $query = $query->where('state', 1)
+            ->where('host', $input->get('host'))
+            ->whereIn('access', $input->get('access'));
+
+        if (InputHelper::null($input, 'sef'))
+        {
+            $query = $query->where('language', '*');
+        }
+        else
+        {
+            $query = $query->where('language', $input->get('sef'));
+        }
+
+        return $query->get()->toTree();
+    }
 }

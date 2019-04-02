@@ -437,7 +437,6 @@ return [
         'code'      => 403,
         'message'   => 'Menu front checkout insufficient permission'
     ],
-
     
     // Is Locked
     'MENU_IS_LOCKED' => [

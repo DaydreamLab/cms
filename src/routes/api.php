@@ -34,6 +34,7 @@ Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
     });
 
     Route::group(['prefix' => 'menu'], function (){
+        Route::get('getTree', 'DaydreamLab\Cms\Controllers\Menu\Front\MenuFrontController@getTree');
         Route::get('{path}', 'DaydreamLab\Cms\Controllers\Menu\Front\MenuFrontController@getItem')->where('path', '.*');
     });
 

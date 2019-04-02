@@ -63,4 +63,16 @@ class MenuFrontService extends MenuService
     }
 
 
+    public function getTree(Collection $input)
+    {
+        $input->put('access', $this->access_ids);
+
+        $tree = $this->repo->getTree($input);
+
+        $this->status = Str::upper(Str::snake($this->type.'GetTreeSuccess'));
+        $this->response = $tree;
+
+        return $tree;
+    }
+
 }

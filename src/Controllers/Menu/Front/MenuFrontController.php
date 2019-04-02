@@ -43,6 +43,17 @@ class MenuFrontController extends BaseController
     }
 
 
+    public function getTree(Request $request)
+    {
+        $this->service->getTree(Helper::collect([
+            'host'  => $request->getHttpHost(),
+            'sef'   => $request->sef
+        ]));
+
+        return ResponseHelper::response($this->service->status, $this->service->response);
+    }
+
+
     public function checkout($id)
     {
         $this->service->checkout($id);
