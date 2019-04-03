@@ -488,6 +488,384 @@ var path = __webpack_require__("./node_modules/path-browserify/index.js");
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/admin/pages/___role/edit.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "role-edit",
+  data: function data() {
+    return {
+      params: {
+        id: "",
+        pid: 1
+      },
+      fields: [{
+        key: "parent_id",
+        type: "select",
+        label: "上層角色",
+        list: this.$store.getters.role_list,
+        custom_attrs: {
+          label: "tree_title",
+          value: "id"
+        }
+      }, {
+        key: "title",
+        label: "標題"
+      }, {
+        key: "redirect",
+        type: "select",
+        label: "登入後頁面",
+        list: [],
+        custom_attrs: {
+          label: "full_path",
+          value: "full_path"
+        }
+      }, {
+        key: "state",
+        label: "是否啟用",
+        type: "radio",
+        list: [{
+          text: "禁用",
+          value: "0"
+        }, {
+          text: "啟用",
+          value: "1"
+        }]
+      }],
+      toolbar: {
+        type: "edit"
+      },
+      default_value: {
+        parent_id: 1,
+        title: "",
+        redirect: "",
+        state: 1
+      }
+    };
+  },
+
+  methods: {
+    onSubmit: function onSubmit(_ref) {
+      var _this = this;
+
+      var data = _ref.data,
+          info = _ref.info,
+          type = _ref.type;
+
+      if (this.params.id) {
+        data.id = this.params.id;
+      }
+      this.$$api_role_save({
+        data: data,
+        fn: function fn(_ref2) {
+          var data = _ref2.data,
+              msg = _ref2.msg;
+
+          _this.$message.success(msg);
+          switch (type) {
+            case "save":
+              _this.$router.push({
+                path: _this.$route.path,
+                query: {
+                  id: data.items.id,
+                  pid: data.items.parent_id
+                }
+              });
+              break;
+            case "savenclose":
+              _this.onCancel();
+              break;
+            case "savenadd":
+              _this.$router.push({
+                path: _this.$route.path
+              });
+              _this.$router.go(0);
+              break;
+          }
+        }
+      });
+    },
+    onCancel: function onCancel() {
+      this.$router.push(this.$route.path.replace("/edit", ""));
+    },
+    onGetView: function onGetView() {
+      var _this2 = this;
+
+      this.$$api_role_pages({
+        pathVar: this.params.id,
+        fn: function fn(_ref3) {
+          var data = _ref3.data;
+
+          _this2.fields[2].list = data.items;
+        }
+      });
+
+      this.$$api_role_get({
+        pathVar: this.params.id,
+        fn: function fn(_ref4) {
+          var data = _ref4.data;
+
+          Object.keys(_this2.default_value).forEach(function (field) {
+            return _this2.default_value[field] = data.items[field];
+          });
+        }
+      });
+    },
+    onUpdateParams: function onUpdateParams() {
+      this.params.id = parseInt(this.$route.query.id) || "";
+    },
+    init: function init() {
+      this.onUpdateParams();
+
+      if (this.params.id) {
+        this.onGetView();
+      }
+    }
+  },
+  created: function created() {
+    this.init();
+  },
+
+  watch: {
+    $route: function $route() {
+      this.init();
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/admin/pages/___role/list.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "role-list",
+  data: function data() {
+    var _this = this;
+
+    return {
+      fields: [{
+        width: "60",
+        key: "id",
+        label: this.$t("LIST_DATA_HEADING_ID")
+      }, {
+        key: "tree_title",
+        label: this.$t("FIELD_TITLE_LABEL"),
+        type: "editable"
+      }, {
+        key: "redirect",
+        label: "登入後頁面"
+      }, {
+        key: "state",
+        label: this.$t("OPTION_STATE"),
+        type: "icon-label",
+        width: "90",
+        formatter: function formatter(item) {
+          return {
+            color: "item_state_" + item + "_color",
+            icon: ["fal", item === 1 ? "check" : "times"]
+          };
+        }
+      }],
+      toolbar: {
+        type: "list",
+        custom: [{
+          text: this.$t("TOOLBAR_PUBLISH"),
+          method: "updateState",
+          condition: function condition(_ref) {
+            var data = _ref.data;
+
+            return data.state === 0 && data.parent_id !== null;
+          },
+
+          fn: function fn(_ref2) {
+            var ids = _ref2.ids;
+
+            _this.onClickBtnUpdateState({ ids: ids, state: 1 });
+          }
+        }, {
+          text: this.$t("TOOLBAR_UNPUBLISH"),
+          method: "updateState",
+          condition: function condition(_ref3) {
+            var data = _ref3.data;
+
+            return data.state === 1 && data.parent_id !== null;
+          },
+
+          fn: function fn(_ref4) {
+            var ids = _ref4.ids;
+
+            _this.onClickBtnUpdateState({ ids: ids, state: 0 });
+          }
+        }]
+      },
+      searchbar: {
+        fields: [{
+          key: "search",
+          desc: this.$t("TOOLBAR_KEYWORDS"),
+          clearable: true
+        }],
+        default_value: {
+          search: ""
+        }
+      },
+      list_actions: {
+        btns: [{
+          text: this.$t("ASSET_USER_ROLE_ASSIGN_ASSET_TITLE"),
+          type: "primary",
+          method: "grant_asset",
+          fn: function fn(_ref5) {
+            var data = _ref5.data;
+
+            _this.$router.push({
+              path: _this.$route.path + "/grant/asset",
+              query: {
+                id: data.id,
+                name: data.full_name
+              }
+            });
+          }
+        }, {
+          text: this.$t("ASSET_USER_ROLE_ASSIGN_API_TITLE"),
+          type: "primary",
+          method: "grant_api",
+          fn: function fn(_ref6) {
+            var data = _ref6.data;
+
+            _this.$router.push({
+              path: _this.$route.path + "/grant/api",
+              query: {
+                id: data.id,
+                name: data.full_name
+              }
+            });
+          }
+        }]
+      }
+    };
+  },
+
+  methods: {
+    /**
+     * Toolbar
+     */
+    onClickBtnUpdateState: function onClickBtnUpdateState(_ref7) {
+      var _this2 = this;
+
+      var ids = _ref7.ids,
+          state = _ref7.state;
+
+      this.$$api_role_updateState({
+        data: {
+          ids: ids,
+          state: state
+        },
+        fn: function fn(_ref8) {
+          var msg = _ref8.msg;
+
+          _this2.$message.success(msg);
+          _this2.$onGetList();
+        }
+      });
+    },
+    onClickBtnBatchDelete: function onClickBtnBatchDelete(_ref9) {
+      var _this3 = this;
+
+      var ids = _ref9.ids,
+          datas = _ref9.datas;
+
+      this.$confirm(this.$t("GLOBAL_CONFIRM_DELETE")).then(function () {
+        _this3.$$api_role_delete({
+          data: { ids: ids },
+          fn: function fn(_ref10) {
+            var data = _ref10.data;
+
+            _this3.$onGetList();
+          }
+        });
+      });
+    },
+    handleEditQuery: function handleEditQuery(_ref11) {
+      var data = _ref11.data;
+
+      this.$onClickBntEdit({
+        id: data.id,
+        pid: data.parent_id,
+        name: data.name
+      });
+    },
+    handleGetList: function handleGetList() {
+      var _this4 = this;
+
+      var _ref12 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+          data = _ref12.data,
+          _fn = _ref12.fn;
+
+      this.$$api_role_list({
+        data: data,
+        fn: function fn(_ref13) {
+          var data = _ref13.data;
+
+          _this4.list_loading.flag = false;
+          _this4.list = data.items;
+          _this4.paginations.total = data.pagination.total;
+
+          _this4.$store.dispatch("update_option_related_list", {
+            type: "role",
+            data: data.items
+          });
+
+          _fn && _fn();
+        }
+      });
+    },
+    init: function init() {
+      this.$onGetList();
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/admin/pages/api/edit.vue":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -638,6 +1016,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin__ = __webpack_require__("./resources/assets/admin/mixins/list_mixin.js");
 //
 //
 //
@@ -660,16 +1039,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "api-list",
+  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin__["a" /* default */]],
   data: function data() {
     var _this = this;
 
     return {
-      list: [],
-      list_loading: {
-        flag: false
-      },
       fields: [{
         key: "url",
         label: "路徑",
@@ -688,13 +1066,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         key: "id",
         label: this.$t("LIST_DATA_HEADING_ID")
       }],
-      paginations: {
-        current_page: 1,
-        total: 0,
-        page_size: 10,
-        page_sizes: [10, 15, 20, 25],
-        layout: "total, sizes, prev, pager, next, jumper"
-      },
       toolbar: {
         type: "list"
       },
@@ -713,119 +1084,64 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   methods: {
     /**
-     * Searchbar
-     */
-    onSearch: function onSearch(_ref) {
-      var data = _ref.data;
-
-      var sd = {};
-
-      var query = this.$route.query;
-
-      for (var p in query) {
-        sd[p] = query[p];
-      }
-      for (var s in data) {
-        sd[s] = data[s];
-        if (!sd[s]) {
-          delete sd[s];
-        }
-      }
-
-      this.$router.push({
-        path: this.$route.path,
-        query: sd
-      });
-    },
-    onSearchReset: function onSearchReset() {
-      this.$router.push({
-        path: this.$route.path
-      });
-    },
-
-    /**
      * Toolbar
      */
-    onClickBtnUpdateState: function onClickBtnUpdateState(_ref2) {
+    onClickBtnUpdateState: function onClickBtnUpdateState(_ref) {
       var _this2 = this;
 
-      var ids = _ref2.ids,
-          state = _ref2.state;
+      var ids = _ref.ids,
+          state = _ref.state;
 
       this.$$api_api_updateState({
         data: {
           ids: ids,
           state: state
         },
-        fn: function fn(_ref3) {
-          var msg = _ref3.msg;
+        fn: function fn(_ref2) {
+          var msg = _ref2.msg;
 
           _this2.$message.success(msg);
-          _this2.onGetList();
+          _this2.$onGetList();
         }
       });
     },
-    onClickBtnBatchDelete: function onClickBtnBatchDelete(_ref4) {
+    onClickBtnBatchDelete: function onClickBtnBatchDelete(_ref3) {
       var _this3 = this;
 
-      var ids = _ref4.ids,
-          datas = _ref4.datas;
+      var ids = _ref3.ids,
+          datas = _ref3.datas;
 
       this.$confirm(this.$t("GLOBAL_CONFIRM_DELETE")).then(function () {
         _this3.$$api_api_delete({
           data: { ids: ids },
-          fn: function fn(_ref5) {
-            var data = _ref5.data;
+          fn: function fn(_ref4) {
+            var data = _ref4.data;
 
-            _this3.onGetList();
+            _this3.$onGetList();
           }
         });
       });
     },
-    onClickBtnEdit: function onClickBtnEdit(_ref6) {
-      var data = _ref6.data;
+    handleEditQuery: function handleEditQuery(_ref5) {
+      var data = _ref5.data;
 
-      this.$router.push({
-        path: this.$route.path + "/edit",
-        query: {
-          id: data.id,
-          pid: data.parent_id,
-          name: data.name
-        }
+      this.$onClickBntEdit({
+        id: data.id,
+        pid: data.parent_id,
+        name: data.name
       });
     },
-    onClickBtnAdd: function onClickBtnAdd() {
-      this.$router.push(this.$route.path + "/edit");
-    },
-    onGetList: function onGetList() {
+    handleGetList: function handleGetList() {
       var _this4 = this;
 
-      var _ref7 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-          page = _ref7.page,
-          pageSize = _ref7.pageSize,
-          _fn = _ref7.fn;
-
-      this.list_loading.flag = true;
-
-      var query = this.$route.query;
-
-      this.paginations.current_page = page || parseInt(query.page) || 1;
-      this.paginations.page_size = pageSize || parseInt(query.page_size) || this.paginations.page_size;
-
-      var data = {
-        page: this.paginations.current_page,
-        limit: this.paginations.page_size
-      };
-
-      Object.keys(query).forEach(function (field) {
-        _this4.searchbar.default_value[field] = query[field];
-        data[field] = query[field];
-      });
+      var _ref6 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+          data = _ref6.data,
+          _fn = _ref6.fn;
 
       this.$$api_api_list({
         data: data,
-        fn: function fn(_ref8) {
-          var data = _ref8.data;
+        fn: function fn(_ref7) {
+          var data = _ref7.data;
 
           _this4.list_loading.flag = false;
           _this4.list = data.items;
@@ -836,16 +1152,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     init: function init() {
-      this.onGetList();
-    }
-  },
-  mounted: function mounted() {
-    this.init();
-  },
-
-  watch: {
-    $route: function $route(to, from) {
-      this.init();
+      this.$onGetList();
     }
   }
 });
@@ -1406,6 +1713,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin__ = __webpack_require__("./resources/assets/admin/mixins/list_mixin.js");
 //
 //
 //
@@ -1428,16 +1736,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "asset-group-list",
+  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin__["a" /* default */]],
   data: function data() {
     var _this = this;
 
     return {
-      list: [],
-      list_loading: {
-        flag: false
-      },
       fields: [{
         width: "60",
         key: "id",
@@ -1458,13 +1765,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           };
         }
       }],
-      paginations: {
-        current_page: 1,
-        total: 0,
-        page_size: 10,
-        page_sizes: [10, 15, 20, 25],
-        layout: "total, sizes, prev, pager, next, jumper"
-      },
       toolbar: {
         type: "list",
         custom: [{
@@ -1512,119 +1812,64 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   methods: {
     /**
-     * Searchbar
-     */
-    onSearch: function onSearch(_ref5) {
-      var data = _ref5.data;
-
-      var sd = {};
-
-      var query = this.$route.query;
-
-      for (var p in query) {
-        sd[p] = query[p];
-      }
-      for (var s in data) {
-        sd[s] = data[s];
-        if (!sd[s]) {
-          delete sd[s];
-        }
-      }
-
-      this.$router.push({
-        path: this.$route.path,
-        query: sd
-      });
-    },
-    onSearchReset: function onSearchReset() {
-      this.$router.push({
-        path: this.$route.path
-      });
-    },
-
-    /**
      * Toolbar
      */
-    onClickBtnUpdateState: function onClickBtnUpdateState(_ref6) {
+    onClickBtnUpdateState: function onClickBtnUpdateState(_ref5) {
       var _this2 = this;
 
-      var ids = _ref6.ids,
-          state = _ref6.state;
+      var ids = _ref5.ids,
+          state = _ref5.state;
 
       this.$$api_asset_updateState({
         data: {
           ids: ids,
           state: state
         },
-        fn: function fn(_ref7) {
-          var msg = _ref7.msg;
+        fn: function fn(_ref6) {
+          var msg = _ref6.msg;
 
           _this2.$message.success(msg);
-          _this2.onGetList();
+          _this2.$onGetList();
         }
       });
     },
-    onClickBtnBatchDelete: function onClickBtnBatchDelete(_ref8) {
+    onClickBtnBatchDelete: function onClickBtnBatchDelete(_ref7) {
       var _this3 = this;
 
-      var ids = _ref8.ids,
-          datas = _ref8.datas;
+      var ids = _ref7.ids,
+          datas = _ref7.datas;
 
       this.$confirm(this.$t("GLOBAL_CONFIRM_DELETE")).then(function () {
         _this3.$$api_asset_delete({
           data: { ids: ids },
-          fn: function fn(_ref9) {
-            var data = _ref9.data;
+          fn: function fn(_ref8) {
+            var data = _ref8.data;
 
-            _this3.onGetList();
+            _this3.$onGetList();
           }
         });
       });
     },
-    onClickBtnEdit: function onClickBtnEdit(_ref10) {
-      var data = _ref10.data;
+    tQuery: function tQuery(_ref9) {
+      var data = _ref9.data;
 
-      this.$router.push({
-        path: this.$route.path + "/edit",
-        query: {
-          id: data.id,
-          pid: data.parent_id,
-          name: data.name
-        }
+      this.$onClickBntEdit({
+        id: data.id,
+        pid: data.parent_id,
+        name: data.name
       });
     },
-    onClickBtnAdd: function onClickBtnAdd() {
-      this.$router.push(this.$route.path + "/edit");
-    },
-    onGetList: function onGetList() {
+    handleGetList: function handleGetList() {
       var _this4 = this;
 
-      var _ref11 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-          page = _ref11.page,
-          pageSize = _ref11.pageSize,
-          _fn = _ref11.fn;
-
-      this.list_loading.flag = true;
-
-      var query = this.$route.query;
-
-      this.paginations.current_page = page || parseInt(query.page) || 1;
-      this.paginations.page_size = pageSize || parseInt(query.page_size) || this.paginations.page_size;
-
-      var data = {
-        page: this.paginations.current_page,
-        limit: this.paginations.page_size
-      };
-
-      Object.keys(query).forEach(function (field) {
-        _this4.searchbar.default_value[field] = query[field];
-        data[field] = query[field];
-      });
+      var _ref10 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+          data = _ref10.data,
+          _fn = _ref10.fn;
 
       this.$$api_asset_listGroup({
         data: data,
-        fn: function fn(_ref12) {
-          var data = _ref12.data;
+        fn: function fn(_ref11) {
+          var data = _ref11.data;
 
           _this4.list_loading.flag = false;
           _this4.list = data.items;
@@ -1635,16 +1880,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     init: function init() {
-      this.onGetList();
-    }
-  },
-  mounted: function mounted() {
-    this.init();
-  },
-
-  watch: {
-    $route: function $route(to, from) {
-      this.init();
+      this.$onGetList();
     }
   }
 });
@@ -1656,6 +1892,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin__ = __webpack_require__("./resources/assets/admin/mixins/list_mixin.js");
 //
 //
 //
@@ -1681,16 +1918,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "asset-list",
+  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin__["a" /* default */]],
   data: function data() {
     var _this = this;
 
     return {
-      list: [],
-      list_loading: {
-        flag: false
-      },
       sort: {
         show: true
       },
@@ -1726,13 +1962,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           };
         }
       }],
-      paginations: {
-        current_page: 1,
-        total: 0,
-        page_size: 10,
-        page_sizes: [10, 15, 20, 25],
-        layout: "total, sizes, prev, pager, next, jumper"
-      },
       toolbar: {
         type: "list",
         custom: [{
@@ -1818,119 +2047,64 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     /**
-     * Searchbar
-     */
-    onSearch: function onSearch(_ref8) {
-      var data = _ref8.data;
-
-      var sd = {};
-
-      var query = this.$route.query;
-
-      for (var p in query) {
-        sd[p] = query[p];
-      }
-      for (var s in data) {
-        sd[s] = data[s];
-        if (!sd[s]) {
-          delete sd[s];
-        }
-      }
-
-      this.$router.push({
-        path: this.$route.path,
-        query: sd
-      });
-    },
-    onSearchReset: function onSearchReset() {
-      this.$router.push({
-        path: this.$route.path
-      });
-    },
-
-    /**
      * Toolbar
      */
-    onClickBtnUpdateState: function onClickBtnUpdateState(_ref9) {
+    onClickBtnUpdateState: function onClickBtnUpdateState(_ref8) {
       var _this2 = this;
 
-      var ids = _ref9.ids,
-          state = _ref9.state;
+      var ids = _ref8.ids,
+          state = _ref8.state;
 
       this.$$api_asset_updateState({
         data: {
           ids: ids,
           state: state
         },
-        fn: function fn(_ref10) {
-          var msg = _ref10.msg;
+        fn: function fn(_ref9) {
+          var msg = _ref9.msg;
 
           _this2.$message.success(msg);
-          _this2.onGetList();
+          _this2.$onGetList();
         }
       });
     },
-    onClickBtnBatchDelete: function onClickBtnBatchDelete(_ref11) {
+    onClickBtnBatchDelete: function onClickBtnBatchDelete(_ref10) {
       var _this3 = this;
 
-      var ids = _ref11.ids,
-          datas = _ref11.datas;
+      var ids = _ref10.ids,
+          datas = _ref10.datas;
 
       this.$confirm(this.$t("GLOBAL_CONFIRM_DELETE")).then(function () {
         _this3.$$api_asset_delete({
           data: { ids: ids },
-          fn: function fn(_ref12) {
-            var data = _ref12.data;
+          fn: function fn(_ref11) {
+            var data = _ref11.data;
 
-            _this3.onGetList();
+            _this3.$onGetList();
           }
         });
       });
     },
-    onClickBtnEdit: function onClickBtnEdit(_ref13) {
-      var data = _ref13.data;
+    handleEditQuery: function handleEditQuery(_ref12) {
+      var data = _ref12.data;
 
-      this.$router.push({
-        path: this.$route.path + "/edit",
-        query: {
-          id: data.id,
-          pid: data.parent_id,
-          name: data.name
-        }
+      this.$onClickBntEdit({
+        id: data.id,
+        pid: data.parent_id,
+        name: data.name
       });
     },
-    onClickBtnAdd: function onClickBtnAdd() {
-      this.$router.push(this.$route.path + "/edit");
-    },
-    onGetList: function onGetList() {
+    handleGetList: function handleGetList() {
       var _this4 = this;
 
-      var _ref14 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-          page = _ref14.page,
-          pageSize = _ref14.pageSize,
-          _fn = _ref14.fn;
-
-      this.list_loading.flag = true;
-
-      var query = this.$route.query;
-
-      this.paginations.current_page = page || parseInt(query.page) || 1;
-      this.paginations.page_size = pageSize || parseInt(query.page_size) || this.paginations.page_size;
-
-      var data = {
-        page: this.paginations.current_page,
-        limit: this.paginations.page_size
-      };
-
-      Object.keys(query).forEach(function (field) {
-        _this4.searchbar.default_value[field] = query[field];
-        data[field] = query[field];
-      });
+      var _ref13 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+          data = _ref13.data,
+          _fn = _ref13.fn;
 
       this.$$api_asset_list({
         data: data,
-        fn: function fn(_ref15) {
-          var data = _ref15.data;
+        fn: function fn(_ref14) {
+          var data = _ref14.data;
 
           _this4.list_loading.flag = false;
           _this4.list = data.items;
@@ -1941,16 +2115,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     init: function init() {
-      this.onGetList();
-    }
-  },
-  mounted: function mounted() {
-    this.init();
-  },
-
-  watch: {
-    $route: function $route(to, from) {
-      this.init();
+      this.$onGetList();
     }
   }
 });
@@ -2232,7 +2397,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin_js__ = __webpack_require__("./resources/assets/admin/mixins/list_mixin.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin__ = __webpack_require__("./resources/assets/admin/mixins/list_mixin.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_cms_list_mixin__ = __webpack_require__("./resources/assets/admin/mixins/cms_list_mixin.js");
 //
 //
 //
@@ -2259,20 +2425,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "category-list",
-  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin_js__["a" /* default */]],
+  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1_mixins_cms_list_mixin__["a" /* default */]],
   data: function data() {
     var _this = this;
 
     return {
-      list: [],
-      list_loading: {
-        flag: false
-      },
       sort: {
         show: true
       },
@@ -2328,13 +2491,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         key: "id",
         label: this.$t("LIST_DATA_HEADING_ID")
       }],
-      paginations: {
-        current_page: 1,
-        total: 0,
-        page_size: 10,
-        page_sizes: [10, 15, 20, 25],
-        layout: "total, sizes, prev, pager, next, jumper"
-      },
       toolbar: {
         type: "list",
         custom: [{
@@ -2441,6 +2597,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     };
   },
+  created: function created() {
+    this.$initSearchbarParams();
+  },
+
 
   methods: {
     /**
@@ -2466,7 +2626,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           var msg = _ref7.msg;
 
           _this2.$message.success(msg);
-          _this2.onGetList();
+          _this2.$onGetList();
         }
       });
     },
@@ -2518,7 +2678,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           var msg = _ref13.msg;
 
           _this3.$message.success(msg);
-          _this3.onGetList();
+          _this3.$onGetList();
         }
       });
     },
@@ -2536,53 +2696,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           fn: function fn(_ref15) {
             var data = _ref15.data;
 
-            _this4.onGetList();
+            _this4.$onGetList();
           }
         });
       });
     },
-    onClickBtnEdit: function onClickBtnEdit(_ref16) {
+    handleEditQuery: function handleEditQuery(_ref16) {
       var data = _ref16.data;
 
-      this.$router.push({
-        path: this.$route.path + "/edit",
-        query: {
-          id: data.id,
-          pid: data.parent_id
-        }
+      this.$onClickBntEdit({
+        id: data.id,
+        pid: data.parent_id
       });
     },
-    onClickBtnAdd: function onClickBtnAdd() {
-      this.$router.push(this.$route.path + "/edit");
-    },
-    onGetList: function onGetList() {
+    handleGetList: function handleGetList() {
       var _this5 = this;
 
       var _ref17 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-          page = _ref17.page,
-          pageSize = _ref17.pageSize,
+          data = _ref17.data,
           _fn = _ref17.fn;
-
-      this.list_loading.flag = true;
-
-      var query = this.$route.query;
-
-      this.paginations.current_page = page || parseInt(query.page) || 1;
-      this.paginations.page_size = pageSize || parseInt(query.page_size) || this.paginations.page_size;
-
-      var data = {
-        page: this.paginations.current_page,
-        limit: this.paginations.page_size
-      };
-
-      Object.keys(query).forEach(function (field) {
-        if (field === "id" || field === "access") {
-          _this5.searchbar.default_value[field] = parseInt(query[field]);
-        } else {
-          _this5.searchbar.default_value[field] = query[field];
-        }
-        data[field] = query[field];
-      });
 
       this.$$api_category_list({
         data: data,
@@ -2596,18 +2728,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           _fn && _fn();
         }
       });
-    }
-  },
-  created: function created() {
-    this.initSearchbarParams();
-  },
-  mounted: function mounted() {
-    this.init();
-  },
-
-  watch: {
-    $route: function $route(to, from) {
-      this.init();
     }
   }
 });
@@ -2663,8 +2783,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
 //
 //
 //
@@ -3026,7 +3144,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin_js__ = __webpack_require__("./resources/assets/admin/mixins/list_mixin.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin__ = __webpack_require__("./resources/assets/admin/mixins/list_mixin.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_cms_list_mixin__ = __webpack_require__("./resources/assets/admin/mixins/cms_list_mixin.js");
 //
 //
 //
@@ -3054,20 +3173,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-list",
-  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin_js__["a" /* default */]],
+  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1_mixins_cms_list_mixin__["a" /* default */]],
   data: function data() {
     var _this = this;
 
     return {
-      list: [],
-      list_loading: {
-        flag: false
-      },
       sort: {
         show: true
       },
@@ -3158,13 +3274,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         label: this.$t("LIST_DATA_HEADING_ID"),
         width: "60"
       }],
-      paginations: {
-        current_page: 1,
-        total: 0,
-        page_size: 10,
-        page_sizes: [10, 15, 20, 25],
-        layout: "total, sizes, prev, pager, next, jumper"
-      },
       toolbar: {
         type: "list",
         custom: [{
@@ -3268,6 +3377,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     };
   },
+  created: function created() {
+    this.$initSearchbarParams();
+  },
 
   methods: {
     /**
@@ -3291,7 +3403,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           var msg = _ref7.msg;
 
           _this2.$message.success(msg);
-          _this2.onGetList();
+          _this2.$onGetList();
         }
       });
     },
@@ -3330,7 +3442,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           var msg = _ref11.msg;
 
           _this3.$message.success(msg);
-          _this3.onGetList();
+          _this3.$onGetList();
         }
       });
     },
@@ -3361,7 +3473,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           var msg = _ref15.msg;
 
           _this4.$message.success(msg);
-          _this4.onGetList();
+          _this4.$onGetList();
         }
       });
     },
@@ -3377,49 +3489,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           fn: function fn(_ref17) {
             var data = _ref17.data;
 
-            _this5.onGetList();
+            _this5.$onGetList();
           }
         });
       });
     },
-    onClickBtnEdit: function onClickBtnEdit(_ref18) {
+    handleEditQuery: function handleEditQuery(_ref18) {
       var data = _ref18.data;
 
-      this.$router.push({
-        path: this.$route.path + "/edit",
-        query: {
-          id: data.id,
-          pid: data.parent_id
-        }
+      this.$onClickBntEdit({
+        id: data.id,
+        pid: data.parent_id
       });
     },
-    onClickBtnAdd: function onClickBtnAdd() {
-      this.$router.push(this.$route.path + "/edit");
-    },
-    onGetList: function onGetList() {
+    handleGetList: function handleGetList() {
       var _this6 = this;
 
       var _ref19 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-          page = _ref19.page,
-          pageSize = _ref19.pageSize,
+          data = _ref19.data,
           _fn = _ref19.fn;
-
-      this.list_loading.flag = true;
-
-      var query = this.$route.query;
-
-      this.paginations.current_page = page || parseInt(query.page) || 1;
-      this.paginations.page_size = pageSize || parseInt(query.page_size) || this.paginations.page_size;
-
-      var data = {
-        page: this.paginations.current_page,
-        limit: this.paginations.page_size
-      };
-
-      Object.keys(query).forEach(function (field) {
-        _this6.searchbar.default_value[field] = query[field];
-        data[field] = query[field];
-      });
 
       this.$$api_item_list({
         data: data,
@@ -3433,18 +3521,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           _fn && _fn();
         }
       });
-    }
-  },
-  created: function created() {
-    this.initSearchbarParams();
-  },
-  mounted: function mounted() {
-    this.init();
-  },
-
-  watch: {
-    $route: function $route(to, from) {
-      this.init();
     }
   }
 });
@@ -3628,7 +3704,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin_js__ = __webpack_require__("./resources/assets/admin/mixins/list_mixin.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin__ = __webpack_require__("./resources/assets/admin/mixins/list_mixin.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_cms_list_mixin__ = __webpack_require__("./resources/assets/admin/mixins/cms_list_mixin.js");
 //
 //
 //
@@ -3653,20 +3730,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "tag-list",
-  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin_js__["a" /* default */]],
+  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1_mixins_cms_list_mixin__["a" /* default */]],
   data: function data() {
     var _this = this;
 
     return {
-      list: [],
-      list_loading: {
-        flag: false
-      },
       fields: [{
         key: "title",
         label: this.$t("FIELD_TITLE_LABEL"),
@@ -3693,13 +3767,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         key: "id",
         label: this.$t("LIST_DATA_HEADING_ID")
       }],
-      paginations: {
-        current_page: 1,
-        total: 0,
-        page_size: 10,
-        page_sizes: [10, 15, 20, 25],
-        layout: "total, sizes, prev, pager, next, jumper"
-      },
       toolbar: {
         type: "list",
         custom: [{
@@ -3793,7 +3860,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           var msg = _ref7.msg;
 
           _this2.$message.success(msg);
-          _this2.onGetList();
+          _this2.$onGetList();
         }
       });
     },
@@ -3828,7 +3895,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           var msg = _ref11.msg;
 
           _this3.$message.success(msg);
-          _this3.onGetList();
+          _this3.$onGetList();
         }
       });
     },
@@ -3844,48 +3911,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           fn: function fn(_ref13) {
             var data = _ref13.data;
 
-            _this4.onGetList();
+            _this4.$onGetList();
           }
         });
       });
     },
-    onClickBtnEdit: function onClickBtnEdit(_ref14) {
+    handleEditQuery: function handleEditQuery(_ref14) {
       var data = _ref14.data;
 
-      this.$router.push({
-        path: this.$router.push(this.$route.path + "/edit"),
-        query: {
-          id: data.id
-        }
+      this.$onClickBntEdit({
+        id: data.id
       });
     },
-    onClickBtnAdd: function onClickBtnAdd() {
-      this.$router.push(this.$route.path + "/edit");
-    },
-    onGetList: function onGetList() {
+    handleGetList: function handleGetList() {
       var _this5 = this;
 
       var _ref15 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-          page = _ref15.page,
-          pageSize = _ref15.pageSize,
+          data = _ref15.data,
           _fn = _ref15.fn;
-
-      this.list_loading.flag = true;
-
-      var query = this.$route.query;
-
-      this.paginations.current_page = page || parseInt(query.page) || 1;
-      this.paginations.page_size = pageSize || parseInt(query.page_size) || this.paginations.page_size;
-
-      var data = {
-        page: this.paginations.current_page,
-        limit: this.paginations.page_size
-      };
-
-      Object.keys(query).forEach(function (field) {
-        _this5.searchbar.default_value[field] = query[field];
-        data[field] = query[field];
-      });
 
       this.$$api_tag_list({
         data: data,
@@ -3899,15 +3942,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           _fn && _fn();
         }
       });
-    }
-  },
-  mounted: function mounted() {
-    this.init();
-  },
-
-  watch: {
-    $route: function $route(to, from) {
-      this.init();
     }
   }
 });
@@ -4307,6 +4341,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin__ = __webpack_require__("./resources/assets/admin/mixins/list_mixin.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4314,7 +4365,135 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-/* harmony default export */ __webpack_exports__["default"] = ({});
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "menu-list",
+  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin__["a" /* default */]],
+  data: function data() {
+    var _this = this;
+
+    return {
+      sort: {
+        show: true
+      },
+      fields: [{
+        width: "60",
+        key: "id",
+        label: this.$t("LIST_DATA_HEADING_ID")
+      }, {
+        key: "title",
+        label: this.$t("FIELD_TITLE_LABEL"),
+        type: "editable"
+      }, {
+        key: "alias",
+        label: this.$t("FIELD_ALIAS_LABEL")
+      }, {
+        key: "category_id",
+        type: "select",
+        desc: this.$t("OPTION_CATEGORY"),
+        list: this.$store.getters.category_list,
+        custom_attrs: {
+          label: "tree_list_title",
+          value: "id"
+        }
+      }, {
+        key: "host",
+        desc: this.$t("OPTION_CATEGORY")
+      }, {
+        key: "access",
+        type: "select",
+        desc: this.$t("FIELD_ACCESS_LEVEL"),
+        list: this.$store.getters.viewlevel_list,
+        custom_attrs: {
+          label: "title",
+          value: "id"
+        }
+      }, {
+        key: "state",
+        label: this.$t("OPTION_STATE"),
+        type: "icon-label",
+        width: "90",
+        formatter: function formatter(item) {
+          return {
+            color: "item_state_" + item + "_color",
+            icon: ["fal", item === 1 ? "check" : "times"]
+          };
+        }
+      }, {
+        key: "language",
+        label: this.$t("OPTION_LANGUAGE"),
+        formatter: function formatter(item) {
+          if (item.language === "*") return _this.$t("ALL_LANGUAGE");
+        }
+      }],
+      toolbar: {
+        type: "list",
+        custom: []
+      },
+      searchbar: {
+        fields: [{
+          key: "search",
+          desc: this.$t("TOOLBAR_KEYWORDS"),
+          clearable: true
+        }],
+        default_value: {
+          search: ""
+        }
+      }
+    };
+  },
+
+  methods: {
+    onClickBtnBatchDelete: function onClickBtnBatchDelete(_ref) {
+      var _this2 = this;
+
+      var ids = _ref.ids,
+          datas = _ref.datas;
+
+      this.$confirm(this.$t("GLOBAL_CONFIRM_DELETE")).then(function () {
+        _this2.$$api_menu_delete({
+          data: { ids: ids },
+          fn: function fn(_ref2) {
+            var data = _ref2.data;
+
+            _this2.$onGetList();
+          }
+        });
+      });
+    },
+    handleEditQuery: function handleEditQuery(_ref3) {
+      var data = _ref3.data;
+
+      this.$onClickBntEdit({
+        id: data.id
+      });
+    },
+    handleGetList: function handleGetList() {
+      var _this3 = this;
+
+      var _ref4 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+          data = _ref4.data,
+          _fn = _ref4.fn;
+
+      this.$$api_menu_list({
+        data: data,
+        fn: function fn(_ref5) {
+          var data = _ref5.data;
+
+          _this3.list_loading.flag = false;
+          _this3.list = data.items;
+          _this3.paginations.total = data.pagination.total;
+
+          _fn && _fn();
+        }
+      });
+    },
+    init: function init() {
+      this.$onGetList();
+    }
+  }
+});
 
 /***/ }),
 
@@ -4345,459 +4524,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/admin/pages/role/edit.vue":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: "role-edit",
-  data: function data() {
-    return {
-      params: {
-        id: "",
-        pid: 1
-      },
-      fields: [{
-        key: "parent_id",
-        type: "select",
-        label: "上層角色",
-        list: this.$store.getters.role_list,
-        custom_attrs: {
-          label: "tree_title",
-          value: "id"
-        }
-      }, {
-        key: "title",
-        label: "標題"
-      }, {
-        key: "redirect",
-        type: "select",
-        label: "登入後頁面",
-        list: [],
-        custom_attrs: {
-          label: "full_path",
-          value: "full_path"
-        }
-      }, {
-        key: "state",
-        label: "是否啟用",
-        type: "radio",
-        list: [{
-          text: "禁用",
-          value: "0"
-        }, {
-          text: "啟用",
-          value: "1"
-        }]
-      }],
-      toolbar: {
-        type: "edit"
-      },
-      default_value: {
-        parent_id: 1,
-        title: "",
-        redirect: "",
-        state: 1
-      }
-    };
-  },
-
-  methods: {
-    onSubmit: function onSubmit(_ref) {
-      var _this = this;
-
-      var data = _ref.data,
-          info = _ref.info,
-          type = _ref.type;
-
-      if (this.params.id) {
-        data.id = this.params.id;
-      }
-      this.$$api_role_save({
-        data: data,
-        fn: function fn(_ref2) {
-          var data = _ref2.data,
-              msg = _ref2.msg;
-
-          _this.$message.success(msg);
-          switch (type) {
-            case "save":
-              _this.$router.push({
-                path: _this.$route.path,
-                query: {
-                  id: data.items.id,
-                  pid: data.items.parent_id
-                }
-              });
-              break;
-            case "savenclose":
-              _this.onCancel();
-              break;
-            case "savenadd":
-              _this.$router.push({
-                path: _this.$route.path
-              });
-              _this.$router.go(0);
-              break;
-          }
-        }
-      });
-    },
-    onCancel: function onCancel() {
-      this.$router.push(this.$route.path.replace("/edit", ""));
-    },
-    onGetView: function onGetView() {
-      var _this2 = this;
-
-      this.$$api_role_pages({
-        pathVar: this.params.id,
-        fn: function fn(_ref3) {
-          var data = _ref3.data;
-
-          _this2.fields[2].list = data.items;
-        }
-      });
-
-      this.$$api_role_get({
-        pathVar: this.params.id,
-        fn: function fn(_ref4) {
-          var data = _ref4.data;
-
-          Object.keys(_this2.default_value).forEach(function (field) {
-            return _this2.default_value[field] = data.items[field];
-          });
-        }
-      });
-    },
-    onUpdateParams: function onUpdateParams() {
-      this.params.id = parseInt(this.$route.query.id) || "";
-    },
-    init: function init() {
-      this.onUpdateParams();
-
-      if (this.params.id) {
-        this.onGetView();
-      }
-    }
-  },
-  created: function created() {
-    this.init();
-  },
-
-  watch: {
-    $route: function $route() {
-      this.init();
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/admin/pages/role/list.vue":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: "role-list",
-  data: function data() {
-    var _this = this;
-
-    return {
-      list: [],
-      list_loading: {
-        flag: false
-      },
-      fields: [{
-        width: "60",
-        key: "id",
-        label: this.$t("LIST_DATA_HEADING_ID")
-      }, {
-        key: "tree_title",
-        label: this.$t("FIELD_TITLE_LABEL"),
-        type: "editable"
-      }, {
-        key: "redirect",
-        label: "登入後頁面"
-      }, {
-        key: "state",
-        label: this.$t("OPTION_STATE"),
-        type: "icon-label",
-        width: "90",
-        formatter: function formatter(item) {
-          return {
-            color: "item_state_" + item + "_color",
-            icon: ["fal", item === 1 ? "check" : "times"]
-          };
-        }
-      }],
-      paginations: {
-        current_page: 1,
-        total: 0,
-        page_size: 10,
-        page_sizes: [10, 15, 20, 25],
-        layout: "total, sizes, prev, pager, next, jumper"
-      },
-      toolbar: {
-        type: "list",
-        custom: [{
-          text: this.$t("TOOLBAR_PUBLISH"),
-          method: "updateState",
-          condition: function condition(_ref) {
-            var data = _ref.data;
-
-            return data.state === 0 && data.parent_id !== null;
-          },
-
-          fn: function fn(_ref2) {
-            var ids = _ref2.ids;
-
-            _this.onClickBtnUpdateState({ ids: ids, state: 1 });
-          }
-        }, {
-          text: this.$t("TOOLBAR_UNPUBLISH"),
-          method: "updateState",
-          condition: function condition(_ref3) {
-            var data = _ref3.data;
-
-            return data.state === 1 && data.parent_id !== null;
-          },
-
-          fn: function fn(_ref4) {
-            var ids = _ref4.ids;
-
-            _this.onClickBtnUpdateState({ ids: ids, state: 0 });
-          }
-        }]
-      },
-      searchbar: {
-        fields: [{
-          key: "search",
-          desc: this.$t("TOOLBAR_KEYWORDS"),
-          clearable: true
-        }],
-        default_value: {
-          search: ""
-        }
-      },
-      list_actions: {
-        btns: [{
-          text: this.$t("ASSET_USER_ROLE_ASSIGN_ASSET_TITLE"),
-          type: "primary",
-          method: "grant_asset",
-          fn: function fn(_ref5) {
-            var data = _ref5.data;
-
-            _this.$router.push({
-              path: _this.$route.path + "/grant/asset",
-              query: {
-                id: data.id,
-                name: data.full_name
-              }
-            });
-          }
-        }, {
-          text: this.$t("ASSET_USER_ROLE_ASSIGN_API_TITLE"),
-          type: "primary",
-          method: "grant_api",
-          fn: function fn(_ref6) {
-            var data = _ref6.data;
-
-            _this.$router.push({
-              path: _this.$route.path + "/grant/api",
-              query: {
-                id: data.id,
-                name: data.full_name
-              }
-            });
-          }
-        }]
-      }
-    };
-  },
-
-  methods: {
-    /**
-     * Searchbar
-     */
-    onSearch: function onSearch(_ref7) {
-      var data = _ref7.data;
-
-      var sd = {};
-
-      var query = this.$route.query;
-
-      for (var p in query) {
-        sd[p] = query[p];
-      }
-      for (var s in data) {
-        sd[s] = data[s];
-        if (!sd[s]) {
-          delete sd[s];
-        }
-      }
-
-      this.$router.push({
-        path: this.$route.path,
-        query: sd
-      });
-    },
-    onSearchReset: function onSearchReset() {
-      this.$router.push({
-        path: this.$route.path
-      });
-    },
-
-    /**
-     * Toolbar
-     */
-    onClickBtnUpdateState: function onClickBtnUpdateState(_ref8) {
-      var _this2 = this;
-
-      var ids = _ref8.ids,
-          state = _ref8.state;
-
-      this.$$api_role_updateState({
-        data: {
-          ids: ids,
-          state: state
-        },
-        fn: function fn(_ref9) {
-          var msg = _ref9.msg;
-
-          _this2.$message.success(msg);
-          _this2.onGetList();
-        }
-      });
-    },
-    onClickBtnBatchDelete: function onClickBtnBatchDelete(_ref10) {
-      var _this3 = this;
-
-      var ids = _ref10.ids,
-          datas = _ref10.datas;
-
-      this.$confirm(this.$t("GLOBAL_CONFIRM_DELETE")).then(function () {
-        _this3.$$api_role_delete({
-          data: { ids: ids },
-          fn: function fn(_ref11) {
-            var data = _ref11.data;
-
-            _this3.onGetList();
-          }
-        });
-      });
-    },
-    onClickBtnEdit: function onClickBtnEdit(_ref12) {
-      var data = _ref12.data;
-
-      this.$router.push({
-        path: this.$route.path + "/edit",
-        query: {
-          id: data.id,
-          pid: data.parent_id,
-          name: data.name
-        }
-      });
-    },
-    onClickBtnAdd: function onClickBtnAdd() {
-      this.$router.push(this.$route.path + "/edit");
-    },
-    onGetList: function onGetList() {
-      var _this4 = this;
-
-      var _ref13 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-          page = _ref13.page,
-          pageSize = _ref13.pageSize,
-          _fn = _ref13.fn;
-
-      this.list_loading.flag = true;
-
-      var query = this.$route.query;
-
-      this.paginations.current_page = page || parseInt(query.page) || 1;
-      this.paginations.page_size = pageSize || parseInt(query.page_size) || this.paginations.page_size;
-
-      var data = {
-        page: this.paginations.current_page,
-        limit: this.paginations.page_size
-      };
-
-      Object.keys(query).forEach(function (field) {
-        _this4.searchbar.default_value[field] = query[field];
-        data[field] = query[field];
-      });
-
-      this.$$api_role_list({
-        data: data,
-        fn: function fn(_ref14) {
-          var data = _ref14.data;
-
-          _this4.list_loading.flag = false;
-          _this4.list = data.items;
-          _this4.paginations.total = data.pagination.total;
-
-          _this4.$store.dispatch("update_option_related_list", {
-            type: "role",
-            data: data.items
-          });
-
-          _fn && _fn();
-        }
-      });
-    },
-    init: function init() {
-      this.onGetList();
-    }
-  },
-  mounted: function mounted() {
-    this.init();
-  },
-
-  watch: {
-    $route: function $route(to, from) {
-      this.init();
-    }
-  }
-});
 
 /***/ }),
 
@@ -4956,7 +4682,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin_js__ = __webpack_require__("./resources/assets/admin/mixins/list_mixin.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin__ = __webpack_require__("./resources/assets/admin/mixins/list_mixin.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_cms_list_mixin__ = __webpack_require__("./resources/assets/admin/mixins/cms_list_mixin.js");
 //
 //
 //
@@ -4980,20 +4707,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "language-list",
-  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin_js__["a" /* default */]],
+  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1_mixins_cms_list_mixin__["a" /* default */]],
   data: function data() {
     var _this = this;
 
     return {
-      list: [],
-      list_loading: {
-        flag: false
-      },
       fields: [{
         key: "state",
         label: this.$t("OPTION_STATE"),
@@ -5026,13 +4750,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         key: "id",
         label: this.$t("LIST_DATA_HEADING_ID")
       }],
-      paginations: {
-        current_page: 1,
-        total: 0,
-        page_size: 10,
-        page_sizes: [10, 15, 20, 25],
-        layout: "total, sizes, prev, pager, next, jumper"
-      },
       toolbar: {
         type: "list",
         custom: [{
@@ -5139,7 +4856,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           var msg = _ref8.msg;
 
           _this2.$message.success(msg);
-          _this2.onGetList();
+          _this2.$onGetList();
         }
       });
     },
@@ -5155,48 +4872,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           fn: function fn(_ref10) {
             var data = _ref10.data;
 
-            _this3.onGetList();
+            _this3.$onGetList();
           }
         });
       });
     },
-    onClickBtnEdit: function onClickBtnEdit(_ref11) {
+    handleEditQuery: function handleEditQuery(_ref11) {
       var data = _ref11.data;
 
-      this.$router.push({
-        path: this.$route.path + "/edit",
-        query: {
-          id: data.id
-        }
+      this.$onClickBntEdit({
+        id: data.id
       });
     },
-    onClickBtnAdd: function onClickBtnAdd() {
-      this.$router.push(this.$route.path + "/edit");
-    },
-    onGetList: function onGetList() {
+    handleGetList: function handleGetList() {
       var _this4 = this;
 
       var _ref12 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-          page = _ref12.page,
-          pageSize = _ref12.pageSize,
+          data = _ref12.data,
           _fn = _ref12.fn;
 
-      this.list_loading.flag = true;
-
-      var query = this.$route.query;
-
-      this.paginations.current_page = page || parseInt(query.page) || 1;
-      this.paginations.page_size = pageSize || parseInt(query.page_size) || this.paginations.page_size;
-
-      var data = {
-        page: this.paginations.current_page,
-        limit: this.paginations.page_size
-      };
-
-      Object.keys(query).forEach(function (field) {
-        _this4.searchbar.default_value[field] = query[field];
-        data[field] = query[field];
-      });
       this.$$api_language_list({
         data: data,
         fn: function fn(_ref13) {
@@ -5209,15 +4903,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           _fn && _fn();
         }
       });
-    }
-  },
-  mounted: function mounted() {
-    this.init();
-  },
-
-  watch: {
-    $route: function $route(to, from) {
-      this.init();
     }
   }
 });
@@ -5287,7 +4972,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     };
   },
+  created: function created() {
+    this.init();
+  },
 
+  watch: {
+    $route: function $route() {
+      this.init();
+    }
+  },
   methods: {
     onSubmit: function onSubmit(_ref) {
       var _this = this;
@@ -5329,16 +5022,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     init: function init() {
       this.onGetView();
     }
-  },
-  created: function created() {
-    this.init();
-  },
-
-  watch: {
-    $route: function $route() {
-      this.init();
-    }
   }
+
 });
 
 /***/ }),
@@ -5538,7 +5223,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin_js__ = __webpack_require__("./resources/assets/admin/mixins/list_mixin.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin__ = __webpack_require__("./resources/assets/admin/mixins/list_mixin.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_cms_list_mixin__ = __webpack_require__("./resources/assets/admin/mixins/cms_list_mixin.js");
 //
 //
 //
@@ -5560,18 +5246,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "site-list",
-  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin_js__["a" /* default */]],
+  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1_mixins_cms_list_mixin__["a" /* default */]],
   data: function data() {
     return {
-      list: [],
-      list_loading: {
-        flag: false
-      },
       fields: [{
         key: "title",
         label: this.$t("FIELD_TITLE_LABEL"),
@@ -5587,13 +5270,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         key: "id",
         label: this.$t("LIST_DATA_HEADING_ID")
       }],
-      paginations: {
-        current_page: 1,
-        total: 0,
-        page_size: 10,
-        page_sizes: [10, 15, 20, 25],
-        layout: "total, sizes, prev, pager, next, jumper"
-      },
       toolbar: {
         type: "list"
       },
@@ -5644,48 +5320,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           fn: function fn(_ref2) {
             var data = _ref2.data;
 
-            _this.onGetList();
+            _this.$onGetList();
           }
         });
       });
     },
-    onClickBtnEdit: function onClickBtnEdit(_ref3) {
+    handleEditQuery: function handleEditQuery(_ref3) {
       var data = _ref3.data;
 
-      this.$router.push({
-        path: this.$route.path + "/edit",
-        query: {
-          id: data.id
-        }
+      this.$onClickBntEdit({
+        id: data.id
       });
     },
-    onClickBtnAdd: function onClickBtnAdd() {
-      this.$router.push(this.$route.path + "/edit");
-    },
-    onGetList: function onGetList() {
+    handleGetList: function handleGetList() {
       var _this2 = this;
 
       var _ref4 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-          page = _ref4.page,
-          pageSize = _ref4.pageSize,
+          data = _ref4.data,
           _fn = _ref4.fn;
 
-      this.list_loading.flag = true;
-
-      var query = this.$route.query;
-
-      this.paginations.current_page = page || parseInt(query.page) || 1;
-      this.paginations.page_size = pageSize || parseInt(query.page_size) || this.paginations.page_size;
-
-      var data = {
-        page: this.paginations.current_page,
-        limit: this.paginations.page_size
-      };
-
-      Object.keys(query).forEach(function (field) {
-        _this2.searchbar.default_value[field] = query[field];
-        data[field] = query[field];
-      });
       this.$$api_site_list({
         data: data,
         fn: function fn(_ref5) {
@@ -5698,15 +5351,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           _fn && _fn();
         }
       });
-    }
-  },
-  mounted: function mounted() {
-    this.init();
-  },
-
-  watch: {
-    $route: function $route(to, from) {
-      this.init();
     }
   }
 });
@@ -6114,6 +5758,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin__ = __webpack_require__("./resources/assets/admin/mixins/list_mixin.js");
 //
 //
 //
@@ -6136,16 +5781,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "user-group-list",
+  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin__["a" /* default */]],
   data: function data() {
     var _this = this;
 
     return {
-      list: [],
-      list_loading: {
-        flag: false
-      },
       fields: [{
         key: "tree_title",
         label: this.$t("FIELD_TITLE_LABEL"),
@@ -6155,13 +5799,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         key: "id",
         label: this.$t("LIST_DATA_HEADING_ID")
       }],
-      paginations: {
-        current_page: 1,
-        total: 0,
-        page_size: 10,
-        page_sizes: [10, 15, 20, 25],
-        layout: "total, sizes, prev, pager, next, jumper"
-      },
       toolbar: {
         type: "list"
       },
@@ -6213,100 +5850,45 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   methods: {
     /**
-     * Searchbar
-     */
-    onSearch: function onSearch(_ref3) {
-      var data = _ref3.data;
-
-      var sd = {};
-
-      var query = this.$route.query;
-
-      for (var p in query) {
-        sd[p] = query[p];
-      }
-      for (var s in data) {
-        sd[s] = data[s];
-        if (!sd[s]) {
-          delete sd[s];
-        }
-      }
-
-      this.$router.push({
-        path: this.$route.path,
-        query: sd
-      });
-    },
-    onSearchReset: function onSearchReset() {
-      this.$router.push({
-        path: this.$route.path
-      });
-    },
-
-    /**
      * Toolbar
      */
-    onClickBtnBatchDelete: function onClickBtnBatchDelete(_ref4) {
+    onClickBtnBatchDelete: function onClickBtnBatchDelete(_ref3) {
       var _this2 = this;
 
-      var ids = _ref4.ids,
-          datas = _ref4.datas;
+      var ids = _ref3.ids,
+          datas = _ref3.datas;
 
       this.$confirm(this.$t("GLOBAL_CONFIRM_DELETE")).then(function () {
         _this2.$$api_user_deleteGroup({
           data: { ids: ids },
-          fn: function fn(_ref5) {
-            var data = _ref5.data;
+          fn: function fn(_ref4) {
+            var data = _ref4.data;
 
-            _this2.onGetList();
+            _this2.$onGetList();
           }
         });
       });
     },
-    onClickBtnEdit: function onClickBtnEdit(_ref6) {
-      var data = _ref6.data;
+    handleEditQuery: function handleEditQuery(_ref5) {
+      var data = _ref5.data;
 
-      this.$router.push({
-        path: this.$route.path + "/edit",
-        query: {
-          id: data.id,
-          pid: data.parent_id,
-          name: data.name
-        }
+      this.$onClickBntEdit({
+        id: data.id,
+        pid: data.parent_id,
+        name: data.name
       });
     },
-    onClickBtnAdd: function onClickBtnAdd() {
-      this.$router.push(this.$route.path + "/edit");
-    },
-    onGetList: function onGetList() {
+    handleGetList: function handleGetList() {
       var _this3 = this;
 
-      var _ref7 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-          page = _ref7.page,
-          pageSize = _ref7.pageSize,
-          _fn = _ref7.fn;
-
-      this.list_loading.flag = true;
-
-      var query = this.$route.query;
-
-      this.paginations.current_page = page || parseInt(query.page) || 1;
-      this.paginations.page_size = pageSize || parseInt(query.page_size) || this.paginations.page_size;
-
-      var data = {
-        page: this.paginations.current_page,
-        limit: this.paginations.page_size
-      };
-
-      Object.keys(query).forEach(function (field) {
-        _this3.searchbar.default_value[field] = query[field];
-        data[field] = query[field];
-      });
+      var _ref6 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+          data = _ref6.data,
+          _fn = _ref6.fn;
 
       this.$$api_user_listGroup({
         data: data,
-        fn: function fn(_ref8) {
-          var data = _ref8.data;
+        fn: function fn(_ref7) {
+          var data = _ref7.data;
 
           _this3.list_loading.flag = false;
           _this3.list = data.items;
@@ -6317,16 +5899,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     init: function init() {
-      this.onGetList();
-    }
-  },
-  mounted: function mounted() {
-    this.init();
-  },
-
-  watch: {
-    $route: function $route(to, from) {
-      this.init();
+      this.$onGetList();
     }
   }
 });
@@ -6338,6 +5911,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin__ = __webpack_require__("./resources/assets/admin/mixins/list_mixin.js");
 //
 //
 //
@@ -6360,16 +5934,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "user-list",
+  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin__["a" /* default */]],
   data: function data() {
     var _this = this;
 
     return {
-      list: [],
-      list_loading: {
-        flag: false
-      },
       fields: [{
         width: "60",
         key: "id",
@@ -6417,13 +5990,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         key: "email",
         label: this.$t("USER_FIELD_EMAIL")
       }],
-      paginations: {
-        current_page: 1,
-        total: 0,
-        page_size: 10,
-        page_sizes: [10, 15, 20, 25],
-        layout: "total, sizes, prev, pager, next, jumper"
-      },
       toolbar: {
         type: "list",
         custom: [{
@@ -6535,121 +6101,67 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
 
+
   methods: {
-    /**
-     * Searchbar
-     */
-    onSearch: function onSearch(_ref7) {
-      var data = _ref7.data;
-
-      var sd = {};
-
-      var query = this.$route.query;
-
-      for (var p in query) {
-        sd[p] = query[p];
-      }
-      for (var s in data) {
-        sd[s] = data[s];
-        if (!sd[s]) {
-          delete sd[s];
-        }
-      }
-
-      this.$router.push({
-        path: this.$route.path,
-        query: sd
-      });
-    },
-    onSearchReset: function onSearchReset() {
-      this.$router.push({
-        path: this.$route.path
-      });
-    },
-
     /**
      * Toolbar
      */
-    onClickBtnUpdateState: function onClickBtnUpdateState(_ref8) {
+    onClickBtnUpdateState: function onClickBtnUpdateState(_ref7) {
       var _this2 = this;
 
-      var ids = _ref8.ids,
-          state = _ref8.state;
+      var ids = _ref7.ids,
+          state = _ref7.state;
 
       this.$$api_user_updateState({
         data: {
           ids: ids,
           state: state
         },
-        fn: function fn(_ref9) {
-          var msg = _ref9.msg;
+        fn: function fn(_ref8) {
+          var msg = _ref8.msg;
 
           _this2.$message.success(msg);
-          _this2.onGetList();
+          _this2.$onGetList();
         }
       });
     },
-    onClickBtnBatchDelete: function onClickBtnBatchDelete(_ref10) {
+    onClickBtnBatchDelete: function onClickBtnBatchDelete(_ref9) {
       var _this3 = this;
 
-      var ids = _ref10.ids,
-          datas = _ref10.datas;
+      var ids = _ref9.ids,
+          datas = _ref9.datas;
 
       this.$confirm(this.$t("GLOBAL_CONFIRM_DELETE")).then(function () {
         _this3.$$api_user_delete({
           data: { ids: ids },
-          fn: function fn(_ref11) {
-            var data = _ref11.data;
+          fn: function fn(_ref10) {
+            var data = _ref10.data;
 
-            _this3.onGetList();
+            _this3.$onGetList();
           }
         });
       });
     },
-    onClickBtnEdit: function onClickBtnEdit(_ref12) {
-      var data = _ref12.data;
+    handleEditQuery: function handleEditQuery(_ref11) {
+      var data = _ref11.data;
 
-      this.$router.push({
-        path: this.$route.path + "/edit",
-        query: {
-          id: data.id,
-          pid: data.parent_id,
-          name: data.name
-        }
+      this.$onClickBntEdit({
+        id: data.id,
+        pid: data.parent_id,
+        name: data.name
       });
     },
-    onClickBtnAdd: function onClickBtnAdd() {
-      this.$router.push(this.$route.path + "/edit");
-    },
-    onGetList: function onGetList() {
+    handleGetList: function handleGetList() {
       var _this4 = this;
 
-      var _ref13 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-          page = _ref13.page,
-          pageSize = _ref13.pageSize,
-          _fn = _ref13.fn;
-
-      this.list_loading.flag = true;
-
-      var query = this.$route.query;
-
-      this.paginations.current_page = page || parseInt(query.page) || 1;
-      this.paginations.page_size = pageSize || parseInt(query.page_size) || this.paginations.page_size;
-
-      var data = {
-        page: this.paginations.current_page,
-        limit: this.paginations.page_size
-      };
-
-      Object.keys(query).forEach(function (field) {
-        _this4.searchbar.default_value[field] = query[field];
-        data[field] = query[field];
-      });
+      var _ref12 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+          data = _ref12.data,
+          _fn = _ref12.fn;
 
       this.$$api_user_list({
         data: data,
-        fn: function fn(_ref14) {
-          var data = _ref14.data;
+        fn: function fn(_ref13) {
+          var data = _ref13.data;
 
           _this4.list_loading.flag = false;
           _this4.list = data.items;
@@ -6663,8 +6175,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this5 = this;
 
       this.$$api_user_listOptionGroup({
-        fn: function fn(_ref15) {
-          var data = _ref15.data;
+        fn: function fn(_ref14) {
+          var data = _ref14.data;
 
           _this5.searchbar.fields[3].list = data.items;
         }
@@ -6672,16 +6184,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     init: function init() {
       this.onUpdateParams();
-      this.onGetList();
-    }
-  },
-  mounted: function mounted() {
-    this.init();
-  },
-
-  watch: {
-    $route: function $route(to, from) {
-      this.init();
+      this.$onGetList();
     }
   }
 });
@@ -6786,7 +6289,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -6801,7 +6304,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -6996,7 +6499,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -8206,16 +7709,16 @@ var render = function() {
           FieldList: _vm.fields
         },
         on: {
-          onClickBtnAdd: _vm.onClickBtnAdd,
-          onClickBtnEdit: _vm.onClickBtnEdit,
+          onClickBtnAdd: _vm.$onClickBtnAdd,
+          onClickBtnEdit: _vm.handleEditQuery,
           onClickBtnBatchDelete: _vm.onClickBtnBatchDelete,
           onClickBtnBatchTrash: _vm.onClickBtnBatchTrash,
           onClickBtnBatchRestore: _vm.onClickBtnBatchRestore,
           onClickBtnCheckout: _vm.onClickBtnCheckout,
-          onChangeCurrentPage: _vm.onChangeCurPage,
-          onChangePageSize: _vm.onChangePageSize,
-          onSearch: _vm.onSearch,
-          onSearchReset: _vm.onSearchReset
+          onChangeCurrentPage: _vm.$onChangeCurrentPage,
+          onChangePageSize: _vm.$onChangePageSize,
+          onSearch: _vm.$onSearch,
+          onSearchReset: _vm.$onSearchReset
         }
       })
     ],
@@ -8263,53 +7766,6 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-1133600e", module.exports)
-  }
-}
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-11703778\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/admin/pages/role/list.vue":
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("ListData", {
-        ref: "list-data",
-        attrs: {
-          List: _vm.list,
-          ListLoading: _vm.list_loading,
-          Pagination: _vm.paginations,
-          Toolbar: _vm.toolbar,
-          Searchbar: _vm.searchbar,
-          ListActions: _vm.list_actions,
-          FieldList: _vm.fields
-        },
-        on: {
-          onClickBtnAdd: _vm.onClickBtnAdd,
-          onClickBtnEdit: _vm.onClickBtnEdit,
-          onClickBtnBatchDelete: _vm.onClickBtnBatchDelete,
-          onChangeCurrentPage: _vm.onChangeCurPage,
-          onChangePageSize: _vm.onChangePageSize,
-          onSearch: _vm.onSearch,
-          onSearchReset: _vm.onSearchReset
-        }
-      })
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-11703778", module.exports)
   }
 }
 
@@ -8539,40 +7995,6 @@ if (false) {
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-20b85ee4\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/admin/pages/role/edit.vue":
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("FormData", {
-        attrs: {
-          FieldList: _vm.fields,
-          DefaultValue: _vm.default_value,
-          Toolbar: _vm.toolbar
-        },
-        on: { onSubmit: _vm.onSubmit, onCancel: _vm.onCancel }
-      })
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-20b85ee4", module.exports)
-  }
-}
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-26fa5c62\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/admin/pages/error/500.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8643,7 +8065,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c("div", [_vm._v("2342")])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -8937,16 +8359,16 @@ var render = function() {
           FieldList: _vm.fields
         },
         on: {
-          onClickBtnAdd: _vm.onClickBtnAdd,
-          onClickBtnEdit: _vm.onClickBtnEdit,
+          onClickBtnAdd: _vm.$onClickBtnAdd,
+          onClickBtnEdit: _vm.handleEditQuery,
           onClickBtnBatchDelete: _vm.onClickBtnBatchDelete,
           onClickBtnBatchTrash: _vm.onClickBtnBatchTrash,
           onClickBtnBatchRestore: _vm.onClickBtnBatchRestore,
           onClickBtnCheckout: _vm.onClickBtnCheckout,
-          onChangeCurrentPage: _vm.onChangeCurPage,
-          onChangePageSize: _vm.onChangePageSize,
-          onSearch: _vm.onSearch,
-          onSearchReset: _vm.onSearchReset,
+          onChangeCurrentPage: _vm.$onChangeCurrentPage,
+          onChangePageSize: _vm.$onChangePageSize,
+          onSearch: _vm.$onSearch,
+          onSearchReset: _vm.$onSearchReset,
           onOrderChange: _vm.onOrderChange
         }
       })
@@ -8987,6 +8409,53 @@ if (false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-40797127\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/admin/pages/___role/list.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("ListData", {
+        ref: "list-data",
+        attrs: {
+          List: _vm.list,
+          ListLoading: _vm.list_loading,
+          Pagination: _vm.paginations,
+          Toolbar: _vm.toolbar,
+          Searchbar: _vm.searchbar,
+          ListActions: _vm.list_actions,
+          FieldList: _vm.fields
+        },
+        on: {
+          onClickBtnAdd: _vm.$onClickBtnAdd,
+          onClickBtnEdit: _vm.handleEditQuery,
+          onClickBtnBatchDelete: _vm.onClickBtnBatchDelete,
+          onChangeCurrentPage: _vm.$onChangeCurrentPage,
+          onChangePageSize: _vm.$onChangePageSize,
+          onSearch: _vm.$onSearch,
+          onSearchReset: _vm.$onSearchReset
+        }
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-40797127", module.exports)
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-41f96c35\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/admin/pages/system/site/list.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9008,13 +8477,13 @@ var render = function() {
           FieldList: _vm.fields
         },
         on: {
-          onClickBtnAdd: _vm.onClickBtnAdd,
-          onClickBtnEdit: _vm.onClickBtnEdit,
+          onClickBtnAdd: _vm.$onClickBtnAdd,
+          onClickBtnEdit: _vm.handleEditQuery,
           onClickBtnBatchDelete: _vm.onClickBtnBatchDelete,
-          onChangeCurrentPage: _vm.onChangeCurPage,
-          onChangePageSize: _vm.onChangePageSize,
-          onSearch: _vm.onSearch,
-          onSearchReset: _vm.onSearchReset
+          onChangeCurrentPage: _vm.$onChangeCurrentPage,
+          onChangePageSize: _vm.$onChangePageSize,
+          onSearch: _vm.$onSearch,
+          onSearchReset: _vm.$onSearchReset
         }
       })
     ],
@@ -9671,6 +9140,40 @@ if (false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-4fc19893\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/admin/pages/___role/edit.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("FormData", {
+        attrs: {
+          FieldList: _vm.fields,
+          DefaultValue: _vm.default_value,
+          Toolbar: _vm.toolbar
+        },
+        on: { onSubmit: _vm.onSubmit, onCancel: _vm.onCancel }
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-4fc19893", module.exports)
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-5139bbc3\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/admin/pages/user/list.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9692,13 +9195,13 @@ var render = function() {
           FieldList: _vm.fields
         },
         on: {
-          onClickBtnAdd: _vm.onClickBtnAdd,
-          onClickBtnEdit: _vm.onClickBtnEdit,
+          onClickBtnAdd: _vm.$onClickBtnAdd,
+          onClickBtnEdit: _vm.handleEditQuery,
           onClickBtnBatchDelete: _vm.onClickBtnBatchDelete,
-          onChangeCurrentPage: _vm.onChangeCurPage,
-          onChangePageSize: _vm.onChangePageSize,
-          onSearch: _vm.onSearch,
-          onSearchReset: _vm.onSearchReset
+          onChangeCurrentPage: _vm.$onChangeCurrentPage,
+          onChangePageSize: _vm.$onChangePageSize,
+          onSearch: _vm.$onSearch,
+          onSearchReset: _vm.$onSearchReset
         }
       })
     ],
@@ -9979,15 +9482,15 @@ var render = function() {
           FieldList: _vm.fields
         },
         on: {
-          onClickBtnAdd: _vm.onClickBtnAdd,
-          onClickBtnEdit: _vm.onClickBtnEdit,
+          onClickBtnAdd: _vm.$onClickBtnAdd,
+          onClickBtnEdit: _vm.handleEditQuery,
           onClickBtnBatchDelete: _vm.onClickBtnBatchDelete,
           onClickBtnBatchTrash: _vm.onClickBtnBatchTrash,
           onClickBtnBatchRestore: _vm.onClickBtnBatchRestore,
-          onChangeCurrentPage: _vm.onChangeCurPage,
-          onChangePageSize: _vm.onChangePageSize,
-          onSearch: _vm.onSearch,
-          onSearchReset: _vm.onSearchReset
+          onChangeCurrentPage: _vm.$onChangeCurrentPage,
+          onChangePageSize: _vm.$onChangePageSize,
+          onSearch: _vm.$onSearch,
+          onSearchReset: _vm.$onSearchReset
         }
       })
     ],
@@ -11024,16 +10527,16 @@ var render = function() {
           FieldList: _vm.fields
         },
         on: {
-          onClickBtnAdd: _vm.onClickBtnAdd,
-          onClickBtnEdit: _vm.onClickBtnEdit,
+          onClickBtnAdd: _vm.$onClickBtnAdd,
+          onClickBtnEdit: _vm.handleEditQuery,
           onClickBtnBatchDelete: _vm.onClickBtnBatchDelete,
           onClickBtnCheckout: _vm.onClickBtnCheckout,
           onClickBtnBatchTrash: _vm.onClickBtnBatchTrash,
           onClickBtnBatchRestore: _vm.onClickBtnBatchRestore,
-          onChangeCurrentPage: _vm.onChangeCurPage,
-          onChangePageSize: _vm.onChangePageSize,
-          onSearch: _vm.onSearch,
-          onSearchReset: _vm.onSearchReset,
+          onChangeCurrentPage: _vm.$onChangeCurrentPage,
+          onChangePageSize: _vm.$onChangePageSize,
+          onSearch: _vm.$onSearch,
+          onSearchReset: _vm.$onSearchReset,
           onOrderChange: _vm.onOrderChange
         }
       })
@@ -11129,13 +10632,13 @@ var render = function() {
           FieldList: _vm.fields
         },
         on: {
-          onClickBtnAdd: _vm.onClickBtnAdd,
-          onClickBtnEdit: _vm.onClickBtnEdit,
+          onClickBtnAdd: _vm.$onClickBtnAdd,
+          onClickBtnEdit: _vm.handleEditQuery,
           onClickBtnBatchDelete: _vm.onClickBtnBatchDelete,
-          onChangeCurrentPage: _vm.onChangeCurPage,
-          onChangePageSize: _vm.onChangePageSize,
-          onSearch: _vm.onSearch,
-          onSearchReset: _vm.onSearchReset
+          onChangeCurrentPage: _vm.$onChangeCurrentPage,
+          onChangePageSize: _vm.$onChangePageSize,
+          onSearch: _vm.$onSearch,
+          onSearchReset: _vm.$onSearchReset
         }
       })
     ],
@@ -11730,13 +11233,13 @@ var render = function() {
           FieldList: _vm.fields
         },
         on: {
-          onClickBtnAdd: _vm.onClickBtnAdd,
-          onClickBtnEdit: _vm.onClickBtnEdit,
+          onClickBtnAdd: _vm.$onClickBtnAdd,
+          onClickBtnEdit: _vm.handleEditQuery,
           onClickBtnBatchDelete: _vm.onClickBtnBatchDelete,
-          onChangeCurrentPage: _vm.onChangeCurPage,
-          onChangePageSize: _vm.onChangePageSize,
-          onSearch: _vm.onSearch,
-          onSearchReset: _vm.onSearchReset,
+          onChangeCurrentPage: _vm.$onChangeCurrentPage,
+          onChangePageSize: _vm.$onChangePageSize,
+          onSearch: _vm.$onSearch,
+          onSearchReset: _vm.$onSearchReset,
           onOrderChange: _vm.onOrderChange
         }
       })
@@ -11884,13 +11387,13 @@ var render = function() {
           FieldList: _vm.fields
         },
         on: {
-          onClickBtnAdd: _vm.onClickBtnAdd,
-          onClickBtnEdit: _vm.onClickBtnEdit,
+          onClickBtnAdd: _vm.$onClickBtnAdd,
+          onClickBtnEdit: _vm.handleEditQuery,
           onClickBtnBatchDelete: _vm.onClickBtnBatchDelete,
-          onChangeCurrentPage: _vm.onChangeCurPage,
-          onChangePageSize: _vm.onChangePageSize,
-          onSearch: _vm.onSearch,
-          onSearchReset: _vm.onSearchReset
+          onChangeCurrentPage: _vm.$onChangeCurrentPage,
+          onChangePageSize: _vm.$onChangePageSize,
+          onSearch: _vm.$onSearch,
+          onSearchReset: _vm.$onSearchReset
         }
       })
     ],
@@ -11964,13 +11467,13 @@ var render = function() {
           FieldList: _vm.fields
         },
         on: {
-          onClickBtnAdd: _vm.onClickBtnAdd,
-          onClickBtnEdit: _vm.onClickBtnEdit,
+          onClickBtnAdd: _vm.$onClickBtnAdd,
+          onClickBtnEdit: _vm.handleEditQuery,
           onClickBtnBatchDelete: _vm.onClickBtnBatchDelete,
-          onChangeCurrentPage: _vm.onChangeCurPage,
-          onChangePageSize: _vm.onChangePageSize,
-          onSearch: _vm.onSearch,
-          onSearchReset: _vm.onSearchReset
+          onChangeCurrentPage: _vm.$onChangeCurrentPage,
+          onChangePageSize: _vm.$onChangePageSize,
+          onSearch: _vm.$onSearch,
+          onSearchReset: _vm.$onSearchReset
         }
       })
     ],
@@ -11996,7 +11499,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c("div", [_vm._v("768678")])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -12051,7 +11554,33 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c(
+    "div",
+    [
+      _c("ListData", {
+        ref: "list-data",
+        attrs: {
+          List: _vm.list,
+          ListLoading: _vm.list_loading,
+          Sort: _vm.sort,
+          Pagination: _vm.paginations,
+          Toolbar: _vm.toolbar,
+          Searchbar: _vm.searchbar,
+          FieldList: _vm.fields
+        },
+        on: {
+          onClickBtnAdd: _vm.$onClickBtnAdd,
+          onClickBtnEdit: _vm.handleEditQuery,
+          onClickBtnBatchDelete: _vm.onClickBtnBatchDelete,
+          onChangeCurrentPage: _vm.$onChangeCurrentPage,
+          onChangePageSize: _vm.$onChangePageSize,
+          onSearch: _vm.$onSearch,
+          onSearchReset: _vm.$onSearchReset
+        }
+      })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -12239,6 +11768,62 @@ module.exports = Component.exports
 
 /***/ }),
 
+/***/ "./resources/assets/admin/mixins/cms_list_mixin.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+    watch: {
+        $route: function $route() {
+            this.$init();
+        }
+    },
+    mounted: function mounted() {
+        this.$init();
+    },
+
+    methods: {
+        $initSearchbarParams: function $initSearchbarParams() {
+            var _this = this;
+
+            var params = ["category", "language", "viewlevel"];
+            if (!this.$store.getters.category_list || !this.$store.getters.language_list || !this.$store.getters.viewlevel_list) {
+                this.$$api_option_list({
+                    data: {
+                        types: params
+                    },
+                    fn: function fn(_ref) {
+                        var data = _ref.data;
+
+                        params.forEach(function (param) {
+                            if (param === "language") {
+                                data.items[param].unshift({
+                                    sef: "*",
+                                    title: _this.$t("ALL_LANGUAGE")
+                                });
+                            }
+                            _this.$store.dispatch("update_option_related_list", {
+                                type: param,
+                                data: data.items[param]
+                            });
+
+                            _this.searchbar.fields[2].list = _this.$store.getters.viewlevel_list;
+                            _this.searchbar.fields[3].list = _this.$store.getters.language_list;
+                            _this.searchbar.fields[4].list = _this.$store.getters.category_list;
+                        });
+                    }
+                });
+            }
+        },
+        $init: function $init() {
+            this.$set(this.toolbar, "type", this.$route.query.state === "-2" ? "trash" : "list");
+            this.$onGetList();
+        }
+    }
+});
+
+/***/ }),
+
 /***/ "./resources/assets/admin/mixins/edit_mixin.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12292,12 +11877,49 @@ module.exports = Component.exports
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 /* harmony default export */ __webpack_exports__["a"] = ({
+    data: function data() {
+        return {
+            list: [],
+            list_loading: {
+                flag: false
+            },
+            paginations: {
+                current_page: 1,
+                total: 0,
+                page_size: 10,
+                page_sizes: [10, 15, 20, 25],
+                layout: "total, sizes, prev, pager, next, jumper"
+            }
+        };
+    },
+    mounted: function mounted() {
+        this.init();
+    },
+
+    watch: {
+        $route: function $route() {
+            this.init();
+        }
+    },
     methods: {
-        /**
-         * Searchbar
-         */
-        onSearch: function onSearch(_ref) {
+        $onClickBtnAdd: function $onClickBtnAdd() {
+            this.$router.push(this.$route.path + "/edit");
+        },
+        $onClickBntEdit: function $onClickBntEdit(query) {
+            this.$router.push({
+                path: this.$route.path + "/edit",
+                query: query
+            });
+        },
+        $onSearchReset: function $onSearchReset() {
+            this.$router.push({
+                path: this.$route.path
+            });
+        },
+        $onSearch: function $onSearch(_ref) {
             var data = _ref.data;
 
             var sd = {};
@@ -12319,46 +11941,75 @@ module.exports = Component.exports
                 query: sd
             });
         },
-        onSearchReset: function onSearchReset() {
-            this.$router.push({
-                path: this.$route.path
-            });
+        setRouteQuery: function setRouteQuery(field, value) {
+            var query = Object.assign({}, this.$route.query);
+
+            if ((typeof field === "undefined" ? "undefined" : _typeof(field)) === "object") {
+                query = field;
+            } else {
+                query[field] = value;
+            }
+
+            return query;
         },
-        initSearchbarParams: function initSearchbarParams() {
+        getRouteQuery: function getRouteQuery() {
             var _this = this;
 
-            var params = ["category", "language", "viewlevel"];
-            if (!this.$store.getters.category_list || !this.$store.getters.language_list || !this.$store.getters.viewlevel_list) {
-                this.$$api_option_list({
-                    data: {
-                        types: params
-                    },
-                    fn: function fn(_ref2) {
-                        var data = _ref2.data;
+            var query = this.$route.query;
+            var intArray = ["id", "access"];
+            var data = {};
 
-                        params.forEach(function (param) {
-                            if (param === "language") {
-                                data.items[param].unshift({
-                                    sef: "*",
-                                    title: _this.$t("ALL_LANGUAGE")
-                                });
-                            }
-                            _this.$store.dispatch("update_option_related_list", {
-                                type: param,
-                                data: data.items[param]
-                            });
-
-                            _this.searchbar.fields[2].list = _this.$store.getters.viewlevel_list;
-                            _this.searchbar.fields[3].list = _this.$store.getters.language_list;
-                            _this.searchbar.fields[4].list = _this.$store.getters.category_list;
-                        });
-                    }
-                });
-            }
+            Object.keys(query).forEach(function (field) {
+                _this.searchbar.default_value[field] = intArray.includes(field) ? parseInt(query[field]) : query[field];
+                data[field] = query[field];
+            });
+            return data;
         },
-        init: function init() {
-            this.$set(this.toolbar, "type", this.$route.query.state === "-2" ? "trash" : "list");
-            this.onGetList();
+        $onChangeCurrentPage: function $onChangeCurrentPage(page) {
+            var _this2 = this;
+
+            this.onGetList({
+                page: page,
+                fn: function fn() {
+                    _this2.$router.push({
+                        path: _this2.$route.path,
+                        query: _this2.setRouteQuery("page", page)
+                    });
+                }
+            });
+        },
+        $onChangePageSize: function $onChangePageSize(pageSize) {
+            var _this3 = this;
+
+            this.onGetList({
+                pageSize: pageSize,
+                fn: function fn() {
+                    _this3.$router.push({
+                        path: _this3.$route.path,
+                        query: _this3.setRouteQuery("page_size", pageSize)
+                    });
+                }
+            });
+        },
+        $onGetList: function $onGetList() {
+            var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+                page = _ref2.page,
+                pageSize = _ref2.pageSize,
+                fn = _ref2.fn;
+
+            this.list_loading.flag = true;
+
+            var query = this.$route.query;
+
+            this.paginations.current_page = page || parseInt(query.page) || 1;
+            this.paginations.page_size = pageSize || parseInt(query.page_size) || this.paginations.page_size;
+
+            var data = Object.assign(this.getRouteQuery(), {
+                page: this.paginations.current_page,
+                limit: this.paginations.page_size
+            });
+
+            this.handleGetList({ data: data, fn: fn });
         }
     }
 });
@@ -12372,6 +12023,10 @@ var map = {
 	"./": "./resources/assets/admin/pages/index.vue",
 	"./App": "./resources/assets/admin/pages/App.vue",
 	"./App.vue": "./resources/assets/admin/pages/App.vue",
+	"./___role/edit": "./resources/assets/admin/pages/___role/edit.vue",
+	"./___role/edit.vue": "./resources/assets/admin/pages/___role/edit.vue",
+	"./___role/list": "./resources/assets/admin/pages/___role/list.vue",
+	"./___role/list.vue": "./resources/assets/admin/pages/___role/list.vue",
 	"./api/edit": "./resources/assets/admin/pages/api/edit.vue",
 	"./api/edit.vue": "./resources/assets/admin/pages/api/edit.vue",
 	"./api/list": "./resources/assets/admin/pages/api/list.vue",
@@ -12430,10 +12085,6 @@ var map = {
 	"./module/edit.vue": "./resources/assets/admin/pages/module/edit.vue",
 	"./module/list": "./resources/assets/admin/pages/module/list.vue",
 	"./module/list.vue": "./resources/assets/admin/pages/module/list.vue",
-	"./role/edit": "./resources/assets/admin/pages/role/edit.vue",
-	"./role/edit.vue": "./resources/assets/admin/pages/role/edit.vue",
-	"./role/list": "./resources/assets/admin/pages/role/list.vue",
-	"./role/list.vue": "./resources/assets/admin/pages/role/list.vue",
 	"./system/language/edit": "./resources/assets/admin/pages/system/language/edit.vue",
 	"./system/language/edit.vue": "./resources/assets/admin/pages/system/language/edit.vue",
 	"./system/language/list": "./resources/assets/admin/pages/system/language/list.vue",
@@ -12476,6 +12127,102 @@ webpackContext.keys = function webpackContextKeys() {
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
 webpackContext.id = "./resources/assets/admin/pages recursive ^\\.\\/.*$";
+
+/***/ }),
+
+/***/ "./resources/assets/admin/pages/___role/edit.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/admin/pages/___role/edit.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-4fc19893\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/admin/pages/___role/edit.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/admin/pages/___role/edit.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4fc19893", Component.options)
+  } else {
+    hotAPI.reload("data-v-4fc19893", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/assets/admin/pages/___role/list.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/admin/pages/___role/list.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-40797127\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/admin/pages/___role/list.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/admin/pages/___role/list.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-40797127", Component.options)
+  } else {
+    hotAPI.reload("data-v-40797127", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
 
 /***/ }),
 
@@ -13868,102 +13615,6 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-496a1802", Component.options)
   } else {
     hotAPI.reload("data-v-496a1802", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-
-/***/ "./resources/assets/admin/pages/role/edit.vue":
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
-/* script */
-var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/admin/pages/role/edit.vue")
-/* template */
-var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-20b85ee4\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/admin/pages/role/edit.vue")
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/admin/pages/role/edit.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-20b85ee4", Component.options)
-  } else {
-    hotAPI.reload("data-v-20b85ee4", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-
-/***/ "./resources/assets/admin/pages/role/list.vue":
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
-/* script */
-var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/admin/pages/role/list.vue")
-/* template */
-var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-11703778\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/admin/pages/role/list.vue")
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/admin/pages/role/list.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-11703778", Component.options)
-  } else {
-    hotAPI.reload("data-v-11703778", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true

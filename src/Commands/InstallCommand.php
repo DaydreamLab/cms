@@ -91,9 +91,9 @@ class InstallCommand extends Command
             '--tag' => 'cms-frontend-admin'
         ]);
 
-        $this->call('vendor:publish', [
-            '--tag' => 'cms-frontend-site'
-        ]);
+//        $this->call('vendor:publish', [
+//            '--tag' => 'cms-frontend-site'
+//        ]);
     }
 
 
