@@ -170,11 +170,13 @@ class ItemFrontService extends ItemService
 
     public function getItemByAlias(Collection $input)
     {
-        $items = $this->search($input);
+        $items = $this->search($input, false);
 
         if ($items->count())
         {
             $item = $items->first();
+            $item->hits++;
+            $this->update($item, $item);
 
             if (!Helper::hasPermission($item->viewlevels, $this->viewlevels))
             {

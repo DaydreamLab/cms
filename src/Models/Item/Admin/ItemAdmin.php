@@ -14,4 +14,6 @@ class ItemAdmin extends Item
      */
     protected $table = 'items';
 
+
+    protected $model_type = 'admin';
 }

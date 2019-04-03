@@ -13,4 +13,6 @@ class CategoryAdmin extends Category
     protected $table = 'categories';
 
 
+    protected $model_type = 'admin';
+
 }

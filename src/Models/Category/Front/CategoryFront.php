@@ -14,6 +14,8 @@ class CategoryFront extends Category
      */
     protected $table = 'categories';
 
+    protected $model_type = 'front';
+
     protected $hidden = [
         'id',
         'parent_id',

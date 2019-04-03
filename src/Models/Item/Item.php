@@ -26,6 +26,8 @@ class Item extends BaseModel
     protected $table = 'items';
 
 
+    protected $model_type = 'parent';
+
     /**
      * The attributes that are mass assignable.
      *

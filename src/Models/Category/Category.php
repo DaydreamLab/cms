@@ -24,6 +24,10 @@ class Category extends BaseModel
      */
     protected $table = 'categories';
 
+
+    protected $model_type = 'parent';
+
+
     protected $order = 'asc';
     /**
      * The attributes that are mass assignable.

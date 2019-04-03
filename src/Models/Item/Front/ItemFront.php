@@ -20,6 +20,8 @@ class ItemFront extends Item
 
     protected $order = 'desc';
 
+    protected $model_type = 'front';
+
     protected $hidden = [
         'id',
         'category_id',

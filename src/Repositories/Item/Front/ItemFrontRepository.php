@@ -207,7 +207,6 @@ class ItemFrontRepository extends ItemRepository
     }
 
 
-
     public function getPreviousOrNext(Collection $input, $previous = true)
     {
         $query = $this->model->where('state', 1);
