@@ -49,9 +49,10 @@ class MenuFrontRepository extends MenuRepository
         }
         else
         {
+            Helper::show($input);
             $query = $query->where('language', $input->get('sef'));
         }
-
+        Helper::show($this->model->where('language', $input->get('sef'))->where('state',1)->where('host', $input->get('host'))->whereIn('access', $input->get('access'))->get()->toArray());
         return $query->get()->toTree();
     }
 }

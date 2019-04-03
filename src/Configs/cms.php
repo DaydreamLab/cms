@@ -8,6 +8,8 @@ return [
                 'enabled'           => 0,
                 'groups'        => []
             ],
+            'access_ids'    => [1],
+            'viewlevels'    => [1],
         ]
     ],
     'form' => [

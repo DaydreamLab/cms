@@ -8,6 +8,7 @@ use DaydreamLab\Cms\Repositories\Item\Front\ItemFrontRepository;
 use DaydreamLab\Cms\Services\Category\CategoryService;
 use DaydreamLab\Cms\Services\Item\Front\ItemFrontService;
 use DaydreamLab\JJAJ\Helpers\Helper;
+use DaydreamLab\JJAJ\Helpers\InputHelper;
 use DaydreamLab\User\Models\User\Front\UserGroupFront;
 use DaydreamLab\User\Models\User\Front\UserGroupMapFront;
 use DaydreamLab\User\Repositories\User\Front\UserGroupFrontRepository;
@@ -110,7 +111,11 @@ class CategoryFrontService extends CategoryService
 
     public function search(Collection $input)
     {
-        $input->put('content_type', 'article');
+        if (InputHelper::null($input, 'content_type'))
+        {
+            $input->put('content_type', 'article');
+        }
+
         return parent::search($input);
     }
 

@@ -89,14 +89,6 @@ class ItemFrontService extends ItemService
     }
 
 
-    public function getCategoriesItems($categories_ids)
-    {
-        $items = $this->repo->getCategoriesItems($categories_ids, $this->access_ids);
-
-        return $this->appendExtrafileds($items);
-    }
-
-
     public function getLatestItemsModule($params)
     {
         $data = [];

@@ -54,47 +54,71 @@ class ModuleFrontService extends ModuleService
 
     public function getCategoryItemsModule($params)
     {
-        $category       = $this->categoryFrontService->find($params['category_id']);
-        $content_type   = $category->content_type;
-        $items          = $this->itemFrontService->getCategoriesItems([$params['category_id']]);
+        $categories = $this->categoryFrontService->search(Helper::collect([
+            'special_queries' =>
+                [[
+                    'type'  => 'whereIn',
+                    'key'   => 'id',
+                    'value' => $params['category_ids']
+                ]],
+            'paginate'  => false
+        ]));
 
-        if ($content_type == 'item' || $content_type == 'article')
-        {
+        $category_ids   = $categories->map(function ($item, $key){
+            return $item->id;
+        })->all();
 
-        }
-        elseif ($content_type == 'timeline')
+        foreach ($categories as $category)
         {
-            $data = [];
-            foreach ($items as $item)
+            $content_type   = $category->content_type;
+
+            $items          = $this->itemFrontService->search(Helper::collect([
+                'category_id'   => $category->id,
+                'order_by'      => $params['order_by'],
+                'order'         => $params['order'],
+                'limit'         => $params['limit'],
+            ]));
+            Helper::show($items->toArray());
+
+            if ($content_type == 'item' || $content_type == 'article')
             {
-                $year_value     = $item['year'];
-                $year_key       = $year_value;
-                $month_value    = $item['month'];
-                $month_key      = $month_value;
 
-                if (!array_key_exists($year_key, $data))
-                {
-                    $data[$year_key] = [];
-                }
-
-                if (!array_key_exists($month_key, $data[$year_key]))
-                {
-                    $data[$year_key][$month_key] = [];
-                }
-
-                $temp['title'] = $item['title'];
-                $temp['description'] = $item['description'];
-                $data[$year_key][$month_key][] = $temp;
-
-                krsort($data[$year_key]);
+                //Helper::show($items->toArray());
             }
-            krsort($data);
+            elseif ($content_type == 'timeline')
+            {
+                $data = [];
+                foreach ($items as $item)
+                {
+                    $year_value     = $item['year'];
+                    $year_key       = $year_value;
+                    $month_value    = $item['month'];
+                    $month_key      = $month_value;
 
-            $items = $data;
-        }
-        elseif ($content_type == 'slideshow')
-        {
+                    if (!array_key_exists($year_key, $data))
+                    {
+                        $data[$year_key] = [];
+                    }
 
+                    if (!array_key_exists($month_key, $data[$year_key]))
+                    {
+                        $data[$year_key][$month_key] = [];
+                    }
+
+                    $temp['title'] = $item['title'];
+                    $temp['description'] = $item['description'];
+                    $data[$year_key][$month_key][] = $temp;
+
+                    krsort($data[$year_key]);
+                }
+                krsort($data);
+
+                $items = $data;
+            }
+            elseif ($content_type == 'slideshow')
+            {
+
+            }
         }
 
         return $items;
