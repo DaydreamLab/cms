@@ -29,7 +29,7 @@ class CmsServiceProvider extends ServiceProvider
         ], 'cms-frontend-admin');
 
         $this->publishes([
-            __DIR__. '/../public/site'      => public_path('site'),
+            //__DIR__. '/../public/site'      => public_path('site'),
             __DIR__. '/../resources/site'   => resource_path('views/site'),
         ], 'cms-frontend-site');
 
