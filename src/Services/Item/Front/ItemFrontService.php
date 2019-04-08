@@ -286,7 +286,7 @@ class ItemFrontService extends ItemService
         $input->forget('special_queries');
         $input->put('special_queries', $special_queries);
         $input->put('state', 1);
-
+        
         $original_items = $items = parent::search($input);
 
         $data = $this->paginationFormat($items->toArray());

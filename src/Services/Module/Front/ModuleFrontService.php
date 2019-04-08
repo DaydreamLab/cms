@@ -52,7 +52,7 @@ class ModuleFrontService extends ModuleService
     }
 
 
-    public function getCategoryItemsModule($params)
+    public function getCategoriesItemsModule($params)
     {
         $categories = $this->categoryFrontService->search(Helper::collect([
             'special_queries' =>
@@ -64,62 +64,65 @@ class ModuleFrontService extends ModuleService
             'paginate'  => false
         ]));
 
+
         $category_ids   = $categories->map(function ($item, $key){
             return $item->id;
         })->all();
 
-        foreach ($categories as $category)
+
+        $content_type = $categories[0]->content_type;
+
+
+        // 這邊並沒有處理 categories 的 content_type 不同的狀況
+        $items          = $this->itemFrontService->search(Helper::collect([
+            'category_id'   => $category->id,
+            'order_by'      => $params['order_by'],
+            'order'         => $params['order'],
+            'limit'         => $params['limit'],
+        ]));
+
+
+        if ($content_type == 'item' || $content_type == 'article')
         {
-            $content_type   = $category->content_type;
 
-            $items          = $this->itemFrontService->search(Helper::collect([
-                'category_id'   => $category->id,
-                'order_by'      => $params['order_by'],
-                'order'         => $params['order'],
-                'limit'         => $params['limit'],
-            ]));
-
-
-            if ($content_type == 'item' || $content_type == 'article')
-            {
-
-                //Helper::show($items->toArray());
-            }
-            elseif ($content_type == 'timeline')
-            {
-                $data = [];
-                foreach ($items as $item)
-                {
-                    $year_value     = $item['year'];
-                    $year_key       = $year_value;
-                    $month_value    = $item['month'];
-                    $month_key      = $month_value;
-
-                    if (!array_key_exists($year_key, $data))
-                    {
-                        $data[$year_key] = [];
-                    }
-
-                    if (!array_key_exists($month_key, $data[$year_key]))
-                    {
-                        $data[$year_key][$month_key] = [];
-                    }
-
-                    $temp['title'] = $item['title'];
-                    $temp['description'] = $item['description'];
-                    $data[$year_key][$month_key][] = $temp;
-
-                    krsort($data[$year_key]);
-                }
-                krsort($data);
-
-                $items = $data;
-            }
-            elseif ($content_type == 'slideshow')
-            {
-
-            }
+            //Helper::show($items->toArray());
         }
+        elseif ($content_type == 'timeline')
+        {
+            $data = [];
+            foreach ($items as $item)
+            {
+                $year_value     = $item['year'];
+                $year_key       = $year_value;
+                $month_value    = $item['month'];
+                $month_key      = $month_value;
+
+                if (!array_key_exists($year_key, $data))
+                {
+                    $data[$year_key] = [];
+                }
+
+                if (!array_key_exists($month_key, $data[$year_key]))
+                {
+                    $data[$year_key][$month_key] = [];
+                }
+
+                $temp['title'] = $item['title'];
+                $temp['description'] = $item['description'];
+                $data[$year_key][$month_key][] = $temp;
+
+                krsort($data[$year_key]);
+            }
+            krsort($data);
+
+            $items = $data;
+        }
+        elseif ($content_type == 'slideshow')
+        {
+
+        }
+
+
 
         return $items;
     }
@@ -151,9 +154,9 @@ class ModuleFrontService extends ModuleService
     public function loadModule($module)
     {
         $items = [];
-        if ($module->category->alias == 'module-category-items')
+        if ($module->category->alias == 'module-categories-items')
         {
-            $items = $this->getCategoryItemsModule($module->params);
+            $items = $this->getCategoriesItemsModule($module->params);
         }
         elseif ($module->category->alias == 'module-selected-items')
         {
