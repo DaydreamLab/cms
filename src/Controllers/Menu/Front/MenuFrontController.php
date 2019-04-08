@@ -26,9 +26,9 @@ class MenuFrontController extends BaseController
     public function getItem(Request $request, $alias)
     {
         $menu = $this->service->getMenu(Helper::collect([
-            'alias' => $alias,
-            'host'  => $request->getHttpHost(),
-            'sef'   => $request->sef
+            'alias'     => $alias,
+            'host'      => $request->getHttpHost(),
+            'language'  => $request->language
         ]));
 
         return ResponseHelper::response($this->service->status, $this->service->response);
@@ -46,8 +46,8 @@ class MenuFrontController extends BaseController
     public function getTree(Request $request)
     {
         $this->service->getTree(Helper::collect([
-            'host'  => $request->getHttpHost(),
-            'sef'   => $request->sef
+            'host'       => $request->getHttpHost(),
+            'language'   => $request->language
         ]));
 
         return ResponseHelper::response($this->service->status, $this->service->response);
