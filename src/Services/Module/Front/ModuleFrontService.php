@@ -78,7 +78,7 @@ class ModuleFrontService extends ModuleService
                 'order'         => $params['order'],
                 'limit'         => $params['limit'],
             ]));
-            Helper::show($items->toArray());
+
 
             if ($content_type == 'item' || $content_type == 'article')
             {
