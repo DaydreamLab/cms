@@ -69,6 +69,16 @@ class MenuFrontService extends MenuService
 
         $tree = $this->repo->getTree($input);
 
+        $items = [];
+        foreach ($tree as $item)
+        {
+            if (isset($items['$item->category->alias']))
+            {
+                
+            }
+        }
+
+
         $this->status = Str::upper(Str::snake($this->type.'GetTreeSuccess'));
         $this->response = $tree;
 
