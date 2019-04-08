@@ -72,15 +72,16 @@ class MenuFrontService extends MenuService
         $items = [];
         foreach ($tree as $item)
         {
-            if (isset($items['$item->category->alias']))
+            if (!array_key_exists($item->category->alias, $items))
             {
-                
+                $items[$item->category->alias] = [];
             }
+            $items[$item->category->alias][] = $item;
         }
 
 
         $this->status = Str::upper(Str::snake($this->type.'GetTreeSuccess'));
-        $this->response = $tree;
+        $this->response = $items;
 
         return $tree;
     }
