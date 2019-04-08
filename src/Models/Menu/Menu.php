@@ -66,8 +66,14 @@ class Menu extends BaseModel
      * @var array
      */
     protected $appends = [
+        'category_title',
+        'creator',
+        'updater',
+        'locker',
+        'tree_title',
         'category',
-        'viewlevels'
+        'viewlevels',
+        'access_title',
     ];
 
 
@@ -99,6 +105,12 @@ class Menu extends BaseModel
     public function getCategoryAttribute()
     {
         return $this->category()->first();
+    }
+
+
+    public function getCategoryTitleAttribute()
+    {
+        return $this->category->title;
     }
 
 

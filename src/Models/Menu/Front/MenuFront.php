@@ -34,6 +34,9 @@ class MenuFront extends Menu
         'publish_up',
         'publish_down',
         'category',
-        'viewlevels'
+        'viewlevels',
+        'viewlevel',
+        'ancestors',
+        'tree_title'
     ];
 }

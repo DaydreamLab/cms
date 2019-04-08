@@ -17,7 +17,7 @@ trait WithExtrafield
 
     public function extrafieldGroup()
     {
-        return $this->hasOne($this->class_extrafield_group, 'id', 'extrafield_group_id');
+        return $this->hasOne($this->getExtrafieldGroupClass(), 'id', 'extrafield_group_id');
     }
 
 
