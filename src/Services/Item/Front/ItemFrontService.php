@@ -89,6 +89,49 @@ class ItemFrontService extends ItemService
     }
 
 
+    public function getCategoriesItemsModule($params)
+    {
+        $items = $this->repo->getCategoriesItemsModule($params);
+
+        if ($items->count() > 0)
+        {
+            $content_type = $items[0]->category->content_type;
+            if ($content_type == 'timeline')
+            {
+                $data = [];
+                foreach ($items as $item)
+                {
+                    $year_value     = $item['year'];
+                    $year_key       = $year_value;
+                    $month_value    = $item['month'];
+                    $month_key      = $month_value;
+
+                    if (!array_key_exists($year_key, $data))
+                    {
+                        $data[$year_key] = [];
+                    }
+
+                    if (!array_key_exists($month_key, $data[$year_key]))
+                    {
+                        $data[$year_key][$month_key] = [];
+                    }
+
+                    $temp['title'] = $item['title'];
+                    $temp['description'] = $item['description'];
+                    $data[$year_key][$month_key][] = $temp;
+
+                    krsort($data[$year_key]);
+                }
+                krsort($data);
+
+                $items = $data;
+            }
+        }
+
+        return $items;
+    }
+
+
     public function getLatestItemsModule($params)
     {
         $data = [];

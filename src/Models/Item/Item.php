@@ -126,7 +126,7 @@ class Item extends BaseModel
 
     public function getCategoryAttribute()
     {
-        return $this->category;
+        return $this->category()->first();
     }
 
 

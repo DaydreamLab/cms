@@ -31,6 +31,19 @@ class ItemFrontRepository extends ItemRepository
     }
 
 
+    public function getCategoriesItemsModule($params)
+    {
+        return $this->model
+            ->whereIn('category_id', $params['category_ids'])
+            ->where('state', 1)
+            ->whereIn('access', $params['access_ids'])
+            ->orderBy($params['order_by'], $params['order'])
+            ->orderBy('publish_up', 'desc')
+            ->limit($params['limit'])
+            ->get();
+    }
+
+
     public function getCreatorGroupUserIds($creator_group)
     {
         $group = $this->userGroupRepository->findBy('title', '=', $creator_group)->first();
