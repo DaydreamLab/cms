@@ -72,7 +72,9 @@ class ModuleFrontService extends ModuleService
 
     public function getSelectedItemsModule($params)
     {
-        $items = $this->itemFrontService->getSelectedItems($params['item_ids']);
+        $params['access_ids'] = $this->access_ids;
+
+        $items = $this->itemFrontService->getSelectedItems($params);
 
         if ($items->count() == 1)
         {

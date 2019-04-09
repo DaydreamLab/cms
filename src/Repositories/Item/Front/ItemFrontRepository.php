@@ -258,12 +258,14 @@ class ItemFrontRepository extends ItemRepository
     }
 
 
-    public function getSelectedItems($ids, $access_ids)
+    public function getSelectedItems($params)
     {
-        return  $this->model->whereIn('id', $ids)
-                            ->where('state', 1)
-                            ->whereIn('access', $access_ids)
-                            ->get();
+        return  $this->model
+            ->whereIn('id', $params['item_ids'])
+            ->where('state', 1)
+            ->whereIn('access', $params['access_ids'])
+            ->orderBy($params['order_by'], $params['order'])
+            ->get();
     }
 
 

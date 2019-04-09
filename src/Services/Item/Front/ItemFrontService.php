@@ -269,11 +269,11 @@ class ItemFrontService extends ItemService
     }
 
 
-    public function getSelectedItems($ids)
+    public function getSelectedItems($params)
     {
-        $items = $this->repo->getSelectedItems($ids, $this->access_ids);
+        $items = $this->repo->getSelectedItems($params);
 
-        return $this->appendExtrafileds($items);
+        return $items;
     }
 
 
