@@ -138,11 +138,18 @@ class Item extends BaseModel
 
     public function getCreatorGroupsAttribute()
     {
-        $groups = $this->creator()->groups;
+        $creator = $this->creator();
 
-        return $groups->map(function ($item, $key) {
-            return $item->title;
-        });
+        if ($creator)
+        {
+            return $creator->groups->map(function ($item, $key) {
+                return $item->title;
+            });
+        }
+        else
+        {
+            return null;
+        }
     }
 
 
