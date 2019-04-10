@@ -22,18 +22,6 @@ class ItemSearchPost extends ListRequest
     {
         $rules = [
             'search'        => 'nullable|string',
-            'state'         => [
-                'nullable',
-                'integer',
-                Rule::in([0,1,-1,-2])
-            ],
-            'category_id'   => 'nullable|integer',
-            'featured'      =>[
-                'nullable',
-                Rule::in([0,1])
-            ],
-            'access'        => 'nullable|integer',
-            'language'      => 'nullable|string|min:1|max:2'
         ];
 
         return array_merge(parent::rules(), $rules);

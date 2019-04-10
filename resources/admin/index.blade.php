@@ -88,7 +88,7 @@
         </style>
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.6.3/css/light.css" integrity="sha384-ouQ4uivIto2ZdBS6+torZMbImJhWA6/m7/CAGY9z0FNDmoAF6uWAEnavvIsR1EBt" crossorigin="anonymous">
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.6.3/css/fontawesome.css" integrity="sha384-toEUmnrGu+eq8XUD6ovsr/vFX+R3v9+FUGAnpef+uwGKMCeqZkcZfkXQ0Pls5WS7" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="{{ asset(mix('/css/app.css', 'vendor/admin')) }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset(mix('/css/app.css', 'admin')) }}">
     </head>
 
     <body>
@@ -111,10 +111,10 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.2/vue-router.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/vuex/3.0.1/vuex.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/element-ui/2.4.6/index.js"></script>
-        <script type="text/javascript" src="{{ asset(mix('/js/ckeditor.js', 'vendor/admin')) }}"></script>
-        <script type="text/javascript" src="{{ asset(mix('/js/manifest.js', 'vendor/admin')) }}"></script>
-        <script type="text/javascript" src="{{ asset(mix('/js/vendor.js', 'vendor/admin')) }}"></script>
-        <script type="text/javascript" src="{{ asset(mix('/js/app.js', 'vendor/admin')) }}"></script>
+        <script type="text/javascript" src="{{ asset(mix('/js/ckeditor.js', 'admin')) }}"></script>
+        <script type="text/javascript" src="{{ asset(mix('/js/manifest.js', 'admin')) }}"></script>
+        <script type="text/javascript" src="{{ asset(mix('/js/vendor.js', 'admin')) }}"></script>
+        <script type="text/javascript" src="{{ asset(mix('/js/app.js', 'admin')) }}"></script>
 
     </body>
 </html>

@@ -19,6 +19,7 @@ class CategoryFrontController extends BaseController
     public function __construct(CategoryFrontService $service)
     {
         parent::__construct($service);
+        $this->service = $service;
     }
 
 
@@ -41,6 +42,14 @@ class CategoryFrontController extends BaseController
     public function checkout(CategoryFrontCheckoutPost $request)
     {
         $this->service->checkout($request->rulesInput());
+
+        return ResponseHelper::response($this->service->status, $this->service->response);
+    }
+
+
+    public function getItemByAlias($alias)
+    {
+        $this->service->getItemByAlias(Helper::collect(['alias'=>$alias]));
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
@@ -77,4 +86,11 @@ class CategoryFrontController extends BaseController
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
 
+
+    public function searchItems(CategoryFrontSearchPost $request)
+    {
+        $this->service->searchItems($request->rulesInput());
+
+        return ResponseHelper::response($this->service->status, $this->service->response);
+    }
 }

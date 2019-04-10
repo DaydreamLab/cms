@@ -1,11 +1,11 @@
 <?php
 
-namespace DaydreamLab\Cms\Requests\Tag;
+namespace DaydreamLab\Cms\Requests\Category;
 
 use DaydreamLab\JJAJ\Requests\ListRequest;
 use Illuminate\Validation\Rule;
 
-class TagSearchPost extends ListRequest
+class CategorySearchItemPost extends ListRequest
 {
 
     public function authorize()
@@ -21,7 +21,11 @@ class TagSearchPost extends ListRequest
     public function rules()
     {
         $rules = [
-            'search'    => 'nullable|string',
+            'search'        => 'nullable|string',
+            'paginate'      => [
+                'nullable',
+                Rule::in([0,1])
+            ]
         ];
 
         return array_merge(parent::rules(), $rules);

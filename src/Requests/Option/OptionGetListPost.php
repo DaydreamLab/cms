@@ -29,7 +29,15 @@ class OptionGetListPost extends AdminRequest
             'types'      => 'nullable|array',
             'types.*'    => [
                 'nullable',
-                Rule::in(['category', 'language', 'viewlevel'])
+                Rule::in([
+                    'category',
+                    'language',
+                    'viewlevel',
+                    'menuCategory',
+                    'moduleCategory',
+                    'extension',
+                    'content_type'
+                ])
             ]
         ];
     }

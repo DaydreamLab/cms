@@ -55,6 +55,28 @@ class CategoryService extends BaseService
     }
 
 
+    public function getRelatedItems($itemService, $categories)
+    {
+        $category_ids = $categories instanceof \Illuminate\Support\Collection || $categories instanceof \Kalnoy\Nestedset\Collection ?
+            $categories->map(function($item, $key){
+            return $item->id;
+        })->all() : [$categories->id];
+
+        $category_items = $itemService->search(Helper::collect([
+            'special_queries' => [
+                [
+                    'type'  => 'whereIn',
+                    'key'   => 'category_id',
+                    'value' => $category_ids
+                ]
+            ],
+            'paginate'  => false
+        ]));
+
+        return $category_items;
+    }
+
+
     public function modifyNested(Collection $input)
     {
         $result = $this->traitModifiedNested($input);

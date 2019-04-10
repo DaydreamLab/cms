@@ -89,11 +89,46 @@ class ItemFrontService extends ItemService
     }
 
 
-    public function getCategoriesItems($categories_ids)
+    public function getCategoriesItemsModule($params)
     {
-        $items = $this->repo->getCategoriesItems($categories_ids, $this->access_ids);
+        $items = $this->repo->getCategoriesItemsModule($params);
 
-        return $this->appendExtrafileds($items);
+        if ($items->count() > 0)
+        {
+            $content_type = $items[0]->category->content_type;
+            if ($content_type == 'timeline')
+            {
+                $data = [];
+                foreach ($items as $item)
+                {
+                    $year_value     = $item['year'];
+                    $year_key       = $year_value;
+                    $month_value    = $item['month'];
+                    $month_key      = $month_value;
+
+                    if (!array_key_exists($year_key, $data))
+                    {
+                        $data[$year_key] = [];
+                    }
+
+                    if (!array_key_exists($month_key, $data[$year_key]))
+                    {
+                        $data[$year_key][$month_key] = [];
+                    }
+
+                    $temp['title'] = $item['title'];
+                    $temp['description'] = $item['description'];
+                    $data[$year_key][$month_key][] = $temp;
+
+                    krsort($data[$year_key]);
+                }
+                krsort($data);
+
+                $items = $data;
+            }
+        }
+
+        return $items;
     }
 
 
@@ -170,11 +205,13 @@ class ItemFrontService extends ItemService
 
     public function getItemByAlias(Collection $input)
     {
-        $items = $this->search($input);
+        $items = $this->search($input, false);
 
         if ($items->count())
         {
             $item = $items->first();
+            $item->hits++;
+            $this->update($item, $item);
 
             if (!Helper::hasPermission($item->viewlevels, $this->viewlevels))
             {
@@ -232,22 +269,23 @@ class ItemFrontService extends ItemService
     }
 
 
-    public function getSelectedItems($ids)
+    public function getSelectedItems($params)
     {
-        $items = $this->repo->getSelectedItems($ids, $this->access_ids);
+        $items = $this->repo->getSelectedItems($params);
 
-        return $this->appendExtrafileds($items);
+        return $items;
     }
 
 
-    public function search(Collection $input)
+    public function getSpecialQueries(Collection $input)
     {
         $special_queries = [];
+        // 取得後門的 special queries
         if (!InputHelper::null($input, 'special_queries'))
         {
-            $special_queries = array_merge($special_queries, $input->special_queries);
+            $special_queries = array_merge($special_queries, $input->get('special_queries'));
         }
-
+        // 取得年份 special queries
         if (!InputHelper::null($input, 'year'))
         {
             $year = $input->year;
@@ -257,7 +295,7 @@ class ItemFrontService extends ItemService
             $obj['value']       = $year;
             $special_queries[]  = $obj;
         }
-
+        // 取得月份 special queries
         if (!InputHelper::null($input, 'month'))
         {
             $month = $input->month;
@@ -268,16 +306,25 @@ class ItemFrontService extends ItemService
             $special_queries[]  = $obj;
         }
 
-        $categories = $this->categoryFrontService->getContentTypeItems('item', 'article');
-        $category_ids = [];
-        foreach ($categories as $category)
-        {
-            $category_ids[] = $category->id;
-        }
+        // 取得文章類型 special queries
+        $categories = $this->categoryFrontService->getContentTypeItems();
+        $category_ids = $categories->map(function ($item, $key){
+            return $item->id;
+        });
+
         $obj['type']        = 'whereIn';
         $obj['key']         = 'category_id';
         $obj['value']       = $category_ids;
         $special_queries[]  = $obj;
+
+        return $special_queries;
+    }
+
+
+    public function search(Collection $input, $paginate = true)
+    {
+        $input->put('paginate', $paginate);
+        $special_queries = $this->getSpecialQueries($input);
 
         $input->forget('special_queries');
         $input->put('special_queries', $special_queries);

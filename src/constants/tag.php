@@ -323,6 +323,20 @@ return [
         'message'   => 'Tag front search fail'
     ],
 
+    //Search Items
+    'TAG_SEARCH_ITEMS_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Tag search items success'
+    ],
+    'TAG_ADMIN_SEARCH_ITEMS_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Tag admin search items success'
+    ],
+    'TAG_FRONT_SEARCH_ITEMS_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Tag front search items success'
+    ],
+
     // Get Item
     'TAG_GET_ITEM_SUCCESS' => [
             'code'      => 200,

@@ -98,12 +98,52 @@ class ItemAdminService extends ItemService
 
     public function search(Collection $input)
     {
+        $extension      = !InputHelper::null($input, 'extension') ? $input->get('extension') : 'item';
+
+        if ($extension == 'item')
+        {
+            if (InputHelper::null($input, 'content_type'))
+            {
+                $content_type = 'article';
+            }
+            else
+            {
+                $content_type = $input->get('content_type');
+            }
+        }
+        else
+        {
+            $content_type = null;
+        }
+
+        $categories = $this->categoryAdminService->search(Helper::collect([
+            'extension'     => $extension,
+            'content_type'  => $content_type,
+            'paginate'  => false
+        ]));
+
+        $category_ids = $categories->map(function ($item, $key) {
+            return $item->id;
+        });
+
+
+        $input->put('special_queries',
+            [[
+                'type'  => 'whereIn',
+                'key'   => 'category_id',
+                'value' => $category_ids
+            ]]
+        );
+
         if (!InputHelper::null($input, 'category_id'))
         {
             $category_ids = $this->categoryAdminService->findSubTreeIds($input->category_id);
             $input->forget('category_id');
             $input->put('category_id', $category_ids);
         }
+
+        $input->forget('extension');
+        $input->forget('content_type');
 
         return parent::search($input);
     }

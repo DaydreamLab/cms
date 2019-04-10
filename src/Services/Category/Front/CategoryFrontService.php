@@ -8,6 +8,7 @@ use DaydreamLab\Cms\Repositories\Item\Front\ItemFrontRepository;
 use DaydreamLab\Cms\Services\Category\CategoryService;
 use DaydreamLab\Cms\Services\Item\Front\ItemFrontService;
 use DaydreamLab\JJAJ\Helpers\Helper;
+use DaydreamLab\JJAJ\Helpers\InputHelper;
 use DaydreamLab\User\Models\User\Front\UserGroupFront;
 use DaydreamLab\User\Models\User\Front\UserGroupMapFront;
 use DaydreamLab\User\Repositories\User\Front\UserGroupFrontRepository;
@@ -100,7 +101,7 @@ class CategoryFrontService extends CategoryService
     }
 
 
-    public function getContentTypeItems($extension, $type)
+    public function getContentTypeItems($extension = 'item', $type = 'article')
     {
         $items = $this->repo->getContentTypeItems($extension, $type, $this->access_ids);
 
@@ -110,6 +111,7 @@ class CategoryFrontService extends CategoryService
 
     public function search(Collection $input)
     {
+<<<<<<< HEAD
         $input->put('content_type', 'article');
         $categories = parent::search($input);
 
@@ -149,5 +151,30 @@ class CategoryFrontService extends CategoryService
         }
 
         return $this->response;
+=======
+        if (InputHelper::null($input, 'content_type'))
+        {
+            $input->put('content_type', 'article');
+        }
+
+        return parent::search($input);
+>>>>>>> master
     }
+
+
+    public function searchItems(Collection $input, $paginate = true)
+    {
+        $input->put('paginate', $paginate);
+        $limit = $input->get('limit') ?: $this->repo->getModel()->getLimit();
+
+        $categories = $this->search($input);
+
+        $items = $this->getRelatedItems($this->itemFrontService, $categories);
+
+        $this->status  = Str::upper(Str::snake($this->type.'SearchItemsSuccess'));
+        $this->response = $paginate ? $this->repo->paginate($items, $limit, 1, []) : $items;
+
+        return $items;
+    }
+
 }

@@ -20,6 +20,8 @@ class ItemFront extends Item
 
     protected $order = 'desc';
 
+    protected $model_type = 'front';
+
     protected $hidden = [
         'id',
         'category_id',
@@ -28,7 +30,6 @@ class ItemFront extends Item
         'ordering',
         'featured_ordering',
         'language',
-        'content_type',
         'params',
         'creator_groups',
         'extrafield_group_id',
@@ -42,7 +43,9 @@ class ItemFront extends Item
         'updater',
         'viewlevels',
         'viewlevel',
-        'access_title'
+        'access_title',
+        'extrafields_search',
+        'extrafield_group_title'
     ];
 
 
