@@ -15,6 +15,7 @@ use DaydreamLab\Cms\Traits\Model\WithLanguage;
 use DaydreamLab\JJAJ\Services\BaseService;
 use DaydreamLab\JJAJ\Traits\NestedServiceTrait;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 class MenuService extends BaseService
 {

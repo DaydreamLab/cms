@@ -102,16 +102,8 @@ class MenuAdminController extends BaseController
 
     public function treeList()
     {
-        $tree = $this->service->search(Helper::collect([
-            'paginate'  => false,
-            'order_by'  => 'id',
-            'order'     => 'asc'
-        ]))->toFlatTree();
+        $this->service->treeList();
 
-        $tree = $tree->map(function ($item, $key) {
-            return $item->only(['id', 'tree_list_title']);
-        });
-
-        return ResponseHelper::response($this->service->status, $tree);
+        return ResponseHelper::response($this->service->status, $this->service->response);
     }
 }
