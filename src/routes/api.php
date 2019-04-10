@@ -123,6 +123,8 @@ Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
             Route::post('search','DaydreamLab\Cms\Controllers\Menu\Admin\MenuAdminController@search');
             Route::post('checkout','DaydreamLab\Cms\Controllers\Menu\Admin\MenuAdminController@checkout');
             Route::post('ordering','DaydreamLab\Cms\Controllers\Menu\Admin\MenuAdminController@ordering');
+            Route::get('tree', 'DaydreamLab\Cms\Controllers\Menu\Admin\MenuAdminController@tree');
+            Route::get('treeList', 'DaydreamLab\Cms\Controllers\Menu\Admin\MenuAdminController@treeList');
             Route::get('{id}', 'DaydreamLab\Cms\Controllers\Menu\Admin\MenuAdminController@getItem');
         });
 

@@ -19,6 +19,7 @@ class CategoryAdminController extends BaseController
     public function __construct(CategoryAdminService $service)
     {
         parent::__construct($service);
+        $this->service = $service;
     }
 
     public function getItem($id)

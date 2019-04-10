@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Controllers\Menu\Admin;
 
 use DaydreamLab\JJAJ\Controllers\BaseController;
+use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\ResponseHelper;
 use Illuminate\Support\Collection;
 use DaydreamLab\Cms\Services\Menu\Admin\MenuAdminService;
@@ -17,6 +18,7 @@ class MenuAdminController extends BaseController
     public function __construct(MenuAdminService $service)
     {
         parent::__construct($service);
+        $this->service = $service;
     }
 
     public function getItem($id)
@@ -83,5 +85,33 @@ class MenuAdminController extends BaseController
         $this->service->search($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
+    }
+
+
+    public function tree()
+    {
+        $this->service->search(Helper::collect(Helper::collect([
+            'paginate'  => false,
+            'order_by'  => 'id',
+            'order'     => 'asc'
+        ])))->toTree();
+
+        return ResponseHelper::response($this->service->status, $this->service->response);
+    }
+
+
+    public function treeList()
+    {
+        $tree = $this->service->search(Helper::collect([
+            'paginate'  => false,
+            'order_by'  => 'id',
+            'order'     => 'asc'
+        ]))->toFlatTree();
+
+        $tree = $tree->map(function ($item, $key) {
+            return $item->only(['id', 'tree_list_title']);
+        });
+
+        return ResponseHelper::response($this->service->status, $tree);
     }
 }

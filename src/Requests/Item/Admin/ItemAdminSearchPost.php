@@ -35,6 +35,14 @@ class ItemAdminSearchPost extends ItemSearchPost
                 'nullable',
                 Rule::in([0,1])
             ],
+            'content_type'  => [
+                'nullable',
+                Rule::in(['article', 'item', 'link', 'menu', 'slideshow', 'timeline'])
+            ],
+            'extension'     => [
+                'nullable',
+                Rule::in(['item', 'module', 'menu'])
+            ],
             'access'        => 'nullable|integer',
             'language'      => 'nullable|string|min:1|max:2'
         ];
