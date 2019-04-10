@@ -111,54 +111,12 @@ class CategoryFrontService extends CategoryService
 
     public function search(Collection $input)
     {
-<<<<<<< HEAD
-        $input->put('content_type', 'article');
-        $categories = parent::search($input);
-
-        $category_ids = $categories->map(function($item, $key){
-            return $item->id;
-        })->all();
-
-        $items = Collection::make([]);
-        if($categories->count())
-        {
-            foreach ($categories as $category)
-            {
-                $category->hits++;
-                $this->update($category, $category);
-
-                $category_items = $this->itemFrontService->search(Helper::collect([
-                    'special_queries' => [
-                        [
-                            'type'  => 'whereIn',
-                            'key'   => 'category_id',
-                            'value' => $category_ids
-                        ]
-                    ]
-                ]));
-
-                foreach ($category_items as $category_item)
-                {
-                    if(!$items->contains('id', $category_item->id))
-                    {
-                        $items->push($category_item);
-                    }
-                }
-            }
-
-            $limit= $input->get('limit') ?: 15;
-            $this->response = $this->repo->paginate($items, (int)$limit, '', ['limit' => $limit]);
-        }
-
-        return $this->response;
-=======
         if (InputHelper::null($input, 'content_type'))
         {
             $input->put('content_type', 'article');
         }
 
         return parent::search($input);
->>>>>>> master
     }
 
 

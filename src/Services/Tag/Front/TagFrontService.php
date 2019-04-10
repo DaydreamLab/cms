@@ -51,13 +51,7 @@ class TagFrontService extends TagService
             return $item->item_id;
         })->all();
 
-<<<<<<< HEAD
-        $items = Collection::make([]);
-        if($tags->count())
-        {
 
-            foreach ($tags as $tag)
-=======
         $tag_items = $this->itemFrontService->search(Helper::collect([
             'special_queries' => [
                 [
@@ -73,7 +67,6 @@ class TagFrontService extends TagService
         foreach ($tag_items as $tag_item)
         {
             if(!$items->contains('id', $tag_item->id))
->>>>>>> master
             {
                 $items->push($tag_item);
             }
