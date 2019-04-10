@@ -20,10 +20,23 @@ trait WithCategory
     }
 
 
+    public function getCategoryAliasAttribute()
+    {
+        $category   = $this->category()->first();
+        $path       = $category ? substr($category->path, strlen('/'.$category->extension.'/')) : null;
+
+        return $path;
+    }
+
+
+
     public function getCategoryTitleAttribute()
     {
         $category = $this->category()->first();
 
         return $category ? $category->title : null;
     }
+
+
+
 }

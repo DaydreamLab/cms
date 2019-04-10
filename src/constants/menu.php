@@ -452,4 +452,34 @@ return [
         'message'   => 'Menu front is locked'
     ],
 
+
+    // Get Tree
+    'MENU_GET_TREE_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Menu get tree success'
+    ],
+    'MENU_ADMIN_GET_TREE_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Menu admin get tree success'
+    ],
+    'MENU_FRONT_GET_TREE_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Menu front get tree success'
+    ],
+
+
+    // Get Tree List
+    'MENU_GET_TREE_LIST_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Menu get tree list success'
+    ],
+    'MENU_ADMIN_GET_TREE_LIST_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Menu admin get tree list success'
+    ],
+    'MENU_FRONT_GET_TREE_LIST_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Menu front get tree list success'
+    ],
+
 ];

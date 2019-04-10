@@ -39,4 +39,5 @@ class MenuFront extends Menu
         'ancestors',
         'tree_title'
     ];
+
 }

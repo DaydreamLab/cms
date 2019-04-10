@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Controllers\Menu\Admin;
 
 use DaydreamLab\JJAJ\Controllers\BaseController;
 use DaydreamLab\JJAJ\Helpers\Helper;
+use DaydreamLab\JJAJ\Helpers\InputHelper;
 use DaydreamLab\JJAJ\Helpers\ResponseHelper;
 use Illuminate\Support\Collection;
 use DaydreamLab\Cms\Services\Menu\Admin\MenuAdminService;
@@ -72,7 +73,16 @@ class MenuAdminController extends BaseController
     public function store(MenuAdminStorePost $request)
     {
         $input = $request->rulesInput();
-        $input->put('host', $request->getHttpHost());
+        if (InputHelper::null($input, 'host'))
+        {
+            $input->put('host', $request->getHttpHost());
+        }
+        else
+        {
+            $host = $input->host;
+            $host = parse_url($host, PHP_URL_HOST);
+            $input->put('host', $host);
+        }
 
         $this->service->store($input);
 
@@ -102,16 +112,8 @@ class MenuAdminController extends BaseController
 
     public function treeList()
     {
-        $tree = $this->service->search(Helper::collect([
-            'paginate'  => false,
-            'order_by'  => 'id',
-            'order'     => 'asc'
-        ]))->toFlatTree();
+        $this->service->treeList();
 
-        $tree = $tree->map(function ($item, $key) {
-            return $item->only(['id', 'tree_list_title']);
-        });
-
-        return ResponseHelper::response($this->service->status, $tree);
+        return ResponseHelper::response($this->service->status, $this->service->response);
     }
 }
