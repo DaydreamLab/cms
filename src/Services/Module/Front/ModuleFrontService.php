@@ -52,50 +52,11 @@ class ModuleFrontService extends ModuleService
     }
 
 
-    public function getCategoryItemsModule($params)
+    public function getCategoriesItemsModule($params)
     {
-        $category       = $this->categoryFrontService->find($params['category_id']);
-        $content_type   = $category->content_type;
-        $items          = $this->itemFrontService->getCategoriesItems([$params['category_id']]);
+        $params['access_ids'] = $this->access_ids;
 
-        if ($content_type == 'item' || $content_type == 'article')
-        {
-
-        }
-        elseif ($content_type == 'timeline')
-        {
-            $data = [];
-            foreach ($items as $item)
-            {
-                $year_value     = $item['year'];
-                $year_key       = $year_value;
-                $month_value    = $item['month'];
-                $month_key      = $month_value;
-
-                if (!array_key_exists($year_key, $data))
-                {
-                    $data[$year_key] = [];
-                }
-
-                if (!array_key_exists($month_key, $data[$year_key]))
-                {
-                    $data[$year_key][$month_key] = [];
-                }
-
-                $temp['title'] = $item['title'];
-                $temp['description'] = $item['description'];
-                $data[$year_key][$month_key][] = $temp;
-
-                krsort($data[$year_key]);
-            }
-            krsort($data);
-
-            $items = $data;
-        }
-        elseif ($content_type == 'slideshow')
-        {
-
-        }
+        $items = $this->itemFrontService->getCategoriesItemsModule($params);
 
         return $items;
     }
@@ -111,7 +72,9 @@ class ModuleFrontService extends ModuleService
 
     public function getSelectedItemsModule($params)
     {
-        $items = $this->itemFrontService->getSelectedItems($params['item_ids']);
+        $params['access_ids'] = $this->access_ids;
+
+        $items = $this->itemFrontService->getSelectedItems($params);
 
         if ($items->count() == 1)
         {
@@ -127,9 +90,9 @@ class ModuleFrontService extends ModuleService
     public function loadModule($module)
     {
         $items = [];
-        if ($module->category->alias == 'module-category-items')
+        if ($module->category->alias == 'module-categories-items')
         {
-            $items = $this->getCategoryItemsModule($module->params);
+            $items = $this->getCategoriesItemsModule($module->params);
         }
         elseif ($module->category->alias == 'module-selected-items')
         {

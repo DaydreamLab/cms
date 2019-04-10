@@ -50,8 +50,10 @@ class TagAdminService extends TagService
 
         $item->locked_by = $this->user->id;
         $item->locked_at = now();
+        $this->update($item, $item);
+        $this->response = $item;
 
-        return $this->update($item, $item);
+        return $item;
     }
 
 

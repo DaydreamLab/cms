@@ -36,5 +36,9 @@ class TagFront extends Tag
         'viewlevels',
         'access_title',
         'viewlevel',
+        'metadesc',
+        'metakeywords',
+        'params',
+        'content_type'
     ];
 }

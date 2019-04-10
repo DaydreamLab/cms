@@ -1,12 +1,14 @@
 <?php
 namespace DaydreamLab\Cms\Models\Extrafield;
 
+use DaydreamLab\Cms\Traits\Model\WithAccess;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\JJAJ\Models\BaseModel;
 
 class Extrafield extends BaseModel
 {
-    use RecordChanger {
+    use WithAccess,
+        RecordChanger {
         RecordChanger::boot as traitBoot;
     }
     /**
@@ -48,7 +50,9 @@ class Extrafield extends BaseModel
         'created_by',
         'updated_by',
         'created_at',
-        'updated_at'
+        'updated_at',
+        'viewlevel',
+        'viewlevels'
     ];
 
 
@@ -58,6 +62,7 @@ class Extrafield extends BaseModel
      * @var array
      */
     protected $appends = [
+        'access_title'
     ];
 
 

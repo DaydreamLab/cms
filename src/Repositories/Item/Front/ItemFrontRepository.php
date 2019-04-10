@@ -31,13 +31,16 @@ class ItemFrontRepository extends ItemRepository
     }
 
 
-
-    public function getCategoriesItems($category_ids, $access_ids)
+    public function getCategoriesItemsModule($params)
     {
-        return $this->model->whereIn('category_id', $category_ids)
-                            ->where('state', 1)
-                            ->whereIn('access', $access_ids)
-                            ->get();
+        return $this->model
+            ->whereIn('category_id', $params['category_ids'])
+            ->where('state', 1)
+            ->whereIn('access', $params['access_ids'])
+            ->orderBy($params['order_by'], $params['order'])
+            ->orderBy('publish_up', 'desc')
+            ->limit($params['limit'])
+            ->get();
     }
 
 
@@ -207,7 +210,6 @@ class ItemFrontRepository extends ItemRepository
     }
 
 
-
     public function getPreviousOrNext(Collection $input, $previous = true)
     {
         $query = $this->model->where('state', 1);
@@ -256,12 +258,14 @@ class ItemFrontRepository extends ItemRepository
     }
 
 
-    public function getSelectedItems($ids, $access_ids)
+    public function getSelectedItems($params)
     {
-        return  $this->model->whereIn('id', $ids)
-                            ->where('state', 1)
-                            ->whereIn('access', $access_ids)
-                            ->get();
+        return  $this->model
+            ->whereIn('id', $params['item_ids'])
+            ->where('state', 1)
+            ->whereIn('access', $params['access_ids'])
+            ->orderBy($params['order_by'], $params['order'])
+            ->get();
     }
 
 

@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Requests\Tag\Admin;
 
 use DaydreamLab\Cms\Requests\Tag\TagSearchPost;
+use Illuminate\Validation\Rule;
 
 class TagAdminSearchPost extends TagSearchPost
 {
@@ -24,7 +25,12 @@ class TagAdminSearchPost extends TagSearchPost
     public function rules()
     {
         $rules = [
-            //
+            'state'     => [
+                'nullable',
+                'integer',
+                Rule::in([0,1,-1,-2])
+            ],
+            'access'        => 'nullable|integer'
         ];
         return array_merge($rules, parent::rules());
     }

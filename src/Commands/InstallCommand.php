@@ -45,8 +45,8 @@ class InstallCommand extends Command
     protected $seeders = [
         'AssetsTableSeeder',
         'ItemsTableSeeder',
-        'LanguagesTableSeeder',
         'SitesTableSeeder',
+        'LanguagesTableSeeder',
         'MenusTableSeeder',
         'ModulesTableSeeder',
         'TagsTableSeeder',
@@ -87,6 +87,13 @@ class InstallCommand extends Command
             '--tag' => 'cms-configs'
         ]);
 
+        $this->call('vendor:publish', [
+            '--tag' => 'cms-frontend-site'
+        ]);
+
+        $this->call('vendor:publish', [
+            '--tag' => 'cms-frontend-admin'
+        ]);
     }
 
 

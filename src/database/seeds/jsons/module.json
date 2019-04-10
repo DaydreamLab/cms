@@ -18,8 +18,8 @@
   },
   {
     "title"         : "Category Items(分類文章)",
-    "alias"         : "module-category-items",
-    "path"          : "/module-category-items",
+    "alias"         : "module-categories-items",
+    "path"          : "/module-categories-items",
     "state"         : 1,
     "introimage"    : "",
     "introtext"     : "",

@@ -12,5 +12,12 @@ class MenuAdmin extends Menu
      */
     protected $table = 'menus';
 
+    protected $hidden = [
+        '_lft',
+        '_rgt',
+        'viewlevels',
+        'viewlevel',
+        'ancestors',
+    ];
 
 }

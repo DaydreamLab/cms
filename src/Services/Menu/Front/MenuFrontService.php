@@ -63,4 +63,27 @@ class MenuFrontService extends MenuService
     }
 
 
+    public function getTree(Collection $input)
+    {
+        $input->put('access', $this->access_ids);
+
+        $tree = $this->repo->getTree($input);
+
+        $items = [];
+        foreach ($tree as $item)
+        {
+            if (!array_key_exists($item->category->alias, $items))
+            {
+                $items[$item->category->alias] = [];
+            }
+            $items[$item->category->alias][] = $item;
+        }
+
+
+        $this->status = Str::upper(Str::snake($this->type.'GetTreeSuccess'));
+        $this->response = $items;
+
+        return $tree;
+    }
+
 }

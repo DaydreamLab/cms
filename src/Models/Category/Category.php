@@ -4,6 +4,8 @@ namespace DaydreamLab\Cms\Models\Category;
 use Carbon\Carbon;
 use DaydreamLab\Cms\Models\Extrafield\Extrafield;
 use DaydreamLab\Cms\Models\Extrafield\ExtrafieldGroup;
+use DaydreamLab\Cms\Traits\Model\WithAccess;
+use DaydreamLab\Cms\Traits\Model\WithLanguage;
 use DaydreamLab\Cms\Traits\WithExtrafield;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Models\BaseModel;
@@ -14,7 +16,8 @@ use Kalnoy\Nestedset\NodeTrait;
 
 class Category extends BaseModel
 {
-    use NodeTrait, WithExtrafield, RecordChanger {
+    use NodeTrait, WithAccess, WithLanguage, WithExtrafield,
+        RecordChanger {
         RecordChanger::boot as traitBoot;
     }
     /**
@@ -23,6 +26,10 @@ class Category extends BaseModel
      * @var string
      */
     protected $table = 'categories';
+
+
+    protected $model_type = 'parent';
+
 
     protected $order = 'asc';
     /**
@@ -72,6 +79,7 @@ class Category extends BaseModel
         '_rgt',
         'ancestors',
         'viewlevel',
+        'viewlevels',
         'extrafields_search',
         //'extrafield_group',
         //'extrafield_group_title'
@@ -90,6 +98,7 @@ class Category extends BaseModel
         'tree_title',
         'tree_list_title',
         'access_title',
+        'language_title',
         'extrafield_group_title'
     ];
 
@@ -108,21 +117,4 @@ class Category extends BaseModel
         self::traitBoot();
     }
 
-
-    public function getAccessTitleAttribute()
-    {
-        return $this->viewlevel->title ?: null;
-    }
-
-
-    public function getViewlevelsAttribute()
-    {
-        return $this->viewlevel()->first()->rules;
-    }
-
-
-    public function viewlevel()
-    {
-        return $this->hasOne(Viewlevel::class, 'id', 'access');
-    }
 }

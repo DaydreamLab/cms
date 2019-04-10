@@ -6,6 +6,9 @@ use DaydreamLab\Cms\Models\Extrafield\Admin\ExtrafieldAdmin;
 use DaydreamLab\Cms\Models\Extrafield\Extrafield;
 use DaydreamLab\Cms\Models\Extrafield\ExtrafieldGroup;
 use DaydreamLab\Cms\Models\Tag\Tag;
+use DaydreamLab\Cms\Traits\Model\WithAccess;
+use DaydreamLab\Cms\Traits\Model\WithCategory;
+use DaydreamLab\Cms\Traits\Model\WithLanguage;
 use DaydreamLab\Cms\Traits\WithExtrafield;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Models\BaseModel;
@@ -14,7 +17,8 @@ use DaydreamLab\User\Models\Viewlevel\Viewlevel;
 
 class Item extends BaseModel
 {
-    use WithExtrafield, RecordChanger {
+    use WithAccess, WithExtrafield, WithCategory, WithLanguage,
+        RecordChanger {
         RecordChanger::boot as traitBoot;
     }
 
@@ -25,6 +29,8 @@ class Item extends BaseModel
      */
     protected $table = 'items';
 
+
+    protected $model_type = 'parent';
 
     /**
      * The attributes that are mass assignable.
@@ -83,14 +89,15 @@ class Item extends BaseModel
      * @var array
      */
     protected $appends = [
-        'category_title',
         'creator',
         'updater',
         'locker',
         'creator_groups',
         'tags',
         'viewlevels',
+        'category_title',
         'access_title',
+        'language_title',
         'extrafield_group_title'
     ];
 
@@ -110,37 +117,20 @@ class Item extends BaseModel
     }
 
 
-    public function category()
-    {
-        return $this->belongsTo(Category::class, 'category_id', 'id');
-    }
-
-
-    public function getAccessTitleAttribute()
-    {
-        return $this->viewlevel->title ?: null;
-    }
-
-
-    public function getCategoryAttribute()
-    {
-        return $this->category;
-    }
-
-
-    public function getCategoryTitleAttribute()
-    {
-        return $this->category()->first()->title;
-    }
-
-
     public function getCreatorGroupsAttribute()
     {
-        $groups = $this->creator()->groups;
+        $creator = $this->creator();
 
-        return $groups->map(function ($item, $key) {
-            return $item->title;
-        });
+        if ($creator)
+        {
+            return $creator->groups->map(function ($item, $key) {
+                return $item->title;
+            });
+        }
+        else
+        {
+            return null;
+        }
     }
 
 
@@ -149,22 +139,11 @@ class Item extends BaseModel
         return $this->tag()->get();
     }
 
-    public function getViewlevelsAttribute()
-    {
-        return $this->viewlevel->rules ?: [];
-    }
-
 
     public function tag()
     {
         return $this->belongsToMany(Tag::class, 'items_tags_maps', 'item_id', 'tag_id')
             ->where('state', 1);
-    }
-
-
-    public function viewlevel()
-    {
-        return $this->hasOne(Viewlevel::class, 'id', 'access');
     }
 
 }

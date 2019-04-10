@@ -8,6 +8,7 @@ use DaydreamLab\Cms\Repositories\Item\Front\ItemFrontRepository;
 use DaydreamLab\Cms\Services\Category\CategoryService;
 use DaydreamLab\Cms\Services\Item\Front\ItemFrontService;
 use DaydreamLab\JJAJ\Helpers\Helper;
+use DaydreamLab\JJAJ\Helpers\InputHelper;
 use DaydreamLab\User\Models\User\Front\UserGroupFront;
 use DaydreamLab\User\Models\User\Front\UserGroupMapFront;
 use DaydreamLab\User\Repositories\User\Front\UserGroupFrontRepository;
@@ -100,7 +101,7 @@ class CategoryFrontService extends CategoryService
     }
 
 
-    public function getContentTypeItems($extension, $type)
+    public function getContentTypeItems($extension = 'item', $type = 'article')
     {
         $items = $this->repo->getContentTypeItems($extension, $type, $this->access_ids);
 
@@ -110,44 +111,28 @@ class CategoryFrontService extends CategoryService
 
     public function search(Collection $input)
     {
-        $input->put('content_type', 'article');
-        $categories = parent::search($input);
-
-        $category_ids = $categories->map(function($item, $key){
-            return $item->id;
-        })->all();
-
-        $items = Collection::make([]);
-        if($categories->count())
+        if (InputHelper::null($input, 'content_type'))
         {
-            foreach ($categories as $category)
-            {
-                $category->hits++;
-                $this->update($category, $category);
-
-                $category_items = $this->itemFrontService->search(Helper::collect([
-                    'special_queries' => [
-                        [
-                            'type'  => 'whereIn',
-                            'key'   => 'category_id',
-                            'value' => $category_ids
-                        ]
-                    ]
-                ]));
-
-                foreach ($category_items as $category_item)
-                {
-                    if(!$items->contains('id', $category_item->id))
-                    {
-                        $items->push($category_item);
-                    }
-                }
-            }
-
-            $limit= $input->get('limit') ?: 15;
-            $this->response = $this->repo->paginate($items, (int)$limit, '', ['limit' => $limit]);
+            $input->put('content_type', 'article');
         }
 
-        return $this->response;
+        return parent::search($input);
     }
+
+
+    public function searchItems(Collection $input, $paginate = true)
+    {
+        $input->put('paginate', $paginate);
+        $limit = $input->get('limit') ?: $this->repo->getModel()->getLimit();
+
+        $categories = $this->search($input);
+
+        $items = $this->getRelatedItems($this->itemFrontService, $categories);
+
+        $this->status  = Str::upper(Str::snake($this->type.'SearchItemsSuccess'));
+        $this->response = $paginate ? $this->repo->paginate($items, $limit, 1, []) : $items;
+
+        return $items;
+    }
+
 }

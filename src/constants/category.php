@@ -231,6 +231,21 @@ return [
         'message'   => 'Category front search fail'
     ],
 
+    // Search Items
+    'CATEGORY_SEARCH_ITEMS_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Category search items success'
+    ],
+    'CATEGORY_ADMIN_SEARCH_ITEMS_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Category admin search items success'
+    ],
+    'CATEGORY_FRONT_SEARCH_ITEMS_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Category front search items success'
+    ],
+
+
     // Get Category
     'CATEGORY_GET_ITEM_SUCCESS' => [
         'code'      => 200,

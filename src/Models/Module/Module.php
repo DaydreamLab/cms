@@ -2,13 +2,17 @@
 namespace DaydreamLab\Cms\Models\Module;
 
 use DaydreamLab\Cms\Models\Category\Category;
+use DaydreamLab\Cms\Traits\Model\WithAccess;
+use DaydreamLab\Cms\Traits\Model\WithCategory;
+use DaydreamLab\Cms\Traits\Model\WithLanguage;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\User\Models\Viewlevel\Viewlevel;
 
 class Module extends BaseModel
 {
-    use RecordChanger {
+    use WithAccess, WithLanguage, WithCategory,
+        RecordChanger {
         RecordChanger::boot as traitBoot;
     }
     /**
@@ -48,6 +52,8 @@ class Module extends BaseModel
      * @var array
      */
     protected $hidden = [
+        'viewlevel',
+        'viewlevels'
     ];
 
 
@@ -57,8 +63,9 @@ class Module extends BaseModel
      * @var array
      */
     protected $appends = [
-        'category',
-        'viewlevels'
+        'category_title',
+        'access_title',
+        'language_title'
     ];
 
 
@@ -72,27 +79,4 @@ class Module extends BaseModel
         self::traitBoot();
     }
 
-
-    public function category()
-    {
-        return $this->belongsTo(Category::class, 'category_id', 'id');
-    }
-
-
-    public function getCategoryAttribute()
-    {
-        return $this->category()->first();
-    }
-
-
-    public function getViewlevelsAttribute()
-    {
-        return $this->viewlevel()->first()->rules;
-    }
-
-
-    public function viewlevel()
-    {
-        return $this->hasOne(Viewlevel::class, 'id', 'access');
-    }
 }

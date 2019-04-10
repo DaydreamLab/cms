@@ -19,6 +19,7 @@ class TagFrontController extends BaseController
     public function __construct(TagFrontService $service)
     {
         parent::__construct($service);
+        $this->service = $service;
     }
 
 
@@ -33,6 +34,14 @@ class TagFrontController extends BaseController
     public function getItems()
     {
         $this->service->search(new Collection());
+
+        return ResponseHelper::response($this->service->status, $this->service->response);
+    }
+
+
+    public function getItemByAlias($alias)
+    {
+        $this->service->getItemByAlias(Helper::collect(['alias'=>$alias]));
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
@@ -70,11 +79,17 @@ class TagFrontController extends BaseController
     }
 
 
-    public function search(TagFrontSearchPost $input, $title)
+    public function search(TagFrontSearchPost $request)
     {
-        $input = $input->rulesInput()->put('title', $title);
+        $this->service->search($request->rulesInput());
 
-        $this->service->search($input);
+        return ResponseHelper::response($this->service->status, $this->service->response);
+    }
+
+
+    public function searchItems(TagFrontSearchPost $request)
+    {
+        $this->service->searchItems($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }

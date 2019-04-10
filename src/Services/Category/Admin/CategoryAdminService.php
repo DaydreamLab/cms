@@ -2,9 +2,18 @@
 
 namespace DaydreamLab\Cms\Services\Category\Admin;
 
+use DaydreamLab\Cms\Models\Item\Admin\ItemAdmin;
+use DaydreamLab\Cms\Models\Item\Admin\ItemTagMapAdmin;
+use DaydreamLab\Cms\Models\Tag\Admin\TagAdmin;
 use DaydreamLab\Cms\Repositories\Category\Admin\CategoryAdminRepository;
+use DaydreamLab\Cms\Repositories\Item\Admin\ItemAdminRepository;
+use DaydreamLab\Cms\Repositories\Item\Admin\ItemTagMapAdminRepository;
+use DaydreamLab\Cms\Repositories\Tag\Admin\TagAdminRepository;
 use DaydreamLab\Cms\Services\Category\CategoryService;
 use DaydreamLab\Cms\Services\Cms\CmsCronJobService;
+use DaydreamLab\Cms\Services\Item\Admin\ItemAdminService;
+use DaydreamLab\Cms\Services\Item\Admin\ItemTagMapAdminService;
+use DaydreamLab\Cms\Services\Tag\Admin\TagAdminService;
 use DaydreamLab\Cms\Traits\Service\CmsCronJob;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
@@ -17,7 +26,7 @@ class CategoryAdminService extends CategoryService
 
     protected $type = 'CategoryAdmin';
 
-    protected $cmsCronJobService;
+    protected $cmsCronJobService, $itemAdminService;
 
     protected $search_keys = ['title', 'introtext', 'description', 'extrafields_search'];
 
@@ -27,6 +36,14 @@ class CategoryAdminService extends CategoryService
         parent::__construct($repo);
         $this->repo               = $repo;
         $this->cmsCronJobService  = $cmsCronJobService;
+
+        $this->itemAdminService = new ItemAdminService(
+            new ItemAdminRepository(new ItemAdmin()),
+            new TagAdminService(new TagAdminRepository(new TagAdmin()), $cmsCronJobService),
+            new ItemTagMapAdminService(new ItemTagMapAdminRepository(new ItemTagMapAdmin())),
+            $this,
+            $cmsCronJobService
+        );
     }
 
 
@@ -47,7 +64,6 @@ class CategoryAdminService extends CategoryService
             return false;
         }
 
-
         if ($item->locked_by && $item->locked_by != $this->user->id)
         {
             $this->status   = Str::upper(Str::snake($this->type.'IsLocked'));
@@ -55,10 +71,19 @@ class CategoryAdminService extends CategoryService
             return false;
         }
 
+
         $item->locked_by = $this->user->id;
         $item->locked_at = now();
+        $result = $item->save();
 
-        return $item->save();
+        if ($item->content_type == 'related_link')
+        {
+            $related_items = $this->getRelatedItems($this->itemAdminService, $item);
+            $item->items = $related_items;
+            $this->response = $item;
+        }
+
+        return $result;
     }
 
 
@@ -107,6 +132,7 @@ class CategoryAdminService extends CategoryService
             $input->forget('extension');
             $input->put('extension', 'item');
         }
+
         return parent::search($input);
     }
 

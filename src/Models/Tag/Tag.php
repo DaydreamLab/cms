@@ -1,14 +1,15 @@
 <?php
 namespace DaydreamLab\Cms\Models\Tag;
 
+use DaydreamLab\Cms\Traits\Model\WithAccess;
+use DaydreamLab\Cms\Traits\Model\WithLanguage;
 use DaydreamLab\JJAJ\Models\BaseModel;
-use DaydreamLab\User\Models\Viewlevel\Viewlevel;
 use Kalnoy\Nestedset\NodeTrait;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 
 class Tag extends BaseModel
 {
-    use NodeTrait,
+    use NodeTrait, WithLanguage, WithAccess,
         RecordChanger {
         RecordChanger::boot as traitBoot;
     }
@@ -54,7 +55,11 @@ class Tag extends BaseModel
      * @var array
      */
     protected $hidden = [
-        'pivot'
+        'pivot',
+        '_lft',
+        '_rgt',
+        'viewlevel',
+        'viewlevels'
     ];
 
 
@@ -68,7 +73,8 @@ class Tag extends BaseModel
         'updater',
         'locker',
         'viewlevels',
-        'access_title'
+        'access_title',
+        'language'
     ];
 
 
@@ -84,24 +90,6 @@ class Tag extends BaseModel
     public static function boot()
     {
         self::traitBoot();
-    }
-
-
-    public function getAccessTitleAttribute()
-    {
-        return $this->viewlevel->title ?: null;
-    }
-
-
-    public function getViewlevelsAttribute()
-    {
-        return $this->viewlevel->rules ?: [];
-    }
-
-
-    public function viewlevel()
-    {
-        return $this->hasOne(Viewlevel::class, 'id', 'access');
     }
 
 }
