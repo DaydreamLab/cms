@@ -57,7 +57,7 @@ class OptionService
             }
             elseif ($type == 'moduleCategory')
             {
-                $data[$type] = $service->treeList('module');
+                $data[$type] = $service->treeList('module', ['alias']);
             }
             elseif ($type == 'extension')
             {

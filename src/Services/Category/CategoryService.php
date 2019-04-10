@@ -156,12 +156,13 @@ class CategoryService extends BaseService
     }
 
 
-    public function treeList($extension)
+    public function treeList($extension, $additional_keys = [])
     {
         $tree = $this->repo->treeList($extension, $this->access_ids)->toFlatTree();
 
-        $tree = $tree->map(function ($item, $key) {
-            return $item->only(['id', 'tree_list_title']);
+        $required_keys = array_merge(['id', 'tree_list_title'], $additional_keys);
+        $tree = $tree->map(function ($item, $key) use ($required_keys) {
+            return $item->only($required_keys);
         });
 
         $this->status =  Str::upper(Str::snake($this->type . 'GetTreeListSuccess'));
