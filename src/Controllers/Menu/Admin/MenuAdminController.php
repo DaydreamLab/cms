@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Controllers\Menu\Admin;
 
 use DaydreamLab\JJAJ\Controllers\BaseController;
 use DaydreamLab\JJAJ\Helpers\Helper;
+use DaydreamLab\JJAJ\Helpers\InputHelper;
 use DaydreamLab\JJAJ\Helpers\ResponseHelper;
 use Illuminate\Support\Collection;
 use DaydreamLab\Cms\Services\Menu\Admin\MenuAdminService;
@@ -72,7 +73,16 @@ class MenuAdminController extends BaseController
     public function store(MenuAdminStorePost $request)
     {
         $input = $request->rulesInput();
-        $input->put('host', $request->getHttpHost());
+        if (InputHelper::null($input, 'host'))
+        {
+            $input->put('host', $request->getHttpHost());
+        }
+        else
+        {
+            $host = $input->host;
+            $host = parse_url($host, PHP_URL_HOST);
+            $input->put('host', $host);
+        }
 
         $this->service->store($input);
 
