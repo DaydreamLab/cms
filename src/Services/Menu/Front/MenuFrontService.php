@@ -42,7 +42,6 @@ class MenuFrontService extends MenuService
         }
 
         $modules = [];
-
         foreach ($menu->params as $key => $param)
         {
             if ($key == 'module_ids')
@@ -51,7 +50,8 @@ class MenuFrontService extends MenuService
                 {
                     $module = $this->moduleFrontService->find($module_id);
                     $data   = $this->moduleFrontService->loadModule($module);
-                    $modules[$module->alias] = $data;
+                    $module->items = $data;
+                    $modules[$module->alias] = $module;
                 }
             }
         }
