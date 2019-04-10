@@ -23,7 +23,7 @@ class OptionService
                                 LanguageAdminService $languageAdminService,
                                 ViewlevelAdminService $viewlevelAdminService)
     {
-        $this->map['category']  = $categoryAdminService;
+        $this->map['category'] = $this->map['menuCategory'] = $this->map['moduleCategory'] = $categoryAdminService;
         $this->map['language']  = $languageAdminService;
         $this->map['viewlevel'] = $viewlevelAdminService;
     }
@@ -49,6 +49,15 @@ class OptionService
             {
                 $data[$type] = $service->getList();
             }
+            elseif ($type == 'menuCategory')
+            {
+                $data[$type] = $service->treeList('menu');;
+            }
+            elseif ($type == 'moduleCategory')
+            {
+                $data[$type] = $service->treeList('module');
+            }
+
 
         }
 
