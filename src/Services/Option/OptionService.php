@@ -23,9 +23,11 @@ class OptionService
                                 LanguageAdminService $languageAdminService,
                                 ViewlevelAdminService $viewlevelAdminService)
     {
-        $this->map['category'] = $this->map['menuCategory'] = $this->map['moduleCategory'] = $categoryAdminService;
-        $this->map['language']  = $languageAdminService;
-        $this->map['viewlevel'] = $viewlevelAdminService;
+        $this->map['category']      = $this->map['menuCategory'] = $this->map['moduleCategory'] = $categoryAdminService;
+        $this->map['language']      = $languageAdminService;
+        $this->map['viewlevel']     = $viewlevelAdminService;
+        $this->map['extension']     = ['item', 'menu', 'module'];
+        $this->map['content_type']  = ['article', 'item', 'link', 'menu', 'slideshow', 'timeline'];
     }
 
 

@@ -72,6 +72,7 @@ class Menu extends BaseModel
         'creator',
         'updater',
         'locker',
+        'viewlevels',
         'tree_title',
         'category_title',
         'access_title',
