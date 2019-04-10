@@ -2,6 +2,9 @@
 namespace DaydreamLab\Cms\Models\Menu;
 
 use DaydreamLab\Cms\Models\Category\Category;
+use DaydreamLab\Cms\Traits\Model\WithAccess;
+use DaydreamLab\Cms\Traits\Model\WithCategory;
+use DaydreamLab\Cms\Traits\Model\WithLanguage;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
@@ -10,7 +13,7 @@ use Kalnoy\Nestedset\NodeTrait;
 
 class Menu extends BaseModel
 {
-    use NodeTrait,
+    use NodeTrait, WithCategory, WithAccess, WithLanguage,
         RecordChanger {
         RecordChanger::boot as traitBoot;
     }
@@ -66,14 +69,13 @@ class Menu extends BaseModel
      * @var array
      */
     protected $appends = [
-        'category_title',
         'creator',
         'updater',
         'locker',
         'tree_title',
-        'category',
-        'viewlevels',
+        'category_title',
         'access_title',
+        'language_title'
     ];
 
 
@@ -87,43 +89,4 @@ class Menu extends BaseModel
         self::traitBoot();
     }
 
-
-    public function category()
-    {
-        return $this->belongsTo(Category::class, 'category_id', 'id');
-    }
-
-
-    public function getAccessTitleAttribute()
-    {
-        $viewlevel = $this->viewlevel()->first();
-
-        return $viewlevel ? $viewlevel->title : null;
-    }
-
-
-    public function getCategoryAttribute()
-    {
-        return $this->category()->first();
-    }
-
-
-    public function getCategoryTitleAttribute()
-    {
-        return $this->category->title;
-    }
-
-
-    public function getViewlevelsAttribute()
-    {
-        $viewlevel = $this->viewlevel()->first();
-
-        return $viewlevel ? $viewlevel->rules : null;
-    }
-
-
-    public function viewlevel()
-    {
-        return $this->hasOne(Viewlevel::class, 'id', 'access');
-    }
 }

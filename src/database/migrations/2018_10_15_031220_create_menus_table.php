@@ -25,6 +25,8 @@ class CreateMenusTable extends Migration
             $table->tinyInteger('state')->default(1);
             $table->text('description')->nullable();
             $table->unsignedTinyInteger('hidden')->default(0);
+            //$table->unsignedTinyInteger('is_link')->default(0);
+            //$table->string('redirect')->nullable();
             $table->unsignedInteger('access')->nullalbe()->default(1);
 
             $table->string('language')->nullable()->default('*');

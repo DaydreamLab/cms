@@ -9,13 +9,17 @@ use DaydreamLab\Cms\Events\Modify;
 use DaydreamLab\Cms\Events\Ordering;
 use DaydreamLab\Cms\Events\Remove;
 use DaydreamLab\Cms\Events\State;
+use DaydreamLab\Cms\Traits\Model\WithAccess;
+use DaydreamLab\Cms\Traits\Model\WithCategory;
+use DaydreamLab\Cms\Traits\Model\WithLanguage;
 use DaydreamLab\JJAJ\Services\BaseService;
 use DaydreamLab\JJAJ\Traits\NestedServiceTrait;
 use Illuminate\Support\Collection;
 
 class MenuService extends BaseService
 {
-    use NestedServiceTrait {
+    use WithCategory, WithLanguage, WithAccess,
+        NestedServiceTrait {
         NestedServiceTrait::addNested       as traitAddNested;
         NestedServiceTrait::modifyNested    as traitModifiedNested;
         NestedServiceTrait::storeNested     as traitStoreNested;

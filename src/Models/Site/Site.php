@@ -57,7 +57,7 @@ class Site extends BaseModel
      * @var array
      */
     protected $appends = [
-        'language'
+        'language_title'
     ];
 
 
@@ -73,7 +73,7 @@ class Site extends BaseModel
     }
 
 
-    public function getLanguageAttribute()
+    public function getLanguageTitleAttribute()
     {
         return $this->language()->first()->title;
     }

@@ -15,7 +15,6 @@ class MenuAdmin extends Menu
     protected $hidden = [
         '_lft',
         '_rgt',
-        'category',
         'viewlevels',
         'viewlevel',
         'ancestors',
