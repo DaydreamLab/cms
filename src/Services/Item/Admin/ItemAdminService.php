@@ -142,7 +142,6 @@ class ItemAdminService extends ItemService
             $input->put('category_id', $category_ids);
         }
 
-
         $input->forget('extension');
         $input->forget('content_type');
 

@@ -59,12 +59,19 @@ class OptionService
             {
                 $data[$type] = $service->treeList('module');
             }
-
-
+            elseif ($type == 'extension')
+            {
+                $data[$type] = $service;
+            }
+            elseif ($type == 'content_type')
+            {
+                $data[$type] = $service;
+            }
         }
 
         $this->status = Str::upper(Str::snake($this->type.'GetListSuccess'));
         $this->response = $data;
+
         return true;
     }
 
