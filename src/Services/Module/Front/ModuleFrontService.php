@@ -5,6 +5,7 @@ namespace DaydreamLab\Cms\Services\Module\Front;
 use DaydreamLab\Cms\Repositories\Module\Front\ModuleFrontRepository;
 use DaydreamLab\Cms\Services\Category\Front\CategoryFrontService;
 use DaydreamLab\Cms\Services\Item\Front\ItemFrontService;
+use DaydreamLab\Cms\Services\Menu\Front\MenuFrontService;
 use DaydreamLab\Cms\Services\Module\ModuleService;
 use DaydreamLab\JJAJ\Helpers\Helper;
 
@@ -16,13 +17,18 @@ class ModuleFrontService extends ModuleService
 
     protected $categoryFrontService;
 
+    protected $menuFrontService;
+
     public function __construct(ModuleFrontRepository $repo,
                                 CategoryFrontService $categoryFrontService,
-                                ItemFrontService $itemFrontService)
+                                ItemFrontService $itemFrontService,
+                                MenuFrontService $menuFrontService)
     {
+        parent::__construct($repo);
+        $this->repo                 = $repo;
         $this->itemFrontService     = $itemFrontService;
         $this->categoryFrontService = $categoryFrontService;
-        parent::__construct($repo);
+        $this->menuFrontService     = $menuFrontService;
     }
 
 
@@ -70,6 +76,12 @@ class ModuleFrontService extends ModuleService
     }
 
 
+    public function getMenusModule()
+    {
+
+    }
+
+
     public function getSelectedItemsModule($params)
     {
         $params['access_ids'] = $this->access_ids;
@@ -105,6 +117,10 @@ class ModuleFrontService extends ModuleService
         elseif ($module->category->alias == 'module-latest-items')
         {
             $items = $this->getLatestItemsModule($module->params);
+        }
+        elseif ($module->category->alias == 'module-latest-items')
+        {
+            $items = $this->getMenusModule($module->params);
         }
 
         return $items;

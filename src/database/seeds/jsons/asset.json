@@ -181,7 +181,7 @@
     "created_by": 1,
     "children": [
       {
-        "title": "COM_MENUS_ITEM_MANAGER_TITLE",
+        "title": "COM_MODULES_ITEM_MANAGER_TITLE",
         "path": "",
         "component": "module/list",
         "type": "menu",
@@ -453,6 +453,20 @@
         "state": 1,
         "showNav": 1,
         "ordering": 11,
+        "created_by": 1,
+        "children": [],
+        "apis": []
+      },
+      {
+        "title": "COM_CONTENT_SEARCH_STATISTICS_TITLE",
+        "path": "/search",
+        "component": "content/search",
+        "type": "menu",
+        "redirect": "",
+        "icon": "search",
+        "state": 1,
+        "showNav": 1,
+        "ordering": 12,
         "created_by": 1,
         "children": [],
         "apis": []
