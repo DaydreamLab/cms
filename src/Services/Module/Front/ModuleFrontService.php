@@ -98,10 +98,18 @@ class ModuleFrontService extends ModuleService
 
     public function getMenusModule($params)
     {
-        $this->menuFrontService->search(Helper::collect([
-            //'spe'
-            'paginate' => false
+        $menus = $this->menuFrontService->search(Helper::collect([
+            'special_queries'   => [
+                [
+                    'type'  => 'whereIn',
+                    'key'   => 'id',
+                    'value' => $params['menu_ids']
+                ]
+            ],
+            'paginate'  => false
         ]));
+
+        return $menus;
     }
 
 

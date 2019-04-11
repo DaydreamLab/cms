@@ -66,5 +66,22 @@
     "extrafields"   : [],
     "created_by"    : 1,
     "modules"       : []
+  },
+  {
+    "title"         : "選單",
+    "alias"         : "module-menus",
+    "path"          : "/module-menus",
+    "state"         : 1,
+    "introimage"    : "",
+    "introtext"     : "",
+    "image"         : "",
+    "description"   : "",
+    "extension"     : "module",
+    "access"        : 5,
+    "metadesc"      : "",
+    "metakeywords"  : "",
+    "extrafields"   : [],
+    "created_by"    : 1,
+    "modules"       : []
   }
 ]
