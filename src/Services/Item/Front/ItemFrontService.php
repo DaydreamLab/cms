@@ -330,6 +330,28 @@ class ItemFrontService extends ItemService
         $input->put('paginate', $paginate);
         $special_queries = $this->getSpecialQueries($input);
 
+
+        // 如果有傳 category_alias
+        if (!InputHelper::null($input, 'category_alias'))
+        {
+            $category_ids = $this->categoryFrontService->search(Helper::collect([
+                'alias'         => $input->get('category_alias'),
+                'language'      => $input->get('language') != '' ? $input->get('language') : config('global.locale'),
+                'paginate'      => false
+            ]))->map(function ($item, $key) {
+                return $item->id;
+            })->all();
+
+            $special_queries[] = [
+                'type'  => 'whereIn',
+                'key'   => 'category_id',
+                'value' => $category_ids
+            ];
+
+            $input->forget('category_alias');
+        }
+
+
         $input->forget('special_queries');
         $input->put('special_queries', $special_queries);
         $input->put('state', 1);

@@ -24,7 +24,6 @@ class CategoryFrontSearchPost extends CategorySearchPost
     public function rules()
     {
         $rules = [
-            //
         ];
         return array_merge($rules, parent::rules());
     }
