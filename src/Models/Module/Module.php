@@ -64,7 +64,7 @@ class Module extends BaseModel
      */
     protected $appends = [
         'creator',
-        'updator',
+        'updater',
         'locker',
         'category_title',
         'category_alias',
