@@ -49,7 +49,7 @@ class MenuFrontService extends MenuService
                 foreach ($param as $module_id)
                 {
                     $module = $this->moduleFrontService->find($module_id);
-                    $data   = $this->moduleFrontService->loadModule($module);
+                    $data   = $this->moduleFrontService->loadModule($module, $input->get('language'));
                     $module->items = $data;
                     $modules[$module->alias] = $module;
                 }

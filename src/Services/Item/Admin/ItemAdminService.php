@@ -113,7 +113,7 @@ class ItemAdminService extends ItemService
         }
         else
         {
-            $content_type = null;
+            $content_type = '';
         }
 
         $categories = $this->categoryAdminService->search(Helper::collect([

@@ -96,16 +96,17 @@ class ModuleFrontService extends ModuleService
     }
 
 
-    public function getMenusModule($params)
+    public function getMenusModule($params, $language)
     {
         $menus = $this->menuFrontService->search(Helper::collect([
             'special_queries'   => [
                 [
                     'type'  => 'whereIn',
                     'key'   => 'id',
-                    'value' => $params['menu_ids']
+                    'value' => [25]
                 ]
             ],
+            'language' => $language,
             'paginate'  => false
         ]));
 
@@ -130,7 +131,7 @@ class ModuleFrontService extends ModuleService
     }
 
 
-    public function loadModule($module)
+    public function loadModule($module, $language = '*')
     {
         $items = [];
         if ($module->category->alias == 'module-categories-items')
@@ -151,7 +152,7 @@ class ModuleFrontService extends ModuleService
         }
         elseif ($module->category->alias == 'module-menus')
         {
-            $items = $this->getMenusModule($module->params);
+            $items = $this->getMenusModule($module->params, $language);
         }
 
         return $items;
