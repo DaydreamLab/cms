@@ -29,7 +29,6 @@ trait WithCategory
     }
 
 
-
     public function getCategoryTitleAttribute()
     {
         $category = $this->category()->first();
