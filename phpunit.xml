@@ -8,11 +8,14 @@
          convertWarningsToExceptions="true"
          processIsolation="false"
          stopOnFailure="false"
-         syntaxCheck="false"
+         syntaxCheck="true"
 >
     <testsuites>
         <testsuite name="Package Test Suite">
             <directory suffix="Test.php">./tests/</directory>
         </testsuite>
     </testsuites>
+    <php>
+        <env name="DB_CONNECTION" value="mysql"/>
+    </php>
 </phpunit>
