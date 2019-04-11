@@ -2,7 +2,6 @@
 
 namespace DaydreamLab\Cms\Services\Module\Front;
 
-use DaydreamLab\Cms\Models\Category\Front\CategoryFront;
 use DaydreamLab\Cms\Models\Menu\Front\MenuFront;
 use DaydreamLab\Cms\Repositories\Menu\Front\MenuFrontRepository;
 use DaydreamLab\Cms\Repositories\Module\Front\ModuleFrontRepository;
@@ -99,7 +98,10 @@ class ModuleFrontService extends ModuleService
 
     public function getMenusModule($params)
     {
-
+        $this->menuFrontService->search(Helper::collect([
+            //'spe'
+            'paginate' => false
+        ]));
     }
 
 

@@ -340,7 +340,7 @@
 
       {
         "title": "COM_CONTENT_FIELD_MANAGER_TITLE",
-        "path": "/field/list",
+        "path": "/field",
         "component": "content/field/list",
         "type": "menu",
         "redirect": "",
@@ -368,7 +368,7 @@
       },
       {
         "title": "COM_CONTENT_FIELD_GROUP_MANAGER_TITLE",
-        "path": "/field/group/list",
+        "path": "/field/group",
         "component": "content/field/group/list",
         "type": "menu",
         "redirect": "",

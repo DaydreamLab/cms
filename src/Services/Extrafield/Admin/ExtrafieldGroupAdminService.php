@@ -9,6 +9,8 @@ class ExtrafieldGroupAdminService extends ExtrafieldGroupService
 {
     protected $type = 'ExtrafieldGroupAdmin';
 
+    protected $search_keys = ['title', 'description'];
+
     public function __construct(ExtrafieldGroupAdminRepository $repo)
     {
         parent::__construct($repo);

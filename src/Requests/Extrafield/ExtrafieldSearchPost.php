@@ -21,12 +21,13 @@ class ExtrafieldSearchPost extends ListRequest
     public function rules()
     {
         $rules = [
-            'title' => 'nullable|string',
+            'search' => 'nullable|string',
             'state'     => [
                 'nullable',
                 'integer',
                 Rule::in([0,1,-2])
-            ]
+            ],
+            'group_id'  => 'nullable|integer'
         ];
 
         return array_merge(parent::rules(), $rules);
