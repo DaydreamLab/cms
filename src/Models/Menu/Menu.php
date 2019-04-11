@@ -75,7 +75,6 @@ class Menu extends BaseModel
         'viewlevels',
         'tree_title',
         'category_title',
-        'category_alias',
         'access_title',
         'language_title'
     ];

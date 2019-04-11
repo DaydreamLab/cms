@@ -63,7 +63,11 @@ class Module extends BaseModel
      * @var array
      */
     protected $appends = [
+        'creator',
+        'updator',
+        'locker',
         'category_title',
+        'category_alias',
         'access_title',
         'language_title'
     ];
