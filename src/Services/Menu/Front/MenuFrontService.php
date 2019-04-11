@@ -6,6 +6,7 @@ use DaydreamLab\Cms\Repositories\Menu\Front\MenuFrontRepository;
 use DaydreamLab\Cms\Services\Menu\MenuService;
 use DaydreamLab\Cms\Services\Module\Front\ModuleFrontService;
 use DaydreamLab\JJAJ\Helpers\Helper;
+use DaydreamLab\JJAJ\Helpers\InputHelper;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
@@ -48,8 +49,9 @@ class MenuFrontService extends MenuService
             {
                 foreach ($param as $module_id)
                 {
-                    $module = $this->moduleFrontService->find($module_id);
-                    $data   = $this->moduleFrontService->loadModule($module, $input->get('language'));
+                    $module     = $this->moduleFrontService->find($module_id);
+                    $language   = !InputHelper::null($input, 'language') ? $input->get('language') : config('global.locale');
+                    $data       = $this->moduleFrontService->loadModule($module, $language);
                     $module->items = $data;
                     $modules[$module->alias] = $module;
                 }

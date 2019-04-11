@@ -103,7 +103,7 @@ class ModuleFrontService extends ModuleService
                 [
                     'type'  => 'whereIn',
                     'key'   => 'id',
-                    'value' => [25]
+                    'value' => $params['menu_ids']
                 ]
             ],
             'language' => $language,
