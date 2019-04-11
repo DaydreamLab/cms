@@ -48,7 +48,7 @@ class ModuleFrontService extends ModuleService
             $item_params['access_ids']      = $this->access_ids;
             $item_params['order_by']        = $params['item_order_by'];
             $item_params['order']           = $params['item_order'];
-            $item_params['paginate']        = $params['item_paginate'];
+            $item_params['limit']           = $params['item_limit'];
 
             $children_category = [];
             if ($params['with_children_items'])
@@ -61,8 +61,6 @@ class ModuleFrontService extends ModuleService
 
                 // 塞入子分類的 ids
                 $item_params['category_ids'] = $category_ids;
-
-
             }
 
             $category->items = $this->itemFrontService->getItemsByCategoryIds($item_params);

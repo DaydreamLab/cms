@@ -39,8 +39,7 @@ class ItemFrontRepository extends ItemRepository
             ->whereIn('access', $params['access_ids'])
             ->orderBy($params['order_by'], $params['order'])
             ->orderBy('publish_up', 'desc')
-            ->limit($params['limit'])
-            ->get();
+            ->paginate($params['limit']);
     }
 
 
@@ -144,7 +143,7 @@ class ItemFrontRepository extends ItemRepository
             ->whereIn('access', $params['access_ids'])
             ->orderBy($params['order_by'], $params['order'])
             ->orderBy('publish_up', 'desc')
-            ->paginate($params['paginate']);
+            ->paginate($params['limit']);
     }
 
 

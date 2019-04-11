@@ -128,6 +128,8 @@ class ItemFrontService extends ItemService
             }
         }
 
+        $items = $this->paginationFormat($items->toArray());
+
         return $items;
     }
 

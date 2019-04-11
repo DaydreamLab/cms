@@ -879,15 +879,15 @@ return [
 
     // Get List
     'EXTRAFIELD_GROUP_GET_LIST_SUCCESS' => [
-        'code'      => 403,
+        'code'      => 200,
         'message'   => 'Extrafield group get list success'
     ],
     'EXTRAFIELD_GROUP_ADMIN_GET_LIST_SUCCESS' => [
-        'code'      => 403,
+        'code'      => 200,
         'message'   => 'Extrafield group admin get list success'
     ],
     'EXTRAFIELD_GROUP_FRONT_GET_LIST_SUCCESS' => [
-        'code'      => 403,
+        'code'      => 200,
         'message'   => 'Extrafield group front get list success'
     ],
 
