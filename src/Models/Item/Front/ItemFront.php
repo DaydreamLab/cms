@@ -29,7 +29,7 @@ class ItemFront extends Item
         'access',
         'ordering',
         'featured_ordering',
-        'language',
+        //'language',
         'params',
         'creator_groups',
         'extrafield_group_id',
