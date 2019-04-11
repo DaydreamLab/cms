@@ -64,6 +64,7 @@ class CategoryFrontService extends CategoryService
     }
 
 
+
     public function getContentTypeIds($content_type)
     {
         $categories = $this->findByChain(['content_type', 'extension', 'state', 'access'], ['=', '=', '=', '='], [$content_type, 'item', '1', '2']);

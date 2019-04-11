@@ -55,6 +55,12 @@ class CategoryService extends BaseService
     }
 
 
+    public function findDescendantOf($id)
+    {
+        return $this->repo->findDescendantOf($id);
+    }
+
+
     public function getRelatedItems($itemService, $categories)
     {
         $category_ids = $categories instanceof \Illuminate\Support\Collection || $categories instanceof \Kalnoy\Nestedset\Collection ?

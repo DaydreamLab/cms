@@ -15,6 +15,11 @@ class CategoryRepository extends BaseRepository
         parent::__construct($model);
     }
 
+    public function findDescendantOf($id)
+    {
+        return $this->model->whereDescendantOf($id)->get();
+    }
+
 
     public function findSubTreeIds($id)
     {

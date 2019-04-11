@@ -136,12 +136,15 @@ class ItemFrontRepository extends ItemRepository
     }
 
 
-    public function getItemsByCategoryIds($category_ids, $access_ids)
+    public function getItemsByCategoryIds($params)
     {
-        return $this->model->whereIn('category_id', $category_ids)
-                            ->where('state', 1)
-                            ->whereIn('access', $access_ids)
-                            ->get();
+        return $this->model
+            ->whereIn('category_id', $params['category_ids'])
+            ->where('state', 1)
+            ->whereIn('access', $params['access_ids'])
+            ->orderBy($params['order_by'], $params['order'])
+            ->orderBy('publish_up', 'desc')
+            ->paginate($params['paginate']);
     }
 
 

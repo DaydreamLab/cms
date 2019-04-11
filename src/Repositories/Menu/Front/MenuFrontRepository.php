@@ -32,7 +32,6 @@ class MenuFrontRepository extends MenuRepository
             $query = $query->whereIn('language', ['*', $input->get('language')]);
         }
 
-        
         return $query->first();
     }
 

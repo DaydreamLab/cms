@@ -195,11 +195,13 @@ class ItemFrontService extends ItemService
     }
 
 
-    public function getItemsByCategoryIds($category_ids)
+    public function getItemsByCategoryIds($params)
     {
-        $items = $this->repo->getItemsByCategoryIds($category_ids, $this->access_ids);
+        $items  = $this->repo->getItemsByCategoryIds($params);
 
-        return $this->appendExtrafileds($items);
+        $data   = $this->paginationFormat($items->toArray());
+
+        return $data;
     }
 
 

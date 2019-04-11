@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Services\Module\Front;
 
+use DaydreamLab\Cms\Models\Category\Front\CategoryFront;
 use DaydreamLab\Cms\Repositories\Module\Front\ModuleFrontRepository;
 use DaydreamLab\Cms\Services\Category\Front\CategoryFrontService;
 use DaydreamLab\Cms\Services\Item\Front\ItemFrontService;
@@ -21,40 +22,61 @@ class ModuleFrontService extends ModuleService
 
     public function __construct(ModuleFrontRepository $repo,
                                 CategoryFrontService $categoryFrontService,
-                                ItemFrontService $itemFrontService,
-                                MenuFrontService $menuFrontService)
+                                ItemFrontService $itemFrontService)
+                                //)
     {
         parent::__construct($repo);
         $this->repo                 = $repo;
         $this->itemFrontService     = $itemFrontService;
         $this->categoryFrontService = $categoryFrontService;
-        $this->menuFrontService     = $menuFrontService;
+        //$this->menuFrontService     = $menuFrontService;
     }
 
 
     public function getCategoriesModule($params)
     {
-        $items = [];
-        if ($params['with_items'])
-        {
-            $items = $this->itemFrontService->getItemsByCategoryIds($params['category_ids']);
-        }
+        $params['access_ids'] = $this->access_ids;
 
+        $data = [];
         $categories = $this->categoryFrontService->getItemsByIds($params['category_ids']);
-
-        foreach ($items as $item)
+        foreach ($categories as $category)
         {
-            foreach ($categories as $category)
+            $category_ids = [$category->id];
+
+            // 取出項目的搜尋條件
+            $item_params['category_ids']    = $category_ids;
+            $item_params['access_ids']      = $this->access_ids;
+            $item_params['order_by']        = $params['item_order_by'];
+            $item_params['order']           = $params['item_order'];
+            $item_params['paginate']        = $params['item_paginate'];
+
+            $children_category = [];
+            if ($params['with_children_items'])
             {
-                if($category->title == $item->category_title)
-                {
-                    $category->items = array_merge($category->items, array($item->toArray()));
-                    break;
-                }
+                $descendant = $this->categoryFrontService->findDescendantOf($category->id);
+                $descendant_ids = $descendant->map(function ($item, $key){
+                    return $item->id;
+                });
+                $category_ids = $descendant_ids;
+
+                // 塞入子分類的 ids
+                $item_params['category_ids'] = $category_ids;
+
+
+            }
+
+            $category->items = $this->itemFrontService->getItemsByCategoryIds($item_params);
+
+            $data[] = $category;
+            foreach ($descendant as $sub_category)
+            {
+                $item_params['category_ids'] = [$sub_category->id];
+                $sub_category->items = $this->itemFrontService->getItemsByCategoryIds($item_params);
+                $data[] = $sub_category;
             }
         }
 
-        return $params['toTree'] ? $categories->toTree() : $categories;
+        return $data;
     }
 
 
@@ -76,7 +98,7 @@ class ModuleFrontService extends ModuleService
     }
 
 
-    public function getMenusModule()
+    public function getMenusModule($params)
     {
 
     }
@@ -118,7 +140,7 @@ class ModuleFrontService extends ModuleService
         {
             $items = $this->getLatestItemsModule($module->params);
         }
-        elseif ($module->category->alias == 'module-latest-items')
+        elseif ($module->category->alias == 'module-menus')
         {
             $items = $this->getMenusModule($module->params);
         }

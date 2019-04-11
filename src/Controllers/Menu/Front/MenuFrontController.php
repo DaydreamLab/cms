@@ -20,6 +20,7 @@ class MenuFrontController extends BaseController
     public function __construct(MenuFrontService $service)
     {
         parent::__construct($service);
+        $this->service = $service;
     }
 
 
@@ -28,7 +29,7 @@ class MenuFrontController extends BaseController
         $menu = $this->service->getMenu(Helper::collect([
             'alias'     => $alias,
             'host'      => $request->getHttpHost(),
-            'language'  => $request->language
+            'language'  => isset($request->language) ? $request->language : config('global.locale')
         ]));
 
         return ResponseHelper::response($this->service->status, $this->service->response);
@@ -47,7 +48,7 @@ class MenuFrontController extends BaseController
     {
         $this->service->getTree(Helper::collect([
             'host'       => $request->getHttpHost(),
-            'language'   => $request->language
+            'language'   => isset($request->language) ? $request->language : config('global.locale')
         ]));
 
         return ResponseHelper::response($this->service->status, $this->service->response);
