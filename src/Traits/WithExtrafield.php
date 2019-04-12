@@ -43,6 +43,9 @@ trait WithExtrafield
             $extrafields_data = ExtrafieldAdmin::whereIn('id', $extrafield_ids)->get();
         }
 
+
+        // 組合實際的資料與額外欄位的初始定義
+        $data = (object)[];
         foreach ($extrafields_data as $extrafield_data)
         {
             foreach (json_decode($value) as $extrafield)
@@ -58,9 +61,10 @@ trait WithExtrafield
 //                    }
                 }
             }
+            $data->{$extrafield_data->alias} = (object) $extrafield_data;
         }
 
-        return $extrafields_data;
+        return $data;
     }
 
 

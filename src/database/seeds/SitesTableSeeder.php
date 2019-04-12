@@ -20,7 +20,7 @@ class SitesTableSeeder extends Seeder
 
         $service->store(Helper::collect([
             'title'         => env('APP_NAME').' - 繁體中文',
-            'url'           => env('APP_URL').'/zh-TW',
+            'url'           => str_replace('http://', '',str_replace('https://', '', env('APP_URL'))),
             'sitename'      => env('APP_NAME'),
             'sef'           => 'zh-TW',
             'metakeywords'  => '',
