@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Repositories\Category;
 
+use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Repositories\BaseRepository;
 use DaydreamLab\Cms\Models\Category\Category;
 use DaydreamLab\JJAJ\Traits\NestedRepositoryTrait;
@@ -38,10 +39,25 @@ class CategoryRepository extends BaseRepository
     }
 
 
-    public function treeList($extension, $access_ids)
+    public function treeList($extension, $additional_queries, $access_ids)
     {
-        return $this->model->where('extension', $extension)
-                            ->whereIn('access', $access_ids)
-                            ->get();
+        $query = $this->model->where('extension', $extension)->whereIn('access', $access_ids);
+        foreach ($additional_queries as $key => $value)
+        {
+            if ($key == 'special_queries')
+            {
+                foreach ($value as $item)
+                {
+                    $query = $query->{$item['type']}($item['key'], $item['value']);
+                }
+            }
+            else
+            {
+                $query = $query->where($key, $value);
+            }
+
+        }
+
+        return $query->get();
     }
 }

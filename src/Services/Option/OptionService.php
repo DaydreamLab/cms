@@ -41,7 +41,22 @@ class OptionService
 
             if ($type == 'category')
             {
-                $data[$type] = $service->treeList('item');
+                $data[$type] = $service->treeList(
+                    'item',
+                    [
+                        'extension' => 'item',
+                        'special_queries'   => [
+                            [
+                                'type'  => 'whereNotIn',
+                                'key'   => 'content_type',
+                                'value' => ['link']
+                            ]
+                        ]
+                    ],
+                    [
+                        'content_type'
+                    ]
+                );
             }
             elseif ($type == 'language')
             {
@@ -57,7 +72,7 @@ class OptionService
             }
             elseif ($type == 'moduleCategory')
             {
-                $data[$type] = $service->treeList('module', ['alias']);
+                $data[$type] = $service->treeList('module', [], ['alias']);
             }
             elseif ($type == 'extension')
             {

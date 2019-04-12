@@ -25,6 +25,10 @@ class Menu extends BaseModel
     protected $table = 'menus';
 
 
+    protected $order_by = 'ordering';
+
+    protected $order = 'asc';
+
     /**
      * The attributes that are mass assignable.
      *
