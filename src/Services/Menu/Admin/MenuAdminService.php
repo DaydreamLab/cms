@@ -46,19 +46,19 @@ class MenuAdminService extends MenuService
     }
 
 
-    public function treeList()
-    {
-        //$tree = $this->repo->findBySpecial('where', 'access', $this->access_ids)->toFlatTree();
-        $tree = $this->repo->all()->toFlatTree();
-
-        $tree = $tree->map(function ($item, $key) {
-            return $item->only(['id', 'tree_list_title']);
-        });
-
-        $this->status =  Str::upper(Str::snake($this->type . 'GetTreeListSuccess'));
-        $this->response = $tree;
-
-        return $tree;
-    }
+//    public function treeList()
+//    {
+//        //$tree = $this->repo->findBySpecial('where', 'access', $this->access_ids)->toFlatTree();
+//        $tree = $this->repo->all()->toFlatTree();
+//
+//        $tree = $tree->map(function ($item, $key) {
+//            return $item->only(['id', 'tree_list_title']);
+//        });
+//
+//        $this->status =  Str::upper(Str::snake($this->type . 'GetTreeListSuccess'));
+//        $this->response = $tree;
+//
+//        return $tree;
+//    }
 
 }

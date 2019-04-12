@@ -192,6 +192,8 @@ class ItemAdminService extends ItemService
 
         $this->setCronJob($input, $item);
 
+        $this->response = $item;
+
         return $item;
     }
 

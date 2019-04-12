@@ -162,18 +162,18 @@ class CategoryService extends BaseService
     }
 
 
-    public function treeList($extension, $additional_queries = [],$additional_keys = [])
-    {
-        $tree = $this->repo->treeList($extension, $additional_queries, $this->access_ids)->toFlatTree();
-
-        $required_keys = array_merge(['id', 'tree_list_title'], $additional_keys);
-        $tree = $tree->map(function ($item, $key) use ($required_keys) {
-            return $item->only($required_keys);
-        });
-
-        $this->status =  Str::upper(Str::snake($this->type . 'GetTreeListSuccess'));
-        $this->response = $tree;
-
-        return $tree;
-    }
+//    public function treeList($extension, $additional_queries = [],$additional_keys = [])
+//    {
+//        $tree = $this->repo->2treeList($extension, $additional_queries, $this->access_ids)->toFlatTree();
+//
+//        $required_keys = array_merge(['id', 'tree_list_title'], $additional_keys);
+//        $tree = $tree->map(function ($item, $key) use ($required_keys) {
+//            return $item->only($required_keys);
+//        });
+//
+//        $this->status =  Str::upper(Str::snake($this->type . 'GetTreeListSuccess'));
+//        $this->response = $tree;
+//
+//        return $tree;
+//    }
 }

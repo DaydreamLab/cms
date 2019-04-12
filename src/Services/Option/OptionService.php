@@ -23,7 +23,9 @@ class OptionService
                                 LanguageAdminService $languageAdminService,
                                 ViewlevelAdminService $viewlevelAdminService)
     {
-        $this->map['category']      = $this->map['menuCategory'] = $this->map['moduleCategory'] = $categoryAdminService;
+        $this->map['category']      = $categoryAdminService;
+        $this->map['menuCategory']  = $categoryAdminService;
+        $this->map['moduleCategory']= $categoryAdminService;
         $this->map['language']      = $languageAdminService;
         $this->map['viewlevel']     = $viewlevelAdminService;
         $this->map['extension']     = ['item', 'menu', 'module'];
@@ -41,11 +43,18 @@ class OptionService
 
             if ($type == 'category')
             {
-                $data[$type] = $service->treeList('item', [], ['content_type']);
+                $data[$type] = $service->search(Helper::collect([
+                    'extension' => 'item',
+                    'paginate'  => false
+                ]))->toFlatTree()->map( function($item, $key) {
+                    return $item->only(['id', 'tree_list_title', 'content_type']);
+                });
             }
             elseif ($type == 'language')
             {
-                $data[$type] = $service->getTypeList('content');
+                $data[$type] = $service->getTypeList('content')->map( function($item, $key) {
+                    return $item->only(['id', 'title', 'sef']);
+                });;
             }
             elseif ($type == 'viewlevel')
             {
@@ -53,11 +62,22 @@ class OptionService
             }
             elseif ($type == 'menuCategory')
             {
-                $data[$type] = $service->treeList('menu');;
+                $data[$type] = $service->search(Helper::collect([
+                    'extension'     => 'menu',
+                    'paginate'      => false
+                ]))->toFlatTree()->map( function($item, $key) {
+                    return $item->only(['id', 'tree_list_title']);
+                });
             }
             elseif ($type == 'moduleCategory')
             {
-                $data[$type] = $service->treeList('module', [], ['alias']);
+                $data[$type] = $service->search(Helper::collect([
+                    'extension'     => 'module',
+                    'without_root'  => 1,
+                    'paginate'      => false
+                ]))->toFlatTree()->map( function($item, $key) {
+                    return $item->only(['id', 'tree_list_title', 'alias']);
+                });
             }
             elseif ($type == 'extension')
             {
