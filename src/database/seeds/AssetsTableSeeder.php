@@ -39,7 +39,7 @@ class AssetsTableSeeder extends Seeder
             }
         };
 
-        $assets     = $service->search(Helper::collect(['limit' => 10000]));
+        $assets     = $service->search(Helper::collect(['paginate' => false, 'without_root' => 1]));
         $assets->forget('pagination');
         foreach ($assets as $asset) {
             $full_path = $asset->path;
