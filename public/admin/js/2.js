@@ -1,6 +1,6 @@
 webpackJsonp([2],{
 
-/***/ 213:
+/***/ 220:
 /***/ (function(module, exports) {
 
 /*
@@ -83,7 +83,7 @@ function toComment(sourceMap) {
 
 /***/ }),
 
-/***/ 214:
+/***/ 221:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -102,7 +102,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(90)
+var listToStyles = __webpack_require__(93)
 
 /*
 type StyleObject = {
@@ -312,19 +312,19 @@ function applyToTag (styleElement, obj) {
 
 /***/ }),
 
-/***/ 216:
+/***/ 223:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(228)
+  __webpack_require__(236)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(230)
+var __vue_script__ = __webpack_require__(238)
 /* template */
-var __vue_template__ = __webpack_require__(244)
+var __vue_template__ = __webpack_require__(255)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -364,17 +364,17 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 228:
+/***/ 236:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(229);
+var content = __webpack_require__(237);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(214)("100bbe7b", content, false, {});
+var update = __webpack_require__(221)("100bbe7b", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -391,10 +391,10 @@ if(false) {
 
 /***/ }),
 
-/***/ 229:
+/***/ 237:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(213)(false);
+exports = module.exports = __webpack_require__(220)(false);
 // imports
 
 
@@ -406,7 +406,7 @@ exports.push([module.i, "/* Colors -------------------------- */\n/* Link ------
 
 /***/ }),
 
-/***/ 230:
+/***/ 238:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -516,6 +516,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     };
   },
+  mounted: function mounted() {
+    if (this.$store.state.global.is_login_refresh) {
+      // setTimeout(() => {
+      //   this.$router.go(0);
+      // }, 50);
+      this.$router.go(0);
+      this.$store.commit("update_login_refresh", {
+        type: false
+      });
+    }
+
+    if (this.remember.remember_flag === true) {
+      this.data.email = this.remember.remember_login_info.email;
+    }
+  },
 
   methods: {
     togglePassword: function togglePassword() {
@@ -528,6 +543,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         if (valid) {
           _this2.login_loading = true;
           _this2.$$api_user_login({
+            tokenFlag: true,
             data: _this2[ref],
             fn: function fn(_ref) {
               var data = _ref.data,
@@ -551,36 +567,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
               // 儲存用戶 token
               _this2.$store.dispatch("update_userinfo", data.items).then(function () {
-                // 取得後台語言設定
-                _this2.$$api_setting_get({
-                  fn: function fn(_ref2) {
-                    var data = _ref2.data;
-
-                    _this2.$store.commit("set_language", data.items.locale_admin);
-                  }
-                });
-                // 取得後台管理網站列表
-                _this2.$$api_site_list({
-                  fn: function fn(_ref3) {
-                    var data = _ref3.data;
-
-                    _this2.$store.commit("update_site_list", data.items);
-                  }
-                });
-                // 取得用戶 apis
-                _this2.$$api_user_getAPIs({
-                  fn: function fn(_ref4) {
-                    var data = _ref4.data;
-
-                    _this2.$store.dispatch("update_user_apis", data.items);
-                  }
-                });
                 // 取得用戶 routes
                 _this2.$$api_user_getRoutes({
-                  fn: function fn(_ref5) {
-                    var data = _ref5.data;
-
-                    _this2.login_loading = false;
+                  fn: function fn(_ref2) {
+                    var data = _ref2.data;
 
                     var user_routes = data.items;
                     _this2.$router.options.routes = Object(__WEBPACK_IMPORTED_MODULE_0_utils___["c" /* formatRoutes */])(user_routes);
@@ -590,7 +580,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                       routes: user_routes,
                       redirect: user_redirect
                     }).then(function () {
-                      _this2.$router.push(user_redirect);
+                      _this2.$router.push(_this2.$route.query.redirect || user_redirect);
                     });
                   }
                 });
@@ -598,34 +588,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             },
             errFn: function errFn(err) {
               _this2.$message.error(err.message);
-              _this2.login_loading = false;
             },
-            tokenFlag: true
+            finalFn: function finalFn() {
+              _this2.login_loading = false;
+            }
           });
         }
       });
-    }
-  },
-  mounted: function mounted() {
-    if (this.$store.state.global.is_login_refresh) {
-      // setTimeout(() => {
-      //   this.$router.go(0);
-      // }, 50);
-      this.$router.go(0);
-      this.$store.commit("update_login_refresh", {
-        type: false
-      });
-    }
-
-    if (this.remember.remember_flag === true) {
-      this.data.email = this.remember.remember_login_info.email;
     }
   }
 });
 
 /***/ }),
 
-/***/ 244:
+/***/ 255:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -828,7 +804,7 @@ if (false) {
 
 /***/ }),
 
-/***/ 90:
+/***/ 93:
 /***/ (function(module, exports) {
 
 /**
