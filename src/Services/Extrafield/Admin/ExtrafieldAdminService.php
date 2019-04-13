@@ -19,4 +19,15 @@ class ExtrafieldAdminService extends ExtrafieldService
         parent::__construct($repo);
     }
 
+    public function getItem($id)
+    {
+        $this->repo->with('group');
+
+        $item = parent::getItem($id)->makeHidden(['group']);
+
+        $item->group_title = $item->group->title;
+
+        return $item;
+    }
+
 }

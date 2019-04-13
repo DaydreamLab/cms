@@ -1,8 +1,8 @@
 [
   {
     "title"         : "文章 - 分類選單列表",
-    "alias"         : "module-categories",
-    "path"          : "/menu/module-categories",
+    "alias"         : "categories",
+    "path"          : "/module/categories",
     "state"         : 1,
     "introimage"    : "",
     "introtext"     : "",
@@ -18,8 +18,8 @@
   },
   {
     "title"         : "文章 - 分類",
-    "alias"         : "module-categories-items",
-    "path"          : "/menu/module-categories-items",
+    "alias"         : "categories-items",
+    "path"          : "/module/categories-items",
     "state"         : 1,
     "introimage"    : "",
     "introtext"     : "",
@@ -35,8 +35,8 @@
   },
   {
     "title"         : "文章",
-    "alias"         : "module-selected-items",
-    "path"          : "/menu/module-selected-items",
+    "alias"         : "selected-items",
+    "path"          : "/module/selected-items",
     "state"         : 1,
     "introimage"    : "",
     "introtext"     : "",
@@ -52,8 +52,8 @@
   },
   {
     "title"         : "Latest(最新消息)",
-    "alias"         : "module-latest-items",
-    "path"          : "/menu/module-latest-items",
+    "alias"         : "latest-items",
+    "path"          : "/module/latest-items",
     "state"         : 1,
     "introimage"    : "",
     "introtext"     : "",
@@ -69,8 +69,8 @@
   },
   {
     "title"         : "選單",
-    "alias"         : "module-menus",
-    "path"          : "/menu/module-menus",
+    "alias"         : "menus",
+    "path"          : "/module/menus",
     "state"         : 1,
     "introimage"    : "",
     "introtext"     : "",

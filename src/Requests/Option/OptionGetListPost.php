@@ -30,13 +30,20 @@ class OptionGetListPost extends AdminRequest
             'types.*'    => [
                 'nullable',
                 Rule::in([
-                    'category',
-                    'language',
-                    'viewlevel',
-                    'menuCategory',
-                    'moduleCategory',
+                    'asset',
                     'extension',
-                    'content_type'
+                    'extrafield_group',
+                    'item_category',
+                    'item_article_category',
+                    'item_content_type',
+                    'language',
+                    'site',
+                    'menu',
+                    'menu_category',
+                    'module',
+                    'module_category',
+                    'user_group',
+                    'viewlevel',
                 ])
             ]
         ];

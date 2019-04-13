@@ -1,6 +1,7 @@
 <?php
 namespace DaydreamLab\Cms\Models\Extrafield;
 
+use DaydreamLab\Cms\Models\Extrafield\Admin\ExtrafieldGroupAdmin;
 use DaydreamLab\Cms\Traits\Model\WithAccess;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\JJAJ\Models\BaseModel;
@@ -62,7 +63,7 @@ class Extrafield extends BaseModel
      * @var array
      */
     protected $appends = [
-        'access_title'
+        'access_title',
     ];
 
 
@@ -75,4 +76,11 @@ class Extrafield extends BaseModel
     {
         self::traitBoot();
     }
+
+
+    public function group()
+    {
+        return $this->belongsTo(ExtrafieldGroup::class, 'group_id', 'id');
+    }
+
 }

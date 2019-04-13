@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Traits\Model;
 
 use DaydreamLab\Cms\Models\Category\Category;
+use DaydreamLab\JJAJ\Helpers\Helper;
 
 
 trait WithCategory
