@@ -13,6 +13,8 @@ class ModuleAdminService extends ModuleService
 {
     protected $type = 'ModuleAdmin';
 
+    protected $search_keys = ['title', 'introtext', 'description'];
+
     public function __construct(ModuleAdminRepository $repo)
     {
         parent::__construct($repo);

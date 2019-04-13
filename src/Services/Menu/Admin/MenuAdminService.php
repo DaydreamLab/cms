@@ -14,6 +14,7 @@ class MenuAdminService extends MenuService
 {
     protected $type = 'MenuAdmin';
 
+    protected $search_keys = ['title', 'introtext', 'description'];
 
     public function __construct(MenuAdminRepository $repo)
     {
