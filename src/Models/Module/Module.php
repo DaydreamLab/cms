@@ -2,9 +2,11 @@
 namespace DaydreamLab\Cms\Models\Module;
 
 use DaydreamLab\Cms\Models\Category\Category;
+use DaydreamLab\Cms\Models\Item\Item;
 use DaydreamLab\Cms\Traits\Model\WithAccess;
 use DaydreamLab\Cms\Traits\Model\WithCategory;
 use DaydreamLab\Cms\Traits\Model\WithLanguage;
+use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\User\Models\Viewlevel\Viewlevel;
@@ -83,4 +85,28 @@ class Module extends BaseModel
         self::traitBoot();
     }
 
+
+    public function getParamsAttribute($value)
+    {
+        $value = json_decode($value);
+
+        if (array_key_exists('item_ids', $value))
+        {
+            $items = Item::whereIn('id', $value->item_ids)->get()
+                ->map(function ($item, $key) {
+                    return (object)['id'=> $item->id, 'title'=> $item->title];
+                });
+            $value->item_ids = $items;
+        }
+        else if(array_key_exists('category_ids', $value))
+        {
+           $items = Category::whereIn('id', $value->category_ids)->get()
+                    ->map(function ($item, $key) {
+                        return (object)['id'=> $item->id, 'tree_list_title'=> $item->tree_list_title];
+                    });
+           $value->category_ids = $items;
+        }
+
+        return $value;
+    }
 }

@@ -2,6 +2,7 @@
 namespace DaydreamLab\Cms\Models\Menu;
 
 use DaydreamLab\Cms\Models\Category\Category;
+use DaydreamLab\Cms\Models\Module\Module;
 use DaydreamLab\Cms\Traits\Model\WithAccess;
 use DaydreamLab\Cms\Traits\Model\WithCategory;
 use DaydreamLab\Cms\Traits\Model\WithLanguage;
@@ -94,4 +95,16 @@ class Menu extends BaseModel
         self::traitBoot();
     }
 
+
+    public function getParamsAttribute($value)
+    {
+        $value = json_decode($value);
+        $items = Module::whereIn('id', $value->module_ids)->get()
+            ->map(function ($item, $key) {
+                return (object)['id'=> $item->id, 'title'=> $item->title];
+            });
+        $value->module_ids = $items;
+
+        return $value;
+    }
 }

@@ -38,7 +38,7 @@ class MenuStorePost extends AdminRequest
             ],
             'description'   => 'nullable|string',
             'language'      => 'nullable|string',
-            'params'        => 'nullable|string',
+            'params'        => 'nullable|array',
             'metadata'      => 'nullable|string',
             'metakeywords'  => 'nullable|string',
             'publish_up'    => 'nullable|datetime',

@@ -9,7 +9,7 @@ use DaydreamLab\JJAJ\Traits\RecordChanger;
 
 class Tag extends BaseModel
 {
-    use NodeTrait, WithLanguage, WithAccess,
+    use NodeTrait, WithLanguage, WithAccess, WithLanguage,
         RecordChanger {
         RecordChanger::boot as traitBoot;
     }
@@ -74,7 +74,7 @@ class Tag extends BaseModel
         'locker',
         'viewlevels',
         'access_title',
-        'language'
+        'language_title'
     ];
 
 

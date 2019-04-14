@@ -134,23 +134,23 @@ class ModuleFrontService extends ModuleService
     public function loadModule($module, $language = '*')
     {
         $items = [];
-        if ($module->category->alias == 'module-categories-items')
+        if ($module->category->alias == 'categories-items')
         {
             $items = $this->getCategoriesItemsModule($module->params);
         }
-        elseif ($module->category->alias == 'module-selected-items')
+        elseif ($module->category->alias == 'selected-items')
         {
             $items = $this->getSelectedItemsModule($module->params);
         }
-        elseif ($module->category->alias == 'module-categories')
+        elseif ($module->category->alias == '-categories')
         {
             $items = $this->getCategoriesModule($module->params);
         }
-        elseif ($module->category->alias == 'module-latest-items')
+        elseif ($module->category->alias == 'latest-items')
         {
             $items = $this->getLatestItemsModule($module->params);
         }
-        elseif ($module->category->alias == 'module-menus')
+        elseif ($module->category->alias == 'menus')
         {
             $items = $this->getMenusModule($module->params, $language);
         }

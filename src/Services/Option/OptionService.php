@@ -106,7 +106,7 @@ class OptionService
             }
             elseif ($type == 'site')
             {
-                $data[$type] = $this->getOptionList($service, 'list');
+                $data[$type] = $this->getOptionList($service, 'list', [], ['url']);
             }
             elseif ($type == 'user_group')
             {
