@@ -3,6 +3,7 @@ namespace DaydreamLab\Cms\Models\Module;
 
 use DaydreamLab\Cms\Models\Category\Category;
 use DaydreamLab\Cms\Models\Item\Item;
+use DaydreamLab\Cms\Models\Menu\Menu;
 use DaydreamLab\Cms\Traits\Model\WithAccess;
 use DaydreamLab\Cms\Traits\Model\WithCategory;
 use DaydreamLab\Cms\Traits\Model\WithLanguage;
@@ -105,6 +106,14 @@ class Module extends BaseModel
                         return (object)['id'=> $item->id, 'tree_list_title'=> $item->tree_list_title];
                     });
            $value->category_ids = $items;
+        }
+        else if(array_key_exists('menu_ids', $value))
+        {
+            $items = Menu::whereIn('id', $value->menu_ids)->get()
+                ->map(function ($item, $key) {
+                    return (object)['id'=> $item->id, 'title'=> $item->title];
+                });
+            $value->menu_ids = $items;
         }
 
         return $value;

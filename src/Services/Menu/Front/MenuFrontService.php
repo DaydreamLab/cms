@@ -43,17 +43,19 @@ class MenuFrontService extends MenuService
         }
 
         $modules = [];
+
         foreach ($menu->params as $key => $param)
         {
             if ($key == 'module_ids')
             {
                 foreach ($param as $module_id)
                 {
-                    $module     = $this->moduleFrontService->find($module_id);
+                    $module     = $this->moduleFrontService->find($module_id->id);
                     $language   = !InputHelper::null($input, 'language') ? $input->get('language') : config('global.locale');
                     $data       = $this->moduleFrontService->loadModule($module, $language);
                     $module->items = $data;
                     $modules[$module->alias] = $module;
+                    
                 }
             }
         }

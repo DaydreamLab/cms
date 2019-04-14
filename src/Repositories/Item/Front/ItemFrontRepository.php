@@ -33,13 +33,18 @@ class ItemFrontRepository extends ItemRepository
 
     public function getCategoriesItemsModule($params)
     {
+        $ids = [];
+        foreach ($params->category_ids as $category_id)
+        {
+            $ids [] = $category_id->id;
+        }
         return $this->model
-            ->whereIn('category_id', $params['category_ids'])
+            ->whereIn('category_id', $ids)
             ->where('state', 1)
-            ->whereIn('access', $params['access_ids'])
-            ->orderBy($params['order_by'], $params['order'])
+            ->whereIn('access', $params->access_ids)
+            ->orderBy($params->order_by, $params->order)
             ->orderBy('publish_up', 'desc')
-            ->paginate($params['limit']);
+            ->paginate($params->limit);
     }
 
 
@@ -262,11 +267,17 @@ class ItemFrontRepository extends ItemRepository
 
     public function getSelectedItems($params)
     {
+        $ids = [];
+        foreach ($params->item_ids as $item_id)
+        {
+            $ids [] = $item_id->id;
+        }
+
         return  $this->model
-            ->whereIn('id', $params['item_ids'])
+            ->whereIn('id', $ids)
             ->where('state', 1)
-            ->whereIn('access', $params['access_ids'])
-            ->orderBy($params['order_by'], $params['order'])
+            ->whereIn('access', $params->access_ids)
+            ->orderBy($params->order_by, $params->order)
             ->get();
     }
 

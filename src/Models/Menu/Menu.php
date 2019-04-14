@@ -98,12 +98,15 @@ class Menu extends BaseModel
 
     public function getParamsAttribute($value)
     {
-        $value = json_decode($value);
-        $items = Module::whereIn('id', $value->module_ids)->get()
-            ->map(function ($item, $key) {
-                return (object)['id'=> $item->id, 'title'=> $item->title];
-            });
-        $value->module_ids = $items;
+        $value      = json_decode($value);
+
+        $data       = [];
+        $modules    = Module::whereIn('id', $value->module_ids)->get();
+        $modules->map(function ($item, $key) use (&$data){
+           $data[] = (object) $item->only('id', 'title');
+        });
+
+        $value->module_ids = $data;
 
         return $value;
     }
