@@ -9,7 +9,7 @@ use DaydreamLab\JJAJ\Traits\RecordChanger;
 
 class Tag extends BaseModel
 {
-    use NodeTrait, WithLanguage, WithAccess, WithLanguage,
+    use NodeTrait, WithLanguage, WithAccess,
         RecordChanger {
         RecordChanger::boot as traitBoot;
     }
