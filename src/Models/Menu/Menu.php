@@ -106,8 +106,6 @@ class Menu extends BaseModel
 
     public function host()
     {
-//        return $this->hasOne(Site::class, 'url', 'host')
-//                    ->where('sef', $this->language);
         return $this->hasOne(Site::class, 'id', 'site_id');
     }
 }
