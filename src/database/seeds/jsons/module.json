@@ -83,5 +83,21 @@
     "extrafields"   : [],
     "created_by"    : 1,
     "modules"       : []
+  },
+  {
+    "title"         : "文章 - 分類搜尋",
+    "alias"         : "search",
+    "path"          : "/module/search",
+    "state"         : 1,
+    "introimage"    : "",
+    "introtext"     : "",
+    "image"         : "",
+    "description"   : "搜尋分類下的所有文章",
+    "extension"     : "module",
+    "access"        : 5,
+    "language"      : "*",
+    "extrafields"   : [],
+    "created_by"    : 1,
+    "modules"       : []
   }
 ]

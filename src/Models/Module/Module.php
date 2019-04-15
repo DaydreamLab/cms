@@ -101,9 +101,15 @@ class Module extends BaseModel
         }
         else if(array_key_exists('category_ids', $value))
         {
-           $items = Category::whereIn('id', $value['category_ids'])->get()
-                    ->map(function ($item, $key) {
-                        return (object)['id'=> $item->id, 'tree_list_title'=> $item->tree_list_title];
+            $category_alias = $this->category->alias;
+            $items = Category::whereIn('id', $value['category_ids'])->get()
+                    ->map(function ($item, $key) use ($category_alias) {
+                        $data = (object)['id'=> $item->id, 'tree_list_title'=> $item->tree_list_title];
+                        if ($category_alias == 'search')
+                        {
+                            $data->alias = $item->alias;
+                        }
+                        return $data;
                     });
            $value['category_ids'] = $items;
         }

@@ -136,6 +136,12 @@ class ModuleFrontService extends ModuleService
     }
 
 
+    public function getSearchModule($params)
+    {
+        Helper::show($params);
+    }
+
+
     public function loadModule($module, $language = '*')
     {
         $items = [];
@@ -158,6 +164,14 @@ class ModuleFrontService extends ModuleService
         elseif ($module->category->alias == 'menus')
         {
             $items = $this->getMenusModule($module->params, $language);
+        }
+        elseif ($module->category->alias == 'search')
+        {
+            foreach ($module->params['category_ids'] as $category)
+            {
+                $category_alias[] = $category->alias;
+            }
+            $items = ['category_alias' => $category_alias];
         }
 
         return $items;

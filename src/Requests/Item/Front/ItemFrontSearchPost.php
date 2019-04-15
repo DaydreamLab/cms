@@ -26,7 +26,8 @@ class ItemFrontSearchPost extends ItemSearchPost
         $rules = [
             'year'              => 'nullable|integer',
             'month'             => 'nullable|integer',
-            'category_alias'    => 'nullable|string',
+            'category_alias'    => 'nullable|array',
+            'category_alias.*'  => 'nullable|string',
             'language'          => 'nullable|string|max:5',
         ];
         return array_merge($rules, parent::rules());
