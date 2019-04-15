@@ -52,7 +52,6 @@ class ItemFrontController extends BaseController
 
     public function getItemByAlias(Request $request, $alias)
     {
-        Helper::show($request->language);
         $this->service->getItemByAlias(Helper::collect([
             'alias'     =>$alias,
             'language'  => $request->get('language') != '' ? $request->language : config('global.locale')

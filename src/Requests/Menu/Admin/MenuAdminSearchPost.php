@@ -24,7 +24,8 @@ class MenuAdminSearchPost extends MenuSearchPost
     public function rules()
     {
         $rules = [
-            'language'      => 'nullable|string'
+            'language'      => 'nullable|string',
+            'category_id'   => 'nullable|integer',
         ];
         return array_merge($rules, parent::rules());
     }

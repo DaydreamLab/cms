@@ -417,7 +417,7 @@
       },
 
       {
-        "title": "COM_CONTENT_FIELD_MANAGER_TITLE",
+        "title": "COM_CONTENT_EXTRAFIELD_MANAGER_TITLE",
         "path": "/field",
         "component": "content/field/list",
         "type": "menu",
@@ -457,7 +457,7 @@
         ]
       },
       {
-        "title": "COM_CONTENT_FIELD_EDIT_TITLE",
+        "title": "COM_CONTENT_EXTRAFIELD_EDIT_TITLE",
         "path": "/field/edit",
         "component": "content/field/edit",
         "type": "function",
@@ -471,7 +471,7 @@
         "apis": []
       },
       {
-        "title": "COM_CONTENT_FIELD_GROUP_MANAGER_TITLE",
+        "title": "COM_CONTENT_EXTRAFIELD_GROUP_MANAGER_TITLE",
         "path": "/field/group",
         "component": "content/field/group/list",
         "type": "menu",
@@ -511,7 +511,7 @@
         ]
       },
       {
-        "title": "COM_CONTENT_FIELD_GROUP_EDIT_TITLE",
+        "title": "COM_CONTENT_EXTRAFIELD_GROUP_EDIT_TITLE",
         "path": "/field/group/edit",
         "component": "content/field/group/edit",
         "type": "function",
