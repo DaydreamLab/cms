@@ -51,6 +51,8 @@ class AssetsTableSeeder extends Seeder
     public function migrate($data, $parent)
     {
         $super_user = UserGroup::where('title','Super User')->first();
+        $administrator = UserGroup::where('title','Administrator')->first();
+
 
         foreach ($data as $item)
         {
@@ -63,6 +65,10 @@ class AssetsTableSeeder extends Seeder
             //UserGroupAssetMap::create([
             UserGroupAssetMap::create([
                 'group_id'   => $super_user->id,
+                'asset_id'  => $asset->id,
+            ]);
+            UserGroupAssetMap::create([
+                'group_id'   => $administrator->id,
                 'asset_id'  => $asset->id,
             ]);
 
@@ -79,6 +85,11 @@ class AssetsTableSeeder extends Seeder
                 $api_ids[] = $asset_api->id;
                 UserGroupApiMap::create([
                     'group_id'   => $super_user->id,
+                    'api_id'    => $asset_api->id,
+                ]);
+
+                UserGroupApiMap::create([
+                    'group_id'   => $administrator->id,
                     'api_id'    => $asset_api->id,
                 ]);
             }
