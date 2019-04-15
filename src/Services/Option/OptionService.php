@@ -70,7 +70,7 @@ class OptionService
             }
             elseif ($type == 'extrafield_group')
             {
-                $data[$type] = $this->getOptionList($service, 'list');
+                $data[$type] = $this->getOptionList($service, 'list', [], ['extrafields']);
             }
             elseif ($type == 'item_article_category')
             {

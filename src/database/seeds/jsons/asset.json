@@ -92,7 +92,33 @@
         "ordering": 11,
         "created_by": 1,
         "children": [],
-        "apis": []
+        "apis": [
+          {
+            "method": "add",
+            "url": "/admin/site/store",
+            "created_by": 1
+          },
+          {
+            "method": "edit",
+            "url": "/admin/site/store",
+            "created_by": 1
+          },
+          {
+            "method": "delete",
+            "url": "/admin/site/remove",
+            "created_by": 1
+          },
+          {
+            "method": "updateState",
+            "url": "/admin/site/state",
+            "created_by": 1
+          },
+          {
+            "method": "checkout",
+            "url": "/admin/site/checkout",
+            "created_by": 1
+          }
+        ]
       },
       {
         "title": "COM_SYSTEM_SITE_EDIT_TITLE",
@@ -559,7 +585,18 @@
         "ordering": 11,
         "created_by": 1,
         "children": [],
-        "apis": []
+        "apis": [
+          {
+            "method": "add",
+            "url": "/admin/media/store",
+            "created_by": 1
+          },
+          {
+            "method": "delete",
+            "url": "/admin/media/remove",
+            "created_by": 1
+          }
+        ]
       },
       {
         "title": "COM_CONTENT_SEARCH_STATISTICS_TITLE",

@@ -15,6 +15,7 @@ use DaydreamLab\Cms\Requests\Item\Front\ItemFrontSearchPost;
 use DaydreamLab\Cms\Requests\Item\Front\ItemFrontCheckoutPost;
 use DaydreamLab\Cms\Requests\Item\Front\ItemFrontFeaturePost;
 use DaydreamLab\Cms\Requests\Item\Front\ItemFrontOrderingPost;
+use Symfony\Component\HttpFoundation\Request;
 
 
 class ItemFrontController extends BaseController
@@ -49,9 +50,13 @@ class ItemFrontController extends BaseController
     }
 
 
-    public function getItemByAlias($alias)
+    public function getItemByAlias(Request $request, $alias)
     {
-        $this->service->getItemByAlias(Helper::collect(['alias'=>$alias]));
+        Helper::show($request->language);
+        $this->service->getItemByAlias(Helper::collect([
+            'alias'     =>$alias,
+            'language'  => $request->get('language') != '' ? $request->language : config('global.locale')
+        ]));
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
