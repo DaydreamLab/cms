@@ -33,23 +33,12 @@ class ModuleFrontService extends ModuleService
     }
 
 
-    public function getParamsIds($params, $name)
-    {
-        $ids = [];
-        foreach ($params->{$name} as $item)
-        {
-            $ids[] = $item->id;
-        }
-
-        return $ids;
-    }
-
     public function getCategoriesModule($params)
     {
-        $params->access_ids = $this->access_ids;
+        $params['access_ids'] = $this->access_ids;
 
         $data = [];
-        $categories = $this->categoryFrontService->getItemsByIds($this->getParamsIds($params, 'category_ids'));
+        $categories = $this->categoryFrontService->getItemsByIds($params['category_ids']);
         foreach ($categories as $category)
         {
             $category_ids = [$category->id];
@@ -57,9 +46,9 @@ class ModuleFrontService extends ModuleService
             // 取出項目的搜尋條件
             $item_params['category_ids']    = $category_ids;
             $item_params['access_ids']      = $this->access_ids;
-            $item_params['order_by']        = $params->item_order_by;
-            $item_params['order']           = $params->item_order;
-            $item_params['limit']           = $params->item_limit;
+            $item_params['order_by']        = $params['item_order_by'];
+            $item_params['order']           = $params['item_order'];
+            $item_params['limit']           = $params['item_limit'];
 
             $children_category = [];
             if ($params->with_children_items)
@@ -91,7 +80,7 @@ class ModuleFrontService extends ModuleService
 
     public function getCategoriesItemsModule($params)
     {
-        $params->access_ids = $this->access_ids;
+        $params['access_ids'] = $this->access_ids;
 
         $items = $this->itemFrontService->getCategoriesItemsModule($params);
 
@@ -110,9 +99,9 @@ class ModuleFrontService extends ModuleService
     public function getMenusModule($params, $language)
     {
         $menu_ids = [];
-        foreach ($params->menu_ids as $menu_id)
+        foreach ($params['menu_ids'] as $menu)
         {
-            $menu_ids [] = $menu_id->id;
+            $menu_ids[] = $menu->id;
         }
 
         $menus = $this->menuFrontService->search(Helper::collect([
@@ -133,8 +122,7 @@ class ModuleFrontService extends ModuleService
 
     public function getSelectedItemsModule($params)
     {
-        $params->access_ids = $this->access_ids;
-
+        $params['access_ids'] = $this->access_ids;
         $items = $this->itemFrontService->getSelectedItems($params);
 
         if ($items->count() == 1)

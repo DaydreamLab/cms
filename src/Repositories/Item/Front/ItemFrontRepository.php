@@ -33,18 +33,13 @@ class ItemFrontRepository extends ItemRepository
 
     public function getCategoriesItemsModule($params)
     {
-        $ids = [];
-        foreach ($params->category_ids as $category_id)
-        {
-            $ids [] = $category_id->id;
-        }
         return $this->model
-            ->whereIn('category_id', $ids)
+            ->whereIn('category_id', $this->getParamsIds($params, 'category_ids'))
             ->where('state', 1)
-            ->whereIn('access', $params->access_ids)
-            ->orderBy($params->order_by, $params->order)
+            ->whereIn('access', $params['access_ids'])
+            ->orderBy($params['order_by'], $params['order'])
             ->orderBy('publish_up', 'desc')
-            ->paginate($params->limit);
+            ->paginate($params['limit']);
     }
 
 
@@ -143,7 +138,7 @@ class ItemFrontRepository extends ItemRepository
     public function getItemsByCategoryIds($params)
     {
         return $this->model
-            ->whereIn('category_id', $params['category_ids'])
+            ->whereIn('category_id', $this->getParamsIds($params, 'category_ids'))
             ->where('state', 1)
             ->whereIn('access', $params['access_ids'])
             ->orderBy($params['order_by'], $params['order'])
@@ -265,19 +260,25 @@ class ItemFrontRepository extends ItemRepository
     }
 
 
-    public function getSelectedItems($params)
+    public function getParamsIds($params, $key)
     {
         $ids = [];
-        foreach ($params->item_ids as $item_id)
+        foreach ($params[$key] as $param)
         {
-            $ids [] = $item_id->id;
+            $ids[] = $param->id;
         }
 
+        return $ids;
+    }
+
+
+    public function getSelectedItems($params)
+    {
         return  $this->model
-            ->whereIn('id', $ids)
+            ->whereIn('id', $this->getParamsIds($params, 'item_ids'))
             ->where('state', 1)
-            ->whereIn('access', $params->access_ids)
-            ->orderBy($params->order_by, $params->order)
+            ->whereIn('access', $params['access_ids'])
+            ->orderBy($params['order_by'], $params['order'])
             ->get();
     }
 

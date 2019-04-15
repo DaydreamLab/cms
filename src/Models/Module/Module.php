@@ -89,31 +89,31 @@ class Module extends BaseModel
 
     public function getParamsAttribute($value)
     {
-        $value = json_decode($value);
+        $value = json_decode($value, true);
 
         if (array_key_exists('item_ids', $value))
         {
-            $items = Item::whereIn('id', $value->item_ids)->get()
+            $items = Item::whereIn('id', $value['item_ids'])->get()
                 ->map(function ($item, $key) {
                     return (object)['id'=> $item->id, 'title'=> $item->title];
                 });
-            $value->item_ids = $items;
+            $value['item_ids'] = $items;
         }
         else if(array_key_exists('category_ids', $value))
         {
-           $items = Category::whereIn('id', $value->category_ids)->get()
+           $items = Category::whereIn('id', $value['category_ids'])->get()
                     ->map(function ($item, $key) {
                         return (object)['id'=> $item->id, 'tree_list_title'=> $item->tree_list_title];
                     });
-           $value->category_ids = $items;
+           $value['category_ids'] = $items;
         }
         else if(array_key_exists('menu_ids', $value))
         {
-            $items = Menu::whereIn('id', $value->menu_ids)->get()
+            $items = Menu::whereIn('id', $value['menu_ids'])->get()
                 ->map(function ($item, $key) {
                     return (object)['id'=> $item->id, 'title'=> $item->title];
                 });
-            $value->menu_ids = $items;
+            $value['menu_ids'] = $items;
         }
 
         return $value;
