@@ -31,6 +31,7 @@ class MenuStorePost extends AdminRequest
             'category_id'   => 'required|integer',
             'parent_id'     => 'nullable|integer',
             'host'          => 'required|url',
+            'site_id'       => 'nullable|integer',
             'state'         => [
                 'nullable',
                 'integer',

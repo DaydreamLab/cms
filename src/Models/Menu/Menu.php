@@ -3,6 +3,7 @@ namespace DaydreamLab\Cms\Models\Menu;
 
 use DaydreamLab\Cms\Models\Category\Category;
 use DaydreamLab\Cms\Models\Module\Module;
+use DaydreamLab\Cms\Models\Site\Site;
 use DaydreamLab\Cms\Traits\Model\WithAccess;
 use DaydreamLab\Cms\Traits\Model\WithCategory;
 use DaydreamLab\Cms\Traits\Model\WithLanguage;
@@ -82,7 +83,7 @@ class Menu extends BaseModel
         'category_title',
         'access_title',
         'language_title',
-//        'host_title',
+        'host_title',
     ];
 
 
@@ -97,23 +98,16 @@ class Menu extends BaseModel
     }
 
 
+    public function getHostTitleAttribute()
+    {
+        return $this->host()->first()->title;
+    }
 
-//    public function getParamsAttribute($value)
-//    {
-//        $value      = json_decode($value, true);
-//
-//        $data       = [];
-//        if (array_key_exists('module_ids', $value))
-//        {
-//            $modules    = Module::whereIn('id', $value['module_ids'])->get();
-//            $modules->map(function ($item, $key) use (&$data){
-//                $data[] = (object) $item->only('id', 'title');
-//            });
-//
-//        }
-//
-//        $value['module_ids'] = $data;
-//
-//        return $value;
-//    }
+
+    public function host()
+    {
+//        return $this->hasOne(Site::class, 'url', 'host')
+//                    ->where('sef', $this->language);
+        return $this->hasOne(Site::class, 'id', 'site_id');
+    }
 }
