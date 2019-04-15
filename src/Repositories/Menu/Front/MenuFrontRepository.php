@@ -21,7 +21,7 @@ class MenuFrontRepository extends MenuRepository
         $query = $this->model;
         $query = $query->where('state', 1)
                         ->where('alias', $input->get('alias'))
-                        ->where('host', $input->get('host'));
+                        ->where('site_id', $input->get('site_id'));
 
         if (InputHelper::null($input, 'language'))
         {
@@ -40,7 +40,7 @@ class MenuFrontRepository extends MenuRepository
     {
         $query = $this->model;
         $query = $query->where('state', 1)
-            ->where('host', $input->get('host'))
+            ->where('site_id', $input->get('site_id'))
             ->whereIn('access', $input->get('access'));
 
         if (InputHelper::null($input, 'language'))

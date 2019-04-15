@@ -22,6 +22,7 @@ class MenuFront extends Menu
         'ordering',
         'path',
         'host',
+        'site_id',
         'category_id',
         'access',
         'params',

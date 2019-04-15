@@ -5,6 +5,7 @@ namespace DaydreamLab\Cms\Services\Menu\Front;
 use DaydreamLab\Cms\Repositories\Menu\Front\MenuFrontRepository;
 use DaydreamLab\Cms\Services\Menu\MenuService;
 use DaydreamLab\Cms\Services\Module\Front\ModuleFrontService;
+use DaydreamLab\Cms\Services\Site\SiteService;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
 use Illuminate\Support\Collection;
@@ -16,18 +17,29 @@ class MenuFrontService extends MenuService
 
     protected $moduleFrontService;
 
+    protected $siteService;
+
 
     public function __construct(MenuFrontRepository $repo,
-                                ModuleFrontService $moduleFrontService)
+                                ModuleFrontService $moduleFrontService,
+                                SiteService $siteService)
     {
         parent::__construct($repo);
         $this->moduleFrontService = $moduleFrontService;
         $this->repo = $repo;
+        $this->siteService = $siteService;
     }
 
 
     public function getMenu(Collection $input)
     {
+        $site = $this->siteService->search(Helper::collect([
+            'url' => $input->get('host'),
+            'sef' => $input->get('language')
+        ]))->first();
+
+        $input->put('site_id', $site->id);
+
         $menu = $this->repo->getMenu($input);
 
         if (!$menu)
@@ -69,6 +81,12 @@ class MenuFrontService extends MenuService
 
     public function getTree(Collection $input)
     {
+        $site = $this->siteService->search(Helper::collect([
+            'url' => $input->get('host'),
+            'sef' => $input->get('language')
+        ]))->first();
+
+        $input->put('site_id', $site->id);
         $input->put('access', $this->access_ids);
 
         $tree = $this->repo->getTree($input);

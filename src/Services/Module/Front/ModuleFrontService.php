@@ -3,12 +3,15 @@
 namespace DaydreamLab\Cms\Services\Module\Front;
 
 use DaydreamLab\Cms\Models\Menu\Front\MenuFront;
+use DaydreamLab\Cms\Models\Site\Site;
 use DaydreamLab\Cms\Repositories\Menu\Front\MenuFrontRepository;
 use DaydreamLab\Cms\Repositories\Module\Front\ModuleFrontRepository;
+use DaydreamLab\Cms\Repositories\Site\SiteRepository;
 use DaydreamLab\Cms\Services\Category\Front\CategoryFrontService;
 use DaydreamLab\Cms\Services\Item\Front\ItemFrontService;
 use DaydreamLab\Cms\Services\Menu\Front\MenuFrontService;
 use DaydreamLab\Cms\Services\Module\ModuleService;
+use DaydreamLab\Cms\Services\Site\SiteService;
 use DaydreamLab\JJAJ\Helpers\Helper;
 
 class ModuleFrontService extends ModuleService
@@ -29,7 +32,10 @@ class ModuleFrontService extends ModuleService
         $this->repo                 = $repo;
         $this->itemFrontService     = $itemFrontService;
         $this->categoryFrontService = $categoryFrontService;
-        $this->menuFrontService     = new MenuFrontService(new MenuFrontRepository(new MenuFront()), $this);
+        $this->menuFrontService     = new MenuFrontService(
+            new MenuFrontRepository(new MenuFront()),
+            $this ,
+            new SiteService(new SiteRepository(new Site())));
     }
 
 
