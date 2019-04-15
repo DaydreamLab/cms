@@ -138,7 +138,7 @@ class ItemFrontRepository extends ItemRepository
     public function getItemsByCategoryIds($params)
     {
         return $this->model
-            ->whereIn('category_id', $this->getParamsIds($params, 'category_ids'))
+            ->whereIn('category_id', $params['category_ids'])
             ->where('state', 1)
             ->whereIn('access', $params['access_ids'])
             ->orderBy($params['order_by'], $params['order'])
@@ -257,18 +257,6 @@ class ItemFrontRepository extends ItemRepository
             return false;
         }
 
-    }
-
-
-    public function getParamsIds($params, $key)
-    {
-        $ids = [];
-        foreach ($params[$key] as $param)
-        {
-            $ids[] = $param->id;
-        }
-
-        return $ids;
     }
 
 

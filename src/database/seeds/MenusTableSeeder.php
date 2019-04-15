@@ -68,7 +68,7 @@ class MenusTableSeeder extends Seeder
             'ordering'      => 1,
             'description'   => '',
             'extension'     => 'menu',
-            'params'        => [],
+            'params'        => (object)[],
             'access'        => 5,
             'metadesc'      => '',
             'metakeywords'  => '',

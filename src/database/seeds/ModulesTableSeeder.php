@@ -35,7 +35,7 @@ class ModulesTableSeeder extends Seeder
             'metadesc'      => '',
             'metakeywords'  => '',
             'extrafields'   => [],
-            'params'        => [],
+            'params'        => (object)[],
             'children'      => []
         ]);
 

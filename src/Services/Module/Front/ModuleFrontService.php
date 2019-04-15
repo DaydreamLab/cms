@@ -38,7 +38,7 @@ class ModuleFrontService extends ModuleService
         $params['access_ids'] = $this->access_ids;
 
         $data = [];
-        $categories = $this->categoryFrontService->getItemsByIds($params['category_ids']);
+        $categories = $this->categoryFrontService->getItemsByIds($params);
         foreach ($categories as $category)
         {
             $category_ids = [$category->id];
@@ -51,7 +51,7 @@ class ModuleFrontService extends ModuleService
             $item_params['limit']           = $params['item_limit'];
 
             $children_category = [];
-            if ($params->with_children_items)
+            if ($params['with_children_items'])
             {
                 $descendant = $this->categoryFrontService->findDescendantOf($category->id);
                 $descendant_ids = $descendant->map(function ($item, $key){

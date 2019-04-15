@@ -49,7 +49,7 @@ class ItemsTableSeeder extends Seeder
             'access'        => 1,
             'metadesc'      => '',
             'metakeywords'  => '',
-            'params'        => [],
+            'params'        => (object)[],
             'extrafields'   => [],
             'children'      => []
         ]);
