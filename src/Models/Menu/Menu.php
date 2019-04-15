@@ -98,22 +98,22 @@ class Menu extends BaseModel
 
 
 
-    public function getParamsAttribute($value)
-    {
-        $value      = json_decode($value, true);
-
-        $data       = [];
-        if (array_key_exists('module_ids', $value))
-        {
-            $modules    = Module::whereIn('id', $value['module_ids'])->get();
-            $modules->map(function ($item, $key) use (&$data){
-                $data[] = (object) $item->only('id', 'title');
-            });
-
-        }
-
-        $value['module_ids'] = $data;
-
-        return $value;
-    }
+//    public function getParamsAttribute($value)
+//    {
+//        $value      = json_decode($value, true);
+//
+//        $data       = [];
+//        if (array_key_exists('module_ids', $value))
+//        {
+//            $modules    = Module::whereIn('id', $value['module_ids'])->get();
+//            $modules->map(function ($item, $key) use (&$data){
+//                $data[] = (object) $item->only('id', 'title');
+//            });
+//
+//        }
+//
+//        $value['module_ids'] = $data;
+//
+//        return $value;
+//    }
 }
