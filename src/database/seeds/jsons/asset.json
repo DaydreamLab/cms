@@ -149,7 +149,33 @@
         "ordering": 1,
         "created_by": 1,
         "children": [],
-        "apis": []
+        "apis": [
+          {
+            "method": "add",
+            "url": "/admin/menu/store",
+            "created_by": 1
+          },
+          {
+            "method": "edit",
+            "url": "/admin/menu/store",
+            "created_by": 1
+          },
+          {
+            "method": "delete",
+            "url": "/admin/menu/remove",
+            "created_by": 1
+          },
+          {
+            "method": "updateState",
+            "url": "/admin/menu/state",
+            "created_by": 1
+          },
+          {
+            "method": "checkout",
+            "url": "/admin/menu/checkout",
+            "created_by": 1
+          }
+        ]
       },
       {
         "title": "COM_MENUS_ITEM_EDIT_TITLE",
@@ -192,7 +218,33 @@
         "ordering": 1,
         "created_by": 1,
         "children": [],
-        "apis": []
+        "apis": [
+          {
+            "method": "add",
+            "url": "/admin/module/store",
+            "created_by": 1
+          },
+          {
+            "method": "edit",
+            "url": "/admin/module/store",
+            "created_by": 1
+          },
+          {
+            "method": "delete",
+            "url": "/admin/module/remove",
+            "created_by": 1
+          },
+          {
+            "method": "updateState",
+            "url": "/admin/module/state",
+            "created_by": 1
+          },
+          {
+            "method": "checkout",
+            "url": "/admin/module/checkout",
+            "created_by": 1
+          }
+        ]
       },
       {
         "title": "COM_MODULES_ITEM_EDIT_TITLE",
@@ -350,7 +402,33 @@
         "ordering": 5,
         "created_by": 1,
         "children": [],
-        "apis": []
+        "apis": [
+          {
+            "method": "add",
+            "url": "/admin/extrafield/store",
+            "created_by": 1
+          },
+          {
+            "method": "edit",
+            "url": "/admin/extrafield/store",
+            "created_by": 1
+          },
+          {
+            "method": "delete",
+            "url": "/admin/extrafield/remove",
+            "created_by": 1
+          },
+          {
+            "method": "updateState",
+            "url": "/admin/extrafield/state",
+            "created_by": 1
+          },
+          {
+            "method": "checkout",
+            "url": "/admin/extrafield/checkout",
+            "created_by": 1
+          }
+        ]
       },
       {
         "title": "COM_CONTENT_FIELD_EDIT_TITLE",
@@ -378,7 +456,33 @@
         "ordering": 7,
         "created_by": 1,
         "children": [],
-        "apis": []
+        "apis": [
+          {
+            "method": "add",
+            "url": "/admin/extrafield_group/store",
+            "created_by": 1
+          },
+          {
+            "method": "edit",
+            "url": "/admin/extrafield_group/store",
+            "created_by": 1
+          },
+          {
+            "method": "delete",
+            "url": "/admin/extrafield_group/remove",
+            "created_by": 1
+          },
+          {
+            "method": "updateState",
+            "url": "/admin/extrafield_group/state",
+            "created_by": 1
+          },
+          {
+            "method": "checkout",
+            "url": "/admin/extrafield_group/checkout",
+            "created_by": 1
+          }
+        ]
       },
       {
         "title": "COM_CONTENT_FIELD_GROUP_EDIT_TITLE",

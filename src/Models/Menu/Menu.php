@@ -81,7 +81,8 @@ class Menu extends BaseModel
         'tree_title',
         'category_title',
         'access_title',
-        'language_title'
+        'language_title',
+//        'host_title',
     ];
 
 
