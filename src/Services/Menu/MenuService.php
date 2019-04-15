@@ -67,7 +67,6 @@ class MenuService extends BaseService
     }
 
 
-
     public function remove(Collection $input)
     {
         $tree_ids = [];

@@ -66,7 +66,7 @@ class ModuleFrontService extends ModuleService
             $category->items = $this->itemFrontService->getItemsByCategoryIds($item_params);
 
             $data[] = $category;
-            foreach ($descendant as $sub_category)
+            foreach ($descendant->toFlatTree() as $sub_category)
             {
                 $item_params['category_ids'] = [$sub_category->id];
                 $sub_category->items = $this->itemFrontService->getItemsByCategoryIds($item_params);
@@ -136,12 +136,6 @@ class ModuleFrontService extends ModuleService
     }
 
 
-    public function getSearchModule($params)
-    {
-        Helper::show($params);
-    }
-
-
     public function loadModule($module, $language = '*')
     {
         $items = [];
@@ -167,11 +161,15 @@ class ModuleFrontService extends ModuleService
         }
         elseif ($module->category->alias == 'search')
         {
-            foreach ($module->params['category_ids'] as $category)
+            $params_category_ids = $module->params['category_ids'];
+
+            $items = $module->params;
+            foreach ( $params_category_ids as $category)
             {
                 $category_alias[] = $category->alias;
             }
-            $items = ['category_alias' => $category_alias];
+            $items['category_alias'] = $category_alias;
+            unset($items['category_ids']);
         }
 
         return $items;

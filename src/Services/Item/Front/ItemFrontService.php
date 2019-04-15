@@ -335,7 +335,13 @@ class ItemFrontService extends ItemService
         if (!InputHelper::null($input, 'category_alias'))
         {
             $category_ids = $this->categoryFrontService->search(Helper::collect([
-                'alias'         => $input->get('category_alias'),
+                'special_queries' => [
+                    [
+                        'type'  => 'whereIn',
+                        'key'   => 'alias',
+                        'value' => $input->get('category_alias'),
+                    ]
+                ],
                 'language'      => $input->get('language') != '' ? $input->get('language') : config('global.locale'),
                 'paginate'      => false
             ]))->map(function ($item, $key) {
