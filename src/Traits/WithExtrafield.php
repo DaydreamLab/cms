@@ -30,11 +30,12 @@ trait WithExtrafield
             $extrafield_ids[] = $extrafield->id;
         }
 
+
         if($this->model_type == 'parent')
         {
             $extrafields_data = Extrafield::whereIn('id', $extrafield_ids)->get();
         }
-        elseif($this->model_type = 'front')
+        elseif($this->model_type == 'front')
         {
             $extrafields_data = ExtrafieldFront::whereIn('id', $extrafield_ids)->get();
         }
@@ -42,7 +43,6 @@ trait WithExtrafield
         {
             $extrafields_data = ExtrafieldAdmin::whereIn('id', $extrafield_ids)->get();
         }
-
 
         // 組合實際的資料與額外欄位的初始定義
         $data = (object)[];
@@ -52,16 +52,21 @@ trait WithExtrafield
             {
                 if($extrafield->id == $extrafield_data->id) {
                     $extrafield_data->value = $extrafield->value;
-//                    if (property_exists($extrafield, 'params')){
-//                        foreach ($extrafield->params as $key => $param)
-//                        {
-//                            $extrafield_data->{$key} = $param->value;
-//                            $this->{$extrafield_data->alias . '_' . $key} = $param->value;
-//                        }
-//                    }
                 }
             }
-            $data->{$extrafield_data->alias} = (object) $extrafield_data;
+
+            if($this->model_type == 'parent')
+            {
+                $data->{$extrafield_data->id} = (object) $extrafield_data;
+            }
+            elseif($this->model_type == 'front')
+            {
+                $data->{$extrafield_data->alias} = (object) $extrafield_data;
+            }
+            else
+            {
+                $data->{$extrafield_data->id} = (object) $extrafield_data;
+            }
         }
 
         return $data;

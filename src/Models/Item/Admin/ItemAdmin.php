@@ -16,4 +16,6 @@ class ItemAdmin extends Item
 
 
     protected $model_type = 'admin';
+
+    protected $aaa =2;
 }
