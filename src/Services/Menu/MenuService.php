@@ -12,6 +12,7 @@ use DaydreamLab\Cms\Events\State;
 use DaydreamLab\Cms\Traits\Model\WithAccess;
 use DaydreamLab\Cms\Traits\Model\WithCategory;
 use DaydreamLab\Cms\Traits\Model\WithLanguage;
+use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Services\BaseService;
 use DaydreamLab\JJAJ\Traits\NestedServiceTrait;
 use Illuminate\Support\Collection;

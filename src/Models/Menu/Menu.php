@@ -100,7 +100,8 @@ class Menu extends BaseModel
 
     public function getHostTitleAttribute()
     {
-        return $this->host()->first()->title;
+        $host = $this->host()->first();
+        return  $host ? $host->title : 'None';
     }
 
 

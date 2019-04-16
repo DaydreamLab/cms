@@ -77,12 +77,6 @@ class MenuAdminController extends BaseController
         {
             $input->put('host', $request->getHttpHost());
         }
-        else
-        {
-            $host = $input->host;
-            $host = parse_url($host, PHP_URL_HOST);
-            $input->put('host', $host);
-        }
 
         $this->service->store($input);
 
