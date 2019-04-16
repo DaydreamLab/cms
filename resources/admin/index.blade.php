@@ -108,11 +108,11 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js"></script>
 
-    {{ @if (config('app.env') === 'production') }}
+    @if (config('app.env') === 'production')
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    {{ @else }}
+    @else
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    {{ @endif }}
+    @endif
     <script src="//unpkg.com/vue-i18n/dist/vue-i18n.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.2/vue-router.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/vuex/3.0.1/vuex.min.js"></script>
