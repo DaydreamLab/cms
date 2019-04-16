@@ -230,7 +230,7 @@ class ItemFrontRepository extends ItemRepository
             $query = $query->whereIn('created_by', $user_ids);
         }
 
-        $query = $query->orderBy('created_at', 'desc');
+        $query = $query->orderBy('publish_up', 'desc');
         $items = $query->get();
 
         $item_key = $items->search(function ($item, $key) use ($input, $previous){
