@@ -222,7 +222,7 @@
   },
   {
     "title": "COM_MODULES",
-    "path": "/alias",
+    "path": "/module",
     "component": "",
     "type": "separator",
     "redirect": "",
