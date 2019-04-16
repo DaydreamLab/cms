@@ -224,7 +224,7 @@
     "title": "COM_MODULES",
     "path": "/module",
     "component": "",
-    "type": "separator",
+    "type": "alias",
     "redirect": "",
     "icon": "",
     "state": 1,
