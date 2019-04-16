@@ -44,7 +44,7 @@ class ItemAdminSearchPost extends ItemSearchPost
                 Rule::in(['item', 'module', 'menu'])
             ],
             'access'        => 'nullable|integer',
-            'language'      => 'nullable|string|min:1|max:2'
+            'language'      => 'nullable|string|max:5'
         ];
         return array_merge($rules, parent::rules());
     }
