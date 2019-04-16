@@ -120,7 +120,7 @@ class Item extends BaseModel
 
     public function getCreatorGroupsAttribute()
     {
-        $creator = $this->creator();
+        $creator = $this->creator()->first();
 
         if ($creator)
         {
