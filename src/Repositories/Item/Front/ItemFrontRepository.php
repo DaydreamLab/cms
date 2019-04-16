@@ -229,7 +229,7 @@ class ItemFrontRepository extends ItemRepository
 
             $query = $query->whereIn('created_by', $user_ids);
         }
-
+        $query = $query->orderBy('featured_ordering', 'desc');
         $query = $query->orderBy('publish_up', 'desc');
         $items = $query->get();
 

@@ -155,7 +155,7 @@
     "title": "COM_MENUS",
     "path": "/menu",
     "component": "",
-    "type": "separator",
+    "type": "alias",
     "redirect": "",
     "icon": "",
     "state": 1,
@@ -222,7 +222,7 @@
   },
   {
     "title": "COM_MODULES",
-    "path": "/module",
+    "path": "/alias",
     "component": "",
     "type": "separator",
     "redirect": "",
