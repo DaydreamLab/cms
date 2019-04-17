@@ -9,8 +9,7 @@ use DaydreamLab\Cms\Events\Ordering;
 use DaydreamLab\Cms\Events\Remove;
 use DaydreamLab\Cms\Events\State;
 use DaydreamLab\Cms\Events\Modify;
-use DaydreamLab\JJAJ\Helpers\Helper;
-use DaydreamLab\JJAJ\Repositories\BaseRepository;
+use DaydreamLab\Cms\Repositories\Item\ItemRepository;
 use DaydreamLab\JJAJ\Services\BaseService;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
@@ -23,7 +22,7 @@ class ItemService extends BaseService
 
     protected $itemTagMapService;
 
-    public function __construct(BaseRepository $repo)
+    public function __construct(ItemRepository $repo)
     {
         parent::__construct($repo);
         $this->repo = $repo;

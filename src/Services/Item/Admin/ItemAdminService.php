@@ -46,7 +46,7 @@ class ItemAdminService extends ItemService
 
     public function add(Collection $input)
     {
-        if (!InputHelper::null($input, 'featured'))
+        if ((int)$input->get('featured') == 1)
         {
             $newest = $this->repo->findNewestFeatured();
             $input->put('featured_ordering', $newest ? $newest->featured_ordering + 1 : 1);
