@@ -52,6 +52,7 @@ class ItemAdminService extends ItemService
             $input->put('featured_ordering', $newest ? $newest->featured_ordering + 1 : 1);
         }
 
+
         return parent::add($input);
     }
 
@@ -83,13 +84,21 @@ class ItemAdminService extends ItemService
 
     public function modify(Collection $input)
     {
-        if (!InputHelper::null($input, 'featured'))
+        $input_featured = $input->get('featured');
+        $item = $this->repo->find($input->id);
+        // 代表有修改到 featured 值
+        if ($item && $item->featured != $input_featured)
         {
-            $item = $this->repo->find($input->id);
-            if ($item && $item->featured != $input->featured)
+            if ((int)$input_featured == 1)
             {
                 $newest = $this->repo->findNewestFeatured();
                 $input->put('featured_ordering', $newest->featured_ordering++);
+            }
+            else
+            {
+                $newer = $this->repo->findNewerFeatured($item);
+                $this->repo->updateOrdering($newer, '--');
+                $input->put('featured_ordering', null);
             }
         }
 
