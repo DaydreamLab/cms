@@ -34,8 +34,9 @@ class MenuFrontService extends MenuService
     public function getMenu(Collection $input)
     {
         $site = $this->siteService->search(Helper::collect([
-            'url' => $input->get('host'),
-            'sef' => $input->get('language')
+            'url'       => $input->get('host'),
+            'sef'       => $input->get('language'),
+            'paginate'  => false
         ]))->first();
 
         $input->put('site_id', $site->id);
