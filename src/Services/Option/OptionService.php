@@ -124,7 +124,13 @@ class OptionService
         return true;
     }
 
-
+    /**
+     * @param $service CategoryAdminService
+     * @param $type string
+     * @param array $extra_rules
+     * @param array $extra_fields
+     * @return mixed
+     */
     public function getOptionList($service, $type, $extra_rules = [], $extra_fields = [])
     {
         $default_rules = array_merge($extra_rules, ['paginate' => false]);
@@ -132,7 +138,6 @@ class OptionService
         if ($type == 'tree')
         {
             $default_field = array_merge($extra_fields, ['id', 'tree_list_title']);
-
             return $service->search(Helper::collect($default_rules))->toFlatTree()
                 ->map( function($item, $key) use ($default_field){
                     return $item->only($default_field);
