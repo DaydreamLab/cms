@@ -42,7 +42,8 @@ class PublishCommand extends Command
         if ($this->option('admin'))
         {
             $this->call('vendor:publish', [
-               '--tag' => 'cms-frontend-admin'
+                '--tag'     => 'cms-frontend-admin',
+                '--force'   => true
             ]);
         }
         else

@@ -758,69 +758,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -830,15 +767,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       menuList: this.$router.options.routes
     };
-  },
-
-  methods: {
-    // countChildMenu(child) {
-    //   const menuMap = child.filter(
-    //     item => item.meta.type === "menu" || item.meta.type === "url"
-    //   );
-    //   return menuMap.length;
-    // }
   }
 });
 
@@ -1391,7 +1319,7 @@ var render = function() {
                       _vm._v(" "),
                       _vm._l(_vm.item.children, function(child) {
                         return _c("sidebar-item", {
-                          key: child.path,
+                          key: child.meta.id,
                           staticClass: "nest-menu",
                           attrs: { item: child }
                         })
@@ -1425,7 +1353,7 @@ var render = function() {
                         _vm._v(" "),
                         _vm._l(_vm.item.children, function(child) {
                           return _c("sidebar-item", {
-                            key: child.path,
+                            key: child.meta.id,
                             staticClass: "nest-menu",
                             attrs: { item: child }
                           })
@@ -1489,7 +1417,7 @@ var render = function() {
       ),
       _vm._v(" "),
       _vm._l(_vm.menuList, function(menu) {
-        return _c("SidebarItem", { key: menu.path, attrs: { item: menu } })
+        return _c("SidebarItem", { key: menu.meta.id, attrs: { item: menu } })
       })
     ],
     2

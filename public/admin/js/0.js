@@ -929,7 +929,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             var _this = this;
 
             var query = this.$route.query;
-            var intArray = ["id", "pid", "access"];
+            var intArray = ["id", "pid", "category_id", "access"];
             var data = {};
 
             Object.keys(query).forEach(function (field) {
@@ -7164,7 +7164,7 @@ exports = module.exports = __webpack_require__(222)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -7224,6 +7224,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   methods: {
     onSelect: function onSelect() {
+      this.dialogVisible = false;
       this.$emit("onSelect", this.value);
     },
     onChange: function onChange() {
@@ -11883,7 +11884,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         introtext: "",
         description: "",
         tags: [],
-        category_id: 0,
+        category_id: "",
         state: 1,
         featured: 0,
         language: "",
@@ -13117,9 +13118,9 @@ var render = function() {
         on: {
           onClickBtnAdd: _vm.$onClickBtnAdd,
           onClickBtnEdit: _vm.handleEditQuery,
-          onClickBtnBatchDelete: _vm.onClickBtnBatchDelete,
           onClickBtnBatchTrash: _vm.onClickBtnBatchTrash,
           onClickBtnBatchRestore: _vm.onClickBtnBatchRestore,
+          onClickBtnBatchDelete: _vm.onClickBtnBatchDelete,
           onClickBtnCheckout: _vm.onClickBtnCheckout,
           onChangeCurrentPage: _vm.$onChangeCurrentPage,
           onChangePageSize: _vm.$onChangePageSize,
@@ -14225,11 +14226,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             value: "sef"
           }
         },
-        host: {
+        site_id: {
           list: this.$store.getters.site_list,
           custom_attrs: {
             label: "title",
-            value: "url"
+            value: "id"
           }
         },
         module_ids: {
@@ -14242,7 +14243,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         title: "",
         alias: "",
         description: "",
-        host: "",
+        site_id: "",
         state: 1,
         access: 1,
         language: "",
@@ -14259,7 +14260,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       module: "module_ids",
       language: "language",
       viewlevel: "access",
-      site: "host"
+      site: "site_id"
     });
   },
 
@@ -14388,7 +14389,7 @@ var render = function() {
                         "el-form-item",
                         {
                           attrs: {
-                            prop: "host",
+                            prop: "site_id",
                             label: _vm.$t("MENU_FIELD_SITE_NAME_LABEL") /*網站*/
                           }
                         },
@@ -14397,21 +14398,25 @@ var render = function() {
                             "el-select",
                             {
                               model: {
-                                value: _vm.default_value.host,
+                                value: _vm.default_value.site_id,
                                 callback: function($$v) {
-                                  _vm.$set(_vm.default_value, "host", $$v)
+                                  _vm.$set(_vm.default_value, "site_id", $$v)
                                 },
-                                expression: "default_value.host"
+                                expression: "default_value.site_id"
                               }
                             },
-                            _vm._l(_vm.fields.host.list, function(option) {
+                            _vm._l(_vm.fields.site_id.list, function(option) {
                               return _c("el-option", {
                                 key: option.id,
                                 attrs: {
                                   label:
-                                    option[_vm.fields.host.custom_attrs.label],
+                                    option[
+                                      _vm.fields.site_id.custom_attrs.label
+                                    ],
                                   value:
-                                    option[_vm.fields.host.custom_attrs.value]
+                                    option[
+                                      _vm.fields.site_id.custom_attrs.value
+                                    ]
                                 }
                               })
                             })
@@ -14752,7 +14757,7 @@ exports = module.exports = __webpack_require__(222)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -14790,6 +14795,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 
@@ -14800,9 +14807,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_option_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1_mixins_list_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2_mixins_cms_list_mixin__["a" /* default */]],
   data: function data() {
     var _this = this,
-        _ref2;
+        _ref4;
 
-    return _ref2 = {
+    return _ref4 = {
       sort: {
         show: true
       },
@@ -14856,10 +14863,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           return item.language === "*" ? _this.$t("ALL_LANGUAGE") : item.language_title;
         }
       }]
-    }, _defineProperty(_ref2, "toolbar", {
+    }, _defineProperty(_ref4, "toolbar", {
       type: "list",
-      custom: []
-    }), _defineProperty(_ref2, "searchbar", {
+      custom: [{
+        text: this.$t("TOOLBAR_PUBLISH"),
+        method: "updateState",
+        fn: function fn(_ref2) {
+          var ids = _ref2.ids;
+
+          _this.onClickBtnUpdateState({ ids: ids, state: 1 });
+        }
+      }, {
+        text: this.$t("TOOLBAR_UNPUBLISH"),
+        method: "updateState",
+        fn: function fn(_ref3) {
+          var ids = _ref3.ids;
+
+          _this.onClickBtnUpdateState({ ids: ids, state: 0 });
+        }
+      }]
+    }), _defineProperty(_ref4, "searchbar", {
       fields: [{
         key: "search",
         desc: this.$t("TOOLBAR_KEYWORDS"),
@@ -14916,7 +14939,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         language: "",
         access: ""
       }
-    }), _ref2;
+    }), _ref4;
   },
   created: function created() {
     this.$getFieldList({ menu_category: 2, language: 3, viewlevel: 4 }, "searchbar");
@@ -14926,42 +14949,73 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     /**
      * list actions
      */
-    onClickBtnCheckout: function onClickBtnCheckout(_ref3) {
+    onClickBtnCheckout: function onClickBtnCheckout(_ref5) {
       var _this2 = this;
 
-      var data = _ref3.data,
-          ids = _ref3.ids;
+      var data = _ref5.data,
+          ids = _ref5.ids;
 
       var checkout_data = ids ? ids : [data.id];
       this.$$api_menu_checkout({
         data: { ids: checkout_data },
-        fn: function fn(_ref4) {
-          var msg = _ref4.msg;
+        fn: function fn(_ref6) {
+          var msg = _ref6.msg;
 
           _this2.$message.success(msg);
           _this2.$onGetList();
         }
       });
     },
-    onClickBtnBatchDelete: function onClickBtnBatchDelete(_ref5) {
+    onClickBtnBatchDelete: function onClickBtnBatchDelete(_ref7) {
       var _this3 = this;
 
-      var ids = _ref5.ids,
-          datas = _ref5.datas;
+      var ids = _ref7.ids,
+          datas = _ref7.datas;
 
       this.$confirm(this.$t("GLOBAL_CONFIRM_DELETE")).then(function () {
         _this3.$$api_menu_delete({
           data: { ids: ids },
-          fn: function fn(_ref6) {
-            var data = _ref6.data;
+          fn: function fn(_ref8) {
+            var data = _ref8.data;
 
             _this3.$onGetList();
           }
         });
       });
     },
-    handleEditQuery: function handleEditQuery(_ref7) {
-      var data = _ref7.data;
+    onClickBtnBatchTrash: function onClickBtnBatchTrash(_ref9) {
+      var ids = _ref9.ids,
+          state = _ref9.state;
+
+      this.onClickBtnUpdateState({ ids: ids, state: state });
+    },
+    onClickBtnBatchRestore: function onClickBtnBatchRestore(_ref10) {
+      var ids = _ref10.ids,
+          state = _ref10.state;
+
+      this.onClickBtnUpdateState({ ids: ids, state: state });
+    },
+    onClickBtnUpdateState: function onClickBtnUpdateState(_ref11) {
+      var _this4 = this;
+
+      var ids = _ref11.ids,
+          state = _ref11.state;
+
+      this.$$api_menu_updateState({
+        data: {
+          ids: ids,
+          state: state
+        },
+        fn: function fn(_ref12) {
+          var msg = _ref12.msg;
+
+          _this4.$message.success(msg);
+          _this4.$onGetList();
+        }
+      });
+    },
+    handleEditQuery: function handleEditQuery(_ref13) {
+      var data = _ref13.data;
 
       this.$onClickBntEdit({
         id: data.id,
@@ -14969,20 +15023,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     handleGetList: function handleGetList() {
-      var _this4 = this;
+      var _this5 = this;
 
-      var _ref8 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-          page_data = _ref8.page_data,
-          _fn = _ref8.fn;
+      var _ref14 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+          page_data = _ref14.page_data,
+          _fn = _ref14.fn;
 
       this.$$api_menu_list({
         data: page_data,
-        fn: function fn(_ref9) {
-          var data = _ref9.data;
+        fn: function fn(_ref15) {
+          var data = _ref15.data;
 
-          _this4.list_loading.flag = false;
-          _this4.list = data.items;
-          _this4.paginations.total = data.pagination.total;
+          _this5.list_loading.flag = false;
+          _this5.list = data.items;
+          _this5.paginations.total = data.pagination.total;
 
           _fn && _fn();
         }
@@ -15015,6 +15069,8 @@ var render = function() {
         on: {
           onClickBtnAdd: _vm.$onClickBtnAdd,
           onClickBtnEdit: _vm.handleEditQuery,
+          onClickBtnBatchTrash: _vm.onClickBtnBatchTrash,
+          onClickBtnBatchRestore: _vm.onClickBtnBatchRestore,
           onClickBtnBatchDelete: _vm.onClickBtnBatchDelete,
           onClickBtnCheckout: _vm.onClickBtnCheckout,
           onChangeCurrentPage: _vm.$onChangeCurrentPage,
