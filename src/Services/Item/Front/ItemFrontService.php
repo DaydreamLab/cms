@@ -330,7 +330,6 @@ class ItemFrontService extends ItemService
         $input->put('paginate', $paginate);
         $special_queries = $this->getSpecialQueries($input);
 
-
         // 如果有傳 category_alias
         if (!InputHelper::null($input, 'category_alias'))
         {
