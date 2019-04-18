@@ -117,7 +117,7 @@ class Module extends BaseModel
         {
             $items = Menu::whereIn('id', $value['menu_ids'])->get()
                 ->map(function ($item, $key) {
-                    return (object)['id'=> $item->id, 'title'=> $item->title];
+                    return (object)['id'=> $item->id, 'title'=> $item->title, 'tree_list_title'=> $item->tree_list_title];
                 });
             $value['menu_ids'] = $items;
         }
