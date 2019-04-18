@@ -102,4 +102,17 @@ trait WithExtrafield
         return $this->class_extrafield_group;
     }
 
+
+    public function setExtrafieldsAttribute($value)
+    {
+        $data = [];
+
+        foreach ($value as $item)
+        {
+            $data[] = (object)$item;
+        }
+
+        $this->attributes['extrafields'] = json_encode($data);
+    }
+
 }
