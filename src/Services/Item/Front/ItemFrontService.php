@@ -128,7 +128,11 @@ class ItemFrontService extends ItemService
             }
         }
 
-        $items = $this->paginationFormat($items->toArray());
+        //  假如 limit 設定為無限大則不用分頁
+        if ((int)$params['limit'])
+        {
+            $items = $this->paginationFormat($items->toArray());
+        }
 
         return $items;
     }

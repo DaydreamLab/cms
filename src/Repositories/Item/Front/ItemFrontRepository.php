@@ -33,13 +33,14 @@ class ItemFrontRepository extends ItemRepository
 
     public function getCategoriesItemsModule($params)
     {
-        return $this->model
+        $query = $this->model
             ->whereIn('category_id', $this->getParamsIds($params, 'category_ids'))
             ->where('state', 1)
             ->whereIn('access', $params['access_ids'])
             ->orderBy($params['order_by'], $params['order'])
-            ->orderBy('publish_up', 'desc')
-            ->paginate($params['limit']);
+            ->orderBy('publish_up', 'desc');
+
+        return (int)$params['limit'] ? $query->paginate($params['limit']) : $query->get();
     }
 
 
