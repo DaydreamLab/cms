@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Services\Setting\Front;
 
 use DaydreamLab\Cms\Services\Language\Front\LanguageFrontService;
 use DaydreamLab\Cms\Services\Setting\SettingService;
+use DaydreamLab\Cms\Services\Site\Admin\SiteAdminService;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use Illuminate\Support\Str;
 
@@ -12,32 +13,32 @@ class SettingFrontService extends SettingService
 {
     protected $type = 'SettingFront';
 
-    protected $languageService;
 
-
-
-    public function __construct(LanguageFrontService $languageService)
+    public function __construct(SiteAdminService $siteAdminService)
     {
-        parent::__construct($languageService);
+        parent::__construct($siteAdminService);
     }
 
 
-    public function getItem($locale)
+    public function getItem($locale, $host)
     {
         $global = config('global');
 
-        $lang_setting = $this->languageService->findByChain(
-            ['sef', 'type'],
+        $site_setting = $this->siteService->findByChain(
+            ['sef', 'url'],
             ['=', '='],
-            [$locale ?: 'tw', 'content']
+            [$locale ?: $global['locale'], $host]
         )->first();
 
-        if($lang_setting)
+        if($site_setting)
         {
-            $data['metadesc']       = $lang_setting->metadesc       ?: $global['metadesc'];
-            $data['metakeywords']   = $lang_setting->metakeywords   ?: $global['metakeywords'];
-            $data['sitename']       = $lang_setting->sitename       ?: $global['sitename'];
+            $data['metadesc']       = $site_setting->metadesc       ?: $global['metadesc'];
+            $data['metakeywords']   = $site_setting->metakeywords   ?: $global['metakeywords'];
+            $data['sitename']       = $site_setting->sitename       ?: $global['sitename'];
             $data['locale']         = $global['locale'];
+            $data['custom_header']  = $global['custom_head'];
+            $data['custom_body']    = $global['custom_body'];
+            $data['custom_footer']  = $global['custom_footer'];
 
             $this->status   = Str::upper(Str::snake($this->type.'GetItemSuccess'));
             $this->response = (object)$data;

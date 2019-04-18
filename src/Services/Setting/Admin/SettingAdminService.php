@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Services\Setting\Admin;
 
 use DaydreamLab\Cms\Services\Language\Admin\LanguageAdminService;
 use DaydreamLab\Cms\Services\Setting\SettingService;
+use DaydreamLab\Cms\Services\Site\Admin\SiteAdminService;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
@@ -14,12 +15,9 @@ class SettingAdminService extends SettingService
 {
     protected $type = 'SettingAdmin';
 
-    protected $languageService;
-
-
-    public function __construct(LanguageAdminService $languageService)
+    public function __construct(SiteAdminService $siteAdminService)
     {
-        parent::__construct($languageService);
+        parent::__construct($siteAdminService);
     }
 
 

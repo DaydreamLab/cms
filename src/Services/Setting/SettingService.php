@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Services\Setting;
 
 use DaydreamLab\Cms\Services\Language\LanguageService;
+use DaydreamLab\Cms\Services\Site\SiteService;
 use Illuminate\Support\Facades\Auth;
 
 class SettingService
@@ -13,7 +14,7 @@ class SettingService
 
     public $response;
 
-    protected $languageService;
+    protected $siteService;
 
     protected $user;
 
@@ -21,7 +22,7 @@ class SettingService
 
     protected $access_ids;
 
-    public function __construct(LanguageService $languageService)
+    public function __construct(SiteService $siteService)
     {
         $this->user = Auth::guard('api')->user();
         if ($this->user)
@@ -34,12 +35,7 @@ class SettingService
             $this->viewlevels = config('cms.item.front.viewlevels');
             $this->access_ids = config('cms.item.front.access_ids');
         }
-        $this->languageService = $languageService;
+        $this->siteService = $siteService;
     }
 
-
-    public function getItem($locale)
-    {
-
-    }
 }
