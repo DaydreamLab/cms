@@ -38,7 +38,7 @@ class MenuStorePost extends AdminRequest
                 Rule::in([0,1,-2])
             ],
             'description'   => 'nullable|string',
-            'language'      => 'nullable|string',
+            'language'      => 'required|string',
             'params'        => 'nullable|array',
             'metadata'      => 'nullable|string',
             'metakeywords'  => 'nullable|string',

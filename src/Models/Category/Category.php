@@ -31,7 +31,7 @@ class Category extends BaseModel
     protected $model_type = 'parent';
 
 
-    protected $order_by = '_lft';
+    protected $order_by = 'id';
 
     protected $order = 'asc';
     /**

@@ -22,6 +22,22 @@ class TagSearchPost extends ListRequest
     {
         $rules = [
             'search'    => 'nullable|string',
+            'order_by'              => [
+                'nullable',
+                'string',
+                Rule::in([
+                    'id',
+                    'title',
+                    'state',
+                    'access',
+                    'language',
+                    'ordering',
+                    'created_at',
+                    'updated_at',
+                    'created_by',
+                    'updated_by',
+                ])
+            ]
         ];
 
         return array_merge(parent::rules(), $rules);

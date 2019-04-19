@@ -108,7 +108,6 @@ class ItemAdminService extends ItemService
     public function search(Collection $input)
     {
         $extension      = !InputHelper::null($input, 'extension') ? $input->get('extension') : 'item';
-
         if ($extension == 'item')
         {
             if (InputHelper::null($input, 'content_type'))

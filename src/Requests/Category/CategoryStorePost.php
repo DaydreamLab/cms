@@ -47,13 +47,31 @@ class CategoryStorePost extends AdminRequest
             'extrafields.*'         => 'nullable|array',
             'extrafields.*.id'      => 'required|integer',
             'extrafields.*.value'   => 'required|string',
-            'language'              => 'nullable|string',
+            'language'              => 'required|string',
             'template'              => 'nullable|string',
             'metadesc'              => 'nullable|string',
             'metakeywords'          => 'nullable|string',
             'params'                => 'nullable|array',
             'publish_up'            => 'nullable|datetime',
             'publish_down'          => 'nullable|datetime',
+            'order_by'              => [
+                'nullable',
+                'string',
+                Rule::in([
+                    'id',
+                    'title',
+                    'state',
+                    'image',
+                    'access',
+                    'language',
+                    'ordering',
+                    'content_type',
+                    'created_at',
+                    'updated_at',
+                    'created_by',
+                    'updated_by',
+                ])
+            ]
         ];
     }
 }

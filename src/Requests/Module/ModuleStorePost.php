@@ -36,7 +36,7 @@ class ModuleStorePost extends AdminRequest
             ],
             'description'   => 'nullable|string',
             'access'        => 'nullable|integer',
-            'language'      => 'nullable|string',
+            'language'      => 'required|string',
             'params'        => 'nullable|array',
             'publish_up'    => 'nullable|datetime',
             'publish_down'  => 'nullable|datetime',

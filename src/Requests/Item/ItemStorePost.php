@@ -46,7 +46,7 @@ class ItemStorePost extends AdminRequest
                 Rule::in([0,1])
             ],
             'featured_ordering'     => 'nullable|integer',
-            'language'              => 'nullable|string',
+            'language'              => 'required|string',
             'metadesc'              => 'nullable|string',
             'metakeywords'          => 'nullable|string',
             //'content_type'  => 'nullable|string',

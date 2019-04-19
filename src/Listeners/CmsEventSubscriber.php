@@ -109,6 +109,25 @@ class CmsEventSubscriber
     }
 
 
+    public function onSearch($event)
+    {
+        if ($event->user)
+        {
+            foreach ($event->item_ids as $item_id)
+            {
+                $input = Helper::collect([
+                    'created_by' => $event->user->id,
+                    'action'     => $event->action,
+                    'result'     => $event->result,
+                    'type'       => $event->type,
+                ]);
+
+                $this->logService->store($input);
+            }
+        }
+    }
+
+
     public function onState($event)
     {
         if ($event->user)
