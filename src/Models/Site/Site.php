@@ -38,7 +38,9 @@ class Site extends BaseModel
         'access',
         'ordering',
         'created_by',
-        'updated_by'
+        'updated_by',
+        'locked_by',
+        'locked_at'
     ];
 
 
@@ -57,7 +59,15 @@ class Site extends BaseModel
      * @var array
      */
     protected $appends = [
-        'language_title'
+        'language_title',
+        'creator',
+        'updater',
+        'locker',
+    ];
+
+
+    protected $casts = [
+        'locked_at' => 'datetime:Y-m-d H:i:s',
     ];
 
 

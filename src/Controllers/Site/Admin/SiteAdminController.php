@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Controllers\Site\Admin;
 
+use DaydreamLab\Cms\Requests\Site\SiteCheckoutPost;
 use DaydreamLab\JJAJ\Controllers\BaseController;
 use DaydreamLab\JJAJ\Helpers\ResponseHelper;
 use Illuminate\Support\Collection;
@@ -20,9 +21,9 @@ class SiteAdminController extends BaseController
     }
 
 
-    public function checkout($id)
+    public function checkout(SiteCheckoutPost $request)
     {
-        $this->service->checkout($id);
+        $this->service->checkout($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
