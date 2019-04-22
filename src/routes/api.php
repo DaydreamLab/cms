@@ -152,6 +152,7 @@ Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
 
         Route::group(['prefix' => 'site'], function (){
             Route::post('remove','DaydreamLab\Cms\Controllers\Site\Admin\SiteAdminController@remove');
+            Route::post('checkout','DaydreamLab\Cms\Controllers\Site\Admin\SiteAdminController@checkout');
             Route::get('list','DaydreamLab\Cms\Controllers\Site\Admin\SiteAdminController@getList');
             Route::post('store','DaydreamLab\Cms\Controllers\Site\Admin\SiteAdminController@store');
             Route::post('state','DaydreamLab\Cms\Controllers\Site\Admin\SiteAdminController@state');

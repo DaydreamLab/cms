@@ -19,6 +19,15 @@ class SiteAdminController extends BaseController
         parent::__construct($service);
     }
 
+
+    public function checkout($id)
+    {
+        $this->service->checkout($id);
+
+        return ResponseHelper::response($this->service->status, $this->service->response);
+    }
+
+
     public function getItem($id)
     {
         $this->service->getItem($id);
@@ -38,14 +47,6 @@ class SiteAdminController extends BaseController
     public function getList()
     {
         $this->service->getList();
-
-        return ResponseHelper::response($this->service->status, $this->service->response);
-    }
-
-
-    public function checkout($id)
-    {
-        $this->service->checkout($id);
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }

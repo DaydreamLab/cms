@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Controllers\Item;
 
+use DaydreamLab\Cms\Requests\Item\ItemCheckoutPost;
 use DaydreamLab\JJAJ\Controllers\BaseController;
 use DaydreamLab\JJAJ\Helpers\ResponseHelper;
 use Illuminate\Support\Collection;
@@ -10,7 +11,7 @@ use DaydreamLab\Cms\Requests\Item\ItemRemovePost;
 use DaydreamLab\Cms\Requests\Item\ItemStorePost;
 use DaydreamLab\Cms\Requests\Item\ItemStatePost;
 use DaydreamLab\Cms\Requests\Item\ItemSearchPost;
-use DaydreamLab\Cms\Requests\Item\ItemCheckoutPost;
+
 use DaydreamLab\Cms\Requests\Item\ItemFeaturePost;
 use DaydreamLab\Cms\Requests\Item\ItemOrderingPost;
 

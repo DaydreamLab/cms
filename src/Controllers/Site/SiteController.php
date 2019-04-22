@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Controllers\Site;
 
+use DaydreamLab\Cms\Requests\Site\SiteCheckoutPost;
 use DaydreamLab\JJAJ\Controllers\BaseController;
 use DaydreamLab\JJAJ\Helpers\ResponseHelper;
 use Illuminate\Support\Collection;
@@ -20,6 +21,14 @@ class SiteController extends BaseController
     }
 
 
+    public function checkout(SiteCheckoutPost $request)
+    {
+        $this->service->checkout($request->rulesInput());
+
+        return ResponseHelper::response($this->service->status, $this->service->response);
+    }
+
+
     public function getItem($id)
     {
         $this->service->getItem($id);
@@ -31,14 +40,6 @@ class SiteController extends BaseController
     public function getItems()
     {
         $this->service->search(new Collection());
-
-        return ResponseHelper::response($this->service->status, $this->service->response);
-    }
-
-
-    public function checkout($id)
-    {
-        $this->service->checkout($id);
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }

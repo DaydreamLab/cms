@@ -45,6 +45,28 @@ class ItemAdminSearchPost extends ItemSearchPost
             ],
             'access'        => 'nullable|integer',
             'language'      => 'nullable|string|max:5',
+            'order_by'      => [
+                'nullable',
+                'string',
+                Rule::in([
+                    'id',
+                    'title',
+                    'category_id',
+                    'featured',
+                    'state',
+                    'introimage',
+                    'image',
+                    'description',
+                    'hits',
+                    'access',
+                    'language',
+                    'ordering',
+                    'created_at',
+                    'updated_at',
+                    'created_by',
+                    'updated_by',
+                ])
+            ]
         ];
         return array_merge($rules, parent::rules());
     }

@@ -34,7 +34,25 @@ class CategoryAdminSearchPost extends CategorySearchPost
             'language'      => 'nullable|string',
             'extension'     => 'nullable|string',
             'created_by'    => 'nullable|integer',
-            'access'        => 'nullable|integer'
+            'access'        => 'nullable|integer',
+            'order_by'      => [
+                'nullable',
+                'string',
+                Rule::in([
+                    'id',
+                    'title',
+                    'content_type',
+                    'image',
+                    'state',
+                    'access',
+                    'language',
+                    'ordering',
+                    'created_at',
+                    'updated_at',
+                    'created_by',
+                    'updated_by',
+                ])
+            ]
         ];
         return array_merge($rules, parent::rules());
     }

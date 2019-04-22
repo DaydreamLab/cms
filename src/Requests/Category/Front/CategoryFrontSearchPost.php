@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Requests\Category\Front;
 
 use DaydreamLab\Cms\Requests\Category\CategorySearchPost;
+use Illuminate\Validation\Rule;
 
 class CategoryFrontSearchPost extends CategorySearchPost
 {
@@ -24,6 +25,20 @@ class CategoryFrontSearchPost extends CategorySearchPost
     public function rules()
     {
         $rules = [
+            'order_by'      => [
+                'nullable',
+                'string',
+                Rule::in([
+                    'id',
+                    'title',
+                    'access',
+                    'ordering',
+                    'created_at',
+                    'updated_at',
+                    'created_by',
+                    'updated_by',
+                ])
+            ]
         ];
         return array_merge($rules, parent::rules());
     }

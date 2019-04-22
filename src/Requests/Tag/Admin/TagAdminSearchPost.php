@@ -30,7 +30,22 @@ class TagAdminSearchPost extends TagSearchPost
                 'integer',
                 Rule::in([0,1,-1,-2])
             ],
-            'access'        => 'nullable|integer'
+            'access'        => 'nullable|integer',
+            'order_by'  => [
+                'nullable',
+                'string',
+                Rule::in([
+                    'id',
+                    'title',
+                    'access',
+                    'content_type',
+                    'ordering',
+                    'created_at',
+                    'updated_at',
+                    'created_by',
+                    'updated_by',
+                ])
+            ]
         ];
         return array_merge($rules, parent::rules());
     }

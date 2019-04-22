@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Requests\Tag\Front;
 
 use DaydreamLab\Cms\Requests\Tag\TagSearchPost;
+use Illuminate\Validation\Rule;
 
 class TagFrontSearchPost extends TagSearchPost
 {
@@ -24,6 +25,21 @@ class TagFrontSearchPost extends TagSearchPost
     public function rules()
     {
         $rules = [
+            'order_by'  => [
+                'nullable',
+                'string',
+                Rule::in([
+                    'id',
+                    'title',
+                    'access',
+                    'content_type',
+                    'ordering',
+                    'created_at',
+                    'updated_at',
+                    'created_by',
+                    'updated_by',
+                ])
+            ]
         ];
         return array_merge($rules, parent::rules());
     }
