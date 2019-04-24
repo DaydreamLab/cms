@@ -103,7 +103,6 @@
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js"></script>
 
     @if (env('APP_ENV') === 'production')
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
