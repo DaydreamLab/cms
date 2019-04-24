@@ -87,10 +87,6 @@
             }
         }
     </style>
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.6.3/css/light.css" integrity="sha384-ouQ4uivIto2ZdBS6+torZMbImJhWA6/m7/CAGY9z0FNDmoAF6uWAEnavvIsR1EBt"
-        crossorigin="anonymous">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.6.3/css/fontawesome.css" integrity="sha384-toEUmnrGu+eq8XUD6ovsr/vFX+R3v9+FUGAnpef+uwGKMCeqZkcZfkXQ0Pls5WS7"
-        crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{ asset(mix('/css/app.css', 'admin')) }}">
 </head>
 
@@ -105,18 +101,19 @@
                 document.querySelector('#preloader').remove()
             }
     </script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js"></script>
 
     @if (env('APP_ENV') === 'production')
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     @else
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     @endif
-    <script src="//unpkg.com/vue-i18n/dist/vue-i18n.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.2/vue-router.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/vuex/3.0.1/vuex.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/element-ui/2.4.6/index.js"></script>
+    <script src="https://unpkg.com/vue-i18n/dist/vue-i18n.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.2/vue-router.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.0.1/vuex.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.4.6/index.js"></script>
     <script type="text/javascript" src="{{ asset(mix('/js/editor.js', 'admin')) }}"></script>
     <script type="text/javascript" src="{{ asset(mix('/js/manifest.js', 'admin')) }}"></script>
     <script type="text/javascript" src="{{ asset(mix('/js/vendor.js', 'admin')) }}"></script>
