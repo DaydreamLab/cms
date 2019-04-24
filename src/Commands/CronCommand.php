@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Commands;
 
+use Carbon\Carbon;
 use DaydreamLab\Cms\Models\Category\Category;
 use DaydreamLab\Cms\Models\Cms\CmsCronJob;
 use DaydreamLab\Cms\Models\Item\Item;
@@ -61,7 +62,8 @@ class CronCommand extends Command
            }
 
            if ($item->type == 'up') {
-               if ($item->time < now()) {
+
+               if (Carbon::parse($item->time) < Carbon::now()) {
                    $up_item = $model->find($item->item_id);
                    if ($up_item) {
                        $up_item->state = 1;
@@ -71,7 +73,7 @@ class CronCommand extends Command
                }
            }
            else {
-               if ($item->time < now()) {
+               if (Carbon::parse($item->time) < Carbon::now()) {
                    $down_item = $model->find($item->item_id);
                    if ($down_item) {
                        $down_item->state = 0;
