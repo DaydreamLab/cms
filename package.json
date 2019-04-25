@@ -1,0 +1,11 @@
+{
+  "name": "cms",
+  "description": "",
+  "author": "Daydream Lab",
+  "scripts": {
+    "update-frontend": "node scripts/update-frontend"
+  },
+  "dependencies": {
+    "fs-extra": "^7.0.1"
+  }
+}
