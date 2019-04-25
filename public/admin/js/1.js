@@ -1,40 +1,6 @@
 webpackJsonp([1],{
 
-/***/ 115:
-/***/ (function(module, exports) {
-
-/**
- * Translates the list format produced by css-loader into something
- * easier to manipulate.
- */
-module.exports = function listToStyles (parentId, list) {
-  var styles = []
-  var newStyles = {}
-  for (var i = 0; i < list.length; i++) {
-    var item = list[i]
-    var id = item[0]
-    var css = item[1]
-    var media = item[2]
-    var sourceMap = item[3]
-    var part = {
-      id: parentId + ':' + i,
-      css: css,
-      media: media,
-      sourceMap: sourceMap
-    }
-    if (!newStyles[id]) {
-      styles.push(newStyles[id] = { id: id, parts: [part] })
-    } else {
-      newStyles[id].parts.push(part)
-    }
-  }
-  return styles
-}
-
-
-/***/ }),
-
-/***/ 266:
+/***/ 223:
 /***/ (function(module, exports) {
 
 /*
@@ -117,7 +83,7 @@ function toComment(sourceMap) {
 
 /***/ }),
 
-/***/ 267:
+/***/ 224:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -136,7 +102,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(115)
+var listToStyles = __webpack_require__(96)
 
 /*
 type StyleObject = {
@@ -346,19 +312,19 @@ function applyToTag (styleElement, obj) {
 
 /***/ }),
 
-/***/ 273:
+/***/ 230:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(375)
+  __webpack_require__(304)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(377)
+var __vue_script__ = __webpack_require__(306)
 /* template */
-var __vue_template__ = __webpack_require__(423)
+var __vue_template__ = __webpack_require__(352)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -398,17 +364,17 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 375:
+/***/ 304:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(376);
+var content = __webpack_require__(305);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(267)("302c6906", content, false, {});
+var update = __webpack_require__(224)("302c6906", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -425,10 +391,10 @@ if(false) {
 
 /***/ }),
 
-/***/ 376:
+/***/ 305:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(266)(false);
+exports = module.exports = __webpack_require__(223)(false);
 // imports
 
 
@@ -440,22 +406,22 @@ exports.push([module.i, "/* Colors -------------------------- */\n/* Link ------
 
 /***/ }),
 
-/***/ 377:
+/***/ 306:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_cps_sticky_nav__ = __webpack_require__(378);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_cps_sticky_nav__ = __webpack_require__(307);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_cps_sticky_nav___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_cps_sticky_nav__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Sidebar__ = __webpack_require__(381);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Sidebar__ = __webpack_require__(310);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Sidebar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Sidebar__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__navbar__ = __webpack_require__(399);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__navbar__ = __webpack_require__(328);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__navbar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__navbar__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__subnavbar__ = __webpack_require__(404);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__subnavbar__ = __webpack_require__(333);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__subnavbar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__subnavbar__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__content__ = __webpack_require__(417);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__content__ = __webpack_require__(346);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__content___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__content__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__footer__ = __webpack_require__(421);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__footer__ = __webpack_require__(350);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__footer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__footer__);
 //
 //
@@ -502,15 +468,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 378:
+/***/ 307:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(379)
+var __vue_script__ = __webpack_require__(308)
 /* template */
-var __vue_template__ = __webpack_require__(380)
+var __vue_template__ = __webpack_require__(309)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -550,14 +516,11 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 379:
+/***/ 308:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
 //
 //
 //
@@ -642,7 +605,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 380:
+/***/ 309:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -683,19 +646,19 @@ if (false) {
 
 /***/ }),
 
-/***/ 381:
+/***/ 310:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(382)
+  __webpack_require__(311)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(384)
+var __vue_script__ = __webpack_require__(313)
 /* template */
-var __vue_template__ = __webpack_require__(398)
+var __vue_template__ = __webpack_require__(327)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -735,17 +698,17 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 382:
+/***/ 311:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(383);
+var content = __webpack_require__(312);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(267)("6617d833", content, false, {});
+var update = __webpack_require__(224)("6617d833", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -762,10 +725,10 @@ if(false) {
 
 /***/ }),
 
-/***/ 383:
+/***/ 312:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(266)(false);
+exports = module.exports = __webpack_require__(223)(false);
 // imports
 
 
@@ -777,12 +740,12 @@ exports.push([module.i, "/* Colors -------------------------- */\n/* Link ------
 
 /***/ }),
 
-/***/ 384:
+/***/ 313:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sidebarItem__ = __webpack_require__(385);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sidebarItem__ = __webpack_require__(314);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sidebarItem___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__sidebarItem__);
 //
 //
@@ -809,19 +772,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 385:
+/***/ 314:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(386)
+  __webpack_require__(315)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(388)
+var __vue_script__ = __webpack_require__(317)
 /* template */
-var __vue_template__ = __webpack_require__(397)
+var __vue_template__ = __webpack_require__(326)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -861,17 +824,17 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 386:
+/***/ 315:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(387);
+var content = __webpack_require__(316);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(267)("a88130dc", content, false, {});
+var update = __webpack_require__(224)("a88130dc", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -888,10 +851,10 @@ if(false) {
 
 /***/ }),
 
-/***/ 387:
+/***/ 316:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(266)(false);
+exports = module.exports = __webpack_require__(223)(false);
 // imports
 
 
@@ -903,14 +866,14 @@ exports.push([module.i, "/* Colors -------------------------- */\n/* Link ------
 
 /***/ }),
 
-/***/ 388:
+/***/ 317:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__item__ = __webpack_require__(389);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__item__ = __webpack_require__(318);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__item___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__item__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__itemLink__ = __webpack_require__(393);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__itemLink__ = __webpack_require__(322);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__itemLink___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__itemLink__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -1015,17 +978,17 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 /***/ }),
 
-/***/ 389:
+/***/ 318:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(390)
+  __webpack_require__(319)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(392)
+var __vue_script__ = __webpack_require__(321)
 /* template */
 var __vue_template__ = null
 /* template functional */
@@ -1067,17 +1030,17 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 390:
+/***/ 319:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(391);
+var content = __webpack_require__(320);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(267)("b99c0188", content, false, {});
+var update = __webpack_require__(224)("b99c0188", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -1094,10 +1057,10 @@ if(false) {
 
 /***/ }),
 
-/***/ 391:
+/***/ 320:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(266)(false);
+exports = module.exports = __webpack_require__(223)(false);
 // imports
 
 
@@ -1109,12 +1072,12 @@ exports.push([module.i, "/* Colors -------------------------- */\n/* Link ------
 
 /***/ }),
 
-/***/ 392:
+/***/ 321:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fortawesome_vue_fontawesome__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fortawesome_vue_fontawesome__ = __webpack_require__(79);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fortawesome_vue_fontawesome___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__fortawesome_vue_fontawesome__);
 
 
@@ -1163,15 +1126,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 393:
+/***/ 322:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(394)
+var __vue_script__ = __webpack_require__(323)
 /* template */
-var __vue_template__ = __webpack_require__(396)
+var __vue_template__ = __webpack_require__(325)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -1211,12 +1174,12 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 394:
+/***/ 323:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_validate__ = __webpack_require__(395);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_validate__ = __webpack_require__(324);
 //
 //
 //
@@ -1255,7 +1218,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 395:
+/***/ 324:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1272,7 +1235,7 @@ function publishState(start_date, end_date) {
 
 /***/ }),
 
-/***/ 396:
+/***/ 325:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -1298,7 +1261,7 @@ if (false) {
 
 /***/ }),
 
-/***/ 397:
+/***/ 326:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -1416,7 +1379,7 @@ if (false) {
 
 /***/ }),
 
-/***/ 398:
+/***/ 327:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -1472,19 +1435,19 @@ if (false) {
 
 /***/ }),
 
-/***/ 399:
+/***/ 328:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(400)
+  __webpack_require__(329)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(402)
+var __vue_script__ = __webpack_require__(331)
 /* template */
-var __vue_template__ = __webpack_require__(403)
+var __vue_template__ = __webpack_require__(332)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -1524,17 +1487,17 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 400:
+/***/ 329:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(401);
+var content = __webpack_require__(330);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(267)("622d93de", content, false, {});
+var update = __webpack_require__(224)("622d93de", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -1551,10 +1514,10 @@ if(false) {
 
 /***/ }),
 
-/***/ 401:
+/***/ 330:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(266)(false);
+exports = module.exports = __webpack_require__(223)(false);
 // imports
 
 
@@ -1566,7 +1529,7 @@ exports.push([module.i, "/* Colors -------------------------- */\n/* Link ------
 
 /***/ }),
 
-/***/ 402:
+/***/ 331:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1666,7 +1629,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 403:
+/***/ 332:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -1736,10 +1699,7 @@ var render = function() {
                   "a",
                   {
                     key: site.id,
-                    attrs: {
-                      href: "https://" + site.url + "/" + site.sef,
-                      target: "_blank"
-                    }
+                    attrs: { href: site.url + "/" + site.sef, target: "_blank" }
                   },
                   [_c("el-dropdown-item", [_vm._v(_vm._s(site.title))])],
                   1
@@ -1822,19 +1782,19 @@ if (false) {
 
 /***/ }),
 
-/***/ 404:
+/***/ 333:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(405)
+  __webpack_require__(334)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(407)
+var __vue_script__ = __webpack_require__(336)
 /* template */
-var __vue_template__ = __webpack_require__(416)
+var __vue_template__ = __webpack_require__(345)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -1874,17 +1834,17 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 405:
+/***/ 334:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(406);
+var content = __webpack_require__(335);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(267)("5c69fef7", content, false, {});
+var update = __webpack_require__(224)("5c69fef7", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -1901,10 +1861,10 @@ if(false) {
 
 /***/ }),
 
-/***/ 406:
+/***/ 335:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(266)(false);
+exports = module.exports = __webpack_require__(223)(false);
 // imports
 
 
@@ -1916,14 +1876,14 @@ exports.push([module.i, "/* Colors -------------------------- */\n/* Link ------
 
 /***/ }),
 
-/***/ 407:
+/***/ 336:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__breadcrumb__ = __webpack_require__(408);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__breadcrumb__ = __webpack_require__(337);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__breadcrumb___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__breadcrumb__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__toolbar__ = __webpack_require__(413);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__toolbar__ = __webpack_require__(342);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__toolbar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__toolbar__);
 //
 //
@@ -1951,19 +1911,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 408:
+/***/ 337:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(409)
+  __webpack_require__(338)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(411)
+var __vue_script__ = __webpack_require__(340)
 /* template */
-var __vue_template__ = __webpack_require__(412)
+var __vue_template__ = __webpack_require__(341)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -2003,17 +1963,17 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 409:
+/***/ 338:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(410);
+var content = __webpack_require__(339);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(267)("fbca3346", content, false, {});
+var update = __webpack_require__(224)("fbca3346", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -2030,10 +1990,10 @@ if(false) {
 
 /***/ }),
 
-/***/ 410:
+/***/ 339:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(266)(false);
+exports = module.exports = __webpack_require__(223)(false);
 // imports
 
 
@@ -2045,7 +2005,7 @@ exports.push([module.i, "/* Colors -------------------------- */\n/* Link ------
 
 /***/ }),
 
-/***/ 411:
+/***/ 340:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2085,7 +2045,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 412:
+/***/ 341:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -2157,15 +2117,15 @@ if (false) {
 
 /***/ }),
 
-/***/ 413:
+/***/ 342:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(414)
+var __vue_script__ = __webpack_require__(343)
 /* template */
-var __vue_template__ = __webpack_require__(415)
+var __vue_template__ = __webpack_require__(344)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -2205,13 +2165,11 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 414:
+/***/ 343:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
 //
 //
 //
@@ -2304,7 +2262,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       btn_list: {
         list: ["add", "edit", "trash"],
-        user_list: ["add", "edit"],
         trash: ["delete", "restore"],
         add: ["save", "savenclose", "savenadd", "cancel"],
         edit: ["save", "savenclose", "savenadd", "cancel", "trash", "preview"]
@@ -2323,6 +2280,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   methods: {
     onClickBtn: function onClickBtn(opts) {
+      // console.log("toolbar onClickBtn");
       this.$$eventBus.$emit("onClick" + this.cp_name + "Toolbar", opts);
     }
   },
@@ -2352,7 +2310,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 415:
+/***/ 344:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -2363,236 +2321,212 @@ var render = function() {
     "div",
     { staticClass: "toolbar-container" },
     [
-      _c(
-        "transition-group",
-        { attrs: { name: "breadcrumb" } },
-        [
-          _vm._l(_vm.default_btns, function(btn) {
-            return [
-              btn === "add"
-                ? _c(
-                    "el-button",
+      _vm._l(_vm.default_btns, function(btn) {
+        return [
+          btn === "add"
+            ? _c(
+                "el-button",
+                {
+                  directives: [
                     {
-                      directives: [
-                        {
-                          name: "can",
-                          rawName: "v-can",
-                          value: "add",
-                          expression: "'add'"
-                        }
-                      ],
-                      key: btn,
-                      attrs: { type: "primary", icon: "el-icon-plus" },
-                      on: {
-                        click: function($event) {
-                          _vm.onClickBtn({ type: btn })
-                        }
-                      }
-                    },
-                    [_vm._v(_vm._s(_vm.$t("TOOLBAR_ADD" /*新增*/)))]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              btn === "edit"
-                ? _c(
-                    "el-button",
-                    {
-                      directives: [
-                        {
-                          name: "can",
-                          rawName: "v-can",
-                          value: "edit",
-                          expression: "'edit'"
-                        }
-                      ],
-                      key: btn,
-                      attrs: {
-                        icon: "el-icon-edit",
-                        disabled: _vm.btn_disabled
-                      },
-                      on: {
-                        click: function($event) {
-                          _vm.onClickBtn({ type: btn })
-                        }
-                      }
-                    },
-                    [_vm._v(_vm._s(_vm.$t("TOOLBAR_EDIT") /*編輯*/))]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              btn === "trash"
-                ? _c(
-                    "el-button",
-                    {
-                      directives: [
-                        {
-                          name: "can",
-                          rawName: "v-can",
-                          value: "delete",
-                          expression: "'delete'"
-                        }
-                      ],
-                      key: btn,
-                      attrs: {
-                        icon: "el-icon-delete",
-                        disabled: _vm.btn_disabled
-                      },
-                      on: {
-                        click: function($event) {
-                          _vm.onClickBtn({ type: btn })
-                        }
-                      }
-                    },
-                    [_vm._v(_vm._s(_vm.$t("TOOLBAR_TRASH") /*回收*/))]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              btn === "delete"
-                ? _c(
-                    "el-button",
-                    {
-                      directives: [
-                        {
-                          name: "can",
-                          rawName: "v-can",
-                          value: "delete",
-                          expression: "'delete'"
-                        }
-                      ],
-                      key: btn,
-                      attrs: {
-                        icon: "el-icon-delete",
-                        disabled: _vm.btn_disabled
-                      },
-                      on: {
-                        click: function($event) {
-                          _vm.onClickBtn({ type: btn })
-                        }
-                      }
-                    },
-                    [_vm._v(_vm._s(_vm.$t("TOOLBAR_DELETE") /*刪除*/))]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              btn === "restore"
-                ? _c(
-                    "el-button",
-                    {
-                      key: btn,
-                      attrs: {
-                        icon: "el-icon-refresh",
-                        disabled: _vm.btn_disabled
-                      },
-                      on: {
-                        click: function($event) {
-                          _vm.onClickBtn({ type: btn })
-                        }
-                      }
-                    },
-                    [_vm._v(_vm._s(_vm.$t("TOOLBAR_RESTORE") /*恢復*/))]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              btn === "save"
-                ? _c(
-                    "el-button",
-                    {
-                      key: btn,
-                      attrs: { type: "success", icon: "el-icon-edit-outline" },
-                      on: {
-                        click: function($event) {
-                          _vm.onClickBtn({ type: btn })
-                        }
-                      }
-                    },
-                    [_vm._v(_vm._s(_vm.$t("TOOLBAR_SAVE") /*儲存*/))]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              btn === "savenclose"
-                ? _c(
-                    "el-button",
-                    {
-                      key: btn,
-                      attrs: { icon: "el-icon-check" },
-                      on: {
-                        click: function($event) {
-                          _vm.onClickBtn({ type: btn })
-                        }
-                      }
-                    },
-                    [
-                      _vm._v(
-                        _vm._s(_vm.$t("TOOLBAR_SAVE_AND_CLOSE") /*儲存&關閉*/)
-                      )
-                    ]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              btn === "savenadd"
-                ? _c(
-                    "el-button",
-                    {
-                      key: btn,
-                      attrs: { icon: "el-icon-plus" },
-                      on: {
-                        click: function($event) {
-                          _vm.onClickBtn({ type: btn })
-                        }
-                      }
-                    },
-                    [
-                      _vm._v(
-                        _vm._s(_vm.$t("TOOLBAR_SAVE_AND_ADD") /*儲存&新增*/)
-                      )
-                    ]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              btn === "cancel"
-                ? _c(
-                    "el-button",
-                    {
-                      key: btn,
-                      attrs: { icon: "el-icon-circle-close" },
-                      on: {
-                        click: function($event) {
-                          _vm.onClickBtn({ type: btn })
-                        }
-                      }
-                    },
-                    [_vm._v(_vm._s(_vm.$t("TOOLBAR_CANCEL") /*取消*/))]
-                  )
-                : _vm._e()
-            ]
-          }),
-          _vm._v(" "),
-          _vm._l(_vm.custom_btns, function(btn, index) {
-            return _c(
-              "el-button",
-              {
-                key: index,
-                attrs: { type: btn.type || "" },
-                on: {
-                  click: function($event) {
-                    _vm.onClickBtn({ type: "custom", btn: btn })
+                      name: "can",
+                      rawName: "v-can",
+                      value: "add",
+                      expression: "'add'"
+                    }
+                  ],
+                  key: btn,
+                  attrs: { type: "primary", icon: "el-icon-plus" },
+                  on: {
+                    click: function($event) {
+                      _vm.onClickBtn({ type: btn })
+                    }
                   }
-                }
-              },
-              [
-                btn.icon
-                  ? _c("font-awesome-icon", { attrs: { icon: btn.icon } })
-                  : _vm._e(),
-                _vm._v("\n      " + _vm._s(btn.text) + "\n    ")
-              ],
-              1
-            )
-          })
-        ],
-        2
-      )
+                },
+                [_vm._v(_vm._s(_vm.$t("TOOLBAR_ADD" /*新增*/)))]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          btn === "edit"
+            ? _c(
+                "el-button",
+                {
+                  directives: [
+                    {
+                      name: "can",
+                      rawName: "v-can",
+                      value: "edit",
+                      expression: "'edit'"
+                    }
+                  ],
+                  key: btn,
+                  attrs: { icon: "el-icon-edit", disabled: _vm.btn_disabled },
+                  on: {
+                    click: function($event) {
+                      _vm.onClickBtn({ type: btn })
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(_vm.$t("TOOLBAR_EDIT") /*編輯*/))]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          btn === "trash"
+            ? _c(
+                "el-button",
+                {
+                  directives: [
+                    {
+                      name: "can",
+                      rawName: "v-can",
+                      value: "delete",
+                      expression: "'delete'"
+                    }
+                  ],
+                  key: btn,
+                  attrs: { icon: "el-icon-delete", disabled: _vm.btn_disabled },
+                  on: {
+                    click: function($event) {
+                      _vm.onClickBtn({ type: btn })
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(_vm.$t("TOOLBAR_TRASH") /*回收*/))]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          btn === "delete"
+            ? _c(
+                "el-button",
+                {
+                  directives: [
+                    {
+                      name: "can",
+                      rawName: "v-can",
+                      value: "delete",
+                      expression: "'delete'"
+                    }
+                  ],
+                  key: btn,
+                  attrs: { icon: "el-icon-delete", disabled: _vm.btn_disabled },
+                  on: {
+                    click: function($event) {
+                      _vm.onClickBtn({ type: btn })
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(_vm.$t("TOOLBAR_DELETE") /*刪除*/))]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          btn === "restore"
+            ? _c(
+                "el-button",
+                {
+                  key: btn,
+                  attrs: {
+                    icon: "el-icon-refresh",
+                    disabled: _vm.btn_disabled
+                  },
+                  on: {
+                    click: function($event) {
+                      _vm.onClickBtn({ type: btn })
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(_vm.$t("TOOLBAR_RESTORE") /*恢復*/))]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          btn === "save"
+            ? _c(
+                "el-button",
+                {
+                  key: btn,
+                  attrs: { type: "success", icon: "el-icon-edit-outline" },
+                  on: {
+                    click: function($event) {
+                      _vm.onClickBtn({ type: btn })
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(_vm.$t("TOOLBAR_SAVE") /*儲存*/))]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          btn === "savenclose"
+            ? _c(
+                "el-button",
+                {
+                  key: btn,
+                  attrs: { icon: "el-icon-check" },
+                  on: {
+                    click: function($event) {
+                      _vm.onClickBtn({ type: btn })
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(_vm.$t("TOOLBAR_SAVE_AND_CLOSE") /*儲存&關閉*/))]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          btn === "savenadd"
+            ? _c(
+                "el-button",
+                {
+                  key: btn,
+                  attrs: { icon: "el-icon-plus" },
+                  on: {
+                    click: function($event) {
+                      _vm.onClickBtn({ type: btn })
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(_vm.$t("TOOLBAR_SAVE_AND_ADD") /*儲存&新增*/))]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          btn === "cancel"
+            ? _c(
+                "el-button",
+                {
+                  key: btn,
+                  attrs: { icon: "el-icon-circle-close" },
+                  on: {
+                    click: function($event) {
+                      _vm.onClickBtn({ type: btn })
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(_vm.$t("TOOLBAR_CANCEL") /*取消*/))]
+              )
+            : _vm._e()
+        ]
+      }),
+      _vm._v(" "),
+      _vm._l(_vm.custom_btns, function(btn, index) {
+        return _c(
+          "el-button",
+          {
+            key: index,
+            attrs: { type: btn.type || "" },
+            on: {
+              click: function($event) {
+                _vm.onClickBtn({ type: "custom", btn: btn })
+              }
+            }
+          },
+          [
+            btn.icon
+              ? _c("font-awesome-icon", { attrs: { icon: btn.icon } })
+              : _vm._e(),
+            _vm._v("\n    " + _vm._s(btn.text) + "\n  ")
+          ],
+          1
+        )
+      })
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []
@@ -2607,7 +2541,7 @@ if (false) {
 
 /***/ }),
 
-/***/ 416:
+/***/ 345:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -2632,19 +2566,19 @@ if (false) {
 
 /***/ }),
 
-/***/ 417:
+/***/ 346:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(418)
+  __webpack_require__(347)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = null
 /* template */
-var __vue_template__ = __webpack_require__(420)
+var __vue_template__ = __webpack_require__(349)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -2684,17 +2618,17 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 418:
+/***/ 347:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(419);
+var content = __webpack_require__(348);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(267)("5ffe2e18", content, false, {});
+var update = __webpack_require__(224)("5ffe2e18", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -2711,10 +2645,10 @@ if(false) {
 
 /***/ }),
 
-/***/ 419:
+/***/ 348:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(266)(false);
+exports = module.exports = __webpack_require__(223)(false);
 // imports
 
 
@@ -2726,7 +2660,7 @@ exports.push([module.i, "/* Colors -------------------------- */\n/* Link ------
 
 /***/ }),
 
-/***/ 420:
+/***/ 349:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -2752,7 +2686,7 @@ if (false) {
 
 /***/ }),
 
-/***/ 421:
+/***/ 350:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
@@ -2760,7 +2694,7 @@ var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = null
 /* template */
-var __vue_template__ = __webpack_require__(422)
+var __vue_template__ = __webpack_require__(351)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -2800,7 +2734,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 422:
+/***/ 351:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -2857,7 +2791,7 @@ if (false) {
 
 /***/ }),
 
-/***/ 423:
+/***/ 352:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -2912,6 +2846,40 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-eb19f51e", module.exports)
   }
 }
+
+/***/ }),
+
+/***/ 96:
+/***/ (function(module, exports) {
+
+/**
+ * Translates the list format produced by css-loader into something
+ * easier to manipulate.
+ */
+module.exports = function listToStyles (parentId, list) {
+  var styles = []
+  var newStyles = {}
+  for (var i = 0; i < list.length; i++) {
+    var item = list[i]
+    var id = item[0]
+    var css = item[1]
+    var media = item[2]
+    var sourceMap = item[3]
+    var part = {
+      id: parentId + ':' + i,
+      css: css,
+      media: media,
+      sourceMap: sourceMap
+    }
+    if (!newStyles[id]) {
+      styles.push(newStyles[id] = { id: id, parts: [part] })
+    } else {
+      newStyles[id].parts.push(part)
+    }
+  }
+  return styles
+}
+
 
 /***/ })
 
