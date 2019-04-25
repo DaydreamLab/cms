@@ -550,7 +550,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     };
   },
-  mounted: function mounted() {
+  created: function created() {
     if (this.$store.state.global.is_login_refresh) {
       // setTimeout(() => {
       //   this.$router.go(0);

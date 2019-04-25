@@ -815,10 +815,8 @@ var map = {
 	"./menu/edit.vue": 350,
 	"./menu/list": 351,
 	"./menu/list.vue": 351,
-	"./module/components/params": 659,
 	"./module/components/params-form": 319,
 	"./module/components/params-form.vue": 319,
-	"./module/components/params.vue": 659,
 	"./module/edit": 359,
 	"./module/edit.vue": 359,
 	"./module/list": 360,
@@ -897,14 +895,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     },
 
     watch: {
-        $route: function $route() {
-            this.$initList();
+        $route: {
+            handler: "$initList",
+            immediate: true
         }
     },
-    mounted: function mounted() {
-        this.$initList();
-    },
-
     methods: {
         $onClickBtnAdd: function $onClickBtnAdd() {
             this.$router.push(this.$route.path + "/edit");
@@ -964,7 +959,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             var data = {};
 
             Object.keys(query).forEach(function (field) {
-                _this.searchbar.default_value[field] = intArray.includes(field) ? parseInt(query[field]) : dateArray.includes(field) ? _this.$options.filters.displayDateFormat(query[field]) : query[field];
+                _this.searchbar.default_value[field] = intArray.includes(field) ? parseInt(query[field]) : dateArray.includes(field) ? _this.$options.filters.storeDateFormat(query[field]) : query[field];
                 data[field] = query[field];
             });
             return data;
@@ -2218,7 +2213,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     };
   },
-  mounted: function mounted() {
+  created: function created() {
     if (this.$store.state.global.is_login_refresh) {
       // setTimeout(() => {
       //   this.$router.go(0);
@@ -8457,7 +8452,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.params.path = v;
     }
   },
-  mounted: function mounted() {
+  created: function created() {
     this.initMedia();
   },
 
@@ -12493,27 +12488,33 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     };
   },
 
-  watch: {
-    default_value: {
-      deep: true,
-      handler: function handler(value) {
-        var update_data = this.params[this.type] ? _extends({}, this.default_value, { params: this.params[this.type] }) : this.default_value;
-
-        this.$emit("update:data", update_data);
-      }
+  computed: {
+    fieldData: function fieldData() {
+      return this.params[this.type] ? _extends({}, this.default_value, { params: this.params[this.type] }) : this.default_value;
     }
   },
-  mounted: function mounted() {
-    var _this = this;
+  watch: {
+    fieldData: function fieldData(value) {
+      this.$emit("update:data", value);
+    }
+  },
+  created: function created() {
+    this.initData();
+  },
 
-    Object.keys(this.default_value).forEach(function (field) {
-      return _this.default_value[field] = _this.data[field];
-    });
-    this.default_value.id = this.id;
-    if (this.params[this.type] && "params" in this.data) {
-      Object.keys(this.params[this.type]).forEach(function (param) {
-        return _this.params[_this.type][param] = _this.data.params[param];
+  methods: {
+    initData: function initData() {
+      var _this = this;
+
+      Object.keys(this.default_value).forEach(function (field) {
+        return _this.default_value[field] = _this.data[field];
       });
+      this.default_value.id = this.id;
+      if ("params" in this.data && this.params[this.type]) {
+        Object.keys(this.params[this.type]).forEach(function (param) {
+          return _this.params[_this.type][param] = _this.data.params[param];
+        });
+      }
     }
   }
 });
@@ -14411,13 +14412,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var submit_data = _ref4.submit_data,
           type = _ref4.type;
 
+      var submitData = Object.assign({}, submit_data);
+
       if (this.params.id) {
-        submit_data.id = this.params.id;
+        submitData.id = this.params.id;
       }
-      submit_data.publish_up = this.$options.filters.storeDateFormat(submit_data.publish_up);
-      submit_data.publish_down = this.$options.filters.storeDateFormat(submit_data.publish_down);
+      submitData.publish_up = this.$options.filters.storeDateFormat(submitData.publish_up);
+
+      submitData.publish_down = this.$options.filters.storeDateFormat(submitData.publish_down);
       this.$$api_item_save({
-        data: submit_data,
+        data: submitData,
         fn: function fn(_ref5) {
           var data = _ref5.data,
               msg = _ref5.msg;
@@ -15760,14 +15764,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           type: "date",
           desc: this.$t("FIELD_SEARCH_START_DATE"),
           date_attrs: {
-            "value-format": "yyyy-MM-dd" // default is Date() will cause error
+            "value-format": "yyyy-MM-dd HH:mm:ss" // default is Date() will cause error
           }
         }, {
           key: "end_date",
           type: "date",
           desc: this.$t("FIELD_SEARCH_END_DATE"),
           date_attrs: {
-            "value-format": "yyyy-MM-dd" // default is Date() will cause error
+            "value-format": "yyyy-MM-dd HH:mm:ss" // default is Date() will cause error
           }
         }],
         default_value: {
@@ -17738,16 +17742,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     };
   },
 
+  computed: {
+    formData: function formData() {
+      return _extends({}, this.params, this.default_value[this.moduleType]);
+    }
+  },
   watch: {
-    default_value: {
-      deep: true,
-      handler: function handler() {
-        console.log("default_value watched");
-
-        var update_data = this.default_value[this.moduleType] ? _extends({}, this.default_value[this.moduleType], { params: this.params }) : { params: this.params };
-
-        this.$emit("update:data", update_data);
-      }
+    formData: function formData(value) {
+      this.$emit("update:data", value);
     }
   },
   created: function created() {
@@ -17756,21 +17758,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       menu: "menu_ids",
       viewlevel: "access"
     });
-  },
-  mounted: function mounted() {
-    var _this = this;
-
-    console.log(this.data["order"]);
-    console.log(this.data["order_by"]);
-    console.log(this.data);
-
-    Object.keys(this.params).forEach(function (param) {
-      _this.params[param] = _this.data[param];
-    });
-
-    Object.keys(this.default_value[this.moduleType]).forEach(function (field) {
-      return _this.default_value[_this.moduleType][field] = _this.data[field];
-    });
+    this.initFormData();
   },
 
   methods: {
@@ -17791,6 +17779,16 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       return function (item) {
         return item.tree_list_title.toLowerCase().indexOf(queryString.toLowerCase()) === 0;
       };
+    },
+    initFormData: function initFormData() {
+      var _this = this;
+
+      Object.keys(this.default_value[this.moduleType]).forEach(function (field) {
+        return _this.default_value[_this.moduleType][field] = _this.data[field];
+      });
+      Object.keys(this.params).forEach(function (param) {
+        return _this.params[param] = _this.data[param];
+      });
     }
   }
 });
@@ -19624,7 +19622,7 @@ exports = module.exports = __webpack_require__(266)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -19641,7 +19639,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_mixins_cms_edit_mixin__ = __webpack_require__(281);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_params_form__ = __webpack_require__(319);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_params_form___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_params_form__);
-//
 //
 //
 //
@@ -19761,7 +19758,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         state: 1,
         access: 1,
         language: "",
-        params: {}
+        params: ""
       }
     };
   },
@@ -20009,24 +20006,24 @@ var render = function() {
                     1
                   ),
                   _vm._v(" "),
-                  [
-                    _c("ParamsForm", {
-                      attrs: {
-                        moduleType:
-                          _vm.normalize_category[_vm.default_value.category_id][
-                            "alias"
-                          ],
-                        data: _vm.default_value.params
-                      },
-                      on: {
-                        "update:data": function($event) {
-                          _vm.$set(_vm.default_value, "params", $event)
+                  _vm.default_value.params
+                    ? _c("ParamsForm", {
+                        attrs: {
+                          moduleType:
+                            _vm.normalize_category[
+                              _vm.default_value.category_id
+                            ]["alias"],
+                          data: _vm.default_value.params
+                        },
+                        on: {
+                          "update:data": function($event) {
+                            _vm.$set(_vm.default_value, "params", $event)
+                          }
                         }
-                      }
-                    })
-                  ]
+                      })
+                    : _vm._e()
                 ],
-                2
+                1
               )
             ],
             1
@@ -21812,6 +21809,10 @@ if (false) {
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_edit_mixin__ = __webpack_require__(279);
+var _name$mixins$data$cre;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -21871,7 +21872,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = ({
+/* harmony default export */ __webpack_exports__["default"] = (_name$mixins$data$cre = {
   name: "user-edit",
   mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_edit_mixin__["a" /* default */]],
   data: function data() {
@@ -21921,106 +21922,102 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     });
     this.onUpdateFieldList();
-  },
-  mounted: function mounted() {
-    this.$$eventBus.$emit("onInitToolbar", {
-      name: "USERFormData",
-      data: this.toolbar
-    });
-  },
-  beforeDestroy: function beforeDestroy() {
-    this.$$eventBus.$emit("onInitToolbar", {
-      name: "USERFormData",
-      data: {}
-    });
-    this.$$eventBus.$off("onClickUSERFormDataToolbar");
-  },
-
-  methods: {
-    onTrash: function onTrash() {
-      var _this2 = this;
-
-      this.$$api_user_updateBlock({
-        data: {
-          ids: [this.params.id],
-          block: 1
-        },
-        fn: function fn(_ref) {
-          var msg = _ref.msg;
-
-          _this2.$message.success(msg);
-          _this2.$onCancel();
-        }
-      });
-    },
-    onCheckGroupChange: function onCheckGroupChange() {
-      this.default_value.group_ids = this.$refs.groupTree.getCheckedKeys();
-    },
-    onSubmit: function onSubmit(_ref2) {
-      var _this3 = this;
-
-      var data = _ref2.data,
-          info = _ref2.info,
-          type = _ref2.type;
-
-      var submit_data = data;
-      if (this.params.id) {
-        submit_data.id = this.params.id;
-      }
-      this.$$api_user_save({
-        data: submit_data,
-        fn: function fn(_ref3) {
-          var data = _ref3.data,
-              msg = _ref3.msg;
-
-          _this3.$message.success(msg);
-
-          if (data) {
-            submit_data.id = data.items.id;
-          }
-          _this3.$onSubmitFinish({
-            type: type,
-            query: { id: submit_data.id }
-          });
-        }
-      });
-    },
-    $onCancel: function $onCancel() {
-      this.$router.push(this.$route.path.replace("/edit", ""));
-    },
-    onGetView: function onGetView() {
-      var _this4 = this;
-
-      this.$$api_user_get({
-        pathVar: this.params.id,
-        fn: function fn(_ref4) {
-          var data = _ref4.data;
-
-          Object.keys(_this4.default_value).forEach(function (field) {
-            if (field === "group_ids") {
-              _this4.default_value[field] = data.items["groups"].map(function (item) {
-                return item.id;
-              });
-            } else {
-              _this4.default_value[field] = data.items[field];
-            }
-          });
-        }
-      });
-    },
-    onUpdateFieldList: function onUpdateFieldList() {
-      var _this5 = this;
-
-      this.$$api_user_listTreeGroup({
-        fn: function fn(_ref5) {
-          var data = _ref5.data;
-
-          _this5.fields.group_ids.list = data.items;
-        }
-      });
-    }
   }
-});
+}, _defineProperty(_name$mixins$data$cre, "created", function created() {
+  this.$$eventBus.$emit("onInitToolbar", {
+    name: "USERFormData",
+    data: this.toolbar
+  });
+}), _defineProperty(_name$mixins$data$cre, "beforeDestroy", function beforeDestroy() {
+  this.$$eventBus.$emit("onInitToolbar", {
+    name: "USERFormData",
+    data: {}
+  });
+  this.$$eventBus.$off("onClickUSERFormDataToolbar");
+}), _defineProperty(_name$mixins$data$cre, "methods", {
+  onTrash: function onTrash() {
+    var _this2 = this;
+
+    this.$$api_user_updateBlock({
+      data: {
+        ids: [this.params.id],
+        block: 1
+      },
+      fn: function fn(_ref) {
+        var msg = _ref.msg;
+
+        _this2.$message.success(msg);
+        _this2.$onCancel();
+      }
+    });
+  },
+  onCheckGroupChange: function onCheckGroupChange() {
+    this.default_value.group_ids = this.$refs.groupTree.getCheckedKeys();
+  },
+  onSubmit: function onSubmit(_ref2) {
+    var _this3 = this;
+
+    var data = _ref2.data,
+        info = _ref2.info,
+        type = _ref2.type;
+
+    var submit_data = data;
+    if (this.params.id) {
+      submit_data.id = this.params.id;
+    }
+    this.$$api_user_save({
+      data: submit_data,
+      fn: function fn(_ref3) {
+        var data = _ref3.data,
+            msg = _ref3.msg;
+
+        _this3.$message.success(msg);
+
+        if (data) {
+          submit_data.id = data.items.id;
+        }
+        _this3.$onSubmitFinish({
+          type: type,
+          query: { id: submit_data.id }
+        });
+      }
+    });
+  },
+  $onCancel: function $onCancel() {
+    this.$router.push(this.$route.path.replace("/edit", ""));
+  },
+  onGetView: function onGetView() {
+    var _this4 = this;
+
+    this.$$api_user_get({
+      pathVar: this.params.id,
+      fn: function fn(_ref4) {
+        var data = _ref4.data;
+
+        Object.keys(_this4.default_value).forEach(function (field) {
+          if (field === "group_ids") {
+            _this4.default_value[field] = data.items["groups"].map(function (item) {
+              return item.id;
+            });
+          } else {
+            _this4.default_value[field] = data.items[field];
+          }
+        });
+      }
+    });
+  },
+  onUpdateFieldList: function onUpdateFieldList() {
+    var _this5 = this;
+
+    this.$$api_user_listTreeGroup({
+      fn: function fn(_ref5) {
+        var data = _ref5.data;
+
+        _this5.fields.group_ids.list = data.items;
+      }
+    });
+  }
+}), _name$mixins$data$cre);
 
 /***/ }),
 /* 632 */
@@ -23020,7 +23017,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           desc: this.$t("FIELD_SEARCH_START_DATE"),
           clearable: true,
           date_attrs: {
-            "value-format": "yyyy-MM-dd" // default is Date() will cause error
+            "value-format": "yyyy-MM-dd HH:mm:ss" // default is Date() will cause error
           }
         }, {
           key: "end_date",
@@ -23028,7 +23025,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           desc: this.$t("FIELD_SEARCH_END_DATE"),
           clearable: true,
           date_attrs: {
-            "value-format": "yyyy-MM-dd" // default is Date() will cause error
+            "value-format": "yyyy-MM-dd HH:mm:ss" // default is Date() will cause error
           }
         }],
         default_value: {
@@ -23252,44 +23249,6 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-657d6c3d", module.exports)
   }
 }
-
-/***/ }),
-/* 651 */,
-/* 652 */,
-/* 653 */,
-/* 654 */,
-/* 655 */,
-/* 656 */,
-/* 657 */,
-/* 658 */,
-/* 659 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = null
-/* template */
-var __vue_template__ = null
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/admin/views/module/components/params.vue"
-
-module.exports = Component.exports
-
 
 /***/ })
 ]));
