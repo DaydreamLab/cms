@@ -1,6 +1,40 @@
 webpackJsonp([3],{
 
-/***/ 223:
+/***/ 115:
+/***/ (function(module, exports) {
+
+/**
+ * Translates the list format produced by css-loader into something
+ * easier to manipulate.
+ */
+module.exports = function listToStyles (parentId, list) {
+  var styles = []
+  var newStyles = {}
+  for (var i = 0; i < list.length; i++) {
+    var item = list[i]
+    var id = item[0]
+    var css = item[1]
+    var media = item[2]
+    var sourceMap = item[3]
+    var part = {
+      id: parentId + ':' + i,
+      css: css,
+      media: media,
+      sourceMap: sourceMap
+    }
+    if (!newStyles[id]) {
+      styles.push(newStyles[id] = { id: id, parts: [part] })
+    } else {
+      newStyles[id].parts.push(part)
+    }
+  }
+  return styles
+}
+
+
+/***/ }),
+
+/***/ 266:
 /***/ (function(module, exports) {
 
 /*
@@ -83,7 +117,7 @@ function toComment(sourceMap) {
 
 /***/ }),
 
-/***/ 224:
+/***/ 267:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -102,7 +136,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(96)
+var listToStyles = __webpack_require__(115)
 
 /*
 type StyleObject = {
@@ -312,19 +346,19 @@ function applyToTag (styleElement, obj) {
 
 /***/ }),
 
-/***/ 225:
+/***/ 268:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(251)
+  __webpack_require__(307)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(253)
+var __vue_script__ = __webpack_require__(309)
 /* template */
-var __vue_template__ = __webpack_require__(254)
+var __vue_template__ = __webpack_require__(310)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -364,17 +398,17 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 251:
+/***/ 307:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(252);
+var content = __webpack_require__(308);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(224)("1f7dc693", content, false, {});
+var update = __webpack_require__(267)("1f7dc693", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -391,10 +425,10 @@ if(false) {
 
 /***/ }),
 
-/***/ 252:
+/***/ 308:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(223)(false);
+exports = module.exports = __webpack_require__(266)(false);
 // imports
 
 
@@ -406,7 +440,7 @@ exports.push([module.i, "/* Colors -------------------------- */\n/* Link ------
 
 /***/ }),
 
-/***/ 253:
+/***/ 309:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -435,7 +469,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 254:
+/***/ 310:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -480,40 +514,6 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-0c9d3554", module.exports)
   }
 }
-
-/***/ }),
-
-/***/ 96:
-/***/ (function(module, exports) {
-
-/**
- * Translates the list format produced by css-loader into something
- * easier to manipulate.
- */
-module.exports = function listToStyles (parentId, list) {
-  var styles = []
-  var newStyles = {}
-  for (var i = 0; i < list.length; i++) {
-    var item = list[i]
-    var id = item[0]
-    var css = item[1]
-    var media = item[2]
-    var sourceMap = item[3]
-    var part = {
-      id: parentId + ':' + i,
-      css: css,
-      media: media,
-      sourceMap: sourceMap
-    }
-    if (!newStyles[id]) {
-      styles.push(newStyles[id] = { id: id, parts: [part] })
-    } else {
-      newStyles[id].parts.push(part)
-    }
-  }
-  return styles
-}
-
 
 /***/ })
 
