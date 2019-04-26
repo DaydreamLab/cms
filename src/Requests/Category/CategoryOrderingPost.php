@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Requests\Item;
 
 use DaydreamLab\JJAJ\Requests\AdminRequest;
+use Illuminate\Validation\Rule;
 
 class CategoryOrderingPost extends AdminRequest
 {
@@ -25,7 +26,11 @@ class CategoryOrderingPost extends AdminRequest
     {
         return [
             'id'            => 'required|integer',
-            'index_diff'    => 'required|integer'
+            'index_diff'    => 'required|integer',
+            'order'         => [
+                'required',
+                Rule::in(['asc', 'desc'])
+            ],
         ];
     }
 }

@@ -27,10 +27,15 @@ class ItemOrderingPost extends AdminRequest
         return [
             'id'            => 'required|integer',
             'index_diff'    => 'required|integer',
+            'order'         => [
+                'required',
+                Rule::in(['asc', 'desc'])
+            ],
+            // Item 有兩種排序所以用 orderingKey 去切割
             'orderingKey'   => [
                 'nullable',
                 'string',
-                Rule::in(['ordering', 'featured_oordering'])
+                Rule::in(['ordering', 'featured_ordering'])
             ]
         ];
     }

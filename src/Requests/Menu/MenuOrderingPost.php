@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Requests\Menu;
 
 use DaydreamLab\JJAJ\Requests\AdminRequest;
+use Illuminate\Validation\Rule;
 
 class MenuOrderingPost extends AdminRequest
 {
@@ -26,6 +27,10 @@ class MenuOrderingPost extends AdminRequest
         return [
             'id'            => 'required|integer',
             'index_diff'    => 'required|integer',
+            'order'         => [
+                'required',
+                Rule::in(['asc', 'desc'])
+            ],
         ];
     }
 }
