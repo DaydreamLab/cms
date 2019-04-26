@@ -64,6 +64,7 @@ class Extrafield extends BaseModel
      */
     protected $appends = [
         'access_title',
+        'group_title'
     ];
 
 
@@ -81,6 +82,12 @@ class Extrafield extends BaseModel
     public function group()
     {
         return $this->belongsTo(ExtrafieldGroup::class, 'group_id', 'id');
+    }
+
+
+    public function getGroupTitleAttribute()
+    {
+        return $this->group()->first()->title;
     }
 
 }
