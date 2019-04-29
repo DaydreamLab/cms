@@ -113,6 +113,7 @@ class ItemAdminService extends ItemService
             if (InputHelper::null($input, 'content_type'))
             {
                 $content_type = 'article';
+
             }
             else
             {
@@ -124,16 +125,23 @@ class ItemAdminService extends ItemService
             $content_type = '';
         }
 
-        $categories = $this->categoryAdminService->search(Helper::collect([
-            'extension'     => $extension,
-            'content_type'  => $content_type,
-            'paginate'  => false
-        ]));
 
-        $category_ids = $categories->map(function ($item, $key) {
-            return $item->id;
-        });
+        if (!InputHelper::null($input, 'category_id'))
+        {
+            $category_ids = $this->categoryAdminService->findSubTreeIds($input->category_id);
+        }
+        else
+        {
+            $categories = $this->categoryAdminService->search(Helper::collect([
+                'extension'     => $extension,
+                'content_type'  => $content_type,
+                'paginate'  => false
+            ]));
 
+            $category_ids = $categories->map(function ($item, $key) {
+                return $item->id;
+            });
+        }
 
         $input->put('special_queries',
             [[
@@ -143,15 +151,11 @@ class ItemAdminService extends ItemService
             ]]
         );
 
-        if (!InputHelper::null($input, 'category_id'))
-        {
-            $category_ids = $this->categoryAdminService->findSubTreeIds($input->category_id);
-            $input->forget('category_id');
-            $input->put('category_id', $category_ids);
-        }
-
+        // Item Search 沒有這兩個 column
         $input->forget('extension');
         $input->forget('content_type');
+        // 要撈取包括子分類的東西
+        $input->forget('category_id');
 
         return parent::search($input);
     }

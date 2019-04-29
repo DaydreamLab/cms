@@ -26,16 +26,13 @@ class CategoryRepository extends BaseRepository
     {
         $category = $this->find($id);
 
-        $subs = $this->model->where('_lft', '>=', $category->_lft)
-            ->where('_rgt', '<=', $category->_rgt)
-            ->get();
-        $ids = [];
-        foreach ($subs as $sub)
-        {
-            $ids[] = $sub->id;
-        }
+        $descendants = $category->descendants->map(function ($item) {
+            return $item->id;
+        })->all();
 
-        return $ids;
+        $descendants[] = $id;
+
+        return $descendants;
     }
 
 
