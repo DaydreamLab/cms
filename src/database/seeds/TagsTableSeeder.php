@@ -12,8 +12,8 @@ class TagsTableSeeder extends Seeder
     {
         Tag::create([
             'title'         => 'ROOT',
-            'alias'         => 'root',
-            'path'         => '/item',
+            'alias'         => 'tag',
+            'path'         => '/tag',
             'state'         => 1,
             'description'   => '',
             'ordering'      => 1,

@@ -117,6 +117,7 @@ class TagService extends BaseService
 
     public function store(Collection $input)
     {
+
         $result = $this->traitStoreNested($input);
 
         return $result;

@@ -58,6 +58,7 @@ class ModulesTableSeeder extends Seeder
             $modules    = $category['modules'];
             unset($category['modules']);
 
+            $category['parent_id'] = $parent->id;
             $category = $this->categoryAdminService->store(Helper::collect($category));
 
             foreach ($modules as $module)
