@@ -13,6 +13,8 @@ use DaydreamLab\Cms\Services\Menu\Front\MenuFrontService;
 use DaydreamLab\Cms\Services\Module\ModuleService;
 use DaydreamLab\Cms\Services\Site\SiteService;
 use DaydreamLab\JJAJ\Helpers\Helper;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 class ModuleFrontService extends ModuleService
 {
@@ -91,6 +93,38 @@ class ModuleFrontService extends ModuleService
         $items = $this->itemFrontService->getCategoriesItemsModule($params);
 
         return $items;
+    }
+
+
+    public function getItemByAlias(Collection $input)
+    {
+        $input->put('paginate', false);
+
+        $items = $this->search($input);
+
+        if ($items->count())
+        {
+            $item = $items->first();
+
+            if (!Helper::hasPermission($item->viewlevels, $this->viewlevels))
+            {
+                $this->status   = Str::upper(Str::snake($this->type.'InsufficientPermission'));
+                $this->response = null;
+                return false;
+            }
+
+            $item->items = $this->loadModule($item, $input->get('language'));
+
+            $this->response = $item;
+            $this->status   = Str::upper(Str::snake($this->type.'GetItemSuccess'));
+        }
+        else
+        {
+            $this->status = Str::upper(Str::snake($this->type.'ItemNotExist'));
+            $this->response = null;
+        }
+
+        return $this->response;
     }
 
 

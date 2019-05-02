@@ -33,14 +33,47 @@ class ItemFrontRepository extends ItemRepository
 
     public function getCategoriesItemsModule($params)
     {
-        $query = $this->model
-            ->whereIn('category_id', $this->getParamsIds($params, 'category_ids'))
-            ->where('state', 1)
-            ->whereIn('access', $params['access_ids'])
-            ->orderBy($params['order_by'], $params['order'])
-            ->orderBy('publish_up', 'desc');
+        if (array_key_exists('featured_limit', $params) && $params['featured_limit'] > 0)
+        {
+            $featured_items = $this->model
+                ->whereIn('category_id', $this->getParamsIds($params, 'category_ids'))
+                ->where('state', 1)
+                ->orderBy($params['featured_order_by'], $params['featured_order']);
 
-        return (int)$params['limit'] ? $query->paginate($params['limit']) : $query->get();
+            $featured_items =  (int)$params['featured_paginate'] ? $featured_items->paginate($params['featured_limit']) : $featured_items->get();
+
+            $featured_items_ids = $featured_items->map(function ($item){
+                return $item->id;
+            })->all();
+
+            $data['featured'] = $featured_items;
+
+
+            $items = $this->model
+                ->whereIn('category_id', $this->getParamsIds($params, 'category_ids'))
+                ->where('state', 1)
+                ->whereIn('access', $params['access_ids'])
+                ->orderBy($params['order_by'], $params['order'])
+                ->orderBy('publish_up', 'desc')
+                ->whereNotIn('id', $featured_items_ids);
+
+            $data['items'] =  (int)$params['paginate'] ? $items->paginate($params['limit']) : $items->get();
+
+            return $data;
+        }
+        else
+        {
+            $query = $this->model
+                ->whereIn('category_id', $this->getParamsIds($params, 'category_ids'))
+                ->where('state', 1)
+                ->whereIn('access', $params['access_ids'])
+                ->orderBy($params['order_by'], $params['order'])
+                ->orderBy('publish_up', 'desc');
+
+            $data =  (int)$params['paginate'] ? $query->paginate($params['limit']) : $query->get();
+
+            return $data;
+        }
     }
 
 
@@ -270,42 +303,4 @@ class ItemFrontRepository extends ItemRepository
             ->orderBy($params['order_by'], $params['order'])
             ->get();
     }
-
-
-//    public function getTimelineItems($params)
-//    {
-//        $items = $this->model->where('state', 1)
-//                             ->get();
-//
-//        $items = $this->appendParams($items);
-//
-//        $data = [];
-//        foreach ($items as $item)
-//        {
-//            $year_value     = $item['year']['value'];
-//            $year_title     = $item['year']['title'];
-//            $year_key       = $year_value.$year_title;
-//            $month_value    = $item['month']['value'];
-//            $month_title    = $item['month']['title'];
-//            $month_key      = $month_value.$month_title;
-//
-//            if (!array_key_exists($year_key, $data))
-//            {
-//                $data[$year_key] = [];
-//            }
-//
-//            if (!array_key_exists($month_key, $data[$year_key]))
-//            {
-//                $data[$year_key][$month_key] = [];
-//            }
-//
-//            $temp['title'] = $item['title'];
-//            $temp['description'] = $item['description'];
-//            $data[$year_key][$month_key][] = $temp;
-//            krsort($data[$year_key]);
-//        }
-//        krsort($data);
-//
-//        return $data;
-//    }
 }

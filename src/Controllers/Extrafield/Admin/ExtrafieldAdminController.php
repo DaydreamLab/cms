@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Controllers\Extrafield\Admin;
 
+use DaydreamLab\Cms\Requests\Extrafield\ExtrafieldAdminCheckoutPost;
 use DaydreamLab\JJAJ\Controllers\BaseController;
 use DaydreamLab\JJAJ\Helpers\ResponseHelper;
 use Illuminate\Support\Collection;
@@ -43,9 +44,9 @@ class ExtrafieldAdminController extends BaseController
     }
 
 
-    public function checkout($id)
+    public function checkout(ExtrafieldAdminCheckoutPost $request)
     {
-        $this->service->checkout($id);
+        $this->service->checkout($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }

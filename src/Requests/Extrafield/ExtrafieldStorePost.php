@@ -28,7 +28,7 @@ class ExtrafieldStorePost extends AdminRequest
             'id'            => 'nullable|integer',
             'title'         => 'required|string',
             'alias'         => 'nullable|string',
-            'group_id'      => 'nullable|integer',
+            'group_id'      => 'required|integer',
             'state'         => [
                 'nullable',
                 'integer',

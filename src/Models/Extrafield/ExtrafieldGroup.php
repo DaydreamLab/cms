@@ -29,6 +29,8 @@ class ExtrafieldGroup extends BaseModel
         'state',
         'description',
         'access',
+        'locked_by',
+        'locked_at',
         'created_by',
         'updated_by'
     ];
@@ -56,7 +58,10 @@ class ExtrafieldGroup extends BaseModel
      */
     protected $appends = [
         'extrafields',
-        'access_title'
+        'access_title',
+        'creator',
+        'updater',
+        'locker',
     ];
 
 

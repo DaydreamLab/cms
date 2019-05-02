@@ -38,6 +38,10 @@ Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
         Route::get('{path}', 'DaydreamLab\Cms\Controllers\Menu\Front\MenuFrontController@getItem')->where('path', '.*');
     });
 
+    Route::group(['prefix' => 'module'], function (){
+        Route::get('{alias}', 'DaydreamLab\Cms\Controllers\Module\Front\ModuleFrontController@getItemByAlias');
+    });
+
     Route::group(['prefix' => 'setting'], function (){
         Route::get('{locale}', 'DaydreamLab\Cms\Controllers\Setting\Front\SettingFrontController@getItem');
     });
@@ -67,6 +71,7 @@ Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
 
 
         Route::group(['prefix' => 'extrafield'], function (){
+            Route::post('checkout','DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldAdminController@checkout');
             Route::post('remove', 'DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldAdminController@remove');
             Route::post('state', 'DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldAdminController@state');
             Route::post('store','DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldAdminController@store');
@@ -74,6 +79,7 @@ Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
             Route::get('{id}', 'DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldAdminController@getItem');
 
             Route::group(['prefix' => 'group'], function (){
+                Route::post('checkout','DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldGroupAdminController@checkout');
                 Route::post('remove', 'DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldGroupAdminController@remove');
                 Route::post('state', 'DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldGroupAdminController@state');
                 Route::post('store','DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldGroupAdminController@store');

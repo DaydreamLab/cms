@@ -30,7 +30,7 @@ class ModuleFront extends Module
         'publish_up',
         'publish_down',
         'viewlevel',
-        'viewlevels'
+        'viewlevels',
     ];
 
 }

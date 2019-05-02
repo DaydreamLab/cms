@@ -68,7 +68,6 @@ class MenuFrontService extends MenuService
                     $data       = $this->moduleFrontService->loadModule($module, $language);
                     $module->items = $data;
                     $modules[$module->alias] = $module;
-                    
                 }
             }
         }

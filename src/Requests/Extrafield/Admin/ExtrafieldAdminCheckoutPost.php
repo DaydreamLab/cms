@@ -1,10 +1,10 @@
 <?php
 
-namespace DaydreamLab\Cms\Requests\Pagebuilder\Admin;
+namespace DaydreamLab\Cms\Requests\Extrafield;
 
-use DaydreamLab\Cms\Requests\Pagebuilder\PagebuilderStorePost;
+use DaydreamLab\JJAJ\Requests\AdminRequest;
 
-class PagebuilderAdminStorePost extends PagebuilderStorePost
+class ExtrafieldAdminCheckoutPost extends AdminRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +23,9 @@ class PagebuilderAdminStorePost extends PagebuilderStorePost
      */
     public function rules()
     {
-        $rules = [
-            //
+        return [
+            'ids'       => 'required|array',
+            'ids.*'     => 'required|integer'
         ];
-        return array_merge($rules, parent::rules());
     }
 }

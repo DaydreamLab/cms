@@ -343,6 +343,10 @@ return [
         'code'      => 500,
         'message'   => 'Module front get item fail'
     ],
+    'MODULE_FRONT_ITEM_NOT_EXIST' => [
+        'code'      => 403,
+        'message'   => 'Module front item not exist'
+    ],
 
     // Ordering
     'MODULE_UPDATE_ORDERING_SUCCESS' => [

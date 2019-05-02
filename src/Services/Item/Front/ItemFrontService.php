@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Services\Item\Front;
 
+use Carbon\Carbon;
 use DaydreamLab\Cms\Events\Search;
 use DaydreamLab\Cms\Repositories\Item\Front\ItemFrontRepository;
 use DaydreamLab\Cms\Services\Category\Front\CategoryFrontService;
@@ -101,26 +102,16 @@ class ItemFrontService extends ItemService
                 $data = [];
                 foreach ($items as $item)
                 {
-                    $year_value     = $item['year'];
-                    $year_key       = $year_value;
-                    $month_value    = $item['month'];
-                    $month_key      = $month_value;
-
-                    if (!array_key_exists($year_key, $data))
+                    foreach ($item->extrafields as $extrafield)
                     {
-                        $data[$year_key] = [];
+                        if (array_key_exists('timeline', $extrafield->params) && (int)$extrafield->params['timeline'] == 1)
+                        {
+                            $time   = Carbon::parse($extrafield->value);
+                            $units  = explode('-', $extrafield->params['format']);
+
+                            $this->filterByDatetimeFormat($data, $units, $time, $item);
+                        }
                     }
-
-                    if (!array_key_exists($month_key, $data[$year_key]))
-                    {
-                        $data[$year_key][$month_key] = [];
-                    }
-
-                    $temp['title'] = $item['title'];
-                    $temp['description'] = $item['description'];
-                    $data[$year_key][$month_key][] = $temp;
-
-                    krsort($data[$year_key]);
                 }
                 krsort($data);
 
@@ -131,10 +122,34 @@ class ItemFrontService extends ItemService
         //  假如 limit 設定為無限大則不用分頁
         if ((int)$params['limit'])
         {
-            $items = $this->paginationFormat($items->toArray());
+            $items= $this->paginationFormat($items->toArray());
         }
 
+        $this->response = $items;
+
         return $items;
+    }
+
+
+    public function filterByDatetimeFormat(&$data, $units, $datetime, $item)
+    {
+        $unit = array_shift($units);
+        if (count($units) == 0)
+        {   $temp['title'] = $item['title'];
+            $temp['description'] = $item['description'];
+            $data[(int)$datetime->format($unit)][] = $temp;
+            krsort($data);
+            return $data;
+        }
+        else
+        {
+            if (!array_key_exists($datetime->format($unit), $data))
+            {
+                $date[$datetime->format($unit)] = [];
+            }
+
+            return $this->filterByDatetimeFormat($data[(int)$datetime->format($unit)], $units, $datetime, $item);
+        }
     }
 
 
