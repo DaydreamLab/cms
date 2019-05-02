@@ -229,10 +229,12 @@ class ItemFrontService extends ItemService
     public function getItemsByCategoryIds($params)
     {
         $items  = $this->repo->getItemsByCategoryIds($params);
+        if ($params['paginate'])
+        {
+            $items = $this->paginationFormat($items->toArray());
+        }
 
-        $data   = $this->paginationFormat($items->toArray());
-
-        return $data;
+        return $items;
     }
 
 
@@ -362,7 +364,6 @@ class ItemFrontService extends ItemService
         // 如果有傳 category_alias
         if (!InputHelper::null($input, 'category_alias'))
         {
-            Helper::show($input->get('category_alias'));
             $category_ids = $this->categoryFrontService->search(Helper::collect([
                 'special_queries' => [
                     [
@@ -391,11 +392,10 @@ class ItemFrontService extends ItemService
             $input->forget('category_alias');
         }
 
-
         $input->forget('special_queries');
         $input->put('special_queries', $special_queries);
         $input->put('state', 1);
-        Helper::show($input);
+
         $original_items = $items = parent::search($input);
 
         $data = $this->paginationFormat($items->toArray());

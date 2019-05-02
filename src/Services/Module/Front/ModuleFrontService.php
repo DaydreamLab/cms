@@ -57,32 +57,37 @@ class ModuleFrontService extends ModuleService
             $item_params['order_by']        = $params['item_order_by'];
             $item_params['order']           = $params['item_order'];
             $item_params['limit']           = $params['item_limit'];
+            $item_params['paginate']        = $params['item_paginate'];
 
-            $children_category = [];
+
+            $descendant = $this->categoryFrontService->findDescendantOf($category->id);
             if ($params['with_children_items'])
             {
-                $descendant = $this->categoryFrontService->findDescendantOf($category->id);
                 $descendant_ids = $descendant->map(function ($item, $key){
                     return $item->id;
-                });
-                $category_ids = $descendant_ids;
+                })->all();
 
                 // 塞入子分類的 ids
-                $item_params['category_ids'] = $category_ids;
+                $item_params['category_ids']   = array_merge($category_ids, $descendant_ids);
             }
 
             $category->items = $this->itemFrontService->getItemsByCategoryIds($item_params);
 
-            $data[] = $category;
-            foreach ($descendant->toFlatTree() as $sub_category)
-            {
-                $item_params['category_ids'] = [$sub_category->id];
-                $sub_category->items = $this->itemFrontService->getItemsByCategoryIds($item_params);
-                $data[] = $sub_category;
-            }
+//            foreach ($descendant->toFlatTree() as $sub_category)
+//            {
+//                $item_params['category_ids'] = [$sub_category->id];
+//                $sub_category->items = $this->itemFrontService->getItemsByCategoryIds($item_params);
+//                $data[] = $sub_category;
+//            }
+
         }
 
-        return $data;
+        if ($params['toTree'])
+        {
+            $categories = $categories->toTree();
+        }
+
+        return $categories;
     }
 
 
@@ -91,7 +96,7 @@ class ModuleFrontService extends ModuleService
         $params['access_ids'] = $this->access_ids;
 
         $items['all'] = $this->itemFrontService->getCategoriesItemsModule($params);
-        if ($params['split_category_result'])
+        if ($params['split_categories_result'])
         {
             $copy = $params;
             // category_id 是一個 object
