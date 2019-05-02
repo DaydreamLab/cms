@@ -33,47 +33,35 @@ class ItemFrontRepository extends ItemRepository
 
     public function getCategoriesItemsModule($params)
     {
+        $data['featured'] = collect();
+        $data['normal']   = collect();
+
         if (array_key_exists('featured_limit', $params) && $params['featured_limit'] > 0)
-        {
-            $featured_items = $this->model
-                ->whereIn('category_id', $this->getParamsIds($params, 'category_ids'))
-                ->where('state', 1)
-                ->orderBy($params['featured_order_by'], $params['featured_order']);
-
-            $featured_items =  (int)$params['featured_paginate'] ? $featured_items->paginate($params['featured_limit']) : $featured_items->get();
-
-            $featured_items_ids = $featured_items->map(function ($item){
-                return $item->id;
-            })->all();
-
-            $data['featured'] = $featured_items;
-
-
-            $items = $this->model
-                ->whereIn('category_id', $this->getParamsIds($params, 'category_ids'))
-                ->where('state', 1)
-                ->whereIn('access', $params['access_ids'])
-                ->orderBy($params['order_by'], $params['order'])
-                ->orderBy('publish_up', 'desc')
-                ->whereNotIn('id', $featured_items_ids);
-
-            $data['items'] =  (int)$params['paginate'] ? $items->paginate($params['limit']) : $items->get();
-
-            return $data;
-        }
-        else
         {
             $query = $this->model
                 ->whereIn('category_id', $this->getParamsIds($params, 'category_ids'))
                 ->where('state', 1)
+                ->where('featured', 1)
                 ->whereIn('access', $params['access_ids'])
-                ->orderBy($params['order_by'], $params['order'])
+                ->orderBy($params['featured_order_by'], $params['featured_order'])
                 ->orderBy('publish_up', 'desc');
 
-            $data =  (int)$params['paginate'] ? $query->paginate($params['limit']) : $query->get();
+            $featured_items =  $this->getItemsFromLimitAndPaginate($query, $params['featured_limit'], $params['featured_paginate']);
 
-            return $data;
+            $data['featured'] = $featured_items;
         }
+
+        $query = $this->model
+            ->whereIn('category_id', $this->getParamsIds($params, 'category_ids'))
+            ->where('state', 1)
+            ->where('featured', 0)
+            ->whereIn('access', $params['access_ids'])
+            ->orderBy($params['order_by'], $params['order'])
+            ->orderBy('publish_up', 'desc');
+
+        $data['normal'] =  $this->getItemsFromLimitAndPaginate($query, $params['limit'], $params['paginate']);
+
+        return $data;
     }
 
 
@@ -94,12 +82,12 @@ class ItemFrontRepository extends ItemRepository
 
     public function getItems($category_ids, $params, $featured, $created_by_ids = null)
     {
-        $limit      = $params['per_page'];
+        $limit      = $params['per_pa ge'];
         $order_by   = $params['order_by'];
         $ordering   = $params['ordering'];
 
         $ids = [];
-        foreach ( $category_ids as $category_id)
+        foreach ($category_ids as $category_id)
         {
             $ids = array_merge($ids, $this->categoryFrontRepository->findSubTreeIds($category_id));
         }

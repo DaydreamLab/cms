@@ -92,42 +92,52 @@ class ItemFrontService extends ItemService
 
     public function getCategoriesItemsModule($params)
     {
-        $items = $this->repo->getCategoriesItemsModule($params);
+        $all  = $this->repo->getCategoriesItemsModule($params);
+        $data = [];
 
-        if ($items->count() > 0)
+        // 這邊有 featured 和 items
+        foreach ($all as $key => $items)
         {
-            $content_type = $items[0]->category->content_type;
-            if ($content_type == 'timeline')
+            if ($items->count() > 0)
             {
-                $data = [];
-                foreach ($items as $item)
+                $content_type = $items[0]->category->content_type;
+                if ($content_type == 'timeline')
                 {
-                    foreach ($item->extrafields as $extrafield)
+                    $data = [];
+                    foreach ($items as $item)
                     {
-                        if (array_key_exists('timeline', $extrafield->params) && (int)$extrafield->params['timeline'] == 1)
+                        foreach ($item->extrafields as $extrafield)
                         {
-                            $time   = Carbon::parse($extrafield->value);
-                            $units  = explode('-', $extrafield->params['format']);
+                            if (array_key_exists('timeline', $extrafield->params) && (int)$extrafield->params['timeline'] == 1)
+                            {
+                                $time   = Carbon::parse($extrafield->value);
+                                $units  = explode('-', $extrafield->params['format']);
 
-                            $this->filterByDatetimeFormat($data, $units, $time, $item);
+                                $this->filterByDatetimeFormat($data, $units, $time, $item);
+                            }
                         }
                     }
-                }
-                krsort($data);
+                    krsort($data);
 
-                $items = $data;
+                    $items = $data;
+                }
+            }
+
+            if (($key == 'featured' && (int)$params['featured_paginate']) ||
+                ($key == 'normal' && (int)$params['paginate']))
+            {
+                $data[$key] = $this->paginationFormat($items->toArray());
+            }
+            else
+            {
+                $data[$key] = $items;
             }
         }
 
-        //  假如 limit 設定為無限大則不用分頁
-        if ((int)$params['limit'])
-        {
-            $items= $this->paginationFormat($items->toArray());
-        }
 
-        $this->response = $items;
+        $this->response = $data;
 
-        return $items;
+        return $data;
     }
 
 
@@ -348,19 +358,25 @@ class ItemFrontService extends ItemService
     {
         $input->put('paginate', $paginate);
         $special_queries = $this->getSpecialQueries($input);
-
+        $language = $input->get('language') != '' ? [$input->get('language')] : ['*',config('global.locale')];
         // 如果有傳 category_alias
         if (!InputHelper::null($input, 'category_alias'))
         {
+            Helper::show($input->get('category_alias'));
             $category_ids = $this->categoryFrontService->search(Helper::collect([
                 'special_queries' => [
                     [
                         'type'  => 'whereIn',
                         'key'   => 'alias',
                         'value' => $input->get('category_alias'),
+                    ],
+                    [
+                        'type'  => 'whereIn',
+                        'key'   => 'language',
+                        'value' =>  $language
                     ]
                 ],
-                'language'      => $input->get('language') != '' ? $input->get('language') : config('global.locale'),
+
                 'paginate'      => false
             ]))->map(function ($item, $key) {
                 return $item->id;
@@ -379,7 +395,7 @@ class ItemFrontService extends ItemService
         $input->forget('special_queries');
         $input->put('special_queries', $special_queries);
         $input->put('state', 1);
-
+        Helper::show($input);
         $original_items = $items = parent::search($input);
 
         $data = $this->paginationFormat($items->toArray());
@@ -389,39 +405,8 @@ class ItemFrontService extends ItemService
             $data['filter'] = $this->filterYearMonth($data);
         }
 
-        $special_queries_copy = $input->get('special_queries');
-        $all['all'] = $data;
-        if (config('cms.item.front.creator_group_filter.enabled'))
-        {
-            foreach (config('cms.item.front.creator_group_filter.groups') as $creator_group)
-            {
-                $special_queries  =  $special_queries_copy;
+        $this->response = $items;
 
-                $user_ids = $this->repo->getCreatorGroupUserIds($creator_group);
-                $obj['type']        = 'whereIn';
-                $obj['key']         = 'created_by';
-                $obj['value']       = $user_ids;
-                $special_queries[]  = $obj;
-
-                $input->forget('special_queries');
-                $input->put('special_queries', $special_queries);
-
-                $items = parent::search($input);
-
-                $paginate_data = $this->paginationFormat($items->toArray());
-
-                if (config('cms.item.front.year_month_filter'))
-                {
-                    $paginate_data['filter'] = $this->filterYearMonth($paginate_data);
-                }
-                $all[$creator_group] = $paginate_data;
-            }
-            $this->response = $all;
-        }
-        else
-        {
-            $this->response = $items;
-        }
 
         event(new Search($input, $this->user));
 

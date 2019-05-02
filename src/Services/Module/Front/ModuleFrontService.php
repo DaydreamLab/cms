@@ -90,7 +90,18 @@ class ModuleFrontService extends ModuleService
     {
         $params['access_ids'] = $this->access_ids;
 
-        $items = $this->itemFrontService->getCategoriesItemsModule($params);
+        $items['all'] = $this->itemFrontService->getCategoriesItemsModule($params);
+        if ($params['split_category_result'])
+        {
+            $copy = $params;
+            // category_id 是一個 object
+            foreach ($params['category_ids'] as $category_id)
+            {
+                $category = $this->categoryFrontService->find($category_id->id);
+                $copy['category_ids'] = [$category_id];
+                $items[$category->alias] = $this->itemFrontService->getCategoriesItemsModule($copy);
+            }
+        }
 
         return $items;
     }

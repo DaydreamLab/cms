@@ -46,6 +46,11 @@ class ItemFrontSearchPost extends ItemSearchPost
                     'created_by',
                     'updated_by',
                 ])
+            ],
+            'split_categories_result'   => [
+                'nullable',
+                'integer',
+                Rule::in([0,1])
             ]
         ];
 
