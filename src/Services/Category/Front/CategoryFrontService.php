@@ -48,23 +48,6 @@ class CategoryFrontService extends CategoryService
         );
     }
 
-
-    public function appendExtrafileds($items)
-    {
-        return $items->each(function ($value, $key){
-            foreach ($value->extrafields as $extrafield)
-            {
-                if (array_key_exists('alias', $extrafield))
-                {
-                    $value->{$extrafield['alias']} = $extrafield['value'];
-                }
-            }
-            $value->items = [];
-        });
-    }
-
-
-
     public function getContentTypeIds($content_type)
     {
         $categories = $this->findByChain(['content_type', 'extension', 'state', 'access'], ['=', '=', '=', '='], [$content_type, 'item', '1', '2']);
@@ -98,7 +81,7 @@ class CategoryFrontService extends CategoryService
     {
         $items = $this->repo->getItemsByIds($ids, $this->access_ids);
 
-        return $this->appendExtrafileds($items);
+        return $items;
     }
 
 
@@ -106,7 +89,7 @@ class CategoryFrontService extends CategoryService
     {
         $items = $this->repo->getContentTypeItems($extension, $type, $this->access_ids);
 
-        return $this->appendExtrafileds($items);
+        return $items;
     }
 
 

@@ -45,7 +45,6 @@ class ModuleFrontService extends ModuleService
     {
         $params['access_ids'] = $this->access_ids;
 
-        $data = [];
         $categories = $this->categoryFrontService->getItemsByIds($params);
         foreach ($categories as $category)
         {
@@ -60,26 +59,21 @@ class ModuleFrontService extends ModuleService
             $item_params['paginate']        = $params['item_paginate'];
 
 
-            $descendant = $this->categoryFrontService->findDescendantOf($category->id);
-            if ($params['with_children_items'])
+            if ($params['with_items'] == 'self')
             {
+                $item_params['category_ids'] = $category_ids;
+            }
+            elseif ($params['with_items'] == 'children')
+            {
+                $descendant = $this->categoryFrontService->findDescendantOf($category->id);
                 $descendant_ids = $descendant->map(function ($item, $key){
                     return $item->id;
                 })->all();
-
                 // 塞入子分類的 ids
-                $item_params['category_ids']   = array_merge($category_ids, $descendant_ids);
+                $item_params['category_ids'] = array_merge($category_ids, $descendant_ids);
             }
 
             $category->items = $this->itemFrontService->getItemsByCategoryIds($item_params);
-
-//            foreach ($descendant->toFlatTree() as $sub_category)
-//            {
-//                $item_params['category_ids'] = [$sub_category->id];
-//                $sub_category->items = $this->itemFrontService->getItemsByCategoryIds($item_params);
-//                $data[] = $sub_category;
-//            }
-
         }
 
         if ($params['toTree'])
