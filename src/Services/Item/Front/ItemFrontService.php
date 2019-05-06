@@ -303,11 +303,12 @@ class ItemFrontService extends ItemService
     public function getSearchFilter($data)
     {
         $filters = [];
+
         foreach ($data['data'] as $item)
         {
-            $item_publish_up = strtotime($item['publish_up']);
-            $item_year       = date('Y', $item_publish_up);
-            $item_month      = date('m', $item_publish_up);
+            $item_publish_up = Carbon::parse($item['publish_up']);
+            $item_year       = (int)$item_publish_up->format('Y');
+            $item_month      = (int)$item_publish_up->format('m');
 
             $find_year = false;
             foreach ($filters as $key => $filter)
@@ -335,6 +336,10 @@ class ItemFrontService extends ItemService
                 $filters[]      = $obj;
             }
         }
+
+        usort($filters, function ($a, $b){
+            return strcmp($a['year'], $b['year']);
+        });
 
         return $filters;
     }
@@ -387,9 +392,10 @@ class ItemFrontService extends ItemService
         if (config('cms.item.front.search_filter'))
         {
             $data['filter'] = $this->getSearchfilter($data);
+
         }
 
-        $this->response = $items;
+        $this->response = $data;
 
 
         event(new Search($input, $this->user));
