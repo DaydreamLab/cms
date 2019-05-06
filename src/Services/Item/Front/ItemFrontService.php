@@ -92,19 +92,26 @@ class ItemFrontService extends ItemService
 
     public function getCategoriesItemsModule($params)
     {
-        $all  = $this->repo->getCategoriesItemsModule($params);
-        $data = [];
+        $result  = $this->repo->getCategoriesItemsModule($params);
 
-        // 這邊有 featured 和 items
-        foreach ($all as $key => $items)
+        // 代表有分類的切割
+        if (gettype($result) == 'array')
         {
-            if ($items->count() > 0)
+            foreach ($result as $key => $items)
             {
-                $content_type = $items[0]->category->content_type;
+                $result[$key] = $this->paginationFormat($items->toArray());
+
+            }
+        }
+        else
+        {
+            if ($result->count() > 0)
+            {
+                $content_type = $result[0]->category->content_type;
                 if ($content_type == 'timeline')
                 {
                     $data = [];
-                    foreach ($items as $item)
+                    foreach ($result as $item)
                     {
                         foreach ($item->extrafields as $extrafield)
                         {
@@ -119,25 +126,58 @@ class ItemFrontService extends ItemService
                     }
                     krsort($data);
 
-                    $items = $data;
+                    $result = $data;
                 }
-            }
-
-            if (($key == 'featured' && (int)$params['featured_paginate']) ||
-                ($key == 'normal' && (int)$params['paginate']))
-            {
-                $data[$key] = $this->paginationFormat($items->toArray());
-            }
-            else
-            {
-                $data[$key] = $items;
             }
         }
 
 
-        $this->response = $data;
-
-        return $data;
+        return $result;
+//        $data = [];
+//
+//        // 這邊有 featured 和 items
+//        foreach ($all as $key => $items)
+//        {
+//            if ($items->count() > 0)
+//            {
+//                $content_type = $items[0]->category->content_type;
+//                if ($content_type == 'timeline')
+//                {
+//                    $data = [];
+//                    foreach ($items as $item)
+//                    {
+//                        foreach ($item->extrafields as $extrafield)
+//                        {
+//                            if (array_key_exists('timeline', $extrafield->params) && (int)$extrafield->params['timeline'] == 1)
+//                            {
+//                                $time   = Carbon::parse($extrafield->value);
+//                                $units  = explode('-', $extrafield->params['format']);
+//
+//                                $this->filterByDatetimeFormat($data, $units, $time, $item);
+//                            }
+//                        }
+//                    }
+//                    krsort($data);
+//
+//                    $items = $data;
+//                }
+//            }
+//
+//            if (($key == 'featured' && (int)$params['featured_paginate']) ||
+//                ($key == 'normal' && (int)$params['paginate']))
+//            {
+//                $data[$key] = $this->paginationFormat($items->toArray());
+//            }
+//            else
+//            {
+//                $data[$key] = $items;
+//            }
+//        }
+//
+//
+//        $this->response = $data;
+//
+//        return $data;
     }
 
 

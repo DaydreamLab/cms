@@ -9,6 +9,7 @@ use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\User\Repositories\User\Front\UserGroupFrontRepository;
 use DaydreamLab\User\Repositories\User\Front\UserGroupMapFrontRepository;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Request;
 
 
 class ItemFrontRepository extends ItemRepository
@@ -33,36 +34,148 @@ class ItemFrontRepository extends ItemRepository
 
     public function getCategoriesItemsModule($params)
     {
-        $data['featured'] = collect();
-        $data['normal']   = collect();
-
-        if (array_key_exists('featured_limit', $params) && $params['featured_limit'] > 0)
+        $item_count = (int)$params['item_count'] ? (int)$params['item_count'] : $this->infinity;
+        $data = [];
+        // hide featured
+        if ($params['featured_display'] == 0)
         {
-            $query = $this->model
+            $all_items = $this->model
+                ->whereIn('category_id', $this->getParamsIds($params, 'category_ids'))
+                ->where('state', 1)
+                ->where('featured', 0)
+                ->whereIn('access', $params['access_ids'])
+                ->orderBy($params['item_order_by'], $params['item_order'])
+                ->orderBy('publish_up', 'desc')
+                ->paginate($item_count);
+
+            if ($params['split_items_by_categories'])
+            {
+                $data['all'] = $all_items;
+                foreach ($this->getParamsIds($params, 'category_ids') as $category_id)
+                {
+                    $category = $this->categoryFrontRepository->find($category_id);
+
+                    $data[$category->title] = $this->model
+                        ->whereIn('category_id', [$category_id])
+                        ->where('state', 1)
+                        ->where('featured', 0)
+                        ->whereIn('access', $params['access_ids'])
+                        ->orderBy($params['item_order_by'], $params['item_order'])
+                        ->orderBy('publish_up', 'desc')
+                        ->paginate($item_count);
+                }
+            }
+            else
+            {
+                $data = $all_items;
+            }
+        }
+        // include featured
+        elseif ($params['featured_display'] == 1)
+        {
+            // 不需要置頂
+            if ($params['split_items_by_featured'] == 0)
+            {
+                $all_items = $this->model
+                    ->whereIn('category_id', $this->getParamsIds($params, 'category_ids'))
+                    ->where('state', 1)
+                    ->whereIn('access', $params['access_ids'])
+                    ->orderBy($params['item_order_by'], $params['item_order'])
+                    ->orderBy('publish_up', 'desc')
+                    ->paginate($item_count);
+            }
+            // 需要置頂
+            else
+            {
+                $featured_items = $this->model
+                    ->whereIn('category_id', $this->getParamsIds($params, 'category_ids'))
+                    ->where('state', 1)
+                    ->where('featured', 1)
+                    ->whereIn('access', $params['access_ids'])
+                    ->orderBy($params['featured_order_by'], $params['featured_order'])
+                    ->orderBy('publish_up', 'desc')
+                    ->limit($params['featured_count'])
+                    ->get();
+
+                $featured_items_ids = $featured_items->map(function ($item){
+                    return $item->id;
+                });
+
+                $mixed_items = $this->model
+                    ->whereIn('category_id', $this->getParamsIds($params, 'category_ids'))
+                    ->whereNotIn('id', $featured_items_ids)
+                    ->where('state', 1)
+                    ->whereIn('access', $params['access_ids'])
+                    ->orderBy($params['item_order_by'], $params['item_order'])
+                    ->orderBy('publish_up', 'desc')
+                    ->get();
+
+                $request_page = Request::get('page') == '' ? 1 : Request::get('page');
+                $merge_items  = $featured_items->merge($mixed_items);
+                $all_items    = $this->paginate($merge_items, $item_count, $request_page, []);
+            }
+
+
+            if ($params['split_items_by_categories'])
+            {
+                $data['all'] = $all_items;
+                foreach ($this->getParamsIds($params, 'category_ids') as $category_id)
+                {
+                    $category = $this->categoryFrontRepository->find($category_id);
+
+                    $data[$category->title] = $this->model
+                        ->whereIn('category_id', [$category_id])
+                        ->where('state', 1)
+                        ->whereIn('access', $params['access_ids'])
+                        ->orderBy($params['item_order_by'], $params['item_order'])
+                        ->orderBy('publish_up', 'desc')
+                        ->paginate($item_count);
+                }
+            }
+            else
+            {
+                $data = $all_items;
+            }
+        }
+        // only featured
+        elseif ($params['featured_display'] == 2)
+        {
+            $all_items = $this->model
                 ->whereIn('category_id', $this->getParamsIds($params, 'category_ids'))
                 ->where('state', 1)
                 ->where('featured', 1)
                 ->whereIn('access', $params['access_ids'])
                 ->orderBy($params['featured_order_by'], $params['featured_order'])
-                ->orderBy('publish_up', 'desc');
+                ->orderBy('publish_up', 'desc')
+                ->paginate($item_count);
 
-            $featured_items =  $this->getItemsFromLimitAndPaginate($query, $params['featured_limit'], $params['featured_paginate']);
+            if ($params['split_items_by_categories'])
+            {
+                $data['all'] = $all_items;
+                foreach ($this->getParamsIds($params, 'category_ids') as $category_id)
+                {
+                    $category = $this->categoryFrontRepository->find($category_id);
 
-            $data['featured'] = $featured_items;
+                    $data[$category->title] = $this->model
+                        ->whereIn('category_id', [$category_id])
+                        ->where('state', 1)
+                        ->where('featured', 1)
+                        ->whereIn('access', $params['access_ids'])
+                        ->orderBy($params['featured_order_by'], $params['featured_order'])
+                        ->orderBy('publish_up', 'desc')
+                        ->paginate($item_count);
+                }
+            }
+            else
+            {
+                $data = $all_items;
+            }
         }
-
-        $query = $this->model
-            ->whereIn('category_id', $this->getParamsIds($params, 'category_ids'))
-            ->where('state', 1)
-            ->where('featured', 0)
-            ->whereIn('access', $params['access_ids'])
-            ->orderBy($params['order_by'], $params['order'])
-            ->orderBy('publish_up', 'desc');
-
-        $data['normal'] =  $this->getItemsFromLimitAndPaginate($query, $params['limit'], $params['paginate']);
 
         return $data;
     }
+
+
 
 
     public function getCreatorGroupUserIds($creator_group)
