@@ -45,7 +45,6 @@ class ModuleFrontService extends ModuleService
     {
         $params['access_ids'] = $this->access_ids;
 
-
         $categories = $this->categoryFrontService->getItemsByIds($params);
         foreach ($categories as $category)
         {

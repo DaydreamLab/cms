@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "/js/app.js": "/js/app.js?id=3bcd0f76f86f4ca1e933",
     "/css/main.css": "/css/main.css?id=e3bdd4b2e7f335f24b90",
     "/css/cps.css": "/css/cps.css?id=cfe44c10fab9c3eaed26",
@@ -6,4 +7,13 @@
     "/js/manifest.js": "/js/manifest.js?id=7d82240b6f8374f7c1c0",
     "/js/editor.js": "/js/editor.js?id=ae3e4242dec7179c8cb3",
     "/css/app.css": "/css/app.css?id=2a218642960820165bcb"
+=======
+    "/js/app.js": "/js/app.js",
+    "/css/main.css": "/css/main.css",
+    "/css/cps.css": "/css/cps.css",
+    "/js/vendor.js": "/js/vendor.js",
+    "/js/manifest.js": "/js/manifest.js",
+    "/js/editor.js": "/js/editor.js",
+    "/css/app.css": "/css/app.css"
+>>>>>>> aede333b86daa2e6fc717d3346d633f3fbb775e5
 }

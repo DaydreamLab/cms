@@ -35,21 +35,6 @@ class ItemFrontService extends ItemService
     }
 
 
-    public function appendExtrafileds($items)
-    {
-        return $items->each(function ($value, $key){
-            foreach ($value->extrafields as $extrafield)
-            {
-                if (array_key_exists('alias', $extrafield))
-                {
-                    $value->{$extrafield['alias']} = $extrafield['value'];
-                }
-            }
-            $value->items = [];
-        });
-    }
-
-
     public function filterYearMonth($data)
     {
         $filters = [];
