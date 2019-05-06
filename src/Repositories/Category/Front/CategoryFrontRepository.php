@@ -18,10 +18,13 @@ class CategoryFrontRepository extends CategoryRepository
     {
         $category_ids = $this->getParamsIds($params, 'category_ids');
 
-        return $this->model->whereIn('id', $category_ids)
-                            ->where('state', 1)
-                            ->whereIn('access', $access_ids)
-                            ->get();
+        $query =  $this->model
+            ->whereIn('id', $category_ids)
+            ->where('state', 1)
+            ->whereIn('access', $access_ids)
+            ->orderBy($params['category_order_by'], $params['category_order']);
+
+        return (int)$params['category_count'] ? $query->paginate((int)$params['category_count']) : $query->paginate($this->infinity);
     }
 
 

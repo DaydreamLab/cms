@@ -77,9 +77,9 @@ class CategoryFrontService extends CategoryService
     }
 
 
-    public function getItemsByIds($ids)
+    public function getItemsByIds($params)
     {
-        $items = $this->repo->getItemsByIds($ids, $this->access_ids);
+        $items = $this->repo->getItemsByIds($params, $this->access_ids);
 
         return $items;
     }

@@ -46,6 +46,7 @@ class ModuleFrontService extends ModuleService
         $params['access_ids'] = $this->access_ids;
 
         $categories = $this->categoryFrontService->getItemsByIds($params);
+
         foreach ($categories as $category)
         {
             $category_ids = [$category->id];
@@ -55,8 +56,8 @@ class ModuleFrontService extends ModuleService
             $item_params['access_ids']      = $this->access_ids;
             $item_params['order_by']        = $params['item_order_by'];
             $item_params['order']           = $params['item_order'];
-            $item_params['limit']           = $params['item_limit'];
-            $item_params['paginate']        = $params['item_paginate'];
+            $item_params['limit']           = $params['item_count'];
+
 
 
             if ($params['with_items'] == 'self')
@@ -73,10 +74,11 @@ class ModuleFrontService extends ModuleService
                 $item_params['category_ids'] = array_merge($category_ids, $descendant_ids);
             }
 
-            $category->items = $this->itemFrontService->getItemsByCategoryIds($item_params);
+            $category->items = $this->paginationFormat($this->itemFrontService->getItemsByCategoryIds($item_params)->toArray());
+
         }
 
-        if ($params['toTree'])
+        if ($params['category_to_tree'])
         {
             $categories = $categories->toTree();
         }

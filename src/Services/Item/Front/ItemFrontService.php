@@ -254,10 +254,6 @@ class ItemFrontService extends ItemService
     public function getItemsByCategoryIds($params)
     {
         $items  = $this->repo->getItemsByCategoryIds($params);
-        if ($params['paginate'])
-        {
-            $items = $this->paginationFormat($items->toArray());
-        }
 
         return $items;
     }

@@ -279,7 +279,7 @@ class ItemFrontRepository extends ItemRepository
             ->orderBy($params['order_by'], $params['order'])
             ->orderBy('publish_up', 'desc');
 
-        return $this->getItemsFromLimitAndPaginate($query, $params['limit'], $params['paginate']);
+        return (int)$params['limit'] ? $query->paginate((int)$params['limit']) : $query->paginate($this->infinity);
     }
 
 
