@@ -32,43 +32,54 @@ class ItemFrontRepository extends ItemRepository
     }
 
 
+
+    public function getCategoriesItems($category_ids, $params, $item_count, $featured, $mixed = false)
+    {
+        $query = $this->model
+            ->whereIn('category_id', $category_ids)
+            ->where('state', 1)
+            ->whereIn('access', $params['access_ids'])
+            ->orderBy($params['item_order_by'], $params['item_order'])
+            ->orderBy('publish_up', 'desc');
+
+        $query = !$mixed ? $query->where('featured', $featured) : $query;
+
+        return $query->paginate($item_count);
+    }
+
+
+    public function getCategoriesSplitItems($split, $items, $params, $item_count, $featured, $mixed = false)
+    {
+        if ($split)
+        {
+            $data['all'] = $items;
+            foreach ($this->getParamsIds($params, 'category_ids') as $category_id)
+            {
+                $category = $this->categoryFrontRepository->find($category_id);
+                $data[$category->title] = $this->getCategoriesItems([$category_id], $params, $item_count, $featured, $mixed);
+            }
+        }
+        else
+        {
+            $data = $items;
+        }
+
+        return $data;
+    }
+
+
     public function getCategoriesItemsModule($params)
     {
-        $item_count = (int)$params['item_count'] ? (int)$params['item_count'] : $this->infinity;
+        $item_count     = (int)$params['item_count'] ? (int)$params['item_count'] : $this->infinity;
+        $category_ids   = $this->getParamsIds($params, 'category_ids');
         $data = [];
         // hide featured
-        if ($params['featured_display'] == 0)
+        if ($params['featured_display'] == 0 || $params['featured_display'] == 2)
         {
-            $all_items = $this->model
-                ->whereIn('category_id', $this->getParamsIds($params, 'category_ids'))
-                ->where('state', 1)
-                ->where('featured', 0)
-                ->whereIn('access', $params['access_ids'])
-                ->orderBy($params['item_order_by'], $params['item_order'])
-                ->orderBy('publish_up', 'desc')
-                ->paginate($item_count);
+            $featured = $params['featured_display'] == 0 ? 0 : 1;
+            $all_items = $this->getCategoriesItems($category_ids, $params, $item_count, $featured, false);
 
-            if ($params['split_items_by_categories'])
-            {
-                $data['all'] = $all_items;
-                foreach ($this->getParamsIds($params, 'category_ids') as $category_id)
-                {
-                    $category = $this->categoryFrontRepository->find($category_id);
-
-                    $data[$category->title] = $this->model
-                        ->whereIn('category_id', [$category_id])
-                        ->where('state', 1)
-                        ->where('featured', 0)
-                        ->whereIn('access', $params['access_ids'])
-                        ->orderBy($params['item_order_by'], $params['item_order'])
-                        ->orderBy('publish_up', 'desc')
-                        ->paginate($item_count);
-                }
-            }
-            else
-            {
-                $data = $all_items;
-            }
+            $data = $this->getCategoriesSplitItems($params['split_items_by_categories'], $all_items, $params, $item_count, $featured, false);
         }
         // include featured
         elseif ($params['featured_display'] == 1)
@@ -76,34 +87,37 @@ class ItemFrontRepository extends ItemRepository
             // 不需要置頂
             if ($params['split_items_by_featured'] == 0)
             {
-                $all_items = $this->model
-                    ->whereIn('category_id', $this->getParamsIds($params, 'category_ids'))
-                    ->where('state', 1)
-                    ->whereIn('access', $params['access_ids'])
-                    ->orderBy($params['item_order_by'], $params['item_order'])
-                    ->orderBy('publish_up', 'desc')
-                    ->paginate($item_count);
+//                $all_items = $this->model
+//                    ->whereIn('category_id', $this->getParamsIds($params, 'category_ids'))
+//                    ->where('state', 1)
+//                    ->whereIn('access', $params['access_ids'])
+//                    ->orderBy($params['item_order_by'], $params['item_order'])
+//                    ->orderBy('publish_up', 'desc')
+//                    ->paginate($item_count);
 
-                if ($params['split_items_by_categories'])
-                {
-                    $data['all'] = $all_items;
-                    foreach ($this->getParamsIds($params, 'category_ids') as $category_id)
-                    {
-                        $category = $this->categoryFrontRepository->find($category_id);
+                $all_items = $this->getCategoriesItems($category_ids, $params, $item_count, 0, true);
 
-                        $data[$category->title] = $this->model
-                            ->whereIn('category_id', [$category_id])
-                            ->where('state', 1)
-                            ->whereIn('access', $params['access_ids'])
-                            ->orderBy($params['featured_order_by'], $params['featured_order'])
-                            ->orderBy('publish_up', 'desc')
-                            ->paginate($item_count);
-                    }
-                }
-                else
-                {
-                    $data = $all_items;
-                }
+                $data = $this->getCategoriesSplitItems($params['split_items_by_categories'], $all_items, $params, $item_count, 0, true);
+//                if ($params['split_items_by_categories'])
+//                {
+//                    $data['all'] = $all_items;
+//                    foreach ($this->getParamsIds($params, 'category_ids') as $category_id)
+//                    {
+//                        $category = $this->categoryFrontRepository->find($category_id);
+//
+//                        $data[$category->title] = $this->model
+//                            ->whereIn('category_id', [$category_id])
+//                            ->where('state', 1)
+//                            ->whereIn('access', $params['access_ids'])
+//                            ->orderBy($params['item_order_by'], $params['item_order_by'])
+//                            ->orderBy('publish_up', 'desc')
+//                            ->paginate($item_count);
+//                    }
+//                }
+//                else
+//                {
+//                    $data = $all_items;
+//                }
             }
             // 需要置頂
             else
@@ -198,40 +212,6 @@ class ItemFrontRepository extends ItemRepository
                 }
             }
         }
-        // only featured
-        elseif ($params['featured_display'] == 2)
-        {
-            $all_items = $this->model
-                ->whereIn('category_id', $this->getParamsIds($params, 'category_ids'))
-                ->where('state', 1)
-                ->where('featured', 1)
-                ->whereIn('access', $params['access_ids'])
-                ->orderBy($params['featured_order_by'], $params['featured_order'])
-                ->orderBy('publish_up', 'desc')
-                ->paginate($item_count);
-
-            if ($params['split_items_by_categories'])
-            {
-                $data['all'] = $all_items;
-                foreach ($this->getParamsIds($params, 'category_ids') as $category_id)
-                {
-                    $category = $this->categoryFrontRepository->find($category_id);
-
-                    $data[$category->title] = $this->model
-                        ->whereIn('category_id', [$category_id])
-                        ->where('state', 1)
-                        ->where('featured', 1)
-                        ->whereIn('access', $params['access_ids'])
-                        ->orderBy($params['featured_order_by'], $params['featured_order'])
-                        ->orderBy('publish_up', 'desc')
-                        ->paginate($item_count);
-                }
-            }
-            else
-            {
-                $data = $all_items;
-            }
-        }
 
         return $data;
     }
@@ -254,81 +234,81 @@ class ItemFrontRepository extends ItemRepository
     }
 
 
-    public function getItems($category_ids, $params, $featured, $created_by_ids = null)
-    {
-        $limit      = $params['per_pa ge'];
-        $order_by   = $params['order_by'];
-        $ordering   = $params['ordering'];
-
-        $ids = [];
-        foreach ($category_ids as $category_id)
-        {
-            $ids = array_merge($ids, $this->categoryFrontRepository->findSubTreeIds($category_id));
-        }
-
-        $query = $this->model->where('state', 1);
-        if ($created_by_ids !== null)
-        {
-            $query = $query->whereIn('created_by', $created_by_ids);
-        }
-
-        if (array_key_exists('include_featured',$params) && $params['include_featured'])
-        {
-            $query = $query->whereIn('featured', [0,1]);
-        }
-        else
-        {
-            $query = $query->where('featured',$featured);
-        }
-
-        $query = $query->whereIn('category_id', $category_ids);
-
-        $query = $query->orderBy($order_by, $ordering);
-
-        $items = $query->paginate($limit)->toArray();
-
-        $data = [];
-        $data['data'] = $items['data'];
-        unset($items['data']);
-        $data['pagination'] = $items;
-
-
-        $filters = [];
-        foreach ($data['data'] as $item)
-        {
-            $item_created_at = strtotime($item['created_at']);
-            $item_year       = date('Y', $item_created_at);
-            $item_month      = date('m', $item_created_at);
-
-            $find_year = false;
-            foreach ($filters as $key => $filter)
-            {
-                if($filter['year'] == $item_year)
-                {
-                    $find_year  = true;
-                    if (in_array($item_month, $filter['month']))
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        $filters[$key]['month'][] = $item_month;
-                        break;
-                    }
-                }
-            }
-
-            if (!$find_year)
-            {
-                $obj['year']    = $item_year;
-                $obj['month'][] = $item_month;
-                $filters[]      = $obj;
-            }
-        }
-        $data['filter'] = $filters;
-
-        return $data;
-    }
+//    public function getItems($category_ids, $params, $featured, $created_by_ids = null)
+//    {
+//        $limit      = $params['per_page'];
+//        $order_by   = $params['order_by'];
+//        $ordering   = $params['ordering'];
+//
+//        $ids = [];
+//        foreach ($category_ids as $category_id)
+//        {
+//            $ids = array_merge($ids, $this->categoryFrontRepository->findSubTreeIds($category_id));
+//        }
+//
+//        $query = $this->model->where('state', 1);
+//        if ($created_by_ids !== null)
+//        {
+//            $query = $query->whereIn('created_by', $created_by_ids);
+//        }
+//
+//        if (array_key_exists('include_featured',$params) && $params['include_featured'])
+//        {
+//            $query = $query->whereIn('featured', [0,1]);
+//        }
+//        else
+//        {
+//            $query = $query->where('featured',$featured);
+//        }
+//
+//        $query = $query->whereIn('category_id', $category_ids);
+//
+//        $query = $query->orderBy($order_by, $ordering);
+//
+//        $items = $query->paginate($limit)->toArray();
+//
+//        $data = [];
+//        $data['data'] = $items['data'];
+//        unset($items['data']);
+//        $data['pagination'] = $items;
+//
+//
+//        $filters = [];
+//        foreach ($data['data'] as $item)
+//        {
+//            $item_created_at = strtotime($item['created_at']);
+//            $item_year       = date('Y', $item_created_at);
+//            $item_month      = date('m', $item_created_at);
+//
+//            $find_year = false;
+//            foreach ($filters as $key => $filter)
+//            {
+//                if($filter['year'] == $item_year)
+//                {
+//                    $find_year  = true;
+//                    if (in_array($item_month, $filter['month']))
+//                    {
+//                        break;
+//                    }
+//                    else
+//                    {
+//                        $filters[$key]['month'][] = $item_month;
+//                        break;
+//                    }
+//                }
+//            }
+//
+//            if (!$find_year)
+//            {
+//                $obj['year']    = $item_year;
+//                $obj['month'][] = $item_month;
+//                $filters[]      = $obj;
+//            }
+//        }
+//        $data['filter'] = $filters;
+//
+//        return $data;
+//    }
 
 
     public function getItemsByCategoryIds($params)

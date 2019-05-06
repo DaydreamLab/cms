@@ -59,6 +59,7 @@ class Category extends BaseModel
         'metadesc',
         'metakeywords',
         'params',
+        'item_extrafield_group_id',
         'extrafield_group_id',
         'extrafields',
         'extrafields_search',

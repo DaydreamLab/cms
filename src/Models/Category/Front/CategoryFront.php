@@ -27,6 +27,7 @@ class CategoryFront extends Category
         'language',
         'params',
         'extrafields',
+        'item_extrafield_group_id',
         'extrafield_group_id',
         'extrafield_group_title',
         'viewlevel',

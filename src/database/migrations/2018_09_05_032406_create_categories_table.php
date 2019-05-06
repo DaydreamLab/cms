@@ -35,6 +35,7 @@ class CreateCategoriesTable extends Migration
             $table->string('metadesc')->nullable();
             $table->string('metakeywords')->nullable();
             $table->text('params')->nullable();
+            $table->unsignedInteger('item_extrafield_group_id')->nullable();
             $table->unsignedInteger('extrafield_group_id')->nullable();
             $table->text('extrafields')->nullable();
             $table->text('extrafields_search')->nullable();

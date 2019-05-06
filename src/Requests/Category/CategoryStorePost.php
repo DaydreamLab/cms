@@ -42,6 +42,7 @@ class CategoryStorePost extends AdminRequest
             'hits'                  => 'nullable|integer',
             'access'                => 'nullable|integer',
             'ordering'              => 'nullable|integer',
+            'item_extrafield_group_id'   => 'nullable|integer',
             'extrafield_group_id'   => 'nullable|integer',
             'extrafields'           => 'nullable|array',
             'extrafields.*'         => 'nullable|array',
