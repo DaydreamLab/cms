@@ -35,46 +35,6 @@ class ItemFrontService extends ItemService
     }
 
 
-    public function filterYearMonth($data)
-    {
-        $filters = [];
-        foreach ($data['data'] as $item)
-        {
-            $item_publish_up = strtotime($item['publish_up']);
-            $item_year       = date('Y', $item_publish_up);
-            $item_month      = date('m', $item_publish_up);
-
-            $find_year = false;
-            foreach ($filters as $key => $filter)
-            {
-                if($filter['year'] == $item_year)
-                {
-                    $find_year  = true;
-                    if (in_array($item_month, $filter['month']))
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        $filters[$key]['month'][] = $item_month;
-                        break;
-                    }
-                }
-            }
-
-            $obj = [];
-            if (!$find_year)
-            {
-                $obj['year']    = $item_year;
-                $obj['month'][] = $item_month;
-                $filters[]      = $obj;
-            }
-        }
-
-        return $filters;
-    }
-
-
     public function getCategoriesItemsModule($params)
     {
         $result  = $this->repo->getCategoriesItemsModule($params);
@@ -84,8 +44,17 @@ class ItemFrontService extends ItemService
         {
             foreach ($result as $key => $items)
             {
-                $result[$key] = $this->paginationFormat($items->toArray());
-
+               if (!$items instanceof Collection)
+               {
+                   foreach ($items as $index => $objects)
+                   {
+                       $result[$key][$index] = $objects;
+                   }
+               }
+               else
+               {
+                   $result[$key] = $this->paginationFormat($items->toArray());
+               }
             }
         }
         else
@@ -116,53 +85,7 @@ class ItemFrontService extends ItemService
             }
         }
 
-
         return $result;
-//        $data = [];
-//
-//        // 這邊有 featured 和 items
-//        foreach ($all as $key => $items)
-//        {
-//            if ($items->count() > 0)
-//            {
-//                $content_type = $items[0]->category->content_type;
-//                if ($content_type == 'timeline')
-//                {
-//                    $data = [];
-//                    foreach ($items as $item)
-//                    {
-//                        foreach ($item->extrafields as $extrafield)
-//                        {
-//                            if (array_key_exists('timeline', $extrafield->params) && (int)$extrafield->params['timeline'] == 1)
-//                            {
-//                                $time   = Carbon::parse($extrafield->value);
-//                                $units  = explode('-', $extrafield->params['format']);
-//
-//                                $this->filterByDatetimeFormat($data, $units, $time, $item);
-//                            }
-//                        }
-//                    }
-//                    krsort($data);
-//
-//                    $items = $data;
-//                }
-//            }
-//
-//            if (($key == 'featured' && (int)$params['featured_paginate']) ||
-//                ($key == 'normal' && (int)$params['paginate']))
-//            {
-//                $data[$key] = $this->paginationFormat($items->toArray());
-//            }
-//            else
-//            {
-//                $data[$key] = $items;
-//            }
-//        }
-//
-//
-//        $this->response = $data;
-//
-//        return $data;
     }
 
 
@@ -377,6 +300,46 @@ class ItemFrontService extends ItemService
     }
 
 
+    public function getSearchFilter($data)
+    {
+        $filters = [];
+        foreach ($data['data'] as $item)
+        {
+            $item_publish_up = strtotime($item['publish_up']);
+            $item_year       = date('Y', $item_publish_up);
+            $item_month      = date('m', $item_publish_up);
+
+            $find_year = false;
+            foreach ($filters as $key => $filter)
+            {
+                if($filter['year'] == $item_year)
+                {
+                    $find_year  = true;
+                    if (in_array($item_month, $filter['month']))
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        $filters[$key]['month'][] = $item_month;
+                        break;
+                    }
+                }
+            }
+
+            $obj = [];
+            if (!$find_year)
+            {
+                $obj['year']    = $item_year;
+                $obj['month'][] = $item_month;
+                $filters[]      = $obj;
+            }
+        }
+
+        return $filters;
+    }
+
+
     public function search(Collection $input, $paginate = true)
     {
         $input->put('paginate', $paginate);
@@ -421,9 +384,9 @@ class ItemFrontService extends ItemService
 
         $data = $this->paginationFormat($items->toArray());
 
-        if (config('cms.item.front.year_month_filter'))
+        if (config('cms.item.front.search_filter'))
         {
-            $data['filter'] = $this->filterYearMonth($data);
+            $data['filter'] = $this->getSearchfilter($data);
         }
 
         $this->response = $items;

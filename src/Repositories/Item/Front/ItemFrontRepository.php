@@ -83,6 +83,27 @@ class ItemFrontRepository extends ItemRepository
                     ->orderBy($params['item_order_by'], $params['item_order'])
                     ->orderBy('publish_up', 'desc')
                     ->paginate($item_count);
+
+                if ($params['split_items_by_categories'])
+                {
+                    $data['all'] = $all_items;
+                    foreach ($this->getParamsIds($params, 'category_ids') as $category_id)
+                    {
+                        $category = $this->categoryFrontRepository->find($category_id);
+
+                        $data[$category->title] = $this->model
+                            ->whereIn('category_id', [$category_id])
+                            ->where('state', 1)
+                            ->whereIn('access', $params['access_ids'])
+                            ->orderBy($params['featured_order_by'], $params['featured_order'])
+                            ->orderBy('publish_up', 'desc')
+                            ->paginate($item_count);
+                    }
+                }
+                else
+                {
+                    $data = $all_items;
+                }
             }
             // 需要置頂
             else
@@ -112,29 +133,69 @@ class ItemFrontRepository extends ItemRepository
 
                 $request_page = Request::get('page') == '' ? 1 : Request::get('page');
                 $merge_items  = $featured_items->merge($mixed_items);
+
                 $all_items    = $this->paginate($merge_items, $item_count, $request_page, []);
-            }
 
-
-            if ($params['split_items_by_categories'])
-            {
-                $data['all'] = $all_items;
-                foreach ($this->getParamsIds($params, 'category_ids') as $category_id)
+                if ($params['split_items_by_categories'])
                 {
-                    $category = $this->categoryFrontRepository->find($category_id);
+                    $data['all']['featured'] = array_values($all_items->filter(function ($item, $key){
+                        return $item->featured == 1;
+                    })->all());
 
-                    $data[$category->title] = $this->model
-                        ->whereIn('category_id', [$category_id])
-                        ->where('state', 1)
-                        ->whereIn('access', $params['access_ids'])
-                        ->orderBy($params['item_order_by'], $params['item_order'])
-                        ->orderBy('publish_up', 'desc')
-                        ->paginate($item_count);
+                    $data['all']['mixed'] = array_values($all_items->filter(function ($item, $key){
+                        return $item->featured == 0;
+                    })->all());
+
+                    $data['all']['pagination'] = $this->paginationFormat($all_items->toArray())['pagination'];
+
+
+                    foreach ($this->getParamsIds($params, 'category_ids') as $category_id)
+                    {
+                        $category = $this->categoryFrontRepository->find($category_id);
+
+                        $sub_featured_items = $this->model
+                            ->whereIn('category_id', [$category_id])
+                            ->where('state', 1)
+                            ->where('featured', 1)
+                            ->whereIn('access', $params['access_ids'])
+                            ->orderBy($params['featured_order_by'], $params['featured_order'])
+                            ->orderBy('publish_up', 'desc')
+                            ->limit($params['featured_count'])
+                            ->get();
+
+                        $sub_featured_items_ids = $featured_items->map(function ($item){
+                            return $item->id;
+                        });
+
+                        $sub_mixed_items = $this->model
+                            ->whereIn('category_id', [$category_id])
+                            ->whereNotIn('id', $featured_items_ids)
+                            ->where('state', 1)
+                            ->whereIn('access', $params['access_ids'])
+                            ->orderBy($params['item_order_by'], $params['item_order'])
+                            ->orderBy('publish_up', 'desc')
+                            ->get();
+
+                        $sub_merge_items  = $sub_featured_items->merge($sub_mixed_items);
+
+                        $sub_all_items    = $this->paginate($sub_merge_items, $item_count, $request_page, []);
+
+                        $data[$category->title]['featured'] = array_values($sub_all_items->filter(function ($item, $key){
+                            return $item->featured == 1;
+                        })->all());
+
+                        $data[$category->title]['mixed'] = array_values($sub_all_items->filter(function ($item, $key){
+                            return $item->featured == 0;
+                        })->all());
+
+                        $data[$category->title]['pagination'] = $this->paginationFormat($sub_all_items->toArray())['pagination'];
+
+                    }
                 }
-            }
-            else
-            {
-                $data = $all_items;
+                else
+                {
+                    $data = $all_items;
+                }
             }
         }
         // only featured
@@ -404,5 +465,25 @@ class ItemFrontRepository extends ItemRepository
             ->whereIn('access', $params['access_ids'])
             ->orderBy($params['order_by'], $params['order'])
             ->get();
+    }
+
+
+    public function paginationFormat($items)
+    {
+        $data = [];
+
+        if (array_key_exists('data', $items))
+        {
+            $data['data'] = $items['data'];
+            unset($items['data']);
+            $data['pagination'] = $items;
+        }
+        else
+        {
+            $data['data'] = $items;
+            $data['paginate'] = [];
+        }
+
+        return $data;
     }
 }
