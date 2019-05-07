@@ -42,7 +42,7 @@ class ItemStorePost extends AdminRequest
             'hits'                  => 'nullable|integer',
             'access'                => 'nullable|integer',
             'featured'              => [
-                'required',
+                'nullable',
                 Rule::in([0,1])
             ],
             'featured_ordering'     => 'nullable|integer',
