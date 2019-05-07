@@ -44,7 +44,7 @@ class ItemFrontRepository extends ItemRepository
 
         $query = !$mixed ? $query->where('featured', $featured) : $query;
 
-        return $query->paginate($item_count);
+        return $item_count ? $query->paginate($item_count) : $query->paginate($this->infinity);
     }
 
 
@@ -87,57 +87,20 @@ class ItemFrontRepository extends ItemRepository
             // 不需要置頂
             if ($params['split_items_by_featured'] == 0)
             {
-//                $all_items = $this->model
-//                    ->whereIn('category_id', $this->getParamsIds($params, 'category_ids'))
-//                    ->where('state', 1)
-//                    ->whereIn('access', $params['access_ids'])
-//                    ->orderBy($params['item_order_by'], $params['item_order'])
-//                    ->orderBy('publish_up', 'desc')
-//                    ->paginate($item_count);
-
                 $all_items = $this->getCategoriesItems($category_ids, $params, $item_count, 0, true);
-
                 $data = $this->getCategoriesSplitItems($params['split_items_by_categories'], $all_items, $params, $item_count, 0, true);
-//                if ($params['split_items_by_categories'])
-//                {
-//                    $data['all'] = $all_items;
-//                    foreach ($this->getParamsIds($params, 'category_ids') as $category_id)
-//                    {
-//                        $category = $this->categoryFrontRepository->find($category_id);
-//
-//                        $data[$category->title] = $this->model
-//                            ->whereIn('category_id', [$category_id])
-//                            ->where('state', 1)
-//                            ->whereIn('access', $params['access_ids'])
-//                            ->orderBy($params['item_order_by'], $params['item_order_by'])
-//                            ->orderBy('publish_up', 'desc')
-//                            ->paginate($item_count);
-//                    }
-//                }
-//                else
-//                {
-//                    $data = $all_items;
-//                }
             }
             // 需要置頂
             else
             {
-                $featured_items = $this->model
-                    ->whereIn('category_id', $this->getParamsIds($params, 'category_ids'))
-                    ->where('state', 1)
-                    ->where('featured', 1)
-                    ->whereIn('access', $params['access_ids'])
-                    ->orderBy($params['featured_order_by'], $params['featured_order'])
-                    ->orderBy('publish_up', 'desc')
-                    ->limit($params['featured_count'])
-                    ->get();
-
+                $featured_count     = $params['featured_count'];
+                $featured_items     = $this->getCategoriesItems($category_ids, $params, $featured_count, 1, false);
                 $featured_items_ids = $featured_items->map(function ($item){
                     return $item->id;
                 });
 
                 $mixed_items = $this->model
-                    ->whereIn('category_id', $this->getParamsIds($params, 'category_ids'))
+                    ->whereIn('category_id', $category_ids)
                     ->whereNotIn('id', $featured_items_ids)
                     ->where('state', 1)
                     ->whereIn('access', $params['access_ids'])
@@ -145,45 +108,42 @@ class ItemFrontRepository extends ItemRepository
                     ->orderBy('publish_up', 'desc')
                     ->get();
 
-                $request_page = Request::get('page') == '' ? 1 : Request::get('page');
-                $merge_items  = $featured_items->merge($mixed_items);
+                $request_page   = Request::get('page') == '' ? 1 : Request::get('page');
+                $merge_items    = $featured_items->merge($mixed_items);
 
-                $all_items    = $this->paginate($merge_items, $item_count, $request_page, []);
+                $all_items      = $this->paginate($merge_items, $item_count, $request_page, []);
 
                 if ($params['split_items_by_categories'])
                 {
-                    $data['all']['featured'] = array_values($all_items->filter(function ($item, $key){
-                        return $item->featured == 1;
-                    })->all());
-
-                    $data['all']['mixed'] = array_values($all_items->filter(function ($item, $key){
-                        return $item->featured == 0;
-                    })->all());
+                    $featured_counter = 0;
+                    $data['all']['featured'] = collect();
+                    $data['all']['mixed']    = collect();
+                    foreach ($all_items as $item)
+                    {
+                        if ($item->featured == 1 && $featured_counter <= $featured_count)
+                        {
+                            $data['all']['featured']->push($item);
+                        }
+                        else
+                        {
+                            $data['all']['mixed']->push($item);
+                        }
+                    }
 
                     $data['all']['pagination'] = $this->paginationFormat($all_items->toArray())['pagination'];
 
-
-                    foreach ($this->getParamsIds($params, 'category_ids') as $category_id)
+                    foreach ($category_ids as $category_id)
                     {
                         $category = $this->categoryFrontRepository->find($category_id);
 
-                        $sub_featured_items = $this->model
-                            ->whereIn('category_id', [$category_id])
-                            ->where('state', 1)
-                            ->where('featured', 1)
-                            ->whereIn('access', $params['access_ids'])
-                            ->orderBy($params['featured_order_by'], $params['featured_order'])
-                            ->orderBy('publish_up', 'desc')
-                            ->limit($params['featured_count'])
-                            ->get();
-
-                        $sub_featured_items_ids = $featured_items->map(function ($item){
+                        $sub_featured_items     = $this->getCategoriesItems([$category_id], $params, $featured_count, 1, false);
+                        $sub_featured_items_ids = $sub_featured_items->map(function ($item){
                             return $item->id;
                         });
 
                         $sub_mixed_items = $this->model
                             ->whereIn('category_id', [$category_id])
-                            ->whereNotIn('id', $featured_items_ids)
+                            ->whereNotIn('id', $sub_featured_items_ids)
                             ->where('state', 1)
                             ->whereIn('access', $params['access_ids'])
                             ->orderBy($params['item_order_by'], $params['item_order'])
@@ -194,16 +154,22 @@ class ItemFrontRepository extends ItemRepository
 
                         $sub_all_items    = $this->paginate($sub_merge_items, $item_count, $request_page, []);
 
-                        $data[$category->title]['featured'] = array_values($sub_all_items->filter(function ($item, $key){
-                            return $item->featured == 1;
-                        })->all());
-
-                        $data[$category->title]['mixed'] = array_values($sub_all_items->filter(function ($item, $key){
-                            return $item->featured == 0;
-                        })->all());
+                        $featured_counter = 0;
+                        $data[$category->title]['featured'] = collect();
+                        $data[$category->title]['mixed']    = collect();
+                        foreach ($all_items as $item)
+                        {
+                            if ($item->featured == 1 && $featured_counter <= $featured_count)
+                            {
+                                $data[$category->title]['featured']->push($item);
+                            }
+                            else
+                            {
+                                $data[$category->title]['mixed']->push($item);
+                            }
+                        }
 
                         $data[$category->title]['pagination'] = $this->paginationFormat($sub_all_items->toArray())['pagination'];
-
                     }
                 }
                 else

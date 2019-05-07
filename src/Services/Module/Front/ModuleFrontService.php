@@ -58,8 +58,6 @@ class ModuleFrontService extends ModuleService
             $item_params['order']           = $params['item_order'];
             $item_params['limit']           = $params['item_count'];
 
-
-
             if ($params['with_items'] == 'self')
             {
                 $item_params['category_ids'] = $category_ids;
