@@ -127,14 +127,6 @@ class ModuleFrontService extends ModuleService
     }
 
 
-    public function getLatestItemsModule($params)
-    {
-        $items = $this->itemFrontService->getLatestItemsModule($params);
-
-        return $items;
-    }
-
-
     public function getMenusModule($params, $language)
     {
         $menu_ids = [];
@@ -189,10 +181,6 @@ class ModuleFrontService extends ModuleService
         elseif ($module->category->alias == 'categories')
         {
             $items = $this->getCategoriesModule($module->params);
-        }
-        elseif ($module->category->alias == 'latest-items')
-        {
-            $items = $this->getLatestItemsModule($module->params);
         }
         elseif ($module->category->alias == 'menus')
         {

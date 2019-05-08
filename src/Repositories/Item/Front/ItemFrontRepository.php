@@ -174,7 +174,21 @@ class ItemFrontRepository extends ItemRepository
                 }
                 else
                 {
-                    $data = $all_items;
+                    $featured_counter = 0;
+                    $data['featured'] = collect();
+                    $data['mixed']    = collect();
+                    foreach ($all_items as $item)
+                    {
+                        if ($item->featured == 1 && $featured_counter <= $featured_count)
+                        {
+                            $data['featured']->push($item);
+                        }
+                        else
+                        {
+                            $data['mixed']->push($item);
+                        }
+                    }
+                    $data['pagination'] = $this->paginationFormat($all_items->toArray())['pagination'];
                 }
             }
         }

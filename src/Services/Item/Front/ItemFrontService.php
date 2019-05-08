@@ -51,10 +51,7 @@ class ItemFrontService extends ItemService
                        $result[$key][$index] = $objects;
                    }
                }
-               else
-               {
-                   $result[$key] = $this->paginationFormat($items->toArray());
-               }
+
             }
         }
         else
@@ -108,46 +105,6 @@ class ItemFrontService extends ItemService
 
             return $this->filterByDatetimeFormat($data[(int)$datetime->format($unit)], $units, $datetime, $item);
         }
-    }
-
-
-    public function getLatestItemsModule($params)
-    {
-        $data = [];
-
-        $data['all'] = $this->getLatestItems($params, $params['creator_groups'] );
-
-        foreach ($params['creator_groups'] as $creator_group)
-        {
-            $group = $this->userGroupFrontService->find($creator_group);
-            $data[$group->title] = $this->getLatestItems($params, [$creator_group]);
-        }
-        return $data;
-    }
-
-
-    public function getLatestItems($params, $creator_groups = [])
-    {
-        $data = [];
-
-        $featured_setting   = $params['featured'];
-        $item_setting       = $params['item'];
-
-        if ($featured_setting['limit']  == 0) {
-            $data['featured'] = [];
-        }
-        else {
-            $data['featured'] = $this->repo->getLatestItems(1, $params['category_ids'], $featured_setting, $this->access_ids, $creator_groups);
-        }
-
-        if ($item_setting['limit']  == 0) {
-            $data['items'] = [];
-        }
-        else {
-            $data['items'] = $this->repo->getLatestItems(0, $params['category_ids'], $item_setting, $this->access_ids, $creator_groups);
-        }
-        
-        return $data;
     }
 
 
