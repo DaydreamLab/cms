@@ -120,9 +120,10 @@ class ItemFrontRepository extends ItemRepository
                     $data['all']['mixed']    = collect();
                     foreach ($all_items as $item)
                     {
-                        if ($item->featured == 1 && $featured_counter <= $featured_count)
+                        if ($item->featured == 1 && $featured_counter < $featured_count)
                         {
                             $data['all']['featured']->push($item);
+                            $featured_counter++;
                         }
                         else
                         {
@@ -159,9 +160,10 @@ class ItemFrontRepository extends ItemRepository
                         $data[$category->title]['mixed']    = collect();
                         foreach ($all_items as $item)
                         {
-                            if ($item->featured == 1 && $featured_counter <= $featured_count)
+                            if ($item->featured == 1 && $featured_counter < $featured_count)
                             {
                                 $data[$category->title]['featured']->push($item);
+                                $featured_counter++;
                             }
                             else
                             {
@@ -179,9 +181,10 @@ class ItemFrontRepository extends ItemRepository
                     $data['mixed']    = collect();
                     foreach ($all_items as $item)
                     {
-                        if ($item->featured == 1 && $featured_counter <= $featured_count)
+                        if ($item->featured == 1 && $featured_counter < $featured_count)
                         {
                             $data['featured']->push($item);
+                            $featured_counter++;
                         }
                         else
                         {
