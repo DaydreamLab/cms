@@ -350,6 +350,7 @@ class ItemFrontService extends ItemService
         if (config('cms.item.front.search_filter'))
         {
             $copy->forget('paginate');
+            $copy->forget('searchg');
             $copy->put('paginate', false);
             $temp = parent::search($copy);
             $data['filter'] = $this->getSearchfilter($temp);
