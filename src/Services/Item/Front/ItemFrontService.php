@@ -295,7 +295,7 @@ class ItemFrontService extends ItemService
         }
 
         usort($filters, function ($a, $b){
-            return strcmp($b['year'], $a['year']g);
+            return strcmp($b['year'],$a['year']);
         });
 
         return $filters;
