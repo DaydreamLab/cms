@@ -257,11 +257,11 @@ class ItemFrontService extends ItemService
     }
 
 
-    public function getSearchFilter($data)
+    public function getSearchFilter($items)
     {
         $filters = [];
 
-        foreach ($data['data'] as $item)
+        foreach ($items as $item)
         {
             $item_publish_up = Carbon::parse($item['publish_up']);
             $item_year       = (int)$item_publish_up->format('Y');
@@ -295,7 +295,7 @@ class ItemFrontService extends ItemService
         }
 
         usort($filters, function ($a, $b){
-            return strcmp($a['year'], $b['year']);
+            return strcmp($b['year'], $a['year']g);
         });
 
         return $filters;
@@ -341,15 +341,18 @@ class ItemFrontService extends ItemService
         $input->forget('special_queries');
         $input->put('special_queries', $special_queries);
         $input->put('state', 1);
+        $copy = Helper::collect($input->toArray());
 
-        $original_items = $items = parent::search($input);
+        $items = parent::search($input);
 
         $data = $this->paginationFormat($items->toArray());
 
         if (config('cms.item.front.search_filter'))
         {
-            $data['filter'] = $this->getSearchfilter($data);
-
+            $copy->forget('paginate');
+            $copy->put('paginate', false);
+            $temp = parent::search($copy);
+            $data['filter'] = $this->getSearchfilter($temp);
         }
 
         $this->response = $data;
@@ -357,7 +360,7 @@ class ItemFrontService extends ItemService
 
         event(new Search($input, $this->user));
 
-        return $original_items;
+        return $items;
     }
 
 
