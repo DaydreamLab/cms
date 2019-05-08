@@ -1,6 +1,6 @@
 webpackJsonp([4],{
 
-/***/ 117:
+/***/ 169:
 /***/ (function(module, exports) {
 
 /**
@@ -34,7 +34,59 @@ module.exports = function listToStyles (parentId, list) {
 
 /***/ }),
 
-/***/ 263:
+/***/ 23:
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(508)
+}
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(510)
+/* template */
+var __vue_template__ = __webpack_require__(511)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-2d5fa488"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/admin/views/error/404.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2d5fa488", Component.options)
+  } else {
+    hotAPI.reload("data-v-2d5fa488", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 261:
 /***/ (function(module, exports) {
 
 /*
@@ -117,7 +169,7 @@ function toComment(sourceMap) {
 
 /***/ }),
 
-/***/ 264:
+/***/ 262:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -136,7 +188,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(117)
+var listToStyles = __webpack_require__(169)
 
 /*
 type StyleObject = {
@@ -346,69 +398,17 @@ function applyToTag (styleElement, obj) {
 
 /***/ }),
 
-/***/ 268:
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(310)
-}
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(312)
-/* template */
-var __vue_template__ = __webpack_require__(313)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = "data-v-2d5fa488"
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/admin/views/error/404.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-2d5fa488", Component.options)
-  } else {
-    hotAPI.reload("data-v-2d5fa488", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-
-/***/ 310:
+/***/ 508:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(311);
+var content = __webpack_require__(509);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(264)("6c30a608", content, false, {});
+var update = __webpack_require__(262)("6c30a608", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -425,10 +425,10 @@ if(false) {
 
 /***/ }),
 
-/***/ 311:
+/***/ 509:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(263)(false);
+exports = module.exports = __webpack_require__(261)(false);
 // imports
 
 
@@ -440,7 +440,7 @@ exports.push([module.i, "/* Colors -------------------------- */\n/* Link ------
 
 /***/ }),
 
-/***/ 312:
+/***/ 510:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -464,7 +464,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 313:
+/***/ 511:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
