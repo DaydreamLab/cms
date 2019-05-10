@@ -343,10 +343,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             value: "-2",
             text: this.$t("TRASHED")
           }]
+        }, {
+          key: "language",
+          type: "select",
+          desc: this.$t("OPTION_LANGUAGE"),
+          clearable: true,
+          list: this.$store.getters.language_list,
+          custom_attrs: {
+            label: "title",
+            value: "sef"
+          }
         }],
         default_value: {
           search: "",
-          state: ""
+          state: "",
+          language: ""
         }
       }
     };

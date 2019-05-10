@@ -1,6 +1,6 @@
 {
-  "sourceDirPath": "../../../../cms/public/admin/",
+  "sourceDirPath": "../../../public/admin/",
   "targetPublicDirPath": "public/admin",
-  "sourceViewPath": "../../../../cms//resources/views/admin/",
+  "sourceViewPath": "../../../resources/views/admin/",
   "targetViewPath": "resources/admin"
 }

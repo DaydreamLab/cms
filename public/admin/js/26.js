@@ -1018,11 +1018,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       var _this3 = this;
 
       // update user routes
-      this.$$api_user_getRoutes({
+      this.$$api_user_getPages({
         fn: function fn(_ref5) {
           var data = _ref5.data;
+          var assets = data.items.assets;
 
-          _this3.$store.dispatch("update_user_routes", { routes: data.items }).then(function () {
+          _this3.$store.dispatch("update_user_routes", { routes: assets }).then(function () {
             _this3.$router.push({
               path: _this3.$route.path.replace("/edit", ""),
               query: _this3.$router.go(-1)

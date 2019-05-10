@@ -1,20 +1,24 @@
 webpackJsonp([80],{
 
-/***/ 104:
+/***/ 109:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(429)
+}
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(383)
+var __vue_script__ = __webpack_require__(431)
 /* template */
-var __vue_template__ = __webpack_require__(384)
+var __vue_template__ = __webpack_require__(451)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = null
+var __vue_scopeId__ = "data-v-6042c5f6"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -25,7 +29,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/admin/views/content/item/list.vue"
+Component.options.__file = "resources/assets/admin/views/content/category/components/item.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +38,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-525be48f", Component.options)
+    hotAPI.createRecord("data-v-6042c5f6", Component.options)
   } else {
-    hotAPI.reload("data-v-525be48f", Component.options)
+    hotAPI.reload("data-v-6042c5f6", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,636 +52,520 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 288:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ 429:
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+// style-loader: Adds some css to the DOM by adding a <style> tag
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-    data: function data() {
-        return {
-            list: [],
-            list_loading: {
-                flag: false
-            },
-            paginations: {
-                current_page: 1,
-                total: 0,
-                page_size: 10,
-                page_sizes: [10, 15, 20, 25, 50, 100],
-                layout: "total, sizes, prev, pager, next, jumper"
-            }
-        };
-    },
-
-    watch: {
-        $route: {
-            handler: "$initList",
-            immediate: true
-        }
-    },
-    methods: {
-        $onClickBtnAdd: function $onClickBtnAdd() {
-            this.$router.push(this.$route.path + "/edit");
-        },
-        $onClickBntEdit: function $onClickBntEdit(query) {
-            this.$router.push({
-                path: this.$route.path + "/edit",
-                query: _extends({}, query, {
-                    from: this.$route.query
-                })
-            });
-        },
-        $onSearchReset: function $onSearchReset() {
-            this.$router.push({
-                path: this.$route.path
-            });
-        },
-        $onSearch: function $onSearch(_ref) {
-            var data = _ref.data;
-
-            var sd = {};
-
-            var query = this.$route.query;
-
-            for (var p in query) {
-                sd[p] = query[p];
-            }
-            for (var s in data) {
-                sd[s] = data[s];
-                if (!sd[s]) {
-                    delete sd[s];
-                }
-            }
-
-            this.$router.push({
-                path: this.$route.path,
-                query: sd
-            });
-        },
-        setRouteQuery: function setRouteQuery(field, value) {
-            var query = Object.assign({}, this.$route.query);
-
-            if ((typeof field === "undefined" ? "undefined" : _typeof(field)) === "object") {
-                query = field;
-            } else {
-                query[field] = value;
-            }
-
-            return query;
-        },
-        getRouteQuery: function getRouteQuery() {
-            var _this = this;
-
-            var query = this.$route.query;
-            var intArray = ["id", "pid", "category_id", "access"];
-            var dateArray = ["start_date", "end_date"];
-            var data = {};
-
-            Object.keys(query).forEach(function (field) {
-                _this.searchbar.default_value[field] = intArray.includes(field) ? parseInt(query[field]) : dateArray.includes(field) ? _this.$options.filters.storeDateFormat(query[field]) : query[field];
-                data[field] = query[field];
-            });
-            return data;
-        },
-        $onChangeCurrentPage: function $onChangeCurrentPage(page) {
-            var _this2 = this;
-
-            this.$onGetList({
-                page: page,
-                fn: function fn() {
-                    _this2.$router.push({
-                        path: _this2.$route.path,
-                        query: _this2.setRouteQuery("page", page)
-                    });
-                }
-            });
-        },
-        $onChangePageSize: function $onChangePageSize(pageSize) {
-            var _this3 = this;
-
-            this.$onGetList({
-                pageSize: pageSize,
-                fn: function fn() {
-                    _this3.$router.push({
-                        path: _this3.$route.path,
-                        query: _this3.setRouteQuery("page_size", pageSize)
-                    });
-                }
-            });
-        },
-        $onGetList: function $onGetList() {
-            var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-                page = _ref2.page,
-                pageSize = _ref2.pageSize,
-                where = _ref2.where,
-                fn = _ref2.fn;
-
-            this.list_loading.flag = true;
-
-            var query = this.$route.query;
-
-            this.paginations.current_page = page || parseInt(query.page) || 1;
-            this.paginations.page_size = pageSize || parseInt(query.page_size) || this.paginations.page_size;
-
-            var page_data = Object.assign(this.getRouteQuery(), {
-                page: this.paginations.current_page,
-                limit: this.paginations.page_size
-            });
-            if (where) {
-                page_data = Object.assign(page_data, where || {});
-            }
-            this.handleGetList({ page_data: page_data, fn: fn });
-        },
-        $initList: function $initList() {
-            this.$onGetList();
-        }
-    }
-});
+// load the styles
+var content = __webpack_require__(430);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(256)("8ebb0d16", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6042c5f6\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Users/daydreamlab/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./item.vue", function() {
+     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6042c5f6\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Users/daydreamlab/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./item.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
 
 /***/ }),
 
-/***/ 295:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ 430:
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-/* harmony default export */ __webpack_exports__["a"] = ({
-    methods: {
-        $initList: function $initList() {
-            this.$set(this.toolbar, "type", this.$route.query.state === "-2" ? "trash" : "list");
-            this.$onGetList();
-        }
-    }
-});
+exports = module.exports = __webpack_require__(255)(false);
+// imports
+
+
+// module
+exports.push([module.i, "/* Colors -------------------------- */\n/* Link -------------------------- */\n/* Background -------------------------- */\n/* Border -------------------------- */\n/* Navbar -------------------------- */\n/* Sidebar -------------------------- */\n/* Tab -------------------------- */\n/* Icon -------------------------- */\n/* Item -------------------------- */\n.el-collapse-item__header[data-v-6042c5f6] {\n  cursor: auto;\n  padding-left: 8px;\n}\n.el-collapse-item__header.is-disabled[data-v-6042c5f6] {\n    cursor: not-allowed;\n    background: #e6e6e6;\n}\n", ""]);
+
+// exports
+
 
 /***/ }),
 
-/***/ 383:
+/***/ 431:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_option_mixin__ = __webpack_require__(289);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_list_mixin__ = __webpack_require__(288);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mixins_cms_list_mixin__ = __webpack_require__(295);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-
-
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "item-list",
-  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_option_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1_mixins_list_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2_mixins_cms_list_mixin__["a" /* default */]],
+  components: {
+    MediaInput: function MediaInput() {
+      return __webpack_require__.e/* import() */(81/* duplicate */).then(__webpack_require__.bind(null, 365));
+    },
+    FieldForm: function FieldForm() {
+      return __webpack_require__.e/* import() */(78).then(__webpack_require__.bind(null, 364));
+    }
+  },
+  props: {
+    category: {
+      type: Object,
+      default: function _default() {
+        return {};
+      }
+    },
+    data: {
+      type: Object,
+      default: function _default() {
+        return {};
+      }
+    },
+    type: {
+      type: String,
+      required: true
+    },
+
+    isActive: {
+      type: Boolean,
+      default: false
+    },
+    isDisabled: {
+      type: Boolean,
+      default: false
+    }
+  },
   data: function data() {
-    var _this = this;
-
     return {
-      sort: {
-        show: true
-      },
-      fields: [{
-        key: "title",
-        label: this.$t("FIELD_TITLE_LABEL"),
-        type: "editable",
-        width: 300
-      }, {
-        key: "featured",
-        label: this.$t("OPTION_FEATURED"),
-        type: "icon",
-        width: "80",
-        formatter: function formatter(item) {
-          return {
-            style: {
-              color: item === 1 ? "#fdd034" : "#cfd3da"
-            },
-            icon: ["fas", "star"]
-          };
-        }
-      }, {
-        key: "state",
-        label: this.$t("OPTION_STATE"),
-        type: "label",
-        width: "120",
-        formatter: function formatter(item) {
-          var item_text = {
-            "1": "PUBLISHED",
-            "0": "UNPUBLISHED",
-            "-1": "ARCHIVED",
-            "-2": "TRASHED",
-            "2": "PENDING",
-            "3": "EXPIRED"
-          };
-          return {
-            text: _this.$t(item_text[item]),
-            color: "item_state_" + item + "_color"
-          };
-        }
-      }, {
-        key: "category_title",
-        label: this.$t("OPTION_CATEGORY"),
-        width: "120"
-      }, {
-        key: "creator",
-        label: this.$t("LIST_DATA_AUTHOR_LABEL")
-      }, {
-        key: "updater",
-        label: this.$t("LIST_DATA_MODIFIED_BY_LABEL"),
-        width: "100"
-      }, {
-        key: "created_at",
-        label: this.$t("LIST_DATA_CREATED_DATE_LABEL"),
-        formatter: function formatter(item) {
-          return _this.$options.filters.displayDateFormat(item.created_at);
-        }
-      }, {
-        key: "updated_at",
-        label: this.$t("LIST_DATA_MODIFIED_DATE_LABEL"),
-        formatter: function formatter(item) {
-          return _this.$options.filters.displayDateFormat(item.updated_at);
-        }
-      }, {
-        key: "hits",
-        label: this.$t("LIST_DATA_HITS_LABEL")
-      }, {
-        key: "introimage",
-        label: this.$t("LIST_DATA_INTRO_IMAGE_LABEL"),
-        type: "icon",
-        sort: false,
-        formatter: function formatter(item) {
-          return {
-            icon: item ? ["fal", "image"] : ""
-          };
-        }
-      }, {
-        key: "image",
-        label: this.$t("LIST_DATA_IMAGE_LABEL"),
-        type: "icon",
-        sort: false,
-        formatter: function formatter(item) {
-          return {
-            icon: item ? ["fal", "image"] : ""
-          };
-        }
-      }, {
-        key: "language_title",
-        label: this.$t("OPTION_LANGUAGE"),
-        width: "100",
-        formatter: function formatter(item) {
-          return item.language === "*" ? _this.$t("ALL_LANGUAGE") : item.language_title;
-        }
-      }, {
-        key: "id",
-        label: this.$t("LIST_DATA_HEADING_ID"),
-        width: "60"
-      }],
-      toolbar: {
-        type: "list",
-        custom: [{
-          text: this.$t("TOOLBAR_PUBLISH"),
-          method: "updateState",
-          fn: function fn(_ref) {
-            var ids = _ref.ids;
-
-            _this.onClickBtnUpdateState({ ids: ids, state: 1 });
-          }
-        }, {
-          text: this.$t("TOOLBAR_UNPUBLISH"),
-          method: "updateState",
-          fn: function fn(_ref2) {
-            var ids = _ref2.ids;
-
-            _this.onClickBtnUpdateState({ ids: ids, state: 0 });
-          }
-        }, {
-          text: this.$t("TOOLBAR_FEATURED"),
-          method: "updateFeatured",
-          fn: function fn(_ref3) {
-            var ids = _ref3.ids;
-
-            _this.onClickBtnUpdatFeatured({ ids: ids, featured: 1 });
-          }
-        }, {
-          text: this.$t("TOOLBAR_UNFEATURED"),
-          method: "updateFeatured",
-          fn: function fn(_ref4) {
-            var ids = _ref4.ids;
-
-            _this.onClickBtnUpdatFeatured({ ids: ids, featured: 0 });
-          }
-        }, {
-          text: this.$t("TOOLBAR_CHECKOUT"),
-          method: "checkout",
-          fn: function fn(_ref5) {
-            var ids = _ref5.ids;
-
-            _this.onClickBtnCheckout({ ids: ids });
-          }
-        }]
-      },
-      searchbar: {
-        fields: [{
-          key: "search",
-          desc: this.$t("TOOLBAR_KEYWORDS"),
-          clearable: true
-        }, {
-          key: "featured",
-          type: "select",
-          desc: this.$t("OPTION_FEATURED"),
-          clearable: true,
-          list: [{
-            value: "1",
-            text: this.$t("FEATURED")
-          }, {
-            value: "0",
-            text: this.$t("NOT_FEATURED")
-          }]
-        }, {
-          key: "state",
-          type: "select",
-          desc: this.$t("OPTION_STATE"),
-          clearable: true,
-          list: [{
-            value: "1",
-            text: this.$t("PUBLISHED")
-          }, {
-            value: "0",
-            text: this.$t("UNPUBLISHED")
-          }, {
-            value: "-1",
-            text: this.$t("ARCHIVED")
-          }, {
-            value: "-2",
-            text: this.$t("TRASHED")
-          }]
-        }, {
-          key: "category_id",
-          type: "select",
-          desc: this.$t("OPTION_CATEGORY"),
-          clearable: true,
-          list: this.$store.getters.item_article_category_list,
-          custom_attrs: {
-            label: "tree_list_title",
-            value: "id"
-          }
-        }, {
-          key: "language",
-          type: "select",
-          desc: this.$t("OPTION_LANGUAGE"),
-          clearable: true,
-          list: this.$store.getters.language_list,
-          custom_attrs: {
-            label: "title",
-            value: "sef"
-          }
-        }, {
-          key: "access",
-          type: "select",
-          desc: this.$t("FIELD_ACCESS_LEVEL"),
-          clearable: true,
-          list: this.$store.getters.viewlevel_list,
+      fields: {
+        extrafield_group_id: {
+          list: this.$store.getters.extrafield_group_list,
           custom_attrs: {
             label: "title",
             value: "id"
           }
-        }],
-        default_value: {
-          search: "",
-          state: "",
-          featured: "",
-          category_id: "",
-          language: "",
-          access: ""
+        }
+      },
+      default_value: {
+        id: "",
+        title: "",
+        link: "",
+        introtext: "",
+        description: "",
+        category_id: "",
+        language: "",
+        image: "",
+        state: 1,
+        featured: 0,
+        extrafield_group_id: "",
+        extrafields: {}
+      },
+      save_loading: false,
+      form_label_map: {
+        slideshow: {
+          title: "Slide 標題",
+          image: "背景圖片"
+        },
+        link: {
+          image: "Logo",
+          title: "連結標題",
+          link: "連結網址",
+          description: "連結描述"
+        },
+        menu: {
+          title: "菜名",
+          introtext: "描述",
+          description: "價錢"
+        },
+        timeline: {
+          title: "標題",
+          description: "描述"
         }
       }
     };
   },
-  created: function created() {
-    this.$getFieldList({
-      item_article_category: 3,
-      language: 4,
-      viewlevel: 5
-    }, "searchbar");
+
+  computed: {
+    groupFields: function groupFields() {
+      return this.fields.extrafield_group_id.list[this.default_value.extrafield_group_id];
+    }
+  },
+  mounted: function mounted() {
+    this.onFillForm();
   },
 
   methods: {
-    /**
-     * list actions
-     */
-    onClickBtnCheckout: function onClickBtnCheckout(_ref6) {
+    onClickBtnDelete: function onClickBtnDelete(id) {
+      var _this = this;
+
+      this.$$api_item_delete({
+        data: { ids: [id] },
+        fn: function fn(_ref) {
+          var msg = _ref.msg;
+
+          _this.$message.success(msg);
+          _this.$emit("update");
+        }
+      });
+    },
+    onClickBtnSave: function onClickBtnSave() {
       var _this2 = this;
 
-      var data = _ref6.data,
-          ids = _ref6.ids;
+      this.save_loading = true;
 
-      var checkout_data = ids ? ids : [data.id];
-      this.$$api_item_checkout({
-        data: { ids: checkout_data },
-        fn: function fn(_ref7) {
-          var msg = _ref7.msg;
+      if (this.category) {
+        this.default_value.category_id = this.category.id;
+        this.default_value.language = this.category.language;
+      }
+
+      this.$$api_item_save({
+        data: this.default_value,
+        fn: function fn(_ref2) {
+          var data = _ref2.data,
+              msg = _ref2.msg;
 
           _this2.$message.success(msg);
-          _this2.$onGetList();
-        }
-      });
-    },
-    onOrderChange: function onOrderChange(_ref8) {
-      var _this3 = this;
-
-      var id = _ref8.id,
-          index_diff = _ref8.index_diff,
-          order = _ref8.order;
-
-      this.$$api_item_ordering({
-        data: {
-          id: id,
-          index_diff: index_diff,
-          order: order
+          _this2.$emit("update");
+          _this2.onUpdateActiveItem();
         },
-        fn: function fn(_ref9) {
-          var msg = _ref9.msg;
-
-          _this3.$message.success(msg);
+        finalFn: function finalFn() {
+          _this2.save_loading = false;
         }
       });
     },
-    onSortChange: function onSortChange(order) {
-      this.$onGetList({
-        where: { order_by: "ordering", order: order.replace("ending", "") }
-      });
+    onUpdateActiveItem: function onUpdateActiveItem(id) {
+      this.$emit("updateActive", id);
     },
-
-    /**
-     * Toolbar
-     */
-    onClickBtnUpdatFeatured: function onClickBtnUpdatFeatured(_ref10) {
-      var _this4 = this;
-
-      var ids = _ref10.ids,
-          featured = _ref10.featured;
-
-      this.$$api_item_updateFeatured({
-        data: {
-          ids: ids,
-          featured: featured
-        },
-        fn: function fn(_ref11) {
-          var msg = _ref11.msg;
-
-          _this4.$message.success(msg);
-          _this4.$onGetList();
-        }
-      });
-    },
-    onClickBtnBatchTrash: function onClickBtnBatchTrash(_ref12) {
-      var ids = _ref12.ids,
-          state = _ref12.state;
-
-      this.onClickBtnUpdateState({ ids: ids, state: state });
-    },
-    onClickBtnBatchRestore: function onClickBtnBatchRestore(_ref13) {
-      var ids = _ref13.ids,
-          state = _ref13.state;
-
-      this.onClickBtnUpdateState({ ids: ids, state: state });
-    },
-    onClickBtnUpdateState: function onClickBtnUpdateState(_ref14) {
-      var _this5 = this;
-
-      var ids = _ref14.ids,
-          state = _ref14.state;
-
-      this.$$api_item_updateState({
-        data: {
-          ids: ids,
-          state: state
-        },
-        fn: function fn(_ref15) {
-          var msg = _ref15.msg;
-
-          _this5.$message.success(msg);
-          _this5.$onGetList();
-        }
-      });
-    },
-    onClickBtnBatchDelete: function onClickBtnBatchDelete(_ref16) {
-      var _this6 = this;
-
-      var ids = _ref16.ids,
-          datas = _ref16.datas;
-
-      this.$confirm(this.$t("GLOBAL_CONFIRM_DELETE")).then(function () {
-        _this6.$$api_item_delete({
-          data: { ids: ids },
-          fn: function fn(_ref17) {
-            var data = _ref17.data;
-
-            _this6.$onGetList();
-          }
-        });
-      });
-    },
-    handleEditQuery: function handleEditQuery(_ref18) {
-      var data = _ref18.data;
-
-      this.$onClickBntEdit({
-        id: data.id
-      });
-    },
-    handleGetList: function handleGetList() {
-      var _this7 = this;
-
-      var _ref19 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-          page_data = _ref19.page_data,
-          _fn = _ref19.fn;
-
-      this.$$api_item_list({
-        data: page_data,
-        fn: function fn(_ref20) {
-          var data = _ref20.data;
-
-          _this7.list_loading.flag = false;
-          _this7.list = data.items;
-          _this7.paginations.total = data.pagination.total;
-
-          _fn && _fn();
-        }
-      });
+    onFillForm: function onFillForm() {
+      this.default_value = _extends({}, this.default_value, this.data);
     }
   }
 });
 
 /***/ }),
 
-/***/ 384:
+/***/ 451:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("ListData", {
-        ref: "list-data",
-        attrs: {
-          List: _vm.list,
-          ListLoading: _vm.list_loading,
-          Sort: _vm.sort,
-          Pagination: _vm.paginations,
-          Toolbar: _vm.toolbar,
-          Searchbar: _vm.searchbar,
-          FieldList: _vm.fields
-        },
-        on: {
-          onClickBtnAdd: _vm.$onClickBtnAdd,
-          onClickBtnEdit: _vm.handleEditQuery,
-          onClickBtnBatchTrash: _vm.onClickBtnBatchTrash,
-          onClickBtnBatchRestore: _vm.onClickBtnBatchRestore,
-          onClickBtnBatchDelete: _vm.onClickBtnBatchDelete,
-          onClickBtnCheckout: _vm.onClickBtnCheckout,
-          onChangeCurrentPage: _vm.$onChangeCurrentPage,
-          onChangePageSize: _vm.$onChangePageSize,
-          onSearch: _vm.$onSearch,
-          onSearchReset: _vm.$onSearchReset,
-          onOrderChange: _vm.onOrderChange,
-          onSortChange: _vm.onSortChange
-        }
-      })
-    ],
-    1
-  )
+  return _c("div", { staticClass: "el-collapse-item" }, [
+    _c(
+      "div",
+      {
+        staticClass: "el-collapse-item__header",
+        class: { "is-disabled": _vm.isDisabled }
+      },
+      [
+        _c(
+          "el-button",
+          {
+            staticClass: "sortable-handler",
+            attrs: { disabled: _vm.isDisabled, type: "text" }
+          },
+          [_c("font-awesome-icon", { attrs: { icon: ["fal", "arrows"] } })],
+          1
+        ),
+        _vm._v("\n    " + _vm._s(_vm.data.title) + "\n    "),
+        _c(
+          "div",
+          { staticClass: "el-collapse-item__arrow" },
+          [
+            _vm.isActive
+              ? [
+                  _c(
+                    "el-tooltip",
+                    {
+                      attrs: {
+                        effect: "dark",
+                        content: _vm.$t("TOOLBAR_CANCEL" /*取消*/),
+                        placement: "top-start"
+                      }
+                    },
+                    [
+                      _c(
+                        "el-button",
+                        {
+                          attrs: { size: "small", plain: "" },
+                          on: {
+                            click: function($event) {
+                              _vm.onUpdateActiveItem()
+                            }
+                          }
+                        },
+                        [
+                          _c("font-awesome-icon", {
+                            attrs: { icon: ["fal", "times"] }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "el-tooltip",
+                    {
+                      attrs: {
+                        effect: "dark",
+                        content: _vm.$t("TOOLBAR_SAVE" /*儲存*/),
+                        placement: "top-start"
+                      }
+                    },
+                    [
+                      _c(
+                        "el-button",
+                        {
+                          attrs: {
+                            loading: _vm.save_loading,
+                            type: "primary",
+                            size: "small"
+                          },
+                          on: { click: _vm.onClickBtnSave }
+                        },
+                        [
+                          _c("font-awesome-icon", {
+                            attrs: { icon: ["fal", "save"] }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ]
+              : [
+                  _c(
+                    "el-tooltip",
+                    {
+                      attrs: {
+                        effect: "dark",
+                        content: _vm.$t("TOOLBAR_EDIT" /*編輯*/),
+                        placement: "top-start"
+                      }
+                    },
+                    [
+                      _c(
+                        "el-button",
+                        {
+                          attrs: {
+                            disabled: _vm.isDisabled,
+                            type: "primary",
+                            size: "small",
+                            plain: ""
+                          },
+                          on: {
+                            click: function($event) {
+                              _vm.onUpdateActiveItem(_vm.data.id)
+                            }
+                          }
+                        },
+                        [
+                          _c("font-awesome-icon", {
+                            attrs: { icon: ["fal", "edit"] }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "el-tooltip",
+                    {
+                      attrs: {
+                        effect: "dark",
+                        content: _vm.$t("TOOLBAR_DELETE" /*刪除*/),
+                        placement: "top-start"
+                      }
+                    },
+                    [
+                      _c(
+                        "el-button",
+                        {
+                          attrs: {
+                            disabled: _vm.isDisabled,
+                            type: "danger",
+                            size: "small",
+                            plain: ""
+                          },
+                          on: {
+                            click: function($event) {
+                              _vm.onClickBtnDelete(_vm.data.id)
+                            }
+                          }
+                        },
+                        [
+                          _c("font-awesome-icon", {
+                            attrs: { icon: ["fal", "trash-alt"] }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ]
+          ],
+          2
+        )
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _vm.isActive
+      ? _c(
+          "div",
+          { staticClass: "el-collapse-item__wrap" },
+          [
+            _c(
+              "el-form",
+              { ref: "form-data", attrs: { model: _vm.default_value } },
+              [
+                _vm._l(_vm.form_label_map[_vm.type], function(value, key) {
+                  return [
+                    key === "image"
+                      ? _c(
+                          "el-form-item",
+                          {
+                            attrs: {
+                              prop: key,
+                              label: _vm.form_label_map[_vm.type][key]
+                            }
+                          },
+                          [
+                            _c("MediaInput", {
+                              attrs: { Data: _vm.default_value[key] },
+                              on: {
+                                onClickBtnSelect: function(value) {
+                                  return (_vm.default_value[key] = value)
+                                }
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      : _c(
+                          "el-form-item",
+                          {
+                            attrs: {
+                              prop: key,
+                              label: _vm.form_label_map[_vm.type][key]
+                            }
+                          },
+                          [
+                            _c("el-input", {
+                              model: {
+                                value: _vm.default_value[key],
+                                callback: function($$v) {
+                                  _vm.$set(_vm.default_value, key, $$v)
+                                },
+                                expression: "default_value[key]"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                  ]
+                }),
+                _vm._v(" "),
+                _vm.groupFields && "extrafields" in _vm.groupFields
+                  ? _c("FieldForm", {
+                      attrs: {
+                        fields: _vm.groupFields["extrafields"],
+                        data: _vm.default_value.extrafields
+                      },
+                      on: {
+                        "update:data": function($event) {
+                          _vm.$set(_vm.default_value, "extrafields", $event)
+                        }
+                      }
+                    })
+                  : _vm._e()
+              ],
+              2
+            )
+          ],
+          1
+        )
+      : _vm._e()
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -685,7 +573,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-525be48f", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-6042c5f6", module.exports)
   }
 }
 

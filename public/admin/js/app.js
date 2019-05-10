@@ -338,7 +338,7 @@ module.exports = {"ERROR_INPUT_IDS":"請至少勾選一個項目","ERROR_INPUT_T
 /* 33 */
 /***/ (function(module, exports) {
 
-module.exports = {"YES":"是","NO":"否","ALL":"所有","ALL_LANGUAGE":"所有","NONE":"無","LOGIN":"登入","LOGIN_LOADING":"登入中⋯⋯","LOGOUT":"登出","PUBLISHED":"發佈的","UNPUBLISHED":"停止發佈的","PENDING":"待上架","EXPIRED":"已下架","ARCHIVED":"封存","TRASHED":"刪除至回收桶中","FEATURED":"精選","NOT_FEATURED":"非精選","DISABLED":"停用","SELECT":"選擇","TOOLBAR_ADD":"新增","TOOLBAR_EDIT":"編輯","TOOLBAR_TRASH":"回收","TOOLBAR_DELETE":"刪除","TOOLBAR_RESTORE":"恢復","TOOLBAR_SAVE":"儲存","TOOLBAR_SAVE_AND_ADD":"儲存&新增","TOOLBAR_SAVE_AND_CLOSE":"儲存&關閉","TOOLBAR_CANCEL":"取消","TOOLBAR_PUBLISH":"發佈","TOOLBAR_UNPUBLISH":"停止發佈","TOOLBAR_FEATURED":"精選","TOOLBAR_UNFEATURED":"取消精選","TOOLBAR_CHECKOUT":"回存","TOOLBAR_BLOCK":"封鎖","TOOLBAR_UNBLOCK":"解除封鎖","TOOLBAR_KEYWORDS":"輸入關鍵字","SEARCHBAR_SEARCH":"搜尋","SEARCHBAR_RESET":"重置","LIST_DATA_HEADING_ID":"ID","LIST_DATA_HEADING_LANGUAGE":"語言","LIST_DATA_IMAGE_LABEL":"圖片","LIST_DATA_INTRO_IMAGE_LABEL":"摘要圖片","LIST_DATA_AUTHOR_LABEL":"作者","LIST_DATA_MODIFIED_DATE_LABEL":"修改日期","LIST_DATA_MODIFIED_BY_LABEL":"最後修改者","LIST_DATA_CREATED_DATE_LABEL":"建立日期","LIST_DATA_HITS_LABEL":"點擊","LIST_DATA_ACTIONS_LABEL":"操作","LIST_DATA_LOADING_TEXT":"載入中⋯⋯","OPTION_ORDER_BY":"排序依據","OPTION_ORDER":"排序方式","OPTION_ITEM_COUNT":"顯示項目總數量","OPTION_ITEM_SPLIT_ITEMS":"是否依照分類區隔資料？","OPTION_FEATURED_DISPLAY":"精選項目","OPTION_FEATURED_SPLIT_ITEMS":"是否置頂？","OPTION_FEATURED_COUNT":"精選項目數量","OPTION_FEATURED_ORDER_BY":"精選排序依據","OPTION_FEATURED_ORDER":"精選排序方式","OPTION_SELECT":"- 選擇{name} -","OPTION_NONE":"- 無 -","OPTION_STATE":"狀態","OPTION_BLOCK":"封鎖狀態","OPTION_ITEM":"項目","OPTION_CATEGORY":"分類","OPTION_PARENT_CATEGORY":"上層分類","OPTION_LANGUAGE":"語言","OPTION_FEATURED":"精選","OPTION_REQUIRED":"必填","OPTION_TAG":"標籤","OPTION_TYPE":"類型","OPTION_GROUP":"群組","OPTION_PARENT_GROUP":"上層群組","OPTION_MENU":"選單","OPTION_PARENT_MENU":"上層選單","OPTION_EXTENSION":"擴充類型","OPTION_EXTENSION_MENU":"選單","OPTION_EXTENSION_MODULE":"模組","OPTION_EXTENSION_ITEM":"項目","OPTION_CONTENT_TYPE":"內容類型","OPTION_CONTENT_TYPE_ARTICLE":"文章","OPTION_CONTENT_TYPE_MENU":"菜單","OPTION_CONTENT_TYPE_TIMELINE":"時間軸","OPTION_CONTENT_TYPE_SLIDESHOW":"Slideshow","OPTION_CONTENT_TYPE_LINK":"連結","OPTION_EXTRAFIELD_GROUP":"欄位群組","OPTION_ITEM_EXTRAFIELD_GROUP":"項目欄位群組","OPTION_EXTRAFIELD_TYPE":"欄位類型","OPTION_EXTRAFIELD_TYPE_TEXTFIELD":"文字欄位","OPTION_EXTRAFIELD_TYPE_TEXTAREA":"文字區","OPTION_EXTRAFIELD_TYPE_SELECT":"下拉選擇","OPTION_EXTRAFIELD_TYPE_MULTIPLESELECT":"多選列表","OPTION_EXTRAFIELD_TYPE_RADIO":"單選按鈕","OPTION_EXTRAFIELD_TYPE_LINK":"連結","OPTION_EXTRAFIELD_TYPE_DATE":"日期","OPTION_EXTRAFIELD_TYPE_DATETIME":"日期時間","OPTION_EXTRAFIELD_TYPE_IMAGE":"圖片","FIELD_TITLE_LABEL":"標題","FIELD_ALIAS_LABEL":"別名","FIELD_INTRO_TEXT_LABEL":"摘要文字","FIELD_DESCRIPTION_LABEL":"描述","FIELD_ITEM_DESCRIPTION_LABEL":"內容文字","FIELD_CATEGORY_DESCRIPTION_LABEL":"分類描述","FIELD_LANGUAGE_LABEL":"語言","FIELD_ACCESS_LEVEL":"存取層級","FIELD_PUBLISH_UP_DATE":"起始發佈日期","FIELD_PUBLISH_DOWN_DATE":"結束發佈日期","FIELD_META_DESCRIPTION_LABEL":"Meta 說明","FIELD_META_KEYWORDS_LABEL":"Meta 關鍵字","FIELD_MAIN_IMAGE_SAME_AS_INTRO_IMAGE_LABEL":"與摘要圖片相同","FIELD_MEDIA_PREVIEW_SELECTED_IMAGE":"預覽","FIELD_MEDIA_PREVIEW_EMPTY":"沒有選擇圖片","FIELD_MENU_CHOOSE_MODULE":"選擇模組","FIELD_SEARCH_KEYWORD":"搜尋關鍵字","FIELD_SEARCH_COUNT":"次數","FIELD_SEARCH_START_DATE":"起始日期","FIELD_SEARCH_END_DATE":"結束日期","FIELD_EXTRAFIELD_DEFAULT_VALUE":"預設值","FIELD_EXTRAFIELD_DISPLAY_NULL_OPTION":"顯示空選項","FIELD_EXTRAFIELD_TEXTAREA_ROWS":"列數","FIELD_EXTRAFIELD_TEXTAREA_USE_EDITOR":" 使用編輯器","FIELD_EXTRAFIELD_DATE_DISPLAY_FORMAT":"顯示格式","LANGUAGE_TAB_SITE_NAME_AND_METADATA":"網站名稱 & Metadata","LANGUAGE_FIELD_LANG_TAG_LABEL":"語言標籤","LANGUAGE_FIELD_LANG_CODE_LABEL":"網址語言代碼","LANGUAGE_FIELD_TYPE_LABEL":"語言類型","LANGUAGE_FIELD_TYPE_SYSTEM":"系統","LANGUAGE_FIELD_TYPE_CONTENT":"內容","LANGUAGE_FIELD_CUSTOM_SITE_NAME_LABEL":"自訂網站名稱","EXTRAFIELD_TYPE_TEXTFIELD":"文字欄位","EXTRAFIELD_TYPE_TEXTAREA":"文字區","EXTRAFIELD_TYPE_SELECT":"下拉選單","EXTRAFIELD_TYPE_MULTIPLESELECT":"多選列表","EXTRAFIELD_TYPE_RADIO":"單選按鈕","EXTRAFIELD_TYPE_LINK":"連結","EXTRAFIELD_TYPE_DATE":"日期","EXTRAFIELD_TYPE_IMAGE":"圖片","EXTRAFIELD_TYPE_LINK_TEXT":"連結文字","EXTRAFIELD_TYPE_LINK_URL":"網址","EXTRAFIELD_TYPE_LINK_OPEN_IN":"開啟於","EXTRAFIELD_TYPE_LINK_OPEN_IN_SAME_WINDOW":"相同視窗","EXTRAFIELD_TYPE_LINK_OPEN_IN_NEW_WINDOW":"新視窗","MENU_FIELD_SITE_NAME_LABEL":"網站","SITE_FIELD_URL_LABEL":"網址","MEDIA_LIST_VIEW":"列表","MEDIA_THUMB_VIEW":"縮圖","MEDIA_UPLOAD_FILE":"上傳檔案","MEDIA_UPLOAD_FILE_LIMIT":"最大大小: 10MB","MEDIA_ITEMS":"項目:","MEDIA_UPLOAD":"上傳","MEDIA_SELECT_FILE":"選擇檔案","MEDIA_CREATE_DIR":"新增資料夾","MEDIA_CREATE":"建立","MEDIA_NAME":"名稱","MEDIA_SIZE":"大小","MEDIA_TYPE":"種類","MEDIA_MODIFIED_DATE":"修改日期","EDITOR_CHOOSE_IMAGE_FROM_MEDIA":"從媒體選擇圖片","USER_OPTION_BLOCK":"已封鎖","USER_OPTION_ACTIVE":"啟用狀態","USER_ACTIVATED":"已啟用","USER_UNACTIVATED":"未啟用","USER_BLOCKED":"已封鎖","USER_TAB_DETAIL":"會員資料","USER_TAB_ASSIGN_GROUP":"指定會員群組","USER_FIELD_FIRST_NAME":"姓氏","USER_FIELD_LAST_NAME":"名字","USER_FIELD_EMAIL":"Email","USER_FIELD_PASSWORD":"密碼","USER_FIELD_PASSWORD_CONFIRMATION":"再次輸入密碼","SETTING_FIELD_SITE_NAME_LABEL":"網站名稱","SETTING_FIELD_SITE_LANG_LABEL":"網站語言","SETTING_FIELD_ADMIN_LANG_LABEL":"管理區語言","GLOBAL_FIELDSET_OPTIONS":"選項","GLOBAL_FIELDSET_BASIC_OPTIONS":"基本","GLOBAL_FIELDSET_METADATA_OPTIONS":"Metadata","GLOBAL_FIELDSET_IMAGE_OPTIONS":"圖片","GLOBAL_FIELDSET_PARAMS_OPTIONS":"參數","GLOBAL_FIELDSET_EXTRAFIELD_OPTIONS":"附加欄位","GLOBAL_FIELDSET_CONTENT_MANAGE_PREFIX":"項目管理：{name}","GLOBAL_USERNAME":"帳號","GLOBAL_PASSWORD":"密碼","GLOBAL_REMEMBER_ME":"記住帳號","GLOBAL_ROOT":"根","GLOBAL_VIEW_SITE":"預覽網站","GLOBAL_HOMEPAGE":"首頁","GLOBAL_CONFIRM_DELETE":"你確定想要移除？確認後將永久刪除選定的項目！","GLOBAL_CONFIRM_LOGOUT":"你確定要登出？","ERROR":"錯誤","ERROR_PLEASE_ENTER_USER_NAME":"請輸入帳號","ERROR_PLEASE_ENTER_VALID_EMAIL":"請輸入有效的Email","ERROR_PLEASE_ENTER_PASSWORD":"請輸入密碼","ERROR_PLEASE_LOGIN":"請先登入"}
+module.exports = {"YES":"是","NO":"否","ALL":"所有","ALL_LANGUAGE":"所有","NONE":"無","LOGIN":"登入","LOGIN_LOADING":"登入中⋯⋯","LOGOUT":"登出","PUBLISHED":"發佈的","UNPUBLISHED":"停止發佈的","PENDING":"待上架","EXPIRED":"已下架","ARCHIVED":"封存","TRASHED":"刪除至回收桶中","FEATURED":"精選","NOT_FEATURED":"非精選","DISABLED":"停用","SELECT":"選擇","TOOLBAR_ADD":"新增","TOOLBAR_EDIT":"編輯","TOOLBAR_TRASH":"回收","TOOLBAR_DELETE":"刪除","TOOLBAR_RESTORE":"恢復","TOOLBAR_SAVE":"儲存","TOOLBAR_SAVE_AND_ADD":"儲存&新增","TOOLBAR_SAVE_AND_CLOSE":"儲存&關閉","TOOLBAR_CANCEL":"取消","TOOLBAR_PUBLISH":"發佈","TOOLBAR_UNPUBLISH":"停止發佈","TOOLBAR_FEATURED":"精選","TOOLBAR_UNFEATURED":"取消精選","TOOLBAR_CHECKOUT":"回存","TOOLBAR_BLOCK":"封鎖","TOOLBAR_UNBLOCK":"解除封鎖","TOOLBAR_KEYWORDS":"輸入關鍵字","SEARCHBAR_SEARCH":"搜尋","SEARCHBAR_RESET":"重置","LIST_DATA_HEADING_ID":"ID","LIST_DATA_HEADING_LANGUAGE":"語言","LIST_DATA_IMAGE_LABEL":"圖片","LIST_DATA_INTRO_IMAGE_LABEL":"摘要圖片","LIST_DATA_AUTHOR_LABEL":"作者","LIST_DATA_MODIFIED_DATE_LABEL":"修改日期","LIST_DATA_MODIFIED_BY_LABEL":"最後修改者","LIST_DATA_CREATED_DATE_LABEL":"建立日期","LIST_DATA_HITS_LABEL":"點擊","LIST_DATA_ACTIONS_LABEL":"操作","LIST_DATA_LOADING_TEXT":"載入中⋯⋯","OPTION_ORDER_BY":"排序依據","OPTION_ORDER":"排序方式","OPTION_ITEM_COUNT":"顯示項目總數量","OPTION_ITEM_SPLIT_ITEMS":"是否依照分類區隔資料？","OPTION_FEATURED_DISPLAY":"精選項目","OPTION_FEATURED_SPLIT_ITEMS":"是否置頂？","OPTION_FEATURED_COUNT":"精選項目數量","OPTION_FEATURED_ORDER_BY":"精選排序依據","OPTION_FEATURED_ORDER":"精選排序方式","OPTION_SELECT":"- 選擇{name} -","OPTION_NONE":"- 無 -","OPTION_STATE":"狀態","OPTION_BLOCK":"封鎖狀態","OPTION_ITEM":"項目","OPTION_CATEGORY":"分類","OPTION_PARENT_CATEGORY":"上層分類","OPTION_LANGUAGE":"語言","OPTION_FEATURED":"精選","OPTION_REQUIRED":"必填","OPTION_TAG":"標籤","OPTION_TYPE":"類型","OPTION_GROUP":"群組","OPTION_PARENT_GROUP":"上層群組","OPTION_USER_REDIRECT":"登入後頁面","OPTION_MENU":"選單","OPTION_PARENT_MENU":"上層選單","OPTION_EXTENSION":"擴充類型","OPTION_EXTENSION_MENU":"選單","OPTION_EXTENSION_MODULE":"模組","OPTION_EXTENSION_ITEM":"項目","OPTION_CONTENT_TYPE":"內容類型","OPTION_CONTENT_TYPE_ARTICLE":"文章","OPTION_CONTENT_TYPE_MENU":"菜單","OPTION_CONTENT_TYPE_TIMELINE":"時間軸","OPTION_CONTENT_TYPE_SLIDESHOW":"Slideshow","OPTION_CONTENT_TYPE_LINK":"連結","OPTION_EXTRAFIELD_GROUP":"欄位群組","OPTION_ITEM_EXTRAFIELD_GROUP":"項目欄位群組","OPTION_EXTRAFIELD_TYPE":"欄位類型","OPTION_EXTRAFIELD_TYPE_TEXTFIELD":"文字欄位","OPTION_EXTRAFIELD_TYPE_TEXTAREA":"文字區","OPTION_EXTRAFIELD_TYPE_SELECT":"下拉選擇","OPTION_EXTRAFIELD_TYPE_MULTIPLESELECT":"多選列表","OPTION_EXTRAFIELD_TYPE_RADIO":"單選按鈕","OPTION_EXTRAFIELD_TYPE_LINK":"連結","OPTION_EXTRAFIELD_TYPE_DATE":"日期","OPTION_EXTRAFIELD_TYPE_DATETIME":"日期時間","OPTION_EXTRAFIELD_TYPE_IMAGE":"圖片","FIELD_TITLE_LABEL":"標題","FIELD_ALIAS_LABEL":"別名","FIELD_INTRO_TEXT_LABEL":"摘要文字","FIELD_DESCRIPTION_LABEL":"描述","FIELD_ITEM_DESCRIPTION_LABEL":"內容文字","FIELD_CATEGORY_DESCRIPTION_LABEL":"分類描述","FIELD_LANGUAGE_LABEL":"語言","FIELD_ACCESS_LEVEL":"存取層級","FIELD_PUBLISH_UP_DATE":"起始發佈日期","FIELD_PUBLISH_DOWN_DATE":"結束發佈日期","FIELD_META_DESCRIPTION_LABEL":"Meta 說明","FIELD_META_KEYWORDS_LABEL":"Meta 關鍵字","FIELD_MAIN_IMAGE_SAME_AS_INTRO_IMAGE_LABEL":"與摘要圖片相同","FIELD_MEDIA_PREVIEW_SELECTED_IMAGE":"預覽","FIELD_MEDIA_PREVIEW_EMPTY":"沒有選擇圖片","FIELD_MENU_CHOOSE_MODULE":"選擇模組","FIELD_SEARCH_KEYWORD":"搜尋關鍵字","FIELD_SEARCH_COUNT":"次數","FIELD_SEARCH_START_DATE":"起始日期","FIELD_SEARCH_END_DATE":"結束日期","FIELD_EXTRAFIELD_DEFAULT_VALUE":"預設值","FIELD_EXTRAFIELD_DISPLAY_NULL_OPTION":"顯示空選項","FIELD_EXTRAFIELD_TEXTAREA_ROWS":"列數","FIELD_EXTRAFIELD_TEXTAREA_USE_EDITOR":" 使用編輯器","FIELD_EXTRAFIELD_DATE_DISPLAY_FORMAT":"顯示格式","LANGUAGE_TAB_SITE_NAME_AND_METADATA":"網站名稱 & Metadata","LANGUAGE_FIELD_LANG_TAG_LABEL":"語言標籤","LANGUAGE_FIELD_LANG_CODE_LABEL":"網址語言代碼","LANGUAGE_FIELD_TYPE_LABEL":"語言類型","LANGUAGE_FIELD_TYPE_SYSTEM":"系統","LANGUAGE_FIELD_TYPE_CONTENT":"內容","LANGUAGE_FIELD_CUSTOM_SITE_NAME_LABEL":"自訂網站名稱","EXTRAFIELD_TYPE_TEXTFIELD":"文字欄位","EXTRAFIELD_TYPE_TEXTAREA":"文字區","EXTRAFIELD_TYPE_SELECT":"下拉選單","EXTRAFIELD_TYPE_MULTIPLESELECT":"多選列表","EXTRAFIELD_TYPE_RADIO":"單選按鈕","EXTRAFIELD_TYPE_LINK":"連結","EXTRAFIELD_TYPE_DATE":"日期","EXTRAFIELD_TYPE_IMAGE":"圖片","EXTRAFIELD_TYPE_LINK_TEXT":"連結文字","EXTRAFIELD_TYPE_LINK_URL":"網址","EXTRAFIELD_TYPE_LINK_OPEN_IN":"開啟於","EXTRAFIELD_TYPE_LINK_OPEN_IN_SAME_WINDOW":"相同視窗","EXTRAFIELD_TYPE_LINK_OPEN_IN_NEW_WINDOW":"新視窗","MENU_FIELD_SITE_NAME_LABEL":"網站","SITE_FIELD_URL_LABEL":"網址","MEDIA_LIST_VIEW":"列表","MEDIA_THUMB_VIEW":"縮圖","MEDIA_UPLOAD_FILE":"上傳檔案","MEDIA_UPLOAD_FILE_LIMIT":"最大大小: 10MB","MEDIA_ITEMS":"項目:","MEDIA_UPLOAD":"上傳","MEDIA_SELECT_FILE":"選擇檔案","MEDIA_CREATE_DIR":"新增資料夾","MEDIA_CREATE":"建立","MEDIA_NAME":"名稱","MEDIA_SIZE":"大小","MEDIA_TYPE":"種類","MEDIA_MODIFIED_DATE":"修改日期","EDITOR_CHOOSE_IMAGE_FROM_MEDIA":"從媒體選擇圖片","USER_OPTION_BLOCK":"已封鎖","USER_OPTION_ACTIVE":"啟用狀態","USER_ACTIVATED":"已啟用","USER_UNACTIVATED":"未啟用","USER_BLOCKED":"已封鎖","USER_TAB_DETAIL":"會員資料","USER_TAB_ASSIGN_GROUP":"指定會員群組","USER_FIELD_FIRST_NAME":"姓氏","USER_FIELD_LAST_NAME":"名字","USER_FIELD_EMAIL":"Email","USER_FIELD_PASSWORD":"密碼","USER_FIELD_PASSWORD_CONFIRMATION":"再次輸入密碼","SETTING_FIELD_SITE_NAME_LABEL":"網站名稱","SETTING_FIELD_SITE_LANG_LABEL":"網站語言","SETTING_FIELD_ADMIN_LANG_LABEL":"管理區語言","GLOBAL_FIELDSET_OPTIONS":"選項","GLOBAL_FIELDSET_BASIC_OPTIONS":"基本","GLOBAL_FIELDSET_METADATA_OPTIONS":"Metadata","GLOBAL_FIELDSET_IMAGE_OPTIONS":"圖片","GLOBAL_FIELDSET_PARAMS_OPTIONS":"參數","GLOBAL_FIELDSET_EXTRAFIELD_OPTIONS":"附加欄位","GLOBAL_FIELDSET_CONTENT_MANAGE_PREFIX":"項目管理：{name}","GLOBAL_USERNAME":"帳號","GLOBAL_PASSWORD":"密碼","GLOBAL_REMEMBER_ME":"記住帳號","GLOBAL_ROOT":"根","GLOBAL_VIEW_SITE":"預覽網站","GLOBAL_HOMEPAGE":"首頁","GLOBAL_CONFIRM_DELETE":"你確定想要移除？確認後將永久刪除選定的項目！","GLOBAL_CONFIRM_LOGOUT":"你確定要登出？","GLOBAL_LOGIN_SUCCESS":"登入成功","GLOBAL_LOGOUT_SUCCESS":"成功登出","ERROR":"錯誤","ERROR_PLEASE_ENTER_USER_NAME":"請輸入帳號","ERROR_PLEASE_ENTER_VALID_EMAIL":"請輸入有效的Email","ERROR_PLEASE_ENTER_PASSWORD":"請輸入密碼","ERROR_PLEASE_LOGIN":"請先登入"}
 
 /***/ }),
 /* 34 */
@@ -427,16 +427,16 @@ module.exports = {"COM_USERS":"會員","COM_USERS_USER_MANAGER_TITLE":"管理","
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return UPDATE_USERINFO; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return REMOVE_USERINFO; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return UPDATE_USERTOKEN; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return REMOVE_USERTOKEN; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return UPDATE_USER_INFO; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return REMOVE_USER_INFO; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return UPDATE_USER_TOKEN; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return REMOVE_USER_TOKEN; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return UPDATE_REMEMBER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return REMOVE_REMEMBER; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return UPDATE_USER_ROUTES; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return REMOVE_USER_ROUTES; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return UPDATE_USER_ACCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return REMOVE_USER_ACCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return UPDATE_USER_ROUTES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return REMOVE_USER_ROUTES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return UPDATE_USER_ACCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return REMOVE_USER_ACCESS; });
 /* unused harmony export UPDATE_ROLES */
 /* unused harmony export UPDATE_ASSETS */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return UPDATE_ERROR_LOGS; });
@@ -445,11 +445,11 @@ module.exports = {"COM_USERS":"會員","COM_USERS_USER_MANAGER_TITLE":"管理","
  * user
  */
 
-var UPDATE_USERINFO = "UPDATE_USERINFO";
-var REMOVE_USERINFO = "REMOVE_USERINFO";
+var UPDATE_USER_INFO = "UPDATE_USER_INFO";
+var REMOVE_USER_INFO = "REMOVE_USER_INFO";
 
-var UPDATE_USERTOKEN = "UPDATE_USERTOKEN";
-var REMOVE_USERTOKEN = "REMOVE_USERTOKEN";
+var UPDATE_USER_TOKEN = "UPDATE_USER_TOKEN";
+var REMOVE_USER_TOKEN = "REMOVE_USER_TOKEN";
 
 var UPDATE_REMEMBER = "UPDATE_REMEMBER";
 var REMOVE_REMEMBER = "REMOVE_REMEMBER";
@@ -774,14 +774,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           var data = _ref2.data;
 
           _this.$store.commit("update_site_list", data.items);
-        }
-      });
-      // 取得用戶 apis
-      this.$$api_user_getAccess({
-        fn: function fn(_ref3) {
-          var data = _ref3.data;
-
-          _this.$store.dispatch("update_user_access", data.items);
         }
       });
     }
@@ -1563,6 +1555,8 @@ var _mutations;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 
 
 
@@ -1590,18 +1584,18 @@ var actions = {
         var commit = _ref.commit;
 
         return new Promise(function (resolve, reject) {
-            commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["i" /* UPDATE_USERINFO */], user_info);
-            commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["j" /* UPDATE_USERTOKEN */], user_info.token);
+            commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["j" /* UPDATE_USER_INFO */], user_info);
+            commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["l" /* UPDATE_USER_TOKEN */], user_info.token);
             resolve();
         });
     },
     remove_userinfo: function remove_userinfo(_ref2) {
         var commit = _ref2.commit;
 
-        commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["b" /* REMOVE_USERINFO */]);
-        commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["c" /* REMOVE_USERTOKEN */]);
-        commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["e" /* REMOVE_USER_ROUTES */]);
-        commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["d" /* REMOVE_USER_ACCESS */]);
+        commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["c" /* REMOVE_USER_INFO */]);
+        commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["e" /* REMOVE_USER_TOKEN */]);
+        commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["d" /* REMOVE_USER_ROUTES */]);
+        commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["b" /* REMOVE_USER_ACCESS */]);
     },
     update_remember: function update_remember(_ref3, _ref4) {
         var commit = _ref3.commit;
@@ -1625,27 +1619,27 @@ var actions = {
             redirect = _ref7.redirect;
 
         return new Promise(function (resolve) {
-            commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["l" /* UPDATE_USER_ROUTES */], { routes: routes, redirect: redirect });
+            commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["k" /* UPDATE_USER_ROUTES */], { routes: routes, redirect: redirect });
             resolve();
         });
     },
-    update_user_access: function update_user_access(_ref8, apis) {
+    update_user_access: function update_user_access(_ref8, access) {
         var commit = _ref8.commit;
 
-        commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["k" /* UPDATE_USER_ACCESS */], apis);
+        commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["i" /* UPDATE_USER_ACCESS */], access);
     }
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["j" /* UPDATE_USERTOKEN */], function (state, user_token) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["l" /* UPDATE_USER_TOKEN */], function (state, user_token) {
     state.user_token = user_token;
     __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].set("user_token", state.user_token);
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["c" /* REMOVE_USERTOKEN */], function (state) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["e" /* REMOVE_USER_TOKEN */], function (state) {
     __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].remove("user_token");
     state.user_token = "";
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["i" /* UPDATE_USERINFO */], function (state, user_info) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["j" /* UPDATE_USER_INFO */], function (state, user_info) {
     state.user_info = user_info;
     __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].set("user_info", state.user_info);
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["b" /* REMOVE_USERINFO */], function (state) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["c" /* REMOVE_USER_INFO */], function (state) {
     __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].remove("user_info");
     state.user_info = {};
 }), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["h" /* UPDATE_REMEMBER */], function (state, user_info) {
@@ -1663,7 +1657,7 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED
         email: "",
         token: ""
     };
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["l" /* UPDATE_USER_ROUTES */], function (state, _ref9) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["k" /* UPDATE_USER_ROUTES */], function (state, _ref9) {
     var routes = _ref9.routes,
         redirect = _ref9.redirect;
 
@@ -1672,29 +1666,29 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED
     });
     // fix user doesn't have dashboard asset
     if (include_index.length === 0) {
-        routes.push({
+        routes = [].concat(_toConsumableArray(routes), [{
             path: "/",
             redirect: redirect,
             enabled: 1,
             showNav: false
-        });
+        }]);
     }
     // ensure error page would be the last one
-    routes.push({
+    routes = [].concat(_toConsumableArray(routes), [{
         path: "*",
         redirect: "/error/404",
         enabled: 1,
         showNav: false
-    });
+    }]);
     state.user_routes = routes;
     __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].set("user_routes", routes);
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["e" /* REMOVE_USER_ROUTES */], function (state) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["d" /* REMOVE_USER_ROUTES */], function (state) {
     state.user_routes = [];
     __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].remove("user_routes");
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["k" /* UPDATE_USER_ACCESS */], function (state, apis) {
-    state.user_access = apis;
-    __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].set("user_access", apis);
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["d" /* REMOVE_USER_ACCESS */], function (state) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["i" /* UPDATE_USER_ACCESS */], function (state, access) {
+    state.user_access = access;
+    __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].set("user_access", access);
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["b" /* REMOVE_USER_ACCESS */], function (state) {
     state.user_access = {};
     __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].remove("user_access");
 }), _mutations);
@@ -4866,14 +4860,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     path: "/user/logout",
     type: "get"
 }, {
-    name: "取得會員可走訪頁面列表",
-    method: "getRoutes",
+    name: "取得會員可走訪頁面列表與接口列表",
+    method: "getPages",
     path: "/admin/user/page",
-    type: "get"
-}, {
-    name: "取得會員可用的接口列表",
-    method: "getAccess",
-    path: "/admin/user/apis",
     type: "get"
 }, {
     name: "取得所有會員列表",
@@ -4936,14 +4925,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     path: "/admin/user/group/ordering",
     type: "post"
 }, {
-    name: "取得單一會員群組可走訪頁面列表(樹狀結構)",
+    name: "取得單一會員群組可走訪頁面列表(樹狀結構)與接口列表",
     method: "groupPages",
     path: "/admin/user/group/*/page",
-    type: "get"
-}, {
-    name: "取得單一會員群組可走訪頁面對應的APIs(樹狀結構)",
-    method: "groupAccess",
-    path: "/admin/user/group/*/action",
     type: "get"
 }]);
 
