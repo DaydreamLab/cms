@@ -1,14 +1,14 @@
 webpackJsonp([40],{
 
-/***/ 117:
+/***/ 142:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(429)
+var __vue_script__ = __webpack_require__(543)
 /* template */
-var __vue_template__ = __webpack_require__(430)
+var __vue_template__ = __webpack_require__(544)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/admin/views/api/list.vue"
+Component.options.__file = "resources/assets/admin/views/user/group/list.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5db8d738", Component.options)
+    hotAPI.createRecord("data-v-5810993d", Component.options)
   } else {
-    hotAPI.reload("data-v-5db8d738", Component.options)
+    hotAPI.reload("data-v-5810993d", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 288:
+/***/ 283:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -200,14 +200,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 /***/ }),
 
-/***/ 429:
+/***/ 543:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin__ = __webpack_require__(288);
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin__ = __webpack_require__(283);
 //
 //
 //
@@ -231,25 +229,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "api-list",
+  name: "user-group-list",
   mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin__["a" /* default */]],
   data: function data() {
-    var _this = this;
-
     return {
       fields: [{
-        key: "url",
-        label: "路徑",
+        key: "tree_title",
+        label: this.$t("FIELD_TITLE_LABEL"),
         type: "editable"
-      }, {
-        key: "asset_title",
-        label: "隸屬資源",
-        formatter: function formatter(item) {
-          return _this.$t(item.asset_title);
-        }
-      }, {
-        key: "method",
-        label: "代碼"
       }, {
         width: "60",
         key: "id",
@@ -263,9 +250,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           key: "search",
           desc: this.$t("TOOLBAR_KEYWORDS"),
           clearable: true
+        }, {
+          key: "state",
+          type: "select",
+          desc: this.$t("OPTION_STATE"),
+          clearable: true,
+          list: [{
+            value: "1",
+            text: this.$t("PUBLISHED")
+          }, {
+            value: "0",
+            text: this.$t("UNPUBLISHED")
+          }, {
+            value: "-2",
+            text: this.$t("TRASHED")
+          }]
         }],
         default_value: {
-          search: ""
+          search: "",
+          state: ""
         }
       }
     };
@@ -275,44 +278,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     /**
      * Toolbar
      */
-    onClickBtnUpdateState: function onClickBtnUpdateState(_ref) {
-      var _this2 = this;
+    onClickBtnBatchDelete: function onClickBtnBatchDelete(_ref) {
+      var _this = this;
 
       var ids = _ref.ids,
-          state = _ref.state;
-
-      this.$$api_api_updateState({
-        data: {
-          ids: ids,
-          state: state
-        },
-        fn: function fn(_ref2) {
-          var msg = _ref2.msg;
-
-          _this2.$message.success(msg);
-          _this2.$onGetList();
-        }
-      });
-    },
-    onClickBtnBatchDelete: function onClickBtnBatchDelete(_ref3) {
-      var _this3 = this;
-
-      var ids = _ref3.ids,
-          datas = _ref3.datas;
+          datas = _ref.datas;
 
       this.$confirm(this.$t("GLOBAL_CONFIRM_DELETE")).then(function () {
-        _this3.$$api_api_delete({
+        _this.$$api_user_deleteGroup({
           data: { ids: ids },
-          fn: function fn(_ref4) {
-            var data = _ref4.data;
+          fn: function fn(_ref2) {
+            var data = _ref2.data;
 
-            _this3.$onGetList();
+            _this.$onGetList();
           }
         });
       });
     },
-    handleEditQuery: function handleEditQuery(_ref5) {
-      var data = _ref5.data;
+    handleEditQuery: function handleEditQuery(_ref3) {
+      var data = _ref3.data;
 
       this.$onClickBntEdit({
         id: data.id,
@@ -321,20 +305,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     handleGetList: function handleGetList() {
-      var _this4 = this;
+      var _this2 = this;
 
-      var _ref6 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-          page_data = _ref6.page_data,
-          _fn = _ref6.fn;
+      var _ref4 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+          page_data = _ref4.page_data,
+          _fn = _ref4.fn;
 
-      this.$$api_api_list({
+      this.$$api_user_listGroup({
         data: page_data,
-        fn: function fn(_ref7) {
-          var data = _ref7.data;
+        fn: function fn(_ref5) {
+          var data = _ref5.data;
 
-          _this4.list_loading.flag = false;
-          _this4.list = data.items;
-          _this4.paginations.total = data.pagination.total;
+          _this2.list_loading.flag = false;
+          _this2.list = data.items;
+          _this2.paginations.total = data.pagination.total;
 
           _fn && _fn();
         }
@@ -345,39 +329,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 430:
+/***/ 544:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("ListData", {
-        ref: "list-data",
-        attrs: {
-          List: _vm.list,
-          ListLoading: _vm.list_loading,
-          Pagination: _vm.paginations,
-          Toolbar: _vm.toolbar,
-          Searchbar: _vm.searchbar,
-          FieldList: _vm.fields
-        },
-        on: {
-          onClickBtnAdd: _vm.$onClickBtnAdd,
-          onClickBtnEdit: _vm.handleEditQuery,
-          onClickBtnBatchDelete: _vm.onClickBtnBatchDelete,
-          onChangeCurrentPage: _vm.$onChangeCurrentPage,
-          onChangePageSize: _vm.$onChangePageSize,
-          onSearch: _vm.$onSearch,
-          onSearchReset: _vm.$onSearchReset
-        }
-      })
-    ],
-    1
-  )
+  return _c("ListData", {
+    ref: "list-data",
+    attrs: {
+      List: _vm.list,
+      ListLoading: _vm.list_loading,
+      Pagination: _vm.paginations,
+      Toolbar: _vm.toolbar,
+      Searchbar: _vm.searchbar,
+      FieldList: _vm.fields
+    },
+    on: {
+      onClickBtnAdd: _vm.$onClickBtnAdd,
+      onClickBtnEdit: _vm.handleEditQuery,
+      onClickBtnBatchDelete: _vm.onClickBtnBatchDelete,
+      onChangeCurrentPage: _vm.$onChangeCurrentPage,
+      onChangePageSize: _vm.$onChangePageSize,
+      onSearch: _vm.$onSearch,
+      onSearchReset: _vm.$onSearchReset
+    }
+  })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -385,7 +363,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-5db8d738", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-5810993d", module.exports)
   }
 }
 

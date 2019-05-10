@@ -1,14 +1,14 @@
 webpackJsonp([46],{
 
-/***/ 114:
+/***/ 259:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(423)
+var __vue_script__ = __webpack_require__(611)
 /* template */
-var __vue_template__ = __webpack_require__(424)
+var __vue_template__ = __webpack_require__(612)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/admin/views/___role/edit.vue"
+Component.options.__file = "resources/assets/admin/components/form-data/fields/DdlTextarea.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-fb3a51ae", Component.options)
+    hotAPI.createRecord("data-v-5c05b291", Component.options)
   } else {
-    hotAPI.reload("data-v-fb3a51ae", Component.options)
+    hotAPI.reload("data-v-5c05b291", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,133 +48,206 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 423:
+/***/ 281:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: "role-edit",
-  data: function data() {
+/* harmony default export */ __webpack_exports__["a"] = (function (name) {
     return {
-      params: {
-        id: "",
-        pid: 1
-      },
-      fields: [{
-        key: "parent_id",
-        type: "select",
-        label: "上層角色",
-        list: this.$store.getters.role_list,
-        custom_attrs: {
-          label: "tree_title",
-          value: "id"
+        name: name,
+        data: function data() {
+            return {};
+        },
+
+        computed: {
+            data: function data() {
+                return this.Data;
+            },
+            events: function events() {
+                return this.Data.events || {};
+            },
+            submit_data: function submit_data() {
+                return this.SubmitData;
+            },
+            submit_info: function submit_info() {
+                return this.SubmitInfo;
+            },
+            temp_field_obj: function temp_field_obj() {
+                return this.TempFieldObj;
+            },
+            custom_attrs: function custom_attrs() {
+                return this.Data.custom_attrs || {};
+            },
+            label_attr: function label_attr() {
+                return this.custom_attrs.label || "text";
+            },
+            value_attr: function value_attr() {
+                return this.custom_attrs.value || "value";
+            }
+        },
+        props: {
+            Data: {
+                type: Object,
+                default: function _default() {
+                    return {};
+                }
+            },
+            SubmitData: {
+                type: Object,
+                default: function _default() {
+                    return {};
+                }
+            },
+            SubmitInfo: {
+                type: Object,
+                default: function _default() {
+                    return {};
+                }
+            },
+            TempFieldObj: {
+                type: Object,
+                default: function _default() {
+                    return {};
+                }
+            }
+        },
+        watch: {
+            $route: function $route() {
+                this.init();
+            }
+        },
+        created: function created() {
+            this.setDefaultFieldByNoDefaultValue();
+            this.setArrayValue();
+        },
+        mounted: function mounted() {
+            this.init();
+        },
+
+
+        methods: {
+            /**
+             * 处理表单控件值复数类型，比如，获取的值和显示的文本不同时，除了返回需要提交表单的value值，还需要返回显示的文本，以防不时之需
+             */
+            setArrayValue: function setArrayValue() {
+                var _this = this;
+
+                //把存储value和text的数组转成对象格式，有利于提高根据值取文本的效率
+                if (!this.temp_field_obj[this.data.key]) {
+                    this.temp_field_obj[this.data.key] = {};
+                }
+
+                // console.log(this.custom_attrs);
+
+                //当存在value和text数组时，才可调用
+                if (this.data.list && Array.isArray(this.data.list)) {
+                    //遍历value和text数组，组装成对象格式
+                    this.data.list.forEach(function (item) {
+                        _this.temp_field_obj[_this.data.key][item[_this.value_attr] !== undefined ? item[_this.value_attr] : item[_this.label_attr]] = item[_this.label_attr] !== undefined ? item[_this.label_attr] : item[_this.value_attr];
+                    });
+                    //如果当前默认值为真，默认先提取一下默认值对应的文本
+                    if (this.submit_data[this.data.key] !== undefined) {
+                        //默认值分两种：数组(多选)，字符串或整形(单选)
+                        if (Array.isArray(this.submit_data[this.data.key])) {
+                            //循环数组值，把每个对应的文本取出来
+                            this.submit_info[this.data.key] = [];
+                            this.submit_data[this.data.key].forEach(function (item) {
+                                if (_this.temp_field_obj[_this.data.key][item]) {
+                                    _this.submit_info[_this.data.key].push(_this.temp_field_obj[_this.data.key][item]);
+                                }
+                            });
+                        } else {
+                            //不是数组，直接提取对应的值得文本
+                            this.submit_info[this.data.key] = "";
+                            if (this.temp_field_obj[this.data.key][this.submit_data[this.data.key]]) {
+                                this.submit_info[this.data.key] = this.temp_field_obj[this.data.key][this.submit_data[this.data.key]];
+                            }
+                        }
+                    }
+                }
+            },
+
+
+            /**
+             * 当没有传默认值或者连default_value都不存在时(添加的时候确实是不需要传default_value,如果不这样操作一下，绑定将会失败)
+             * 此时，组件中定义的default_value只是一个空对象，这时，v-model是无法绑定的，所以这个函数用来设置默认字段。
+             */
+            setDefaultFieldByNoDefaultValue: function setDefaultFieldByNoDefaultValue() {
+                // console.log(this.submit_data);
+                if (this.submit_data[this.data.key] === undefined) {
+                    this.$set(this.submit_data, this.data.key, "");
+                }
+            },
+            init: function init() {}
         }
-      }, {
-        key: "title",
-        label: "標題"
-      }, {
-        key: "redirect",
-        type: "select",
-        label: "登入後頁面",
-        list: [],
-        custom_attrs: {
-          label: "full_path",
-          value: "full_path"
-        }
-      }, {
-        key: "state",
-        label: "是否啟用",
-        type: "radio",
-        list: [{
-          text: "禁用",
-          value: "0"
-        }, {
-          text: "啟用",
-          value: "1"
-        }]
-      }],
-      toolbar: {
-        type: "edit"
-      },
-      default_value: {
-        parent_id: 1,
-        title: "",
-        redirect: "",
-        state: 1
-      }
     };
-  },
-
-  methods: {
-    onSubmit: function onSubmit(_ref) {
-      var _this = this;
-
-      var data = _ref.data,
-          info = _ref.info,
-          type = _ref.type;
-
-      if (this.params.id) {
-        data.id = this.params.id;
-      }
-      this.$$api_role_save({
-        data: data,
-        fn: function fn(_ref2) {
-          var data = _ref2.data,
-              msg = _ref2.msg;
-
-          _this.$message.success(msg);
-          _this.$onSubmitFinish({
-            type: type,
-            query: { id: data.items.id, pid: data.items.parent_id }
-          });
-        }
-      });
-    },
-    onCancel: function onCancel() {
-      this.$router.push(this.$route.path.replace("/edit", ""));
-    },
-    onGetView: function onGetView() {
-      var _this2 = this;
-
-      this.$$api_role_pages({
-        pathVar: this.params.id,
-        fn: function fn(_ref3) {
-          var data = _ref3.data;
-
-          _this2.fields[2].list = data.items;
-        }
-      });
-
-      this.$$api_role_get({
-        pathVar: this.params.id,
-        fn: function fn(_ref4) {
-          var data = _ref4.data;
-
-          _this2.default_value = _extends({}, _this2.default_value, data.items);
-        }
-      });
-    }
-  }
 });
 
 /***/ }),
 
-/***/ 424:
+/***/ 403:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/**
+ * Created by sailengsi on 2017/7/2.
+ */
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+	name: '',
+	computed: {
+		attrs: function attrs() {
+			return this.Data.attrs || {};
+		}
+	},
+
+	methods: {
+		onClick: function onClick(e) {
+			this.events.click && this.events.click(e);
+		},
+		onBlur: function onBlur(e) {
+			this.events.blur && this.events.blur(e);
+		},
+		onFocus: function onFocus(e) {
+			this.events.focus && this.events.focus(e);
+		},
+		onChange: function onChange(value) {
+			this.events.change && this.events.change(value);
+		}
+	}
+});
+
+/***/ }),
+
+/***/ 611:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__js_Common__ = __webpack_require__(281);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__js_InputTextarea__ = __webpack_require__(403);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+var Js = Object(__WEBPACK_IMPORTED_MODULE_0__js_Common__["a" /* default */])("sls-textarea");
+Js.mixins = [__WEBPACK_IMPORTED_MODULE_1__js_InputTextarea__["a" /* default */]];
+/* harmony default export */ __webpack_exports__["default"] = (Js);
+
+/***/ }),
+
+/***/ 612:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -182,18 +255,23 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
-    [
-      _c("FormData", {
-        attrs: {
-          FieldList: _vm.fields,
-          DefaultValue: _vm.default_value,
-          Toolbar: _vm.toolbar
-        },
-        on: { onSubmit: _vm.onSubmit, onCancel: _vm.onCancel }
-      })
-    ],
-    1
+    "el-input",
+    _vm._b(
+      {
+        attrs: { type: "textarea", placeholder: _vm.data.desc },
+        on: { blur: _vm.onBlur, focus: _vm.onFocus, change: _vm.onChange },
+        model: {
+          value: _vm.submit_data[_vm.data.key],
+          callback: function($$v) {
+            _vm.$set(_vm.submit_data, _vm.data.key, $$v)
+          },
+          expression: "submit_data[data.key]"
+        }
+      },
+      "el-input",
+      _vm.attrs,
+      false
+    )
   )
 }
 var staticRenderFns = []
@@ -202,7 +280,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-fb3a51ae", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-5c05b291", module.exports)
   }
 }
 

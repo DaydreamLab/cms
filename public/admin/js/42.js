@@ -1,14 +1,14 @@
 webpackJsonp([42],{
 
-/***/ 144:
+/***/ 117:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(548)
+var __vue_script__ = __webpack_require__(422)
 /* template */
-var __vue_template__ = __webpack_require__(549)
+var __vue_template__ = __webpack_require__(423)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/admin/views/user/edit.vue"
+Component.options.__file = "resources/assets/admin/views/asset/group/list.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-dc05c74e", Component.options)
+    hotAPI.createRecord("data-v-0959d872", Component.options)
   } else {
-    hotAPI.reload("data-v-dc05c74e", Component.options)
+    hotAPI.reload("data-v-0959d872", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,132 +48,164 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 290:
+/***/ 283:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 /* harmony default export */ __webpack_exports__["a"] = ({
     data: function data() {
         return {
-            params: {
-                id: "",
-                pid: ""
+            list: [],
+            list_loading: {
+                flag: false
             },
-            toolbar: {
-                type: "edit"
+            paginations: {
+                current_page: 1,
+                total: 0,
+                page_size: 10,
+                page_sizes: [10, 15, 20, 25, 50, 100],
+                layout: "total, sizes, prev, pager, next, jumper"
             }
         };
     },
 
     watch: {
-        $route: function $route() {
-            this.$initView();
+        $route: {
+            handler: "$initList",
+            immediate: true
         }
     },
-    created: function created() {
-        this.$initView();
-    },
-
     methods: {
-        $onSubmitFinish: function $onSubmitFinish(_ref) {
-            var type = _ref.type,
-                query = _ref.query;
-
-            switch (type) {
-                case "save":
-                    this.$router.push({
-                        path: this.$route.path,
-                        query: query
-                    });
-                    break;
-                case "savenadd":
-                    this.$router.push({
-                        path: this.$route.path
-                    });
-                    this.$router.go(0);
-                    break;
-                case "savenclose":
-                    this.$onCancel();
-                    break;
-            }
+        $onClickBtnAdd: function $onClickBtnAdd() {
+            this.$router.push(this.$route.path + "/edit");
         },
-        $onCancel: function $onCancel() {
-            var checkout_id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
-
-            if (checkout_id) {
-                this.handleCheckout(checkout_id);
-            }
+        $onClickBntEdit: function $onClickBntEdit(query) {
             this.$router.push({
-                path: this.$route.path.replace("/edit", ""),
-                query: this.$route.query.from
+                path: this.$route.path + "/edit",
+                query: _extends({}, query, {
+                    from: this.$route.query
+                })
             });
         },
-        onUpdateViewParams: function onUpdateViewParams() {
-            this.params.id = parseInt(this.$route.query.id) || "";
-            this.params.pid = parseInt(this.$route.query.pid) || "";
-            this.$set(this.toolbar, "type", this.params.id ? "edit" : "add");
+        $onSearchReset: function $onSearchReset() {
+            this.$router.push({
+                path: this.$route.path
+            });
         },
-        $initView: function $initView() {
-            this.onUpdateViewParams();
+        $onSearch: function $onSearch(_ref) {
+            var data = _ref.data;
 
-            if (this.params.id) {
-                this.onGetView();
+            var sd = {};
+
+            var query = this.$route.query;
+
+            for (var p in query) {
+                sd[p] = query[p];
             }
+            for (var s in data) {
+                sd[s] = data[s];
+                if (!sd[s]) {
+                    delete sd[s];
+                }
+            }
+
+            this.$router.push({
+                path: this.$route.path,
+                query: sd
+            });
+        },
+        setRouteQuery: function setRouteQuery(field, value) {
+            var query = Object.assign({}, this.$route.query);
+
+            if ((typeof field === "undefined" ? "undefined" : _typeof(field)) === "object") {
+                query = field;
+            } else {
+                query[field] = value;
+            }
+
+            return query;
+        },
+        getRouteQuery: function getRouteQuery() {
+            var _this = this;
+
+            var query = this.$route.query;
+            var intArray = ["id", "pid", "category_id", "access"];
+            var dateArray = ["start_date", "end_date"];
+            var data = {};
+
+            Object.keys(query).forEach(function (field) {
+                _this.searchbar.default_value[field] = intArray.includes(field) ? parseInt(query[field]) : dateArray.includes(field) ? _this.$options.filters.storeDateFormat(query[field]) : query[field];
+                data[field] = query[field];
+            });
+            return data;
+        },
+        $onChangeCurrentPage: function $onChangeCurrentPage(page) {
+            var _this2 = this;
+
+            this.$onGetList({
+                page: page,
+                fn: function fn() {
+                    _this2.$router.push({
+                        path: _this2.$route.path,
+                        query: _this2.setRouteQuery("page", page)
+                    });
+                }
+            });
+        },
+        $onChangePageSize: function $onChangePageSize(pageSize) {
+            var _this3 = this;
+
+            this.$onGetList({
+                pageSize: pageSize,
+                fn: function fn() {
+                    _this3.$router.push({
+                        path: _this3.$route.path,
+                        query: _this3.setRouteQuery("page_size", pageSize)
+                    });
+                }
+            });
+        },
+        $onGetList: function $onGetList() {
+            var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+                page = _ref2.page,
+                pageSize = _ref2.pageSize,
+                where = _ref2.where,
+                fn = _ref2.fn;
+
+            this.list_loading.flag = true;
+
+            var query = this.$route.query;
+
+            this.paginations.current_page = page || parseInt(query.page) || 1;
+            this.paginations.page_size = pageSize || parseInt(query.page_size) || this.paginations.page_size;
+
+            var page_data = Object.assign(this.getRouteQuery(), {
+                page: this.paginations.current_page,
+                limit: this.paginations.page_size
+            });
+            if (where) {
+                page_data = Object.assign(page_data, where || {});
+            }
+            this.handleGetList({ page_data: page_data, fn: fn });
+        },
+        $initList: function $initList() {
+            this.$onGetList();
         }
     }
 });
 
 /***/ }),
 
-/***/ 548:
+/***/ 422:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_edit_mixin__ = __webpack_require__(290);
-var _name$mixins$data$cre;
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin__ = __webpack_require__(283);
 //
 //
 //
@@ -196,382 +228,179 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = (_name$mixins$data$cre = {
-  name: "user-edit",
-  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_edit_mixin__["a" /* default */]],
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "asset-group-list",
+  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin__["a" /* default */]],
   data: function data() {
+    var _this = this;
+
     return {
-      fields: {
-        group_ids: {
-          list: [],
-          custom_attrs: {
-            children: "children",
-            label: "title"
-          }
+      fields: [{
+        key: "title",
+        label: this.$t("FIELD_TITLE_LABEL"),
+        type: "editable"
+      }, {
+        key: "state",
+        label: this.$t("OPTION_STATE"),
+        type: "icon-label",
+        width: "90",
+        formatter: function formatter(item) {
+          return {
+            color: "item_state_" + item + "_color",
+            icon: ["fal", item === 1 ? "check" : "times"]
+          };
         }
+      }, {
+        width: "60",
+        key: "id",
+        label: this.$t("LIST_DATA_HEADING_ID")
+      }],
+      toolbar: {
+        type: "list",
+        custom: [{
+          text: this.$t("TOOLBAR_PUBLISH"),
+          method: "updateState",
+          condition: function condition(_ref) {
+            var data = _ref.data;
+
+            return data.state === 0 && data.parent_id !== null;
+          },
+
+          fn: function fn(_ref2) {
+            var ids = _ref2.ids;
+
+            _this.onClickBtnUpdateState({ ids: ids, state: 1 });
+          }
+        }, {
+          text: this.$t("TOOLBAR_UNPUBLISH"),
+          method: "updateState",
+          condition: function condition(_ref3) {
+            var data = _ref3.data;
+
+            return data.state === 1 && data.parent_id !== null;
+          },
+
+          fn: function fn(_ref4) {
+            var ids = _ref4.ids;
+
+            _this.onClickBtnUpdateState({ ids: ids, state: 0 });
+          }
+        }]
       },
-      default_value: {
-        first_name: "",
-        last_name: "",
-        email: "",
-        password: "",
-        password_confirmation: "",
-        reset_password: "0",
-        group_ids: [],
-        activation: 1,
-        block: 0
+      searchbar: {
+        fields: [{
+          key: "search",
+          desc: this.$t("TOOLBAR_KEYWORDS"),
+          clearable: true
+        }],
+        default_value: {
+          search: ""
+        }
       }
     };
   },
-  created: function created() {
-    var _this = this;
 
-    this.$$eventBus.$on("onClickUSERFormDataToolbar", function (opts) {
-      switch (opts.type) {
-        case "cancel":
-          _this.$onCancel();
-          break;
-        case "save":
-        case "savenclose":
-        case "savenadd":
-          _this.onSubmit({
-            ref: "form-data",
-            type: opts.type,
-            data: _this.default_value
-          });
-          break;
-        case "trash":
-          _this.onTrash();
-          break;
-      }
-    });
-    this.onUpdateFieldList();
-  }
-}, _defineProperty(_name$mixins$data$cre, "created", function created() {
-  this.$$eventBus.$emit("onInitToolbar", {
-    name: "USERFormData",
-    data: this.toolbar
-  });
-}), _defineProperty(_name$mixins$data$cre, "beforeDestroy", function beforeDestroy() {
-  this.$$eventBus.$emit("onInitToolbar", {
-    name: "USERFormData",
-    data: {}
-  });
-  this.$$eventBus.$off("onClickUSERFormDataToolbar");
-}), _defineProperty(_name$mixins$data$cre, "methods", {
-  onTrash: function onTrash() {
-    var _this2 = this;
+  methods: {
+    /**
+     * Toolbar
+     */
+    onClickBtnUpdateState: function onClickBtnUpdateState(_ref5) {
+      var _this2 = this;
 
-    this.$$api_user_updateBlock({
-      data: {
-        ids: [this.params.id],
-        block: 1
-      },
-      fn: function fn(_ref) {
-        var msg = _ref.msg;
+      var ids = _ref5.ids,
+          state = _ref5.state;
 
-        _this2.$message.success(msg);
-        _this2.$onCancel();
-      }
-    });
-  },
-  onCheckGroupChange: function onCheckGroupChange() {
-    this.default_value.group_ids = this.$refs.groupTree.getCheckedKeys();
-  },
-  onSubmit: function onSubmit(_ref2) {
-    var _this3 = this;
+      this.$$api_asset_updateState({
+        data: {
+          ids: ids,
+          state: state
+        },
+        fn: function fn(_ref6) {
+          var msg = _ref6.msg;
 
-    var data = _ref2.data,
-        info = _ref2.info,
-        type = _ref2.type;
-
-    var submit_data = data;
-    if (this.params.id) {
-      submit_data.id = this.params.id;
-    }
-    this.$$api_user_save({
-      data: submit_data,
-      fn: function fn(_ref3) {
-        var data = _ref3.data,
-            msg = _ref3.msg;
-
-        _this3.$message.success(msg);
-
-        if (data) {
-          submit_data.id = data.items.id;
+          _this2.$message.success(msg);
+          _this2.$onGetList();
         }
-        _this3.$onSubmitFinish({
-          type: type,
-          query: { id: submit_data.id }
+      });
+    },
+    onClickBtnBatchDelete: function onClickBtnBatchDelete(_ref7) {
+      var _this3 = this;
+
+      var ids = _ref7.ids,
+          datas = _ref7.datas;
+
+      this.$confirm(this.$t("GLOBAL_CONFIRM_DELETE")).then(function () {
+        _this3.$$api_asset_delete({
+          data: { ids: ids },
+          fn: function fn(_ref8) {
+            var data = _ref8.data;
+
+            _this3.$onGetList();
+          }
         });
-      }
-    });
-  },
-  $onCancel: function $onCancel() {
-    this.$router.push(this.$route.path.replace("/edit", ""));
-  },
-  onGetView: function onGetView() {
-    var _this4 = this;
+      });
+    },
+    handleEditQuery: function handleEditQuery(_ref9) {
+      var data = _ref9.data;
 
-    this.$$api_user_get({
-      pathVar: this.params.id,
-      fn: function fn(_ref4) {
-        var data = _ref4.data;
+      this.$onClickBntEdit({
+        id: data.id,
+        pid: data.parent_id,
+        name: data.name
+      });
+    },
+    handleGetList: function handleGetList() {
+      var _this4 = this;
 
-        _this4.default_value = _extends({}, _this4.default_value, data.items, {
-          group_ids: data.items["groups"].map(function (item) {
-            return item.id;
-          })
-        });
-      }
-    });
-  },
-  onUpdateFieldList: function onUpdateFieldList() {
-    var _this5 = this;
+      var _ref10 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+          page_data = _ref10.page_data,
+          _fn = _ref10.fn;
 
-    this.$$api_user_listTreeGroup({
-      fn: function fn(_ref5) {
-        var data = _ref5.data;
+      this.$$api_asset_listGroup({
+        data: page_data,
+        fn: function fn(_ref11) {
+          var data = _ref11.data;
 
-        _this5.fields.group_ids.list = data.items;
-      }
-    });
+          _this4.list_loading.flag = false;
+          _this4.list = data.items;
+          _this4.paginations.total = data.pagination.total;
+
+          _fn && _fn();
+        }
+      });
+    }
   }
-}), _name$mixins$data$cre);
+});
 
 /***/ }),
 
-/***/ 549:
+/***/ 423:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "el-container",
-    [
-      _c(
-        "el-main",
-        [
-          _c(
-            "el-tabs",
-            { attrs: { type: "border-card" } },
-            [
-              _c(
-                "el-tab-pane",
-                { attrs: { label: _vm.$t("USER_TAB_DETAIL") /*會員資料*/ } },
-                [
-                  _c(
-                    "el-form",
-                    {
-                      ref: "form-data",
-                      attrs: {
-                        "label-position": "top",
-                        model: _vm.default_value
-                      }
-                    },
-                    [
-                      _c(
-                        "el-form-item",
-                        { attrs: { label: _vm.$t("USER_OPTION_ACTIVE") } },
-                        [
-                          _c("el-switch", {
-                            attrs: {
-                              "active-text": _vm.$t("YES"),
-                              "active-value": 1,
-                              "inactive-text": _vm.$t("NO"),
-                              "inactive-value": 0
-                            },
-                            model: {
-                              value: _vm.default_value.activation,
-                              callback: function($$v) {
-                                _vm.$set(_vm.default_value, "activation", $$v)
-                              },
-                              expression: "default_value.activation"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "el-form-item",
-                        {
-                          attrs: {
-                            prop: "first_name",
-                            label: _vm.$t("USER_FIELD_FIRST_NAME" /*姓*/)
-                          }
-                        },
-                        [
-                          _c("el-input", {
-                            model: {
-                              value: _vm.default_value.first_name,
-                              callback: function($$v) {
-                                _vm.$set(_vm.default_value, "first_name", $$v)
-                              },
-                              expression: "default_value.first_name"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "el-form-item",
-                        {
-                          attrs: {
-                            prop: "last_name",
-                            label: _vm.$t("USER_FIELD_LAST_NAME") /*名*/
-                          }
-                        },
-                        [
-                          _c("el-input", {
-                            model: {
-                              value: _vm.default_value.last_name,
-                              callback: function($$v) {
-                                _vm.$set(_vm.default_value, "last_name", $$v)
-                              },
-                              expression: "default_value.last_name"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "el-form-item",
-                        {
-                          attrs: {
-                            prop: "email",
-                            label: _vm.$t("USER_FIELD_EMAIL") /*Email*/
-                          }
-                        },
-                        [
-                          _c("el-input", {
-                            model: {
-                              value: _vm.default_value.email,
-                              callback: function($$v) {
-                                _vm.$set(_vm.default_value, "email", $$v)
-                              },
-                              expression: "default_value.email"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "el-form-item",
-                        {
-                          attrs: {
-                            prop: "password",
-                            label: _vm.$t("USER_FIELD_PASSWORD") /*密碼*/
-                          }
-                        },
-                        [
-                          _c("el-input", {
-                            model: {
-                              value: _vm.default_value.password,
-                              callback: function($$v) {
-                                _vm.$set(_vm.default_value, "password", $$v)
-                              },
-                              expression: "default_value.password"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "el-form-item",
-                        {
-                          attrs: {
-                            prop: "password_confirmation",
-                            label: _vm.$t(
-                              "USER_FIELD_PASSWORD_CONFIRMATION"
-                            ) /*再次輸入密碼*/
-                          }
-                        },
-                        [
-                          _c("el-input", {
-                            model: {
-                              value: _vm.default_value.password_confirmation,
-                              callback: function($$v) {
-                                _vm.$set(
-                                  _vm.default_value,
-                                  "password_confirmation",
-                                  $$v
-                                )
-                              },
-                              expression: "default_value.password_confirmation"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "el-tab-pane",
-                {
-                  attrs: {
-                    label: _vm.$t("USER_TAB_ASSIGN_GROUP") /*指定會員群組*/
-                  }
-                },
-                [
-                  _c(
-                    "el-form",
-                    {
-                      ref: "form-data",
-                      attrs: {
-                        "label-position": "top",
-                        model: _vm.default_value
-                      }
-                    },
-                    [
-                      _c(
-                        "el-form-item",
-                        { attrs: { prop: "group_ids" } },
-                        [
-                          _c("el-tree", {
-                            ref: "groupTree",
-                            attrs: {
-                              data: _vm.fields.group_ids.list,
-                              "default-checked-keys":
-                                _vm.default_value.group_ids,
-                              "default-expanded-keys":
-                                _vm.default_value.group_ids,
-                              props: _vm.fields.group_ids.custom_attrs,
-                              "node-key": "id",
-                              "check-strictly": "",
-                              "show-checkbox": ""
-                            },
-                            on: { "check-change": _vm.onCheckGroupChange }
-                          })
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
+  return _c("ListData", {
+    ref: "list-data",
+    attrs: {
+      List: _vm.list,
+      ListLoading: _vm.list_loading,
+      Pagination: _vm.paginations,
+      Toolbar: _vm.toolbar,
+      Searchbar: _vm.searchbar,
+      FieldList: _vm.fields
+    },
+    on: {
+      onClickBtnAdd: _vm.$onClickBtnAdd,
+      onClickBtnEdit: _vm.handleEditQuery,
+      onClickBtnBatchDelete: _vm.onClickBtnBatchDelete,
+      onChangeCurrentPage: _vm.$onChangeCurrentPage,
+      onChangePageSize: _vm.$onChangePageSize,
+      onSearch: _vm.$onSearch,
+      onSearchReset: _vm.$onSearchReset
+    }
+  })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -579,7 +408,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-dc05c74e", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-0959d872", module.exports)
   }
 }
 

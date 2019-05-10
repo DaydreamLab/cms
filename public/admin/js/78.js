@@ -1,368 +1,616 @@
-webpackJsonp([78],{
+webpackJsonp([78,70],{
 
-/***/ 578:
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(579)
-}
-var normalizeComponent = __webpack_require__(2)
-/* script */
-var __vue_script__ = __webpack_require__(581)
-/* template */
-var __vue_template__ = __webpack_require__(590)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = "data-v-359e9cca"
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/admin/layout/Sidebar/sidebarItem.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-359e9cca", Component.options)
-  } else {
-    hotAPI.reload("data-v-359e9cca", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-
-/***/ 579:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(580);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(262)("a88130dc", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-359e9cca\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Users/daydreamlab/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./sidebarItem.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-359e9cca\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Users/daydreamlab/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./sidebarItem.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-
-/***/ 580:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(261)(false);
-// imports
-
-
-// module
-exports.push([module.i, "/* Colors -------------------------- */\n/* Link -------------------------- */\n/* Background -------------------------- */\n/* Border -------------------------- */\n/* Navbar -------------------------- */\n/* Sidebar -------------------------- */\n/* Tab -------------------------- */\n/* Icon -------------------------- */\n/* Item -------------------------- */\n.sidebar-menu__separator[data-v-359e9cca] {\n  color: #6589aa;\n  padding-left: 20px;\n  margin-top: 20px;\n  margin-bottom: 10px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  text-transform: uppercase;\n  font-size: 90%;\n  word-break: keep-all;\n}\n.sidebar-menu__separator[data-v-359e9cca]:after {\n    content: \"\";\n    width: 100%;\n    height: 1px;\n    background-color: #6589aa;\n    margin-left: 20px;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ 581:
+/***/ 280:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__item__ = __webpack_require__(582);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__item___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__item__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__itemLink__ = __webpack_require__(586);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__itemLink___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__itemLink__);
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return schema; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return normalize$1; });
+/* unused harmony export denormalize */
+/**
+ * Helpers to enable Immutable compatibility *without* bringing in
+ * the 'immutable' package as a dependency.
+ */
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/**
+ * Check if an object is immutable by checking if it has a key specific
+ * to the immutable library.
+ *
+ * @param  {any} object
+ * @return {bool}
+ */
+function isImmutable(object) {
+  return !!(object && typeof object.hasOwnProperty === 'function' && (object.hasOwnProperty('__ownerID') || // Immutable.Map
+  object._map && object._map.hasOwnProperty('__ownerID'))); // Immutable.Record
+}
 
+/**
+ * Denormalize an immutable entity.
+ *
+ * @param  {Schema} schema
+ * @param  {Immutable.Map|Immutable.Record} input
+ * @param  {function} unvisit
+ * @param  {function} getDenormalizedEntity
+ * @return {Immutable.Map|Immutable.Record}
+ */
+function denormalizeImmutable(schema, input, unvisit) {
+  return Object.keys(schema).reduce(function (object, key) {
+    // Immutable maps cast keys to strings on write so we need to ensure
+    // we're accessing them using string keys.
+    var stringKey = '' + key;
 
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: "SidebarItem",
-  components: { Item: __WEBPACK_IMPORTED_MODULE_0__item___default.a, ItemLink: __WEBPACK_IMPORTED_MODULE_1__itemLink___default.a },
-  props: {
-    item: {
-      type: Object,
-      required: true
-    },
-    isNest: {
-      type: Boolean,
-      default: false
+    if (object.has(stringKey)) {
+      return object.set(stringKey, unvisit(object.get(stringKey), schema[stringKey]));
+    } else {
+      return object;
     }
-  },
-  data: function data() {
-    return {
-      onlyOneChild: null
-    };
-  },
+  }, input);
+}
 
-  methods: {
-    hasOneShowingChild: function hasOneShowingChild() {
-      var _this = this;
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+  return typeof obj;
+} : function (obj) {
+  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+};
 
-      var children = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-      var parent = arguments[1];
 
-      var menuExcludeFunction = children.filter(function (item) {
-        return item.meta.type === "menu" || item.meta.type === "url";
-      });
-      var showingChildren = menuExcludeFunction.filter(function (item) {
-        if (!item.meta.showNav) {
-          return false;
-        } else {
-          // Temp set(will be used if only has one showing child)
-          _this.onlyOneChild = item;
-          return true;
-        }
-      });
-      // When there is only one child router, the child router is displayed by default
-      if (showingChildren.length === 1) {
-        return true;
-      }
 
-      // Show parent if there are no child router to display
-      if (showingChildren.length === 0) {
-        this.onlyOneChild = _extends({}, parent, { noShowingChildren: true });
-        return true;
-      }
 
-      return false;
+
+
+
+
+
+
+
+var classCallCheck = function (instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+};
+
+var createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-});
+
+  return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+}();
+
+
+
+
+
+
+
+var _extends = Object.assign || function (target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i];
+
+    for (var key in source) {
+      if (Object.prototype.hasOwnProperty.call(source, key)) {
+        target[key] = source[key];
+      }
+    }
+  }
+
+  return target;
+};
+
+
+
+var inherits = function (subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      enumerable: false,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+};
+
+
+
+
+
+
+
+
+
+
+
+var possibleConstructorReturn = function (self, call) {
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return call && (typeof call === "object" || typeof call === "function") ? call : self;
+};
+
+var getDefaultGetId = function getDefaultGetId(idAttribute) {
+  return function (input) {
+    return isImmutable(input) ? input.get(idAttribute) : input[idAttribute];
+  };
+};
+
+var EntitySchema = function () {
+  function EntitySchema(key) {
+    var definition = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+    classCallCheck(this, EntitySchema);
+
+    if (!key || typeof key !== 'string') {
+      throw new Error('Expected a string key for Entity, but found ' + key + '.');
+    }
+
+    var _options$idAttribute = options.idAttribute,
+        idAttribute = _options$idAttribute === undefined ? 'id' : _options$idAttribute,
+        _options$mergeStrateg = options.mergeStrategy,
+        mergeStrategy = _options$mergeStrateg === undefined ? function (entityA, entityB) {
+      return _extends({}, entityA, entityB);
+    } : _options$mergeStrateg,
+        _options$processStrat = options.processStrategy,
+        processStrategy = _options$processStrat === undefined ? function (input) {
+      return _extends({}, input);
+    } : _options$processStrat;
+
+
+    this._key = key;
+    this._getId = typeof idAttribute === 'function' ? idAttribute : getDefaultGetId(idAttribute);
+    this._idAttribute = idAttribute;
+    this._mergeStrategy = mergeStrategy;
+    this._processStrategy = processStrategy;
+    this.define(definition);
+  }
+
+  EntitySchema.prototype.define = function define(definition) {
+    this.schema = Object.keys(definition).reduce(function (entitySchema, key) {
+      var _babelHelpers$extends;
+
+      var schema = definition[key];
+      return _extends({}, entitySchema, (_babelHelpers$extends = {}, _babelHelpers$extends[key] = schema, _babelHelpers$extends));
+    }, this.schema || {});
+  };
+
+  EntitySchema.prototype.getId = function getId(input, parent, key) {
+    return this._getId(input, parent, key);
+  };
+
+  EntitySchema.prototype.merge = function merge(entityA, entityB) {
+    return this._mergeStrategy(entityA, entityB);
+  };
+
+  EntitySchema.prototype.normalize = function normalize(input, parent, key, visit, addEntity) {
+    var _this = this;
+
+    var processedEntity = this._processStrategy(input, parent, key);
+    Object.keys(this.schema).forEach(function (key) {
+      if (processedEntity.hasOwnProperty(key) && _typeof(processedEntity[key]) === 'object') {
+        var schema = _this.schema[key];
+        processedEntity[key] = visit(processedEntity[key], processedEntity, key, schema, addEntity);
+      }
+    });
+
+    addEntity(this, processedEntity, input, parent, key);
+    return this.getId(input, parent, key);
+  };
+
+  EntitySchema.prototype.denormalize = function denormalize(entity, unvisit) {
+    var _this2 = this;
+
+    if (isImmutable(entity)) {
+      return denormalizeImmutable(this.schema, entity, unvisit);
+    }
+
+    Object.keys(this.schema).forEach(function (key) {
+      if (entity.hasOwnProperty(key)) {
+        var schema = _this2.schema[key];
+        entity[key] = unvisit(entity[key], schema);
+      }
+    });
+    return entity;
+  };
+
+  createClass(EntitySchema, [{
+    key: 'key',
+    get: function get$$1() {
+      return this._key;
+    }
+  }, {
+    key: 'idAttribute',
+    get: function get$$1() {
+      return this._idAttribute;
+    }
+  }]);
+  return EntitySchema;
+}();
+
+var PolymorphicSchema = function () {
+  function PolymorphicSchema(definition, schemaAttribute) {
+    classCallCheck(this, PolymorphicSchema);
+
+    if (schemaAttribute) {
+      this._schemaAttribute = typeof schemaAttribute === 'string' ? function (input) {
+        return input[schemaAttribute];
+      } : schemaAttribute;
+    }
+    this.define(definition);
+  }
+
+  PolymorphicSchema.prototype.define = function define(definition) {
+    this.schema = definition;
+  };
+
+  PolymorphicSchema.prototype.getSchemaAttribute = function getSchemaAttribute(input, parent, key) {
+    return !this.isSingleSchema && this._schemaAttribute(input, parent, key);
+  };
+
+  PolymorphicSchema.prototype.inferSchema = function inferSchema(input, parent, key) {
+    if (this.isSingleSchema) {
+      return this.schema;
+    }
+
+    var attr = this.getSchemaAttribute(input, parent, key);
+    return this.schema[attr];
+  };
+
+  PolymorphicSchema.prototype.normalizeValue = function normalizeValue(value, parent, key, visit, addEntity) {
+    var schema = this.inferSchema(value, parent, key);
+    if (!schema) {
+      return value;
+    }
+    var normalizedValue = visit(value, parent, key, schema, addEntity);
+    return this.isSingleSchema || normalizedValue === undefined || normalizedValue === null ? normalizedValue : { id: normalizedValue, schema: this.getSchemaAttribute(value, parent, key) };
+  };
+
+  PolymorphicSchema.prototype.denormalizeValue = function denormalizeValue(value, unvisit) {
+    var schemaKey = isImmutable(value) ? value.get('schema') : value.schema;
+    if (!this.isSingleSchema && !schemaKey) {
+      return value;
+    }
+    var id = isImmutable(value) ? value.get('id') : value.id;
+    var schema = this.isSingleSchema ? this.schema : this.schema[schemaKey];
+    return unvisit(id || value, schema);
+  };
+
+  createClass(PolymorphicSchema, [{
+    key: 'isSingleSchema',
+    get: function get$$1() {
+      return !this._schemaAttribute;
+    }
+  }]);
+  return PolymorphicSchema;
+}();
+
+var UnionSchema = function (_PolymorphicSchema) {
+  inherits(UnionSchema, _PolymorphicSchema);
+
+  function UnionSchema(definition, schemaAttribute) {
+    classCallCheck(this, UnionSchema);
+
+    if (!schemaAttribute) {
+      throw new Error('Expected option "schemaAttribute" not found on UnionSchema.');
+    }
+    return possibleConstructorReturn(this, _PolymorphicSchema.call(this, definition, schemaAttribute));
+  }
+
+  UnionSchema.prototype.normalize = function normalize(input, parent, key, visit, addEntity) {
+    return this.normalizeValue(input, parent, key, visit, addEntity);
+  };
+
+  UnionSchema.prototype.denormalize = function denormalize(input, unvisit) {
+    return this.denormalizeValue(input, unvisit);
+  };
+
+  return UnionSchema;
+}(PolymorphicSchema);
+
+var ValuesSchema = function (_PolymorphicSchema) {
+  inherits(ValuesSchema, _PolymorphicSchema);
+
+  function ValuesSchema() {
+    classCallCheck(this, ValuesSchema);
+    return possibleConstructorReturn(this, _PolymorphicSchema.apply(this, arguments));
+  }
+
+  ValuesSchema.prototype.normalize = function normalize(input, parent, key, visit, addEntity) {
+    var _this2 = this;
+
+    return Object.keys(input).reduce(function (output, key, index) {
+      var _babelHelpers$extends;
+
+      var value = input[key];
+      return value !== undefined && value !== null ? _extends({}, output, (_babelHelpers$extends = {}, _babelHelpers$extends[key] = _this2.normalizeValue(value, input, key, visit, addEntity), _babelHelpers$extends)) : output;
+    }, {});
+  };
+
+  ValuesSchema.prototype.denormalize = function denormalize(input, unvisit) {
+    var _this3 = this;
+
+    return Object.keys(input).reduce(function (output, key) {
+      var _babelHelpers$extends2;
+
+      var entityOrId = input[key];
+      return _extends({}, output, (_babelHelpers$extends2 = {}, _babelHelpers$extends2[key] = _this3.denormalizeValue(entityOrId, unvisit), _babelHelpers$extends2));
+    }, {});
+  };
+
+  return ValuesSchema;
+}(PolymorphicSchema);
+
+var validateSchema = function validateSchema(definition) {
+  var isArray = Array.isArray(definition);
+  if (isArray && definition.length > 1) {
+    throw new Error('Expected schema definition to be a single schema, but found ' + definition.length + '.');
+  }
+
+  return definition[0];
+};
+
+var getValues = function getValues(input) {
+  return Array.isArray(input) ? input : Object.keys(input).map(function (key) {
+    return input[key];
+  });
+};
+
+var normalize = function normalize(schema, input, parent, key, visit, addEntity) {
+  schema = validateSchema(schema);
+
+  var values = getValues(input);
+
+  // Special case: Arrays pass *their* parent on to their children, since there
+  // is not any special information that can be gathered from themselves directly
+  return values.map(function (value, index) {
+    return visit(value, parent, key, schema, addEntity);
+  });
+};
+
+var denormalize = function denormalize(schema, input, unvisit) {
+  schema = validateSchema(schema);
+  return input && input.map ? input.map(function (entityOrId) {
+    return unvisit(entityOrId, schema);
+  }) : input;
+};
+
+var ArraySchema = function (_PolymorphicSchema) {
+  inherits(ArraySchema, _PolymorphicSchema);
+
+  function ArraySchema() {
+    classCallCheck(this, ArraySchema);
+    return possibleConstructorReturn(this, _PolymorphicSchema.apply(this, arguments));
+  }
+
+  ArraySchema.prototype.normalize = function normalize(input, parent, key, visit, addEntity) {
+    var _this2 = this;
+
+    var values = getValues(input);
+
+    return values.map(function (value, index) {
+      return _this2.normalizeValue(value, parent, key, visit, addEntity);
+    }).filter(function (value) {
+      return value !== undefined && value !== null;
+    });
+  };
+
+  ArraySchema.prototype.denormalize = function denormalize(input, unvisit) {
+    var _this3 = this;
+
+    return input && input.map ? input.map(function (value) {
+      return _this3.denormalizeValue(value, unvisit);
+    }) : input;
+  };
+
+  return ArraySchema;
+}(PolymorphicSchema);
+
+var _normalize = function _normalize(schema, input, parent, key, visit, addEntity) {
+  var object = _extends({}, input);
+  Object.keys(schema).forEach(function (key) {
+    var localSchema = schema[key];
+    var value = visit(input[key], input, key, localSchema, addEntity);
+    if (value === undefined || value === null) {
+      delete object[key];
+    } else {
+      object[key] = value;
+    }
+  });
+  return object;
+};
+
+var _denormalize = function _denormalize(schema, input, unvisit) {
+  if (isImmutable(input)) {
+    return denormalizeImmutable(schema, input, unvisit);
+  }
+
+  var object = _extends({}, input);
+  Object.keys(schema).forEach(function (key) {
+    if (object[key]) {
+      object[key] = unvisit(object[key], schema[key]);
+    }
+  });
+  return object;
+};
+
+var ObjectSchema = function () {
+  function ObjectSchema(definition) {
+    classCallCheck(this, ObjectSchema);
+
+    this.define(definition);
+  }
+
+  ObjectSchema.prototype.define = function define(definition) {
+    this.schema = Object.keys(definition).reduce(function (entitySchema, key) {
+      var _babelHelpers$extends;
+
+      var schema = definition[key];
+      return _extends({}, entitySchema, (_babelHelpers$extends = {}, _babelHelpers$extends[key] = schema, _babelHelpers$extends));
+    }, this.schema || {});
+  };
+
+  ObjectSchema.prototype.normalize = function normalize() {
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _normalize.apply(undefined, [this.schema].concat(args));
+  };
+
+  ObjectSchema.prototype.denormalize = function denormalize() {
+    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      args[_key2] = arguments[_key2];
+    }
+
+    return _denormalize.apply(undefined, [this.schema].concat(args));
+  };
+
+  return ObjectSchema;
+}();
+
+var visit = function visit(value, parent, key, schema, addEntity) {
+  if ((typeof value === 'undefined' ? 'undefined' : _typeof(value)) !== 'object' || !value) {
+    return value;
+  }
+
+  if ((typeof schema === 'undefined' ? 'undefined' : _typeof(schema)) === 'object' && (!schema.normalize || typeof schema.normalize !== 'function')) {
+    var method = Array.isArray(schema) ? normalize : _normalize;
+    return method(schema, value, parent, key, visit, addEntity);
+  }
+
+  return schema.normalize(value, parent, key, visit, addEntity);
+};
+
+var addEntities = function addEntities(entities) {
+  return function (schema, processedEntity, value, parent, key) {
+    var schemaKey = schema.key;
+    var id = schema.getId(value, parent, key);
+    if (!(schemaKey in entities)) {
+      entities[schemaKey] = {};
+    }
+
+    var existingEntity = entities[schemaKey][id];
+    if (existingEntity) {
+      entities[schemaKey][id] = schema.merge(existingEntity, processedEntity);
+    } else {
+      entities[schemaKey][id] = processedEntity;
+    }
+  };
+};
+
+var schema = {
+  Array: ArraySchema,
+  Entity: EntitySchema,
+  Object: ObjectSchema,
+  Union: UnionSchema,
+  Values: ValuesSchema
+};
+
+var normalize$1 = function normalize$$1(input, schema) {
+  if (!input || (typeof input === 'undefined' ? 'undefined' : _typeof(input)) !== 'object') {
+    throw new Error('Unexpected input given to normalize. Expected type to be "object", found "' + (typeof input === 'undefined' ? 'undefined' : _typeof(input)) + '".');
+  }
+
+  var entities = {};
+  var addEntity = addEntities(entities);
+
+  var result = visit(input, input, null, schema, addEntity);
+  return { entities: entities, result: result };
+};
+
+var unvisitEntity = function unvisitEntity(id, schema, unvisit, getEntity, cache) {
+  var entity = getEntity(id, schema);
+  if ((typeof entity === 'undefined' ? 'undefined' : _typeof(entity)) !== 'object' || entity === null) {
+    return entity;
+  }
+
+  if (!cache[schema.key]) {
+    cache[schema.key] = {};
+  }
+
+  if (!cache[schema.key][id]) {
+    // Ensure we don't mutate it non-immutable objects
+    var entityCopy = isImmutable(entity) ? entity : _extends({}, entity);
+
+    // Need to set this first so that if it is referenced further within the
+    // denormalization the reference will already exist.
+    cache[schema.key][id] = entityCopy;
+    cache[schema.key][id] = schema.denormalize(entityCopy, unvisit);
+  }
+
+  return cache[schema.key][id];
+};
+
+var getUnvisit = function getUnvisit(entities) {
+  var cache = {};
+  var getEntity = getEntities(entities);
+
+  return function unvisit(input, schema) {
+    if ((typeof schema === 'undefined' ? 'undefined' : _typeof(schema)) === 'object' && (!schema.denormalize || typeof schema.denormalize !== 'function')) {
+      var method = Array.isArray(schema) ? denormalize : _denormalize;
+      return method(schema, input, unvisit);
+    }
+
+    if (input === undefined || input === null) {
+      return input;
+    }
+
+    if (schema instanceof EntitySchema) {
+      return unvisitEntity(input, schema, unvisit, getEntity, cache);
+    }
+
+    return schema.denormalize(input, unvisit);
+  };
+};
+
+var getEntities = function getEntities(entities) {
+  var isImmutable$$1 = isImmutable(entities);
+
+  return function (entityOrId, schema) {
+    var schemaKey = schema.key;
+
+    if ((typeof entityOrId === 'undefined' ? 'undefined' : _typeof(entityOrId)) === 'object') {
+      return entityOrId;
+    }
+
+    return isImmutable$$1 ? entities.getIn([schemaKey, entityOrId.toString()]) : entities[schemaKey][entityOrId];
+  };
+};
+
+var denormalize$1 = function denormalize$$1(input, schema, entities) {
+  if (typeof input !== 'undefined') {
+    return getUnvisit(entities)(input, schema);
+  }
+};
+
+
+
 
 /***/ }),
 
-/***/ 582:
+/***/ 364:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(583)
-}
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(585)
+var __vue_script__ = __webpack_require__(367)
 /* template */
-var __vue_template__ = null
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = "data-v-695704b7"
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/admin/layout/Sidebar/item.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-695704b7", Component.options)
-  } else {
-    hotAPI.reload("data-v-695704b7", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-
-/***/ 583:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(584);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(262)("b99c0188", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-695704b7\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Users/daydreamlab/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./item.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-695704b7\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Users/daydreamlab/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./item.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-
-/***/ 584:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(261)(false);
-// imports
-
-
-// module
-exports.push([module.i, "/* Colors -------------------------- */\n/* Link -------------------------- */\n/* Background -------------------------- */\n/* Border -------------------------- */\n/* Navbar -------------------------- */\n/* Sidebar -------------------------- */\n/* Tab -------------------------- */\n/* Icon -------------------------- */\n/* Item -------------------------- */\n.sidebar-menu-icon[data-v-695704b7] {\n  margin-right: 16px;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ 585:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fortawesome_vue_fontawesome__ = __webpack_require__(113);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fortawesome_vue_fontawesome___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__fortawesome_vue_fontawesome__);
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: "MenuItem",
-  functional: true,
-  props: {
-    icon: {
-      type: String,
-      default: ""
-    },
-    title: {
-      type: String,
-      default: ""
-    }
-  },
-  render: function render(h, context) {
-    var _context$props = context.props,
-        icon = _context$props.icon,
-        title = _context$props.title;
-
-    var vnodes = [];
-
-    if (icon) {
-      vnodes.push(h(__WEBPACK_IMPORTED_MODULE_0__fortawesome_vue_fontawesome__["FontAwesomeIcon"], {
-        class: {
-          "sidebar-menu-icon": true
-        },
-        props: {
-          icon: ["fal", icon]
-        }
-      }));
-    }
-
-    if (title) {
-      vnodes.push(h("span", {
-        attrs: {
-          slot: "title"
-        }
-      }, context.parent.$t(title)));
-    }
-    return vnodes;
-  }
-});
-
-/***/ }),
-
-/***/ 586:
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(2)
-/* script */
-var __vue_script__ = __webpack_require__(587)
-/* template */
-var __vue_template__ = __webpack_require__(589)
+var __vue_template__ = __webpack_require__(368)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -379,7 +627,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/admin/layout/Sidebar/itemLink.vue"
+Component.options.__file = "resources/assets/admin/components/field-form/index.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -388,9 +636,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-cd19375e", Component.options)
+    hotAPI.createRecord("data-v-045ca43f", Component.options)
   } else {
-    hotAPI.reload("data-v-cd19375e", Component.options)
+    hotAPI.reload("data-v-045ca43f", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -402,12 +650,17 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 587:
+/***/ 367:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_validate__ = __webpack_require__(588);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_normalizr__ = __webpack_require__(280);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -418,52 +671,70 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 
+var _isEmpty = function _isEmpty() {
+  return __webpack_require__.e/* import() */(74).then(__webpack_require__.bind(null, 339));
+};
+var _pick = function _pick() {
+  return __webpack_require__.e/* import() */(72).then(__webpack_require__.bind(null, 404));
+};
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: { FieldFormItem: function FieldFormItem() {
+      return __webpack_require__.e/* import() */(73).then(__webpack_require__.bind(null, 405));
+    } },
   props: {
-    to: {
-      type: String,
-      required: true
+    fields: {
+      type: Array,
+      default: []
+    },
+    data: {
+      type: Object,
+      default: function _default() {
+        return {};
+      }
     }
   },
-  methods: {
-    linkProps: function linkProps(url) {
-      if (Object(__WEBPACK_IMPORTED_MODULE_0__utils_validate__["a" /* isExternal */])(url)) {
-        return {
-          is: 'a',
-          href: url,
-          target: '_blank',
-          rel: 'noopener'
-        };
-      }
-      return {
-        is: 'router-link',
-        to: url
-      };
+  watch: {
+    fields: {
+      handler: function handler() {
+        var _this = this;
+
+        _isEmpty().then(function () {
+          if (_isEmpty(_this.data)) {
+            var fields = new __WEBPACK_IMPORTED_MODULE_0_normalizr__["b" /* schema */].Entity("fields");
+            var normalize_list = Object(__WEBPACK_IMPORTED_MODULE_0_normalizr__["a" /* normalize */])(_this.fields, [fields]);
+            _this.$emit("update:data", normalize_list.entities["fields"]);
+          }
+        });
+      },
+
+      immediate: true
+    }
+  },
+  computed: {
+    rules: function rules() {
+      var _this2 = this;
+
+      _pick().then(function () {
+        var required_fields = _this2.fields.filter(function (el) {
+          return el.required;
+        });
+        var fields = new __WEBPACK_IMPORTED_MODULE_0_normalizr__["b" /* schema */].Entity("fields", undefined, {
+          idAttribute: "alias",
+          processStrategy: function processStrategy(entity) {
+            return _pick(entity, "required");
+          }
+        });
+        var normalize_list = Object(__WEBPACK_IMPORTED_MODULE_0_normalizr__["a" /* normalize */])(required_fields, [fields]);
+        return normalize_list.entities["fields"];
+      });
     }
   }
 });
 
 /***/ }),
 
-/***/ 588:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = isExternal;
-/* unused harmony export publishState */
-function isExternal(path) {
-    return (/^(https?:|mailto:|tel:)/.test(path)
-    );
-}
-
-function publishState(start_date, end_date) {
-    var now = new Data();
-}
-
-/***/ }),
-
-/***/ 589:
+/***/ 368:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -471,10 +742,20 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "component",
-    _vm._b({}, "component", _vm.linkProps(_vm.to), false),
-    [_vm._t("default")],
-    2
+    "el-form",
+    { ref: "field-data", attrs: { model: _vm.data, "label-position": "top" } },
+    _vm._l(_vm.fields, function(field, $index) {
+      return _c(
+        "el-form-item",
+        { key: field.id, attrs: { prop: field.alias, label: field.title } },
+        [
+          _c("FieldFormItem", {
+            attrs: { DefaultValue: field, Data: _vm.data[field.id] }
+          })
+        ],
+        1
+      )
+    })
   )
 }
 var staticRenderFns = []
@@ -483,125 +764,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-cd19375e", module.exports)
-  }
-}
-
-/***/ }),
-
-/***/ 590:
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm.item.meta.showNav
-    ? _c(
-        "div",
-        [
-          _vm.hasOneShowingChild(_vm.item.children, _vm.item)
-            ? [
-                _vm.item.meta.type === "separator"
-                  ? [
-                      _c("li", { staticClass: "sidebar-menu__separator" }, [
-                        _vm._v(_vm._s(_vm.$t(_vm.item.name)))
-                      ])
-                    ]
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.onlyOneChild.meta.type !== "separator"
-                  ? _c(
-                      "ItemLink",
-                      { attrs: { to: _vm.onlyOneChild.path } },
-                      [
-                        _c(
-                          "el-menu-item",
-                          {
-                            class: { "submenu-title-noDropdown": !_vm.isNest },
-                            attrs: { index: _vm.onlyOneChild.path }
-                          },
-                          [
-                            _c("item", {
-                              attrs: {
-                                icon:
-                                  _vm.onlyOneChild.meta.icon ||
-                                  (_vm.item.meta && _vm.item.meta.icon),
-                                title: _vm.onlyOneChild.name
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
-                  : _vm._e()
-              ]
-            : [
-                _vm.item.meta.type === "separator"
-                  ? [
-                      _c("li", { staticClass: "sidebar-menu__separator" }, [
-                        _vm._v(_vm._s(_vm.$t(_vm.item.name)))
-                      ]),
-                      _vm._v(" "),
-                      _vm._l(_vm.item.children, function(child) {
-                        return _c("sidebar-item", {
-                          key: child.meta.id,
-                          staticClass: "nest-menu",
-                          attrs: { item: child }
-                        })
-                      })
-                    ]
-                  : _c(
-                      "el-submenu",
-                      {
-                        ref: "subMenu",
-                        attrs: {
-                          index: _vm.item.path,
-                          "popper-append-to-body": ""
-                        }
-                      },
-                      [
-                        _c(
-                          "template",
-                          { slot: "title" },
-                          [
-                            _vm.item.meta
-                              ? _c("item", {
-                                  attrs: {
-                                    icon: _vm.item.meta && _vm.item.meta.icon,
-                                    title: _vm.item.name
-                                  }
-                                })
-                              : _vm._e()
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _vm._l(_vm.item.children, function(child) {
-                          return _c("sidebar-item", {
-                            key: child.meta.id,
-                            staticClass: "nest-menu",
-                            attrs: { item: child }
-                          })
-                        })
-                      ],
-                      2
-                    )
-              ]
-        ],
-        2
-      )
-    : _vm._e()
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-359e9cca", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-045ca43f", module.exports)
   }
 }
 

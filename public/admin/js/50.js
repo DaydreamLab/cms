@@ -1,14 +1,14 @@
 webpackJsonp([50],{
 
-/***/ 265:
+/***/ 273:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(620)
+var __vue_script__ = __webpack_require__(639)
 /* template */
-var __vue_template__ = __webpack_require__(621)
+var __vue_template__ = __webpack_require__(640)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/admin/components/form-data/fields/DdlTextarea.vue"
+Component.options.__file = "resources/assets/admin/components/form-data/fields/DdlTimeFixedRange.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5c05b291", Component.options)
+    hotAPI.createRecord("data-v-a01c0226", Component.options)
   } else {
-    hotAPI.reload("data-v-5c05b291", Component.options)
+    hotAPI.reload("data-v-a01c0226", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 285:
+/***/ 281:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -185,53 +185,12 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 417:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/**
- * Created by sailengsi on 2017/7/2.
- */
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-	name: '',
-	computed: {
-		attrs: function attrs() {
-			return this.Data.attrs || {};
-		}
-	},
-
-	methods: {
-		onClick: function onClick(e) {
-			this.events.click && this.events.click(e);
-		},
-		onBlur: function onBlur(e) {
-			this.events.blur && this.events.blur(e);
-		},
-		onFocus: function onFocus(e) {
-			this.events.focus && this.events.focus(e);
-		},
-		onChange: function onChange(value) {
-			this.events.change && this.events.change(value);
-		}
-	}
-});
-
-/***/ }),
-
-/***/ 620:
+/***/ 639:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__js_Common__ = __webpack_require__(285);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__js_InputTextarea__ = __webpack_require__(417);
-//
-//
-//
-//
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__js_Common__ = __webpack_require__(281);
 //
 //
 //
@@ -250,14 +209,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 
-
-var Js = Object(__WEBPACK_IMPORTED_MODULE_0__js_Common__["a" /* default */])('sls-textarea');
-Js.mixins = [__WEBPACK_IMPORTED_MODULE_1__js_InputTextarea__["a" /* default */]];
+var Js = Object(__WEBPACK_IMPORTED_MODULE_0__js_Common__["a" /* default */])('sls-time');
+Js.mixins = [{
+	computed: {
+		time_attrs: function time_attrs() {
+			return this.Data.time_attrs || {};
+		}
+	},
+	methods: {
+		onChange: function onChange(v) {
+			this.events.change && this.events.change(v);
+		}
+	}
+}];
 /* harmony default export */ __webpack_exports__["default"] = (Js);
 
 /***/ }),
 
-/***/ 621:
+/***/ 640:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -268,11 +237,11 @@ var render = function() {
     "div",
     [
       _c(
-        "el-input",
+        "el-time-select",
         _vm._b(
           {
-            attrs: { type: "textarea", placeholder: _vm.data.desc },
-            on: { blur: _vm.onBlur, focus: _vm.onFocus, change: _vm.onChange },
+            attrs: { placeholder: _vm.data.desc },
+            on: { change: _vm.onChange },
             model: {
               value: _vm.submit_data[_vm.data.key],
               callback: function($$v) {
@@ -281,8 +250,28 @@ var render = function() {
               expression: "submit_data[data.key]"
             }
           },
-          "el-input",
-          _vm.attrs,
+          "el-time-select",
+          _vm.time_attrs,
+          false
+        )
+      ),
+      _vm._v(" "),
+      _c(
+        "el-time-select",
+        _vm._b(
+          {
+            attrs: { placeholder: _vm.data.desc },
+            on: { change: _vm.onChange },
+            model: {
+              value: _vm.submit_data[_vm.data.key],
+              callback: function($$v) {
+                _vm.$set(_vm.submit_data, _vm.data.key, $$v)
+              },
+              expression: "submit_data[data.key]"
+            }
+          },
+          "el-time-select",
+          _vm.time_attrs,
           false
         )
       )
@@ -296,7 +285,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-5c05b291", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-a01c0226", module.exports)
   }
 }
 

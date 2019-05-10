@@ -1,14 +1,14 @@
 webpackJsonp([60],{
 
-/***/ 273:
+/***/ 266:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(636)
+var __vue_script__ = __webpack_require__(625)
 /* template */
-var __vue_template__ = __webpack_require__(637)
+var __vue_template__ = __webpack_require__(626)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/admin/components/form-data/fields/DdlDateYear.vue"
+Component.options.__file = "resources/assets/admin/components/form-data/fields/DdlDateRange.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-17920fe2", Component.options)
+    hotAPI.createRecord("data-v-65c38930", Component.options)
   } else {
-    hotAPI.reload("data-v-17920fe2", Component.options)
+    hotAPI.reload("data-v-65c38930", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 285:
+/***/ 281:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -185,14 +185,12 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 636:
+/***/ 625:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__js_Common__ = __webpack_require__(285);
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__js_Common__ = __webpack_require__(281);
 //
 //
 //
@@ -204,24 +202,53 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 
-var Js = Object(__WEBPACK_IMPORTED_MODULE_0__js_Common__["a" /* default */])('sls-date-year');
+var Js = Object(__WEBPACK_IMPORTED_MODULE_0__js_Common__["a" /* default */])('sls-date-range');
 Js.mixins = [{
 	computed: {
 		date_attrs: function date_attrs() {
-			return this.Data.date_attrs || {};
+			return this.Data.date_range_attrs || {};
+		},
+
+
+		/**
+            * 范围分隔符，默认为 ' - '
+   * @returns {*|string}
+   */
+		range_separator: function range_separator() {
+			return this.Data.date_range_attrs['range-separator'] || ' - ';
 		}
 	},
 	methods: {
 		onChange: function onChange(v) {
-			this.events.change && this.events.change(v);
+			this.submit_info[this.data.key] = v.split(this.range_separator);
+			this.events.change && this.events.change({ value: v, info: this.submit_info[this.data.key] });
+		},
+
+
+		/**
+            * 如果传的默认值为字符串，自动转为数组
+   */
+		setValueStringToArray: function setValueStringToArray() {
+			//传了默认值且为字符串再处理
+			if (typeof this.submit_data[this.data.key] === 'string' && this.submit_data[this.data.key]) {
+				//默认值必须包含分隔符
+				if (this.submit_data[this.data.key].indexOf(this.range_separator) !== -1) {
+					this.submit_data[this.data.key] = this.submit_data[this.data.key].split(this.range_separator);
+				} else {
+					console.error('日期范围默认值为数组。如果设置成了字符串，范围分隔符必须和设置的一样，默认分隔符为 " - "！');
+				}
+			}
 		}
+	},
+	created: function created() {
+		this.setValueStringToArray();
 	}
 }];
 /* harmony default export */ __webpack_exports__["default"] = (Js);
 
 /***/ }),
 
-/***/ 637:
+/***/ 626:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -229,29 +256,23 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
-    [
-      _c(
-        "el-date-picker",
-        _vm._b(
-          {
-            attrs: { type: "year", placeholder: _vm.data.desc },
-            on: { change: _vm.onChange },
-            model: {
-              value: _vm.submit_data[_vm.data.key],
-              callback: function($$v) {
-                _vm.$set(_vm.submit_data, _vm.data.key, $$v)
-              },
-              expression: "submit_data[data.key]"
-            }
+    "el-date-picker",
+    _vm._b(
+      {
+        attrs: { type: "daterange", placeholder: _vm.data.desc },
+        on: { change: _vm.onChange },
+        model: {
+          value: _vm.submit_data[_vm.data.key],
+          callback: function($$v) {
+            _vm.$set(_vm.submit_data, _vm.data.key, $$v)
           },
-          "el-date-picker",
-          _vm.date_attrs,
-          false
-        )
-      )
-    ],
-    1
+          expression: "submit_data[data.key]"
+        }
+      },
+      "el-date-picker",
+      _vm.date_attrs,
+      false
+    )
   )
 }
 var staticRenderFns = []
@@ -260,7 +281,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-17920fe2", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-65c38930", module.exports)
   }
 }
 

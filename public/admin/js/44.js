@@ -6,9 +6,9 @@ webpackJsonp([44],{
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(427)
+var __vue_script__ = __webpack_require__(420)
 /* template */
-var __vue_template__ = __webpack_require__(428)
+var __vue_template__ = __webpack_require__(421)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/admin/views/api/edit.vue"
+Component.options.__file = "resources/assets/admin/views/asset/group/edit.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6d00fea4", Component.options)
+    hotAPI.createRecord("data-v-18a1ffde", Component.options)
   } else {
-    hotAPI.reload("data-v-6d00fea4", Component.options)
+    hotAPI.reload("data-v-18a1ffde", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 290:
+/***/ 284:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -110,7 +110,7 @@ module.exports = Component.exports
         },
         onUpdateViewParams: function onUpdateViewParams() {
             this.params.id = parseInt(this.$route.query.id) || "";
-            this.params.pid = parseInt(this.$route.query.pid) || "";
+            this.params.pid = parseInt(this.$route.query.pid) || 1;
             this.$set(this.toolbar, "type", this.params.id ? "edit" : "add");
         },
         $initView: function $initView() {
@@ -125,16 +125,14 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 427:
+/***/ 420:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_edit_mixin__ = __webpack_require__(290);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_edit_mixin__ = __webpack_require__(284);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-//
-//
 //
 //
 //
@@ -148,36 +146,35 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "api-edit",
+  name: "asset-group-edit",
   mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_edit_mixin__["a" /* default */]],
   data: function data() {
     return {
       fields: [{
-        key: "asset_id",
-        type: "select",
-        label: "Asset",
-        list: [],
-        custom_attrs: {
-          label: "tree_title",
-          value: "id"
-        }
+        key: "title",
+        desc: "請輸入資源群組名稱",
+        label: "資源群組名稱"
       }, {
-        key: "url",
-        label: "路徑"
-      }, {
-        key: "method",
-        desc: "Please enter api method",
-        label: "代碼"
+        key: "state",
+        label: "是否啟用",
+        desc: "",
+        type: "radio",
+        list: [{
+          text: "禁用",
+          value: "0"
+        }, {
+          text: "啟用",
+          value: "1"
+        }]
       }],
+      toolbar: {
+        type: "edit"
+      },
       default_value: {
-        asset_id: 1,
-        url: "",
-        method: ""
+        title: "",
+        state: 1
       }
     };
-  },
-  created: function created() {
-    this.onUpdateFieldList();
   },
 
   methods: {
@@ -191,14 +188,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       if (this.params.id) {
         data.id = this.params.id;
       }
-      this.$$api_api_save({
+      this.$$api_asset_saveGroup({
         data: data,
         fn: function fn(_ref2) {
           var data = _ref2.data,
               msg = _ref2.msg;
 
           _this.$message.success(msg);
-
           _this.$onSubmitFinish({
             type: type,
             query: { id: data.items.id, pid: data.items.parent_id }
@@ -207,28 +203,20 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       });
     },
     onCancel: function onCancel() {
-      this.$router.push(this.$route.path.replace("/edit", ""));
+      this.$router.push({
+        path: this.$route.path.replace("/edit", ""),
+        query: this.$router.go(-1)
+      });
     },
     onGetView: function onGetView() {
       var _this2 = this;
 
-      this.$$api_api_get({
+      this.$$api_asset_getGroup({
         pathVar: this.params.id,
         fn: function fn(_ref3) {
           var data = _ref3.data;
 
           _this2.default_value = _extends({}, _this2.default_value, data.items);
-        }
-      });
-    },
-    onUpdateFieldList: function onUpdateFieldList() {
-      var _this3 = this;
-
-      this.$$api_asset_list({
-        fn: function fn(_ref4) {
-          var data = _ref4.data;
-
-          _this3.fields[0].list = data.items;
         }
       });
     }
@@ -237,27 +225,21 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 /***/ }),
 
-/***/ 428:
+/***/ 421:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("FormData", {
-        attrs: {
-          FieldList: _vm.fields,
-          DefaultValue: _vm.default_value,
-          Toolbar: _vm.toolbar
-        },
-        on: { onSubmit: _vm.onSubmit, onCancel: _vm.onCancel }
-      })
-    ],
-    1
-  )
+  return _c("FormData", {
+    attrs: {
+      FieldList: _vm.fields,
+      DefaultValue: _vm.default_value,
+      Toolbar: _vm.toolbar
+    },
+    on: { onSubmit: _vm.onSubmit, onCancel: _vm.onCancel }
+  })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -265,7 +247,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-6d00fea4", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-18a1ffde", module.exports)
   }
 }
 

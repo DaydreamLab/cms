@@ -1,14 +1,14 @@
 webpackJsonp([39],{
 
-/***/ 121:
+/***/ 129:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(439)
+var __vue_script__ = __webpack_require__(492)
 /* template */
-var __vue_template__ = __webpack_require__(440)
+var __vue_template__ = __webpack_require__(493)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/admin/views/asset/group/list.vue"
+Component.options.__file = "resources/assets/admin/views/content/tag/edit.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0959d872", Component.options)
+    hotAPI.createRecord("data-v-73c7b5fa", Component.options)
   } else {
-    hotAPI.reload("data-v-0959d872", Component.options)
+    hotAPI.reload("data-v-73c7b5fa", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,164 +48,144 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 288:
+/***/ 284:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 /* harmony default export */ __webpack_exports__["a"] = ({
     data: function data() {
         return {
-            list: [],
-            list_loading: {
-                flag: false
+            params: {
+                id: "",
+                pid: ""
             },
-            paginations: {
-                current_page: 1,
-                total: 0,
-                page_size: 10,
-                page_sizes: [10, 15, 20, 25, 50, 100],
-                layout: "total, sizes, prev, pager, next, jumper"
+            toolbar: {
+                type: "edit"
             }
         };
     },
 
     watch: {
-        $route: {
-            handler: "$initList",
-            immediate: true
+        $route: function $route() {
+            this.$initView();
         }
     },
+    created: function created() {
+        this.$initView();
+    },
+
     methods: {
-        $onClickBtnAdd: function $onClickBtnAdd() {
-            this.$router.push(this.$route.path + "/edit");
-        },
-        $onClickBntEdit: function $onClickBntEdit(query) {
-            this.$router.push({
-                path: this.$route.path + "/edit",
-                query: _extends({}, query, {
-                    from: this.$route.query
-                })
-            });
-        },
-        $onSearchReset: function $onSearchReset() {
-            this.$router.push({
-                path: this.$route.path
-            });
-        },
-        $onSearch: function $onSearch(_ref) {
-            var data = _ref.data;
+        $onSubmitFinish: function $onSubmitFinish(_ref) {
+            var type = _ref.type,
+                query = _ref.query;
 
-            var sd = {};
-
-            var query = this.$route.query;
-
-            for (var p in query) {
-                sd[p] = query[p];
-            }
-            for (var s in data) {
-                sd[s] = data[s];
-                if (!sd[s]) {
-                    delete sd[s];
-                }
-            }
-
-            this.$router.push({
-                path: this.$route.path,
-                query: sd
-            });
-        },
-        setRouteQuery: function setRouteQuery(field, value) {
-            var query = Object.assign({}, this.$route.query);
-
-            if ((typeof field === "undefined" ? "undefined" : _typeof(field)) === "object") {
-                query = field;
-            } else {
-                query[field] = value;
-            }
-
-            return query;
-        },
-        getRouteQuery: function getRouteQuery() {
-            var _this = this;
-
-            var query = this.$route.query;
-            var intArray = ["id", "pid", "category_id", "access"];
-            var dateArray = ["start_date", "end_date"];
-            var data = {};
-
-            Object.keys(query).forEach(function (field) {
-                _this.searchbar.default_value[field] = intArray.includes(field) ? parseInt(query[field]) : dateArray.includes(field) ? _this.$options.filters.storeDateFormat(query[field]) : query[field];
-                data[field] = query[field];
-            });
-            return data;
-        },
-        $onChangeCurrentPage: function $onChangeCurrentPage(page) {
-            var _this2 = this;
-
-            this.$onGetList({
-                page: page,
-                fn: function fn() {
-                    _this2.$router.push({
-                        path: _this2.$route.path,
-                        query: _this2.setRouteQuery("page", page)
+            switch (type) {
+                case "save":
+                    this.$router.push({
+                        path: this.$route.path,
+                        query: query
                     });
-                }
-            });
-        },
-        $onChangePageSize: function $onChangePageSize(pageSize) {
-            var _this3 = this;
-
-            this.$onGetList({
-                pageSize: pageSize,
-                fn: function fn() {
-                    _this3.$router.push({
-                        path: _this3.$route.path,
-                        query: _this3.setRouteQuery("page_size", pageSize)
+                    break;
+                case "savenadd":
+                    this.$router.push({
+                        path: this.$route.path
                     });
-                }
-            });
-        },
-        $onGetList: function $onGetList() {
-            var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-                page = _ref2.page,
-                pageSize = _ref2.pageSize,
-                where = _ref2.where,
-                fn = _ref2.fn;
-
-            this.list_loading.flag = true;
-
-            var query = this.$route.query;
-
-            this.paginations.current_page = page || parseInt(query.page) || 1;
-            this.paginations.page_size = pageSize || parseInt(query.page_size) || this.paginations.page_size;
-
-            var page_data = Object.assign(this.getRouteQuery(), {
-                page: this.paginations.current_page,
-                limit: this.paginations.page_size
-            });
-            if (where) {
-                page_data = Object.assign(page_data, where || {});
+                    this.$router.go(0);
+                    break;
+                case "savenclose":
+                    this.$onCancel();
+                    break;
             }
-            this.handleGetList({ page_data: page_data, fn: fn });
         },
-        $initList: function $initList() {
-            this.$onGetList();
+        $onCancel: function $onCancel() {
+            var checkout_id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
+
+            if (checkout_id) {
+                this.handleCheckout(checkout_id);
+            }
+            this.$router.push({
+                path: this.$route.path.replace("/edit", ""),
+                query: this.$route.query.from
+            });
+        },
+        onUpdateViewParams: function onUpdateViewParams() {
+            this.params.id = parseInt(this.$route.query.id) || "";
+            this.params.pid = parseInt(this.$route.query.pid) || 1;
+            this.$set(this.toolbar, "type", this.params.id ? "edit" : "add");
+        },
+        $initView: function $initView() {
+            this.onUpdateViewParams();
+
+            if (this.params.id) {
+                this.onGetView();
+            }
         }
     }
 });
 
 /***/ }),
 
-/***/ 439:
+/***/ 288:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+    created: function created() {
+        var _this = this;
+
+        this.$$eventBus.$on("onClickCMSFormDataToolbar", function (_ref) {
+            var type = _ref.type;
+
+            switch (type) {
+                case "cancel":
+                    _this.$onCancel(_this.$route.query.id);
+                    break;
+                case "save":
+                case "savenclose":
+                case "savenadd":
+                    _this.handleSubmit({
+                        ref: "form-data",
+                        type: type,
+                        submit_data: _this.default_value
+                    });
+                    break;
+                case "trash":
+                    _this.handleTrash();
+                    break;
+            }
+        });
+    },
+    mounted: function mounted() {
+        this.initToolbar(this.toolbar);
+    },
+    beforeDestroy: function beforeDestroy() {
+        this.initToolbar();
+        this.$$eventBus.$off("onClickCMSFormDataToolbar");
+    },
+
+    methods: {
+        initToolbar: function initToolbar() {
+            var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+            this.$$eventBus.$emit("onInitToolbar", {
+                name: "CMSFormData",
+                data: data
+            });
+        }
+    }
+});
+
+/***/ }),
+
+/***/ 492:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin__ = __webpack_require__(288);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_edit_mixin__ = __webpack_require__(284);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_cms_edit_mixin__ = __webpack_require__(288);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -227,147 +207,82 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "asset-group-list",
-  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin__["a" /* default */]],
+  name: "tag-edit",
+  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_edit_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1_mixins_cms_edit_mixin__["a" /* default */]],
   data: function data() {
-    var _this = this;
-
     return {
-      fields: [{
-        key: "title",
-        label: this.$t("FIELD_TITLE_LABEL"),
-        type: "editable"
-      }, {
-        key: "state",
-        label: this.$t("OPTION_STATE"),
-        type: "icon-label",
-        width: "90",
-        formatter: function formatter(item) {
-          return {
-            color: "item_state_" + item + "_color",
-            icon: ["fal", item === 1 ? "check" : "times"]
-          };
-        }
-      }, {
-        width: "60",
-        key: "id",
-        label: this.$t("LIST_DATA_HEADING_ID")
-      }],
-      toolbar: {
-        type: "list",
-        custom: [{
-          text: this.$t("TOOLBAR_PUBLISH"),
-          method: "updateState",
-          condition: function condition(_ref) {
-            var data = _ref.data;
-
-            return data.state === 0 && data.parent_id !== null;
-          },
-
-          fn: function fn(_ref2) {
-            var ids = _ref2.ids;
-
-            _this.onClickBtnUpdateState({ ids: ids, state: 1 });
-          }
-        }, {
-          text: this.$t("TOOLBAR_UNPUBLISH"),
-          method: "updateState",
-          condition: function condition(_ref3) {
-            var data = _ref3.data;
-
-            return data.state === 1 && data.parent_id !== null;
-          },
-
-          fn: function fn(_ref4) {
-            var ids = _ref4.ids;
-
-            _this.onClickBtnUpdateState({ ids: ids, state: 0 });
-          }
-        }]
-      },
-      searchbar: {
-        fields: [{
-          key: "search",
-          desc: this.$t("TOOLBAR_KEYWORDS"),
-          clearable: true
-        }],
-        default_value: {
-          search: ""
-        }
+      default_value: {
+        title: "",
+        alias: "",
+        state: 1,
+        access: 1,
+        language: "*",
+        ordering: "",
+        parent_id: 1,
+        metadesc: "",
+        metakeywords: ""
       }
     };
   },
 
   methods: {
-    /**
-     * Toolbar
-     */
-    onClickBtnUpdateState: function onClickBtnUpdateState(_ref5) {
-      var _this2 = this;
+    handleSubmit: function handleSubmit(_ref) {
+      var _this = this;
 
-      var ids = _ref5.ids,
-          state = _ref5.state;
+      var submit_data = _ref.submit_data,
+          type = _ref.type;
 
-      this.$$api_asset_updateState({
-        data: {
-          ids: ids,
-          state: state
-        },
-        fn: function fn(_ref6) {
-          var msg = _ref6.msg;
+      if (this.params.id) {
+        submit_data.id = this.params.id;
+      }
+      this.$$api_tag_save({
+        data: submit_data,
+        fn: function fn(_ref2) {
+          var data = _ref2.data,
+              msg = _ref2.msg;
 
-          _this2.$message.success(msg);
-          _this2.$onGetList();
+          _this.$message.success(msg);
+          if (data) {
+            submit_data.id = data.items.id;
+          }
+          _this.$onSubmitFinish({ type: type, query: { id: submit_data.id } });
         }
       });
     },
-    onClickBtnBatchDelete: function onClickBtnBatchDelete(_ref7) {
-      var _this3 = this;
+    onGetView: function onGetView() {
+      var _this2 = this;
 
-      var ids = _ref7.ids,
-          datas = _ref7.datas;
+      this.$$api_tag_get({
+        pathVar: this.params.id,
+        fn: function fn(_ref3) {
+          var data = _ref3.data;
 
-      this.$confirm(this.$t("GLOBAL_CONFIRM_DELETE")).then(function () {
-        _this3.$$api_asset_delete({
-          data: { ids: ids },
-          fn: function fn(_ref8) {
-            var data = _ref8.data;
-
-            _this3.$onGetList();
-          }
-        });
-      });
-    },
-    handleEditQuery: function handleEditQuery(_ref9) {
-      var data = _ref9.data;
-
-      this.$onClickBntEdit({
-        id: data.id,
-        pid: data.parent_id,
-        name: data.name
-      });
-    },
-    handleGetList: function handleGetList() {
-      var _this4 = this;
-
-      var _ref10 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-          page_data = _ref10.page_data,
-          _fn = _ref10.fn;
-
-      this.$$api_asset_listGroup({
-        data: page_data,
-        fn: function fn(_ref11) {
-          var data = _ref11.data;
-
-          _this4.list_loading.flag = false;
-          _this4.list = data.items;
-          _this4.paginations.total = data.pagination.total;
-
-          _fn && _fn();
+          _this2.default_value = _extends({}, _this2.default_value, data.items);
         }
       });
     }
@@ -376,7 +291,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 440:
+/***/ 493:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -384,28 +299,228 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
+    "el-container",
     [
-      _c("ListData", {
-        ref: "list-data",
-        attrs: {
-          List: _vm.list,
-          ListLoading: _vm.list_loading,
-          Pagination: _vm.paginations,
-          Toolbar: _vm.toolbar,
-          Searchbar: _vm.searchbar,
-          FieldList: _vm.fields
-        },
-        on: {
-          onClickBtnAdd: _vm.$onClickBtnAdd,
-          onClickBtnEdit: _vm.handleEditQuery,
-          onClickBtnBatchDelete: _vm.onClickBtnBatchDelete,
-          onChangeCurrentPage: _vm.$onChangeCurrentPage,
-          onChangePageSize: _vm.$onChangePageSize,
-          onSearch: _vm.$onSearch,
-          onSearchReset: _vm.$onSearchReset
-        }
-      })
+      _c(
+        "el-main",
+        [
+          _c(
+            "el-tabs",
+            { attrs: { type: "border-card" } },
+            [
+              _c(
+                "el-tab-pane",
+                {
+                  attrs: {
+                    label: _vm.$t("GLOBAL_FIELDSET_BASIC_OPTIONS") /*基本*/
+                  }
+                },
+                [
+                  _c(
+                    "el-form",
+                    {
+                      ref: "form-data",
+                      attrs: {
+                        "label-position": "top",
+                        model: _vm.default_value
+                      }
+                    },
+                    [
+                      _c(
+                        "el-form-item",
+                        {
+                          attrs: {
+                            prop: "title",
+                            label: _vm.$t("FIELD_TITLE_LABEL" /*標題*/)
+                          }
+                        },
+                        [
+                          _c("el-input", {
+                            model: {
+                              value: _vm.default_value.title,
+                              callback: function($$v) {
+                                _vm.$set(_vm.default_value, "title", $$v)
+                              },
+                              expression: "default_value.title"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "el-form-item",
+                        {
+                          attrs: {
+                            prop: "alias",
+                            label: _vm.$t("FIELD_ALIAS_LABEL") /*別名*/
+                          }
+                        },
+                        [
+                          _c("el-input", {
+                            model: {
+                              value: _vm.default_value.alias,
+                              callback: function($$v) {
+                                _vm.$set(_vm.default_value, "alias", $$v)
+                              },
+                              expression: "default_value.alias"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-tab-pane",
+                {
+                  attrs: {
+                    label: _vm.$t(
+                      "GLOBAL_FIELDSET_METADATA_OPTIONS"
+                    ) /*Metadata*/
+                  }
+                },
+                [
+                  _c(
+                    "el-form",
+                    {
+                      ref: "form-data",
+                      attrs: {
+                        "label-position": "top",
+                        model: _vm.default_value
+                      }
+                    },
+                    [
+                      _c(
+                        "el-form-item",
+                        {
+                          attrs: {
+                            prop: "metadesc",
+                            label: _vm.$t(
+                              "FIELD_META_DESCRIPTION_LABEL"
+                            ) /*Meta 說明*/
+                          }
+                        },
+                        [
+                          _c("el-input", {
+                            attrs: { type: "textarea", rows: 2 },
+                            model: {
+                              value: _vm.default_value.metadesc,
+                              callback: function($$v) {
+                                _vm.$set(_vm.default_value, "metadesc", $$v)
+                              },
+                              expression: "default_value.metadesc"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "el-form-item",
+                        {
+                          attrs: {
+                            prop: "metakeywords",
+                            label: _vm.$t(
+                              "FIELD_META_KEYWORDS_LABEL"
+                            ) /*Meta 關鍵字*/
+                          }
+                        },
+                        [
+                          _c("el-input", {
+                            attrs: { type: "textarea", rows: 2 },
+                            model: {
+                              value: _vm.default_value.metakeywords,
+                              callback: function($$v) {
+                                _vm.$set(_vm.default_value, "metakeywords", $$v)
+                              },
+                              expression: "default_value.metakeywords"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("el-aside", { attrs: { width: "400px" } }, [
+        _c("div", { staticClass: "content-aside__header" }, [
+          _vm._v(_vm._s(_vm.$t("GLOBAL_FIELDSET_OPTIONS") /*選項*/))
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "content-aside__content" },
+          [
+            _c(
+              "el-form",
+              {
+                ref: "form-data",
+                attrs: { "label-position": "top", model: _vm.default_value }
+              },
+              [
+                _c(
+                  "el-form-item",
+                  {
+                    attrs: {
+                      prop: "state",
+                      label: _vm.$t("OPTION_STATE" /*狀態*/)
+                    }
+                  },
+                  [
+                    _c(
+                      "el-select",
+                      {
+                        model: {
+                          value: _vm.default_value.state,
+                          callback: function($$v) {
+                            _vm.$set(_vm.default_value, "state", $$v)
+                          },
+                          expression: "default_value.state"
+                        }
+                      },
+                      [
+                        _c("el-option", {
+                          attrs: {
+                            label: _vm.$t("PUBLISHED") /*發佈的*/,
+                            value: 1
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("el-option", {
+                          attrs: {
+                            label: _vm.$t("UNPUBLISHED") /*停止發佈的*/,
+                            value: 0
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ],
+          1
+        )
+      ])
     ],
     1
   )
@@ -416,7 +531,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-0959d872", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-73c7b5fa", module.exports)
   }
 }
 

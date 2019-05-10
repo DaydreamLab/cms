@@ -1,14 +1,14 @@
-webpackJsonp([15],{
+webpackJsonp([15,77],{
 
-/***/ 125:
+/***/ 102:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(471)
+var __vue_script__ = __webpack_require__(369)
 /* template */
-var __vue_template__ = __webpack_require__(472)
+var __vue_template__ = __webpack_require__(370)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/admin/views/content/category/list.vue"
+Component.options.__file = "resources/assets/admin/views/content/item/list.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-e3a236f8", Component.options)
+    hotAPI.createRecord("data-v-525be48f", Component.options)
   } else {
-    hotAPI.reload("data-v-e3a236f8", Component.options)
+    hotAPI.reload("data-v-525be48f", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 287:
+/***/ 280:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -650,7 +650,114 @@ var denormalize$1 = function denormalize$$1(input, schema, entities) {
 
 /***/ }),
 
-/***/ 288:
+/***/ 282:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_normalizr__ = __webpack_require__(280);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    methods: {
+        $handleGetFieldList: function $handleGetFieldList() {
+            var fields = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+
+            var _this = this;
+
+            var fieldsObj = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+            var usage = arguments[2];
+
+            this.$$api_option_list({
+                data: {
+                    types: fields
+                },
+                fn: function fn(_ref) {
+                    var data = _ref.data;
+
+                    fields.forEach(function (type) {
+                        if (type === "extrafield_group") {
+                            data.items[type] = [{
+                                id: 0,
+                                value: "",
+                                title: _this.$t("OPTION_NONE")
+                            }].concat(_toConsumableArray(data.items[type]));
+                            var groups = new __WEBPACK_IMPORTED_MODULE_0_normalizr__["b" /* schema */].Entity("groups");
+                            var normalize_list = Object(__WEBPACK_IMPORTED_MODULE_0_normalizr__["a" /* normalize */])(data.items[type], [groups]);
+                            _this.handleUpdateField(type, normalize_list.entities["groups"], fieldsObj[type], usage);
+                        } else {
+                            _this.handleUpdateField(type, data.items, fieldsObj[type], usage);
+                        }
+                    });
+                }
+            });
+        },
+        $getFieldList: function $getFieldList() {
+            var _this2 = this;
+
+            var fieldsObj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+            var usage = arguments[1];
+
+            var fieldsNotExit = Object.keys(fieldsObj).filter(function (key) {
+                return !_this2.checkStoreField(key);
+            });
+            if (fieldsNotExit.length > 0) {
+                this.$handleGetFieldList(fieldsNotExit, fieldsObj, usage);
+            }
+        },
+        handleUpdateField: function handleUpdateField(field, data, key_or_index, update_target) {
+            this.onUpdateStoreFieldList(field, data[field] || data);
+            update_target ? this.onUpdateSearchbarFieldList(field, key_or_index) : this.onUpdateFieldList(field, key_or_index);
+        },
+        onUpdateFieldList: function onUpdateFieldList(field, field_key_or_index) {
+            this.fields[field_key_or_index]["list"] = this.$store.getters[field + "_list"];
+        },
+        onUpdateSearchbarFieldList: function onUpdateSearchbarFieldList(field, field_index) {
+            this.searchbar.fields[field_index]["list"] = this.$store.getters[field + "_list"];
+        },
+        onUpdateStoreFieldList: function onUpdateStoreFieldList(field, value) {
+            var _this3 = this;
+
+            if (field === "language") {
+                value = [{
+                    sef: "*",
+                    title: this.$t("ALL_LANGUAGE")
+                }].concat(_toConsumableArray(value));
+            }
+            if (field === "asset") {
+                value = value.map(function (el) {
+                    var _el$tree_list_title$s = el.tree_list_title.split(" "),
+                        _el$tree_list_title$s2 = _slicedToArray(_el$tree_list_title$s, 2),
+                        prefix = _el$tree_list_title$s2[0],
+                        title = _el$tree_list_title$s2[1];
+
+                    var combinedTitle = title ? prefix + " " + _this3.$t(title) : _this3.$t(prefix);
+                    return _extends({}, el, { tree_list_title: combinedTitle });
+                });
+            }
+            if (field === "asset" || field === "item_category" || field === "menu_category") {
+                value[0]["tree_list_title"] = value[0]["tree_list_title"].replace("ROOT", this.$t("GLOBAL_ROOT" /*根*/));
+            }
+
+            this.$store.dispatch("update_option_related_list", {
+                type: field,
+                data: value
+            });
+        },
+        checkStoreField: function checkStoreField(field) {
+            return Boolean(this.$store.getters[field + "_list"]);
+        }
+    }
+});
+
+/***/ }),
+
+/***/ 283:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -806,95 +913,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_normalizr__ = __webpack_require__(287);
-
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-    methods: {
-        $handleGetFieldList: function $handleGetFieldList() {
-            var fields = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-
-            var _this = this;
-
-            var fieldsObj = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-            var usage = arguments[2];
-
-            this.$$api_option_list({
-                data: {
-                    types: fields
-                },
-                fn: function fn(_ref) {
-                    var data = _ref.data;
-
-                    fields.forEach(function (type) {
-                        if (type === "extrafield_group") {
-                            data.items[type].unshift({
-                                id: 0,
-                                value: "",
-                                title: _this.$t("OPTION_NONE")
-                            });
-                            var groups = new __WEBPACK_IMPORTED_MODULE_0_normalizr__["b" /* schema */].Entity("groups");
-                            var normalize_list = Object(__WEBPACK_IMPORTED_MODULE_0_normalizr__["a" /* normalize */])(data.items[type], [groups]);
-                            _this.handleUpdateField(type, normalize_list.entities["groups"], fieldsObj[type], usage);
-                        } else {
-                            _this.handleUpdateField(type, data.items, fieldsObj[type], usage);
-                        }
-                    });
-                }
-            });
-        },
-        $getFieldList: function $getFieldList() {
-            var _this2 = this;
-
-            var fieldsObj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-            var usage = arguments[1];
-
-            var fieldsNotExit = Object.keys(fieldsObj).filter(function (key) {
-                return !_this2.checkStoreField(key);
-            });
-            if (fieldsNotExit.length > 0) {
-                this.$handleGetFieldList(fieldsNotExit, fieldsObj, usage);
-            }
-        },
-        handleUpdateField: function handleUpdateField(field, data, key_or_index, update_target) {
-            this.onUpdateStoreFieldList(field, data[field] || data);
-            update_target ? this.onUpdateSearchbarFieldList(field, key_or_index) : this.onUpdateFieldList(field, key_or_index);
-        },
-        onUpdateFieldList: function onUpdateFieldList(field, field_key_or_index) {
-            this.fields[field_key_or_index]["list"] = this.$store.getters[field + "_list"];
-        },
-        onUpdateSearchbarFieldList: function onUpdateSearchbarFieldList(field, field_index) {
-            this.searchbar.fields[field_index]["list"] = this.$store.getters[field + "_list"];
-        },
-        onUpdateStoreFieldList: function onUpdateStoreFieldList(field, value) {
-            if (field === "language") {
-                var first_option = {
-                    sef: "*",
-                    title: this.$t("ALL_LANGUAGE")
-                };
-                value.unshift(first_option);
-            }
-
-            if (field === "item_category" || field === "menu_category") {
-                value[0]["tree_list_title"] = value[0]["tree_list_title"].replace("ROOT", this.$t("GLOBAL_ROOT" /*根*/));
-            }
-            this.$store.dispatch("update_option_related_list", {
-                type: field,
-                data: value
-            });
-        },
-        checkStoreField: function checkStoreField(field) {
-            return Boolean(this.$store.getters[field + "_list"]);
-        }
-    }
-});
-
-/***/ }),
-
-/***/ 295:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony default export */ __webpack_exports__["a"] = ({
     methods: {
         $initList: function $initList() {
@@ -906,14 +924,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 /***/ }),
 
-/***/ 471:
+/***/ 369:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_option_mixin__ = __webpack_require__(289);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_list_mixin__ = __webpack_require__(288);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mixins_cms_list_mixin__ = __webpack_require__(295);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_option_mixin__ = __webpack_require__(282);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_list_mixin__ = __webpack_require__(283);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mixins_cms_list_mixin__ = __webpack_require__(289);
 //
 //
 //
@@ -946,7 +964,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "category-list",
+  name: "item-list",
   mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_option_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1_mixins_list_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2_mixins_cms_list_mixin__["a" /* default */]],
   data: function data() {
     var _this = this;
@@ -956,12 +974,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         show: true
       },
       fields: [{
-        key: "tree_title",
+        key: "title",
         label: this.$t("FIELD_TITLE_LABEL"),
-        type: "editable"
+        type: "editable",
+        width: 300
       }, {
-        key: "content_type",
-        label: this.$t("OPTION_CONTENT_TYPE")
+        key: "featured",
+        label: this.$t("OPTION_FEATURED"),
+        type: "icon",
+        width: "80",
+        formatter: function formatter(item) {
+          return {
+            style: {
+              color: item === 1 ? "#fdd034" : "#cfd3da"
+            },
+            icon: ["fas", "star"]
+          };
+        }
       }, {
         key: "state",
         label: this.$t("OPTION_STATE"),
@@ -972,7 +1001,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             "1": "PUBLISHED",
             "0": "UNPUBLISHED",
             "-1": "ARCHIVED",
-            "-2": "TRASHED"
+            "-2": "TRASHED",
+            "2": "PENDING",
+            "3": "EXPIRED"
           };
           return {
             text: _this.$t(item_text[item]),
@@ -980,10 +1011,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           };
         }
       }, {
-        key: "image",
-        label: this.$t("LIST_DATA_IMAGE_LABEL"),
+        key: "category_title",
+        label: this.$t("OPTION_CATEGORY"),
+        width: "120"
+      }, {
+        key: "creator",
+        label: this.$t("LIST_DATA_AUTHOR_LABEL")
+      }, {
+        key: "updater",
+        label: this.$t("LIST_DATA_MODIFIED_BY_LABEL"),
+        width: "100"
+      }, {
+        key: "created_at",
+        label: this.$t("LIST_DATA_CREATED_DATE_LABEL"),
+        formatter: function formatter(item) {
+          return _this.$options.filters.displayDateFormat(item.created_at);
+        }
+      }, {
+        key: "updated_at",
+        label: this.$t("LIST_DATA_MODIFIED_DATE_LABEL"),
+        formatter: function formatter(item) {
+          return _this.$options.filters.displayDateFormat(item.updated_at);
+        }
+      }, {
+        key: "hits",
+        label: this.$t("LIST_DATA_HITS_LABEL")
+      }, {
+        key: "introimage",
+        label: this.$t("LIST_DATA_INTRO_IMAGE_LABEL"),
         type: "icon",
-        width: "90",
         sort: false,
         formatter: function formatter(item) {
           return {
@@ -991,54 +1047,60 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           };
         }
       }, {
-        key: "access_title",
-        label: this.$t("FIELD_ACCESS_LEVEL")
+        key: "image",
+        label: this.$t("LIST_DATA_IMAGE_LABEL"),
+        type: "icon",
+        sort: false,
+        formatter: function formatter(item) {
+          return {
+            icon: item ? ["fal", "image"] : ""
+          };
+        }
       }, {
         key: "language_title",
         label: this.$t("OPTION_LANGUAGE"),
+        width: "100",
         formatter: function formatter(item) {
           return item.language === "*" ? _this.$t("ALL_LANGUAGE") : item.language_title;
         }
       }, {
-        width: "60",
         key: "id",
-        label: this.$t("LIST_DATA_HEADING_ID")
+        label: this.$t("LIST_DATA_HEADING_ID"),
+        width: "60"
       }],
       toolbar: {
         type: "list",
         custom: [{
           text: this.$t("TOOLBAR_PUBLISH"),
           method: "updateState",
-          condition: function condition(_ref) {
-            var data = _ref.data;
+          fn: function fn(_ref) {
+            var ids = _ref.ids;
 
-            return data.state === 0 && data.parent_id !== null;
-          },
-
-          fn: function fn(_ref2) {
-            var ids = _ref2.ids;
-
-            _this.onClickBtnUpdateState({
-              ids: ids,
-              state: 1
-            });
+            _this.onClickBtnUpdateState({ ids: ids, state: 1 });
           }
         }, {
           text: this.$t("TOOLBAR_UNPUBLISH"),
           method: "updateState",
-          condition: function condition(_ref3) {
-            var data = _ref3.data;
+          fn: function fn(_ref2) {
+            var ids = _ref2.ids;
 
-            return data.state === 1 && data.parent_id !== null;
-          },
+            _this.onClickBtnUpdateState({ ids: ids, state: 0 });
+          }
+        }, {
+          text: this.$t("TOOLBAR_FEATURED"),
+          method: "updateFeatured",
+          fn: function fn(_ref3) {
+            var ids = _ref3.ids;
 
+            _this.onClickBtnUpdatFeatured({ ids: ids, featured: 1 });
+          }
+        }, {
+          text: this.$t("TOOLBAR_UNFEATURED"),
+          method: "updateFeatured",
           fn: function fn(_ref4) {
             var ids = _ref4.ids;
 
-            _this.onClickBtnUpdateState({
-              ids: ids,
-              state: 0
-            });
+            _this.onClickBtnUpdatFeatured({ ids: ids, featured: 0 });
           }
         }, {
           text: this.$t("TOOLBAR_CHECKOUT"),
@@ -1055,6 +1117,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           key: "search",
           desc: this.$t("TOOLBAR_KEYWORDS"),
           clearable: true
+        }, {
+          key: "featured",
+          type: "select",
+          desc: this.$t("OPTION_FEATURED"),
+          clearable: true,
+          list: [{
+            value: "1",
+            text: this.$t("FEATURED")
+          }, {
+            value: "0",
+            text: this.$t("NOT_FEATURED")
+          }]
         }, {
           key: "state",
           type: "select",
@@ -1074,11 +1148,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             text: this.$t("TRASHED")
           }]
         }, {
-          key: "id",
+          key: "category_id",
           type: "select",
           desc: this.$t("OPTION_CATEGORY"),
-          list: this.$store.getters.item_category_list,
           clearable: true,
+          list: this.$store.getters.item_article_category_list,
           custom_attrs: {
             label: "tree_list_title",
             value: "id"
@@ -1087,8 +1161,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           key: "language",
           type: "select",
           desc: this.$t("OPTION_LANGUAGE"),
-          list: this.$store.getters.language_list,
           clearable: true,
+          list: this.$store.getters.language_list,
           custom_attrs: {
             label: "title",
             value: "sef"
@@ -1097,8 +1171,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           key: "access",
           type: "select",
           desc: this.$t("FIELD_ACCESS_LEVEL"),
-          list: this.$store.getters.viewlevel_list,
           clearable: true,
+          list: this.$store.getters.viewlevel_list,
           custom_attrs: {
             label: "title",
             value: "id"
@@ -1107,7 +1181,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         default_value: {
           search: "",
           state: "",
-          id: "",
+          featured: "",
+          category_id: "",
           language: "",
           access: ""
         }
@@ -1115,7 +1190,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
   created: function created() {
-    this.$getFieldList({ item_category: 2, language: 3, viewlevel: 4 }, "searchbar");
+    this.$getFieldList({
+      item_article_category: 3,
+      language: 4,
+      viewlevel: 5
+    }, "searchbar");
   },
 
   methods: {
@@ -1129,10 +1208,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           ids = _ref6.ids;
 
       var checkout_data = ids ? ids : [data.id];
-      this.$$api_category_checkout({
-        data: {
-          ids: checkout_data
-        },
+      this.$$api_item_checkout({
+        data: { ids: checkout_data },
         fn: function fn(_ref7) {
           var msg = _ref7.msg;
 
@@ -1142,11 +1219,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     onOrderChange: function onOrderChange(_ref8) {
+      var _this3 = this;
+
       var id = _ref8.id,
           index_diff = _ref8.index_diff,
           order = _ref8.order;
 
-      this.$$api_category_ordering({
+      this.$$api_item_ordering({
         data: {
           id: id,
           index_diff: index_diff,
@@ -1155,88 +1234,108 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         fn: function fn(_ref9) {
           var msg = _ref9.msg;
 
-          console.log(msg);
+          _this3.$message.success(msg);
         }
       });
     },
-
+    onSortChange: function onSortChange(order) {
+      this.$onGetList({
+        where: { order_by: "ordering", order: order.replace("ending", "") }
+      });
+    },
 
     /**
      * Toolbar
      */
-    onClickBtnBatchTrash: function onClickBtnBatchTrash(_ref10) {
+    onClickBtnUpdatFeatured: function onClickBtnUpdatFeatured(_ref10) {
+      var _this4 = this;
+
       var ids = _ref10.ids,
-          state = _ref10.state;
+          featured = _ref10.featured;
 
-      this.onClickBtnUpdateState({ ids: ids, state: state });
+      this.$$api_item_updateFeatured({
+        data: {
+          ids: ids,
+          featured: featured
+        },
+        fn: function fn(_ref11) {
+          var msg = _ref11.msg;
+
+          _this4.$message.success(msg);
+          _this4.$onGetList();
+        }
+      });
     },
-    onClickBtnBatchRestore: function onClickBtnBatchRestore(_ref11) {
-      var ids = _ref11.ids,
-          state = _ref11.state;
-
-      this.onClickBtnUpdateState({ ids: ids, state: state });
-    },
-    onClickBtnUpdateState: function onClickBtnUpdateState(_ref12) {
-      var _this3 = this;
-
+    onClickBtnBatchTrash: function onClickBtnBatchTrash(_ref12) {
       var ids = _ref12.ids,
           state = _ref12.state;
 
-      this.$$api_category_updateState({
+      this.onClickBtnUpdateState({ ids: ids, state: state });
+    },
+    onClickBtnBatchRestore: function onClickBtnBatchRestore(_ref13) {
+      var ids = _ref13.ids,
+          state = _ref13.state;
+
+      this.onClickBtnUpdateState({ ids: ids, state: state });
+    },
+    onClickBtnUpdateState: function onClickBtnUpdateState(_ref14) {
+      var _this5 = this;
+
+      var ids = _ref14.ids,
+          state = _ref14.state;
+
+      this.$$api_item_updateState({
         data: {
           ids: ids,
           state: state
         },
-        fn: function fn(_ref13) {
-          var msg = _ref13.msg;
+        fn: function fn(_ref15) {
+          var msg = _ref15.msg;
 
-          _this3.$message.success(msg);
-          _this3.$onGetList();
+          _this5.$message.success(msg);
+          _this5.$onGetList();
         }
       });
     },
-    onClickBtnBatchDelete: function onClickBtnBatchDelete(_ref14) {
-      var _this4 = this;
+    onClickBtnBatchDelete: function onClickBtnBatchDelete(_ref16) {
+      var _this6 = this;
 
-      var ids = _ref14.ids,
-          datas = _ref14.datas;
+      var ids = _ref16.ids,
+          datas = _ref16.datas;
 
       this.$confirm(this.$t("GLOBAL_CONFIRM_DELETE")).then(function () {
-        _this4.$$api_category_delete({
-          data: {
-            ids: ids
-          },
-          fn: function fn(_ref15) {
-            var data = _ref15.data;
+        _this6.$$api_item_delete({
+          data: { ids: ids },
+          fn: function fn(_ref17) {
+            var data = _ref17.data;
 
-            _this4.$onGetList();
+            _this6.$onGetList();
           }
         });
       });
     },
-    handleEditQuery: function handleEditQuery(_ref16) {
-      var data = _ref16.data;
+    handleEditQuery: function handleEditQuery(_ref18) {
+      var data = _ref18.data;
 
       this.$onClickBntEdit({
-        id: data.id,
-        pid: data.parent_id
+        id: data.id
       });
     },
     handleGetList: function handleGetList() {
-      var _this5 = this;
+      var _this7 = this;
 
-      var _ref17 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-          page_data = _ref17.page_data,
-          _fn = _ref17.fn;
+      var _ref19 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+          page_data = _ref19.page_data,
+          _fn = _ref19.fn;
 
-      this.$$api_category_list({
+      this.$$api_item_list({
         data: page_data,
-        fn: function fn(_ref18) {
-          var data = _ref18.data;
+        fn: function fn(_ref20) {
+          var data = _ref20.data;
 
-          _this5.list_loading.flag = false;
-          _this5.list = data.items;
-          _this5.paginations.total = data.pagination.total;
+          _this7.list_loading.flag = false;
+          _this7.list = data.items;
+          _this7.paginations.total = data.pagination.total;
 
           _fn && _fn();
         }
@@ -1247,44 +1346,39 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 472:
+/***/ 370:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("ListData", {
-        ref: "list-data",
-        attrs: {
-          List: _vm.list,
-          ListLoading: _vm.list_loading,
-          Sort: _vm.sort,
-          Pagination: _vm.paginations,
-          Toolbar: _vm.toolbar,
-          Searchbar: _vm.searchbar,
-          FieldList: _vm.fields
-        },
-        on: {
-          onClickBtnAdd: _vm.$onClickBtnAdd,
-          onClickBtnEdit: _vm.handleEditQuery,
-          onClickBtnBatchDelete: _vm.onClickBtnBatchDelete,
-          onClickBtnCheckout: _vm.onClickBtnCheckout,
-          onClickBtnBatchTrash: _vm.onClickBtnBatchTrash,
-          onClickBtnBatchRestore: _vm.onClickBtnBatchRestore,
-          onChangeCurrentPage: _vm.$onChangeCurrentPage,
-          onChangePageSize: _vm.$onChangePageSize,
-          onSearch: _vm.$onSearch,
-          onSearchReset: _vm.$onSearchReset,
-          onOrderChange: _vm.onOrderChange
-        }
-      })
-    ],
-    1
-  )
+  return _c("ListData", {
+    ref: "list-data",
+    attrs: {
+      List: _vm.list,
+      ListLoading: _vm.list_loading,
+      Sort: _vm.sort,
+      Pagination: _vm.paginations,
+      Toolbar: _vm.toolbar,
+      Searchbar: _vm.searchbar,
+      FieldList: _vm.fields
+    },
+    on: {
+      onClickBtnAdd: _vm.$onClickBtnAdd,
+      onClickBtnEdit: _vm.handleEditQuery,
+      onClickBtnBatchTrash: _vm.onClickBtnBatchTrash,
+      onClickBtnBatchRestore: _vm.onClickBtnBatchRestore,
+      onClickBtnBatchDelete: _vm.onClickBtnBatchDelete,
+      onClickBtnCheckout: _vm.onClickBtnCheckout,
+      onChangeCurrentPage: _vm.$onChangeCurrentPage,
+      onChangePageSize: _vm.$onChangePageSize,
+      onSearch: _vm.$onSearch,
+      onSearchReset: _vm.$onSearchReset,
+      onOrderChange: _vm.onOrderChange,
+      onSortChange: _vm.onSortChange
+    }
+  })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -1292,7 +1386,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-e3a236f8", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-525be48f", module.exports)
   }
 }
 

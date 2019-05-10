@@ -1,157 +1,24 @@
 webpackJsonp([69],{
 
-/***/ 1:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony default export */ __webpack_exports__["a"] = (function (name) {
-    return {
-        name: name,
-        data: function data() {
-            return {};
-        },
-
-        computed: {
-            data: function data() {
-                return this.Data;
-            },
-            events: function events() {
-                return this.Data.events || {};
-            },
-            submit_data: function submit_data() {
-                return this.SubmitData;
-            },
-            submit_info: function submit_info() {
-                return this.SubmitInfo;
-            },
-            temp_field_obj: function temp_field_obj() {
-                return this.TempFieldObj;
-            },
-            custom_attrs: function custom_attrs() {
-                return this.Data.custom_attrs || {};
-            },
-            label_attr: function label_attr() {
-                return this.custom_attrs.label || "text";
-            },
-            value_attr: function value_attr() {
-                return this.custom_attrs.value || "value";
-            }
-        },
-        props: {
-            Data: {
-                type: Object,
-                default: function _default() {
-                    return {};
-                }
-            },
-            SubmitData: {
-                type: Object,
-                default: function _default() {
-                    return {};
-                }
-            },
-            SubmitInfo: {
-                type: Object,
-                default: function _default() {
-                    return {};
-                }
-            },
-            TempFieldObj: {
-                type: Object,
-                default: function _default() {
-                    return {};
-                }
-            }
-        },
-        watch: {
-            $route: function $route() {
-                this.init();
-            }
-        },
-        created: function created() {
-            this.setDefaultFieldByNoDefaultValue();
-            this.setArrayValue();
-        },
-        mounted: function mounted() {
-            this.init();
-        },
-
-
-        methods: {
-            /**
-             * 处理表单控件值复数类型，比如，获取的值和显示的文本不同时，除了返回需要提交表单的value值，还需要返回显示的文本，以防不时之需
-             */
-            setArrayValue: function setArrayValue() {
-                var _this = this;
-
-                //把存储value和text的数组转成对象格式，有利于提高根据值取文本的效率
-                if (!this.temp_field_obj[this.data.key]) {
-                    this.temp_field_obj[this.data.key] = {};
-                }
-
-                // console.log(this.custom_attrs);
-
-                //当存在value和text数组时，才可调用
-                if (this.data.list && Array.isArray(this.data.list)) {
-                    //遍历value和text数组，组装成对象格式
-                    this.data.list.forEach(function (item) {
-                        _this.temp_field_obj[_this.data.key][item[_this.value_attr] !== undefined ? item[_this.value_attr] : item[_this.label_attr]] = item[_this.label_attr] !== undefined ? item[_this.label_attr] : item[_this.value_attr];
-                    });
-                    //如果当前默认值为真，默认先提取一下默认值对应的文本
-                    if (this.submit_data[this.data.key] !== undefined) {
-                        //默认值分两种：数组(多选)，字符串或整形(单选)
-                        if (Array.isArray(this.submit_data[this.data.key])) {
-                            //循环数组值，把每个对应的文本取出来
-                            this.submit_info[this.data.key] = [];
-                            this.submit_data[this.data.key].forEach(function (item) {
-                                if (_this.temp_field_obj[_this.data.key][item]) {
-                                    _this.submit_info[_this.data.key].push(_this.temp_field_obj[_this.data.key][item]);
-                                }
-                            });
-                        } else {
-                            //不是数组，直接提取对应的值得文本
-                            this.submit_info[this.data.key] = "";
-                            if (this.temp_field_obj[this.data.key][this.submit_data[this.data.key]]) {
-                                this.submit_info[this.data.key] = this.temp_field_obj[this.data.key][this.submit_data[this.data.key]];
-                            }
-                        }
-                    }
-                }
-            },
-
-
-            /**
-             * 当没有传默认值或者连default_value都不存在时(添加的时候确实是不需要传default_value,如果不这样操作一下，绑定将会失败)
-             * 此时，组件中定义的default_value只是一个空对象，这时，v-model是无法绑定的，所以这个函数用来设置默认字段。
-             */
-            setDefaultFieldByNoDefaultValue: function setDefaultFieldByNoDefaultValue() {
-                // console.log(this.submit_data);
-                if (this.submit_data[this.data.key] === undefined) {
-                    this.$set(this.submit_data, this.data.key, "");
-                }
-            },
-            init: function init() {}
-        }
-    };
-});
-
-/***/ }),
-
-/***/ 237:
+/***/ 406:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(0)
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(454)
+}
+var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(238)
+var __vue_script__ = __webpack_require__(456)
 /* template */
-var __vue_template__ = __webpack_require__(239)
+var __vue_template__ = __webpack_require__(459)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = null
+var __vue_scopeId__ = "data-v-24a1c216"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -162,7 +29,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/admin/components/form-data/fields/DdlTree.vue"
+Component.options.__file = "resources/assets/admin/components/editor/index.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -171,9 +38,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-1a325475", Component.options)
+    hotAPI.createRecord("data-v-24a1c216", Component.options)
   } else {
-    hotAPI.reload("data-v-1a325475", Component.options)
+    hotAPI.reload("data-v-24a1c216", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -185,12 +52,61 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 238:
+/***/ 454:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(455);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(256)("2c06b00b", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-24a1c216\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Users/daydreamlab/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-24a1c216\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Users/daydreamlab/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ 455:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(255)(false);
+// imports
+
+
+// module
+exports.push([module.i, "/* Colors -------------------------- */\n/* Link -------------------------- */\n/* Background -------------------------- */\n/* Border -------------------------- */\n/* Navbar -------------------------- */\n/* Sidebar -------------------------- */\n/* Tab -------------------------- */\n/* Icon -------------------------- */\n/* Item -------------------------- */\n.custom-toolbar-button[data-v-24a1c216] {\n  position: absolute;\n  top: 4px;\n  right: 4px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ 456:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__js_Common__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__plugins__ = __webpack_require__(457);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__toolbar__ = __webpack_require__(458);
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -207,28 +123,177 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 
-var Js = Object(__WEBPACK_IMPORTED_MODULE_0__js_Common__["a" /* default */])("sls-tree");
-Js.mixins = [{
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: { Media: function Media() {
+      return __webpack_require__.e/* import() */(67/* duplicate */).then(__webpack_require__.bind(null, 366));
+    } },
   data: function data() {
-    return {};
+    return {
+      mediaPaths: [],
+      mediaDialogVisible: false,
+      hasChange: false,
+      hasInit: false,
+      tinymceId: this.id,
+      fullscreen: false
+    };
   },
 
-  computed: {
-    tree_attrs: function tree_attrs() {
-      return this.Data.tree_attrs || {};
+  props: {
+    id: {
+      type: String,
+      default: "editor-" + +new Date() + ((Math.random() * 1000).toFixed(0) + "")
+    },
+    value: {
+      type: String,
+      default: ""
+    },
+    toolbar: {
+      type: Array,
+      required: false,
+      default: function _default() {
+        return [];
+      }
+    },
+    menubar: {
+      type: String,
+      default: "file edit insert view format table"
+    },
+    height: {
+      type: Number,
+      required: false,
+      default: 400
     }
   },
+  watch: {
+    value: function value(val) {
+      var _this2 = this;
+
+      if (!this.hasChange && this.hasInit) {
+        this.$nextTick(function () {
+          return window.tinymce.get(_this2.tinymceId).setContent(val || "");
+        });
+      }
+    }
+  },
+  mounted: function mounted() {
+    this.initTinymce();
+  },
+  activated: function activated() {
+    this.initTinymce();
+  },
+  deactivated: function deactivated() {
+    this.destroyTinymce();
+  },
+  destroyed: function destroyed() {
+    this.destroyTinymce();
+  },
+
   methods: {
-    onCheckChange: function onCheckChange() {
-      this.submit_data[this.data.key] = this.$refs.tree.getCheckedKeys();
+    handleInsertMedia: function handleInsertMedia(files) {
+      var _this = this;
+      files.forEach(function (path) {
+        window.tinymce.get(_this.tinymceId).insertContent("<img src=\"/storage/media" + path + "\" >");
+      });
+    },
+    onClickBtnSelectMedia: function onClickBtnSelectMedia() {
+      this.mediaDialogVisible = false;
+      this.handleInsertMedia(this.mediaPaths);
+    },
+    onChangeMedia: function onChangeMedia(files) {
+      this.mediaPaths = files;
+    },
+    setContent: function setContent(value) {
+      window.tinymce.get(this.tinymceId).setContent(value);
+    },
+    getContent: function getContent() {
+      window.tinymce.get(this.tinymceId).getContent();
+    },
+    initTinymce: function initTinymce() {
+      var _this3 = this;
+
+      var _this = this;
+      window.tinymce.init({
+        language: "zh_TW",
+        selector: "#" + this.tinymceId,
+        height: this.height,
+        body_class: "panel-body ",
+        object_resizing: false,
+        toolbar: this.toolbar.length > 0 ? this.toolbar : __WEBPACK_IMPORTED_MODULE_1__toolbar__["a" /* default */],
+        menubar: this.menubar,
+        plugins: __WEBPACK_IMPORTED_MODULE_0__plugins__["a" /* default */],
+        end_container_on_empty_block: true,
+        powerpaste_word_import: "clean",
+        code_dialog_height: 450,
+        code_dialog_width: 1000,
+        advlist_bullet_styles: "square",
+        advlist_number_styles: "default",
+        imagetools_cors_hosts: ["www.tinymce.com", "codepen.io"],
+        default_link_target: "_blank",
+        link_title: true,
+        convert_urls: false,
+        nonbreaking_force_tab: true, // inserting nonbreaking space &nbsp; need Nonbreaking Space Plugin
+        init_instance_callback: function init_instance_callback(editor) {
+          if (_this.value) {
+            editor.setContent(_this.value);
+          }
+          _this.hasInit = true;
+          editor.on("NodeChange Change KeyUp SetContent", function () {
+            _this3.hasChange = true;
+            _this3.$emit("input", editor.getContent());
+          });
+        },
+        setup: function setup(editor) {
+          // editor.on("FullscreenStateChanged", e => {
+          //   _this.fullscreen = e.state;
+          // });
+        }
+      });
+    },
+    destroyTinymce: function destroyTinymce() {
+      var tinymce = window.tinymce.get(this.tinymceId);
+      if (this.fullscreen) {
+        tinymce.execCommand("mceFullScreen");
+      }
+
+      if (tinymce) {
+        tinymce.destroy();
+      }
     }
   }
-}];
-/* harmony default export */ __webpack_exports__["default"] = (Js);
+});
 
 /***/ }),
 
-/***/ 239:
+/***/ 457:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// Any plugins you want to use has to be imported
+// Detail plugins list see https://www.tinymce.com/docs/plugins/
+// Custom builds see https://www.tinymce.com/download/custom-builds/
+
+var plugins = ["advlist anchor autolink autosave code codesample colorpicker colorpicker contextmenu directionality fullscreen hr image imagetools insertdatetime link lists media nonbreaking noneditable pagebreak paste preview print save searchreplace spellchecker tabfocus table template textcolor textpattern visualblocks visualchars wordcount"];
+
+/* harmony default export */ __webpack_exports__["a"] = (plugins);
+
+/***/ }),
+
+/***/ 458:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// Here is a list of the toolbar
+// Detail list see https://www.tinymce.com/docs/advanced/editor-control-identifiers/#toolbarcontrols
+
+var toolbar = ['searchreplace bold italic underline strikethrough alignleft aligncenter alignright outdent indent  blockquote undo redo removeformat subscript superscript code codesample', 'hr bullist numlist link image charmap preview anchor pagebreak insertdatetime media table emoticons forecolor backcolor fullscreen'];
+
+/* harmony default export */ __webpack_exports__["a"] = (toolbar);
+
+/***/ }),
+
+/***/ 459:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -236,25 +301,74 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "el-tree",
-    _vm._b(
-      {
-        ref: "tree",
-        attrs: {
-          "node-key": "id",
-          data: _vm.data.list,
-          "default-checked-keys": _vm.submit_data[_vm.data.key],
-          "default-expanded-keys": _vm.submit_data[_vm.data.key],
-          props: _vm.custom_attrs,
-          "show-checkbox": "",
-          "auto-expand-parent": ""
+    "div",
+    { staticClass: "tinymce-container" },
+    [
+      _c("textarea", { attrs: { id: _vm.tinymceId } }),
+      _vm._v(" "),
+      _c(
+        "el-button",
+        {
+          staticClass: "custom-toolbar-button",
+          attrs: { size: "mini", type: "primary" },
+          on: {
+            click: function($event) {
+              _vm.mediaDialogVisible = true
+            }
+          }
         },
-        on: { "check-change": _vm.onCheckChange }
-      },
-      "el-tree",
-      _vm.tree_attrs,
-      false
-    )
+        [
+          _c("font-awesome-icon", { attrs: { icon: ["fal", "images"] } }),
+          _vm._v(
+            "\n    " +
+              _vm._s(
+                _vm.$t("EDITOR_CHOOSE_IMAGE_FROM_MEDIA") /*從媒體選擇圖片*/
+              ) +
+              "\n  "
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "el-dialog",
+        {
+          attrs: { width: "80%", visible: _vm.mediaDialogVisible },
+          on: {
+            "update:visible": function($event) {
+              _vm.mediaDialogVisible = $event
+            }
+          }
+        },
+        [
+          _vm.mediaDialogVisible
+            ? _c("Media", { on: { onChangeSelection: _vm.onChangeMedia } })
+            : _vm._e(),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass: "dialog-footer",
+              attrs: { slot: "footer" },
+              slot: "footer"
+            },
+            [
+              _c(
+                "el-button",
+                {
+                  attrs: { type: "primary" },
+                  on: { click: _vm.onClickBtnSelectMedia }
+                },
+                [_vm._v(_vm._s(_vm.$t("SELECT") /*選擇*/))]
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
   )
 }
 var staticRenderFns = []
@@ -263,7 +377,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-1a325475", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-24a1c216", module.exports)
   }
 }
 

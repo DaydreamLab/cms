@@ -1,14 +1,14 @@
-webpackJsonp([14,80],{
+webpackJsonp([14],{
 
-/***/ 104:
+/***/ 141:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(383)
+var __vue_script__ = __webpack_require__(540)
 /* template */
-var __vue_template__ = __webpack_require__(384)
+var __vue_template__ = __webpack_require__(542)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/admin/views/content/item/list.vue"
+Component.options.__file = "resources/assets/admin/views/user/group/edit.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-525be48f", Component.options)
+    hotAPI.createRecord("data-v-6758c0a9", Component.options)
   } else {
-    hotAPI.reload("data-v-525be48f", Component.options)
+    hotAPI.reload("data-v-6758c0a9", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 287:
+/***/ 280:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -650,163 +650,17 @@ var denormalize$1 = function denormalize$$1(input, schema, entities) {
 
 /***/ }),
 
-/***/ 288:
+/***/ 282:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_normalizr__ = __webpack_require__(280);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-/* harmony default export */ __webpack_exports__["a"] = ({
-    data: function data() {
-        return {
-            list: [],
-            list_loading: {
-                flag: false
-            },
-            paginations: {
-                current_page: 1,
-                total: 0,
-                page_size: 10,
-                page_sizes: [10, 15, 20, 25, 50, 100],
-                layout: "total, sizes, prev, pager, next, jumper"
-            }
-        };
-    },
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
-    watch: {
-        $route: {
-            handler: "$initList",
-            immediate: true
-        }
-    },
-    methods: {
-        $onClickBtnAdd: function $onClickBtnAdd() {
-            this.$router.push(this.$route.path + "/edit");
-        },
-        $onClickBntEdit: function $onClickBntEdit(query) {
-            this.$router.push({
-                path: this.$route.path + "/edit",
-                query: _extends({}, query, {
-                    from: this.$route.query
-                })
-            });
-        },
-        $onSearchReset: function $onSearchReset() {
-            this.$router.push({
-                path: this.$route.path
-            });
-        },
-        $onSearch: function $onSearch(_ref) {
-            var data = _ref.data;
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-            var sd = {};
-
-            var query = this.$route.query;
-
-            for (var p in query) {
-                sd[p] = query[p];
-            }
-            for (var s in data) {
-                sd[s] = data[s];
-                if (!sd[s]) {
-                    delete sd[s];
-                }
-            }
-
-            this.$router.push({
-                path: this.$route.path,
-                query: sd
-            });
-        },
-        setRouteQuery: function setRouteQuery(field, value) {
-            var query = Object.assign({}, this.$route.query);
-
-            if ((typeof field === "undefined" ? "undefined" : _typeof(field)) === "object") {
-                query = field;
-            } else {
-                query[field] = value;
-            }
-
-            return query;
-        },
-        getRouteQuery: function getRouteQuery() {
-            var _this = this;
-
-            var query = this.$route.query;
-            var intArray = ["id", "pid", "category_id", "access"];
-            var dateArray = ["start_date", "end_date"];
-            var data = {};
-
-            Object.keys(query).forEach(function (field) {
-                _this.searchbar.default_value[field] = intArray.includes(field) ? parseInt(query[field]) : dateArray.includes(field) ? _this.$options.filters.storeDateFormat(query[field]) : query[field];
-                data[field] = query[field];
-            });
-            return data;
-        },
-        $onChangeCurrentPage: function $onChangeCurrentPage(page) {
-            var _this2 = this;
-
-            this.$onGetList({
-                page: page,
-                fn: function fn() {
-                    _this2.$router.push({
-                        path: _this2.$route.path,
-                        query: _this2.setRouteQuery("page", page)
-                    });
-                }
-            });
-        },
-        $onChangePageSize: function $onChangePageSize(pageSize) {
-            var _this3 = this;
-
-            this.$onGetList({
-                pageSize: pageSize,
-                fn: function fn() {
-                    _this3.$router.push({
-                        path: _this3.$route.path,
-                        query: _this3.setRouteQuery("page_size", pageSize)
-                    });
-                }
-            });
-        },
-        $onGetList: function $onGetList() {
-            var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-                page = _ref2.page,
-                pageSize = _ref2.pageSize,
-                where = _ref2.where,
-                fn = _ref2.fn;
-
-            this.list_loading.flag = true;
-
-            var query = this.$route.query;
-
-            this.paginations.current_page = page || parseInt(query.page) || 1;
-            this.paginations.page_size = pageSize || parseInt(query.page_size) || this.paginations.page_size;
-
-            var page_data = Object.assign(this.getRouteQuery(), {
-                page: this.paginations.current_page,
-                limit: this.paginations.page_size
-            });
-            if (where) {
-                page_data = Object.assign(page_data, where || {});
-            }
-            this.handleGetList({ page_data: page_data, fn: fn });
-        },
-        $initList: function $initList() {
-            this.$onGetList();
-        }
-    }
-});
-
-/***/ }),
-
-/***/ 289:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_normalizr__ = __webpack_require__(287);
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -828,11 +682,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
                     fields.forEach(function (type) {
                         if (type === "extrafield_group") {
-                            data.items[type].unshift({
+                            data.items[type] = [{
                                 id: 0,
                                 value: "",
                                 title: _this.$t("OPTION_NONE")
-                            });
+                            }].concat(_toConsumableArray(data.items[type]));
                             var groups = new __WEBPACK_IMPORTED_MODULE_0_normalizr__["b" /* schema */].Entity("groups");
                             var normalize_list = Object(__WEBPACK_IMPORTED_MODULE_0_normalizr__["a" /* normalize */])(data.items[type], [groups]);
                             _this.handleUpdateField(type, normalize_list.entities["groups"], fieldsObj[type], usage);
@@ -867,17 +721,29 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.searchbar.fields[field_index]["list"] = this.$store.getters[field + "_list"];
         },
         onUpdateStoreFieldList: function onUpdateStoreFieldList(field, value) {
+            var _this3 = this;
+
             if (field === "language") {
-                var first_option = {
+                value = [{
                     sef: "*",
                     title: this.$t("ALL_LANGUAGE")
-                };
-                value.unshift(first_option);
+                }].concat(_toConsumableArray(value));
             }
+            if (field === "asset") {
+                value = value.map(function (el) {
+                    var _el$tree_list_title$s = el.tree_list_title.split(" "),
+                        _el$tree_list_title$s2 = _slicedToArray(_el$tree_list_title$s, 2),
+                        prefix = _el$tree_list_title$s2[0],
+                        title = _el$tree_list_title$s2[1];
 
-            if (field === "item_category" || field === "menu_category") {
+                    var combinedTitle = title ? prefix + " " + _this3.$t(title) : _this3.$t(prefix);
+                    return _extends({}, el, { tree_list_title: combinedTitle });
+                });
+            }
+            if (field === "asset" || field === "item_category" || field === "menu_category") {
                 value[0]["tree_list_title"] = value[0]["tree_list_title"].replace("ROOT", this.$t("GLOBAL_ROOT" /*根*/));
             }
+
             this.$store.dispatch("update_option_related_list", {
                 type: field,
                 data: value
@@ -891,48 +757,93 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 /***/ }),
 
-/***/ 295:
+/***/ 284:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony default export */ __webpack_exports__["a"] = ({
+    data: function data() {
+        return {
+            params: {
+                id: "",
+                pid: ""
+            },
+            toolbar: {
+                type: "edit"
+            }
+        };
+    },
+
+    watch: {
+        $route: function $route() {
+            this.$initView();
+        }
+    },
+    created: function created() {
+        this.$initView();
+    },
+
     methods: {
-        $initList: function $initList() {
-            this.$set(this.toolbar, "type", this.$route.query.state === "-2" ? "trash" : "list");
-            this.$onGetList();
+        $onSubmitFinish: function $onSubmitFinish(_ref) {
+            var type = _ref.type,
+                query = _ref.query;
+
+            switch (type) {
+                case "save":
+                    this.$router.push({
+                        path: this.$route.path,
+                        query: query
+                    });
+                    break;
+                case "savenadd":
+                    this.$router.push({
+                        path: this.$route.path
+                    });
+                    this.$router.go(0);
+                    break;
+                case "savenclose":
+                    this.$onCancel();
+                    break;
+            }
+        },
+        $onCancel: function $onCancel() {
+            var checkout_id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
+
+            if (checkout_id) {
+                this.handleCheckout(checkout_id);
+            }
+            this.$router.push({
+                path: this.$route.path.replace("/edit", ""),
+                query: this.$route.query.from
+            });
+        },
+        onUpdateViewParams: function onUpdateViewParams() {
+            this.params.id = parseInt(this.$route.query.id) || "";
+            this.params.pid = parseInt(this.$route.query.pid) || 1;
+            this.$set(this.toolbar, "type", this.params.id ? "edit" : "add");
+        },
+        $initView: function $initView() {
+            this.onUpdateViewParams();
+
+            if (this.params.id) {
+                this.onGetView();
+            }
         }
     }
 });
 
 /***/ }),
 
-/***/ 383:
+/***/ 540:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_option_mixin__ = __webpack_require__(289);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_list_mixin__ = __webpack_require__(288);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mixins_cms_list_mixin__ = __webpack_require__(295);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_utils_permission__ = __webpack_require__(541);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_option_mixin__ = __webpack_require__(282);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mixins_edit_mixin__ = __webpack_require__(284);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -943,385 +854,121 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-
+ // 權限判斷 function
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "item-list",
-  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_option_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1_mixins_list_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2_mixins_cms_list_mixin__["a" /* default */]],
+  name: "user-group-edit",
+  mixins: [__WEBPACK_IMPORTED_MODULE_1_mixins_option_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2_mixins_edit_mixin__["a" /* default */]],
   data: function data() {
-    var _this = this;
-
     return {
-      sort: {
-        show: true
-      },
       fields: [{
         key: "title",
-        label: this.$t("FIELD_TITLE_LABEL"),
-        type: "editable",
-        width: 300
+        desc: "請輸入名稱",
+        label: this.$t("FIELD_TITLE_LABEL")
       }, {
-        key: "featured",
-        label: this.$t("OPTION_FEATURED"),
-        type: "icon",
-        width: "80",
-        formatter: function formatter(item) {
-          return {
-            style: {
-              color: item === 1 ? "#fdd034" : "#cfd3da"
-            },
-            icon: ["fas", "star"]
-          };
+        key: "parent_id",
+        type: "select",
+        desc: "請選擇上層會員群組",
+        label: this.$t("OPTION_PARENT_GROUP" /*上層群組*/),
+        list: this.$store.getters.user_group_list,
+        custom_attrs: {
+          label: "tree_list_title",
+          value: "id"
+        },
+        condition: function condition(_ref) {
+          var data = _ref.data;
+
+          return data.parent_id !== 1;
         }
       }, {
-        key: "state",
-        label: this.$t("OPTION_STATE"),
-        type: "label",
-        width: "120",
-        formatter: function formatter(item) {
-          var item_text = {
-            "1": "PUBLISHED",
-            "0": "UNPUBLISHED",
-            "-1": "ARCHIVED",
-            "-2": "TRASHED",
-            "2": "PENDING",
-            "3": "EXPIRED"
-          };
-          return {
-            text: _this.$t(item_text[item]),
-            color: "item_state_" + item + "_color"
-          };
+        key: "asset_ids",
+        label: "可訪問頁面",
+        type: "tree",
+        list: [],
+        custom_attrs: {
+          children: "children",
+          label: "title"
+        },
+        tree_attrs: {
+          "check-strictly": true
         }
       }, {
-        key: "category_title",
-        label: this.$t("OPTION_CATEGORY"),
-        width: "120"
-      }, {
-        key: "creator",
-        label: this.$t("LIST_DATA_AUTHOR_LABEL")
-      }, {
-        key: "updater",
-        label: this.$t("LIST_DATA_MODIFIED_BY_LABEL"),
-        width: "100"
-      }, {
-        key: "created_at",
-        label: this.$t("LIST_DATA_CREATED_DATE_LABEL"),
-        formatter: function formatter(item) {
-          return _this.$options.filters.displayDateFormat(item.created_at);
+        key: "api_ids",
+        label: "各頁面可操作按鈕",
+        type: "tree",
+        list: [],
+        custom_attrs: {
+          children: "child",
+          label: "name"
+        },
+        tree_attrs: {
+          "check-strictly": true
         }
-      }, {
-        key: "updated_at",
-        label: this.$t("LIST_DATA_MODIFIED_DATE_LABEL"),
-        formatter: function formatter(item) {
-          return _this.$options.filters.displayDateFormat(item.updated_at);
-        }
-      }, {
-        key: "hits",
-        label: this.$t("LIST_DATA_HITS_LABEL")
-      }, {
-        key: "introimage",
-        label: this.$t("LIST_DATA_INTRO_IMAGE_LABEL"),
-        type: "icon",
-        sort: false,
-        formatter: function formatter(item) {
-          return {
-            icon: item ? ["fal", "image"] : ""
-          };
-        }
-      }, {
-        key: "image",
-        label: this.$t("LIST_DATA_IMAGE_LABEL"),
-        type: "icon",
-        sort: false,
-        formatter: function formatter(item) {
-          return {
-            icon: item ? ["fal", "image"] : ""
-          };
-        }
-      }, {
-        key: "language_title",
-        label: this.$t("OPTION_LANGUAGE"),
-        width: "100",
-        formatter: function formatter(item) {
-          return item.language === "*" ? _this.$t("ALL_LANGUAGE") : item.language_title;
-        }
-      }, {
-        key: "id",
-        label: this.$t("LIST_DATA_HEADING_ID"),
-        width: "60"
       }],
-      toolbar: {
-        type: "list",
-        custom: [{
-          text: this.$t("TOOLBAR_PUBLISH"),
-          method: "updateState",
-          fn: function fn(_ref) {
-            var ids = _ref.ids;
-
-            _this.onClickBtnUpdateState({ ids: ids, state: 1 });
-          }
-        }, {
-          text: this.$t("TOOLBAR_UNPUBLISH"),
-          method: "updateState",
-          fn: function fn(_ref2) {
-            var ids = _ref2.ids;
-
-            _this.onClickBtnUpdateState({ ids: ids, state: 0 });
-          }
-        }, {
-          text: this.$t("TOOLBAR_FEATURED"),
-          method: "updateFeatured",
-          fn: function fn(_ref3) {
-            var ids = _ref3.ids;
-
-            _this.onClickBtnUpdatFeatured({ ids: ids, featured: 1 });
-          }
-        }, {
-          text: this.$t("TOOLBAR_UNFEATURED"),
-          method: "updateFeatured",
-          fn: function fn(_ref4) {
-            var ids = _ref4.ids;
-
-            _this.onClickBtnUpdatFeatured({ ids: ids, featured: 0 });
-          }
-        }, {
-          text: this.$t("TOOLBAR_CHECKOUT"),
-          method: "checkout",
-          fn: function fn(_ref5) {
-            var ids = _ref5.ids;
-
-            _this.onClickBtnCheckout({ ids: ids });
-          }
-        }]
-      },
-      searchbar: {
-        fields: [{
-          key: "search",
-          desc: this.$t("TOOLBAR_KEYWORDS"),
-          clearable: true
-        }, {
-          key: "featured",
-          type: "select",
-          desc: this.$t("OPTION_FEATURED"),
-          clearable: true,
-          list: [{
-            value: "1",
-            text: this.$t("FEATURED")
-          }, {
-            value: "0",
-            text: this.$t("NOT_FEATURED")
-          }]
-        }, {
-          key: "state",
-          type: "select",
-          desc: this.$t("OPTION_STATE"),
-          clearable: true,
-          list: [{
-            value: "1",
-            text: this.$t("PUBLISHED")
-          }, {
-            value: "0",
-            text: this.$t("UNPUBLISHED")
-          }, {
-            value: "-1",
-            text: this.$t("ARCHIVED")
-          }, {
-            value: "-2",
-            text: this.$t("TRASHED")
-          }]
-        }, {
-          key: "category_id",
-          type: "select",
-          desc: this.$t("OPTION_CATEGORY"),
-          clearable: true,
-          list: this.$store.getters.item_article_category_list,
-          custom_attrs: {
-            label: "tree_list_title",
-            value: "id"
-          }
-        }, {
-          key: "language",
-          type: "select",
-          desc: this.$t("OPTION_LANGUAGE"),
-          clearable: true,
-          list: this.$store.getters.language_list,
-          custom_attrs: {
-            label: "title",
-            value: "sef"
-          }
-        }, {
-          key: "access",
-          type: "select",
-          desc: this.$t("FIELD_ACCESS_LEVEL"),
-          clearable: true,
-          list: this.$store.getters.viewlevel_list,
-          custom_attrs: {
-            label: "title",
-            value: "id"
-          }
-        }],
-        default_value: {
-          search: "",
-          state: "",
-          featured: "",
-          category_id: "",
-          language: "",
-          access: ""
-        }
+      default_value: {
+        parent_id: 1,
+        title: "",
+        redirect: "",
+        state: 1,
+        asset_ids: [],
+        api_ids: []
       }
     };
   },
   created: function created() {
-    this.$getFieldList({
-      item_article_category: 3,
-      language: 4,
-      viewlevel: 5
-    }, "searchbar");
+    this.$getFieldList({ user_group: 1 });
   },
 
   methods: {
-    /**
-     * list actions
-     */
-    onClickBtnCheckout: function onClickBtnCheckout(_ref6) {
+    onSubmit: function onSubmit(_ref2) {
+      var _this = this;
+
+      var data = _ref2.data,
+          info = _ref2.info,
+          type = _ref2.type;
+
+      if (this.params.id) {
+        data.id = this.params.id;
+      }
+      this.$$api_user_saveGroup({
+        data: data,
+        fn: function fn(_ref3) {
+          var data = _ref3.data,
+              msg = _ref3.msg;
+
+          _this.$message.success(msg);
+          _this.$onSubmitFinish({
+            type: type,
+            query: { id: data.items.id }
+          });
+        }
+      });
+    },
+    onGetFieldList: function onGetFieldList() {
       var _this2 = this;
 
-      var data = _ref6.data,
-          ids = _ref6.ids;
+      this.$$api_user_groupAccess({
+        pathVar: this.params.pid,
+        fn: function fn(_ref4) {
+          var data = _ref4.data;
 
-      var checkout_data = ids ? ids : [data.id];
-      this.$$api_item_checkout({
-        data: { ids: checkout_data },
-        fn: function fn(_ref7) {
-          var msg = _ref7.msg;
-
-          _this2.$message.success(msg);
-          _this2.$onGetList();
+          _this2.fields[3].list = data.items;
         }
       });
     },
-    onOrderChange: function onOrderChange(_ref8) {
+    onGetView: function onGetView() {
       var _this3 = this;
 
-      var id = _ref8.id,
-          index_diff = _ref8.index_diff,
-          order = _ref8.order;
+      this.$$api_user_getGroup({
+        pathVar: this.params.id,
+        fn: function fn(_ref5) {
+          var data = _ref5.data;
 
-      this.$$api_item_ordering({
-        data: {
-          id: id,
-          index_diff: index_diff,
-          order: order
-        },
-        fn: function fn(_ref9) {
-          var msg = _ref9.msg;
-
-          _this3.$message.success(msg);
-        }
-      });
-    },
-    onSortChange: function onSortChange(order) {
-      this.$onGetList({
-        where: { order_by: "ordering", order: order.replace("ending", "") }
-      });
-    },
-
-    /**
-     * Toolbar
-     */
-    onClickBtnUpdatFeatured: function onClickBtnUpdatFeatured(_ref10) {
-      var _this4 = this;
-
-      var ids = _ref10.ids,
-          featured = _ref10.featured;
-
-      this.$$api_item_updateFeatured({
-        data: {
-          ids: ids,
-          featured: featured
-        },
-        fn: function fn(_ref11) {
-          var msg = _ref11.msg;
-
-          _this4.$message.success(msg);
-          _this4.$onGetList();
-        }
-      });
-    },
-    onClickBtnBatchTrash: function onClickBtnBatchTrash(_ref12) {
-      var ids = _ref12.ids,
-          state = _ref12.state;
-
-      this.onClickBtnUpdateState({ ids: ids, state: state });
-    },
-    onClickBtnBatchRestore: function onClickBtnBatchRestore(_ref13) {
-      var ids = _ref13.ids,
-          state = _ref13.state;
-
-      this.onClickBtnUpdateState({ ids: ids, state: state });
-    },
-    onClickBtnUpdateState: function onClickBtnUpdateState(_ref14) {
-      var _this5 = this;
-
-      var ids = _ref14.ids,
-          state = _ref14.state;
-
-      this.$$api_item_updateState({
-        data: {
-          ids: ids,
-          state: state
-        },
-        fn: function fn(_ref15) {
-          var msg = _ref15.msg;
-
-          _this5.$message.success(msg);
-          _this5.$onGetList();
-        }
-      });
-    },
-    onClickBtnBatchDelete: function onClickBtnBatchDelete(_ref16) {
-      var _this6 = this;
-
-      var ids = _ref16.ids,
-          datas = _ref16.datas;
-
-      this.$confirm(this.$t("GLOBAL_CONFIRM_DELETE")).then(function () {
-        _this6.$$api_item_delete({
-          data: { ids: ids },
-          fn: function fn(_ref17) {
-            var data = _ref17.data;
-
-            _this6.$onGetList();
-          }
-        });
-      });
-    },
-    handleEditQuery: function handleEditQuery(_ref18) {
-      var data = _ref18.data;
-
-      this.$onClickBntEdit({
-        id: data.id
-      });
-    },
-    handleGetList: function handleGetList() {
-      var _this7 = this;
-
-      var _ref19 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-          page_data = _ref19.page_data,
-          _fn = _ref19.fn;
-
-      this.$$api_item_list({
-        data: page_data,
-        fn: function fn(_ref20) {
-          var data = _ref20.data;
-
-          _this7.list_loading.flag = false;
-          _this7.list = data.items;
-          _this7.paginations.total = data.pagination.total;
-
-          _fn && _fn();
+          _this3.default_value = _extends({}, _this3.default_value, data.items);
+          // if (checkPermission("assignAccess"))
+          // this.onGetFieldList();
         }
       });
     }
@@ -1330,45 +977,47 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 384:
+/***/ 541:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export default */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_store___ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_router___ = __webpack_require__(20);
+
+
+/**
+ * @param {String} method API 對應代碼
+ * @returns {Boolean}
+ */
+function checkPermission(method) {
+    var userAssetAccess = __WEBPACK_IMPORTED_MODULE_0_store___["a" /* default */].state.user.user_access[__WEBPACK_IMPORTED_MODULE_1_router___["a" /* default */].currentRoute.meta.id];
+
+    var hasPermission = userAssetAccess ? userAssetAccess.includes(method) : true;
+
+    if (!hasPermission) {
+        return false;
+    }
+    return true;
+}
+
+/***/ }),
+
+/***/ 542:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("ListData", {
-        ref: "list-data",
-        attrs: {
-          List: _vm.list,
-          ListLoading: _vm.list_loading,
-          Sort: _vm.sort,
-          Pagination: _vm.paginations,
-          Toolbar: _vm.toolbar,
-          Searchbar: _vm.searchbar,
-          FieldList: _vm.fields
-        },
-        on: {
-          onClickBtnAdd: _vm.$onClickBtnAdd,
-          onClickBtnEdit: _vm.handleEditQuery,
-          onClickBtnBatchTrash: _vm.onClickBtnBatchTrash,
-          onClickBtnBatchRestore: _vm.onClickBtnBatchRestore,
-          onClickBtnBatchDelete: _vm.onClickBtnBatchDelete,
-          onClickBtnCheckout: _vm.onClickBtnCheckout,
-          onChangeCurrentPage: _vm.$onChangeCurrentPage,
-          onChangePageSize: _vm.$onChangePageSize,
-          onSearch: _vm.$onSearch,
-          onSearchReset: _vm.$onSearchReset,
-          onOrderChange: _vm.onOrderChange,
-          onSortChange: _vm.onSortChange
-        }
-      })
-    ],
-    1
-  )
+  return _c("FormData", {
+    attrs: {
+      FieldList: _vm.fields,
+      DefaultValue: _vm.default_value,
+      Toolbar: _vm.toolbar
+    },
+    on: { onSubmit: _vm.onSubmit, onCancel: _vm.onCancel }
+  })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -1376,7 +1025,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-525be48f", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-6758c0a9", module.exports)
   }
 }
 

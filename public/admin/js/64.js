@@ -1,14 +1,14 @@
 webpackJsonp([64],{
 
-/***/ 272:
+/***/ 264:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(634)
+var __vue_script__ = __webpack_require__(621)
 /* template */
-var __vue_template__ = __webpack_require__(635)
+var __vue_template__ = __webpack_require__(622)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/admin/components/form-data/fields/DdlDateRange.vue"
+Component.options.__file = "resources/assets/admin/components/form-data/fields/DdlCascader.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-65c38930", Component.options)
+    hotAPI.createRecord("data-v-0404a995", Component.options)
   } else {
-    hotAPI.reload("data-v-65c38930", Component.options)
+    hotAPI.reload("data-v-0404a995", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 285:
+/***/ 281:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -185,12 +185,13 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 634:
+/***/ 621:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__js_Common__ = __webpack_require__(285);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__js_Common__ = __webpack_require__(281);
+//
 //
 //
 //
@@ -202,53 +203,84 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 
-var Js = Object(__WEBPACK_IMPORTED_MODULE_0__js_Common__["a" /* default */])('sls-date-range');
+var Js = Object(__WEBPACK_IMPORTED_MODULE_0__js_Common__["a" /* default */])("sls-cascader");
 Js.mixins = [{
-	computed: {
-		date_attrs: function date_attrs() {
-			return this.Data.date_range_attrs || {};
-		},
+  data: function data() {
+    return {};
+  },
+
+  computed: {
+    cascader_attrs: function cascader_attrs() {
+      return this.Data.cascader_attrs || {};
+    }
+  },
+  methods: {
+    /**
+     * 根据数组的长度，来决定需要递归几次，最终取出需要的结果，我曹，没法解释，解释不清的玩意。
+     * @param  {array} 	areas 地区列表，无线分类结构
+     * @param  {array} 	temps 一维数组,如果只有一个，代表取顶级;如果两个，取顶级的子级；如果三个，顶级的子级的子级....以此类推
+     * @param  {number} k     递归次数，当这个值等于temps的长度时，就代表结束了
+     * @return {string}       地区名称
+     */
+    onDeepGetCityName: function onDeepGetCityName(list, temps, k) {
+      for (var i = 0; i < list.length; i++) {
+        if (list[i].id + "" === temps[k] + "") {
+          if (k < temps.length - 1) {
+            k = k + 1;
+            this.temp_field_obj[this.data.key].push(list[i].city);
+            this.onDeepGetCityName(list[i].children, temps, k);
+          } else {
+            this.temp_field_obj[this.data.key].push(list[i].city);
+            return;
+          }
+        }
+      }
+    },
 
 
-		/**
-            * 范围分隔符，默认为 ' - '
-   * @returns {*|string}
-   */
-		range_separator: function range_separator() {
-			return this.Data.date_range_attrs['range-separator'] || ' - ';
-		}
-	},
-	methods: {
-		onChange: function onChange(v) {
-			this.submit_info[this.data.key] = v.split(this.range_separator);
-			this.events.change && this.events.change({ value: v, info: this.submit_info[this.data.key] });
-		},
+    /**
+     * 最后一级选择完后触发
+     * @param v 选中的值数组，根据这个数组取出对应的文本
+     */
+    onChange: function onChange(v) {
+      this.temp_field_obj[this.data.key] = [];
+      this.onDeepGetCityName(this.data.options, v, 0);
+      this.submit_info[this.data.key] = this.temp_field_obj[this.data.key];
+
+      this.events.change && this.events.change({
+        value: v,
+        info: this.submit_info[this.data.key]
+      });
+    },
 
 
-		/**
-            * 如果传的默认值为字符串，自动转为数组
-   */
-		setValueStringToArray: function setValueStringToArray() {
-			//传了默认值且为字符串再处理
-			if (typeof this.submit_data[this.data.key] === 'string' && this.submit_data[this.data.key]) {
-				//默认值必须包含分隔符
-				if (this.submit_data[this.data.key].indexOf(this.range_separator) !== -1) {
-					this.submit_data[this.data.key] = this.submit_data[this.data.key].split(this.range_separator);
-				} else {
-					console.error('日期范围默认值为数组。如果设置成了字符串，范围分隔符必须和设置的一样，默认分隔符为 " - "！');
-				}
-			}
-		}
-	},
-	created: function created() {
-		this.setValueStringToArray();
-	}
+    /**
+     * 每选择一项时就触发这个
+     * 场景：当选择的条件不允许继续选择时，可以使用这个事件
+     * @param v 选中的值数组，根据这个数组取出对应的文本
+     */
+    onActiveItemChange: function onActiveItemChange(v) {
+      this.temp_field_obj[this.data.key] = [];
+      this.onDeepGetCityName(this.data.options, v, 0);
+      this.submit_info[this.data.key] = this.temp_field_obj[this.data.key];
+      this.events["active-item-change"] && this.events["active-item-change"]({
+        value: v,
+        info: this.submit_info[this.data.key]
+      });
+    }
+  },
+  created: function created() {
+    if (!this.submit_data[this.data.key] || !Array.isArray(this.submit_data[this.data.key])) {
+      this.submit_data[this.data.key] = [];
+    }
+    this.temp_field_obj[this.data.key] = [];
+  }
 }];
 /* harmony default export */ __webpack_exports__["default"] = (Js);
 
 /***/ }),
 
-/***/ 635:
+/***/ 622:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -256,11 +288,14 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "el-date-picker",
+    "el-cascader",
     _vm._b(
       {
-        attrs: { type: "daterange", placeholder: _vm.data.desc },
-        on: { change: _vm.onChange },
+        attrs: { placeholder: _vm.data.desc, options: _vm.data.options },
+        on: {
+          change: _vm.onChange,
+          "active-item-change": _vm.onActiveItemChange
+        },
         model: {
           value: _vm.submit_data[_vm.data.key],
           callback: function($$v) {
@@ -269,8 +304,8 @@ var render = function() {
           expression: "submit_data[data.key]"
         }
       },
-      "el-date-picker",
-      _vm.date_attrs,
+      "el-cascader",
+      _vm.cascader_attrs,
       false
     )
   )
@@ -281,7 +316,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-65c38930", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-0404a995", module.exports)
   }
 }
 

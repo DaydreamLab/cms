@@ -1,14 +1,14 @@
 webpackJsonp([54],{
 
-/***/ 279:
+/***/ 262:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(648)
+var __vue_script__ = __webpack_require__(617)
 /* template */
-var __vue_template__ = __webpack_require__(649)
+var __vue_template__ = __webpack_require__(618)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/admin/components/form-data/fields/DdlTimeFixedRange.vue"
+Component.options.__file = "resources/assets/admin/components/form-data/fields/DdlSelect.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-a01c0226", Component.options)
+    hotAPI.createRecord("data-v-0c88e313", Component.options)
   } else {
-    hotAPI.reload("data-v-a01c0226", Component.options)
+    hotAPI.reload("data-v-0c88e313", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 285:
+/***/ 281:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -185,12 +185,18 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 648:
+/***/ 617:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__js_Common__ = __webpack_require__(285);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__js_Common__ = __webpack_require__(281);
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -209,24 +215,57 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 
-var Js = Object(__WEBPACK_IMPORTED_MODULE_0__js_Common__["a" /* default */])('sls-time');
+var Js = Object(__WEBPACK_IMPORTED_MODULE_0__js_Common__["a" /* default */])("sls-select");
 Js.mixins = [{
-	computed: {
-		time_attrs: function time_attrs() {
-			return this.Data.time_attrs || {};
-		}
-	},
-	methods: {
-		onChange: function onChange(v) {
-			this.events.change && this.events.change(v);
-		}
-	}
+  data: function data() {
+    return {};
+  },
+
+  computed: {
+    select_attrs: function select_attrs() {
+      return this.Data.select_attrs || {};
+    },
+    option_attrs: function option_attrs() {
+      return this.Data.option_attrs || {};
+    }
+  },
+  methods: {
+    onChange: function onChange(v) {
+      var _this = this;
+
+      if (v) {
+        if (Array.isArray(v)) {
+          this.submit_info[this.data.key] = [];
+          v.forEach(function (item) {
+            _this.submit_info[_this.data.key].push(_this.temp_field_obj[_this.data.key][item]);
+          });
+        } else {
+          this.submit_info[this.data.key] = "";
+          this.submit_info[this.data.key] = this.temp_field_obj[this.data.key][v];
+        }
+      }
+
+      this.events.change && this.events.change({
+        value: v,
+        info: this.submit_info[this.data.key]
+      });
+    },
+    onVisibleChange: function onVisibleChange() {
+      this.events["visible-change"] && this.events["visible-change"]();
+    },
+    onRemoveTag: function onRemoveTag() {
+      this.events["remove-tag"] && this.events["remove-tag"]();
+    },
+    onClear: function onClear() {
+      this.events.clear && this.events.clear();
+    }
+  }
 }];
 /* harmony default export */ __webpack_exports__["default"] = (Js);
 
 /***/ }),
 
-/***/ 649:
+/***/ 618:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -234,49 +273,46 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
-    [
-      _c(
-        "el-time-select",
+    "el-select",
+    _vm._b(
+      {
+        attrs: {
+          multiple: _vm.data.multiple ? true : false,
+          placeholder: _vm.$t("OPTION_SELECT", { name: _vm.data.desc }),
+          clearable: _vm.data.clearable ? true : false
+        },
+        on: {
+          change: _vm.onChange,
+          "visible-change": _vm.onVisibleChange,
+          "remove-tag": _vm.onRemoveTag,
+          clear: _vm.onClear
+        },
+        model: {
+          value: _vm.submit_data[_vm.data.key],
+          callback: function($$v) {
+            _vm.$set(_vm.submit_data, _vm.data.key, $$v)
+          },
+          expression: "submit_data[data.key]"
+        }
+      },
+      "el-select",
+      _vm.select_attrs,
+      false
+    ),
+    _vm._l(_vm.data.list, function(item) {
+      return _c(
+        "el-option",
         _vm._b(
           {
-            attrs: { placeholder: _vm.data.desc },
-            on: { change: _vm.onChange },
-            model: {
-              value: _vm.submit_data[_vm.data.key],
-              callback: function($$v) {
-                _vm.$set(_vm.submit_data, _vm.data.key, $$v)
-              },
-              expression: "submit_data[data.key]"
-            }
+            key: item[_vm.value_attr],
+            attrs: { value: item[_vm.value_attr], label: item[_vm.label_attr] }
           },
-          "el-time-select",
-          _vm.time_attrs,
-          false
-        )
-      ),
-      _vm._v(" "),
-      _c(
-        "el-time-select",
-        _vm._b(
-          {
-            attrs: { placeholder: _vm.data.desc },
-            on: { change: _vm.onChange },
-            model: {
-              value: _vm.submit_data[_vm.data.key],
-              callback: function($$v) {
-                _vm.$set(_vm.submit_data, _vm.data.key, $$v)
-              },
-              expression: "submit_data[data.key]"
-            }
-          },
-          "el-time-select",
-          _vm.time_attrs,
+          "el-option",
+          _vm.option_attrs,
           false
         )
       )
-    ],
-    1
+    })
   )
 }
 var staticRenderFns = []
@@ -285,7 +321,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-a01c0226", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-0c88e313", module.exports)
   }
 }
 

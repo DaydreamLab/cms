@@ -1,14 +1,14 @@
 webpackJsonp([18],{
 
-/***/ 130:
+/***/ 138:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(492)
+var __vue_script__ = __webpack_require__(534)
 /* template */
-var __vue_template__ = __webpack_require__(493)
+var __vue_template__ = __webpack_require__(535)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/admin/views/content/item/edit.vue"
+Component.options.__file = "resources/assets/admin/views/system/site/edit.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-61a40bfb", Component.options)
+    hotAPI.createRecord("data-v-8554d192", Component.options)
   } else {
-    hotAPI.reload("data-v-61a40bfb", Component.options)
+    hotAPI.reload("data-v-8554d192", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 287:
+/***/ 280:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -650,11 +650,17 @@ var denormalize$1 = function denormalize$$1(input, schema, entities) {
 
 /***/ }),
 
-/***/ 289:
+/***/ 282:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_normalizr__ = __webpack_require__(287);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_normalizr__ = __webpack_require__(280);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -676,11 +682,11 @@ var denormalize$1 = function denormalize$$1(input, schema, entities) {
 
                     fields.forEach(function (type) {
                         if (type === "extrafield_group") {
-                            data.items[type].unshift({
+                            data.items[type] = [{
                                 id: 0,
                                 value: "",
                                 title: _this.$t("OPTION_NONE")
-                            });
+                            }].concat(_toConsumableArray(data.items[type]));
                             var groups = new __WEBPACK_IMPORTED_MODULE_0_normalizr__["b" /* schema */].Entity("groups");
                             var normalize_list = Object(__WEBPACK_IMPORTED_MODULE_0_normalizr__["a" /* normalize */])(data.items[type], [groups]);
                             _this.handleUpdateField(type, normalize_list.entities["groups"], fieldsObj[type], usage);
@@ -715,17 +721,29 @@ var denormalize$1 = function denormalize$$1(input, schema, entities) {
             this.searchbar.fields[field_index]["list"] = this.$store.getters[field + "_list"];
         },
         onUpdateStoreFieldList: function onUpdateStoreFieldList(field, value) {
+            var _this3 = this;
+
             if (field === "language") {
-                var first_option = {
+                value = [{
                     sef: "*",
                     title: this.$t("ALL_LANGUAGE")
-                };
-                value.unshift(first_option);
+                }].concat(_toConsumableArray(value));
             }
+            if (field === "asset") {
+                value = value.map(function (el) {
+                    var _el$tree_list_title$s = el.tree_list_title.split(" "),
+                        _el$tree_list_title$s2 = _slicedToArray(_el$tree_list_title$s, 2),
+                        prefix = _el$tree_list_title$s2[0],
+                        title = _el$tree_list_title$s2[1];
 
-            if (field === "item_category" || field === "menu_category") {
+                    var combinedTitle = title ? prefix + " " + _this3.$t(title) : _this3.$t(prefix);
+                    return _extends({}, el, { tree_list_title: combinedTitle });
+                });
+            }
+            if (field === "asset" || field === "item_category" || field === "menu_category") {
                 value[0]["tree_list_title"] = value[0]["tree_list_title"].replace("ROOT", this.$t("GLOBAL_ROOT" /*根*/));
             }
+
             this.$store.dispatch("update_option_related_list", {
                 type: field,
                 data: value
@@ -739,7 +757,7 @@ var denormalize$1 = function denormalize$$1(input, schema, entities) {
 
 /***/ }),
 
-/***/ 290:
+/***/ 284:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -801,7 +819,7 @@ var denormalize$1 = function denormalize$$1(input, schema, entities) {
         },
         onUpdateViewParams: function onUpdateViewParams() {
             this.params.id = parseInt(this.$route.query.id) || "";
-            this.params.pid = parseInt(this.$route.query.pid) || "";
+            this.params.pid = parseInt(this.$route.query.pid) || 1;
             this.$set(this.toolbar, "type", this.params.id ? "edit" : "add");
         },
         $initView: function $initView() {
@@ -816,7 +834,7 @@ var denormalize$1 = function denormalize$$1(input, schema, entities) {
 
 /***/ }),
 
-/***/ 300:
+/***/ 288:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -824,8 +842,10 @@ var denormalize$1 = function denormalize$$1(input, schema, entities) {
     created: function created() {
         var _this = this;
 
-        this.$$eventBus.$on("onClickCMSFormDataToolbar", function (opts) {
-            switch (opts.type) {
+        this.$$eventBus.$on("onClickCMSFormDataToolbar", function (_ref) {
+            var type = _ref.type;
+
+            switch (type) {
                 case "cancel":
                     _this.$onCancel(_this.$route.query.id);
                     break;
@@ -834,12 +854,12 @@ var denormalize$1 = function denormalize$$1(input, schema, entities) {
                 case "savenadd":
                     _this.handleSubmit({
                         ref: "form-data",
-                        type: opts.type,
+                        type: type,
                         submit_data: _this.default_value
                     });
                     break;
                 case "trash":
-                    _this.onTrash();
+                    _this.handleTrash();
                     break;
             }
         });
@@ -866,221 +886,73 @@ var denormalize$1 = function denormalize$$1(input, schema, entities) {
 
 /***/ }),
 
-/***/ 492:
+/***/ 534:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_normalizr__ = __webpack_require__(287);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_option_mixin__ = __webpack_require__(289);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mixins_edit_mixin__ = __webpack_require__(290);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_mixins_cms_edit_mixin__ = __webpack_require__(300);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_option_mixin__ = __webpack_require__(282);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_edit_mixin__ = __webpack_require__(284);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mixins_cms_edit_mixin__ = __webpack_require__(288);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "item-edit",
-  components: {
-    Editor: function Editor() {
-      return __webpack_require__.e/* import() */(74/* duplicate */).then(__webpack_require__.bind(null, 419));
-    },
-    MediaInput: function MediaInput() {
-      return __webpack_require__.e/* import() */(72/* duplicate */).then(__webpack_require__.bind(null, 371));
-    },
-    FieldForm: function FieldForm() {
-      return __webpack_require__.e/* import() */(73/* duplicate */).then(__webpack_require__.bind(null, 370));
-    }
-  },
-  mixins: [__WEBPACK_IMPORTED_MODULE_1_mixins_option_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2_mixins_edit_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_3_mixins_cms_edit_mixin__["a" /* default */]],
+  name: "site-edit",
+  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_option_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1_mixins_edit_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2_mixins_cms_edit_mixin__["a" /* default */]],
   data: function data() {
     return {
       fields: {
-        category_id: {
-          list: this.$store.getters.item_article_category_list,
-          custom_attrs: {
-            label: "tree_list_title",
-            value: "id"
-          }
-        },
-        extrafield_group_id: {
-          list: this.$store.getters.extrafield_group_list,
-          custom_attrs: {
-            label: "title",
-            value: "id"
-          }
-        },
-        access: {
-          list: this.$store.getters.viewlevel_list,
-          custom_attrs: {
-            label: "title",
-            value: "id"
-          }
-        },
-        language: {
+        sef: {
           list: this.$store.getters.language_list,
           custom_attrs: {
             label: "title",
@@ -1088,152 +960,77 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           }
         }
       },
-      default_value: {
+      default_value: _defineProperty({
         title: "",
-        alias: "",
-        link: "",
-        introtext: "",
-        description: "",
-        tags: [],
-        category_id: "",
-        state: 1,
-        featured: 0,
-        language: "",
-        access: 1,
-        metadesc: "",
+        url: "",
+        sef: "",
+        sitename: "",
         metakeywords: "",
-        introimage: "",
-        image: "",
-        image_sameas_introimage: false,
-        ordering: "",
-        publish_up: "",
-        publish_down: "",
-        extrafield_group_id: "",
-        extrafields: {}
-      },
-      new_tag_value: ""
+        metadesc: ""
+      }, "sef", "")
     };
-  },
-
-  watch: {
-    "default_value.image_sameas_introimage": function default_valueImage_sameas_introimage(v) {
-      if (v) {
-        this.default_value.image = this.default_value.introimage;
-      } else {
-        this.default_value.image = "";
-      }
-    }
   },
   created: function created() {
     this.$getFieldList({
-      item_article_category: "category_id",
-      extrafield_group: "extrafield_group_id",
-      language: "language",
-      viewlevel: "access"
+      language: "sef"
     });
   },
 
   methods: {
-    queryTagSearch: function queryTagSearch(queryString, callback) {
-      this.$$api_tag_list({
-        data: {
-          search: queryString
-        },
-        fn: function fn(_ref) {
-          var data = _ref.data;
-
-          callback(data.items);
-        }
-      });
-      this.queryString;
-    },
-    handleTagClose: function handleTagClose(tag) {
-      this.default_value.tags.splice(this.default_value.tags.indexOf(tag), 1);
-    },
-    handleTagConfirm: function handleTagConfirm(item) {
+    handleTrash: function handleTrash() {
       var _this = this;
 
-      if (item.type === "keyup") {
-        this.$$api_tag_save({
-          data: {
-            title: this.new_tag_value,
-            state: 1
-          },
-          fn: function fn(_ref2) {
-            var data = _ref2.data;
-
-            _this.default_value.tags.push(data.items);
-            _this.new_tag_value = "";
-          }
-        });
-      } else {
-        this.default_value.tags.push(item);
-        this.new_tag_value = "";
-      }
-    },
-    onTrash: function onTrash() {
-      var _this2 = this;
-
-      this.$$api_item_updateState({
+      this.$$api_site_updateState({
         data: {
           ids: [this.params.id],
           state: "-2"
         },
-        fn: function fn(_ref3) {
-          var msg = _ref3.msg;
+        fn: function fn(_ref) {
+          var msg = _ref.msg;
 
-          _this2.$message.success(msg);
-          _this2.$onCancel();
+          _this.$message.success(msg);
+          _this.onCancel();
         }
       });
     },
     handleCheckout: function handleCheckout(id) {
-      this.$$api_item_checkout({
+      this.$$api_site_checkout({
         data: { ids: [id] },
         fn: function fn() {}
       });
     },
-    handleSubmit: function handleSubmit(_ref4) {
-      var _this3 = this;
+    handleSubmit: function handleSubmit(_ref2) {
+      var _this2 = this;
 
-      var submit_data = _ref4.submit_data,
-          type = _ref4.type;
-
-      var submitData = Object.assign({}, submit_data);
+      var submit_data = _ref2.submit_data,
+          type = _ref2.type;
 
       if (this.params.id) {
-        submitData.id = this.params.id;
+        submit_data.id = this.params.id;
       }
-      submitData.publish_up = this.$options.filters.storeDateFormat(submitData.publish_up);
+      this.$$api_site_save({
+        data: submit_data,
+        fn: function fn(_ref3) {
+          var data = _ref3.data,
+              msg = _ref3.msg;
 
-      submitData.publish_down = this.$options.filters.storeDateFormat(submitData.publish_down);
-      this.$$api_item_save({
-        data: submitData,
-        fn: function fn(_ref5) {
-          var data = _ref5.data,
-              msg = _ref5.msg;
-
-          _this3.$message.success(msg);
-
+          _this2.$message.success(msg);
           if (data) {
             submit_data.id = data.items.id;
           }
-          _this3.$onSubmitFinish({ type: type, query: { id: submit_data.id } });
+          _this2.$onSubmitFinish({ type: type, query: { id: submit_data.id } });
         }
       });
     },
     onGetView: function onGetView() {
-      var _this4 = this;
+      var _this3 = this;
 
-      this.$$api_item_get({
+      this.$$api_site_get({
         pathVar: this.params.id,
-        fn: function fn(_ref6) {
-          var data = _ref6.data;
+        fn: function fn(_ref4) {
+          var data = _ref4.data;
 
-          var formatFields = ["publish_up", "publish_down"];
-          Object.keys(_this4.default_value).forEach(function (field) {
-            _this4.default_value[field] = formatFields.includes(field) ? _this4.$options.filters.displayDateFormat(data.items[field]) : data.items[field];
-          });
+          _this3.default_value = _extends({}, _this3.default_value, data.items);
         }
       });
     }
@@ -1242,7 +1039,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 493:
+/***/ 535:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -1303,18 +1100,18 @@ var render = function() {
                         "el-form-item",
                         {
                           attrs: {
-                            prop: "alias",
-                            label: _vm.$t("FIELD_ALIAS_LABEL") /*別名*/
+                            prop: "url",
+                            label: _vm.$t("SITE_FIELD_URL_LABEL") /*網址*/
                           }
                         },
                         [
                           _c("el-input", {
                             model: {
-                              value: _vm.default_value.alias,
+                              value: _vm.default_value.url,
                               callback: function($$v) {
-                                _vm.$set(_vm.default_value, "alias", $$v)
+                                _vm.$set(_vm.default_value, "url", $$v)
                               },
-                              expression: "default_value.alias"
+                              expression: "default_value.url"
                             }
                           })
                         ],
@@ -1325,46 +1122,34 @@ var render = function() {
                         "el-form-item",
                         {
                           attrs: {
-                            prop: "introtext",
-                            label: _vm.$t("FIELD_INTRO_TEXT_LABEL") /*摘要文字*/
+                            prop: "sef",
+                            label: _vm.$t("OPTION_LANGUAGE") /*語言*/
                           }
                         },
                         [
-                          _c("el-input", {
-                            attrs: { type: "textarea", rows: 2 },
-                            model: {
-                              value: _vm.default_value.introtext,
-                              callback: function($$v) {
-                                _vm.$set(_vm.default_value, "introtext", $$v)
-                              },
-                              expression: "default_value.introtext"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "el-form-item",
-                        {
-                          attrs: {
-                            prop: "description",
-                            label: _vm.$t(
-                              "FIELD_ITEM_DESCRIPTION_LABEL"
-                            ) /*內容文字*/
-                          }
-                        },
-                        [
-                          _c("Editor", {
-                            staticClass: "form-item__inner",
-                            model: {
-                              value: _vm.default_value.description,
-                              callback: function($$v) {
-                                _vm.$set(_vm.default_value, "description", $$v)
-                              },
-                              expression: "default_value.description"
-                            }
-                          })
+                          _c(
+                            "el-select",
+                            {
+                              model: {
+                                value: _vm.default_value.sef,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.default_value, "sef", $$v)
+                                },
+                                expression: "default_value.sef"
+                              }
+                            },
+                            _vm._l(_vm.fields.sef.list, function(option) {
+                              return _c("el-option", {
+                                key: option.id,
+                                attrs: {
+                                  label:
+                                    option[_vm.fields.sef.custom_attrs.label],
+                                  value:
+                                    option[_vm.fields.sef.custom_attrs.value]
+                                }
+                              })
+                            })
+                          )
                         ],
                         1
                       )
@@ -1380,8 +1165,8 @@ var render = function() {
                 {
                   attrs: {
                     label: _vm.$t(
-                      "GLOBAL_FIELDSET_METADATA_OPTIONS"
-                    ) /*Metadata*/
+                      "LANGUAGE_TAB_SITE_NAME_AND_METADATA"
+                    ) /*網站名稱&Metadata*/
                   }
                 },
                 [
@@ -1399,21 +1184,20 @@ var render = function() {
                         "el-form-item",
                         {
                           attrs: {
-                            prop: "metadesc",
+                            prop: "sitename",
                             label: _vm.$t(
-                              "FIELD_META_DESCRIPTION_LABEL"
-                            ) /*Meta 說明*/
+                              "LANGUAGE_FIELD_CUSTOM_SITE_NAME_LABEL"
+                            ) /*自訂網站名稱*/
                           }
                         },
                         [
                           _c("el-input", {
-                            attrs: { type: "textarea", rows: 2 },
                             model: {
-                              value: _vm.default_value.metadesc,
+                              value: _vm.default_value.sitename,
                               callback: function($$v) {
-                                _vm.$set(_vm.default_value, "metadesc", $$v)
+                                _vm.$set(_vm.default_value, "sitename", $$v)
                               },
-                              expression: "default_value.metadesc"
+                              expression: "default_value.sitename"
                             }
                           })
                         ],
@@ -1443,92 +1227,27 @@ var render = function() {
                           })
                         ],
                         1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "el-tab-pane",
-                {
-                  attrs: {
-                    label: _vm.$t("GLOBAL_FIELDSET_IMAGE_OPTIONS") /*圖片*/
-                  }
-                },
-                [
-                  _c(
-                    "el-form",
-                    {
-                      ref: "form-data",
-                      attrs: {
-                        "label-position": "top",
-                        model: _vm.default_value
-                      }
-                    },
-                    [
-                      _c(
-                        "el-form-item",
-                        {
-                          attrs: {
-                            prop: "introimage",
-                            label: _vm.$t(
-                              "CONTENT_FIELD_INTRO_IMAGE_LABEL"
-                            ) /*摘要圖片*/
-                          }
-                        },
-                        [
-                          _c("MediaInput", {
-                            attrs: { Data: _vm.default_value.introimage },
-                            on: {
-                              onClickBtnSelect: function(value) {
-                                return (_vm.default_value.introimage = value)
-                              }
-                            }
-                          })
-                        ],
-                        1
                       ),
                       _vm._v(" "),
                       _c(
                         "el-form-item",
                         {
                           attrs: {
-                            prop: "image",
+                            prop: "metadesc",
                             label: _vm.$t(
-                              "CONTENT_FIELD_MAIN_IMAGE_LABEL"
-                            ) /*主要圖片*/
+                              "FIELD_META_DESCRIPTION_LABEL"
+                            ) /*Meta 說明*/
                           }
                         },
                         [
-                          _c("el-switch", {
-                            attrs: {
-                              "active-text": _vm.$t(
-                                "FIELD_MAIN_IMAGE_SAME_AS_INTRO_IMAGE_LABEL"
-                              ) /*與摘要圖片相同*/
-                            },
+                          _c("el-input", {
+                            attrs: { type: "textarea", rows: 2 },
                             model: {
-                              value: _vm.default_value.image_sameas_introimage,
+                              value: _vm.default_value.metadesc,
                               callback: function($$v) {
-                                _vm.$set(
-                                  _vm.default_value,
-                                  "image_sameas_introimage",
-                                  $$v
-                                )
+                                _vm.$set(_vm.default_value, "metadesc", $$v)
                               },
-                              expression:
-                                "default_value.image_sameas_introimage"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("MediaInput", {
-                            attrs: { Data: _vm.default_value.image },
-                            on: {
-                              onClickBtnSelect: function(value) {
-                                return (_vm.default_value.image = value)
-                              }
+                              expression: "default_value.metadesc"
                             }
                           })
                         ],
@@ -1539,372 +1258,13 @@ var render = function() {
                   )
                 ],
                 1
-              ),
-              _vm._v(" "),
-              _c(
-                "el-tab-pane",
-                {
-                  attrs: {
-                    label: _vm.$t(
-                      "GLOBAL_FIELDSET_EXTRAFIELD_OPTIONS"
-                    ) /*附加欄位*/
-                  }
-                },
-                [
-                  _c(
-                    "el-form",
-                    { ref: "form-data", attrs: { model: _vm.default_value } },
-                    [
-                      _c(
-                        "el-form-item",
-                        {
-                          attrs: {
-                            prop: "extrafield_group_id",
-                            label: _vm.$t(
-                              "OPTION_EXTRAFIELD_GROUP"
-                            ) /*欄位群組*/
-                          }
-                        },
-                        [
-                          _c(
-                            "el-select",
-                            {
-                              attrs: { clearable: "" },
-                              model: {
-                                value: _vm.default_value.extrafield_group_id,
-                                callback: function($$v) {
-                                  _vm.$set(
-                                    _vm.default_value,
-                                    "extrafield_group_id",
-                                    $$v
-                                  )
-                                },
-                                expression: "default_value.extrafield_group_id"
-                              }
-                            },
-                            _vm._l(
-                              _vm.fields.extrafield_group_id.list,
-                              function(option) {
-                                return _c("el-option", {
-                                  key:
-                                    option[
-                                      _vm.fields.extrafield_group_id
-                                        .custom_attrs.value
-                                    ],
-                                  attrs: {
-                                    label:
-                                      option[
-                                        _vm.fields.extrafield_group_id
-                                          .custom_attrs.label
-                                      ],
-                                    value:
-                                      option[
-                                        _vm.fields.extrafield_group_id
-                                          .custom_attrs.value
-                                      ]
-                                  }
-                                })
-                              }
-                            )
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _vm.fields.extrafield_group_id.list[
-                    _vm.default_value.extrafield_group_id
-                  ] &&
-                  "extrafields" in
-                    _vm.fields.extrafield_group_id.list[
-                      _vm.default_value.extrafield_group_id
-                    ]
-                    ? [
-                        _c("FieldForm", {
-                          attrs: {
-                            fields:
-                              _vm.fields.extrafield_group_id.list[
-                                _vm.default_value.extrafield_group_id
-                              ]["extrafields"],
-                            data: _vm.default_value.extrafields
-                          },
-                          on: {
-                            "update:data": function($event) {
-                              _vm.$set(_vm.default_value, "extrafields", $event)
-                            }
-                          }
-                        })
-                      ]
-                    : _vm._e()
-                ],
-                2
               )
             ],
             1
           )
         ],
         1
-      ),
-      _vm._v(" "),
-      _c("el-aside", { attrs: { width: "400px" } }, [
-        _c("div", { staticClass: "content-aside__header" }, [
-          _vm._v(_vm._s(_vm.$t("GLOBAL_FIELDSET_OPTIONS") /*選項*/))
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "content-aside__content" },
-          [
-            _c(
-              "el-form",
-              {
-                ref: "form-data",
-                attrs: { "label-position": "top", model: _vm.default_value }
-              },
-              [
-                _c(
-                  "el-form-item",
-                  {
-                    attrs: {
-                      prop: "state",
-                      label: _vm.$t("OPTION_STATE" /*狀態*/)
-                    }
-                  },
-                  [
-                    _c(
-                      "el-select",
-                      {
-                        model: {
-                          value: _vm.default_value.state,
-                          callback: function($$v) {
-                            _vm.$set(_vm.default_value, "state", $$v)
-                          },
-                          expression: "default_value.state"
-                        }
-                      },
-                      [
-                        _c("el-option", {
-                          attrs: {
-                            label: _vm.$t("PUBLISHED") /*發佈的*/,
-                            value: 1
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("el-option", {
-                          attrs: {
-                            label: _vm.$t("UNPUBLISHED") /*停止發佈的*/,
-                            value: 0
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  {
-                    attrs: {
-                      prop: "category_id",
-                      label: _vm.$t("OPTION_CATEGORY") /*分類*/
-                    }
-                  },
-                  [
-                    _c(
-                      "el-select",
-                      {
-                        model: {
-                          value: _vm.default_value.category_id,
-                          callback: function($$v) {
-                            _vm.$set(_vm.default_value, "category_id", $$v)
-                          },
-                          expression: "default_value.category_id"
-                        }
-                      },
-                      _vm._l(_vm.fields.category_id.list, function(option) {
-                        return _c("el-option", {
-                          key:
-                            option[_vm.fields.category_id.custom_attrs.value],
-                          attrs: {
-                            label:
-                              option[_vm.fields.category_id.custom_attrs.label],
-                            value:
-                              option[_vm.fields.category_id.custom_attrs.value]
-                          }
-                        })
-                      })
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  {
-                    attrs: {
-                      prop: "featured",
-                      label: _vm.$t("OPTION_FEATURED") /*精選*/
-                    }
-                  },
-                  [
-                    _c(
-                      "el-radio-group",
-                      {
-                        model: {
-                          value: _vm.default_value.featured,
-                          callback: function($$v) {
-                            _vm.$set(_vm.default_value, "featured", $$v)
-                          },
-                          expression: "default_value.featured"
-                        }
-                      },
-                      [
-                        _c("el-radio-button", { attrs: { label: "1" } }, [
-                          _vm._v(_vm._s(_vm.$t("YES") /*是*/))
-                        ]),
-                        _vm._v(" "),
-                        _c("el-radio-button", { attrs: { label: "0" } }, [
-                          _vm._v(_vm._s(_vm.$t("NO") /*否*/))
-                        ])
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  {
-                    attrs: {
-                      prop: "access",
-                      label: _vm.$t("FIELD_ACCESS_LEVEL") /*存取層級*/
-                    }
-                  },
-                  [
-                    _c(
-                      "el-select",
-                      {
-                        model: {
-                          value: _vm.default_value.access,
-                          callback: function($$v) {
-                            _vm.$set(_vm.default_value, "access", $$v)
-                          },
-                          expression: "default_value.access"
-                        }
-                      },
-                      _vm._l(_vm.fields.access.list, function(option) {
-                        return _c("el-option", {
-                          key: option[_vm.fields.access.custom_attrs.value],
-                          attrs: {
-                            label: option[_vm.fields.access.custom_attrs.label],
-                            value: option[_vm.fields.access.custom_attrs.value]
-                          }
-                        })
-                      })
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  {
-                    attrs: {
-                      prop: "language",
-                      label: _vm.$t("OPTION_LANGUAGE") /*語言*/
-                    }
-                  },
-                  [
-                    _c(
-                      "el-select",
-                      {
-                        model: {
-                          value: _vm.default_value.language,
-                          callback: function($$v) {
-                            _vm.$set(_vm.default_value, "language", $$v)
-                          },
-                          expression: "default_value.language"
-                        }
-                      },
-                      _vm._l(_vm.fields.language.list, function(option) {
-                        return _c("el-option", {
-                          key: option[_vm.fields.language.custom_attrs.value],
-                          attrs: {
-                            label:
-                              option[_vm.fields.language.custom_attrs.label],
-                            value:
-                              option[_vm.fields.language.custom_attrs.value]
-                          }
-                        })
-                      })
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  {
-                    attrs: {
-                      prop: "publish_up",
-                      label: _vm.$t("FIELD_PUBLISH_UP_DATE")
-                    }
-                  },
-                  [
-                    _c("el-date-picker", {
-                      attrs: {
-                        "value-format": "yyyy-MM-dd HH:mm:ss",
-                        type: "datetime"
-                      },
-                      model: {
-                        value: _vm.default_value.publish_up,
-                        callback: function($$v) {
-                          _vm.$set(_vm.default_value, "publish_up", $$v)
-                        },
-                        expression: "default_value.publish_up"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  {
-                    attrs: {
-                      prop: "publish_down",
-                      label: _vm.$t("FIELD_PUBLISH_DOWN_DATE")
-                    }
-                  },
-                  [
-                    _c("el-date-picker", {
-                      attrs: {
-                        "value-format": "yyyy-MM-dd HH:mm:ss",
-                        type: "datetime"
-                      },
-                      model: {
-                        value: _vm.default_value.publish_down,
-                        callback: function($$v) {
-                          _vm.$set(_vm.default_value, "publish_down", $$v)
-                        },
-                        expression: "default_value.publish_down"
-                      }
-                    })
-                  ],
-                  1
-                )
-              ],
-              1
-            )
-          ],
-          1
-        )
-      ])
+      )
     ],
     1
   )
@@ -1915,7 +1275,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-61a40bfb", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-8554d192", module.exports)
   }
 }
 

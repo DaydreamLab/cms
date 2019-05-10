@@ -1,14 +1,14 @@
 webpackJsonp([52],{
 
-/***/ 282:
+/***/ 270:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(654)
+var __vue_script__ = __webpack_require__(633)
 /* template */
-var __vue_template__ = __webpack_require__(655)
+var __vue_template__ = __webpack_require__(634)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/admin/components/form-data/fields/DdlTree.vue"
+Component.options.__file = "resources/assets/admin/components/form-data/fields/DdlTime.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-1a325475", Component.options)
+    hotAPI.createRecord("data-v-4bc10424", Component.options)
   } else {
-    hotAPI.reload("data-v-1a325475", Component.options)
+    hotAPI.reload("data-v-4bc10424", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 285:
+/***/ 281:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -185,18 +185,12 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 654:
+/***/ 633:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__js_Common__ = __webpack_require__(285);
-//
-//
-//
-//
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__js_Common__ = __webpack_require__(281);
 //
 //
 //
@@ -207,20 +201,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 
-var Js = Object(__WEBPACK_IMPORTED_MODULE_0__js_Common__["a" /* default */])("sls-tree");
+var Js = Object(__WEBPACK_IMPORTED_MODULE_0__js_Common__["a" /* default */])("sls-time");
 Js.mixins = [{
-  data: function data() {
-    return {};
-  },
-
   computed: {
-    tree_attrs: function tree_attrs() {
-      return this.Data.tree_attrs || {};
+    time_attrs: function time_attrs() {
+      return this.Data.time_attrs || {};
     }
   },
   methods: {
-    onCheckChange: function onCheckChange() {
-      this.submit_data[this.data.key] = this.$refs.tree.getCheckedKeys();
+    onChange: function onChange(v) {
+      this.events.change && this.events.change(v);
     }
   }
 }];
@@ -228,7 +218,7 @@ Js.mixins = [{
 
 /***/ }),
 
-/***/ 655:
+/***/ 634:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -236,23 +226,21 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "el-tree",
+    "el-time-picker",
     _vm._b(
       {
-        ref: "tree",
-        attrs: {
-          "node-key": "id",
-          data: _vm.data.list,
-          "default-checked-keys": _vm.submit_data[_vm.data.key],
-          "default-expanded-keys": _vm.submit_data[_vm.data.key],
-          props: _vm.custom_attrs,
-          "show-checkbox": "",
-          "auto-expand-parent": ""
-        },
-        on: { "check-change": _vm.onCheckChange }
+        attrs: { placeholder: _vm.data.desc },
+        on: { change: _vm.onChange },
+        model: {
+          value: _vm.submit_data[_vm.data.key],
+          callback: function($$v) {
+            _vm.$set(_vm.submit_data, _vm.data.key, $$v)
+          },
+          expression: "submit_data[data.key]"
+        }
       },
-      "el-tree",
-      _vm.tree_attrs,
+      "el-time-picker",
+      _vm.time_attrs,
       false
     )
   )
@@ -263,7 +251,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-1a325475", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-4bc10424", module.exports)
   }
 }
 

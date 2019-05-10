@@ -1,14 +1,14 @@
 webpackJsonp([62],{
 
-/***/ 281:
+/***/ 265:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(652)
+var __vue_script__ = __webpack_require__(623)
 /* template */
-var __vue_template__ = __webpack_require__(653)
+var __vue_template__ = __webpack_require__(624)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/admin/components/form-data/fields/DdlDateTimeRange.vue"
+Component.options.__file = "resources/assets/admin/components/form-data/fields/DdlDate.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-3bb2c4ca", Component.options)
+    hotAPI.createRecord("data-v-326e4885", Component.options)
   } else {
-    hotAPI.reload("data-v-3bb2c4ca", Component.options)
+    hotAPI.reload("data-v-326e4885", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 285:
+/***/ 281:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -185,12 +185,12 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 652:
+/***/ 623:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__js_Common__ = __webpack_require__(285);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__js_Common__ = __webpack_require__(281);
 //
 //
 //
@@ -202,24 +202,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 
-var Js = Object(__WEBPACK_IMPORTED_MODULE_0__js_Common__["a" /* default */])('sls-date-time-range');
+var Js = Object(__WEBPACK_IMPORTED_MODULE_0__js_Common__["a" /* default */])("sls-date");
 Js.mixins = [{
-	computed: {
-		date_time_attrs: function date_time_attrs() {
-			return this.Data.date_time_attrs || {};
-		}
-	},
-	methods: {
-		onChange: function onChange(v) {
-			this.events.change && this.events.change(v);
-		}
-	}
+  computed: {
+    date_attrs: function date_attrs() {
+      return this.Data.date_attrs || {};
+    }
+  },
+  methods: {
+    onChange: function onChange(v) {
+      this.events.change && this.events.change(v);
+    }
+  },
+  created: function created() {}
 }];
 /* harmony default export */ __webpack_exports__["default"] = (Js);
 
 /***/ }),
 
-/***/ 653:
+/***/ 624:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -230,7 +231,7 @@ var render = function() {
     "el-date-picker",
     _vm._b(
       {
-        attrs: { type: "datetimerange", placeholder: _vm.data.desc },
+        attrs: { placeholder: _vm.data.desc, type: "date" },
         on: { change: _vm.onChange },
         model: {
           value: _vm.submit_data[_vm.data.key],
@@ -241,7 +242,7 @@ var render = function() {
         }
       },
       "el-date-picker",
-      _vm.date_time_attrs,
+      _vm.date_attrs,
       false
     )
   )
@@ -252,7 +253,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-3bb2c4ca", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-326e4885", module.exports)
   }
 }
 

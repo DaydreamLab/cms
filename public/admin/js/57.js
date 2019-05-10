@@ -6,9 +6,9 @@ webpackJsonp([57],{
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(628)
+var __vue_script__ = __webpack_require__(631)
 /* template */
-var __vue_template__ = __webpack_require__(629)
+var __vue_template__ = __webpack_require__(632)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/admin/components/form-data/fields/DdlSwitch.vue"
+Component.options.__file = "resources/assets/admin/components/form-data/fields/DdlDateWeek.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5a89894b", Component.options)
+    hotAPI.createRecord("data-v-4e407419", Component.options)
   } else {
-    hotAPI.reload("data-v-5a89894b", Component.options)
+    hotAPI.reload("data-v-4e407419", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 285:
+/***/ 281:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -185,13 +185,12 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 628:
+/***/ 631:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__js_Common__ = __webpack_require__(285);
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__js_Common__ = __webpack_require__(281);
 //
 //
 //
@@ -203,37 +202,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 
-var Js = Object(__WEBPACK_IMPORTED_MODULE_0__js_Common__["a" /* default */])("sls-switch");
+var Js = Object(__WEBPACK_IMPORTED_MODULE_0__js_Common__["a" /* default */])("sls-date-week");
 Js.mixins = [{
   computed: {
-    switch_attrs: function switch_attrs() {
-      return this.Data.switch_attrs || {};
+    date_attrs: function date_attrs() {
+      return this.Data.date_attrs || {};
     }
   },
   methods: {
     onChange: function onChange(v) {
-      this.submit_info[this.data.key] = "";
-      this.submit_info[this.data.key] = this.temp_field_obj[this.data.key][v ? "on" : "off"];
-
-      this.events.change && this.events.change({
-        value: v,
-        info: this.submit_info[this.data.key]
-      });
+      this.events.change && this.events.change(v);
     }
-  },
-  created: function created() {
-    this.temp_field_obj[this.data.key] = {};
-    this.temp_field_obj[this.data.key].on = this.data.value.on;
-    this.temp_field_obj[this.data.key].off = this.data.value.off;
-
-    this.submit_info[this.data.key] = this.temp_field_obj[this.data.key][this.submit_data[this.data.key] ? "on" : "off"];
   }
 }];
 /* harmony default export */ __webpack_exports__["default"] = (Js);
 
 /***/ }),
 
-/***/ 629:
+/***/ 632:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -241,13 +227,10 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "el-switch",
+    "el-date-picker",
     _vm._b(
       {
-        attrs: {
-          "active-text": _vm.data.value.on,
-          "inactive-text": _vm.data.value.off
-        },
+        attrs: { type: "week", placeholder: _vm.data.desc },
         on: { change: _vm.onChange },
         model: {
           value: _vm.submit_data[_vm.data.key],
@@ -257,8 +240,8 @@ var render = function() {
           expression: "submit_data[data.key]"
         }
       },
-      "el-switch",
-      _vm.switch_attrs,
+      "el-date-picker",
+      _vm.date_attrs,
       false
     )
   )
@@ -269,7 +252,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-5a89894b", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-4e407419", module.exports)
   }
 }
 

@@ -1,14 +1,14 @@
 webpackJsonp([16],{
 
-/***/ 142:
+/***/ 121:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(544)
+var __vue_script__ = __webpack_require__(461)
 /* template */
-var __vue_template__ = __webpack_require__(545)
+var __vue_template__ = __webpack_require__(462)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/admin/views/system/site/edit.vue"
+Component.options.__file = "resources/assets/admin/views/content/category/list.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-8554d192", Component.options)
+    hotAPI.createRecord("data-v-e3a236f8", Component.options)
   } else {
-    hotAPI.reload("data-v-8554d192", Component.options)
+    hotAPI.reload("data-v-e3a236f8", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 287:
+/***/ 280:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -650,11 +650,17 @@ var denormalize$1 = function denormalize$$1(input, schema, entities) {
 
 /***/ }),
 
-/***/ 289:
+/***/ 282:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_normalizr__ = __webpack_require__(287);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_normalizr__ = __webpack_require__(280);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -676,11 +682,11 @@ var denormalize$1 = function denormalize$$1(input, schema, entities) {
 
                     fields.forEach(function (type) {
                         if (type === "extrafield_group") {
-                            data.items[type].unshift({
+                            data.items[type] = [{
                                 id: 0,
                                 value: "",
                                 title: _this.$t("OPTION_NONE")
-                            });
+                            }].concat(_toConsumableArray(data.items[type]));
                             var groups = new __WEBPACK_IMPORTED_MODULE_0_normalizr__["b" /* schema */].Entity("groups");
                             var normalize_list = Object(__WEBPACK_IMPORTED_MODULE_0_normalizr__["a" /* normalize */])(data.items[type], [groups]);
                             _this.handleUpdateField(type, normalize_list.entities["groups"], fieldsObj[type], usage);
@@ -715,17 +721,29 @@ var denormalize$1 = function denormalize$$1(input, schema, entities) {
             this.searchbar.fields[field_index]["list"] = this.$store.getters[field + "_list"];
         },
         onUpdateStoreFieldList: function onUpdateStoreFieldList(field, value) {
+            var _this3 = this;
+
             if (field === "language") {
-                var first_option = {
+                value = [{
                     sef: "*",
                     title: this.$t("ALL_LANGUAGE")
-                };
-                value.unshift(first_option);
+                }].concat(_toConsumableArray(value));
             }
+            if (field === "asset") {
+                value = value.map(function (el) {
+                    var _el$tree_list_title$s = el.tree_list_title.split(" "),
+                        _el$tree_list_title$s2 = _slicedToArray(_el$tree_list_title$s, 2),
+                        prefix = _el$tree_list_title$s2[0],
+                        title = _el$tree_list_title$s2[1];
 
-            if (field === "item_category" || field === "menu_category") {
+                    var combinedTitle = title ? prefix + " " + _this3.$t(title) : _this3.$t(prefix);
+                    return _extends({}, el, { tree_list_title: combinedTitle });
+                });
+            }
+            if (field === "asset" || field === "item_category" || field === "menu_category") {
                 value[0]["tree_list_title"] = value[0]["tree_list_title"].replace("ROOT", this.$t("GLOBAL_ROOT" /*根*/));
             }
+
             this.$store.dispatch("update_option_related_list", {
                 type: field,
                 data: value
@@ -739,278 +757,504 @@ var denormalize$1 = function denormalize$$1(input, schema, entities) {
 
 /***/ }),
 
-/***/ 290:
+/***/ 283:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 /* harmony default export */ __webpack_exports__["a"] = ({
     data: function data() {
         return {
-            params: {
-                id: "",
-                pid: ""
+            list: [],
+            list_loading: {
+                flag: false
             },
-            toolbar: {
-                type: "edit"
+            paginations: {
+                current_page: 1,
+                total: 0,
+                page_size: 10,
+                page_sizes: [10, 15, 20, 25, 50, 100],
+                layout: "total, sizes, prev, pager, next, jumper"
             }
         };
     },
 
     watch: {
-        $route: function $route() {
-            this.$initView();
+        $route: {
+            handler: "$initList",
+            immediate: true
         }
     },
-    created: function created() {
-        this.$initView();
-    },
-
     methods: {
-        $onSubmitFinish: function $onSubmitFinish(_ref) {
-            var type = _ref.type,
-                query = _ref.query;
-
-            switch (type) {
-                case "save":
-                    this.$router.push({
-                        path: this.$route.path,
-                        query: query
-                    });
-                    break;
-                case "savenadd":
-                    this.$router.push({
-                        path: this.$route.path
-                    });
-                    this.$router.go(0);
-                    break;
-                case "savenclose":
-                    this.$onCancel();
-                    break;
-            }
+        $onClickBtnAdd: function $onClickBtnAdd() {
+            this.$router.push(this.$route.path + "/edit");
         },
-        $onCancel: function $onCancel() {
-            var checkout_id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
-
-            if (checkout_id) {
-                this.handleCheckout(checkout_id);
-            }
+        $onClickBntEdit: function $onClickBntEdit(query) {
             this.$router.push({
-                path: this.$route.path.replace("/edit", ""),
-                query: this.$route.query.from
+                path: this.$route.path + "/edit",
+                query: _extends({}, query, {
+                    from: this.$route.query
+                })
             });
         },
-        onUpdateViewParams: function onUpdateViewParams() {
-            this.params.id = parseInt(this.$route.query.id) || "";
-            this.params.pid = parseInt(this.$route.query.pid) || "";
-            this.$set(this.toolbar, "type", this.params.id ? "edit" : "add");
+        $onSearchReset: function $onSearchReset() {
+            this.$router.push({
+                path: this.$route.path
+            });
         },
-        $initView: function $initView() {
-            this.onUpdateViewParams();
+        $onSearch: function $onSearch(_ref) {
+            var data = _ref.data;
 
-            if (this.params.id) {
-                this.onGetView();
+            var sd = {};
+
+            var query = this.$route.query;
+
+            for (var p in query) {
+                sd[p] = query[p];
             }
+            for (var s in data) {
+                sd[s] = data[s];
+                if (!sd[s]) {
+                    delete sd[s];
+                }
+            }
+
+            this.$router.push({
+                path: this.$route.path,
+                query: sd
+            });
+        },
+        setRouteQuery: function setRouteQuery(field, value) {
+            var query = Object.assign({}, this.$route.query);
+
+            if ((typeof field === "undefined" ? "undefined" : _typeof(field)) === "object") {
+                query = field;
+            } else {
+                query[field] = value;
+            }
+
+            return query;
+        },
+        getRouteQuery: function getRouteQuery() {
+            var _this = this;
+
+            var query = this.$route.query;
+            var intArray = ["id", "pid", "category_id", "access"];
+            var dateArray = ["start_date", "end_date"];
+            var data = {};
+
+            Object.keys(query).forEach(function (field) {
+                _this.searchbar.default_value[field] = intArray.includes(field) ? parseInt(query[field]) : dateArray.includes(field) ? _this.$options.filters.storeDateFormat(query[field]) : query[field];
+                data[field] = query[field];
+            });
+            return data;
+        },
+        $onChangeCurrentPage: function $onChangeCurrentPage(page) {
+            var _this2 = this;
+
+            this.$onGetList({
+                page: page,
+                fn: function fn() {
+                    _this2.$router.push({
+                        path: _this2.$route.path,
+                        query: _this2.setRouteQuery("page", page)
+                    });
+                }
+            });
+        },
+        $onChangePageSize: function $onChangePageSize(pageSize) {
+            var _this3 = this;
+
+            this.$onGetList({
+                pageSize: pageSize,
+                fn: function fn() {
+                    _this3.$router.push({
+                        path: _this3.$route.path,
+                        query: _this3.setRouteQuery("page_size", pageSize)
+                    });
+                }
+            });
+        },
+        $onGetList: function $onGetList() {
+            var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+                page = _ref2.page,
+                pageSize = _ref2.pageSize,
+                where = _ref2.where,
+                fn = _ref2.fn;
+
+            this.list_loading.flag = true;
+
+            var query = this.$route.query;
+
+            this.paginations.current_page = page || parseInt(query.page) || 1;
+            this.paginations.page_size = pageSize || parseInt(query.page_size) || this.paginations.page_size;
+
+            var page_data = Object.assign(this.getRouteQuery(), {
+                page: this.paginations.current_page,
+                limit: this.paginations.page_size
+            });
+            if (where) {
+                page_data = Object.assign(page_data, where || {});
+            }
+            this.handleGetList({ page_data: page_data, fn: fn });
+        },
+        $initList: function $initList() {
+            this.$onGetList();
         }
     }
 });
 
 /***/ }),
 
-/***/ 300:
+/***/ 289:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony default export */ __webpack_exports__["a"] = ({
-    created: function created() {
-        var _this = this;
-
-        this.$$eventBus.$on("onClickCMSFormDataToolbar", function (opts) {
-            switch (opts.type) {
-                case "cancel":
-                    _this.$onCancel(_this.$route.query.id);
-                    break;
-                case "save":
-                case "savenclose":
-                case "savenadd":
-                    _this.handleSubmit({
-                        ref: "form-data",
-                        type: opts.type,
-                        submit_data: _this.default_value
-                    });
-                    break;
-                case "trash":
-                    _this.onTrash();
-                    break;
-            }
-        });
-    },
-    mounted: function mounted() {
-        this.initToolbar(this.toolbar);
-    },
-    beforeDestroy: function beforeDestroy() {
-        this.initToolbar();
-        this.$$eventBus.$off("onClickCMSFormDataToolbar");
-    },
-
     methods: {
-        initToolbar: function initToolbar() {
-            var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-            this.$$eventBus.$emit("onInitToolbar", {
-                name: "CMSFormData",
-                data: data
-            });
+        $initList: function $initList() {
+            this.$set(this.toolbar, "type", this.$route.query.state === "-2" ? "trash" : "list");
+            this.$onGetList();
         }
     }
 });
 
 /***/ }),
 
-/***/ 544:
+/***/ 461:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_option_mixin__ = __webpack_require__(289);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_edit_mixin__ = __webpack_require__(290);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mixins_cms_edit_mixin__ = __webpack_require__(300);
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_option_mixin__ = __webpack_require__(282);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_list_mixin__ = __webpack_require__(283);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mixins_cms_list_mixin__ = __webpack_require__(289);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "site-edit",
-  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_option_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1_mixins_edit_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2_mixins_cms_edit_mixin__["a" /* default */]],
+  name: "category-list",
+  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_option_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1_mixins_list_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2_mixins_cms_list_mixin__["a" /* default */]],
   data: function data() {
+    var _this = this;
+
     return {
-      fields: {
-        sef: {
+      sort: {
+        show: true
+      },
+      fields: [{
+        key: "tree_title",
+        label: this.$t("FIELD_TITLE_LABEL"),
+        type: "editable"
+      }, {
+        key: "content_type",
+        label: this.$t("OPTION_CONTENT_TYPE")
+      }, {
+        key: "state",
+        label: this.$t("OPTION_STATE"),
+        type: "label",
+        width: "120",
+        formatter: function formatter(item) {
+          var item_text = {
+            "1": "PUBLISHED",
+            "0": "UNPUBLISHED",
+            "-1": "ARCHIVED",
+            "-2": "TRASHED"
+          };
+          return {
+            text: _this.$t(item_text[item]),
+            color: "item_state_" + item + "_color"
+          };
+        }
+      }, {
+        key: "image",
+        label: this.$t("LIST_DATA_IMAGE_LABEL"),
+        type: "icon",
+        width: "90",
+        sort: false,
+        formatter: function formatter(item) {
+          return {
+            icon: item ? ["fal", "image"] : ""
+          };
+        }
+      }, {
+        key: "access_title",
+        label: this.$t("FIELD_ACCESS_LEVEL")
+      }, {
+        key: "language_title",
+        label: this.$t("OPTION_LANGUAGE"),
+        formatter: function formatter(item) {
+          return item.language === "*" ? _this.$t("ALL_LANGUAGE") : item.language_title;
+        }
+      }, {
+        width: "60",
+        key: "id",
+        label: this.$t("LIST_DATA_HEADING_ID")
+      }],
+      toolbar: {
+        type: "list",
+        custom: [{
+          text: this.$t("TOOLBAR_PUBLISH"),
+          method: "updateState",
+          condition: function condition(_ref) {
+            var data = _ref.data;
+
+            return data.state === 0 && data.parent_id !== null;
+          },
+
+          fn: function fn(_ref2) {
+            var ids = _ref2.ids;
+
+            _this.onClickBtnUpdateState({
+              ids: ids,
+              state: 1
+            });
+          }
+        }, {
+          text: this.$t("TOOLBAR_UNPUBLISH"),
+          method: "updateState",
+          condition: function condition(_ref3) {
+            var data = _ref3.data;
+
+            return data.state === 1 && data.parent_id !== null;
+          },
+
+          fn: function fn(_ref4) {
+            var ids = _ref4.ids;
+
+            _this.onClickBtnUpdateState({
+              ids: ids,
+              state: 0
+            });
+          }
+        }, {
+          text: this.$t("TOOLBAR_CHECKOUT"),
+          method: "checkout",
+          fn: function fn(_ref5) {
+            var ids = _ref5.ids;
+
+            _this.onClickBtnCheckout({ ids: ids });
+          }
+        }]
+      },
+      searchbar: {
+        fields: [{
+          key: "search",
+          desc: this.$t("TOOLBAR_KEYWORDS"),
+          clearable: true
+        }, {
+          key: "state",
+          type: "select",
+          desc: this.$t("OPTION_STATE"),
+          clearable: true,
+          list: [{
+            value: "1",
+            text: this.$t("PUBLISHED")
+          }, {
+            value: "0",
+            text: this.$t("UNPUBLISHED")
+          }, {
+            value: "-1",
+            text: this.$t("ARCHIVED")
+          }, {
+            value: "-2",
+            text: this.$t("TRASHED")
+          }]
+        }, {
+          key: "id",
+          type: "select",
+          desc: this.$t("OPTION_CATEGORY"),
+          list: this.$store.getters.item_category_list,
+          clearable: true,
+          custom_attrs: {
+            label: "tree_list_title",
+            value: "id"
+          }
+        }, {
+          key: "language",
+          type: "select",
+          desc: this.$t("OPTION_LANGUAGE"),
           list: this.$store.getters.language_list,
+          clearable: true,
           custom_attrs: {
             label: "title",
             value: "sef"
           }
+        }, {
+          key: "access",
+          type: "select",
+          desc: this.$t("FIELD_ACCESS_LEVEL"),
+          list: this.$store.getters.viewlevel_list,
+          clearable: true,
+          custom_attrs: {
+            label: "title",
+            value: "id"
+          }
+        }],
+        default_value: {
+          search: "",
+          state: "",
+          id: "",
+          language: "",
+          access: ""
         }
-      },
-      default_value: _defineProperty({
-        title: "",
-        url: "",
-        sef: "",
-        sitename: "",
-        metakeywords: "",
-        metadesc: ""
-      }, "sef", "")
+      }
     };
   },
   created: function created() {
-    this.$getFieldList({
-      language: "sef"
-    });
+    this.$getFieldList({ item_category: 2, language: 3, viewlevel: 4 }, "searchbar");
   },
 
   methods: {
-    onTrash: function onTrash() {
-      var _this = this;
-
-      this.$$api_site_updateState({
-        data: {
-          ids: [this.params.id],
-          state: "-2"
-        },
-        fn: function fn(_ref) {
-          var msg = _ref.msg;
-
-          _this.$message.success(msg);
-          _this.onCancel();
-        }
-      });
-    },
-    handleCheckout: function handleCheckout(id) {
-      this.$$api_site_checkout({
-        data: { ids: [id] },
-        fn: function fn() {}
-      });
-    },
-    handleSubmit: function handleSubmit(_ref2) {
+    /**
+     * list actions
+     */
+    onClickBtnCheckout: function onClickBtnCheckout(_ref6) {
       var _this2 = this;
 
-      var submit_data = _ref2.submit_data,
-          type = _ref2.type;
+      var data = _ref6.data,
+          ids = _ref6.ids;
 
-      if (this.params.id) {
-        submit_data.id = this.params.id;
-      }
-      this.$$api_site_save({
-        data: submit_data,
-        fn: function fn(_ref3) {
-          var data = _ref3.data,
-              msg = _ref3.msg;
+      var checkout_data = ids ? ids : [data.id];
+      this.$$api_category_checkout({
+        data: {
+          ids: checkout_data
+        },
+        fn: function fn(_ref7) {
+          var msg = _ref7.msg;
 
           _this2.$message.success(msg);
-          if (data) {
-            submit_data.id = data.items.id;
-          }
-          _this2.$onSubmitFinish({ type: type, query: { id: submit_data.id } });
+          _this2.$onGetList();
         }
       });
     },
-    onGetView: function onGetView() {
+    onOrderChange: function onOrderChange(_ref8) {
+      var id = _ref8.id,
+          index_diff = _ref8.index_diff,
+          order = _ref8.order;
+
+      this.$$api_category_ordering({
+        data: {
+          id: id,
+          index_diff: index_diff,
+          order: order
+        },
+        fn: function fn(_ref9) {
+          var msg = _ref9.msg;
+
+          console.log(msg);
+        }
+      });
+    },
+
+
+    /**
+     * Toolbar
+     */
+    onClickBtnBatchTrash: function onClickBtnBatchTrash(_ref10) {
+      var ids = _ref10.ids,
+          state = _ref10.state;
+
+      this.onClickBtnUpdateState({ ids: ids, state: state });
+    },
+    onClickBtnBatchRestore: function onClickBtnBatchRestore(_ref11) {
+      var ids = _ref11.ids,
+          state = _ref11.state;
+
+      this.onClickBtnUpdateState({ ids: ids, state: state });
+    },
+    onClickBtnUpdateState: function onClickBtnUpdateState(_ref12) {
       var _this3 = this;
 
-      this.$$api_site_get({
-        pathVar: this.params.id,
-        fn: function fn(_ref4) {
-          var data = _ref4.data;
+      var ids = _ref12.ids,
+          state = _ref12.state;
 
-          _this3.default_value = _extends({}, _this3.default_value, data.items);
+      this.$$api_category_updateState({
+        data: {
+          ids: ids,
+          state: state
+        },
+        fn: function fn(_ref13) {
+          var msg = _ref13.msg;
+
+          _this3.$message.success(msg);
+          _this3.$onGetList();
+        }
+      });
+    },
+    onClickBtnBatchDelete: function onClickBtnBatchDelete(_ref14) {
+      var _this4 = this;
+
+      var ids = _ref14.ids,
+          datas = _ref14.datas;
+
+      this.$confirm(this.$t("GLOBAL_CONFIRM_DELETE")).then(function () {
+        _this4.$$api_category_delete({
+          data: {
+            ids: ids
+          },
+          fn: function fn(_ref15) {
+            var data = _ref15.data;
+
+            _this4.$onGetList();
+          }
+        });
+      });
+    },
+    handleEditQuery: function handleEditQuery(_ref16) {
+      var data = _ref16.data;
+
+      this.$onClickBntEdit({
+        id: data.id,
+        pid: data.parent_id
+      });
+    },
+    handleGetList: function handleGetList() {
+      var _this5 = this;
+
+      var _ref17 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+          page_data = _ref17.page_data,
+          _fn = _ref17.fn;
+
+      this.$$api_category_list({
+        data: page_data,
+        fn: function fn(_ref18) {
+          var data = _ref18.data;
+
+          _this5.list_loading.flag = false;
+          _this5.list = data.items;
+          _this5.paginations.total = data.pagination.total;
+
+          _fn && _fn();
         }
       });
     }
@@ -1019,235 +1263,38 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /***/ }),
 
-/***/ 545:
+/***/ 462:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "el-container",
-    [
-      _c(
-        "el-main",
-        [
-          _c(
-            "el-tabs",
-            { attrs: { type: "border-card" } },
-            [
-              _c(
-                "el-tab-pane",
-                {
-                  attrs: {
-                    label: _vm.$t("GLOBAL_FIELDSET_BASIC_OPTIONS") /*基本*/
-                  }
-                },
-                [
-                  _c(
-                    "el-form",
-                    {
-                      ref: "form-data",
-                      attrs: {
-                        "label-position": "top",
-                        model: _vm.default_value
-                      }
-                    },
-                    [
-                      _c(
-                        "el-form-item",
-                        {
-                          attrs: {
-                            prop: "title",
-                            label: _vm.$t("FIELD_TITLE_LABEL" /*標題*/)
-                          }
-                        },
-                        [
-                          _c("el-input", {
-                            model: {
-                              value: _vm.default_value.title,
-                              callback: function($$v) {
-                                _vm.$set(_vm.default_value, "title", $$v)
-                              },
-                              expression: "default_value.title"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "el-form-item",
-                        {
-                          attrs: {
-                            prop: "url",
-                            label: _vm.$t("SITE_FIELD_URL_LABEL") /*網址*/
-                          }
-                        },
-                        [
-                          _c("el-input", {
-                            model: {
-                              value: _vm.default_value.url,
-                              callback: function($$v) {
-                                _vm.$set(_vm.default_value, "url", $$v)
-                              },
-                              expression: "default_value.url"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "el-form-item",
-                        {
-                          attrs: {
-                            prop: "sef",
-                            label: _vm.$t("OPTION_LANGUAGE") /*語言*/
-                          }
-                        },
-                        [
-                          _c(
-                            "el-select",
-                            {
-                              model: {
-                                value: _vm.default_value.sef,
-                                callback: function($$v) {
-                                  _vm.$set(_vm.default_value, "sef", $$v)
-                                },
-                                expression: "default_value.sef"
-                              }
-                            },
-                            _vm._l(_vm.fields.sef.list, function(option) {
-                              return _c("el-option", {
-                                key: option.id,
-                                attrs: {
-                                  label:
-                                    option[_vm.fields.sef.custom_attrs.label],
-                                  value:
-                                    option[_vm.fields.sef.custom_attrs.value]
-                                }
-                              })
-                            })
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "el-tab-pane",
-                {
-                  attrs: {
-                    label: _vm.$t(
-                      "LANGUAGE_TAB_SITE_NAME_AND_METADATA"
-                    ) /*網站名稱&Metadata*/
-                  }
-                },
-                [
-                  _c(
-                    "el-form",
-                    {
-                      ref: "form-data",
-                      attrs: {
-                        "label-position": "top",
-                        model: _vm.default_value
-                      }
-                    },
-                    [
-                      _c(
-                        "el-form-item",
-                        {
-                          attrs: {
-                            prop: "sitename",
-                            label: _vm.$t(
-                              "LANGUAGE_FIELD_CUSTOM_SITE_NAME_LABEL"
-                            ) /*自訂網站名稱*/
-                          }
-                        },
-                        [
-                          _c("el-input", {
-                            model: {
-                              value: _vm.default_value.sitename,
-                              callback: function($$v) {
-                                _vm.$set(_vm.default_value, "sitename", $$v)
-                              },
-                              expression: "default_value.sitename"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "el-form-item",
-                        {
-                          attrs: {
-                            prop: "metakeywords",
-                            label: _vm.$t(
-                              "FIELD_META_KEYWORDS_LABEL"
-                            ) /*Meta 關鍵字*/
-                          }
-                        },
-                        [
-                          _c("el-input", {
-                            attrs: { type: "textarea", rows: 2 },
-                            model: {
-                              value: _vm.default_value.metakeywords,
-                              callback: function($$v) {
-                                _vm.$set(_vm.default_value, "metakeywords", $$v)
-                              },
-                              expression: "default_value.metakeywords"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "el-form-item",
-                        {
-                          attrs: {
-                            prop: "metadesc",
-                            label: _vm.$t(
-                              "FIELD_META_DESCRIPTION_LABEL"
-                            ) /*Meta 說明*/
-                          }
-                        },
-                        [
-                          _c("el-input", {
-                            attrs: { type: "textarea", rows: 2 },
-                            model: {
-                              value: _vm.default_value.metadesc,
-                              callback: function($$v) {
-                                _vm.$set(_vm.default_value, "metadesc", $$v)
-                              },
-                              expression: "default_value.metadesc"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
+  return _c("ListData", {
+    ref: "list-data",
+    attrs: {
+      List: _vm.list,
+      ListLoading: _vm.list_loading,
+      Sort: _vm.sort,
+      Pagination: _vm.paginations,
+      Toolbar: _vm.toolbar,
+      Searchbar: _vm.searchbar,
+      FieldList: _vm.fields
+    },
+    on: {
+      onClickBtnAdd: _vm.$onClickBtnAdd,
+      onClickBtnEdit: _vm.handleEditQuery,
+      onClickBtnBatchDelete: _vm.onClickBtnBatchDelete,
+      onClickBtnCheckout: _vm.onClickBtnCheckout,
+      onClickBtnBatchTrash: _vm.onClickBtnBatchTrash,
+      onClickBtnBatchRestore: _vm.onClickBtnBatchRestore,
+      onChangeCurrentPage: _vm.$onChangeCurrentPage,
+      onChangePageSize: _vm.$onChangePageSize,
+      onSearch: _vm.$onSearch,
+      onSearchReset: _vm.$onSearchReset,
+      onOrderChange: _vm.onOrderChange
+    }
+  })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -1255,7 +1302,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-8554d192", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-e3a236f8", module.exports)
   }
 }
 

@@ -1,14 +1,14 @@
 webpackJsonp([61],{
 
-/***/ 275:
+/***/ 268:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(640)
+var __vue_script__ = __webpack_require__(629)
 /* template */
-var __vue_template__ = __webpack_require__(641)
+var __vue_template__ = __webpack_require__(630)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/admin/components/form-data/fields/DdlDateWeek.vue"
+Component.options.__file = "resources/assets/admin/components/form-data/fields/DdlDateMonth.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4e407419", Component.options)
+    hotAPI.createRecord("data-v-a71c69aa", Component.options)
   } else {
-    hotAPI.reload("data-v-4e407419", Component.options)
+    hotAPI.reload("data-v-a71c69aa", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 285:
+/***/ 281:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -185,12 +185,12 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 640:
+/***/ 629:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__js_Common__ = __webpack_require__(285);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__js_Common__ = __webpack_require__(281);
 //
 //
 //
@@ -202,24 +202,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 
-var Js = Object(__WEBPACK_IMPORTED_MODULE_0__js_Common__["a" /* default */])('sls-date-week');
+var Js = Object(__WEBPACK_IMPORTED_MODULE_0__js_Common__["a" /* default */])("sls-date-month");
 Js.mixins = [{
-	computed: {
-		date_attrs: function date_attrs() {
-			return this.Data.date_attrs || {};
-		}
-	},
-	methods: {
-		onChange: function onChange(v) {
-			this.events.change && this.events.change(v);
-		}
-	}
+  computed: {
+    date_attrs: function date_attrs() {
+      return this.Data.date_attrs || {};
+    }
+  },
+  methods: {
+    onChange: function onChange(v) {
+      this.events.change && this.events.change(v);
+    }
+  }
 }];
 /* harmony default export */ __webpack_exports__["default"] = (Js);
 
 /***/ }),
 
-/***/ 641:
+/***/ 630:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -230,7 +230,7 @@ var render = function() {
     "el-date-picker",
     _vm._b(
       {
-        attrs: { type: "week", placeholder: _vm.data.desc },
+        attrs: { type: "month", placeholder: _vm.data.desc },
         on: { change: _vm.onChange },
         model: {
           value: _vm.submit_data[_vm.data.key],
@@ -252,7 +252,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-4e407419", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-a71c69aa", module.exports)
   }
 }
 

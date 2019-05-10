@@ -1,14 +1,14 @@
 webpackJsonp([55],{
 
-/***/ 278:
+/***/ 261:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(646)
+var __vue_script__ = __webpack_require__(615)
 /* template */
-var __vue_template__ = __webpack_require__(647)
+var __vue_template__ = __webpack_require__(616)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/admin/components/form-data/fields/DdlTimeFixed.vue"
+Component.options.__file = "resources/assets/admin/components/form-data/fields/DdlRadio.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-39f5a5e0", Component.options)
+    hotAPI.createRecord("data-v-1a086898", Component.options)
   } else {
-    hotAPI.reload("data-v-39f5a5e0", Component.options)
+    hotAPI.reload("data-v-1a086898", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 285:
+/***/ 281:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -185,12 +185,20 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 646:
+/***/ 615:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__js_Common__ = __webpack_require__(285);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__js_Common__ = __webpack_require__(281);
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -201,24 +209,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 
-var Js = Object(__WEBPACK_IMPORTED_MODULE_0__js_Common__["a" /* default */])('sls-time');
+var Js = Object(__WEBPACK_IMPORTED_MODULE_0__js_Common__["a" /* default */])("sls-radio");
 Js.mixins = [{
-	computed: {
-		time_attrs: function time_attrs() {
-			return this.Data.time_attrs || {};
-		}
-	},
-	methods: {
-		onChange: function onChange(v) {
-			this.events.change && this.events.change(v);
-		}
-	}
+  computed: {
+    radio_group_attrs: function radio_group_attrs() {
+      return this.Data.radio_group_attrs || {};
+    },
+    radio_attrs: function radio_attrs() {
+      return this.Data.radio_attrs || {};
+    }
+  },
+  methods: {
+    onChange: function onChange(v) {
+      this.submit_info[this.data.key] = "";
+      this.submit_info[this.data.key] = this.temp_field_obj[this.data.key][v];
+      this.events.change && this.events.change({
+        value: v,
+        info: this.submit_info[this.data.key]
+      });
+    }
+  }
 }];
 /* harmony default export */ __webpack_exports__["default"] = (Js);
 
 /***/ }),
 
-/***/ 647:
+/***/ 616:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -226,7 +242,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "el-time-select",
+    "el-radio-group",
     _vm._b(
       {
         attrs: { placeholder: _vm.data.desc },
@@ -239,10 +255,22 @@ var render = function() {
           expression: "submit_data[data.key]"
         }
       },
-      "el-time-select",
-      _vm.time_attrs,
+      "el-radio-group",
+      _vm.radio_group_attrs,
       false
-    )
+    ),
+    _vm._l(_vm.data.list, function(item, $index) {
+      return _c(
+        "el-radio-button",
+        _vm._b(
+          { key: $index, attrs: { label: item.value } },
+          "el-radio-button",
+          _vm.radio_attrs,
+          false
+        ),
+        [_vm._v(_vm._s(item.text || item.value))]
+      )
+    })
   )
 }
 var staticRenderFns = []
@@ -251,7 +279,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-39f5a5e0", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-1a086898", module.exports)
   }
 }
 

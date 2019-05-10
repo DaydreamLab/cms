@@ -1,404 +1,14 @@
-webpackJsonp([77,84],{
+webpackJsonp([77],{
 
-/***/ 286:
-/***/ (function(module, exports, __webpack_require__) {
-
-var baseIsNative = __webpack_require__(312),
-    getValue = __webpack_require__(315);
-
-/**
- * Gets the native function at `key` of `object`.
- *
- * @private
- * @param {Object} object The object to query.
- * @param {string} key The key of the method to get.
- * @returns {*} Returns the function if it's native, else `undefined`.
- */
-function getNative(object, key) {
-  var value = getValue(object, key);
-  return baseIsNative(value) ? value : undefined;
-}
-
-module.exports = getNative;
-
-
-/***/ }),
-
-/***/ 299:
-/***/ (function(module, exports, __webpack_require__) {
-
-var getNative = __webpack_require__(286),
-    root = __webpack_require__(16);
-
-/* Built-in method references that are verified to be native. */
-var Map = getNative(root, 'Map');
-
-module.exports = Map;
-
-
-/***/ }),
-
-/***/ 302:
-/***/ (function(module, exports) {
-
-/** Used for built-in method references. */
-var funcProto = Function.prototype;
-
-/** Used to resolve the decompiled source of functions. */
-var funcToString = funcProto.toString;
-
-/**
- * Converts `func` to its source code.
- *
- * @private
- * @param {Function} func The function to convert.
- * @returns {string} Returns the source code.
- */
-function toSource(func) {
-  if (func != null) {
-    try {
-      return funcToString.call(func);
-    } catch (e) {}
-    try {
-      return (func + '');
-    } catch (e) {}
-  }
-  return '';
-}
-
-module.exports = toSource;
-
-
-/***/ }),
-
-/***/ 312:
-/***/ (function(module, exports, __webpack_require__) {
-
-var isFunction = __webpack_require__(101),
-    isMasked = __webpack_require__(313),
-    isObject = __webpack_require__(99),
-    toSource = __webpack_require__(302);
-
-/**
- * Used to match `RegExp`
- * [syntax characters](http://ecma-international.org/ecma-262/7.0/#sec-patterns).
- */
-var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
-
-/** Used to detect host constructors (Safari). */
-var reIsHostCtor = /^\[object .+?Constructor\]$/;
-
-/** Used for built-in method references. */
-var funcProto = Function.prototype,
-    objectProto = Object.prototype;
-
-/** Used to resolve the decompiled source of functions. */
-var funcToString = funcProto.toString;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/** Used to detect if a method is native. */
-var reIsNative = RegExp('^' +
-  funcToString.call(hasOwnProperty).replace(reRegExpChar, '\\$&')
-  .replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
-);
-
-/**
- * The base implementation of `_.isNative` without bad shim checks.
- *
- * @private
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a native function,
- *  else `false`.
- */
-function baseIsNative(value) {
-  if (!isObject(value) || isMasked(value)) {
-    return false;
-  }
-  var pattern = isFunction(value) ? reIsNative : reIsHostCtor;
-  return pattern.test(toSource(value));
-}
-
-module.exports = baseIsNative;
-
-
-/***/ }),
-
-/***/ 313:
-/***/ (function(module, exports, __webpack_require__) {
-
-var coreJsData = __webpack_require__(314);
-
-/** Used to detect methods masquerading as native. */
-var maskSrcKey = (function() {
-  var uid = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || '');
-  return uid ? ('Symbol(src)_1.' + uid) : '';
-}());
-
-/**
- * Checks if `func` has its source masked.
- *
- * @private
- * @param {Function} func The function to check.
- * @returns {boolean} Returns `true` if `func` is masked, else `false`.
- */
-function isMasked(func) {
-  return !!maskSrcKey && (maskSrcKey in func);
-}
-
-module.exports = isMasked;
-
-
-/***/ }),
-
-/***/ 314:
-/***/ (function(module, exports, __webpack_require__) {
-
-var root = __webpack_require__(16);
-
-/** Used to detect overreaching core-js shims. */
-var coreJsData = root['__core-js_shared__'];
-
-module.exports = coreJsData;
-
-
-/***/ }),
-
-/***/ 315:
-/***/ (function(module, exports) {
-
-/**
- * Gets the value at `key` of `object`.
- *
- * @private
- * @param {Object} [object] The object to query.
- * @param {string} key The key of the property to get.
- * @returns {*} Returns the property value.
- */
-function getValue(object, key) {
-  return object == null ? undefined : object[key];
-}
-
-module.exports = getValue;
-
-
-/***/ }),
-
-/***/ 346:
-/***/ (function(module, exports, __webpack_require__) {
-
-var DataView = __webpack_require__(347),
-    Map = __webpack_require__(299),
-    Promise = __webpack_require__(348),
-    Set = __webpack_require__(349),
-    WeakMap = __webpack_require__(350),
-    baseGetTag = __webpack_require__(9),
-    toSource = __webpack_require__(302);
-
-/** `Object#toString` result references. */
-var mapTag = '[object Map]',
-    objectTag = '[object Object]',
-    promiseTag = '[object Promise]',
-    setTag = '[object Set]',
-    weakMapTag = '[object WeakMap]';
-
-var dataViewTag = '[object DataView]';
-
-/** Used to detect maps, sets, and weakmaps. */
-var dataViewCtorString = toSource(DataView),
-    mapCtorString = toSource(Map),
-    promiseCtorString = toSource(Promise),
-    setCtorString = toSource(Set),
-    weakMapCtorString = toSource(WeakMap);
-
-/**
- * Gets the `toStringTag` of `value`.
- *
- * @private
- * @param {*} value The value to query.
- * @returns {string} Returns the `toStringTag`.
- */
-var getTag = baseGetTag;
-
-// Fallback for data views, maps, sets, and weak maps in IE 11 and promises in Node.js < 6.
-if ((DataView && getTag(new DataView(new ArrayBuffer(1))) != dataViewTag) ||
-    (Map && getTag(new Map) != mapTag) ||
-    (Promise && getTag(Promise.resolve()) != promiseTag) ||
-    (Set && getTag(new Set) != setTag) ||
-    (WeakMap && getTag(new WeakMap) != weakMapTag)) {
-  getTag = function(value) {
-    var result = baseGetTag(value),
-        Ctor = result == objectTag ? value.constructor : undefined,
-        ctorString = Ctor ? toSource(Ctor) : '';
-
-    if (ctorString) {
-      switch (ctorString) {
-        case dataViewCtorString: return dataViewTag;
-        case mapCtorString: return mapTag;
-        case promiseCtorString: return promiseTag;
-        case setCtorString: return setTag;
-        case weakMapCtorString: return weakMapTag;
-      }
-    }
-    return result;
-  };
-}
-
-module.exports = getTag;
-
-
-/***/ }),
-
-/***/ 347:
-/***/ (function(module, exports, __webpack_require__) {
-
-var getNative = __webpack_require__(286),
-    root = __webpack_require__(16);
-
-/* Built-in method references that are verified to be native. */
-var DataView = getNative(root, 'DataView');
-
-module.exports = DataView;
-
-
-/***/ }),
-
-/***/ 348:
-/***/ (function(module, exports, __webpack_require__) {
-
-var getNative = __webpack_require__(286),
-    root = __webpack_require__(16);
-
-/* Built-in method references that are verified to be native. */
-var Promise = getNative(root, 'Promise');
-
-module.exports = Promise;
-
-
-/***/ }),
-
-/***/ 349:
-/***/ (function(module, exports, __webpack_require__) {
-
-var getNative = __webpack_require__(286),
-    root = __webpack_require__(16);
-
-/* Built-in method references that are verified to be native. */
-var Set = getNative(root, 'Set');
-
-module.exports = Set;
-
-
-/***/ }),
-
-/***/ 350:
-/***/ (function(module, exports, __webpack_require__) {
-
-var getNative = __webpack_require__(286),
-    root = __webpack_require__(16);
-
-/* Built-in method references that are verified to be native. */
-var WeakMap = getNative(root, 'WeakMap');
-
-module.exports = WeakMap;
-
-
-/***/ }),
-
-/***/ 353:
-/***/ (function(module, exports, __webpack_require__) {
-
-var baseKeys = __webpack_require__(110),
-    getTag = __webpack_require__(346),
-    isArguments = __webpack_require__(97),
-    isArray = __webpack_require__(15),
-    isArrayLike = __webpack_require__(18),
-    isBuffer = __webpack_require__(102),
-    isPrototype = __webpack_require__(111),
-    isTypedArray = __webpack_require__(103);
-
-/** `Object#toString` result references. */
-var mapTag = '[object Map]',
-    setTag = '[object Set]';
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/**
- * Checks if `value` is an empty object, collection, map, or set.
- *
- * Objects are considered empty if they have no own enumerable string keyed
- * properties.
- *
- * Array-like values such as `arguments` objects, arrays, buffers, strings, or
- * jQuery-like collections are considered empty if they have a `length` of `0`.
- * Similarly, maps and sets are considered empty if they have a `size` of `0`.
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is empty, else `false`.
- * @example
- *
- * _.isEmpty(null);
- * // => true
- *
- * _.isEmpty(true);
- * // => true
- *
- * _.isEmpty(1);
- * // => true
- *
- * _.isEmpty([1, 2, 3]);
- * // => false
- *
- * _.isEmpty({ 'a': 1 });
- * // => false
- */
-function isEmpty(value) {
-  if (value == null) {
-    return true;
-  }
-  if (isArrayLike(value) &&
-      (isArray(value) || typeof value == 'string' || typeof value.splice == 'function' ||
-        isBuffer(value) || isTypedArray(value) || isArguments(value))) {
-    return !value.length;
-  }
-  var tag = getTag(value);
-  if (tag == mapTag || tag == setTag) {
-    return !value.size;
-  }
-  if (isPrototype(value)) {
-    return !baseKeys(value).length;
-  }
-  for (var key in value) {
-    if (hasOwnProperty.call(value, key)) {
-      return false;
-    }
-  }
-  return true;
-}
-
-module.exports = isEmpty;
-
-
-/***/ }),
-
-/***/ 418:
+/***/ 102:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(459)
+var __vue_script__ = __webpack_require__(369)
 /* template */
-var __vue_template__ = __webpack_require__(460)
+var __vue_template__ = __webpack_require__(370)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -415,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/admin/components/field-form/field-form-item.vue"
+Component.options.__file = "resources/assets/admin/views/content/item/list.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -424,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-e0bc61d4", Component.options)
+    hotAPI.createRecord("data-v-525be48f", Component.options)
   } else {
-    hotAPI.reload("data-v-e0bc61d4", Component.options)
+    hotAPI.reload("data-v-525be48f", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -438,13 +48,181 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 459:
+/***/ 283:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    data: function data() {
+        return {
+            list: [],
+            list_loading: {
+                flag: false
+            },
+            paginations: {
+                current_page: 1,
+                total: 0,
+                page_size: 10,
+                page_sizes: [10, 15, 20, 25, 50, 100],
+                layout: "total, sizes, prev, pager, next, jumper"
+            }
+        };
+    },
+
+    watch: {
+        $route: {
+            handler: "$initList",
+            immediate: true
+        }
+    },
+    methods: {
+        $onClickBtnAdd: function $onClickBtnAdd() {
+            this.$router.push(this.$route.path + "/edit");
+        },
+        $onClickBntEdit: function $onClickBntEdit(query) {
+            this.$router.push({
+                path: this.$route.path + "/edit",
+                query: _extends({}, query, {
+                    from: this.$route.query
+                })
+            });
+        },
+        $onSearchReset: function $onSearchReset() {
+            this.$router.push({
+                path: this.$route.path
+            });
+        },
+        $onSearch: function $onSearch(_ref) {
+            var data = _ref.data;
+
+            var sd = {};
+
+            var query = this.$route.query;
+
+            for (var p in query) {
+                sd[p] = query[p];
+            }
+            for (var s in data) {
+                sd[s] = data[s];
+                if (!sd[s]) {
+                    delete sd[s];
+                }
+            }
+
+            this.$router.push({
+                path: this.$route.path,
+                query: sd
+            });
+        },
+        setRouteQuery: function setRouteQuery(field, value) {
+            var query = Object.assign({}, this.$route.query);
+
+            if ((typeof field === "undefined" ? "undefined" : _typeof(field)) === "object") {
+                query = field;
+            } else {
+                query[field] = value;
+            }
+
+            return query;
+        },
+        getRouteQuery: function getRouteQuery() {
+            var _this = this;
+
+            var query = this.$route.query;
+            var intArray = ["id", "pid", "category_id", "access"];
+            var dateArray = ["start_date", "end_date"];
+            var data = {};
+
+            Object.keys(query).forEach(function (field) {
+                _this.searchbar.default_value[field] = intArray.includes(field) ? parseInt(query[field]) : dateArray.includes(field) ? _this.$options.filters.storeDateFormat(query[field]) : query[field];
+                data[field] = query[field];
+            });
+            return data;
+        },
+        $onChangeCurrentPage: function $onChangeCurrentPage(page) {
+            var _this2 = this;
+
+            this.$onGetList({
+                page: page,
+                fn: function fn() {
+                    _this2.$router.push({
+                        path: _this2.$route.path,
+                        query: _this2.setRouteQuery("page", page)
+                    });
+                }
+            });
+        },
+        $onChangePageSize: function $onChangePageSize(pageSize) {
+            var _this3 = this;
+
+            this.$onGetList({
+                pageSize: pageSize,
+                fn: function fn() {
+                    _this3.$router.push({
+                        path: _this3.$route.path,
+                        query: _this3.setRouteQuery("page_size", pageSize)
+                    });
+                }
+            });
+        },
+        $onGetList: function $onGetList() {
+            var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+                page = _ref2.page,
+                pageSize = _ref2.pageSize,
+                where = _ref2.where,
+                fn = _ref2.fn;
+
+            this.list_loading.flag = true;
+
+            var query = this.$route.query;
+
+            this.paginations.current_page = page || parseInt(query.page) || 1;
+            this.paginations.page_size = pageSize || parseInt(query.page_size) || this.paginations.page_size;
+
+            var page_data = Object.assign(this.getRouteQuery(), {
+                page: this.paginations.current_page,
+                limit: this.paginations.page_size
+            });
+            if (where) {
+                page_data = Object.assign(page_data, where || {});
+            }
+            this.handleGetList({ page_data: page_data, fn: fn });
+        },
+        $initList: function $initList() {
+            this.$onGetList();
+        }
+    }
+});
+
+/***/ }),
+
+/***/ 289:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+    methods: {
+        $initList: function $initList() {
+            this.$set(this.toolbar, "type", this.$route.query.state === "-2" ? "trash" : "list");
+            this.$onGetList();
+        }
+    }
+});
+
+/***/ }),
+
+/***/ 369:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_isEmpty__ = __webpack_require__(353);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_isEmpty___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash_isEmpty__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_option_mixin__ = __webpack_require__(282);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_list_mixin__ = __webpack_require__(283);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mixins_cms_list_mixin__ = __webpack_require__(289);
 //
 //
 //
@@ -471,294 +249,427 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: {
-    DefaultValue: {
-      type: Object,
-      default: function _default() {
-        return {};
-      }
-    },
-    Data: {
-      type: Object,
-      default: function _default() {
-        return {};
-      }
-    }
-  },
+  name: "item-list",
+  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_option_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1_mixins_list_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2_mixins_cms_list_mixin__["a" /* default */]],
   data: function data() {
+    var _this = this;
+
     return {
-      default_value: "",
-      params: {
-        textarea: {
-          rows: "",
-          cols: "",
-          editor: 0
-        },
-        select: {
-          options: []
-        },
-        multipleSelect: {
-          options: []
-        },
-        radio: {
-          options: []
-        },
-        link: {
-          text: "",
-          target: ""
+      sort: {
+        show: true
+      },
+      fields: [{
+        key: "title",
+        label: this.$t("FIELD_TITLE_LABEL"),
+        type: "editable",
+        width: 300
+      }, {
+        key: "featured",
+        label: this.$t("OPTION_FEATURED"),
+        type: "icon",
+        width: "80",
+        formatter: function formatter(item) {
+          return {
+            style: {
+              color: item === 1 ? "#fdd034" : "#cfd3da"
+            },
+            icon: ["fas", "star"]
+          };
+        }
+      }, {
+        key: "state",
+        label: this.$t("OPTION_STATE"),
+        type: "label",
+        width: "120",
+        formatter: function formatter(item) {
+          var item_text = {
+            "1": "PUBLISHED",
+            "0": "UNPUBLISHED",
+            "-1": "ARCHIVED",
+            "-2": "TRASHED",
+            "2": "PENDING",
+            "3": "EXPIRED"
+          };
+          return {
+            text: _this.$t(item_text[item]),
+            color: "item_state_" + item + "_color"
+          };
+        }
+      }, {
+        key: "category_title",
+        label: this.$t("OPTION_CATEGORY"),
+        width: "120"
+      }, {
+        key: "creator",
+        label: this.$t("LIST_DATA_AUTHOR_LABEL")
+      }, {
+        key: "updater",
+        label: this.$t("LIST_DATA_MODIFIED_BY_LABEL"),
+        width: "100"
+      }, {
+        key: "created_at",
+        label: this.$t("LIST_DATA_CREATED_DATE_LABEL"),
+        formatter: function formatter(item) {
+          return _this.$options.filters.displayDateFormat(item.created_at);
+        }
+      }, {
+        key: "updated_at",
+        label: this.$t("LIST_DATA_MODIFIED_DATE_LABEL"),
+        formatter: function formatter(item) {
+          return _this.$options.filters.displayDateFormat(item.updated_at);
+        }
+      }, {
+        key: "hits",
+        label: this.$t("LIST_DATA_HITS_LABEL")
+      }, {
+        key: "introimage",
+        label: this.$t("LIST_DATA_INTRO_IMAGE_LABEL"),
+        type: "icon",
+        sort: false,
+        formatter: function formatter(item) {
+          return {
+            icon: item ? ["fal", "image"] : ""
+          };
+        }
+      }, {
+        key: "image",
+        label: this.$t("LIST_DATA_IMAGE_LABEL"),
+        type: "icon",
+        sort: false,
+        formatter: function formatter(item) {
+          return {
+            icon: item ? ["fal", "image"] : ""
+          };
+        }
+      }, {
+        key: "language_title",
+        label: this.$t("OPTION_LANGUAGE"),
+        width: "100",
+        formatter: function formatter(item) {
+          return item.language === "*" ? _this.$t("ALL_LANGUAGE") : item.language_title;
+        }
+      }, {
+        key: "id",
+        label: this.$t("LIST_DATA_HEADING_ID"),
+        width: "60"
+      }],
+      toolbar: {
+        type: "list",
+        custom: [{
+          text: this.$t("TOOLBAR_PUBLISH"),
+          method: "updateState",
+          fn: function fn(_ref) {
+            var ids = _ref.ids;
+
+            _this.onClickBtnUpdateState({ ids: ids, state: 1 });
+          }
+        }, {
+          text: this.$t("TOOLBAR_UNPUBLISH"),
+          method: "updateState",
+          fn: function fn(_ref2) {
+            var ids = _ref2.ids;
+
+            _this.onClickBtnUpdateState({ ids: ids, state: 0 });
+          }
+        }, {
+          text: this.$t("TOOLBAR_FEATURED"),
+          method: "updateFeatured",
+          fn: function fn(_ref3) {
+            var ids = _ref3.ids;
+
+            _this.onClickBtnUpdatFeatured({ ids: ids, featured: 1 });
+          }
+        }, {
+          text: this.$t("TOOLBAR_UNFEATURED"),
+          method: "updateFeatured",
+          fn: function fn(_ref4) {
+            var ids = _ref4.ids;
+
+            _this.onClickBtnUpdatFeatured({ ids: ids, featured: 0 });
+          }
+        }, {
+          text: this.$t("TOOLBAR_CHECKOUT"),
+          method: "checkout",
+          fn: function fn(_ref5) {
+            var ids = _ref5.ids;
+
+            _this.onClickBtnCheckout({ ids: ids });
+          }
+        }]
+      },
+      searchbar: {
+        fields: [{
+          key: "search",
+          desc: this.$t("TOOLBAR_KEYWORDS"),
+          clearable: true
+        }, {
+          key: "featured",
+          type: "select",
+          desc: this.$t("OPTION_FEATURED"),
+          clearable: true,
+          list: [{
+            value: "1",
+            text: this.$t("FEATURED")
+          }, {
+            value: "0",
+            text: this.$t("NOT_FEATURED")
+          }]
+        }, {
+          key: "state",
+          type: "select",
+          desc: this.$t("OPTION_STATE"),
+          clearable: true,
+          list: [{
+            value: "1",
+            text: this.$t("PUBLISHED")
+          }, {
+            value: "0",
+            text: this.$t("UNPUBLISHED")
+          }, {
+            value: "-1",
+            text: this.$t("ARCHIVED")
+          }, {
+            value: "-2",
+            text: this.$t("TRASHED")
+          }]
+        }, {
+          key: "category_id",
+          type: "select",
+          desc: this.$t("OPTION_CATEGORY"),
+          clearable: true,
+          list: this.$store.getters.item_article_category_list,
+          custom_attrs: {
+            label: "tree_list_title",
+            value: "id"
+          }
+        }, {
+          key: "language",
+          type: "select",
+          desc: this.$t("OPTION_LANGUAGE"),
+          clearable: true,
+          list: this.$store.getters.language_list,
+          custom_attrs: {
+            label: "title",
+            value: "sef"
+          }
+        }, {
+          key: "access",
+          type: "select",
+          desc: this.$t("FIELD_ACCESS_LEVEL"),
+          clearable: true,
+          list: this.$store.getters.viewlevel_list,
+          custom_attrs: {
+            label: "title",
+            value: "id"
+          }
+        }],
+        default_value: {
+          search: "",
+          state: "",
+          featured: "",
+          category_id: "",
+          language: "",
+          access: ""
         }
       }
     };
   },
-
-  computed: {
-    data: function data() {
-      return __WEBPACK_IMPORTED_MODULE_0_lodash_isEmpty___default()(this.Data) ? this.DefaultValue : this.Data;
-    },
-    datePickerType: function datePickerType() {
-      var formatValueRefs = {
-        Y: "year",
-        "Y-m": "month",
-        "Y-m-d": "date"
-      };
-
-      return formatValueRefs[this.default_value.params["format"]];
-    }
+  created: function created() {
+    this.$getFieldList({
+      item_article_category: 3,
+      language: 4,
+      viewlevel: 5
+    }, "searchbar");
   },
-  watch: {
-    default_value: {
-      handler: "initData",
-      immediate: true
-    }
-  },
+
   methods: {
-    initData: function initData() {
-      this.default_value = this.data;
+    /**
+     * list actions
+     */
+    onClickBtnCheckout: function onClickBtnCheckout(_ref6) {
+      var _this2 = this;
+
+      var data = _ref6.data,
+          ids = _ref6.ids;
+
+      var checkout_data = ids ? ids : [data.id];
+      this.$$api_item_checkout({
+        data: { ids: checkout_data },
+        fn: function fn(_ref7) {
+          var msg = _ref7.msg;
+
+          _this2.$message.success(msg);
+          _this2.$onGetList();
+        }
+      });
+    },
+    onOrderChange: function onOrderChange(_ref8) {
+      var _this3 = this;
+
+      var id = _ref8.id,
+          index_diff = _ref8.index_diff,
+          order = _ref8.order;
+
+      this.$$api_item_ordering({
+        data: {
+          id: id,
+          index_diff: index_diff,
+          order: order
+        },
+        fn: function fn(_ref9) {
+          var msg = _ref9.msg;
+
+          _this3.$message.success(msg);
+        }
+      });
+    },
+    onSortChange: function onSortChange(order) {
+      this.$onGetList({
+        where: { order_by: "ordering", order: order.replace("ending", "") }
+      });
+    },
+
+    /**
+     * Toolbar
+     */
+    onClickBtnUpdatFeatured: function onClickBtnUpdatFeatured(_ref10) {
+      var _this4 = this;
+
+      var ids = _ref10.ids,
+          featured = _ref10.featured;
+
+      this.$$api_item_updateFeatured({
+        data: {
+          ids: ids,
+          featured: featured
+        },
+        fn: function fn(_ref11) {
+          var msg = _ref11.msg;
+
+          _this4.$message.success(msg);
+          _this4.$onGetList();
+        }
+      });
+    },
+    onClickBtnBatchTrash: function onClickBtnBatchTrash(_ref12) {
+      var ids = _ref12.ids,
+          state = _ref12.state;
+
+      this.onClickBtnUpdateState({ ids: ids, state: state });
+    },
+    onClickBtnBatchRestore: function onClickBtnBatchRestore(_ref13) {
+      var ids = _ref13.ids,
+          state = _ref13.state;
+
+      this.onClickBtnUpdateState({ ids: ids, state: state });
+    },
+    onClickBtnUpdateState: function onClickBtnUpdateState(_ref14) {
+      var _this5 = this;
+
+      var ids = _ref14.ids,
+          state = _ref14.state;
+
+      this.$$api_item_updateState({
+        data: {
+          ids: ids,
+          state: state
+        },
+        fn: function fn(_ref15) {
+          var msg = _ref15.msg;
+
+          _this5.$message.success(msg);
+          _this5.$onGetList();
+        }
+      });
+    },
+    onClickBtnBatchDelete: function onClickBtnBatchDelete(_ref16) {
+      var _this6 = this;
+
+      var ids = _ref16.ids,
+          datas = _ref16.datas;
+
+      this.$confirm(this.$t("GLOBAL_CONFIRM_DELETE")).then(function () {
+        _this6.$$api_item_delete({
+          data: { ids: ids },
+          fn: function fn(_ref17) {
+            var data = _ref17.data;
+
+            _this6.$onGetList();
+          }
+        });
+      });
+    },
+    handleEditQuery: function handleEditQuery(_ref18) {
+      var data = _ref18.data;
+
+      this.$onClickBntEdit({
+        id: data.id
+      });
+    },
+    handleGetList: function handleGetList() {
+      var _this7 = this;
+
+      var _ref19 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+          page_data = _ref19.page_data,
+          _fn = _ref19.fn;
+
+      this.$$api_item_list({
+        data: page_data,
+        fn: function fn(_ref20) {
+          var data = _ref20.data;
+
+          _this7.list_loading.flag = false;
+          _this7.list = data.items;
+          _this7.paginations.total = data.pagination.total;
+
+          _fn && _fn();
+        }
+      });
     }
   }
 });
 
 /***/ }),
 
-/***/ 460:
+/***/ 370:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _vm.default_value.type === "link"
-        ? _c(
-            "el-row",
-            { attrs: { gutter: 10 } },
-            [
-              _c(
-                "el-col",
-                { attrs: { span: 8 } },
-                [
-                  _c("el-input", {
-                    attrs: { placeholder: _vm.$t("EXTRAFIELD_TYPE_LINK_TEXT") },
-                    model: {
-                      value: _vm.default_value.params["text"],
-                      callback: function($$v) {
-                        _vm.$set(_vm.default_value.params, "text", $$v)
-                      },
-                      expression: "default_value.params['text']"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "el-col",
-                { attrs: { span: 8 } },
-                [
-                  _c("el-input", {
-                    attrs: { placeholder: _vm.$t("EXTRAFIELD_TYPE_LINK_URL") },
-                    model: {
-                      value: _vm.default_value["value"],
-                      callback: function($$v) {
-                        _vm.$set(_vm.default_value, "value", $$v)
-                      },
-                      expression: "default_value['value']"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "el-col",
-                { attrs: { span: 8 } },
-                [
-                  _c(
-                    "el-select",
-                    {
-                      attrs: {
-                        placeholder: _vm.$t("EXTRAFIELD_TYPE_LINK_OPEN_IN")
-                      },
-                      model: {
-                        value: _vm.default_value.params["target"],
-                        callback: function($$v) {
-                          _vm.$set(_vm.default_value.params, "target", $$v)
-                        },
-                        expression: "default_value.params['target']"
-                      }
-                    },
-                    [
-                      _c("el-option", {
-                        attrs: {
-                          label: _vm.$t(
-                            "EXTRAFIELD_TYPE_LINK_OPEN_IN_SAME_WINDOW"
-                          ),
-                          value: "_self"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("el-option", {
-                        attrs: {
-                          label: _vm.$t(
-                            "EXTRAFIELD_TYPE_LINK_OPEN_IN_NEW_WINDOW"
-                          ),
-                          value: "_blank"
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          )
-        : _vm.default_value.type === "date"
-          ? _c("el-date-picker", {
-              attrs: { type: _vm.datePickerType },
-              model: {
-                value: _vm.default_value["value"],
-                callback: function($$v) {
-                  _vm.$set(_vm.default_value, "value", $$v)
-                },
-                expression: "default_value['value']"
-              }
-            })
-          : _vm.default_value.type === "datetime"
-            ? _c("el-date-picker", {
-                attrs: { type: _vm.datePickerType },
-                model: {
-                  value: _vm.default_value["value"],
-                  callback: function($$v) {
-                    _vm.$set(_vm.default_value, "value", $$v)
-                  },
-                  expression: "default_value['value']"
-                }
-              })
-            : _vm.default_value.type === "radio"
-              ? _c(
-                  "el-radio-group",
-                  {
-                    model: {
-                      value: _vm.default_value["value"],
-                      callback: function($$v) {
-                        _vm.$set(_vm.default_value, "value", $$v)
-                      },
-                      expression: "default_value['value']"
-                    }
-                  },
-                  _vm._l(_vm.default_value.params["options"], function(option) {
-                    return _c(
-                      "el-radio-button",
-                      {
-                        key: option.value,
-                        attrs: { label: "" + option.value }
-                      },
-                      [_vm._v(_vm._s(option.name))]
-                    )
-                  })
-                )
-              : _vm.default_value.type === "select"
-                ? _c(
-                    "el-select",
-                    {
-                      model: {
-                        value: _vm.default_value["value"],
-                        callback: function($$v) {
-                          _vm.$set(_vm.default_value, "value", $$v)
-                        },
-                        expression: "default_value['value']"
-                      }
-                    },
-                    _vm._l(_vm.default_value.params["options"], function(
-                      option
-                    ) {
-                      return _c("el-option", {
-                        key: option.value,
-                        attrs: { label: option.name, value: "" + option.value }
-                      })
-                    })
-                  )
-                : _vm.default_value.type === "textarea"
-                  ? _c("el-input", {
-                      attrs: { type: "textarea", rows: 2 },
-                      model: {
-                        value: _vm.default_value["value"],
-                        callback: function($$v) {
-                          _vm.$set(_vm.default_value, "value", $$v)
-                        },
-                        expression: "default_value['value']"
-                      }
-                    })
-                  : _c("el-input", {
-                      model: {
-                        value: _vm.default_value["value"],
-                        callback: function($$v) {
-                          _vm.$set(_vm.default_value, "value", $$v)
-                        },
-                        expression: "default_value['value']"
-                      }
-                    })
-    ],
-    1
-  )
+  return _c("ListData", {
+    ref: "list-data",
+    attrs: {
+      List: _vm.list,
+      ListLoading: _vm.list_loading,
+      Sort: _vm.sort,
+      Pagination: _vm.paginations,
+      Toolbar: _vm.toolbar,
+      Searchbar: _vm.searchbar,
+      FieldList: _vm.fields
+    },
+    on: {
+      onClickBtnAdd: _vm.$onClickBtnAdd,
+      onClickBtnEdit: _vm.handleEditQuery,
+      onClickBtnBatchTrash: _vm.onClickBtnBatchTrash,
+      onClickBtnBatchRestore: _vm.onClickBtnBatchRestore,
+      onClickBtnBatchDelete: _vm.onClickBtnBatchDelete,
+      onClickBtnCheckout: _vm.onClickBtnCheckout,
+      onChangeCurrentPage: _vm.$onChangeCurrentPage,
+      onChangePageSize: _vm.$onChangePageSize,
+      onSearch: _vm.$onSearch,
+      onSearchReset: _vm.$onSearchReset,
+      onOrderChange: _vm.onOrderChange,
+      onSortChange: _vm.onSortChange
+    }
+  })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -766,7 +677,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-e0bc61d4", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-525be48f", module.exports)
   }
 }
 
