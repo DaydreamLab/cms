@@ -26,24 +26,9 @@ class MenuAdminService extends MenuService
     {
         $item = parent::getItem($id);
 
-        if (!Helper::hasPermission($item->viewlevels, $this->viewlevels))
-        {
-            $this->status   = Str::upper(Str::snake($this->type.'InsufficientPermission'));
-            $this->response = null;
-            return false;
-        }
+        $this->hasPermission($item->access, $this->access_ids);
 
-        if ($item->locked_by && $item->locked_by != $this->user->id)
-        {
-            $this->status   = Str::upper(Str::snake($this->type.'IsLocked'));
-            $this->response = (object) $this->user->only('email', 'full_name', 'nickname');
-            return false;
-        }
-
-        $item->locked_by = $this->user->id;
-        $item->locked_at = now();
-
-        return $item->save();
+        return $this->checkLocked($item);
     }
 
     public function search(Collection $input)

@@ -65,12 +65,7 @@ class CategoryFrontService extends CategoryService
     {
         $item = parent::getItem($id);
 
-        if (!Helper::hasPermission($item->viewlevels, $this->viewlevels))
-        {
-            $this->status   = Str::upper(Str::snake($this->type.'InsufficientPermission'));
-            $this->response = null;
-            return false;
-        }
+        $this->hasPermission($item->access, $this->access_ids);
 
         $item->hits++;
         return $item->save();

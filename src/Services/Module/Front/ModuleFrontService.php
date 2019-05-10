@@ -105,12 +105,7 @@ class ModuleFrontService extends ModuleService
         {
             $item = $items->first();
 
-            if (!Helper::hasPermission($item->viewlevels, $this->viewlevels))
-            {
-                $this->status   = Str::upper(Str::snake($this->type.'InsufficientPermission'));
-                $this->response = null;
-                return false;
-            }
+            $this->hasPermission($item->access, $this->access_ids);
 
             $item->items = $this->loadModule($item, $input->get('language'));
 

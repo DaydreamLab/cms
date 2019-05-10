@@ -57,33 +57,9 @@ class CategoryAdminService extends CategoryService
     {
         $item = parent::getItem($id);
 
-        if (!Helper::hasPermission($item->viewlevels, $this->viewlevels))
-        {
-            $this->status   = Str::upper(Str::snake($this->type.'InsufficientPermission'));
-            $this->response = null;
-            return false;
-        }
+        $this->hasPermission($item->access, $this->access_ids);
 
-        if ($item->locked_by && $item->locked_by != $this->user->id)
-        {
-            $this->status   = Str::upper(Str::snake($this->type.'IsLocked'));
-            $this->response = (object) $this->user->only('email', 'full_name', 'nickname');
-            return false;
-        }
-
-
-        $item->locked_by = $this->user->id;
-        $item->locked_at = now();
-        $result = $item->save();
-
-        if ($item->content_type == 'related_link')
-        {
-            $related_items = $this->getRelatedItems($this->itemAdminService, $item);
-            $item->items = $related_items;
-            $this->response = $item;
-        }
-
-        return $result;
+        return  $this->checkLocked($item);
     }
 
 

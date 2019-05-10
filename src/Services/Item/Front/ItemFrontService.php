@@ -112,12 +112,7 @@ class ItemFrontService extends ItemService
     {
         $item = parent::getItem($id);
 
-        if (!Helper::hasPermission($item->viewlevels, $this->viewlevels))
-        {
-            $this->status   = Str::upper(Str::snake($this->type.'InsufficientPermission'));
-            $this->response = null;
-            return false;
-        }
+        $this->hasPermission($item->access, $this->access_ids);
 
         if ($item)
         {
@@ -149,12 +144,7 @@ class ItemFrontService extends ItemService
             $item->hits++;
             $this->update($item, $item);
 
-            if (!Helper::hasPermission($item->viewlevels, $this->viewlevels))
-            {
-                $this->status   = Str::upper(Str::snake($this->type.'InsufficientPermission'));
-                $this->response = null;
-                return false;
-            }
+            $this->hasPermission($item->access, $this->access_ids);
 
             $prev_and_next  = $this->repo->getPreviousAndNext($item);
             $item->previous =  $prev_and_next['previous'];
