@@ -111,6 +111,7 @@ class ItemFrontController extends BaseController
 
     public function search(ItemFrontSearchPost $request)
     {
+        $input =
         $this->service->search($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);

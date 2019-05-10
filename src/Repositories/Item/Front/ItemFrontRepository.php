@@ -138,6 +138,7 @@ class ItemFrontRepository extends ItemRepository
                         $category = $this->categoryFrontRepository->find($category_id);
 
                         $sub_featured_items     = $this->getCategoriesItems([$category_id], $params, $featured_count, 1, false);
+
                         $sub_featured_items_ids = $sub_featured_items->map(function ($item){
                             return $item->id;
                         });
@@ -158,7 +159,7 @@ class ItemFrontRepository extends ItemRepository
                         $featured_counter = 0;
                         $data[$category->title]['featured'] = collect();
                         $data[$category->title]['mixed']    = collect();
-                        foreach ($all_items as $item)
+                        foreach ($sub_all_items as $item)
                         {
                             if ($item->featured == 1 && $featured_counter < $featured_count)
                             {
