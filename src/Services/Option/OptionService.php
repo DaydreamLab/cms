@@ -138,8 +138,7 @@ class OptionService
         if ($type == 'tree')
         {
             $default_field = array_merge($extra_fields, ['id', 'tree_list_title']);
-            Helper::show( $service->search(Helper::collect($default_rules)));
-            exit();
+
             return $service->search(Helper::collect($default_rules))->toFlatTree()
                 ->map( function($item, $key) use ($default_field){
                     return $item->only($default_field);
