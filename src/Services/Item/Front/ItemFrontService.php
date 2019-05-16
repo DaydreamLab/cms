@@ -92,6 +92,13 @@ class ItemFrontService extends ItemService
         if (count($units) == 0)
         {   $temp['title'] = $item['title'];
             $temp['description'] = $item['description'];
+            foreach ($item->extrafields as $extrafield)
+            {
+                if (!array_key_exists('timeline', $extrafield->params) || (int)$extrafield->params['timeline'] == 0)
+                {
+                    $temp['extrafields'][] = $extrafield;
+                }
+            }
             $data[(int)$datetime->format($unit)][] = $temp;
             krsort($data);
             return $data;
