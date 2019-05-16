@@ -38,8 +38,8 @@ class ModuleStorePost extends AdminRequest
             'access'        => 'nullable|integer',
             'language'      => 'required|string',
             'params'        => 'nullable|array',
-            'publish_up'    => 'nullable|datetime',
-            'publish_down'  => 'nullable|datetime',
+            'publish_up'    => 'nullable|date',
+            'publish_down'  => 'nullable|date',
         ];
     }
 }

@@ -45,8 +45,8 @@ class TagStorePost extends AdminRequest
             'metadesc'      => 'nullable|string',
             'metakeywords'  => 'nullable|string',
             'params'        => 'nullable|string',
-            'publish_up'    => 'nullable|datetime',
-            'publish_down'  => 'nullable|datetime',
+            'publish_up'    => 'nullable|date',
+            'publish_down'  => 'nullable|date',
         ];
     }
 }
