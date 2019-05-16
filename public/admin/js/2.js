@@ -1,52 +1,18 @@
 webpackJsonp([2],{
 
-/***/ 163:
-/***/ (function(module, exports) {
-
-/**
- * Translates the list format produced by css-loader into something
- * easier to manipulate.
- */
-module.exports = function listToStyles (parentId, list) {
-  var styles = []
-  var newStyles = {}
-  for (var i = 0; i < list.length; i++) {
-    var item = list[i]
-    var id = item[0]
-    var css = item[1]
-    var media = item[2]
-    var sourceMap = item[3]
-    var part = {
-      id: parentId + ':' + i,
-      css: css,
-      media: media,
-      sourceMap: sourceMap
-    }
-    if (!newStyles[id]) {
-      styles.push(newStyles[id] = { id: id, parts: [part] })
-    } else {
-      newStyles[id].parts.push(part)
-    }
-  }
-  return styles
-}
-
-
-/***/ }),
-
-/***/ 21:
+/***/ 26:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(407)
+  __webpack_require__(507)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(409)
+var __vue_script__ = __webpack_require__(509)
 /* template */
-var __vue_template__ = __webpack_require__(608)
+var __vue_template__ = __webpack_require__(510)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -86,325 +52,13 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 255:
-/***/ (function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function(useSourceMap) {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if(item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
-
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
-		});
-
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
-
-	return [content].join('\n');
-}
-
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-	return '/*# ' + data + ' */';
-}
-
-
-/***/ }),
-
-/***/ 256:
-/***/ (function(module, exports, __webpack_require__) {
-
-/*
-  MIT License http://www.opensource.org/licenses/mit-license.php
-  Author Tobias Koppers @sokra
-  Modified by Evan You @yyx990803
-*/
-
-var hasDocument = typeof document !== 'undefined'
-
-if (typeof DEBUG !== 'undefined' && DEBUG) {
-  if (!hasDocument) {
-    throw new Error(
-    'vue-style-loader cannot be used in a non-browser environment. ' +
-    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
-  ) }
-}
-
-var listToStyles = __webpack_require__(163)
-
-/*
-type StyleObject = {
-  id: number;
-  parts: Array<StyleObjectPart>
-}
-
-type StyleObjectPart = {
-  css: string;
-  media: string;
-  sourceMap: ?string
-}
-*/
-
-var stylesInDom = {/*
-  [id: number]: {
-    id: number,
-    refs: number,
-    parts: Array<(obj?: StyleObjectPart) => void>
-  }
-*/}
-
-var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
-var singletonElement = null
-var singletonCounter = 0
-var isProduction = false
-var noop = function () {}
-var options = null
-var ssrIdKey = 'data-vue-ssr-id'
-
-// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-// tags it will allow on a page
-var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
-
-module.exports = function (parentId, list, _isProduction, _options) {
-  isProduction = _isProduction
-
-  options = _options || {}
-
-  var styles = listToStyles(parentId, list)
-  addStylesToDom(styles)
-
-  return function update (newList) {
-    var mayRemove = []
-    for (var i = 0; i < styles.length; i++) {
-      var item = styles[i]
-      var domStyle = stylesInDom[item.id]
-      domStyle.refs--
-      mayRemove.push(domStyle)
-    }
-    if (newList) {
-      styles = listToStyles(parentId, newList)
-      addStylesToDom(styles)
-    } else {
-      styles = []
-    }
-    for (var i = 0; i < mayRemove.length; i++) {
-      var domStyle = mayRemove[i]
-      if (domStyle.refs === 0) {
-        for (var j = 0; j < domStyle.parts.length; j++) {
-          domStyle.parts[j]()
-        }
-        delete stylesInDom[domStyle.id]
-      }
-    }
-  }
-}
-
-function addStylesToDom (styles /* Array<StyleObject> */) {
-  for (var i = 0; i < styles.length; i++) {
-    var item = styles[i]
-    var domStyle = stylesInDom[item.id]
-    if (domStyle) {
-      domStyle.refs++
-      for (var j = 0; j < domStyle.parts.length; j++) {
-        domStyle.parts[j](item.parts[j])
-      }
-      for (; j < item.parts.length; j++) {
-        domStyle.parts.push(addStyle(item.parts[j]))
-      }
-      if (domStyle.parts.length > item.parts.length) {
-        domStyle.parts.length = item.parts.length
-      }
-    } else {
-      var parts = []
-      for (var j = 0; j < item.parts.length; j++) {
-        parts.push(addStyle(item.parts[j]))
-      }
-      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
-    }
-  }
-}
-
-function createStyleElement () {
-  var styleElement = document.createElement('style')
-  styleElement.type = 'text/css'
-  head.appendChild(styleElement)
-  return styleElement
-}
-
-function addStyle (obj /* StyleObjectPart */) {
-  var update, remove
-  var styleElement = document.querySelector('style[' + ssrIdKey + '~="' + obj.id + '"]')
-
-  if (styleElement) {
-    if (isProduction) {
-      // has SSR styles and in production mode.
-      // simply do nothing.
-      return noop
-    } else {
-      // has SSR styles but in dev mode.
-      // for some reason Chrome can't handle source map in server-rendered
-      // style tags - source maps in <style> only works if the style tag is
-      // created and inserted dynamically. So we remove the server rendered
-      // styles and inject new ones.
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  if (isOldIE) {
-    // use singleton mode for IE9.
-    var styleIndex = singletonCounter++
-    styleElement = singletonElement || (singletonElement = createStyleElement())
-    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
-    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
-  } else {
-    // use multi-style-tag mode in all other cases
-    styleElement = createStyleElement()
-    update = applyToTag.bind(null, styleElement)
-    remove = function () {
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  update(obj)
-
-  return function updateStyle (newObj /* StyleObjectPart */) {
-    if (newObj) {
-      if (newObj.css === obj.css &&
-          newObj.media === obj.media &&
-          newObj.sourceMap === obj.sourceMap) {
-        return
-      }
-      update(obj = newObj)
-    } else {
-      remove()
-    }
-  }
-}
-
-var replaceText = (function () {
-  var textStore = []
-
-  return function (index, replacement) {
-    textStore[index] = replacement
-    return textStore.filter(Boolean).join('\n')
-  }
-})()
-
-function applyToSingletonTag (styleElement, index, remove, obj) {
-  var css = remove ? '' : obj.css
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = replaceText(index, css)
-  } else {
-    var cssNode = document.createTextNode(css)
-    var childNodes = styleElement.childNodes
-    if (childNodes[index]) styleElement.removeChild(childNodes[index])
-    if (childNodes.length) {
-      styleElement.insertBefore(cssNode, childNodes[index])
-    } else {
-      styleElement.appendChild(cssNode)
-    }
-  }
-}
-
-function applyToTag (styleElement, obj) {
-  var css = obj.css
-  var media = obj.media
-  var sourceMap = obj.sourceMap
-
-  if (media) {
-    styleElement.setAttribute('media', media)
-  }
-  if (options.ssrId) {
-    styleElement.setAttribute(ssrIdKey, obj.id)
-  }
-
-  if (sourceMap) {
-    // https://developer.chrome.com/devtools/docs/javascript-debugging
-    // this makes source maps inside style tags work properly in Chrome
-    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
-    // http://stackoverflow.com/a/26603875
-    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
-  }
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = css
-  } else {
-    while (styleElement.firstChild) {
-      styleElement.removeChild(styleElement.firstChild)
-    }
-    styleElement.appendChild(document.createTextNode(css))
-  }
-}
-
-
-/***/ }),
-
-/***/ 407:
+/***/ 507:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(408);
+var content = __webpack_require__(508);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -425,7 +79,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 408:
+/***/ 508:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(255)(false);
@@ -433,19 +87,20 @@ exports = module.exports = __webpack_require__(255)(false);
 
 
 // module
-exports.push([module.i, "/* Colors -------------------------- */\n/* Link -------------------------- */\n/* Background -------------------------- */\n/* Border -------------------------- */\n/* Navbar -------------------------- */\n/* Sidebar -------------------------- */\n/* Tab -------------------------- */\n/* Icon -------------------------- */\n/* Item -------------------------- */\n.login-wrapper[data-v-15828418] {\n  background: -webkit-gradient(linear, left top, right top, from(#3f6c95), to(#2f3855));\n  background: linear-gradient(to right, #3f6c95 0%, #2f3855 100%);\n  height: 100vh;\n}\n.login-form[data-v-15828418] {\n  position: absolute;\n  max-width: 600px;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n          transform: translate(-50%, -50%);\n  background: #fff;\n  border-radius: 4px;\n  padding: 30px;\n}\n.btn--help[data-v-15828418] {\n  margin-top: 10px;\n}\n", ""]);
+exports.push([module.i, "/* Colors -------------------------- */\n/* Link -------------------------- */\n/* Background -------------------------- */\n/* Border -------------------------- */\n/* Navbar -------------------------- */\n/* Sidebar -------------------------- */\n/* Tab -------------------------- */\n/* Icon -------------------------- */\n/* Item -------------------------- */\n.login-wrapper[data-v-15828418] {\n  background: -webkit-gradient(linear, left top, right top, from(#3f6c95), to(#2f3855));\n  background: linear-gradient(to right, #3f6c95 0%, #2f3855 100%);\n  height: 100vh;\n}\n.login-form__wrapper[data-v-15828418] {\n  position: absolute;\n  max-width: 600px;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n          transform: translate(-50%, -50%);\n  background: #fff;\n  border-radius: 4px;\n  padding: 30px;\n}\n.login-header[data-v-15828418] {\n  margin-bottom: 25px;\n}\n.btn--help[data-v-15828418] {\n  margin-top: 10px;\n}\n\n/*transition: login-form*/\n.login-form-enter-active[data-v-15828418], .login-form-leave-active[data-v-15828418] {\n  -webkit-transition: opacity 1s ease-in-out;\n  transition: opacity 1s ease-in-out;\n}\n.login-form-enter[data-v-15828418], .login-form-leave-to[data-v-15828418] {\n  opacity: 0;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ 409:
+/***/ 509:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_utils___ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_utils___ = __webpack_require__(21);
+//
 //
 //
 //
@@ -507,7 +162,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "login",
+  name: "Login",
   data: function data() {
     var _this = this;
 
@@ -516,7 +171,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       password_visible: false,
       login_visibel: false,
       login_loading: false, // v-loading
-      data: {
+      form_data: {
         email: "",
         password: ""
       },
@@ -549,93 +204,91 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
   created: function created() {
-    if (this.$store.state.global.is_login_refresh) {
-      // setTimeout(() => {
-      //   this.$router.go(0);
-      // }, 50);
-      this.$router.go(0);
-      this.$store.commit("update_login_refresh", {
-        type: false
-      });
-    }
-
-    if (this.remember.remember_flag === true) {
-      this.data.email = this.remember.remember_login_info.email;
-    }
+    if (this.remember.remember_flag) this.form_data.email = this.remember.remember_login_info.email;
   },
 
   methods: {
     togglePassword: function togglePassword() {
       this.password_visible = !this.password_visible;
     },
-    onLogin: function onLogin(ref) {
+
+    /**
+     * 透過 token 取得用戶 assets 與 apis
+     * @param {String} redirectPage 重新導向的頁面路徑
+     */
+    getUserPage: function getUserPage(redirectPage) {
       var _this2 = this;
 
-      this.$refs[ref].validate(function (valid) {
+      this.$$api_user_getPages({
+        fn: function fn(_ref) {
+          var data = _ref.data;
+          var _data$items = data.items,
+              assets = _data$items.assets,
+              apis = _data$items.apis;
+
+          _this2.$router.options.routes = Object(__WEBPACK_IMPORTED_MODULE_0_utils___["c" /* formatRoutes */])(assets);
+          _this2.$router.addRoutes(_this2.$router.options.routes);
+
+          _this2.$message.success(_this2.$t("GLOBAL_LOGIN_SUCCESS"));
+          _this2.$router.push(redirectPage);
+
+          _this2.$store.dispatch("update_user_access", apis);
+          _this2.$store.dispatch("update_user_routes", {
+            routes: assets,
+            redirect: redirectPage
+          });
+        },
+        errFn: function errFn(msg) {
+          _this2.$message.error(msg);
+          _this2.$store.dispatch("remove_userinfo").then(function () {
+            _this2.$router.push("/login");
+          });
+        },
+        finalFn: function finalFn() {
+          _this2.login_loading = false;
+        }
+      });
+    },
+    updateRememberStore: function updateRememberStore(userToken) {
+      if (this.remember.remember_flag) {
+        this.$store.dispatch("update_remember", {
+          remember_flag: this.remember.remember_flag,
+          remember_login_info: {
+            email: this.form_data.email,
+            userToken: userToken
+          }
+        });
+      } else {
+        this.$store.dispatch("remove_remember");
+      }
+    },
+    onLogin: function onLogin() {
+      var _this3 = this;
+
+      this.$refs["form-data"].validate(function (valid) {
         if (valid) {
-          _this2.login_loading = true;
-          _this2.$$api_user_login({
+          _this3.login_loading = true;
+          _this3.$$api_user_login({
             tokenFlag: true,
-            data: _this2[ref],
-            fn: function fn(_ref) {
-              var data = _ref.data,
-                  msg = _ref.msg;
-
-              _this2.$message.success(_this2.$t("GLOBAL_LOGIN_SUCCESS"));
-
-              var _data$items = data.items,
-                  token = _data$items.token,
-                  redirect = _data$items.redirect;
+            data: _this3.form_data,
+            fn: function fn(_ref2) {
+              var data = _ref2.data,
+                  msg = _ref2.msg;
+              var _data$items2 = data.items,
+                  token = _data$items2.token,
+                  redirect = _data$items2.redirect;
 
 
-              if (_this2.remember.remember_flag === true) {
-                _this2.$store.dispatch("update_remember", {
-                  remember_flag: _this2.remember.remember_flag,
-                  remember_login_info: {
-                    email: _this2[ref].email,
-                    token: token
-                  }
-                });
-              } else {
-                _this2.$store.dispatch("remove_remember");
-              }
-              var user_redirect = redirect;
+              _this3.updateRememberStore(token);
 
               // 儲存用戶 token
-              _this2.$store.dispatch("update_userinfo", data.items).then(function () {
-                // 取得用戶 routes
-                _this2.$$api_user_getPages({
-                  fn: function fn(_ref2) {
-                    var data = _ref2.data;
-                    var _data$items2 = data.items,
-                        assets = _data$items2.assets,
-                        apis = _data$items2.apis;
-
-                    _this2.$router.options.routes = Object(__WEBPACK_IMPORTED_MODULE_0_utils___["c" /* formatRoutes */])(assets);
-                    _this2.$router.addRoutes(_this2.$router.options.routes);
-
-                    _this2.$store.dispatch("update_user_access", apis);
-                    _this2.$store.dispatch("update_user_routes", {
-                      routes: assets,
-                      redirect: user_redirect
-                    }).then(function () {
-                      _this2.$router.push(user_redirect);
-                    });
-                  },
-                  errFn: function errFn(msg) {
-                    _this2.$message.error(msg);
-                    _this2.$store.dispatch("remove_userinfo").then(function () {
-                      _this2.$router.push("/login");
-                    });
-                  }
-                });
+              _this3.$store.dispatch("update_userinfo", data.items).then(function () {
+                _this3.getUserPage(redirect);
               });
             },
             errFn: function errFn(msg) {
-              _this2.$message.error(msg);
-            },
-            finalFn: function finalFn() {
-              _this2.login_loading = false;
+              _this3.login_loading = false;
+              _this3.$message.error(msg);
             }
           });
         }
@@ -646,7 +299,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 608:
+/***/ 510:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -662,161 +315,180 @@ var render = function() {
           { staticClass: "content login-wrapper" },
           [
             _c(
-              "el-form",
-              {
-                directives: [
-                  {
-                    name: "loading",
-                    rawName: "v-loading",
-                    value: _vm.login_loading,
-                    expression: "login_loading"
-                  }
-                ],
-                ref: "data",
-                staticClass: "login-form",
-                attrs: {
-                  "label-position": "left",
-                  "element-loading-text": _vm.$t("LOGIN_LOADING") /*登入中⋯⋯*/,
-                  model: _vm.data,
-                  rules: _vm.rule_data
-                }
-              },
+              "transition",
+              { attrs: { name: "login-form", appear: "" } },
               [
                 _c(
-                  "el-form-item",
-                  { staticClass: "text-center login-header" },
-                  [
-                    _c("SvgIcon", {
-                      staticStyle: { width: "100%", height: "45px" },
-                      attrs: { "icon-class": "logo" }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  { attrs: { prop: "email" } },
-                  [
-                    _c("el-input", {
-                      attrs: {
-                        type: "email",
-                        "auto-complete": "off",
-                        placeholder: _vm.$t("GLOBAL_USERNAME") /*帳號*/
-                      },
-                      model: {
-                        value: _vm.data.email,
-                        callback: function($$v) {
-                          _vm.$set(_vm.data, "email", $$v)
-                        },
-                        expression: "data.email"
+                  "el-form",
+                  {
+                    directives: [
+                      {
+                        name: "loading",
+                        rawName: "v-loading",
+                        value: _vm.login_loading,
+                        expression: "login_loading"
                       }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  { attrs: { prop: "password" } },
+                    ],
+                    ref: "form-data",
+                    staticClass: "login-form__wrapper",
+                    attrs: {
+                      model: _vm.form_data,
+                      rules: _vm.rule_data,
+                      "element-loading-text": _vm.$t(
+                        "LOGIN_LOADING"
+                      ) /*登入中⋯⋯*/,
+                      "label-position": "left"
+                    }
+                  },
                   [
                     _c(
-                      "el-input",
-                      {
-                        attrs: {
-                          type: _vm.password_visible ? "text" : "password",
-                          "auto-complete": "off",
-                          placeholder: _vm.$t("GLOBAL_PASSWORD") /*密碼*/
-                        },
-                        nativeOn: {
-                          keyup: function($event) {
-                            if (
-                              !("button" in $event) &&
-                              _vm._k(
-                                $event.keyCode,
-                                "enter",
-                                13,
-                                $event.key,
-                                "Enter"
-                              )
-                            ) {
-                              return null
-                            }
-                            _vm.onLogin("data", true)
-                          }
-                        },
-                        model: {
-                          value: _vm.data.password,
-                          callback: function($$v) {
-                            _vm.$set(_vm.data, "password", $$v)
-                          },
-                          expression: "data.password"
-                        }
-                      },
+                      "div",
+                      { staticClass: "text-center login-header" },
+                      [
+                        _c("SvgIcon", {
+                          staticStyle: { width: "100%", height: "45px" },
+                          attrs: { "icon-class": "logo" }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "login-from" },
                       [
                         _c(
-                          "el-button",
-                          {
-                            attrs: { slot: "append" },
-                            on: { click: _vm.togglePassword },
-                            slot: "append"
-                          },
+                          "el-form-item",
+                          { attrs: { prop: "email" } },
                           [
-                            _c("font-awesome-icon", {
+                            _c("el-input", {
                               attrs: {
-                                icon: [
-                                  "fal",
-                                  _vm.password_visible ? "eye" : "eye-slash"
-                                ]
+                                type: "email",
+                                "auto-complete": "off",
+                                placeholder: _vm.$t("GLOBAL_USERNAME") /*帳號*/
+                              },
+                              model: {
+                                value: _vm.form_data.email,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.form_data, "email", $$v)
+                                },
+                                expression: "form_data.email"
                               }
                             })
                           ],
                           1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "el-form-item",
+                          { attrs: { prop: "password" } },
+                          [
+                            _c(
+                              "el-input",
+                              {
+                                attrs: {
+                                  type: _vm.password_visible
+                                    ? "text"
+                                    : "password",
+                                  "auto-complete": "off",
+                                  placeholder: _vm.$t(
+                                    "GLOBAL_PASSWORD"
+                                  ) /*密碼*/
+                                },
+                                nativeOn: {
+                                  keyup: function($event) {
+                                    if (
+                                      !("button" in $event) &&
+                                      _vm._k(
+                                        $event.keyCode,
+                                        "enter",
+                                        13,
+                                        $event.key,
+                                        "Enter"
+                                      )
+                                    ) {
+                                      return null
+                                    }
+                                    return _vm.onLogin($event)
+                                  }
+                                },
+                                model: {
+                                  value: _vm.form_data.password,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.form_data, "password", $$v)
+                                  },
+                                  expression: "form_data.password"
+                                }
+                              },
+                              [
+                                _c(
+                                  "el-button",
+                                  {
+                                    attrs: { slot: "append" },
+                                    on: { click: _vm.togglePassword },
+                                    slot: "append"
+                                  },
+                                  [
+                                    _c("font-awesome-icon", {
+                                      attrs: {
+                                        icon: [
+                                          "fal",
+                                          _vm.password_visible
+                                            ? "eye"
+                                            : "eye-slash"
+                                        ]
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "el-form-item",
+                          [
+                            _c(
+                              "el-checkbox",
+                              {
+                                attrs: { checked: _vm.remember.remember_flag },
+                                model: {
+                                  value: _vm.remember.remember_flag,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.remember, "remember_flag", $$v)
+                                  },
+                                  expression: "remember.remember_flag"
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.$t("GLOBAL_REMEMBER_ME") /*記住帳號*/
+                                  )
+                                )
+                              ]
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "el-button",
+                          {
+                            staticClass: "is-block",
+                            attrs: { type: "primary" },
+                            on: { click: _vm.onLogin }
+                          },
+                          [_vm._v(_vm._s(_vm.$t("LOGIN") /*登入*/))]
                         )
                       ],
                       1
                     )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  [
-                    _c(
-                      "el-checkbox",
-                      {
-                        attrs: { checked: _vm.remember.remember_flag },
-                        model: {
-                          value: _vm.remember.remember_flag,
-                          callback: function($$v) {
-                            _vm.$set(_vm.remember, "remember_flag", $$v)
-                          },
-                          expression: "remember.remember_flag"
-                        }
-                      },
-                      [
-                        _vm._v(
-                          _vm._s(_vm.$t("GLOBAL_REMEMBER_ME") /*記住帳號*/)
-                        )
-                      ]
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-button",
-                  {
-                    staticClass: "is-block",
-                    attrs: { type: "primary" },
-                    on: {
-                      click: function($event) {
-                        _vm.onLogin("data")
-                      }
-                    }
-                  },
-                  [_vm._v(_vm._s(_vm.$t("LOGIN") /*登入*/))]
+                  ]
                 )
               ],
               1

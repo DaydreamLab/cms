@@ -1,6 +1,6 @@
 webpackJsonp([73,74],{
 
-/***/ 279:
+/***/ 280:
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseIsNative = __webpack_require__(294),
@@ -60,7 +60,7 @@ module.exports = toSource;
 /***/ 291:
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(279),
+var getNative = __webpack_require__(280),
     root = __webpack_require__(15);
 
 /* Built-in method references that are verified to be native. */
@@ -253,7 +253,7 @@ module.exports = getTag;
 /***/ 303:
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(279),
+var getNative = __webpack_require__(280),
     root = __webpack_require__(15);
 
 /* Built-in method references that are verified to be native. */
@@ -267,7 +267,7 @@ module.exports = DataView;
 /***/ 304:
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(279),
+var getNative = __webpack_require__(280),
     root = __webpack_require__(15);
 
 /* Built-in method references that are verified to be native. */
@@ -281,7 +281,7 @@ module.exports = Promise;
 /***/ 305:
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(279),
+var getNative = __webpack_require__(280),
     root = __webpack_require__(15);
 
 /* Built-in method references that are verified to be native. */
@@ -295,7 +295,7 @@ module.exports = Set;
 /***/ 306:
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(279),
+var getNative = __webpack_require__(280),
     root = __webpack_require__(15);
 
 /* Built-in method references that are verified to be native. */
@@ -390,15 +390,15 @@ module.exports = isEmpty;
 
 /***/ }),
 
-/***/ 405:
+/***/ 403:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(449)
+var __vue_script__ = __webpack_require__(444)
 /* template */
-var __vue_template__ = __webpack_require__(450)
+var __vue_template__ = __webpack_require__(445)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -438,7 +438,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 449:
+/***/ 444:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -499,29 +499,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    DefaultValue: {
+    defaultValue: {
       type: Object,
-      default: function _default() {
-        return {};
-      }
+      default: function _default() {}
     },
-    Data: {
+    fieldData: {
       type: Object,
-      default: function _default() {
-        return {};
-      }
+      default: function _default() {}
     }
   },
   data: function data() {
     return {
-      default_value: "",
+      defaultValue: "",
       params: {
         textarea: {
           rows: "",
@@ -547,34 +540,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   computed: {
     data: function data() {
-      return __WEBPACK_IMPORTED_MODULE_0_lodash_isEmpty___default()(this.Data) ? this.DefaultValue : this.Data;
+      return __WEBPACK_IMPORTED_MODULE_0_lodash_isEmpty___default()(this.defaultValue) ? this.fieldData : this.defaultValue;
     },
-    datePickerType: function datePickerType() {
+    date_picker_type: function date_picker_type() {
       var formatValueRefs = {
         Y: "year",
         "Y-m": "month",
         "Y-m-d": "date"
       };
 
-      return formatValueRefs[this.default_value.params["format"]];
+      return formatValueRefs[this.defaultValue.params["format"]];
     }
   },
   watch: {
-    default_value: {
+    defaultValue: {
       handler: "initData",
       immediate: true
     }
   },
   methods: {
     initData: function initData() {
-      this.default_value = this.data;
+      this.defaultValue = this.data;
     }
   }
 });
 
 /***/ }),
 
-/***/ 450:
+/***/ 445:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -584,7 +577,7 @@ var render = function() {
   return _c(
     "div",
     [
-      _vm.default_value.type === "link"
+      _vm.defaultValue.type === "link"
         ? _c(
             "el-row",
             { attrs: { gutter: 10 } },
@@ -596,11 +589,11 @@ var render = function() {
                   _c("el-input", {
                     attrs: { placeholder: _vm.$t("EXTRAFIELD_TYPE_LINK_TEXT") },
                     model: {
-                      value: _vm.default_value.params["text"],
+                      value: _vm.defaultValue.params.text,
                       callback: function($$v) {
-                        _vm.$set(_vm.default_value.params, "text", $$v)
+                        _vm.$set(_vm.defaultValue.params, "text", $$v)
                       },
-                      expression: "default_value.params['text']"
+                      expression: "defaultValue.params.text"
                     }
                   })
                 ],
@@ -614,11 +607,11 @@ var render = function() {
                   _c("el-input", {
                     attrs: { placeholder: _vm.$t("EXTRAFIELD_TYPE_LINK_URL") },
                     model: {
-                      value: _vm.default_value["value"],
+                      value: _vm.defaultValue.value,
                       callback: function($$v) {
-                        _vm.$set(_vm.default_value, "value", $$v)
+                        _vm.$set(_vm.defaultValue, "value", $$v)
                       },
-                      expression: "default_value['value']"
+                      expression: "defaultValue.value"
                     }
                   })
                 ],
@@ -636,11 +629,11 @@ var render = function() {
                         placeholder: _vm.$t("EXTRAFIELD_TYPE_LINK_OPEN_IN")
                       },
                       model: {
-                        value: _vm.default_value.params["target"],
+                        value: _vm.defaultValue.params.target,
                         callback: function($$v) {
-                          _vm.$set(_vm.default_value.params, "target", $$v)
+                          _vm.$set(_vm.defaultValue.params, "target", $$v)
                         },
-                        expression: "default_value.params['target']"
+                        expression: "defaultValue.params.target"
                       }
                     },
                     [
@@ -670,41 +663,41 @@ var render = function() {
             ],
             1
           )
-        : _vm.default_value.type === "date"
+        : _vm.defaultValue.type === "date"
           ? _c("el-date-picker", {
-              attrs: { type: _vm.datePickerType },
+              attrs: { type: _vm.date_picker_type },
               model: {
-                value: _vm.default_value["value"],
+                value: _vm.defaultValue.value,
                 callback: function($$v) {
-                  _vm.$set(_vm.default_value, "value", $$v)
+                  _vm.$set(_vm.defaultValue, "value", $$v)
                 },
-                expression: "default_value['value']"
+                expression: "defaultValue.value"
               }
             })
-          : _vm.default_value.type === "datetime"
+          : _vm.defaultValue.type === "datetime"
             ? _c("el-date-picker", {
-                attrs: { type: _vm.datePickerType },
+                attrs: { type: _vm.date_picker_type },
                 model: {
-                  value: _vm.default_value["value"],
+                  value: _vm.defaultValue.value,
                   callback: function($$v) {
-                    _vm.$set(_vm.default_value, "value", $$v)
+                    _vm.$set(_vm.defaultValue, "value", $$v)
                   },
-                  expression: "default_value['value']"
+                  expression: "defaultValue.value"
                 }
               })
-            : _vm.default_value.type === "radio"
+            : _vm.defaultValue.type === "radio"
               ? _c(
                   "el-radio-group",
                   {
                     model: {
-                      value: _vm.default_value["value"],
+                      value: _vm.defaultValue.value,
                       callback: function($$v) {
-                        _vm.$set(_vm.default_value, "value", $$v)
+                        _vm.$set(_vm.defaultValue, "value", $$v)
                       },
-                      expression: "default_value['value']"
+                      expression: "defaultValue.value"
                     }
                   },
-                  _vm._l(_vm.default_value.params["options"], function(option) {
+                  _vm._l(_vm.defaultValue.params.options, function(option) {
                     return _c(
                       "el-radio-button",
                       {
@@ -715,45 +708,43 @@ var render = function() {
                     )
                   })
                 )
-              : _vm.default_value.type === "select"
+              : _vm.defaultValue.type === "select"
                 ? _c(
                     "el-select",
                     {
                       model: {
-                        value: _vm.default_value["value"],
+                        value: _vm.defaultValue.value,
                         callback: function($$v) {
-                          _vm.$set(_vm.default_value, "value", $$v)
+                          _vm.$set(_vm.defaultValue, "value", $$v)
                         },
-                        expression: "default_value['value']"
+                        expression: "defaultValue.value"
                       }
                     },
-                    _vm._l(_vm.default_value.params["options"], function(
-                      option
-                    ) {
+                    _vm._l(_vm.defaultValue.params.options, function(option) {
                       return _c("el-option", {
                         key: option.value,
                         attrs: { label: option.name, value: "" + option.value }
                       })
                     })
                   )
-                : _vm.default_value.type === "textarea"
+                : _vm.defaultValue.type === "textarea"
                   ? _c("el-input", {
                       attrs: { type: "textarea", rows: 2 },
                       model: {
-                        value: _vm.default_value["value"],
+                        value: _vm.defaultValue.value,
                         callback: function($$v) {
-                          _vm.$set(_vm.default_value, "value", $$v)
+                          _vm.$set(_vm.defaultValue, "value", $$v)
                         },
-                        expression: "default_value['value']"
+                        expression: "defaultValue.value"
                       }
                     })
                   : _c("el-input", {
                       model: {
-                        value: _vm.default_value["value"],
+                        value: _vm.defaultValue.value,
                         callback: function($$v) {
-                          _vm.$set(_vm.default_value, "value", $$v)
+                          _vm.$set(_vm.defaultValue, "value", $$v)
                         },
-                        expression: "default_value['value']"
+                        expression: "defaultValue.value"
                       }
                     })
     ],

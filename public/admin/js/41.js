@@ -6,9 +6,9 @@ webpackJsonp([41],{
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(424)
+var __vue_script__ = __webpack_require__(419)
 /* template */
-var __vue_template__ = __webpack_require__(425)
+var __vue_template__ = __webpack_require__(420)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -60,7 +60,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     data: function data() {
         return {
             list: [],
-            list_loading: {
+            listLoading: {
                 flag: false
             },
             paginations: {
@@ -75,15 +75,22 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
     watch: {
         $route: {
-            handler: "$initList",
+            handler: "$_listMixin_init",
             immediate: true
         }
     },
     methods: {
-        $onClickBtnAdd: function $onClickBtnAdd() {
+        $_listMixin_goAddRoute: function $_listMixin_goAddRoute() {
             this.$router.push(this.$route.path + "/edit");
         },
-        $onClickBntEdit: function $onClickBntEdit(query) {
+
+        /**
+         * 組裝編輯路徑
+         * @param {Object} query 編輯項目參數
+         * @param.attr query.id 項目 id
+         * @param.attr query.pid 項目 parent_id
+         */
+        $_listMixin_goEditRoute: function $_listMixin_goEditRoute(query) {
             this.$router.push({
                 path: this.$route.path + "/edit",
                 query: _extends({}, query, {
@@ -91,32 +98,78 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 })
             });
         },
-        $onSearchReset: function $onSearchReset() {
+        $_listMixin_onSearchReset: function $_listMixin_onSearchReset() {
             this.$router.push({
                 path: this.$route.path
             });
         },
-        $onSearch: function $onSearch(_ref) {
-            var data = _ref.data;
+        $_listMixin_onSearch: function $_listMixin_onSearch(data) {
+            var query = this.$route.query;
 
-            var sd = {};
+            var searchData = _extends({}, query);
+
+            for (var s in data) {
+                searchData[s] = data[s];
+                if (!searchData[s]) {
+                    delete searchData[s];
+                }
+            }
+            this.$router.push({
+                path: this.$route.path,
+                query: searchData
+            });
+        },
+        $_listMixin_updateCurrentPage: function $_listMixin_updateCurrentPage(page) {
+            var _this = this;
+
+            this.$_listMixin_getList({
+                page: page,
+                fn: function fn() {
+                    _this.$router.push({
+                        path: _this.$route.path,
+                        query: _this.setRouteQuery("page", page)
+                    });
+                }
+            });
+        },
+        $_listMixin_updatePageSize: function $_listMixin_updatePageSize(pageSize) {
+            var _this2 = this;
+
+            this.$_listMixin_getList({
+                pageSize: pageSize,
+                fn: function fn() {
+                    _this2.$router.push({
+                        path: _this2.$route.path,
+                        query: _this2.setRouteQuery("page_size", pageSize)
+                    });
+                }
+            });
+        },
+        $_listMixin_getList: function $_listMixin_getList() {
+            var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+                page = _ref.page,
+                pageSize = _ref.pageSize,
+                where = _ref.where,
+                fn = _ref.fn;
+
+            this.listLoading.flag = true;
 
             var query = this.$route.query;
 
-            for (var p in query) {
-                sd[p] = query[p];
-            }
-            for (var s in data) {
-                sd[s] = data[s];
-                if (!sd[s]) {
-                    delete sd[s];
-                }
-            }
+            this.paginations.current_page = page || Number(query.page) || 1;
+            this.paginations.page_size = pageSize || Number(query.page_size) || this.paginations.page_size;
 
-            this.$router.push({
-                path: this.$route.path,
-                query: sd
+            var page_data = Object.assign(this.getRouteQuery(), {
+                page: this.paginations.current_page,
+                limit: this.paginations.page_size
             });
+            if (where) {
+                page_data = Object.assign(page_data, where || {});
+            }
+            this.handleGetList({ page_data: page_data, fn: fn });
+        },
+        $_listMixin_init: function $_listMixin_init() {
+            this.$_listMixin_getList(); //為了在 cms mixin 可以加參數
         },
         setRouteQuery: function setRouteQuery(field, value) {
             var query = Object.assign({}, this.$route.query);
@@ -130,82 +183,30 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             return query;
         },
         getRouteQuery: function getRouteQuery() {
-            var _this = this;
+            var _this3 = this;
 
             var query = this.$route.query;
-            var intArray = ["id", "pid", "category_id", "access"];
+            var numberArray = ["id", "pid", "category_id", "access"];
             var dateArray = ["start_date", "end_date"];
             var data = {};
 
             Object.keys(query).forEach(function (field) {
-                _this.searchbar.default_value[field] = intArray.includes(field) ? parseInt(query[field]) : dateArray.includes(field) ? _this.$options.filters.storeDateFormat(query[field]) : query[field];
+                _this3.searchbar.defaultValue[field] = numberArray.includes(field) ? Number(query[field]) : dateArray.includes(field) ? _this3.$options.filters.storeDateFormat(query[field]) : query[field];
                 data[field] = query[field];
             });
             return data;
-        },
-        $onChangeCurrentPage: function $onChangeCurrentPage(page) {
-            var _this2 = this;
-
-            this.$onGetList({
-                page: page,
-                fn: function fn() {
-                    _this2.$router.push({
-                        path: _this2.$route.path,
-                        query: _this2.setRouteQuery("page", page)
-                    });
-                }
-            });
-        },
-        $onChangePageSize: function $onChangePageSize(pageSize) {
-            var _this3 = this;
-
-            this.$onGetList({
-                pageSize: pageSize,
-                fn: function fn() {
-                    _this3.$router.push({
-                        path: _this3.$route.path,
-                        query: _this3.setRouteQuery("page_size", pageSize)
-                    });
-                }
-            });
-        },
-        $onGetList: function $onGetList() {
-            var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-                page = _ref2.page,
-                pageSize = _ref2.pageSize,
-                where = _ref2.where,
-                fn = _ref2.fn;
-
-            this.list_loading.flag = true;
-
-            var query = this.$route.query;
-
-            this.paginations.current_page = page || parseInt(query.page) || 1;
-            this.paginations.page_size = pageSize || parseInt(query.page_size) || this.paginations.page_size;
-
-            var page_data = Object.assign(this.getRouteQuery(), {
-                page: this.paginations.current_page,
-                limit: this.paginations.page_size
-            });
-            if (where) {
-                page_data = Object.assign(page_data, where || {});
-            }
-            this.handleGetList({ page_data: page_data, fn: fn });
-        },
-        $initList: function $initList() {
-            this.$onGetList();
         }
     }
 });
 
 /***/ }),
 
-/***/ 424:
+/***/ 419:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin__ = __webpack_require__(283);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_list__ = __webpack_require__(283);
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 //
@@ -234,15 +235,12 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "asset-list",
-  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin__["a" /* default */]],
+  name: "AssetList",
+  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_list__["a" /* default */]],
   data: function data() {
     var _this = this;
 
     return {
-      sort: {
-        show: true
-      },
       fields: [{
         width: "60",
         key: "id",
@@ -251,11 +249,11 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
         key: "tree_title",
         label: this.$t("FIELD_TITLE_LABEL"),
         type: "editable",
-        formatter: function formatter(item) {
-          var _item$split = item.split("  "),
-              _item$split2 = _slicedToArray(_item$split, 2),
-              prefix = _item$split2[0],
-              title = _item$split2[1];
+        formatter: function formatter(value) {
+          var _value$split = value.split("  "),
+              _value$split2 = _slicedToArray(_value$split, 2),
+              prefix = _value$split2[0],
+              title = _value$split2[1];
 
           var combinedTitle = title ? prefix + " " + _this.$t(title) : _this.$t(prefix);
 
@@ -275,62 +273,20 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
         label: this.$t("OPTION_STATE"),
         type: "icon-label",
         width: "90",
-        formatter: function formatter(item) {
+        formatter: function formatter(value) {
           return {
-            color: "item_state_" + item + "_color",
-            icon: ["fal", item === 1 ? "check" : "times"]
+            color: "item_state_" + value + "_color",
+            icon: ["fal", value === 1 ? "check" : "times"]
           };
         }
       }],
-      toolbar: {
-        type: "list",
-        custom: [{
-          text: this.$t("TOOLBAR_PUBLISH"),
-          method: "updateState",
-          condition: function condition(_ref) {
-            var data = _ref.data;
-
-            return data.state === 0 && data.parent_id !== null;
-          },
-
-          fn: function fn(_ref2) {
-            var ids = _ref2.ids;
-
-            _this.onClickBtnUpdateState({ ids: ids, state: 1 });
-          }
-        }, {
-          text: this.$t("TOOLBAR_UNPUBLISH"),
-          method: "updateState",
-          condition: function condition(_ref3) {
-            var data = _ref3.data;
-
-            return data.state === 1 && data.parent_id !== null;
-          },
-
-          fn: function fn(_ref4) {
-            var ids = _ref4.ids;
-
-            _this.onClickBtnUpdateState({ ids: ids, state: 0 });
-          }
-        }]
-      },
-      searchbar: {
-        fields: [{
-          key: "search",
-          desc: this.$t("TOOLBAR_KEYWORDS"),
-          clearable: true
-        }],
-        default_value: {
-          search: ""
-        }
-      },
-      list_actions: {
+      list_btns: {
         btns: [{
           text: "指定資源群組",
           type: "primary",
           method: "assignGroup",
-          fn: function fn(_ref5) {
-            var data = _ref5.data;
+          fn: function fn(_ref) {
+            var data = _ref.data;
 
             _this.$router.push({
               path: _this.$route.path + "/assign/group",
@@ -341,15 +297,54 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
             });
           }
         }]
+      },
+      toolbar: {
+        type: "list",
+        custom: [{
+          text: this.$t("TOOLBAR_PUBLISH"),
+          method: "updateState",
+          condition: function condition(_ref2) {
+            var data = _ref2.data;
+
+            return data.state === 0 && data.parent_id !== null;
+          },
+
+          fn: function fn(_ref3) {
+            var ids = _ref3.ids;
+
+            _this.handleUpdateState({ ids: ids, state: 1 });
+          }
+        }, {
+          text: this.$t("TOOLBAR_UNPUBLISH"),
+          method: "updateState",
+          condition: function condition(_ref4) {
+            var data = _ref4.data;
+
+            return data.state === 1 && data.parent_id !== null;
+          },
+
+          fn: function fn(_ref5) {
+            var ids = _ref5.ids;
+
+            _this.handleUpdateState({ ids: ids, state: 0 });
+          }
+        }]
+      },
+      searchbar: {
+        fields: [{
+          key: "search",
+          desc: this.$t("TOOLBAR_KEYWORDS"),
+          clearable: true
+        }],
+        defaultValue: {
+          search: ""
+        }
       }
     };
   },
 
   methods: {
-    /**
-     * list actions
-     */
-    onOrderChange: function onOrderChange(_ref6) {
+    handleUpdateOrder: function handleUpdateOrder(_ref6) {
       var id = _ref6.id,
           index_diff = _ref6.index_diff,
           order = _ref6.order;
@@ -371,7 +366,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
     /**
      * Toolbar
      */
-    onClickBtnUpdateState: function onClickBtnUpdateState(_ref8) {
+    handleUpdateState: function handleUpdateState(_ref8) {
       var _this2 = this;
 
       var ids = _ref8.ids,
@@ -386,11 +381,11 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
           var msg = _ref9.msg;
 
           _this2.$message.success(msg);
-          _this2.$onGetList();
+          _this2.$_listMixin_getList();
         }
       });
     },
-    onClickBtnBatchDelete: function onClickBtnBatchDelete(_ref10) {
+    handleBatchDelete: function handleBatchDelete(_ref10) {
       var _this3 = this;
 
       var ids = _ref10.ids,
@@ -402,18 +397,17 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
           fn: function fn(_ref11) {
             var data = _ref11.data;
 
-            _this3.$onGetList();
+            _this3.$_listMixin_getList();
           }
         });
       });
     },
-    handleEditQuery: function handleEditQuery(_ref12) {
+    setEditRouteQuery: function setEditRouteQuery(_ref12) {
       var data = _ref12.data;
 
-      this.$onClickBntEdit({
+      this.$_listMixin_goEditRoute({
         id: data.id,
-        pid: data.parent_id,
-        name: data.name
+        pid: data.parent_id
       });
     },
     handleGetList: function handleGetList() {
@@ -428,7 +422,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
         fn: function fn(_ref14) {
           var data = _ref14.data;
 
-          _this4.list_loading.flag = false;
+          _this4.listLoading.flag = false;
           _this4.list = data.items;
           _this4.paginations.total = data.pagination.total;
 
@@ -441,7 +435,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 /***/ }),
 
-/***/ 425:
+/***/ 420:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -451,24 +445,24 @@ var render = function() {
   return _c("ListData", {
     ref: "list-data",
     attrs: {
-      List: _vm.list,
-      ListLoading: _vm.list_loading,
-      Sort: _vm.sort,
-      Pagination: _vm.paginations,
-      Toolbar: _vm.toolbar,
-      Searchbar: _vm.searchbar,
-      ListActions: _vm.list_actions,
-      FieldList: _vm.fields
+      list: _vm.list,
+      "list-loading": _vm.listLoading,
+      listBtns: _vm.list_btns,
+      "field-list": _vm.fields,
+      sort: { show: true },
+      pagination: _vm.paginations,
+      toolbar: _vm.toolbar,
+      searchbar: _vm.searchbar
     },
     on: {
-      onClickBtnAdd: _vm.$onClickBtnAdd,
-      onClickBtnEdit: _vm.handleEditQuery,
-      onClickBtnBatchDelete: _vm.onClickBtnBatchDelete,
-      onChangeCurrentPage: _vm.$onChangeCurrentPage,
-      onChangePageSize: _vm.$onChangePageSize,
-      onSearch: _vm.$onSearch,
-      onSearchReset: _vm.$onSearchReset,
-      onOrderChange: _vm.onOrderChange
+      "click-add": _vm.$_listMixin_goAddRoute,
+      "click-edit": _vm.setEditRouteQuery,
+      "click-batch-delete": _vm.handleBatchDelete,
+      "change-current-page": _vm.$_listMixin_updateCurrentPage,
+      "change-page-size": _vm.$_listMixin_updatePageSize,
+      "on-order-change": _vm.handleUpdateOrder,
+      search: _vm.$_listMixin_onSearch,
+      "search-reset": _vm.$_listMixin_onSearchReset
     }
   })
 }

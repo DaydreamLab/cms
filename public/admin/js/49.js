@@ -48,35 +48,57 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 281:
+/***/ 282:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony default export */ __webpack_exports__["a"] = (function (name) {
     return {
         name: name,
-        data: function data() {
-            return {};
+        props: {
+            fieldData: {
+                type: Object,
+                default: function _default() {
+                    return {};
+                }
+            },
+            submitData: {
+                type: Object,
+                default: function _default() {
+                    return {};
+                }
+            },
+            submitInfo: {
+                type: Object,
+                default: function _default() {
+                    return {};
+                }
+            },
+            tempFieldObj: {
+                type: Object,
+                default: function _default() {
+                    return {};
+                }
+            }
         },
-
         computed: {
             data: function data() {
-                return this.Data;
+                return this.fieldData;
             },
             events: function events() {
-                return this.Data.events || {};
+                return this.fieldData.events || {};
             },
             submit_data: function submit_data() {
-                return this.SubmitData;
+                return this.submitData;
             },
             submit_info: function submit_info() {
-                return this.SubmitInfo;
+                return this.submitInfo;
             },
             temp_field_obj: function temp_field_obj() {
-                return this.TempFieldObj;
+                return this.tempFieldObj;
             },
             custom_attrs: function custom_attrs() {
-                return this.Data.custom_attrs || {};
+                return this.fieldData.custom_attrs || {};
             },
             label_attr: function label_attr() {
                 return this.custom_attrs.label || "text";
@@ -85,71 +107,34 @@ module.exports = Component.exports
                 return this.custom_attrs.value || "value";
             }
         },
-        props: {
-            Data: {
-                type: Object,
-                default: function _default() {
-                    return {};
-                }
-            },
-            SubmitData: {
-                type: Object,
-                default: function _default() {
-                    return {};
-                }
-            },
-            SubmitInfo: {
-                type: Object,
-                default: function _default() {
-                    return {};
-                }
-            },
-            TempFieldObj: {
-                type: Object,
-                default: function _default() {
-                    return {};
-                }
-            }
-        },
-        watch: {
-            $route: function $route() {
-                this.init();
-            }
-        },
         created: function created() {
-            this.setDefaultFieldByNoDefaultValue();
+            this.setDefaultFieldByNodefaultValue();
             this.setArrayValue();
         },
-        mounted: function mounted() {
-            this.init();
-        },
-
 
         methods: {
             /**
-             * 处理表单控件值复数类型，比如，获取的值和显示的文本不同时，除了返回需要提交表单的value值，还需要返回显示的文本，以防不时之需
+             * 處理表單控件值複數類型，比如，獲取的值和顯示的文本不同時，除了返回需要提交表單的value值，還需要返回顯示的文本，以防不時之需
              */
             setArrayValue: function setArrayValue() {
                 var _this = this;
 
-                //把存储value和text的数组转成对象格式，有利于提高根据值取文本的效率
+                //把存儲value和text的數組轉成對象格式，有利於提高根據值取文本的效率
                 if (!this.temp_field_obj[this.data.key]) {
                     this.temp_field_obj[this.data.key] = {};
                 }
 
-                // console.log(this.custom_attrs);
-
-                //当存在value和text数组时，才可调用
+                //當存在value和text數組時，才可調用
                 if (this.data.list && Array.isArray(this.data.list)) {
-                    //遍历value和text数组，组装成对象格式
+                    //遍曆value和text數組，組裝成對象格式
                     this.data.list.forEach(function (item) {
                         _this.temp_field_obj[_this.data.key][item[_this.value_attr] !== undefined ? item[_this.value_attr] : item[_this.label_attr]] = item[_this.label_attr] !== undefined ? item[_this.label_attr] : item[_this.value_attr];
                     });
-                    //如果当前默认值为真，默认先提取一下默认值对应的文本
+                    //如果當前默認值為真，默認先提取一下默認值對應的文本
                     if (this.submit_data[this.data.key] !== undefined) {
-                        //默认值分两种：数组(多选)，字符串或整形(单选)
+                        //默認值分兩種：數組(多選)，字符串或整形(單選)
                         if (Array.isArray(this.submit_data[this.data.key])) {
-                            //循环数组值，把每个对应的文本取出来
+                            //循環數組值，把每個對應的文本取出來
                             this.submit_info[this.data.key] = [];
                             this.submit_data[this.data.key].forEach(function (item) {
                                 if (_this.temp_field_obj[_this.data.key][item]) {
@@ -157,7 +142,7 @@ module.exports = Component.exports
                                 }
                             });
                         } else {
-                            //不是数组，直接提取对应的值得文本
+                            //不是數組，直接提取對應的值得文本
                             this.submit_info[this.data.key] = "";
                             if (this.temp_field_obj[this.data.key][this.submit_data[this.data.key]]) {
                                 this.submit_info[this.data.key] = this.temp_field_obj[this.data.key][this.submit_data[this.data.key]];
@@ -169,16 +154,14 @@ module.exports = Component.exports
 
 
             /**
-             * 当没有传默认值或者连default_value都不存在时(添加的时候确实是不需要传default_value,如果不这样操作一下，绑定将会失败)
-             * 此时，组件中定义的default_value只是一个空对象，这时，v-model是无法绑定的，所以这个函数用来设置默认字段。
+             * 當有傳默認值或者連default_value都不存在時(添加的時候確實是不需要傳default_value,如果不這樣操作一下，綁定將會失敗)
+             * 此時，組件中定義的default_value隻是一個空對象，這時，v-model是無法綁定的，所以這個函數用來設置默認字段。
              */
-            setDefaultFieldByNoDefaultValue: function setDefaultFieldByNoDefaultValue() {
-                // console.log(this.submit_data);
+            setDefaultFieldByNodefaultValue: function setDefaultFieldByNodefaultValue() {
                 if (this.submit_data[this.data.key] === undefined) {
                     this.$set(this.submit_data, this.data.key, "");
                 }
-            },
-            init: function init() {}
+            }
         }
     };
 });
@@ -190,7 +173,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__js_Common__ = __webpack_require__(281);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__js_Common__ = __webpack_require__(282);
 //
 //
 //
@@ -206,7 +189,7 @@ var Js = Object(__WEBPACK_IMPORTED_MODULE_0__js_Common__["a" /* default */])("sl
 Js.mixins = [{
   computed: {
     time_attrs: function time_attrs() {
-      return this.Data.time_attrs || {};
+      return this.fieldData.time_attrs || {};
     }
   },
   methods: {

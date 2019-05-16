@@ -1,14 +1,14 @@
 webpackJsonp([26],{
 
-/***/ 115:
+/***/ 143:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(418)
+var __vue_script__ = __webpack_require__(546)
 /* template */
-var __vue_template__ = __webpack_require__(419)
+var __vue_template__ = __webpack_require__(547)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/admin/views/asset/edit.vue"
+Component.options.__file = "resources/assets/admin/views/user/list.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-73c1b164", Component.options)
+    hotAPI.createRecord("data-v-fa961626", Component.options)
   } else {
-    hotAPI.reload("data-v-73c1b164", Component.options)
+    hotAPI.reload("data-v-fa961626", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 280:
+/***/ 279:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -650,11 +650,11 @@ var denormalize$1 = function denormalize$$1(input, schema, entities) {
 
 /***/ }),
 
-/***/ 282:
+/***/ 281:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_normalizr__ = __webpack_require__(280);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_normalizr__ = __webpack_require__(279);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -665,63 +665,18 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 /* harmony default export */ __webpack_exports__["a"] = ({
     methods: {
-        $handleGetFieldList: function $handleGetFieldList() {
-            var fields = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-
+        handleUpdateField: function handleUpdateField(field, data, fieldKeyOrIndex, isSearchbar) {
+            this.updateStoreFieldList(field, data[field] || data);
+            isSearchbar ? this.updateSearchbarFieldList(field, fieldKeyOrIndex) : this.updateFieldList(field, fieldKeyOrIndex);
+        },
+        updateFieldList: function updateFieldList(field, fieldKeyOrIndex) {
+            this.fields[fieldKeyOrIndex]["list"] = this.$store.getters[field + "_list"];
+        },
+        updateSearchbarFieldList: function updateSearchbarFieldList(field, fieldIndex) {
+            this.searchbar.fields[fieldIndex]["list"] = this.$store.getters[field + "_list"];
+        },
+        updateStoreFieldList: function updateStoreFieldList(field, value) {
             var _this = this;
-
-            var fieldsObj = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-            var usage = arguments[2];
-
-            this.$$api_option_list({
-                data: {
-                    types: fields
-                },
-                fn: function fn(_ref) {
-                    var data = _ref.data;
-
-                    fields.forEach(function (type) {
-                        if (type === "extrafield_group") {
-                            data.items[type] = [{
-                                id: 0,
-                                value: "",
-                                title: _this.$t("OPTION_NONE")
-                            }].concat(_toConsumableArray(data.items[type]));
-                            var groups = new __WEBPACK_IMPORTED_MODULE_0_normalizr__["b" /* schema */].Entity("groups");
-                            var normalize_list = Object(__WEBPACK_IMPORTED_MODULE_0_normalizr__["a" /* normalize */])(data.items[type], [groups]);
-                            _this.handleUpdateField(type, normalize_list.entities["groups"], fieldsObj[type], usage);
-                        } else {
-                            _this.handleUpdateField(type, data.items, fieldsObj[type], usage);
-                        }
-                    });
-                }
-            });
-        },
-        $getFieldList: function $getFieldList() {
-            var _this2 = this;
-
-            var fieldsObj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-            var usage = arguments[1];
-
-            var fieldsNotExit = Object.keys(fieldsObj).filter(function (key) {
-                return !_this2.checkStoreField(key);
-            });
-            if (fieldsNotExit.length > 0) {
-                this.$handleGetFieldList(fieldsNotExit, fieldsObj, usage);
-            }
-        },
-        handleUpdateField: function handleUpdateField(field, data, key_or_index, update_target) {
-            this.onUpdateStoreFieldList(field, data[field] || data);
-            update_target ? this.onUpdateSearchbarFieldList(field, key_or_index) : this.onUpdateFieldList(field, key_or_index);
-        },
-        onUpdateFieldList: function onUpdateFieldList(field, field_key_or_index) {
-            this.fields[field_key_or_index]["list"] = this.$store.getters[field + "_list"];
-        },
-        onUpdateSearchbarFieldList: function onUpdateSearchbarFieldList(field, field_index) {
-            this.searchbar.fields[field_index]["list"] = this.$store.getters[field + "_list"];
-        },
-        onUpdateStoreFieldList: function onUpdateStoreFieldList(field, value) {
-            var _this3 = this;
 
             if (field === "language") {
                 value = [{
@@ -736,7 +691,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                         prefix = _el$tree_list_title$s2[0],
                         title = _el$tree_list_title$s2[1];
 
-                    var combinedTitle = title ? prefix + " " + _this3.$t(title) : _this3.$t(prefix);
+                    var combinedTitle = title ? prefix + " " + _this.$t(title) : _this.$t(prefix);
                     return _extends({}, el, { tree_list_title: combinedTitle });
                 });
             }
@@ -749,6 +704,68 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                 data: value
             });
         },
+
+        /**
+         * 跟後端拿所需欄位類型之值
+         * @param {Array} fields
+         * @param {Object} typeAndTarget
+         * @param {Boolean} isSearchbar
+         * @returns {Object} 以 type 為 key 值的 Array
+         */
+        $_optionMixin_handleGetFieldList: function $_optionMixin_handleGetFieldList() {
+            var fields = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+
+            var _this2 = this;
+
+            var typeAndTarget = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+            var isSearchbar = arguments[2];
+
+            this.$$api_option_list({
+                data: {
+                    types: fields
+                },
+                fn: function fn(_ref) {
+                    var data = _ref.data;
+
+                    fields.forEach(function (type) {
+                        if (type === "extrafield_group") {
+                            data.items[type] = [{
+                                id: 0,
+                                value: "",
+                                title: _this2.$t("OPTION_NONE")
+                            }].concat(_toConsumableArray(data.items[type]));
+                            var groups = new __WEBPACK_IMPORTED_MODULE_0_normalizr__["b" /* schema */].Entity("groups");
+                            var normalize_list = Object(__WEBPACK_IMPORTED_MODULE_0_normalizr__["a" /* normalize */])(data.items[type], [groups]);
+                            _this2.handleUpdateField(type, normalize_list.entities["groups"], typeAndTarget[type], isSearchbar);
+                        } else {
+                            _this2.handleUpdateField(type, data.items, typeAndTarget[type], isSearchbar);
+                        }
+                    });
+                }
+            });
+        },
+
+        /**
+         * 更新下拉選單列表
+         * @param {Object} typeAndTarget
+         * 更新的欄位類型與其位置與fields 的相對位置
+         * 當 fields 為 Object 則為 key 值
+         * 當 fields 為 Array 則為 index 值
+         * @param {Boolean} isSearchbar 是否為 searchbar 欄位的下拉選單
+         */
+        $_optionMixin_updateFieldList: function $_optionMixin_updateFieldList() {
+            var _this3 = this;
+
+            var typeAndTarget = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+            var isSearchbar = arguments[1];
+
+            var fieldsNotExit = Object.keys(typeAndTarget).filter(function (key) {
+                return !_this3.checkStoreField(key);
+            });
+            if (fieldsNotExit.length > 0) {
+                this.$_optionMixin_handleGetFieldList(fieldsNotExit, typeAndTarget, isSearchbar);
+            }
+        },
         checkStoreField: function checkStoreField(field) {
             return Boolean(this.$store.getters[field + "_list"]);
         }
@@ -757,92 +774,176 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 /***/ }),
 
-/***/ 284:
+/***/ 283:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 /* harmony default export */ __webpack_exports__["a"] = ({
     data: function data() {
         return {
-            params: {
-                id: "",
-                pid: ""
+            list: [],
+            listLoading: {
+                flag: false
             },
-            toolbar: {
-                type: "edit"
+            paginations: {
+                current_page: 1,
+                total: 0,
+                page_size: 10,
+                page_sizes: [10, 15, 20, 25, 50, 100],
+                layout: "total, sizes, prev, pager, next, jumper"
             }
         };
     },
 
     watch: {
-        $route: function $route() {
-            this.$initView();
+        $route: {
+            handler: "$_listMixin_init",
+            immediate: true
         }
     },
-    created: function created() {
-        this.$initView();
-    },
-
     methods: {
-        $onSubmitFinish: function $onSubmitFinish(_ref) {
-            var type = _ref.type,
-                query = _ref.query;
-
-            switch (type) {
-                case "save":
-                    this.$router.push({
-                        path: this.$route.path,
-                        query: query
-                    });
-                    break;
-                case "savenadd":
-                    this.$router.push({
-                        path: this.$route.path
-                    });
-                    this.$router.go(0);
-                    break;
-                case "savenclose":
-                    this.$onCancel();
-                    break;
-            }
+        $_listMixin_goAddRoute: function $_listMixin_goAddRoute() {
+            this.$router.push(this.$route.path + "/edit");
         },
-        $onCancel: function $onCancel() {
-            var checkout_id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
 
-            if (checkout_id) {
-                this.handleCheckout(checkout_id);
-            }
+        /**
+         * 組裝編輯路徑
+         * @param {Object} query 編輯項目參數
+         * @param.attr query.id 項目 id
+         * @param.attr query.pid 項目 parent_id
+         */
+        $_listMixin_goEditRoute: function $_listMixin_goEditRoute(query) {
             this.$router.push({
-                path: this.$route.path.replace("/edit", ""),
-                query: this.$route.query.from
+                path: this.$route.path + "/edit",
+                query: _extends({}, query, {
+                    from: this.$route.query
+                })
             });
         },
-        onUpdateViewParams: function onUpdateViewParams() {
-            this.params.id = parseInt(this.$route.query.id) || "";
-            this.params.pid = parseInt(this.$route.query.pid) || 1;
-            this.$set(this.toolbar, "type", this.params.id ? "edit" : "add");
+        $_listMixin_onSearchReset: function $_listMixin_onSearchReset() {
+            this.$router.push({
+                path: this.$route.path
+            });
         },
-        $initView: function $initView() {
-            this.onUpdateViewParams();
+        $_listMixin_onSearch: function $_listMixin_onSearch(data) {
+            var query = this.$route.query;
 
-            if (this.params.id) {
-                this.onGetView();
+            var searchData = _extends({}, query);
+
+            for (var s in data) {
+                searchData[s] = data[s];
+                if (!searchData[s]) {
+                    delete searchData[s];
+                }
             }
+            this.$router.push({
+                path: this.$route.path,
+                query: searchData
+            });
+        },
+        $_listMixin_updateCurrentPage: function $_listMixin_updateCurrentPage(page) {
+            var _this = this;
+
+            this.$_listMixin_getList({
+                page: page,
+                fn: function fn() {
+                    _this.$router.push({
+                        path: _this.$route.path,
+                        query: _this.setRouteQuery("page", page)
+                    });
+                }
+            });
+        },
+        $_listMixin_updatePageSize: function $_listMixin_updatePageSize(pageSize) {
+            var _this2 = this;
+
+            this.$_listMixin_getList({
+                pageSize: pageSize,
+                fn: function fn() {
+                    _this2.$router.push({
+                        path: _this2.$route.path,
+                        query: _this2.setRouteQuery("page_size", pageSize)
+                    });
+                }
+            });
+        },
+        $_listMixin_getList: function $_listMixin_getList() {
+            var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+                page = _ref.page,
+                pageSize = _ref.pageSize,
+                where = _ref.where,
+                fn = _ref.fn;
+
+            this.listLoading.flag = true;
+
+            var query = this.$route.query;
+
+            this.paginations.current_page = page || Number(query.page) || 1;
+            this.paginations.page_size = pageSize || Number(query.page_size) || this.paginations.page_size;
+
+            var page_data = Object.assign(this.getRouteQuery(), {
+                page: this.paginations.current_page,
+                limit: this.paginations.page_size
+            });
+            if (where) {
+                page_data = Object.assign(page_data, where || {});
+            }
+            this.handleGetList({ page_data: page_data, fn: fn });
+        },
+        $_listMixin_init: function $_listMixin_init() {
+            this.$_listMixin_getList(); //為了在 cms mixin 可以加參數
+        },
+        setRouteQuery: function setRouteQuery(field, value) {
+            var query = Object.assign({}, this.$route.query);
+
+            if ((typeof field === "undefined" ? "undefined" : _typeof(field)) === "object") {
+                query = field;
+            } else {
+                query[field] = value;
+            }
+
+            return query;
+        },
+        getRouteQuery: function getRouteQuery() {
+            var _this3 = this;
+
+            var query = this.$route.query;
+            var numberArray = ["id", "pid", "category_id", "access"];
+            var dateArray = ["start_date", "end_date"];
+            var data = {};
+
+            Object.keys(query).forEach(function (field) {
+                _this3.searchbar.defaultValue[field] = numberArray.includes(field) ? Number(query[field]) : dateArray.includes(field) ? _this3.$options.filters.storeDateFormat(query[field]) : query[field];
+                data[field] = query[field];
+            });
+            return data;
         }
     }
 });
 
 /***/ }),
 
-/***/ 418:
+/***/ 546:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_option_mixin__ = __webpack_require__(282);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_edit_mixin__ = __webpack_require__(284);
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_options__ = __webpack_require__(281);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_list__ = __webpack_require__(283);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -857,215 +958,232 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "asset-edit",
-  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_option_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1_mixins_edit_mixin__["a" /* default */]],
+  name: "UserList",
+  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_options__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1_mixins_list__["a" /* default */]],
   data: function data() {
     var _this = this;
 
     return {
       fields: [{
-        key: "parent_id",
-        type: "select",
-        desc: "請選擇",
-        label: "父級資源",
-        list: this.$store.getters.asset_list,
-        custom_attrs: {
-          label: "tree_list_title",
-          value: "id"
-        },
-        events: {
-          change: function change(_ref) {
-            var value = _ref.value;
-
-            // update path prepend_value
-            var result = _this.$store.getters.asset_list.filter(function (asset) {
-              return asset.id === value;
-            });
-            _this.fields[2].prepend_value = result[0].path;
-
-            // update component prepend_value
-            _this.fields[3].prepend_value = value === 1 ? "src/layout" : "views/";
-          }
+        width: "60",
+        key: "id",
+        label: this.$t("LIST_DATA_HEADING_ID")
+      }, {
+        key: "first_name",
+        label: this.$t("USER_FIELD_FIRST_NAME"),
+        type: "editable"
+      }, {
+        key: "last_name",
+        label: this.$t("USER_FIELD_LAST_NAME"),
+        type: "editable"
+      }, {
+        key: "activation",
+        label: this.$t("USER_OPTION_ACTIVE") /*啟用狀態*/
+        , type: "icon-label",
+        width: "120",
+        formatter: function formatter(value) {
+          return {
+            color: "item_state_" + value + "_color",
+            icon: ["fal", value === 1 ? "check" : "times"]
+          };
         }
       }, {
-        key: "title",
-        desc: "請輸入資源名稱，名稱不可重複",
-        label: "資源名稱"
-      }, {
-        key: "path",
-        desc: "開頭須為 /；若為上層預設頁面，請留空",
-        label: "資源訪問路徑",
-        prepend: true,
-        prepend_value: ""
-      }, {
-        key: "component",
-        desc: "若上層為根，請勿填寫",
-        label: "資源文件路徑",
-        prepend: true,
-        prepend_value: "",
-        append: true,
-        append_value: ".vue"
-      }, {
-        key: "type",
-        desc: "請輸入資源類型",
-        label: "資源類型",
-        type: "radio",
-        list: [{
-          text: "別名",
-          value: "alias"
-        }, {
-          text: "選單",
-          value: "menu"
-        }, {
-          text: "選單標頭",
-          value: "separator"
-        }, {
-          text: "功能",
-          value: "function"
-        }, {
-          text: "外部連結",
-          value: "url"
-        }],
-        events: {
-          change: function change(_ref2) {
-            var value = _ref2.value;
+        key: "block",
+        label: this.$t("USER_OPTION_BLOCK") /*已封鎖*/
+        , width: "120",
+        formatter: function formatter(_ref) {
+          var block = _ref.block;
 
-            _this.default_value.redirect = value === "alias" ? "noredirect" : "";
-          }
+          return block === 1 ? _this.$t("YES") : _this.$t("NO");
         }
       }, {
-        key: "redirect",
-        desc: "請輸入重新導向路徑。若類型為 url 請輸入要連結的網址",
-        label: "重新導向路徑"
+        key: "groups",
+        label: this.$t("OPTION_GROUP"),
+        formatter: function formatter(_ref2) {
+          var groups = _ref2.groups;
+
+          //TODO: translate
+          return groups.length > 2 ? "Multiple Groups" : groups.map(function (el) {
+            return el.title;
+          }).join(", ");
+        }
       }, {
-        key: "icon",
-        label: "icon",
-        desc: "請輸入icon class"
-      }, {
-        key: "state",
-        label: "是否啟用",
-        desc: "",
-        type: "radio",
-        list: [{
-          text: "禁用",
-          value: "0"
-        }, {
-          text: "啟用",
-          value: "1"
-        }]
-      }, {
-        key: "showNav",
-        label: "顯示在選單",
-        desc: "",
-        type: "radio",
-        list: [{
-          text: "隱藏",
-          value: "0"
-        }, {
-          text: "顯示",
-          value: "1"
-        }]
+        key: "email",
+        label: this.$t("USER_FIELD_EMAIL")
       }],
       toolbar: {
-        type: "edit"
+        type: "list_user",
+        custom: [{
+          text: this.$t("TOOLBAR_BLOCK"),
+          method: "updateState",
+          fn: function fn(_ref3) {
+            var ids = _ref3.ids;
+
+            _this.handleUpdateBlock({ ids: ids, block: 1 });
+          }
+        }, {
+          text: this.$t("TOOLBAR_UNBLOCK"),
+          method: "updateState",
+          fn: function fn(_ref4) {
+            var ids = _ref4.ids;
+
+            _this.handleUpdateBlock({ ids: ids, block: 0 });
+          }
+        }]
       },
-      default_value: {
-        parent_id: 1,
-        title: "",
-        path: "",
-        type: "menu",
-        icon: "",
-        component: "",
-        redirect: "",
-        state: 1,
-        showNav: 1
+      searchbar: {
+        fields: [{
+          key: "search",
+          desc: this.$t("TOOLBAR_KEYWORDS"),
+          clearable: true
+        }, {
+          key: "activation",
+          type: "select",
+          desc: this.$t("USER_OPTION_ACTIVE"),
+          clearable: true,
+          list: [{
+            value: "1",
+            text: this.$t("USER_ACTIVATED")
+          }, {
+            value: "0",
+            text: this.$t("USER_UNACTIVATED")
+          }],
+          events: {
+            change: function change() {
+              _this.$_listMixin_onSearch(_this.searchbar.defaultValue);
+            }
+          }
+        }, {
+          key: "block",
+          type: "select",
+          desc: this.$t("OPTION_BLOCK"),
+          clearable: true,
+          list: [{
+            value: "0",
+            text: this.$t("USER_ACTIVATED")
+          }, {
+            value: "1",
+            text: this.$t("USER_BLOCKED")
+          }],
+          events: {
+            change: function change() {
+              _this.$_listMixin_onSearch(_this.searchbar.defaultValue);
+            }
+          }
+        }, {
+          key: "groups",
+          type: "select",
+          desc: this.$t("OPTION_GROUP"),
+          clearable: true,
+          list: this.$store.getters.user_group_list,
+          custom_attrs: {
+            label: "tree_list_title",
+            value: "id"
+          },
+          events: {
+            change: function change() {
+              _this.$_listMixin_onSearch(_this.searchbar.defaultValue);
+            }
+          }
+        }],
+        defaultValue: {
+          search: "",
+          block: "",
+          activation: "",
+          groups: ""
+        }
       }
     };
   },
   created: function created() {
-    this.$getFieldList({
-      asset: 0
-    });
-    this.setPathPrefix();
+    this.$_optionMixin_updateFieldList({ user_group: 3 }, true);
   },
 
   methods: {
-    onSubmit: function onSubmit(_ref3) {
+    onClickBtnBatchRestore: function onClickBtnBatchRestore(_ref5) {
+      var ids = _ref5.ids,
+          block = _ref5.block;
+
+      this.handleUpdateBlock({ ids: ids, block: block });
+    },
+    handleUpdateBlock: function handleUpdateBlock(_ref6) {
       var _this2 = this;
 
-      var data = _ref3.data,
-          info = _ref3.info,
-          type = _ref3.type;
+      var ids = _ref6.ids,
+          block = _ref6.block;
 
-      if (this.params.id) {
-        data.id = this.params.id;
-      }
-      this.$$api_asset_save({
-        data: data,
-        fn: function fn(_ref4) {
-          var data = _ref4.data,
-              msg = _ref4.msg;
+      this.$$api_user_updateBlock({
+        data: {
+          ids: ids,
+          block: block
+        },
+        fn: function fn(_ref7) {
+          var msg = _ref7.msg;
 
           _this2.$message.success(msg);
-          _this2.$onSubmitFinish({
-            type: type,
-            query: { id: data.items.id, pid: data.items.parent_id }
-          });
+          _this2.$_listMixin_getList();
         }
       });
     },
-    onCancel: function onCancel() {
+    setEditRouteQuery: function setEditRouteQuery(_ref8) {
+      var data = _ref8.data;
+
+      this.$_listMixin_goEditRoute({
+        id: data.id,
+        pid: data.parent_id
+      });
+    },
+    handleGetList: function handleGetList() {
       var _this3 = this;
 
-      // update user routes
-      this.$$api_user_getPages({
-        fn: function fn(_ref5) {
-          var data = _ref5.data;
-          var assets = data.items.assets;
+      var _ref9 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+          page_data = _ref9.page_data,
+          _fn = _ref9.fn;
 
-          _this3.$store.dispatch("update_user_routes", { routes: assets }).then(function () {
-            _this3.$router.push({
-              path: _this3.$route.path.replace("/edit", ""),
-              query: _this3.$router.go(-1)
-            });
-          });
+      this.$$api_user_list({
+        data: page_data,
+        fn: function fn(_ref10) {
+          var data = _ref10.data;
+
+          _this3.listLoading.flag = false;
+          _this3.list = data.items;
+          _this3.paginations.total = data.pagination.total;
+
+          _fn && _fn();
         }
       });
-    },
-    onGetView: function onGetView() {
-      var _this4 = this;
-
-      this.$$api_asset_get({
-        pathVar: this.params.id,
-        fn: function fn(_ref6) {
-          var data = _ref6.data;
-
-          _this4.default_value = _extends({}, _this4.default_value, data.items);
-        }
-      });
-    },
-    setPathPrefix: function setPathPrefix() {
-      this.fields[3].prepend_value = this.params.pid === 1 ? "src/layout" : "views/";
     }
   }
 });
 
 /***/ }),
 
-/***/ 419:
+/***/ 547:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("FormData", {
+  return _c("ListData", {
+    ref: "list-data",
     attrs: {
-      FieldList: _vm.fields,
-      DefaultValue: _vm.default_value,
-      Toolbar: _vm.toolbar
+      list: _vm.list,
+      "list-loading": _vm.listLoading,
+      pagination: _vm.paginations,
+      toolbar: _vm.toolbar,
+      searchbar: _vm.searchbar,
+      "field-list": _vm.fields
     },
-    on: { onSubmit: _vm.onSubmit, onCancel: _vm.onCancel }
+    on: {
+      "click-add": _vm.$_listMixin_goAddRoute,
+      "click-edit": _vm.setEditRouteQuery,
+      "click-batch-restore": _vm.onClickBtnBatchRestore,
+      "change-current-page": _vm.$_listMixin_updateCurrentPage,
+      "change-page-size": _vm.$_listMixin_updatePageSize,
+      search: _vm.$_listMixin_onSearch,
+      "search-reset": _vm.$_listMixin_onSearchReset
+    }
   })
 }
 var staticRenderFns = []
@@ -1074,7 +1192,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-73c1b164", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-fa961626", module.exports)
   }
 }
 

@@ -1,14 +1,14 @@
 webpackJsonp([18],{
 
-/***/ 138:
+/***/ 140:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(534)
+var __vue_script__ = __webpack_require__(537)
 /* template */
-var __vue_template__ = __webpack_require__(535)
+var __vue_template__ = __webpack_require__(538)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/admin/views/system/site/edit.vue"
+Component.options.__file = "resources/assets/admin/views/user/edit.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-8554d192", Component.options)
+    hotAPI.createRecord("data-v-dc05c74e", Component.options)
   } else {
-    hotAPI.reload("data-v-8554d192", Component.options)
+    hotAPI.reload("data-v-dc05c74e", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 280:
+/***/ 279:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -650,11 +650,11 @@ var denormalize$1 = function denormalize$$1(input, schema, entities) {
 
 /***/ }),
 
-/***/ 282:
+/***/ 281:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_normalizr__ = __webpack_require__(280);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_normalizr__ = __webpack_require__(279);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -665,63 +665,18 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 /* harmony default export */ __webpack_exports__["a"] = ({
     methods: {
-        $handleGetFieldList: function $handleGetFieldList() {
-            var fields = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-
+        handleUpdateField: function handleUpdateField(field, data, fieldKeyOrIndex, isSearchbar) {
+            this.updateStoreFieldList(field, data[field] || data);
+            isSearchbar ? this.updateSearchbarFieldList(field, fieldKeyOrIndex) : this.updateFieldList(field, fieldKeyOrIndex);
+        },
+        updateFieldList: function updateFieldList(field, fieldKeyOrIndex) {
+            this.fields[fieldKeyOrIndex]["list"] = this.$store.getters[field + "_list"];
+        },
+        updateSearchbarFieldList: function updateSearchbarFieldList(field, fieldIndex) {
+            this.searchbar.fields[fieldIndex]["list"] = this.$store.getters[field + "_list"];
+        },
+        updateStoreFieldList: function updateStoreFieldList(field, value) {
             var _this = this;
-
-            var fieldsObj = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-            var usage = arguments[2];
-
-            this.$$api_option_list({
-                data: {
-                    types: fields
-                },
-                fn: function fn(_ref) {
-                    var data = _ref.data;
-
-                    fields.forEach(function (type) {
-                        if (type === "extrafield_group") {
-                            data.items[type] = [{
-                                id: 0,
-                                value: "",
-                                title: _this.$t("OPTION_NONE")
-                            }].concat(_toConsumableArray(data.items[type]));
-                            var groups = new __WEBPACK_IMPORTED_MODULE_0_normalizr__["b" /* schema */].Entity("groups");
-                            var normalize_list = Object(__WEBPACK_IMPORTED_MODULE_0_normalizr__["a" /* normalize */])(data.items[type], [groups]);
-                            _this.handleUpdateField(type, normalize_list.entities["groups"], fieldsObj[type], usage);
-                        } else {
-                            _this.handleUpdateField(type, data.items, fieldsObj[type], usage);
-                        }
-                    });
-                }
-            });
-        },
-        $getFieldList: function $getFieldList() {
-            var _this2 = this;
-
-            var fieldsObj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-            var usage = arguments[1];
-
-            var fieldsNotExit = Object.keys(fieldsObj).filter(function (key) {
-                return !_this2.checkStoreField(key);
-            });
-            if (fieldsNotExit.length > 0) {
-                this.$handleGetFieldList(fieldsNotExit, fieldsObj, usage);
-            }
-        },
-        handleUpdateField: function handleUpdateField(field, data, key_or_index, update_target) {
-            this.onUpdateStoreFieldList(field, data[field] || data);
-            update_target ? this.onUpdateSearchbarFieldList(field, key_or_index) : this.onUpdateFieldList(field, key_or_index);
-        },
-        onUpdateFieldList: function onUpdateFieldList(field, field_key_or_index) {
-            this.fields[field_key_or_index]["list"] = this.$store.getters[field + "_list"];
-        },
-        onUpdateSearchbarFieldList: function onUpdateSearchbarFieldList(field, field_index) {
-            this.searchbar.fields[field_index]["list"] = this.$store.getters[field + "_list"];
-        },
-        onUpdateStoreFieldList: function onUpdateStoreFieldList(field, value) {
-            var _this3 = this;
 
             if (field === "language") {
                 value = [{
@@ -736,7 +691,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                         prefix = _el$tree_list_title$s2[0],
                         title = _el$tree_list_title$s2[1];
 
-                    var combinedTitle = title ? prefix + " " + _this3.$t(title) : _this3.$t(prefix);
+                    var combinedTitle = title ? prefix + " " + _this.$t(title) : _this.$t(prefix);
                     return _extends({}, el, { tree_list_title: combinedTitle });
                 });
             }
@@ -748,6 +703,68 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                 type: field,
                 data: value
             });
+        },
+
+        /**
+         * 跟後端拿所需欄位類型之值
+         * @param {Array} fields
+         * @param {Object} typeAndTarget
+         * @param {Boolean} isSearchbar
+         * @returns {Object} 以 type 為 key 值的 Array
+         */
+        $_optionMixin_handleGetFieldList: function $_optionMixin_handleGetFieldList() {
+            var fields = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+
+            var _this2 = this;
+
+            var typeAndTarget = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+            var isSearchbar = arguments[2];
+
+            this.$$api_option_list({
+                data: {
+                    types: fields
+                },
+                fn: function fn(_ref) {
+                    var data = _ref.data;
+
+                    fields.forEach(function (type) {
+                        if (type === "extrafield_group") {
+                            data.items[type] = [{
+                                id: 0,
+                                value: "",
+                                title: _this2.$t("OPTION_NONE")
+                            }].concat(_toConsumableArray(data.items[type]));
+                            var groups = new __WEBPACK_IMPORTED_MODULE_0_normalizr__["b" /* schema */].Entity("groups");
+                            var normalize_list = Object(__WEBPACK_IMPORTED_MODULE_0_normalizr__["a" /* normalize */])(data.items[type], [groups]);
+                            _this2.handleUpdateField(type, normalize_list.entities["groups"], typeAndTarget[type], isSearchbar);
+                        } else {
+                            _this2.handleUpdateField(type, data.items, typeAndTarget[type], isSearchbar);
+                        }
+                    });
+                }
+            });
+        },
+
+        /**
+         * 更新下拉選單列表
+         * @param {Object} typeAndTarget
+         * 更新的欄位類型與其位置與fields 的相對位置
+         * 當 fields 為 Object 則為 key 值
+         * 當 fields 為 Array 則為 index 值
+         * @param {Boolean} isSearchbar 是否為 searchbar 欄位的下拉選單
+         */
+        $_optionMixin_updateFieldList: function $_optionMixin_updateFieldList() {
+            var _this3 = this;
+
+            var typeAndTarget = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+            var isSearchbar = arguments[1];
+
+            var fieldsNotExit = Object.keys(typeAndTarget).filter(function (key) {
+                return !_this3.checkStoreField(key);
+            });
+            if (fieldsNotExit.length > 0) {
+                this.$_optionMixin_handleGetFieldList(fieldsNotExit, typeAndTarget, isSearchbar);
+            }
         },
         checkStoreField: function checkStoreField(field) {
             return Boolean(this.$store.getters[field + "_list"]);
@@ -775,20 +792,19 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     },
 
     watch: {
-        $route: function $route() {
-            this.$initView();
+        $route: {
+            immediate: true,
+            handler: "initData"
         }
     },
-    created: function created() {
-        this.$initView();
-    },
-
     methods: {
-        $onSubmitFinish: function $onSubmitFinish(_ref) {
-            var type = _ref.type,
+        $_editMixin_onSubmitFinish: function $_editMixin_onSubmitFinish(_ref) {
+            var msg = _ref.msg,
+                btn_type = _ref.btn_type,
                 query = _ref.query;
 
-            switch (type) {
+            this.$message.success(msg);
+            switch (btn_type) {
                 case "save":
                     this.$router.push({
                         path: this.$route.path,
@@ -802,14 +818,14 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                     this.$router.go(0);
                     break;
                 case "savenclose":
-                    this.$onCancel();
+                    this.$_editMixin_onCancel();
                     break;
             }
         },
-        $onCancel: function $onCancel() {
+        $_editMixin_onCancel: function $_editMixin_onCancel() {
             var checkout_id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
 
-            if (checkout_id) {
+            if (this.checkRouteNeedCheckout(this.$route.path) && checkout_id) {
                 this.handleCheckout(checkout_id);
             }
             this.$router.push({
@@ -817,16 +833,46 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                 query: this.$route.query.from
             });
         },
-        onUpdateViewParams: function onUpdateViewParams() {
-            this.params.id = parseInt(this.$route.query.id) || "";
-            this.params.pid = parseInt(this.$route.query.pid) || 1;
+        checkRouteNeedCheckout: function checkRouteNeedCheckout(route) {
+            var checkoutArray = ["item", "category", "menu"];
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = checkoutArray[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var path = _step.value;
+
+                    if (route.includes(path)) {
+                        return true;
+                        break;
+                    }
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+        },
+        updateParams: function updateParams() {
+            this.params.id = Number(this.$route.query.id) || "";
+            this.params.pid = Number(this.$route.query.pid) || 1;
             this.$set(this.toolbar, "type", this.params.id ? "edit" : "add");
         },
-        $initView: function $initView() {
-            this.onUpdateViewParams();
+        initData: function initData() {
+            this.updateParams();
 
             if (this.params.id) {
-                this.onGetView();
+                this.handleGetData();
             }
         }
     }
@@ -842,20 +888,17 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     created: function created() {
         var _this = this;
 
-        this.$$eventBus.$on("onClickCMSFormDataToolbar", function (_ref) {
-            var type = _ref.type;
-
-            switch (type) {
+        this.$$eventBus.$on("onClickCMSFormDataToolbar", function (btnType) {
+            switch (btnType) {
                 case "cancel":
-                    _this.$onCancel(_this.$route.query.id);
+                    _this.$_editMixin_onCancel(_this.$route.query.id);
                     break;
                 case "save":
                 case "savenclose":
                 case "savenadd":
                     _this.handleSubmit({
-                        ref: "form-data",
-                        type: type,
-                        submit_data: _this.default_value
+                        btn_type: btnType,
+                        submit_data: _this.defaultValue
                     });
                     break;
                 case "trash":
@@ -886,151 +929,175 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 /***/ }),
 
-/***/ 534:
+/***/ 537:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_option_mixin__ = __webpack_require__(282);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_edit_mixin__ = __webpack_require__(284);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mixins_cms_edit_mixin__ = __webpack_require__(288);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_options__ = __webpack_require__(281);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_edit__ = __webpack_require__(284);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mixins_edit_cms__ = __webpack_require__(288);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "site-edit",
-  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_option_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1_mixins_edit_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2_mixins_cms_edit_mixin__["a" /* default */]],
+  name: "UserEdit",
+  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_options__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1_mixins_edit__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2_mixins_edit_cms__["a" /* default */]],
   data: function data() {
     return {
       fields: {
-        sef: {
-          list: this.$store.getters.language_list,
+        group_ids: {
+          list: [],
           custom_attrs: {
-            label: "title",
-            value: "sef"
+            children: "children",
+            label: "title"
           }
         }
       },
-      default_value: _defineProperty({
-        title: "",
-        url: "",
-        sef: "",
-        sitename: "",
-        metakeywords: "",
-        metadesc: ""
-      }, "sef", "")
+      defaultValue: {
+        first_name: "",
+        last_name: "",
+        email: "",
+        password: "",
+        password_confirmation: "",
+        reset_password: "0",
+        group_ids: [],
+        activation: 1,
+        block: 0
+      }
     };
   },
   created: function created() {
-    this.$getFieldList({
-      language: "sef"
-    });
+    this.handleGetFieldList();
   },
 
   methods: {
     handleTrash: function handleTrash() {
       var _this = this;
 
-      this.$$api_site_updateState({
+      this.$$api_user_updateBlock({
         data: {
           ids: [this.params.id],
-          state: "-2"
+          block: 1
         },
         fn: function fn(_ref) {
           var msg = _ref.msg;
 
           _this.$message.success(msg);
-          _this.onCancel();
+          _this.$_editMixin_onCancel();
         }
-      });
-    },
-    handleCheckout: function handleCheckout(id) {
-      this.$$api_site_checkout({
-        data: { ids: [id] },
-        fn: function fn() {}
       });
     },
     handleSubmit: function handleSubmit(_ref2) {
       var _this2 = this;
 
       var submit_data = _ref2.submit_data,
-          type = _ref2.type;
+          btn_type = _ref2.btn_type;
 
       if (this.params.id) {
         submit_data.id = this.params.id;
       }
-      this.$$api_site_save({
+      this.$$api_user_save({
         data: submit_data,
         fn: function fn(_ref3) {
           var data = _ref3.data,
               msg = _ref3.msg;
 
-          _this2.$message.success(msg);
-          if (data) {
-            submit_data.id = data.items.id;
-          }
-          _this2.$onSubmitFinish({ type: type, query: { id: submit_data.id } });
+          _this2.$_editMixin_onSubmitFinish({
+            msg: msg,
+            btn_type: btn_type,
+            query: { id: data ? data.items.id : submit_data.id }
+          });
         }
       });
     },
-    onGetView: function onGetView() {
+    onCheckGroupChange: function onCheckGroupChange() {
+      this.defaultValue.group_ids = this.$refs.groupTree.getCheckedKeys();
+    },
+    handleGetData: function handleGetData() {
       var _this3 = this;
 
-      this.$$api_site_get({
+      this.$$api_user_get({
         pathVar: this.params.id,
         fn: function fn(_ref4) {
           var data = _ref4.data;
 
-          _this3.default_value = _extends({}, _this3.default_value, data.items);
+          _this3.defaultValue = _extends({}, _this3.defaultValue, data.items, {
+            group_ids: data.items["groups"].map(function (item) {
+              return item.id;
+            })
+          });
+        }
+      });
+    },
+    handleGetFieldList: function handleGetFieldList() {
+      var _this4 = this;
+
+      this.$$api_user_listTreeGroup({
+        fn: function fn(_ref5) {
+          var data = _ref5.data;
+
+          _this4.fields.group_ids.list = data.items;
         }
       });
     }
@@ -1039,7 +1106,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /***/ }),
 
-/***/ 535:
+/***/ 538:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -1058,11 +1125,7 @@ var render = function() {
             [
               _c(
                 "el-tab-pane",
-                {
-                  attrs: {
-                    label: _vm.$t("GLOBAL_FIELDSET_BASIC_OPTIONS") /*基本*/
-                  }
-                },
+                { attrs: { label: _vm.$t("USER_TAB_DETAIL") /*會員資料*/ } },
                 [
                   _c(
                     "el-form",
@@ -1070,86 +1133,145 @@ var render = function() {
                       ref: "form-data",
                       attrs: {
                         "label-position": "top",
-                        model: _vm.default_value
+                        model: _vm.defaultValue
                       }
                     },
                     [
                       _c(
                         "el-form-item",
-                        {
-                          attrs: {
-                            prop: "title",
-                            label: _vm.$t("FIELD_TITLE_LABEL" /*標題*/)
-                          }
-                        },
+                        { attrs: { label: _vm.$t("USER_OPTION_ACTIVE") } },
                         [
-                          _c("el-input", {
-                            model: {
-                              value: _vm.default_value.title,
-                              callback: function($$v) {
-                                _vm.$set(_vm.default_value, "title", $$v)
-                              },
-                              expression: "default_value.title"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "el-form-item",
-                        {
-                          attrs: {
-                            prop: "url",
-                            label: _vm.$t("SITE_FIELD_URL_LABEL") /*網址*/
-                          }
-                        },
-                        [
-                          _c("el-input", {
-                            model: {
-                              value: _vm.default_value.url,
-                              callback: function($$v) {
-                                _vm.$set(_vm.default_value, "url", $$v)
-                              },
-                              expression: "default_value.url"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "el-form-item",
-                        {
-                          attrs: {
-                            prop: "sef",
-                            label: _vm.$t("OPTION_LANGUAGE") /*語言*/
-                          }
-                        },
-                        [
-                          _c(
-                            "el-select",
-                            {
-                              model: {
-                                value: _vm.default_value.sef,
-                                callback: function($$v) {
-                                  _vm.$set(_vm.default_value, "sef", $$v)
-                                },
-                                expression: "default_value.sef"
-                              }
+                          _c("el-switch", {
+                            attrs: {
+                              "active-text": _vm.$t("YES"),
+                              "active-value": 1,
+                              "inactive-text": _vm.$t("NO"),
+                              "inactive-value": 0
                             },
-                            _vm._l(_vm.fields.sef.list, function(option) {
-                              return _c("el-option", {
-                                key: option.id,
-                                attrs: {
-                                  label:
-                                    option[_vm.fields.sef.custom_attrs.label],
-                                  value:
-                                    option[_vm.fields.sef.custom_attrs.value]
-                                }
-                              })
-                            })
-                          )
+                            model: {
+                              value: _vm.defaultValue.activation,
+                              callback: function($$v) {
+                                _vm.$set(_vm.defaultValue, "activation", $$v)
+                              },
+                              expression: "defaultValue.activation"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "el-form-item",
+                        {
+                          attrs: {
+                            prop: "first_name",
+                            label: _vm.$t("USER_FIELD_FIRST_NAME" /*姓*/)
+                          }
+                        },
+                        [
+                          _c("el-input", {
+                            model: {
+                              value: _vm.defaultValue.first_name,
+                              callback: function($$v) {
+                                _vm.$set(_vm.defaultValue, "first_name", $$v)
+                              },
+                              expression: "defaultValue.first_name"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "el-form-item",
+                        {
+                          attrs: {
+                            prop: "last_name",
+                            label: _vm.$t("USER_FIELD_LAST_NAME") /*名*/
+                          }
+                        },
+                        [
+                          _c("el-input", {
+                            model: {
+                              value: _vm.defaultValue.last_name,
+                              callback: function($$v) {
+                                _vm.$set(_vm.defaultValue, "last_name", $$v)
+                              },
+                              expression: "defaultValue.last_name"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "el-form-item",
+                        {
+                          attrs: {
+                            prop: "email",
+                            label: _vm.$t("USER_FIELD_EMAIL") /*Email*/
+                          }
+                        },
+                        [
+                          _c("el-input", {
+                            model: {
+                              value: _vm.defaultValue.email,
+                              callback: function($$v) {
+                                _vm.$set(_vm.defaultValue, "email", $$v)
+                              },
+                              expression: "defaultValue.email"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "el-form-item",
+                        {
+                          attrs: {
+                            prop: "password",
+                            label: _vm.$t("USER_FIELD_PASSWORD") /*密碼*/
+                          }
+                        },
+                        [
+                          _c("el-input", {
+                            model: {
+                              value: _vm.defaultValue.password,
+                              callback: function($$v) {
+                                _vm.$set(_vm.defaultValue, "password", $$v)
+                              },
+                              expression: "defaultValue.password"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "el-form-item",
+                        {
+                          attrs: {
+                            prop: "password_confirmation",
+                            label: _vm.$t(
+                              "USER_FIELD_PASSWORD_CONFIRMATION"
+                            ) /*再次輸入密碼*/
+                          }
+                        },
+                        [
+                          _c("el-input", {
+                            model: {
+                              value: _vm.defaultValue.password_confirmation,
+                              callback: function($$v) {
+                                _vm.$set(
+                                  _vm.defaultValue,
+                                  "password_confirmation",
+                                  $$v
+                                )
+                              },
+                              expression: "defaultValue.password_confirmation"
+                            }
+                          })
                         ],
                         1
                       )
@@ -1164,9 +1286,7 @@ var render = function() {
                 "el-tab-pane",
                 {
                   attrs: {
-                    label: _vm.$t(
-                      "LANGUAGE_TAB_SITE_NAME_AND_METADATA"
-                    ) /*網站名稱&Metadata*/
+                    label: _vm.$t("USER_TAB_ASSIGN_GROUP") /*指定會員群組*/
                   }
                 },
                 [
@@ -1176,79 +1296,28 @@ var render = function() {
                       ref: "form-data",
                       attrs: {
                         "label-position": "top",
-                        model: _vm.default_value
+                        model: _vm.defaultValue
                       }
                     },
                     [
                       _c(
                         "el-form-item",
-                        {
-                          attrs: {
-                            prop: "sitename",
-                            label: _vm.$t(
-                              "LANGUAGE_FIELD_CUSTOM_SITE_NAME_LABEL"
-                            ) /*自訂網站名稱*/
-                          }
-                        },
+                        { attrs: { prop: "group_ids" } },
                         [
-                          _c("el-input", {
-                            model: {
-                              value: _vm.default_value.sitename,
-                              callback: function($$v) {
-                                _vm.$set(_vm.default_value, "sitename", $$v)
-                              },
-                              expression: "default_value.sitename"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "el-form-item",
-                        {
-                          attrs: {
-                            prop: "metakeywords",
-                            label: _vm.$t(
-                              "FIELD_META_KEYWORDS_LABEL"
-                            ) /*Meta 關鍵字*/
-                          }
-                        },
-                        [
-                          _c("el-input", {
-                            attrs: { type: "textarea", rows: 2 },
-                            model: {
-                              value: _vm.default_value.metakeywords,
-                              callback: function($$v) {
-                                _vm.$set(_vm.default_value, "metakeywords", $$v)
-                              },
-                              expression: "default_value.metakeywords"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "el-form-item",
-                        {
-                          attrs: {
-                            prop: "metadesc",
-                            label: _vm.$t(
-                              "FIELD_META_DESCRIPTION_LABEL"
-                            ) /*Meta 說明*/
-                          }
-                        },
-                        [
-                          _c("el-input", {
-                            attrs: { type: "textarea", rows: 2 },
-                            model: {
-                              value: _vm.default_value.metadesc,
-                              callback: function($$v) {
-                                _vm.$set(_vm.default_value, "metadesc", $$v)
-                              },
-                              expression: "default_value.metadesc"
-                            }
+                          _c("el-tree", {
+                            ref: "groupTree",
+                            attrs: {
+                              data: _vm.fields.group_ids.list,
+                              "default-checked-keys":
+                                _vm.defaultValue.group_ids,
+                              "default-expanded-keys":
+                                _vm.defaultValue.group_ids,
+                              props: _vm.fields.group_ids.custom_attrs,
+                              "node-key": "id",
+                              "check-strictly": "",
+                              "show-checkbox": ""
+                            },
+                            on: { "check-change": _vm.onCheckGroupChange }
                           })
                         ],
                         1
@@ -1275,7 +1344,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-8554d192", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-dc05c74e", module.exports)
   }
 }
 

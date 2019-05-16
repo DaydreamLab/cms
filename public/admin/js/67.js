@@ -6,13 +6,13 @@ webpackJsonp([67],{
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(435)
+  __webpack_require__(430)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(437)
+var __vue_script__ = __webpack_require__(432)
 /* template */
-var __vue_template__ = __webpack_require__(440)
+var __vue_template__ = __webpack_require__(435)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -52,13 +52,13 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 435:
+/***/ 430:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(436);
+var content = __webpack_require__(431);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -79,7 +79,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 436:
+/***/ 431:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(255)(false);
@@ -87,24 +87,20 @@ exports = module.exports = __webpack_require__(255)(false);
 
 
 // module
-exports.push([module.i, "/* Colors -------------------------- */\n/* Link -------------------------- */\n/* Background -------------------------- */\n/* Border -------------------------- */\n/* Navbar -------------------------- */\n/* Sidebar -------------------------- */\n/* Tab -------------------------- */\n/* Icon -------------------------- */\n/* Item -------------------------- */\n.content-container .el-main.media-main {\n  min-height: 500px;\n  padding: 10px;\n}\n.content-container .el-aside.media-aside {\n  padding: 10px;\n}\n.media-container {\n  background: #fff;\n}\n.media-container .el-header, .media-container .el-footer {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n.media-container .el-header {\n    border-bottom: 1px solid #e6e6e6;\n}\n.media-container .el-footer {\n    border-top: 1px solid #e6e6e6;\n    color: #999999;\n}\n.media-container .el-aside {\n    border-right: 1px solid #e6e6e6;\n}\n.media-toolbar__item {\n  margin-right: 10px;\n}\n.media-create__item {\n  margin-bottom: 10px;\n}\n.media-footer {\n  width: 100%;\n}\n.file-list__table .el-table__row {\n  cursor: default;\n}\n.file-list__table .el-table__row .file-item__thumb {\n    width: 1em;\n    height: 1em;\n    display: inline-block;\n    vertical-align: middle;\n    background-size: cover;\n    background-color: #e6e6e6;\n}\n.file-list__icon {\n  color: #606266;\n  padding: 10px;\n}\n.file-list__icon:before, .file-list__icon:after {\n    content: \"\";\n    display: table;\n}\n.file-list__icon .file-item__inner {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n}\n.file-list__icon .file-item__type {\n    width: 3em;\n    height: 3em;\n}\n.file-list__icon .file-item__icon {\n    font-size: 3em;\n}\n.file-list__icon .file-item__thumb {\n    width: 100%;\n    height: 100%;\n    background-size: cover;\n    background-color: #e6e6e6;\n}\n.file-list__icon .file-item__name {\n    margin-top: 10px;\n    padding: 2px 4px;\n    display: -webkit-box;\n    -webkit-line-clamp: 1;\n    -webkit-box-orient: vertical;\n    max-height: 2.4em;\n    line-height: 1.3em;\n    white-space: pre-line;\n    overflow: hidden;\n    overflow-wrap: break-word;\n    word-break: break-word;\n    text-align: center;\n}\n.file-item {\n  width: 120px;\n  height: 80px;\n  float: left;\n  padding-right: 1.5rem;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.file-item__checkbox {\n    opacity: 0;\n    position: absolute;\n}\n.file-item.is-selected_filepath .file-item__name {\n    background: #2f3855;\n    color: #fff;\n    border-radius: 4px;\n    max-height: 3.8em;\n    -webkit-line-clamp: initial;\n    z-index: 1;\n}\n", ""]);
+exports.push([module.i, "/* Colors -------------------------- */\n/* Link -------------------------- */\n/* Background -------------------------- */\n/* Border -------------------------- */\n/* Navbar -------------------------- */\n/* Sidebar -------------------------- */\n/* Tab -------------------------- */\n/* Icon -------------------------- */\n/* Item -------------------------- */\n.content-container .el-main.media-main {\n  min-height: 500px;\n  padding: 10px;\n}\n.content-container .el-aside.media-aside {\n  padding: 10px;\n}\n.media-container {\n  background: #fff;\n}\n.media-container .el-header, .media-container .el-footer {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n.media-container .el-header {\n    border-bottom: 1px solid #e6e6e6;\n}\n.media-container .el-footer {\n    border-top: 1px solid #e6e6e6;\n    color: #999999;\n}\n.media-container .el-aside {\n    border-right: 1px solid #e6e6e6;\n}\n.media-toolbar__item {\n  margin-right: 10px;\n}\n.media-create__item {\n  margin-bottom: 10px;\n}\n.media-footer {\n  width: 100%;\n}\n.file-list__table .el-table__row {\n  cursor: default;\n}\n.file-list__table .el-table__row .file-item__thumb {\n    width: 1em;\n    height: 1em;\n    display: inline-block;\n    vertical-align: middle;\n    background-size: cover;\n    background-color: #e6e6e6;\n}\n.file-list__icon {\n  color: #606266;\n  padding: 10px;\n}\n.file-list__icon:before, .file-list__icon:after {\n    content: \"\";\n    display: table;\n}\n.file-list__icon .file-item__inner {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n}\n.file-list__icon .file-item__type {\n    width: 3em;\n    height: 3em;\n}\n.file-list__icon .file-item__icon {\n    font-size: 3em;\n}\n.file-list__icon .file-item__thumb {\n    width: 100%;\n    height: 100%;\n    background-size: cover;\n    background-color: #e6e6e6;\n}\n.file-list__icon .file-item__name {\n    margin-top: 10px;\n    padding: 2px 4px;\n    display: -webkit-box;\n    -webkit-line-clamp: 1;\n    -webkit-box-orient: vertical;\n    max-height: 2.4em;\n    line-height: 1.3em;\n    white-space: pre-line;\n    overflow: hidden;\n    overflow-wrap: break-word;\n    word-break: break-word;\n    text-align: center;\n}\n.file-item {\n  width: 120px;\n  height: 80px;\n  float: left;\n  padding-right: 1.5rem;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.file-item__checkbox {\n    opacity: 0;\n    position: absolute;\n}\n.file-item.is-selected .file-item__name {\n    background: #2f3855;\n    color: #fff;\n    border-radius: 4px;\n    max-height: 3.8em;\n    -webkit-line-clamp: initial;\n    z-index: 1;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ 437:
+/***/ 432:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path__ = __webpack_require__(438);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path__ = __webpack_require__(433);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_path__);
-//
-//
-//
-//
 //
 //
 //
@@ -280,48 +276,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "media",
+  name: "Media",
   data: function data() {
     return {
       params: {
         dir: "/",
-        path: this.FilePath,
+        path: this.filePath,
         total: ""
       },
       view: "list",
-      list_checkbox: true,
-      selected_filepath: [],
+      folders: [],
+      files: [],
       loading: false,
-      folder_prop: {
+      selected: [],
+      newFolderName: "",
+      showCreateFolderBtn: false,
+      showUploadFileBtn: false,
+      folderTreeProps: {
         label: "name",
         children: "children"
-      },
-      folder_create: {
-        show: false,
-        value: ""
-      },
-      file_upload: {
-        show: false
-      },
-      folders: [],
-      files: []
+      }
     };
   },
 
   props: {
-    FilePath: {
+    filePath: {
       type: String,
       default: ""
     }
   },
   watch: {
-    selected_filepath: function selected_filepath(value) {
-      this.$emit("onChangeSelection", value);
+    selected: function selected(value) {
+      this.$emit("change", value);
     },
-    "params.dir": function paramsDir() {
-      this.$refs.folderTree.setCurrentKey(this.params.dir);
+    "params.dir": function paramsDir(v) {
+      this.$refs.folderTree.setCurrentKey(v);
     },
-    FilePath: function FilePath(v) {
+    filePath: function filePath(v) {
       this.params.path = v;
     }
   },
@@ -330,47 +321,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
-    formatItemDate: function formatItemDate(row) {
-      return this.$options.filters.displayDateFormat(row.modified);
-    },
-    onChangeSelection: function onChangeSelection(value) {
-      this.selected_filepath = value.map(function (el) {
-        return el.path;
-      });
-    },
-    onDeleteItem: function onDeleteItem() {
+    handleDeleteFile: function handleDeleteFile() {
       var _this = this;
 
       this.$$api_media_delete({
         data: {
-          paths: this.selected_filepath
+          paths: this.selected
         },
         fn: function fn() {
-          _this.selected_filepath = [];
-          _this.onGetFiles();
+          _this.resetSelectedFiles();
         }
       });
     },
-    onItemDoubleClick: function onItemDoubleClick(item) {
-      if (item.type === "Folder") {
-        this.onClickFolder(item);
-      } else {
-        this.onClickFile(item);
-      }
+    updateSelectedFiles: function updateSelectedFiles(value) {
+      this.selected = value.map(function (el) {
+        return el.path;
+      });
     },
-    onClickFile: function onClickFile(file) {
+    resetSelectedFiles: function resetSelectedFiles() {
+      this.selected = [];
+      this.handleGetFiles();
+    },
+    onDoubleClickItem: function onDoubleClickItem(item) {
+      item.type === "Folder" ? this.updateParamDir(item) : this.updateParamPath(item);
+    },
+    updateParamPath: function updateParamPath(file) {
       this.params.path = file.path;
-      this.$emit("onDbClickFile", this.params.path);
+      // this.$emit("onDbClickFile", this.params.path);
     },
-    onClickFolder: function onClickFolder(folder) {
+    updateParamDir: function updateParamDir(folder) {
       this.params.dir = folder.path;
-      this.selected_filepath = [];
-      this.onGetFiles();
+      this.resetSelectedFiles();
     },
     handleUploadFile: function handleUploadFile() {
       this.$refs.fileUpload.submit();
     },
-    onUploadFiles: function onUploadFiles(params) {
+    handleUploadFiles: function handleUploadFiles(params) {
       var _this2 = this;
 
       var formData = new FormData();
@@ -389,8 +375,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           _this2.$message.success(msg);
           params.onSuccess();
           _this2.$refs.fileUpload.clearFiles();
-          _this2.file_upload.show = false;
-          _this2.onGetFiles();
+          _this2.showUploadFileBtn = false;
+          _this2.handleGetFiles();
         },
         errFn: function errFn(msg) {
           _this2.$message.error(msg);
@@ -398,25 +384,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
       });
     },
-    onCreateFolder: function onCreateFolder() {
+    handleCreateFolder: function handleCreateFolder() {
       var _this3 = this;
 
       this.$$api_media_createFolder({
         data: {
           dir: this.params.dir,
-          name: this.folder_create.value
+          name: this.newFolderName
         },
         fn: function fn(_ref2) {
           var data = _ref2.data;
 
-          _this3.folder_create.value = "";
-          _this3.folder_create.show = false;
-          _this3.onGetFiles();
-          _this3.onGetFolders();
+          _this3.newFolderName = "";
+          _this3.showCreateFolderBtn = false;
+          _this3.handleGetFiles();
+          _this3.handleGetFolders();
         }
       });
     },
-    onGetFolders: function onGetFolders() {
+    handleGetFolders: function handleGetFolders() {
       var _this4 = this;
 
       this.$$api_media_listFolder({
@@ -428,51 +414,41 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
       });
     },
-    onGetFiles: function onGetFiles() {
+    handleGetFiles: function handleGetFiles() {
       var _this5 = this;
-
-      var _ref4 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-          _fn = _ref4.fn;
 
       this.loading = true;
       this.$$api_media_listFile({
         data: {
           dir: this.params.dir
         },
-        fn: function fn(_ref5) {
-          var data = _ref5.data;
+        fn: function fn(_ref4) {
+          var data = _ref4.data;
 
           _this5.files = data.items;
           _this5.params.total = data.records;
           _this5.loading = false;
-
-          _fn && _fn();
         }
       });
     },
-    onGetView: function onGetView() {
-      this.params.dir = __WEBPACK_IMPORTED_MODULE_0_path___default.a.dirname(this.params.path) !== "." ? __WEBPACK_IMPORTED_MODULE_0_path___default.a.dirname(this.params.path) : "/";
-      this.onGetFiles();
-      this.selected_filepath.push(this.params.path);
+    formatItemDate: function formatItemDate(row) {
+      return this.$options.filters.displayDateFormat(row.modified);
     },
     initMedia: function initMedia() {
-      var _this6 = this;
-
-      this.onGetFolders();
-      this.onGetFiles({
-        fn: function fn() {
-          if (_this6.params.path) {
-            _this6.onGetView();
-          }
-        }
-      });
+      this.handleGetFolders();
+      if (this.params.path) {
+        // FIXME: replace /storage/media ??
+        this.params.dir = __WEBPACK_IMPORTED_MODULE_0_path___default.a.dirname(this.params.path) || this.params.dir;
+        this.selected.push(this.params.path);
+      }
+      this.handleGetFiles();
     }
   }
 });
 
 /***/ }),
 
-/***/ 438:
+/***/ 433:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -700,11 +676,11 @@ var substr = 'ab'.substr(-1) === 'b'
     }
 ;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(439)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(434)))
 
 /***/ }),
 
-/***/ 439:
+/***/ 434:
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -895,7 +871,7 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
-/***/ 440:
+/***/ 435:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -963,15 +939,15 @@ var render = function() {
               _c(
                 "el-button",
                 {
-                  attrs: { type: _vm.file_upload.show ? "info" : "success" },
+                  attrs: { type: _vm.showUploadFileBtn ? "info" : "success" },
                   on: {
                     click: function($event) {
-                      _vm.file_upload.show = !_vm.file_upload.show
+                      _vm.showUploadFileBtn = !_vm.showUploadFileBtn
                     }
                   }
                 },
                 [
-                  _vm.file_upload.show
+                  _vm.showUploadFileBtn
                     ? [
                         _c("font-awesome-icon", {
                           attrs: { icon: ["fal", "times"] }
@@ -1002,15 +978,15 @@ var render = function() {
               _c(
                 "el-button",
                 {
-                  attrs: { type: _vm.folder_create.show ? "info" : "" },
+                  attrs: { type: _vm.showCreateFolderBtn ? "info" : "" },
                   on: {
                     click: function($event) {
-                      _vm.folder_create.show = !_vm.folder_create.show
+                      _vm.showCreateFolderBtn = !_vm.showCreateFolderBtn
                     }
                   }
                 },
                 [
-                  _vm.folder_create.show
+                  _vm.showCreateFolderBtn
                     ? [
                         _c("font-awesome-icon", {
                           attrs: { icon: ["fal", "times"] }
@@ -1048,8 +1024,8 @@ var render = function() {
               _c(
                 "el-button",
                 {
-                  attrs: { disabled: _vm.selected_filepath.length <= 0 },
-                  on: { click: _vm.onDeleteItem }
+                  attrs: { disabled: _vm.selected.length <= 0 },
+                  on: { click: _vm.handleDeleteFile }
                 },
                 [
                   _c("font-awesome-icon", {
@@ -1082,12 +1058,12 @@ var render = function() {
                 attrs: {
                   "node-key": "path",
                   data: _vm.folders,
-                  props: _vm.folder_prop,
+                  props: _vm.folderTreeProps,
                   "expand-on-click-node": false,
                   "default-expand-all": "",
                   "highlight-current": ""
                 },
-                on: { "node-click": _vm.onClickFolder }
+                on: { "node-click": _vm.updateParamDir }
               })
             ],
             1
@@ -1111,17 +1087,17 @@ var render = function() {
                 "div",
                 { staticClass: "media-create" },
                 [
-                  _vm.folder_create.show
+                  _vm.showCreateFolderBtn
                     ? _c(
                         "el-input",
                         {
                           staticClass: "media-create__item",
                           model: {
-                            value: _vm.folder_create.value,
+                            value: _vm.newFolderName,
                             callback: function($$v) {
-                              _vm.$set(_vm.folder_create, "value", $$v)
+                              _vm.newFolderName = $$v
                             },
-                            expression: "folder_create.value"
+                            expression: "newFolderName"
                           }
                         },
                         [
@@ -1133,7 +1109,7 @@ var render = function() {
                             "el-button",
                             {
                               attrs: { slot: "append" },
-                              on: { click: _vm.onCreateFolder },
+                              on: { click: _vm.handleCreateFolder },
                               slot: "append"
                             },
                             [_vm._v(_vm._s(_vm.$t("MEDIA_CREATE") /*建立*/))]
@@ -1143,17 +1119,17 @@ var render = function() {
                       )
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.file_upload.show
+                  _vm.showUploadFileBtn
                     ? _c(
                         "el-upload",
                         {
                           ref: "fileUpload",
                           staticClass: "media-create__item",
                           attrs: {
+                            multiple: "",
                             action: "string",
-                            "http-request": _vm.onUploadFiles,
-                            "auto-upload": false,
-                            multiple: ""
+                            "http-request": _vm.handleUploadFiles,
+                            "auto-upload": false
                           }
                         },
                         [
@@ -1207,14 +1183,12 @@ var render = function() {
                     {
                       staticClass: "file-list__table",
                       attrs: { data: _vm.files, "current-row-key": "path" },
-                      on: { "selection-change": _vm.onChangeSelection }
+                      on: { "selection-change": _vm.updateSelectedFiles }
                     },
                     [
-                      _vm.list_checkbox
-                        ? _c("el-table-column", {
-                            attrs: { type: "selection", width: "55" }
-                          })
-                        : _vm._e(),
+                      _c("el-table-column", {
+                        attrs: { type: "selection", width: "55" }
+                      }),
                       _vm._v(" "),
                       _c("el-table-column", {
                         attrs: {
@@ -1233,7 +1207,7 @@ var render = function() {
                                     staticClass: "file-item__inner",
                                     on: {
                                       dblclick: function($event) {
-                                        _vm.onItemDoubleClick(scope.row)
+                                        _vm.onDoubleClickItem(scope.row)
                                       }
                                     }
                                   },
@@ -1307,8 +1281,7 @@ var render = function() {
                           key: item.path,
                           staticClass: "file-item",
                           class: {
-                            "is-selected_filepath":
-                              _vm.selected_filepath.indexOf(item.path) >= 0
+                            "is-selected": _vm.selected.indexOf(item.path) >= 0
                           }
                         },
                         [
@@ -1317,21 +1290,21 @@ var render = function() {
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.selected_filepath,
-                                expression: "selected_filepath"
+                                value: _vm.selected,
+                                expression: "selected"
                               }
                             ],
                             staticClass: "file-item__checkbox",
                             attrs: { type: "checkbox" },
                             domProps: {
                               value: item.path,
-                              checked: Array.isArray(_vm.selected_filepath)
-                                ? _vm._i(_vm.selected_filepath, item.path) > -1
-                                : _vm.selected_filepath
+                              checked: Array.isArray(_vm.selected)
+                                ? _vm._i(_vm.selected, item.path) > -1
+                                : _vm.selected
                             },
                             on: {
                               change: function($event) {
-                                var $$a = _vm.selected_filepath,
+                                var $$a = _vm.selected,
                                   $$el = $event.target,
                                   $$c = $$el.checked ? true : false
                                 if (Array.isArray($$a)) {
@@ -1339,17 +1312,15 @@ var render = function() {
                                     $$i = _vm._i($$a, $$v)
                                   if ($$el.checked) {
                                     $$i < 0 &&
-                                      (_vm.selected_filepath = $$a.concat([
-                                        $$v
-                                      ]))
+                                      (_vm.selected = $$a.concat([$$v]))
                                   } else {
                                     $$i > -1 &&
-                                      (_vm.selected_filepath = $$a
+                                      (_vm.selected = $$a
                                         .slice(0, $$i)
                                         .concat($$a.slice($$i + 1)))
                                   }
                                 } else {
-                                  _vm.selected_filepath = $$c
+                                  _vm.selected = $$c
                                 }
                               }
                             }
@@ -1361,7 +1332,7 @@ var render = function() {
                               staticClass: "file-item__inner",
                               on: {
                                 dblclick: function($event) {
-                                  _vm.onItemDoubleClick(item)
+                                  _vm.onDoubleClickItem(item)
                                 }
                               }
                             },
@@ -1418,11 +1389,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("el-col", { attrs: { span: 12 } }, [
-                _vm._v(
-                  _vm._s(
-                    _vm.selected_filepath[_vm.selected_filepath.length - 1]
-                  )
-                )
+                _vm._v(_vm._s(_vm.selected[_vm.selected.length - 1]))
               ]),
               _vm._v(" "),
               _vm.params.total

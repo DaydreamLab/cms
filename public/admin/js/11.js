@@ -1,24 +1,24 @@
 webpackJsonp([11],{
 
-/***/ 132:
+/***/ 134:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(514)
+  __webpack_require__(521)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(516)
+var __vue_script__ = __webpack_require__(523)
 /* template */
-var __vue_template__ = __webpack_require__(517)
+var __vue_template__ = __webpack_require__(524)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-88675c4e"
+var __vue_scopeId__ = "data-v-08fbaeac"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -29,7 +29,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/admin/views/menu/list.vue"
+Component.options.__file = "resources/assets/admin/views/module/list.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -38,9 +38,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-88675c4e", Component.options)
+    hotAPI.createRecord("data-v-08fbaeac", Component.options)
   } else {
-    hotAPI.reload("data-v-88675c4e", Component.options)
+    hotAPI.reload("data-v-08fbaeac", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -52,353 +52,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 163:
-/***/ (function(module, exports) {
-
-/**
- * Translates the list format produced by css-loader into something
- * easier to manipulate.
- */
-module.exports = function listToStyles (parentId, list) {
-  var styles = []
-  var newStyles = {}
-  for (var i = 0; i < list.length; i++) {
-    var item = list[i]
-    var id = item[0]
-    var css = item[1]
-    var media = item[2]
-    var sourceMap = item[3]
-    var part = {
-      id: parentId + ':' + i,
-      css: css,
-      media: media,
-      sourceMap: sourceMap
-    }
-    if (!newStyles[id]) {
-      styles.push(newStyles[id] = { id: id, parts: [part] })
-    } else {
-      newStyles[id].parts.push(part)
-    }
-  }
-  return styles
-}
-
-
-/***/ }),
-
-/***/ 255:
-/***/ (function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function(useSourceMap) {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if(item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
-
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
-		});
-
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
-
-	return [content].join('\n');
-}
-
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-	return '/*# ' + data + ' */';
-}
-
-
-/***/ }),
-
-/***/ 256:
-/***/ (function(module, exports, __webpack_require__) {
-
-/*
-  MIT License http://www.opensource.org/licenses/mit-license.php
-  Author Tobias Koppers @sokra
-  Modified by Evan You @yyx990803
-*/
-
-var hasDocument = typeof document !== 'undefined'
-
-if (typeof DEBUG !== 'undefined' && DEBUG) {
-  if (!hasDocument) {
-    throw new Error(
-    'vue-style-loader cannot be used in a non-browser environment. ' +
-    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
-  ) }
-}
-
-var listToStyles = __webpack_require__(163)
-
-/*
-type StyleObject = {
-  id: number;
-  parts: Array<StyleObjectPart>
-}
-
-type StyleObjectPart = {
-  css: string;
-  media: string;
-  sourceMap: ?string
-}
-*/
-
-var stylesInDom = {/*
-  [id: number]: {
-    id: number,
-    refs: number,
-    parts: Array<(obj?: StyleObjectPart) => void>
-  }
-*/}
-
-var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
-var singletonElement = null
-var singletonCounter = 0
-var isProduction = false
-var noop = function () {}
-var options = null
-var ssrIdKey = 'data-vue-ssr-id'
-
-// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-// tags it will allow on a page
-var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
-
-module.exports = function (parentId, list, _isProduction, _options) {
-  isProduction = _isProduction
-
-  options = _options || {}
-
-  var styles = listToStyles(parentId, list)
-  addStylesToDom(styles)
-
-  return function update (newList) {
-    var mayRemove = []
-    for (var i = 0; i < styles.length; i++) {
-      var item = styles[i]
-      var domStyle = stylesInDom[item.id]
-      domStyle.refs--
-      mayRemove.push(domStyle)
-    }
-    if (newList) {
-      styles = listToStyles(parentId, newList)
-      addStylesToDom(styles)
-    } else {
-      styles = []
-    }
-    for (var i = 0; i < mayRemove.length; i++) {
-      var domStyle = mayRemove[i]
-      if (domStyle.refs === 0) {
-        for (var j = 0; j < domStyle.parts.length; j++) {
-          domStyle.parts[j]()
-        }
-        delete stylesInDom[domStyle.id]
-      }
-    }
-  }
-}
-
-function addStylesToDom (styles /* Array<StyleObject> */) {
-  for (var i = 0; i < styles.length; i++) {
-    var item = styles[i]
-    var domStyle = stylesInDom[item.id]
-    if (domStyle) {
-      domStyle.refs++
-      for (var j = 0; j < domStyle.parts.length; j++) {
-        domStyle.parts[j](item.parts[j])
-      }
-      for (; j < item.parts.length; j++) {
-        domStyle.parts.push(addStyle(item.parts[j]))
-      }
-      if (domStyle.parts.length > item.parts.length) {
-        domStyle.parts.length = item.parts.length
-      }
-    } else {
-      var parts = []
-      for (var j = 0; j < item.parts.length; j++) {
-        parts.push(addStyle(item.parts[j]))
-      }
-      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
-    }
-  }
-}
-
-function createStyleElement () {
-  var styleElement = document.createElement('style')
-  styleElement.type = 'text/css'
-  head.appendChild(styleElement)
-  return styleElement
-}
-
-function addStyle (obj /* StyleObjectPart */) {
-  var update, remove
-  var styleElement = document.querySelector('style[' + ssrIdKey + '~="' + obj.id + '"]')
-
-  if (styleElement) {
-    if (isProduction) {
-      // has SSR styles and in production mode.
-      // simply do nothing.
-      return noop
-    } else {
-      // has SSR styles but in dev mode.
-      // for some reason Chrome can't handle source map in server-rendered
-      // style tags - source maps in <style> only works if the style tag is
-      // created and inserted dynamically. So we remove the server rendered
-      // styles and inject new ones.
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  if (isOldIE) {
-    // use singleton mode for IE9.
-    var styleIndex = singletonCounter++
-    styleElement = singletonElement || (singletonElement = createStyleElement())
-    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
-    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
-  } else {
-    // use multi-style-tag mode in all other cases
-    styleElement = createStyleElement()
-    update = applyToTag.bind(null, styleElement)
-    remove = function () {
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  update(obj)
-
-  return function updateStyle (newObj /* StyleObjectPart */) {
-    if (newObj) {
-      if (newObj.css === obj.css &&
-          newObj.media === obj.media &&
-          newObj.sourceMap === obj.sourceMap) {
-        return
-      }
-      update(obj = newObj)
-    } else {
-      remove()
-    }
-  }
-}
-
-var replaceText = (function () {
-  var textStore = []
-
-  return function (index, replacement) {
-    textStore[index] = replacement
-    return textStore.filter(Boolean).join('\n')
-  }
-})()
-
-function applyToSingletonTag (styleElement, index, remove, obj) {
-  var css = remove ? '' : obj.css
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = replaceText(index, css)
-  } else {
-    var cssNode = document.createTextNode(css)
-    var childNodes = styleElement.childNodes
-    if (childNodes[index]) styleElement.removeChild(childNodes[index])
-    if (childNodes.length) {
-      styleElement.insertBefore(cssNode, childNodes[index])
-    } else {
-      styleElement.appendChild(cssNode)
-    }
-  }
-}
-
-function applyToTag (styleElement, obj) {
-  var css = obj.css
-  var media = obj.media
-  var sourceMap = obj.sourceMap
-
-  if (media) {
-    styleElement.setAttribute('media', media)
-  }
-  if (options.ssrId) {
-    styleElement.setAttribute(ssrIdKey, obj.id)
-  }
-
-  if (sourceMap) {
-    // https://developer.chrome.com/devtools/docs/javascript-debugging
-    // this makes source maps inside style tags work properly in Chrome
-    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
-    // http://stackoverflow.com/a/26603875
-    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
-  }
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = css
-  } else {
-    while (styleElement.firstChild) {
-      styleElement.removeChild(styleElement.firstChild)
-    }
-    styleElement.appendChild(document.createTextNode(css))
-  }
-}
-
-
-/***/ }),
-
-/***/ 280:
+/***/ 279:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1000,11 +654,11 @@ var denormalize$1 = function denormalize$$1(input, schema, entities) {
 
 /***/ }),
 
-/***/ 282:
+/***/ 281:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_normalizr__ = __webpack_require__(280);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_normalizr__ = __webpack_require__(279);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -1015,63 +669,18 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 /* harmony default export */ __webpack_exports__["a"] = ({
     methods: {
-        $handleGetFieldList: function $handleGetFieldList() {
-            var fields = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-
+        handleUpdateField: function handleUpdateField(field, data, fieldKeyOrIndex, isSearchbar) {
+            this.updateStoreFieldList(field, data[field] || data);
+            isSearchbar ? this.updateSearchbarFieldList(field, fieldKeyOrIndex) : this.updateFieldList(field, fieldKeyOrIndex);
+        },
+        updateFieldList: function updateFieldList(field, fieldKeyOrIndex) {
+            this.fields[fieldKeyOrIndex]["list"] = this.$store.getters[field + "_list"];
+        },
+        updateSearchbarFieldList: function updateSearchbarFieldList(field, fieldIndex) {
+            this.searchbar.fields[fieldIndex]["list"] = this.$store.getters[field + "_list"];
+        },
+        updateStoreFieldList: function updateStoreFieldList(field, value) {
             var _this = this;
-
-            var fieldsObj = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-            var usage = arguments[2];
-
-            this.$$api_option_list({
-                data: {
-                    types: fields
-                },
-                fn: function fn(_ref) {
-                    var data = _ref.data;
-
-                    fields.forEach(function (type) {
-                        if (type === "extrafield_group") {
-                            data.items[type] = [{
-                                id: 0,
-                                value: "",
-                                title: _this.$t("OPTION_NONE")
-                            }].concat(_toConsumableArray(data.items[type]));
-                            var groups = new __WEBPACK_IMPORTED_MODULE_0_normalizr__["b" /* schema */].Entity("groups");
-                            var normalize_list = Object(__WEBPACK_IMPORTED_MODULE_0_normalizr__["a" /* normalize */])(data.items[type], [groups]);
-                            _this.handleUpdateField(type, normalize_list.entities["groups"], fieldsObj[type], usage);
-                        } else {
-                            _this.handleUpdateField(type, data.items, fieldsObj[type], usage);
-                        }
-                    });
-                }
-            });
-        },
-        $getFieldList: function $getFieldList() {
-            var _this2 = this;
-
-            var fieldsObj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-            var usage = arguments[1];
-
-            var fieldsNotExit = Object.keys(fieldsObj).filter(function (key) {
-                return !_this2.checkStoreField(key);
-            });
-            if (fieldsNotExit.length > 0) {
-                this.$handleGetFieldList(fieldsNotExit, fieldsObj, usage);
-            }
-        },
-        handleUpdateField: function handleUpdateField(field, data, key_or_index, update_target) {
-            this.onUpdateStoreFieldList(field, data[field] || data);
-            update_target ? this.onUpdateSearchbarFieldList(field, key_or_index) : this.onUpdateFieldList(field, key_or_index);
-        },
-        onUpdateFieldList: function onUpdateFieldList(field, field_key_or_index) {
-            this.fields[field_key_or_index]["list"] = this.$store.getters[field + "_list"];
-        },
-        onUpdateSearchbarFieldList: function onUpdateSearchbarFieldList(field, field_index) {
-            this.searchbar.fields[field_index]["list"] = this.$store.getters[field + "_list"];
-        },
-        onUpdateStoreFieldList: function onUpdateStoreFieldList(field, value) {
-            var _this3 = this;
 
             if (field === "language") {
                 value = [{
@@ -1086,7 +695,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                         prefix = _el$tree_list_title$s2[0],
                         title = _el$tree_list_title$s2[1];
 
-                    var combinedTitle = title ? prefix + " " + _this3.$t(title) : _this3.$t(prefix);
+                    var combinedTitle = title ? prefix + " " + _this.$t(title) : _this.$t(prefix);
                     return _extends({}, el, { tree_list_title: combinedTitle });
                 });
             }
@@ -1098,6 +707,68 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                 type: field,
                 data: value
             });
+        },
+
+        /**
+         * 跟後端拿所需欄位類型之值
+         * @param {Array} fields
+         * @param {Object} typeAndTarget
+         * @param {Boolean} isSearchbar
+         * @returns {Object} 以 type 為 key 值的 Array
+         */
+        $_optionMixin_handleGetFieldList: function $_optionMixin_handleGetFieldList() {
+            var fields = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+
+            var _this2 = this;
+
+            var typeAndTarget = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+            var isSearchbar = arguments[2];
+
+            this.$$api_option_list({
+                data: {
+                    types: fields
+                },
+                fn: function fn(_ref) {
+                    var data = _ref.data;
+
+                    fields.forEach(function (type) {
+                        if (type === "extrafield_group") {
+                            data.items[type] = [{
+                                id: 0,
+                                value: "",
+                                title: _this2.$t("OPTION_NONE")
+                            }].concat(_toConsumableArray(data.items[type]));
+                            var groups = new __WEBPACK_IMPORTED_MODULE_0_normalizr__["b" /* schema */].Entity("groups");
+                            var normalize_list = Object(__WEBPACK_IMPORTED_MODULE_0_normalizr__["a" /* normalize */])(data.items[type], [groups]);
+                            _this2.handleUpdateField(type, normalize_list.entities["groups"], typeAndTarget[type], isSearchbar);
+                        } else {
+                            _this2.handleUpdateField(type, data.items, typeAndTarget[type], isSearchbar);
+                        }
+                    });
+                }
+            });
+        },
+
+        /**
+         * 更新下拉選單列表
+         * @param {Object} typeAndTarget
+         * 更新的欄位類型與其位置與fields 的相對位置
+         * 當 fields 為 Object 則為 key 值
+         * 當 fields 為 Array 則為 index 值
+         * @param {Boolean} isSearchbar 是否為 searchbar 欄位的下拉選單
+         */
+        $_optionMixin_updateFieldList: function $_optionMixin_updateFieldList() {
+            var _this3 = this;
+
+            var typeAndTarget = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+            var isSearchbar = arguments[1];
+
+            var fieldsNotExit = Object.keys(typeAndTarget).filter(function (key) {
+                return !_this3.checkStoreField(key);
+            });
+            if (fieldsNotExit.length > 0) {
+                this.$_optionMixin_handleGetFieldList(fieldsNotExit, typeAndTarget, isSearchbar);
+            }
         },
         checkStoreField: function checkStoreField(field) {
             return Boolean(this.$store.getters[field + "_list"]);
@@ -1119,7 +790,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     data: function data() {
         return {
             list: [],
-            list_loading: {
+            listLoading: {
                 flag: false
             },
             paginations: {
@@ -1134,15 +805,22 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
     watch: {
         $route: {
-            handler: "$initList",
+            handler: "$_listMixin_init",
             immediate: true
         }
     },
     methods: {
-        $onClickBtnAdd: function $onClickBtnAdd() {
+        $_listMixin_goAddRoute: function $_listMixin_goAddRoute() {
             this.$router.push(this.$route.path + "/edit");
         },
-        $onClickBntEdit: function $onClickBntEdit(query) {
+
+        /**
+         * 組裝編輯路徑
+         * @param {Object} query 編輯項目參數
+         * @param.attr query.id 項目 id
+         * @param.attr query.pid 項目 parent_id
+         */
+        $_listMixin_goEditRoute: function $_listMixin_goEditRoute(query) {
             this.$router.push({
                 path: this.$route.path + "/edit",
                 query: _extends({}, query, {
@@ -1150,32 +828,78 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 })
             });
         },
-        $onSearchReset: function $onSearchReset() {
+        $_listMixin_onSearchReset: function $_listMixin_onSearchReset() {
             this.$router.push({
                 path: this.$route.path
             });
         },
-        $onSearch: function $onSearch(_ref) {
-            var data = _ref.data;
+        $_listMixin_onSearch: function $_listMixin_onSearch(data) {
+            var query = this.$route.query;
 
-            var sd = {};
+            var searchData = _extends({}, query);
+
+            for (var s in data) {
+                searchData[s] = data[s];
+                if (!searchData[s]) {
+                    delete searchData[s];
+                }
+            }
+            this.$router.push({
+                path: this.$route.path,
+                query: searchData
+            });
+        },
+        $_listMixin_updateCurrentPage: function $_listMixin_updateCurrentPage(page) {
+            var _this = this;
+
+            this.$_listMixin_getList({
+                page: page,
+                fn: function fn() {
+                    _this.$router.push({
+                        path: _this.$route.path,
+                        query: _this.setRouteQuery("page", page)
+                    });
+                }
+            });
+        },
+        $_listMixin_updatePageSize: function $_listMixin_updatePageSize(pageSize) {
+            var _this2 = this;
+
+            this.$_listMixin_getList({
+                pageSize: pageSize,
+                fn: function fn() {
+                    _this2.$router.push({
+                        path: _this2.$route.path,
+                        query: _this2.setRouteQuery("page_size", pageSize)
+                    });
+                }
+            });
+        },
+        $_listMixin_getList: function $_listMixin_getList() {
+            var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+                page = _ref.page,
+                pageSize = _ref.pageSize,
+                where = _ref.where,
+                fn = _ref.fn;
+
+            this.listLoading.flag = true;
 
             var query = this.$route.query;
 
-            for (var p in query) {
-                sd[p] = query[p];
-            }
-            for (var s in data) {
-                sd[s] = data[s];
-                if (!sd[s]) {
-                    delete sd[s];
-                }
-            }
+            this.paginations.current_page = page || Number(query.page) || 1;
+            this.paginations.page_size = pageSize || Number(query.page_size) || this.paginations.page_size;
 
-            this.$router.push({
-                path: this.$route.path,
-                query: sd
+            var page_data = Object.assign(this.getRouteQuery(), {
+                page: this.paginations.current_page,
+                limit: this.paginations.page_size
             });
+            if (where) {
+                page_data = Object.assign(page_data, where || {});
+            }
+            this.handleGetList({ page_data: page_data, fn: fn });
+        },
+        $_listMixin_init: function $_listMixin_init() {
+            this.$_listMixin_getList(); //為了在 cms mixin 可以加參數
         },
         setRouteQuery: function setRouteQuery(field, value) {
             var query = Object.assign({}, this.$route.query);
@@ -1189,70 +913,18 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             return query;
         },
         getRouteQuery: function getRouteQuery() {
-            var _this = this;
+            var _this3 = this;
 
             var query = this.$route.query;
-            var intArray = ["id", "pid", "category_id", "access"];
+            var numberArray = ["id", "pid", "category_id", "access"];
             var dateArray = ["start_date", "end_date"];
             var data = {};
 
             Object.keys(query).forEach(function (field) {
-                _this.searchbar.default_value[field] = intArray.includes(field) ? parseInt(query[field]) : dateArray.includes(field) ? _this.$options.filters.storeDateFormat(query[field]) : query[field];
+                _this3.searchbar.defaultValue[field] = numberArray.includes(field) ? Number(query[field]) : dateArray.includes(field) ? _this3.$options.filters.storeDateFormat(query[field]) : query[field];
                 data[field] = query[field];
             });
             return data;
-        },
-        $onChangeCurrentPage: function $onChangeCurrentPage(page) {
-            var _this2 = this;
-
-            this.$onGetList({
-                page: page,
-                fn: function fn() {
-                    _this2.$router.push({
-                        path: _this2.$route.path,
-                        query: _this2.setRouteQuery("page", page)
-                    });
-                }
-            });
-        },
-        $onChangePageSize: function $onChangePageSize(pageSize) {
-            var _this3 = this;
-
-            this.$onGetList({
-                pageSize: pageSize,
-                fn: function fn() {
-                    _this3.$router.push({
-                        path: _this3.$route.path,
-                        query: _this3.setRouteQuery("page_size", pageSize)
-                    });
-                }
-            });
-        },
-        $onGetList: function $onGetList() {
-            var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-                page = _ref2.page,
-                pageSize = _ref2.pageSize,
-                where = _ref2.where,
-                fn = _ref2.fn;
-
-            this.list_loading.flag = true;
-
-            var query = this.$route.query;
-
-            this.paginations.current_page = page || parseInt(query.page) || 1;
-            this.paginations.page_size = pageSize || parseInt(query.page_size) || this.paginations.page_size;
-
-            var page_data = Object.assign(this.getRouteQuery(), {
-                page: this.paginations.current_page,
-                limit: this.paginations.page_size
-            });
-            if (where) {
-                page_data = Object.assign(page_data, where || {});
-            }
-            this.handleGetList({ page_data: page_data, fn: fn });
-        },
-        $initList: function $initList() {
-            this.$onGetList();
         }
     }
 });
@@ -1265,32 +937,32 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 "use strict";
 /* harmony default export */ __webpack_exports__["a"] = ({
     methods: {
-        $initList: function $initList() {
+        $_listMixin_init: function $_listMixin_init() {
             this.$set(this.toolbar, "type", this.$route.query.state === "-2" ? "trash" : "list");
-            this.$onGetList();
+            this.$_listMixin_getList();
         }
     }
 });
 
 /***/ }),
 
-/***/ 514:
+/***/ 521:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(515);
+var content = __webpack_require__(522);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(256)("9276126a", content, false, {});
+var update = __webpack_require__(256)("09e7f294", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-88675c4e\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./list.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-88675c4e\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./list.vue");
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-08fbaeac\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./list.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-08fbaeac\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./list.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -1301,7 +973,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 515:
+/***/ 522:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(255)(false);
@@ -1309,25 +981,21 @@ exports = module.exports = __webpack_require__(255)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ 516:
+/***/ 523:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_option_mixin__ = __webpack_require__(282);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_list_mixin__ = __webpack_require__(283);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mixins_cms_list_mixin__ = __webpack_require__(289);
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_options__ = __webpack_require__(281);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_list__ = __webpack_require__(283);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mixins_list_cms__ = __webpack_require__(289);
 //
 //
 //
@@ -1354,34 +1022,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "menu-list",
-  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_option_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1_mixins_list_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2_mixins_cms_list_mixin__["a" /* default */]],
+  name: "ModuleList",
+  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_options__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1_mixins_list__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2_mixins_list_cms__["a" /* default */]],
   data: function data() {
-    var _this = this,
-        _ref4;
+    var _this = this;
 
-    return _ref4 = {
-      sort: {
-        show: true
-      },
-      toolbar: {
-        type: "list",
-        custom: [{
-          text: this.$t("TOOLBAR_CHECKOUT"),
-          method: "checkout",
-          fn: function fn(_ref) {
-            var ids = _ref.ids;
-
-            _this.onClickBtnCheckout({ ids: ids });
-          }
-        }]
-      },
+    return {
       fields: [{
-        width: "60",
-        key: "id",
-        label: this.$t("LIST_DATA_HEADING_ID")
-      }, {
-        key: "tree_title",
+        key: "title",
         label: this.$t("FIELD_TITLE_LABEL"),
         type: "editable"
       }, {
@@ -1391,17 +1039,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         key: "category_title",
         label: this.$t("OPTION_CATEGORY")
       }, {
-        key: "host_title",
-        label: this.$t("MENU_FIELD_SITE_NAME_LABEL")
-      }, {
         key: "state",
         label: this.$t("OPTION_STATE"),
         type: "icon-label",
         width: "90",
-        formatter: function formatter(item) {
+        formatter: function formatter(value) {
           return {
-            color: "item_state_" + item + "_color",
-            icon: ["fal", item === 1 ? "check" : "times"]
+            color: "item_state_" + value + "_color",
+            icon: ["fal", value === 1 ? "check" : "times"]
           };
         }
       }, {
@@ -1410,188 +1055,174 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }, {
         key: "language_title",
         label: this.$t("OPTION_LANGUAGE"),
-        formatter: function formatter(item) {
-          return item.language === "*" ? _this.$t("ALL_LANGUAGE") : item.language_title;
-        }
-      }]
-    }, _defineProperty(_ref4, "toolbar", {
-      type: "list",
-      custom: [{
-        text: this.$t("TOOLBAR_PUBLISH"),
-        method: "updateState",
-        fn: function fn(_ref2) {
-          var ids = _ref2.ids;
+        formatter: function formatter(_ref) {
+          var language = _ref.language,
+              language_title = _ref.language_title;
 
-          _this.onClickBtnUpdateState({ ids: ids, state: 1 });
+          return language === "*" ? _this.$t("ALL_LANGUAGE") : language_title;
         }
       }, {
-        text: this.$t("TOOLBAR_UNPUBLISH"),
-        method: "updateState",
-        fn: function fn(_ref3) {
-          var ids = _ref3.ids;
-
-          _this.onClickBtnUpdateState({ ids: ids, state: 0 });
-        }
-      }]
-    }), _defineProperty(_ref4, "searchbar", {
-      fields: [{
-        key: "search",
-        desc: this.$t("TOOLBAR_KEYWORDS"),
-        clearable: true
-      }, {
-        key: "state",
-        type: "select",
-        desc: this.$t("OPTION_STATE"),
-        clearable: true,
-        list: [{
-          value: "1",
-          text: this.$t("PUBLISHED")
-        }, {
-          value: "0",
-          text: this.$t("UNPUBLISHED")
-        }, {
-          value: "-1",
-          text: this.$t("ARCHIVED")
-        }, {
-          value: "-2",
-          text: this.$t("TRASHED")
-        }]
-      }, {
-        key: "category_id",
-        type: "select",
-        desc: this.$t("OPTION_CATEGORY"),
-        clearable: true,
-        list: this.$store.getters.menu_category_list,
-        custom_attrs: {
-          label: "tree_list_title",
-          value: "id"
-        }
-      }, {
-        key: "language",
-        type: "select",
-        desc: this.$t("OPTION_LANGUAGE"),
-        clearable: true,
-        list: this.$store.getters.language_list,
-        custom_attrs: {
-          label: "title",
-          value: "sef"
-        }
-      }, {
-        key: "access",
-        type: "select",
-        desc: this.$t("FIELD_ACCESS_LEVEL"),
-        clearable: true,
-        list: this.$store.getters.viewlevel_list,
-        custom_attrs: {
-          label: "title",
-          value: "id"
-        }
+        width: "60",
+        key: "id",
+        label: this.$t("LIST_DATA_HEADING_ID")
       }],
-      default_value: {
-        search: "",
-        state: "",
-        category_id: "",
-        language: "",
-        access: ""
+      toolbar: {
+        type: "list",
+        custom: [{
+          text: this.$t("TOOLBAR_CHECKOUT"),
+          method: "checkout",
+          fn: function fn(_ref2) {
+            var ids = _ref2.ids;
+
+            _this.handleCheckout({ ids: ids });
+          }
+        }]
+      },
+      searchbar: {
+        fields: [{
+          key: "search",
+          desc: this.$t("TOOLBAR_KEYWORDS"),
+          clearable: true
+        }, {
+          key: "state",
+          type: "select",
+          desc: this.$t("OPTION_STATE"),
+          clearable: true,
+          list: [{
+            value: "1",
+            text: this.$t("PUBLISHED")
+          }, {
+            value: "0",
+            text: this.$t("UNPUBLISHED")
+          }, {
+            value: "-1",
+            text: this.$t("ARCHIVED")
+          }, {
+            value: "-2",
+            text: this.$t("TRASHED")
+          }],
+          events: {
+            change: function change() {
+              _this.$_listMixin_onSearch(_this.searchbar.defaultValue);
+            }
+          }
+        }, {
+          key: "category_id",
+          type: "select",
+          desc: this.$t("OPTION_CATEGORY"),
+          clearable: true,
+          list: this.$store.getters.module_category_list,
+          custom_attrs: {
+            label: "tree_list_title",
+            value: "id"
+          },
+          events: {
+            change: function change() {
+              _this.$_listMixin_onSearch(_this.searchbar.defaultValue);
+            }
+          }
+        }, {
+          key: "language",
+          type: "select",
+          desc: this.$t("OPTION_LANGUAGE"),
+          clearable: true,
+          list: this.$store.getters.language_list,
+          custom_attrs: {
+            label: "title",
+            value: "sef"
+          },
+          events: {
+            change: function change() {
+              _this.$_listMixin_onSearch(_this.searchbar.defaultValue);
+            }
+          }
+        }, {
+          key: "access",
+          type: "select",
+          desc: this.$t("FIELD_ACCESS_LEVEL"),
+          clearable: true,
+          list: this.$store.getters.viewlevel_list,
+          custom_attrs: {
+            label: "title",
+            value: "id"
+          },
+          events: {
+            change: function change() {
+              _this.$_listMixin_onSearch(_this.searchbar.defaultValue);
+            }
+          }
+        }],
+        defaultValue: {
+          search: "",
+          state: "",
+          category_id: "",
+          language: "",
+          access: ""
+        }
       }
-    }), _ref4;
+    };
   },
   created: function created() {
-    this.$getFieldList({ menu_category: 2, language: 3, viewlevel: 4 }, "searchbar");
+    this.$_optionMixin_updateFieldList({ module_category: 2, language: 3, viewlevel: 4 }, true);
   },
 
   methods: {
-    /**
-     * list actions
-     */
-    onClickBtnCheckout: function onClickBtnCheckout(_ref5) {
+    handleCheckout: function handleCheckout(_ref3) {
       var _this2 = this;
 
-      var data = _ref5.data,
-          ids = _ref5.ids;
+      var data = _ref3.data,
+          ids = _ref3.ids;
 
       var checkout_data = ids ? ids : [data.id];
-      this.$$api_menu_checkout({
+      this.$$api_module_checkout({
         data: { ids: checkout_data },
-        fn: function fn(_ref6) {
-          var msg = _ref6.msg;
+        fn: function fn(_ref4) {
+          var msg = _ref4.msg;
 
           _this2.$message.success(msg);
-          _this2.$onGetList();
+          _this2.$_listMixin_getList();
         }
       });
     },
-    onClickBtnBatchDelete: function onClickBtnBatchDelete(_ref7) {
+    handleBatchDelete: function handleBatchDelete(_ref5) {
       var _this3 = this;
 
-      var ids = _ref7.ids,
-          datas = _ref7.datas;
+      var ids = _ref5.ids,
+          datas = _ref5.datas;
 
       this.$confirm(this.$t("GLOBAL_CONFIRM_DELETE")).then(function () {
-        _this3.$$api_menu_delete({
+        _this3.$$api_module_delete({
           data: { ids: ids },
-          fn: function fn(_ref8) {
-            var data = _ref8.data;
+          fn: function fn(_ref6) {
+            var data = _ref6.data;
 
-            _this3.$onGetList();
+            _this3.$_listMixin_getList();
           }
         });
       });
     },
-    onClickBtnBatchTrash: function onClickBtnBatchTrash(_ref9) {
-      var ids = _ref9.ids,
-          state = _ref9.state;
+    setEditRouteQuery: function setEditRouteQuery(_ref7) {
+      var data = _ref7.data;
 
-      this.onClickBtnUpdateState({ ids: ids, state: state });
-    },
-    onClickBtnBatchRestore: function onClickBtnBatchRestore(_ref10) {
-      var ids = _ref10.ids,
-          state = _ref10.state;
-
-      this.onClickBtnUpdateState({ ids: ids, state: state });
-    },
-    onClickBtnUpdateState: function onClickBtnUpdateState(_ref11) {
-      var _this4 = this;
-
-      var ids = _ref11.ids,
-          state = _ref11.state;
-
-      this.$$api_menu_updateState({
-        data: {
-          ids: ids,
-          state: state
-        },
-        fn: function fn(_ref12) {
-          var msg = _ref12.msg;
-
-          _this4.$message.success(msg);
-          _this4.$onGetList();
-        }
-      });
-    },
-    handleEditQuery: function handleEditQuery(_ref13) {
-      var data = _ref13.data;
-
-      this.$onClickBntEdit({
-        id: data.id,
-        pid: data.parent_id
+      this.$_listMixin_goEditRoute({
+        id: data.id
       });
     },
     handleGetList: function handleGetList() {
-      var _this5 = this;
+      var _this4 = this;
 
-      var _ref14 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-          page_data = _ref14.page_data,
-          _fn = _ref14.fn;
+      var _ref8 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+          page_data = _ref8.page_data,
+          _fn = _ref8.fn;
 
-      this.$$api_menu_list({
+      this.$$api_module_list({
         data: page_data,
-        fn: function fn(_ref15) {
-          var data = _ref15.data;
+        fn: function fn(_ref9) {
+          var data = _ref9.data;
 
-          _this5.list_loading.flag = false;
-          _this5.list = data.items;
-          _this5.paginations.total = data.pagination.total;
+          _this4.listLoading.flag = false;
+          _this4.list = data.items;
+          _this4.paginations.total = data.pagination.total;
 
           _fn && _fn();
         }
@@ -1602,7 +1233,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /***/ }),
 
-/***/ 517:
+/***/ 524:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -1612,24 +1243,22 @@ var render = function() {
   return _c("ListData", {
     ref: "list-data",
     attrs: {
-      List: _vm.list,
-      ListLoading: _vm.list_loading,
-      Pagination: _vm.paginations,
-      Toolbar: _vm.toolbar,
-      Searchbar: _vm.searchbar,
-      FieldList: _vm.fields
+      list: _vm.list,
+      "list-loading": _vm.listLoading,
+      pagination: _vm.paginations,
+      toolbar: _vm.toolbar,
+      searchbar: _vm.searchbar,
+      "field-list": _vm.fields
     },
     on: {
-      onClickBtnAdd: _vm.$onClickBtnAdd,
-      onClickBtnEdit: _vm.handleEditQuery,
-      onClickBtnBatchTrash: _vm.onClickBtnBatchTrash,
-      onClickBtnBatchRestore: _vm.onClickBtnBatchRestore,
-      onClickBtnBatchDelete: _vm.onClickBtnBatchDelete,
-      onClickBtnCheckout: _vm.onClickBtnCheckout,
-      onChangeCurrentPage: _vm.$onChangeCurrentPage,
-      onChangePageSize: _vm.$onChangePageSize,
-      onSearch: _vm.$onSearch,
-      onSearchReset: _vm.$onSearchReset
+      "click-add": _vm.$_listMixin_goAddRoute,
+      "click-edit": _vm.setEditRouteQuery,
+      "click-batch-delete": _vm.handleBatchDelete,
+      "click-checkout": _vm.handleCheckout,
+      "change-current-page": _vm.$_listMixin_updateCurrentPage,
+      "change-page-size": _vm.$_listMixin_updatePageSize,
+      search: _vm.$_listMixin_onSearch,
+      "search-reset": _vm.$_listMixin_onSearchReset
     }
   })
 }
@@ -1639,7 +1268,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-88675c4e", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-08fbaeac", module.exports)
   }
 }
 

@@ -6,9 +6,9 @@ webpackJsonp([44],{
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(420)
+var __vue_script__ = __webpack_require__(415)
 /* template */
-var __vue_template__ = __webpack_require__(421)
+var __vue_template__ = __webpack_require__(416)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -66,20 +66,19 @@ module.exports = Component.exports
     },
 
     watch: {
-        $route: function $route() {
-            this.$initView();
+        $route: {
+            immediate: true,
+            handler: "initData"
         }
     },
-    created: function created() {
-        this.$initView();
-    },
-
     methods: {
-        $onSubmitFinish: function $onSubmitFinish(_ref) {
-            var type = _ref.type,
+        $_editMixin_onSubmitFinish: function $_editMixin_onSubmitFinish(_ref) {
+            var msg = _ref.msg,
+                btn_type = _ref.btn_type,
                 query = _ref.query;
 
-            switch (type) {
+            this.$message.success(msg);
+            switch (btn_type) {
                 case "save":
                     this.$router.push({
                         path: this.$route.path,
@@ -93,14 +92,14 @@ module.exports = Component.exports
                     this.$router.go(0);
                     break;
                 case "savenclose":
-                    this.$onCancel();
+                    this.$_editMixin_onCancel();
                     break;
             }
         },
-        $onCancel: function $onCancel() {
+        $_editMixin_onCancel: function $_editMixin_onCancel() {
             var checkout_id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
 
-            if (checkout_id) {
+            if (this.checkRouteNeedCheckout(this.$route.path) && checkout_id) {
                 this.handleCheckout(checkout_id);
             }
             this.$router.push({
@@ -108,16 +107,46 @@ module.exports = Component.exports
                 query: this.$route.query.from
             });
         },
-        onUpdateViewParams: function onUpdateViewParams() {
-            this.params.id = parseInt(this.$route.query.id) || "";
-            this.params.pid = parseInt(this.$route.query.pid) || 1;
+        checkRouteNeedCheckout: function checkRouteNeedCheckout(route) {
+            var checkoutArray = ["item", "category", "menu"];
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = checkoutArray[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var path = _step.value;
+
+                    if (route.includes(path)) {
+                        return true;
+                        break;
+                    }
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+        },
+        updateParams: function updateParams() {
+            this.params.id = Number(this.$route.query.id) || "";
+            this.params.pid = Number(this.$route.query.pid) || 1;
             this.$set(this.toolbar, "type", this.params.id ? "edit" : "add");
         },
-        $initView: function $initView() {
-            this.onUpdateViewParams();
+        initData: function initData() {
+            this.updateParams();
 
             if (this.params.id) {
-                this.onGetView();
+                this.handleGetData();
             }
         }
     }
@@ -125,12 +154,12 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 420:
+/***/ 415:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_edit_mixin__ = __webpack_require__(284);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_edit__ = __webpack_require__(284);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -147,7 +176,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "asset-group-edit",
-  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_edit_mixin__["a" /* default */]],
+  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_edit__["a" /* default */]],
   data: function data() {
     return {
       fields: [{
@@ -170,7 +199,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       toolbar: {
         type: "edit"
       },
-      default_value: {
+      defaultValue: {
         title: "",
         state: 1
       }
@@ -178,37 +207,33 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   },
 
   methods: {
-    onSubmit: function onSubmit(_ref) {
+    handleSubmit: function handleSubmit(_ref) {
       var _this = this;
 
-      var data = _ref.data,
-          info = _ref.info,
-          type = _ref.type;
+      var submit_data = _ref.submit_data,
+          btn_type = _ref.btn_type;
 
       if (this.params.id) {
-        data.id = this.params.id;
+        submit_data.id = this.params.id;
       }
       this.$$api_asset_saveGroup({
-        data: data,
+        data: submit_data,
         fn: function fn(_ref2) {
           var data = _ref2.data,
               msg = _ref2.msg;
 
-          _this.$message.success(msg);
-          _this.$onSubmitFinish({
-            type: type,
-            query: { id: data.items.id, pid: data.items.parent_id }
+          _this.$_editMixin_onSubmitFinish({
+            msg: msg,
+            btn_type: btn_type,
+            query: {
+              id: data ? data.items.id : submit_data.id,
+              pid: data ? data.items.parent_id : submit_data.parent_id
+            }
           });
         }
       });
     },
-    onCancel: function onCancel() {
-      this.$router.push({
-        path: this.$route.path.replace("/edit", ""),
-        query: this.$router.go(-1)
-      });
-    },
-    onGetView: function onGetView() {
+    handleGetData: function handleGetData() {
       var _this2 = this;
 
       this.$$api_asset_getGroup({
@@ -216,7 +241,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         fn: function fn(_ref3) {
           var data = _ref3.data;
 
-          _this2.default_value = _extends({}, _this2.default_value, data.items);
+          _this2.defaultValue = _extends({}, _this2.defaultValue, data.items);
         }
       });
     }
@@ -225,7 +250,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 /***/ }),
 
-/***/ 421:
+/***/ 416:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -234,11 +259,11 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("FormData", {
     attrs: {
-      FieldList: _vm.fields,
-      DefaultValue: _vm.default_value,
-      Toolbar: _vm.toolbar
+      "default-value": _vm.defaultValue,
+      "field-list": _vm.fields,
+      toolbar: _vm.toolbar
     },
-    on: { onSubmit: _vm.onSubmit, onCancel: _vm.onCancel }
+    on: { "on-submit": _vm.handleSubmit, "on-cancel": _vm.$_editMixin_onCancel }
   })
 }
 var staticRenderFns = []

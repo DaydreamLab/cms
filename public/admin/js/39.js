@@ -6,9 +6,9 @@ webpackJsonp([39],{
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(492)
+var __vue_script__ = __webpack_require__(487)
 /* template */
-var __vue_template__ = __webpack_require__(493)
+var __vue_template__ = __webpack_require__(488)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -66,20 +66,19 @@ module.exports = Component.exports
     },
 
     watch: {
-        $route: function $route() {
-            this.$initView();
+        $route: {
+            immediate: true,
+            handler: "initData"
         }
     },
-    created: function created() {
-        this.$initView();
-    },
-
     methods: {
-        $onSubmitFinish: function $onSubmitFinish(_ref) {
-            var type = _ref.type,
+        $_editMixin_onSubmitFinish: function $_editMixin_onSubmitFinish(_ref) {
+            var msg = _ref.msg,
+                btn_type = _ref.btn_type,
                 query = _ref.query;
 
-            switch (type) {
+            this.$message.success(msg);
+            switch (btn_type) {
                 case "save":
                     this.$router.push({
                         path: this.$route.path,
@@ -93,14 +92,14 @@ module.exports = Component.exports
                     this.$router.go(0);
                     break;
                 case "savenclose":
-                    this.$onCancel();
+                    this.$_editMixin_onCancel();
                     break;
             }
         },
-        $onCancel: function $onCancel() {
+        $_editMixin_onCancel: function $_editMixin_onCancel() {
             var checkout_id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
 
-            if (checkout_id) {
+            if (this.checkRouteNeedCheckout(this.$route.path) && checkout_id) {
                 this.handleCheckout(checkout_id);
             }
             this.$router.push({
@@ -108,16 +107,46 @@ module.exports = Component.exports
                 query: this.$route.query.from
             });
         },
-        onUpdateViewParams: function onUpdateViewParams() {
-            this.params.id = parseInt(this.$route.query.id) || "";
-            this.params.pid = parseInt(this.$route.query.pid) || 1;
+        checkRouteNeedCheckout: function checkRouteNeedCheckout(route) {
+            var checkoutArray = ["item", "category", "menu"];
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = checkoutArray[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var path = _step.value;
+
+                    if (route.includes(path)) {
+                        return true;
+                        break;
+                    }
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+        },
+        updateParams: function updateParams() {
+            this.params.id = Number(this.$route.query.id) || "";
+            this.params.pid = Number(this.$route.query.pid) || 1;
             this.$set(this.toolbar, "type", this.params.id ? "edit" : "add");
         },
-        $initView: function $initView() {
-            this.onUpdateViewParams();
+        initData: function initData() {
+            this.updateParams();
 
             if (this.params.id) {
-                this.onGetView();
+                this.handleGetData();
             }
         }
     }
@@ -133,20 +162,17 @@ module.exports = Component.exports
     created: function created() {
         var _this = this;
 
-        this.$$eventBus.$on("onClickCMSFormDataToolbar", function (_ref) {
-            var type = _ref.type;
-
-            switch (type) {
+        this.$$eventBus.$on("onClickCMSFormDataToolbar", function (btnType) {
+            switch (btnType) {
                 case "cancel":
-                    _this.$onCancel(_this.$route.query.id);
+                    _this.$_editMixin_onCancel(_this.$route.query.id);
                     break;
                 case "save":
                 case "savenclose":
                 case "savenadd":
                     _this.handleSubmit({
-                        ref: "form-data",
-                        type: type,
-                        submit_data: _this.default_value
+                        btn_type: btnType,
+                        submit_data: _this.defaultValue
                     });
                     break;
                 case "trash":
@@ -177,15 +203,25 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 492:
+/***/ 487:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_edit_mixin__ = __webpack_require__(284);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_cms_edit_mixin__ = __webpack_require__(288);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_edit__ = __webpack_require__(284);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_edit_cms__ = __webpack_require__(288);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -232,11 +268,20 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "tag-edit",
-  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_edit_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1_mixins_cms_edit_mixin__["a" /* default */]],
+  name: "TagEdit",
+  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_edit__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1_mixins_edit_cms__["a" /* default */]],
   data: function data() {
     return {
-      default_value: {
+      fields: {
+        language: {
+          list: this.$store.getters.language_list,
+          custom_attrs: {
+            label: "title",
+            value: "sef"
+          }
+        }
+      },
+      defaultValue: {
         title: "",
         alias: "",
         state: 1,
@@ -255,7 +300,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       var _this = this;
 
       var submit_data = _ref.submit_data,
-          type = _ref.type;
+          btn_type = _ref.btn_type;
 
       if (this.params.id) {
         submit_data.id = this.params.id;
@@ -266,15 +311,15 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
           var data = _ref2.data,
               msg = _ref2.msg;
 
-          _this.$message.success(msg);
-          if (data) {
-            submit_data.id = data.items.id;
-          }
-          _this.$onSubmitFinish({ type: type, query: { id: submit_data.id } });
+          _this.$_editMixin_onSubmitFinish({
+            msg: msg,
+            btn_type: btn_type,
+            query: { id: data ? data.items.id : submit_data.id }
+          });
         }
       });
     },
-    onGetView: function onGetView() {
+    handleGetData: function handleGetData() {
       var _this2 = this;
 
       this.$$api_tag_get({
@@ -282,7 +327,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         fn: function fn(_ref3) {
           var data = _ref3.data;
 
-          _this2.default_value = _extends({}, _this2.default_value, data.items);
+          _this2.defaultValue = _extends({}, _this2.defaultValue, data.items);
         }
       });
     }
@@ -291,7 +336,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 /***/ }),
 
-/***/ 493:
+/***/ 488:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -322,7 +367,7 @@ var render = function() {
                       ref: "form-data",
                       attrs: {
                         "label-position": "top",
-                        model: _vm.default_value
+                        model: _vm.defaultValue
                       }
                     },
                     [
@@ -337,11 +382,11 @@ var render = function() {
                         [
                           _c("el-input", {
                             model: {
-                              value: _vm.default_value.title,
+                              value: _vm.defaultValue.title,
                               callback: function($$v) {
-                                _vm.$set(_vm.default_value, "title", $$v)
+                                _vm.$set(_vm.defaultValue, "title", $$v)
                               },
-                              expression: "default_value.title"
+                              expression: "defaultValue.title"
                             }
                           })
                         ],
@@ -359,11 +404,11 @@ var render = function() {
                         [
                           _c("el-input", {
                             model: {
-                              value: _vm.default_value.alias,
+                              value: _vm.defaultValue.alias,
                               callback: function($$v) {
-                                _vm.$set(_vm.default_value, "alias", $$v)
+                                _vm.$set(_vm.defaultValue, "alias", $$v)
                               },
-                              expression: "default_value.alias"
+                              expression: "defaultValue.alias"
                             }
                           })
                         ],
@@ -392,7 +437,7 @@ var render = function() {
                       ref: "form-data",
                       attrs: {
                         "label-position": "top",
-                        model: _vm.default_value
+                        model: _vm.defaultValue
                       }
                     },
                     [
@@ -410,11 +455,11 @@ var render = function() {
                           _c("el-input", {
                             attrs: { type: "textarea", rows: 2 },
                             model: {
-                              value: _vm.default_value.metadesc,
+                              value: _vm.defaultValue.metadesc,
                               callback: function($$v) {
-                                _vm.$set(_vm.default_value, "metadesc", $$v)
+                                _vm.$set(_vm.defaultValue, "metadesc", $$v)
                               },
-                              expression: "default_value.metadesc"
+                              expression: "defaultValue.metadesc"
                             }
                           })
                         ],
@@ -435,11 +480,11 @@ var render = function() {
                           _c("el-input", {
                             attrs: { type: "textarea", rows: 2 },
                             model: {
-                              value: _vm.default_value.metakeywords,
+                              value: _vm.defaultValue.metakeywords,
                               callback: function($$v) {
-                                _vm.$set(_vm.default_value, "metakeywords", $$v)
+                                _vm.$set(_vm.defaultValue, "metakeywords", $$v)
                               },
-                              expression: "default_value.metakeywords"
+                              expression: "defaultValue.metakeywords"
                             }
                           })
                         ],
@@ -471,7 +516,7 @@ var render = function() {
               "el-form",
               {
                 ref: "form-data",
-                attrs: { "label-position": "top", model: _vm.default_value }
+                attrs: { "label-position": "top", model: _vm.defaultValue }
               },
               [
                 _c(
@@ -487,11 +532,11 @@ var render = function() {
                       "el-select",
                       {
                         model: {
-                          value: _vm.default_value.state,
+                          value: _vm.defaultValue.state,
                           callback: function($$v) {
-                            _vm.$set(_vm.default_value, "state", $$v)
+                            _vm.$set(_vm.defaultValue, "state", $$v)
                           },
-                          expression: "default_value.state"
+                          expression: "defaultValue.state"
                         }
                       },
                       [
@@ -510,6 +555,42 @@ var render = function() {
                         })
                       ],
                       1
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "el-form-item",
+                  {
+                    attrs: {
+                      prop: "language",
+                      label: _vm.$t("OPTION_LANGUAGE") /*語言*/
+                    }
+                  },
+                  [
+                    _c(
+                      "el-select",
+                      {
+                        model: {
+                          value: _vm.defaultValue.language,
+                          callback: function($$v) {
+                            _vm.$set(_vm.defaultValue, "language", $$v)
+                          },
+                          expression: "defaultValue.language"
+                        }
+                      },
+                      _vm._l(_vm.fields.language.list, function(option) {
+                        return _c("el-option", {
+                          key: option[_vm.fields.language.custom_attrs.value],
+                          attrs: {
+                            label:
+                              option[_vm.fields.language.custom_attrs.label],
+                            value:
+                              option[_vm.fields.language.custom_attrs.value]
+                          }
+                        })
+                      })
                     )
                   ],
                   1

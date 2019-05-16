@@ -53,7 +53,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_normalizr__ = __webpack_require__(280);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_normalizr__ = __webpack_require__(279);
 //
 //
 //
@@ -73,12 +73,12 @@ var _isEmpty = function _isEmpty() {
   return __webpack_require__.e/* import() */(74).then(__webpack_require__.bind(null, 339));
 };
 var _pick = function _pick() {
-  return __webpack_require__.e/* import() */(72).then(__webpack_require__.bind(null, 404));
+  return __webpack_require__.e/* import() */(72).then(__webpack_require__.bind(null, 402));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: { FieldFormItem: function FieldFormItem() {
-      return __webpack_require__.e/* import() */(73).then(__webpack_require__.bind(null, 405));
+      return __webpack_require__.e/* import() */(73).then(__webpack_require__.bind(null, 403));
     } },
   props: {
     fields: {
@@ -148,7 +148,7 @@ var render = function() {
         { key: field.id, attrs: { prop: field.alias, label: field.title } },
         [
           _c("FieldFormItem", {
-            attrs: { DefaultValue: field, Data: _vm.data[field.id] }
+            attrs: { "default-value": _vm.data[field.id], fieldData: field }
           })
         ],
         1

@@ -6,13 +6,13 @@ webpackJsonp([1,74],{
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(463)
+  __webpack_require__(458)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(465)
+var __vue_script__ = __webpack_require__(460)
 /* template */
-var __vue_template__ = __webpack_require__(467)
+var __vue_template__ = __webpack_require__(462)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -52,353 +52,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 163:
-/***/ (function(module, exports) {
-
-/**
- * Translates the list format produced by css-loader into something
- * easier to manipulate.
- */
-module.exports = function listToStyles (parentId, list) {
-  var styles = []
-  var newStyles = {}
-  for (var i = 0; i < list.length; i++) {
-    var item = list[i]
-    var id = item[0]
-    var css = item[1]
-    var media = item[2]
-    var sourceMap = item[3]
-    var part = {
-      id: parentId + ':' + i,
-      css: css,
-      media: media,
-      sourceMap: sourceMap
-    }
-    if (!newStyles[id]) {
-      styles.push(newStyles[id] = { id: id, parts: [part] })
-    } else {
-      newStyles[id].parts.push(part)
-    }
-  }
-  return styles
-}
-
-
-/***/ }),
-
-/***/ 255:
-/***/ (function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function(useSourceMap) {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if(item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
-
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
-		});
-
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
-
-	return [content].join('\n');
-}
-
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-	return '/*# ' + data + ' */';
-}
-
-
-/***/ }),
-
-/***/ 256:
-/***/ (function(module, exports, __webpack_require__) {
-
-/*
-  MIT License http://www.opensource.org/licenses/mit-license.php
-  Author Tobias Koppers @sokra
-  Modified by Evan You @yyx990803
-*/
-
-var hasDocument = typeof document !== 'undefined'
-
-if (typeof DEBUG !== 'undefined' && DEBUG) {
-  if (!hasDocument) {
-    throw new Error(
-    'vue-style-loader cannot be used in a non-browser environment. ' +
-    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
-  ) }
-}
-
-var listToStyles = __webpack_require__(163)
-
-/*
-type StyleObject = {
-  id: number;
-  parts: Array<StyleObjectPart>
-}
-
-type StyleObjectPart = {
-  css: string;
-  media: string;
-  sourceMap: ?string
-}
-*/
-
-var stylesInDom = {/*
-  [id: number]: {
-    id: number,
-    refs: number,
-    parts: Array<(obj?: StyleObjectPart) => void>
-  }
-*/}
-
-var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
-var singletonElement = null
-var singletonCounter = 0
-var isProduction = false
-var noop = function () {}
-var options = null
-var ssrIdKey = 'data-vue-ssr-id'
-
-// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-// tags it will allow on a page
-var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
-
-module.exports = function (parentId, list, _isProduction, _options) {
-  isProduction = _isProduction
-
-  options = _options || {}
-
-  var styles = listToStyles(parentId, list)
-  addStylesToDom(styles)
-
-  return function update (newList) {
-    var mayRemove = []
-    for (var i = 0; i < styles.length; i++) {
-      var item = styles[i]
-      var domStyle = stylesInDom[item.id]
-      domStyle.refs--
-      mayRemove.push(domStyle)
-    }
-    if (newList) {
-      styles = listToStyles(parentId, newList)
-      addStylesToDom(styles)
-    } else {
-      styles = []
-    }
-    for (var i = 0; i < mayRemove.length; i++) {
-      var domStyle = mayRemove[i]
-      if (domStyle.refs === 0) {
-        for (var j = 0; j < domStyle.parts.length; j++) {
-          domStyle.parts[j]()
-        }
-        delete stylesInDom[domStyle.id]
-      }
-    }
-  }
-}
-
-function addStylesToDom (styles /* Array<StyleObject> */) {
-  for (var i = 0; i < styles.length; i++) {
-    var item = styles[i]
-    var domStyle = stylesInDom[item.id]
-    if (domStyle) {
-      domStyle.refs++
-      for (var j = 0; j < domStyle.parts.length; j++) {
-        domStyle.parts[j](item.parts[j])
-      }
-      for (; j < item.parts.length; j++) {
-        domStyle.parts.push(addStyle(item.parts[j]))
-      }
-      if (domStyle.parts.length > item.parts.length) {
-        domStyle.parts.length = item.parts.length
-      }
-    } else {
-      var parts = []
-      for (var j = 0; j < item.parts.length; j++) {
-        parts.push(addStyle(item.parts[j]))
-      }
-      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
-    }
-  }
-}
-
-function createStyleElement () {
-  var styleElement = document.createElement('style')
-  styleElement.type = 'text/css'
-  head.appendChild(styleElement)
-  return styleElement
-}
-
-function addStyle (obj /* StyleObjectPart */) {
-  var update, remove
-  var styleElement = document.querySelector('style[' + ssrIdKey + '~="' + obj.id + '"]')
-
-  if (styleElement) {
-    if (isProduction) {
-      // has SSR styles and in production mode.
-      // simply do nothing.
-      return noop
-    } else {
-      // has SSR styles but in dev mode.
-      // for some reason Chrome can't handle source map in server-rendered
-      // style tags - source maps in <style> only works if the style tag is
-      // created and inserted dynamically. So we remove the server rendered
-      // styles and inject new ones.
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  if (isOldIE) {
-    // use singleton mode for IE9.
-    var styleIndex = singletonCounter++
-    styleElement = singletonElement || (singletonElement = createStyleElement())
-    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
-    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
-  } else {
-    // use multi-style-tag mode in all other cases
-    styleElement = createStyleElement()
-    update = applyToTag.bind(null, styleElement)
-    remove = function () {
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  update(obj)
-
-  return function updateStyle (newObj /* StyleObjectPart */) {
-    if (newObj) {
-      if (newObj.css === obj.css &&
-          newObj.media === obj.media &&
-          newObj.sourceMap === obj.sourceMap) {
-        return
-      }
-      update(obj = newObj)
-    } else {
-      remove()
-    }
-  }
-}
-
-var replaceText = (function () {
-  var textStore = []
-
-  return function (index, replacement) {
-    textStore[index] = replacement
-    return textStore.filter(Boolean).join('\n')
-  }
-})()
-
-function applyToSingletonTag (styleElement, index, remove, obj) {
-  var css = remove ? '' : obj.css
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = replaceText(index, css)
-  } else {
-    var cssNode = document.createTextNode(css)
-    var childNodes = styleElement.childNodes
-    if (childNodes[index]) styleElement.removeChild(childNodes[index])
-    if (childNodes.length) {
-      styleElement.insertBefore(cssNode, childNodes[index])
-    } else {
-      styleElement.appendChild(cssNode)
-    }
-  }
-}
-
-function applyToTag (styleElement, obj) {
-  var css = obj.css
-  var media = obj.media
-  var sourceMap = obj.sourceMap
-
-  if (media) {
-    styleElement.setAttribute('media', media)
-  }
-  if (options.ssrId) {
-    styleElement.setAttribute(ssrIdKey, obj.id)
-  }
-
-  if (sourceMap) {
-    // https://developer.chrome.com/devtools/docs/javascript-debugging
-    // this makes source maps inside style tags work properly in Chrome
-    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
-    // http://stackoverflow.com/a/26603875
-    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
-  }
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = css
-  } else {
-    while (styleElement.firstChild) {
-      styleElement.removeChild(styleElement.firstChild)
-    }
-    styleElement.appendChild(document.createTextNode(css))
-  }
-}
-
-
-/***/ }),
-
-/***/ 279:
+/***/ 280:
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseIsNative = __webpack_require__(294),
@@ -425,7 +79,7 @@ module.exports = getNative;
 /***/ 285:
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(279);
+var getNative = __webpack_require__(280);
 
 /* Built-in method references that are verified to be native. */
 var nativeCreate = getNative(Object, 'create');
@@ -524,7 +178,7 @@ module.exports = toSource;
 /***/ 291:
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(279),
+var getNative = __webpack_require__(280),
     root = __webpack_require__(15);
 
 /* Built-in method references that are verified to be native. */
@@ -839,7 +493,7 @@ module.exports = getTag;
 /***/ 303:
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(279),
+var getNative = __webpack_require__(280),
     root = __webpack_require__(15);
 
 /* Built-in method references that are verified to be native. */
@@ -853,7 +507,7 @@ module.exports = DataView;
 /***/ 304:
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(279),
+var getNative = __webpack_require__(280),
     root = __webpack_require__(15);
 
 /* Built-in method references that are verified to be native. */
@@ -867,7 +521,7 @@ module.exports = Promise;
 /***/ 305:
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(279),
+var getNative = __webpack_require__(280),
     root = __webpack_require__(15);
 
 /* Built-in method references that are verified to be native. */
@@ -881,7 +535,7 @@ module.exports = Set;
 /***/ 306:
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(279),
+var getNative = __webpack_require__(280),
     root = __webpack_require__(15);
 
 /* Built-in method references that are verified to be native. */
@@ -950,7 +604,7 @@ module.exports = arrayPush;
 /***/ 310:
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(279);
+var getNative = __webpack_require__(280);
 
 var defineProperty = (function() {
   try {
@@ -2194,13 +1848,13 @@ module.exports = isArrayLikeObject;
 
 /***/ }),
 
-/***/ 463:
+/***/ 458:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(464);
+var content = __webpack_require__(459);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -2221,7 +1875,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 464:
+/***/ 459:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(255)(false);
@@ -2236,14 +1890,14 @@ exports.push([module.i, "/* Colors -------------------------- */\n/* Link ------
 
 /***/ }),
 
-/***/ 465:
+/***/ 460:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_isEmpty__ = __webpack_require__(339);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_isEmpty___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash_isEmpty__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_difference__ = __webpack_require__(466);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_difference__ = __webpack_require__(461);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_difference___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash_difference__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -2330,11 +1984,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    Type: {
+    type: {
       type: String,
       default: "text"
     },
-    Data: {
+    data: {
       type: Object,
       default: function _default() {
         return {};
@@ -2343,7 +1997,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   },
   data: function data() {
     return {
-      default_value: {},
+      defaultValue: {},
       params: {
         textarea: {
           rows: "",
@@ -2373,46 +2027,46 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   },
 
   computed: {
-    datePickerType: function datePickerType() {
+    date_picker_type: function date_picker_type() {
       var formatValueRefs = {
         Y: "year",
         "Y-m": "month",
         "Y-m-d": "date"
       };
 
-      return formatValueRefs[this.default_value.params["format"]];
+      return formatValueRefs[this.defaultValue.params["format"]];
     },
-    defaultParams: function defaultParams() {
+    default_params: function default_params() {
       return this.params[this.Type] || "";
     }
   },
   watch: {
-    Type: {
+    type: {
       handler: "initData",
       immediate: true
     }
   },
   methods: {
     onClickBtnAdd: function onClickBtnAdd() {
-      this.default_value.params.options.push({
+      this.defaultValue.params.options.push({
         name: "",
-        value: this.default_value.params.options.length + 1
+        value: this.defaultValue.params.options.length + 1
       });
     },
     onClickBtnDelete: function onClickBtnDelete(option) {
-      this.default_value.params.options.splice(this.default_value.params.options.indexOf(option), 1);
+      this.defaultValue.params.options.splice(this.defaultValue.params.options.indexOf(option), 1);
     },
     initData: function initData() {
-      var diffKeys = __WEBPACK_IMPORTED_MODULE_1_lodash_difference___default()(Object.keys(this.Data.params), Object.keys(this.defaultParams));
+      var diffKeys = __WEBPACK_IMPORTED_MODULE_1_lodash_difference___default()(Object.keys(this.Data.params), Object.keys(this.default_params));
 
-      this.default_value = this.defaultParams && (__WEBPACK_IMPORTED_MODULE_0_lodash_isEmpty___default()(this.Data.params) || !__WEBPACK_IMPORTED_MODULE_0_lodash_isEmpty___default()(this.Data.params) && diffKeys.length > 0) ? _extends({}, this.Data, { params: this.defaultParams }) : this.Data;
+      this.defaultValue = this.default_params && (__WEBPACK_IMPORTED_MODULE_0_lodash_isEmpty___default()(this.Data.params) || !__WEBPACK_IMPORTED_MODULE_0_lodash_isEmpty___default()(this.Data.params) && diffKeys.length > 0) ? _extends({}, this.Data, { params: this.default_params }) : this.Data;
     }
   }
 });
 
 /***/ }),
 
-/***/ 466:
+/***/ 461:
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseDifference = __webpack_require__(348),
@@ -2452,7 +2106,7 @@ module.exports = difference;
 
 /***/ }),
 
-/***/ 467:
+/***/ 462:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -2462,7 +2116,7 @@ var render = function() {
   return _c(
     "div",
     [
-      (_vm.Type === "textfield") | (_vm.Type === "textarea")
+      (_vm.Type === "text") | (_vm.Type === "textarea")
         ? [
             _c(
               "el-form-item",
@@ -2471,11 +2125,11 @@ var render = function() {
                 _c("el-input", {
                   attrs: { type: _vm.Type },
                   model: {
-                    value: _vm.default_value.value,
+                    value: _vm.defaultValue.value,
                     callback: function($$v) {
-                      _vm.$set(_vm.default_value, "value", $$v)
+                      _vm.$set(_vm.defaultValue, "value", $$v)
                     },
-                    expression: "default_value.value"
+                    expression: "defaultValue.value"
                   }
                 })
               ],
@@ -2492,11 +2146,11 @@ var render = function() {
                     [
                       _c("el-input", {
                         model: {
-                          value: _vm.default_value.params["rows"],
+                          value: _vm.defaultValue.params.rows,
                           callback: function($$v) {
-                            _vm.$set(_vm.default_value.params, "rows", $$v)
+                            _vm.$set(_vm.defaultValue.params, "rows", $$v)
                           },
-                          expression: "default_value.params['rows']"
+                          expression: "defaultValue.params.rows"
                         }
                       })
                     ],
@@ -2513,11 +2167,11 @@ var render = function() {
                     [
                       _c("el-checkbox", {
                         model: {
-                          value: _vm.default_value.params["editor"],
+                          value: _vm.defaultValue.params.editor,
                           callback: function($$v) {
-                            _vm.$set(_vm.default_value.params, "editor", $$v)
+                            _vm.$set(_vm.defaultValue.params, "editor", $$v)
                           },
-                          expression: "default_value.params['editor']"
+                          expression: "defaultValue.params.editor"
                         }
                       })
                     ],
@@ -2545,11 +2199,11 @@ var render = function() {
                       "el-radio-group",
                       {
                         model: {
-                          value: _vm.default_value.params["showNull"],
+                          value: _vm.defaultValue.params.showNull,
                           callback: function($$v) {
-                            _vm.$set(_vm.default_value.params, "showNull", $$v)
+                            _vm.$set(_vm.defaultValue.params, "showNull", $$v)
                           },
-                          expression: "default_value.params['showNull']"
+                          expression: "defaultValue.params.showNull"
                         }
                       },
                       [
@@ -2591,7 +2245,7 @@ var render = function() {
                   1
                 ),
                 _vm._v(" "),
-                _vm._l(_vm.default_value.params["options"], function(option) {
+                _vm._l(_vm.defaultValue.params.options, function(option) {
                   return _c(
                     "el-input",
                     {
@@ -2646,11 +2300,11 @@ var render = function() {
                           placeholder: _vm.$t("EXTRAFIELD_TYPE_LINK_TEXT")
                         },
                         model: {
-                          value: _vm.default_value.params["text"],
+                          value: _vm.defaultValue.params.text,
                           callback: function($$v) {
-                            _vm.$set(_vm.default_value.params, "text", $$v)
+                            _vm.$set(_vm.defaultValue.params, "text", $$v)
                           },
-                          expression: "default_value.params['text']"
+                          expression: "defaultValue.params.text"
                         }
                       })
                     ],
@@ -2666,11 +2320,11 @@ var render = function() {
                           placeholder: _vm.$t("EXTRAFIELD_TYPE_LINK_URL")
                         },
                         model: {
-                          value: _vm.default_value.value,
+                          value: _vm.defaultValue.value,
                           callback: function($$v) {
-                            _vm.$set(_vm.default_value, "value", $$v)
+                            _vm.$set(_vm.defaultValue, "value", $$v)
                           },
-                          expression: "default_value.value"
+                          expression: "defaultValue.value"
                         }
                       })
                     ],
@@ -2689,11 +2343,11 @@ var render = function() {
                             clearable: ""
                           },
                           model: {
-                            value: _vm.default_value.params["target"],
+                            value: _vm.defaultValue.params.target,
                             callback: function($$v) {
-                              _vm.$set(_vm.default_value.params, "target", $$v)
+                              _vm.$set(_vm.defaultValue.params, "target", $$v)
                             },
-                            expression: "default_value.params['target']"
+                            expression: "defaultValue.params.target"
                           }
                         },
                         [
@@ -2740,11 +2394,11 @@ var render = function() {
                   "el-select",
                   {
                     model: {
-                      value: _vm.default_value.params["format"],
+                      value: _vm.defaultValue.params.format,
                       callback: function($$v) {
-                        _vm.$set(_vm.default_value.params, "format", $$v)
+                        _vm.$set(_vm.defaultValue.params, "format", $$v)
                       },
-                      expression: "default_value.params['format']"
+                      expression: "defaultValue.params.format"
                     }
                   },
                   _vm._l(_vm.formatList, function(option) {
@@ -2763,13 +2417,13 @@ var render = function() {
               { attrs: { label: _vm.$t("FIELD_EXTRAFIELD_DEFAULT_VALUE") } },
               [
                 _c("el-date-picker", {
-                  attrs: { type: _vm.datePickerType, clearable: "" },
+                  attrs: { type: _vm.date_picker_type, clearable: "" },
                   model: {
-                    value: _vm.default_value["value"],
+                    value: _vm.defaultValue.value,
                     callback: function($$v) {
-                      _vm.$set(_vm.default_value, "value", $$v)
+                      _vm.$set(_vm.defaultValue, "value", $$v)
                     },
-                    expression: "default_value['value']"
+                    expression: "defaultValue.value"
                   }
                 })
               ],

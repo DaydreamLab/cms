@@ -3,21 +3,17 @@ webpackJsonp([71],Array(107).concat([
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(371)
-}
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(373)
+var __vue_script__ = __webpack_require__(371)
 /* template */
-var __vue_template__ = __webpack_require__(402)
+var __vue_template__ = __webpack_require__(400)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = injectStyle
+var __vue_styles__ = null
 /* scopeId */
-var __vue_scopeId__ = "data-v-655249c0"
+var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -221,7 +217,8 @@ module.exports = Component.exports
 /* 276 */,
 /* 277 */,
 /* 278 */,
-/* 279 */
+/* 279 */,
+/* 280 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseIsNative = __webpack_require__(294),
@@ -244,7 +241,6 @@ module.exports = getNative;
 
 
 /***/ }),
-/* 280 */,
 /* 281 */,
 /* 282 */,
 /* 283 */,
@@ -252,7 +248,7 @@ module.exports = getNative;
 /* 285 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(279);
+var getNative = __webpack_require__(280);
 
 /* Built-in method references that are verified to be native. */
 var nativeCreate = getNative(Object, 'create');
@@ -349,7 +345,7 @@ module.exports = toSource;
 /* 291 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(279),
+var getNative = __webpack_require__(280),
     root = __webpack_require__(15);
 
 /* Built-in method references that are verified to be native. */
@@ -744,7 +740,7 @@ module.exports = getTag;
 /* 303 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(279),
+var getNative = __webpack_require__(280),
     root = __webpack_require__(15);
 
 /* Built-in method references that are verified to be native. */
@@ -757,7 +753,7 @@ module.exports = DataView;
 /* 304 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(279),
+var getNative = __webpack_require__(280),
     root = __webpack_require__(15);
 
 /* Built-in method references that are verified to be native. */
@@ -770,7 +766,7 @@ module.exports = Promise;
 /* 305 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(279),
+var getNative = __webpack_require__(280),
     root = __webpack_require__(15);
 
 /* Built-in method references that are verified to be native. */
@@ -783,7 +779,7 @@ module.exports = Set;
 /* 306 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(279),
+var getNative = __webpack_require__(280),
     root = __webpack_require__(15);
 
 /* Built-in method references that are verified to be native. */
@@ -884,7 +880,7 @@ module.exports = arrayPush;
 /* 310 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(279);
+var getNative = __webpack_require__(280);
 
 var defineProperty = (function() {
   try {
@@ -2365,11 +2361,11 @@ module.exports = isArrayLikeObject;
 /***/ (function(module, exports, __webpack_require__) {
 
 var ListCache = __webpack_require__(292),
-    stackClear = __webpack_require__(378),
-    stackDelete = __webpack_require__(379),
-    stackGet = __webpack_require__(380),
-    stackHas = __webpack_require__(381),
-    stackSet = __webpack_require__(382);
+    stackClear = __webpack_require__(376),
+    stackDelete = __webpack_require__(377),
+    stackGet = __webpack_require__(378),
+    stackHas = __webpack_require__(379),
+    stackSet = __webpack_require__(380);
 
 /**
  * Creates a stack cache object to store key-value pairs.
@@ -2397,7 +2393,7 @@ module.exports = Stack;
 /* 360 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseIsEqualDeep = __webpack_require__(383),
+var baseIsEqualDeep = __webpack_require__(381),
     isObjectLike = __webpack_require__(9);
 
 /**
@@ -2432,7 +2428,7 @@ module.exports = baseIsEqual;
 /***/ (function(module, exports, __webpack_require__) {
 
 var SetCache = __webpack_require__(337),
-    arraySome = __webpack_require__(384),
+    arraySome = __webpack_require__(382),
     cacheHas = __webpack_require__(338);
 
 /** Used to compose bitmasks for value comparisons. */
@@ -2572,58 +2568,15 @@ module.exports = matchesStrictComparable;
 /* 369 */,
 /* 370 */,
 /* 371 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(372);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(256)("a727779c", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-655249c0\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Users/daydreamlab/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./params-form.vue", function() {
-     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-655249c0\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Users/daydreamlab/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./params-form.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 372 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(255)(false);
-// imports
-
-
-// module
-exports.push([module.i, "/* Colors -------------------------- */\n/* Link -------------------------- */\n/* Background -------------------------- */\n/* Border -------------------------- */\n/* Navbar -------------------------- */\n/* Sidebar -------------------------- */\n/* Tab -------------------------- */\n/* Icon -------------------------- */\n/* Item -------------------------- */\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 373 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_differenceBy__ = __webpack_require__(374);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_differenceBy__ = __webpack_require__(372);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_differenceBy___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash_differenceBy__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_option_mixin__ = __webpack_require__(282);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_options__ = __webpack_require__(281);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-//
-//
-//
 //
 //
 //
@@ -2826,9 +2779,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mixins: [__WEBPACK_IMPORTED_MODULE_1_mixins_option_mixin__["a" /* default */]],
+  mixins: [__WEBPACK_IMPORTED_MODULE_1_mixins_options__["a" /* default */]],
   components: { ItemList: function ItemList() {
-      return __webpack_require__.e/* import() */(77).then(__webpack_require__.bind(null, 102));
+      return __webpack_require__.e/* import() */(78).then(__webpack_require__.bind(null, 102));
     } },
   props: {
     moduleType: {
@@ -2842,7 +2795,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   },
   data: function data() {
     return {
-      item_list_dialogVisible: false,
+      itemListDialogVisible: false,
       fields: {
         item_count: {
           all: true,
@@ -2913,7 +2866,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         }
       },
 
-      default_value: {
+      defaultValue: {
         "selected-items": {
           item_ids: []
         },
@@ -2948,23 +2901,23 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   },
 
   computed: {
-    formData: function formData() {
-      return _extends({}, this.params, this.default_value[this.moduleType]);
+    form_data: function form_data() {
+      return _extends({}, this.params, this.defaultValue[this.moduleType]);
     }
   },
   watch: {
-    formData: function formData(value) {
+    form_data: function form_data(value) {
       this.$emit("update:data", value);
     },
     "fields.item_count.all": function fieldsItem_countAll(value) {
-      if (value) this.default_value[this.moduleType]["item_count"] = 0;
+      if (value) this.defaultValue[this.moduleType]["item_count"] = 0;
     },
     "fields.featured_count.all": function fieldsFeatured_countAll(value) {
-      if (value) this.default_value[this.moduleType]["featured_count"] = 0;
+      if (value) this.defaultValue[this.moduleType]["featured_count"] = 0;
     }
   },
   created: function created() {
-    this.$getFieldList({
+    this.$_optionMixin_updateFieldList({
       item_category: "category_ids",
       menu: "menu_ids",
       viewlevel: "access"
@@ -2974,13 +2927,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
   methods: {
     handleSelectConfirm: function handleSelectConfirm(item, field) {
-      this.default_value[this.moduleType][field].push(item);
+      this.defaultValue[this.moduleType][field].push(item);
     },
     handleSelectClose: function handleSelectClose(item, field) {
-      this.default_value[this.moduleType][field].splice(this.default_value[this.moduleType][field].indexOf(item), 1);
+      this.defaultValue[this.moduleType][field].splice(this.defaultValue[this.moduleType][field].indexOf(item), 1);
     },
     querySelectSearch: function querySelectSearch(queryString, callback, list_field) {
-      var list_whithout_selected = __WEBPACK_IMPORTED_MODULE_0_lodash_differenceBy___default()(this.fields[list_field].list, this.default_value[this.moduleType][list_field], "id");
+      var list_whithout_selected = __WEBPACK_IMPORTED_MODULE_0_lodash_differenceBy___default()(this.fields[list_field].list, this.defaultValue[this.moduleType][list_field], "id");
 
       var results = queryString ? list_whithout_selected.filter(this.handleFilterTitle(queryString)) : list_whithout_selected;
 
@@ -2998,11 +2951,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       var _this = this;
 
       fields.forEach(function (field) {
-        _this.fields[field].all = _this.getCountValue(_this.default_value[_this.moduleType][field]);
+        _this.fields[field].all = _this.getCountValue(_this.defaultValue[_this.moduleType][field]);
       });
     },
     initFormData: function initFormData() {
-      this.default_value[this.moduleType] = _extends({}, this.default_value[this.moduleType], this.data);
+      this.defaultValue[this.moduleType] = _extends({}, this.defaultValue[this.moduleType], this.data);
       this.params = _extends({}, this.params, this.data);
 
       if (this.moduleType === "categories-items") {
@@ -3013,15 +2966,15 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 });
 
 /***/ }),
-/* 374 */
+/* 372 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseDifference = __webpack_require__(348),
     baseFlatten = __webpack_require__(329),
-    baseIteratee = __webpack_require__(375),
+    baseIteratee = __webpack_require__(373),
     baseRest = __webpack_require__(357),
     isArrayLikeObject = __webpack_require__(358),
-    last = __webpack_require__(401);
+    last = __webpack_require__(399);
 
 /**
  * This method is like `_.difference` except that it accepts `iteratee` which
@@ -3063,14 +3016,14 @@ module.exports = differenceBy;
 
 
 /***/ }),
-/* 375 */
+/* 373 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseMatches = __webpack_require__(376),
-    baseMatchesProperty = __webpack_require__(396),
+var baseMatches = __webpack_require__(374),
+    baseMatchesProperty = __webpack_require__(394),
     identity = __webpack_require__(97),
     isArray = __webpack_require__(16),
-    property = __webpack_require__(398);
+    property = __webpack_require__(396);
 
 /**
  * The base implementation of `_.iteratee`.
@@ -3100,11 +3053,11 @@ module.exports = baseIteratee;
 
 
 /***/ }),
-/* 376 */
+/* 374 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseIsMatch = __webpack_require__(377),
-    getMatchData = __webpack_require__(395),
+var baseIsMatch = __webpack_require__(375),
+    getMatchData = __webpack_require__(393),
     matchesStrictComparable = __webpack_require__(363);
 
 /**
@@ -3128,7 +3081,7 @@ module.exports = baseMatches;
 
 
 /***/ }),
-/* 377 */
+/* 375 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Stack = __webpack_require__(359),
@@ -3196,7 +3149,7 @@ module.exports = baseIsMatch;
 
 
 /***/ }),
-/* 378 */
+/* 376 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var ListCache = __webpack_require__(292);
@@ -3217,7 +3170,7 @@ module.exports = stackClear;
 
 
 /***/ }),
-/* 379 */
+/* 377 */
 /***/ (function(module, exports) {
 
 /**
@@ -3241,7 +3194,7 @@ module.exports = stackDelete;
 
 
 /***/ }),
-/* 380 */
+/* 378 */
 /***/ (function(module, exports) {
 
 /**
@@ -3261,7 +3214,7 @@ module.exports = stackGet;
 
 
 /***/ }),
-/* 381 */
+/* 379 */
 /***/ (function(module, exports) {
 
 /**
@@ -3281,7 +3234,7 @@ module.exports = stackHas;
 
 
 /***/ }),
-/* 382 */
+/* 380 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var ListCache = __webpack_require__(292),
@@ -3321,13 +3274,13 @@ module.exports = stackSet;
 
 
 /***/ }),
-/* 383 */
+/* 381 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Stack = __webpack_require__(359),
     equalArrays = __webpack_require__(361),
-    equalByTag = __webpack_require__(385),
-    equalObjects = __webpack_require__(389),
+    equalByTag = __webpack_require__(383),
+    equalObjects = __webpack_require__(387),
     getTag = __webpack_require__(302),
     isArray = __webpack_require__(16),
     isBuffer = __webpack_require__(99),
@@ -3410,7 +3363,7 @@ module.exports = baseIsEqualDeep;
 
 
 /***/ }),
-/* 384 */
+/* 382 */
 /***/ (function(module, exports) {
 
 /**
@@ -3439,15 +3392,15 @@ module.exports = arraySome;
 
 
 /***/ }),
-/* 385 */
+/* 383 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Symbol = __webpack_require__(17),
-    Uint8Array = __webpack_require__(386),
+    Uint8Array = __webpack_require__(384),
     eq = __webpack_require__(301),
     equalArrays = __webpack_require__(361),
-    mapToArray = __webpack_require__(387),
-    setToArray = __webpack_require__(388);
+    mapToArray = __webpack_require__(385),
+    setToArray = __webpack_require__(386);
 
 /** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG = 1,
@@ -3557,7 +3510,7 @@ module.exports = equalByTag;
 
 
 /***/ }),
-/* 386 */
+/* 384 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var root = __webpack_require__(15);
@@ -3569,7 +3522,7 @@ module.exports = Uint8Array;
 
 
 /***/ }),
-/* 387 */
+/* 385 */
 /***/ (function(module, exports) {
 
 /**
@@ -3593,7 +3546,7 @@ module.exports = mapToArray;
 
 
 /***/ }),
-/* 388 */
+/* 386 */
 /***/ (function(module, exports) {
 
 /**
@@ -3617,10 +3570,10 @@ module.exports = setToArray;
 
 
 /***/ }),
-/* 389 */
+/* 387 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getAllKeys = __webpack_require__(390);
+var getAllKeys = __webpack_require__(388);
 
 /** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG = 1;
@@ -3712,11 +3665,11 @@ module.exports = equalObjects;
 
 
 /***/ }),
-/* 390 */
+/* 388 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseGetAllKeys = __webpack_require__(391),
-    getSymbols = __webpack_require__(392),
+var baseGetAllKeys = __webpack_require__(389),
+    getSymbols = __webpack_require__(390),
     keys = __webpack_require__(103);
 
 /**
@@ -3734,7 +3687,7 @@ module.exports = getAllKeys;
 
 
 /***/ }),
-/* 391 */
+/* 389 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var arrayPush = __webpack_require__(309),
@@ -3760,11 +3713,11 @@ module.exports = baseGetAllKeys;
 
 
 /***/ }),
-/* 392 */
+/* 390 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var arrayFilter = __webpack_require__(393),
-    stubArray = __webpack_require__(394);
+var arrayFilter = __webpack_require__(391),
+    stubArray = __webpack_require__(392);
 
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
@@ -3796,7 +3749,7 @@ module.exports = getSymbols;
 
 
 /***/ }),
-/* 393 */
+/* 391 */
 /***/ (function(module, exports) {
 
 /**
@@ -3827,7 +3780,7 @@ module.exports = arrayFilter;
 
 
 /***/ }),
-/* 394 */
+/* 392 */
 /***/ (function(module, exports) {
 
 /**
@@ -3856,7 +3809,7 @@ module.exports = stubArray;
 
 
 /***/ }),
-/* 395 */
+/* 393 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isStrictComparable = __webpack_require__(362),
@@ -3886,11 +3839,11 @@ module.exports = getMatchData;
 
 
 /***/ }),
-/* 396 */
+/* 394 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseIsEqual = __webpack_require__(360),
-    get = __webpack_require__(397),
+    get = __webpack_require__(395),
     hasIn = __webpack_require__(345),
     isKey = __webpack_require__(307),
     isStrictComparable = __webpack_require__(362),
@@ -3925,7 +3878,7 @@ module.exports = baseMatchesProperty;
 
 
 /***/ }),
-/* 397 */
+/* 395 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseGet = __webpack_require__(311);
@@ -3964,11 +3917,11 @@ module.exports = get;
 
 
 /***/ }),
-/* 398 */
+/* 396 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseProperty = __webpack_require__(399),
-    basePropertyDeep = __webpack_require__(400),
+var baseProperty = __webpack_require__(397),
+    basePropertyDeep = __webpack_require__(398),
     isKey = __webpack_require__(307),
     toKey = __webpack_require__(293);
 
@@ -4002,7 +3955,7 @@ module.exports = property;
 
 
 /***/ }),
-/* 399 */
+/* 397 */
 /***/ (function(module, exports) {
 
 /**
@@ -4022,7 +3975,7 @@ module.exports = baseProperty;
 
 
 /***/ }),
-/* 400 */
+/* 398 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseGet = __webpack_require__(311);
@@ -4044,7 +3997,7 @@ module.exports = basePropertyDeep;
 
 
 /***/ }),
-/* 401 */
+/* 399 */
 /***/ (function(module, exports) {
 
 /**
@@ -4070,7 +4023,7 @@ module.exports = last;
 
 
 /***/ }),
-/* 402 */
+/* 400 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -4099,7 +4052,7 @@ var render = function() {
                   { staticClass: "form-item-tags__wrapper" },
                   [
                     _vm._l(
-                      _vm.default_value[_vm.moduleType]["category_ids"],
+                      _vm.defaultValue[_vm.moduleType].category_ids,
                       function(tag) {
                         return _c(
                           "el-tag",
@@ -4197,18 +4150,16 @@ var render = function() {
                             _c("el-input", {
                               model: {
                                 value:
-                                  _vm.default_value[_vm.moduleType][
-                                    "item_count"
-                                  ],
+                                  _vm.defaultValue[_vm.moduleType].item_count,
                                 callback: function($$v) {
                                   _vm.$set(
-                                    _vm.default_value[_vm.moduleType],
+                                    _vm.defaultValue[_vm.moduleType],
                                     "item_count",
                                     $$v
                                   )
                                 },
                                 expression:
-                                  "default_value[moduleType]['item_count']"
+                                  "defaultValue[moduleType].item_count"
                               }
                             })
                           ],
@@ -4238,18 +4189,17 @@ var render = function() {
                   {
                     model: {
                       value:
-                        _vm.default_value[_vm.moduleType][
-                          "split_items_by_categories"
-                        ],
+                        _vm.defaultValue[_vm.moduleType]
+                          .split_items_by_categories,
                       callback: function($$v) {
                         _vm.$set(
-                          _vm.default_value[_vm.moduleType],
+                          _vm.defaultValue[_vm.moduleType],
                           "split_items_by_categories",
                           $$v
                         )
                       },
                       expression:
-                        "default_value[moduleType]['split_items_by_categories']"
+                        "defaultValue[moduleType].split_items_by_categories"
                     }
                   },
                   [
@@ -4280,15 +4230,15 @@ var render = function() {
                   "el-select",
                   {
                     model: {
-                      value: _vm.default_value[_vm.moduleType]["item_order_by"],
+                      value: _vm.defaultValue[_vm.moduleType].item_order_by,
                       callback: function($$v) {
                         _vm.$set(
-                          _vm.default_value[_vm.moduleType],
+                          _vm.defaultValue[_vm.moduleType],
                           "item_order_by",
                           $$v
                         )
                       },
-                      expression: "default_value[moduleType]['item_order_by']"
+                      expression: "defaultValue[moduleType].item_order_by"
                     }
                   },
                   _vm._l(_vm.fields.order_by.list, function(option) {
@@ -4315,15 +4265,15 @@ var render = function() {
                   "el-select",
                   {
                     model: {
-                      value: _vm.default_value[_vm.moduleType]["item_order"],
+                      value: _vm.defaultValue[_vm.moduleType].item_order,
                       callback: function($$v) {
                         _vm.$set(
-                          _vm.default_value[_vm.moduleType],
+                          _vm.defaultValue[_vm.moduleType],
                           "item_order",
                           $$v
                         )
                       },
-                      expression: "default_value[moduleType]['item_order']"
+                      expression: "defaultValue[moduleType].item_order"
                     }
                   },
                   _vm._l(_vm.fields.order.list, function(option) {
@@ -4350,17 +4300,15 @@ var render = function() {
                   "el-select",
                   {
                     model: {
-                      value:
-                        _vm.default_value[_vm.moduleType]["featured_display"],
+                      value: _vm.defaultValue[_vm.moduleType].featured_display,
                       callback: function($$v) {
                         _vm.$set(
-                          _vm.default_value[_vm.moduleType],
+                          _vm.defaultValue[_vm.moduleType],
                           "featured_display",
                           $$v
                         )
                       },
-                      expression:
-                        "default_value[moduleType]['featured_display']"
+                      expression: "defaultValue[moduleType].featured_display"
                     }
                   },
                   _vm._l(_vm.fields.featured_display.list, function(option) {
@@ -4374,7 +4322,7 @@ var render = function() {
               1
             ),
             _vm._v(" "),
-            _vm.default_value[_vm.moduleType]["featured_display"] === 1
+            _vm.defaultValue[_vm.moduleType].featured_display === 1
               ? [
                   _c(
                     "el-form-item",
@@ -4392,18 +4340,17 @@ var render = function() {
                         {
                           model: {
                             value:
-                              _vm.default_value[_vm.moduleType][
-                                "split_items_by_featured"
-                              ],
+                              _vm.defaultValue[_vm.moduleType]
+                                .split_items_by_featured,
                             callback: function($$v) {
                               _vm.$set(
-                                _vm.default_value[_vm.moduleType],
+                                _vm.defaultValue[_vm.moduleType],
                                 "split_items_by_featured",
                                 $$v
                               )
                             },
                             expression:
-                              "default_value[moduleType]['split_items_by_featured']"
+                              "defaultValue[moduleType].split_items_by_featured"
                           }
                         },
                         [
@@ -4421,7 +4368,7 @@ var render = function() {
                     1
                   ),
                   _vm._v(" "),
-                  _vm.default_value[_vm.moduleType]["split_items_by_featured"]
+                  _vm.defaultValue[_vm.moduleType].split_items_by_featured
                     ? _c(
                         "el-form-item",
                         {
@@ -4481,18 +4428,17 @@ var render = function() {
                                       _c("el-input", {
                                         model: {
                                           value:
-                                            _vm.default_value[_vm.moduleType][
-                                              "featured_count"
-                                            ],
+                                            _vm.defaultValue[_vm.moduleType]
+                                              .featured_count,
                                           callback: function($$v) {
                                             _vm.$set(
-                                              _vm.default_value[_vm.moduleType],
+                                              _vm.defaultValue[_vm.moduleType],
                                               "featured_count",
                                               $$v
                                             )
                                           },
                                           expression:
-                                            "default_value[moduleType]['featured_count']"
+                                            "defaultValue[moduleType].featured_count"
                                         }
                                       })
                                     ],
@@ -4523,18 +4469,17 @@ var render = function() {
                         {
                           model: {
                             value:
-                              _vm.default_value[_vm.moduleType][
-                                "featured_order_by"
-                              ],
+                              _vm.defaultValue[_vm.moduleType]
+                                .featured_order_by,
                             callback: function($$v) {
                               _vm.$set(
-                                _vm.default_value[_vm.moduleType],
+                                _vm.defaultValue[_vm.moduleType],
                                 "featured_order_by",
                                 $$v
                               )
                             },
                             expression:
-                              "default_value[moduleType]['featured_order_by']"
+                              "defaultValue[moduleType].featured_order_by"
                           }
                         },
                         _vm._l(_vm.fields.order_by.list, function(option) {
@@ -4562,18 +4507,16 @@ var render = function() {
                         {
                           model: {
                             value:
-                              _vm.default_value[_vm.moduleType][
-                                "featured_order"
-                              ],
+                              _vm.defaultValue[_vm.moduleType].featured_order,
                             callback: function($$v) {
                               _vm.$set(
-                                _vm.default_value[_vm.moduleType],
+                                _vm.defaultValue[_vm.moduleType],
                                 "featured_order",
                                 $$v
                               )
                             },
                             expression:
-                              "default_value[moduleType]['featured_order']"
+                              "defaultValue[moduleType].featured_order"
                           }
                         },
                         _vm._l(_vm.fields.order.list, function(option) {
@@ -4603,27 +4546,23 @@ var render = function() {
                   "div",
                   { staticClass: "form-item-tags__wrapper" },
                   [
-                    _vm._l(
-                      _vm.default_value[_vm.moduleType]["menu_ids"],
-                      function(tag) {
-                        return _c(
-                          "el-tag",
-                          {
-                            key: tag.id,
-                            attrs: {
-                              "disable-transitions": false,
-                              closable: ""
-                            },
-                            on: {
-                              close: function($event) {
-                                _vm.handleSelectClose(tag, "menu_ids")
-                              }
+                    _vm._l(_vm.defaultValue[_vm.moduleType].menu_ids, function(
+                      tag
+                    ) {
+                      return _c(
+                        "el-tag",
+                        {
+                          key: tag.id,
+                          attrs: { "disable-transitions": false, closable: "" },
+                          on: {
+                            close: function($event) {
+                              _vm.handleSelectClose(tag, "menu_ids")
                             }
-                          },
-                          [_vm._v(_vm._s(tag.tree_list_title))]
-                        )
-                      }
-                    ),
+                          }
+                        },
+                        [_vm._v(_vm._s(tag.tree_list_title))]
+                      )
+                    }),
                     _vm._v(" "),
                     _c("el-autocomplete", {
                       attrs: {
@@ -4670,7 +4609,7 @@ var render = function() {
                         {
                           on: {
                             click: function($event) {
-                              _vm.item_list_dialogVisible = true
+                              _vm.itemListDialogVisible = true
                             }
                           }
                         },
@@ -4685,7 +4624,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "ul",
-                _vm._l(_vm.default_value[_vm.moduleType]["item_ids"], function(
+                _vm._l(_vm.defaultValue[_vm.moduleType].item_ids, function(
                   ref
                 ) {
                   var title = ref.title
@@ -4696,10 +4635,10 @@ var render = function() {
               _c(
                 "el-dialog",
                 {
-                  attrs: { width: "80%", visible: _vm.item_list_dialogVisible },
+                  attrs: { width: "80%", visible: _vm.itemListDialogVisible },
                   on: {
                     "update:visible": function($event) {
-                      _vm.item_list_dialogVisible = $event
+                      _vm.itemListDialogVisible = $event
                     }
                   }
                 },
@@ -4720,7 +4659,7 @@ var render = function() {
                           attrs: { type: "primary" },
                           on: {
                             click: function($event) {
-                              _vm.item_list_dialogVisible = false
+                              _vm.itemListDialogVisible = false
                             }
                           }
                         },

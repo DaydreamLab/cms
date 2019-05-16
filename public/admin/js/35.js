@@ -1,18 +1,22 @@
 webpackJsonp([35],{
 
-/***/ 139:
+/***/ 114:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(409)
+}
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(536)
+var __vue_script__ = __webpack_require__(411)
 /* template */
-var __vue_template__ = __webpack_require__(537)
+var __vue_template__ = __webpack_require__(412)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -25,7 +29,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/admin/views/system/site/list.vue"
+Component.options.__file = "resources/assets/admin/views/asset/assign/group.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +38,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-a3e5206a", Component.options)
+    hotAPI.createRecord("data-v-e547afba", Component.options)
   } else {
-    hotAPI.reload("data-v-a3e5206a", Component.options)
+    hotAPI.reload("data-v-e547afba", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,180 +52,53 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 283:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ 409:
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+// style-loader: Adds some css to the DOM by adding a <style> tag
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-    data: function data() {
-        return {
-            list: [],
-            list_loading: {
-                flag: false
-            },
-            paginations: {
-                current_page: 1,
-                total: 0,
-                page_size: 10,
-                page_sizes: [10, 15, 20, 25, 50, 100],
-                layout: "total, sizes, prev, pager, next, jumper"
-            }
-        };
-    },
-
-    watch: {
-        $route: {
-            handler: "$initList",
-            immediate: true
-        }
-    },
-    methods: {
-        $onClickBtnAdd: function $onClickBtnAdd() {
-            this.$router.push(this.$route.path + "/edit");
-        },
-        $onClickBntEdit: function $onClickBntEdit(query) {
-            this.$router.push({
-                path: this.$route.path + "/edit",
-                query: _extends({}, query, {
-                    from: this.$route.query
-                })
-            });
-        },
-        $onSearchReset: function $onSearchReset() {
-            this.$router.push({
-                path: this.$route.path
-            });
-        },
-        $onSearch: function $onSearch(_ref) {
-            var data = _ref.data;
-
-            var sd = {};
-
-            var query = this.$route.query;
-
-            for (var p in query) {
-                sd[p] = query[p];
-            }
-            for (var s in data) {
-                sd[s] = data[s];
-                if (!sd[s]) {
-                    delete sd[s];
-                }
-            }
-
-            this.$router.push({
-                path: this.$route.path,
-                query: sd
-            });
-        },
-        setRouteQuery: function setRouteQuery(field, value) {
-            var query = Object.assign({}, this.$route.query);
-
-            if ((typeof field === "undefined" ? "undefined" : _typeof(field)) === "object") {
-                query = field;
-            } else {
-                query[field] = value;
-            }
-
-            return query;
-        },
-        getRouteQuery: function getRouteQuery() {
-            var _this = this;
-
-            var query = this.$route.query;
-            var intArray = ["id", "pid", "category_id", "access"];
-            var dateArray = ["start_date", "end_date"];
-            var data = {};
-
-            Object.keys(query).forEach(function (field) {
-                _this.searchbar.default_value[field] = intArray.includes(field) ? parseInt(query[field]) : dateArray.includes(field) ? _this.$options.filters.storeDateFormat(query[field]) : query[field];
-                data[field] = query[field];
-            });
-            return data;
-        },
-        $onChangeCurrentPage: function $onChangeCurrentPage(page) {
-            var _this2 = this;
-
-            this.$onGetList({
-                page: page,
-                fn: function fn() {
-                    _this2.$router.push({
-                        path: _this2.$route.path,
-                        query: _this2.setRouteQuery("page", page)
-                    });
-                }
-            });
-        },
-        $onChangePageSize: function $onChangePageSize(pageSize) {
-            var _this3 = this;
-
-            this.$onGetList({
-                pageSize: pageSize,
-                fn: function fn() {
-                    _this3.$router.push({
-                        path: _this3.$route.path,
-                        query: _this3.setRouteQuery("page_size", pageSize)
-                    });
-                }
-            });
-        },
-        $onGetList: function $onGetList() {
-            var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-                page = _ref2.page,
-                pageSize = _ref2.pageSize,
-                where = _ref2.where,
-                fn = _ref2.fn;
-
-            this.list_loading.flag = true;
-
-            var query = this.$route.query;
-
-            this.paginations.current_page = page || parseInt(query.page) || 1;
-            this.paginations.page_size = pageSize || parseInt(query.page_size) || this.paginations.page_size;
-
-            var page_data = Object.assign(this.getRouteQuery(), {
-                page: this.paginations.current_page,
-                limit: this.paginations.page_size
-            });
-            if (where) {
-                page_data = Object.assign(page_data, where || {});
-            }
-            this.handleGetList({ page_data: page_data, fn: fn });
-        },
-        $initList: function $initList() {
-            this.$onGetList();
-        }
-    }
-});
+// load the styles
+var content = __webpack_require__(410);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(256)("1ba120ed", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-e547afba\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./group.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-e547afba\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./group.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
 
 /***/ }),
 
-/***/ 289:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ 410:
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-/* harmony default export */ __webpack_exports__["a"] = ({
-    methods: {
-        $initList: function $initList() {
-            this.$set(this.toolbar, "type", this.$route.query.state === "-2" ? "trash" : "list");
-            this.$onGetList();
-        }
-    }
-});
+exports = module.exports = __webpack_require__(255)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
 
 /***/ }),
 
-/***/ 536:
+/***/ 411:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin__ = __webpack_require__(283);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_cms_list_mixin__ = __webpack_require__(289);
 //
 //
 //
@@ -232,153 +109,122 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "site-list",
-  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1_mixins_cms_list_mixin__["a" /* default */]],
+  name: "AssetAssignGroup",
   data: function data() {
     return {
-      fields: [{
-        key: "title",
-        label: this.$t("FIELD_TITLE_LABEL"),
-        type: "editable"
-      }, {
-        key: "url",
-        label: this.$t("SITE_FIELD_URL_LABEL")
-      }, {
-        key: "language_title",
-        label: this.$t("OPTION_LANGUAGE")
-      }, {
-        width: "60",
-        key: "id",
-        label: this.$t("LIST_DATA_HEADING_ID")
-      }],
-      toolbar: {
-        type: "list"
+      params: {
+        asset_id: ""
       },
-      searchbar: {
-        fields: [{
-          key: "search",
-          desc: this.$t("TOOLBAR_KEYWORDS"),
-          clearable: true
-        }, {
-          key: "state",
-          type: "select",
-          desc: this.$t("OPTION_STATE"),
-          clearable: true,
-          list: [{
-            value: "1",
-            text: this.$t("PUBLISHED")
-          }, {
-            value: "0",
-            text: this.$t("UNPUBLISHED")
-          }, {
-            value: "-1",
-            text: this.$t("ARCHIVED")
-          }, {
-            value: "-2",
-            text: this.$t("TRASHED")
-          }]
-        }],
-        default_value: {
-          search: "",
-          state: ""
+      fields: [{
+        key: "group_ids",
+        label: "選擇群組",
+        type: "tree",
+        list: [],
+        custom_attrs: {
+          label: "title"
+        },
+        tree_attrs: {
+          "check-strictly": true
         }
+      }],
+      defaultValue: {
+        group_ids: []
+      },
+      toolbar: {
+        default: ["save", "savenclose", "savenadd", "cancel", "delete", "preview"],
+        custom: []
       }
     };
   },
 
+  watch: {
+    $route: {
+      immediate: true,
+      handler: "initData"
+    }
+  },
   methods: {
-    /**
-     * Toolbar
-     */
-    onClickBtnBatchDelete: function onClickBtnBatchDelete(_ref) {
+    handleSubmit: function handleSubmit(_ref) {
       var _this = this;
 
-      var ids = _ref.ids,
-          datas = _ref.datas;
+      var submit_data = _ref.submit_data,
+          btn_type = _ref.btn_type;
 
-      this.$confirm(this.$t("GLOBAL_CONFIRM_DELETE")).then(function () {
-        _this.$$api_site_delete({
-          data: { ids: ids },
-          fn: function fn(_ref2) {
-            var data = _ref2.data;
+      if (this.params.asset_id) {
+        submit_data.asset_id = this.params.asset_id;
+      }
+      this.$$api_asset_assignGroup({
+        data: submit_data,
+        fn: function fn(_ref2) {
+          var data = _ref2.data,
+              msg = _ref2.msg;
 
-            _this.$onGetList();
-          }
-        });
-      });
-    },
-    handleEditQuery: function handleEditQuery(_ref3) {
-      var data = _ref3.data;
-
-      this.$onClickBntEdit({
-        id: data.id
-      });
-    },
-    handleGetList: function handleGetList() {
-      var _this2 = this;
-
-      var _ref4 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-          page_data = _ref4.page_data,
-          _fn = _ref4.fn;
-
-      this.$$api_site_list({
-        data: page_data,
-        fn: function fn(_ref5) {
-          var data = _ref5.data;
-
-          _this2.list_loading.flag = false;
-          _this2.list = data.items;
-          _this2.paginations.total = data.pagination.total;
-
-          _fn && _fn();
+          _this.$_editMixin_onSubmitFinish({
+            msg: msg,
+            btn_type: btn_type,
+            query: { id: submit_data.id }
+          });
         }
       });
+    },
+    onCancel: function onCancel() {
+      this.$router.push(this.$route.path.replace("/assign", ""));
+    },
+    handleGetData: function handleGetData() {
+      var _this2 = this;
+
+      this.$$api_asset_group({
+        pathVar: this.params.asset_id,
+        fn: function fn(_ref3) {
+          var data = _ref3.data;
+
+          _this2.defaultValue.group_ids = data.items.map(function (_ref4) {
+            var id = _ref4.id;
+            return id;
+          });
+
+          // for select options
+          _this2.$$api_asset_listGroup({
+            fn: function fn(_ref5) {
+              var data = _ref5.data;
+
+              _this2.fields[0].list = data.items;
+            }
+          });
+        }
+      });
+    },
+    updateParams: function updateParams() {
+      this.params.asset_id = Number(this.$route.query.id) || "";
+    },
+    initData: function initData() {
+      this.updateParams();
+
+      if (this.params.asset_id) {
+        this.handleGetData();
+      }
     }
   }
 });
 
 /***/ }),
 
-/***/ 537:
+/***/ 412:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("ListData", {
-    ref: "list-data",
+  return _c("FormData", {
     attrs: {
-      List: _vm.list,
-      ListLoading: _vm.list_loading,
-      Pagination: _vm.paginations,
-      Toolbar: _vm.toolbar,
-      Searchbar: _vm.searchbar,
-      FieldList: _vm.fields
+      "default-value": _vm.defaultValue,
+      "field-list": _vm.fields,
+      toolbar: _vm.toolbar
     },
-    on: {
-      onClickBtnAdd: _vm.$onClickBtnAdd,
-      onClickBtnEdit: _vm.handleEditQuery,
-      onClickBtnBatchDelete: _vm.onClickBtnBatchDelete,
-      onChangeCurrentPage: _vm.$onChangeCurrentPage,
-      onChangePageSize: _vm.$onChangePageSize,
-      onSearch: _vm.$onSearch,
-      onSearchReset: _vm.$onSearchReset
-    }
+    on: { "on-submit": _vm.handleSubmit, "on-cancel": _vm.onCancel }
   })
 }
 var staticRenderFns = []
@@ -387,7 +233,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-a3e5206a", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-e547afba", module.exports)
   }
 }
 

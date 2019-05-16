@@ -1,14 +1,14 @@
 webpackJsonp([7],{
 
-/***/ 25:
+/***/ 24:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(502)
+var __vue_script__ = __webpack_require__(497)
 /* template */
-var __vue_template__ = __webpack_require__(503)
+var __vue_template__ = __webpack_require__(498)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 502:
+/***/ 497:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -62,14 +62,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "err500"
+  name: "Error500"
 });
 
 /***/ }),
 
-/***/ 503:
+/***/ 498:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -93,7 +99,7 @@ var staticRenderFns = [
       _c("div", [
         _c("p", { staticClass: "error-msg" }, [
           _vm._v(
-            "Something went wrong at our end, we are working on it. Mean while try below options. "
+            "Something went wrong at our end, we are working on it. Mean while try below options."
           )
         ])
       ])

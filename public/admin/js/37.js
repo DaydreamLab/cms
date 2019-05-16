@@ -6,9 +6,9 @@ webpackJsonp([37],{
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(494)
+var __vue_script__ = __webpack_require__(489)
 /* template */
-var __vue_template__ = __webpack_require__(495)
+var __vue_template__ = __webpack_require__(490)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -60,7 +60,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     data: function data() {
         return {
             list: [],
-            list_loading: {
+            listLoading: {
                 flag: false
             },
             paginations: {
@@ -75,15 +75,22 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
     watch: {
         $route: {
-            handler: "$initList",
+            handler: "$_listMixin_init",
             immediate: true
         }
     },
     methods: {
-        $onClickBtnAdd: function $onClickBtnAdd() {
+        $_listMixin_goAddRoute: function $_listMixin_goAddRoute() {
             this.$router.push(this.$route.path + "/edit");
         },
-        $onClickBntEdit: function $onClickBntEdit(query) {
+
+        /**
+         * 組裝編輯路徑
+         * @param {Object} query 編輯項目參數
+         * @param.attr query.id 項目 id
+         * @param.attr query.pid 項目 parent_id
+         */
+        $_listMixin_goEditRoute: function $_listMixin_goEditRoute(query) {
             this.$router.push({
                 path: this.$route.path + "/edit",
                 query: _extends({}, query, {
@@ -91,32 +98,78 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 })
             });
         },
-        $onSearchReset: function $onSearchReset() {
+        $_listMixin_onSearchReset: function $_listMixin_onSearchReset() {
             this.$router.push({
                 path: this.$route.path
             });
         },
-        $onSearch: function $onSearch(_ref) {
-            var data = _ref.data;
+        $_listMixin_onSearch: function $_listMixin_onSearch(data) {
+            var query = this.$route.query;
 
-            var sd = {};
+            var searchData = _extends({}, query);
+
+            for (var s in data) {
+                searchData[s] = data[s];
+                if (!searchData[s]) {
+                    delete searchData[s];
+                }
+            }
+            this.$router.push({
+                path: this.$route.path,
+                query: searchData
+            });
+        },
+        $_listMixin_updateCurrentPage: function $_listMixin_updateCurrentPage(page) {
+            var _this = this;
+
+            this.$_listMixin_getList({
+                page: page,
+                fn: function fn() {
+                    _this.$router.push({
+                        path: _this.$route.path,
+                        query: _this.setRouteQuery("page", page)
+                    });
+                }
+            });
+        },
+        $_listMixin_updatePageSize: function $_listMixin_updatePageSize(pageSize) {
+            var _this2 = this;
+
+            this.$_listMixin_getList({
+                pageSize: pageSize,
+                fn: function fn() {
+                    _this2.$router.push({
+                        path: _this2.$route.path,
+                        query: _this2.setRouteQuery("page_size", pageSize)
+                    });
+                }
+            });
+        },
+        $_listMixin_getList: function $_listMixin_getList() {
+            var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+                page = _ref.page,
+                pageSize = _ref.pageSize,
+                where = _ref.where,
+                fn = _ref.fn;
+
+            this.listLoading.flag = true;
 
             var query = this.$route.query;
 
-            for (var p in query) {
-                sd[p] = query[p];
-            }
-            for (var s in data) {
-                sd[s] = data[s];
-                if (!sd[s]) {
-                    delete sd[s];
-                }
-            }
+            this.paginations.current_page = page || Number(query.page) || 1;
+            this.paginations.page_size = pageSize || Number(query.page_size) || this.paginations.page_size;
 
-            this.$router.push({
-                path: this.$route.path,
-                query: sd
+            var page_data = Object.assign(this.getRouteQuery(), {
+                page: this.paginations.current_page,
+                limit: this.paginations.page_size
             });
+            if (where) {
+                page_data = Object.assign(page_data, where || {});
+            }
+            this.handleGetList({ page_data: page_data, fn: fn });
+        },
+        $_listMixin_init: function $_listMixin_init() {
+            this.$_listMixin_getList(); //為了在 cms mixin 可以加參數
         },
         setRouteQuery: function setRouteQuery(field, value) {
             var query = Object.assign({}, this.$route.query);
@@ -130,70 +183,18 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             return query;
         },
         getRouteQuery: function getRouteQuery() {
-            var _this = this;
+            var _this3 = this;
 
             var query = this.$route.query;
-            var intArray = ["id", "pid", "category_id", "access"];
+            var numberArray = ["id", "pid", "category_id", "access"];
             var dateArray = ["start_date", "end_date"];
             var data = {};
 
             Object.keys(query).forEach(function (field) {
-                _this.searchbar.default_value[field] = intArray.includes(field) ? parseInt(query[field]) : dateArray.includes(field) ? _this.$options.filters.storeDateFormat(query[field]) : query[field];
+                _this3.searchbar.defaultValue[field] = numberArray.includes(field) ? Number(query[field]) : dateArray.includes(field) ? _this3.$options.filters.storeDateFormat(query[field]) : query[field];
                 data[field] = query[field];
             });
             return data;
-        },
-        $onChangeCurrentPage: function $onChangeCurrentPage(page) {
-            var _this2 = this;
-
-            this.$onGetList({
-                page: page,
-                fn: function fn() {
-                    _this2.$router.push({
-                        path: _this2.$route.path,
-                        query: _this2.setRouteQuery("page", page)
-                    });
-                }
-            });
-        },
-        $onChangePageSize: function $onChangePageSize(pageSize) {
-            var _this3 = this;
-
-            this.$onGetList({
-                pageSize: pageSize,
-                fn: function fn() {
-                    _this3.$router.push({
-                        path: _this3.$route.path,
-                        query: _this3.setRouteQuery("page_size", pageSize)
-                    });
-                }
-            });
-        },
-        $onGetList: function $onGetList() {
-            var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-                page = _ref2.page,
-                pageSize = _ref2.pageSize,
-                where = _ref2.where,
-                fn = _ref2.fn;
-
-            this.list_loading.flag = true;
-
-            var query = this.$route.query;
-
-            this.paginations.current_page = page || parseInt(query.page) || 1;
-            this.paginations.page_size = pageSize || parseInt(query.page_size) || this.paginations.page_size;
-
-            var page_data = Object.assign(this.getRouteQuery(), {
-                page: this.paginations.current_page,
-                limit: this.paginations.page_size
-            });
-            if (where) {
-                page_data = Object.assign(page_data, where || {});
-            }
-            this.handleGetList({ page_data: page_data, fn: fn });
-        },
-        $initList: function $initList() {
-            this.$onGetList();
         }
     }
 });
@@ -206,22 +207,22 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 "use strict";
 /* harmony default export */ __webpack_exports__["a"] = ({
     methods: {
-        $initList: function $initList() {
+        $_listMixin_init: function $_listMixin_init() {
             this.$set(this.toolbar, "type", this.$route.query.state === "-2" ? "trash" : "list");
-            this.$onGetList();
+            this.$_listMixin_getList();
         }
     }
 });
 
 /***/ }),
 
-/***/ 494:
+/***/ 489:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin__ = __webpack_require__(283);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_cms_list_mixin__ = __webpack_require__(289);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_list__ = __webpack_require__(283);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_list_cms__ = __webpack_require__(289);
 //
 //
 //
@@ -249,8 +250,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "tag-list",
-  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_list_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1_mixins_cms_list_mixin__["a" /* default */]],
+  name: "TagList",
+  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_list__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1_mixins_list_cms__["a" /* default */]],
   data: function data() {
     var _this = this;
 
@@ -264,17 +265,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         label: this.$t("OPTION_STATE"),
         type: "icon-label",
         width: "90",
-        formatter: function formatter(item) {
+        formatter: function formatter(value) {
           return {
-            color: "item_state_" + item + "_color",
-            icon: ["fal", item === 1 ? "check" : "times"]
+            color: "item_state_" + value + "_color",
+            icon: ["fal", value === 1 ? "check" : "times"]
           };
         }
       }, {
         key: "language_title",
         label: this.$t("OPTION_LANGUAGE"),
-        formatter: function formatter(item) {
-          return item.language === "*" ? _this.$t("ALL_LANGUAGE") : item.language_title;
+        formatter: function formatter(_ref) {
+          var language = _ref.language,
+              language_title = _ref.language_title;
+
+          return language === "*" ? _this.$t("ALL_LANGUAGE") : language_title;
         }
       }, {
         width: "60",
@@ -286,38 +290,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         custom: [{
           text: this.$t("TOOLBAR_PUBLISH"),
           method: "updateState",
-          condition: function condition(_ref) {
-            var data = _ref.data;
+          condition: function condition(_ref2) {
+            var data = _ref2.data;
 
             return data.state === 0 && data.parent_id !== null;
           },
 
-          fn: function fn(_ref2) {
-            var ids = _ref2.ids;
+          fn: function fn(_ref3) {
+            var ids = _ref3.ids;
 
-            _this.onClickBtnUpdateState({ ids: ids, state: 1 });
+            _this.handleUpdateState({ ids: ids, state: 1 });
           }
         }, {
           text: this.$t("TOOLBAR_UNPUBLISH"),
           method: "updateState",
-          condition: function condition(_ref3) {
-            var data = _ref3.data;
+          condition: function condition(_ref4) {
+            var data = _ref4.data;
 
             return data.state === 1 && data.parent_id !== null;
           },
 
-          fn: function fn(_ref4) {
-            var ids = _ref4.ids;
+          fn: function fn(_ref5) {
+            var ids = _ref5.ids;
 
-            _this.onClickBtnUpdateState({ ids: ids, state: 0 });
+            _this.handleUpdateState({ ids: ids, state: 0 });
           }
         }, {
           text: this.$t("TOOLBAR_CHECKOUT"),
           method: "checkout",
-          fn: function fn(_ref5) {
-            var ids = _ref5.ids;
+          fn: function fn(_ref6) {
+            var ids = _ref6.ids;
 
-            _this.onClickBtnCheckout({ ids: ids });
+            _this.handleCheckout({ ids: ids });
           }
         }]
       },
@@ -342,7 +346,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           }, {
             value: "-2",
             text: this.$t("TRASHED")
-          }]
+          }],
+          events: {
+            change: function change() {
+              _this.$_listMixin_onSearch(_this.searchbar.defaultValue);
+            }
+          }
         }, {
           key: "language",
           type: "select",
@@ -352,9 +361,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           custom_attrs: {
             label: "title",
             value: "sef"
+          },
+          events: {
+            change: function change() {
+              _this.$_listMixin_onSearch(_this.searchbar.defaultValue);
+            }
           }
         }],
-        default_value: {
+        defaultValue: {
           search: "",
           state: "",
           language: ""
@@ -364,98 +378,79 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
-    /**
-     * list actions
-     */
-    onClickBtnCheckout: function onClickBtnCheckout(_ref6) {
+    handleCheckout: function handleCheckout(_ref7) {
       var _this2 = this;
 
-      var data = _ref6.data,
-          ids = _ref6.ids;
+      var data = _ref7.data,
+          ids = _ref7.ids;
 
       var checkout_data = ids ? ids : [data.id];
       this.$$api_tag_checkout({
         data: { ids: checkout_data },
-        fn: function fn(_ref7) {
-          var msg = _ref7.msg;
+        fn: function fn(_ref8) {
+          var msg = _ref8.msg;
 
           _this2.$message.success(msg);
-          _this2.$onGetList();
+          _this2.$_listMixin_getList();
         }
       });
     },
-
-    /**
-     * Toolbar
-     */
-    onClickBtnBatchTrash: function onClickBtnBatchTrash(_ref8) {
-      var ids = _ref8.ids,
-          state = _ref8.state;
-
-      this.onClickBtnUpdateState({ ids: ids, state: state });
-    },
-    onClickBtnBatchRestore: function onClickBtnBatchRestore(_ref9) {
-      var ids = _ref9.ids,
-          state = _ref9.state;
-
-      this.onClickBtnUpdateState({ ids: ids, state: state });
-    },
-    onClickBtnUpdateState: function onClickBtnUpdateState(_ref10) {
+    handleUpdateState: function handleUpdateState(_ref9) {
       var _this3 = this;
 
-      var ids = _ref10.ids,
-          state = _ref10.state;
+      var ids = _ref9.ids,
+          state = _ref9.state;
 
       this.$$api_tag_updateState({
         data: {
           ids: ids,
           state: state
         },
-        fn: function fn(_ref11) {
-          var msg = _ref11.msg;
+        fn: function fn(_ref10) {
+          var msg = _ref10.msg;
 
           _this3.$message.success(msg);
-          _this3.$onGetList();
+          _this3.$_listMixin_getList();
         }
       });
     },
-    onClickBtnBatchDelete: function onClickBtnBatchDelete(_ref12) {
+    handleBatchDelete: function handleBatchDelete(_ref11) {
       var _this4 = this;
 
-      var ids = _ref12.ids,
-          datas = _ref12.datas;
+      var ids = _ref11.ids,
+          datas = _ref11.datas;
 
       this.$confirm(this.$t("GLOBAL_CONFIRM_DELETE")).then(function () {
         _this4.$$api_tag_delete({
           data: { ids: ids },
-          fn: function fn(_ref13) {
-            var data = _ref13.data;
+          fn: function fn(_ref12) {
+            var data = _ref12.data;
 
-            _this4.$onGetList();
+            _this4.$_listMixin_getList();
           }
         });
       });
     },
-    handleEditQuery: function handleEditQuery(_ref14) {
-      var data = _ref14.data;
+    setEditRouteQuery: function setEditRouteQuery(_ref13) {
+      var data = _ref13.data;
 
-      this.$onClickBntEdit({
+      this.$_listMixin_goEditRoute({
         id: data.id
       });
     },
     handleGetList: function handleGetList() {
       var _this5 = this;
 
-      var _ref15 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-          page_data = _ref15.page_data,
-          _fn = _ref15.fn;
+      var _ref14 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+          page_data = _ref14.page_data,
+          _fn = _ref14.fn;
 
       this.$$api_tag_list({
         data: page_data,
-        fn: function fn(_ref16) {
-          var data = _ref16.data;
+        fn: function fn(_ref15) {
+          var data = _ref15.data;
 
-          _this5.list_loading.flag = false;
+          _this5.listLoading.flag = false;
           _this5.list = data.items;
           _this5.paginations.total = data.pagination.total;
 
@@ -468,7 +463,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 495:
+/***/ 490:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -478,24 +473,24 @@ var render = function() {
   return _c("ListData", {
     ref: "list-data",
     attrs: {
-      List: _vm.list,
-      ListLoading: _vm.list_loading,
-      Pagination: _vm.paginations,
-      Toolbar: _vm.toolbar,
-      Searchbar: _vm.searchbar,
-      FieldList: _vm.fields
+      list: _vm.list,
+      "list-loading": _vm.listLoading,
+      "field-list": _vm.fields,
+      pagination: _vm.paginations,
+      toolbar: _vm.toolbar,
+      searchbar: _vm.searchbar
     },
     on: {
-      onClickBtnAdd: _vm.$onClickBtnAdd,
-      onClickBtnEdit: _vm.handleEditQuery,
-      onClickBtnBatchDelete: _vm.onClickBtnBatchDelete,
-      onClickBtnBatchTrash: _vm.onClickBtnBatchTrash,
-      onClickBtnBatchRestore: _vm.onClickBtnBatchRestore,
-      onClickBtnCheckout: _vm.onClickBtnCheckout,
-      onChangeCurrentPage: _vm.$onChangeCurrentPage,
-      onChangePageSize: _vm.$onChangePageSize,
-      onSearch: _vm.$onSearch,
-      onSearchReset: _vm.$onSearchReset
+      "click-add": _vm.$_listMixin_goAddRoute,
+      "click-edit": _vm.setEditRouteQuery,
+      "click-batch-delete": _vm.handleBatchDelete,
+      "click-batch-trash": _vm.handleUpdateState,
+      "click-batch-restore": _vm.handleUpdateState,
+      "click-checkout": _vm.handleCheckout,
+      "change-current-page": _vm.$_listMixin_updateCurrentPage,
+      "change-page-size": _vm.$_listMixin_updatePageSize,
+      search: _vm.$_listMixin_onSearch,
+      "search-reset": _vm.$_listMixin_onSearchReset
     }
   })
 }

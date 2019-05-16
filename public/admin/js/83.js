@@ -6,13 +6,13 @@ webpackJsonp([83],{
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(446)
+  __webpack_require__(426)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(448)
+var __vue_script__ = __webpack_require__(428)
 /* template */
-var __vue_template__ = __webpack_require__(461)
+var __vue_template__ = __webpack_require__(448)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -52,17 +52,17 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 446:
+/***/ 426:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(447);
+var content = __webpack_require__(427);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(262)("8ebb0d16", content, false, {});
+var update = __webpack_require__(256)("8ebb0d16", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -79,10 +79,10 @@ if(false) {
 
 /***/ }),
 
-/***/ 447:
+/***/ 427:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(261)(false);
+exports = module.exports = __webpack_require__(255)(false);
 // imports
 
 
@@ -94,7 +94,7 @@ exports.push([module.i, "/* Colors -------------------------- */\n/* Link ------
 
 /***/ }),
 
-/***/ 448:
+/***/ 428:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -167,17 +167,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     MediaInput: function MediaInput() {
-      return __webpack_require__.e/* import() */(81).then(__webpack_require__.bind(null, 371));
+      return __webpack_require__.e/* import() */(84).then(__webpack_require__.bind(null, 365));
     },
     FieldForm: function FieldForm() {
-      return __webpack_require__.e/* import() */(86).then(__webpack_require__.bind(null, 370));
+      return __webpack_require__.e/* import() */(80).then(__webpack_require__.bind(null, 364));
     }
   },
   props: {
@@ -218,7 +215,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
           }
         }
       },
-      default_value: {
+      defaultValue: {
         id: "",
         title: "",
         link: "",
@@ -232,8 +229,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         extrafield_group_id: "",
         extrafields: {}
       },
-      save_loading: false,
-      form_label_map: {
+      saveLoading: false,
+      formLabelRefs: {
         slideshow: {
           title: "Slide 標題",
           image: "背景圖片"
@@ -258,12 +255,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   },
 
   computed: {
-    groupFields: function groupFields() {
-      return this.fields.extrafield_group_id.list[this.default_value.extrafield_group_id];
+    group_fields: function group_fields() {
+      return this.fields.extrafield_group_id.list[this.defaultValue.extrafield_group_id];
     }
   },
   mounted: function mounted() {
-    this.onFillForm();
+    this.initData();
   },
 
   methods: {
@@ -283,40 +280,40 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     onClickBtnSave: function onClickBtnSave() {
       var _this2 = this;
 
-      this.save_loading = true;
+      this.saveLoading = true;
 
       if (this.category) {
-        this.default_value.category_id = this.category.id;
-        this.default_value.language = this.category.language;
+        this.defaultValue.category_id = this.category.id;
+        this.defaultValue.language = this.category.language;
       }
 
       this.$$api_item_save({
-        data: this.default_value,
+        data: this.defaultValue,
         fn: function fn(_ref2) {
           var data = _ref2.data,
               msg = _ref2.msg;
 
           _this2.$message.success(msg);
           _this2.$emit("update");
-          _this2.onUpdateActiveItem();
+          _this2.updateActiveItem();
         },
         finalFn: function finalFn() {
-          _this2.save_loading = false;
+          _this2.saveLoading = false;
         }
       });
     },
-    onUpdateActiveItem: function onUpdateActiveItem(id) {
-      this.$emit("updateActive", id);
+    updateActiveItem: function updateActiveItem(id) {
+      this.$emit("update-active", id);
     },
-    onFillForm: function onFillForm() {
-      this.default_value = _extends({}, this.default_value, this.data);
+    initData: function initData() {
+      this.defaultValue = _extends({}, this.defaultValue, this.data);
     }
   }
 });
 
 /***/ }),
 
-/***/ 461:
+/***/ 448:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -363,7 +360,7 @@ var render = function() {
                           attrs: { size: "small", plain: "" },
                           on: {
                             click: function($event) {
-                              _vm.onUpdateActiveItem()
+                              _vm.updateActiveItem()
                             }
                           }
                         },
@@ -392,7 +389,7 @@ var render = function() {
                         "el-button",
                         {
                           attrs: {
-                            loading: _vm.save_loading,
+                            loading: _vm.saveLoading,
                             type: "primary",
                             size: "small"
                           },
@@ -431,7 +428,7 @@ var render = function() {
                           },
                           on: {
                             click: function($event) {
-                              _vm.onUpdateActiveItem(_vm.data.id)
+                              _vm.updateActiveItem(_vm.data.id)
                             }
                           }
                         },
@@ -496,9 +493,9 @@ var render = function() {
           [
             _c(
               "el-form",
-              { ref: "form-data", attrs: { model: _vm.default_value } },
+              { ref: "form-data", attrs: { model: _vm.defaultValue } },
               [
-                _vm._l(_vm.form_label_map[_vm.type], function(value, key) {
+                _vm._l(_vm.formLabelRefs[_vm.type], function(value, key) {
                   return [
                     key === "image"
                       ? _c(
@@ -506,16 +503,17 @@ var render = function() {
                           {
                             attrs: {
                               prop: key,
-                              label: _vm.form_label_map[_vm.type][key]
+                              label: _vm.formLabelRefs[_vm.type][key]
                             }
                           },
                           [
                             _c("MediaInput", {
-                              attrs: { Data: _vm.default_value[key] },
-                              on: {
-                                onClickBtnSelect: function(value) {
-                                  return (_vm.default_value[key] = value)
-                                }
+                              model: {
+                                value: _vm.defaultValue[key],
+                                callback: function($$v) {
+                                  _vm.$set(_vm.defaultValue, key, $$v)
+                                },
+                                expression: "defaultValue[key]"
                               }
                             })
                           ],
@@ -526,17 +524,17 @@ var render = function() {
                           {
                             attrs: {
                               prop: key,
-                              label: _vm.form_label_map[_vm.type][key]
+                              label: _vm.formLabelRefs[_vm.type][key]
                             }
                           },
                           [
                             _c("el-input", {
                               model: {
-                                value: _vm.default_value[key],
+                                value: _vm.defaultValue[key],
                                 callback: function($$v) {
-                                  _vm.$set(_vm.default_value, key, $$v)
+                                  _vm.$set(_vm.defaultValue, key, $$v)
                                 },
-                                expression: "default_value[key]"
+                                expression: "defaultValue[key]"
                               }
                             })
                           ],
@@ -545,15 +543,15 @@ var render = function() {
                   ]
                 }),
                 _vm._v(" "),
-                _vm.groupFields && "extrafields" in _vm.groupFields
+                _vm.group_fields && "extrafields" in _vm.group_fields
                   ? _c("FieldForm", {
                       attrs: {
-                        fields: _vm.groupFields["extrafields"],
-                        data: _vm.default_value.extrafields
+                        fields: _vm.group_fields.extrafields,
+                        data: _vm.defaultValue.extrafields
                       },
                       on: {
                         "update:data": function($event) {
-                          _vm.$set(_vm.default_value, "extrafields", $event)
+                          _vm.$set(_vm.defaultValue, "extrafields", $event)
                         }
                       }
                     })

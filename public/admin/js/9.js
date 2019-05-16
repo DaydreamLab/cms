@@ -3,21 +3,17 @@ webpackJsonp([9,71],Array(107).concat([
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(371)
-}
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(373)
+var __vue_script__ = __webpack_require__(371)
 /* template */
-var __vue_template__ = __webpack_require__(402)
+var __vue_template__ = __webpack_require__(400)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = injectStyle
+var __vue_styles__ = null
 /* scopeId */
-var __vue_scopeId__ = "data-v-655249c0"
+var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -105,39 +101,7 @@ module.exports = Component.exports
 /* 160 */,
 /* 161 */,
 /* 162 */,
-/* 163 */
-/***/ (function(module, exports) {
-
-/**
- * Translates the list format produced by css-loader into something
- * easier to manipulate.
- */
-module.exports = function listToStyles (parentId, list) {
-  var styles = []
-  var newStyles = {}
-  for (var i = 0; i < list.length; i++) {
-    var item = list[i]
-    var id = item[0]
-    var css = item[1]
-    var media = item[2]
-    var sourceMap = item[3]
-    var part = {
-      id: parentId + ':' + i,
-      css: css,
-      media: media,
-      sourceMap: sourceMap
-    }
-    if (!newStyles[id]) {
-      styles.push(newStyles[id] = { id: id, parts: [part] })
-    } else {
-      newStyles[id].parts.push(part)
-    }
-  }
-  return styles
-}
-
-
-/***/ }),
+/* 163 */,
 /* 164 */,
 /* 165 */,
 /* 166 */,
@@ -229,316 +193,8 @@ module.exports = function listToStyles (parentId, list) {
 /* 252 */,
 /* 253 */,
 /* 254 */,
-/* 255 */
-/***/ (function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function(useSourceMap) {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if(item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
-
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
-		});
-
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
-
-	return [content].join('\n');
-}
-
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-	return '/*# ' + data + ' */';
-}
-
-
-/***/ }),
-/* 256 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/*
-  MIT License http://www.opensource.org/licenses/mit-license.php
-  Author Tobias Koppers @sokra
-  Modified by Evan You @yyx990803
-*/
-
-var hasDocument = typeof document !== 'undefined'
-
-if (typeof DEBUG !== 'undefined' && DEBUG) {
-  if (!hasDocument) {
-    throw new Error(
-    'vue-style-loader cannot be used in a non-browser environment. ' +
-    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
-  ) }
-}
-
-var listToStyles = __webpack_require__(163)
-
-/*
-type StyleObject = {
-  id: number;
-  parts: Array<StyleObjectPart>
-}
-
-type StyleObjectPart = {
-  css: string;
-  media: string;
-  sourceMap: ?string
-}
-*/
-
-var stylesInDom = {/*
-  [id: number]: {
-    id: number,
-    refs: number,
-    parts: Array<(obj?: StyleObjectPart) => void>
-  }
-*/}
-
-var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
-var singletonElement = null
-var singletonCounter = 0
-var isProduction = false
-var noop = function () {}
-var options = null
-var ssrIdKey = 'data-vue-ssr-id'
-
-// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-// tags it will allow on a page
-var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
-
-module.exports = function (parentId, list, _isProduction, _options) {
-  isProduction = _isProduction
-
-  options = _options || {}
-
-  var styles = listToStyles(parentId, list)
-  addStylesToDom(styles)
-
-  return function update (newList) {
-    var mayRemove = []
-    for (var i = 0; i < styles.length; i++) {
-      var item = styles[i]
-      var domStyle = stylesInDom[item.id]
-      domStyle.refs--
-      mayRemove.push(domStyle)
-    }
-    if (newList) {
-      styles = listToStyles(parentId, newList)
-      addStylesToDom(styles)
-    } else {
-      styles = []
-    }
-    for (var i = 0; i < mayRemove.length; i++) {
-      var domStyle = mayRemove[i]
-      if (domStyle.refs === 0) {
-        for (var j = 0; j < domStyle.parts.length; j++) {
-          domStyle.parts[j]()
-        }
-        delete stylesInDom[domStyle.id]
-      }
-    }
-  }
-}
-
-function addStylesToDom (styles /* Array<StyleObject> */) {
-  for (var i = 0; i < styles.length; i++) {
-    var item = styles[i]
-    var domStyle = stylesInDom[item.id]
-    if (domStyle) {
-      domStyle.refs++
-      for (var j = 0; j < domStyle.parts.length; j++) {
-        domStyle.parts[j](item.parts[j])
-      }
-      for (; j < item.parts.length; j++) {
-        domStyle.parts.push(addStyle(item.parts[j]))
-      }
-      if (domStyle.parts.length > item.parts.length) {
-        domStyle.parts.length = item.parts.length
-      }
-    } else {
-      var parts = []
-      for (var j = 0; j < item.parts.length; j++) {
-        parts.push(addStyle(item.parts[j]))
-      }
-      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
-    }
-  }
-}
-
-function createStyleElement () {
-  var styleElement = document.createElement('style')
-  styleElement.type = 'text/css'
-  head.appendChild(styleElement)
-  return styleElement
-}
-
-function addStyle (obj /* StyleObjectPart */) {
-  var update, remove
-  var styleElement = document.querySelector('style[' + ssrIdKey + '~="' + obj.id + '"]')
-
-  if (styleElement) {
-    if (isProduction) {
-      // has SSR styles and in production mode.
-      // simply do nothing.
-      return noop
-    } else {
-      // has SSR styles but in dev mode.
-      // for some reason Chrome can't handle source map in server-rendered
-      // style tags - source maps in <style> only works if the style tag is
-      // created and inserted dynamically. So we remove the server rendered
-      // styles and inject new ones.
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  if (isOldIE) {
-    // use singleton mode for IE9.
-    var styleIndex = singletonCounter++
-    styleElement = singletonElement || (singletonElement = createStyleElement())
-    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
-    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
-  } else {
-    // use multi-style-tag mode in all other cases
-    styleElement = createStyleElement()
-    update = applyToTag.bind(null, styleElement)
-    remove = function () {
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  update(obj)
-
-  return function updateStyle (newObj /* StyleObjectPart */) {
-    if (newObj) {
-      if (newObj.css === obj.css &&
-          newObj.media === obj.media &&
-          newObj.sourceMap === obj.sourceMap) {
-        return
-      }
-      update(obj = newObj)
-    } else {
-      remove()
-    }
-  }
-}
-
-var replaceText = (function () {
-  var textStore = []
-
-  return function (index, replacement) {
-    textStore[index] = replacement
-    return textStore.filter(Boolean).join('\n')
-  }
-})()
-
-function applyToSingletonTag (styleElement, index, remove, obj) {
-  var css = remove ? '' : obj.css
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = replaceText(index, css)
-  } else {
-    var cssNode = document.createTextNode(css)
-    var childNodes = styleElement.childNodes
-    if (childNodes[index]) styleElement.removeChild(childNodes[index])
-    if (childNodes.length) {
-      styleElement.insertBefore(cssNode, childNodes[index])
-    } else {
-      styleElement.appendChild(cssNode)
-    }
-  }
-}
-
-function applyToTag (styleElement, obj) {
-  var css = obj.css
-  var media = obj.media
-  var sourceMap = obj.sourceMap
-
-  if (media) {
-    styleElement.setAttribute('media', media)
-  }
-  if (options.ssrId) {
-    styleElement.setAttribute(ssrIdKey, obj.id)
-  }
-
-  if (sourceMap) {
-    // https://developer.chrome.com/devtools/docs/javascript-debugging
-    // this makes source maps inside style tags work properly in Chrome
-    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
-    // http://stackoverflow.com/a/26603875
-    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
-  }
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = css
-  } else {
-    while (styleElement.firstChild) {
-      styleElement.removeChild(styleElement.firstChild)
-    }
-    styleElement.appendChild(document.createTextNode(css))
-  }
-}
-
-
-/***/ }),
+/* 255 */,
+/* 256 */,
 /* 257 */,
 /* 258 */,
 /* 259 */,
@@ -562,29 +218,6 @@ function applyToTag (styleElement, obj) {
 /* 277 */,
 /* 278 */,
 /* 279 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var baseIsNative = __webpack_require__(294),
-    getValue = __webpack_require__(297);
-
-/**
- * Gets the native function at `key` of `object`.
- *
- * @private
- * @param {Object} object The object to query.
- * @param {string} key The key of the method to get.
- * @returns {*} Returns the function if it's native, else `undefined`.
- */
-function getNative(object, key) {
-  var value = getValue(object, key);
-  return baseIsNative(value) ? value : undefined;
-}
-
-module.exports = getNative;
-
-
-/***/ }),
-/* 280 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1185,12 +818,34 @@ var denormalize$1 = function denormalize$$1(input, schema, entities) {
 
 
 /***/ }),
-/* 281 */,
-/* 282 */
+/* 280 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseIsNative = __webpack_require__(294),
+    getValue = __webpack_require__(297);
+
+/**
+ * Gets the native function at `key` of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @param {string} key The key of the method to get.
+ * @returns {*} Returns the function if it's native, else `undefined`.
+ */
+function getNative(object, key) {
+  var value = getValue(object, key);
+  return baseIsNative(value) ? value : undefined;
+}
+
+module.exports = getNative;
+
+
+/***/ }),
+/* 281 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_normalizr__ = __webpack_require__(280);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_normalizr__ = __webpack_require__(279);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -1201,63 +856,18 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 /* harmony default export */ __webpack_exports__["a"] = ({
     methods: {
-        $handleGetFieldList: function $handleGetFieldList() {
-            var fields = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-
+        handleUpdateField: function handleUpdateField(field, data, fieldKeyOrIndex, isSearchbar) {
+            this.updateStoreFieldList(field, data[field] || data);
+            isSearchbar ? this.updateSearchbarFieldList(field, fieldKeyOrIndex) : this.updateFieldList(field, fieldKeyOrIndex);
+        },
+        updateFieldList: function updateFieldList(field, fieldKeyOrIndex) {
+            this.fields[fieldKeyOrIndex]["list"] = this.$store.getters[field + "_list"];
+        },
+        updateSearchbarFieldList: function updateSearchbarFieldList(field, fieldIndex) {
+            this.searchbar.fields[fieldIndex]["list"] = this.$store.getters[field + "_list"];
+        },
+        updateStoreFieldList: function updateStoreFieldList(field, value) {
             var _this = this;
-
-            var fieldsObj = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-            var usage = arguments[2];
-
-            this.$$api_option_list({
-                data: {
-                    types: fields
-                },
-                fn: function fn(_ref) {
-                    var data = _ref.data;
-
-                    fields.forEach(function (type) {
-                        if (type === "extrafield_group") {
-                            data.items[type] = [{
-                                id: 0,
-                                value: "",
-                                title: _this.$t("OPTION_NONE")
-                            }].concat(_toConsumableArray(data.items[type]));
-                            var groups = new __WEBPACK_IMPORTED_MODULE_0_normalizr__["b" /* schema */].Entity("groups");
-                            var normalize_list = Object(__WEBPACK_IMPORTED_MODULE_0_normalizr__["a" /* normalize */])(data.items[type], [groups]);
-                            _this.handleUpdateField(type, normalize_list.entities["groups"], fieldsObj[type], usage);
-                        } else {
-                            _this.handleUpdateField(type, data.items, fieldsObj[type], usage);
-                        }
-                    });
-                }
-            });
-        },
-        $getFieldList: function $getFieldList() {
-            var _this2 = this;
-
-            var fieldsObj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-            var usage = arguments[1];
-
-            var fieldsNotExit = Object.keys(fieldsObj).filter(function (key) {
-                return !_this2.checkStoreField(key);
-            });
-            if (fieldsNotExit.length > 0) {
-                this.$handleGetFieldList(fieldsNotExit, fieldsObj, usage);
-            }
-        },
-        handleUpdateField: function handleUpdateField(field, data, key_or_index, update_target) {
-            this.onUpdateStoreFieldList(field, data[field] || data);
-            update_target ? this.onUpdateSearchbarFieldList(field, key_or_index) : this.onUpdateFieldList(field, key_or_index);
-        },
-        onUpdateFieldList: function onUpdateFieldList(field, field_key_or_index) {
-            this.fields[field_key_or_index]["list"] = this.$store.getters[field + "_list"];
-        },
-        onUpdateSearchbarFieldList: function onUpdateSearchbarFieldList(field, field_index) {
-            this.searchbar.fields[field_index]["list"] = this.$store.getters[field + "_list"];
-        },
-        onUpdateStoreFieldList: function onUpdateStoreFieldList(field, value) {
-            var _this3 = this;
 
             if (field === "language") {
                 value = [{
@@ -1272,7 +882,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                         prefix = _el$tree_list_title$s2[0],
                         title = _el$tree_list_title$s2[1];
 
-                    var combinedTitle = title ? prefix + " " + _this3.$t(title) : _this3.$t(prefix);
+                    var combinedTitle = title ? prefix + " " + _this.$t(title) : _this.$t(prefix);
                     return _extends({}, el, { tree_list_title: combinedTitle });
                 });
             }
@@ -1285,6 +895,68 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                 data: value
             });
         },
+
+        /**
+         * 跟後端拿所需欄位類型之值
+         * @param {Array} fields
+         * @param {Object} typeAndTarget
+         * @param {Boolean} isSearchbar
+         * @returns {Object} 以 type 為 key 值的 Array
+         */
+        $_optionMixin_handleGetFieldList: function $_optionMixin_handleGetFieldList() {
+            var fields = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+
+            var _this2 = this;
+
+            var typeAndTarget = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+            var isSearchbar = arguments[2];
+
+            this.$$api_option_list({
+                data: {
+                    types: fields
+                },
+                fn: function fn(_ref) {
+                    var data = _ref.data;
+
+                    fields.forEach(function (type) {
+                        if (type === "extrafield_group") {
+                            data.items[type] = [{
+                                id: 0,
+                                value: "",
+                                title: _this2.$t("OPTION_NONE")
+                            }].concat(_toConsumableArray(data.items[type]));
+                            var groups = new __WEBPACK_IMPORTED_MODULE_0_normalizr__["b" /* schema */].Entity("groups");
+                            var normalize_list = Object(__WEBPACK_IMPORTED_MODULE_0_normalizr__["a" /* normalize */])(data.items[type], [groups]);
+                            _this2.handleUpdateField(type, normalize_list.entities["groups"], typeAndTarget[type], isSearchbar);
+                        } else {
+                            _this2.handleUpdateField(type, data.items, typeAndTarget[type], isSearchbar);
+                        }
+                    });
+                }
+            });
+        },
+
+        /**
+         * 更新下拉選單列表
+         * @param {Object} typeAndTarget
+         * 更新的欄位類型與其位置與fields 的相對位置
+         * 當 fields 為 Object 則為 key 值
+         * 當 fields 為 Array 則為 index 值
+         * @param {Boolean} isSearchbar 是否為 searchbar 欄位的下拉選單
+         */
+        $_optionMixin_updateFieldList: function $_optionMixin_updateFieldList() {
+            var _this3 = this;
+
+            var typeAndTarget = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+            var isSearchbar = arguments[1];
+
+            var fieldsNotExit = Object.keys(typeAndTarget).filter(function (key) {
+                return !_this3.checkStoreField(key);
+            });
+            if (fieldsNotExit.length > 0) {
+                this.$_optionMixin_handleGetFieldList(fieldsNotExit, typeAndTarget, isSearchbar);
+            }
+        },
         checkStoreField: function checkStoreField(field) {
             return Boolean(this.$store.getters[field + "_list"]);
         }
@@ -1292,12 +964,13 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 });
 
 /***/ }),
+/* 282 */,
 /* 283 */,
 /* 284 */,
 /* 285 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(279);
+var getNative = __webpack_require__(280);
 
 /* Built-in method references that are verified to be native. */
 var nativeCreate = getNative(Object, 'create');
@@ -1394,7 +1067,7 @@ module.exports = toSource;
 /* 291 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(279),
+var getNative = __webpack_require__(280),
     root = __webpack_require__(15);
 
 /* Built-in method references that are verified to be native. */
@@ -1789,7 +1462,7 @@ module.exports = getTag;
 /* 303 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(279),
+var getNative = __webpack_require__(280),
     root = __webpack_require__(15);
 
 /* Built-in method references that are verified to be native. */
@@ -1802,7 +1475,7 @@ module.exports = DataView;
 /* 304 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(279),
+var getNative = __webpack_require__(280),
     root = __webpack_require__(15);
 
 /* Built-in method references that are verified to be native. */
@@ -1815,7 +1488,7 @@ module.exports = Promise;
 /* 305 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(279),
+var getNative = __webpack_require__(280),
     root = __webpack_require__(15);
 
 /* Built-in method references that are verified to be native. */
@@ -1828,7 +1501,7 @@ module.exports = Set;
 /* 306 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(279),
+var getNative = __webpack_require__(280),
     root = __webpack_require__(15);
 
 /* Built-in method references that are verified to be native. */
@@ -1929,7 +1602,7 @@ module.exports = arrayPush;
 /* 310 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(279);
+var getNative = __webpack_require__(280);
 
 var defineProperty = (function() {
   try {
@@ -3410,11 +3083,11 @@ module.exports = isArrayLikeObject;
 /***/ (function(module, exports, __webpack_require__) {
 
 var ListCache = __webpack_require__(292),
-    stackClear = __webpack_require__(378),
-    stackDelete = __webpack_require__(379),
-    stackGet = __webpack_require__(380),
-    stackHas = __webpack_require__(381),
-    stackSet = __webpack_require__(382);
+    stackClear = __webpack_require__(376),
+    stackDelete = __webpack_require__(377),
+    stackGet = __webpack_require__(378),
+    stackHas = __webpack_require__(379),
+    stackSet = __webpack_require__(380);
 
 /**
  * Creates a stack cache object to store key-value pairs.
@@ -3442,7 +3115,7 @@ module.exports = Stack;
 /* 360 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseIsEqualDeep = __webpack_require__(383),
+var baseIsEqualDeep = __webpack_require__(381),
     isObjectLike = __webpack_require__(9);
 
 /**
@@ -3477,7 +3150,7 @@ module.exports = baseIsEqual;
 /***/ (function(module, exports, __webpack_require__) {
 
 var SetCache = __webpack_require__(337),
-    arraySome = __webpack_require__(384),
+    arraySome = __webpack_require__(382),
     cacheHas = __webpack_require__(338);
 
 /** Used to compose bitmasks for value comparisons. */
@@ -3617,58 +3290,15 @@ module.exports = matchesStrictComparable;
 /* 369 */,
 /* 370 */,
 /* 371 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(372);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(256)("a727779c", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-655249c0\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Users/daydreamlab/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./params-form.vue", function() {
-     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-655249c0\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Users/daydreamlab/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./params-form.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 372 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(255)(false);
-// imports
-
-
-// module
-exports.push([module.i, "/* Colors -------------------------- */\n/* Link -------------------------- */\n/* Background -------------------------- */\n/* Border -------------------------- */\n/* Navbar -------------------------- */\n/* Sidebar -------------------------- */\n/* Tab -------------------------- */\n/* Icon -------------------------- */\n/* Item -------------------------- */\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 373 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_differenceBy__ = __webpack_require__(374);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_differenceBy__ = __webpack_require__(372);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_differenceBy___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash_differenceBy__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_option_mixin__ = __webpack_require__(282);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_options__ = __webpack_require__(281);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-//
-//
-//
 //
 //
 //
@@ -3871,9 +3501,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mixins: [__WEBPACK_IMPORTED_MODULE_1_mixins_option_mixin__["a" /* default */]],
+  mixins: [__WEBPACK_IMPORTED_MODULE_1_mixins_options__["a" /* default */]],
   components: { ItemList: function ItemList() {
-      return __webpack_require__.e/* import() */(77).then(__webpack_require__.bind(null, 102));
+      return __webpack_require__.e/* import() */(78).then(__webpack_require__.bind(null, 102));
     } },
   props: {
     moduleType: {
@@ -3887,7 +3517,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   },
   data: function data() {
     return {
-      item_list_dialogVisible: false,
+      itemListDialogVisible: false,
       fields: {
         item_count: {
           all: true,
@@ -3958,7 +3588,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         }
       },
 
-      default_value: {
+      defaultValue: {
         "selected-items": {
           item_ids: []
         },
@@ -3993,23 +3623,23 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   },
 
   computed: {
-    formData: function formData() {
-      return _extends({}, this.params, this.default_value[this.moduleType]);
+    form_data: function form_data() {
+      return _extends({}, this.params, this.defaultValue[this.moduleType]);
     }
   },
   watch: {
-    formData: function formData(value) {
+    form_data: function form_data(value) {
       this.$emit("update:data", value);
     },
     "fields.item_count.all": function fieldsItem_countAll(value) {
-      if (value) this.default_value[this.moduleType]["item_count"] = 0;
+      if (value) this.defaultValue[this.moduleType]["item_count"] = 0;
     },
     "fields.featured_count.all": function fieldsFeatured_countAll(value) {
-      if (value) this.default_value[this.moduleType]["featured_count"] = 0;
+      if (value) this.defaultValue[this.moduleType]["featured_count"] = 0;
     }
   },
   created: function created() {
-    this.$getFieldList({
+    this.$_optionMixin_updateFieldList({
       item_category: "category_ids",
       menu: "menu_ids",
       viewlevel: "access"
@@ -4019,13 +3649,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
   methods: {
     handleSelectConfirm: function handleSelectConfirm(item, field) {
-      this.default_value[this.moduleType][field].push(item);
+      this.defaultValue[this.moduleType][field].push(item);
     },
     handleSelectClose: function handleSelectClose(item, field) {
-      this.default_value[this.moduleType][field].splice(this.default_value[this.moduleType][field].indexOf(item), 1);
+      this.defaultValue[this.moduleType][field].splice(this.defaultValue[this.moduleType][field].indexOf(item), 1);
     },
     querySelectSearch: function querySelectSearch(queryString, callback, list_field) {
-      var list_whithout_selected = __WEBPACK_IMPORTED_MODULE_0_lodash_differenceBy___default()(this.fields[list_field].list, this.default_value[this.moduleType][list_field], "id");
+      var list_whithout_selected = __WEBPACK_IMPORTED_MODULE_0_lodash_differenceBy___default()(this.fields[list_field].list, this.defaultValue[this.moduleType][list_field], "id");
 
       var results = queryString ? list_whithout_selected.filter(this.handleFilterTitle(queryString)) : list_whithout_selected;
 
@@ -4043,11 +3673,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       var _this = this;
 
       fields.forEach(function (field) {
-        _this.fields[field].all = _this.getCountValue(_this.default_value[_this.moduleType][field]);
+        _this.fields[field].all = _this.getCountValue(_this.defaultValue[_this.moduleType][field]);
       });
     },
     initFormData: function initFormData() {
-      this.default_value[this.moduleType] = _extends({}, this.default_value[this.moduleType], this.data);
+      this.defaultValue[this.moduleType] = _extends({}, this.defaultValue[this.moduleType], this.data);
       this.params = _extends({}, this.params, this.data);
 
       if (this.moduleType === "categories-items") {
@@ -4058,15 +3688,15 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 });
 
 /***/ }),
-/* 374 */
+/* 372 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseDifference = __webpack_require__(348),
     baseFlatten = __webpack_require__(329),
-    baseIteratee = __webpack_require__(375),
+    baseIteratee = __webpack_require__(373),
     baseRest = __webpack_require__(357),
     isArrayLikeObject = __webpack_require__(358),
-    last = __webpack_require__(401);
+    last = __webpack_require__(399);
 
 /**
  * This method is like `_.difference` except that it accepts `iteratee` which
@@ -4108,14 +3738,14 @@ module.exports = differenceBy;
 
 
 /***/ }),
-/* 375 */
+/* 373 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseMatches = __webpack_require__(376),
-    baseMatchesProperty = __webpack_require__(396),
+var baseMatches = __webpack_require__(374),
+    baseMatchesProperty = __webpack_require__(394),
     identity = __webpack_require__(97),
     isArray = __webpack_require__(16),
-    property = __webpack_require__(398);
+    property = __webpack_require__(396);
 
 /**
  * The base implementation of `_.iteratee`.
@@ -4145,11 +3775,11 @@ module.exports = baseIteratee;
 
 
 /***/ }),
-/* 376 */
+/* 374 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseIsMatch = __webpack_require__(377),
-    getMatchData = __webpack_require__(395),
+var baseIsMatch = __webpack_require__(375),
+    getMatchData = __webpack_require__(393),
     matchesStrictComparable = __webpack_require__(363);
 
 /**
@@ -4173,7 +3803,7 @@ module.exports = baseMatches;
 
 
 /***/ }),
-/* 377 */
+/* 375 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Stack = __webpack_require__(359),
@@ -4241,7 +3871,7 @@ module.exports = baseIsMatch;
 
 
 /***/ }),
-/* 378 */
+/* 376 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var ListCache = __webpack_require__(292);
@@ -4262,7 +3892,7 @@ module.exports = stackClear;
 
 
 /***/ }),
-/* 379 */
+/* 377 */
 /***/ (function(module, exports) {
 
 /**
@@ -4286,7 +3916,7 @@ module.exports = stackDelete;
 
 
 /***/ }),
-/* 380 */
+/* 378 */
 /***/ (function(module, exports) {
 
 /**
@@ -4306,7 +3936,7 @@ module.exports = stackGet;
 
 
 /***/ }),
-/* 381 */
+/* 379 */
 /***/ (function(module, exports) {
 
 /**
@@ -4326,7 +3956,7 @@ module.exports = stackHas;
 
 
 /***/ }),
-/* 382 */
+/* 380 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var ListCache = __webpack_require__(292),
@@ -4366,13 +3996,13 @@ module.exports = stackSet;
 
 
 /***/ }),
-/* 383 */
+/* 381 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Stack = __webpack_require__(359),
     equalArrays = __webpack_require__(361),
-    equalByTag = __webpack_require__(385),
-    equalObjects = __webpack_require__(389),
+    equalByTag = __webpack_require__(383),
+    equalObjects = __webpack_require__(387),
     getTag = __webpack_require__(302),
     isArray = __webpack_require__(16),
     isBuffer = __webpack_require__(99),
@@ -4455,7 +4085,7 @@ module.exports = baseIsEqualDeep;
 
 
 /***/ }),
-/* 384 */
+/* 382 */
 /***/ (function(module, exports) {
 
 /**
@@ -4484,15 +4114,15 @@ module.exports = arraySome;
 
 
 /***/ }),
-/* 385 */
+/* 383 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Symbol = __webpack_require__(17),
-    Uint8Array = __webpack_require__(386),
+    Uint8Array = __webpack_require__(384),
     eq = __webpack_require__(301),
     equalArrays = __webpack_require__(361),
-    mapToArray = __webpack_require__(387),
-    setToArray = __webpack_require__(388);
+    mapToArray = __webpack_require__(385),
+    setToArray = __webpack_require__(386);
 
 /** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG = 1,
@@ -4602,7 +4232,7 @@ module.exports = equalByTag;
 
 
 /***/ }),
-/* 386 */
+/* 384 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var root = __webpack_require__(15);
@@ -4614,7 +4244,7 @@ module.exports = Uint8Array;
 
 
 /***/ }),
-/* 387 */
+/* 385 */
 /***/ (function(module, exports) {
 
 /**
@@ -4638,7 +4268,7 @@ module.exports = mapToArray;
 
 
 /***/ }),
-/* 388 */
+/* 386 */
 /***/ (function(module, exports) {
 
 /**
@@ -4662,10 +4292,10 @@ module.exports = setToArray;
 
 
 /***/ }),
-/* 389 */
+/* 387 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getAllKeys = __webpack_require__(390);
+var getAllKeys = __webpack_require__(388);
 
 /** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG = 1;
@@ -4757,11 +4387,11 @@ module.exports = equalObjects;
 
 
 /***/ }),
-/* 390 */
+/* 388 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseGetAllKeys = __webpack_require__(391),
-    getSymbols = __webpack_require__(392),
+var baseGetAllKeys = __webpack_require__(389),
+    getSymbols = __webpack_require__(390),
     keys = __webpack_require__(103);
 
 /**
@@ -4779,7 +4409,7 @@ module.exports = getAllKeys;
 
 
 /***/ }),
-/* 391 */
+/* 389 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var arrayPush = __webpack_require__(309),
@@ -4805,11 +4435,11 @@ module.exports = baseGetAllKeys;
 
 
 /***/ }),
-/* 392 */
+/* 390 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var arrayFilter = __webpack_require__(393),
-    stubArray = __webpack_require__(394);
+var arrayFilter = __webpack_require__(391),
+    stubArray = __webpack_require__(392);
 
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
@@ -4841,7 +4471,7 @@ module.exports = getSymbols;
 
 
 /***/ }),
-/* 393 */
+/* 391 */
 /***/ (function(module, exports) {
 
 /**
@@ -4872,7 +4502,7 @@ module.exports = arrayFilter;
 
 
 /***/ }),
-/* 394 */
+/* 392 */
 /***/ (function(module, exports) {
 
 /**
@@ -4901,7 +4531,7 @@ module.exports = stubArray;
 
 
 /***/ }),
-/* 395 */
+/* 393 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isStrictComparable = __webpack_require__(362),
@@ -4931,11 +4561,11 @@ module.exports = getMatchData;
 
 
 /***/ }),
-/* 396 */
+/* 394 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseIsEqual = __webpack_require__(360),
-    get = __webpack_require__(397),
+    get = __webpack_require__(395),
     hasIn = __webpack_require__(345),
     isKey = __webpack_require__(307),
     isStrictComparable = __webpack_require__(362),
@@ -4970,7 +4600,7 @@ module.exports = baseMatchesProperty;
 
 
 /***/ }),
-/* 397 */
+/* 395 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseGet = __webpack_require__(311);
@@ -5009,11 +4639,11 @@ module.exports = get;
 
 
 /***/ }),
-/* 398 */
+/* 396 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseProperty = __webpack_require__(399),
-    basePropertyDeep = __webpack_require__(400),
+var baseProperty = __webpack_require__(397),
+    basePropertyDeep = __webpack_require__(398),
     isKey = __webpack_require__(307),
     toKey = __webpack_require__(293);
 
@@ -5047,7 +4677,7 @@ module.exports = property;
 
 
 /***/ }),
-/* 399 */
+/* 397 */
 /***/ (function(module, exports) {
 
 /**
@@ -5067,7 +4697,7 @@ module.exports = baseProperty;
 
 
 /***/ }),
-/* 400 */
+/* 398 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseGet = __webpack_require__(311);
@@ -5089,7 +4719,7 @@ module.exports = basePropertyDeep;
 
 
 /***/ }),
-/* 401 */
+/* 399 */
 /***/ (function(module, exports) {
 
 /**
@@ -5115,7 +4745,7 @@ module.exports = last;
 
 
 /***/ }),
-/* 402 */
+/* 400 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -5144,7 +4774,7 @@ var render = function() {
                   { staticClass: "form-item-tags__wrapper" },
                   [
                     _vm._l(
-                      _vm.default_value[_vm.moduleType]["category_ids"],
+                      _vm.defaultValue[_vm.moduleType].category_ids,
                       function(tag) {
                         return _c(
                           "el-tag",
@@ -5242,18 +4872,16 @@ var render = function() {
                             _c("el-input", {
                               model: {
                                 value:
-                                  _vm.default_value[_vm.moduleType][
-                                    "item_count"
-                                  ],
+                                  _vm.defaultValue[_vm.moduleType].item_count,
                                 callback: function($$v) {
                                   _vm.$set(
-                                    _vm.default_value[_vm.moduleType],
+                                    _vm.defaultValue[_vm.moduleType],
                                     "item_count",
                                     $$v
                                   )
                                 },
                                 expression:
-                                  "default_value[moduleType]['item_count']"
+                                  "defaultValue[moduleType].item_count"
                               }
                             })
                           ],
@@ -5283,18 +4911,17 @@ var render = function() {
                   {
                     model: {
                       value:
-                        _vm.default_value[_vm.moduleType][
-                          "split_items_by_categories"
-                        ],
+                        _vm.defaultValue[_vm.moduleType]
+                          .split_items_by_categories,
                       callback: function($$v) {
                         _vm.$set(
-                          _vm.default_value[_vm.moduleType],
+                          _vm.defaultValue[_vm.moduleType],
                           "split_items_by_categories",
                           $$v
                         )
                       },
                       expression:
-                        "default_value[moduleType]['split_items_by_categories']"
+                        "defaultValue[moduleType].split_items_by_categories"
                     }
                   },
                   [
@@ -5325,15 +4952,15 @@ var render = function() {
                   "el-select",
                   {
                     model: {
-                      value: _vm.default_value[_vm.moduleType]["item_order_by"],
+                      value: _vm.defaultValue[_vm.moduleType].item_order_by,
                       callback: function($$v) {
                         _vm.$set(
-                          _vm.default_value[_vm.moduleType],
+                          _vm.defaultValue[_vm.moduleType],
                           "item_order_by",
                           $$v
                         )
                       },
-                      expression: "default_value[moduleType]['item_order_by']"
+                      expression: "defaultValue[moduleType].item_order_by"
                     }
                   },
                   _vm._l(_vm.fields.order_by.list, function(option) {
@@ -5360,15 +4987,15 @@ var render = function() {
                   "el-select",
                   {
                     model: {
-                      value: _vm.default_value[_vm.moduleType]["item_order"],
+                      value: _vm.defaultValue[_vm.moduleType].item_order,
                       callback: function($$v) {
                         _vm.$set(
-                          _vm.default_value[_vm.moduleType],
+                          _vm.defaultValue[_vm.moduleType],
                           "item_order",
                           $$v
                         )
                       },
-                      expression: "default_value[moduleType]['item_order']"
+                      expression: "defaultValue[moduleType].item_order"
                     }
                   },
                   _vm._l(_vm.fields.order.list, function(option) {
@@ -5395,17 +5022,15 @@ var render = function() {
                   "el-select",
                   {
                     model: {
-                      value:
-                        _vm.default_value[_vm.moduleType]["featured_display"],
+                      value: _vm.defaultValue[_vm.moduleType].featured_display,
                       callback: function($$v) {
                         _vm.$set(
-                          _vm.default_value[_vm.moduleType],
+                          _vm.defaultValue[_vm.moduleType],
                           "featured_display",
                           $$v
                         )
                       },
-                      expression:
-                        "default_value[moduleType]['featured_display']"
+                      expression: "defaultValue[moduleType].featured_display"
                     }
                   },
                   _vm._l(_vm.fields.featured_display.list, function(option) {
@@ -5419,7 +5044,7 @@ var render = function() {
               1
             ),
             _vm._v(" "),
-            _vm.default_value[_vm.moduleType]["featured_display"] === 1
+            _vm.defaultValue[_vm.moduleType].featured_display === 1
               ? [
                   _c(
                     "el-form-item",
@@ -5437,18 +5062,17 @@ var render = function() {
                         {
                           model: {
                             value:
-                              _vm.default_value[_vm.moduleType][
-                                "split_items_by_featured"
-                              ],
+                              _vm.defaultValue[_vm.moduleType]
+                                .split_items_by_featured,
                             callback: function($$v) {
                               _vm.$set(
-                                _vm.default_value[_vm.moduleType],
+                                _vm.defaultValue[_vm.moduleType],
                                 "split_items_by_featured",
                                 $$v
                               )
                             },
                             expression:
-                              "default_value[moduleType]['split_items_by_featured']"
+                              "defaultValue[moduleType].split_items_by_featured"
                           }
                         },
                         [
@@ -5466,7 +5090,7 @@ var render = function() {
                     1
                   ),
                   _vm._v(" "),
-                  _vm.default_value[_vm.moduleType]["split_items_by_featured"]
+                  _vm.defaultValue[_vm.moduleType].split_items_by_featured
                     ? _c(
                         "el-form-item",
                         {
@@ -5526,18 +5150,17 @@ var render = function() {
                                       _c("el-input", {
                                         model: {
                                           value:
-                                            _vm.default_value[_vm.moduleType][
-                                              "featured_count"
-                                            ],
+                                            _vm.defaultValue[_vm.moduleType]
+                                              .featured_count,
                                           callback: function($$v) {
                                             _vm.$set(
-                                              _vm.default_value[_vm.moduleType],
+                                              _vm.defaultValue[_vm.moduleType],
                                               "featured_count",
                                               $$v
                                             )
                                           },
                                           expression:
-                                            "default_value[moduleType]['featured_count']"
+                                            "defaultValue[moduleType].featured_count"
                                         }
                                       })
                                     ],
@@ -5568,18 +5191,17 @@ var render = function() {
                         {
                           model: {
                             value:
-                              _vm.default_value[_vm.moduleType][
-                                "featured_order_by"
-                              ],
+                              _vm.defaultValue[_vm.moduleType]
+                                .featured_order_by,
                             callback: function($$v) {
                               _vm.$set(
-                                _vm.default_value[_vm.moduleType],
+                                _vm.defaultValue[_vm.moduleType],
                                 "featured_order_by",
                                 $$v
                               )
                             },
                             expression:
-                              "default_value[moduleType]['featured_order_by']"
+                              "defaultValue[moduleType].featured_order_by"
                           }
                         },
                         _vm._l(_vm.fields.order_by.list, function(option) {
@@ -5607,18 +5229,16 @@ var render = function() {
                         {
                           model: {
                             value:
-                              _vm.default_value[_vm.moduleType][
-                                "featured_order"
-                              ],
+                              _vm.defaultValue[_vm.moduleType].featured_order,
                             callback: function($$v) {
                               _vm.$set(
-                                _vm.default_value[_vm.moduleType],
+                                _vm.defaultValue[_vm.moduleType],
                                 "featured_order",
                                 $$v
                               )
                             },
                             expression:
-                              "default_value[moduleType]['featured_order']"
+                              "defaultValue[moduleType].featured_order"
                           }
                         },
                         _vm._l(_vm.fields.order.list, function(option) {
@@ -5648,27 +5268,23 @@ var render = function() {
                   "div",
                   { staticClass: "form-item-tags__wrapper" },
                   [
-                    _vm._l(
-                      _vm.default_value[_vm.moduleType]["menu_ids"],
-                      function(tag) {
-                        return _c(
-                          "el-tag",
-                          {
-                            key: tag.id,
-                            attrs: {
-                              "disable-transitions": false,
-                              closable: ""
-                            },
-                            on: {
-                              close: function($event) {
-                                _vm.handleSelectClose(tag, "menu_ids")
-                              }
+                    _vm._l(_vm.defaultValue[_vm.moduleType].menu_ids, function(
+                      tag
+                    ) {
+                      return _c(
+                        "el-tag",
+                        {
+                          key: tag.id,
+                          attrs: { "disable-transitions": false, closable: "" },
+                          on: {
+                            close: function($event) {
+                              _vm.handleSelectClose(tag, "menu_ids")
                             }
-                          },
-                          [_vm._v(_vm._s(tag.tree_list_title))]
-                        )
-                      }
-                    ),
+                          }
+                        },
+                        [_vm._v(_vm._s(tag.tree_list_title))]
+                      )
+                    }),
                     _vm._v(" "),
                     _c("el-autocomplete", {
                       attrs: {
@@ -5715,7 +5331,7 @@ var render = function() {
                         {
                           on: {
                             click: function($event) {
-                              _vm.item_list_dialogVisible = true
+                              _vm.itemListDialogVisible = true
                             }
                           }
                         },
@@ -5730,7 +5346,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "ul",
-                _vm._l(_vm.default_value[_vm.moduleType]["item_ids"], function(
+                _vm._l(_vm.defaultValue[_vm.moduleType].item_ids, function(
                   ref
                 ) {
                   var title = ref.title
@@ -5741,10 +5357,10 @@ var render = function() {
               _c(
                 "el-dialog",
                 {
-                  attrs: { width: "80%", visible: _vm.item_list_dialogVisible },
+                  attrs: { width: "80%", visible: _vm.itemListDialogVisible },
                   on: {
                     "update:visible": function($event) {
-                      _vm.item_list_dialogVisible = $event
+                      _vm.itemListDialogVisible = $event
                     }
                   }
                 },
@@ -5765,7 +5381,7 @@ var render = function() {
                           attrs: { type: "primary" },
                           on: {
                             click: function($event) {
-                              _vm.item_list_dialogVisible = false
+                              _vm.itemListDialogVisible = false
                             }
                           }
                         },
