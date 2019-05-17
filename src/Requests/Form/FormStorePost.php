@@ -28,7 +28,7 @@ class FormStorePost extends AdminRequest
         return [
             'name'          => 'required|string',
             'email'         => 'required|email',
-            'phone'         => 'required|string',
+            'phone'         => 'nullable|string',
             'location'      => 'nullable|string',
             'question_type' => 'required|string',
             'description'   => 'required|string',
