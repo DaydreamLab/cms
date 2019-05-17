@@ -39,13 +39,13 @@ class LanguagesTableSeeder extends Seeder
         ]);
 
 
-        Language::create([
-            'title'     => 'English',
-            'type'      => 'content',
-            'code'      => 'en-GB',
-            'sef'       => 'en',
-            'image'     => 'en_GB',
-            'created_by'=> 1
-        ]);
+//        Language::create([
+//            'title'     => 'English',
+//            'type'      => 'content',
+//            'code'      => 'en-GB',
+//            'sef'       => 'en',
+//            'image'     => 'en_GB',
+//            'created_by'=> 1
+//        ]);
     }
 }
