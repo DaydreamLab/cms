@@ -33,7 +33,7 @@ class FormStorePost extends AdminRequest
             'question_type' => 'required|string',
             'description'   => 'required|string',
             'brand'         => [
-                'required',
+                'nullable',
                 Rule::in([
                     'orangeshabu',
                     'orangeshabushabu',
