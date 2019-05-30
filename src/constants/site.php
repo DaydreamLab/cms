@@ -310,17 +310,17 @@ return [
         'code'      => 200,
         'message'   => 'Site front get item success'
     ],
-    'SITE_GET_ITEM_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Site get item fail'
+    'SITE_ITEM_NOT_EXIST' => [
+        'code'      => 403,
+        'message'   => 'Site item is not exist'
     ],
-    'SITE_ADMIN_GET_ITEM_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Site admin get item fail'
+    'SITE_ADMIN_ITEM_NOT_EXIST' => [
+        'code'      => 403,
+        'message'   => 'Site admin item is not exist'
     ],
-    'SITE_FRONT_GET_ITEM_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Site front get item fail'
+    'SITE_FRONT_ITEM_NOT_EXIST' => [
+        'code'      => 403,
+        'message'   => 'Site front item is not exist'
     ],
 
     // Ordering

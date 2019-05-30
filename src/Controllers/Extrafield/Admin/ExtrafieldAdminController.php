@@ -22,7 +22,7 @@ class ExtrafieldAdminController extends BaseController
 
     public function getItem($id)
     {
-        $this->service->getItem($id);
+        $this->service->getItem($id, true);
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
@@ -36,12 +36,12 @@ class ExtrafieldAdminController extends BaseController
     }
 
 
-    public function getList()
-    {
-        $this->service->getList(new Collection());
-
-        return ResponseHelper::response($this->service->status, $this->service->response);
-    }
+//    public function getList()
+//    {
+//        $this->service->getList(new Collection());
+//
+//        return ResponseHelper::response($this->service->status, $this->service->response);
+//    }
 
 
     public function checkout(ExtrafieldAdminCheckoutPost $request)
@@ -54,7 +54,7 @@ class ExtrafieldAdminController extends BaseController
 
     public function ordering(ExtrafieldAdminOrderingPost $request)
     {
-        $this->service->ordering($request->rulesInput());
+        $this->service->ordering($request->rulesInput(), true);
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
@@ -62,7 +62,7 @@ class ExtrafieldAdminController extends BaseController
 
     public function remove(ExtrafieldAdminRemovePost $request)
     {
-        $this->service->remove($request->rulesInput());
+        $this->service->remove($request->rulesInput(), true);
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
@@ -70,7 +70,7 @@ class ExtrafieldAdminController extends BaseController
 
     public function state(ExtrafieldAdminStatePost $request)
     {
-        $this->service->state($request->rulesInput());
+        $this->service->state($request->rulesInput(), true);
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
@@ -78,7 +78,7 @@ class ExtrafieldAdminController extends BaseController
 
     public function store(ExtrafieldAdminStorePost $request)
     {
-        $this->service->store($request->rulesInput());
+        $this->service->store($request->rulesInput(), true);
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }

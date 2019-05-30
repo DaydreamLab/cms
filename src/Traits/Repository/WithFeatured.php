@@ -2,51 +2,40 @@
 
 namespace DaydreamLab\Cms\Traits\Repository;
 
+use DaydreamLab\JJAJ\Helpers\Helper;
 use Illuminate\Support\Collection;
 
 trait WithFeatured
 {
-    public function featured(Collection $input)
+    public function featured($item, $featured)
     {
-        foreach ($input->ids as $id)
+        $item->featured = $featured;
+
+        if ($featured)
         {
-            $item = $this->find($id);
-            if ($item)
+            $newest = $this->findNewestFeatured();
+            $item->featured_ordering = $newest->featured_ordering + 1;
+        }
+        else
+        {
+            $other_items = $this->findNewerFeatured($item);
+            $item->featured_ordering = 0;
+            foreach ($other_items as $other_item)
             {
-                if (!$item->featured)
+                --$other_item->featured_ordering;
+                if (!$this->update($other_item, $other_item))
                 {
-                    $item->featured = $input->featured;
-
-                    if ($input->featured)
-                    {
-                        $newest = $this->findNewestFeatured();
-                        $item->featured_ordering = $newest->featured_ordering + 1;
-                    }
-                    else
-                    {
-                        $item->featured_ordering = 0;
-                        $other_items = $this->findNewerFeatured($item);
-                        foreach ($other_items as $other_item)
-                        {
-                            --$other_item->featured_ordering;
-                            if (!$this->update($other_item, $other_item))
-                            {
-                                return false;
-                            }
-                        }
-                    }
-
-                    if (!$this->update($item, $item))
-                    {
-                        return false;
-                    }
+                    return false;
                 }
             }
-            else
-            {
-                return false;
-            }
         }
+
+        if (!$this->update($item, $item))
+        {
+            return false;
+        }
+
+
         return true;
     }
 

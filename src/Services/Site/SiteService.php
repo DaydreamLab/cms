@@ -2,12 +2,14 @@
 
 namespace DaydreamLab\Cms\Services\Site;
 
+use DaydreamLab\Cms\Events\Checkout;
 use DaydreamLab\Cms\Repositories\Site\SiteRepository;
 use DaydreamLab\Cms\Events\Add;
 use DaydreamLab\Cms\Events\Modify;
 use DaydreamLab\Cms\Events\Ordering;
 use DaydreamLab\Cms\Events\Remove;
 use DaydreamLab\Cms\Events\State;
+use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Services\BaseService;
 use Illuminate\Support\Collection;
 
@@ -23,7 +25,6 @@ class SiteService extends BaseService
     }
 
 
-
     public function add(Collection $input)
     {
         $item = parent::add($input);
@@ -33,9 +34,16 @@ class SiteService extends BaseService
         return $item;
     }
 
-    public function modify(Collection $input)
+
+    public function checkout(Collection $input, $diff = false)
     {
-        $result =  parent::modify($input);
+        return parent::checkout($input, $diff);
+    }
+
+
+    public function modify(Collection $input, $diff = false)
+    {
+        $result =  parent::modify($input, $diff);
 
         event(new Modify($this->find($input->id), $this->model_name, $result, $input, $this->user));
 
@@ -43,19 +51,19 @@ class SiteService extends BaseService
     }
 
 
-    public function ordering(Collection $input, $orderingKey = 'ordering')
+    public function ordering(Collection $input, $diff = false)
     {
-        $result = parent::ordering($input, $orderingKey);
+        $result =  parent::ordering($input, $diff);
 
-        event(new Ordering($this->model_name, $result, $input, $orderingKey, $this->user));
+        event(new Ordering($this->model_name, $result, $input, $this->user));
 
         return $result;
     }
 
 
-    public function remove(Collection $input)
+    public function remove(Collection $input, $diff = false)
     {
-        $result =  parent::remove($input);
+        $result =  parent::remove($input, $diff);
 
         event(new Remove($this->model_name, $result, $input, $this->user));
 
@@ -63,10 +71,9 @@ class SiteService extends BaseService
     }
 
 
-    public function state(Collection $input)
+    public function state(Collection $input, $diff = false)
     {
-
-        $result = parent::state($input);
+        $result = parent::state($input, $diff);
 
         event(new State($this->model_name, $result, $input, $this->user));
 

@@ -2,40 +2,6 @@
 
 return [
 
-    // Create
-    'MENU_CREATE_SUCCESS' => [
-        'code'      => 200,
-        'message'   => 'Menu create success'
-    ],
-    'MENU_ADMIN_CREATE_SUCCESS' => [
-        'code'      => 200,
-        'message'   => 'Menu admin create success'
-    ],
-    'MENU_FRONT_CREATE_SUCCESS' => [
-        'code'      => 200,
-        'message'   => 'Menu front create success'
-    ],
-    'MENU_CREATE_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Menu create fail'
-    ],
-    'MENU_ADMIN_CREATE_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Menu admin create fail'
-    ],
-    'MENU_FRONT_CREATE_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Menu front create fail'
-    ],
-    'MENU_ADMIN_INSUFFICIENT_PERMISSION' => [
-        'code'      => 403,
-        'message'   => 'Menu admin insufficient permission'
-    ],
-    'MENU_FRONT_INSUFFICIENT_PERMISSION' => [
-        'code'      => 403,
-        'message'   => 'Menu front insufficient permission'
-    ],
-
     // Create Nested
     'MENU_CREATE_NESTED_SUCCESS' => [
         'code'      => 200,
@@ -74,33 +40,6 @@ return [
         'message'   => 'Menu front create nested with exist alias'
     ],
 
-
-    // Update
-    'MENU_UPDATE_SUCCESS' => [
-        'code'      => 200,
-        'message'   => 'Menu update success'
-    ],
-    'MENU_ADMIN_UPDATE_SUCCESS' => [
-        'code'      => 200,
-        'message'   => 'Menu admin update success'
-    ],
-    'MENU_FRONT_UPDATE_SUCCESS' => [
-        'code'      => 200,
-        'message'   => 'Menu front update success'
-    ],
-
-    'MENU_UPDATE_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Menu update fail'
-    ],
-    'MENU_ADMIN_UPDATE_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Menu admin update fail'
-    ],
-    'MENU_FRONT_UPDATE_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Menu front update fail'
-    ],
 
     // Update Nested
     'MENU_UPDATE_NESTED_SUCCESS' => [
@@ -156,33 +95,6 @@ return [
         'message'   => 'Menu front trash fail'
     ],
 
-
-
-    // Delete
-    'MENU_DELETE_SUCCESS' => [
-        'code'      => 200,
-        'message'   => 'Menu delete success'
-    ],
-    'MENU_ADMIN_DELETE_SUCCESS' => [
-        'code'      => 200,
-        'message'   => 'Menu admin delete success'
-    ],
-    'MENU_FRONT_DELETE_SUCCESS' => [
-        'code'      => 200,
-        'message'   => 'Menu front delete success'
-    ],
-    'MENU_DELETE_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Menu delete fail'
-    ],
-    'MENU_ADMIN_DELETE_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Menu admin delete fail'
-    ],
-    'MENU_FRONT_DELETE_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Menu front delete fail'
-    ],
 
     // Delete Nested
     'MENU_DELETE_NESTED_SUCCESS' => [
@@ -331,44 +243,19 @@ return [
         'code'      => 200,
         'message'   => 'Menu front get item success'
     ],
-    'MENU_GET_ITEM_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Menu get item fail'
+    'MENU_ITEM_NOT_EXIST' => [
+        'code'      => 403,
+        'message'   => 'Menu item is not exist'
     ],
-    'MENU_ADMIN_GET_ITEM_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Menu admin get item fail'
+    'MENU_ADMIN_ITEM_NOT_EXIST' => [
+        'code'      => 403,
+        'message'   => 'Menu admin item is not exist'
     ],
-    'MENU_FRONT_GET_ITEM_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Menu front get item fail'
+    'MENU_FRONT_ITEM_NOT_EXIST' => [
+        'code'      => 403,
+        'message'   => 'Menu front item is not exist'
     ],
 
-    // Ordering
-    'MENU_UPDATE_ORDERING_SUCCESS' => [
-        'code'      => 200,
-        'message'   => 'Menu update ordering success'
-    ],
-    'MENU_ADMIN_UPDATE_ORDERING_SUCCESS' => [
-        'code'      => 200,
-        'message'   => 'Menu admin update ordering success'
-    ],
-    'MENU_FRONT_UPDATE_ORDERING_SUCCESS' => [
-        'code'      => 200,
-        'message'   => 'Menu front update ordering success'
-    ],
-    'MENU_UPDATE_ORDERING_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Menu update ordering fail'
-    ],
-    'MENU_ADMIN_UPDATE_ORDERING_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Menu admin update ordering fail'
-    ],
-    'MENU_FRONT_UPDATE_ORDERING_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Menu front update ordering fail'
-    ],
 
     // Ordering Nested
     'MENU_UPDATE_ORDERING_NESTED_SUCCESS' => [
@@ -395,22 +282,6 @@ return [
         'code'      => 500,
         'message'   => 'Menu front update ordering nested fail'
     ],
-
-
-    //Get tree
-    'MENU_GET_TREE_SUCCESS' => [
-        'code'      => 200,
-        'message'   => 'Menu get tree success'
-    ],
-    'MENU_ADMIN_GET_TREE_SUCCESS' => [
-        'code'      => 200,
-        'message'   => 'Menu admin get tree success'
-    ],
-    'MENU_FRONT_GET_TREE_SUCCESS' => [
-        'code'      => 200,
-        'message'   => 'Menu front get tree success'
-    ],
-    
     
     // Checkout
     'MENU_CHECKOUT_SUCCESS' => [
@@ -450,36 +321,6 @@ return [
     'MENU_FRONT_IS_LOCKED' => [
         'code'      => 403,
         'message'   => 'Menu front is locked'
-    ],
-
-
-    // Get Tree
-    'MENU_GET_TREE_SUCCESS' => [
-        'code'      => 200,
-        'message'   => 'Menu get tree success'
-    ],
-    'MENU_ADMIN_GET_TREE_SUCCESS' => [
-        'code'      => 200,
-        'message'   => 'Menu admin get tree success'
-    ],
-    'MENU_FRONT_GET_TREE_SUCCESS' => [
-        'code'      => 200,
-        'message'   => 'Menu front get tree success'
-    ],
-
-
-    // Get Tree List
-    'MENU_GET_TREE_LIST_SUCCESS' => [
-        'code'      => 200,
-        'message'   => 'Menu get tree list success'
-    ],
-    'MENU_ADMIN_GET_TREE_LIST_SUCCESS' => [
-        'code'      => 200,
-        'message'   => 'Menu admin get tree list success'
-    ],
-    'MENU_FRONT_GET_TREE_LIST_SUCCESS' => [
-        'code'      => 200,
-        'message'   => 'Menu front get tree list success'
     ],
 
 ];

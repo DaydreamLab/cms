@@ -42,6 +42,7 @@ class Menu extends BaseModel
         'ordering',
         'path',
         'host',
+        'site_id',
         'category_id',
         'state',
         'description',

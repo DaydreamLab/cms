@@ -8,7 +8,6 @@
     "icon": "",
     "state": 1,
     "showNav": 1,
-    "ordering": 8,
     "created_by": 1,
     "children": [
       {
@@ -16,14 +15,25 @@
         "path": "/setting",
         "component": "system/setting",
         "type": "menu",
+        "model": "SettingAdmin",
         "redirect": "",
         "icon": "sliders-h",
         "state": 1,
         "showNav": 1,
-        "ordering": 10,
         "created_by": 1,
         "children": [],
-        "apis": []
+        "apis": [
+          {
+            "method": "get",
+            "url": "/admin/setting",
+            "created_by": 1
+          },
+          {
+            "method": "edit",
+            "url": "/admin/setting/store",
+            "created_by": 1
+          }
+        ]
       },
 
       {
@@ -36,10 +46,14 @@
         "icon": "language",
         "state": 1,
         "showNav": 1,
-        "ordering": 7,
         "created_by": 1,
         "children": [],
         "apis": [
+          {
+            "method": "get",
+            "url": "/admin/language/{id}",
+            "created_by": 1
+          },
           {
             "method": "add",
             "url": "/admin/language/store",
@@ -53,6 +67,11 @@
           {
             "method": "delete",
             "url": "/admin/language/remove",
+            "created_by": 1
+          },
+          {
+            "method": "search",
+            "url": "/admin/language/search",
             "created_by": 1
           },
           {
@@ -76,7 +95,6 @@
         "icon": "",
         "state": 1,
         "showNav": 0,
-        "ordering": 8,
         "created_by": 1,
         "children": [],
         "apis": []
@@ -91,10 +109,19 @@
         "icon": "sitemap",
         "state": 1,
         "showNav": 1,
-        "ordering": 11,
         "created_by": 1,
         "children": [],
         "apis": [
+          {
+            "method": "get",
+            "url": "/admin/site/{id}",
+            "created_by": 1
+          },
+          {
+            "method": "getList",
+            "url": "/admin/site/getList",
+            "created_by": 1
+          },
           {
             "method": "add",
             "url": "/admin/site/store",
@@ -108,6 +135,11 @@
           {
             "method": "delete",
             "url": "/admin/site/remove",
+            "created_by": 1
+          },
+          {
+            "method": "search",
+            "url": "/admin/site/search",
             "created_by": 1
           },
           {
@@ -131,7 +163,6 @@
         "icon": "",
         "state": 1,
         "showNav": 0,
-        "ordering": 12,
         "created_by": 1,
         "children": [],
         "apis": []
@@ -148,7 +179,6 @@
     "icon": "",
     "state": 1,
     "showNav": 1,
-    "ordering": 9,
     "created_by": 1,
     "children": [],
     "apis": []
@@ -162,7 +192,6 @@
     "icon": "",
     "state": 1,
     "showNav": 1,
-    "ordering": 9,
     "created_by": 1,
     "children": [
       {
@@ -175,10 +204,14 @@
         "icon": "th-list",
         "state": 1,
         "showNav": 1,
-        "ordering": 1,
         "created_by": 1,
         "children": [],
         "apis": [
+          {
+            "method": "get",
+            "url": "/admin/menu/{id}",
+            "created_by": 1
+          },
           {
             "method": "add",
             "url": "/admin/menu/store",
@@ -192,6 +225,11 @@
           {
             "method": "delete",
             "url": "/admin/menu/remove",
+            "created_by": 1
+          },
+          {
+            "method": "search",
+            "url": "/admin/menu/search",
             "created_by": 1
           },
           {
@@ -215,7 +253,6 @@
         "icon": "",
         "state": 1,
         "showNav": 0,
-        "ordering": 2,
         "created_by": 1,
         "children": [],
         "apis": []
@@ -232,7 +269,6 @@
     "icon": "",
     "state": 1,
     "showNav": 1,
-    "ordering": 10,
     "created_by": 1,
     "children": [
       {
@@ -245,10 +281,14 @@
         "icon": "cube",
         "state": 1,
         "showNav": 1,
-        "ordering": 1,
         "created_by": 1,
         "children": [],
         "apis": [
+          {
+            "method": "get",
+            "url": "/admin/module/{id}",
+            "created_by": 1
+          },
           {
             "method": "add",
             "url": "/admin/module/store",
@@ -262,6 +302,11 @@
           {
             "method": "delete",
             "url": "/admin/module/remove",
+            "created_by": 1
+          },
+          {
+            "method": "search",
+            "url": "/admin/module/search",
             "created_by": 1
           },
           {
@@ -285,7 +330,6 @@
         "icon": "",
         "state": 1,
         "showNav": 0,
-        "ordering": 2,
         "created_by": 1,
         "children": [],
         "apis": []
@@ -302,7 +346,6 @@
     "icon": "",
     "state": 1,
     "showNav": 1,
-    "ordering": 11,
     "created_by": 1,
     "children": [
       {
@@ -315,27 +358,56 @@
         "icon": "file-alt",
         "state": 1,
         "showNav": 1,
-        "ordering": 1,
         "created_by": 1,
         "children": [],
         "apis": [
+          {
+            "method": "getOwn",
+            "url": "/admin/item/{id}",
+            "created_by": 1
+          },
+          {
+            "method": "getOther",
+            "url": "/admin/item/{id}",
+            "created_by": 1
+          },
           {
             "method": "add",
             "url": "/admin/item/store",
             "created_by": 1
           },
           {
-            "method": "edit",
+            "method": "editOwn",
             "url": "/admin/item/store",
             "created_by": 1
           },
           {
-            "method": "delete",
+            "method": "editOther",
+            "url": "/admin/item/store",
+            "created_by": 1
+          },
+          {
+            "method": "deleteOwn",
             "url": "/admin/item/remove",
             "created_by": 1
           },
           {
-            "method": "updateState",
+            "method": "deleteOther",
+            "url": "/admin/item/remove",
+            "created_by": 1
+          },
+          {
+            "method": "search",
+            "url": "/admin/item/search",
+            "created_by": 1
+          },
+          {
+            "method": "updateStateOwn",
+            "url": "/admin/item/state",
+            "created_by": 1
+          },
+          {
+            "method": "updateStateOther",
             "url": "/admin/item/state",
             "created_by": 1
           },
@@ -360,7 +432,6 @@
         "icon": "",
         "state": 1,
         "showNav": 0,
-        "ordering": 2,
         "created_by": 1,
         "children": [],
         "apis": []
@@ -376,27 +447,56 @@
         "icon": "folder-open",
         "state": 1,
         "showNav": 1,
-        "ordering": 3,
         "created_by": 1,
         "children": [],
         "apis": [
+          {
+            "method": "getOwn",
+            "url": "/admin/category/{id}",
+            "created_by": 1
+          },
+          {
+            "method": "getOther",
+            "url": "/admin/category/{id}",
+            "created_by": 1
+          },
           {
             "method": "add",
             "url": "/admin/category/store",
             "created_by": 1
           },
           {
-            "method": "edit",
+            "method": "editOwn",
             "url": "/admin/category/store",
             "created_by": 1
           },
           {
-            "method": "delete",
+            "method": "editOther",
+            "url": "/admin/category/store",
+            "created_by": 1
+          },
+          {
+            "method": "deleteOwn",
             "url": "/admin/category/remove",
             "created_by": 1
           },
           {
-            "method": "updateState",
+            "method": "deleteOther",
+            "url": "/admin/category/remove",
+            "created_by": 1
+          },
+          {
+            "method": "search",
+            "url": "/admin/category/search",
+            "created_by": 1
+          },
+          {
+            "method": "updateStateOwn",
+            "url": "/admin/category/state",
+            "created_by": 1
+          },
+          {
+            "method": "updateStateOther",
             "url": "/admin/category/state",
             "created_by": 1
           },
@@ -416,7 +516,6 @@
         "icon": "",
         "state": 1,
         "showNav": 0,
-        "ordering": 4,
         "created_by": 1,
         "children": [],
         "apis": []
@@ -432,27 +531,56 @@
         "icon": "layer-plus",
         "state": 1,
         "showNav": 1,
-        "ordering": 5,
         "created_by": 1,
         "children": [],
         "apis": [
+          {
+            "method": "getOwn",
+            "url": "/admin/extrafield/{id}",
+            "created_by": 1
+          },
+          {
+            "method": "getOther",
+            "url": "/admin/extrafield/{id}",
+            "created_by": 1
+          },
           {
             "method": "add",
             "url": "/admin/extrafield/store",
             "created_by": 1
           },
           {
-            "method": "edit",
+            "method": "editOwn",
             "url": "/admin/extrafield/store",
             "created_by": 1
           },
           {
-            "method": "delete",
+            "method": "editOther",
+            "url": "/admin/extrafield/store",
+            "created_by": 1
+          },
+          {
+            "method": "deleteOwn",
             "url": "/admin/extrafield/remove",
             "created_by": 1
           },
           {
-            "method": "updateState",
+            "method": "deleteOther",
+            "url": "/admin/extrafield/remove",
+            "created_by": 1
+          },
+          {
+            "method": "search",
+            "url": "/admin/extrafield/search",
+            "created_by": 1
+          },
+          {
+            "method": "updateStateOwn",
+            "url": "/admin/extrafield/state",
+            "created_by": 1
+          },
+          {
+            "method": "updateStateOther",
             "url": "/admin/extrafield/state",
             "created_by": 1
           },
@@ -472,7 +600,6 @@
         "icon": "",
         "state": 1,
         "showNav": 0,
-        "ordering": 6,
         "created_by": 1,
         "children": [],
         "apis": []
@@ -487,27 +614,56 @@
         "icon": "layer-group",
         "state": 1,
         "showNav": 1,
-        "ordering": 7,
         "created_by": 1,
         "children": [],
         "apis": [
+          {
+            "method": "getOwn",
+            "url": "/admin/extrafield_group/{id}",
+            "created_by": 1
+          },
+          {
+            "method": "getOther",
+            "url": "/admin/extrafield_group/{id}",
+            "created_by": 1
+          },
           {
             "method": "add",
             "url": "/admin/extrafield_group/store",
             "created_by": 1
           },
           {
-            "method": "edit",
+            "method": "editOwn",
             "url": "/admin/extrafield_group/store",
             "created_by": 1
           },
           {
-            "method": "delete",
+            "method": "editOther",
+            "url": "/admin/extrafield_group/store",
+            "created_by": 1
+          },
+          {
+            "method": "deleteOwn",
             "url": "/admin/extrafield_group/remove",
             "created_by": 1
           },
           {
-            "method": "updateState",
+            "method": "deleteOther",
+            "url": "/admin/extrafield_group/remove",
+            "created_by": 1
+          },
+          {
+            "method": "search",
+            "url": "/admin/extrafield_group/remove",
+            "created_by": 1
+          },
+          {
+            "method": "updateStateOwn",
+            "url": "/admin/extrafield_group/state",
+            "created_by": 1
+          },
+          {
+            "method": "updateStateOther",
             "url": "/admin/extrafield_group/state",
             "created_by": 1
           },
@@ -527,7 +683,6 @@
         "icon": "",
         "state": 1,
         "showNav": 0,
-        "ordering": 8,
         "created_by": 1,
         "children": [],
         "apis": []
@@ -542,28 +697,62 @@
         "icon": "tags",
         "state": 1,
         "showNav": 1,
-        "ordering": 9,
         "created_by": 1,
         "children": [],
         "apis": [
+          {
+            "method": "getOwn",
+            "url": "/admin/tag/{id}",
+            "created_by": 1
+          },
+          {
+            "method": "getOther",
+            "url": "/admin/tag/{id}",
+            "created_by": 1
+          },
           {
             "method": "add",
             "url": "/admin/tag/store",
             "created_by": 1
           },
           {
-            "method": "edit",
+            "method": "editOwn",
             "url": "/admin/tag/store",
             "created_by": 1
           },
           {
-            "method": "delete",
+            "method": "editOther",
+            "url": "/admin/tag/store",
+            "created_by": 1
+          },
+          {
+            "method": "deleteOwn",
             "url": "/admin/tag/remove",
             "created_by": 1
           },
           {
-            "method": "updateState",
+            "method": "deleteOther",
+            "url": "/admin/tag/remove",
+            "created_by": 1
+          },
+          {
+            "method": "search",
+            "url": "/admin/tag/search",
+            "created_by": 1
+          },
+          {
+            "method": "updateStateOwn",
             "url": "/admin/tag/state",
+            "created_by": 1
+          },
+          {
+            "method": "updateStateOther",
+            "url": "/admin/tag/state",
+            "created_by": 1
+          },
+          {
+            "method": "checkout",
+            "url": "/admin/tag/checkout",
             "created_by": 1
           }
         ]
@@ -577,7 +766,6 @@
         "icon": "",
         "state": 1,
         "showNav": 0,
-        "ordering": 10,
         "created_by": 1,
         "children": [],
         "apis": []
@@ -592,7 +780,6 @@
         "icon": "images",
         "state": 1,
         "showNav": 1,
-        "ordering": 11,
         "created_by": 1,
         "children": [],
         "apis": [
@@ -613,14 +800,20 @@
         "path": "/search",
         "component": "content/search",
         "type": "menu",
+        "model": "SearchAdmin",
         "redirect": "",
         "icon": "search",
         "state": 1,
         "showNav": 1,
-        "ordering": 12,
         "created_by": 1,
         "children": [],
-        "apis": []
+        "apis": [
+          {
+            "method": "keywordList",
+            "url": "/admin/search/keywordList",
+            "created_by": 1
+          }
+        ]
       }
     ],
     "apis": []

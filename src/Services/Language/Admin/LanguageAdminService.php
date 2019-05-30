@@ -44,10 +44,4 @@ class LanguageAdminService extends LanguageService
         return $items->values();
     }
 
-
-    public function search(Collection $input)
-    {
-        $result =  parent::search($input);
-        return $result;
-    }
 }

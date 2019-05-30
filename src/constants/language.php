@@ -236,37 +236,16 @@ return [
         'code'      => 200,
         'message'   => 'Language front get item success'
     ],
-    'LANGUAGE_GET_ITEM_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Language get item fail'
+    'LANGUAGE_ITEM_NOT_EXIST' => [
+        'code'      => 403,
+        'message'   => 'Language item is not exist'
     ],
-    'LANGUAGE_ADMIN_GET_ITEM_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Language get item search fail'
+    'LANGUAGE_ADMIN_ITEM_NOT_EXIST' => [
+        'code'      => 403,
+        'message'   => 'Language admin item is not exist'
     ],
-    'LANGUAGE_FRONT_GET_ITEM_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Language front get item fail'
-    ],
-
-
-    //Get tree
-    'LANGUAGE_GET_TREE_SUCCESS' => [
-        'code'      => 200,
-        'message'   => 'Language get tree success'
-    ],
-    'LANGUAGE_ADMIN_GET_TREE_SUCCESS' => [
-        'code'      => 200,
-        'message'   => 'Language admin get tree success'
-    ],
-    'LANGUAGE_FRONT_GET_TREE_SUCCESS' => [
-        'code'      => 200,
-        'message'   => 'Language front get tree success'
-    ],
-
-    // Get List
-    'LANGUAGE_ADMIN_GET_LIST_SUCCESS' => [
-        'code'      => 200,
-        'message'   => 'Language admin get list success'
+    'LANGUAGE_FRONT_ITEM_NOT_EXIST' => [
+        'code'      => 403,
+        'message'   => 'Language front item is not exist'
     ],
 ];

@@ -95,6 +95,12 @@ class InstallCommand extends Command
             '--tag'     => 'cms-frontend-admin',
             '--force'   => 1
         ]);
+
+        $this->call('vendor:publish', [
+            '--provider' => 'Fedeisas\LaravelMailCssInliner\LaravelMailCssInlinerServiceProvider'
+        ]);
+
+
     }
 
 

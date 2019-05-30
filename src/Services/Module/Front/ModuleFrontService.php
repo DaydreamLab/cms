@@ -105,7 +105,7 @@ class ModuleFrontService extends ModuleService
         {
             $item = $items->first();
 
-            $this->hasPermission($item->access, $this->access_ids);
+            $this->canAccess($item->access, $this->access_ids);
 
             $item->items = $this->loadModule($item, $input->get('language'));
 

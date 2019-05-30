@@ -34,19 +34,15 @@ class ModuleService extends BaseService
     }
 
 
-    public function checkout(Collection $input)
+    public function checkout(Collection $input, $diff = false)
     {
-        $result = parent::checkout($input);
-
-        event(new Checkout($this->model_name, $result, $input, $this->user));
-
-        return $result;
+        return parent::checkout($input, $diff);
     }
 
 
-    public function modify(Collection $input)
+    public function modify(Collection $input, $diff = false)
     {
-        $result =  parent::modify($input);
+        $result =  parent::modify($input, $diff);
 
         event(new Modify($this->find($input->id), $this->model_name, $result, $input, $this->user));
 
@@ -54,21 +50,21 @@ class ModuleService extends BaseService
     }
 
 
-    public function state(Collection $input)
+    public function remove(Collection $input, $diff = false)
     {
-        $result = parent::state($input);
+        $result =  parent::remove($input, $diff);
 
-        event(new State($this->model_name, $result, $input, $this->user));
+        event(new Remove($this->model_name, $result, $input, $this->user));
 
         return $result;
     }
 
 
-    public function remove(Collection $input)
+    public function state(Collection $input, $diff = null)
     {
-        $result =  parent::remove($input);
+        $result = parent::state($input, $diff);
 
-        event(new Remove($this->model_name, $result, $input, $this->user));
+        event(new State($this->model_name, $result, $input, $this->user));
 
         return $result;
     }

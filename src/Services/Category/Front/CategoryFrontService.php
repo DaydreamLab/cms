@@ -61,11 +61,11 @@ class CategoryFrontService extends CategoryService
     }
 
 
-    public function getItem($id)
+    public function getItem($id, $diff = false)
     {
-        $item = parent::getItem($id);
+        $item = parent::getItem($id, $diff);
 
-        $this->hasPermission($item->access, $this->access_ids);
+        $this->canAccess($item->access, $this->access_ids);
 
         $item->hits++;
         return $item->save();

@@ -2,7 +2,7 @@
 
 namespace DaydreamLab\Cms\Controllers\Tag\Admin;
 
-use DaydreamLab\Cms\Requests\Item\Admin\ItemTagMapAdminOrderingPost;
+use DaydreamLab\Cms\Requests\Item\ItemOrderingPost;
 use DaydreamLab\JJAJ\Controllers\BaseController;
 use DaydreamLab\JJAJ\Helpers\ResponseHelper;
 use Illuminate\Support\Collection;
@@ -16,14 +16,17 @@ use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminCheckoutPost;
 
 class TagAdminController extends BaseController
 {
+
     public function __construct(TagAdminService $service)
     {
         parent::__construct($service);
+        $this->service = $service;
     }
+
 
     public function getItem($id)
     {
-        $this->service->getItem($id);
+        $this->service->getItem($id, true);
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
@@ -45,9 +48,9 @@ class TagAdminController extends BaseController
     }
 
 
-    public function ordering(ItemTagMapAdminOrderingPost $request)
+    public function ordering(ItemOrderingPost $request)
     {
-        $this->service->ordering($request->rulesInput());
+        $this->service->ordering($request->rulesInput(),true);
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
@@ -55,7 +58,7 @@ class TagAdminController extends BaseController
 
     public function remove(TagAdminRemovePost $request)
     {
-        $this->service->remove($request->rulesInput());
+        $this->service->remove($request->rulesInput(), true);
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
@@ -63,7 +66,7 @@ class TagAdminController extends BaseController
 
     public function state(TagAdminStatePost $request)
     {
-        $this->service->state($request->rulesInput());
+        $this->service->state($request->rulesInput(), true);
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
@@ -71,7 +74,7 @@ class TagAdminController extends BaseController
 
     public function store(TagAdminStorePost $request)
     {
-        $this->service->store($request->rulesInput());
+        $this->service->store($request->rulesInput(), true);
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }

@@ -52,25 +52,14 @@ class ItemAdminService extends ItemService
             $input->put('featured_ordering', $newest ? $newest->featured_ordering + 1 : 1);
         }
 
-
         return parent::add($input);
     }
 
 
-    public function getItem($id)
-    {
-        $item = parent::getItem($id);
-
-        $this->hasPermission($item->access, $this->access_ids);
-
-        return $this->checkLocked($item);
-    }
-
-
-    public function modify(Collection $input)
+    public function modify(Collection $input, $diff = false)
     {
         $input_featured = $input->get('featured');
-        $item = $this->repo->find($input->id);
+        $item = $this->getItem($input->id);
         // 代表有修改到 featured 值
         if ($item && $item->featured != $input_featured)
         {
@@ -87,7 +76,7 @@ class ItemAdminService extends ItemService
             }
         }
 
-        return parent::modify($input);
+        return parent::modify($input, $diff);
     }
 
     public function search(Collection $input)
@@ -145,12 +134,8 @@ class ItemAdminService extends ItemService
         return parent::search($input);
     }
 
-    public function state(Collection $input)
-    {
-        return parent::state($input);
-    }
 
-    public function store(Collection $input)
+    public function store(Collection $input, $diff = false)
     {
         if (InputHelper::null($input, 'hits'))
         {
@@ -166,7 +151,7 @@ class ItemAdminService extends ItemService
         $tags = $input->get('tags') ? $input->get('tags') : [];
         $input->forget('tags');
 
-        $result    =  parent::store($input);
+        $result    =  parent::store($input, $diff);
 
         if (gettype($result) == 'boolean')
         {

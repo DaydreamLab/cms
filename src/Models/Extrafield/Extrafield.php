@@ -1,7 +1,6 @@
 <?php
 namespace DaydreamLab\Cms\Models\Extrafield;
 
-use DaydreamLab\Cms\Models\Extrafield\Admin\ExtrafieldGroupAdmin;
 use DaydreamLab\Cms\Traits\Model\WithAccess;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\JJAJ\Models\BaseModel;

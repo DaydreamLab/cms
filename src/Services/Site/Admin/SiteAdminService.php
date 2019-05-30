@@ -21,20 +21,26 @@ class SiteAdminService extends SiteService
     }
 
 
+    public function getItem($id, $diff = false)
+    {
+        return parent::getItem($id, $diff);
+    }
+
+
     public function getList()
     {
+        $this->canAction('getList');
         /**
          * @var $result LengthAwarePaginator
          */
         $result = $this->search(Helper::collect([
-            'state' => 1,
-            'limit' => 100,
+            'state'     => 1,
+            'paginate'  => false
         ]));
 
 
         $data = [];
-        $items = $result->items();
-        foreach ($items as $item)
+        foreach ($result as $item)
         {
             $data[] = $item->only('id', 'title', 'url');
         }
@@ -43,5 +49,11 @@ class SiteAdminService extends SiteService
         $this->response = $data;
 
         return $data;
+    }
+
+
+    public function ordering(Collection $input, $diff = false)
+    {
+        return parent::ordering($input, $diff);
     }
 }

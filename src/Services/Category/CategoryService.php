@@ -22,7 +22,6 @@ class CategoryService extends BaseService
         NestedServiceTrait::modifyNested    as traitModifiedNested;
         NestedServiceTrait::storeNested     as traitStoreNested;
         NestedServiceTrait::removeNested    as traitRemoveNested;
-        NestedServiceTrait::orderingNested  as traitOrderingNested;
     }
 
     protected $type = 'Category';
@@ -45,13 +44,9 @@ class CategoryService extends BaseService
     }
 
 
-    public function checkout(Collection $input)
+    public function checkout(Collection $input, $diff = false)
     {
-        $result = parent::checkout($input);
-
-        event(new Checkout($this->model_name, $result, $input, $this->user));
-
-        return $result;
+        return parent::checkout($input, $diff);
     }
 
 
@@ -83,9 +78,9 @@ class CategoryService extends BaseService
     }
 
 
-    public function modifyNested(Collection $input)
+    public function modifyNested(Collection $input, $parent, $item)
     {
-        $result = $this->traitModifiedNested($input);
+        $result = $this->traitModifiedNested($input, $parent, $item);
 
         event(new Modify($this->find($input->id), $this->model_name, $result, $input,$this->user));
 
@@ -93,41 +88,19 @@ class CategoryService extends BaseService
     }
 
 
-    public function ordering(Collection $input, $orderingKey = 'ordering')
+    public function ordering(Collection $input, $diff = false)
     {
-        $result = $this->traitOrderingNested($input, $orderingKey);
+        $result =  parent::ordering($input, $diff);
 
-        event(new Ordering($this->model_name, $result, $input, $orderingKey, $this->user));
+        event(new Ordering($this->model_name, $result, $input, $this->user));
 
         return $result;
     }
 
 
-    public function remove(Collection $input)
+    public function remove(Collection $input ,$diff = false)
     {
-        $tree_ids = [];
-        foreach ($input->ids as $id)
-        {
-            $item = $this->find($id);
-            if (!in_array($item->id, $tree_ids))
-            {
-                $tree_ids[] = $item->id;
-            }
-
-            $subtree = $this->findByChain(['_lft', '_rgt'], ['>', '<'], [$item->_lft, $item->_rgt]);
-            foreach ($subtree as $node)
-            {
-                if (!in_array($node->id, $tree_ids))
-                {
-                    $tree_ids[] = $node->id;
-                }
-            }
-        }
-
-        $input->forget('ids');
-        $input->put('ids', $tree_ids);
-
-        $result = $this->traitRemoveNested($input);
+        $result = $this->traitRemoveNested($input, $diff);
 
         event(new Remove($this->model_name, $result, $input, $this->user));
 
@@ -135,9 +108,9 @@ class CategoryService extends BaseService
     }
 
 
-    public function state(Collection $input)
+    public function state(Collection $input, $diff = null)
     {
-        $result = parent::state($input);
+        $result = parent::state($input, $diff);
 
         event(new State($this->model_name, $result, $input, $this->user));
 
@@ -145,9 +118,11 @@ class CategoryService extends BaseService
     }
 
 
-    public function store(Collection $input)
+    public function store(Collection $input, $diff = false)
     {
-        return $this->traitStoreNested($input);
+        $result = $this->traitStoreNested($input, $diff);
+
+        return $result;
     }
 
 
@@ -161,19 +136,4 @@ class CategoryService extends BaseService
         return $tree;
     }
 
-
-//    public function treeList($extension, $additional_queries = [],$additional_keys = [])
-//    {
-//        $tree = $this->repo->2treeList($extension, $additional_queries, $this->access_ids)->toFlatTree();
-//
-//        $required_keys = array_merge(['id', 'tree_list_title'], $additional_keys);
-//        $tree = $tree->map(function ($item, $key) use ($required_keys) {
-//            return $item->only($required_keys);
-//        });
-//
-//        $this->status =  Str::upper(Str::snake($this->type . 'GetTreeListSuccess'));
-//        $this->response = $tree;
-//
-//        return $tree;
-//    }
 }

@@ -350,17 +350,17 @@ return [
         'code'      => 200,
         'message'   => 'Tag front get item success'
     ],
-    'TAG_GET_ITEM_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Tag get item fail'
+    'TAG_ITEM_NOT_EXIST' => [
+        'code'      => 403,
+        'message'   => 'Tag item is not exist'
     ],
-    'TAG_ADMIN_GET_ITEM_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Tag get item search fail'
+    'TAG_ADMIN_ITEM_NOT_EXIST' => [
+        'code'      => 403,
+        'message'   => 'Tag admin item is not exist'
     ],
-    'TAG_FRONT_GET_ITEM_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Tag front get item fail'
+    'TAG_FRONT_ITEM_NOT_EXIST' => [
+        'code'      => 403,
+        'message'   => 'Tag front item is not exist'
     ],
 
 

@@ -49,7 +49,7 @@ class MenuFrontService extends MenuService
             return false;
         }
 
-        $this->hasPermission($menu->access, $this->access_ids);
+        $this->canAccess($menu->access, $this->access_ids);
 
         $modules = [];
 

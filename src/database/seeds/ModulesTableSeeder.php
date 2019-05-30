@@ -31,11 +31,12 @@ class ModulesTableSeeder extends Seeder
             'description'   => '',
             'extension'     => 'module',
             'ordering'      => 1,
-            'access'        => 5,
+            'access'        => 1,
             'metadesc'      => '',
             'metakeywords'  => '',
             'extrafields'   => [],
             'params'        => (object)[],
+            'created_by'    => 1,
             'children'      => []
         ]);
 

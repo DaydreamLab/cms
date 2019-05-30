@@ -31,9 +31,9 @@ class FormService extends BaseService
     }
 
 
-    public function modify(Collection $input)
+    public function modify(Collection $input, $diff = false)
     {
-        $result =  parent::modify($input);
+        $result =  parent::modify($input, $diff);
 
         event(new Modify($this->find($input->id), $this->model_name, $result, $input, $this->user));
 
@@ -41,9 +41,9 @@ class FormService extends BaseService
     }
 
 
-    public function remove(Collection $input)
+    public function remove(Collection $input,  $diff = false)
     {
-        $result =  parent::remove($input);
+        $result =  parent::remove($input, $diff);
 
         event(new Remove($this->model_name, $result, $input, $this->user));
 

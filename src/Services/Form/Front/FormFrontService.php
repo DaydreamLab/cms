@@ -19,7 +19,7 @@ class FormFrontService extends FormService
         parent::__construct($repo);
     }
 
-    public function store(Collection $input)
+    public function store(Collection $input, $diff = false)
     {
         $result = parent::store($input);
         if ($result)

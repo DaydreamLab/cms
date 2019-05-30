@@ -50,8 +50,8 @@ class ItemsTableSeeder extends Seeder
             'metadesc'      => '',
             'metakeywords'  => '',
             'params'        => (object)[],
-            'extrafields'   => [],
-            'children'      => []
+            'children'      => [],
+            'created_by'    => 1,
         ]);
 
     }

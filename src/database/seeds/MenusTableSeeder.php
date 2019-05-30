@@ -69,10 +69,8 @@ class MenusTableSeeder extends Seeder
             'description'   => '',
             'extension'     => 'menu',
             'params'        => (object)[],
-            'access'        => 5,
-            'metadesc'      => '',
-            'metakeywords'  => '',
-            "extrafields"   => [],
+            'access'        => 1,
+            'created_by'    => 1,
         ]);
 
         $menu_root = Menu::create([
@@ -84,9 +82,10 @@ class MenusTableSeeder extends Seeder
             'ordering'      => 1,
             'state'         => 1,
             'description'   => '',
-            'access'        => 5,
+            'access'        => 1,
             'language'      => '*',
             'params'        => [],
+            'created_by'    => 1,
         ]);
     }
 

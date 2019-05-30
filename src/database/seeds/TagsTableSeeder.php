@@ -13,19 +13,17 @@ class TagsTableSeeder extends Seeder
         Tag::create([
             'title'         => 'ROOT',
             'alias'         => 'tag',
-            'path'         => '/tag',
+            'path'          => '/tag',
             'state'         => 1,
             'description'   => '',
             'ordering'      => 1,
             'hits'          => 0,
-            'access'        => 5,
+            'access'        => 1,
             'language'      => '*',
-            'metadesc'      => '',
-            'metakeywords'      => '',
-            'params'        => [],
             'publish_up'    => null,
             'publish_down'  => null,
-            'children'      =>[]
+            'created_by'    => 1,
+            'children'      => [],
         ]); //最外面
 
     }

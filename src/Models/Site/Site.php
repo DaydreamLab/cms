@@ -85,7 +85,9 @@ class Site extends BaseModel
 
     public function getLanguageTitleAttribute()
     {
-        return $this->language()->first()->title;
+        $language = $this->language()->first();
+
+        return $language? $language->title : 'Site sef error';
     }
 
 }

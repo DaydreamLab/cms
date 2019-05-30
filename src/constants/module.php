@@ -331,22 +331,19 @@ return [
         'code'      => 200,
         'message'   => 'Module front get item success'
     ],
-    'MODULE_GET_ITEM_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Module get item fail'
+    'MODULE_ITEM_NOT_EXIST' => [
+        'code'      => 403,
+        'message'   => 'Module item is not exist'
     ],
-    'MODULE_ADMIN_GET_ITEM_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Module admin get item fail'
-    ],
-    'MODULE_FRONT_GET_ITEM_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Module front get item fail'
+    'MODULE_ADMIN_ITEM_NOT_EXIST' => [
+        'code'      => 403,
+        'message'   => 'Module admin item is not exist'
     ],
     'MODULE_FRONT_ITEM_NOT_EXIST' => [
         'code'      => 403,
-        'message'   => 'Module front item not exist'
+        'message'   => 'Module front item is not exist'
     ],
+
 
     // Ordering
     'MODULE_UPDATE_ORDERING_SUCCESS' => [

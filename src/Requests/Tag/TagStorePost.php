@@ -31,7 +31,7 @@ class TagStorePost extends AdminRequest
             'title'         => 'required|string',
             'alias'         => 'nullable|string',
             'state'         => [
-                'required',
+                'nullable',
                 Rule::in([0,1,-1,-2])
             ],
             'description'   => 'nullable|string',

@@ -47,23 +47,27 @@ class CategoryAdminService extends CategoryService
     }
 
 
+    public function checkout(Collection $input, $diff = false)
+    {
+        return parent::checkout($input, true);
+    }
+
+
     public function findSubTreeIds($id)
     {
         return $this->repo->findSubTreeIds($id);
     }
 
 
-    public function getItem($id)
+    public function getItem($id, $diff = false)
     {
-        $item = parent::getItem($id);
+        $item = parent::getItem($id, true);
 
-        $this->hasPermission($item->access, $this->access_ids);
-
-        return  $this->checkLocked($item);
+        return $item;
     }
 
 
-    public function store(Collection $input)
+    public function store(Collection $input, $diff = false)
     {
         if (InputHelper::null($input, 'extension')){
             $input->put('extension', 'item');
@@ -75,8 +79,7 @@ class CategoryAdminService extends CategoryService
             $input->publish_up = now()->toDateTimeString();
         }
 
-
-        $result = parent::store($input);
+        $result = parent::store($input, $diff);
 
         if (gettype($result) == 'boolean')
         {

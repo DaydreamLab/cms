@@ -10,6 +10,7 @@ use DaydreamLab\Cms\Events\Remove;
 use DaydreamLab\Cms\Events\State;
 use DaydreamLab\Cms\Events\Modify;
 use DaydreamLab\Cms\Repositories\Item\ItemRepository;
+use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Services\BaseService;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
@@ -28,6 +29,7 @@ class ItemService extends BaseService
         $this->repo = $repo;
     }
 
+
     public function add(Collection $input)
     {
         $item = parent::add($input);
@@ -38,19 +40,25 @@ class ItemService extends BaseService
     }
 
 
-    public function checkout(Collection $input)
+    public function checkout(Collection $input, $diff = false)
     {
-        $result = parent::checkout($input);
-
-        event(new Checkout($this->model_name, $result, $input, $this->user));
-
-        return $result;
+        return parent::checkout($input, $diff);
     }
 
 
-    public function featured(Collection $input)
+    public function featured(Collection $input, $diff = false)
     {
-        $result = $this->repo->featured($input);
+        $result = false;
+        foreach ($input->ids as $id)
+        {
+            $item = $this->checkItem($id, $diff);
+            $this->checkAction($item, 'edit', $diff);
+            $this->checkAction($item, 'updateFeatured');
+
+            $result =  $this->repo->featured($item, $input->get('featured'));
+            if(!$result) break;
+        }
+
 
         $action = $input->featured == 0 ? 'Unfeatured' : 'Featured';
         if ($result)
@@ -70,9 +78,9 @@ class ItemService extends BaseService
     }
 
 
-    public function modify(Collection $input)
+    public function modify(Collection $input, $diff = false)
     {
-        $result =  parent::modify($input);
+        $result =  parent::modify($input, $diff);
 
         event(new Modify($this->find($input->id), $this->model_name, $result, $input, $this->user));
 
@@ -80,19 +88,19 @@ class ItemService extends BaseService
     }
 
 
-    public function ordering(Collection $input, $orderingKey = 'ordering')
+    public function ordering(Collection $input, $diff = false)
     {
-        $result = parent::ordering($input, $orderingKey);
+        $result = parent::ordering($input, $diff);
 
-        event(new Ordering($this->model_name, $result, $input, $orderingKey, $this->user));
+        event(new Ordering($this->model_name, $result, $input, $this->user));
 
         return $result;
     }
 
 
-    public function remove(Collection $input)
+    public function remove(Collection $input, $diff = false)
     {
-        $result =  parent::remove($input);
+        $result =  parent::remove($input, $diff);
 
         event(new Remove($this->model_name, $result, $input, $this->user));
 
@@ -100,9 +108,9 @@ class ItemService extends BaseService
     }
 
 
-    public function state(Collection $input)
+    public function state(Collection $input, $items = null)
     {
-        $result = parent::state($input);
+        $result = parent::state($items, $input->get('state'));
 
         event(new State($this->model_name, $result, $input, $this->user));
 

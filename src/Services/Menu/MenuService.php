@@ -26,7 +26,6 @@ class MenuService extends BaseService
         NestedServiceTrait::modifyNested    as traitModifiedNested;
         NestedServiceTrait::storeNested     as traitStoreNested;
         NestedServiceTrait::removeNested    as traitRemoveNested;
-        NestedServiceTrait::orderingNested  as traitOrderingNested;
     }
 
     protected $type = 'Menu';
@@ -38,6 +37,7 @@ class MenuService extends BaseService
         parent::__construct($repo);
     }
 
+
     public function addNested(Collection $input)
     {
         $item = $this->traitAddNested($input);
@@ -48,19 +48,15 @@ class MenuService extends BaseService
     }
 
 
-    public function checkout(Collection $input)
+    public function checkout(Collection $input, $diff = false)
     {
-        $result = parent::checkout($input);
-
-        event(new Checkout($this->model_name, $result, $input, $this->user));
-
-        return $result;
+        return parent::checkout($input, $diff);
     }
 
 
-    public function modifyNested(Collection $input)
+    public function modifyNested(Collection $input, $parent, $item)
     {
-        $result = $this->traitModifiedNested($input);
+        $result = $this->traitModifiedNested($input, $parent, $item);
 
         event(new Modify($this->find($input->id), $this->model_name, $result, $input,$this->user));
 
@@ -68,31 +64,9 @@ class MenuService extends BaseService
     }
 
 
-    public function remove(Collection $input)
+    public function remove(Collection $input ,$diff = false)
     {
-        $tree_ids = [];
-        foreach ($input->ids as $id)
-        {
-            $item = $this->find($id);
-            if (!in_array($item->id, $tree_ids))
-            {
-                $tree_ids[] = $item->id;
-            }
-
-            $subtree = $this->findByChain(['_lft', '_rgt'], ['>', '<'], [$item->_lft, $item->_rgt]);
-            foreach ($subtree as $value)
-            {
-                if (!in_array($value->id, $tree_ids))
-                {
-                    $tree_ids[] = $value->id;
-                }
-            }
-        }
-
-        $result = $this->traitRemoveNested($input);
-
-        $input->forget('ids');
-        $input->ids = $tree_ids;
+        $result = $this->traitRemoveNested($input, $diff);
 
         event(new Remove($this->model_name, $result, $input, $this->user));
 
@@ -100,19 +74,19 @@ class MenuService extends BaseService
     }
 
 
-    public function ordering(Collection $input, $orderingKey = 'ordering')
+    public function ordering(Collection $input, $diff = false)
     {
-        $result = $this->traitOrderingNested($input, $orderingKey);
+        $result =  parent::ordering($input, $diff);
 
-        event(new Ordering($this->model_name, $result, $input, $orderingKey, $this->user));
+        event(new Ordering($this->model_name, $result, $input, $this->user));
 
         return $result;
     }
 
 
-    public function state(Collection $input)
+    public function state(Collection $input, $diff = null)
     {
-        $result = parent::state($input);
+        $result = parent::state($input, $diff);
 
         event(new State($this->model_name, $result, $input, $this->user));
 
@@ -120,8 +94,10 @@ class MenuService extends BaseService
     }
 
 
-    public function store(Collection $input)
+    public function store(Collection $input, $diff = false)
     {
-        return $this->traitStoreNested($input);
+        $result = $this->traitStoreNested($input, $diff);
+
+        return $result;
     }
 }

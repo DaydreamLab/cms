@@ -91,23 +91,4 @@ class MenuAdminController extends BaseController
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
 
-
-    public function tree()
-    {
-        $this->service->search(Helper::collect(Helper::collect([
-            'paginate'  => false,
-            'order_by'  => 'id',
-            'order'     => 'asc'
-        ])))->toTree();
-
-        return ResponseHelper::response($this->service->status, $this->service->response);
-    }
-
-
-    public function treeList()
-    {
-        $this->service->treeList();
-
-        return ResponseHelper::response($this->service->status, $this->service->response);
-    }
 }

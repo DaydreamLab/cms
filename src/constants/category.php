@@ -259,17 +259,17 @@ return [
         'code'      => 200,
         'message'   => 'Category front get item success'
     ],
-    'CATEGORY_GET_ITEM_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Category get item fail'
+    'CATEGORY_ITEM_NOT_EXIST' => [
+        'code'      => 403,
+        'message'   => 'Category item is not exist'
     ],
-    'CATEGORY_ADMIN_GET_ITEM_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Category get item search fail'
+    'CATEGORY_ADMIN_ITEM_NOT_EXIST' => [
+        'code'      => 403,
+        'message'   => 'Category admin item is not exist'
     ],
-    'CATEGORY_FRONT_GET_ITEM_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Category front get item fail'
+    'CATEGORY_FRONT_ITEM_NOT_EXIST' => [
+        'code'      => 403,
+        'message'   => 'Category front item is not exist'
     ],
 
     // Get Tree

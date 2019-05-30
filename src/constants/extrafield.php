@@ -323,17 +323,17 @@ return [
         'code'      => 200,
         'message'   => 'Extrafield front get item success'
     ],
-    'EXTRAFIELD_GET_ITEM_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Extrafield get item fail'
+    'EXTRAFIELD_ITEM_NOT_EXIST' => [
+        'code'      => 403,
+        'message'   => 'Extrafield item is not exist'
     ],
-    'EXTRAFIELD_ADMIN_GET_ITEM_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Extrafield admin get item fail'
+    'EXTRAFIELD_ADMIN_ITEM_NOT_EXIST' => [
+        'code'      => 403,
+        'message'   => 'Extrafield admin item is not exist'
     ],
-    'EXTRAFIELD_FRONT_GET_ITEM_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Extrafield front get item fail'
+    'EXTRAFIELD_FRONT_ITEM_NOT_EXIST' => [
+        'code'      => 403,
+        'message'   => 'Extrafield front item is not exist'
     ],
 
     // Ordering
@@ -754,17 +754,17 @@ return [
         'code'      => 200,
         'message'   => 'Extrafield group front get item success'
     ],
-    'EXTRAFIELD_GROUP_GET_ITEM_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Extrafield group get item fail'
+    'EXTRAFIELD_GROUP_ITEM_NOT_EXIST' => [
+        'code'      => 403,
+        'message'   => 'Extrafield group item is not exist'
     ],
-    'EXTRAFIELD_GROUP_ADMIN_GET_ITEM_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Extrafield group admin get item fail'
+    'EXTRAFIELD_GROUP_ADMIN_ITEM_NOT_EXIST' => [
+        'code'      => 403,
+        'message'   => 'Extrafield group admin item is not exist'
     ],
-    'EXTRAFIELD_GROUP_FRONT_GET_ITEM_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Extrafield group front get item fail'
+    'EXTRAFIELD_GROUP_FRONT_ITEM_NOT_EXIST' => [
+        'code'      => 403,
+        'message'   => 'Extrafield group front item is not exist'
     ],
 
     // Ordering

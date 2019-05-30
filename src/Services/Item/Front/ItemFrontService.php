@@ -115,11 +115,11 @@ class ItemFrontService extends ItemService
     }
 
 
-    public function getItem($id)
+    public function getItem($id, $diff = false)
     {
-        $item = parent::getItem($id);
+        $item = parent::getItem($id, $diff);
 
-        $this->hasPermission($item->access, $this->access_ids);
+        $this->canAccess($item->access, $this->access_ids);
 
         if ($item)
         {
@@ -151,7 +151,7 @@ class ItemFrontService extends ItemService
             $item->hits++;
             $this->update($item, $item);
 
-            $this->hasPermission($item->access, $this->access_ids);
+            $this->canAccess($item->access, $this->access_ids);
 
             $prev_and_next  = $this->repo->getPreviousAndNext($item);
             $item->previous =  $prev_and_next['previous'];

@@ -61,6 +61,8 @@ class AssetsTableSeeder extends Seeder
             unset($item['children']);
             unset($item['apis']);
 
+            $parent = Asset::find($parent->id);
+            $item['ordering'] = $parent->children->count()+1;
             $asset = Asset::create($item);
             //UserGroupAssetMap::create([
             UserGroupAssetMap::create([

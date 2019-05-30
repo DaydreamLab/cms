@@ -253,21 +253,17 @@ return [
         'code'      => 200,
         'message'   => 'Item front get item success'
     ],
-    'ITEM_GET_ITEM_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Item get item fail'
+    'ITEM_ITEM_NOT_EXIST' => [
+        'code'      => 403,
+        'message'   => 'Item item is not exist'
     ],
-    'ITEM_ADMIN_GET_ITEM_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Item get item search fail'
-    ],
-    'ITEM_FRONT_GET_ITEM_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Item front get item fail'
+    'ITEM_ADMIN_ITEM_NOT_EXIST' => [
+        'code'      => 403,
+        'message'   => 'Item admin item is not exist'
     ],
     'ITEM_FRONT_ITEM_NOT_EXIST' => [
         'code'      => 403,
-        'message'   => 'Item front item not exist'
+        'message'   => 'Item front item is not exist'
     ],
 
 
@@ -702,17 +698,17 @@ return [
         'code'      => 200,
         'message'   => 'Item tag map front get item success'
     ],
-    'ITEM_TAG_MAP_GET_ITEM_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Item tag map get item fail'
+    'ITEM_TAG_MAP_ITEM_NOT_EXIST' => [
+        'code'      => 403,
+        'message'   => 'Item tag map item is not exist'
     ],
-    'ITEM_TAG_MAP_ADMIN_GET_ITEM_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Item tag map admin get item fail'
+    'ITEM_TAG_MAP_ADMIN_ITEM_NOT_EXIST' => [
+        'code'      => 403,
+        'message'   => 'Item tag map admin item is not exist'
     ],
-    'ITEM_TAG_MAP_FRONT_GET_ITEM_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Item tag map front get item fail'
+    'ITEM_TAG_MAP_FRONT_ITEM_NOT_EXIST' => [
+        'code'      => 403,
+        'message'   => 'Item tag map front item is not exist'
     ],
 
     // Ordering

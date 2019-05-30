@@ -23,13 +23,4 @@ class ModuleAdminService extends ModuleService
     }
 
 
-    public function getItem($id)
-    {
-        $item = parent::getItem($id);
-
-        $this->hasPermission($item->access, $this->access_ids);
-
-        return $this->checkLocked($item);
-    }
-
 }

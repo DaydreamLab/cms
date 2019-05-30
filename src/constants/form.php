@@ -310,17 +310,17 @@ return [
         'code'      => 200,
         'message'   => 'Form front get item success'
     ],
-    'FORM_GET_ITEM_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Form get item fail'
+    'FORM_ITEM_NOT_EXIST' => [
+        'code'      => 403,
+        'message'   => 'Form item is not exist'
     ],
-    'FORM_ADMIN_GET_ITEM_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Form admin get item fail'
+    'FORM_ADMIN_ITEM_NOT_EXIST' => [
+        'code'      => 403,
+        'message'   => 'Form admin item is not exist'
     ],
-    'FORM_FRONT_GET_ITEM_FAIL' => [
-        'code'      => 500,
-        'message'   => 'Form front get item fail'
+    'FORM_FRONT_ITEM_NOT_EXIST' => [
+        'code'      => 403,
+        'message'   => 'Form front item is not exist'
     ],
 
     // Ordering

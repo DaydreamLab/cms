@@ -3,6 +3,7 @@
 
 namespace DaydreamLab\Cms\Notifications;
 
+use DaydreamLab\JJAJ\Helpers\Helper;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -50,7 +51,7 @@ class FormUserNotification extends Notification implements ShouldQueue
                 ->subject('親愛的客戶您好，已收到你的聯絡表單')
                 ->line('感謝您的寶貴意見，我們已經收到你的需求，會盡快回覆或聯繫您！')
             : (new MailMessage)
-                ->subject('「使用者」使用者有來信喔')
+                ->subject('親愛的客戶您好，已收到你的聯絡表單')
                 ->view($template, ['data'=> $this->input]);
     }
 

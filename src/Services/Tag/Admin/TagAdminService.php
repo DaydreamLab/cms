@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Services\Tag\Admin;
 
+use Carbon\Carbon;
 use DaydreamLab\Cms\Repositories\Tag\Admin\TagAdminRepository;
 use DaydreamLab\Cms\Services\Cms\CmsCronJobService;
 use DaydreamLab\Cms\Services\Tag\TagService;
@@ -30,19 +31,35 @@ class TagAdminService extends TagService
     }
 
 
-    public function getItem($id)
+    public function checkout(Collection $input, $diff = false)
     {
-        $item = parent::getItem($id);
-
-        $this->hasPermission($item->access, $this->access_ids);
-
-        return $this->checkLocked($item);
+        return parent::checkout($input, true);
     }
 
 
-    public function store(Collection $input)
+    public function getItem($id, $diff = false)
     {
-        $result = parent::storeNested($input);
+        $item =  parent::getItem($id, true);
+
+        return $item;
+    }
+
+
+    public function ordering(Collection $input, $diff = false)
+    {
+        return parent::ordering($input, $diff);
+    }
+
+
+    public function state(Collection $input, $diff = false)
+    {
+        return parent::state($input, $diff);
+    }
+
+
+    public function store(Collection $input, $diff = false)
+    {
+        $result = parent::store($input, $diff);
 
         if (gettype($result) == 'boolean')
         {
@@ -58,11 +75,17 @@ class TagAdminService extends TagService
         }
         else
         {
-            $item      = $this->find($result->id);
+            $item = $this->find($result->id);
         }
 
         $this->setCronJob($input, $item);
 
         return $result;
+    }
+
+
+    public function remove(Collection $input, $diff = false)
+    {
+        return parent::remove($input, $diff);
     }
 }

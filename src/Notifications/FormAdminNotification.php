@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Notifications;
 
+use DaydreamLab\JJAJ\Helpers\Helper;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -46,10 +47,10 @@ class FormAdminNotification extends Notification implements ShouldQueue
 
         return $template === 'default'
             ? (new MailMessage)
-                ->subject('「管理者」使用者有來信喔')
+                ->subject('「管理者」網站收到使用者的聯繫表單！')
                 ->line('有收到使用者表單，請到網站後台確認內容')
             : (new MailMessage)
-                ->subject('「管理者」使用者有來信喔')
+                ->subject('「管理者」網站收到使用者的聯繫表單！')
                 ->view($template, ['data'=> $this->input]);
     }
 

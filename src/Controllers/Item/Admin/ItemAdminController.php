@@ -34,7 +34,7 @@ class ItemAdminController extends BaseController
 
     public function featured(ItemAdminFeaturePost $request)
     {
-        $this->service->featured($request->rulesInput());
+        $this->service->featured($request->rulesInput(), true);
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
@@ -42,7 +42,7 @@ class ItemAdminController extends BaseController
 
     public function featuredOrdering(ItemAdminOrderingPost $request)
     {
-        $this->service->ordering($request->rulesInput(), 'featured_ordering');
+        $this->service->ordering($request->rulesInput(), true);
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
@@ -50,7 +50,7 @@ class ItemAdminController extends BaseController
 
     public function getItem($id)
     {
-        $this->service->getItem($id);
+        $this->service->getItem($id, true);
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
@@ -66,7 +66,7 @@ class ItemAdminController extends BaseController
 
     public function ordering(ItemAdminOrderingPost $request)
     {
-        $this->service->ordering($request->rulesInput());
+        $this->service->ordering($request->rulesInput(), true);
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
@@ -74,7 +74,7 @@ class ItemAdminController extends BaseController
 
     public function remove(ItemAdminRemovePost $request)
     {
-        $this->service->remove($request->rulesInput());
+        $this->service->remove($request->rulesInput(), true);
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
@@ -82,7 +82,7 @@ class ItemAdminController extends BaseController
 
     public function state(ItemAdminStatePost $request)
     {
-        $this->service->state($request->rulesInput());
+        $this->service->state($request->rulesInput(), true);
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
@@ -90,7 +90,7 @@ class ItemAdminController extends BaseController
 
     public function store(ItemAdminStorePost $request)
     {
-        $this->service->store($request->rulesInput());
+        $this->service->store($request->rulesInput(), true);
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
