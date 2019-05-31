@@ -58,9 +58,11 @@ class CategoryService extends BaseService
 
     public function getRelatedItems($itemService, $categories)
     {
-        $category_ids = $categories instanceof \Illuminate\Support\Collection || $categories instanceof \Kalnoy\Nestedset\Collection ?
+        $category_ids = $categories instanceof \Illuminate\Support\Collection ||
+        $categories instanceof \Kalnoy\Nestedset\Collection ||
+        $categories instanceof \Illuminate\Pagination\LengthAwarePaginator ?
             $categories->map(function($item, $key){
-            return $item->id;
+                return $item->id;
         })->all() : [$categories->id];
 
         $category_items = $itemService->search(Helper::collect([
