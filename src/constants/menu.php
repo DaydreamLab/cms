@@ -323,4 +323,8 @@ return [
         'message'   => 'Menu front is locked'
     ],
 
+    'MENU_FRONT_GET_TREE_SUCCESS' => [
+        'code'      => 200,
+        'message'   => 'Menu front get tree success'
+    ],
 ];
