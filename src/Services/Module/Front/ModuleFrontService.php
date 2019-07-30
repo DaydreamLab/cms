@@ -68,12 +68,12 @@ class ModuleFrontService extends ModuleService
                 $descendant_ids = $descendant->map(function ($item, $key){
                     return $item->id;
                 })->all();
+
                 // 塞入子分類的 ids
                 $item_params['category_ids'] = array_merge($category_ids, $descendant_ids);
             }
 
             $category->items = $this->paginationFormat($this->itemFrontService->getItemsByCategoryIds($item_params)->toArray());
-
         }
 
         if ($params['category_to_tree'])
@@ -81,7 +81,7 @@ class ModuleFrontService extends ModuleService
             $categories = $categories->toTree();
         }
 
-        return $categories;
+        return $categories->toArray()['data'];
     }
 
 
