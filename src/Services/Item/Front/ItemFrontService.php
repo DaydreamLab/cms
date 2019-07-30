@@ -137,7 +137,9 @@ class ItemFrontService extends ItemService
     {
         $items  = $this->repo->getItemsByCategoryIds($params);
 
-        return $items;
+        $data = $this->paginationFormat($items->toArray());
+
+        return $data;
     }
 
 

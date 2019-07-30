@@ -73,7 +73,7 @@ class ModuleFrontService extends ModuleService
                 $item_params['category_ids'] = array_merge($category_ids, $descendant_ids);
             }
 
-            $category->items = $this->paginationFormat($this->itemFrontService->getItemsByCategoryIds($item_params)->toArray());
+            $category->items = $this->itemFrontService->getItemsByCategoryIds($item_params);
         }
 
         if ($params['category_to_tree'])
@@ -81,7 +81,7 @@ class ModuleFrontService extends ModuleService
             $categories = $categories->toTree();
         }
 
-        return $categories->toArray()['data'];
+        return $categories;
     }
 
 

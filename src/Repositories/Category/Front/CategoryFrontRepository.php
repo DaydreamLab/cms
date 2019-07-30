@@ -24,7 +24,9 @@ class CategoryFrontRepository extends CategoryRepository
             ->whereIn('access', $access_ids)
             ->orderBy($params['category_order_by'], $params['category_order']);
 
-        return (int)$params['category_count'] ? $query->paginate((int)$params['category_count']) : $query->paginate($this->infinity);
+        // 要是用paginate 會導致 cipo 的產業團體拿不到資料
+        //return (int)$params['category_count'] ? $query->paginate((int)$params['category_count']) : $query->paginate($this->infinity);
+        return $query->get();
     }
 
 

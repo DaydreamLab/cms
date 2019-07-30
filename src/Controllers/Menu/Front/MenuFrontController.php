@@ -27,6 +27,8 @@ class MenuFrontController extends BaseController
     public function getItem(Request $request, $alias)
     {
         $menu = $this->service->getMenu(Helper::collect([
+            'page'      => $request->get('page'),
+            'category'  => $request->get('category'),
             'alias'     => $alias,
             'host'      => $request->getHttpHost(),
             'language'  => isset($request->language) ? $request->language : config('global.locale')
