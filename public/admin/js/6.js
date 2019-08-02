@@ -6,11 +6,11 @@ webpackJsonp([6],{
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(421)
+  __webpack_require__(428)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(423)
+var __vue_script__ = __webpack_require__(430)
 /* template */
 var __vue_template__ = __webpack_require__(447)
 /* template functional */
@@ -52,13 +52,13 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 421:
+/***/ 428:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(422);
+var content = __webpack_require__(429);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -79,7 +79,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 422:
+/***/ 429:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(255)(false);
@@ -94,7 +94,7 @@ exports.push([module.i, "/* Colors -------------------------- */\n/* Link ------
 
 /***/ }),
 
-/***/ 423:
+/***/ 430:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -204,9 +204,9 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
       this.listLoading = true;
       this.$$api_item_list({
         data: {
-          category_id: this.Category.id,
+          category_id: this.category.id,
           extension: "item",
-          content_type: this.Type,
+          content_type: this.type,
           order_by: "ordering",
           order: "desc"
         },
@@ -294,11 +294,11 @@ var render = function() {
               _vm.isAdding
                 ? _c("Item", {
                     attrs: {
-                      type: _vm.Type,
+                      type: _vm.type,
                       data: {
-                        extrafield_group_id: _vm.Category.item_extrafield
+                        extrafield_group_id: _vm.category.item_extrafield
                       },
-                      category: _vm.Category,
+                      category: _vm.category,
                       "is-disabled": false,
                       "is-active": ""
                     },
@@ -317,8 +317,8 @@ var render = function() {
                   {
                     key: item.id,
                     attrs: {
-                      type: _vm.Type,
-                      category: _vm.Category,
+                      type: _vm.type,
+                      category: _vm.category,
                       data: item,
                       "is-active": _vm.activeId === item.id,
                       "is-disabled": Boolean(

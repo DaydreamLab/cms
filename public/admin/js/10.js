@@ -1035,6 +1035,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
 
  // 權限判斷 function
 
@@ -1061,14 +1065,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             value: "path"
           }
         },
-        assets: {
+        asset_ids: {
           list: [],
           custom_attrs: {
             label: "tree_list_title",
             value: "id"
           }
         },
-        apis: {
+        api_ids: {
           list: [],
           custom_attrs: {
             label: "method",
@@ -1081,8 +1085,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         title: "",
         redirect: "",
         state: 1,
-        assets: [],
-        apis: []
+        asset_ids: [],
+        api_ids: []
       }
     };
   },
@@ -1155,8 +1159,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
               assets = _data$items.assets,
               apis = _data$items.apis;
 
-          _this3.fields.assets.list = assets;
-          _this3.fields.apis.list = apis;
+          _this3.fields.asset_ids.list = assets;
+          _this3.fields.api_ids.list = apis;
         }
       });
     },
@@ -1168,7 +1172,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         fn: function fn(_ref6) {
           var data = _ref6.data;
 
-          _this4.defaultValue = _extends({}, _this4.defaultValue, data.items);
+          _this4.defaultValue = _extends({}, _this4.defaultValue, data.items, {
+            api_ids: data.items.apis,
+            asset_ids: data.items.assets
+          });
           if (Object(__WEBPACK_IMPORTED_MODULE_0_utils_permission__["a" /* default */])("assignAccess")) _this4.handleGetFieldList();
         }
       });
@@ -1306,7 +1313,7 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _vm._l(_vm.fields.assets.list, function(page) {
+      _vm._l(_vm.fields.asset_ids.list, function(page) {
         return [
           _c(
             "el-row",
@@ -1321,11 +1328,11 @@ var render = function() {
                     {
                       attrs: { label: page.id },
                       model: {
-                        value: _vm.defaultValue.assets,
+                        value: _vm.defaultValue.asset_ids,
                         callback: function($$v) {
-                          _vm.$set(_vm.defaultValue, "assets", $$v)
+                          _vm.$set(_vm.defaultValue, "asset_ids", $$v)
                         },
-                        expression: "defaultValue.assets"
+                        expression: "defaultValue.asset_ids"
                       }
                     },
                     [_vm._v(_vm._s(_vm.$t(page.title)))]
@@ -1351,11 +1358,11 @@ var render = function() {
                             {
                               attrs: { label: subpage.id },
                               model: {
-                                value: _vm.defaultValue.assets,
+                                value: _vm.defaultValue.asset_ids,
                                 callback: function($$v) {
-                                  _vm.$set(_vm.defaultValue, "assets", $$v)
+                                  _vm.$set(_vm.defaultValue, "asset_ids", $$v)
                                 },
-                                expression: "defaultValue.assets"
+                                expression: "defaultValue.asset_ids"
                               }
                             },
                             [_vm._v(_vm._s(_vm.$t(subpage.title)))]
@@ -1364,29 +1371,34 @@ var render = function() {
                         1
                       ),
                       _vm._v(" "),
-                      _vm.fields.apis.list[subpage.id]
+                      _vm.fields.api_ids.list[subpage.id]
                         ? _c(
                             "el-col",
                             { attrs: { span: 18 } },
-                            _vm._l(_vm.fields.apis.list[subpage.id], function(
-                              api
-                            ) {
-                              return _c(
-                                "el-checkbox",
-                                {
-                                  key: api.id,
-                                  attrs: { label: api.id },
-                                  model: {
-                                    value: _vm.defaultValue.apis,
-                                    callback: function($$v) {
-                                      _vm.$set(_vm.defaultValue, "apis", $$v)
-                                    },
-                                    expression: "defaultValue.apis"
-                                  }
-                                },
-                                [_vm._v(_vm._s(api.method))]
-                              )
-                            })
+                            _vm._l(
+                              _vm.fields.api_ids.list[subpage.id],
+                              function(api) {
+                                return _c(
+                                  "el-checkbox",
+                                  {
+                                    key: subpage.id + "-" + api.id,
+                                    attrs: { label: api.id },
+                                    model: {
+                                      value: _vm.defaultValue.api_ids,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          _vm.defaultValue,
+                                          "api_ids",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "defaultValue.api_ids"
+                                    }
+                                  },
+                                  [_vm._v(_vm._s(api.method))]
+                                )
+                              }
+                            )
                           )
                         : _vm._e()
                     ],

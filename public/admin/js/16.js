@@ -1,4 +1,4 @@
-webpackJsonp([16,78],{
+webpackJsonp([16,76],{
 
 /***/ 102:
 /***/ (function(module, exports, __webpack_require__) {
@@ -6,9 +6,9 @@ webpackJsonp([16,78],{
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(369)
+var __vue_script__ = __webpack_require__(377)
 /* template */
-var __vue_template__ = __webpack_require__(370)
+var __vue_template__ = __webpack_require__(378)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -927,7 +927,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 /***/ }),
 
-/***/ 289:
+/***/ 290:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -942,14 +942,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 /***/ }),
 
-/***/ 369:
+/***/ 377:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_options__ = __webpack_require__(281);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_list__ = __webpack_require__(283);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mixins_list_cms__ = __webpack_require__(289);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mixins_list_cms__ = __webpack_require__(290);
 //
 //
 //
@@ -1012,9 +1012,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }, {
         key: "state",
         label: this.$t("OPTION_STATE"),
-        type: "label",
+        type: "publish-label",
         width: "120",
-        formatter: function formatter(value) {
+        formatter: function formatter(_ref) {
+          var state = _ref.state,
+              publish_up = _ref.publish_up,
+              publish_down = _ref.publish_down;
+
           var stateText = {
             "1": "PUBLISHED",
             "0": "UNPUBLISHED",
@@ -1023,9 +1027,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             "2": "PENDING",
             "3": "EXPIRED"
           };
+          state = state === 1 ? _this.formatPublishState(publish_up, publish_down) : state;
           return {
-            text: _this.$t(stateText[value]),
-            color: "item_state_" + value + "_color"
+            text: _this.$t(stateText[state]),
+            color: "item_state_" + state + "_color"
           };
         }
       }, {
@@ -1042,16 +1047,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }, {
         key: "created_at",
         label: this.$t("LIST_DATA_CREATED_DATE_LABEL"),
-        formatter: function formatter(_ref) {
-          var created_at = _ref.created_at;
+        formatter: function formatter(_ref2) {
+          var created_at = _ref2.created_at;
 
           return _this.$options.filters.displayDateFormat(created_at);
         }
       }, {
         key: "updated_at",
         label: this.$t("LIST_DATA_MODIFIED_DATE_LABEL"),
-        formatter: function formatter(_ref2) {
-          var updated_at = _ref2.updated_at;
+        formatter: function formatter(_ref3) {
+          var updated_at = _ref3.updated_at;
 
           return _this.$options.filters.displayDateFormat(updated_at);
         }
@@ -1082,9 +1087,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         key: "language_title",
         label: this.$t("OPTION_LANGUAGE"),
         width: "100",
-        formatter: function formatter(_ref3) {
-          var language = _ref3.language,
-              language_title = _ref3.language_title;
+        formatter: function formatter(_ref4) {
+          var language = _ref4.language,
+              language_title = _ref4.language_title;
 
           return language === "*" ? _this.$t("ALL_LANGUAGE") : language_title;
         }
@@ -1098,40 +1103,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         custom: [{
           text: this.$t("TOOLBAR_PUBLISH"),
           method: "handleUpdateState",
-          fn: function fn(_ref4) {
-            var ids = _ref4.ids;
+          fn: function fn(_ref5) {
+            var ids = _ref5.ids;
 
             _this.handleUpdateState({ ids: ids, state: 1 });
           }
         }, {
           text: this.$t("TOOLBAR_UNPUBLISH"),
           method: "handleUpdateState",
-          fn: function fn(_ref5) {
-            var ids = _ref5.ids;
+          fn: function fn(_ref6) {
+            var ids = _ref6.ids;
 
             _this.handleUpdateState({ ids: ids, state: 0 });
           }
         }, {
           text: this.$t("TOOLBAR_FEATURED"),
           method: "updateFeatured",
-          fn: function fn(_ref6) {
-            var ids = _ref6.ids;
+          fn: function fn(_ref7) {
+            var ids = _ref7.ids;
 
             _this.handleUpdateFeatured({ ids: ids, featured: 1 });
           }
         }, {
           text: this.$t("TOOLBAR_UNFEATURED"),
           method: "updateFeatured",
-          fn: function fn(_ref7) {
-            var ids = _ref7.ids;
+          fn: function fn(_ref8) {
+            var ids = _ref8.ids;
 
             _this.handleUpdateFeatured({ ids: ids, featured: 0 });
           }
         }, {
           text: this.$t("TOOLBAR_CHECKOUT"),
           method: "checkout",
-          fn: function fn(_ref8) {
-            var ids = _ref8.ids;
+          fn: function fn(_ref9) {
+            var ids = _ref9.ids;
 
             _this.handleCheckout({ ids: ids });
           }
@@ -1248,29 +1253,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
-    handleCheckout: function handleCheckout(_ref9) {
+    formatPublishState: function formatPublishState(startDate, endDate) {
+      var rightNow = new Date();
+      var isExpired = rightNow > new Date(endDate);
+      var isPending = new Date(startDate) > rightNow;
+      if (endDate && isExpired) {
+        return 3;
+      } else if (isPending) {
+        return 2;
+      }
+      return 1;
+    },
+    handleCheckout: function handleCheckout(_ref10) {
       var _this2 = this;
 
-      var data = _ref9.data,
-          ids = _ref9.ids;
+      var data = _ref10.data,
+          ids = _ref10.ids;
 
       var checkout_data = ids ? ids : [data.id];
       this.$$api_item_checkout({
         data: { ids: checkout_data },
-        fn: function fn(_ref10) {
-          var msg = _ref10.msg;
+        fn: function fn(_ref11) {
+          var msg = _ref11.msg;
 
           _this2.$message.success(msg);
           _this2.$_listMixin_getList();
         }
       });
     },
-    handleUpdateOrder: function handleUpdateOrder(_ref11) {
+    handleUpdateOrder: function handleUpdateOrder(_ref12) {
       var _this3 = this;
 
-      var id = _ref11.id,
-          index_diff = _ref11.index_diff,
-          order = _ref11.order;
+      var id = _ref12.id,
+          index_diff = _ref12.index_diff,
+          order = _ref12.order;
 
       this.$$api_item_ordering({
         data: {
@@ -1278,8 +1294,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           index_diff: index_diff,
           order: order
         },
-        fn: function fn(_ref12) {
-          var msg = _ref12.msg;
+        fn: function fn(_ref13) {
+          var msg = _ref13.msg;
 
           _this3.$message.success(msg);
         }
@@ -1290,63 +1306,63 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         where: { order_by: "ordering", order: order.replace("ending", "") }
       });
     },
-    handleUpdateFeatured: function handleUpdateFeatured(_ref13) {
+    handleUpdateFeatured: function handleUpdateFeatured(_ref14) {
       var _this4 = this;
 
-      var ids = _ref13.ids,
-          featured = _ref13.featured;
+      var ids = _ref14.ids,
+          featured = _ref14.featured;
 
       this.$$api_item_updateFeatured({
         data: {
           ids: ids,
           featured: featured
         },
-        fn: function fn(_ref14) {
-          var msg = _ref14.msg;
+        fn: function fn(_ref15) {
+          var msg = _ref15.msg;
 
           _this4.$message.success(msg);
           _this4.$_listMixin_getList();
         }
       });
     },
-    handleUpdateState: function handleUpdateState(_ref15) {
+    handleUpdateState: function handleUpdateState(_ref16) {
       var _this5 = this;
 
-      var ids = _ref15.ids,
-          state = _ref15.state;
+      var ids = _ref16.ids,
+          state = _ref16.state;
 
       this.$$api_item_updateState({
         data: {
           ids: ids,
           state: state
         },
-        fn: function fn(_ref16) {
-          var msg = _ref16.msg;
+        fn: function fn(_ref17) {
+          var msg = _ref17.msg;
 
           _this5.$message.success(msg);
           _this5.$_listMixin_getList();
         }
       });
     },
-    handleBatchDelete: function handleBatchDelete(_ref17) {
+    handleBatchDelete: function handleBatchDelete(_ref18) {
       var _this6 = this;
 
-      var ids = _ref17.ids,
-          datas = _ref17.datas;
+      var ids = _ref18.ids,
+          datas = _ref18.datas;
 
       this.$confirm(this.$t("GLOBAL_CONFIRM_DELETE")).then(function () {
         _this6.$$api_item_delete({
           data: { ids: ids },
-          fn: function fn(_ref18) {
-            var data = _ref18.data;
+          fn: function fn(_ref19) {
+            var data = _ref19.data;
 
             _this6.$_listMixin_getList();
           }
         });
       });
     },
-    setEditRouteQuery: function setEditRouteQuery(_ref19) {
-      var data = _ref19.data;
+    setEditRouteQuery: function setEditRouteQuery(_ref20) {
+      var data = _ref20.data;
 
       this.$_listMixin_goEditRoute({
         id: data.id
@@ -1355,14 +1371,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     handleGetList: function handleGetList() {
       var _this7 = this;
 
-      var _ref20 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-          page_data = _ref20.page_data,
-          _fn = _ref20.fn;
+      var _ref21 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+          page_data = _ref21.page_data,
+          _fn = _ref21.fn;
 
       this.$$api_item_list({
         data: page_data,
-        fn: function fn(_ref21) {
-          var data = _ref21.data;
+        fn: function fn(_ref22) {
+          var data = _ref22.data;
 
           _this7.listLoading.flag = false;
           _this7.list = data.items;
@@ -1377,7 +1393,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 370:
+/***/ 378:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {

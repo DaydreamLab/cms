@@ -927,7 +927,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 /***/ }),
 
-/***/ 289:
+/***/ 290:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -949,7 +949,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_options__ = __webpack_require__(281);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_list__ = __webpack_require__(283);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mixins_list_cms__ = __webpack_require__(289);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mixins_list_cms__ = __webpack_require__(290);
 //
 //
 //
@@ -1193,6 +1193,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     handleUpdateOrder: function handleUpdateOrder(_ref9) {
+      var _this3 = this;
+
       var id = _ref9.id,
           index_diff = _ref9.index_diff,
           order = _ref9.order;
@@ -1206,12 +1208,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         fn: function fn(_ref10) {
           var msg = _ref10.msg;
 
-          console.log(msg);
+          _this3.$message.success(msg);
         }
       });
     },
     handleUpdateState: function handleUpdateState(_ref11) {
-      var _this3 = this;
+      var _this4 = this;
 
       var ids = _ref11.ids,
           state = _ref11.state;
@@ -1224,26 +1226,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         fn: function fn(_ref12) {
           var msg = _ref12.msg;
 
-          _this3.$message.success(msg);
-          _this3.$_listMixin_getList();
+          _this4.$message.success(msg);
+          _this4.$_listMixin_getList();
         }
       });
     },
     handleBatchDelete: function handleBatchDelete(_ref13) {
-      var _this4 = this;
+      var _this5 = this;
 
       var ids = _ref13.ids,
           datas = _ref13.datas;
 
       this.$confirm(this.$t("GLOBAL_CONFIRM_DELETE")).then(function () {
-        _this4.$$api_category_delete({
+        _this5.$$api_category_delete({
           data: {
             ids: ids
           },
           fn: function fn(_ref14) {
             var data = _ref14.data;
 
-            _this4.$_listMixin_getList();
+            _this5.$_listMixin_getList();
           }
         });
       });
@@ -1257,7 +1259,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     handleGetList: function handleGetList() {
-      var _this5 = this;
+      var _this6 = this;
 
       var _ref16 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
           page_data = _ref16.page_data,
@@ -1268,9 +1270,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         fn: function fn(_ref17) {
           var data = _ref17.data;
 
-          _this5.listLoading.flag = false;
-          _this5.list = data.items;
-          _this5.paginations.total = data.pagination.total;
+          _this6.listLoading.flag = false;
+          _this6.list = data.items;
+          _this6.paginations.total = data.pagination.total;
 
           _fn && _fn();
         }

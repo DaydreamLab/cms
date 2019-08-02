@@ -137,14 +137,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     StickyNav: __WEBPACK_IMPORTED_MODULE_0_cps_sticky_nav___default.a,
     Sidebar: __WEBPACK_IMPORTED_MODULE_1__TheSidebar___default.a,
     Navbar: function Navbar() {
-      return __webpack_require__.e/* import() */(76).then(__webpack_require__.bind(null, 597));
+      return __webpack_require__.e/* import() */(74).then(__webpack_require__.bind(null, 597));
     },
     Subnavbar: __WEBPACK_IMPORTED_MODULE_2__TheSubnavbar___default.a,
     AppContent: function AppContent() {
-      return __webpack_require__.e/* import() */(79).then(__webpack_require__.bind(null, 602));
+      return __webpack_require__.e/* import() */(77).then(__webpack_require__.bind(null, 602));
     },
     AppFooter: function AppFooter() {
-      return __webpack_require__.e/* import() */(81).then(__webpack_require__.bind(null, 606));
+      return __webpack_require__.e/* import() */(79).then(__webpack_require__.bind(null, 606));
     }
   }
 });
@@ -446,7 +446,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Sidebar",
   components: { SidebarItem: function SidebarItem() {
-      return __webpack_require__.e/* import() */(75).then(__webpack_require__.bind(null, 570));
+      return __webpack_require__.e/* import() */(73).then(__webpack_require__.bind(null, 570));
     } },
   data: function data() {
     return {
@@ -631,7 +631,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   name: "SubNavbar",
   components: {
     Breadcrumb: function Breadcrumb() {
-      return __webpack_require__.e/* import() */(77).then(__webpack_require__.bind(null, 591));
+      return __webpack_require__.e/* import() */(75).then(__webpack_require__.bind(null, 591));
     },
     Toolbar: __WEBPACK_IMPORTED_MODULE_0__TheToolbar___default.a
   }
@@ -1052,11 +1052,11 @@ var render = function() {
             ]
           }),
           _vm._v(" "),
-          _vm._l(_vm.customBtns, function(btn, index) {
+          _vm._l(_vm.customBtns, function(btn, $index) {
             return _c(
               "el-button",
               {
-                key: index,
+                key: $index,
                 attrs: { type: btn.type || "" },
                 on: {
                   click: function($event) {

@@ -1,372 +1,22 @@
 webpackJsonp([75],{
 
-/***/ 570:
+/***/ 591:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(571)
+  __webpack_require__(592)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(573)
+var __vue_script__ = __webpack_require__(594)
 /* template */
-var __vue_template__ = __webpack_require__(582)
+var __vue_template__ = __webpack_require__(595)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = "data-v-aaa711c8"
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/admin/layout/TheSidebar/SidebarItem.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-aaa711c8", Component.options)
-  } else {
-    hotAPI.reload("data-v-aaa711c8", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-
-/***/ 571:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(572);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(256)("529e6d30", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-aaa711c8\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Users/daydreamlab/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./SidebarItem.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-aaa711c8\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Users/daydreamlab/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./SidebarItem.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-
-/***/ 572:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(255)(false);
-// imports
-
-
-// module
-exports.push([module.i, "/* Colors -------------------------- */\n/* Link -------------------------- */\n/* Background -------------------------- */\n/* Border -------------------------- */\n/* Navbar -------------------------- */\n/* Sidebar -------------------------- */\n/* Tab -------------------------- */\n/* Icon -------------------------- */\n/* Item -------------------------- */\n.sidebar-menu__separator[data-v-aaa711c8] {\n  color: #6589aa;\n  padding-left: 20px;\n  margin-top: 20px;\n  margin-bottom: 10px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  text-transform: uppercase;\n  font-size: 90%;\n  word-break: keep-all;\n}\n.sidebar-menu__separator[data-v-aaa711c8]:after {\n    content: \"\";\n    width: 100%;\n    height: 1px;\n    background-color: #6589aa;\n    margin-left: 20px;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ 573:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__item__ = __webpack_require__(574);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__item___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__item__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__itemLink__ = __webpack_require__(578);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__itemLink___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__itemLink__);
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: "SidebarItem",
-  components: { Item: __WEBPACK_IMPORTED_MODULE_0__item___default.a, ItemLink: __WEBPACK_IMPORTED_MODULE_1__itemLink___default.a },
-  props: {
-    item: {
-      type: Object,
-      required: true
-    },
-    isNest: {
-      type: Boolean,
-      default: false
-    }
-  },
-  data: function data() {
-    return {
-      onlyOneChild: null
-    };
-  },
-
-  methods: {
-    hasOneShowingChild: function hasOneShowingChild() {
-      var _this = this;
-
-      var children = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-      var parent = arguments[1];
-
-      var menuExcludeFunction = children.filter(function (item) {
-        return item.meta.type === "menu" || item.meta.type === "url";
-      });
-      var showingChildren = menuExcludeFunction.filter(function (item) {
-        if (!item.meta.showNav) {
-          return false;
-        } else {
-          // Temp set(will be used if only has one showing child)
-          _this.onlyOneChild = item;
-          return true;
-        }
-      });
-      // When there is only one child router, the child router is displayed by default
-      if (showingChildren.length === 1) {
-        return true;
-      }
-
-      // Show parent if there are no child router to display
-      if (showingChildren.length === 0) {
-        this.onlyOneChild = _extends({}, parent, { noShowingChildren: true });
-        return true;
-      }
-
-      return false;
-    }
-  }
-});
-
-/***/ }),
-
-/***/ 574:
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(575)
-}
-var normalizeComponent = __webpack_require__(2)
-/* script */
-var __vue_script__ = __webpack_require__(577)
-/* template */
-var __vue_template__ = null
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = "data-v-6d019a36"
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/admin/layout/TheSidebar/item.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6d019a36", Component.options)
-  } else {
-    hotAPI.reload("data-v-6d019a36", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-
-/***/ 575:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(576);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(256)("a2dd2a96", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6d019a36\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Users/daydreamlab/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./item.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6d019a36\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Users/daydreamlab/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./item.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-
-/***/ 576:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(255)(false);
-// imports
-
-
-// module
-exports.push([module.i, "/* Colors -------------------------- */\n/* Link -------------------------- */\n/* Background -------------------------- */\n/* Border -------------------------- */\n/* Navbar -------------------------- */\n/* Sidebar -------------------------- */\n/* Tab -------------------------- */\n/* Icon -------------------------- */\n/* Item -------------------------- */\n.sidebar-menu-icon[data-v-6d019a36] {\n  margin-right: 16px;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ 577:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fortawesome_vue_fontawesome__ = __webpack_require__(111);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fortawesome_vue_fontawesome___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__fortawesome_vue_fontawesome__);
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: "MenuItem",
-  functional: true,
-  props: {
-    icon: {
-      type: String,
-      default: ""
-    },
-    title: {
-      type: String,
-      default: ""
-    }
-  },
-  render: function render(h, context) {
-    var _context$props = context.props,
-        icon = _context$props.icon,
-        title = _context$props.title;
-
-    var vnodes = [];
-
-    if (icon) {
-      vnodes.push(h(__WEBPACK_IMPORTED_MODULE_0__fortawesome_vue_fontawesome__["FontAwesomeIcon"], {
-        class: {
-          "sidebar-menu-icon": true
-        },
-        props: {
-          icon: ["fal", icon]
-        }
-      }));
-    }
-
-    if (title) {
-      vnodes.push(h("span", {
-        attrs: {
-          slot: "title"
-        }
-      }, context.parent.$t(title)));
-    }
-    return vnodes;
-  }
-});
-
-/***/ }),
-
-/***/ 578:
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(2)
-/* script */
-var __vue_script__ = __webpack_require__(579)
-/* template */
-var __vue_template__ = __webpack_require__(581)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -379,7 +29,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/admin/layout/TheSidebar/itemLink.vue"
+Component.options.__file = "resources/assets/admin/layout/TheBreadcrumb.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -388,9 +38,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-1a6dbb60", Component.options)
+    hotAPI.createRecord("data-v-67e8c7d3", Component.options)
   } else {
-    hotAPI.reload("data-v-1a6dbb60", Component.options)
+    hotAPI.reload("data-v-67e8c7d3", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -402,12 +52,53 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 579:
+/***/ 592:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(593);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(256)("0a8fa7e0", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-67e8c7d3\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Users/daydreamlab/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TheBreadcrumb.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-67e8c7d3\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Users/daydreamlab/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TheBreadcrumb.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ 593:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(255)(false);
+// imports
+
+
+// module
+exports.push([module.i, "/* Colors -------------------------- */\n/* Link -------------------------- */\n/* Background -------------------------- */\n/* Border -------------------------- */\n/* Navbar -------------------------- */\n/* Sidebar -------------------------- */\n/* Tab -------------------------- */\n/* Icon -------------------------- */\n/* Item -------------------------- */\n.breadcrumb-container {\n  line-height: 60px;\n}\n.breadcrumb--alias {\n  color: #4d4d4d;\n  cursor: text;\n}\n\n/*transitionL: breadcrumb*/\n.breadcrumb-enter-active, .breadcrumb-leave-active {\n  -webkit-transition: all 0.5s;\n  transition: all 0.5s;\n}\n.breadcrumb-enter, .breadcrumb-leave-active {\n  opacity: 0;\n  -webkit-transform: translateX(20px);\n          transform: translateX(20px);\n}\n.breadcrumb-move {\n  -webkit-transition: all 0.5s;\n  transition: all 0.5s;\n}\n.breadcrumb-leave-active {\n  position: absolute;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ 594:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_validate__ = __webpack_require__(580);
 //
 //
 //
@@ -415,54 +106,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: {
-    to: {
-      type: String,
-      required: true
+  computed: {
+    breadcrumbs: function breadcrumbs() {
+      return this.$route.matched.filter(function (route) {
+        return route.name && route.path !== "/";
+      });
     }
   },
   methods: {
-    linkProps: function linkProps(url) {
-      if (Object(__WEBPACK_IMPORTED_MODULE_0__utils_validate__["a" /* isExternal */])(url)) {
-        return {
-          is: "a",
-          href: url,
-          target: "_blank",
-          rel: "noopener"
-        };
-      }
-      return {
-        is: "router-link",
-        to: url
-      };
+    formatEditTitle: function formatEditTitle(name) {
+      return name = name.replace(this.$t("TOOLBAR_EDIT"), this.$route.query.id ? this.$t("TOOLBAR_EDIT") : this.$t("TOOLBAR_ADD"));
     }
   }
 });
 
 /***/ }),
 
-/***/ 580:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = isExternal;
-/* unused harmony export publishState */
-function isExternal(path) {
-    return (/^(https?:|mailto:|tel:)/.test(path)
-    );
-}
-
-function publishState(start_date, end_date) {
-    var now = new Data();
-}
-
-/***/ }),
-
-/***/ 581:
+/***/ 595:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -470,10 +145,55 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "component",
-    _vm._b({}, "component", _vm.linkProps(_vm.to), false),
-    [_vm._t("default")],
-    2
+    "div",
+    { staticClass: "breadcrumb-container" },
+    [
+      _c(
+        "el-breadcrumb",
+        { attrs: { separator: "/" } },
+        [
+          _c(
+            "transition-group",
+            { attrs: { name: "breadcrumb" } },
+            [
+              _c(
+                "el-breadcrumb-item",
+                {
+                  key: "index",
+                  attrs: {
+                    to: { path: _vm.$store.state.user.user_info.redirect }
+                  }
+                },
+                [_vm._v(_vm._s(_vm.$t("GLOBAL_HOMEPAGE" /*首頁*/)))]
+              ),
+              _vm._v(" "),
+              _vm._l(_vm.breadcrumbs, function(ref, $index) {
+                var name = ref.name
+                var path = ref.path
+                var meta = ref.meta
+                return _c(
+                  "el-breadcrumb-item",
+                  { key: meta.id },
+                  [
+                    $index === _vm.$route.matched.length - 1
+                      ? _c("span", { staticClass: "breadcrumb--alias" }, [
+                          _vm._v(_vm._s(_vm.formatEditTitle(_vm.$t(name))))
+                        ])
+                      : _c("router-link", { attrs: { to: path } }, [
+                          _vm._v(_vm._s(_vm.$t(name)))
+                        ])
+                  ],
+                  1
+                )
+              })
+            ],
+            2
+          )
+        ],
+        1
+      )
+    ],
+    1
   )
 }
 var staticRenderFns = []
@@ -482,125 +202,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-1a6dbb60", module.exports)
-  }
-}
-
-/***/ }),
-
-/***/ 582:
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm.item.meta.showNav
-    ? _c(
-        "div",
-        [
-          _vm.hasOneShowingChild(_vm.item.children, _vm.item)
-            ? [
-                _vm.item.meta.type === "separator"
-                  ? [
-                      _c("li", { staticClass: "sidebar-menu__separator" }, [
-                        _vm._v(_vm._s(_vm.$t(_vm.item.name)))
-                      ])
-                    ]
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.onlyOneChild.meta.type !== "separator"
-                  ? _c(
-                      "ItemLink",
-                      { attrs: { to: _vm.onlyOneChild.path } },
-                      [
-                        _c(
-                          "el-menu-item",
-                          {
-                            class: { "submenu-title-noDropdown": !_vm.isNest },
-                            attrs: { index: _vm.onlyOneChild.path }
-                          },
-                          [
-                            _c("item", {
-                              attrs: {
-                                icon:
-                                  _vm.onlyOneChild.meta.icon ||
-                                  (_vm.item.meta && _vm.item.meta.icon),
-                                title: _vm.onlyOneChild.name
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
-                  : _vm._e()
-              ]
-            : [
-                _vm.item.meta.type === "separator"
-                  ? [
-                      _c("li", { staticClass: "sidebar-menu__separator" }, [
-                        _vm._v(_vm._s(_vm.$t(_vm.item.name)))
-                      ]),
-                      _vm._v(" "),
-                      _vm._l(_vm.item.children, function(child) {
-                        return _c("sidebar-item", {
-                          key: child.meta.id,
-                          staticClass: "nest-menu",
-                          attrs: { item: child }
-                        })
-                      })
-                    ]
-                  : _c(
-                      "el-submenu",
-                      {
-                        ref: "subMenu",
-                        attrs: {
-                          index: _vm.item.path,
-                          "popper-append-to-body": ""
-                        }
-                      },
-                      [
-                        _c(
-                          "template",
-                          { slot: "title" },
-                          [
-                            _vm.item.meta
-                              ? _c("item", {
-                                  attrs: {
-                                    icon: _vm.item.meta && _vm.item.meta.icon,
-                                    title: _vm.item.name
-                                  }
-                                })
-                              : _vm._e()
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _vm._l(_vm.item.children, function(child) {
-                          return _c("sidebar-item", {
-                            key: child.meta.id,
-                            staticClass: "nest-menu",
-                            attrs: { item: child }
-                          })
-                        })
-                      ],
-                      2
-                    )
-              ]
-        ],
-        2
-      )
-    : _vm._e()
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-aaa711c8", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-67e8c7d3", module.exports)
   }
 }
 

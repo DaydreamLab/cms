@@ -6,9 +6,9 @@ webpackJsonp([41],{
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(419)
+var __vue_script__ = __webpack_require__(426)
 /* template */
-var __vue_template__ = __webpack_require__(420)
+var __vue_template__ = __webpack_require__(427)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -201,7 +201,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 /***/ }),
 
-/***/ 419:
+/***/ 426:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -345,6 +345,8 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
   methods: {
     handleUpdateOrder: function handleUpdateOrder(_ref6) {
+      var _this2 = this;
+
       var id = _ref6.id,
           index_diff = _ref6.index_diff,
           order = _ref6.order;
@@ -358,7 +360,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
         fn: function fn(_ref7) {
           var msg = _ref7.msg;
 
-          console.log(msg);
+          _this2.$message.success(msg);
         }
       });
     },
@@ -367,7 +369,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
      * Toolbar
      */
     handleUpdateState: function handleUpdateState(_ref8) {
-      var _this2 = this;
+      var _this3 = this;
 
       var ids = _ref8.ids,
           state = _ref8.state;
@@ -380,24 +382,24 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
         fn: function fn(_ref9) {
           var msg = _ref9.msg;
 
-          _this2.$message.success(msg);
-          _this2.$_listMixin_getList();
+          _this3.$message.success(msg);
+          _this3.$_listMixin_getList();
         }
       });
     },
     handleBatchDelete: function handleBatchDelete(_ref10) {
-      var _this3 = this;
+      var _this4 = this;
 
       var ids = _ref10.ids,
           datas = _ref10.datas;
 
       this.$confirm(this.$t("GLOBAL_CONFIRM_DELETE")).then(function () {
-        _this3.$$api_asset_delete({
+        _this4.$$api_asset_delete({
           data: { ids: ids },
           fn: function fn(_ref11) {
             var data = _ref11.data;
 
-            _this3.$_listMixin_getList();
+            _this4.$_listMixin_getList();
           }
         });
       });
@@ -411,7 +413,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
       });
     },
     handleGetList: function handleGetList() {
-      var _this4 = this;
+      var _this5 = this;
 
       var _ref13 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
           page_data = _ref13.page_data,
@@ -422,9 +424,9 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
         fn: function fn(_ref14) {
           var data = _ref14.data;
 
-          _this4.listLoading.flag = false;
-          _this4.list = data.items;
-          _this4.paginations.total = data.pagination.total;
+          _this5.listLoading.flag = false;
+          _this5.list = data.items;
+          _this5.paginations.total = data.pagination.total;
 
           _fn && _fn();
         }
@@ -435,7 +437,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 /***/ }),
 
-/***/ 420:
+/***/ 427:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
