@@ -20,7 +20,7 @@ class LanguageAdminService extends LanguageService
     }
 
 
-    public function getList()
+    public function getList(Collection $input)
     {
         $data = $this->findBy('state','=', 1);
 
@@ -33,7 +33,7 @@ class LanguageAdminService extends LanguageService
 
     public function getTypeList($type)
     {
-        $items = $this->getList();
+        $items = $this->getList(collect());
 
         $items = $items->filter(function ($value, $key) use ($type){
             return $value->type == $type;
