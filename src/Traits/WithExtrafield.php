@@ -52,6 +52,7 @@ trait WithExtrafield
             {
                 if($extrafield->id == $extrafield_data->id) {
                     $extrafield_data->value = $extrafield->value;
+                    $extrafield_data->params = $extrafield->params;
                 }
             }
 
