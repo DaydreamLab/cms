@@ -1,392 +1,340 @@
 webpackJsonp([74],{
 
-/***/ 280:
+/***/ 597:
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseIsNative = __webpack_require__(294),
-    getValue = __webpack_require__(297);
-
-/**
- * Gets the native function at `key` of `object`.
- *
- * @private
- * @param {Object} object The object to query.
- * @param {string} key The key of the method to get.
- * @returns {*} Returns the function if it's native, else `undefined`.
- */
-function getNative(object, key) {
-  var value = getValue(object, key);
-  return baseIsNative(value) ? value : undefined;
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(598)
 }
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(600)
+/* template */
+var __vue_template__ = __webpack_require__(601)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/admin/layout/TheNavbar.vue"
 
-module.exports = getNative;
-
-
-/***/ }),
-
-/***/ 290:
-/***/ (function(module, exports) {
-
-/** Used for built-in method references. */
-var funcProto = Function.prototype;
-
-/** Used to resolve the decompiled source of functions. */
-var funcToString = funcProto.toString;
-
-/**
- * Converts `func` to its source code.
- *
- * @private
- * @param {Function} func The function to convert.
- * @returns {string} Returns the source code.
- */
-function toSource(func) {
-  if (func != null) {
-    try {
-      return funcToString.call(func);
-    } catch (e) {}
-    try {
-      return (func + '');
-    } catch (e) {}
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2a3bfd40", Component.options)
+  } else {
+    hotAPI.reload("data-v-2a3bfd40", Component.options)
   }
-  return '';
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 598:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(599);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(256)("5cc5c1eb", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2a3bfd40\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Users/daydreamlab/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TheNavbar.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2a3bfd40\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Users/daydreamlab/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TheNavbar.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
 }
 
-module.exports = toSource;
-
-
 /***/ }),
 
-/***/ 291:
+/***/ 599:
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(280),
-    root = __webpack_require__(15);
-
-/* Built-in method references that are verified to be native. */
-var Map = getNative(root, 'Map');
-
-module.exports = Map;
+exports = module.exports = __webpack_require__(255)(false);
+// imports
 
 
-/***/ }),
+// module
+exports.push([module.i, "/* Colors -------------------------- */\n/* Link -------------------------- */\n/* Background -------------------------- */\n/* Border -------------------------- */\n/* Navbar -------------------------- */\n/* Sidebar -------------------------- */\n/* Tab -------------------------- */\n/* Icon -------------------------- */\n/* Item -------------------------- */\n.navbar {\n  height: 60px;\n  -webkit-box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.15);\n          box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.15);\n}\n.navbar-left {\n    -webkit-box-flex: 1;\n        -ms-flex: 1;\n            flex: 1;\n}\n.navbar-right__item {\n    vertical-align: middle;\n}\n.navbar-right__item + .navbar-right__item {\n      padding-left: 40px;\n}\n.navbar-right__item + .navbar-right__item:before {\n        content: \"\";\n        height: 30px;\n        width: 1px;\n        background: #e6e6e6;\n        position: absolute;\n        top: calc(50% - 15px);\n        left: 20px;\n}\n.navbar-right__icontitle {\n    margin-right: 0.25em;\n}\n.navbar-right__dropdown {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n.navbar-right__dropdown_item {\n      -webkit-box-flex: 1;\n          -ms-flex: 1;\n              flex: 1;\n      padding-right: 10px;\n}\n.navbar-right__dropdown_subtitle {\n      color: #909399;\n}\n", ""]);
 
-/***/ 294:
-/***/ (function(module, exports, __webpack_require__) {
-
-var isFunction = __webpack_require__(98),
-    isMasked = __webpack_require__(295),
-    isObject = __webpack_require__(96),
-    toSource = __webpack_require__(290);
-
-/**
- * Used to match `RegExp`
- * [syntax characters](http://ecma-international.org/ecma-262/7.0/#sec-patterns).
- */
-var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
-
-/** Used to detect host constructors (Safari). */
-var reIsHostCtor = /^\[object .+?Constructor\]$/;
-
-/** Used for built-in method references. */
-var funcProto = Function.prototype,
-    objectProto = Object.prototype;
-
-/** Used to resolve the decompiled source of functions. */
-var funcToString = funcProto.toString;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/** Used to detect if a method is native. */
-var reIsNative = RegExp('^' +
-  funcToString.call(hasOwnProperty).replace(reRegExpChar, '\\$&')
-  .replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
-);
-
-/**
- * The base implementation of `_.isNative` without bad shim checks.
- *
- * @private
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a native function,
- *  else `false`.
- */
-function baseIsNative(value) {
-  if (!isObject(value) || isMasked(value)) {
-    return false;
-  }
-  var pattern = isFunction(value) ? reIsNative : reIsHostCtor;
-  return pattern.test(toSource(value));
-}
-
-module.exports = baseIsNative;
+// exports
 
 
 /***/ }),
 
-/***/ 295:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ 600:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-var coreJsData = __webpack_require__(296);
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-/** Used to detect methods masquerading as native. */
-var maskSrcKey = (function() {
-  var uid = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || '');
-  return uid ? ('Symbol(src)_1.' + uid) : '';
-}());
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "Navbar",
+  methods: {
+    toggle_menu: function toggle_menu() {
+      this.$store.commit("left_menu", "toggle");
+    },
 
-/**
- * Checks if `func` has its source masked.
- *
- * @private
- * @param {Function} func The function to check.
- * @returns {boolean} Returns `true` if `func` is masked, else `false`.
- */
-function isMasked(func) {
-  return !!maskSrcKey && (maskSrcKey in func);
-}
+    /**
+     * 登出
+     */
+    handleLogout: function handleLogout() {
+      var _this = this;
 
-module.exports = isMasked;
-
-
-/***/ }),
-
-/***/ 296:
-/***/ (function(module, exports, __webpack_require__) {
-
-var root = __webpack_require__(15);
-
-/** Used to detect overreaching core-js shims. */
-var coreJsData = root['__core-js_shared__'];
-
-module.exports = coreJsData;
-
-
-/***/ }),
-
-/***/ 297:
-/***/ (function(module, exports) {
-
-/**
- * Gets the value at `key` of `object`.
- *
- * @private
- * @param {Object} [object] The object to query.
- * @param {string} key The key of the property to get.
- * @returns {*} Returns the property value.
- */
-function getValue(object, key) {
-  return object == null ? undefined : object[key];
-}
-
-module.exports = getValue;
-
-
-/***/ }),
-
-/***/ 302:
-/***/ (function(module, exports, __webpack_require__) {
-
-var DataView = __webpack_require__(303),
-    Map = __webpack_require__(291),
-    Promise = __webpack_require__(304),
-    Set = __webpack_require__(305),
-    WeakMap = __webpack_require__(306),
-    baseGetTag = __webpack_require__(8),
-    toSource = __webpack_require__(290);
-
-/** `Object#toString` result references. */
-var mapTag = '[object Map]',
-    objectTag = '[object Object]',
-    promiseTag = '[object Promise]',
-    setTag = '[object Set]',
-    weakMapTag = '[object WeakMap]';
-
-var dataViewTag = '[object DataView]';
-
-/** Used to detect maps, sets, and weakmaps. */
-var dataViewCtorString = toSource(DataView),
-    mapCtorString = toSource(Map),
-    promiseCtorString = toSource(Promise),
-    setCtorString = toSource(Set),
-    weakMapCtorString = toSource(WeakMap);
-
-/**
- * Gets the `toStringTag` of `value`.
- *
- * @private
- * @param {*} value The value to query.
- * @returns {string} Returns the `toStringTag`.
- */
-var getTag = baseGetTag;
-
-// Fallback for data views, maps, sets, and weak maps in IE 11 and promises in Node.js < 6.
-if ((DataView && getTag(new DataView(new ArrayBuffer(1))) != dataViewTag) ||
-    (Map && getTag(new Map) != mapTag) ||
-    (Promise && getTag(Promise.resolve()) != promiseTag) ||
-    (Set && getTag(new Set) != setTag) ||
-    (WeakMap && getTag(new WeakMap) != weakMapTag)) {
-  getTag = function(value) {
-    var result = baseGetTag(value),
-        Ctor = result == objectTag ? value.constructor : undefined,
-        ctorString = Ctor ? toSource(Ctor) : '';
-
-    if (ctorString) {
-      switch (ctorString) {
-        case dataViewCtorString: return dataViewTag;
-        case mapCtorString: return mapTag;
-        case promiseCtorString: return promiseTag;
-        case setCtorString: return setTag;
-        case weakMapCtorString: return weakMapTag;
+      this.$confirm(this.$t("GLOBAL_CONFIRM_LOGOUT"), {
+        type: "warning"
+      }).then(function () {
+        _this.$$api_user_logout({
+          fn: function fn() {
+            _this.$message.success(_this.$t("GLOBAL_LOGOUT_SUCCESS"));
+            _this.$store.dispatch("remove_option_related_list");
+            _this.$store.dispatch("remove_userinfo").then(function () {
+              _this.$router.push("/login");
+            });
+          }
+        });
+      });
+    },
+    onCommand: function onCommand(cmd) {
+      if (cmd === "logout") {
+        this.handleLogout();
       }
     }
-    return result;
-  };
+  }
+});
+
+/***/ }),
+
+/***/ 601:
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "navbar" }, [
+    _c(
+      "div",
+      { staticClass: "navbar-left" },
+      [
+        _c("font-awesome-icon", {
+          staticClass: "sidebar-toggle",
+          attrs: { icon: ["fal", "list-ul"] },
+          on: { click: _vm.toggle_menu }
+        })
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "navbar-right" },
+      [
+        _c(
+          "el-dropdown",
+          {
+            staticClass: "navbar-right__item",
+            attrs: { trigger: "click" },
+            on: { command: _vm.onCommand }
+          },
+          [
+            _c("div", { staticClass: "navbar-right__dropdown" }, [
+              _c(
+                "div",
+                { staticClass: "navbar-right__dropdown_item" },
+                [
+                  _c("span", { staticClass: "navbar-right__icontitle" }, [
+                    _vm._v(_vm._s(_vm.$t("GLOBAL_VIEW_SITE" /*預覽網站*/)))
+                  ]),
+                  _vm._v(" "),
+                  _c("font-awesome-icon", {
+                    attrs: { icon: ["fal", "external-link"] }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                [
+                  _c("font-awesome-icon", {
+                    attrs: { icon: ["fas", "caret-down"] }
+                  })
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "el-dropdown-menu",
+              { attrs: { slot: "dropdown" }, slot: "dropdown" },
+              _vm._l(_vm.$store.state.sys.site_list, function(site) {
+                return _c(
+                  "a",
+                  {
+                    key: site.id,
+                    attrs: {
+                      href: "https://" + site.url + "/" + site.sef,
+                      target: "_blank"
+                    }
+                  },
+                  [_c("el-dropdown-item", [_vm._v(_vm._s(site.title))])],
+                  1
+                )
+              })
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "el-dropdown",
+          {
+            staticClass: "navbar-right__item",
+            attrs: { trigger: "click" },
+            on: { command: _vm.onCommand }
+          },
+          [
+            _c("div", { staticClass: "navbar-right__dropdown" }, [
+              _c("div", { staticClass: "navbar-right__dropdown_item" }, [
+                _vm._v(
+                  "\n          " +
+                    _vm._s(_vm.$store.state.user.user_info.last_name) +
+                    "\n          "
+                ),
+                _c("div", { staticClass: "navbar-right__dropdown_subtitle" }, [
+                  _vm._v(_vm._s(_vm.$store.state.user.user_info.first_name))
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                [
+                  _c("font-awesome-icon", {
+                    attrs: { icon: ["fas", "caret-down"] }
+                  })
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "el-dropdown-menu",
+              { attrs: { slot: "dropdown" }, slot: "dropdown" },
+              [
+                _c(
+                  "el-dropdown-item",
+                  { attrs: { command: "logout" } },
+                  [
+                    _c("span", { staticClass: "navbar-right__icontitle" }, [
+                      _vm._v(_vm._s(_vm.$t("LOGOUT") /*登出*/))
+                    ]),
+                    _vm._v(" "),
+                    _c("font-awesome-icon", {
+                      attrs: { icon: ["fal", "sign-out"] }
+                    })
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ],
+          1
+        )
+      ],
+      1
+    )
+  ])
 }
-
-module.exports = getTag;
-
-
-/***/ }),
-
-/***/ 303:
-/***/ (function(module, exports, __webpack_require__) {
-
-var getNative = __webpack_require__(280),
-    root = __webpack_require__(15);
-
-/* Built-in method references that are verified to be native. */
-var DataView = getNative(root, 'DataView');
-
-module.exports = DataView;
-
-
-/***/ }),
-
-/***/ 304:
-/***/ (function(module, exports, __webpack_require__) {
-
-var getNative = __webpack_require__(280),
-    root = __webpack_require__(15);
-
-/* Built-in method references that are verified to be native. */
-var Promise = getNative(root, 'Promise');
-
-module.exports = Promise;
-
-
-/***/ }),
-
-/***/ 305:
-/***/ (function(module, exports, __webpack_require__) {
-
-var getNative = __webpack_require__(280),
-    root = __webpack_require__(15);
-
-/* Built-in method references that are verified to be native. */
-var Set = getNative(root, 'Set');
-
-module.exports = Set;
-
-
-/***/ }),
-
-/***/ 306:
-/***/ (function(module, exports, __webpack_require__) {
-
-var getNative = __webpack_require__(280),
-    root = __webpack_require__(15);
-
-/* Built-in method references that are verified to be native. */
-var WeakMap = getNative(root, 'WeakMap');
-
-module.exports = WeakMap;
-
-
-/***/ }),
-
-/***/ 339:
-/***/ (function(module, exports, __webpack_require__) {
-
-var baseKeys = __webpack_require__(104),
-    getTag = __webpack_require__(302),
-    isArguments = __webpack_require__(95),
-    isArray = __webpack_require__(16),
-    isArrayLike = __webpack_require__(18),
-    isBuffer = __webpack_require__(99),
-    isPrototype = __webpack_require__(105),
-    isTypedArray = __webpack_require__(100);
-
-/** `Object#toString` result references. */
-var mapTag = '[object Map]',
-    setTag = '[object Set]';
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/**
- * Checks if `value` is an empty object, collection, map, or set.
- *
- * Objects are considered empty if they have no own enumerable string keyed
- * properties.
- *
- * Array-like values such as `arguments` objects, arrays, buffers, strings, or
- * jQuery-like collections are considered empty if they have a `length` of `0`.
- * Similarly, maps and sets are considered empty if they have a `size` of `0`.
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is empty, else `false`.
- * @example
- *
- * _.isEmpty(null);
- * // => true
- *
- * _.isEmpty(true);
- * // => true
- *
- * _.isEmpty(1);
- * // => true
- *
- * _.isEmpty([1, 2, 3]);
- * // => false
- *
- * _.isEmpty({ 'a': 1 });
- * // => false
- */
-function isEmpty(value) {
-  if (value == null) {
-    return true;
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-2a3bfd40", module.exports)
   }
-  if (isArrayLike(value) &&
-      (isArray(value) || typeof value == 'string' || typeof value.splice == 'function' ||
-        isBuffer(value) || isTypedArray(value) || isArguments(value))) {
-    return !value.length;
-  }
-  var tag = getTag(value);
-  if (tag == mapTag || tag == setTag) {
-    return !value.size;
-  }
-  if (isPrototype(value)) {
-    return !baseKeys(value).length;
-  }
-  for (var key in value) {
-    if (hasOwnProperty.call(value, key)) {
-      return false;
-    }
-  }
-  return true;
 }
-
-module.exports = isEmpty;
-
 
 /***/ })
 

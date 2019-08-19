@@ -1,22 +1,18 @@
 webpackJsonp([76],{
 
-/***/ 597:
+/***/ 102:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(598)
-}
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(600)
+var __vue_script__ = __webpack_require__(377)
 /* template */
-var __vue_template__ = __webpack_require__(601)
+var __vue_template__ = __webpack_require__(378)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = injectStyle
+var __vue_styles__ = null
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -29,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/admin/layout/TheNavbar.vue"
+Component.options.__file = "resources/assets/admin/views/content/item/list.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -38,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-2a3bfd40", Component.options)
+    hotAPI.createRecord("data-v-525be48f", Component.options)
   } else {
-    hotAPI.reload("data-v-2a3bfd40", Component.options)
+    hotAPI.reload("data-v-525be48f", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -52,53 +48,182 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 598:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ 283:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-// style-loader: Adds some css to the DOM by adding a <style> tag
+"use strict";
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-// load the styles
-var content = __webpack_require__(599);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(256)("5cc5c1eb", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2a3bfd40\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Users/daydreamlab/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TheNavbar.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2a3bfd40\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Users/daydreamlab/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TheNavbar.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    data: function data() {
+        return {
+            list: [],
+            listLoading: {
+                flag: false
+            },
+            paginations: {
+                current_page: 1,
+                total: 0,
+                page_size: 10,
+                page_sizes: [10, 15, 20, 25, 50, 100],
+                layout: "total, sizes, prev, pager, next, jumper"
+            }
+        };
+    },
+
+    watch: {
+        $route: {
+            handler: "$_listMixin_init",
+            immediate: true
+        }
+    },
+    methods: {
+        $_listMixin_goAddRoute: function $_listMixin_goAddRoute() {
+            this.$router.push(this.$route.path + "/edit");
+        },
+
+        /**
+         * 組裝編輯路徑
+         * @param {Object} query 編輯項目參數
+         * @param.attr query.id 項目 id
+         * @param.attr query.pid 項目 parent_id
+         */
+        $_listMixin_goEditRoute: function $_listMixin_goEditRoute(query) {
+            this.$router.push({
+                path: this.$route.path + "/edit",
+                query: _extends({}, query, {
+                    from: this.$route.query
+                })
+            });
+        },
+        $_listMixin_onSearchReset: function $_listMixin_onSearchReset() {
+            this.$router.push({
+                path: this.$route.path
+            });
+        },
+        $_listMixin_onSearch: function $_listMixin_onSearch(data) {
+            var query = this.$route.query;
+
+            var searchData = _extends({}, query);
+
+            for (var s in data) {
+                searchData[s] = data[s];
+                if (!searchData[s]) {
+                    delete searchData[s];
+                }
+            }
+            this.$router.push({
+                path: this.$route.path,
+                query: searchData
+            });
+        },
+        $_listMixin_updateCurrentPage: function $_listMixin_updateCurrentPage(page) {
+            var _this = this;
+
+            this.$_listMixin_getList({
+                page: page,
+                fn: function fn() {
+                    _this.$router.push({
+                        path: _this.$route.path,
+                        query: _this.setRouteQuery("page", page)
+                    });
+                }
+            });
+        },
+        $_listMixin_updatePageSize: function $_listMixin_updatePageSize(pageSize) {
+            var _this2 = this;
+
+            this.$_listMixin_getList({
+                pageSize: pageSize,
+                fn: function fn() {
+                    _this2.$router.push({
+                        path: _this2.$route.path,
+                        query: _this2.setRouteQuery("page_size", pageSize)
+                    });
+                }
+            });
+        },
+        $_listMixin_getList: function $_listMixin_getList() {
+            var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+                page = _ref.page,
+                pageSize = _ref.pageSize,
+                where = _ref.where,
+                fn = _ref.fn;
+
+            this.listLoading.flag = true;
+
+            var query = this.$route.query;
+
+            this.paginations.current_page = page || Number(query.page) || 1;
+            this.paginations.page_size = pageSize || Number(query.page_size) || this.paginations.page_size;
+
+            var page_data = Object.assign(this.getRouteQuery(), {
+                page: this.paginations.current_page,
+                limit: this.paginations.page_size
+            });
+            if (where) {
+                page_data = Object.assign(page_data, where || {});
+            }
+            this.handleGetList({ page_data: page_data, fn: fn });
+        },
+        $_listMixin_init: function $_listMixin_init() {
+            this.$_listMixin_getList(); //為了在 cms mixin 可以加參數
+        },
+        setRouteQuery: function setRouteQuery(field, value) {
+            var query = Object.assign({}, this.$route.query);
+
+            if ((typeof field === "undefined" ? "undefined" : _typeof(field)) === "object") {
+                query = field;
+            } else {
+                query[field] = value;
+            }
+
+            return query;
+        },
+        getRouteQuery: function getRouteQuery() {
+            var _this3 = this;
+
+            var query = this.$route.query;
+            var numberArray = ["id", "pid", "category_id", "access"];
+            var dateArray = ["start_date", "end_date"];
+            var data = {};
+
+            Object.keys(query).forEach(function (field) {
+                _this3.searchbar.defaultValue[field] = numberArray.includes(field) ? Number(query[field]) : dateArray.includes(field) ? _this3.$options.filters.storeDateFormat(query[field]) : query[field];
+                data[field] = query[field];
+            });
+            return data;
+        }
+    }
+});
 
 /***/ }),
 
-/***/ 599:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ 290:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(255)(false);
-// imports
-
-
-// module
-exports.push([module.i, "/* Colors -------------------------- */\n/* Link -------------------------- */\n/* Background -------------------------- */\n/* Border -------------------------- */\n/* Navbar -------------------------- */\n/* Sidebar -------------------------- */\n/* Tab -------------------------- */\n/* Icon -------------------------- */\n/* Item -------------------------- */\n.navbar {\n  height: 60px;\n  -webkit-box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.15);\n          box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.15);\n}\n.navbar-left {\n    -webkit-box-flex: 1;\n        -ms-flex: 1;\n            flex: 1;\n}\n.navbar-right__item {\n    vertical-align: middle;\n}\n.navbar-right__item + .navbar-right__item {\n      padding-left: 40px;\n}\n.navbar-right__item + .navbar-right__item:before {\n        content: \"\";\n        height: 30px;\n        width: 1px;\n        background: #e6e6e6;\n        position: absolute;\n        top: calc(50% - 15px);\n        left: 20px;\n}\n.navbar-right__icontitle {\n    margin-right: 0.25em;\n}\n.navbar-right__dropdown {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n.navbar-right__dropdown_item {\n      -webkit-box-flex: 1;\n          -ms-flex: 1;\n              flex: 1;\n      padding-right: 10px;\n}\n.navbar-right__dropdown_subtitle {\n      color: #909399;\n}\n", ""]);
-
-// exports
-
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+    methods: {
+        $_listMixin_init: function $_listMixin_init() {
+            this.$set(this.toolbar, "type", this.$route.query.state === "-2" ? "trash" : "list");
+            this.$_listMixin_getList();
+        }
+    }
+});
 
 /***/ }),
 
-/***/ 600:
+/***/ 377:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_options__ = __webpack_require__(281);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_list__ = __webpack_require__(283);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mixins_list_cms__ = __webpack_require__(290);
 //
 //
 //
@@ -125,206 +250,456 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "Navbar",
+  name: "ItemList",
+  mixins: [__WEBPACK_IMPORTED_MODULE_0_mixins_options__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1_mixins_list__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2_mixins_list_cms__["a" /* default */]],
+  data: function data() {
+    var _this = this;
+
+    return {
+      sort: {
+        show: true
+      },
+      fields: [{
+        key: "title",
+        label: this.$t("FIELD_TITLE_LABEL"),
+        type: "editable",
+        width: 300
+      }, {
+        key: "featured",
+        label: this.$t("OPTION_FEATURED"),
+        type: "icon",
+        width: "80",
+        formatter: function formatter(value) {
+          return {
+            style: {
+              color: value === 1 ? "#fdd034" : "#cfd3da"
+            },
+            icon: ["fas", "star"]
+          };
+        }
+      }, {
+        key: "state",
+        label: this.$t("OPTION_STATE"),
+        type: "publish-label",
+        width: "120",
+        formatter: function formatter(_ref) {
+          var state = _ref.state,
+              publish_up = _ref.publish_up,
+              publish_down = _ref.publish_down;
+
+          var stateText = {
+            "1": "PUBLISHED",
+            "0": "UNPUBLISHED",
+            "-1": "ARCHIVED",
+            "-2": "TRASHED",
+            "2": "PENDING",
+            "3": "EXPIRED"
+          };
+          state = state === 1 ? _this.formatPublishState(publish_up, publish_down) : state;
+          return {
+            text: _this.$t(stateText[state]),
+            color: "item_state_" + state + "_color"
+          };
+        }
+      }, {
+        key: "category_title",
+        label: this.$t("OPTION_CATEGORY"),
+        width: "120"
+      }, {
+        key: "creator",
+        label: this.$t("LIST_DATA_AUTHOR_LABEL")
+      }, {
+        key: "updater",
+        label: this.$t("LIST_DATA_MODIFIED_BY_LABEL"),
+        width: "100"
+      }, {
+        key: "created_at",
+        label: this.$t("LIST_DATA_CREATED_DATE_LABEL"),
+        formatter: function formatter(_ref2) {
+          var created_at = _ref2.created_at;
+
+          return _this.$options.filters.displayDateFormat(created_at);
+        }
+      }, {
+        key: "updated_at",
+        label: this.$t("LIST_DATA_MODIFIED_DATE_LABEL"),
+        formatter: function formatter(_ref3) {
+          var updated_at = _ref3.updated_at;
+
+          return _this.$options.filters.displayDateFormat(updated_at);
+        }
+      }, {
+        key: "hits",
+        label: this.$t("LIST_DATA_HITS_LABEL")
+      }, {
+        key: "introimage",
+        label: this.$t("LIST_DATA_INTRO_IMAGE_LABEL"),
+        type: "icon",
+        sort: false,
+        formatter: function formatter(value) {
+          return {
+            icon: value ? ["fal", "image"] : ""
+          };
+        }
+      }, {
+        key: "image",
+        label: this.$t("LIST_DATA_IMAGE_LABEL"),
+        type: "icon",
+        sort: false,
+        formatter: function formatter(value) {
+          return {
+            icon: value ? ["fal", "image"] : ""
+          };
+        }
+      }, {
+        key: "language_title",
+        label: this.$t("OPTION_LANGUAGE"),
+        width: "100",
+        formatter: function formatter(_ref4) {
+          var language = _ref4.language,
+              language_title = _ref4.language_title;
+
+          return language === "*" ? _this.$t("ALL_LANGUAGE") : language_title;
+        }
+      }, {
+        key: "id",
+        label: this.$t("LIST_DATA_HEADING_ID"),
+        width: "60"
+      }],
+      toolbar: {
+        type: "list",
+        custom: [{
+          text: this.$t("TOOLBAR_PUBLISH"),
+          method: "handleUpdateState",
+          fn: function fn(_ref5) {
+            var ids = _ref5.ids;
+
+            _this.handleUpdateState({ ids: ids, state: 1 });
+          }
+        }, {
+          text: this.$t("TOOLBAR_UNPUBLISH"),
+          method: "handleUpdateState",
+          fn: function fn(_ref6) {
+            var ids = _ref6.ids;
+
+            _this.handleUpdateState({ ids: ids, state: 0 });
+          }
+        }, {
+          text: this.$t("TOOLBAR_FEATURED"),
+          method: "updateFeatured",
+          fn: function fn(_ref7) {
+            var ids = _ref7.ids;
+
+            _this.handleUpdateFeatured({ ids: ids, featured: 1 });
+          }
+        }, {
+          text: this.$t("TOOLBAR_UNFEATURED"),
+          method: "updateFeatured",
+          fn: function fn(_ref8) {
+            var ids = _ref8.ids;
+
+            _this.handleUpdateFeatured({ ids: ids, featured: 0 });
+          }
+        }, {
+          text: this.$t("TOOLBAR_CHECKOUT"),
+          method: "checkout",
+          fn: function fn(_ref9) {
+            var ids = _ref9.ids;
+
+            _this.handleCheckout({ ids: ids });
+          }
+        }]
+      },
+      searchbar: {
+        fields: [{
+          key: "search",
+          desc: this.$t("TOOLBAR_KEYWORDS"),
+          clearable: true
+        }, {
+          key: "featured",
+          type: "select",
+          desc: this.$t("OPTION_FEATURED"),
+          clearable: true,
+          list: [{
+            value: "1",
+            text: this.$t("FEATURED")
+          }, {
+            value: "0",
+            text: this.$t("NOT_FEATURED")
+          }],
+          events: {
+            change: function change() {
+              _this.$_listMixin_onSearch(_this.searchbar.defaultValue);
+            }
+          }
+        }, {
+          key: "state",
+          type: "select",
+          desc: this.$t("OPTION_STATE"),
+          clearable: true,
+          list: [{
+            value: "1",
+            text: this.$t("PUBLISHED")
+          }, {
+            value: "0",
+            text: this.$t("UNPUBLISHED")
+          }, {
+            value: "-1",
+            text: this.$t("ARCHIVED")
+          }, {
+            value: "-2",
+            text: this.$t("TRASHED")
+          }],
+          events: {
+            change: function change() {
+              _this.$_listMixin_onSearch(_this.searchbar.defaultValue);
+            }
+          }
+        }, {
+          key: "category_id",
+          type: "select",
+          desc: this.$t("OPTION_CATEGORY"),
+          clearable: true,
+          list: this.$store.getters.item_article_category_list,
+          custom_attrs: {
+            label: "tree_list_title",
+            value: "id"
+          },
+          events: {
+            change: function change() {
+              _this.$_listMixin_onSearch(_this.searchbar.defaultValue);
+            }
+          }
+        }, {
+          key: "language",
+          type: "select",
+          desc: this.$t("OPTION_LANGUAGE"),
+          clearable: true,
+          list: this.$store.getters.language_list,
+          custom_attrs: {
+            label: "title",
+            value: "sef"
+          },
+          events: {
+            change: function change() {
+              _this.$_listMixin_onSearch(_this.searchbar.defaultValue);
+            }
+          }
+        }, {
+          key: "access",
+          type: "select",
+          desc: this.$t("FIELD_ACCESS_LEVEL"),
+          clearable: true,
+          list: this.$store.getters.viewlevel_list,
+          custom_attrs: {
+            label: "title",
+            value: "id"
+          },
+          events: {
+            change: function change() {
+              _this.$_listMixin_onSearch(_this.searchbar.defaultValue);
+            }
+          }
+        }],
+        defaultValue: {
+          search: "",
+          state: "",
+          featured: "",
+          category_id: "",
+          language: "",
+          access: ""
+        }
+      }
+    };
+  },
+  created: function created() {
+    this.$_optionMixin_updateFieldList({
+      item_article_category: 3,
+      language: 4,
+      viewlevel: 5
+    }, true);
+  },
+
   methods: {
-    toggle_menu: function toggle_menu() {
-      this.$store.commit("left_menu", "toggle");
+    formatPublishState: function formatPublishState(startDate, endDate) {
+      var rightNow = new Date();
+      var isExpired = rightNow > new Date(endDate);
+      var isPending = new Date(startDate) > rightNow;
+      if (endDate && isExpired) {
+        return 3;
+      } else if (isPending) {
+        return 2;
+      }
+      return 1;
     },
+    handleCheckout: function handleCheckout(_ref10) {
+      var _this2 = this;
 
-    /**
-     * 登出
-     */
-    handleLogout: function handleLogout() {
-      var _this = this;
+      var data = _ref10.data,
+          ids = _ref10.ids;
 
-      this.$confirm(this.$t("GLOBAL_CONFIRM_LOGOUT"), {
-        type: "warning"
-      }).then(function () {
-        _this.$$api_user_logout({
-          fn: function fn() {
-            _this.$message.success(_this.$t("GLOBAL_LOGOUT_SUCCESS"));
-            _this.$store.dispatch("remove_option_related_list");
-            _this.$store.dispatch("remove_userinfo").then(function () {
-              _this.$router.push("/login");
-            });
+      var checkout_data = ids ? ids : [data.id];
+      this.$$api_item_checkout({
+        data: { ids: checkout_data },
+        fn: function fn(_ref11) {
+          var msg = _ref11.msg;
+
+          _this2.$message.success(msg);
+          _this2.$_listMixin_getList();
+        }
+      });
+    },
+    handleUpdateOrder: function handleUpdateOrder(_ref12) {
+      var _this3 = this;
+
+      var id = _ref12.id,
+          index_diff = _ref12.index_diff,
+          order = _ref12.order;
+
+      this.$$api_item_ordering({
+        data: {
+          id: id,
+          index_diff: index_diff,
+          order: order
+        },
+        fn: function fn(_ref13) {
+          var msg = _ref13.msg;
+
+          _this3.$message.success(msg);
+        }
+      });
+    },
+    onSortChange: function onSortChange(order) {
+      this.$_listMixin_getList({
+        where: { order_by: "ordering", order: order.replace("ending", "") }
+      });
+    },
+    handleUpdateFeatured: function handleUpdateFeatured(_ref14) {
+      var _this4 = this;
+
+      var ids = _ref14.ids,
+          featured = _ref14.featured;
+
+      this.$$api_item_updateFeatured({
+        data: {
+          ids: ids,
+          featured: featured
+        },
+        fn: function fn(_ref15) {
+          var msg = _ref15.msg;
+
+          _this4.$message.success(msg);
+          _this4.$_listMixin_getList();
+        }
+      });
+    },
+    handleUpdateState: function handleUpdateState(_ref16) {
+      var _this5 = this;
+
+      var ids = _ref16.ids,
+          state = _ref16.state;
+
+      this.$$api_item_updateState({
+        data: {
+          ids: ids,
+          state: state
+        },
+        fn: function fn(_ref17) {
+          var msg = _ref17.msg;
+
+          _this5.$message.success(msg);
+          _this5.$_listMixin_getList();
+        }
+      });
+    },
+    handleBatchDelete: function handleBatchDelete(_ref18) {
+      var _this6 = this;
+
+      var ids = _ref18.ids,
+          datas = _ref18.datas;
+
+      this.$confirm(this.$t("GLOBAL_CONFIRM_DELETE")).then(function () {
+        _this6.$$api_item_delete({
+          data: { ids: ids },
+          fn: function fn(_ref19) {
+            var data = _ref19.data;
+
+            _this6.$_listMixin_getList();
           }
         });
       });
     },
-    onCommand: function onCommand(cmd) {
-      if (cmd === "logout") {
-        this.handleLogout();
-      }
+    setEditRouteQuery: function setEditRouteQuery(_ref20) {
+      var data = _ref20.data;
+
+      this.$_listMixin_goEditRoute({
+        id: data.id
+      });
+    },
+    handleGetList: function handleGetList() {
+      var _this7 = this;
+
+      var _ref21 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+          page_data = _ref21.page_data,
+          _fn = _ref21.fn;
+
+      this.$$api_item_list({
+        data: page_data,
+        fn: function fn(_ref22) {
+          var data = _ref22.data;
+
+          _this7.listLoading.flag = false;
+          _this7.list = data.items;
+          _this7.paginations.total = data.pagination.total;
+
+          _fn && _fn();
+        }
+      });
     }
   }
 });
 
 /***/ }),
 
-/***/ 601:
+/***/ 378:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "navbar" }, [
-    _c(
-      "div",
-      { staticClass: "navbar-left" },
-      [
-        _c("font-awesome-icon", {
-          staticClass: "sidebar-toggle",
-          attrs: { icon: ["fal", "list-ul"] },
-          on: { click: _vm.toggle_menu }
-        })
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "navbar-right" },
-      [
-        _c(
-          "el-dropdown",
-          {
-            staticClass: "navbar-right__item",
-            attrs: { trigger: "click" },
-            on: { command: _vm.onCommand }
-          },
-          [
-            _c("div", { staticClass: "navbar-right__dropdown" }, [
-              _c(
-                "div",
-                { staticClass: "navbar-right__dropdown_item" },
-                [
-                  _c("span", { staticClass: "navbar-right__icontitle" }, [
-                    _vm._v(_vm._s(_vm.$t("GLOBAL_VIEW_SITE" /*預覽網站*/)))
-                  ]),
-                  _vm._v(" "),
-                  _c("font-awesome-icon", {
-                    attrs: { icon: ["fal", "external-link"] }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                [
-                  _c("font-awesome-icon", {
-                    attrs: { icon: ["fas", "caret-down"] }
-                  })
-                ],
-                1
-              )
-            ]),
-            _vm._v(" "),
-            _c(
-              "el-dropdown-menu",
-              { attrs: { slot: "dropdown" }, slot: "dropdown" },
-              _vm._l(_vm.$store.state.sys.site_list, function(site) {
-                return _c(
-                  "a",
-                  {
-                    key: site.id,
-                    attrs: {
-                      href: "https://" + site.url + "/" + site.sef,
-                      target: "_blank"
-                    }
-                  },
-                  [_c("el-dropdown-item", [_vm._v(_vm._s(site.title))])],
-                  1
-                )
-              })
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "el-dropdown",
-          {
-            staticClass: "navbar-right__item",
-            attrs: { trigger: "click" },
-            on: { command: _vm.onCommand }
-          },
-          [
-            _c("div", { staticClass: "navbar-right__dropdown" }, [
-              _c("div", { staticClass: "navbar-right__dropdown_item" }, [
-                _vm._v(
-                  "\n          " +
-                    _vm._s(_vm.$store.state.user.user_info.last_name) +
-                    "\n          "
-                ),
-                _c("div", { staticClass: "navbar-right__dropdown_subtitle" }, [
-                  _vm._v(_vm._s(_vm.$store.state.user.user_info.first_name))
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                [
-                  _c("font-awesome-icon", {
-                    attrs: { icon: ["fas", "caret-down"] }
-                  })
-                ],
-                1
-              )
-            ]),
-            _vm._v(" "),
-            _c(
-              "el-dropdown-menu",
-              { attrs: { slot: "dropdown" }, slot: "dropdown" },
-              [
-                _c(
-                  "el-dropdown-item",
-                  { attrs: { command: "logout" } },
-                  [
-                    _c("span", { staticClass: "navbar-right__icontitle" }, [
-                      _vm._v(_vm._s(_vm.$t("LOGOUT") /*登出*/))
-                    ]),
-                    _vm._v(" "),
-                    _c("font-awesome-icon", {
-                      attrs: { icon: ["fal", "sign-out"] }
-                    })
-                  ],
-                  1
-                )
-              ],
-              1
-            )
-          ],
-          1
-        )
-      ],
-      1
-    )
-  ])
+  return _c("ListData", {
+    ref: "list-data",
+    attrs: {
+      list: _vm.list,
+      "field-list": _vm.fields,
+      "list-loading": _vm.listLoading,
+      sort: { show: true },
+      pagination: _vm.paginations,
+      toolbar: _vm.toolbar,
+      searchbar: _vm.searchbar
+    },
+    on: {
+      "click-add": _vm.$_listMixin_goAddRoute,
+      "click-edit": _vm.setEditRouteQuery,
+      "click-batch-trash": _vm.handleUpdateState,
+      "click-batch-restore": _vm.handleUpdateState,
+      "click-batch-delete": _vm.handleBatchDelete,
+      "click-checkout": _vm.handleCheckout,
+      "change-current-page": _vm.$_listMixin_updateCurrentPage,
+      "change-page-size": _vm.$_listMixin_updatePageSize,
+      search: _vm.$_listMixin_onSearch,
+      "search-reset": _vm.$_listMixin_onSearchReset,
+      "on-order-change": _vm.handleUpdateOrder,
+      "on-sort-change": _vm.onSortChange
+    }
+  })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -332,7 +707,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-2a3bfd40", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-525be48f", module.exports)
   }
 }
 

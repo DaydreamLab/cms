@@ -1103,13 +1103,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   name: "ItemEdit",
   components: {
     Editor: function Editor() {
-      return __webpack_require__.e/* import() */(69/* duplicate */).then(__webpack_require__.bind(null, 404));
+      return __webpack_require__.e/* import() */(70/* duplicate */).then(__webpack_require__.bind(null, 411));
     },
     MediaInput: function MediaInput() {
       return __webpack_require__.e/* import() */(68/* duplicate */).then(__webpack_require__.bind(null, 365));
     },
     FieldForm: function FieldForm() {
-      return __webpack_require__.e/* import() */(70/* duplicate */).then(__webpack_require__.bind(null, 364));
+      return __webpack_require__.e/* import() */(69/* duplicate */).then(__webpack_require__.bind(null, 364));
     }
   },
   mixins: [__WEBPACK_IMPORTED_MODULE_1_mixins_options__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2_mixins_edit__["a" /* default */], __WEBPACK_IMPORTED_MODULE_3_mixins_edit_cms__["a" /* default */]],
@@ -1209,8 +1209,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     handleTagConfirm: function handleTagConfirm(item) {
       var _this = this;
-
-      console.log(item);
 
       if (item.type === "keyup") {
         this.$$api_tag_save({
@@ -1779,7 +1777,7 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("el-aside", { attrs: { width: "400px" } }, [
+      _c("el-aside", { attrs: { width: "300px" } }, [
         _c("div", { staticClass: "content-aside__header" }, [
           _vm._v(_vm._s(_vm.$t("GLOBAL_FIELDSET_OPTIONS") /*選項*/))
         ]),

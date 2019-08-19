@@ -6,11 +6,11 @@ webpackJsonp([5],{
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(424)
+  __webpack_require__(431)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(426)
+var __vue_script__ = __webpack_require__(433)
 /* template */
 var __vue_template__ = __webpack_require__(446)
 /* template functional */
@@ -52,13 +52,13 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 424:
+/***/ 431:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(425);
+var content = __webpack_require__(432);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -79,7 +79,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 425:
+/***/ 432:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(255)(false);
@@ -94,7 +94,7 @@ exports.push([module.i, "/* Colors -------------------------- */\n/* Link ------
 
 /***/ }),
 
-/***/ 426:
+/***/ 433:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -174,7 +174,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       return __webpack_require__.e/* import() */(68/* duplicate */).then(__webpack_require__.bind(null, 365));
     },
     FieldForm: function FieldForm() {
-      return __webpack_require__.e/* import() */(80).then(__webpack_require__.bind(null, 364));
+      return __webpack_require__.e/* import() */(72).then(__webpack_require__.bind(null, 364));
     }
   },
   props: {
@@ -546,13 +546,8 @@ var render = function() {
                 _vm.group_fields && "extrafields" in _vm.group_fields
                   ? _c("FieldForm", {
                       attrs: {
-                        fields: _vm.group_fields.extrafields,
-                        data: _vm.defaultValue.extrafields
-                      },
-                      on: {
-                        "update:data": function($event) {
-                          _vm.$set(_vm.defaultValue, "extrafields", $event)
-                        }
+                        data: _vm.defaultValue.extrafields,
+                        fields: _vm.group_fields.extrafields
                       }
                     })
                   : _vm._e()

@@ -503,7 +503,7 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("el-aside", { attrs: { width: "400px" } }, [
+      _c("el-aside", { attrs: { width: "300px" } }, [
         _c("div", { staticClass: "content-aside__header" }, [
           _vm._v(_vm._s(_vm.$t("GLOBAL_FIELDSET_OPTIONS") /*選項*/))
         ]),

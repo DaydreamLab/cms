@@ -1104,13 +1104,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   name: "CategoryEdit",
   components: {
     Editor: function Editor() {
-      return __webpack_require__.e/* import() */(69/* duplicate */).then(__webpack_require__.bind(null, 404));
+      return __webpack_require__.e/* import() */(70/* duplicate */).then(__webpack_require__.bind(null, 411));
     },
     MediaInput: function MediaInput() {
       return __webpack_require__.e/* import() */(68/* duplicate */).then(__webpack_require__.bind(null, 365));
     },
     FieldForm: function FieldForm() {
-      return __webpack_require__.e/* import() */(70/* duplicate */).then(__webpack_require__.bind(null, 364));
+      return __webpack_require__.e/* import() */(69/* duplicate */).then(__webpack_require__.bind(null, 364));
     },
     ItemList: function ItemList() {
       return __webpack_require__.e/* import() */(6/* duplicate */).then(__webpack_require__.bind(null, 108));
@@ -1727,7 +1727,7 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("el-aside", { attrs: { width: "400px" } }, [
+      _c("el-aside", { attrs: { width: "300px" } }, [
         _c("div", { staticClass: "content-aside__header" }, [
           _vm._v(_vm._s(_vm.$t("GLOBAL_FIELDSET_OPTIONS") /*選項*/))
         ]),
