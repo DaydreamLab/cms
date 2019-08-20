@@ -51,7 +51,8 @@ trait WithExtrafield
             foreach (json_decode($value) as $extrafield)
             {
                 if($extrafield->id == $extrafield_data->id) {
-                    $extrafield_data->value = $extrafield->value;
+                    $extrafield_data->value  = $extrafield->value;
+                    $extrafield_data->params = empty($extrafield->params) ? $extrafield_data->params : $extrafield->params;
                 }
             }
 
