@@ -30,7 +30,7 @@ class CreateCategoriesTable extends Migration
             $table->unsignedInteger('hits')->nullable()->default(0);
             $table->unsignedInteger('access');
 
-            $table->string('language')->default('*');
+            $table->string('language')->nullable()->default('*');
             $table->string('template')->nullable();
             $table->string('metadesc')->nullable();
             $table->string('metakeywords')->nullable();
