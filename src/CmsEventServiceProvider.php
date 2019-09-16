@@ -2,11 +2,9 @@
 
 namespace DaydreamLab\Cms;
 
-use App\Providers\EventServiceProvider;
 use DaydreamLab\Cms\Listeners\CmsEventSubscriber;
 
-
-class CmsEventServiceProvider extends EventServiceProvider
+class CmsEventServiceProvider extends \Illuminate\Foundation\Support\Providers\EventServiceProvider
 {
 
 
