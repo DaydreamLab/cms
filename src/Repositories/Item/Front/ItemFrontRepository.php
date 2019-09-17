@@ -113,7 +113,6 @@ class ItemFrontRepository extends ItemRepository
 
                 $request_page   = Request::get('page') == '' ? 1 : Request::get('page');
                 $merge_items    = $featured_items->merge($mixed_items);
-
                 $all_items      = $this->paginate($merge_items, $item_count, $request_page, []);
 
                 if ($params['split_items_by_categories'])
@@ -183,8 +182,10 @@ class ItemFrontRepository extends ItemRepository
                     $featured_counter = 0;
                     $data['featured'] = collect();
                     $data['mixed']    = collect();
+
                     foreach ($all_items as $item)
                     {
+
                         if ($item->featured == 1 && $featured_counter < $featured_count)
                         {
                             $data['featured']->push($item);
