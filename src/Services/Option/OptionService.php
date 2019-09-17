@@ -13,6 +13,7 @@ use DaydreamLab\User\Services\Asset\Admin\AssetAdminService;
 use DaydreamLab\User\Services\User\Admin\UserGroupAdminService;
 use DaydreamLab\User\Services\Viewlevel\Admin\ViewlevelAdminService;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class OptionService
@@ -114,7 +115,8 @@ class OptionService
             }
             elseif ($type == 'viewlevel')
             {
-                $data[$type] = $this->getOptionList($service, 'list');
+                $user = Auth::guard('api')->user();
+                $data[$type] = $this->getOptionList($service, 'list', ['special_queries' => [['type'=> 'whereIn', 'key' => 'id', 'value' => $user->access_ids]]]);
             }
         }
 
