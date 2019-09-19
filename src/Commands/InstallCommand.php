@@ -83,14 +83,7 @@ class InstallCommand extends Command
 
         if ($this->option('publish'))
         {
-            $this->call('vendor:publish', [
-                '--tag' => 'cms-frontend-site'
-            ]);
-
-            $this->call('vendor:publish', [
-                '--tag'     => 'cms-frontend-admin',
-                '--force'   => 1
-            ]);
+            $this->call('cms:publish');
         }
 
         $this->call('vendor:publish', [
