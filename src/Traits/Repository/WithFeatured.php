@@ -9,32 +9,35 @@ trait WithFeatured
 {
     public function featured($item, $featured)
     {
-        $item->featured = $featured;
-
         if ($featured)
         {
-            $newest = $this->findNewestFeatured();
-            $item->featured_ordering = $newest->featured_ordering + 1;
+            if (!$item->featured) {
+                $newest = $this->findNewestFeatured();
+                $item->featured_ordering = ($newest) ? $newest->featured_ordering + 1 : 1;
+            }
         }
         else
         {
-            $other_items = $this->findNewerFeatured($item);
-            $item->featured_ordering = 0;
-            foreach ($other_items as $other_item)
-            {
-                --$other_item->featured_ordering;
-                if (!$this->update($other_item, $other_item))
+            if ($item->featured) {
+                $other_items = $this->findNewerFeatured($item);
+                $item->featured_ordering = 0;
+                foreach ($other_items as $other_item)
                 {
-                    return false;
+                    --$other_item->featured_ordering;
+                    if (!$this->update($other_item, $other_item))
+                    {
+                        return false;
+                    }
                 }
             }
         }
+
+        $item->featured = $featured;
 
         if (!$this->update($item, $item))
         {
             return false;
         }
-
 
         return true;
     }
@@ -43,17 +46,17 @@ trait WithFeatured
     public function findNewestFeatured()
     {
         return $this->model->where('featured',1)
-                            ->orderBy('featured_ordering', 'desc')
-                            ->limit(1)
-                            ->first();
+            ->orderBy('featured_ordering', 'desc')
+            ->limit(1)
+            ->first();
     }
 
 
     public function findNewerFeatured($item)
     {
         return $this->model->where('featured', 1)
-                        ->where('featured_ordering', '>', $item->featured_ordering)
-                        ->get();
+            ->where('featured_ordering', '>', $item->featured_ordering)
+            ->get();
     }
 
 
