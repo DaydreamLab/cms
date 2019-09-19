@@ -14,6 +14,9 @@ let updatePublicDir = callback => {
   fs.copy(
     abs(project, config.sourceDirPath),
     abs(project, config.targetPublicDirPath),
+    {
+      filter: src => src !== `${abs(project, config.sourceDirPath)}/img`
+    },
     err => {
       if (err) return alert(err);
       callback();
