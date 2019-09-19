@@ -13,7 +13,7 @@ class InstallCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'cms:install';
+    protected $signature = 'cms:install {--publish}';
 
     /**
      * The console command description.
@@ -81,26 +81,25 @@ class InstallCommand extends Command
 
         $this->deleteConstants();
 
-//        $this->deleteResources();
+        if ($this->option('publish'))
+        {
+            $this->call('vendor:publish', [
+                '--tag' => 'cms-frontend-site'
+            ]);
+
+            $this->call('vendor:publish', [
+                '--tag'     => 'cms-frontend-admin',
+                '--force'   => 1
+            ]);
+        }
 
         $this->call('vendor:publish', [
             '--tag' => 'cms-configs'
         ]);
 
         $this->call('vendor:publish', [
-            '--tag' => 'cms-frontend-site'
-        ]);
-
-        $this->call('vendor:publish', [
-            '--tag'     => 'cms-frontend-admin',
-            '--force'   => 1
-        ]);
-
-        $this->call('vendor:publish', [
             '--provider' => 'Fedeisas\LaravelMailCssInliner\LaravelMailCssInlinerServiceProvider'
         ]);
-
-
     }
 
 
