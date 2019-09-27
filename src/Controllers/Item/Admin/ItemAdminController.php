@@ -50,7 +50,7 @@ class ItemAdminController extends BaseController
 
     public function getItem($id)
     {
-        $this->service->getItem($id, true);
+        $this->service->getItem($id);
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }

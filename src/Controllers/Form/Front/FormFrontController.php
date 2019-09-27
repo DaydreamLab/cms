@@ -8,9 +8,7 @@ use Illuminate\Support\Collection;
 use DaydreamLab\Cms\Services\Form\Front\FormFrontService;
 use DaydreamLab\Cms\Requests\Form\Front\FormFrontRemovePost;
 use DaydreamLab\Cms\Requests\Form\Front\FormFrontStorePost;
-use DaydreamLab\Cms\Requests\Form\Front\FormFrontStatePost;
 use DaydreamLab\Cms\Requests\Form\Front\FormFrontSearchPost;
-use DaydreamLab\Cms\Requests\Form\Front\FormFrontOrderingPost;
 
 
 class FormFrontController extends BaseController

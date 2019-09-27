@@ -24,7 +24,7 @@ class CategoryAdminController extends BaseController
 
     public function getItem($id)
     {
-        $this->service->getItem($id, true);
+        $this->service->getItem($id);
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
@@ -48,7 +48,7 @@ class CategoryAdminController extends BaseController
 
     public function ordering(CategoryAdminOrderingPost $request)
     {
-        $this->service->ordering($request->rulesInput(), true);
+        $this->service->ordering($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
@@ -56,7 +56,7 @@ class CategoryAdminController extends BaseController
 
     public function remove(CategoryAdminRemovePost $request)
     {
-        $this->service->remove($request->rulesInput(), true);
+        $this->service->remove($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
@@ -64,7 +64,7 @@ class CategoryAdminController extends BaseController
 
     public function state(CategoryAdminStatePost $request)
     {
-        $this->service->state($request->rulesInput(), true);
+        $this->service->state($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
@@ -72,7 +72,7 @@ class CategoryAdminController extends BaseController
 
     public function store(CategoryAdminStorePost $request)
     {
-        $this->service->store($request->rulesInput(), true);
+        $this->service->store($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
