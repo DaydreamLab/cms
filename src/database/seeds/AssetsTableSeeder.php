@@ -56,8 +56,10 @@ class AssetsTableSeeder extends Seeder
         {
             $apis       = $item['apis'];
             $children   = $item['children'];
+            $service    = isset($item['service']) ? $item['service'] : null;
             unset($item['children']);
             unset($item['apis']);
+            unset($item['service']);
 
             $parent = Asset::find($parent->id);
             $item['ordering'] = $parent->children->count()+1;
@@ -73,7 +75,7 @@ class AssetsTableSeeder extends Seeder
             $api_ids = [];
             foreach ($apis as $api)
             {
-                $api['model'] = $asset->model;
+                $api['service'] = $service;
                 $asset_api = AssetApi::create($api);
                 $api_ids[] = $asset_api->id;
             }

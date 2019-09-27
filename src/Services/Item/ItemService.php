@@ -29,7 +29,7 @@ class ItemService extends BaseService
     {
         $item = parent::add($input);
 
-        event(new Add($item, $this->getModelName(), $input, $this->user));
+        event(new Add($item, $this->getServiceName(), $input, $this->user));
 
         return $item;
     }
@@ -67,7 +67,7 @@ class ItemService extends BaseService
             $this->response = null;
         }
 
-        event(new Featured($this->getModelName(), $result, $input, $this->user));
+        event(new Featured($this->getServiceName(), $result, $input, $this->user));
 
         return $result;
     }
@@ -77,7 +77,7 @@ class ItemService extends BaseService
     {
         $result =  parent::modify($input);
 
-        event(new Modify($this->find($input->get('id')), $this->getModelName(), $result, $input, $this->user));
+        event(new Modify($this->find($input->get('id')), $this->getServiceName(), $result, $input, $this->user));
 
         return $result;
     }
@@ -87,7 +87,7 @@ class ItemService extends BaseService
     {
         $result = parent::ordering($input);
 
-        event(new Ordering($this->getModelName(), $result, $input, $this->user));
+        event(new Ordering($this->getServiceName(), $result, $input, $this->user));
 
         return $result;
     }
@@ -97,7 +97,7 @@ class ItemService extends BaseService
     {
         $result =  parent::remove($input);
 
-        event(new Remove($this->getModelName(), $result, $input, $this->user));
+        event(new Remove($this->getServiceName(), $result, $input, $this->user));
 
         return $result;
     }
@@ -107,7 +107,7 @@ class ItemService extends BaseService
     {
         $result = parent::state($input);
 
-        event(new State($this->getModelName(), $result, $input, $this->user));
+        event(new State($this->getServiceName(), $result, $input, $this->user));
 
         return $result;
     }

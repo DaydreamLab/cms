@@ -37,7 +37,7 @@ class MenuService extends BaseService
     {
         $item = $this->traitAddNested($input);
 
-        event(new Add($item, $this->getModelName(), $input, $this->user));
+        event(new Add($item, $this->getServiceName(), $input, $this->user));
 
         return $item;
     }
@@ -53,7 +53,7 @@ class MenuService extends BaseService
     {
         $result = $this->traitModifiedNested($input, $parent, $item);
 
-        event(new Modify($this->find($input->id), $this->getModelName(), $result, $input,$this->user));
+        event(new Modify($this->find($input->id), $this->getServiceName(), $result, $input,$this->user));
 
         return $result;
     }
@@ -63,7 +63,7 @@ class MenuService extends BaseService
     {
         $result = $this->traitRemoveNested($input);
 
-        event(new Remove($this->getModelName(), $result, $input, $this->user));
+        event(new Remove($this->getServiceName(), $result, $input, $this->user));
 
         return $result;
     }
@@ -73,7 +73,7 @@ class MenuService extends BaseService
     {
         $result =  parent::ordering($input);
 
-        event(new Ordering($this->getModelName(), $result, $input, $this->user));
+        event(new Ordering($this->getServiceName(), $result, $input, $this->user));
 
         return $result;
     }
@@ -83,7 +83,7 @@ class MenuService extends BaseService
     {
         $result = parent::state($input);
 
-        event(new State($this->getModelName(), $result, $input, $this->user));
+        event(new State($this->getServiceName(), $result, $input, $this->user));
 
         return $result;
     }

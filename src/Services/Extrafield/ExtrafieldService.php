@@ -25,7 +25,7 @@ class ExtrafieldService extends BaseService
     {
         $item = parent::add($input);
 
-        event(new Add($item, $this->getModelName(), $input, $this->user));
+        event(new Add($item, $this->getServiceName(), $input, $this->user));
 
         return $item;
     }
@@ -35,7 +35,7 @@ class ExtrafieldService extends BaseService
     {
         $result =  parent::modify($input);
 
-        event(new Modify($this->find($input->id), $this->getModelName(), $result, $input, $this->user));
+        event(new Modify($this->find($input->id), $this->getServiceName(), $result, $input, $this->user));
 
         return $result;
     }
@@ -45,7 +45,7 @@ class ExtrafieldService extends BaseService
     {
         $result =  parent::remove($input);
 
-        event(new Remove($this->getModelName(), $result, $input, $this->user));
+        event(new Remove($this->getServiceName(), $result, $input, $this->user));
 
         return $result;
     }
@@ -55,7 +55,7 @@ class ExtrafieldService extends BaseService
     {
         $result = parent::state($input);
 
-        event(new State($this->getModelName(), $result, $input, $this->user));
+        event(new State($this->getServiceName(), $result, $input, $this->user));
 
         return $result;
     }

@@ -38,9 +38,9 @@ class SettingService
     }
 
 
-    public function canAction($model_name, $method, $model)
+    public function canAction($service, $method, $model)
     {
-        $apis = $this->apis()->where('model', $model_name)->where('method', $method)->get();
+        $apis = $this->apis()->where('service', $service)->where('method', $method)->get();
         if ($apis->count() == 1) {
             return true;
         } elseif ($apis->count() > 1) {
