@@ -39,9 +39,7 @@ class ModulesTableSeeder extends Seeder
             'created_by'    => 1,
             'children'      => []
         ]);
-        Helper::show(1324);
         $this->categoryAdminService  = app(CategoryAdminService::class);
-        Helper::show(5678);
         $data = json_decode(file_get_contents(__DIR__.'/jsons/module.json'), true);
 
         $this->migrate($data, Category::where('extension', 'module')->first());
