@@ -137,11 +137,11 @@ class Item extends BaseModel
 
     public function getTagsAttribute()
     {
-        return $this->tag()->get();
+        return $this->tags()->get();
     }
 
 
-    public function tag()
+    public function tags()
     {
         return $this->belongsToMany(Tag::class, 'items_tags_maps', 'item_id', 'tag_id')
             ->where('state', 1);

@@ -39,12 +39,9 @@ class ModulesTableSeeder extends Seeder
             'created_by'    => 1,
             'children'      => []
         ]);
-
-        $this->categoryAdminService  = new CategoryAdminService(
-            new CategoryAdminRepository(new CategoryAdmin()),
-            new CmsCronJobService(new CmsCronJobRepository(new CmsCronJob()))
-        );
-
+        Helper::show(1324);
+        $this->categoryAdminService  = app(CategoryAdminService::class);
+        Helper::show(5678);
         $data = json_decode(file_get_contents(__DIR__.'/jsons/module.json'), true);
 
         $this->migrate($data, Category::where('extension', 'module')->first());

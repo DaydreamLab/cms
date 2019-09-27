@@ -2,13 +2,8 @@
 
 namespace DaydreamLab\Cms\Services\Setting;
 
-use DaydreamLab\Cms\Services\Language\LanguageService;
 use DaydreamLab\Cms\Services\Site\SiteService;
-use DaydreamLab\JJAJ\Helpers\Helper;
-use DaydreamLab\JJAJ\Helpers\ResponseHelper;
-use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 
 class SettingService
 {
@@ -43,22 +38,22 @@ class SettingService
     }
 
 
-    public function canAction(...$methods)
+    public function canAction($model_name, $method, $model)
     {
-        foreach ($this->user->groups as $group)
-        {
-            if ($group->canAction($this->type, $methods))
-            {
-                return true;
+        $apis = $this->apis()->where('model', $model_name)->where('method', $method)->get();
+        if ($apis->count() == 1) {
+            return true;
+        } elseif ($apis->count() > 1) {
+            foreach ($apis as $api) {
+                if (strpos($apis->method, 'Own')) {
+                    return $model->created_by == $this->user->id ?: false;
+                } else {
+                    return $model->created_by != $this->user->id ?: false;
+                }
             }
         }
-
-        throw new HttpResponseException(
-            ResponseHelper::genResponse(
-                Str::upper(Str::snake('UserInsufficientPermission')),
-                env('APP_ENV') == 'local' ? ['model' => $this->type, 'methods' => $methods] : null
-            )
-        );
+        else {
+            return false;
+        }
     }
-
 }

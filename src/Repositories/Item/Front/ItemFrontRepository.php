@@ -7,7 +7,6 @@ use DaydreamLab\Cms\Repositories\Item\ItemRepository;
 use DaydreamLab\Cms\Models\Item\Front\ItemFront;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\User\Repositories\User\Front\UserGroupFrontRepository;
-use DaydreamLab\User\Repositories\User\Front\UserGroupMapFrontRepository;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Request;
 
@@ -16,18 +15,14 @@ class ItemFrontRepository extends ItemRepository
 {
     protected $userGroupRepository;
 
-    protected $userGroupMapRepository;
-
     protected $categoryFrontRepository;
 
     public function __construct(ItemFront $model,
                                 UserGroupFrontRepository $userGroupRepository,
-                                UserGroupMapFrontRepository $userGroupMapRepository,
                                 CategoryFrontRepository $categoryFrontRepository)
     {
         parent::__construct($model);
         $this->userGroupRepository = $userGroupRepository;
-        $this->userGroupMapRepository = $userGroupMapRepository;
         $this->categoryFrontRepository = $categoryFrontRepository;
     }
 
@@ -210,93 +205,16 @@ class ItemFrontRepository extends ItemRepository
     public function getCreatorGroupUserIds($creator_group)
     {
         $group = $this->userGroupRepository->findBy('title', '=', $creator_group)->first();
-        $user_group_map = $this->userGroupMapRepository->findBy('group_id', '=', $group->id);
 
         $user_ids = [];
-        foreach ($user_group_map as $map)
+        foreach ($group->users as $user)
         {
-            $user_ids[] = $map->user_id;
+            $user_ids[] = $user->id;
         }
 
         return $user_ids;
     }
 
-
-//    public function getItems($category_ids, $params, $featured, $created_by_ids = null)
-//    {
-//        $limit      = $params['per_page'];
-//        $order_by   = $params['order_by'];
-//        $ordering   = $params['ordering'];
-//
-//        $ids = [];
-//        foreach ($category_ids as $category_id)
-//        {
-//            $ids = array_merge($ids, $this->categoryFrontRepository->findSubTreeIds($category_id));
-//        }
-//
-//        $query = $this->model->where('state', 1);
-//        if ($created_by_ids !== null)
-//        {
-//            $query = $query->whereIn('created_by', $created_by_ids);
-//        }
-//
-//        if (array_key_exists('include_featured',$params) && $params['include_featured'])
-//        {
-//            $query = $query->whereIn('featured', [0,1]);
-//        }
-//        else
-//        {
-//            $query = $query->where('featured',$featured);
-//        }
-//
-//        $query = $query->whereIn('category_id', $category_ids);
-//
-//        $query = $query->orderBy($order_by, $ordering);
-//
-//        $items = $query->paginate($limit)->toArray();
-//
-//        $data = [];
-//        $data['data'] = $items['data'];
-//        unset($items['data']);
-//        $data['pagination'] = $items;
-//
-//
-//        $filters = [];
-//        foreach ($data['data'] as $item)
-//        {
-//            $item_created_at = strtotime($item['created_at']);
-//            $item_year       = date('Y', $item_created_at);
-//            $item_month      = date('m', $item_created_at);
-//
-//            $find_year = false;
-//            foreach ($filters as $key => $filter)
-//            {
-//                if($filter['year'] == $item_year)
-//                {
-//                    $find_year  = true;
-//                    if (in_array($item_month, $filter['month']))
-//                    {
-//                        break;
-//                    }
-//                    else
-//                    {
-//                        $filters[$key]['month'][] = $item_month;
-//                        break;
-//                    }
-//                }
-//            }
-//
-//            if (!$find_year)
-//            {
-//                $obj['year']    = $item_year;
-//                $obj['month'][] = $item_month;
-//                $filters[]      = $obj;
-//            }
-//        }
-//        $data['filter'] = $filters;
-//
-//        return $data;
-//    }
 
 
     public function getItemsByCategoryIds($params)
@@ -327,7 +245,7 @@ class ItemFrontRepository extends ItemRepository
         }
         else
         {
-            $user_maps =  $this->userGroupMapRepository->findBySpecial('whereIn', 'group_id', $creator_groups);
+            $user_maps = $this->userGroupRepository->findBySpecial('whereIn', 'id', $creator_groups);
             $user_ids = $user_maps->map(function ($value, $key){
                 return $value->id;
             });
@@ -381,15 +299,13 @@ class ItemFrontRepository extends ItemRepository
     {
         $query = $this->model->where('state', 1);
 
-        if ($input->group != 'all')
+        if ($input->get('group') != 'all')
         {
             $group = $this->userGroupRepository->findBy('title', '=', $input->group)->first();
-            $user_group_map = $this->userGroupMapRepository->findBy('group_id', '=', $group->id);
-
             $user_ids = [];
-            foreach ($user_group_map as $map)
+            foreach ($group->users as $user)
             {
-                $user_ids[] = $map->user_id;
+                $user_ids[] = $user->user_id;
             }
 
             $query = $query->whereIn('created_by', $user_ids);
@@ -399,7 +315,7 @@ class ItemFrontRepository extends ItemRepository
         $items = $query->get();
 
         $item_key = $items->search(function ($item, $key) use ($input, $previous){
-            if ($input->id == $item->id)
+            if ($input->get('id') == $item->id)
             {
                 return $item;
             }

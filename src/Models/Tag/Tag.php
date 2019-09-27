@@ -1,6 +1,7 @@
 <?php
 namespace DaydreamLab\Cms\Models\Tag;
 
+use DaydreamLab\Cms\Models\Item\Item;
 use DaydreamLab\Cms\Traits\Model\WithAccess;
 use DaydreamLab\Cms\Traits\Model\WithLanguage;
 use DaydreamLab\JJAJ\Models\BaseModel;
@@ -92,4 +93,10 @@ class Tag extends BaseModel
         self::traitBoot();
     }
 
+
+
+    public function items()
+    {
+        return $this->belongsToMany(Item::class, 'items_tags_maps', 'tag_id', 'item_id');
+    }
 }

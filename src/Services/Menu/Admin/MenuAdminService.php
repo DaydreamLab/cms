@@ -19,8 +19,8 @@ class MenuAdminService extends MenuService
     }
 
 
-    public function store(Collection $input, $diff = false)
+    public function store(Collection $input)
     {
-        return parent::store($input, $diff);
+        return parent::store($input);
     }
 }

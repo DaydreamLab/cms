@@ -57,7 +57,7 @@ class OptionService
     {
         $data = [];
 
-        foreach ($input->types as $type)
+        foreach ($input->get('types') as $type)
         {
             $service = $this->map[$type];
 

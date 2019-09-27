@@ -4,9 +4,7 @@ namespace DaydreamLab\Cms\Services\Tag\Front;
 
 use DaydreamLab\Cms\Repositories\Tag\Front\TagFrontRepository;
 use DaydreamLab\Cms\Services\Item\Front\ItemFrontService;
-use DaydreamLab\Cms\Services\Item\Front\ItemTagMapFrontService;
 use DaydreamLab\Cms\Services\Tag\TagService;
-use DaydreamLab\JJAJ\Helpers\Helper;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
@@ -16,61 +14,30 @@ class TagFrontService extends TagService
 
     protected $itemFrontService;
 
-    protected $itemTagMapFrontService;
-
     protected $search_keys = ['title'];
 
     public function __construct(TagFrontRepository $repo,
-                                ItemFrontService $itemFrontService,
-                                ItemTagMapFrontService $itemTagMapFrontService)
+                                ItemFrontService $itemFrontService)
     {
         $this->itemFrontService = $itemFrontService;
-        $this->itemTagMapFrontService = $itemTagMapFrontService;
         parent::__construct($repo);
     }
 
 
     public function getRelatedItems($tags)
     {
-        $tag_ids = $tags->map(function($item, $key){
-            return $item->id;
-        })->all();
-
-        $maps = $this->itemTagMapFrontService->search(Helper::collect([
-            'special_queries' => [
-                [
-                    'type'  => 'whereIn',
-                    'key'   => 'tag_id',
-                    'value' => $tag_ids
-                ]
-            ],
-            'paginate'  => false
-        ]));
-
-        $map_ids = $maps->map(function($item, $key){
-            return $item->item_id;
-        })->all();
-
-        $tag_items = $this->itemFrontService->search(Helper::collect([
-            'special_queries' => [
-                [
-                    'type'  => 'whereIn',
-                    'key'   => 'id',
-                    'value' => $map_ids
-                ]
-            ],
-            'paginate'  => false
-        ]));
-
-        $items = collect([]);
-        foreach ($tag_items as $tag_item)
+        $items_data = collect([]);
+        foreach ($tags as $tag)
         {
-            if(!$items->contains('id', $tag_item->id))
+            $items = $tag->items;
+            foreach ($items as $item)
             {
-                $items->push($tag_item);
+                if(!$items_data->contains('id', $item->id))
+                {
+                    $items_data->push($item);
+                }
             }
         }
-
 
         return $items;
     }

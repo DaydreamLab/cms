@@ -14,8 +14,6 @@ class LanguageService extends BaseService
 {
     protected $type = 'Language';
 
-    protected $model_name = 'Language';
-
     public function __construct(LanguageRepository $repo)
     {
         parent::__construct($repo);
@@ -26,37 +24,37 @@ class LanguageService extends BaseService
     {
         $item = parent::add($input);
 
-        event(new Add($item, $this->model_name, $input, $this->user));
+        event(new Add($item, $this->getModelName(), $input, $this->user));
 
         return $item;
     }
 
 
-    public function modify(Collection $input, $diff = false)
+    public function modify(Collection $input)
     {
-        $result =  parent::modify($input, $diff);
+        $result =  parent::modify($input);
 
-        event(new Modify($this->find($input->id), $this->model_name, $result, $input, $this->user));
+        event(new Modify($this->find($input->id), $this->getModelName(), $result, $input, $this->user));
 
         return $result;
     }
 
 
-    public function state(Collection $input, $diff = false)
+    public function state(Collection $input)
     {
-        $result = parent::state($input, $diff);
+        $result = parent::state($input);
 
-        event(new State($this->model_name, $result, $input, $this->user));
+        event(new State($this->getModelName(), $result, $input, $this->user));
 
         return $result;
     }
 
 
-    public function remove(Collection $input, $diff = false)
+    public function remove(Collection $input)
     {
-        $result =  parent::remove($input, $diff);
+        $result =  parent::remove($input);
 
-        event(new Remove($this->model_name, $result, $input, $this->user));
+        event(new Remove($this->getModelName(), $result, $input, $this->user));
 
         return $result;
     }

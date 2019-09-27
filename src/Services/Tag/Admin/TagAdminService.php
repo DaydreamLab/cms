@@ -2,15 +2,12 @@
 
 namespace DaydreamLab\Cms\Services\Tag\Admin;
 
-use Carbon\Carbon;
 use DaydreamLab\Cms\Repositories\Tag\Admin\TagAdminRepository;
 use DaydreamLab\Cms\Services\Cms\CmsCronJobService;
 use DaydreamLab\Cms\Services\Tag\TagService;
 use DaydreamLab\Cms\Traits\Service\CmsCronJob;
-use DaydreamLab\JJAJ\Helpers\Helper;
-use DaydreamLab\JJAJ\Helpers\InputHelper;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
+
 
 class TagAdminService extends TagService
 {
@@ -31,41 +28,41 @@ class TagAdminService extends TagService
     }
 
 
-    public function checkout(Collection $input, $diff = false)
+    public function checkout(Collection $input)
     {
         return parent::checkout($input, true);
     }
 
 
-    public function getItem($id, $diff = false)
+    public function getItem($id)
     {
-        $item =  parent::getItem($id, true);
+        $item =  parent::getItem($id);
 
         return $item;
     }
 
 
-    public function ordering(Collection $input, $diff = false)
+    public function ordering(Collection $input)
     {
-        return parent::ordering($input, $diff);
+        return parent::ordering($input);
     }
 
 
-    public function state(Collection $input, $diff = false)
+    public function state(Collection $input)
     {
-        return parent::state($input, $diff);
+        return parent::state($input);
     }
 
 
-    public function store(Collection $input, $diff = false)
+    public function store(Collection $input)
     {
-        $result = parent::store($input, $diff);
+        $result = parent::store($input);
 
         if (gettype($result) == 'boolean')
         {
             if ($result === true)
             {
-                $item  = $this->find($input->id);
+                $item  = $this->find($input->get('id'));
             }
             else
             {
@@ -84,8 +81,8 @@ class TagAdminService extends TagService
     }
 
 
-    public function remove(Collection $input, $diff = false)
+    public function remove(Collection $input)
     {
-        return parent::remove($input, $diff);
+        return parent::remove($input);
     }
 }

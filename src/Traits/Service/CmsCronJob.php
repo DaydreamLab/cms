@@ -9,7 +9,7 @@ trait CmsCronJob
 {
     public function setCronJob(Collection $input, $item)
     {
-        if (!InputHelper::null($input, 'publish_up') && $input->publish_up > now())
+        if (!InputHelper::null($input, 'publish_up') && $input->get('publish_up') > now())
         {
             $this->cmsCronJobService->create([
                 'table'     => $this->repo->getModel()->getTable(),
@@ -19,7 +19,7 @@ trait CmsCronJob
             ]);
         }
 
-        if (!InputHelper::null($input, 'publish_down') && $input->publish_down > now())
+        if (!InputHelper::null($input, 'publish_down') && $input->get('publish_down') > now())
         {
             $this->cmsCronJobService->create([
                 'table'     => $this->repo->getModel()->getTable(),

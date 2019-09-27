@@ -2,18 +2,10 @@
 
 namespace DaydreamLab\Cms\Services\Category\Front;
 
-use DaydreamLab\Cms\Models\Item\Front\ItemFront;
 use DaydreamLab\Cms\Repositories\Category\Front\CategoryFrontRepository;
-use DaydreamLab\Cms\Repositories\Item\Front\ItemFrontRepository;
 use DaydreamLab\Cms\Services\Category\CategoryService;
 use DaydreamLab\Cms\Services\Item\Front\ItemFrontService;
-use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
-use DaydreamLab\User\Models\User\Front\UserGroupFront;
-use DaydreamLab\User\Models\User\Front\UserGroupMapFront;
-use DaydreamLab\User\Repositories\User\Front\UserGroupFrontRepository;
-use DaydreamLab\User\Repositories\User\Front\UserGroupMapFrontRepository;
-use DaydreamLab\User\Services\User\Front\UserGroupFrontService;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
@@ -30,22 +22,7 @@ class CategoryFrontService extends CategoryService
     {
         parent::__construct($repo);
         $this->repo = $repo;
-
-        /*
-         * Deal with nested relation bug
-         */
-        $userGroupFrontService = new UserGroupFrontService(new UserGroupFrontRepository(new UserGroupFront()));
-
-        $this->itemFrontService = new ItemFrontService(
-            new ItemFrontRepository(
-                new ItemFront(),
-                $userGroupFrontService->repo,
-                new UserGroupMapFrontRepository(new UserGroupMapFront()),
-                $this->repo
-            ),
-            $this,
-            $userGroupFrontService
-        );
+        $this->itemFrontService = app(ItemFrontService::class);
     }
 
     public function getContentTypeIds($content_type)
@@ -61,9 +38,9 @@ class CategoryFrontService extends CategoryService
     }
 
 
-    public function getItem($id, $diff = false)
+    public function getItem($id)
     {
-        $item = parent::getItem($id, $diff);
+        $item = parent::getItem($id);
 
         $this->canAccess($item->access, $this->access_ids);
 
@@ -106,7 +83,11 @@ class CategoryFrontService extends CategoryService
 
         $categories = $this->search($input);
 
-        $items = $this->getRelatedItems($this->itemFrontService, $categories);
+        $items = collect();
+        foreach ($categories as $category)
+        {
+            $items = $items->merge($category->items);
+        }
 
         $this->status  = Str::upper(Str::snake($this->type.'SearchItemsSuccess'));
         $this->response = $paginate ? $this->repo->paginate($items, $limit, 1, []) : $items;

@@ -6,7 +6,6 @@ use DaydreamLab\Cms\Notifications\FormAdminNotification;
 use DaydreamLab\Cms\Notifications\FormUserNotification;
 use DaydreamLab\Cms\Repositories\Form\Front\FormFrontRepository;
 use DaydreamLab\Cms\Services\Form\FormService;
-use DaydreamLab\JJAJ\Helpers\Helper;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Notification;
 
@@ -19,7 +18,7 @@ class FormFrontService extends FormService
         parent::__construct($repo);
     }
 
-    public function store(Collection $input, $diff = false)
+    public function store(Collection $input)
     {
         $result = parent::store($input);
         if ($result)

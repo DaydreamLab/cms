@@ -21,9 +21,9 @@ class SiteAdminService extends SiteService
     }
 
 
-    public function getItem($id, $diff = false)
+    public function getItem($id)
     {
-        return parent::getItem($id, $diff);
+        return parent::getItem($id);
     }
 
 
@@ -52,8 +52,8 @@ class SiteAdminService extends SiteService
     }
 
 
-    public function ordering(Collection $input, $diff = false)
+    public function ordering(Collection $input)
     {
-        return parent::ordering($input, $diff);
+        return parent::ordering($input);
     }
 }

@@ -18,7 +18,7 @@ class ExtrafieldRepository extends BaseRepository
     {
         if (InputHelper::null($input, 'ordering'))
         {
-            $last = $this->model->where('group_id', $input->group_id)
+            $last = $this->model->where('group_id', $input->get('group_id'))
                 ->orderBy('ordering', 'desc')
                 ->get()
                 ->first();

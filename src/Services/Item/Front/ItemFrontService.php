@@ -115,9 +115,9 @@ class ItemFrontService extends ItemService
     }
 
 
-    public function getItem($id, $diff = false)
+    public function getItem($id)
     {
-        $item = parent::getItem($id, $diff);
+        $item = parent::getItem($id);
 
         $this->canAccess($item->access, $this->access_ids);
 
@@ -223,7 +223,7 @@ class ItemFrontService extends ItemService
         // 取得年份 special queries
         if (!InputHelper::null($input, 'year'))
         {
-            $year = $input->year;
+            $year = $input->get('year');
             $input->forget('year');
             $obj['type']        = 'whereYear';
             $obj['key']         = 'publish_up';
@@ -233,7 +233,7 @@ class ItemFrontService extends ItemService
         // 取得月份 special queries
         if (!InputHelper::null($input, 'month'))
         {
-            $month = $input->month;
+            $month = $input->get('month');
             $input->forget('month');
             $obj['type']        = 'whereMonth';
             $obj['key']         = 'publish_up';

@@ -4,7 +4,6 @@ namespace DaydreamLab\Cms\Services\Menu;
 
 use DaydreamLab\Cms\Repositories\Menu\MenuRepository;
 use DaydreamLab\Cms\Events\Add;
-use DaydreamLab\Cms\Events\Checkout;
 use DaydreamLab\Cms\Events\Modify;
 use DaydreamLab\Cms\Events\Ordering;
 use DaydreamLab\Cms\Events\Remove;
@@ -12,11 +11,9 @@ use DaydreamLab\Cms\Events\State;
 use DaydreamLab\Cms\Traits\Model\WithAccess;
 use DaydreamLab\Cms\Traits\Model\WithCategory;
 use DaydreamLab\Cms\Traits\Model\WithLanguage;
-use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Services\BaseService;
 use DaydreamLab\JJAJ\Traits\NestedServiceTrait;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 
 class MenuService extends BaseService
 {
@@ -30,8 +27,6 @@ class MenuService extends BaseService
 
     protected $type = 'Menu';
 
-    protected $model_name = 'Menu';
-
     public function __construct(MenuRepository $repo)
     {
         parent::__construct($repo);
@@ -42,15 +37,15 @@ class MenuService extends BaseService
     {
         $item = $this->traitAddNested($input);
 
-        event(new Add($item, $this->model_name, $input, $this->user));
+        event(new Add($item, $this->getModelName(), $input, $this->user));
 
         return $item;
     }
 
 
-    public function checkout(Collection $input, $diff = false)
+    public function checkout(Collection $input)
     {
-        return parent::checkout($input, $diff);
+        return parent::checkout($input);
     }
 
 
@@ -58,7 +53,7 @@ class MenuService extends BaseService
     {
         $result = $this->traitModifiedNested($input, $parent, $item);
 
-        event(new Modify($this->find($input->id), $this->model_name, $result, $input,$this->user));
+        event(new Modify($this->find($input->id), $this->getModelName(), $result, $input,$this->user));
 
         return $result;
     }
@@ -66,37 +61,37 @@ class MenuService extends BaseService
 
     public function remove(Collection $input ,$diff = false)
     {
-        $result = $this->traitRemoveNested($input, $diff);
+        $result = $this->traitRemoveNested($input);
 
-        event(new Remove($this->model_name, $result, $input, $this->user));
-
-        return $result;
-    }
-
-
-    public function ordering(Collection $input, $diff = false)
-    {
-        $result =  parent::ordering($input, $diff);
-
-        event(new Ordering($this->model_name, $result, $input, $this->user));
+        event(new Remove($this->getModelName(), $result, $input, $this->user));
 
         return $result;
     }
 
 
-    public function state(Collection $input, $diff = null)
+    public function ordering(Collection $input)
     {
-        $result = parent::state($input, $diff);
+        $result =  parent::ordering($input);
 
-        event(new State($this->model_name, $result, $input, $this->user));
+        event(new Ordering($this->getModelName(), $result, $input, $this->user));
 
         return $result;
     }
 
 
-    public function store(Collection $input, $diff = false)
+    public function state(Collection $input = null)
     {
-        $result = $this->traitStoreNested($input, $diff);
+        $result = parent::state($input);
+
+        event(new State($this->getModelName(), $result, $input, $this->user));
+
+        return $result;
+    }
+
+
+    public function store(Collection $input)
+    {
+        $result = $this->traitStoreNested($input);
 
         return $result;
     }

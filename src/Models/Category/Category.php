@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Models\Category;
 use Carbon\Carbon;
 use DaydreamLab\Cms\Models\Extrafield\Extrafield;
 use DaydreamLab\Cms\Models\Extrafield\ExtrafieldGroup;
+use DaydreamLab\Cms\Models\Item\Item;
 use DaydreamLab\Cms\Traits\Model\WithAccess;
 use DaydreamLab\Cms\Traits\Model\WithLanguage;
 use DaydreamLab\Cms\Traits\WithExtrafield;
@@ -120,4 +121,9 @@ class Category extends BaseModel
         self::traitBoot();
     }
 
+
+    public function items()
+    {
+        return $this->hasMany(Item::class, 'category_id', 'id');
+    }
 }

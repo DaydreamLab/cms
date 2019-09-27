@@ -2,23 +2,12 @@
 
 namespace DaydreamLab\Cms\Services\Category\Admin;
 
-use DaydreamLab\Cms\Models\Item\Admin\ItemAdmin;
-use DaydreamLab\Cms\Models\Item\Admin\ItemTagMapAdmin;
-use DaydreamLab\Cms\Models\Tag\Admin\TagAdmin;
 use DaydreamLab\Cms\Repositories\Category\Admin\CategoryAdminRepository;
-use DaydreamLab\Cms\Repositories\Item\Admin\ItemAdminRepository;
-use DaydreamLab\Cms\Repositories\Item\Admin\ItemTagMapAdminRepository;
-use DaydreamLab\Cms\Repositories\Tag\Admin\TagAdminRepository;
 use DaydreamLab\Cms\Services\Category\CategoryService;
 use DaydreamLab\Cms\Services\Cms\CmsCronJobService;
-use DaydreamLab\Cms\Services\Item\Admin\ItemAdminService;
-use DaydreamLab\Cms\Services\Item\Admin\ItemTagMapAdminService;
-use DaydreamLab\Cms\Services\Tag\Admin\TagAdminService;
 use DaydreamLab\Cms\Traits\Service\CmsCronJob;
-use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 
 class CategoryAdminService extends CategoryService
 {
@@ -26,30 +15,21 @@ class CategoryAdminService extends CategoryService
 
     protected $type = 'CategoryAdmin';
 
-    protected $cmsCronJobService, $itemAdminService;
+    protected $cmsCronJobService;
 
     protected $search_keys = ['title', 'introtext', 'description', 'extrafields_search'];
 
-    public function __construct(CategoryAdminRepository $repo,
-                                CmsCronJobService       $cmsCronJobService)
+    public function __construct(CategoryAdminRepository $repo)
     {
         parent::__construct($repo);
         $this->repo               = $repo;
-        $this->cmsCronJobService  = $cmsCronJobService;
-
-        $this->itemAdminService = new ItemAdminService(
-            new ItemAdminRepository(new ItemAdmin()),
-            new TagAdminService(new TagAdminRepository(new TagAdmin()), $cmsCronJobService),
-            new ItemTagMapAdminService(new ItemTagMapAdminRepository(new ItemTagMapAdmin())),
-            $this,
-            $cmsCronJobService
-        );
+        $this->cmsCronJobService = app(CmsCronJobService::class);
     }
 
 
-    public function checkout(Collection $input, $diff = false)
+    public function checkout(Collection $input)
     {
-        return parent::checkout($input, true);
+        return parent::checkout($input);
     }
 
 
@@ -59,15 +39,15 @@ class CategoryAdminService extends CategoryService
     }
 
 
-    public function getItem($id, $diff = false)
+    public function getItem($id)
     {
-        $item = parent::getItem($id, true);
+        $item = parent::getItem($id);
 
         return $item;
     }
 
 
-    public function store(Collection $input, $diff = false)
+    public function store(Collection $input)
     {
         if (InputHelper::null($input, 'extension')){
             $input->put('extension', 'item');
@@ -75,17 +55,16 @@ class CategoryAdminService extends CategoryService
 
         if (InputHelper::null($input, 'publish_up'))
         {
-            $input->put('publish_up', now());
-            $input->publish_up = now()->toDateTimeString();
+            $input->put('publish_up', now()->toDateTimeString()) ;
         }
 
-        $result = parent::store($input, $diff);
+        $result = parent::store($input);
 
         if (gettype($result) == 'boolean')
         {
             if ($result === true)
             {
-                $item  = $this->find($input->id);
+                $item  = $this->find($input->get('id'));
             }
             else
             {

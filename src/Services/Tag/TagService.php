@@ -4,12 +4,11 @@ namespace DaydreamLab\Cms\Services\Tag;
 
 use DaydreamLab\Cms\Repositories\Tag\TagRepository;
 use DaydreamLab\Cms\Events\Add;
-use DaydreamLab\Cms\Events\Checkout;
+
 use DaydreamLab\Cms\Events\Modify;
 use DaydreamLab\Cms\Events\Ordering;
 use DaydreamLab\Cms\Events\Remove;
 use DaydreamLab\Cms\Events\State;
-use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Services\BaseService;
 use DaydreamLab\JJAJ\Traits\NestedServiceTrait;
 use Illuminate\Support\Collection;
@@ -25,7 +24,6 @@ class TagService extends BaseService
 
     protected $type = 'Tag';
 
-    protected $model_name = 'Tag';
 
     public function __construct(TagRepository $repo)
     {
@@ -37,15 +35,15 @@ class TagService extends BaseService
     {
         $item = $this->traitAddNested($input);
 
-        event(new Add($item, $this->model_name, $input, $this->user));
+        event(new Add($item, $this->getModelName(), $input, $this->user));
 
         return $item;
     }
 
 
-    public function checkout(Collection $input, $diff = false)
+    public function checkout(Collection $input)
     {
-        return parent::checkout($input, $diff);
+        return parent::checkout($input);
     }
 
 
@@ -53,45 +51,45 @@ class TagService extends BaseService
     {
         $result = $this->traitModifiedNested($input, $parent, $item);
 
-        event(new Modify($this->find($input->id), $this->model_name, $result, $input,$this->user));
+        event(new Modify($this->find($input->id), $this->getModelName(), $result, $input,$this->user));
 
         return $result;
     }
 
 
-    public function remove(Collection $input ,$diff = false)
+    public function remove(Collection $input)
     {
-        $result = $this->traitRemoveNested($input, $diff);
+        $result = $this->traitRemoveNested($input);
 
-        event(new Remove($this->model_name, $result, $input, $this->user));
+        event(new Remove($this->getModelName(), $result, $input, $this->user));
 
         return $result;
     }
 
 
-    public function state(Collection $input, $diff = null)
+    public function state(Collection $input)
     {
-        $result = parent::state($input, $diff);
+        $result = parent::state($input);
 
-        event(new State($this->model_name, $result, $input, $this->user));
+        event(new State($this->getModelName(), $result, $input, $this->user));
 
         return $result;
     }
 
 
-    public function ordering(Collection $input, $diff = false)
+    public function ordering(Collection $input)
     {
-        $result =  parent::ordering($input, $diff);
+        $result =  parent::ordering($input);
 
-        event(new Ordering($this->model_name, $result, $input, $this->user));
+        event(new Ordering($this->getModelName(), $result, $input, $this->user));
 
         return $result;
     }
 
 
-    public function store(Collection $input, $diff = false)
+    public function store(Collection $input)
     {
-        $result = $this->traitStoreNested($input, $diff);
+        $result = $this->traitStoreNested($input);
 
         return $result;
     }

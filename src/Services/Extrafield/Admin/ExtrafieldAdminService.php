@@ -4,8 +4,6 @@ namespace DaydreamLab\Cms\Services\Extrafield\Admin;
 
 use DaydreamLab\Cms\Repositories\Extrafield\Admin\ExtrafieldAdminRepository;
 use DaydreamLab\Cms\Services\Extrafield\ExtrafieldService;
-use DaydreamLab\JJAJ\Helpers\Helper;
-use DaydreamLab\JJAJ\Helpers\InputHelper;
 use Illuminate\Support\Collection;
 
 class ExtrafieldAdminService extends ExtrafieldService
@@ -19,11 +17,11 @@ class ExtrafieldAdminService extends ExtrafieldService
         parent::__construct($repo);
     }
 
-    public function getItem($id, $diff = false)
+    public function getItem($id)
     {
         $this->repo->with('group');
 
-        $item = parent::getItem($id, $diff)->makeHidden(['group']);
+        $item = parent::getItem($id)->makeHidden(['group']);
 
         $item->group_title = $item->group->title;
 
@@ -31,11 +29,11 @@ class ExtrafieldAdminService extends ExtrafieldService
     }
 
 
-    public function store(Collection $input, $diff = false)
+    public function store(Collection $input)
     {
-        $this->checkItem($input->group_id, $diff);
+        $this->checkItem($input->get('group_id'));
 
-        return parent::store($input, $diff);
+        return parent::store($input);
     }
 
 }

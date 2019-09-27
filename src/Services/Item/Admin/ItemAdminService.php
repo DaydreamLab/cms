@@ -11,7 +11,7 @@ use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
 use DaydreamLab\Cms\Services\Item\ItemService;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
+
 
 class ItemAdminService extends ItemService
 {
@@ -21,8 +21,6 @@ class ItemAdminService extends ItemService
 
     protected $tagAdminService;
 
-    protected $itemTagMapAdminService;
-
     protected $cmsCronJobService;
 
     protected $categoryAdminService;
@@ -31,16 +29,13 @@ class ItemAdminService extends ItemService
 
     public function __construct(ItemAdminRepository     $repo,
                                 TagAdminService         $tagAdminService,
-                                ItemTagMapAdminService  $itemTagMapAdminService,
-                                CategoryAdminService    $categoryAdminService,
-                                CmsCronJobService       $cmsCronJobService)
+                                CategoryAdminService    $categoryAdminService)
     {
         parent::__construct($repo);
         $this->repo                     = $repo;
         $this->tagAdminService          = $tagAdminService;
-        $this->itemTagMapAdminService   = $itemTagMapAdminService;
         $this->categoryAdminService     = $categoryAdminService;
-        $this->cmsCronJobService        = $cmsCronJobService;
+        $this->cmsCronJobService        = app(CmsCronJobService::class);
     }
 
 
@@ -56,10 +51,10 @@ class ItemAdminService extends ItemService
     }
 
 
-    public function modify(Collection $input, $diff = false)
+    public function modify(Collection $input)
     {
         $input_featured = $input->get('featured');
-        $item = $this->checkItem($input->id, $diff);
+        $item = $this->checkItem($input->get('id'));
         // 代表有修改到 featured 值
         if ($item && $item->featured != $input_featured)
         {
@@ -76,7 +71,7 @@ class ItemAdminService extends ItemService
             }
         }
 
-        return parent::modify($input, $diff);
+        return parent::modify($input);
     }
 
     public function search(Collection $input)
@@ -102,7 +97,7 @@ class ItemAdminService extends ItemService
 
         if (!InputHelper::null($input, 'category_id'))
         {
-            $category_ids = $this->categoryAdminService->findSubTreeIds($input->category_id);
+            $category_ids = $this->categoryAdminService->findSubTreeIds($input->get('category_id'));
         }
         else
         {
@@ -135,14 +130,14 @@ class ItemAdminService extends ItemService
     }
 
 
-    public function store(Collection $input, $diff = false)
+    public function store(Collection $input)
     {
         if (InputHelper::null($input, 'hits'))
         {
             $input->put('hits', 0);
         }
 
-        if ($input->state == 1 && InputHelper::null($input, 'publish_up'))
+        if ($input->get('state') == 1 && InputHelper::null($input, 'publish_up'))
         {
             $input->put('publish_up', now());
             $input->publish_up = now()->toDateTimeString();
@@ -151,13 +146,13 @@ class ItemAdminService extends ItemService
         $tags = $input->get('tags') ? $input->get('tags') : [];
         $input->forget('tags');
 
-        $result    =  parent::store($input, $diff);
+        $result    =  parent::store($input);
 
         if (gettype($result) == 'boolean')
         {
             if ($result === true)
             {
-                $item = $this->find($input->id);
+                $item = $this->find($input->get('id'));
             }
             else
             {
@@ -167,12 +162,15 @@ class ItemAdminService extends ItemService
         }
         else
         {
+
             $item = $this->find($result->id);
+
+
         }
 
-        $this->storeTags($tags, $item->id);
+        //$this->storeTags($tags, $item);
 
-        $this->setCronJob($input, $item);
+        //$this->setCronJob($input, $item);
 
         $this->response = $item;
 
@@ -181,8 +179,9 @@ class ItemAdminService extends ItemService
 
 
 
-    public function storeTags($tags = [], $item_id)
+    public function storeTags($tags = [], $item)
     {
+        Helper::show($tags);
         $tag_ids = [];
         foreach ($tags  as $tag)
         {
@@ -195,6 +194,7 @@ class ItemAdminService extends ItemService
                 $db_tag = $this->tagAdminService->findBy('title', '=', $tag['title'])->first();
                 if (!$db_tag)
                 {
+                    $tag['language'] = $item->language;
                     $tag = $this->tagAdminService->store(Helper::collect($tag));
                 }
                 else
@@ -204,18 +204,13 @@ class ItemAdminService extends ItemService
             }
             else
             {
+                $tag['language'] = $item->language;
                 $tag = $this->tagAdminService->store(Helper::collect($tag));
             }
 
             $tag_ids[] = $tag['id'];
         }
-
-        if(count($tag_ids))
-        {
-            $this->itemTagMapAdminService->storeKeysMap(Helper::collect([
-                'item_id'   => $item_id,
-                'tag_ids'   => $tag_ids,
-            ]));
-        }
+        $item->tags()->detach();
+        $item->tags()->attach($tag_ids);
     }
 }
