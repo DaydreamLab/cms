@@ -16,13 +16,13 @@ class CategoryFrontService extends CategoryService
     protected $search_keys = ['title', 'introtext', 'description', 'extrafields_search'];
 
 
-    protected $itemFrontService;
+    //protected $itemFrontService;
 
     public function __construct(CategoryFrontRepository $repo)
     {
         parent::__construct($repo);
         $this->repo = $repo;
-        $this->itemFrontService = app(ItemFrontService::class);
+        //$this->itemFrontService = app(ItemFrontService::class);
     }
 
     public function getContentTypeIds($content_type)
