@@ -29,7 +29,6 @@ class SiteAdminService extends SiteService
 
     public function getList(Collection $input)
     {
-        $this->canAction('getList');
         /**
          * @var $result LengthAwarePaginator
          */

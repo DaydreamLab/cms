@@ -47,9 +47,6 @@ class ItemService extends BaseService
         foreach ($input->get('ids') as $id)
         {
             $item = $this->checkItem($id);
-            $this->canAction('edit', $item);
-
-
             $result =  $this->repo->featured($item, $input->get('featured'));
             if(!$result) break;
         }
