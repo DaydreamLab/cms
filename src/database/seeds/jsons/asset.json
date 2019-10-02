@@ -793,6 +793,31 @@
             "method": "delete",
             "url": "/admin/media/remove",
             "created_by": 1
+          },
+          {
+            "method": "rename",
+            "url": "/admin/media/rename",
+            "created_by": 1
+          },
+          {
+            "method": "move",
+            "url": "/admin/media/move",
+            "created_by": 1
+          },
+          {
+            "method": "getAllItems",
+            "url": "/admin/media/getAllItems",
+            "created_by": 1
+          },
+          {
+            "method": "getAllFolder",
+            "url": "/admin/media/getAllFolder",
+            "created_by": 1
+          },
+          {
+            "method": "createFolder",
+            "url": "/admin/media/createFolder",
+            "created_by": 1
           }
         ]
       },
