@@ -19,6 +19,7 @@ class SettingAdminController
 
     public function getItem()
     {
+        $this->service->canAction('SettingAdminService', 'getSetting', '');
         $this->service->getItem();
 
         return ResponseHelper::response($this->service->status, $this->service->response);

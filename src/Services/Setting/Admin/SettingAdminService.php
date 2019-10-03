@@ -32,8 +32,6 @@ class SettingAdminService extends SettingService
 
     public function store(Collection $input)
     {
-        //$this->canAction('edit');
-
         $config     = config('global');
 
         $file_str   = '<?php return [' . PHP_EOL;

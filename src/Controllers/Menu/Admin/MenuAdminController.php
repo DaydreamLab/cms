@@ -24,15 +24,8 @@ class MenuAdminController extends BaseController
 
     public function getItem($id)
     {
+        $this->service->canAction('getMenu');
         $this->service->getItem($id);
-
-        return ResponseHelper::response($this->service->status, $this->service->response);
-    }
-
-
-    public function getItems()
-    {
-        $this->service->search(new Collection());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
@@ -48,6 +41,7 @@ class MenuAdminController extends BaseController
 
     public function ordering(MenuAdminOrderingPost $request)
     {
+        $this->service->canAction('editMenu');
         $this->service->ordering($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
@@ -56,6 +50,7 @@ class MenuAdminController extends BaseController
 
     public function remove(MenuAdminRemovePost $request)
     {
+        $this->service->canAction('deleteMenu');
         $this->service->remove($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
@@ -64,6 +59,7 @@ class MenuAdminController extends BaseController
 
     public function state(MenuAdminStatePost $request)
     {
+        $this->service->canAction('updateMenuState');
         $this->service->state($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
@@ -78,6 +74,9 @@ class MenuAdminController extends BaseController
             $input->put('host', $request->getHttpHost());
         }
 
+        InputHelper::null($input, 'id') ? $this->service->canAction('addMenu')
+            : $this->service->canAction('editMenu');
+
         $this->service->store($input);
 
         return ResponseHelper::response($this->service->status, $this->service->response);
@@ -86,6 +85,7 @@ class MenuAdminController extends BaseController
 
     public function search(MenuAdminSearchPost $request)
     {
+        $this->service->canAction('searchMenu');
         $this->service->search($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);

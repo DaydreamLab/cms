@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Controllers\Extrafield\Admin;
 
 use DaydreamLab\Cms\Requests\Extrafield\ExtrafieldGroupAdminCheckoutPost;
 use DaydreamLab\JJAJ\Controllers\BaseController;
+use DaydreamLab\JJAJ\Helpers\InputHelper;
 use DaydreamLab\JJAJ\Helpers\ResponseHelper;
 use Illuminate\Support\Collection;
 use DaydreamLab\Cms\Services\Extrafield\Admin\ExtrafieldGroupAdminService;
@@ -22,23 +23,8 @@ class ExtrafieldGroupAdminController extends BaseController
 
     public function getItem($id)
     {
+        $this->service->canAction('getExtrafieldGroup');
         $this->service->getItem($id);
-
-        return ResponseHelper::response($this->service->status, $this->service->response);
-    }
-
-
-    public function getItems()
-    {
-        $this->service->search(new Collection());
-
-        return ResponseHelper::response($this->service->status, $this->service->response);
-    }
-
-
-    public function getList()
-    {
-        $this->service->getList(collect());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
@@ -54,6 +40,7 @@ class ExtrafieldGroupAdminController extends BaseController
 
     public function ordering(ExtrafieldGroupAdminOrderingPost $request)
     {
+        $this->service->canAction('editExtrafieldGroup');
         $this->service->ordering($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
@@ -62,6 +49,7 @@ class ExtrafieldGroupAdminController extends BaseController
 
     public function remove(ExtrafieldGroupAdminRemovePost $request)
     {
+        $this->service->canAction('deleteExtrafieldGroup');
         $this->service->remove($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
@@ -70,6 +58,7 @@ class ExtrafieldGroupAdminController extends BaseController
 
     public function state(ExtrafieldGroupAdminStatePost $request)
     {
+        $this->service->canAction('updateExtrafieldGroupState');
         $this->service->state($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
@@ -78,6 +67,8 @@ class ExtrafieldGroupAdminController extends BaseController
 
     public function store(ExtrafieldGroupAdminStorePost $request)
     {
+        InputHelper::null($request->rulesInput(), 'id') ? $this->service->canAction('addExtrafieldGroup')
+            : $this->service->canAction('editExtrafieldGroup');
         $this->service->store($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
@@ -86,6 +77,7 @@ class ExtrafieldGroupAdminController extends BaseController
 
     public function search(ExtrafieldGroupAdminSearchPost $request)
     {
+        $this->service->canAction('searchExtrafieldGroup');
         $this->service->search($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);

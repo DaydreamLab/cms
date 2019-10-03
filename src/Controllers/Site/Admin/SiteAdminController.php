@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Controllers\Site\Admin;
 
 use DaydreamLab\Cms\Requests\Site\SiteCheckoutPost;
 use DaydreamLab\JJAJ\Controllers\BaseController;
+use DaydreamLab\JJAJ\Helpers\InputHelper;
 use DaydreamLab\JJAJ\Helpers\ResponseHelper;
 use Illuminate\Support\Collection;
 use DaydreamLab\Cms\Services\Site\Admin\SiteAdminService;
@@ -31,15 +32,8 @@ class SiteAdminController extends BaseController
 
     public function getItem($id)
     {
+        $this->service->canAction('getSite');
         $this->service->getItem($id);
-
-        return ResponseHelper::response($this->service->status, $this->service->response);
-    }
-
-
-    public function getItems()
-    {
-        $this->service->search(new Collection());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
@@ -47,6 +41,7 @@ class SiteAdminController extends BaseController
 
     public function getList()
     {
+        $this->service->canAction('getSiteList');
         $this->service->getList(collect());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
@@ -55,6 +50,7 @@ class SiteAdminController extends BaseController
 
     public function ordering(SiteAdminOrderingPost $request)
     {
+        $this->service->canAction('editSite');
         $this->service->ordering($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
@@ -63,6 +59,7 @@ class SiteAdminController extends BaseController
 
     public function remove(SiteAdminRemovePost $request)
     {
+        $this->service->canAction('deleteSite');
         $this->service->remove($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
@@ -71,6 +68,7 @@ class SiteAdminController extends BaseController
 
     public function state(SiteAdminStatePost $request)
     {
+        $this->service->canAction('updateSiteState');
         $this->service->state($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
@@ -79,6 +77,8 @@ class SiteAdminController extends BaseController
 
     public function store(SiteAdminStorePost $request)
     {
+        InputHelper::null($request->rulesInput(), 'id') ? $this->service->canAction('addSite')
+            : $this->service->canAction('editSite');
         $this->service->store($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
@@ -87,6 +87,7 @@ class SiteAdminController extends BaseController
 
     public function search(SiteAdminSearchPost $request)
     {
+        $this->service->canAction('searchSite');
         $this->service->search($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);

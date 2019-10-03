@@ -5,6 +5,7 @@ namespace DaydreamLab\Cms\Controllers\Category\Admin;
 use DaydreamLab\Cms\Requests\Item\Admin\CategoryAdminOrderingPost;
 use DaydreamLab\JJAJ\Controllers\BaseController;
 use DaydreamLab\JJAJ\Helpers\Helper;
+use DaydreamLab\JJAJ\Helpers\InputHelper;
 use DaydreamLab\JJAJ\Helpers\ResponseHelper;
 use Illuminate\Support\Collection;
 use DaydreamLab\Cms\Services\Category\Admin\CategoryAdminService;
@@ -24,15 +25,8 @@ class CategoryAdminController extends BaseController
 
     public function getItem($id)
     {
+        $this->service->canAction('getCategory');
         $this->service->getItem($id);
-
-        return ResponseHelper::response($this->service->status, $this->service->response);
-    }
-
-
-    public function getItems()
-    {
-        $this->service->search(new Collection());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
@@ -48,6 +42,7 @@ class CategoryAdminController extends BaseController
 
     public function ordering(CategoryAdminOrderingPost $request)
     {
+        $this->service->canAction('editCategory');
         $this->service->ordering($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
@@ -56,6 +51,7 @@ class CategoryAdminController extends BaseController
 
     public function remove(CategoryAdminRemovePost $request)
     {
+        $this->service->canAction('deleteCategory');
         $this->service->remove($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
@@ -64,6 +60,7 @@ class CategoryAdminController extends BaseController
 
     public function state(CategoryAdminStatePost $request)
     {
+        $this->service->canAction('updateCategoryState');
         $this->service->state($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
@@ -72,6 +69,8 @@ class CategoryAdminController extends BaseController
 
     public function store(CategoryAdminStorePost $request)
     {
+        InputHelper::null($request->rulesInput(), 'id') ? $this->service->canAction('addCategory')
+            : $this->service->canAction('editCategory');
         $this->service->store($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
@@ -80,6 +79,7 @@ class CategoryAdminController extends BaseController
 
     public function search(CategoryAdminSearchPost $request)
     {
+        $this->service->canAction('searchCategory');
         $this->service->search($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);

@@ -24,12 +24,12 @@
         "children": [],
         "apis": [
           {
-            "method": "get",
+            "method": "getSetting",
             "url": "/admin/setting",
             "created_by": 1
           },
           {
-            "method": "edit",
+            "method": "editSetting",
             "url": "/admin/setting/store",
             "created_by": 1
           }
@@ -50,38 +50,43 @@
         "children": [],
         "apis": [
           {
-            "method": "get",
+            "method": "getLanguage",
             "url": "/admin/language/{id}",
             "created_by": 1
           },
           {
-            "method": "add",
+            "method": "addLanguage",
             "url": "/admin/language/store",
             "created_by": 1
           },
           {
-            "method": "edit",
+            "method": "editLanguage",
             "url": "/admin/language/store",
             "created_by": 1
           },
           {
-            "method": "delete",
+            "method": "deleteLanguage",
             "url": "/admin/language/remove",
             "created_by": 1
           },
           {
-            "method": "search",
+            "method": "searchLanguage",
             "url": "/admin/language/search",
             "created_by": 1
           },
           {
-            "method": "updateState",
+            "method": "updateLanguageState",
             "url": "/admin/language/state",
             "created_by": 1
           },
           {
-            "method": "setDefault",
+            "method": "setDefaultLanguage",
             "url": "/admin/language/default",
+            "created_by": 1
+          },
+          {
+            "method": "checkoutLanguage",
+            "url": "/admin/language/checkout",
             "created_by": 1
           }
         ]
@@ -113,43 +118,43 @@
         "children": [],
         "apis": [
           {
-            "method": "get",
+            "method": "getSite",
             "url": "/admin/site/{id}",
             "created_by": 1
           },
           {
-            "method": "getList",
+            "method": "getSiteList",
             "url": "/admin/site/getList",
             "created_by": 1
           },
           {
-            "method": "add",
+            "method": "addSite",
             "url": "/admin/site/store",
             "created_by": 1
           },
           {
-            "method": "edit",
+            "method": "editSite",
             "url": "/admin/site/store",
             "created_by": 1
           },
           {
-            "method": "delete",
+            "method": "deleteSite",
             "url": "/admin/site/remove",
             "created_by": 1
           },
           {
-            "method": "search",
+            "method": "searchSite",
             "url": "/admin/site/search",
             "created_by": 1
           },
           {
-            "method": "updateState",
+            "method": "updateSiteState",
             "url": "/admin/site/state",
             "created_by": 1
           },
           {
-            "method": "checkout",
-            "url": "/admin/site/checkout",
+            "method": "checkoutSite",
+            "url": "/admin/site/remove",
             "created_by": 1
           }
         ]
@@ -209,37 +214,37 @@
         "children": [],
         "apis": [
           {
-            "method": "get",
+            "method": "getMenu",
             "url": "/admin/menu/{id}",
             "created_by": 1
           },
           {
-            "method": "add",
+            "method": "addMenu",
             "url": "/admin/menu/store",
             "created_by": 1
           },
           {
-            "method": "edit",
+            "method": "editMenu",
             "url": "/admin/menu/store",
             "created_by": 1
           },
           {
-            "method": "delete",
+            "method": "deleteMenu",
             "url": "/admin/menu/remove",
             "created_by": 1
           },
           {
-            "method": "search",
+            "method": "searchMenu",
             "url": "/admin/menu/search",
             "created_by": 1
           },
           {
-            "method": "updateState",
+            "method": "updateMenuState",
             "url": "/admin/menu/state",
             "created_by": 1
           },
           {
-            "method": "checkout",
+            "method": "checkoutMenu",
             "url": "/admin/menu/checkout",
             "created_by": 1
           }
@@ -286,37 +291,37 @@
         "children": [],
         "apis": [
           {
-            "method": "get",
+            "method": "getModule",
             "url": "/admin/module/{id}",
             "created_by": 1
           },
           {
-            "method": "add",
+            "method": "addModule",
             "url": "/admin/module/store",
             "created_by": 1
           },
           {
-            "method": "edit",
+            "method": "editModule",
             "url": "/admin/module/store",
             "created_by": 1
           },
           {
-            "method": "delete",
+            "method": "deleteModule",
             "url": "/admin/module/remove",
             "created_by": 1
           },
           {
-            "method": "search",
+            "method": "searchModule",
             "url": "/admin/module/search",
             "created_by": 1
           },
           {
-            "method": "updateState",
+            "method": "updateModuleState",
             "url": "/admin/module/state",
             "created_by": 1
           },
           {
-            "method": "checkout",
+            "method": "checkoutModule",
             "url": "/admin/module/checkout",
             "created_by": 1
           }
@@ -363,62 +368,42 @@
         "children": [],
         "apis": [
           {
-            "method": "getOwn",
+            "method": "getItem",
             "url": "/admin/item/{id}",
             "created_by": 1
           },
           {
-            "method": "getOther",
-            "url": "/admin/item/{id}",
-            "created_by": 1
-          },
-          {
-            "method": "add",
+            "method": "addItem",
             "url": "/admin/item/store",
             "created_by": 1
           },
           {
-            "method": "editOwn",
+            "method": "editItem",
             "url": "/admin/item/store",
             "created_by": 1
           },
           {
-            "method": "editOther",
-            "url": "/admin/item/store",
-            "created_by": 1
-          },
-          {
-            "method": "deleteOwn",
+            "method": "deleteItem",
             "url": "/admin/item/remove",
             "created_by": 1
           },
           {
-            "method": "deleteOther",
-            "url": "/admin/item/remove",
-            "created_by": 1
-          },
-          {
-            "method": "search",
+            "method": "searchItem",
             "url": "/admin/item/search",
             "created_by": 1
           },
           {
-            "method": "updateStateOwn",
+            "method": "updateItemState",
             "url": "/admin/item/state",
             "created_by": 1
           },
           {
-            "method": "updateStateOther",
-            "url": "/admin/item/state",
-            "created_by": 1
-          },
-          {
-            "method": "updateFeatured",
+            "method": "updateItemFeatured",
             "url": "/admin/item/featured",
             "created_by": 1
           },
           {
-            "method": "checkout",
+            "method": "checkoutItem",
             "url": "/admin/item/checkout",
             "created_by": 1
           }
@@ -452,57 +437,37 @@
         "children": [],
         "apis": [
           {
-            "method": "getOwn",
+            "method": "getCategory",
             "url": "/admin/category/{id}",
             "created_by": 1
           },
           {
-            "method": "getOther",
-            "url": "/admin/category/{id}",
-            "created_by": 1
-          },
-          {
-            "method": "add",
+            "method": "addCategory",
             "url": "/admin/category/store",
             "created_by": 1
           },
           {
-            "method": "editOwn",
+            "method": "editCategory",
             "url": "/admin/category/store",
             "created_by": 1
           },
           {
-            "method": "editOther",
-            "url": "/admin/category/store",
-            "created_by": 1
-          },
-          {
-            "method": "deleteOwn",
+            "method": "deleteCategory",
             "url": "/admin/category/remove",
             "created_by": 1
           },
           {
-            "method": "deleteOther",
-            "url": "/admin/category/remove",
-            "created_by": 1
-          },
-          {
-            "method": "search",
+            "method": "searchCategory",
             "url": "/admin/category/search",
             "created_by": 1
           },
           {
-            "method": "updateStateOwn",
+            "method": "updateCategoryState",
             "url": "/admin/category/state",
             "created_by": 1
           },
           {
-            "method": "updateStateOther",
-            "url": "/admin/category/state",
-            "created_by": 1
-          },
-          {
-            "method": "checkout",
+            "method": "checkoutCategory",
             "url": "/admin/category/checkout",
             "created_by": 1
           }
@@ -536,47 +501,32 @@
         "children": [],
         "apis": [
           {
-            "method": "getOwn",
+            "method": "getExtrafield",
             "url": "/admin/extrafield/{id}",
             "created_by": 1
           },
           {
-            "method": "getOther",
-            "url": "/admin/extrafield/{id}",
-            "created_by": 1
-          },
-          {
-            "method": "add",
+            "method": "addExtrafield",
             "url": "/admin/extrafield/store",
             "created_by": 1
           },
           {
-            "method": "editOwn",
+            "method": "editExtrafield",
             "url": "/admin/extrafield/store",
             "created_by": 1
           },
           {
-            "method": "editOther",
-            "url": "/admin/extrafield/store",
-            "created_by": 1
-          },
-          {
-            "method": "deleteOwn",
+            "method": "deleteExtrafield",
             "url": "/admin/extrafield/remove",
             "created_by": 1
           },
           {
-            "method": "deleteOther",
-            "url": "/admin/extrafield/remove",
-            "created_by": 1
-          },
-          {
-            "method": "search",
+            "method": "searchExtrafield",
             "url": "/admin/extrafield/search",
             "created_by": 1
           },
           {
-            "method": "updateStateOwn",
+            "method": "updateExtrafieldState",
             "url": "/admin/extrafield/state",
             "created_by": 1
           },
@@ -586,7 +536,7 @@
             "created_by": 1
           },
           {
-            "method": "checkout",
+            "method": "checkoutExtrafield",
             "url": "/admin/extrafield/checkout",
             "created_by": 1
           }
@@ -619,57 +569,37 @@
         "children": [],
         "apis": [
           {
-            "method": "getOwn",
+            "method": "getExtrafieldGroup",
             "url": "/admin/extrafield_group/{id}",
             "created_by": 1
           },
           {
-            "method": "getOther",
-            "url": "/admin/extrafield_group/{id}",
-            "created_by": 1
-          },
-          {
-            "method": "add",
+            "method": "addExtrafieldGroup",
             "url": "/admin/extrafield_group/store",
             "created_by": 1
           },
           {
-            "method": "editOwn",
+            "method": "editExtrafieldGroup",
             "url": "/admin/extrafield_group/store",
             "created_by": 1
           },
           {
-            "method": "editOther",
-            "url": "/admin/extrafield_group/store",
-            "created_by": 1
-          },
-          {
-            "method": "deleteOwn",
+            "method": "deleteExtrafieldGroup",
             "url": "/admin/extrafield_group/remove",
             "created_by": 1
           },
           {
-            "method": "deleteOther",
+            "method": "searchExtrafieldGroup",
             "url": "/admin/extrafield_group/remove",
             "created_by": 1
           },
           {
-            "method": "search",
-            "url": "/admin/extrafield_group/remove",
-            "created_by": 1
-          },
-          {
-            "method": "updateStateOwn",
+            "method": "updateExtrafieldGroupState",
             "url": "/admin/extrafield_group/state",
             "created_by": 1
           },
           {
-            "method": "updateStateOther",
-            "url": "/admin/extrafield_group/state",
-            "created_by": 1
-          },
-          {
-            "method": "checkout",
+            "method": "checkoutExtrafieldGroup",
             "url": "/admin/extrafield_group/checkout",
             "created_by": 1
           }
@@ -702,57 +632,37 @@
         "children": [],
         "apis": [
           {
-            "method": "getOwn",
+            "method": "getTag",
             "url": "/admin/tag/{id}",
             "created_by": 1
           },
           {
-            "method": "getOther",
-            "url": "/admin/tag/{id}",
-            "created_by": 1
-          },
-          {
-            "method": "add",
+            "method": "addTag",
             "url": "/admin/tag/store",
             "created_by": 1
           },
           {
-            "method": "editOwn",
+            "method": "editTag",
             "url": "/admin/tag/store",
             "created_by": 1
           },
           {
-            "method": "editOther",
-            "url": "/admin/tag/store",
-            "created_by": 1
-          },
-          {
-            "method": "deleteOwn",
+            "method": "deleteTag",
             "url": "/admin/tag/remove",
             "created_by": 1
           },
           {
-            "method": "deleteOther",
-            "url": "/admin/tag/remove",
-            "created_by": 1
-          },
-          {
-            "method": "search",
+            "method": "searchTag",
             "url": "/admin/tag/search",
             "created_by": 1
           },
           {
-            "method": "updateStateOwn",
+            "method": "updateTagState",
             "url": "/admin/tag/state",
             "created_by": 1
           },
           {
-            "method": "updateStateOther",
-            "url": "/admin/tag/state",
-            "created_by": 1
-          },
-          {
-            "method": "checkout",
+            "method": "checkoutTag",
             "url": "/admin/tag/checkout",
             "created_by": 1
           }
@@ -785,37 +695,37 @@
         "children": [],
         "apis": [
           {
-            "method": "add",
+            "method": "uploadMedia",
             "url": "/admin/media/store",
             "created_by": 1
           },
           {
-            "method": "delete",
+            "method": "deleteMedia",
             "url": "/admin/media/remove",
             "created_by": 1
           },
           {
-            "method": "rename",
+            "method": "renameMedia",
             "url": "/admin/media/rename",
             "created_by": 1
           },
           {
-            "method": "move",
+            "method": "moveMedia",
             "url": "/admin/media/move",
             "created_by": 1
           },
           {
-            "method": "getAllItems",
+            "method": "getMediaAllItems",
             "url": "/admin/media/getAllItems",
             "created_by": 1
           },
           {
-            "method": "getAllFolder",
+            "method": "getMediaAllFolder",
             "url": "/admin/media/getAllFolder",
             "created_by": 1
           },
           {
-            "method": "createFolder",
+            "method": "createMediaFolder",
             "url": "/admin/media/createFolder",
             "created_by": 1
           }

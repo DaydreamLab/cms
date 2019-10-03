@@ -3,7 +3,10 @@
 namespace DaydreamLab\Cms\Requests\Language\Admin;
 
 
-class LanguageAdminStatePost extends LanguageStatePost
+use DaydreamLab\JJAJ\Requests\AdminRequest;
+use Illuminate\Validation\Rule;
+
+class LanguageStatePost extends AdminRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +25,14 @@ class LanguageAdminStatePost extends LanguageStatePost
      */
     public function rules()
     {
-        $rules = [
-            //
+        return [
+            'ids'       => 'required|array',
+            'ids.*'     => 'required|integer',
+            'state'     => [
+                'required',
+                'integer',
+                Rule::in([0,1,-1,-2]),
+            ]
         ];
-        return array_merge($rules, parent::rules());
     }
 }

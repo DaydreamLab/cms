@@ -17,30 +17,4 @@ class LanguageAdminService extends LanguageService
     {
         parent::__construct($repo);
     }
-
-
-    public function getList(Collection $input)
-    {
-        $data = $this->findBy('state','=', 1);
-
-        $this->status = Str::upper(Str::snake($this->type.'GetListSuccess'));
-        $this->response = $data;
-
-        return $data;
-    }
-
-
-    public function getTypeList($type)
-    {
-        $items = $this->getList(collect());
-
-        $items = $items->filter(function ($value, $key) use ($type){
-            return $value->type == $type;
-        });
-
-        $this->response = $items->values();
-
-        return $items->values();
-    }
-
 }
