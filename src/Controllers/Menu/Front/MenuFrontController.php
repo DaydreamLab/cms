@@ -31,7 +31,7 @@ class MenuFrontController extends BaseController
             'category'  => $request->get('category'),
             'alias'     => $alias,
             'host'      => $request->getHttpHost(),
-            'language'  => isset($request->language) ? $request->language : config('global.locale')
+            'language'  => isset($request->language) ? $request->language : config('daydreamlab.global.locale')
         ]));
 
         return ResponseHelper::response($this->service->status, $this->service->response);
@@ -50,7 +50,7 @@ class MenuFrontController extends BaseController
     {
         $this->service->getTree(Helper::collect([
             'host'       => $request->getHttpHost(),
-            'language'   => isset($request->language) ? $request->language : config('global.locale')
+            'language'   => isset($request->language) ? $request->language : config('daydreamlab.global.locale')
         ]));
 
         return ResponseHelper::response($this->service->status, $this->service->response);

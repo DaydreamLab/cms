@@ -36,7 +36,7 @@ class ModuleFrontController extends BaseController
     {
         $this->service->getItemByAlias(Helper::collect([
             'alias'     =>$alias,
-            'language'  => $request->get('language') != '' ? $request->language : config('global.locale')
+            'language'  => $request->get('language') != '' ? $request->language : config('daydreamlab.global.locale')
         ]));
 
         return ResponseHelper::response($this->service->status, $this->service->response);

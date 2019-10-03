@@ -306,7 +306,7 @@ class ItemFrontService extends ItemService
         $input->put('paginate', $paginate);
         $special_queries = $this->getSpecialQueries($input);
 
-        $language = $input->get('language') != '' ? [$input->get('language')] : ['*',config('global.locale')];
+        $language = $input->get('language') != '' ? [$input->get('language')] : ['*',config('daydreamlab.global.locale')];
         // 如果有傳 category_alias
         if (!InputHelper::null($input, 'category_alias'))
         {

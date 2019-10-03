@@ -21,7 +21,7 @@ class SettingAdminService extends SettingService
 
     public function getItem($locale = '')
     {
-        $global = config('global');
+        $global = config('daydreamlab.global');
 
         $this->status   = Str::upper(Str::snake($this->type.'GetItemSuccess'));
         $this->response = (object)$global;
@@ -32,7 +32,7 @@ class SettingAdminService extends SettingService
 
     public function store(Collection $input)
     {
-        $config     = config('global');
+        $config     = config('daydreamlab.global');
 
         $file_str   = '<?php return [' . PHP_EOL;
 
@@ -50,7 +50,7 @@ class SettingAdminService extends SettingService
 
         $file_str .= '];';
 
-        $result = File::put(config_path('global.php'), $file_str);
+        $result = File::put(config_path('daydreamlab/global.php'), $file_str);
 
 
         if ($result)

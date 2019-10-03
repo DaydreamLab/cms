@@ -20,7 +20,7 @@ class SettingFrontService extends SettingService
 
     public function getItem($locale, $host)
     {
-        $global = config('global');
+        $global = config('daydreamlab.global');
 
         $site_setting = $this->siteService->findByChain(
             ['sef', 'url'],

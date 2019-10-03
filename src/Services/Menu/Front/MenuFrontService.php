@@ -60,7 +60,7 @@ class MenuFrontService extends MenuService
                 foreach ($param as $module_id)
                 {
                     $module     = $this->moduleFrontService->find($module_id);
-                    $language   = !InputHelper::null($input, 'language') ? $input->get('language') : config('global.locale');
+                    $language   = !InputHelper::null($input, 'language') ? $input->get('language') : config('daydreamlab.global.locale');
                     $data       = $this->moduleFrontService->loadModule($module, $language);
                     $module->items = $data;
                     $modules[$module->alias] = $module;

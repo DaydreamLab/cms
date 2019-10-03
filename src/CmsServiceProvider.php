@@ -21,7 +21,7 @@ class CmsServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([__DIR__. '/constants' => config_path('constants')], 'cms-configs');
-        $this->publishes([__DIR__. '/Configs'   => config_path()], 'cms-configs');
+        $this->publishes([__DIR__. '/Configs'   => config_path('daydreamlab')], 'cms-configs');
 
         $this->publishes([
             __DIR__. '/../public/admin'     => public_path('admin'),
