@@ -745,7 +745,7 @@
         "children": [],
         "apis": [
           {
-            "method": "keywordList",
+            "method": "searchkeywordList",
             "url": "/admin/search/keywordList",
             "created_by": 1
           }
