@@ -39,8 +39,25 @@ class ItemFrontService extends ItemService
     {
         $result  = $this->repo->getCategoriesItemsModule($params);
 
+        $category = $this->categoryFrontService->find($params['category_ids'][0]->id);
+        if ($category->content_type == 'timeline') {
+            $data = [];
+            foreach ($result['data'] as $item) {
+                foreach ($item['extrafields'] as $extrafield) {
+                    if (array_key_exists('timeline', $extrafield->params) && (int)$extrafield->params['timeline'] == 1) {
+                        $time   = Carbon::parse($extrafield->value);
+                        $units  = explode('-', $extrafield->params['format']);
+
+                        $this->filterByDatetimeFormat($data, $units, $time, Helper::collect($item));
+                    }
+                }
+            }
+            krsort($data);
+
+            $result = $data;
+        }
         // 代表有分類的切割
-        if (gettype($result) == 'array')
+        else if (gettype($result) == 'array')
         {
             foreach ($result as $key => $items)
             {
@@ -52,33 +69,6 @@ class ItemFrontService extends ItemService
                    }
                }
 
-            }
-        }
-        else
-        {
-            if ($result->count() > 0)
-            {
-                $content_type = $result[0]->category->content_type;
-                if ($content_type == 'timeline')
-                {
-                    $data = [];
-                    foreach ($result as $item)
-                    {
-                        foreach ($item->extrafields as $extrafield)
-                        {
-                            if (array_key_exists('timeline', $extrafield->params) && (int)$extrafield->params['timeline'] == 1)
-                            {
-                                $time   = Carbon::parse($extrafield->value);
-                                $units  = explode('-', $extrafield->params['format']);
-
-                                $this->filterByDatetimeFormat($data, $units, $time, $item);
-                            }
-                        }
-                    }
-                    krsort($data);
-
-                    $result = $data;
-                }
             }
         }
 
