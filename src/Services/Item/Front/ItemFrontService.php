@@ -45,7 +45,7 @@ class ItemFrontService extends ItemService
             foreach ($result['data'] as $item) {
                 foreach ($item['extrafields'] as $extrafield) {
                     if (array_key_exists('timeline', $extrafield->params) && (int)$extrafield->params['timeline'] == 1) {
-                        $time   = Carbon::parse($extrafield->value);
+                        $time   = Carbon::parse($extrafield->value)->addHours(8);
                         $units  = explode('-', $extrafield->params['format']);
 
                         $this->filterByDatetimeFormat($data, $units, $time, Helper::collect($item));
