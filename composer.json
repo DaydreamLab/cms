@@ -19,7 +19,7 @@
     "require": {
         "daydreamlab/jjaj": "dev-master",
         "daydreamlab/user": "dev-master",
-        "daydreamlab/media": "dev-master",
+        "daydreamlab/media": "dev-orange",
         "timehunter/laravel-google-recaptcha-v3": "~2.2.11"
     },
     "require-dev": {
