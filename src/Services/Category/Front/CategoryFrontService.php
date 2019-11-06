@@ -48,6 +48,20 @@ class CategoryFrontService extends CategoryService
         );
     }
 
+
+    public function getSubcategories(Collection $input)
+    {
+        $category = $this->getItemByAlias($input);
+        if ($category) {
+            $sub_categories = $this->findBy('parent_id', '=', $category->id);
+            if ($sub_categories->count() > 0) {
+                $this->response = $sub_categories;
+            } else {
+                $this->response = [];
+            }
+        }
+    }
+
     public function getContentTypeIds($content_type)
     {
         $categories = $this->findByChain(['content_type', 'extension', 'state', 'access'], ['=', '=', '=', '='], [$content_type, 'item', '1', '2']);

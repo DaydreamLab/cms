@@ -23,6 +23,14 @@ class CategoryFrontController extends BaseController
     }
 
 
+    public function getSubcategories($alias)
+    {
+        $this->service->getSubcategories(Helper::collect(['alias'=>$alias]));
+
+        return ResponseHelper::response($this->service->status, $this->service->response);
+    }
+
+
     public function getItem($id)
     {
         $this->service->getItem($id);

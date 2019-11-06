@@ -3,7 +3,7 @@
 return [
     'item' => [
         'front' => [
-            'year_month_filter' => 0,
+            'search_filter' => 0,
             'creator_group_filter'    => [
                 'enabled'           => 0,
                 'groups'        => []

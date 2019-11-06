@@ -20,6 +20,7 @@ Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
         Route::post('search', 'DaydreamLab\Cms\Controllers\Category\Front\CategoryFrontController@search');
         Route::post('search/items', 'DaydreamLab\Cms\Controllers\Category\Front\CategoryFrontController@searchItems');
         Route::get('{alias}', 'DaydreamLab\Cms\Controllers\Category\Front\CategoryFrontController@getItemByAlias');
+        Route::get('{alias}/subcategories', 'DaydreamLab\Cms\Controllers\Category\Front\CategoryFrontController@getSubcategories');
     });
 
 
