@@ -40,13 +40,18 @@ class MenuFrontService extends MenuService
             'paginate'  => false
         ]))->first();
 
+        if ($site == null) {
+            $this->status = Str::upper(Str::snake($this->type.'ItemNotExist'));
+            return false;
+        }
+
         $input->put('site_id', $site->id);
 
         $menu = $this->repo->getMenu($input);
 
         if (!$menu)
         {
-            $this->status = Str::upper(Str::snake($this->type.'GetItemFail'));
+            $this->status = Str::upper(Str::snake($this->type.'ItemNotExist'));
             return false;
         }
 
