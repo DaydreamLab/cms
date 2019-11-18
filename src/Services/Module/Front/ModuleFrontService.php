@@ -41,6 +41,25 @@ class ModuleFrontService extends ModuleService
     }
 
 
+    public function getSubcategories(Collection $input)
+    {
+        $module = $this->getItemByAlias($input);
+        $category_ids = $module->params['category_ids'];
+
+        foreach ($category_ids as $category_id) {
+            $category = $this->categoryFrontService->find($category_id->id);
+            if ($category) {
+                $sub_categories = $this->categoryFrontService->findBy('parent_id', '=', $category->id);
+                if ($sub_categories->count() > 0) {
+                    $this->response = $sub_categories;
+                } else {
+                    $this->response = [];
+                }
+            }
+        }
+    }
+
+
     public function getCategoriesModule($params)
     {
         $params['access_ids'] = $this->access_ids;
