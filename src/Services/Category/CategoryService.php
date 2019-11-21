@@ -34,6 +34,21 @@ class CategoryService extends BaseService
         $this->repo = $repo;
     }
 
+
+    public function getSubcategories(Collection $input)
+    {
+        $category = $this->getItemByAlias($input);
+        if ($category) {
+            $sub_categories = $this->findBy('parent_id', '=', $category->id);
+            if ($sub_categories->count() > 0) {
+                $this->response = $sub_categories;
+            } else {
+                $this->response = [];
+            }
+        }
+    }
+
+
     public function addNested(Collection $input)
     {
         $item = $this->traitAddNested($input);

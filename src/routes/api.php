@@ -40,6 +40,7 @@ Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
 
     Route::group(['prefix' => 'module'], function (){
         Route::get('{alias}', 'DaydreamLab\Cms\Controllers\Module\Front\ModuleFrontController@getItemByAlias');
+        Route::get('{alias}/subcategories', 'DaydreamLab\Cms\Controllers\Module\Front\ModuleFrontController@getSubcategories');
     });
 
     Route::group(['prefix' => 'setting'], function (){
