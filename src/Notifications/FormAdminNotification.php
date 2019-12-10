@@ -43,7 +43,7 @@ class FormAdminNotification extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        $template = config('cms.form.email.template.admin');
+        $template = config('daydreamlab.cms.form.email.template.admin');
 
         return $template === 'default'
             ? (new MailMessage)
