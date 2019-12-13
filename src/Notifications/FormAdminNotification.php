@@ -45,7 +45,7 @@ class FormAdminNotification extends Notification implements ShouldQueue
     {
         $template = config('daydreamlab.cms.form.email.template.admin');
 
-        return $template === 'default'
+        return $template == 'default'
             ? (new MailMessage)
                 ->subject('「管理者」網站收到使用者的聯繫表單！')
                 ->line('有收到使用者表單，請到網站後台確認內容')

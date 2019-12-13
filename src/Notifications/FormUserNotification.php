@@ -44,9 +44,9 @@ class FormUserNotification extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        $template = config('cms.form.email.template.user');
+        $template = config('daydreamlab.cms.form.email.template.user');
 
-        return $template === 'default'
+        return $template == 'default'
             ? (new MailMessage)
                 ->subject('親愛的客戶您好，已收到你的聯絡表單')
                 ->line('感謝您的寶貴意見，我們已經收到你的需求，會盡快回覆或聯繫您！')
