@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Services\Extrafield\Admin;
 
 use DaydreamLab\Cms\Repositories\Extrafield\Admin\ExtrafieldAdminRepository;
 use DaydreamLab\Cms\Services\Extrafield\ExtrafieldService;
+use DaydreamLab\JJAJ\Helpers\Helper;
 use Illuminate\Support\Collection;
 
 class ExtrafieldAdminService extends ExtrafieldService
@@ -31,6 +32,8 @@ class ExtrafieldAdminService extends ExtrafieldService
 
     public function store(Collection $input)
     {
+//        Helper::show( $input->get('group_id') );
+//        exit();
         $this->checkItem($input->get('group_id'));
 
         return parent::store($input);
