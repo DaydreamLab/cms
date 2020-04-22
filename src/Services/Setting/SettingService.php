@@ -3,10 +3,13 @@
 namespace DaydreamLab\Cms\Services\Setting;
 
 use DaydreamLab\Cms\Services\Site\SiteService;
+use DaydreamLab\JJAJ\Traits\LoggedIn;
 use Illuminate\Support\Facades\Auth;
 
 class SettingService
 {
+    use LoggedIn;
+
     protected $type = 'Setting';
 
     public $status;
@@ -23,17 +26,17 @@ class SettingService
 
     public function __construct(SiteService $siteService)
     {
-        $this->user = Auth::guard('api')->user();
-        if ($this->user)
-        {
-            $this->viewlevels = $this->user->viewlevels;
-            $this->access_ids = $this->user->access_ids;
-        }
-        else
-        {
-            $this->viewlevels = config('cms.item.front.viewlevels');
-            $this->access_ids = config('cms.item.front.access_ids');
-        }
+//        $this->user = Auth::guard('api')->user();
+//        if ($this->user)
+//        {
+//            $this->viewlevels = $this->user->viewlevels;
+//            $this->access_ids = $this->user->access_ids;
+//        }
+//        else
+//        {
+//            $this->viewlevels = config('cms.item.front.viewlevels');
+//            $this->access_ids = config('cms.item.front.access_ids');
+//        }
         $this->siteService = $siteService;
     }
 
