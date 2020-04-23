@@ -7,6 +7,7 @@ use DaydreamLab\JJAJ\Controllers\BaseController;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
 use DaydreamLab\JJAJ\Helpers\ResponseHelper;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use DaydreamLab\Cms\Services\Category\Admin\CategoryAdminService;
 use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminRemovePost;
@@ -23,8 +24,9 @@ class CategoryAdminController extends BaseController
         $this->service = $service;
     }
 
-    public function getItem($id)
+    public function getItem($id, Request $request)
     {
+        $this->service->setUser($request['user']);
         $this->service->canAction('getCategory');
         $this->service->getItem($id);
 
