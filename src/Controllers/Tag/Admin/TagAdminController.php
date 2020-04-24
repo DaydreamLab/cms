@@ -6,6 +6,7 @@ use DaydreamLab\Cms\Requests\Item\ItemOrderingPost;
 use DaydreamLab\JJAJ\Controllers\BaseController;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
 use DaydreamLab\JJAJ\Helpers\ResponseHelper;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use DaydreamLab\Cms\Services\Tag\Admin\TagAdminService;
 use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminRemovePost;
@@ -25,8 +26,9 @@ class TagAdminController extends BaseController
     }
 
 
-    public function getItem($id)
+    public function getItem($id, Request $request)
     {
+        $this->service->setUser($request['user']);
         $this->service->canAction('getTag');
         $this->service->getItem($id);
 

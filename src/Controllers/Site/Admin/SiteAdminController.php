@@ -6,6 +6,7 @@ use DaydreamLab\Cms\Requests\Site\SiteCheckoutPost;
 use DaydreamLab\JJAJ\Controllers\BaseController;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
 use DaydreamLab\JJAJ\Helpers\ResponseHelper;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use DaydreamLab\Cms\Services\Site\Admin\SiteAdminService;
 use DaydreamLab\Cms\Requests\Site\Admin\SiteAdminRemovePost;
@@ -30,8 +31,9 @@ class SiteAdminController extends BaseController
     }
 
 
-    public function getItem($id)
+    public function getItem($id, Request $request)
     {
+        $this->service->setUser($request['user']);
         $this->service->canAction('getSite');
         $this->service->getItem($id);
 

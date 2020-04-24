@@ -6,6 +6,7 @@ use DaydreamLab\Cms\Requests\Extrafield\ExtrafieldAdminCheckoutPost;
 use DaydreamLab\JJAJ\Controllers\BaseController;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
 use DaydreamLab\JJAJ\Helpers\ResponseHelper;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use DaydreamLab\Cms\Services\Extrafield\Admin\ExtrafieldAdminService;
 use DaydreamLab\Cms\Requests\Extrafield\Admin\ExtrafieldAdminRemovePost;
@@ -21,8 +22,9 @@ class ExtrafieldAdminController extends BaseController
         parent::__construct($service);
     }
 
-    public function getItem($id)
+    public function getItem($id, Request $request)
     {
+        $this->service->setUser($request['user']);
         $this->service->canAction('getExtrafield');
         $this->service->getItem($id);
 
