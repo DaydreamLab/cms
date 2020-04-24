@@ -6,6 +6,7 @@ use DaydreamLab\JJAJ\Controllers\BaseController;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
 use DaydreamLab\JJAJ\Helpers\ResponseHelper;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use DaydreamLab\Cms\Services\Item\Admin\ItemAdminService;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminRemovePost;
@@ -51,8 +52,9 @@ class ItemAdminController extends BaseController
     }
 
 
-    public function getItem($id)
+    public function getItem($id, Request $request)
     {
+        $this->service->setUser($request['user']);
         $this->service->canAction('getItem');
         $this->service->getItem($id);
 
