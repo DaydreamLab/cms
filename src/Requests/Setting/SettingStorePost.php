@@ -25,7 +25,7 @@ class SettingStorePost extends AdminRequest
     public function rules()
     {
         return [
-            'sitename'      => 'required|string',
+            'sitename'      => 'nullable|string',
             'metadesc'      => 'nullable|string',
             'metakeywords'  => 'nullable|string',
             'locale'        => 'required|string',
@@ -33,6 +33,7 @@ class SettingStorePost extends AdminRequest
             'custom_head'   => 'nullable|string',
             'custom_body'   => 'nullable|string',
             'custom_footer' => 'nullable|string',
+            'usercount'     => 'nullable|integer'
         ];
     }
 }
