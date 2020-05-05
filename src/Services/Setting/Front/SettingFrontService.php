@@ -39,6 +39,7 @@ class SettingFrontService extends SettingService
             $data['custom_header']  = $global['custom_head'];
             $data['custom_body']    = $global['custom_body'];
             $data['custom_footer']  = $global['custom_footer'];
+            $data['usercount'] = $global['usercount'];
 
             $this->status   = Str::upper(Str::snake($this->type.'GetItemSuccess'));
             $this->response = (object)$data;
