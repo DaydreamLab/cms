@@ -37,7 +37,7 @@ class CategoryService extends BaseService
 
     public function getSubcategories(Collection $input)
     {
-        $category = $this->getItemByAlias($input);
+        $category = $this->findBy('alias', '=', $input->get('alias'))->first();
         if ($category) {
             $sub_categories = $this->findBy('parent_id', '=', $category->id);
             if ($sub_categories->count() > 0) {
