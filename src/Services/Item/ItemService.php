@@ -46,7 +46,7 @@ class ItemService extends BaseService
         $result = false;
         foreach ($input->get('ids') as $id)
         {
-            $item = $this->checkItem($id);
+            $item = $this->checkItem(collect(['id' => $id]));
             $result =  $this->repo->featured($item, $input->get('featured'));
             if(!$result) break;
         }

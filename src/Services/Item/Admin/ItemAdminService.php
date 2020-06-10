@@ -54,7 +54,7 @@ class ItemAdminService extends ItemService
     public function modify(Collection $input)
     {
         $input_featured = $input->get('featured');
-        $item = $this->checkItem($input->get('id'));
+        $item = $this->checkItem(collect(['id' => $input->get('id')]));
         // 代表有修改到 featured 值
         if ($item && $item->featured != $input_featured)
         {

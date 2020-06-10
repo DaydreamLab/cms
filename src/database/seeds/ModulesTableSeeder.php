@@ -2,13 +2,8 @@
 
 namespace DaydreamLab\Cms\Database\Seeds;
 
-use DaydreamLab\Cms\Models\Category\Admin\CategoryAdmin;
 use DaydreamLab\Cms\Models\Category\Category;
-use DaydreamLab\Cms\Models\Cms\CmsCronJob;
-use DaydreamLab\Cms\Repositories\Category\Admin\CategoryAdminRepository;
-use DaydreamLab\Cms\Repositories\Cms\CmsCronJobRepository;
 use DaydreamLab\Cms\Services\Category\Admin\CategoryAdminService;
-use DaydreamLab\Cms\Services\Cms\CmsCronJobService;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use Illuminate\Database\Seeder;
 
@@ -39,11 +34,11 @@ class ModulesTableSeeder extends Seeder
             'created_by'    => 1,
             'children'      => []
         ]);
+
         $this->categoryAdminService  = app(CategoryAdminService::class);
         $data = json_decode(file_get_contents(__DIR__.'/jsons/module.json'), true);
 
         $this->migrate($data, Category::where('extension', 'module')->first());
-
     }
 
 
@@ -55,8 +50,8 @@ class ModulesTableSeeder extends Seeder
             unset($category['modules']);
 
             $category['parent_id'] = $parent->id;
-            $category = $this->categoryAdminService->store(Helper::collect($category));
 
+            $category = $this->categoryAdminService->store(Helper::collect($category));
             foreach ($modules as $module)
             {
                 $module['category_id'] = $category->id;

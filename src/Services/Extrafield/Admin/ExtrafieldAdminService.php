@@ -31,7 +31,7 @@ class ExtrafieldAdminService extends ExtrafieldService
 
     public function store(Collection $input)
     {
-        $this->checkItem($input->get('group_id'));
+        $this->checkItem(collect(['id' => $input->get('group_id')]));
 
         return parent::store($input);
     }
