@@ -41,9 +41,11 @@ class CategoryService extends BaseService
         if ($category) {
             $sub_categories = $this->findBy('parent_id', '=', $category->id);
             if ($sub_categories->count() > 0) {
+                $this->status = 'CATEGORY_GET_ITEM_SUCCESS';
                 $this->response = $sub_categories;
                 return $sub_categories;
             } else {
+                $this->status = 'CATEGORY_GET_ITEM_SUCCESS';
                 $this->response = [];
                 return [];
             }
