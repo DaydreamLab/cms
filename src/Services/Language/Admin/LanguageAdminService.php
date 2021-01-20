@@ -20,7 +20,7 @@ class LanguageAdminService extends LanguageService
     }
 
 
-    public function getList()
+    public function getList(Collection $input)
     {
         $data = $this->findBy('state','=', 1);
 
