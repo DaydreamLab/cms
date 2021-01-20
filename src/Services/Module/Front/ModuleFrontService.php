@@ -56,13 +56,13 @@ class ModuleFrontService extends ModuleService
             $item_params['access_ids']      = $this->access_ids;
             $item_params['order_by']        = $params['item_order_by'];
             $item_params['order']           = $params['item_order'];
-            $item_params['limit']           = $params['item_count'];
+            $item_params['limit']           = $params['item_limit'];
 
             if ($params['with_items'] == 'self')
             {
                 $item_params['category_ids'] = $category_ids;
             }
-            elseif ($params['with_items'] == 'children')
+            elseif ($params['with_items'])
             {
                 $descendant = $this->categoryFrontService->findDescendantOf($category->id);
                 $descendant_ids = $descendant->map(function ($item, $key){
@@ -76,7 +76,7 @@ class ModuleFrontService extends ModuleService
             $category->items = $this->itemFrontService->getItemsByCategoryIds($item_params);
         }
 
-        if ($params['category_to_tree'])
+        if (array_key_exists('toTree', $params) && $params['toTree'])
         {
             $categories = $categories->toTree();
         }

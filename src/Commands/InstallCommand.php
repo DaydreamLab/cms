@@ -72,6 +72,8 @@ class InstallCommand extends Command
     public function handle()
     {
         $this->call('user:install');
+        $this->call('media:install');
+        $this->call('observer:install');
 
         foreach ($this->seeders as $seeder) {
             $this->call('db:seed', [
@@ -80,8 +82,6 @@ class InstallCommand extends Command
         }
 
         $this->deleteConstants();
-
-//        $this->deleteResources();
 
         $this->call('vendor:publish', [
             '--tag' => 'cms-configs'
@@ -100,9 +100,7 @@ class InstallCommand extends Command
             '--provider' => 'Fedeisas\LaravelMailCssInliner\LaravelMailCssInlinerServiceProvider'
         ]);
 
-
     }
-
 
     public function deleteConstants()
     {
@@ -112,11 +110,4 @@ class InstallCommand extends Command
         }
     }
 
-
-    public function deleteResources()
-    {
-        File::deleteDirectory('resources/js');
-        File::deleteDirectory('resources/assets');
-        File::deleteDirectory('resources/views');
-    }
 }
