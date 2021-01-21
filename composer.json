@@ -17,7 +17,7 @@
     },
     "minimum-stability": "dev",
     "require": {
-        "daydreamlab/jjaj": "dev-master",
+        "daydreamlab/jjaj": "dev-base/develop",
         "daydreamlab/user": "dev-master",
         "daydreamlab/media": "dev-master",
         "timehunter/laravel-google-recaptcha-v3": "~2.2.11"
