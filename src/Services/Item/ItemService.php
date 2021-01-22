@@ -110,7 +110,7 @@ class ItemService extends BaseService
 
     public function state(Collection $input, $items = null)
     {
-        $result = parent::state($items, $input->get('state'));
+        $result = parent::state($input, $input->get('state'));
 
         event(new State($this->model_name, $result, $input, $this->user));
 
