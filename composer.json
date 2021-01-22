@@ -17,9 +17,6 @@
     },
     "minimum-stability": "dev",
     "require": {
-        //        "daydreamlab/jjaj": "dev-master",
-        //        "daydreamlab/user": "dev-master",
-        //        "daydreamlab/media": "dev-master",
         "daydreamlab/jjaj": "dev-develop-tusa",
         "daydreamlab/user": "dev-develop-tusa",
         "daydreamlab/media": "dev-develop-tusa",
