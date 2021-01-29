@@ -1,0 +1,757 @@
+[
+  {
+    "title": "MOD_GLOBAL_MENU_SYSTEM",
+    "path": "/system",
+    "component": "",
+    "type": "separator",
+    "redirect": "",
+    "icon": "",
+    "state": 1,
+    "showNav": 1,
+    "created_by": 1,
+    "children": [
+      {
+        "title": "COM_SYSTEM_SETTINGS_TITLE",
+        "path": "/setting",
+        "component": "system/setting",
+        "service": "SettingAdminService",
+        "type": "menu",
+        "redirect": "",
+        "icon": "sliders-h",
+        "state": 1,
+        "showNav": 1,
+        "created_by": 1,
+        "children": [],
+        "apis": [
+          {
+            "method": "getSetting",
+            "url": "/admin/setting",
+            "created_by": 1
+          },
+          {
+            "method": "editSetting",
+            "url": "/admin/setting/store",
+            "created_by": 1
+          }
+        ]
+      },
+
+      {
+        "title": "COM_SYSTEM_LANGUAGE_MANAGER_TITLE",
+        "path": "/language",
+        "component": "system/language/list",
+        "service": "LanguageAdminService",
+        "type": "menu",
+        "redirect": "",
+        "icon": "language",
+        "state": 1,
+        "showNav": 1,
+        "created_by": 1,
+        "children": [],
+        "apis": [
+          {
+            "method": "getLanguage",
+            "url": "/admin/language/{id}",
+            "created_by": 1
+          },
+          {
+            "method": "addLanguage",
+            "url": "/admin/language/store",
+            "created_by": 1
+          },
+          {
+            "method": "editLanguage",
+            "url": "/admin/language/store",
+            "created_by": 1
+          },
+          {
+            "method": "deleteLanguage",
+            "url": "/admin/language/remove",
+            "created_by": 1
+          },
+          {
+            "method": "searchLanguage",
+            "url": "/admin/language/search",
+            "created_by": 1
+          },
+          {
+            "method": "updateLanguageState",
+            "url": "/admin/language/state",
+            "created_by": 1
+          },
+          {
+            "method": "setDefaultLanguage",
+            "url": "/admin/language/default",
+            "created_by": 1
+          },
+          {
+            "method": "checkoutLanguage",
+            "url": "/admin/language/checkout",
+            "created_by": 1
+          }
+        ]
+      },
+      {
+        "title": "COM_SYSTEM_LANGUAGE_EDIT_TITLE",
+        "path": "/language/edit",
+        "component": "system/language/edit",
+        "type": "function",
+        "redirect": "",
+        "icon": "",
+        "state": 1,
+        "showNav": 0,
+        "created_by": 1,
+        "children": [],
+        "apis": []
+      },
+      {
+        "title": "COM_SYSTEM_SITE_MANAGER_TITLE",
+        "path": "/site",
+        "component": "system/site/list",
+        "service": "SiteAdminService",
+        "type": "menu",
+        "redirect": "",
+        "icon": "sitemap",
+        "state": 1,
+        "showNav": 1,
+        "created_by": 1,
+        "children": [],
+        "apis": [
+          {
+            "method": "getSite",
+            "url": "/admin/site/{id}",
+            "created_by": 1
+          },
+          {
+            "method": "getSiteList",
+            "url": "/admin/site/getList",
+            "created_by": 1
+          },
+          {
+            "method": "addSite",
+            "url": "/admin/site/store",
+            "created_by": 1
+          },
+          {
+            "method": "editSite",
+            "url": "/admin/site/store",
+            "created_by": 1
+          },
+          {
+            "method": "deleteSite",
+            "url": "/admin/site/remove",
+            "created_by": 1
+          },
+          {
+            "method": "searchSite",
+            "url": "/admin/site/search",
+            "created_by": 1
+          },
+          {
+            "method": "updateSiteState",
+            "url": "/admin/site/state",
+            "created_by": 1
+          },
+          {
+            "method": "checkoutSite",
+            "url": "/admin/site/remove",
+            "created_by": 1
+          }
+        ]
+      },
+      {
+        "title": "COM_SYSTEM_SITE_EDIT_TITLE",
+        "path": "/site/edit",
+        "component": "system/site/edit",
+        "type": "function",
+        "redirect": "",
+        "icon": "",
+        "state": 1,
+        "showNav": 0,
+        "created_by": 1,
+        "children": [],
+        "apis": []
+      }
+    ],
+    "apis": []
+  },
+  {
+    "title": "MOD_GLOBAL_MENU_PAGE",
+    "path": "",
+    "component": "",
+    "type": "separator",
+    "redirect": "",
+    "icon": "",
+    "state": 1,
+    "showNav": 1,
+    "created_by": 1,
+    "children": [],
+    "apis": []
+  },
+  {
+    "title": "COM_MENUS",
+    "path": "/menu",
+    "component": "",
+    "service": "MenuAdminService",
+    "type": "alias",
+    "redirect": "",
+    "icon": "",
+    "state": 1,
+    "showNav": 1,
+    "created_by": 1,
+    "children": [
+      {
+        "title": "COM_MENUS_ITEM_MANAGER_TITLE",
+        "path": "",
+        "component": "menu/list",
+        "service": "MenuAdminService",
+        "type": "menu",
+        "redirect": "",
+        "icon": "th-list",
+        "state": 1,
+        "showNav": 1,
+        "created_by": 1,
+        "children": [],
+        "apis": [
+          {
+            "method": "getMenu",
+            "url": "/admin/menu/{id}",
+            "created_by": 1
+          },
+          {
+            "method": "addMenu",
+            "url": "/admin/menu/store",
+            "created_by": 1
+          },
+          {
+            "method": "editMenu",
+            "url": "/admin/menu/store",
+            "created_by": 1
+          },
+          {
+            "method": "deleteMenu",
+            "url": "/admin/menu/remove",
+            "created_by": 1
+          },
+          {
+            "method": "searchMenu",
+            "url": "/admin/menu/search",
+            "created_by": 1
+          },
+          {
+            "method": "updateMenuState",
+            "url": "/admin/menu/state",
+            "created_by": 1
+          },
+          {
+            "method": "checkoutMenu",
+            "url": "/admin/menu/checkout",
+            "created_by": 1
+          }
+        ]
+      },
+      {
+        "title": "COM_MENUS_ITEM_EDIT_TITLE",
+        "path": "/edit",
+        "component": "menu/edit",
+        "type": "function",
+        "redirect": "",
+        "icon": "",
+        "state": 1,
+        "showNav": 0,
+        "created_by": 1,
+        "children": [],
+        "apis": []
+      }
+    ],
+    "apis": []
+  },
+  {
+    "title": "COM_MODULES",
+    "path": "/module",
+    "component": "",
+    "type": "alias",
+    "redirect": "",
+    "icon": "",
+    "state": 1,
+    "showNav": 1,
+    "created_by": 1,
+    "children": [
+      {
+        "title": "COM_MODULES_ITEM_MANAGER_TITLE",
+        "path": "",
+        "component": "module/list",
+        "service": "ModuleAdminService",
+        "type": "menu",
+        "redirect": "",
+        "icon": "cube",
+        "state": 1,
+        "showNav": 1,
+        "created_by": 1,
+        "children": [],
+        "apis": [
+          {
+            "method": "getModule",
+            "url": "/admin/module/{id}",
+            "created_by": 1
+          },
+          {
+            "method": "addModule",
+            "url": "/admin/module/store",
+            "created_by": 1
+          },
+          {
+            "method": "editModule",
+            "url": "/admin/module/store",
+            "created_by": 1
+          },
+          {
+            "method": "deleteModule",
+            "url": "/admin/module/remove",
+            "created_by": 1
+          },
+          {
+            "method": "searchModule",
+            "url": "/admin/module/search",
+            "created_by": 1
+          },
+          {
+            "method": "updateModuleState",
+            "url": "/admin/module/state",
+            "created_by": 1
+          },
+          {
+            "method": "checkoutModule",
+            "url": "/admin/module/checkout",
+            "created_by": 1
+          }
+        ]
+      },
+      {
+        "title": "COM_MODULES_ITEM_EDIT_TITLE",
+        "path": "/edit",
+        "component": "module/edit",
+        "type": "function",
+        "redirect": "",
+        "icon": "",
+        "state": 1,
+        "showNav": 0,
+        "created_by": 1,
+        "children": [],
+        "apis": []
+      }
+    ],
+    "apis": []
+  },
+  {
+    "title": "COM_CONTENT",
+    "path": "/content",
+    "component": "",
+    "type": "separator",
+    "redirect": "/content/item",
+    "icon": "",
+    "state": 1,
+    "showNav": 1,
+    "created_by": 1,
+    "children": [
+      {
+        "title": "COM_CONTENT_ITEM_MANAGER_TITLE",
+        "path": "/item",
+        "component": "content/item/list",
+        "service": "ItemAdminService",
+        "type": "menu",
+        "redirect": "",
+        "icon": "file-alt",
+        "state": 1,
+        "showNav": 1,
+        "created_by": 1,
+        "children": [],
+        "apis": [
+          {
+            "method": "getItem",
+            "url": "/admin/item/{id}",
+            "created_by": 1
+          },
+          {
+            "method": "addItem",
+            "url": "/admin/item/store",
+            "created_by": 1
+          },
+          {
+            "method": "editItem",
+            "url": "/admin/item/store",
+            "created_by": 1
+          },
+          {
+            "method": "deleteItem",
+            "url": "/admin/item/remove",
+            "created_by": 1
+          },
+          {
+            "method": "searchItem",
+            "url": "/admin/item/search",
+            "created_by": 1
+          },
+          {
+            "method": "updateItemState",
+            "url": "/admin/item/state",
+            "created_by": 1
+          },
+          {
+            "method": "updateItemFeatured",
+            "url": "/admin/item/featured",
+            "created_by": 1
+          },
+          {
+            "method": "checkoutItem",
+            "url": "/admin/item/checkout",
+            "created_by": 1
+          }
+        ]
+      },
+      {
+        "title": "COM_CONTENT_ITEM_EDIT_TITLE",
+        "path": "/item/edit",
+        "component": "content/item/edit",
+        "type": "function",
+        "redirect": "",
+        "icon": "",
+        "state": 1,
+        "showNav": 0,
+        "created_by": 1,
+        "children": [],
+        "apis": []
+      },
+
+      {
+        "title": "COM_CONTENT_CATEGORY_MANAGER_TITLE",
+        "path": "/category",
+        "component": "content/category/list",
+        "service": "CategoryAdminService",
+        "type": "menu",
+        "redirect": "",
+        "icon": "folder-open",
+        "state": 1,
+        "showNav": 1,
+        "created_by": 1,
+        "children": [],
+        "apis": [
+          {
+            "method": "getCategory",
+            "url": "/admin/category/{id}",
+            "created_by": 1
+          },
+          {
+            "method": "addCategory",
+            "url": "/admin/category/store",
+            "created_by": 1
+          },
+          {
+            "method": "editCategory",
+            "url": "/admin/category/store",
+            "created_by": 1
+          },
+          {
+            "method": "deleteCategory",
+            "url": "/admin/category/remove",
+            "created_by": 1
+          },
+          {
+            "method": "searchCategory",
+            "url": "/admin/category/search",
+            "created_by": 1
+          },
+          {
+            "method": "updateCategoryState",
+            "url": "/admin/category/state",
+            "created_by": 1
+          },
+          {
+            "method": "checkoutCategory",
+            "url": "/admin/category/checkout",
+            "created_by": 1
+          }
+        ]
+      },
+      {
+        "title": "COM_CONTENT_CATEGORY_EDIT_TITLE",
+        "path": "/category/edit",
+        "component": "content/category/edit",
+        "type": "function",
+        "redirect": "",
+        "icon": "",
+        "state": 1,
+        "showNav": 0,
+        "created_by": 1,
+        "children": [],
+        "apis": []
+      },
+
+      {
+        "title": "COM_CONTENT_EXTRAFIELD_MANAGER_TITLE",
+        "path": "/field",
+        "component": "content/field/list",
+        "service": "ExtrafieldAdminService",
+        "type": "menu",
+        "redirect": "",
+        "icon": "layer-plus",
+        "state": 1,
+        "showNav": 1,
+        "created_by": 1,
+        "children": [],
+        "apis": [
+          {
+            "method": "getExtrafield",
+            "url": "/admin/extrafield/{id}",
+            "created_by": 1
+          },
+          {
+            "method": "addExtrafield",
+            "url": "/admin/extrafield/store",
+            "created_by": 1
+          },
+          {
+            "method": "editExtrafield",
+            "url": "/admin/extrafield/store",
+            "created_by": 1
+          },
+          {
+            "method": "deleteExtrafield",
+            "url": "/admin/extrafield/remove",
+            "created_by": 1
+          },
+          {
+            "method": "searchExtrafield",
+            "url": "/admin/extrafield/search",
+            "created_by": 1
+          },
+          {
+            "method": "updateExtrafieldState",
+            "url": "/admin/extrafield/state",
+            "created_by": 1
+          },
+          {
+            "method": "updateStateOther",
+            "url": "/admin/extrafield/state",
+            "created_by": 1
+          },
+          {
+            "method": "checkoutExtrafield",
+            "url": "/admin/extrafield/checkout",
+            "created_by": 1
+          }
+        ]
+      },
+      {
+        "title": "COM_CONTENT_EXTRAFIELD_EDIT_TITLE",
+        "path": "/field/edit",
+        "component": "content/field/edit",
+        "type": "function",
+        "redirect": "",
+        "icon": "",
+        "state": 1,
+        "showNav": 0,
+        "created_by": 1,
+        "children": [],
+        "apis": []
+      },
+      {
+        "title": "COM_CONTENT_EXTRAFIELD_GROUP_MANAGER_TITLE",
+        "path": "/field/group",
+        "component": "content/field/group/list",
+        "service": "ExtrafieldGroupAdminService",
+        "type": "menu",
+        "redirect": "",
+        "icon": "layer-group",
+        "state": 1,
+        "showNav": 1,
+        "created_by": 1,
+        "children": [],
+        "apis": [
+          {
+            "method": "getExtrafieldGroup",
+            "url": "/admin/extrafield_group/{id}",
+            "created_by": 1
+          },
+          {
+            "method": "addExtrafieldGroup",
+            "url": "/admin/extrafield_group/store",
+            "created_by": 1
+          },
+          {
+            "method": "editExtrafieldGroup",
+            "url": "/admin/extrafield_group/store",
+            "created_by": 1
+          },
+          {
+            "method": "deleteExtrafieldGroup",
+            "url": "/admin/extrafield_group/remove",
+            "created_by": 1
+          },
+          {
+            "method": "searchExtrafieldGroup",
+            "url": "/admin/extrafield_group/remove",
+            "created_by": 1
+          },
+          {
+            "method": "updateExtrafieldGroupState",
+            "url": "/admin/extrafield_group/state",
+            "created_by": 1
+          },
+          {
+            "method": "checkoutExtrafieldGroup",
+            "url": "/admin/extrafield_group/checkout",
+            "created_by": 1
+          }
+        ]
+      },
+      {
+        "title": "COM_CONTENT_EXTRAFIELD_GROUP_EDIT_TITLE",
+        "path": "/field/group/edit",
+        "component": "content/field/group/edit",
+        "type": "function",
+        "redirect": "",
+        "icon": "",
+        "state": 1,
+        "showNav": 0,
+        "created_by": 1,
+        "children": [],
+        "apis": []
+      },
+      {
+        "title": "COM_CONTENT_TAG_MANAGER_TITLE",
+        "path": "/tag",
+        "component": "content/tag/list",
+        "service": "TagAdminService",
+        "type": "menu",
+        "redirect": "",
+        "icon": "tags",
+        "state": 1,
+        "showNav": 1,
+        "created_by": 1,
+        "children": [],
+        "apis": [
+          {
+            "method": "getTag",
+            "url": "/admin/tag/{id}",
+            "created_by": 1
+          },
+          {
+            "method": "addTag",
+            "url": "/admin/tag/store",
+            "created_by": 1
+          },
+          {
+            "method": "editTag",
+            "url": "/admin/tag/store",
+            "created_by": 1
+          },
+          {
+            "method": "deleteTag",
+            "url": "/admin/tag/remove",
+            "created_by": 1
+          },
+          {
+            "method": "searchTag",
+            "url": "/admin/tag/search",
+            "created_by": 1
+          },
+          {
+            "method": "updateTagState",
+            "url": "/admin/tag/state",
+            "created_by": 1
+          },
+          {
+            "method": "checkoutTag",
+            "url": "/admin/tag/checkout",
+            "created_by": 1
+          }
+        ]
+      },
+      {
+        "title": "COM_CONTENT_TAG_EDIT_TITLE",
+        "path": "/tag/edit",
+        "component": "content/tag/edit",
+        "type": "function",
+        "redirect": "",
+        "icon": "",
+        "state": 1,
+        "showNav": 0,
+        "created_by": 1,
+        "children": [],
+        "apis": []
+      },
+      {
+        "title": "COM_CONTENT_MEDIA_MANAGER_TITLE",
+        "path": "/media",
+        "component": "content/media",
+        "service": "MediaAdminService",
+        "type": "menu",
+        "redirect": "",
+        "icon": "images",
+        "state": 1,
+        "showNav": 1,
+        "created_by": 1,
+        "children": [],
+        "apis": [
+          {
+            "method": "uploadMedia",
+            "url": "/admin/media/store",
+            "created_by": 1
+          },
+          {
+            "method": "deleteMedia",
+            "url": "/admin/media/remove",
+            "created_by": 1
+          },
+          {
+            "method": "renameMedia",
+            "url": "/admin/media/rename",
+            "created_by": 1
+          },
+          {
+            "method": "moveMedia",
+            "url": "/admin/media/move",
+            "created_by": 1
+          },
+          {
+            "method": "getMediaAllItems",
+            "url": "/admin/media/getAllItems",
+            "created_by": 1
+          },
+          {
+            "method": "getMediaAllFolder",
+            "url": "/admin/media/getAllFolder",
+            "created_by": 1
+          },
+          {
+            "method": "createMediaFolder",
+            "url": "/admin/media/createFolder",
+            "created_by": 1
+          }
+        ]
+      },
+      {
+        "title": "COM_CONTENT_SEARCH_STATISTICS_TITLE",
+        "path": "/search",
+        "component": "content/search",
+        "service": "SearchAdminService",
+        "type": "menu",
+        "redirect": "",
+        "icon": "search",
+        "state": 1,
+        "showNav": 1,
+        "created_by": 1,
+        "children": [],
+        "apis": [
+          {
+            "method": "searchkeywordList",
+            "url": "/admin/search/keywordList",
+            "created_by": 1
+          }
+        ]
+      }
+    ],
+    "apis": []
+  }
+]

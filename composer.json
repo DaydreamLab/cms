@@ -10,8 +10,8 @@
     "autoload": {
         "psr-4": {
             "DaydreamLab\\Cms\\": "src/",
-            "DaydreamLab\\Cms\\Database\\Seeders\\": "resources/seeders",
-            "DaydreamLab\\Cms\\Database\\Factories\\": "resources/factories",
+            "DaydreamLab\\Cms\\Database\\Seeders\\": "database/seeders",
+            "DaydreamLab\\Cms\\Database\\Factories\\": "database/factories",
             "DaydreamLab\\Cms\\Tests\\": "tests/"
         }
     },
