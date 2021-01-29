@@ -19,6 +19,12 @@ use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminOrderingPost;
 
 class ItemAdminController extends BaseController
 {
+    protected $package = 'Cms';
+
+    protected $modelName = 'Item';
+
+    protected $modelType = 'Admin';
+
     public function __construct(ItemAdminService $service)
     {
         parent::__construct($service);
@@ -27,27 +33,27 @@ class ItemAdminController extends BaseController
 
     public function checkout(ItemAdminCheckoutPost $request)
     {
-        $this->service->checkout($request->rulesInput());
+        $this->service->checkout($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function featured(ItemAdminFeaturePost $request)
     {
         $this->service->canAction('editItem');
-        $this->service->featured($request->rulesInput());
+        $this->service->featured($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function featuredOrdering(ItemAdminOrderingPost $request)
     {
         $this->service->canAction('editItem');
-        $this->service->ordering($request->rulesInput());
+        $this->service->ordering($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
@@ -56,52 +62,52 @@ class ItemAdminController extends BaseController
         $this->service->canAction('getItem');
         $this->service->getItem($id);
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function ordering(ItemAdminOrderingPost $request)
     {
         $this->service->canAction('editItem');
-        $this->service->ordering($request->rulesInput());
+        $this->service->ordering($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function remove(ItemAdminRemovePost $request)
     {
         $this->service->canAction('deleteItem');
-        $this->service->remove($request->rulesInput());
+        $this->service->remove($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function state(ItemAdminStatePost $request)
     {
         $this->service->canAction('updateItemState');
-        $this->service->state($request->rulesInput());
+        $this->service->state($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function store(ItemAdminStorePost $request)
     {
-        InputHelper::null($request->rulesInput(), 'id') ? $this->service->canAction('addItem')
+        InputHelper::null($request->validated(), 'id') ? $this->service->canAction('addItem')
             : $this->service->canAction('editItem');
-        $this->service->store($request->rulesInput());
+        $this->service->store($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function search(ItemAdminSearchPost $request)
     {
         $this->service->canAction('searchItem');
-        $this->service->search($request->rulesInput());
+        $this->service->search($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 }

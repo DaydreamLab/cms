@@ -16,6 +16,12 @@ use DaydreamLab\Cms\Requests\Menu\Admin\MenuAdminOrderingPost;
 
 class MenuAdminController extends BaseController
 {
+    protected $package = 'Cms';
+
+    protected $modelName = 'Menu';
+
+    protected $modelType = 'Admin';
+
     public function __construct(MenuAdminService $service)
     {
         parent::__construct($service);
@@ -27,48 +33,48 @@ class MenuAdminController extends BaseController
         $this->service->canAction('getMenu');
         $this->service->getItem($id);
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function checkout(MenuAdminRemovePost $request)
     {
-        $this->service->checkout($request->rulesInput());
+        $this->service->checkout($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function ordering(MenuAdminOrderingPost $request)
     {
         $this->service->canAction('editMenu');
-        $this->service->ordering($request->rulesInput());
+        $this->service->ordering($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function remove(MenuAdminRemovePost $request)
     {
         $this->service->canAction('deleteMenu');
-        $this->service->remove($request->rulesInput());
+        $this->service->remove($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function state(MenuAdminStatePost $request)
     {
         $this->service->canAction('updateMenuState');
-        $this->service->state($request->rulesInput());
+        $this->service->state($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function store(MenuAdminStorePost $request)
     {
-        $input = $request->rulesInput();
+        $input = $request->validated();
         if (InputHelper::null($input, 'host'))
         {
             $input->put('host', $request->getHttpHost());
@@ -79,16 +85,16 @@ class MenuAdminController extends BaseController
 
         $this->service->store($input);
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function search(MenuAdminSearchPost $request)
     {
         $this->service->canAction('searchMenu');
-        $this->service->search($request->rulesInput());
+        $this->service->search($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 }

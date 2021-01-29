@@ -12,7 +12,11 @@ use Illuminate\Support\Collection;
 
 class ExtrafieldGroupService extends BaseService
 {
-    protected $type = 'ExtrafieldGroup';
+    protected $package = 'Cms';
+
+    protected $modelName = 'ExtrafieldGroup';
+
+    protected $modelType = 'Base';
 
     public function __construct(ExtrafieldGroupRepository $repo)
     {

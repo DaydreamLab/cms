@@ -22,14 +22,14 @@ class SettingAdminController
         $this->service->canAction('SettingAdminService', 'getSetting', '');
         $this->service->getItem();
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function store(SettingStorePost $request)
     {
-        $this->service->store($request->rulesInput());
+        $this->service->store($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 }

@@ -22,6 +22,12 @@ class TagService extends BaseService
         NestedServiceTrait::removeNested    as traitRemoveNested;
     }
 
+    protected $package = 'Cms';
+
+    protected $modelName = 'Tag';
+
+    protected $modelType = 'Base';
+
     protected $type = 'Tag';
 
 

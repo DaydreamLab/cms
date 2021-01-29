@@ -28,17 +28,17 @@ class ItemFrontController extends BaseController
 
     public function checkout(ItemFrontCheckoutPost $request)
     {
-        $this->service->checkout($request->rulesInput());
+        $this->service->checkout($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function feature(ItemFrontFeaturePost $request)
     {
-        $this->service->feature($request->rulesInput());
+        $this->service->feature($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
@@ -46,7 +46,7 @@ class ItemFrontController extends BaseController
     {
         $this->service->getItem($id);
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
@@ -57,7 +57,7 @@ class ItemFrontController extends BaseController
             'language'  => $request->get('language') != '' ? $request->language : config('daydreamlab.global.locale')
         ]));
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
@@ -65,55 +65,55 @@ class ItemFrontController extends BaseController
     {
         $this->service->search(new Collection());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function getPreviousAndNext(ItemFrontGetPreviousAndNextPost $request)
     {
-        $this->service->getPreviousAndNext($request->rulesInput());
+        $this->service->getPreviousAndNext($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function ordering(ItemFrontOrderingPost $request)
     {
-        $this->service->ordering($request->rulesInput());
+        $this->service->ordering($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function remove(ItemFrontRemovePost $request)
     {
-        $this->service->remove($request->rulesInput());
+        $this->service->remove($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function state(ItemFrontStatePost $request)
     {
-        $this->service->state($request->rulesInput());
+        $this->service->state($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function store(ItemFrontStorePost $request)
     {
-        $this->service->store($request->rulesInput());
+        $this->service->store($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function search(ItemFrontSearchPost $request)
     {
         $input =
-        $this->service->search($request->rulesInput());
+        $this->service->search($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 }

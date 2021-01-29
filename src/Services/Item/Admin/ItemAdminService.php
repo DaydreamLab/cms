@@ -17,7 +17,7 @@ class ItemAdminService extends ItemService
 {
     use CmsCronJob;
 
-    protected $type = 'ItemAdmin';
+    protected $modelType = 'Admin';
 
     protected $tagAdminService;
 

@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Notification;
 
 class FormFrontService extends FormService
 {
-    protected $type = 'FormFront';
+    protected $type = 'Front';
 
     public function __construct(FormFrontRepository $repo)
     {

@@ -2,87 +2,90 @@
 
 namespace DaydreamLab\Cms\Controllers\Category\Admin;
 
+use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminGetItem;
 use DaydreamLab\Cms\Requests\Item\Admin\CategoryAdminOrderingPost;
+use DaydreamLab\Cms\Resources\Category\Admin\Collections\CategoryAdminListResourceCollection;
+use DaydreamLab\Cms\Resources\Category\Admin\Models\CategoryAdminResource;
 use DaydreamLab\JJAJ\Controllers\BaseController;
-use DaydreamLab\JJAJ\Helpers\Helper;
-use DaydreamLab\JJAJ\Helpers\InputHelper;
-use DaydreamLab\JJAJ\Helpers\ResponseHelper;
-use Illuminate\Support\Collection;
 use DaydreamLab\Cms\Services\Category\Admin\CategoryAdminService;
 use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminRemovePost;
 use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminStorePost;
 use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminStatePost;
 use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminSearchPost;
 use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminCheckoutPost;
+use DaydreamLab\JJAJ\Helpers\Helper;
 
 class CategoryAdminController extends BaseController
 {
+    protected $package = 'Cms';
+
+    protected $modelName = 'Category';
+
+    protected $modelType = 'Admin';
+
     public function __construct(CategoryAdminService $service)
     {
         parent::__construct($service);
         $this->service = $service;
     }
 
-    public function getItem($id)
-    {
-        $this->service->canAction('getCategory');
-        $this->service->getItem($id);
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+    public function getItem(CategoryAdminGetItem $request)
+    {
+        $this->service->getItem(collect(['id' => $request->route('id')]));
+
+        return $this->response($this->service->status, new CategoryAdminResource($this->service->response));
     }
 
 
     public function checkout(CategoryAdminCheckoutPost $request)
     {
-        $this->service->checkout($request->rulesInput());
+        $this->service->checkout($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function ordering(CategoryAdminOrderingPost $request)
     {
-        $this->service->canAction('editCategory');
-        $this->service->ordering($request->rulesInput());
+        $this->service->ordering($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function remove(CategoryAdminRemovePost $request)
     {
-        $this->service->canAction('deleteCategory');
-        $this->service->remove($request->rulesInput());
+        $this->service->remove($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function state(CategoryAdminStatePost $request)
     {
-        $this->service->canAction('updateCategoryState');
-        $this->service->state($request->rulesInput());
+        $this->service->state($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function store(CategoryAdminStorePost $request)
     {
-        InputHelper::null($request->rulesInput(), 'id') ? $this->service->canAction('addCategory')
-            : $this->service->canAction('editCategory');
-        $this->service->store($request->rulesInput());
+        $this->service->setUser($request->user('api'));
+        $this->service->store($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function search(CategoryAdminSearchPost $request)
     {
-        $this->service->canAction('searchCategory');
-        $this->service->search($request->rulesInput());
+        $this->service->search($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status,
+            new CategoryAdminListResourceCollection($this->service->response)
+        );
     }
 
 
@@ -90,7 +93,7 @@ class CategoryAdminController extends BaseController
     {
         $this->service->tree($extension);
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
@@ -98,6 +101,6 @@ class CategoryAdminController extends BaseController
     {
         $this->service->treeList($extension);
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 }

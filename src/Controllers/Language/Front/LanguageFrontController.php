@@ -24,7 +24,7 @@ class LanguageFrontController extends BaseController
     {
         $this->service->getItem($id);
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
@@ -32,38 +32,38 @@ class LanguageFrontController extends BaseController
     {
         $this->service->search(new Collection());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function remove(LanguageFrontRemovePost $request)
     {
-        $this->service->remove($request->rulesInput());
+        $this->service->remove($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function state(LanguageFrontStatePost $request)
     {
-        $this->service->state($request->rulesInput());
+        $this->service->state($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function store(LanguageFrontStorePost $request)
     {
-        $this->service->store($request->rulesInput());
+        $this->service->store($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function search(LanguageFrontSearchPost $request)
     {
-        $this->service->search($request->rulesInput());
+        $this->service->search($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 }

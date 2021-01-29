@@ -7,7 +7,7 @@ use DaydreamLab\Cms\Services\Form\FormService;
 
 class FormAdminService extends FormService
 {
-    protected $type = 'FormAdmin';
+    protected $modelType = 'Admin';
 
     public function __construct(FormAdminRepository $repo)
     {

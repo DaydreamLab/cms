@@ -8,7 +8,7 @@ use Illuminate\Support\Collection;
 
 class MenuAdminService extends MenuService
 {
-    protected $type = 'MenuAdmin';
+    protected $modelType = 'Admin';
 
     protected $search_keys = ['title', 'description'];
 

@@ -7,7 +7,11 @@ use DaydreamLab\JJAJ\Services\BaseService;
 
 class CmsCronJobService extends BaseService
 {
-    protected $type = 'CmsCronJob';
+    protected $package = 'Cms';
+
+    protected $modelName = 'CmsCronJob';
+
+    protected $modelType = 'Base';
 
     public function __construct(CmsCronJobRepository $repo)
     {

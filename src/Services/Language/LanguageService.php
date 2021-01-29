@@ -12,7 +12,11 @@ use Illuminate\Support\Collection;
 
 class LanguageService extends BaseService
 {
-    protected $type = 'Language';
+    protected $package = 'Cms';
+
+    protected $modelName = 'Language';
+
+    protected $modelType = 'Base';
 
     public function __construct(LanguageRepository $repo)
     {

@@ -24,6 +24,12 @@ class CategoryService extends BaseService
 
     protected $type = 'Category';
 
+    protected $package = 'Cms';
+
+    protected $modelName = 'Category';
+
+    protected $modelType = 'Base';
+
     public function __construct(CategoryRepository $repo)
     {
         parent::__construct($repo);

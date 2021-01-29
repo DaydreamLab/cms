@@ -7,13 +7,14 @@ use DaydreamLab\Cms\Services\Category\CategoryService;
 use DaydreamLab\Cms\Services\Cms\CmsCronJobService;
 use DaydreamLab\Cms\Traits\Service\CmsCronJob;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
+use DaydreamLab\JJAJ\Traits\LoggedIn;
 use Illuminate\Support\Collection;
 
 class CategoryAdminService extends CategoryService
 {
-    use CmsCronJob;
+    use CmsCronJob, LoggedIn;
 
-    protected $type = 'CategoryAdmin';
+    protected $modelType = 'Admin';
 
     protected $cmsCronJobService;
 
@@ -25,27 +26,14 @@ class CategoryAdminService extends CategoryService
         $this->repo               = $repo;
         $this->cmsCronJobService = app(CmsCronJobService::class);
     }
-
-
-    public function checkout(Collection $input)
-    {
-        return parent::checkout($input);
-    }
+    
 
 
     public function findSubTreeIds($id)
     {
         return $this->repo->findSubTreeIds($id);
     }
-
-
-    public function getItem($id)
-    {
-        $item = parent::getItem($id);
-
-        return $item;
-    }
-
+    
 
     public function store(Collection $input)
     {
@@ -85,8 +73,7 @@ class CategoryAdminService extends CategoryService
 
     public function search(Collection $input)
     {
-        if (InputHelper::null($input, 'extension'))
-        {
+        if (InputHelper::null($input, 'extension')) {
             $input->forget('extension');
             $input->put('extension', 'item');
         }

@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 
 class SiteAdminService extends SiteService
 {
-    protected $type = 'SiteAdmin';
+    protected $modelType = 'Admin';
 
     protected $search_keys = ['title'];
 

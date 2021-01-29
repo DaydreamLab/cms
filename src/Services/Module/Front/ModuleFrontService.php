@@ -18,7 +18,7 @@ use Illuminate\Support\Str;
 
 class ModuleFrontService extends ModuleService
 {
-    protected $type = 'ModuleFront';
+    protected $type = 'Front';
 
     protected $itemFrontService;
 

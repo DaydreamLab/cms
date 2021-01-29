@@ -7,7 +7,7 @@ use DaydreamLab\Cms\Services\Language\LanguageService;
 
 class LanguageFrontService extends LanguageService
 {
-    protected $type = 'LanguageFront';
+    protected $type = 'Front';
 
     public function __construct(LanguageFrontRepository $repo)
     {

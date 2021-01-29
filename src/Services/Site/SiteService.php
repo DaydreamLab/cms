@@ -15,7 +15,11 @@ use Illuminate\Support\Collection;
 
 class SiteService extends BaseService
 {
-    protected $type = 'Site';
+    protected $package = 'Cms';
+
+    protected $modelName = 'Site';
+
+    protected $modelType = 'Base';
 
 
     public function __construct(SiteRepository $repo)
@@ -27,8 +31,10 @@ class SiteService extends BaseService
     public function add(Collection $input)
     {
         $item = parent::add($input);
-
-        event(new Add($item, $this->getServiceName(), $input, $this->user));
+        
+//        if ($this->user) {
+//            event(new Add($item, $this->getServiceName(), $input, $this->user));
+//        }
 
         return $item;
     }

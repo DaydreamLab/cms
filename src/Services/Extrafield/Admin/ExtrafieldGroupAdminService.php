@@ -7,7 +7,7 @@ use DaydreamLab\Cms\Services\Extrafield\ExtrafieldGroupService;
 
 class ExtrafieldGroupAdminService extends ExtrafieldGroupService
 {
-    protected $type = 'ExtrafieldGroupAdmin';
+    protected $modelType = 'Admin';
 
     protected $search_keys = ['title', 'description'];
 

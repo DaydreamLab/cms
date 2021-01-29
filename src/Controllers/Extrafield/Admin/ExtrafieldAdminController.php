@@ -16,6 +16,13 @@ use DaydreamLab\Cms\Requests\Extrafield\Admin\ExtrafieldAdminOrderingPost;
 
 class ExtrafieldAdminController extends BaseController
 {
+    protected $package = 'Cms';
+
+    protected $modelName = 'Extrafield';
+
+    protected $modelType = 'Admin';
+
+
     public function __construct(ExtrafieldAdminService $service)
     {
         parent::__construct($service);
@@ -26,60 +33,60 @@ class ExtrafieldAdminController extends BaseController
         $this->service->canAction('getExtrafield');
         $this->service->getItem($id);
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function checkout(ExtrafieldAdminCheckoutPost $request)
     {
-        $this->service->checkout($request->rulesInput());
+        $this->service->checkout($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function ordering(ExtrafieldAdminOrderingPost $request)
     {
         $this->service->canAction('editExtrafield');
-        $this->service->ordering($request->rulesInput());
+        $this->service->ordering($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function remove(ExtrafieldAdminRemovePost $request)
     {
         $this->service->canAction('deleteExtrafield');
-        $this->service->remove($request->rulesInput());
+        $this->service->remove($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function state(ExtrafieldAdminStatePost $request)
     {
         $this->service->canAction('updateExtrafieldState');
-        $this->service->state($request->rulesInput());
+        $this->service->state($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function store(ExtrafieldAdminStorePost $request)
     {
-        InputHelper::null($request->rulesInput(), 'id') ? $this->service->canAction('addExtrafield')
+        InputHelper::null($request->validated(), 'id') ? $this->service->canAction('addExtrafield')
             : $this->service->canAction('editExtrafield');
-        $this->service->store($request->rulesInput());
+        $this->service->store($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function search(ExtrafieldAdminSearchPost $request)
     {
         $this->service->canAction('searchExtrafield');
-        $this->service->search($request->rulesInput());
+        $this->service->search($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 }

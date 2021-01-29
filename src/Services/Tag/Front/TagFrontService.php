@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 
 class TagFrontService extends TagService
 {
-    protected $type = 'TagFront';
+    protected $type = 'Front';
 
     protected $itemFrontService;
 

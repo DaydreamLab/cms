@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 
 class LanguageAdminService extends LanguageService
 {
-    protected $type = 'LanguageAdmin';
+    protected $modelType = 'Admin';
 
     protected $search_keys = ['title', 'description'];
 

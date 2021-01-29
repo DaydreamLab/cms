@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 
 class CategoryFrontService extends CategoryService
 {
-    protected $type = 'CategoryFront';
+    protected $type = 'Front';
 
     protected $search_keys = ['title', 'introtext', 'description', 'extrafields_search'];
 

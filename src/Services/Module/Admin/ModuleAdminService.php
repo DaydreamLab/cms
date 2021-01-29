@@ -7,7 +7,7 @@ use DaydreamLab\Cms\Services\Module\ModuleService;
 
 class ModuleAdminService extends ModuleService
 {
-    protected $type = 'ModuleAdmin';
+    protected $modelType = 'Admin';
 
     protected $search_keys = ['title', 'description'];
 

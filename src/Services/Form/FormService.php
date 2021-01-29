@@ -11,7 +11,11 @@ use Illuminate\Support\Collection;
 
 class FormService extends BaseService
 {
-    protected $type = 'Form';
+    protected $package = 'Cms';
+
+    protected $modelName = 'Form';
+
+    protected $modelType = 'Base';
 
 
     public function __construct(FormRepository $repo)

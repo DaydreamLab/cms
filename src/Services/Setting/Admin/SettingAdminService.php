@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 
 class SettingAdminService extends SettingService
 {
-    protected $type = 'SettingAdmin';
+    protected $type = 'Admin';
 
     public function __construct(SiteAdminService $siteAdminService)
     {

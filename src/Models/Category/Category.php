@@ -5,6 +5,7 @@ use Carbon\Carbon;
 use DaydreamLab\Cms\Models\Extrafield\Extrafield;
 use DaydreamLab\Cms\Models\Extrafield\ExtrafieldGroup;
 use DaydreamLab\Cms\Models\Item\Item;
+use DaydreamLab\Cms\Traits\Model\UserInfo;
 use DaydreamLab\Cms\Traits\Model\WithAccess;
 use DaydreamLab\Cms\Traits\Model\WithLanguage;
 use DaydreamLab\Cms\Traits\WithExtrafield;
@@ -17,7 +18,7 @@ use Kalnoy\Nestedset\NodeTrait;
 
 class Category extends BaseModel
 {
-    use NodeTrait, WithAccess, WithLanguage, WithExtrafield,
+    use NodeTrait, WithAccess, WithLanguage, WithExtrafield, UserInfo,
         RecordChanger {
         RecordChanger::boot as traitBoot;
     }
@@ -72,7 +73,11 @@ class Category extends BaseModel
         'publish_down',
     ];
 
-
+//    protected $with = [
+//        'creator',
+//        'updater',
+//        'locker'
+//    ];
     /**
      * The attributes that should be hidden for arrays
      *

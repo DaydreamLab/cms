@@ -13,7 +13,7 @@ class TagAdminService extends TagService
 {
     use CmsCronJob;
 
-    protected $type = 'TagAdmin';
+    protected $modelType = 'Admin';
 
     protected $search_keys = ['title', 'description'];
 

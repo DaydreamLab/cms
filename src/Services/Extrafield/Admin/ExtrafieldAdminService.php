@@ -8,7 +8,7 @@ use Illuminate\Support\Collection;
 
 class ExtrafieldAdminService extends ExtrafieldService
 {
-    protected $type = 'ExtrafieldAdmin';
+    protected $modelType = 'Admin';
 
     protected $search_keys = ['title', 'description'];
 

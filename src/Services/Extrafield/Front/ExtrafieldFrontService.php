@@ -7,7 +7,7 @@ use DaydreamLab\Cms\Services\Extrafield\ExtrafieldService;
 
 class ExtrafieldFrontService extends ExtrafieldService
 {
-    protected $type = 'ExtrafieldFront';
+    protected $type = 'Front';
 
     public function __construct(ExtrafieldFrontRepository $repo)
     {

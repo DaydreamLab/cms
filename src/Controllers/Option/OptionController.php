@@ -18,8 +18,8 @@ class OptionController
 
     public function mergeList(OptionGetListPost $request)
     {
-        $this->service->mergeList($request->rulesInput());
+        $this->service->mergeList($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 }

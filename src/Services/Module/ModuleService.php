@@ -13,7 +13,11 @@ use Illuminate\Support\Collection;
 
 class ModuleService extends BaseService
 {
-    protected $type = 'Module';
+    protected $package = 'Cms';
+
+    protected $modelName = 'Module';
+
+    protected $modelType = 'Base';
 
 
     public function __construct(ModuleRepository $repo)

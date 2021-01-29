@@ -26,60 +26,60 @@ class ExtrafieldGroupAdminController extends BaseController
         $this->service->canAction('getExtrafieldGroup');
         $this->service->getItem($id);
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function checkout(ExtrafieldGroupAdminCheckoutPost $request)
     {
-        $this->service->checkout($request->rulesInput());
+        $this->service->checkout($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function ordering(ExtrafieldGroupAdminOrderingPost $request)
     {
         $this->service->canAction('editExtrafieldGroup');
-        $this->service->ordering($request->rulesInput());
+        $this->service->ordering($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function remove(ExtrafieldGroupAdminRemovePost $request)
     {
         $this->service->canAction('deleteExtrafieldGroup');
-        $this->service->remove($request->rulesInput());
+        $this->service->remove($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function state(ExtrafieldGroupAdminStatePost $request)
     {
         $this->service->canAction('updateExtrafieldGroupState');
-        $this->service->state($request->rulesInput());
+        $this->service->state($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function store(ExtrafieldGroupAdminStorePost $request)
     {
-        InputHelper::null($request->rulesInput(), 'id') ? $this->service->canAction('addExtrafieldGroup')
+        InputHelper::null($request->validated(), 'id') ? $this->service->canAction('addExtrafieldGroup')
             : $this->service->canAction('editExtrafieldGroup');
-        $this->service->store($request->rulesInput());
+        $this->service->store($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function search(ExtrafieldGroupAdminSearchPost $request)
     {
         $this->service->canAction('searchExtrafieldGroup');
-        $this->service->search($request->rulesInput());
+        $this->service->search($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 }

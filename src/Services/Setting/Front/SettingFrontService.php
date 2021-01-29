@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 
 class SettingFrontService extends SettingService
 {
-    protected $type = 'SettingFront';
+    protected $type = 'Front';
 
 
     public function __construct(SiteAdminService $siteAdminService)

@@ -19,6 +19,6 @@ class SettingController
     {
         $this->service->getItem('');
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 }

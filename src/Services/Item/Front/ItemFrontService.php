@@ -15,7 +15,7 @@ use Illuminate\Support\Str;
 
 class ItemFrontService extends ItemService
 {
-    protected $type = 'ItemFront';
+    protected $type = 'Front';
 
     protected $categoryFrontService;
 

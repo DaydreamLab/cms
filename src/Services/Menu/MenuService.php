@@ -25,7 +25,11 @@ class MenuService extends BaseService
         NestedServiceTrait::removeNested    as traitRemoveNested;
     }
 
-    protected $type = 'Menu';
+    protected $package = 'Cms';
+
+    protected $modelName = 'Menu';
+
+    protected $modelType = 'Base';
 
     public function __construct(MenuRepository $repo)
     {

@@ -15,7 +15,11 @@ use Illuminate\Support\Str;
 
 class ItemService extends BaseService
 {
-    protected $type = 'Item';
+    protected $package = 'Cms';
+
+    protected $modelName = 'Item';
+
+    protected $modelType = 'Base';
 
 
     public function __construct(ItemRepository $repo)

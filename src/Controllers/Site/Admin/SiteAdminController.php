@@ -16,6 +16,13 @@ use DaydreamLab\Cms\Requests\Site\Admin\SiteAdminOrderingPost;
 
 class SiteAdminController extends BaseController
 {
+    protected $package = 'Cms';
+
+    protected $modelName = 'Site';
+
+    protected $modelType = 'Admin';
+
+
     public function __construct(SiteAdminService $service)
     {
         parent::__construct($service);
@@ -24,9 +31,9 @@ class SiteAdminController extends BaseController
 
     public function checkout(SiteCheckoutPost $request)
     {
-        $this->service->checkout($request->rulesInput());
+        $this->service->checkout($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
@@ -35,7 +42,7 @@ class SiteAdminController extends BaseController
         $this->service->canAction('getSite');
         $this->service->getItem($id);
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
@@ -44,52 +51,52 @@ class SiteAdminController extends BaseController
         $this->service->canAction('getSiteList');
         $this->service->getList(collect());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function ordering(SiteAdminOrderingPost $request)
     {
         $this->service->canAction('editSite');
-        $this->service->ordering($request->rulesInput());
+        $this->service->ordering($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function remove(SiteAdminRemovePost $request)
     {
         $this->service->canAction('deleteSite');
-        $this->service->remove($request->rulesInput());
+        $this->service->remove($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function state(SiteAdminStatePost $request)
     {
         $this->service->canAction('updateSiteState');
-        $this->service->state($request->rulesInput());
+        $this->service->state($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function store(SiteAdminStorePost $request)
     {
-        InputHelper::null($request->rulesInput(), 'id') ? $this->service->canAction('addSite')
+        InputHelper::null($request->validated(), 'id') ? $this->service->canAction('addSite')
             : $this->service->canAction('editSite');
-        $this->service->store($request->rulesInput());
+        $this->service->store($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function search(SiteAdminSearchPost $request)
     {
         $this->service->canAction('searchSite');
-        $this->service->search($request->rulesInput());
+        $this->service->search($request->validated());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response);
     }
 }

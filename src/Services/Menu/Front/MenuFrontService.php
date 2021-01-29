@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
 
 class MenuFrontService extends MenuService
 {
-    protected $type = 'MenuFront';
+    protected $type = 'Front';
 
     protected $moduleFrontService;
 
