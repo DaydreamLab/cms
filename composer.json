@@ -16,8 +16,7 @@
     "require": {
         "daydreamlab/jjaj": "dev-base/develop",
         "daydreamlab/user": "dev-base/develop",
-        "daydreamlab/media": "dev-base/develop",
-        "timehunter/laravel-google-recaptcha-v3": "~2.2.11"
+        "daydreamlab/media": "dev-base/develop"
     },
     "repositories" : [
         {
