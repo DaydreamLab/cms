@@ -23,7 +23,7 @@ class InstallCommand extends Command
     protected $description = 'Install DaydreamLab cms component';
 
 
-    protected $seeder_namespace = 'DaydreamLab\\Cms\\Database\\Seeds\\';
+    protected $seeder_namespace = 'DaydreamLab\\Cms\\Database\\Seeders\\';
 
 
     protected $constants = [
