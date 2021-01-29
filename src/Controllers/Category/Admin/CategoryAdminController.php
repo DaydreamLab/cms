@@ -75,7 +75,11 @@ class CategoryAdminController extends BaseController
         $this->service->setUser($request->user('api'));
         $this->service->store($request->validated());
 
-        return $this->response($this->service->status, $this->service->response);
+        return $this->response($this->service->status,
+            gettype($this->service->response) == 'object'
+                ? new CategoryAdminResource($this->service->response)
+                : null
+        );
     }
 
 

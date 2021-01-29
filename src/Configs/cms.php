@@ -1,6 +1,8 @@
   <?php
 
 return [
+    'timezone' => 'Asia/Taipei',
+
     'item' => [
         'front' => [
             'year_month_filter' => 0,

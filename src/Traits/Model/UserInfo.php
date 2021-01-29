@@ -14,7 +14,7 @@ trait UserInfo
 
     public function locker()
     {
-        return $this->hasOne(User::class, 'id', 'locked_by')->first();
+        return $this->belongsTo(User::class, 'locked_by', 'id');
     }
 
 
