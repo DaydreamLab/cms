@@ -1,10 +1,10 @@
 <?php
 
-namespace DaydreamLab\Cms\Requests\Item\Admin;
+namespace DaydreamLab\Cms\Requests\Category\Admin;
 
-use DaydreamLab\Cms\Requests\Item\CategoryOrderingPost;
+use DaydreamLab\Cms\Requests\CmsOrderingPost;
 
-class CategoryAdminOrderingPost extends CategoryOrderingPost
+class CategoryAdminOrderingPost extends CmsOrderingPost
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,6 @@ class CategoryAdminOrderingPost extends CategoryOrderingPost
     public function rules()
     {
         $rules = [
-            //
         ];
         return array_merge($rules, parent::rules());
     }

@@ -26,7 +26,6 @@ class CategoryAdminService extends CategoryService
         $this->repo               = $repo;
         $this->cmsCronJobService = app(CmsCronJobService::class);
     }
-    
 
 
     public function findSubTreeIds($id)
@@ -41,28 +40,16 @@ class CategoryAdminService extends CategoryService
             $input->put('extension', 'item');
         }
 
-        if (InputHelper::null($input, 'publish_up'))
-        {
+        if (InputHelper::null($input, 'publish_up')) {
             $input->put('publish_up', now()->toDateTimeString()) ;
         }
 
         $result = parent::store($input);
 
-        if (gettype($result) == 'boolean')
-        {
-            if ($result === true)
-            {
-                $item  = $this->find($input->get('id'));
-            }
-            else
-            {
-                // Something error 有可能是路徑已經存在
-                return $this->response;
-            }
-        }
-        else
-        {
-            $item      = $this->find($result->id);
+        if ($input->get('id')) {
+            $item = $this->checkItem(collect(['id' => $input->get('id')]));
+        } else {
+            $item = $result->refresh();
         }
 
         $this->setCronJob($input, $item);
@@ -80,5 +67,4 @@ class CategoryAdminService extends CategoryService
 
         return parent::search($input);
     }
-
 }
