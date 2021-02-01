@@ -13,6 +13,8 @@ use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminStorePost;
 use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminStatePost;
 use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminSearchPost;
 use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminCheckoutPost;
+use DaydreamLab\JJAJ\Helpers\Helper;
+use Illuminate\Support\Facades\DB;
 
 class CategoryAdminController extends BaseController
 {
@@ -50,7 +52,10 @@ class CategoryAdminController extends BaseController
     public function ordering(CategoryAdminOrderingPost $request)
     {
         $this->service->setUser($request->user('api'));
-        $this->service->ordering($request->validated());
+        $v = $request->validated();
+        DB::transaction(function () use ($v) {
+            $this->service->ordering($v);
+        });
 
         return $this->response($this->service->status, $this->service->response);
     }
