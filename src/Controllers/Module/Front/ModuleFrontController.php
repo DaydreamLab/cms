@@ -17,6 +17,12 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ModuleFrontController extends BaseController
 {
+    protected $package = 'Cms';
+
+    protected $modelName = 'Module';
+
+    protected $modelType = 'Front';
+
     public function __construct(ModuleFrontService $service)
     {
         parent::__construct($service);

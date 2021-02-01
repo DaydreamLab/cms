@@ -12,6 +12,11 @@ use DaydreamLab\Cms\Requests\Category\Front\CategoryFrontSearchPost;
 
 class CategoryFrontController extends BaseController
 {
+    protected $package = 'Cms';
+
+    protected $modelName = 'Category';
+
+    protected $modelType = 'Front';
 
     public function __construct(CategoryFrontService $service)
     {

@@ -10,6 +10,12 @@ use DaydreamLab\Cms\Services\Extrafield\Front\ExtrafieldGroupFrontService;
 
 class ExtrafieldGroupFrontController extends BaseController
 {
+    protected $package = 'Cms';
+
+    protected $modelName = 'ExtrafieldGroup';
+
+    protected $modelType = 'Front';
+
     public function __construct(ExtrafieldGroupFrontService $service)
     {
         parent::__construct($service);

@@ -12,9 +12,9 @@ class ExtrafieldFrontController extends BaseController
 {
     protected $package = 'Cms';
 
-    protected $modelName = 'ExtrafieldGroup';
+    protected $modelName = 'Extrafield';
 
-    protected $modelType = 'Admin';
+    protected $modelType = 'Front';
 
     public function __construct(ExtrafieldFrontService $service)
     {

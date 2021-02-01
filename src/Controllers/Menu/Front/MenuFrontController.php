@@ -17,6 +17,12 @@ use Symfony\Component\HttpFoundation\Request;
 
 class MenuFrontController extends BaseController
 {
+    protected $package = 'Cms';
+
+    protected $modelName = 'Menu';
+
+    protected $modelType = 'Front';
+
     public function __construct(MenuFrontService $service)
     {
         parent::__construct($service);

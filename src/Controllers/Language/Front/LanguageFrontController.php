@@ -14,6 +14,12 @@ use DaydreamLab\Cms\Requests\Language\Front\LanguageFrontSearchPost;
 
 class LanguageFrontController extends BaseController
 {
+    protected $package = 'Cms';
+
+    protected $modelName = 'Language';
+
+    protected $modelType = 'Front';
+
     public function __construct(LanguageFrontService $service)
     {
         parent::__construct($service);

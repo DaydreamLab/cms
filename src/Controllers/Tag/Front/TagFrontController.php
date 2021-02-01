@@ -4,7 +4,6 @@ namespace DaydreamLab\Cms\Controllers\Tag\Front;
 
 use DaydreamLab\JJAJ\Controllers\BaseController;
 use DaydreamLab\JJAJ\Helpers\Helper;
-use DaydreamLab\JJAJ\Helpers\ResponseHelper;
 use Illuminate\Support\Collection;
 use DaydreamLab\Cms\Services\Tag\Front\TagFrontService;
 use DaydreamLab\Cms\Requests\Tag\Front\TagFrontRemovePost;
@@ -13,9 +12,14 @@ use DaydreamLab\Cms\Requests\Tag\Front\TagFrontStatePost;
 use DaydreamLab\Cms\Requests\Tag\Front\TagFrontSearchPost;
 use DaydreamLab\Cms\Requests\Tag\Front\TagFrontCheckoutPost;
 
-
 class TagFrontController extends BaseController
 {
+    protected $package = 'Cms';
+
+    protected $modelName = 'Tag';
+
+    protected $modelType = 'Front';
+
     public function __construct(TagFrontService $service)
     {
         parent::__construct($service);

@@ -15,13 +15,7 @@ use Illuminate\Support\Str;
 
 class CategoryService extends BaseService
 {
-    use NestedServiceTrait {
-        NestedServiceTrait::addNested       as traitAddNested;
-        NestedServiceTrait::modifyNested    as traitModifiedNested;
-        NestedServiceTrait::storeNested     as traitStoreNested;
-        NestedServiceTrait::removeNested    as traitRemoveNested;
-    }
-
+    use NestedServiceTrait;
     protected $type = 'Category';
 
     protected $package = 'Cms';
@@ -38,7 +32,7 @@ class CategoryService extends BaseService
 
     public function addNested(Collection $input)
     {
-        $item = $this->traitAddNested($input);
+        $item = $this->addNested($input);
 
         event(new Add($item, $this->getServiceName(), $input, $this->user));
 
@@ -60,7 +54,7 @@ class CategoryService extends BaseService
 
     public function modifyNested(Collection $input, $parent, $item)
     {
-        $result = $this->traitModifiedNested($input, $parent, $item);
+        $result = $this->modifyNested($input, $parent, $item);
 
         event(new Modify($this->find($input->get('id')), $this->getServiceName(), $result, $input,$this->user));
 
@@ -80,7 +74,7 @@ class CategoryService extends BaseService
 
     public function remove(Collection $input ,$diff = false)
     {
-        $result = $this->traitRemoveNested($input);
+        $result = $this->removeNested($input);
 
         event(new Remove($this->getServiceName(), $result, $input, $this->user));
 
@@ -100,20 +94,8 @@ class CategoryService extends BaseService
 
     public function store(Collection $input)
     {
-        $result = $this->traitStoreNested($input);
+        $result = $this->storeNested($input);
 
         return $result;
     }
-
-
-    public function tree($extension)
-    {
-        $tree = $this->findBy('extension', '=', $extension)->toTree();
-
-        $this->status =  Str::upper(Str::snake($this->type . 'GetTreeSuccess'));
-        $this->response = $tree;
-
-        return $tree;
-    }
-
 }

@@ -13,6 +13,12 @@ use DaydreamLab\Cms\Requests\Form\Front\FormFrontSearchPost;
 
 class FormFrontController extends BaseController
 {
+    protected $package = 'Cms';
+
+    protected $modelName = 'Form';
+
+    protected $modelType = 'Front';
+
     public function __construct(FormFrontService $service)
     {
         parent::__construct($service);

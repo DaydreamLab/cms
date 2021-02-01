@@ -20,6 +20,12 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ItemFrontController extends BaseController
 {
+    protected $package = 'Cms';
+
+    protected $modelName = 'Item';
+
+    protected $modelType = 'Front';
+
     public function __construct(ItemFrontService $service)
     {
         parent::__construct($service);
