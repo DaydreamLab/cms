@@ -2,10 +2,13 @@
 
 namespace DaydreamLab\Cms\Requests\Category\Admin;
 
-use DaydreamLab\Cms\Requests\Category\CategoryRemovePost;
+use DaydreamLab\Cms\Requests\CmsCheckoutRemovePost;
 
-class CategoryAdminRemovePost extends CategoryRemovePost
+class CategoryAdminRemovePost extends CmsCheckoutRemovePost
 {
+    protected $apiMethod = 'deleteCategory';
+
+    protected $modelName = 'Category';
     /**
      * Determine if the user is authorized to make this request.
      *

@@ -2,18 +2,16 @@
 
 namespace DaydreamLab\Cms\Controllers\Category\Admin;
 
-use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminGetItem;
-use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminOrderingPost;
+use DaydreamLab\Cms\Requests\CmsCheckoutRemovePost;
+use DaydreamLab\Cms\Requests\CmsGetItemGet;
+use DaydreamLab\Cms\Requests\CmsOrderingPost;
+use DaydreamLab\Cms\Requests\CmStatePost;
 use DaydreamLab\Cms\Resources\Category\Admin\Collections\CategoryAdminListResourceCollection;
 use DaydreamLab\Cms\Resources\Category\Admin\Models\CategoryAdminResource;
 use DaydreamLab\JJAJ\Controllers\BaseController;
 use DaydreamLab\Cms\Services\Category\Admin\CategoryAdminService;
-use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminRemovePost;
 use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminStorePost;
-use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminStatePost;
 use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminSearchPost;
-use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminCheckoutPost;
-use DaydreamLab\JJAJ\Helpers\Helper;
 use Illuminate\Support\Facades\DB;
 
 class CategoryAdminController extends BaseController
@@ -31,7 +29,7 @@ class CategoryAdminController extends BaseController
     }
 
 
-    public function getItem(CategoryAdminGetItem $request)
+    public function getItem(CmsGetItemGet $request)
     {
         $this->service->setUser($request->user('api'));
         $this->service->getItem(collect(['id' => $request->route('id')]));
@@ -40,7 +38,7 @@ class CategoryAdminController extends BaseController
     }
 
 
-    public function checkout(CategoryAdminCheckoutPost $request)
+    public function checkout(CmsCheckoutRemovePost $request)
     {
         $this->service->setUser($request->user('api'));
         $this->service->checkout($request->validated());
@@ -49,7 +47,7 @@ class CategoryAdminController extends BaseController
     }
 
 
-    public function ordering(CategoryAdminOrderingPost $request)
+    public function ordering(CmsOrderingPost $request)
     {
         $this->service->setUser($request->user('api'));
         $v = $request->validated();
@@ -61,7 +59,7 @@ class CategoryAdminController extends BaseController
     }
 
 
-    public function remove(CategoryAdminRemovePost $request)
+    public function remove(CmsCheckoutRemovePost $request)
     {
         $this->service->setUser($request->user('api'));
         $this->service->remove($request->validated());
@@ -70,7 +68,7 @@ class CategoryAdminController extends BaseController
     }
 
 
-    public function state(CategoryAdminStatePost $request)
+    public function state(CmStatePost $request)
     {
         $this->service->setUser($request->user('api'));
         $this->service->state($request->validated());
@@ -94,26 +92,11 @@ class CategoryAdminController extends BaseController
 
     public function search(CategoryAdminSearchPost $request)
     {
+        $this->service->setUser($request->user('api'));
         $this->service->search($request->validated());
 
         return $this->response($this->service->status,
             new CategoryAdminListResourceCollection($this->service->response)
         );
-    }
-
-
-    public function tree($extension = 'item')
-    {
-        $this->service->tree($extension);
-
-        return $this->response($this->service->status, $this->service->response);
-    }
-
-
-    public function treeList($extension = 'item')
-    {
-        $this->service->treeList($extension);
-
-        return $this->response($this->service->status, $this->service->response);
     }
 }

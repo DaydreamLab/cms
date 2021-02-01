@@ -6,6 +6,9 @@ use DaydreamLab\Cms\Requests\CmsOrderingPost;
 
 class CategoryAdminOrderingPost extends CmsOrderingPost
 {
+    protected $apiMethod = 'editCategory';
+
+    protected $modelName = 'Category';
     /**
      * Determine if the user is authorized to make this request.
      *

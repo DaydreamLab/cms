@@ -2,10 +2,13 @@
 
 namespace DaydreamLab\Cms\Requests\Category\Admin;
 
-use DaydreamLab\Cms\Requests\Category\CategoryStatePost;
+use DaydreamLab\Cms\Requests\CmStatePost;
 
-class CategoryAdminStatePost extends CategoryStatePost
+class CategoryAdminStatePost extends CmStatePost
 {
+    protected $apiMethod = 'updateCategoryState';
+
+    protected $modelName = 'Category';
     /**
      * Determine if the user is authorized to make this request.
      *

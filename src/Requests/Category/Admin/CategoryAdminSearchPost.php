@@ -2,12 +2,14 @@
 
 namespace DaydreamLab\Cms\Requests\Category\Admin;
 
-use DaydreamLab\Cms\Requests\Category\CategorySearchPost;
 use DaydreamLab\JJAJ\Requests\ListRequest;
 use Illuminate\Validation\Rule;
 
 class CategoryAdminSearchPost extends ListRequest
 {
+    protected $apiMethod = 'searchCategory';
+
+    protected $modelName = 'Category';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -38,6 +40,6 @@ class CategoryAdminSearchPost extends ListRequest
             'access'        => 'nullable|integer',
         ];
         
-        return array_merge($rules, parent::rules());
+        return array_merge(parent::rules(), $rules);
     }
 }

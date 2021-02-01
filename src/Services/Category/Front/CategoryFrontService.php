@@ -5,13 +5,17 @@ namespace DaydreamLab\Cms\Services\Category\Front;
 use DaydreamLab\Cms\Repositories\Category\Front\CategoryFrontRepository;
 use DaydreamLab\Cms\Services\Category\CategoryService;
 use DaydreamLab\Cms\Services\Item\Front\ItemFrontService;
+use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
+use DaydreamLab\JJAJ\Traits\LoggedIn;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 class CategoryFrontService extends CategoryService
 {
-    protected $type = 'Front';
+    use LoggedIn;
+
+    protected $modelType = 'Front';
 
     protected $search_keys = ['title', 'introtext', 'description', 'extrafields_search'];
 
@@ -67,8 +71,7 @@ class CategoryFrontService extends CategoryService
 
     public function search(Collection $input)
     {
-        if (InputHelper::null($input, 'content_type'))
-        {
+        if (InputHelper::null($input, 'content_type')) {
             $input->put('content_type', 'article');
         }
 
@@ -90,7 +93,7 @@ class CategoryFrontService extends CategoryService
         }
 
         $this->status  = Str::upper(Str::snake($this->type.'SearchItemsSuccess'));
-        $this->response = $paginate ? $this->repo->paginate($items, $limit, 1, []) : $items;
+        $this->response = $paginate ? $this->repo->paginate($items, $limit, $input->get('page') ?: 1, []) : $items;
 
         return $items;
     }

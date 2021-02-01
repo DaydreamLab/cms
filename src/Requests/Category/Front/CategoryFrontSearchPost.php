@@ -2,10 +2,10 @@
 
 namespace DaydreamLab\Cms\Requests\Category\Front;
 
-use DaydreamLab\Cms\Requests\Category\CategorySearchPost;
+use DaydreamLab\JJAJ\Requests\ListRequest;
 use Illuminate\Validation\Rule;
 
-class CategoryFrontSearchPost extends CategorySearchPost
+class CategoryFrontSearchPost extends ListRequest
 {
     /**
      * Determine if the user is authorized to make this request.
