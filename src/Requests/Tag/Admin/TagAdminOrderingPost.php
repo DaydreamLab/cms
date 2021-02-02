@@ -1,11 +1,14 @@
 <?php
 
-namespace DaydreamLab\Cms\Requests\Tag;
+namespace DaydreamLab\Cms\Requests\Tag\Admin;
 
-use DaydreamLab\JJAJ\Requests\AdminRequest;
+use DaydreamLab\Cms\Requests\CmsOrderingPost;
 
-class TagCheckoutPost extends AdminRequest
+class TagAdminOrderingPost extends CmsOrderingPost
 {
+    protected $apiMethod = 'editCategory';
+
+    protected $modelName = 'Category';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -23,9 +26,8 @@ class TagCheckoutPost extends AdminRequest
      */
     public function rules()
     {
-        return [
-            'ids'       => 'required|array',
-            'ids.*'     => 'required|integer'
+        $rules = [
         ];
+        return array_merge(parent::rules(), $rules);
     }
 }

@@ -2,10 +2,10 @@
 
 namespace DaydreamLab\Cms\Requests\Tag\Front;
 
-use DaydreamLab\Cms\Requests\Tag\TagSearchPost;
+use DaydreamLab\JJAJ\Requests\ListRequest;
 use Illuminate\Validation\Rule;
 
-class TagFrontSearchPost extends TagSearchPost
+class TagFrontSearchPost extends ListRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -32,7 +32,6 @@ class TagFrontSearchPost extends TagSearchPost
                     'id',
                     'title',
                     'access',
-                    'content_type',
                     'ordering',
                     'created_at',
                     'updated_at',
@@ -41,6 +40,6 @@ class TagFrontSearchPost extends TagSearchPost
                 ])
             ]
         ];
-        return array_merge($rules, parent::rules());
+        return array_merge(parent::rules(), $rules);
     }
 }

@@ -2,23 +2,22 @@
 
 namespace DaydreamLab\Cms\Controllers\Tag\Admin;
 
-use DaydreamLab\Cms\Requests\Item\ItemOrderingPost;
-use DaydreamLab\JJAJ\Controllers\BaseController;
-use DaydreamLab\JJAJ\Helpers\InputHelper;
-use DaydreamLab\JJAJ\Helpers\ResponseHelper;
-use Illuminate\Support\Collection;
-use DaydreamLab\Cms\Services\Tag\Admin\TagAdminService;
-use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminRemovePost;
+use DaydreamLab\Cms\Controllers\CmsController;
+use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminGetItemGet;
 use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminStorePost;
 use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminStatePost;
 use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminSearchPost;
+use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminRemovePost;
 use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminCheckoutPost;
+use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminOrderingPost;
+use DaydreamLab\Cms\Resources\Tag\Admin\Models\TagAdminResource;
+use DaydreamLab\Cms\Resources\Tag\Admin\Collections\TagAdminListResourceCollection;
+use DaydreamLab\Cms\Services\Tag\Admin\TagAdminService;
+use DaydreamLab\JJAJ\Helpers\Helper;
 
 
-class TagAdminController extends BaseController
+class TagAdminController extends CmsController
 {
-    protected $package = 'Cms';
-
     protected $modelName = 'Tag';
 
     protected $modelType = 'Admin';
@@ -30,27 +29,29 @@ class TagAdminController extends BaseController
     }
 
 
-    public function getItem($id)
+    public function getItem(TagAdminGetItemGet $request)
     {
-        $this->service->canAction('getTag');
-        $this->service->getItem($id);
+        $this->service->setUser($request->user('api'));
+        $this->service->getItem(collect(['id' => $request->route('id')]));
 
-        return $this->response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, new TagAdminResource($this->service->response));
     }
 
 
-    public function checkout(TagAdminCheckoutPost $request)
+    public function store(TagAdminStorePost $request)
     {
-        $this->service->checkout($request->validated());
+        $this->service->setUser($request->user('api'));
+        $this->service->store($request->validated());
 
-        return $this->response($this->service->status, $this->service->response);
+        return $this->response($this->service->status,
+            gettype($this->service->response) == 'object' ? new TagAdminResource($this->service->response->refresh()) : null);
     }
 
 
-    public function ordering(ItemOrderingPost $request)
+    public function state(TagAdminStatePost $request)
     {
-        $this->service->canAction('editTag');
-        $this->service->ordering($request->validated());
+        $this->service->setUser($request->user('api'));
+        $this->service->state($request->validated());
 
         return $this->response($this->service->status, $this->service->response);
     }
@@ -58,27 +59,8 @@ class TagAdminController extends BaseController
 
     public function remove(TagAdminRemovePost $request)
     {
-        $this->service->canAction('deleteTag');
+        $this->service->setUser($request->user('api'));
         $this->service->remove($request->validated());
-
-        return $this->response($this->service->status, $this->service->response);
-    }
-
-
-    public function state(TagAdminStatePost $request)
-    {
-        $this->service->canAction('updateTagState');
-        $this->service->state($request->validated());
-
-        return $this->response($this->service->status, $this->service->response);
-    }
-
-
-    public function store(TagAdminStorePost $request)
-    {
-        InputHelper::null($request->validated(), 'id') ? $this->service->canAction('addTag')
-            : $this->service->canAction('editTag');
-        $this->service->store($request->validated());
 
         return $this->response($this->service->status, $this->service->response);
     }
@@ -86,9 +68,28 @@ class TagAdminController extends BaseController
 
     public function search(TagAdminSearchPost $request)
     {
-        $this->service->canAction('searchTag');
+        $this->service->setUser($request->user('api'));
         $this->service->search($request->validated());
+
+        return $this->response($this->service->status, new TagAdminListResourceCollection($this->service->response));
+    }
+
+    
+    public function checkout(TagAdminCheckoutPost $request)
+    {
+        $this->service->setUser($request->user('api'));
+        $this->service->checkout($request->validated());
 
         return $this->response($this->service->status, $this->service->response);
     }
+
+
+    public function ordering(TagAdminOrderingPost $request)
+    {
+        $this->service->setUser($request->user('api'));
+        $this->service->ordering($request->validated());
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
 }

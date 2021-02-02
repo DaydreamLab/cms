@@ -2,20 +2,19 @@
 
 namespace DaydreamLab\Cms\Controllers\Tag\Front;
 
-use DaydreamLab\JJAJ\Controllers\BaseController;
-use DaydreamLab\JJAJ\Helpers\Helper;
-use Illuminate\Support\Collection;
-use DaydreamLab\Cms\Services\Tag\Front\TagFrontService;
-use DaydreamLab\Cms\Requests\Tag\Front\TagFrontRemovePost;
-use DaydreamLab\Cms\Requests\Tag\Front\TagFrontStorePost;
-use DaydreamLab\Cms\Requests\Tag\Front\TagFrontStatePost;
+use DaydreamLab\Cms\Controllers\CmsController;
+use DaydreamLab\Cms\Requests\Tag\Front\TagFrontGetItemGet;
 use DaydreamLab\Cms\Requests\Tag\Front\TagFrontSearchPost;
-use DaydreamLab\Cms\Requests\Tag\Front\TagFrontCheckoutPost;
+use DaydreamLab\Cms\Requests\Tag\Front\TagFrontSearchItemPost;
+use DaydreamLab\Cms\Resources\Tag\Front\Models\TagFrontResource;
+use DaydreamLab\Cms\Resources\Tag\Front\Collections\TagFrontListResourceCollection;
+use DaydreamLab\Cms\Resources\Item\Front\Models\ItemFrontListResource;
+use DaydreamLab\Cms\Services\Tag\Front\TagFrontService;
+use DaydreamLab\JJAJ\Helpers\Helper;
 
-class TagFrontController extends BaseController
+
+class TagFrontController extends CmsController
 {
-    protected $package = 'Cms';
-
     protected $modelName = 'Tag';
 
     protected $modelType = 'Front';
@@ -27,74 +26,30 @@ class TagFrontController extends BaseController
     }
 
 
-    public function getItem($id)
+    public function getItemByAlias(TagFrontGetItemGet $request)
     {
-        $this->service->getItem($id);
+        $this->service->setUser($request->user('api'));
+        $this->service->getItemByAlias(Helper::collect(['alias' => $request->route('alias')]));
 
-        return $this->response($this->service->status, $this->service->response);
+        return $this->response($this->service->status,
+            gettype($this->service->response) == 'object' ? new TagFrontResource($this->service->response) : null);
     }
 
-
-    public function getItems()
-    {
-        $this->service->search(new Collection());
-
-        return $this->response($this->service->status, $this->service->response);
-    }
-
-
-    public function getItemByAlias($alias)
-    {
-        $this->service->getItemByAlias(Helper::collect(['alias'=>$alias]));
-
-        return $this->response($this->service->status, $this->service->response);
-    }
-
-
-    public function checkout(TagFrontCheckoutPost $request)
-    {
-        $this->service->checkout($request->validated());
-
-        return $this->response($this->service->status, $this->service->response);
-    }
-
-
-    public function remove(TagFrontRemovePost $request)
-    {
-        $this->service->remove($request->validated());
-
-        return $this->response($this->service->status, $this->service->response);
-    }
-
-
-    public function state(TagFrontStatePost $request)
-    {
-        $this->service->state($request->validated());
-
-        return $this->response($this->service->status, $this->service->response);
-    }
-
-
-    public function store(TagFrontStorePost $request)
-    {
-        $this->service->store($request->validated());
-
-        return $this->response($this->service->status, $this->service->response);
-    }
-
-
+    
     public function search(TagFrontSearchPost $request)
     {
+        $this->service->setUser($request->user('api'));
         $this->service->search($request->validated());
 
-        return $this->response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, new TagFrontListResourceCollection($this->service->response));
     }
 
 
-    public function searchItems(TagFrontSearchPost $request)
+    public function searchItems(TagFrontSearchItemPost $request)
     {
+        $this->service->setUser($request->user('api'));
         $this->service->searchItems($request->validated());
 
-        return $this->response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, new ItemFrontListResource($this->service->response));
     }
 }

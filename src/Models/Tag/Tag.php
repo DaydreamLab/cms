@@ -4,13 +4,14 @@ namespace DaydreamLab\Cms\Models\Tag;
 use DaydreamLab\Cms\Models\Item\Item;
 use DaydreamLab\Cms\Traits\Model\WithAccess;
 use DaydreamLab\Cms\Traits\Model\WithLanguage;
+use DaydreamLab\Cms\Traits\Model\UserInfo;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use Kalnoy\Nestedset\NodeTrait;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 
 class Tag extends BaseModel
 {
-    use NodeTrait, WithLanguage, WithAccess,
+    use NodeTrait, WithLanguage, WithAccess, UserInfo,
         RecordChanger {
         RecordChanger::boot as traitBoot;
     }
@@ -21,6 +22,11 @@ class Tag extends BaseModel
      */
     protected $table = 'tags';
 
+    protected $model_type = 'parent';
+    
+    protected $order_by = 'id';
+
+    protected $order = 'asc';
 
     /**
      * The attributes that are mass assignable.

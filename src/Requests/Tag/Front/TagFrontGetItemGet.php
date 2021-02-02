@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Tag\Front;
 
-use DaydreamLab\Cms\Requests\Tag\TagStorePost;
+use DaydreamLab\Cms\Requests\CmsGetItemGet;
 
-class TagFrontStorePost extends TagStorePost
+class TagFrontGetItemGet extends CmsGetItemGet
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +23,6 @@ class TagFrontStorePost extends TagStorePost
      */
     public function rules()
     {
-        $rules = [
-                'title' => 'required|string'
-        ];
-        return $rules;
+        return parent::rules();
     }
 }

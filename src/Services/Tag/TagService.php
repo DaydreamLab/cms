@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Services\Tag;
 
+use DaydreamLab\Cms\Services\CmsService;
 use DaydreamLab\Cms\Repositories\Tag\TagRepository;
 use DaydreamLab\Cms\Events\Add;
 
@@ -13,7 +14,7 @@ use DaydreamLab\JJAJ\Services\BaseService;
 use DaydreamLab\JJAJ\Traits\NestedServiceTrait;
 use Illuminate\Support\Collection;
 
-class TagService extends BaseService
+class TagService extends CmsService
 {
     use NestedServiceTrait {
         NestedServiceTrait::addNested       as traitAddNested;
@@ -21,9 +22,7 @@ class TagService extends BaseService
         NestedServiceTrait::storeNested     as traitStoreNested;
         NestedServiceTrait::removeNested    as traitRemoveNested;
     }
-
-    protected $package = 'Cms';
-
+    
     protected $modelName = 'Tag';
 
     protected $modelType = 'Base';

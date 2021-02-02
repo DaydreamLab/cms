@@ -2,15 +2,12 @@
 
 namespace DaydreamLab\Cms\Requests\Tag\Front;
 
-use DaydreamLab\Cms\Requests\Tag\TagStatePost;
+use DaydreamLab\JJAJ\Requests\ListRequest;
+use Illuminate\Validation\Rule;
 
-class TagFrontStatePost extends TagStatePost
+class TagFrontSearchItemPost extends ListRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
+
     public function authorize()
     {
         return parent::authorize();
@@ -24,8 +21,8 @@ class TagFrontStatePost extends TagStatePost
     public function rules()
     {
         $rules = [
-            //
         ];
-        return array_merge($rules, parent::rules());
+
+        return array_merge(parent::rules(), $rules);
     }
 }

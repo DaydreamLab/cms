@@ -39,7 +39,7 @@ class TagFrontService extends TagService
             }
         }
 
-        return $items;
+        return $items_data;
     }
 
 
@@ -59,7 +59,7 @@ class TagFrontService extends TagService
         $items = $this->getRelatedItems($tags);
 
         $this->status = Str::upper(Str::snake($this->type . 'SearchItemsSuccess'));
-        $this->response = $paginate ? $this->repo->paginate($items, $limit, 1, []) : $items;
+        $this->response = $paginate ? $this->repo->paginate($items, $limit, $input->get('page') ?: 1, []) : $items;
 
         return $items;
     }

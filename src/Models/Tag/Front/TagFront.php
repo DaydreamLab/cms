@@ -12,6 +12,8 @@ class TagFront extends Tag
      */
     protected $table = 'tags';
 
+    protected $model_type = 'front';
+
     protected $hidden = [
         'id',
         '_lft',

@@ -7,6 +7,9 @@ use Illuminate\Validation\Rule;
 
 class TagAdminSearchPost extends TagSearchPost
 {
+    protected $apiMethod = 'searchTag';
+
+    protected $modelName = 'Tag';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -47,6 +50,6 @@ class TagAdminSearchPost extends TagSearchPost
                 ])
             ]
         ];
-        return array_merge($rules, parent::rules());
+        return array_merge(parent::rules(), $rules);
     }
 }

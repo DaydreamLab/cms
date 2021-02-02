@@ -2,10 +2,13 @@
 
 namespace DaydreamLab\Cms\Requests\Tag\Admin;
 
-use DaydreamLab\Cms\Requests\Tag\TagStatePost;
+use DaydreamLab\Cms\Requests\CmStatePost;
 
-class TagAdminStatePost extends TagStatePost
+class TagAdminStatePost extends CmStatePost
 {
+    protected $apiMethod = 'updateTagState';
+
+    protected $modelName = 'Tag';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -26,6 +29,6 @@ class TagAdminStatePost extends TagStatePost
         $rules = [
             //
         ];
-        return array_merge($rules, parent::rules());
+        return array_merge(parent::rules(), $rules);
     }
 }

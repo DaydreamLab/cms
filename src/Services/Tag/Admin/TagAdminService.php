@@ -36,7 +36,7 @@ class TagAdminService extends TagService
 
     public function getItem($id)
     {
-        $item =  parent::getItem($id);
+        $item = parent::getItem($id);
 
         return $item;
     }

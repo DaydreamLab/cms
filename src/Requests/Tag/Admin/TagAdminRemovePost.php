@@ -2,10 +2,13 @@
 
 namespace DaydreamLab\Cms\Requests\Tag\Admin;
 
-use DaydreamLab\Cms\Requests\Tag\TagRemovePost;
+use DaydreamLab\Cms\Requests\CmsCheckoutRemovePost;
 
-class TagAdminRemovePost extends TagRemovePost
+class TagAdminRemovePost extends CmsCheckoutRemovePost
 {
+    protected $apiMethod = 'deleteTag';
+
+    protected $modelName = 'Tag';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -26,6 +29,6 @@ class TagAdminRemovePost extends TagRemovePost
         $rules = [
             //
         ];
-        return array_merge($rules, parent::rules());
+        return array_merge(parent::rules(), $rules);
     }
 }

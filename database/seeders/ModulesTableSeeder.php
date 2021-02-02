@@ -38,7 +38,7 @@ class ModulesTableSeeder extends Seeder
         $this->categoryAdminService  = app(CategoryAdminService::class);
         $data = json_decode(file_get_contents(__DIR__ . '/jsons/module.json'), true);
 
-        $this->migrate($data, Category::where('extension', 'module')->first());
+        //$this->migrate($data, Category::where('extension', 'module')->first());
     }
 
 

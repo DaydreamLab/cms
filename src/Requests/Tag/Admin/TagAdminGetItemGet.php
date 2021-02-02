@@ -1,11 +1,15 @@
 <?php
 
-namespace DaydreamLab\Cms\Requests\Tag\Front;
+namespace DaydreamLab\Cms\Requests\Tag\Admin;
 
-use DaydreamLab\Cms\Requests\Tag\TagRemovePost;
+use DaydreamLab\Cms\Requests\CmsGetItemGet;
 
-class TagFrontRemovePost extends TagRemovePost
+class TagAdminGetItemGet extends CmsGetItemGet
 {
+    protected $apiMethod = 'getTag';
+
+    protected $modelName = 'Tag';
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -23,9 +27,6 @@ class TagFrontRemovePost extends TagRemovePost
      */
     public function rules()
     {
-        $rules = [
-            //
-        ];
-        return array_merge($rules, parent::rules());
+        return parent::rules();
     }
 }
