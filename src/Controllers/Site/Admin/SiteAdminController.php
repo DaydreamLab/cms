@@ -2,11 +2,16 @@
 
 namespace DaydreamLab\Cms\Controllers\Site\Admin;
 
+use DaydreamLab\Cms\Controllers\CmsController;
+use DaydreamLab\Cms\Requests\Site\Admin\SiteAdminGetItemGet;
+use DaydreamLab\Cms\Requests\Site\Admin\SiteAdminGetListGet;
+use DaydreamLab\Cms\Requests\Site\Admin\SiteAdminCheckoutPost;
+use DaydreamLab\Cms\Resources\Site\Admin\Models\SiteAdminResource;
+use DaydreamLab\JJAJ\Helpers\Helper;
+
+
+
 use DaydreamLab\Cms\Requests\Site\SiteCheckoutPost;
-use DaydreamLab\JJAJ\Controllers\BaseController;
-use DaydreamLab\JJAJ\Helpers\InputHelper;
-use DaydreamLab\JJAJ\Helpers\ResponseHelper;
-use Illuminate\Support\Collection;
 use DaydreamLab\Cms\Services\Site\Admin\SiteAdminService;
 use DaydreamLab\Cms\Requests\Site\Admin\SiteAdminRemovePost;
 use DaydreamLab\Cms\Requests\Site\Admin\SiteAdminStorePost;
@@ -14,10 +19,8 @@ use DaydreamLab\Cms\Requests\Site\Admin\SiteAdminStatePost;
 use DaydreamLab\Cms\Requests\Site\Admin\SiteAdminSearchPost;
 use DaydreamLab\Cms\Requests\Site\Admin\SiteAdminOrderingPost;
 
-class SiteAdminController extends BaseController
+class SiteAdminController extends CmsController
 {
-    protected $package = 'Cms';
-
     protected $modelName = 'Site';
 
     protected $modelType = 'Admin';
@@ -29,35 +32,41 @@ class SiteAdminController extends BaseController
     }
 
 
-    public function checkout(SiteCheckoutPost $request)
+    public function getItem(SiteAdminGetItemGet $request)
     {
-        $this->service->checkout($request->validated());
+        $this->service->setUser($request->user('api'));
+        $this->service->getItem(collect(['id' => $request->route('id')]));
 
-        return $this->response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, new SiteAdminResource($this->service->response));
     }
 
-
-    public function getItem($id)
+    public function getList(SiteAdminGetListGet $request)
     {
-        $this->service->canAction('getSite');
-        $this->service->getItem($id);
-
-        return $this->response($this->service->status, $this->service->response);
-    }
-
-
-    public function getList()
-    {
-        $this->service->canAction('getSiteList');
+        $this->service->setUser($request->user('api'));
         $this->service->getList(collect());
 
         return $this->response($this->service->status, $this->service->response);
     }
 
 
+    public function checkout(SiteAdminCheckoutPost $request)
+    {
+        $this->service->setUser($request->user('api'));
+        $this->service->checkout($request->validated());
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
+
+
+
+
+
+
+
     public function ordering(SiteAdminOrderingPost $request)
     {
-        $this->service->canAction('editSite');
+        $this->service->setUser($request->user('api'));
         $this->service->ordering($request->validated());
 
         return $this->response($this->service->status, $this->service->response);
@@ -66,7 +75,7 @@ class SiteAdminController extends BaseController
 
     public function remove(SiteAdminRemovePost $request)
     {
-        $this->service->canAction('deleteSite');
+        $this->service->setUser($request->user('api'));
         $this->service->remove($request->validated());
 
         return $this->response($this->service->status, $this->service->response);
@@ -75,7 +84,7 @@ class SiteAdminController extends BaseController
 
     public function state(SiteAdminStatePost $request)
     {
-        $this->service->canAction('updateSiteState');
+        $this->service->setUser($request->user('api'));
         $this->service->state($request->validated());
 
         return $this->response($this->service->status, $this->service->response);
@@ -84,8 +93,7 @@ class SiteAdminController extends BaseController
 
     public function store(SiteAdminStorePost $request)
     {
-        InputHelper::null($request->validated(), 'id') ? $this->service->canAction('addSite')
-            : $this->service->canAction('editSite');
+        $this->service->setUser($request->user('api'));
         $this->service->store($request->validated());
 
         return $this->response($this->service->status, $this->service->response);
@@ -94,7 +102,7 @@ class SiteAdminController extends BaseController
 
     public function search(SiteAdminSearchPost $request)
     {
-        $this->service->canAction('searchSite');
+        $this->service->setUser($request->user('api'));
         $this->service->search($request->validated());
 
         return $this->response($this->service->status, $this->service->response);

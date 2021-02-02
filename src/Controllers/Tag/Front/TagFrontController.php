@@ -8,7 +8,7 @@ use DaydreamLab\Cms\Requests\Tag\Front\TagFrontSearchPost;
 use DaydreamLab\Cms\Requests\Tag\Front\TagFrontSearchItemPost;
 use DaydreamLab\Cms\Resources\Tag\Front\Models\TagFrontResource;
 use DaydreamLab\Cms\Resources\Tag\Front\Collections\TagFrontListResourceCollection;
-use DaydreamLab\Cms\Resources\Item\Front\Models\ItemFrontListResource;
+use DaydreamLab\Cms\Resources\Item\Front\Collections\ItemFrontListResourceCollection;
 use DaydreamLab\Cms\Services\Tag\Front\TagFrontService;
 use DaydreamLab\JJAJ\Helpers\Helper;
 
@@ -50,6 +50,6 @@ class TagFrontController extends CmsController
         $this->service->setUser($request->user('api'));
         $this->service->searchItems($request->validated());
 
-        return $this->response($this->service->status, new ItemFrontListResource($this->service->response));
+        return $this->response($this->service->status, new ItemFrontListResourceCollection($this->service->response));
     }
 }

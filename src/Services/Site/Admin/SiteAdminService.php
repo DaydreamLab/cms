@@ -44,7 +44,7 @@ class SiteAdminService extends SiteService
             $data[] = $item->only('id', 'title', 'url');
         }
 
-        $this->status = Str::upper(Str::snake($this->type.'GetListSuccess'));
+        $this->status = 'GetListSuccess';
         $this->response = $data;
 
         return $data;

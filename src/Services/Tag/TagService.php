@@ -5,7 +5,6 @@ namespace DaydreamLab\Cms\Services\Tag;
 use DaydreamLab\Cms\Services\CmsService;
 use DaydreamLab\Cms\Repositories\Tag\TagRepository;
 use DaydreamLab\Cms\Events\Add;
-
 use DaydreamLab\Cms\Events\Modify;
 use DaydreamLab\Cms\Events\Ordering;
 use DaydreamLab\Cms\Events\Remove;

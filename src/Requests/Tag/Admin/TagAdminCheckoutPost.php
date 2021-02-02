@@ -6,7 +6,7 @@ use DaydreamLab\Cms\Requests\CmsCheckoutRemovePost;
 
 class TagAdminCheckoutPost extends CmsCheckoutRemovePost
 {
-    protected $apiMethod = 'editTag';
+    protected $apiMethod = 'checkoutTag';
 
     protected $modelName = 'Tag';
     /**

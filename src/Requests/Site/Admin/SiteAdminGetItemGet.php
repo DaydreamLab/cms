@@ -1,14 +1,15 @@
 <?php
 
-namespace DaydreamLab\Cms\Requests\Tag\Admin;
+namespace DaydreamLab\Cms\Requests\Site\Admin;
 
-use DaydreamLab\Cms\Requests\CmsOrderingPost;
+use DaydreamLab\Cms\Requests\CmsGetItemGet;
 
-class TagAdminOrderingPost extends CmsOrderingPost
+class SiteAdminGetItemGet extends CmsGetItemGet
 {
-    protected $apiMethod = 'editTag';
+    protected $apiMethod = 'getSite';
 
-    protected $modelName = 'Tag';
+    protected $modelName = 'Site';
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -26,8 +27,6 @@ class TagAdminOrderingPost extends CmsOrderingPost
      */
     public function rules()
     {
-        $rules = [
-        ];
-        return array_merge(parent::rules(), $rules);
+        return parent::rules();
     }
 }

@@ -1,14 +1,14 @@
 <?php
 
-namespace DaydreamLab\Cms\Requests\Tag\Admin;
+namespace DaydreamLab\Cms\Requests\Site\Admin;
 
-use DaydreamLab\Cms\Requests\CmsOrderingPost;
+use DaydreamLab\Cms\Requests\CmsCheckoutRemovePost;
 
-class TagAdminOrderingPost extends CmsOrderingPost
+class SiteAdminCheckoutPost extends CmsCheckoutRemovePost
 {
-    protected $apiMethod = 'editTag';
+    protected $apiMethod = 'checkoutSite';
 
-    protected $modelName = 'Tag';
+    protected $modelName = 'Site';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -27,6 +27,7 @@ class TagAdminOrderingPost extends CmsOrderingPost
     public function rules()
     {
         $rules = [
+            //
         ];
         return array_merge(parent::rules(), $rules);
     }

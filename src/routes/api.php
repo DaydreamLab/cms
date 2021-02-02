@@ -17,6 +17,7 @@ use DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldAdminController;
 use DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldGroupAdminController;
 use DaydreamLab\Cms\Controllers\Language\Admin\LanguageAdminController;
 use DaydreamLab\Cms\Controllers\Setting\Admin\SettingAdminController;
+use DaydreamLab\Cms\Controllers\Site\Admin\SiteAdminController;
 use DaydreamLab\Cms\Controllers\Option\OptionController;
 /*
  *
@@ -165,21 +166,22 @@ Route::post('api/admin/setting/store', [SettingAdminController::class, 'store'])
     ->middleware(['expired','admin']);
 Route::get('api/admin/setting', [SettingAdminController::class, 'getItem'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/site/checkout', [SettingAdminController::class, 'checkout'])
+
+Route::post('api/admin/site/checkout', [SiteAdminController::class, 'checkout'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/site/remove', [SettingAdminController::class, 'remove'])
+Route::post('api/admin/site/remove', [SiteAdminController::class, 'remove'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/site/store', [SettingAdminController::class, 'store'])
+Route::post('api/admin/site/store', [SiteAdminController::class, 'store'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/site/state', [SettingAdminController::class, 'state'])
+Route::post('api/admin/site/state', [SiteAdminController::class, 'state'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/site/search', [SettingAdminController::class, 'search'])
+Route::post('api/admin/site/search', [SiteAdminController::class, 'search'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/site/ordering', [SettingAdminController::class, 'ordering'])
+Route::post('api/admin/site/ordering', [SiteAdminController::class, 'ordering'])
     ->middleware(['expired','admin']);
-Route::get('api/admin/site/list', [SettingAdminController::class, 'getList'])
+Route::get('api/admin/site/list', [SiteAdminController::class, 'getList'])
     ->middleware(['expired','admin']);
-Route::get('api/admin/site/{id}', [SettingAdminController::class, 'getItem'])
+Route::get('api/admin/site/{id}', [SiteAdminController::class, 'getItem'])
     ->middleware(['expired','admin']);
 
 Route::post('api/admin/tag/remove', [TagAdminController::class, 'remove'])

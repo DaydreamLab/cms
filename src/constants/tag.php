@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'SEARCH_ITEMS_SUCCESS' => 200
+    'FRONT_SEARCH_ITEMS_SUCCESS' => 200
 ];

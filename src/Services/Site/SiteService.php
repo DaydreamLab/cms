@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Services\Site;
 
+use DaydreamLab\Cms\Services\CmsService;
 use DaydreamLab\Cms\Events\Checkout;
 use DaydreamLab\Cms\Repositories\Site\SiteRepository;
 use DaydreamLab\Cms\Events\Add;
@@ -10,13 +11,10 @@ use DaydreamLab\Cms\Events\Ordering;
 use DaydreamLab\Cms\Events\Remove;
 use DaydreamLab\Cms\Events\State;
 use DaydreamLab\JJAJ\Helpers\Helper;
-use DaydreamLab\JJAJ\Services\BaseService;
 use Illuminate\Support\Collection;
 
-class SiteService extends BaseService
+class SiteService extends CmsService
 {
-    protected $package = 'Cms';
-
     protected $modelName = 'Site';
 
     protected $modelType = 'Base';
