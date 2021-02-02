@@ -1,11 +1,15 @@
 <?php
 
-namespace DaydreamLab\Cms\Requests\Item;
+namespace DaydreamLab\Cms\Requests\Item\Admin;
 
-use DaydreamLab\JJAJ\Requests\AdminRequest;
+use DaydreamLab\Cms\Requests\CmsGetItemGet;
 
-class ItemCheckoutPost extends AdminRequest
+class ItemAdminGetItemGet extends CmsGetItemGet
 {
+    protected $apiMethod = 'getItem';
+
+    protected $modelName = 'Item';
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -23,9 +27,6 @@ class ItemCheckoutPost extends AdminRequest
      */
     public function rules()
     {
-        return [
-            'ids'       => 'required|array',
-            'ids.*'     => 'required|integer'
-        ];
+        return parent::rules();
     }
 }

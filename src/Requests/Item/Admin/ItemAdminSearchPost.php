@@ -7,6 +7,9 @@ use Illuminate\Validation\Rule;
 
 class ItemAdminSearchPost extends ItemSearchPost
 {
+    protected $apiMethod = 'searchItem';
+
+    protected $modelName = 'Item';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -68,6 +71,6 @@ class ItemAdminSearchPost extends ItemSearchPost
                 ])
             ]
         ];
-        return array_merge($rules, parent::rules());
+        return array_merge(parent::rules(), $rules);
     }
 }

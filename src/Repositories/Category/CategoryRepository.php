@@ -2,12 +2,11 @@
 
 namespace DaydreamLab\Cms\Repositories\Category;
 
-use DaydreamLab\JJAJ\Helpers\Helper;
-use DaydreamLab\JJAJ\Repositories\BaseRepository;
 use DaydreamLab\Cms\Models\Category\Category;
+use DaydreamLab\Cms\Repositories\CmsRepository;
 use DaydreamLab\JJAJ\Traits\NestedRepositoryTrait;
 
-class CategoryRepository extends BaseRepository
+class CategoryRepository extends CmsRepository
 {
     use NestedRepositoryTrait;
 
@@ -52,7 +51,6 @@ class CategoryRepository extends BaseRepository
             {
                 $query = $query->where($key, $value);
             }
-
         }
 
         return $query->get();

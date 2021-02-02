@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Services\Category;
 
 use DaydreamLab\Cms\Repositories\Category\CategoryRepository;
+use DaydreamLab\Cms\Services\CmsService;
 use DaydreamLab\JJAJ\Events\Add;
 use DaydreamLab\JJAJ\Events\Modify;
 use DaydreamLab\JJAJ\Events\Ordering;
@@ -13,12 +14,9 @@ use DaydreamLab\JJAJ\Traits\NestedServiceTrait;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
-class CategoryService extends BaseService
+class CategoryService extends CmsService
 {
     use NestedServiceTrait;
-    protected $type = 'Category';
-
-    protected $package = 'Cms';
 
     protected $modelName = 'Category';
 

@@ -1,12 +1,12 @@
 <?php
 
-namespace DaydreamLab\Cms\Requests\Item\Admin;
+namespace DaydreamLab\Cms\Requests\Category\Admin;
 
 use DaydreamLab\Cms\Requests\CmsCheckoutRemovePost;
 
-class ItemAdminCheckoutPost extends CmsCheckoutRemovePost
+class CategoryAdminCheckoutPost extends CmsCheckoutRemovePost
 {
-    protected $apiMethod = 'storeCategory';
+    protected $apiMethod = 'editCategory';
 
     protected $modelName = 'Category';
     /**

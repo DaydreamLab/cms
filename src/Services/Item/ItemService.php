@@ -9,18 +9,15 @@ use DaydreamLab\Cms\Events\Remove;
 use DaydreamLab\Cms\Events\State;
 use DaydreamLab\Cms\Events\Modify;
 use DaydreamLab\Cms\Repositories\Item\ItemRepository;
-use DaydreamLab\JJAJ\Services\BaseService;
+use DaydreamLab\Cms\Services\CmsService;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
-class ItemService extends BaseService
+class ItemService extends CmsService
 {
-    protected $package = 'Cms';
-
     protected $modelName = 'Item';
 
     protected $modelType = 'Base';
-
 
     public function __construct(ItemRepository $repo)
     {
@@ -39,17 +36,10 @@ class ItemService extends BaseService
     }
 
 
-    public function checkout(Collection $input)
-    {
-        return parent::checkout($input);
-    }
-
-
     public function featured(Collection $input)
     {
         $result = false;
-        foreach ($input->get('ids') as $id)
-        {
+        foreach ($input->get('ids') as $id) {
             $item = $this->checkItem(collect(['id' => $id]));
             $result =  $this->repo->featured($item, $input->get('featured'));
             if(!$result) break;

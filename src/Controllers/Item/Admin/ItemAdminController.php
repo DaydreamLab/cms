@@ -2,11 +2,8 @@
 
 namespace DaydreamLab\Cms\Controllers\Item\Admin;
 
+use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminGetItemGet;
 use DaydreamLab\JJAJ\Controllers\BaseController;
-use DaydreamLab\JJAJ\Helpers\Helper;
-use DaydreamLab\JJAJ\Helpers\InputHelper;
-use DaydreamLab\JJAJ\Helpers\ResponseHelper;
-use Illuminate\Support\Collection;
 use DaydreamLab\Cms\Services\Item\Admin\ItemAdminService;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminRemovePost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminStorePost;
@@ -15,7 +12,6 @@ use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminSearchPost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminCheckoutPost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminFeaturePost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminOrderingPost;
-
 
 class ItemAdminController extends BaseController
 {
@@ -33,6 +29,7 @@ class ItemAdminController extends BaseController
 
     public function checkout(ItemAdminCheckoutPost $request)
     {
+        $this->service->setUser($request->user('api'));
         $this->service->checkout($request->validated());
 
         return $this->response($this->service->status, $this->service->response);
@@ -41,7 +38,7 @@ class ItemAdminController extends BaseController
 
     public function featured(ItemAdminFeaturePost $request)
     {
-        $this->service->canAction('editItem');
+        $this->service->setUser($request->user('api'));
         $this->service->featured($request->validated());
 
         return $this->response($this->service->status, $this->service->response);
@@ -50,17 +47,17 @@ class ItemAdminController extends BaseController
 
     public function featuredOrdering(ItemAdminOrderingPost $request)
     {
-        $this->service->canAction('editItem');
+        $this->service->setUser($request->user('api'));
         $this->service->ordering($request->validated());
 
         return $this->response($this->service->status, $this->service->response);
     }
 
 
-    public function getItem($id)
+    public function getItem(ItemAdminGetItemGet $request)
     {
-        $this->service->canAction('getItem');
-        $this->service->getItem($id);
+        $this->service->setUser($request->user('api'));
+        $this->service->getItem(collect(['id' => $request->route('id')]));
 
         return $this->response($this->service->status, $this->service->response);
     }
@@ -68,7 +65,7 @@ class ItemAdminController extends BaseController
 
     public function ordering(ItemAdminOrderingPost $request)
     {
-        $this->service->canAction('editItem');
+        $this->service->setUser($request->user('api'));
         $this->service->ordering($request->validated());
 
         return $this->response($this->service->status, $this->service->response);
@@ -77,7 +74,7 @@ class ItemAdminController extends BaseController
 
     public function remove(ItemAdminRemovePost $request)
     {
-        $this->service->canAction('deleteItem');
+        $this->service->setUser($request->user('api'));
         $this->service->remove($request->validated());
 
         return $this->response($this->service->status, $this->service->response);
@@ -86,7 +83,7 @@ class ItemAdminController extends BaseController
 
     public function state(ItemAdminStatePost $request)
     {
-        $this->service->canAction('updateItemState');
+        $this->service->setUser($request->user('api'));
         $this->service->state($request->validated());
 
         return $this->response($this->service->status, $this->service->response);
@@ -95,8 +92,7 @@ class ItemAdminController extends BaseController
 
     public function store(ItemAdminStorePost $request)
     {
-        InputHelper::null($request->validated(), 'id') ? $this->service->canAction('addItem')
-            : $this->service->canAction('editItem');
+        $this->service->setUser($request->user('api'));
         $this->service->store($request->validated());
 
         return $this->response($this->service->status, $this->service->response);
@@ -105,7 +101,7 @@ class ItemAdminController extends BaseController
 
     public function search(ItemAdminSearchPost $request)
     {
-        $this->service->canAction('searchItem');
+        $this->service->setUser($request->user('api'));
         $this->service->search($request->validated());
 
         return $this->response($this->service->status, $this->service->response);
