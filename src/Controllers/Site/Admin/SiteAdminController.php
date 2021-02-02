@@ -58,6 +58,14 @@ class SiteAdminController extends CmsController
     }
 
 
+    public function store(SiteAdminStorePost $request)
+    {
+        $this->service->setUser($request->user('api'));
+        $this->service->store($request->validated());
+
+        return $this->response($this->service->status,
+            gettype($this->service->response) == 'object' ? new SiteAdminResource($this->service->response->refresh()) : null);
+    }
 
 
 
@@ -91,13 +99,7 @@ class SiteAdminController extends CmsController
     }
 
 
-    public function store(SiteAdminStorePost $request)
-    {
-        $this->service->setUser($request->user('api'));
-        $this->service->store($request->validated());
 
-        return $this->response($this->service->status, $this->service->response);
-    }
 
 
     public function search(SiteAdminSearchPost $request)
