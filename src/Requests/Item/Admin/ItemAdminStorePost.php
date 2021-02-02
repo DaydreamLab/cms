@@ -2,10 +2,14 @@
 
 namespace DaydreamLab\Cms\Requests\Item\Admin;
 
-use DaydreamLab\Cms\Requests\Item\ItemStorePost;
+use DaydreamLab\JJAJ\Requests\AdminRequest;
+use Illuminate\Validation\Rule;
 
-class ItemAdminStorePost extends ItemStorePost
+class ItemAdminStorePost extends AdminRequest
 {
+    protected $apiMethod = 'storeItem';
+
+    protected $modelName = 'Item';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -24,8 +28,45 @@ class ItemAdminStorePost extends ItemStorePost
     public function rules()
     {
         $rules = [
-            //
+            'id'                    => 'nullable|integer',
+            'title'                 => 'required|string',
+            'alias'                 => 'nullable|string',
+            'category_id'           => 'required|integer',
+            'state'                 => [
+                'required',
+                Rule::in([0,1])
+            ],
+            'introimage'            => 'nullable|string',
+            'introtext'             => 'nullable|string',
+            'image'                 => 'nullable|string',
+            'description'           => 'nullable|string',
+            'video'                 => 'nullable|string',
+            'link'                  => 'nullable|string',
+            'hits'                  => 'nullable|integer',
+            'access'                => 'nullable|integer',
+            'featured'              => [
+                'nullable',
+                Rule::in([0,1])
+            ],
+            'featured_ordering'     => 'nullable|integer',
+            'language'              => 'required|string',
+            'metadesc'              => 'nullable|string',
+            'metakeywords'          => 'nullable|string',
+            //'content_type'  => 'nullable|string',
+            'params'                => 'nullable|array',
+            'ordering'              => 'nullable|integer',
+            'extrafield_group_id'   => 'nullable|integer',
+            'extrafields'           => 'nullable|array',
+            'extrafields.*'         => 'nullable|array',
+            'extrafields.*.id'      => 'nullable|integer',
+            'extrafields.*.value'   => 'nullable|string',
+            'tags'                  => 'nullable|array',
+            'tags.*'                => 'nullable|array',
+            'tags.*.id'             => 'nullable|integer',
+            'tags.*.title'          => 'nullable|string',
+            'publish_up'            => 'nullable|date_format:Y-m-d H:i:s',
+            'publish_down'          => 'nullable|date_format:Y-m-d H:i:s',
         ];
-        return array_merge($rules, parent::rules());
+        return array_merge(parent::rules(), $rules);
     }
 }

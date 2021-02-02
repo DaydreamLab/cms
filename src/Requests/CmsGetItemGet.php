@@ -23,6 +23,8 @@ class CmsGetItemGet extends AdminRequest
      */
     public function rules()
     {
-        return [];
+        return [
+
+        ];
     }
 }

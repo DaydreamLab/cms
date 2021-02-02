@@ -63,7 +63,7 @@ class CategoryFrontService extends CategoryService
 
     public function getContentTypeItems($extension = 'item', $type = 'article')
     {
-        $items = $this->repo->getContentTypeItems($extension, $type, $this->access_ids);
+        $items = $this->repo->getContentTypeItems($extension, $type, $this->getAccessIds());
 
         return $items;
     }

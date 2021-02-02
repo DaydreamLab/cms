@@ -2,7 +2,6 @@
 
 return [
     'timezone' => 'Asia/Taipei',
-
     'item' => [
         'front' => [
             'year_month_filter' => 0,
@@ -10,6 +9,7 @@ return [
                 'enabled'           => 0,
                 'groups'        => []
             ],
+            'access_ids' => [1]
         ]
     ],
     'form' => [
@@ -18,7 +18,6 @@ return [
                 'admin' => 'default',
                 'user'  => 'default'
             ],
-
             'admins' => [
                 'technique@daydream-lab.com'
             ]

@@ -2,7 +2,6 @@
 
 namespace DaydreamLab\Cms;
 
-use DaydreamLab\JJAJ\Helpers\Helper;
 use Illuminate\Support\ServiceProvider;
 
 class CmsServiceProvider extends ServiceProvider
@@ -20,7 +19,7 @@ class CmsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->publishes([__DIR__. '/constants' => config_path('constants')], 'cms-configs');
+        $this->publishes([__DIR__. '/constants' => config_path('constants/cms')], 'cms-configs');
         $this->publishes([__DIR__. '/Configs'   => config_path('daydreamlab')], 'cms-configs');
 
         $this->publishes([
@@ -29,7 +28,6 @@ class CmsServiceProvider extends ServiceProvider
         ], 'cms-frontend-admin');
 
         $this->publishes([
-            //__DIR__. '/../public/site'      => public_path('site'),
             __DIR__. '/../resources/site'   => resource_path('views/site'),
         ], 'cms-frontend-site');
 

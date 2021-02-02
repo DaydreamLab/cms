@@ -2,10 +2,10 @@
 
 namespace DaydreamLab\Cms\Requests\Item\Admin;
 
-use DaydreamLab\Cms\Requests\Item\ItemSearchPost;
+use DaydreamLab\JJAJ\Requests\ListRequest;
 use Illuminate\Validation\Rule;
 
-class ItemAdminSearchPost extends ItemSearchPost
+class ItemAdminSearchPost extends ListRequest
 {
     protected $apiMethod = 'searchItem';
 
@@ -38,14 +38,14 @@ class ItemAdminSearchPost extends ItemSearchPost
                 'nullable',
                 Rule::in([0,1])
             ],
-            'content_type'  => [
-                'nullable',
-                Rule::in(['article', 'item', 'link', 'menu', 'slideshow', 'timeline'])
-            ],
-            'extension'     => [
-                'nullable',
-                Rule::in(['item', 'module', 'menu'])
-            ],
+//            'content_type'  => [
+//                'nullable',
+//                Rule::in(['article', 'item', 'link', 'menu', 'slideshow', 'timeline'])
+//            ],
+//            'extension'     => [
+//                'nullable',
+//                Rule::in(['item', 'module', 'menu'])
+//            ],
             'access'        => 'nullable|integer',
             'language'      => 'nullable|string|max:5',
             'order_by'      => [

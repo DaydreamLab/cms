@@ -4,7 +4,8 @@ namespace DaydreamLab\Cms\Controllers\Item\Admin;
 
 use DaydreamLab\Cms\Controllers\CmsController;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminGetItemGet;
-use DaydreamLab\JJAJ\Controllers\BaseController;
+use DaydreamLab\Cms\Resources\Item\Admin\Models\ItemAdminResource;
+use DaydreamLab\Cms\Resources\Item\Front\Collections\ItemFrontListResourceCollection;
 use DaydreamLab\Cms\Services\Item\Admin\ItemAdminService;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminRemovePost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminStorePost;
@@ -23,6 +24,7 @@ class ItemAdminController extends CmsController
     public function __construct(ItemAdminService $service)
     {
         parent::__construct($service);
+        $this->service = $service;
     }
 
 
@@ -58,7 +60,7 @@ class ItemAdminController extends CmsController
         $this->service->setUser($request->user('api'));
         $this->service->getItem(collect(['id' => $request->route('id')]));
 
-        return $this->response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, new ItemAdminResource($this->service->response));
     }
 
 
@@ -94,7 +96,11 @@ class ItemAdminController extends CmsController
         $this->service->setUser($request->user('api'));
         $this->service->store($request->validated());
 
-        return $this->response($this->service->status, $this->service->response);
+        return $this->response($this->service->status,
+            gettype($this->service->response) == 'object'
+                ? new ItemAdminResource($this->service->response->refresh())
+                : null
+        );
     }
 
 
@@ -103,6 +109,6 @@ class ItemAdminController extends CmsController
         $this->service->setUser($request->user('api'));
         $this->service->search($request->validated());
 
-        return $this->response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, new ItemFrontListResourceCollection($this->service->response));
     }
 }

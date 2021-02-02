@@ -3,8 +3,9 @@
 namespace DaydreamLab\Cms;
 
 use DaydreamLab\Cms\Listeners\CmsEventSubscriber;
+use Illuminate\Foundation\Support\Providers\EventServiceProvider;
 
-class CmsEventServiceProvider extends \Illuminate\Foundation\Support\Providers\EventServiceProvider
+class CmsEventServiceProvider extends EventServiceProvider
 {
     protected $subscribe = [
         CmsEventSubscriber::class

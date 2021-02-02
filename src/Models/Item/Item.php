@@ -1,23 +1,18 @@
 <?php
 namespace DaydreamLab\Cms\Models\Item;
 
-use DaydreamLab\Cms\Models\Category\Category;
-use DaydreamLab\Cms\Models\Extrafield\Admin\ExtrafieldAdmin;
-use DaydreamLab\Cms\Models\Extrafield\Extrafield;
-use DaydreamLab\Cms\Models\Extrafield\ExtrafieldGroup;
 use DaydreamLab\Cms\Models\Tag\Tag;
+use DaydreamLab\Cms\Traits\Model\UserInfo;
 use DaydreamLab\Cms\Traits\Model\WithAccess;
 use DaydreamLab\Cms\Traits\Model\WithCategory;
 use DaydreamLab\Cms\Traits\Model\WithLanguage;
 use DaydreamLab\Cms\Traits\WithExtrafield;
-use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
-use DaydreamLab\User\Models\Viewlevel\Viewlevel;
 
 class Item extends BaseModel
 {
-    use WithAccess, WithExtrafield, WithCategory, WithLanguage,
+    use WithAccess, WithExtrafield, WithCategory, WithLanguage, UserInfo,
         RecordChanger {
         RecordChanger::boot as traitBoot;
     }
@@ -68,6 +63,11 @@ class Item extends BaseModel
         'publish_down',
     ];
 
+    protected $with = [
+        'category',
+        'tags'
+    ];
+
 
     /**
      * The attributes that should be hidden for arrays
@@ -93,7 +93,6 @@ class Item extends BaseModel
         'updater',
         'locker',
         'creator_groups',
-        'tags',
         'viewlevels',
         'category_title',
         'category_alias',
@@ -122,22 +121,13 @@ class Item extends BaseModel
     {
         $creator = $this->creator()->first();
 
-        if ($creator)
-        {
+        if ($creator) {
             return $creator->groups->map(function ($item, $key) {
                 return $item->title;
             });
+        } else {
+            return [];
         }
-        else
-        {
-            return null;
-        }
-    }
-
-
-    public function getTagsAttribute()
-    {
-        return $this->tags()->get();
     }
 
 
@@ -146,5 +136,4 @@ class Item extends BaseModel
         return $this->belongsToMany(Tag::class, 'items_tags_maps', 'item_id', 'tag_id')
             ->where('state', 1);
     }
-
 }

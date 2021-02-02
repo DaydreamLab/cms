@@ -3,9 +3,10 @@
 namespace DaydreamLab\Cms\Requests\Item\Admin;
 
 use DaydreamLab\Cms\Requests\Item\ItemFeaturePost;
+use DaydreamLab\JJAJ\Requests\AdminRequest;
 use Illuminate\Validation\Rule;
 
-class ItemAdminFeaturePost extends ItemFeaturePost
+class ItemAdminFeaturePost extends AdminRequest
 {
     protected $apiMethod = 'updateItemFeatured';
 

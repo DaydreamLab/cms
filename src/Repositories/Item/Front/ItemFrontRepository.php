@@ -10,7 +10,6 @@ use DaydreamLab\User\Repositories\User\Front\UserGroupFrontRepository;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Request;
 
-
 class ItemFrontRepository extends ItemRepository
 {
     protected $userGroupRepository;
@@ -239,12 +238,9 @@ class ItemFrontRepository extends ItemRepository
                                 ->orderBy($setting['order_by'], $setting['ordering'])
                                 ->limit($setting['limit']);
 
-        if (count($creator_groups) == 0)
-        {
+        if (count($creator_groups) == 0) {
             $items = $query->get();
-        }
-        else
-        {
+        } else {
             $user_maps = $this->userGroupRepository->findBySpecial('whereIn', 'id', $creator_groups);
             $user_ids = $user_maps->map(function ($value, $key){
                 return $value->id;
@@ -257,37 +253,33 @@ class ItemFrontRepository extends ItemRepository
 
     public function getPreviousAndNext($item)
     {
-        $previous = $this->model->where('category_id', $item->category_id)
-                                ->where('state', 1)
-                                ->where('id', '!=', $item->id)
-                                ->where('publish_up', '>', $item->publish_up)
-                                ->orderBy('publish_up', 'asc')
-                                ->limit(1)
-                                ->first();
+        $previous = $this->model
+            ->where('category_id', $item->category_id)
+            ->where('state', 1)
+            ->where('id', '!=', $item->id)
+            //->where('publish_up', '>', $item->publish_up)
+            ->orderBy('publish_up', 'asc')
+            ->limit(1)
+            ->first();
 
-        $next     = $this->model->where('category_id', $item->category_id)
-                                ->where('state', 1)
-                                ->where('id', '!=', $item->id)
-                                ->where('publish_up', '<', $item->publish_up )
-                                ->orderBy('publish_up', 'desc')
-                                ->limit(1)
-                                ->first();
+        $next = $this->model
+            ->where('category_id', $item->category_id)
+            ->where('state', 1)
+            ->where('id', '!=', $item->id)
+            //->where('publish_up', '<', $item->publish_up )
+            ->orderBy('publish_up', 'desc')
+            ->limit(1)
+            ->first();
 
-        if ($previous)
-        {
+        if ($previous) {
             $data['previous'] = $previous->only(['title', 'alias']);
-        }
-        else
-        {
+        } else {
             $data['previous'] = null;
         }
 
-        if ($next)
-        {
+        if ($next) {
             $data['next'] = $next ->only(['title', 'alias']);
-        }
-        else
-        {
+        } else {
             $data['next'] = null;
         }
 

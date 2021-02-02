@@ -2,10 +2,13 @@
 
 namespace DaydreamLab\Cms\Requests\Item\Admin;
 
-use DaydreamLab\Cms\Requests\Item\ItemStatePost;
+use DaydreamLab\Cms\Requests\CmStatePost;
 
-class ItemAdminStatePost extends ItemStatePost
+class ItemAdminStatePost extends CmStatePost
 {
+    protected $apiMethod = 'updateItemState';
+
+    protected $modelName = 'Item';
     /**
      * Determine if the user is authorized to make this request.
      *

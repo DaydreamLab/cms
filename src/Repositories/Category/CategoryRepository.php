@@ -24,11 +24,7 @@ class CategoryRepository extends CmsRepository
     public function findSubTreeIds($id)
     {
         $category = $this->find($id);
-
-        $descendants = $category->descendants->map(function ($item) {
-            return $item->id;
-        })->all();
-
+        $descendants = $category->descendants->pluck('id')->all();
         $descendants[] = $id;
 
         return $descendants;

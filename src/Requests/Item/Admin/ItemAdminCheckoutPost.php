@@ -6,9 +6,9 @@ use DaydreamLab\Cms\Requests\CmsCheckoutRemovePost;
 
 class ItemAdminCheckoutPost extends CmsCheckoutRemovePost
 {
-    protected $apiMethod = 'storeCategory';
+    protected $apiMethod = 'checkoutItem';
 
-    protected $modelName = 'Category';
+    protected $modelName = 'Item';
     /**
      * Determine if the user is authorized to make this request.
      *

@@ -145,26 +145,18 @@ class ItemFrontService extends ItemService
 
     public function getItemByAlias(Collection $input)
     {
-        $items = $this->search($input, false);
-
-        if ($items->count())
-        {
-            $item = $items->first();
+        $item = $this->search($input, false)->first();
+        if ($item) {
             $item->hits++;
             $this->update($item, $item);
 
-            $this->canAccess($item->access, $this->access_ids);
-
             $prev_and_next  = $this->repo->getPreviousAndNext($item);
-            $item->previous =  $prev_and_next['previous'];
-            $item->next     =  $prev_and_next['next'];
-            $this->status   = Str::upper(Str::snake($this->type.'GetItemSuccess'));
+            $item->previous = $prev_and_next['previous'];
+            $item->next     = $prev_and_next['next'];
+            $this->status   = 'GetItemSuccess';
             $this->response = $item;
-        }
-        else
-        {
-            $this->status = Str::upper(Str::snake($this->type.'ItemNotExist'));
-            $this->response = null;
+        } else {
+            $this->throwResponse('ItemNotExist', ['alias' => $input->get('alias')]);
         }
 
         return $this->response;
@@ -216,13 +208,11 @@ class ItemFrontService extends ItemService
     {
         $special_queries = [];
         // 取得後門的 special queries
-        if (!InputHelper::null($input, 'special_queries'))
-        {
+        if (!InputHelper::null($input, 'special_queries')) {
             $special_queries = array_merge($special_queries, $input->get('special_queries'));
         }
         // 取得年份 special queries
-        if (!InputHelper::null($input, 'year'))
-        {
+        if (!InputHelper::null($input, 'year')) {
             $year = $input->get('year');
             $input->forget('year');
             $obj['type']        = 'whereYear';
@@ -230,9 +220,9 @@ class ItemFrontService extends ItemService
             $obj['value']       = $year;
             $special_queries[]  = $obj;
         }
+
         // 取得月份 special queries
-        if (!InputHelper::null($input, 'month'))
-        {
+        if (!InputHelper::null($input, 'month')) {
             $month = $input->get('month');
             $input->forget('month');
             $obj['type']        = 'whereMonth';
@@ -243,9 +233,7 @@ class ItemFrontService extends ItemService
 
         // 取得文章類型 special queries
         $categories = $this->categoryFrontService->getContentTypeItems();
-        $category_ids = $categories->map(function ($item, $key){
-            return $item->id;
-        });
+        $category_ids = $categories->pluck('id');
 
         $obj['type']        = 'whereIn';
         $obj['key']         = 'category_id';
@@ -305,11 +293,12 @@ class ItemFrontService extends ItemService
     {
         $input->put('paginate', $paginate);
         $special_queries = $this->getSpecialQueries($input);
+        $language = $input->get('language') != ''
+            ? [$input->get('language')]
+            : ['*',config('daydreamlab.global.locale')];
 
-        $language = $input->get('language') != '' ? [$input->get('language')] : ['*',config('daydreamlab.global.locale')];
         // 如果有傳 category_alias
-        if (!InputHelper::null($input, 'category_alias'))
-        {
+        if (!InputHelper::null($input, 'category_alias')) {
             $category_ids = $this->categoryFrontService->search(Helper::collect([
                 'special_queries' => [
                     [

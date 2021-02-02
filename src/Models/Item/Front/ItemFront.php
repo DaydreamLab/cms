@@ -55,7 +55,7 @@ class ItemFront extends Item
     }
 
 
-    public function tag()
+    public function tags()
     {
         return $this->belongsToMany(TagFront::class, 'items_tags_maps', 'item_id', 'tag_id');
     }
