@@ -2,9 +2,10 @@
 
 namespace DaydreamLab\Cms\Requests\Form\Front;
 
-use DaydreamLab\Cms\Requests\Form\FormStorePost;
+use DaydreamLab\JJAJ\Requests\AdminRequest;
+use Illuminate\Validation\Rule;
 
-class FormFrontStorePost extends FormStorePost
+class FormFrontStorePost extends AdminRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +25,23 @@ class FormFrontStorePost extends FormStorePost
     public function rules()
     {
         $rules = [
-            //
+            'name'          => 'required|string',
+            'email'         => 'required|email',
+            'phone'         => 'nullable|string',
+            'location'      => 'nullable|string',
+            'question_type' => 'required|string',
+            'description'   => 'required|string',
+            'brand'         => [
+                'nullable',
+                Rule::in([
+                    'orangeshabu',
+                    'orangeshabushabu',
+                    'extension1byorange',
+                    'monecafe',
+                    'sakura',
+                    'monespa',
+                ])
+            ],
         ];
         return array_merge($rules, parent::rules());
     }

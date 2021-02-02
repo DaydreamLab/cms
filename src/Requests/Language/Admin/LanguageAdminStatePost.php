@@ -2,9 +2,13 @@
 
 namespace DaydreamLab\Cms\Requests\Language\Admin;
 
+use DaydreamLab\Cms\Requests\CmStatePost;
 
-class LanguageAdminStatePost extends LanguageStatePost
+class LanguageAdminStatePost extends CmStatePost
 {
+    protected $apiMethod = 'updateLanguageState';
+
+    protected $modelName = 'Language';
     /**
      * Determine if the user is authorized to make this request.
      *

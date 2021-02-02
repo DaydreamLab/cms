@@ -2,20 +2,16 @@
 
 namespace DaydreamLab\Cms\Controllers\Language\Admin;
 
-use DaydreamLab\JJAJ\Controllers\BaseController;
+use DaydreamLab\Cms\Controllers\CmsController;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
-use DaydreamLab\JJAJ\Helpers\ResponseHelper;
-use Illuminate\Support\Collection;
 use DaydreamLab\Cms\Services\Language\Admin\LanguageAdminService;
 use DaydreamLab\Cms\Requests\Language\Admin\LanguageAdminRemovePost;
 use DaydreamLab\Cms\Requests\Language\Admin\LanguageAdminStorePost;
 use DaydreamLab\Cms\Requests\Language\Admin\LanguageAdminStatePost;
 use DaydreamLab\Cms\Requests\Language\Admin\LanguageAdminSearchPost;
 
-class LanguageAdminController extends BaseController
+class LanguageAdminController extends CmsController
 {
-    protected $package = 'Cms';
-
     protected $modelName = 'Language';
 
     protected $modelType = 'Admin';
@@ -28,7 +24,7 @@ class LanguageAdminController extends BaseController
 
     public function getItem($id)
     {
-        $this->service->canAction('getLanguage');
+        $this->service->setUser($request->user('api'));
         $this->service->getItem($id);
 
         return $this->response($this->service->status, $this->service->response);
@@ -37,7 +33,7 @@ class LanguageAdminController extends BaseController
 
     public function remove(LanguageAdminRemovePost $request)
     {
-        $this->service->canAction('deleteLanguage');
+        $this->service->setUser($request->user('api'));
         $this->service->remove($request->validated());
 
         return $this->response($this->service->status, $this->service->response);
@@ -46,7 +42,7 @@ class LanguageAdminController extends BaseController
 
     public function state(LanguageAdminStatePost $request)
     {
-        $this->service->canAction('updateLanguageState');
+        $this->service->setUser($request->user('api'));
         $this->service->state($request->validated());
 
         return $this->response($this->service->status, $this->service->response);
@@ -55,8 +51,7 @@ class LanguageAdminController extends BaseController
 
     public function store(LanguageAdminStorePost $request)
     {
-        InputHelper::null($request->validated(), 'id') ? $this->service->canAction('addLanguage')
-            : $this->service->canAction('editLanguage');
+        $this->service->setUser($request->user('api'));
         $this->service->store($request->validated());
 
         return $this->response($this->service->status, $this->service->response);
@@ -65,7 +60,7 @@ class LanguageAdminController extends BaseController
 
     public function search(LanguageAdminSearchPost $request)
     {
-        $this->service->canAction('searchLanguage');
+        $this->service->setUser($request->user('api'));
         $this->service->search($request->validated());
 
         return $this->response($this->service->status, $this->service->response);

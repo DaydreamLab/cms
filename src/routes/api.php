@@ -1,8 +1,25 @@
 <?php
 
-use Illuminate\Http\Request;
-
+use DaydreamLab\Cms\Controllers\Category\Front\CategoryFrontController;
+use DaydreamLab\Cms\Controllers\Category\Admin\CategoryAdminController;
+use DaydreamLab\Cms\Controllers\Item\Admin\ItemAdminController;
+use DaydreamLab\Cms\Controllers\Item\Front\ItemFrontController;
+use DaydreamLab\Cms\Controllers\Form\Front\FormFrontController;
+use DaydreamLab\Cms\Controllers\Form\Admin\FormAdminController;
+use DaydreamLab\Cms\Controllers\Menu\Front\MenuFrontController;
+use DaydreamLab\Cms\Controllers\Menu\Admin\MenuAdminController;
+use DaydreamLab\Cms\Controllers\Module\Front\ModuleFrontController;
+use DaydreamLab\Cms\Controllers\Module\Admin\ModuleAdminController;
+use DaydreamLab\Cms\Controllers\Setting\Front\SettingFrontController;
+use DaydreamLab\Cms\Controllers\Tag\Front\TagFrontController;
+use DaydreamLab\Cms\Controllers\Tag\Admin\TagAdminController;
+use DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldAdminController;
+use DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldGroupAdminController;
+use DaydreamLab\Cms\Controllers\Language\Admin\LanguageAdminController;
+use DaydreamLab\Cms\Controllers\Setting\Admin\SettingAdminController;
+use DaydreamLab\Cms\Controllers\Option\OptionController;
 /*
+ *
 |--------------------------------------------------------------------------
 | API Routes
 |--------------------------------------------------------------------------
@@ -15,168 +32,167 @@ use Illuminate\Http\Request;
 
 /************************************  前台 API  ************************************/
 
-Route::post('api/category/search', 'DaydreamLab\Cms\Controllers\Category\Front\CategoryFrontController@search');
-Route::post('api/category/search/items', 'DaydreamLab\Cms\Controllers\Category\Front\CategoryFrontController@searchItems');
-Route::get('api/category/{alias}', 'DaydreamLab\Cms\Controllers\Category\Front\CategoryFrontController@getItemByAlias');
-Route::post('api/form/post', 'DaydreamLab\Cms\Controllers\Form\Front\FormFrontController@store');
-Route::post('api/item/search', 'DaydreamLab\Cms\Controllers\Item\Front\ItemFrontController@search');
-Route::get('api/item/{alias}', 'DaydreamLab\Cms\Controllers\Item\Front\ItemFrontController@getItemByAlias');
-Route::get('api/menu/getTree', 'DaydreamLab\Cms\Controllers\Menu\Front\MenuFrontController@getTree');
-Route::get('api/menu/{path}', 'DaydreamLab\Cms\Controllers\Menu\Front\MenuFrontController@getItem')->where('path', '.*');
-Route::get('api/module/{alias}', 'DaydreamLab\Cms\Controllers\Module\Front\ModuleFrontController@getItemByAlias');
-Route::get('api/setting/{locale}', 'DaydreamLab\Cms\Controllers\Setting\Front\SettingFrontController@getItem');
-Route::post('api/tag/search', 'DaydreamLab\Cms\Controllers\Tag\Front\TagFrontController@search');
-Route::post('api/tag/search/items', 'DaydreamLab\Cms\Controllers\Tag\Front\TagFrontController@searchItems');
-Route::get('api/tag/{alias}', 'DaydreamLab\Cms\Controllers\Tag\Front\TagFrontController@getItemByAlias');
+Route::post('api/category/search', [CategoryFrontController::class, 'search']);
+Route::post('api/category/search/items', [CategoryFrontController::class, 'searchItems']);
+Route::get('api/category/{alias}', [CategoryFrontController::class, 'getItemByAlias']);
+Route::post('api/form/post', [FormFrontController::class, 'store']);
+Route::post('api/item/search', [ItemFrontController::class, 'search']);
+Route::get('api/item/{alias}', [ItemFrontController::class, 'getItemByAlias']);
+Route::get('api/menu/getTree', [MenuFrontController::class, 'getTree']);
+Route::get('api/menu/{path}', [MenuFrontController::class, 'getItem'])->where('path', '.*');
+Route::get('api/module/{alias}', [ModuleFrontController::class, 'getItemByAlias']);
+Route::get('api/setting/{locale}', [SettingFrontController::class, 'getItem']);
+Route::post('api/tag/search', [TagFrontController::class, 'search']);
+Route::post('api/tag/search/items', [TagFrontController::class, 'searchItems']);
+Route::get('api/tag/{alias}', [TagFrontController::class, 'getItemByAlias']);
 
 
 
 /************************************  後台 API  ************************************/
-Route::post('api/admin/category/remove', 'DaydreamLab\Cms\Controllers\Category\Admin\CategoryAdminController@remove')
+Route::post('api/admin/category/remove', [CategoryAdminController::class, 'remove'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/category/state', 'DaydreamLab\Cms\Controllers\Category\Admin\CategoryAdminController@state')
+Route::post('api/admin/category/state', [CategoryAdminController::class, 'state'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/category/store','DaydreamLab\Cms\Controllers\Category\Admin\CategoryAdminController@store')
+Route::post('api/admin/category/store', [CategoryAdminController::class, 'store'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/category/search','DaydreamLab\Cms\Controllers\Category\Admin\CategoryAdminController@search')
+Route::post('api/admin/category/search', [CategoryAdminController::class, 'search'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/category/checkout','DaydreamLab\Cms\Controllers\Category\Admin\CategoryAdminController@checkout')
+Route::post('api/admin/category/checkout', [CategoryAdminController::class, 'checkout'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/category/ordering','DaydreamLab\Cms\Controllers\Category\Admin\CategoryAdminController@ordering')
+Route::post('api/admin/category/ordering', [CategoryAdminController::class, 'ordering'])
     ->middleware(['expired','admin']);
-Route::get('api/admin/category/{id}', 'DaydreamLab\Cms\Controllers\Category\Admin\CategoryAdminController@getItem')
-    ->middleware(['expired','admin']);
-
-Route::post('api/admin/extrafield/checkout','DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldAdminController@checkout')
-    ->middleware(['expired','admin']);
-Route::post('api/admin/extrafield/remove', 'DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldAdminController@remove')
-    ->middleware(['expired','admin']);
-Route::post('api/admin/extrafield/state', 'DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldAdminController@state')
-    ->middleware(['expired','admin']);
-Route::post('api/admin/extrafield/store','DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldAdminController@store')
-    ->middleware(['expired','admin']);
-Route::post('api/admin/extrafield/search','DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldAdminController@search')
-    ->middleware(['expired','admin']);
-Route::get('api/admin/extrafield/{id}', 'DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldAdminController@getItem')
+Route::get('api/admin/category/{id}', [CategoryAdminController::class, 'getItem'])
     ->middleware(['expired','admin']);
 
-
-Route::post('api/admin/extrafield/group/checkout','DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldGroupAdminController@checkout')
+Route::post('api/admin/extrafield/checkout', [ExtrafieldAdminController::class, 'checkout'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/extrafield/group/remove', 'DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldGroupAdminController@remove')
+Route::post('api/admin/extrafield/remove', [ExtrafieldAdminController::class, 'remove'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/extrafield/group/state', 'DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldGroupAdminController@state')
+Route::post('api/admin/extrafield/state', [ExtrafieldAdminController::class, 'state'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/extrafield/group/store','DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldGroupAdminController@store')
+Route::post('api/admin/extrafield/store', [ExtrafieldAdminController::class, 'store'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/extrafield/group/search','DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldGroupAdminController@search')
+Route::post('api/admin/extrafield/search', [ExtrafieldAdminController::class, 'search'])
     ->middleware(['expired','admin']);
-Route::get('api/admin/extrafield/group/{id}', 'DaydreamLab\Cms\Controllers\Extrafield\Admin\ExtrafieldGroupAdminController@getItem')
-    ->middleware(['expired','admin']);
-
-Route::post('api/admin/form/remove','DaydreamLab\Cms\Controllers\Form\Admin\FormAdminController@remove')
-    ->middleware(['expired','admin']);
-Route::post('api/admin/form/store','DaydreamLab\Cms\Controllers\Form\Admin\FormAdminController@store')
-    ->middleware(['expired','admin']);
-Route::post('api/admin/form/search','DaydreamLab\Cms\Controllers\Form\Admin\FormAdminController@search')
-    ->middleware(['expired','admin']);
-Route::get('api/admin/form/{id}', 'DaydreamLab\Cms\Controllers\Form\Admin\FormAdminController@getItem')
+Route::get('api/admin/extrafield/{id}', [ExtrafieldAdminController::class, 'getItem'])
     ->middleware(['expired','admin']);
 
-Route::post('api/admin/item/remove', 'DaydreamLab\Cms\Controllers\Item\Admin\ItemAdminController@remove')
+
+Route::post('api/admin/extrafield/group/checkout', [ExtrafieldGroupAdminController::class, 'checkout'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/item/state', 'DaydreamLab\Cms\Controllers\Item\Admin\ItemAdminController@state')
+Route::post('api/admin/extrafield/group/remove', [ExtrafieldGroupAdminController::class, 'remove'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/item/store','DaydreamLab\Cms\Controllers\Item\Admin\ItemAdminController@store')
+Route::post('api/admin/extrafield/group/state', [ExtrafieldGroupAdminController::class, 'state'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/item/search','DaydreamLab\Cms\Controllers\Item\Admin\ItemAdminController@search')
+Route::post('api/admin/extrafield/group/store', [ExtrafieldGroupAdminController::class, 'store'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/item/checkout','DaydreamLab\Cms\Controllers\Item\Admin\ItemAdminController@checkout')
+Route::post('api/admin/extrafield/group/search', [ExtrafieldGroupAdminController::class, 'search'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/item/featured','DaydreamLab\Cms\Controllers\Item\Admin\ItemAdminController@featured')
-    ->middleware(['expired','admin']);
-Route::post('api/admin/item/featured/ordering','DaydreamLab\Cms\Controllers\Item\Admin\ItemAdminController@featuredOrdering')
-    ->middleware(['expired','admin']);
-Route::post('api/admin/item/ordering','DaydreamLab\Cms\Controllers\Item\Admin\ItemAdminController@ordering')
-    ->middleware(['expired','admin']);
-Route::get('api/admin/item/{id}', 'DaydreamLab\Cms\Controllers\Item\Admin\ItemAdminController@getItem')
+Route::get('api/admin/extrafield/group/{id}', [ExtrafieldGroupAdminController::class, 'getItem'])
     ->middleware(['expired','admin']);
 
-Route::post('api/admin/language/remove', 'DaydreamLab\Cms\Controllers\Language\Admin\LanguageAdminController@remove')
+Route::post('api/admin/form/remove', [FormAdminController::class, 'remove'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/language/state', 'DaydreamLab\Cms\Controllers\Language\Admin\LanguageAdminController@state')
+Route::post('api/admin/form/store', [FormAdminController::class, 'store'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/language/store','DaydreamLab\Cms\Controllers\Language\Admin\LanguageAdminController@store')
+Route::post('api/admin/form/search', [FormAdminController::class, 'search'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/language/search','DaydreamLab\Cms\Controllers\Language\Admin\LanguageAdminController@search')
-    ->middleware(['expired','admin']);
-Route::get('api/admin/language/{id}', 'DaydreamLab\Cms\Controllers\Language\Admin\LanguageAdminController@getItem')
+Route::get('api/admin/form/{id}', [FormAdminController::class, 'getItem'])
     ->middleware(['expired','admin']);
 
-Route::post('api/admin/menu/remove', 'DaydreamLab\Cms\Controllers\Menu\Admin\MenuAdminController@remove')
+Route::post('api/admin/item/remove', [ItemAdminController::class, 'remove'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/menu/store','DaydreamLab\Cms\Controllers\Menu\Admin\MenuAdminController@store')
+Route::post('api/admin/item/state', [ItemAdminController::class, 'state'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/menu/state', 'DaydreamLab\Cms\Controllers\Menu\Admin\MenuAdminController@state')
+Route::post('api/admin/item/store', [ItemAdminController::class, 'store'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/menu/search','DaydreamLab\Cms\Controllers\Menu\Admin\MenuAdminController@search')
+Route::post('api/admin/item/search', [ItemAdminController::class, 'search'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/menu/checkout','DaydreamLab\Cms\Controllers\Menu\Admin\MenuAdminController@checkout')
+Route::post('api/admin/item/checkout', [ItemAdminController::class, 'checkout'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/menu/ordering','DaydreamLab\Cms\Controllers\Menu\Admin\MenuAdminController@ordering')
+Route::post('api/admin/item/featured', [ItemAdminController::class, 'featured'])
     ->middleware(['expired','admin']);
-Route::get('api/admin/menu/{id}', 'DaydreamLab\Cms\Controllers\Menu\Admin\MenuAdminController@getItem')
+Route::post('api/admin/item/featured/ordering', [ItemAdminController::class, 'featuredOrdering'])
     ->middleware(['expired','admin']);
-
-Route::post('api/admin/module/remove', 'DaydreamLab\Cms\Controllers\Module\Admin\ModuleAdminController@remove')
+Route::post('api/admin/item/ordering', [ItemAdminController::class, 'ordering'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/module/store','DaydreamLab\Cms\Controllers\Module\Admin\ModuleAdminController@store')
-    ->middleware(['expired','admin']);
-Route::post('api/admin/module/state', 'DaydreamLab\Cms\Controllers\Module\Admin\ModuleAdminController@state')
-    ->middleware(['expired','admin']);
-Route::post('api/admin/module/search','DaydreamLab\Cms\Controllers\Module\Admin\ModuleAdminController@search')
-    ->middleware(['expired','admin']);
-Route::post('api/admin/module/checkout','DaydreamLab\Cms\Controllers\Module\Admin\ModuleAdminController@checkout')
-    ->middleware(['expired','admin']);
-Route::get('api/admin/module/{id}', 'DaydreamLab\Cms\Controllers\Module\Admin\ModuleAdminController@getItem')
+Route::get('api/admin/item/{id}', [ItemAdminController::class, 'getItem'])
     ->middleware(['expired','admin']);
 
-Route::post('api/admin/option/list', 'DaydreamLab\Cms\Controllers\Option\OptionController@mergeList')
+Route::post('api/admin/language/remove', [LanguageAdminController::class, 'remove'])
+    ->middleware(['expired','admin']);
+Route::post('api/admin/language/state', [LanguageAdminController::class, 'state'])
+    ->middleware(['expired','admin']);
+Route::post('api/admin/language/store', [LanguageAdminController::class, 'store'])
+    ->middleware(['expired','admin']);
+Route::post('api/admin/language/search', [LanguageAdminController::class, 'search'])
+    ->middleware(['expired','admin']);
+Route::get('api/admin/language/{id}', [LanguageAdminController::class, 'getItem'])
     ->middleware(['expired','admin']);
 
-Route::post('api/admin/setting/store', 'DaydreamLab\Cms\Controllers\Setting\Admin\SettingAdminController@store')
+Route::post('api/admin/menu/remove', [MenuAdminController::class, 'remove'])
     ->middleware(['expired','admin']);
-Route::get('api/admin/setting', 'DaydreamLab\Cms\Controllers\Setting\Admin\SettingAdminController@getItem')
+Route::post('api/admin/menu/store', [MenuAdminController::class, 'store'])
     ->middleware(['expired','admin']);
-
-Route::post('api/admin/site/checkout','DaydreamLab\Cms\Controllers\Site\Admin\SiteAdminController@checkout')
+Route::post('api/admin/menu/state', [MenuAdminController::class, 'state'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/site/remove','DaydreamLab\Cms\Controllers\Site\Admin\SiteAdminController@remove')
+Route::post('api/admin/menu/search', [MenuAdminController::class, 'search'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/site/store','DaydreamLab\Cms\Controllers\Site\Admin\SiteAdminController@store')
+Route::post('api/admin/menu/checkout', [MenuAdminController::class, 'checkout'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/site/state','DaydreamLab\Cms\Controllers\Site\Admin\SiteAdminController@state')
+Route::post('api/admin/menu/ordering', [MenuAdminController::class, 'ordering'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/site/search','DaydreamLab\Cms\Controllers\Site\Admin\SiteAdminController@search')
-    ->middleware(['expired','admin']);
-Route::post('api/admin/site/ordering','DaydreamLab\Cms\Controllers\Site\Admin\SiteAdminController@ordering')
-    ->middleware(['expired','admin']);
-Route::get('api/admin/site/list','DaydreamLab\Cms\Controllers\Site\Admin\SiteAdminController@getList')
-    ->middleware(['expired','admin']);
-Route::get('api/admin/site/{id}', 'DaydreamLab\Cms\Controllers\Site\Admin\SiteAdminController@getItem')
+Route::get('api/admin/menu/{id}', [MenuAdminController::class, 'getItem'])
     ->middleware(['expired','admin']);
 
-Route::post('api/admin/tag/remove', 'DaydreamLab\Cms\Controllers\Tag\Admin\TagAdminController@remove')
+Route::post('api/admin/module/remove', [ModuleAdminController::class, 'remove'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/tag/store','DaydreamLab\Cms\Controllers\Tag\Admin\TagAdminController@store')
+Route::post('api/admin/module/store', [ModuleAdminController::class, 'store'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/tag/search','DaydreamLab\Cms\Controllers\Tag\Admin\TagAdminController@search')
+Route::post('api/admin/module/state', [ModuleAdminController::class, 'state'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/tag/state','DaydreamLab\Cms\Controllers\Tag\Admin\TagAdminController@state')
+Route::post('api/admin/module/search', [ModuleAdminController::class, 'search'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/tag/checkout','DaydreamLab\Cms\Controllers\Tag\Admin\TagAdminController@checkout')
+Route::post('api/admin/module/checkout', [ModuleAdminController::class, 'checkout'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/tag/ordering','DaydreamLab\Cms\Controllers\Tag\Admin\TagAdminController@ordering')
+Route::get('api/admin/module/{id}', [ModuleAdminController::class, 'getItem'])
     ->middleware(['expired','admin']);
-Route::get('api/admin/tag/{id}', 'DaydreamLab\Cms\Controllers\Tag\Admin\TagAdminController@getItem')
+
+Route::post('api/admin/option/list', [OptionController::class, 'mergeList'])
+    ->middleware(['expired','admin']);
+
+Route::post('api/admin/setting/store', [SettingAdminController::class, 'store'])
+    ->middleware(['expired','admin']);
+Route::get('api/admin/setting', [SettingAdminController::class, 'getItem'])
+    ->middleware(['expired','admin']);
+Route::post('api/admin/site/checkout', [SettingAdminController::class, 'checkout'])
+    ->middleware(['expired','admin']);
+Route::post('api/admin/site/remove', [SettingAdminController::class, 'remove'])
+    ->middleware(['expired','admin']);
+Route::post('api/admin/site/store', [SettingAdminController::class, 'store'])
+    ->middleware(['expired','admin']);
+Route::post('api/admin/site/state', [SettingAdminController::class, 'state'])
+    ->middleware(['expired','admin']);
+Route::post('api/admin/site/search', [SettingAdminController::class, 'search'])
+    ->middleware(['expired','admin']);
+Route::post('api/admin/site/ordering', [SettingAdminController::class, 'ordering'])
+    ->middleware(['expired','admin']);
+Route::get('api/admin/site/list', [SettingAdminController::class, 'getList'])
+    ->middleware(['expired','admin']);
+Route::get('api/admin/site/{id}', [SettingAdminController::class, 'getItem'])
+    ->middleware(['expired','admin']);
+
+Route::post('api/admin/tag/remove', [TagAdminController::class, 'remove'])
+    ->middleware(['expired','admin']);
+Route::post('api/admin/tag/store', [TagAdminController::class, 'store'])
+    ->middleware(['expired','admin']);
+Route::post('api/admin/tag/search', [TagAdminController::class, 'search'])
+    ->middleware(['expired','admin']);
+Route::post('api/admin/tag/state', [TagAdminController::class, 'state'])
+    ->middleware(['expired','admin']);
+Route::post('api/admin/tag/checkout',[TagAdminController::class, 'checkout'])
+    ->middleware(['expired','admin']);
+Route::post('api/admin/tag/ordering', [TagAdminController::class, 'ordering'])
+    ->middleware(['expired','admin']);
+Route::get('api/admin/tag/{id}', [TagAdminController::class, 'getItem'])
     ->middleware(['expired','admin']);

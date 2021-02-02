@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Language\Admin;
 
-use DaydreamLab\Cms\Requests\Language\LanguageRemovePost;
+use DaydreamLab\Cms\Requests\CmsCheckoutRemovePost;
 
-class LanguageAdminRemovePost extends LanguageRemovePost
+class LanguageAdminRemovePost extends CmsCheckoutRemovePost
 {
     /**
      * Determine if the user is authorized to make this request.

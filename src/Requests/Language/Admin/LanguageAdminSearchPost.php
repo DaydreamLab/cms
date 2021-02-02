@@ -2,12 +2,14 @@
 
 namespace DaydreamLab\Cms\Requests\Language\Admin;
 
-use DaydreamLab\Cms\Requests\Language\LanguageSearchPost;
-use DaydreamLab\JJAJ\Helpers\Helper;
+use DaydreamLab\JJAJ\Requests\ListRequest;
 use Illuminate\Validation\Rule;
 
-class LanguageAdminSearchPost extends LanguageSearchPost
+class LanguageAdminSearchPost extends ListRequest
 {
+    protected $apiMethod = 'searchLanguage';
+
+    protected $modelName = 'Language';
     /**
      * Determine if the user is authorized to make this request.
      *

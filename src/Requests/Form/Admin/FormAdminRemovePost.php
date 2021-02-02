@@ -2,10 +2,13 @@
 
 namespace DaydreamLab\Cms\Requests\Form\Admin;
 
-use DaydreamLab\Cms\Requests\Form\FormRemovePost;
+use DaydreamLab\Cms\Requests\CmsCheckoutRemovePost;
 
-class FormAdminRemovePost extends FormRemovePost
+class FormAdminRemovePost extends CmsCheckoutRemovePost
 {
+    protected $apiMethod = 'deleteForm';
+
+    protected $modelName = 'Form';
     /**
      * Determine if the user is authorized to make this request.
      *

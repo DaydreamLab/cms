@@ -2,10 +2,13 @@
 
 namespace DaydreamLab\Cms\Requests\Form\Admin;
 
-use DaydreamLab\Cms\Requests\Form\FormSearchPost;
+use DaydreamLab\JJAJ\Requests\ListRequest;
 
-class FormAdminSearchPost extends FormSearchPost
+class FormAdminSearchPost extends ListRequest
 {
+    protected $apiMethod = 'searchForm';
+
+    protected $modelName = 'Form';
     /**
      * Determine if the user is authorized to make this request.
      *

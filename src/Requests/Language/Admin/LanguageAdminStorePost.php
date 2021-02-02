@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Language\Admin;
 
-use DaydreamLab\Cms\Requests\Language\LanguageStorePost;
+use DaydreamLab\JJAJ\Requests\AdminRequest;
 
-class LanguageAdminStorePost extends LanguageStorePost
+class LanguageAdminStorePost extends AdminRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,20 @@ class LanguageAdminStorePost extends LanguageStorePost
     public function rules()
     {
         $rules = [
-            //
+            'id'            => 'nullable|integer',
+            'title'         => 'required|string',
+            'type'          => 'required|string',
+            'code'          => 'required|string',
+            'sef'           => 'required|string',
+            'state'         => 'required|integer',
+            'description'   => 'nullable|string',
+            'image'         => 'nullable|string',
+            //'order'         => 'nullable|integer',
+            //'metadesc'      => 'nullable|string',
+            //'metakeywords'  => 'nullable|string',
+            //'sitename'      => 'nullable|string',
+            //'access'        => 'nullable|integer'
         ];
-        return array_merge($rules, parent::rules());
+        return array_merge(parent::rules(), $rules);
     }
 }

@@ -2,18 +2,15 @@
 
 namespace DaydreamLab\Cms\Controllers\Form\Admin;
 
-use DaydreamLab\JJAJ\Controllers\BaseController;
-use DaydreamLab\JJAJ\Helpers\ResponseHelper;
-use Illuminate\Support\Collection;
+use DaydreamLab\Cms\Controllers\CmsController;
+use DaydreamLab\Cms\Requests\Form\Admin\FormAdminGetItemGet;
 use DaydreamLab\Cms\Services\Form\Admin\FormAdminService;
 use DaydreamLab\Cms\Requests\Form\Admin\FormAdminRemovePost;
 use DaydreamLab\Cms\Requests\Form\Admin\FormAdminStorePost;
 use DaydreamLab\Cms\Requests\Form\Admin\FormAdminSearchPost;
 
-class FormAdminController extends BaseController
+class FormAdminController extends CmsController
 {
-    protected $package = 'Cms';
-
     protected $modelName = 'Form';
 
     protected $modelType = 'Admin';
@@ -21,67 +18,31 @@ class FormAdminController extends BaseController
     public function __construct(FormAdminService $service)
     {
         parent::__construct($service);
+        $this->service = $service;
     }
 
 
-    public function getItem($id)
+    public function getItem(FormAdminGetItemGet $request)
     {
-        $this->service->getItem($id);
+        $this->service->setUser($request->user('api'));
+        $this->service->getItem(collect(['id' => $request->route('id')]));
 
         return $this->response($this->service->status, $this->service->response);
     }
-
-
-    public function getItems()
-    {
-        $this->service->search(new Collection());
-
-        return $this->response($this->service->status, $this->service->response);
-    }
-
-
-    public function getList()
-    {
-        $this->service->getList(new Collection());
-
-        return $this->response($this->service->status, $this->service->response);
-    }
-
-
-    public function checkout($id)
-    {
-        $this->service->checkout($id);
-
-        return $this->response($this->service->status, $this->service->response);
-    }
-
-
-//    public function ordering(FormAdminOrderingPost $request)
-//    {
-//        $this->service->ordering($request->validated());
-//
-//        return $this->response($this->service->status, $this->service->response);
-//    }
 
 
     public function remove(FormAdminRemovePost $request)
     {
+        $this->service->setUser($request->user('api'));
         $this->service->remove($request->validated());
 
         return $this->response($this->service->status, $this->service->response);
     }
 
 
-//    public function state(FormAdminStatePost $request)
-//    {
-//        $this->service->state($request->validated());
-//
-//        return $this->response($this->service->status, $this->service->response);
-//    }
-
-
     public function store(FormAdminStorePost $request)
     {
+        $this->service->setUser($request->user('api'));
         $this->service->store($request->validated());
 
         return $this->response($this->service->status, $this->service->response);
@@ -90,6 +51,7 @@ class FormAdminController extends BaseController
 
     public function search(FormAdminSearchPost $request)
     {
+        $this->service->setUser($request->user('api'));
         $this->service->search($request->validated());
 
         return $this->response($this->service->status, $this->service->response);

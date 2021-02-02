@@ -6,17 +6,15 @@ use DaydreamLab\Cms\Repositories\Form\FormRepository;
 use DaydreamLab\Cms\Events\Add;
 use DaydreamLab\Cms\Events\Modify;
 use DaydreamLab\Cms\Events\Remove;
+use DaydreamLab\Cms\Services\CmsService;
 use DaydreamLab\JJAJ\Services\BaseService;
 use Illuminate\Support\Collection;
 
-class FormService extends BaseService
+class FormService extends CmsService
 {
-    protected $package = 'Cms';
-
     protected $modelName = 'Form';
 
     protected $modelType = 'Base';
-
 
     public function __construct(FormRepository $repo)
     {

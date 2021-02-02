@@ -2,10 +2,13 @@
 
 namespace DaydreamLab\Cms\Requests\Form\Admin;
 
-use DaydreamLab\Cms\Requests\Form\FormStorePost;
+use DaydreamLab\JJAJ\Requests\AdminRequest;
 
-class FormAdminStorePost extends FormStorePost
+class FormAdminStorePost extends AdminRequest
 {
+    protected $apiMethod = 'storeForm';
+
+    protected $modelName = 'Form';
     /**
      * Determine if the user is authorized to make this request.
      *
