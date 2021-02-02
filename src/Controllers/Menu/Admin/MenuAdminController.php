@@ -2,11 +2,11 @@
 
 namespace DaydreamLab\Cms\Controllers\Menu\Admin;
 
-use DaydreamLab\JJAJ\Controllers\BaseController;
-use DaydreamLab\JJAJ\Helpers\Helper;
+use DaydreamLab\Cms\Controllers\CmsController;
+use DaydreamLab\Cms\Requests\Menu\Admin\MenuAdminGetItemGet;
+use DaydreamLab\Cms\Resources\Menu\Admin\Collections\MenuAdminListResourceCollection;
+use DaydreamLab\Cms\Resources\Menu\Admin\Models\MenuAdminResource;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
-use DaydreamLab\JJAJ\Helpers\ResponseHelper;
-use Illuminate\Support\Collection;
 use DaydreamLab\Cms\Services\Menu\Admin\MenuAdminService;
 use DaydreamLab\Cms\Requests\Menu\Admin\MenuAdminRemovePost;
 use DaydreamLab\Cms\Requests\Menu\Admin\MenuAdminStorePost;
@@ -14,10 +14,8 @@ use DaydreamLab\Cms\Requests\Menu\Admin\MenuAdminStatePost;
 use DaydreamLab\Cms\Requests\Menu\Admin\MenuAdminSearchPost;
 use DaydreamLab\Cms\Requests\Menu\Admin\MenuAdminOrderingPost;
 
-class MenuAdminController extends BaseController
+class MenuAdminController extends CmsController
 {
-    protected $package = 'Cms';
-
     protected $modelName = 'Menu';
 
     protected $modelType = 'Admin';
@@ -28,17 +26,19 @@ class MenuAdminController extends BaseController
         $this->service = $service;
     }
 
-    public function getItem($id)
-    {
-        $this->service->canAction('getMenu');
-        $this->service->getItem($id);
 
-        return $this->response($this->service->status, $this->service->response);
+    public function getItem(MenuAdminGetItemGet $request)
+    {
+        $this->service->setUser($request->user('api'));
+        $this->service->getItem(collect(['id' => $request->route('id')]));
+
+        return $this->response($this->service->status, new MenuAdminResource($this->service->response));
     }
 
 
     public function checkout(MenuAdminRemovePost $request)
     {
+        $this->service->setUser($request->user('api'));
         $this->service->checkout($request->validated());
 
         return $this->response($this->service->status, $this->service->response);
@@ -47,7 +47,7 @@ class MenuAdminController extends BaseController
 
     public function ordering(MenuAdminOrderingPost $request)
     {
-        $this->service->canAction('editMenu');
+        $this->service->setUser($request->user('api'));
         $this->service->ordering($request->validated());
 
         return $this->response($this->service->status, $this->service->response);
@@ -56,7 +56,7 @@ class MenuAdminController extends BaseController
 
     public function remove(MenuAdminRemovePost $request)
     {
-        $this->service->canAction('deleteMenu');
+        $this->service->setUser($request->user('api'));
         $this->service->remove($request->validated());
 
         return $this->response($this->service->status, $this->service->response);
@@ -65,7 +65,7 @@ class MenuAdminController extends BaseController
 
     public function state(MenuAdminStatePost $request)
     {
-        $this->service->canAction('updateMenuState');
+        $this->service->setUser($request->user('api'));
         $this->service->state($request->validated());
 
         return $this->response($this->service->status, $this->service->response);
@@ -74,27 +74,26 @@ class MenuAdminController extends BaseController
 
     public function store(MenuAdminStorePost $request)
     {
-        $input = $request->validated();
-        if (InputHelper::null($input, 'host'))
-        {
-            $input->put('host', $request->getHttpHost());
+        $validated = $request->validated();
+        if (InputHelper::null($validated, 'host')) {
+            $validated->put('host', $request->getHttpHost());
         }
+        $this->service->setUser($request->user('api'));
+        $this->service->store($validated);
 
-        InputHelper::null($input, 'id') ? $this->service->canAction('addMenu')
-            : $this->service->canAction('editMenu');
-
-        $this->service->store($input);
-
-        return $this->response($this->service->status, $this->service->response);
+        return $this->response($this->service->status,
+            gettype($this->service->response) == 'object'
+                ? new MenuAdminResource($this->service->response->refresh())
+                : $this->service->response
+        );
     }
 
 
     public function search(MenuAdminSearchPost $request)
     {
-        $this->service->canAction('searchMenu');
+        $this->service->setUser($request->user('api'));
         $this->service->search($request->validated());
 
-        return $this->response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, new MenuAdminListResourceCollection($this->service->response));
     }
-
 }

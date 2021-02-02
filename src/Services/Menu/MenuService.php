@@ -8,21 +8,17 @@ use DaydreamLab\Cms\Events\Modify;
 use DaydreamLab\Cms\Events\Ordering;
 use DaydreamLab\Cms\Events\Remove;
 use DaydreamLab\Cms\Events\State;
+use DaydreamLab\Cms\Services\CmsService;
 use DaydreamLab\Cms\Traits\Model\WithAccess;
 use DaydreamLab\Cms\Traits\Model\WithCategory;
 use DaydreamLab\Cms\Traits\Model\WithLanguage;
-use DaydreamLab\JJAJ\Services\BaseService;
 use DaydreamLab\JJAJ\Traits\NestedServiceTrait;
 use Illuminate\Support\Collection;
 
-class MenuService extends BaseService
+class MenuService extends CmsService
 {
-    use WithCategory, WithLanguage, WithAccess,
-        NestedServiceTrait {
-        NestedServiceTrait::addNested       as traitAddNested;
-        NestedServiceTrait::modifyNested    as traitModifiedNested;
-        NestedServiceTrait::storeNested     as traitStoreNested;
-        NestedServiceTrait::removeNested    as traitRemoveNested;
+    use WithCategory, WithLanguage, WithAccess, NestedServiceTrait {
+        NestedServiceTrait::modifyNested as traitModifyNested;
     }
 
     protected $package = 'Cms';
@@ -34,12 +30,13 @@ class MenuService extends BaseService
     public function __construct(MenuRepository $repo)
     {
         parent::__construct($repo);
+        $this->repo = $repo;
     }
 
 
-    public function addNested(Collection $input)
+    public function add(Collection $input)
     {
-        $item = $this->traitAddNested($input);
+        $item = $this->addNested($input);
 
         event(new Add($item, $this->getServiceName(), $input, $this->user));
 
@@ -55,9 +52,9 @@ class MenuService extends BaseService
 
     public function modifyNested(Collection $input, $parent, $item)
     {
-        $result = $this->traitModifiedNested($input, $parent, $item);
+        $result = $this->traitModifyNested($input, $parent, $item);
 
-        event(new Modify($this->find($input->id), $this->getServiceName(), $result, $input,$this->user));
+        event(new Modify($this->find($input->get('id')), $this->getServiceName(), $result, $input,$this->user));
 
         return $result;
     }
@@ -65,7 +62,7 @@ class MenuService extends BaseService
 
     public function remove(Collection $input ,$diff = false)
     {
-        $result = $this->traitRemoveNested($input);
+        $result = $this->removeNested($input);
 
         event(new Remove($this->getServiceName(), $result, $input, $this->user));
 
@@ -95,7 +92,7 @@ class MenuService extends BaseService
 
     public function store(Collection $input)
     {
-        $result = $this->traitStoreNested($input);
+        $result = $this->storeNested($input);
 
         return $result;
     }

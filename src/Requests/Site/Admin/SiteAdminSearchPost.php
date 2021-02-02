@@ -2,10 +2,13 @@
 
 namespace DaydreamLab\Cms\Requests\Site\Admin;
 
-use DaydreamLab\Cms\Requests\Site\SiteSearchPost;
+use DaydreamLab\JJAJ\Requests\ListRequest;
 
-class SiteAdminSearchPost extends SiteSearchPost
+class SiteAdminSearchPost extends ListRequest
 {
+    protected $apiMethod = 'searchSite';
+
+    protected $modelName = 'Site';
     /**
      * Determine if the user is authorized to make this request.
      *

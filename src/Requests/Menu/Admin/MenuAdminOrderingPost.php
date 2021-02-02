@@ -2,10 +2,13 @@
 
 namespace DaydreamLab\Cms\Requests\Menu\Admin;
 
-use DaydreamLab\Cms\Requests\Menu\MenuOrderingPost;
+use DaydreamLab\Cms\Requests\CmsOrderingPost;
 
-class MenuAdminOrderingPost extends MenuOrderingPost
+class MenuAdminOrderingPost extends CmsOrderingPost
 {
+    protected $apiMethod = 'orderingMenu';
+
+    protected $modelName = 'Menu';
     /**
      * Determine if the user is authorized to make this request.
      *

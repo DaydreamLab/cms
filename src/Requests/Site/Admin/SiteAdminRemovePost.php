@@ -2,10 +2,13 @@
 
 namespace DaydreamLab\Cms\Requests\Site\Admin;
 
-use DaydreamLab\Cms\Requests\Site\SiteRemovePost;
+use DaydreamLab\Cms\Requests\CmsCheckoutRemovePost;
 
-class SiteAdminRemovePost extends SiteRemovePost
+class SiteAdminRemovePost extends CmsCheckoutRemovePost
 {
+    protected $apiMethod = 'deleteSite';
+
+    protected $modelName = 'Site';
     /**
      * Determine if the user is authorized to make this request.
      *

@@ -1,11 +1,14 @@
 <?php
 
-namespace DaydreamLab\Cms\Requests\Menu\Front;
+namespace DaydreamLab\Cms\Requests\Menu\Admin;
 
-use DaydreamLab\Cms\Requests\Menu\MenuRemovePost;
+use DaydreamLab\Cms\Requests\CmsGetItemGet;
 
-class MenuFrontRemovePost extends MenuRemovePost
+class MenuAdminGetItemGet extends CmsGetItemGet
 {
+    protected $apiMethod = 'getMenu';
+
+    protected $modelName = 'Menu';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -23,9 +26,6 @@ class MenuFrontRemovePost extends MenuRemovePost
      */
     public function rules()
     {
-        $rules = [
-            //
-        ];
-        return array_merge($rules, parent::rules());
+        return parent::rules();
     }
 }

@@ -29,6 +29,7 @@ class SiteAdminController extends CmsController
     public function __construct(SiteAdminService $service)
     {
         parent::__construct($service);
+        $this->service = $service;
     }
 
 
@@ -64,12 +65,11 @@ class SiteAdminController extends CmsController
         $this->service->store($request->validated());
 
         return $this->response($this->service->status,
-            gettype($this->service->response) == 'object' ? new SiteAdminResource($this->service->response->refresh()) : null);
+            gettype($this->service->response) == 'object'
+                ? new SiteAdminResource($this->service->response->refresh())
+                : null
+        );
     }
-
-
-
-
 
 
     public function ordering(SiteAdminOrderingPost $request)
@@ -97,9 +97,6 @@ class SiteAdminController extends CmsController
 
         return $this->response($this->service->status, $this->service->response);
     }
-
-
-
 
 
     public function search(SiteAdminSearchPost $request)

@@ -2,11 +2,13 @@
 
 namespace DaydreamLab\Cms\Requests\Site\Admin;
 
+use DaydreamLab\Cms\Requests\CmsOrderingPost;
 
-use DaydreamLab\Cms\Requests\Site\SiteOrderingPost;
-
-class SiteAdminOrderingPost extends SiteOrderingPost
+class SiteAdminOrderingPost extends CmsOrderingPost
 {
+    protected $apiMethod = 'orderingSite';
+
+    protected $modelName = 'Site';
     /**
      * Determine if the user is authorized to make this request.
      *

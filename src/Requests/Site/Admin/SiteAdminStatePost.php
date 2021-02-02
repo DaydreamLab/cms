@@ -2,10 +2,13 @@
 
 namespace DaydreamLab\Cms\Requests\Site\Admin;
 
-use DaydreamLab\Cms\Requests\Site\SiteStatePost;
+use DaydreamLab\Cms\Requests\CmStatePost;
 
-class SiteAdminStatePost extends SiteStatePost
+class SiteAdminStatePost extends CmStatePost
 {
+    protected $apiMethod = 'updateSiteState';
+
+    protected $modelName = 'Site';
     /**
      * Determine if the user is authorized to make this request.
      *

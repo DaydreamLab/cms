@@ -1,11 +1,15 @@
 <?php
 
-namespace DaydreamLab\Cms\Requests\Menu;
+namespace DaydreamLab\Cms\Requests\Form\Admin;
 
-use DaydreamLab\JJAJ\Requests\AdminRequest;
+use DaydreamLab\Cms\Requests\CmsGetItemGet;
 
-class MenuRemovePost extends AdminRequest
+class FormAdminGetItemGet extends CmsGetItemGet
 {
+    protected $apiMethod = 'getForm';
+
+    protected $modelName = 'Form';
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -23,9 +27,6 @@ class MenuRemovePost extends AdminRequest
      */
     public function rules()
     {
-        return [
-            'ids'       => 'required|array',
-            'ids.*'     => 'required|integer'
-        ];
+        return parent::rules();
     }
 }

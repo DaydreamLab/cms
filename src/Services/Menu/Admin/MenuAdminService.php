@@ -4,7 +4,6 @@ namespace DaydreamLab\Cms\Services\Menu\Admin;
 
 use DaydreamLab\Cms\Repositories\Menu\Admin\MenuAdminRepository;
 use DaydreamLab\Cms\Services\Menu\MenuService;
-use Illuminate\Support\Collection;
 
 class MenuAdminService extends MenuService
 {
@@ -16,11 +15,5 @@ class MenuAdminService extends MenuService
     {
         parent::__construct($repo);
         $this->repo = $repo;
-    }
-
-
-    public function store(Collection $input)
-    {
-        return parent::store($input);
     }
 }

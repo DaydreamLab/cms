@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Module\Front;
 
-use DaydreamLab\Cms\Requests\Module\ModuleStatePost;
+use DaydreamLab\Cms\Requests\CmsGetItemGet;
 
-class ModuleFrontStatePost extends ModuleStatePost
+class ModuleFrontGetItemByAliasGet extends CmsGetItemGet
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +23,6 @@ class ModuleFrontStatePost extends ModuleStatePost
      */
     public function rules()
     {
-        $rules = [
-            //
-        ];
-        return array_merge($rules, parent::rules());
+        return parent::rules();
     }
 }

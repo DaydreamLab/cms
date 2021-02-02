@@ -3,10 +3,14 @@
 namespace DaydreamLab\Cms\Requests\Module\Admin;
 
 use DaydreamLab\Cms\Requests\Module\ModuleSearchPost;
+use DaydreamLab\JJAJ\Requests\ListRequest;
 use Illuminate\Validation\Rule;
 
-class ModuleAdminSearchPost extends ModuleSearchPost
+class ModuleAdminSearchPost extends ListRequest
 {
+    protected $apiMethod = 'searchModule';
+
+    protected $modelName = 'Module';
     /**
      * Determine if the user is authorized to make this request.
      *

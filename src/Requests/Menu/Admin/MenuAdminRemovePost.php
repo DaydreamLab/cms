@@ -2,10 +2,13 @@
 
 namespace DaydreamLab\Cms\Requests\Menu\Admin;
 
-use DaydreamLab\Cms\Requests\Menu\MenuRemovePost;
+use DaydreamLab\Cms\Requests\CmsCheckoutRemovePost;
 
-class MenuAdminRemovePost extends MenuRemovePost
+class MenuAdminRemovePost extends CmsCheckoutRemovePost
 {
+    protected $apiMethod = 'deleteMenu';
+
+    protected $modelName = 'Menu';
     /**
      * Determine if the user is authorized to make this request.
      *

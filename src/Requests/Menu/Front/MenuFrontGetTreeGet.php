@@ -1,10 +1,10 @@
 <?php
 
-namespace DaydreamLab\Cms\Requests\Module\Front;
+namespace DaydreamLab\Cms\Requests\Menu\Front;
 
-use DaydreamLab\Cms\Requests\Module\ModuleOrderingPost;
+use DaydreamLab\Cms\Requests\CmsGetItemGet;
 
-class ModuleFrontOrderingPost extends ModuleOrderingPost
+class MenuFrontGetTreeGet extends CmsGetItemGet
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +23,6 @@ class ModuleFrontOrderingPost extends ModuleOrderingPost
      */
     public function rules()
     {
-        $rules = [
-            //
-        ];
-        return array_merge($rules, parent::rules());
+        return parent::rules();
     }
 }

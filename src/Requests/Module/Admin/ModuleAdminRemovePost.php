@@ -2,10 +2,13 @@
 
 namespace DaydreamLab\Cms\Requests\Module\Admin;
 
-use DaydreamLab\Cms\Requests\Module\ModuleRemovePost;
+use DaydreamLab\Cms\Requests\CmsCheckoutRemovePost;
 
-class ModuleAdminRemovePost extends ModuleRemovePost
+class ModuleAdminRemovePost extends CmsCheckoutRemovePost
 {
+    protected $apiMethod = 'deleteModule';
+
+    protected $modelName = 'Module';
     /**
      * Determine if the user is authorized to make this request.
      *

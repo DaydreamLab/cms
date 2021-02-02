@@ -2,10 +2,13 @@
 
 namespace DaydreamLab\Cms\Requests\Menu\Admin;
 
-use DaydreamLab\Cms\Requests\Menu\MenuStatePost;
+use DaydreamLab\Cms\Requests\CmStatePost;
 
-class MenuAdminStatePost extends MenuStatePost
+class MenuAdminStatePost extends CmStatePost
 {
+    protected $apiMethod = 'updateMenuState';
+
+    protected $modelName = 'Menu';
     /**
      * Determine if the user is authorized to make this request.
      *

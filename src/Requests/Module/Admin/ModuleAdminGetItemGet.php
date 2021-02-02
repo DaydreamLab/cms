@@ -1,11 +1,14 @@
 <?php
 
-namespace DaydreamLab\Cms\Requests\Site;
+namespace DaydreamLab\Cms\Requests\Module\Admin;
 
-use DaydreamLab\JJAJ\Requests\AdminRequest;
+use DaydreamLab\Cms\Requests\CmsGetItemGet;
 
-class SiteRemovePost extends AdminRequest
+class ModuleAdminGetItemGet extends CmsGetItemGet
 {
+    protected $apiMethod = 'getModule';
+
+    protected $modelName = 'Module';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -23,9 +26,6 @@ class SiteRemovePost extends AdminRequest
      */
     public function rules()
     {
-        return [
-            'ids'       => 'required|array',
-            'ids.*'     => 'required|integer'
-        ];
+        return parent::rules();
     }
 }

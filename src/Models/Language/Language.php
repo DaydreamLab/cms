@@ -1,12 +1,13 @@
 <?php
 namespace DaydreamLab\Cms\Models\Language;
 
+use DaydreamLab\Cms\Traits\Model\UserInfo;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 
 class Language extends BaseModel
 {
-    use RecordChanger {
+    use RecordChanger, UserInfo {
         RecordChanger::boot as traitBoot;
     }
     /**
@@ -60,17 +61,4 @@ class Language extends BaseModel
     {
         self::traitBoot();
     }
-
-
-    public function getCreatorAttribute()
-    {
-        return $this->creator();
-    }
-
-
-    public function getUpdaterAttribute()
-    {
-        return $this->updater();
-    }
-
 }

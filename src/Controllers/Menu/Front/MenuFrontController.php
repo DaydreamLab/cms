@@ -2,23 +2,14 @@
 
 namespace DaydreamLab\Cms\Controllers\Menu\Front;
 
-use DaydreamLab\JJAJ\Controllers\BaseController;
+use DaydreamLab\Cms\Controllers\CmsController;
+use DaydreamLab\Cms\Requests\Menu\Front\MenuFrontGetItemByPathGet;
+use DaydreamLab\Cms\Requests\Menu\Front\MenuFrontGetTreeGet;
 use DaydreamLab\JJAJ\Helpers\Helper;
-use DaydreamLab\JJAJ\Helpers\ResponseHelper;
-use Illuminate\Support\Collection;
 use DaydreamLab\Cms\Services\Menu\Front\MenuFrontService;
-use DaydreamLab\Cms\Requests\Menu\Front\MenuFrontRemovePost;
-use DaydreamLab\Cms\Requests\Menu\Front\MenuFrontStorePost;
-use DaydreamLab\Cms\Requests\Menu\Front\MenuFrontStatePost;
-use DaydreamLab\Cms\Requests\Menu\Front\MenuFrontSearchPost;
-use DaydreamLab\Cms\Requests\Menu\Front\MenuFrontOrderingPost;
-use Symfony\Component\HttpFoundation\Request;
 
-
-class MenuFrontController extends BaseController
+class MenuFrontController extends CmsController
 {
-    protected $package = 'Cms';
-
     protected $modelName = 'Menu';
 
     protected $modelType = 'Front';
@@ -30,82 +21,32 @@ class MenuFrontController extends BaseController
     }
 
 
-    public function getItem(Request $request, $alias)
+    public function getItem(MenuFrontGetItemByPathGet $request)
     {
-        $menu = $this->service->getMenu(Helper::collect([
+        $this->service->setUser($request->user('api'));
+        $this->service->getMenu(Helper::collect([
             'page'      => $request->get('page'),
             'category'  => $request->get('category'),
-            'alias'     => $alias,
+            'alias'     => $request->route('path'),
             'host'      => $request->getHttpHost(),
-            'language'  => isset($request->language) ? $request->language : config('daydreamlab.global.locale')
+            'language'  => isset($request->language)
+                ? $request->language
+                : config('daydreamlab.global.locale')
         ]));
 
         return $this->response($this->service->status, $this->service->response);
     }
 
 
-    public function getItems()
+    public function getTree(MenuFrontGetTreeGet $request)
     {
-        $this->service->search(new Collection());
-
-        return $this->response($this->service->status, $this->service->response);
-    }
-
-
-    public function getTree(Request $request)
-    {
+        $this->service->setUser($request->user('api'));
         $this->service->getTree(Helper::collect([
             'host'       => $request->getHttpHost(),
-            'language'   => isset($request->language) ? $request->language : config('daydreamlab.global.locale')
+            'language'   => isset($request->language)
+                ? $request->language
+                : config('daydreamlab.global.locale')
         ]));
-
-        return $this->response($this->service->status, $this->service->response);
-    }
-
-
-    public function checkout($id)
-    {
-        $this->service->checkout($id);
-
-        return $this->response($this->service->status, $this->service->response);
-    }
-
-
-    public function ordering(MenuFrontOrderingPost $request)
-    {
-        $this->service->ordering($request->validated());
-
-        return $this->response($this->service->status, $this->service->response);
-    }
-
-
-    public function remove(MenuFrontRemovePost $request)
-    {
-        $this->service->remove($request->validated());
-
-        return $this->response($this->service->status, $this->service->response);
-    }
-
-
-    public function state(MenuFrontStatePost $request)
-    {
-        $this->service->state($request->validated());
-
-        return $this->response($this->service->status, $this->service->response);
-    }
-
-
-    public function store(MenuFrontStorePost $request)
-    {
-        $this->service->store($request->validated());
-
-        return $this->response($this->service->status, $this->service->response);
-    }
-
-
-    public function search(MenuFrontSearchPost $request)
-    {
-        $this->service->search($request->validated());
 
         return $this->response($this->service->status, $this->service->response);
     }

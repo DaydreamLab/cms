@@ -2,10 +2,13 @@
 
 namespace DaydreamLab\Cms\Requests\Module\Admin;
 
-use DaydreamLab\Cms\Requests\Module\ModuleStatePost;
+use DaydreamLab\Cms\Requests\CmStatePost;
 
-class ModuleAdminStatePost extends ModuleStatePost
+class ModuleAdminStatePost extends CmStatePost
 {
+    protected $apiMethod = 'updateModuleState';
+
+    protected $modelName = 'Module';
     /**
      * Determine if the user is authorized to make this request.
      *

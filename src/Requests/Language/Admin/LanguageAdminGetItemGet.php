@@ -1,12 +1,14 @@
 <?php
 
-namespace DaydreamLab\Cms\Requests\Menu;
+namespace DaydreamLab\Cms\Requests\Language\Admin;
 
 use DaydreamLab\JJAJ\Requests\AdminRequest;
-use Illuminate\Validation\Rule;
 
-class MenuStatePost extends AdminRequest
+class LanguageAdminGetItemGet extends AdminRequest
 {
+    protected $apiMethod = 'getLanguage';
+
+    protected $modelName = 'Language';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -24,14 +26,6 @@ class MenuStatePost extends AdminRequest
      */
     public function rules()
     {
-        return [
-            'ids'       => 'required|array',
-            'ids.*'     => 'required|integer',
-            'state'     => [
-                'required',
-                'integer',
-                Rule::in([0,1,-2])
-            ]
-        ];
+        return parent::rules();
     }
 }

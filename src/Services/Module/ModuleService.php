@@ -8,13 +8,12 @@ use DaydreamLab\Cms\Events\Checkout;
 use DaydreamLab\Cms\Events\Modify;
 use DaydreamLab\Cms\Events\Remove;
 use DaydreamLab\Cms\Events\State;
+use DaydreamLab\Cms\Services\CmsService;
 use DaydreamLab\JJAJ\Services\BaseService;
 use Illuminate\Support\Collection;
 
-class ModuleService extends BaseService
+class ModuleService extends CmsService
 {
-    protected $package = 'Cms';
-
     protected $modelName = 'Module';
 
     protected $modelType = 'Base';

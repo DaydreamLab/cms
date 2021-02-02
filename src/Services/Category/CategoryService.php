@@ -16,7 +16,9 @@ use Illuminate\Support\Str;
 
 class CategoryService extends CmsService
 {
-    use NestedServiceTrait;
+    use NestedServiceTrait{
+        NestedServiceTrait::modifyNested as traitModifyNested;
+    }
 
     protected $modelName = 'Category';
 
@@ -28,7 +30,7 @@ class CategoryService extends CmsService
         $this->repo = $repo;
     }
 
-    public function addNested(Collection $input)
+    public function add(Collection $input)
     {
         $item = $this->addNested($input);
 
@@ -52,7 +54,7 @@ class CategoryService extends CmsService
 
     public function modifyNested(Collection $input, $parent, $item)
     {
-        $result = $this->modifyNested($input, $parent, $item);
+        $result = $this->traitModifyNested($input, $parent, $item);
 
         event(new Modify($this->find($input->get('id')), $this->getServiceName(), $result, $input,$this->user));
 

@@ -2,10 +2,13 @@
 
 namespace DaydreamLab\Cms\Requests\Menu\Admin;
 
-use DaydreamLab\Cms\Requests\Menu\MenuSearchPost;
+use DaydreamLab\JJAJ\Requests\ListRequest;
 
-class MenuAdminSearchPost extends MenuSearchPost
+class MenuAdminSearchPost extends ListRequest
 {
+    protected $apiMethod = 'searchMenu';
+
+    protected $modelName = 'Menu';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -26,7 +29,8 @@ class MenuAdminSearchPost extends MenuSearchPost
         $rules = [
             'language'      => 'nullable|string',
             'category_id'   => 'nullable|integer',
+            'access'        => 'nullable|integer'
         ];
-        return array_merge($rules, parent::rules());
+        return array_merge(parent::rules(), $rules);
     }
 }

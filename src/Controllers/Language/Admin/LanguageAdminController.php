@@ -3,7 +3,9 @@
 namespace DaydreamLab\Cms\Controllers\Language\Admin;
 
 use DaydreamLab\Cms\Controllers\CmsController;
-use DaydreamLab\JJAJ\Helpers\InputHelper;
+use DaydreamLab\Cms\Requests\Language\Admin\LanguageAdminGetItemGet;
+use DaydreamLab\Cms\Resources\Language\Admin\Collections\LanguageAdminListResourceCollection;
+use DaydreamLab\Cms\Resources\Language\Admin\Models\LanguageAdminResource;
 use DaydreamLab\Cms\Services\Language\Admin\LanguageAdminService;
 use DaydreamLab\Cms\Requests\Language\Admin\LanguageAdminRemovePost;
 use DaydreamLab\Cms\Requests\Language\Admin\LanguageAdminStorePost;
@@ -19,15 +21,16 @@ class LanguageAdminController extends CmsController
     public function __construct(LanguageAdminService $service)
     {
         parent::__construct($service);
+        $this->service = $service;
     }
 
 
-    public function getItem($id)
+    public function getItem(LanguageAdminGetItemGet $request)
     {
         $this->service->setUser($request->user('api'));
-        $this->service->getItem($id);
+        $this->service->getItem(collect(['id' => $request->route('id')]));
 
-        return $this->response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, new LanguageAdminResource($this->service->response));
     }
 
 
@@ -54,7 +57,11 @@ class LanguageAdminController extends CmsController
         $this->service->setUser($request->user('api'));
         $this->service->store($request->validated());
 
-        return $this->response($this->service->status, $this->service->response);
+        return $this->response($this->service->status,
+            gettype($this->service->response) == 'object'
+            ? new LanguageAdminResource($this->service->response->refresh())
+            : $this->service->response
+        );
     }
 
 
@@ -63,6 +70,8 @@ class LanguageAdminController extends CmsController
         $this->service->setUser($request->user('api'));
         $this->service->search($request->validated());
 
-        return $this->response($this->service->status, $this->service->response);
+        return $this->response($this->service->status,
+            new LanguageAdminListResourceCollection($this->service->response)
+        );
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace DaydreamLab\Cms\Requests\Module;
+namespace DaydreamLab\Cms\Requests\Menu\Front;
 
-use DaydreamLab\JJAJ\Requests\AdminRequest;
+use DaydreamLab\Cms\Requests\CmsGetItemGet;
 
-class ModuleRemovePost extends AdminRequest
+class MenuFrontGetItemByPathGet extends CmsGetItemGet
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +23,6 @@ class ModuleRemovePost extends AdminRequest
      */
     public function rules()
     {
-        return [
-            'ids'       => 'required|array',
-            'ids.*'     => 'required|integer'
-        ];
+        return parent::rules();
     }
 }

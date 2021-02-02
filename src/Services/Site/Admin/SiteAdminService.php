@@ -21,12 +21,6 @@ class SiteAdminService extends SiteService
     }
 
 
-    public function getItem($id)
-    {
-        return parent::getItem($id);
-    }
-
-
     public function getList(Collection $input)
     {
         /**
@@ -39,8 +33,7 @@ class SiteAdminService extends SiteService
 
 
         $data = [];
-        foreach ($result as $item)
-        {
+        foreach ($result as $item) {
             $data[] = $item->only('id', 'title', 'url');
         }
 
@@ -48,11 +41,5 @@ class SiteAdminService extends SiteService
         $this->response = $data;
 
         return $data;
-    }
-
-
-    public function ordering(Collection $input)
-    {
-        return parent::ordering($input);
     }
 }

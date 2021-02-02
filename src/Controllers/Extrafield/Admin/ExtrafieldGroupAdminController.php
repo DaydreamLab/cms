@@ -69,7 +69,7 @@ class ExtrafieldGroupAdminController extends CmsController
 
         return $this->response($this->service->status,
             gettype($this->service->response) == 'object'
-            ? new ExtrafieldGroupAdminResource($this->service->response)
+            ? new ExtrafieldGroupAdminResource($this->service->response->refresh())
             : $this->service->response
         );
     }
