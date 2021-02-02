@@ -2,10 +2,9 @@
 
 namespace DaydreamLab\Cms\Controllers\Item\Front;
 
+use DaydreamLab\Cms\Controllers\CmsController;
 use DaydreamLab\Cms\Requests\Item\Front\ItemFrontGetPreviousAndNextPost;
-use DaydreamLab\JJAJ\Controllers\BaseController;
 use DaydreamLab\JJAJ\Helpers\Helper;
-use DaydreamLab\JJAJ\Helpers\ResponseHelper;
 use Illuminate\Support\Collection;
 use DaydreamLab\Cms\Services\Item\Front\ItemFrontService;
 use DaydreamLab\Cms\Requests\Item\Front\ItemFrontRemovePost;
@@ -17,8 +16,7 @@ use DaydreamLab\Cms\Requests\Item\Front\ItemFrontFeaturePost;
 use DaydreamLab\Cms\Requests\Item\Front\ItemFrontOrderingPost;
 use Symfony\Component\HttpFoundation\Request;
 
-
-class ItemFrontController extends BaseController
+class ItemFrontController extends CmsController
 {
     protected $package = 'Cms';
 

@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Controllers\Item\Admin;
 
+use DaydreamLab\Cms\Controllers\CmsController;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminGetItemGet;
 use DaydreamLab\JJAJ\Controllers\BaseController;
 use DaydreamLab\Cms\Services\Item\Admin\ItemAdminService;
@@ -13,10 +14,8 @@ use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminCheckoutPost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminFeaturePost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminOrderingPost;
 
-class ItemAdminController extends BaseController
+class ItemAdminController extends CmsController
 {
-    protected $package = 'Cms';
-
     protected $modelName = 'Item';
 
     protected $modelType = 'Admin';

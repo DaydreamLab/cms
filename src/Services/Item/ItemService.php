@@ -45,16 +45,13 @@ class ItemService extends CmsService
             if(!$result) break;
         }
 
-
-        $action = $input->get('featured') == 0 ? 'Unfeatured' : 'Featured';
-        if ($result)
-        {
-            $this->status   = Str::upper(Str::snake($this->type.$action.'Success'));
-            $this->response = null;
-        }
-        else
-        {
-            $this->status   = Str::upper(Str::snake($this->type.$action.'Fail'));
+        $action = $input->get('featured') == 0
+            ? 'Unfeatured'
+            : 'Featured';
+        if ($result) {
+            $this->status   = $action.'Success';
+        } else {
+            $this->status   = $action.'Fail';
             $this->response = null;
         }
 

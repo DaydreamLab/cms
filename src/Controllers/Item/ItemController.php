@@ -15,7 +15,6 @@ use DaydreamLab\Cms\Requests\Item\ItemSearchPost;
 use DaydreamLab\Cms\Requests\Item\ItemFeaturePost;
 use DaydreamLab\Cms\Requests\Item\ItemOrderingPost;
 
-
 class ItemController extends BaseController
 {
     public function __construct(ItemService $service)

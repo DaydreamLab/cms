@@ -2,18 +2,16 @@
 
 namespace DaydreamLab\Cms\Controllers\Category\Front;
 
+use DaydreamLab\Cms\Controllers\CmsController;
 use DaydreamLab\Cms\Requests\Category\Front\CategoryFrontGetItemGet;
 use DaydreamLab\Cms\Requests\Category\Front\CategoryFrontSearchItemPost;
 use DaydreamLab\Cms\Resources\Category\Front\Collections\CategoryFrontListResourceCollection;
 use DaydreamLab\Cms\Resources\Category\Front\Models\CategoryFrontResource;
-use DaydreamLab\JJAJ\Controllers\BaseController;
 use DaydreamLab\Cms\Services\Category\Front\CategoryFrontService;
 use DaydreamLab\Cms\Requests\Category\Front\CategoryFrontSearchPost;
 
-class CategoryFrontController extends BaseController
+class CategoryFrontController extends CmsController
 {
-    protected $package = 'Cms';
-
     protected $modelName = 'Category';
 
     protected $modelType = 'Front';
