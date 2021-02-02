@@ -1,13 +1,14 @@
 <?php
 namespace DaydreamLab\Cms\Models\Extrafield;
 
+use DaydreamLab\Cms\Traits\Model\UserInfo;
 use DaydreamLab\Cms\Traits\Model\WithAccess;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 
 class ExtrafieldGroup extends BaseModel
 {
-    use WithAccess,
+    use WithAccess, UserInfo,
         RecordChanger {
         RecordChanger::boot as traitBoot;
     }

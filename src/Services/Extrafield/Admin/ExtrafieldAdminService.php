@@ -10,11 +10,18 @@ class ExtrafieldAdminService extends ExtrafieldService
 {
     protected $modelType = 'Admin';
 
+    protected $extrafiledGroupAdminService;
+
     protected $search_keys = ['title', 'description'];
 
-    public function __construct(ExtrafieldAdminRepository $repo)
+    public function __construct(
+        ExtrafieldAdminRepository $repo,
+        ExtrafieldGroupAdminService  $extrafieldGroupAdminService
+    )
     {
         parent::__construct($repo);
+        $this->repo = $repo;
+        $this->extrafiledGroupAdminService = $extrafieldGroupAdminService;
     }
 
     public function getItem($id)
@@ -31,7 +38,7 @@ class ExtrafieldAdminService extends ExtrafieldService
 
     public function store(Collection $input)
     {
-        $this->checkItem(collect(['id' => $input->get('group_id')]));
+        $this->extrafiledGroupAdminService->checkItem(collect(['id' => $input->get('group_id')]));
 
         return parent::store($input);
     }

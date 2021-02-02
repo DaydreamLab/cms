@@ -2,10 +2,13 @@
 
 namespace DaydreamLab\Cms\Requests\Extrafield\Admin;
 
-use DaydreamLab\Cms\Requests\Extrafield\ExtrafieldRemovePost;
+use DaydreamLab\Cms\Requests\CmsCheckoutRemovePost;
 
-class ExtrafieldAdminRemovePost extends ExtrafieldRemovePost
+class ExtrafieldAdminRemovePost extends CmsCheckoutRemovePost
 {
+    protected $apiMethod = 'deleteExtrafield';
+
+    protected $modelName = 'Extrafield';
     /**
      * Determine if the user is authorized to make this request.
      *

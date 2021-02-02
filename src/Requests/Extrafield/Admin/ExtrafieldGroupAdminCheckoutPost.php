@@ -1,11 +1,14 @@
 <?php
 
-namespace DaydreamLab\Cms\Requests\Extrafield;
+namespace DaydreamLab\Cms\Requests\Extrafield\Admin;
 
-use DaydreamLab\JJAJ\Requests\AdminRequest;
+use DaydreamLab\Cms\Requests\CmsCheckoutRemovePost;
 
-class ExtrafieldGroupAdminCheckoutPost extends AdminRequest
+class ExtrafieldGroupAdminCheckoutPost extends CmsCheckoutRemovePost
 {
+    protected $apiMethod = 'checkoutExtrafieldGroup';
+
+    protected $modelName = 'ExtrafieldGroup';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -23,9 +26,8 @@ class ExtrafieldGroupAdminCheckoutPost extends AdminRequest
      */
     public function rules()
     {
-        return [
-            'ids'       => 'required|array',
-            'ids.*'     => 'required|integer'
+        $rules =  [
         ];
+        return array_merge(parent::rules(), $rules);
     }
 }

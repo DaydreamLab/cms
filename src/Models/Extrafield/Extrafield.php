@@ -76,6 +76,10 @@ class Extrafield extends BaseModel
         'params'    => 'array'
     ];
 
+    protected $with = [
+        'group'
+    ];
+
 
     public static function boot()
     {
@@ -93,5 +97,4 @@ class Extrafield extends BaseModel
     {
         return $this->group()->first()->title;
     }
-
 }

@@ -2,10 +2,13 @@
 
 namespace DaydreamLab\Cms\Requests\Extrafield\Admin;
 
-use DaydreamLab\Cms\Requests\Extrafield\ExtrafieldGroupSearchPost;
+use DaydreamLab\JJAJ\Requests\ListRequest;
 
-class ExtrafieldGroupAdminSearchPost extends ExtrafieldGroupSearchPost
+class ExtrafieldGroupAdminSearchPost extends ListRequest
 {
+    protected $apiMethod = 'searchExtrafieldGroup';
+
+    protected $modelName = 'ExtrafieldGroup';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -24,7 +27,6 @@ class ExtrafieldGroupAdminSearchPost extends ExtrafieldGroupSearchPost
     public function rules()
     {
         $rules = [
-            //
         ];
         return array_merge($rules, parent::rules());
     }

@@ -7,13 +7,12 @@ use DaydreamLab\Cms\Events\Add;
 use DaydreamLab\Cms\Events\Modify;
 use DaydreamLab\Cms\Events\Remove;
 use DaydreamLab\Cms\Events\State;
+use DaydreamLab\Cms\Services\CmsService;
 use DaydreamLab\JJAJ\Services\BaseService;
 use Illuminate\Support\Collection;
 
-class ExtrafieldService extends BaseService
+class ExtrafieldService extends CmsService
 {
-    protected $package = 'Cms';
-
     protected $modelName = 'Extrafield';
 
     protected $modelType = 'Base';

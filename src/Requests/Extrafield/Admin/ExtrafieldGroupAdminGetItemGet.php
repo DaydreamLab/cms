@@ -1,11 +1,15 @@
 <?php
 
-namespace DaydreamLab\Cms\Requests\Extrafield;
+namespace DaydreamLab\Cms\Requests\Extrafield\Admin;
 
-use DaydreamLab\JJAJ\Requests\AdminRequest;
+use DaydreamLab\Cms\Requests\CmsGetItemGet;
 
-class ExtrafieldRemovePost extends AdminRequest
+class ExtrafieldGroupAdminGetItemGet extends CmsGetItemGet
 {
+    protected $apiMethod = 'getExtrafieldGroup';
+
+    protected $modelName = 'ExtrafieldGroup';
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -23,9 +27,6 @@ class ExtrafieldRemovePost extends AdminRequest
      */
     public function rules()
     {
-        return [
-            'ids'       => 'required|array',
-            'ids.*'     => 'required|integer'
-        ];
+        return parent::rules();
     }
 }

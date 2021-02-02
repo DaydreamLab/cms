@@ -2,10 +2,14 @@
 
 namespace DaydreamLab\Cms\Requests\Extrafield\Admin;
 
-use DaydreamLab\Cms\Requests\Extrafield\ExtrafieldGroupOrderingPost;
+use DaydreamLab\Cms\Requests\CmsGetItemGet;
 
-class ExtrafieldGroupAdminOrderingPost extends ExtrafieldGroupOrderingPost
+class ExtrafieldAdminGetItemGet extends CmsGetItemGet
 {
+    protected $apiMethod = 'getExtrafield';
+
+    protected $modelName = 'Extrafield';
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -23,9 +27,6 @@ class ExtrafieldGroupAdminOrderingPost extends ExtrafieldGroupOrderingPost
      */
     public function rules()
     {
-        $rules = [
-            //
-        ];
-        return array_merge($rules, parent::rules());
+        return parent::rules();
     }
 }

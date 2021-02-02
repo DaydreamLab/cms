@@ -2,10 +2,13 @@
 
 namespace DaydreamLab\Cms\Requests\Extrafield\Admin;
 
-use DaydreamLab\Cms\Requests\Extrafield\ExtrafieldGroupStatePost;
+use DaydreamLab\Cms\Requests\CmStatePost;
 
-class ExtrafieldGroupAdminStatePost extends ExtrafieldGroupStatePost
+class ExtrafieldGroupAdminStatePost extends CmStatePost
 {
+    protected $apiMethod = 'updateExtrafieldGroupState';
+
+    protected $modelName = 'ExtrafieldGroup';
     /**
      * Determine if the user is authorized to make this request.
      *

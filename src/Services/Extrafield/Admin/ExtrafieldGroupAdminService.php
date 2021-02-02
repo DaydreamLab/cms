@@ -14,5 +14,6 @@ class ExtrafieldGroupAdminService extends ExtrafieldGroupService
     public function __construct(ExtrafieldGroupAdminRepository $repo)
     {
         parent::__construct($repo);
+        $this->repo = $repo;
     }
 }

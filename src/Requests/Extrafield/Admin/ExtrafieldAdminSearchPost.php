@@ -2,10 +2,14 @@
 
 namespace DaydreamLab\Cms\Requests\Extrafield\Admin;
 
-use DaydreamLab\Cms\Requests\Extrafield\ExtrafieldSearchPost;
+use DaydreamLab\JJAJ\Requests\ListRequest;
+use Illuminate\Validation\Rule;
 
-class ExtrafieldAdminSearchPost extends ExtrafieldSearchPost
+class ExtrafieldAdminSearchPost extends ListRequest
 {
+    protected $apiMethod = 'searchExtrafield';
+
+    protected $modelName = 'Extrafield';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -24,8 +28,14 @@ class ExtrafieldAdminSearchPost extends ExtrafieldSearchPost
     public function rules()
     {
         $rules = [
-            //
+            'search' => 'nullable|string',
+            'state'     => [
+                'nullable',
+                'integer',
+                Rule::in([0,1,-2])
+            ],
+            'group_id'  => 'nullable|integer'
         ];
-        return array_merge($rules, parent::rules());
+        return array_merge(parent::rules(), $rules);
     }
 }
