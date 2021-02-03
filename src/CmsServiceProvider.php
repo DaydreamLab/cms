@@ -30,7 +30,7 @@ class CmsServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__. '/../resources/site'   => resource_path('views/site'),
         ], 'cms-frontend-site');
-
+//
         $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'cms');
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
         $this->loadRoutesFrom(__DIR__.'/routes/api.php');

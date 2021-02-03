@@ -19,7 +19,8 @@
     "require": {
         "daydreamlab/jjaj": "dev-base/develop",
         "daydreamlab/user": "dev-base/develop",
-        "daydreamlab/media": "dev-base/develop"
+        "daydreamlab/media": "dev-base/develop",
+        "fedeisas/laravel-mail-css-inliner": "^4.0"
     },
     "repositories" : [
         {
