@@ -13,6 +13,8 @@ class SettingAdminService extends SettingService
 {
     protected $type = 'Admin';
 
+    protected $modelType = 'Admin';
+
     public function __construct(SiteAdminService $siteAdminService)
     {
         parent::__construct($siteAdminService);
@@ -23,8 +25,8 @@ class SettingAdminService extends SettingService
     {
         $global = config('daydreamlab.global');
 
-        $this->status   = Str::upper(Str::snake($this->type.'GetItemSuccess'));
-        $this->response = (object)$global;
+        $this->status   = 'GetItemSuccess';
+        $this->response = $global;
 
         return $this->response;
     }
@@ -55,12 +57,12 @@ class SettingAdminService extends SettingService
 
         if ($result)
         {
-            $this->status = Str::upper(Str::snake($this->type.'UpdateSuccess'));
+            $this->status = 'UpdateSuccess';
             $this->response = null;
         }
         else
         {
-            $this->status = Str::upper(Str::snake($this->type.'UpdateFail'));
+            $this->status = 'UpdateFail';
             $this->response = null;
         }
 

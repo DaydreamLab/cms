@@ -11,6 +11,8 @@ class SettingFrontService extends SettingService
 {
     protected $type = 'Front';
 
+    protected $modelType = 'Front';
+
 
     public function __construct(SiteAdminService $siteAdminService)
     {
@@ -18,7 +20,7 @@ class SettingFrontService extends SettingService
     }
 
 
-    public function getItem($locale, $host)
+    public function getItem($input, $locale = null, $host = null)
     {
         $global = config('daydreamlab.global');
 
@@ -38,12 +40,12 @@ class SettingFrontService extends SettingService
             $data['custom_body']    = $global['custom_body'];
             $data['custom_footer']  = $global['custom_footer'];
 
-            $this->status   = Str::upper(Str::snake($this->type.'GetItemSuccess'));
-            $this->response = (object)$data;
+            $this->status   = 'GetItemSuccess';
+            $this->response = $data;
         }
         else
         {
-            $this->status   = Str::upper(Str::snake($this->type.'NotFound'));
+            $this->status   = 'ItemNotExist';
             $this->response = null;
         }
 

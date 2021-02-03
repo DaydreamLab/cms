@@ -2,22 +2,29 @@
 
 namespace DaydreamLab\Cms\Controllers\Setting\Front;
 
+use DaydreamLab\Cms\Controllers\CmsController;
+use DaydreamLab\Cms\Requests\Setting\Front\SettingFrontGetItemGet;
 use DaydreamLab\Cms\Services\Setting\Front\SettingFrontService;
 use DaydreamLab\JJAJ\Helpers\ResponseHelper;
 use Symfony\Component\HttpFoundation\Request;
 
-class SettingFrontController
+class SettingFrontController extends CmsController
 {
-    protected $service;
+    protected $modelName = 'Setting';
+
+    protected $modelType = 'Front';
+
 
     public function __construct(SettingFrontService $service)
     {
+        parent::__construct($service);
         $this->service = $service;
     }
 
-    public function getItem(Request $request, $locale)
+    public function getItem(SettingFrontGetItemGet $request)
     {
-        $this->service->getItem($locale, $request->getHttpHost());
+        $this->service->setUser($request->user('api'));
+        $this->service->getItem(0, $request->route('locale'), $request->getHttpHost());
 
         return $this->response($this->service->status, $this->service->response);
     }

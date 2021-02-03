@@ -2,32 +2,38 @@
 
 namespace DaydreamLab\Cms\Controllers\Setting\Admin;
 
-use DaydreamLab\Cms\Requests\Setting\SettingStorePost;
+use DaydreamLab\Cms\Controllers\CmsController;
+use DaydreamLab\Cms\Requests\Setting\Admin\SettingAdminGetItemGet;
+use DaydreamLab\Cms\Requests\Setting\Admin\SettingAdminStorePost;
 use DaydreamLab\Cms\Services\Setting\Admin\SettingAdminService;
 use DaydreamLab\JJAJ\Helpers\ResponseHelper;
 
 
-class SettingAdminController
+class SettingAdminController extends CmsController
 {
-    protected $service;
+    protected $modelName = 'Setting';
 
+    protected $modelType = 'Admin';
+    
     public function __construct(SettingAdminService $service)
     {
+        parent::__construct($service);
         $this->service = $service;
     }
 
 
-    public function getItem()
+    public function getItem(SettingAdminGetItemGet $request)
     {
-        $this->service->canAction('SettingAdminService', 'getSetting', '');
+        $this->service->setUser($request->user('api'));
         $this->service->getItem();
 
         return $this->response($this->service->status, $this->service->response);
     }
 
 
-    public function store(SettingStorePost $request)
+    public function store(SettingAdminStorePost $request)
     {
+        $this->service->setUser($request->user('api'));
         $this->service->store($request->validated());
 
         return $this->response($this->service->status, $this->service->response);
