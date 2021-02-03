@@ -2,12 +2,12 @@
 
 namespace DaydreamLab\Cms\Resources\Tag\Admin\Collections;
 
-use DaydreamLab\Cms\Resources\Tag\admin\Models\TagAdminResource;
+use DaydreamLab\Cms\Resources\Tag\admin\Models\TagAdminListResource;
 use DaydreamLab\JJAJ\Resources\BaseResourceCollection;
 
 class TagAdminListResourceCollection extends BaseResourceCollection
 {
-    public $collects = TagAdminResource::class;
+    public $collects = TagAdminListResource::class;
 
     /**
      * Transform the resource collection into an array.

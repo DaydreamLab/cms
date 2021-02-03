@@ -6,13 +6,15 @@ use DaydreamLab\Cms\Controllers\CmsController;
 use DaydreamLab\Cms\Requests\Site\Admin\SiteAdminGetItemGet;
 use DaydreamLab\Cms\Requests\Site\Admin\SiteAdminGetListGet;
 use DaydreamLab\Cms\Requests\Site\Admin\SiteAdminCheckoutPost;
+use DaydreamLab\Cms\Requests\Site\Admin\SiteAdminStorePost;
+use DaydreamLab\Cms\Requests\Site\Admin\SiteAdminSearchPost;
+use DaydreamLab\Cms\Requests\Site\Admin\SiteAdminStatePost;
+use DaydreamLab\Cms\Requests\Site\Admin\SiteAdminOrderingPost;
 use DaydreamLab\Cms\Resources\Site\Admin\Models\SiteAdminResource;
+use DaydreamLab\Cms\Resources\Site\Admin\Collections\SiteAdminListResourceCollection;
 use DaydreamLab\Cms\Services\Site\Admin\SiteAdminService;
 use DaydreamLab\Cms\Requests\Site\Admin\SiteAdminRemovePost;
-use DaydreamLab\Cms\Requests\Site\Admin\SiteAdminStorePost;
-use DaydreamLab\Cms\Requests\Site\Admin\SiteAdminStatePost;
-use DaydreamLab\Cms\Requests\Site\Admin\SiteAdminSearchPost;
-use DaydreamLab\Cms\Requests\Site\Admin\SiteAdminOrderingPost;
+
 
 class SiteAdminController extends CmsController
 {
@@ -67,10 +69,19 @@ class SiteAdminController extends CmsController
     }
 
 
-    public function ordering(SiteAdminOrderingPost $request)
+    public function search(SiteAdminSearchPost $request)
     {
         $this->service->setUser($request->user('api'));
-        $this->service->ordering($request->validated());
+        $this->service->search($request->validated());
+
+        return $this->response($this->service->status, new SiteAdminListResourceCollection($this->service->response));
+    }
+
+
+    public function state(SiteAdminStatePost $request)
+    {
+        $this->service->setUser($request->user('api'));
+        $this->service->state($request->validated());
 
         return $this->response($this->service->status, $this->service->response);
     }
@@ -85,20 +96,12 @@ class SiteAdminController extends CmsController
     }
 
 
-    public function state(SiteAdminStatePost $request)
+    public function ordering(SiteAdminOrderingPost $request)
     {
         $this->service->setUser($request->user('api'));
-        $this->service->state($request->validated());
+        $this->service->ordering($request->validated());
 
         return $this->response($this->service->status, $this->service->response);
     }
-
-
-    public function search(SiteAdminSearchPost $request)
-    {
-        $this->service->setUser($request->user('api'));
-        $this->service->search($request->validated());
-
-        return $this->response($this->service->status, $this->service->response);
-    }
+    
 }

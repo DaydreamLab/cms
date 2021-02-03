@@ -6,7 +6,7 @@ use DaydreamLab\Cms\Requests\CmsOrderingPost;
 
 class SiteAdminOrderingPost extends CmsOrderingPost
 {
-    protected $apiMethod = 'orderingSite';
+    protected $apiMethod = 'editSite';
 
     protected $modelName = 'Site';
     /**
