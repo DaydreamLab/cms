@@ -1,12 +1,11 @@
 <?php
 
-namespace DaydreamLab\Cms\Requests\Option;
-
+namespace DaydreamLab\Cms\Requests\Option\Admin;
 
 use DaydreamLab\JJAJ\Requests\AdminRequest;
 use Illuminate\Validation\Rule;
 
-class OptionGetListPost extends AdminRequest
+class OptionAdminGetListPost extends AdminRequest
 {
     /**
      * Determine if the user is authorized to make this request.

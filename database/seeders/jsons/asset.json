@@ -590,7 +590,7 @@
           },
           {
             "method": "searchExtrafieldGroup",
-            "url": "/admin/extrafield_group/remove",
+            "url": "/admin/extrafield_group/search",
             "created_by": 1
           },
           {
