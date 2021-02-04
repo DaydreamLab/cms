@@ -13,7 +13,6 @@ use Illuminate\Support\Str;
 
 class CategoryFrontService extends CategoryService
 {
-    use LoggedIn;
 
     protected $modelType = 'Front';
 

@@ -2,12 +2,13 @@
 namespace DaydreamLab\Cms\Models\Extrafield;
 
 use DaydreamLab\Cms\Traits\Model\WithAccess;
+use DaydreamLab\Cms\Traits\Model\UserInfo;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\JJAJ\Models\BaseModel;
 
 class Extrafield extends BaseModel
 {
-    use WithAccess,
+    use WithAccess, UserInfo,
         RecordChanger {
         RecordChanger::boot as traitBoot;
     }
@@ -77,7 +78,7 @@ class Extrafield extends BaseModel
     ];
 
     protected $with = [
-        'group'
+        //'group'
     ];
 
 
