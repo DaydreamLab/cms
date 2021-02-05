@@ -36,6 +36,7 @@ class ItemFrontResource extends JsonResource
             'metakeywords'              => $this->metakeywords,
             'params'                    => $this->params,
             'extrafields'               => $this->extrafields,
+            'tags'                      => $this->tags,
             'created_at'                => $this->getDateTimeString($this->created_at, config('daydreamlab.cms.timezone')),
             'updated_at'                => $this->getDateTimeString($this->updated_at, config('daydreamlab.cms.timezone')),
             'locked_at'                 => $this->getDateTimeString($this->locked_at, config('daydreamlab.cms.timezone')),
