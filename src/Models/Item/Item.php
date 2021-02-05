@@ -66,6 +66,8 @@ class Item extends BaseModel
         'updated_by',
         'publish_up',
         'publish_down',
+        'start_date',
+        'end_date'
     ];
 
 
@@ -99,16 +101,19 @@ class Item extends BaseModel
         'category_alias',
         'access_title',
         'language_title',
-        'extrafield_group_title'
+        'extrafield_group_title',
     ];
 
 
     protected $casts = [
         'params' => 'array',
         'extrafields' => 'array',
+        'created_at' => 'datetime:Y-m-d H:i:s',
         'locked_at' => 'datetime:Y-m-d H:i:s',
         'publish_up' => 'datetime:Y-m-d H:i:s',
         'publish_down' => 'datetime:Y-m-d H:i:s',
+        'start_date' => 'datetime:Y-m-d H:i',
+        'end_date' => 'datetime:Y-m-d H:i',
     ];
 
 
@@ -146,5 +151,4 @@ class Item extends BaseModel
         return $this->belongsToMany(Tag::class, 'items_tags_maps', 'item_id', 'tag_id')
             ->where('state', 1);
     }
-
 }
