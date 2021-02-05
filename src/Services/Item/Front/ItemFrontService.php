@@ -369,4 +369,28 @@ class ItemFrontService extends ItemService
     {
         return parent::search($input);
     }
+
+    public function download(Collection $input)
+    {
+        $mpdf = new\Mpdf\Mpdf ([
+            "autoScriptToLang" => true,
+            "autoLangToFont"   => true,
+            "useSubstitutions" => true,
+        ]);
+
+        $item = $this->checkItemByAlias($input->get('alias'));
+
+        $html = '<h3>'.$item->title.'</h3>'
+            . '<br>'
+            . '<img src="'.$item->introimage.'" alt="'.$item->introtext.'">'
+            . '<h6>.$item->introtext.</h6>'
+            . '<img src="'.$item->image.'" alt="'.$item->introtext.'">'
+            . '<br>'
+            . $item->description;
+
+        $mpdf->writeHTML($html);
+
+        $filename = today()->toDateString() . '.pdf';
+        return $mpdf->Output($filename, 'd');
+    }
 }

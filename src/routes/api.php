@@ -30,6 +30,7 @@ Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
     Route::group(['prefix' => 'item'], function (){
         Route::post('search', 'DaydreamLab\Cms\Controllers\Item\Front\ItemFrontController@search');
         Route::get('{alias}', 'DaydreamLab\Cms\Controllers\Item\Front\ItemFrontController@getItemByAlias');
+        Route::post('download', 'DaydreamLab\Cms\Controllers\Item\Front\ItemFrontController@download')->middleware('throttle:5,1');
     });
 
     Route::group(['prefix' => 'menu'], function (){

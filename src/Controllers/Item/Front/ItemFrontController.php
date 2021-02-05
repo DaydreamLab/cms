@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Controllers\Item\Front;
 
+use DaydreamLab\Cms\Requests\Item\Front\ItemFrontDownloadPost;
 use DaydreamLab\Cms\Requests\Item\Front\ItemFrontGetPreviousAndNextPost;
 use DaydreamLab\JJAJ\Controllers\BaseController;
 use DaydreamLab\JJAJ\Helpers\Helper;
@@ -111,9 +112,13 @@ class ItemFrontController extends BaseController
 
     public function search(ItemFrontSearchPost $request)
     {
-        $input =
         $this->service->search($request->rulesInput());
 
         return ResponseHelper::response($this->service->status, $this->service->response);
+    }
+
+    public function download(ItemFrontDownloadPost $request)
+    {
+        return $this->service->download($request->rulesInput());
     }
 }
