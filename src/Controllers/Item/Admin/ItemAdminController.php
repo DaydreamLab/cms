@@ -5,7 +5,7 @@ namespace DaydreamLab\Cms\Controllers\Item\Admin;
 use DaydreamLab\Cms\Controllers\CmsController;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminGetItemGet;
 use DaydreamLab\Cms\Resources\Item\Admin\Models\ItemAdminResource;
-use DaydreamLab\Cms\Resources\Item\Front\Collections\ItemFrontListResourceCollection;
+use DaydreamLab\Cms\Resources\Item\Admin\Collections\ItemAdminListResourceCollection;
 use DaydreamLab\Cms\Services\Item\Admin\ItemAdminService;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminRemovePost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminStorePost;
@@ -109,6 +109,6 @@ class ItemAdminController extends CmsController
         $this->service->setUser($request->user('api'));
         $this->service->search($request->validated());
 
-        return $this->response($this->service->status, new ItemFrontListResourceCollection($this->service->response));
+        return $this->response($this->service->status, new ItemAdminListResourceCollection($this->service->response));
     }
 }
