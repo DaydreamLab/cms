@@ -368,6 +368,12 @@ class ItemFrontService extends ItemService
         return parent::search($input);
     }
 
+    /**
+     * html to pdf and render on browser or download
+     * @param Collection $input
+     * @return mixed
+     * @throws \Mpdf\MpdfException
+     */
     public function download(Collection $input)
     {
         $mpdf = new\Mpdf\Mpdf ([
@@ -389,6 +395,8 @@ class ItemFrontService extends ItemService
         $mpdf->writeHTML($html);
 
         $filename = today()->toDateString() . '.pdf';
+        // if just want to show on browser, do not pass parameter 1 and 2 (ex: filename and dest)
+        // like this: $mpdf->Output();
         return $mpdf->Output($filename, 'd');
     }
 }
