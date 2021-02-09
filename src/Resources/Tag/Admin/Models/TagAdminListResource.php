@@ -27,7 +27,7 @@ class TagAdminListResource extends JsonResource
             'content_type'              => $this->content_type,
             'hits'                      => $this->hits,
             'access'                    => $this->access,
-            'language_title'            => $this->languaue_title,
+            'language_title'            => $this->language_title,
         ];
     }
 }
