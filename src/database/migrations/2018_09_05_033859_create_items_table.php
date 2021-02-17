@@ -23,6 +23,7 @@ class CreateItemsTable extends Migration
             $table->text('introimage')->nullable();
             $table->mediumText('introtext')->nullable();
             $table->text('image')->nullable();
+            $table->text('gallery')->nullable();
             $table->mediumText('description')->nullable();
             $table->text('video')->nullable();
             $table->text('link')->nullable();

@@ -27,6 +27,7 @@ class ItemFrontResource extends JsonResource
             'introimage'                => $this->introimage,
             'introtext'                 => $this->introtext,
             'image'                     => $this->image,
+            'gallery'                   => $this->gallery,
             'description'               => $this->description,
             'link'                      => $this->link,
             'video'                     => $this->video,
