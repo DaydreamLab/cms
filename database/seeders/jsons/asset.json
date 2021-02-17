@@ -730,26 +730,6 @@
             "created_by": 1
           }
         ]
-      },
-      {
-        "title": "COM_CONTENT_SEARCH_STATISTICS_TITLE",
-        "path": "/search",
-        "component": "content/search",
-        "service": "SearchAdminService",
-        "type": "menu",
-        "redirect": "",
-        "icon": "search",
-        "state": 1,
-        "showNav": 1,
-        "created_by": 1,
-        "children": [],
-        "apis": [
-          {
-            "method": "searchkeywordList",
-            "url": "/admin/search/keywordList",
-            "created_by": 1
-          }
-        ]
       }
     ],
     "apis": []
