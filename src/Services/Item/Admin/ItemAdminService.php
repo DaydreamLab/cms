@@ -150,9 +150,13 @@ class ItemAdminService extends ItemService
             $input->publish_up = now()->toDateTimeString();
         }
 
-        $tagIds = $input->get('tagIds') ? $input->get('tagIds') : [];
+        $tags = $input->get('tags') ? $input->get('tags') : [];
+        $tagIds = array_map(function($tag) {
+            return $tag['id'];
+        }, $tags);
+        $input->put('tagIds', $tagIds);
 
-        $result    =  parent::store($input);
+        $result = parent::store($input);
 
         if (gettype($result) == 'boolean')
         {
