@@ -25,6 +25,7 @@ class ItemAdminResource extends JsonResource
             'category_title'            => $this->category->title,
             'state'                     => $this->state,
             'ordering'                  => $this->ordering,
+            'featured'                  => $this->featured,
             'featured_ordering'         => $this->featured_ordering,
             'introimage'                => $this->introimage,
             'introtext'                 => $this->introtext,

@@ -21,6 +21,7 @@ class ItemFrontListResource extends JsonResource
             'alias'                     => $this->alias,
             'state'                     => $this->state,
             'ordering'                  => $this->ordering,
+            'featured'                  => $this->featured,
             'featured_ordering'         => $this->featured_ordering,
             'introimage'                => $this->introimage,
             'introtext'                 => $this->introtext,
