@@ -37,7 +37,7 @@ class LanguageService extends CmsService
     {
         $result =  parent::modify($input);
 
-        event(new Modify($this->find($input->id), $this->getServiceName(), $result, $input, $this->user));
+        event(new Modify($this->find($input->get('id')), $this->getServiceName(), $result, $input, $this->user));
 
         return $result;
     }

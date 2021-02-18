@@ -55,7 +55,7 @@ class TagService extends CmsService
     {
         $result = $this->traitModifiedNested($input, $parent, $item);
 
-        event(new Modify($this->find($input->id), $this->getServiceName(), $result, $input,$this->user));
+        event(new Modify($this->find($input->get('id')), $this->getServiceName(), $result, $input,$this->user));
 
         return $result;
     }
