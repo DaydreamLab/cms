@@ -36,7 +36,7 @@ class CategoryAdminResource extends JsonResource
             'metadesc'                  => $this->metadesc,
             'metakeywords'              => $this->metakeywords,
             'params'                    => $this->params,
-            'item_extrafield_group_id'  => $this->extrafield_group_id,
+            'item_extrafield_group_id'  => $this->item_extrafield_group_id,
             'extrafield_group_id'       => $this->extrafield_group_id,
             'extrafields'               => $this->extrafields,
             'created_at'                => $this->getDateTimeString($this->created_at, config('daydreamlab.cms.timezone')),
