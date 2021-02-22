@@ -24,7 +24,6 @@ class ItemFrontDownloadPost extends BaseRequest
     public function rules()
     {
         return [
-            'alias'    => 'required|string',
             'language' => 'nullable|string'
         ];
     }

@@ -117,8 +117,10 @@ class ItemFrontController extends BaseController
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
 
-    public function download(ItemFrontDownloadPost $request)
+    public function download($alias, ItemFrontDownloadPost $request)
     {
-        return $this->service->download($request->rulesInput());
+        $input = $request->rulesInput();
+        $input->put('alias', $alias);
+        return $this->service->download($input);
     }
 }

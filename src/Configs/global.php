@@ -9,9 +9,9 @@ return [
     'metakeywords'  => [
     ],
 
-    'locale'            => 'zh-TW',
-    
-    'locale_admin'      => 'zh-TW',
+    'locale'            => 'zh-Hant',
+
+    'locale_admin'      => 'zh-Hant',
 
     'custom_head'       => '',
 

@@ -12,9 +12,9 @@ class LanguagesTableSeeder extends Seeder
         Language::create([
             'title'     => '繁體中文',
             'type'      => 'system',
-            'code'      => 'zh-TW',
-            'sef'       => 'zh-TW',
-            'image'     => 'zh_tw',
+            'code'      => 'zh-Hant',
+            'sef'       => 'zh-Hant',
+            'image'     => 'zh_hant',
             'created_by'=> 1
         ]);
 
@@ -32,9 +32,9 @@ class LanguagesTableSeeder extends Seeder
         Language::create([
             'title'     => '繁體中文',
             'type'      => 'content',
-            'code'      => 'zh-TW',
-            'sef'       => 'zh-TW',
-            'image'     => 'zh_tw',
+            'code'      => 'zh-Hant',
+            'sef'       => 'zh-Hant',
+            'image'     => 'zh_hant',
             'created_by'=> 1
         ]);
 

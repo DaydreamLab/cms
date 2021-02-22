@@ -22,7 +22,6 @@ class MenuFrontRepository extends MenuRepository
         $query = $query->where('state', 1)
                         ->where('alias', $input->get('alias'))
                         ->where('site_id', $input->get('site_id'));
-
         if (InputHelper::null($input, 'language'))
         {
             $query = $query->where('language', '*');

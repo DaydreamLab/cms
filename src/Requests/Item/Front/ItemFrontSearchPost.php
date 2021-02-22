@@ -29,7 +29,7 @@ class ItemFrontSearchPost extends ItemSearchPost
             'month'             => 'nullable|integer',
             'category_alias'    => 'nullable|array',
             'category_alias.*'  => 'nullable|string',
-            'language'          => 'nullable|string|max:5',
+            'language'          => 'nullable|string',
             'order_by'      => [
                 'nullable',
                 'string',

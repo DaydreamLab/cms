@@ -22,7 +22,7 @@ class SitesTableSeeder extends Seeder
             'title'         => env('APP_NAME').' - 繁體中文',
             'url'           => str_replace('http://', '',str_replace('https://', '', env('APP_URL'))),
             'sitename'      => env('APP_NAME'),
-            'sef'           => 'zh-TW',
+            'sef'           => 'zh-Hant',
             'metakeywords'  => '',
             'access'        => 1
         ]));

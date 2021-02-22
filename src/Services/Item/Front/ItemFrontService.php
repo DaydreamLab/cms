@@ -384,11 +384,18 @@ class ItemFrontService extends ItemService
 
         $item = $this->checkItemByAlias($input->get('alias'));
 
+        $introImage = $item->introimage == ''
+            ? ''
+            : '<img src="'.$item->introimage.'" alt="'.$item->introtext.'" width="90">';
+        $image = $item->image == ''
+            ? ''
+            : '<img src="'.$item->image.'" alt="'.$item->introtext.'" width="90">';
+
         $html = '<h3>'.$item->title.'</h3>'
             . '<br>'
-            . '<img src="'.$item->introimage.'" alt="'.$item->introtext.'">'
-            . '<h6>.$item->introtext.</h6>'
-            . '<img src="'.$item->image.'" alt="'.$item->introtext.'">'
+            . $introImage
+            . '<h6>'.$item->introtext.'</h6>'
+            . $image
             . '<br>'
             . $item->description;
 
@@ -397,6 +404,7 @@ class ItemFrontService extends ItemService
         $filename = today()->toDateString() . '.pdf';
         // if just want to show on browser, do not pass parameter 1 and 2 (ex: filename and dest)
         // like this: $mpdf->Output();
-        return $mpdf->Output($filename, 'd');
+//        return $mpdf->Output($filename, 'd');
+        return $mpdf->Output();
     }
 }
