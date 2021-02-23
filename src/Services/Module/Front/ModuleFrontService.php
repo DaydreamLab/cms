@@ -110,11 +110,11 @@ class ModuleFrontService extends ModuleService
             $item->items = $this->loadModule($item, $input->get('language'));
 
             $this->response = $item;
-            $this->status   = Str::upper(Str::snake($this->type.'GetItemSuccess'));
+            $this->status   = 'GetItemSuccess';
         }
         else
         {
-            $this->status = Str::upper(Str::snake($this->type.'ItemNotExist'));
+            $this->status = 'ItemNotExist';
             $this->response = null;
         }
 
