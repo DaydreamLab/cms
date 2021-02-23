@@ -27,7 +27,7 @@ class SiteAdminService extends SiteService
     }
 
 
-    public function getList(Collection $input)
+    public function getList()
     {
         $this->canAction('getList');
         /**
