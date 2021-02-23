@@ -34,6 +34,9 @@ class CategoryFrontResource extends JsonResource
             'metadesc'                  => $this->metadesc,
             'metakeywords'              => $this->metakeywords,
             'params'                    => $this->params,
+            'child_categories'          => $this->children->map(function ($c) {
+                return ['title' => $c->title, 'alias' => $c->alias];
+            }),
             //'item_extrafield_group_id'  => $this->extrafield_group_id,
             //'extrafield_group_id'       => $this->extrafield_group_id,
             'extrafields'               => $this->extrafields,
