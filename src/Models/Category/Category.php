@@ -108,7 +108,8 @@ class Category extends BaseModel
         'tree_list_title',
         'access_title',
         'language_title',
-        'extrafield_group_title'
+        'extrafield_group_title',
+        'items'
     ];
 
 
