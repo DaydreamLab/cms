@@ -52,6 +52,6 @@ class CategoryFrontController extends CmsController
         $this->service->setUser($request->user('api'));
         $this->service->searchItems($request->validated());
 
-        return $this->response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, new CategoryFrontListResourceCollection($this->service->response));
     }
 }
