@@ -16,6 +16,8 @@ class ItemFrontRepository extends ItemRepository
 
     protected $categoryFrontRepository;
 
+    protected $infinity = 100000;
+
     public function __construct(ItemFront $model,
                                 UserGroupFrontRepository $userGroupRepository,
                                 CategoryFrontRepository $categoryFrontRepository)
