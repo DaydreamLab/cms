@@ -87,7 +87,7 @@ class Module extends BaseModel
         self::traitBoot();
     }
 
-
+/*
     public function getParamsAttribute($value)
     {
         $value = json_decode($value, true);
@@ -125,4 +125,5 @@ class Module extends BaseModel
 
         return $value;
     }
+*/
 }
