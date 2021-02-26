@@ -46,4 +46,37 @@ class ModuleAdminStorePost extends AdminRequest
         ];
         return array_merge($rules, parent::rules());
     }
+
+    public function validated()
+    {
+        $validated = parent::validated();
+
+        if ($params = $validated->get('params')) {
+
+            if (array_key_exists('item_ids', $params))
+            {
+                $items = collect($params['item_ids'])->map(function ($i) {
+                    return $i['id'];
+                });
+                $params['item_ids'] = $items;
+            }
+            else if(array_key_exists('category_ids', $params))
+            {
+                $items = collect($params['category_ids'])->map(function ($i) {
+                    return $i['id'];
+                });
+                $params['category_ids'] = $items;
+            }
+            else if(array_key_exists('menu_ids', $params))
+            {
+                $items = collect($params['menu_ids'])->map(function ($i) {
+                    return $i['id'];
+                });
+                $params['menu_ids'] = $items;
+            }
+            $validated->put('params', $params);
+        }
+
+        return $validated;
+    }
 }
