@@ -22,7 +22,6 @@ Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
         Route::get('{alias}', 'DaydreamLab\Cms\Controllers\Category\Front\CategoryFrontController@getItemByAlias');
     });
 
-
     Route::group(['prefix' => 'form'], function (){
         Route::post('post', 'DaydreamLab\Cms\Controllers\Form\Front\FormFrontController@store');
     });
@@ -45,7 +44,6 @@ Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
     Route::group(['prefix' => 'setting'], function (){
         Route::get('{locale}', 'DaydreamLab\Cms\Controllers\Setting\Front\SettingFrontController@getItem');
     });
-
 
     Route::group(['prefix' => 'tag'], function (){
         Route::post('search', 'DaydreamLab\Cms\Controllers\Tag\Front\TagFrontController@search');

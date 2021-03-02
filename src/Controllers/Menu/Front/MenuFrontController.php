@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Controllers\Menu\Front;
 
+use DaydreamLab\Cms\Resources\Menus\Front\Collections\MenuResourceCollection;
 use DaydreamLab\JJAJ\Controllers\BaseController;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\ResponseHelper;
@@ -34,7 +35,10 @@ class MenuFrontController extends BaseController
             'language'  => isset($request->language) ? $request->language : config('global.locale')
         ]));
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return ResponseHelper::response($this->service->status,
+            MenuResourceCollection::make($this->service->response)
+//            $this->service->response
+        );
     }
 
 

@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Controllers\Item\Front;
 
 use DaydreamLab\Cms\Requests\Item\Front\ItemFrontDownloadPost;
 use DaydreamLab\Cms\Requests\Item\Front\ItemFrontGetPreviousAndNextPost;
+use DaydreamLab\Cms\Resources\Items\Front\Models\ItemResource;
 use DaydreamLab\JJAJ\Controllers\BaseController;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\ResponseHelper;
@@ -58,7 +59,10 @@ class ItemFrontController extends BaseController
             'language'  => $request->get('language') != '' ? $request->language : config('global.locale')
         ]));
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return ResponseHelper::response(
+            $this->service->status,
+            ItemResource::make($this->service->response)
+        );
     }
 
 

@@ -28,4 +28,11 @@ class ItemAdminStorePost extends ItemStorePost
         ];
         return array_merge($rules, parent::rules());
     }
+
+    public function rulesInput()
+    {
+        $rulesInput = parent::rulesInput();
+        $rulesInput['image'] = json_encode($rulesInput['image']);
+        return $rulesInput;
+    }
 }
