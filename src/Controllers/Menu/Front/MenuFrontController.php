@@ -37,7 +37,6 @@ class MenuFrontController extends BaseController
 
         return ResponseHelper::response($this->service->status,
             MenuResourceCollection::make($this->service->response)
-//            $this->service->response
         );
     }
 
