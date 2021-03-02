@@ -22,6 +22,7 @@ class MenuResource extends JsonResource
             'title'          => $this->title,
             'alias'          => $this->alias,
             'items'          => $items,
+            'description'    => $this->description,
             'creator'        => $this->creator,
             'updater'        => $this->updater,
             'locker'         => $this->locker,
@@ -45,11 +46,11 @@ class MenuResource extends JsonResource
                         ? 'All'
                         : '所有友站';
                 }
-                $data = $data->toArray();
-                $values  = $data['data'];
+                $data   = $data->toArray();
+                $values = $data['data'];
                 $values = array_map([$this, 'processImage'], $values);
                 unset($data['data']);
-                $paginate     = $data;
+                $paginate = $data;
 
                 $result[$key] = [
                     'title'    => $key,
