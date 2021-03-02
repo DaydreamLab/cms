@@ -46,12 +46,14 @@ class MenuResource extends JsonResource
                         : '所有友站';
                 }
                 $data = $data->toArray();
-                $val  = $data['data'];
+                $values  = $data['data'];
+                $values = array_map([$this, 'processImage'], $values);
                 unset($data['data']);
                 $paginate     = $data;
+
                 $result[$key] = [
                     'title'    => $key,
-                    'items'    => $val,
+                    'items'    => $values,
                     'paginate' => $paginate
                 ];
             } else {
@@ -60,5 +62,11 @@ class MenuResource extends JsonResource
         }
 
         return $result;
+    }
+
+    protected function processImage($data)
+    {
+        $data['image'] = json_decode($data['image'], 1);
+        return $data;
     }
 }
