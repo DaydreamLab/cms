@@ -2,10 +2,12 @@
 
 namespace DaydreamLab\Cms\Resources\Items\Front\Models;
 
+use DaydreamLab\Cms\Traits\ResourceHelper;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ItemResource extends JsonResource
 {
+    use ResourceHelper;
     /**
      * Transform the resource into an array.
      *
@@ -14,7 +16,7 @@ class ItemResource extends JsonResource
      */
     public function toArray($request)
     {
-        $image = json_decode($this->image, 1);
+        $image = $this->processImage($this->image);
 
         return [
             'title'             => $this->title,

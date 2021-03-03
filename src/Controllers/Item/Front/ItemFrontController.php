@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Controllers\Item\Front;
 
 use DaydreamLab\Cms\Requests\Item\Front\ItemFrontDownloadPost;
 use DaydreamLab\Cms\Requests\Item\Front\ItemFrontGetPreviousAndNextPost;
+use DaydreamLab\Cms\Resources\Items\Front\Collections\SearchResourceCollection;
 use DaydreamLab\Cms\Resources\Items\Front\Models\ItemResource;
 use DaydreamLab\JJAJ\Controllers\BaseController;
 use DaydreamLab\JJAJ\Helpers\Helper;
@@ -118,7 +119,9 @@ class ItemFrontController extends BaseController
     {
         $this->service->search($request->rulesInput());
 
-        return ResponseHelper::response($this->service->status, $this->service->response);
+        return ResponseHelper::response($this->service->status,
+            SearchResourceCollection::make($this->service->response)
+        );
     }
 
     public function download($alias, ItemFrontDownloadPost $request)

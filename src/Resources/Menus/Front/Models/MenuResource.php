@@ -2,11 +2,14 @@
 
 namespace DaydreamLab\Cms\Resources\Menus\Front\Models;
 
+use DaydreamLab\Cms\Traits\ResourceHelper;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class MenuResource extends JsonResource
 {
+    use ResourceHelper;
+
     /**
      * Transform the resource into an array.
      *
@@ -58,23 +61,26 @@ class MenuResource extends JsonResource
                     'items'    => $values,
                     'paginate' => $paginate
                 ];
+
             } else if (is_array($data) && $alias === 'data') {
+
                 $values       = array_map([$this, 'processImage'], $data);
                 $result[$key] = $values;
+
+            } else if (is_object($data) && isset($data->items['data'])) {
+                foreach ($data->items as $k => $v) {
+                    if (is_array($v) && $k === 'data') {
+                        $v = array_map([$this, 'processImage'], $v);
+                    }
+                    $result[$k] = $v;
+                }
+
             } else {
+                $data         = $this->processImage($data);
                 $result[$key] = $data;
             }
         }
 
         return $result;
-    }
-
-    protected function processImage($data)
-    {
-        if (isset($data['image'])) {
-            $data['image'] = json_decode($data['image'], 1);
-        }
-
-        return $data;
     }
 }
