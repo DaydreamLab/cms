@@ -20,7 +20,7 @@ class ExtrafieldGroupAdminResource extends JsonResource
             'id'                        => $this->id,
             'title'                     => $this->title,
             'state'                     => $this->state,
-            'ordering'                  => $this->ordering,
+            'extrafields'               => $this->extrafields,
             'description'               => $this->description,
             'access'                    => $this->access,
             'access_title'              => $this->access_title,
