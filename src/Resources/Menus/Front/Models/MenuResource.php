@@ -2,6 +2,8 @@
 
 namespace DaydreamLab\Cms\Resources\Menus\Front\Models;
 
+use DaydreamLab\Cms\Models\Category\Category;
+use DaydreamLab\Cms\Models\Category\Front\CategoryFront;
 use DaydreamLab\Cms\Traits\ResourceHelper;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -45,6 +47,7 @@ class MenuResource extends JsonResource
             $key = $alias;
 
             if ($data instanceof LengthAwarePaginator) {
+
                 if ($alias === 'all') {
                     $key = $this->language === 'en'
                         ? 'All'
@@ -63,18 +66,18 @@ class MenuResource extends JsonResource
                 ];
 
             } else if (is_array($data) && $alias === 'data') {
-
                 $values       = array_map([$this, 'processImage'], $data);
                 $result[$key] = $values;
-
-            } else if (is_object($data) && isset($data->items['data'])) {
-                foreach ($data->items as $k => $v) {
-                    if (is_array($v) && $k === 'data') {
-                        $v = array_map([$this, 'processImage'], $v);
+            } else if ($data instanceof CategoryFront) {
+                foreach ($data->items as $key => $item) {
+                    if ($key === 'data') {
+                        $tmp[$key] = array_map([$this, 'processImage'], $item);
+                    } else {
+                        $tmp[$key] = $item;
                     }
-                    $result[$k] = $v;
                 }
-
+                $data->items = $tmp;
+                $result[] = $data;
             } else {
                 $data         = $this->processImage($data);
                 $result[$key] = $data;

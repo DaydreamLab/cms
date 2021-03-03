@@ -18,9 +18,14 @@ trait ResourceHelper
     }
 
 
-    public function isJson(string $string)
+    public function isJson($string)
     {
-        json_decode($string);
-        return json_last_error() == JSON_ERROR_NONE;
+        if (is_string($string)) {
+            json_decode($string);
+            return json_last_error() == JSON_ERROR_NONE;
+        } else {
+            return false;
+        }
+
     }
 }
