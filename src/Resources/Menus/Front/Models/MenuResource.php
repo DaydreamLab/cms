@@ -18,6 +18,7 @@ class MenuResource extends JsonResource
         $items = is_countable($this->items)
             ? $this->formatItems($this->items)
             : $this->items;
+
         return [
             'title'          => $this->title,
             'alias'          => $this->alias,
@@ -57,6 +58,9 @@ class MenuResource extends JsonResource
                     'items'    => $values,
                     'paginate' => $paginate
                 ];
+            } else if (is_array($data) && $alias === 'data') {
+                $values       = array_map([$this, 'processImage'], $data);
+                $result[$key] = $values;
             } else {
                 $result[$key] = $data;
             }
@@ -67,7 +71,10 @@ class MenuResource extends JsonResource
 
     protected function processImage($data)
     {
-        $data['image'] = json_decode($data['image'], 1);
+        if (isset($data['image'])) {
+            $data['image'] = json_decode($data['image'], 1);
+        }
+
         return $data;
     }
 }
