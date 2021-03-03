@@ -80,6 +80,6 @@ class ExtrafieldGroup extends BaseModel
 
     public function getExtrafieldsAttribute()
     {
-        return $this->extrafield()->get();
+        return $this->extrafield()->orderBy('ordering')->get();
     }
 }
