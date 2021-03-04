@@ -24,7 +24,7 @@ class ItemAdminStorePost extends ItemStorePost
     public function rules()
     {
         $rules = [
-            //
+            'image.*' => 'string'
         ];
         return array_merge($rules, parent::rules());
     }
@@ -32,7 +32,9 @@ class ItemAdminStorePost extends ItemStorePost
     public function rulesInput()
     {
         $rulesInput = parent::rulesInput();
-        $rulesInput['image'] = json_encode($rulesInput['image']);
+        if (is_array($rulesInput['image'])) {
+            $rulesInput['image'] = json_encode($rulesInput['image']);
+        }
         return $rulesInput;
     }
 }

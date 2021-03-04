@@ -35,7 +35,7 @@ class ItemStorePost extends AdminRequest
             ],
             'introimage'            => 'nullable|string',
             'introtext'             => 'nullable|string',
-            'image'                 => 'nullable|string',
+            'image'                 => 'nullable',
             'description'           => 'nullable|string',
             'video'                 => 'nullable|string',
             'link'                  => 'nullable|string',
