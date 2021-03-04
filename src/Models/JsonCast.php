@@ -23,7 +23,7 @@ class JsonCast implements CastsAttributes
         }
 
         if (is_string($value)) {
-            return $valuel;
+            return $value;
         }
 
         return json_encode($value);
