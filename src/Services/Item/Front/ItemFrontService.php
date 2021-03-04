@@ -384,27 +384,29 @@ class ItemFrontService extends ItemService
 
         $item = $this->checkItemByAlias($input->get('alias'));
 
-        $introImage = $item->introimage == ''
-            ? ''
-            : '<img src="'.$item->introimage.'" alt="'.$item->introtext.'" width="90">';
-        $image = $item->image == ''
-            ? ''
-            : '<img src="'.$item->image.'" alt="'.$item->introtext.'" width="90">';
+        $table = $this->getTable($item);
 
-        $html = '<h3>'.$item->title.'</h3>'
-            . '<br>'
-            . $introImage
-            . '<h6>'.$item->introtext.'</h6>'
-            . $image
-            . '<br>'
-            . $item->description;
+        $mpdf->writeHTML($table);
 
-        $mpdf->writeHTML($html);
-
-        $filename = today()->toDateString() . '.pdf';
+        $filename = $item->title . '.pdf';
         // if just want to show on browser, do not pass parameter 1 and 2 (ex: filename and dest)
         // like this: $mpdf->Output();
-//        return $mpdf->Output($filename, 'd');
-        return $mpdf->Output();
+        return $mpdf->Output($filename, 'd');
+//        return $mpdf->Output();
+    }
+
+    /**
+     * 取得item description內的表格
+     * @param $item
+     * @return mixed
+     */
+    private function getTable($item)
+    {
+        preg_match_all('/^<table(.*)>[\s\S]*<\/table>$/m', $item->description, $matches);
+        $table = $matches[0][0];
+        $table = str_replace('<td', '<td style="vertical-align: middle;  text-align:center; padding: 6px"', $table);
+        $table = str_replace('<th', '<th style="background:#f2f8f9"', $table);
+        $table = str_replace('<tr', '<tr style="border:1px solid #6C6E76;"', $table);
+        return $table;
     }
 }
