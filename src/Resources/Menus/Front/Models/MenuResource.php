@@ -2,16 +2,11 @@
 
 namespace DaydreamLab\Cms\Resources\Menus\Front\Models;
 
-use DaydreamLab\Cms\Models\Category\Category;
-use DaydreamLab\Cms\Models\Category\Front\CategoryFront;
-use DaydreamLab\Cms\Traits\ResourceHelper;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class MenuResource extends JsonResource
 {
-    use ResourceHelper;
-
     /**
      * Transform the resource into an array.
      *
@@ -42,12 +37,11 @@ class MenuResource extends JsonResource
 
     protected function formatItems($items)
     {
-        $resutl = [];
+        $result = [];
         foreach ($items as $alias => $data) {
             $key = $alias;
 
             if ($data instanceof LengthAwarePaginator) {
-
                 if ($alias === 'all') {
                     $key = $this->language === 'en'
                         ? 'All'
@@ -55,7 +49,6 @@ class MenuResource extends JsonResource
                 }
                 $data   = $data->toArray();
                 $values = $data['data'];
-                $values = array_map([$this, 'processImage'], $values);
                 unset($data['data']);
                 $paginate = $data;
 
@@ -64,26 +57,9 @@ class MenuResource extends JsonResource
                     'items'    => $values,
                     'paginate' => $paginate
                 ];
-
-            } else if (is_array($data) && $alias === 'data') {
-                $values       = array_map([$this, 'processImage'], $data);
-                $result[$key] = $values;
-            } else if ($data instanceof CategoryFront) {
-                foreach ($data->items as $key => $item) {
-                    if ($key === 'data') {
-                        $tmp[$key] = array_map([$this, 'processImage'], $item);
-                    } else {
-                        $tmp[$key] = $item;
-                    }
-                }
-                $data->items = $tmp;
-                $result[] = $data;
-            } else {
-                $data         = $this->processImage($data);
-                $result[$key] = $data;
             }
         }
 
-        return $result;
+        return $result ?: $items;
     }
 }

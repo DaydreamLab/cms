@@ -5,6 +5,7 @@ use DaydreamLab\Cms\Models\Category\Category;
 use DaydreamLab\Cms\Models\Extrafield\Admin\ExtrafieldAdmin;
 use DaydreamLab\Cms\Models\Extrafield\Extrafield;
 use DaydreamLab\Cms\Models\Extrafield\ExtrafieldGroup;
+use DaydreamLab\Cms\Models\JsonCast;
 use DaydreamLab\Cms\Models\Tag\Tag;
 use DaydreamLab\Cms\Traits\Model\WithAccess;
 use DaydreamLab\Cms\Traits\Model\WithCategory;
@@ -114,6 +115,7 @@ class Item extends BaseModel
         'publish_down' => 'datetime:Y-m-d H:i:s',
         'start_date' => 'datetime:Y-m-d H:i',
         'end_date' => 'datetime:Y-m-d H:i',
+        'image' => JsonCast::class,
     ];
 
 

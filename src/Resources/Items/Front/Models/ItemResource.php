@@ -7,7 +7,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class ItemResource extends JsonResource
 {
-    use ResourceHelper;
     /**
      * Transform the resource into an array.
      *
@@ -16,15 +15,13 @@ class ItemResource extends JsonResource
      */
     public function toArray($request)
     {
-        $image = $this->processImage($this->image);
-
         return [
             'title'             => $this->title,
             'alias'             => $this->alias,
             'ordering'          => $this->ordering,
             'introimage'        => $this->introimage,
             'introtext'         => $this->introtext,
-            'image'             => $image,
+            'image'             => $this->image,
             'description'       => $this->description,
             'video'             => $this->video,
             'link'              => $this->link,
