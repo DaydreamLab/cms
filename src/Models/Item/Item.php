@@ -3,12 +3,12 @@ namespace DaydreamLab\Cms\Models\Item;
 
 use DaydreamLab\Cms\Models\Tag\Tag;
 use DaydreamLab\Cms\Traits\Model\UserInfo;
-use DaydreamLab\Cms\Traits\Model\WithAccess;
 use DaydreamLab\Cms\Traits\Model\WithCategory;
 use DaydreamLab\Cms\Traits\Model\WithLanguage;
 use DaydreamLab\Cms\Traits\WithExtrafield;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
+use DaydreamLab\User\Traits\Model\WithAccess;
 
 class Item extends BaseModel
 {

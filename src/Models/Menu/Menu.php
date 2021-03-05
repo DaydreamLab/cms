@@ -1,16 +1,13 @@
 <?php
 namespace DaydreamLab\Cms\Models\Menu;
 
-use DaydreamLab\Cms\Models\Category\Category;
-use DaydreamLab\Cms\Models\Module\Module;
 use DaydreamLab\Cms\Models\Site\Site;
-use DaydreamLab\Cms\Traits\Model\WithAccess;
 use DaydreamLab\Cms\Traits\Model\WithCategory;
 use DaydreamLab\Cms\Traits\Model\WithLanguage;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
-use DaydreamLab\User\Models\Viewlevel\Viewlevel;
+use DaydreamLab\User\Traits\Model\WithAccess;
 use Kalnoy\Nestedset\NodeTrait;
 
 class Menu extends BaseModel

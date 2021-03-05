@@ -6,12 +6,13 @@ use DaydreamLab\Cms\Repositories\Tag\Admin\TagAdminRepository;
 use DaydreamLab\Cms\Services\Cms\CmsCronJobService;
 use DaydreamLab\Cms\Services\Tag\TagService;
 use DaydreamLab\Cms\Traits\Service\CmsCronJob;
+use DaydreamLab\JJAJ\Traits\LoggedIn;
 use Illuminate\Support\Collection;
 
 
 class TagAdminService extends TagService
 {
-    use CmsCronJob;
+    use CmsCronJob, LoggedIn;
 
     protected $modelType = 'Admin';
 

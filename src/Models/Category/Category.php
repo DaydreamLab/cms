@@ -1,19 +1,15 @@
 <?php
+
 namespace DaydreamLab\Cms\Models\Category;
 
-use Carbon\Carbon;
-use DaydreamLab\Cms\Models\Extrafield\Extrafield;
-use DaydreamLab\Cms\Models\Extrafield\ExtrafieldGroup;
 use DaydreamLab\Cms\Models\Item\Item;
 use DaydreamLab\Cms\Traits\Model\UserInfo;
-use DaydreamLab\Cms\Traits\Model\WithAccess;
 use DaydreamLab\Cms\Traits\Model\WithLanguage;
 use DaydreamLab\Cms\Traits\WithExtrafield;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
-use DaydreamLab\User\Models\User\UserGroup;
-use DaydreamLab\User\Models\Viewlevel\Viewlevel;
+use DaydreamLab\User\Traits\Model\WithAccess;
 use Kalnoy\Nestedset\NodeTrait;
 
 class Category extends BaseModel

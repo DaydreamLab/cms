@@ -9,6 +9,7 @@ use DaydreamLab\Cms\Services\Menu\Admin\MenuAdminService;
 use DaydreamLab\Cms\Services\Module\Admin\ModuleAdminService;
 use DaydreamLab\Cms\Services\Site\Admin\SiteAdminService;
 use DaydreamLab\JJAJ\Helpers\Helper;
+use DaydreamLab\JJAJ\Traits\LoggedIn;
 use DaydreamLab\User\Services\Asset\Admin\AssetAdminService;
 use DaydreamLab\User\Services\User\Admin\UserGroupAdminService;
 use DaydreamLab\User\Services\Viewlevel\Admin\ViewlevelAdminService;
@@ -18,6 +19,8 @@ use Illuminate\Support\Str;
 
 class OptionService
 {
+    use LoggedIn;
+
     protected $type = 'Option';
 
     public $status;

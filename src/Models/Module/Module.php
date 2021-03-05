@@ -5,13 +5,11 @@ use DaydreamLab\Cms\Models\Category\Category;
 use DaydreamLab\Cms\Models\Item\Item;
 use DaydreamLab\Cms\Models\Menu\Menu;
 use DaydreamLab\Cms\Traits\Model\UserInfo;
-use DaydreamLab\Cms\Traits\Model\WithAccess;
 use DaydreamLab\Cms\Traits\Model\WithCategory;
 use DaydreamLab\Cms\Traits\Model\WithLanguage;
-use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
-use DaydreamLab\User\Models\Viewlevel\Viewlevel;
+use DaydreamLab\User\Traits\Model\WithAccess;
 
 class Module extends BaseModel
 {

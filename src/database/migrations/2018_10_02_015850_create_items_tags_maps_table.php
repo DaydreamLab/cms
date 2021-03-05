@@ -14,9 +14,9 @@ class CreateItemsTagsMapsTable extends Migration
     public function up()
     {
         Schema::create('items_tags_maps', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('item_id');
-            $table->unsignedInteger('tag_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('item_id');
+            $table->unsignedBigInteger('tag_id');
             $table->timestamps();
         });
     }

@@ -2,9 +2,9 @@
 namespace DaydreamLab\Cms\Models\Extrafield;
 
 use DaydreamLab\Cms\Traits\Model\UserInfo;
-use DaydreamLab\Cms\Traits\Model\WithAccess;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
+use DaydreamLab\User\Traits\Model\WithAccess;
 
 class ExtrafieldGroup extends BaseModel
 {

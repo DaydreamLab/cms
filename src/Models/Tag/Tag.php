@@ -2,10 +2,10 @@
 namespace DaydreamLab\Cms\Models\Tag;
 
 use DaydreamLab\Cms\Models\Item\Item;
-use DaydreamLab\Cms\Traits\Model\WithAccess;
 use DaydreamLab\Cms\Traits\Model\WithLanguage;
 use DaydreamLab\Cms\Traits\Model\UserInfo;
 use DaydreamLab\JJAJ\Models\BaseModel;
+use DaydreamLab\User\Traits\Model\WithAccess;
 use Kalnoy\Nestedset\NodeTrait;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 

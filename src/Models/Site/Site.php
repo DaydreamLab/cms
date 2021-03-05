@@ -2,16 +2,16 @@
 namespace DaydreamLab\Cms\Models\Site;
 
 use DaydreamLab\Cms\Models\Language\Language;
-use DaydreamLab\Cms\Traits\Model\WithAccess;
 use DaydreamLab\Cms\Traits\Model\WithLanguage;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\Cms\Traits\Model\UserInfo;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Models\BaseModel;
+use DaydreamLab\User\Traits\Model\WithAccess;
 
 class Site extends BaseModel
 {
-    use WithLanguage, WithAccess, UserInfo, 
+    use WithLanguage, WithAccess, UserInfo,
         RecordChanger {
         RecordChanger::boot as traitBoot;
     }
