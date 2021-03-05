@@ -89,7 +89,6 @@ class TagFrontService extends TagService
         $input->forget('page');
 
         $tags = $this->search($input);
-
         $items = $this->getRelatedItems($tags);
 
         $this->status = Str::upper(Str::snake($this->type . 'SearchItemsSuccess'));

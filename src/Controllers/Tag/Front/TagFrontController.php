@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Controllers\Tag\Front;
 
+use DaydreamLab\Cms\Requests\Tag\Front\TagFrontSearchItemPost;
 use DaydreamLab\JJAJ\Controllers\BaseController;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\ResponseHelper;
@@ -87,7 +88,7 @@ class TagFrontController extends BaseController
     }
 
 
-    public function searchItems(TagFrontSearchPost $request)
+    public function searchItems(TagFrontSearchItemPost $request)
     {
         $this->service->searchItems($request->rulesInput());
 

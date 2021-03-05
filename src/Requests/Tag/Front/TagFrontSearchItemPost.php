@@ -5,7 +5,7 @@ namespace DaydreamLab\Cms\Requests\Tag\Front;
 use DaydreamLab\Cms\Requests\Tag\TagSearchPost;
 use Illuminate\Validation\Rule;
 
-class TagFrontSearchPost extends TagSearchPost
+class TagFrontSearchItemPost extends TagSearchPost
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -40,6 +40,7 @@ class TagFrontSearchPost extends TagSearchPost
                     'updated_by',
                 ])
             ],
+            'page' => 'nullable|integer',
         ];
         return array_merge($rules, parent::rules());
     }
