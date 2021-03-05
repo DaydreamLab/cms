@@ -1,20 +1,15 @@
 <?php
+
 namespace DaydreamLab\Cms\Models\Item;
 
-use DaydreamLab\Cms\Models\Category\Category;
-use DaydreamLab\Cms\Models\Extrafield\Admin\ExtrafieldAdmin;
-use DaydreamLab\Cms\Models\Extrafield\Extrafield;
-use DaydreamLab\Cms\Models\Extrafield\ExtrafieldGroup;
 use DaydreamLab\Cms\Models\JsonCast;
 use DaydreamLab\Cms\Models\Tag\Tag;
 use DaydreamLab\Cms\Traits\Model\WithAccess;
 use DaydreamLab\Cms\Traits\Model\WithCategory;
 use DaydreamLab\Cms\Traits\Model\WithLanguage;
 use DaydreamLab\Cms\Traits\WithExtrafield;
-use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
-use DaydreamLab\User\Models\Viewlevel\Viewlevel;
 
 class Item extends BaseModel
 {
@@ -107,15 +102,15 @@ class Item extends BaseModel
 
 
     protected $casts = [
-        'params' => 'array',
-        'extrafields' => 'array',
-        'created_at' => 'datetime:Y-m-d H:i:s',
-        'locked_at' => 'datetime:Y-m-d H:i:s',
-        'publish_up' => 'datetime:Y-m-d H:i:s',
+        'params'       => 'array',
+        'extrafields'  => 'array',
+        'created_at'   => 'datetime:Y-m-d H:i:s',
+        'locked_at'    => 'datetime:Y-m-d H:i:s',
+        'publish_up'   => 'datetime:Y-m-d H:i:s',
         'publish_down' => 'datetime:Y-m-d H:i:s',
-        'start_date' => 'datetime:Y-m-d H:i',
-        'end_date' => 'datetime:Y-m-d H:i',
-        'image' => JsonCast::class,
+        'start_date'   => 'datetime:Y-m-d H:i',
+        'end_date'     => 'datetime:Y-m-d H:i',
+        'image'        => JsonCast::class,
     ];
 
 
@@ -124,19 +119,16 @@ class Item extends BaseModel
         self::traitBoot();
     }
 
-
     public function getCreatorGroupsAttribute()
     {
-        $creator = $this->creator()->first();
+        $creator = $this->creator()
+                        ->first();
 
-        if ($creator)
-        {
+        if ($creator) {
             return $creator->groups->map(function ($item, $key) {
                 return $item->title;
             });
-        }
-        else
-        {
+        } else {
             return null;
         }
     }
@@ -144,13 +136,14 @@ class Item extends BaseModel
 
     public function getTagsAttribute()
     {
-        return $this->tag()->get();
+        return $this->tag()
+                    ->get();
     }
 
 
     public function tag()
     {
         return $this->belongsToMany(Tag::class, 'items_tags_maps', 'item_id', 'tag_id')
-            ->where('state', 1);
+                    ->where('state', 1);
     }
 }

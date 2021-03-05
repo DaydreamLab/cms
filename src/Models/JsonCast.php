@@ -18,16 +18,11 @@ class JsonCast implements CastsAttributes
 
     public function set($model, string $key, $value, array $attributes)
     {
-        if ('key' === 'image' && is_array($value)) {
-            return json_encode($value);
-        }
-
         if (is_string($value)) {
             return $value;
         }
-
+        
         return json_encode($value);
-
     }
 
     public function isJson($value)
