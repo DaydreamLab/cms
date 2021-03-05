@@ -322,7 +322,6 @@ class ItemFrontService extends ItemService
                         'value' =>  $language
                     ]
                 ],
-
                 'paginate'      => false
             ]))->pluck('id')
                ->all();

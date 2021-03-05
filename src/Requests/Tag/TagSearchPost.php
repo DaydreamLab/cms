@@ -37,7 +37,8 @@ class TagSearchPost extends ListRequest
                     'created_by',
                     'updated_by',
                 ])
-            ]
+            ],
+            'page' => 'nullable|integer',
         ];
 
         return array_merge(parent::rules(), $rules);

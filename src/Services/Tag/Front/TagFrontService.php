@@ -60,7 +60,7 @@ class TagFrontService extends TagService
                 ]
             ],
             'paginate'  => false
-        ]));
+        ]),false);
 
         $items = collect([]);
         foreach ($tag_items as $tag_item)
@@ -70,7 +70,6 @@ class TagFrontService extends TagService
                 $items->push($tag_item);
             }
         }
-
 
         return $items;
     }
@@ -84,15 +83,17 @@ class TagFrontService extends TagService
 
     public function searchItems(Collection $input, $paginate = true)
     {
-        $input->put('paginate', $paginate);
+        $input->put('paginate', false);
         $limit = $input->get('limit') ?: $this->repo->getModel()->getPerPage();
+        $page = $input->get('page') ?: 1;
+        $input->forget('page');
 
         $tags = $this->search($input);
 
         $items = $this->getRelatedItems($tags);
 
         $this->status = Str::upper(Str::snake($this->type . 'SearchItemsSuccess'));
-        $this->response = $paginate ? $this->repo->paginate($items, $limit, 1, []) : $items;
+        $this->response = $paginate ? $this->repo->paginate($items, $limit, $page, []) : $items;
 
         return $items;
     }
