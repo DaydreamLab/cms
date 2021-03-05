@@ -13,7 +13,7 @@ use Illuminate\Support\Collection;
 
 class CategoryAdminService extends CategoryService
 {
-    use CmsCronJob;
+    use CmsCronJob, LoggedIn;
 
     protected $modelType = 'Admin';
 

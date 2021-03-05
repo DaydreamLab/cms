@@ -15,7 +15,7 @@ use Illuminate\Support\Collection;
 
 class ItemAdminService extends ItemService
 {
-    use CmsCronJob;
+    use CmsCronJob, LoggedIn;
 
     protected $modelType = 'Admin';
 

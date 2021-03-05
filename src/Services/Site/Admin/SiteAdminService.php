@@ -5,12 +5,15 @@ namespace DaydreamLab\Cms\Services\Site\Admin;
 use DaydreamLab\Cms\Repositories\Site\Admin\SiteAdminRepository;
 use DaydreamLab\Cms\Services\Site\SiteService;
 use DaydreamLab\JJAJ\Helpers\Helper;
+use DaydreamLab\JJAJ\Traits\LoggedIn;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 class SiteAdminService extends SiteService
 {
+    use LoggedIn;
+
     protected $modelType = 'Admin';
 
     protected $search_keys = ['title'];
