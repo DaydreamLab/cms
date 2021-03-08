@@ -56,7 +56,7 @@ class ItemFrontRepository extends ItemRepository
             foreach ($this->getParamsIds($params, 'category_ids') as $category_id)
             {
                 $category = $this->categoryFrontRepository->find($category_id);
-                $data[$category->title] = $this->getCategoriesItems([$category_id], $params, $item_count, $featured, $mixed);
+                $data[$category->alias] = $this->getCategoriesItems([$category_id], $params, $item_count, $featured, $mixed);
             }
         }
         else

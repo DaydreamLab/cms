@@ -15,14 +15,10 @@ class MenuResource extends JsonResource
      */
     public function toArray($request)
     {
-        $items = is_countable($this->items)
-            ? $this->formatItems($this->items)
-            : $this->items;
-
         return [
             'title'          => $this->title,
             'alias'          => $this->alias,
-            'items'          => $items,
+            'items'          => $this->items,
             'description'    => $this->description,
             'creator'        => $this->creator,
             'updater'        => $this->updater,
@@ -32,34 +28,5 @@ class MenuResource extends JsonResource
             'access_title'   => $this->access_title,
             'language_title' => $this->language_title,
         ];
-    }
-
-
-    protected function formatItems($items)
-    {
-        $result = [];
-        foreach ($items as $alias => $data) {
-            $key = $alias;
-
-            if ($data instanceof LengthAwarePaginator) {
-                if ($alias === 'all') {
-                    $key = $this->language === 'en'
-                        ? 'All'
-                        : '所有友站';
-                }
-                $data   = $data->toArray();
-                $values = $data['data'];
-                unset($data['data']);
-                $paginate = $data;
-
-                $result[$key] = [
-                    'title'    => $key,
-                    'items'    => $values,
-                    'paginate' => $paginate
-                ];
-            }
-        }
-
-        return $result ?: $items;
     }
 }
