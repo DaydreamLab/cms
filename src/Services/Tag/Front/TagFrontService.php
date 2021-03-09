@@ -5,7 +5,7 @@ namespace DaydreamLab\Cms\Services\Tag\Front;
 use DaydreamLab\Cms\Repositories\Tag\Front\TagFrontRepository;
 use DaydreamLab\Cms\Services\Item\Front\ItemFrontService;
 use DaydreamLab\Cms\Services\Tag\TagService;
-use DaydreamLab\Cms\Traits\WithAccessIds;
+use DaydreamLab\Cms\Traits\Service\WithAccessIds;
 use DaydreamLab\JJAJ\Traits\LoggedIn;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;

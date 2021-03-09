@@ -7,7 +7,7 @@ use DaydreamLab\Cms\Events\Search;
 use DaydreamLab\Cms\Repositories\Item\Front\ItemFrontRepository;
 use DaydreamLab\Cms\Services\Category\Front\CategoryFrontService;
 use DaydreamLab\Cms\Services\Item\ItemService;
-use DaydreamLab\Cms\Traits\WithAccessIds;
+use DaydreamLab\Cms\Traits\Service\WithAccessIds;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
 use DaydreamLab\JJAJ\Traits\LoggedIn;

@@ -6,7 +6,7 @@ use DaydreamLab\Cms\Repositories\Menu\Front\MenuFrontRepository;
 use DaydreamLab\Cms\Services\Menu\MenuService;
 use DaydreamLab\Cms\Services\Module\Front\ModuleFrontService;
 use DaydreamLab\Cms\Services\Site\SiteService;
-use DaydreamLab\Cms\Traits\WithAccessIds;
+use DaydreamLab\Cms\Traits\Service\WithAccessIds;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
 use DaydreamLab\JJAJ\Traits\LoggedIn;

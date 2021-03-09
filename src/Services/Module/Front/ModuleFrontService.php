@@ -12,7 +12,7 @@ use DaydreamLab\Cms\Services\Item\Front\ItemFrontService;
 use DaydreamLab\Cms\Services\Menu\Front\MenuFrontService;
 use DaydreamLab\Cms\Services\Module\ModuleService;
 use DaydreamLab\Cms\Services\Site\SiteService;
-use DaydreamLab\Cms\Traits\WithAccessIds;
+use DaydreamLab\Cms\Traits\Service\WithAccessIds;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Traits\LoggedIn;
 use Illuminate\Support\Collection;
