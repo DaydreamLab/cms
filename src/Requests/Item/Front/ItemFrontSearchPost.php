@@ -51,9 +51,30 @@ class ItemFrontSearchPost extends ListRequest
                 'nullable',
                 'integer',
                 Rule::in([0,1])
-            ]
+            ],
+            'tag_id' => 'nullable|integer'
         ];
 
         return array_merge($rules, parent::rules());
+    }
+
+    public function validated()
+    {
+        $validated = parent::validated();
+
+        if ($tag_id = $validated->get('tag_id')) {
+            $validated->put('whereHas', [
+                [
+                    'relation' => 'tags',
+                    'callback'  => function ($q) use ($tag_id) {
+                        $q->where('tags.id', $tag_id);
+                    }
+                ]
+            ]);
+        }
+
+        $validated->forget('tag_id');
+
+        return $validated;
     }
 }

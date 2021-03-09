@@ -69,8 +69,30 @@ class ItemAdminSearchPost extends ListRequest
                     'created_by',
                     'updated_by',
                 ])
-            ]
+            ],
+            'tag_id' => 'nullable|integer'
         ];
         return array_merge(parent::rules(), $rules);
+    }
+
+
+    public function validated()
+    {
+        $validated = parent::validated();
+
+        if ($tag_id = $validated->get('tag_id')) {
+            $validated->put('whereHas', [
+                [
+                    'relation' => 'tags',
+                    'callback'  => function ($q) use ($tag_id) {
+                        $q->where('tags.id', $tag_id);
+                    }
+                ]
+            ]);
+        }
+
+        $validated->forget('tag_id');
+
+        return $validated;
     }
 }
