@@ -25,27 +25,35 @@ class ItemAdminSearchPost extends ItemSearchPost
     public function rules()
     {
         $rules = [
-            'state'         => [
+            'state'        => [
                 'nullable',
                 'integer',
-                Rule::in([0,1,-1,-2])
+                Rule::in([0, 1, -1, -2])
             ],
-            'category_id'   => 'nullable|integer',
-            'featured'      =>[
+            'category_id'  => 'nullable|integer',
+            'featured'     => [
                 'nullable',
-                Rule::in([0,1])
+                Rule::in([0, 1])
             ],
-            'content_type'  => [
+            'content_type' => [
                 'nullable',
                 Rule::in(['article', 'item', 'link', 'menu', 'slideshow', 'timeline'])
             ],
-            'extension'     => [
+            'extension'    => [
                 'nullable',
                 Rule::in(['item', 'module', 'menu'])
             ],
-            'access'        => 'nullable|integer',
-            'language'      => 'nullable|string|max:5',
-            'order_by'      => [
+            'access'       => 'nullable|integer',
+            'language'     => [
+                'nullable',
+                'string',
+                Rule::in([
+                    '*',
+                    'en',
+                    'zh-Hant'
+                ]),
+            ],
+            'order_by'     => [
                 'nullable',
                 'string',
                 Rule::in([

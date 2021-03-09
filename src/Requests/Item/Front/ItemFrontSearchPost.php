@@ -25,12 +25,20 @@ class ItemFrontSearchPost extends ItemSearchPost
     public function rules()
     {
         $rules = [
-            'year'              => 'nullable|integer',
-            'month'             => 'nullable|integer',
-            'category_alias'    => 'nullable|array',
-            'category_alias.*'  => 'nullable|string',
-            'language'          => 'nullable|string',
-            'order_by'      => [
+            'year'                    => 'nullable|integer',
+            'month'                   => 'nullable|integer',
+            'category_alias'          => 'nullable|array',
+            'category_alias.*'        => 'nullable|string',
+            'language'                => [
+                'nullable',
+                'string',
+                Rule::in([
+                    '*',
+                    'en',
+                    'zh-Hant',
+                ]),
+            ],
+            'order_by'                => [
                 'nullable',
                 'string',
                 Rule::in([
@@ -47,10 +55,10 @@ class ItemFrontSearchPost extends ItemSearchPost
                     'updated_by',
                 ])
             ],
-            'split_categories_result'   => [
+            'split_categories_result' => [
                 'nullable',
                 'integer',
-                Rule::in([0,1])
+                Rule::in([0, 1])
             ]
         ];
 

@@ -80,7 +80,7 @@ class MenuResource extends JsonResource
                                                      ->where('language', $lang)
                                                      ->first()->title;
         }
-        
+
         return $this->hantTitles[$alias];
     }
 }
