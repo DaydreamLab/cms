@@ -4,57 +4,38 @@ namespace DaydreamLab\Cms\Services\Category\Front;
 
 use DaydreamLab\Cms\Repositories\Category\Front\CategoryFrontRepository;
 use DaydreamLab\Cms\Services\Category\CategoryService;
-use DaydreamLab\Cms\Services\Item\Front\ItemFrontService;
-use DaydreamLab\JJAJ\Helpers\Helper;
+use DaydreamLab\Cms\Traits\WithAccessIds;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
 use DaydreamLab\JJAJ\Traits\LoggedIn;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 
 class CategoryFrontService extends CategoryService
 {
+    use LoggedIn, WithAccessIds;
 
     protected $modelType = 'Front';
 
     protected $search_keys = ['title', 'introtext', 'description', 'extrafields_search'];
 
-
-    //protected $itemFrontService;
-
     public function __construct(CategoryFrontRepository $repo)
     {
         parent::__construct($repo);
         $this->repo = $repo;
-        //$this->itemFrontService = app(ItemFrontService::class);
     }
+
 
     public function getContentTypeIds($content_type)
     {
         $categories = $this->findByChain(['content_type', 'extension', 'state', 'access'], ['=', '=', '=', '='], [$content_type, 'item', '1', '2']);
-        $category_ids = [];
-        foreach ($categories as $category)
-        {
-            $category_ids[] = $category->id;
-        }
+        $category_ids = $categories->pluck('id')->all();
 
         return $category_ids;
     }
 
 
-    public function getItem($id)
-    {
-        $item = parent::getItem($id);
-
-        $this->canAccess($item->access, $this->access_ids);
-
-        $item->hits++;
-        return $item->save();
-    }
-
-
     public function getItemsByIds($params)
     {
-        $items = $this->repo->getItemsByIds($params, $this->access_ids);
+        $items = $this->repo->getItemsByIds($params, $this->getAccessIds());
 
         return $items;
     }
@@ -86,8 +67,7 @@ class CategoryFrontService extends CategoryService
         $categories = $this->search($input);
 
         $items = collect();
-        foreach ($categories as $category)
-        {
+        foreach ($categories as $category) {
             $items = $items->merge($category->items);
         }
 

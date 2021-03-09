@@ -7,14 +7,18 @@ use DaydreamLab\Cms\Events\Search;
 use DaydreamLab\Cms\Repositories\Item\Front\ItemFrontRepository;
 use DaydreamLab\Cms\Services\Category\Front\CategoryFrontService;
 use DaydreamLab\Cms\Services\Item\ItemService;
+use DaydreamLab\Cms\Traits\WithAccessIds;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
+use DaydreamLab\JJAJ\Traits\LoggedIn;
 use DaydreamLab\User\Services\User\Front\UserGroupFrontService;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 class ItemFrontService extends ItemService
 {
+    use LoggedIn, WithAccessIds;
+
     protected $type = 'Front';
 
     protected $categoryFrontService;
@@ -118,17 +122,14 @@ class ItemFrontService extends ItemService
     public function getItem($id)
     {
         $item = parent::getItem($id);
-
-        $this->canAccess($item->access, $this->access_ids);
-
-        if ($item)
-        {
+        if ($item) {
             $prev_and_next  = $this->repo->getPreviousAndNext($item);
             $item->previous =  $prev_and_next['previous'];
             $item->next     =  $prev_and_next['next'];
             $this->response = $item;
             return $item;
         }
+
         return false;
     }
 

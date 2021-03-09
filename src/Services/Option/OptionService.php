@@ -119,7 +119,10 @@ class OptionService
             elseif ($type == 'viewlevel')
             {
                 $user = Auth::guard('api')->user();
-                $data[$type] = $this->getOptionList($service, 'list', ['special_queries' => [['type'=> 'whereIn', 'key' => 'id', 'value' => $user->access_ids]]]);
+                $accessIds = $user
+                    ? $user->accessIds
+                    : (config('daydreamlab.cms.item.front.access_ids') ?: [1]);
+                $data[$type] = $this->getOptionList($service, 'list', ['special_queries' => [['type'=> 'whereIn', 'key' => 'id', 'value' => $accessIds]]]);
             }
         }
 
