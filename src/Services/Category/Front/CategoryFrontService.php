@@ -4,7 +4,7 @@ namespace DaydreamLab\Cms\Services\Category\Front;
 
 use DaydreamLab\Cms\Repositories\Category\Front\CategoryFrontRepository;
 use DaydreamLab\Cms\Services\Category\CategoryService;
-use DaydreamLab\Cms\Traits\WithAccessIds;
+use DaydreamLab\Cms\Traits\Service\WithAccessIds;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
 use DaydreamLab\JJAJ\Traits\LoggedIn;
 use Illuminate\Support\Collection;
