@@ -12,12 +12,16 @@ use DaydreamLab\Cms\Services\Item\Front\ItemFrontService;
 use DaydreamLab\Cms\Services\Menu\Front\MenuFrontService;
 use DaydreamLab\Cms\Services\Module\ModuleService;
 use DaydreamLab\Cms\Services\Site\SiteService;
+use DaydreamLab\Cms\Traits\WithAccessIds;
 use DaydreamLab\JJAJ\Helpers\Helper;
+use DaydreamLab\JJAJ\Traits\LoggedIn;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 class ModuleFrontService extends ModuleService
 {
+    use LoggedIn, WithAccessIds;
+
     protected $type = 'Front';
 
     protected $itemFrontService;
@@ -43,8 +47,6 @@ class ModuleFrontService extends ModuleService
 
     public function getCategoriesModule($params)
     {
-        $params['access_ids'] = $this->access_ids;
-
         $categories = $this->categoryFrontService->getItemsByIds($params);
 
         foreach ($categories as $category)
@@ -53,7 +55,7 @@ class ModuleFrontService extends ModuleService
 
             // 取出項目的搜尋條件
             $item_params['category_ids']    = $category_ids;
-            $item_params['access_ids']      = $this->access_ids;
+            $item_params['access_ids']      = $this->getAccessIds();
             $item_params['order_by']        = $params['item_order_by'];
             $item_params['order']           = $params['item_order'];
             $item_params['limit']           = $params['item_count'];
@@ -87,7 +89,7 @@ class ModuleFrontService extends ModuleService
 
     public function getCategoriesItemsModule($params)
     {
-        $params['access_ids'] = $this->access_ids;
+        $params['access_ids'] = $this->getAccessIds();
 
         $items = $this->itemFrontService->getCategoriesItemsModule($params);
 
@@ -104,8 +106,6 @@ class ModuleFrontService extends ModuleService
         if ($items->count())
         {
             $item = $items->first();
-
-            $this->canAccess($item->access, $this->access_ids);
 
             $item->items = $this->loadModule($item, $input->get('language'));
 
@@ -148,7 +148,7 @@ class ModuleFrontService extends ModuleService
 
     public function getSelectedItemsModule($params)
     {
-        $params['access_ids'] = $this->access_ids;
+        $params['access_ids'] = $this->getAccessIds();
         $items = $this->itemFrontService->getSelectedItems($params);
 
         if ($items->count() == 1)
