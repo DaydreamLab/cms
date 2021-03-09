@@ -1,7 +1,6 @@
 <?php
 
-namespace DaydreamLab\Cms\Traits;
-
+namespace DaydreamLab\Cms\Traits\Service;
 
 trait WithAccessIds
 {
