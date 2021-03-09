@@ -14,7 +14,7 @@ class CreateTagsTable extends Migration
     public function up()
     {
         Schema::create('tags', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('title');
             $table->string('alias');
             $table->string('path');
@@ -30,10 +30,10 @@ class CreateTagsTable extends Migration
             $table->string('metadesc')->nullable();
             $table->string('metakeywords')->nullable();
             $table->text('params')->nullable();
-            $table->unsignedInteger('locked_by')->nullable()->default(0);
+            $table->unsignedBigInteger('locked_by')->nullable()->default(0);
             $table->timestamp('locked_at')->nullable();
-            $table->unsignedInteger('created_by');
-            $table->unsignedInteger('updated_by')->nullable();
+            $table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
             $table->timestamp('publish_up')->nullable();
             $table->timestamp('publish_down')->nullable();

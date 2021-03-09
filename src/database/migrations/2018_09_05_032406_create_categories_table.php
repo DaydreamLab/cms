@@ -14,11 +14,11 @@ class CreateCategoriesTable extends Migration
     public function up()
     {
         Schema::create('categories', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('title');
             $table->string('alias');
             $table->nestedSet();
-            $table->unsignedInteger('ordering')->nullable();
+            $table->unsignedBigInteger('ordering')->nullable();
             $table->string('path');
             $table->tinyInteger('state')->default(1);
             $table->text('introimage')->nullable();
@@ -27,8 +27,8 @@ class CreateCategoriesTable extends Migration
             $table->text('description')->nullable();
             $table->text('content_type')->nullable();
             $table->string('extension');
-            $table->unsignedInteger('hits')->nullable()->default(0);
-            $table->unsignedInteger('access');
+            $table->unsignedBigInteger('hits')->nullable()->default(0);
+            $table->unsignedBigInteger('access');
 
             $table->string('language')->nullable()->default('*');
             $table->string('template')->nullable();
