@@ -189,52 +189,10 @@ class ModuleFrontService extends ModuleService
             unset($items['category_ids']);
         }
         elseif ($module->category->alias == 'advanced-search') {
-            $items = $this->getAdvancedSearchModule($module->params);
+
+            $items = $this->categoryFrontService->getItemsByIds($module->params);
         }
 
         return $items;
     }
-
-
-    public function getAdvancedSearchModule($params)
-    {
-        $params['category_order_by'] = 'id';
-        $params['category_order'] = 'asc';
-        $categories = $this->categoryFrontService->getItemsByIds($params);
-
-        return $this->buildAdvancedSearch($categories);
-    }
-
-
-    private function buildAdvancedSearch($categories)
-    {
-        $results = [];
-        foreach ($categories as $category) {
-            $c['alias'] = $category->alias;
-            $c['title'] = $category->title;
-            $c['child'] = $this->buildAdvancedSearch($category->children);
-            $items = Item::where('category_id', '=', $category->id)->get();
-            $c['items'] = $items->map(function ($i) {
-                $chunk = $i->only(['alias', 'title']);
-                $chunk['tags'] = $i->tags->map(function ($t) {
-                    return $t->only(['alias', 'title']);
-                });
-                return $chunk;
-            })->toArray();
-            $awards = collect([]);
-            foreach ($c['items'] as $item) {
-                $awards_key = ['冠軍','亞軍','季軍','優勝','獎','佳作','award'];
-                foreach ($item['tags'] as $tag) {
-                    if ( str_replace($awards_key, '', $tag['title']) != $tag['title'] ) {
-                        $awards->push($tag);
-                    }
-                }
-            }
-            $c['awards'] = $awards->unique('alias')->values();
-
-            $results[] = $c;
-        }
-        return $results;
-    }
-
 }
