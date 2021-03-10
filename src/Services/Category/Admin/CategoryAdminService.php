@@ -15,10 +15,8 @@ use DaydreamLab\Cms\Services\Item\Admin\ItemAdminService;
 use DaydreamLab\Cms\Services\Item\Admin\ItemTagMapAdminService;
 use DaydreamLab\Cms\Services\Tag\Admin\TagAdminService;
 use DaydreamLab\Cms\Traits\Service\CmsCronJob;
-use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 
 class CategoryAdminService extends CategoryService
 {
@@ -30,12 +28,14 @@ class CategoryAdminService extends CategoryService
 
     protected $search_keys = ['title', 'introtext', 'description', 'extrafields_search'];
 
-    public function __construct(CategoryAdminRepository $repo,
-                                CmsCronJobService       $cmsCronJobService)
+    public function __construct(
+        CategoryAdminRepository $repo,
+        CmsCronJobService $cmsCronJobService
+    )
     {
         parent::__construct($repo);
-        $this->repo               = $repo;
-        $this->cmsCronJobService  = $cmsCronJobService;
+        $this->repo              = $repo;
+        $this->cmsCronJobService = $cmsCronJobService;
 
         $this->itemAdminService = new ItemAdminService(
             new ItemAdminRepository(new ItemAdmin()),
@@ -69,33 +69,26 @@ class CategoryAdminService extends CategoryService
 
     public function store(Collection $input, $diff = false)
     {
-        if (InputHelper::null($input, 'extension')){
+        if (InputHelper::null($input, 'extension')) {
             $input->put('extension', 'item');
         }
 
-        if (InputHelper::null($input, 'publish_up'))
-        {
+        if (InputHelper::null($input, 'publish_up')) {
             $input->put('publish_up', now());
             $input->publish_up = now()->toDateTimeString();
         }
 
         $result = parent::store($input, $diff);
 
-        if (gettype($result) == 'boolean')
-        {
-            if ($result === true)
-            {
-                $item  = $this->find($input->id);
-            }
-            else
-            {
+        if (gettype($result) == 'boolean') {
+            if ($result === true) {
+                $item = $this->find($input->id);
+            } else {
                 // Something error 有可能是路徑已經存在
                 return $this->response;
             }
-        }
-        else
-        {
-            $item      = $this->find($result->id);
+        } else {
+            $item = $this->find($result->id);
         }
 
         $this->setCronJob($input, $item);
@@ -106,8 +99,7 @@ class CategoryAdminService extends CategoryService
 
     public function search(Collection $input)
     {
-        if (InputHelper::null($input, 'extension'))
-        {
+        if (!$input->get('extension')) {
             $input->forget('extension');
             $input->put('extension', 'item');
         }
