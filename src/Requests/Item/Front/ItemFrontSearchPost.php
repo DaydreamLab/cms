@@ -52,28 +52,28 @@ class ItemFrontSearchPost extends ListRequest
                 'integer',
                 Rule::in([0,1])
             ],
-            'tag_id' => 'nullable|integer'
+            'tag_alias' => 'nullable|string'
         ];
 
-        return array_merge($rules, parent::rules());
+        return array_merge(parent::rules(), $rules);
     }
 
     public function validated()
     {
         $validated = parent::validated();
 
-        if ($tag_id = $validated->get('tag_id')) {
+        if ($tag_alias = $validated->get('tag_alias')) {
             $validated->put('whereHas', [
                 [
                     'relation' => 'tags',
-                    'callback'  => function ($q) use ($tag_id) {
-                        $q->where('tags.id', $tag_id);
+                    'callback'  => function ($q) use ($tag_alias) {
+                        $q->where('tags.alias', $tag_alias);
                     }
                 ]
             ]);
         }
 
-        $validated->forget('tag_id');
+        $validated->forget('tag_alias');
 
         return $validated;
     }

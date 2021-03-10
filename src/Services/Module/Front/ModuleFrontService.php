@@ -3,15 +3,14 @@
 namespace DaydreamLab\Cms\Services\Module\Front;
 
 use DaydreamLab\Cms\Models\Menu\Front\MenuFront;
+use DaydreamLab\Cms\Models\Item\Item;
 use DaydreamLab\Cms\Models\Site\Site;
-use DaydreamLab\Cms\Repositories\Menu\Front\MenuFrontRepository;
 use DaydreamLab\Cms\Repositories\Module\Front\ModuleFrontRepository;
 use DaydreamLab\Cms\Repositories\Site\SiteRepository;
 use DaydreamLab\Cms\Services\Category\Front\CategoryFrontService;
 use DaydreamLab\Cms\Services\Item\Front\ItemFrontService;
 use DaydreamLab\Cms\Services\Menu\Front\MenuFrontService;
 use DaydreamLab\Cms\Services\Module\ModuleService;
-use DaydreamLab\Cms\Services\Site\SiteService;
 use DaydreamLab\Cms\Traits\Service\WithAccessIds;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Traits\LoggedIn;
@@ -38,10 +37,6 @@ class ModuleFrontService extends ModuleService
         $this->repo                 = $repo;
         $this->itemFrontService     = $itemFrontService;
         $this->categoryFrontService = $categoryFrontService;
-        $this->menuFrontService     = new MenuFrontService(
-            new MenuFrontRepository(new MenuFront()),
-            $this ,
-            new SiteService(new SiteRepository(new Site())));
     }
 
 
@@ -129,7 +124,7 @@ class ModuleFrontService extends ModuleService
         {
             $menu_ids[] = $menu->id;
         }
-
+        $this->menuFrontService = app(MenuFrontService::class);
         $menus = $this->menuFrontService->search(Helper::collect([
             'special_queries'   => [
                 [
@@ -193,8 +188,53 @@ class ModuleFrontService extends ModuleService
             $items['category_alias'] = $category_alias;
             unset($items['category_ids']);
         }
+        elseif ($module->category->alias == 'advanced-search') {
+            $items = $this->getAdvancedSearchModule($module->params);
+        }
 
         return $items;
+    }
+
+
+    public function getAdvancedSearchModule($params)
+    {
+        $params['category_order_by'] = 'id';
+        $params['category_order'] = 'asc';
+        $categories = $this->categoryFrontService->getItemsByIds($params);
+
+        return $this->buildAdvancedSearch($categories);
+    }
+
+
+    private function buildAdvancedSearch($categories)
+    {
+        $results = [];
+        foreach ($categories as $category) {
+            $c['alias'] = $category->alias;
+            $c['title'] = $category->title;
+            $c['child'] = $this->buildAdvancedSearch($category->children);
+            $items = Item::where('category_id', '=', $category->id)->get();
+            $c['items'] = $items->map(function ($i) {
+                $chunk = $i->only(['alias', 'title']);
+                $chunk['tags'] = $i->tags->map(function ($t) {
+                    return $t->only(['alias', 'title']);
+                });
+                return $chunk;
+            })->toArray();
+            $awards = collect([]);
+            foreach ($c['items'] as $item) {
+                $awards_key = ['冠軍','亞軍','季軍','優勝','獎','佳作','award'];
+                foreach ($item['tags'] as $tag) {
+                    if ( str_replace($awards_key, '', $tag['title']) != $tag['title'] ) {
+                        $awards->push($tag);
+                    }
+                }
+            }
+            $c['awards'] = $awards->unique('alias')->values();
+
+            $results[] = $c;
+        }
+        return $results;
     }
 
 }
