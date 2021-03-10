@@ -4,21 +4,25 @@ namespace DaydreamLab\Cms\Listeners;
 
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\Observer\Services\Log\LogService;
+use DaydreamLab\Observer\Services\Search\SearchService;
 
 class CmsEventSubscriber
 {
     protected $logService;
 
-    public function __construct(LogService $logService)
+    public function __construct(
+        LogService $logService,
+        SearchService $searchService
+    )
     {
-        $this->logService = $logService;
+        $this->logService    = $logService;
+        $this->searchService = $searchService;
     }
 
 
     public function onAdd($event)
     {
-        if ($event->user)
-        {
+        if ($event->user) {
             $input = Helper::collect([
                 'created_by' => $event->user->id,
                 'action'     => $event->action,
@@ -35,10 +39,8 @@ class CmsEventSubscriber
 
     public function onCheckout($event)
     {
-        if ($event->user)
-        {
-            foreach ($event->item_ids as $item_id)
-            {
+        if ($event->user) {
+            foreach ($event->item_ids as $item_id) {
                 $input = Helper::collect([
                     'created_by' => $event->user->id,
                     'action'     => $event->action,
@@ -55,8 +57,7 @@ class CmsEventSubscriber
 
     public function onModify($event)
     {
-        if ($event->user)
-        {
+        if ($event->user) {
             $input = Helper::collect([
                 'created_by' => $event->user->id,
                 'action'     => $event->action,
@@ -73,8 +74,7 @@ class CmsEventSubscriber
 
     public function onOrdering($event)
     {
-        if ($event->user)
-        {
+        if ($event->user) {
             $input = Helper::collect([
                 'created_by' => $event->user->id,
                 'action'     => $event->action,
@@ -91,10 +91,8 @@ class CmsEventSubscriber
 
     public function onRemove($event)
     {
-        if ($event->user)
-        {
-            foreach ($event->item_ids as $item_id)
-            {
+        if ($event->user) {
+            foreach ($event->item_ids as $item_id) {
                 $input = Helper::collect([
                     'created_by' => $event->user->id,
                     'action'     => $event->action,
@@ -111,10 +109,8 @@ class CmsEventSubscriber
 
     public function onSearch($event)
     {
-        if ($event->user)
-        {
-            foreach ($event->item_ids as $item_id)
-            {
+        if ($event->user) {
+            foreach ($event->item_ids as $item_id) {
                 $input = Helper::collect([
                     'created_by' => $event->user->id,
                     'action'     => $event->action,
@@ -124,16 +120,18 @@ class CmsEventSubscriber
 
                 $this->logService->store($input);
             }
+        } elseif (isset($event->input->search)) {
+            $this->searchService->add(collect([
+                    'keyword'    => $event->input->search,
+            ]));
         }
     }
 
 
     public function onState($event)
     {
-        if ($event->user)
-        {
-            foreach ($event->item_ids as $item_id)
-            {
+        if ($event->user) {
+            foreach ($event->item_ids as $item_id) {
                 $input = Helper::collect([
                     'created_by' => $event->user->id,
                     'action'     => $event->action,
@@ -183,6 +181,11 @@ class CmsEventSubscriber
         $events->listen(
             'DaydreamLab\Cms\Events\State',
             'DaydreamLab\Cms\Listeners\CmsEventSubscriber@onState'
+        );
+
+        $events->listen(
+            'DaydreamLab\Cms\Events\Search',
+            'DaydreamLab\Cms\Listeners\CmsEventSubscriber@onSearch'
         );
     }
 }
