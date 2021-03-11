@@ -25,14 +25,18 @@ class ModuleAdminSearchPost extends ModuleSearchPost
     public function rules()
     {
         $rules = [
-            'category_id'   => 'nullable|integer',
-            'state'     => [
+            'category_id' => 'nullable|integer',
+            'state'       => [
                 'nullable',
                 'integer',
-                Rule::in([0,1,-2])
+                Rule::in([0, 1, -2])
             ],
-            'language'      => 'nullable|string|max:5',
-            'access'        => 'nullable|integer',
+            'language'    => [
+                'nullable',
+                'string',
+                Rule::in(['en', 'zh-Hant', '*'])
+            ],
+            'access'      => 'nullable|integer',
         ];
         return array_merge($rules, parent::rules());
     }
