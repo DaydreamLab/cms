@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Services\Tag\Front;
 
+use DaydreamLab\Cms\Events\Hit;
 use DaydreamLab\Cms\Repositories\Tag\Front\TagFrontRepository;
 use DaydreamLab\Cms\Services\Item\Front\ItemFrontService;
 use DaydreamLab\Cms\Services\Item\Front\ItemTagMapFrontService;
@@ -89,6 +90,9 @@ class TagFrontService extends TagService
         $input->forget('page');
 
         $tags = $this->search($input);
+        $tags->each(function ($tag) {
+             Hit::dispatch($tag);
+        });
         $items = $this->getRelatedItems($tags);
 
         $this->status = Str::upper(Str::snake($this->type . 'SearchItemsSuccess'));

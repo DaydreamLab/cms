@@ -2,9 +2,11 @@
 
 namespace DaydreamLab\Cms\Listeners;
 
+use DaydreamLab\Cms\Events\Hit;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\Observer\Services\Log\LogService;
 use DaydreamLab\Observer\Services\Search\SearchService;
+use Illuminate\Support\Facades\DB;
 
 class CmsEventSubscriber
 {
@@ -145,6 +147,16 @@ class CmsEventSubscriber
         }
     }
 
+    public function onHit(Hit $event)
+    {
+        $item = $event->item;
+        if ($item->hasAttribute('hits')) {
+            $item->hits++;
+            $item->timestamps = false;
+            $item->save();
+        }
+    }
+
 
     public function subscribe($events)
     {
@@ -186,6 +198,11 @@ class CmsEventSubscriber
         $events->listen(
             'DaydreamLab\Cms\Events\Search',
             'DaydreamLab\Cms\Listeners\CmsEventSubscriber@onSearch'
+        );
+
+        $events->listen(
+            'DaydreamLab\Cms\Events\Hit',
+            'DaydreamLab\Cms\Listeners\CmsEventSubscriber@onHit'
         );
     }
 }
