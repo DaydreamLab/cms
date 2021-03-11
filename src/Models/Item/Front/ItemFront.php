@@ -45,7 +45,8 @@ class ItemFront extends Item
         'viewlevel',
         'access_title',
         'extrafields_search',
-        'extrafield_group_title'
+        'extrafield_group_title',
+        'category'
     ];
 
 
@@ -60,4 +61,31 @@ class ItemFront extends Item
         return $this->belongsToMany(TagFront::class, 'items_tags_maps', 'item_id', 'tag_id');
     }
 
+
+    public function categorySiblings()
+    {
+        return $this->where('category_id', '=', $this->category_id)->where('state', '=', 1)->orderBy('publish_up', 'desc');
+    }
+
+
+    public function getPrevSiblingAttribute()
+    {
+        $siblings = $this->categorySiblings()->get();
+        $current_pos = $siblings->search(function ($i, $key) {
+            return $i->alias == $this->alias;
+        });
+        $prev_pos = $current_pos-1;
+        return $siblings->slice( ( ($prev_pos <= 0) ? $prev_pos+$siblings->count() : $prev_pos ) % $siblings->count(), 1)->first();
+    }
+
+
+    public function getNextSiblingAttribute()
+    {
+        $siblings = $this->categorySiblings()->get();
+        $current_pos = $siblings->search(function ($i, $key) {
+            return $i->alias == $this->alias;
+        });
+        $next_pos = $current_pos+1;
+        return $siblings->slice( ($current_pos+1) % $siblings->count(), 1)->first();
+    }
 }
