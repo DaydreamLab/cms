@@ -101,8 +101,17 @@ class Module extends BaseModel
         }
         else if(array_key_exists('category_ids', $value))
         {
+            // 處理使用後台存入資料時，params中的category_ids會變成包含 id和tree_list_title的array型態
+            if (is_array(current($value['category_ids']))) {
+                $categoryIds = array_map(function ($item) {
+                    return $item['id'];
+                }, $value['category_ids']);
+            } else {
+                $categoryIds = $value['category_ids'];
+            }
+
             $category_alias = $this->category->alias;
-            $items = Category::whereIn('id', $value['category_ids'])->get()
+            $items = Category::whereIn('id', $categoryIds)->get()
                     ->map(function ($item, $key) use ($category_alias) {
                         $data = (object)['id'=> $item->id, 'tree_list_title'=> $item->tree_list_title];
                         if ($category_alias == 'search')
