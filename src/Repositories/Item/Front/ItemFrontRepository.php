@@ -426,11 +426,14 @@ class ItemFrontRepository extends ItemRepository
 
     public function getSelectedItems($params)
     {
+        $limit = $params['item_count'] ?? $this->infinity;
+
         return  $this->model
             ->whereIn('id', $this->getParamsIds($params, 'item_ids'))
             ->where('state', 1)
             ->whereIn('access', $params['access_ids'])
             ->orderBy($params['order_by'], $params['order'])
+            ->limit($limit)
             ->get();
     }
 
