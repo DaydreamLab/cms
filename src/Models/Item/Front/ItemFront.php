@@ -6,6 +6,7 @@ use DaydreamLab\Cms\Models\Extrafield\Front\ExtrafieldFront;
 use DaydreamLab\Cms\Models\Item\Item;
 use DaydreamLab\Cms\Models\Tag\Front\TagFront;
 use DaydreamLab\JJAJ\Helpers\Helper;
+use Illuminate\Support\Facades\Storage;
 
 class ItemFront extends Item
 {
@@ -87,5 +88,51 @@ class ItemFront extends Item
         });
         $next_pos = $current_pos+1;
         return $siblings->slice( $next_pos % $siblings->count(), 1)->first();
+    }
+
+
+    public function getGalleryAttribute()
+    {
+        $gallery = [];
+        $storage = Storage::disk('media-public');
+        $path = str_replace('/storage/media', '', $this->getRawOriginal('gallery'));
+        if ($path) {
+            $files = $storage->files($path);
+            foreach ($files as $file) {
+                $gallery[] = $storage->url($file);
+            }
+        }
+        return $gallery;
+    }
+
+
+    public function getYearAttribute()
+    {
+        $tags = $this->tags;
+        if ( count($tags) ) {
+            foreach ($tags as $tag) {
+                if ( preg_match("/\d{4}/", $tag['title']) ) {
+                    return $tag['title'];
+                }
+            }
+        }
+
+        if ( $this->extrafield_group_id == 3) {
+            $extrafields = json_decode($this->getRawOriginal('extrafields'), true);
+            if( isset($extrafields[8]) ) {
+                if ( !empty($extrafields[8]['value']) ) {
+                    return '20'.substr($extrafields[8]['value'], 1, 2);
+                }
+            }
+        }
+
+        $ant_cats = CategoryFront::ancestorsOf($this->category_id)->toArray();
+        foreach ($ant_cats as $ant_cat) {
+            if ( preg_match("/\d{4}/", $ant_cat['title']) ) {
+                return $ant_cat['title'];
+            }
+        }
+
+        return '';
     }
 }

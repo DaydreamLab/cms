@@ -21,7 +21,6 @@ class ItemFrontResource extends JsonResource
             'alias'                     => $this->alias,
             'category_alias'            => $this->category->alias,
             'category_title'            => $this->category->title,
-            'state'                     => $this->state,
             'ordering'                  => $this->ordering,
             'featured'                  => $this->featured,
             'featured_ordering'         => $this->featured_ordering,
@@ -33,21 +32,17 @@ class ItemFrontResource extends JsonResource
             'link'                      => $this->link,
             'video'                     => $this->video,
             'hits'                      => $this->hits,
+            'year'                      => $this->year,
             'language'                  => $this->language,
             'metadesc'                  => $this->metadesc,
             'metakeywords'              => $this->metakeywords,
-            'params'                    => $this->params,
             'extrafields'               => $this->extrafields,
             'tags'                      => $this->tags,
             'next'                      => $this->nextSibling->only(['title', 'alias']),
             'prev'                      => $this->prevSibling->only(['title', 'alias']),
-            'created_at'                => $this->getDateTimeString($this->created_at, config('daydreamlab.cms.timezone')),
-            'updated_at'                => $this->getDateTimeString($this->updated_at, config('daydreamlab.cms.timezone')),
-            'locked_at'                 => $this->getDateTimeString($this->locked_at, config('daydreamlab.cms.timezone')),
             'publish_up'                => $this->getDateTimeString($this->locked_at, config('daydreamlab.cms.timezone')),
             'publish_down'              => $this->getDateTimeString($this->publish_down, config('daydreamlab.cms.timezone')),
-            'creator'                   => $this->creator,
-            'updater'                   => $this->updater,
+            'creator'                   => $this->creator
         ];
     }
 }

@@ -33,7 +33,6 @@ class CategoryFrontResource extends JsonResource
             'language'                  => $this->language,
             'metadesc'                  => $this->metadesc,
             'metakeywords'              => $this->metakeywords,
-            'params'                    => $this->params,
             'child_categories'          => $this->children->map(function ($c) {
                 return ['title' => $c->title, 'alias' => $c->alias];
             }),
@@ -41,8 +40,6 @@ class CategoryFrontResource extends JsonResource
             //'extrafield_group_id'       => $this->extrafield_group_id,
             'extrafields'               => $this->extrafields,
             'created_at'                => $this->getDateTimeString($this->created_at, config('daydreamlab.cms.timezone')),
-            'updated_at'                => $this->getDateTimeString($this->updated_at, config('daydreamlab.cms.timezone')),
-            'locked_at'                 => $this->getDateTimeString($this->locked_at, config('daydreamlab.cms.timezone')),
             'publish_up'                => $this->getDateTimeString($this->locked_at, config('daydreamlab.cms.timezone')),
             'publish_down'              => $this->getDateTimeString($this->publish_down, config('daydreamlab.cms.timezone')),
 //            'creator'                   => $this->creator,
