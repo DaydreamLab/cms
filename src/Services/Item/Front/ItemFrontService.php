@@ -366,7 +366,7 @@ class ItemFrontService extends ItemService
 
         // if just want to show on browser, do not pass parameter 1 and 2 (ex: filename and dest)
         // like $mpdf->Output();
-        //        return $mpdf->Output();
+//                return $mpdf->Output();
         return $mpdf->Output($filename, 'd');
     }
 
@@ -377,8 +377,10 @@ class ItemFrontService extends ItemService
      */
     private function getTable($item)
     {
-        preg_match_all('/^<table(.*)>[\s\S]*<\/table>$/m', $item->description, $matches);
+        preg_match_all('/<table[\s]*(.*)?>([\s\S]*)<\/table>/m', $item->description, $matches);
+
         $table = $matches[0][0];
+
         $table = str_replace(
             [
                 '<td',
