@@ -28,7 +28,7 @@ class TagStorePost extends AdminRequest
             'id'            => 'nullable|integer',
             'parent_id'     => 'nullable|integer',
             'ordering'      => 'nullable|integer',
-            'title'         => 'required|string',
+            'title'         => 'required|string|unique:tags',
             'alias'         => 'nullable|string',
             'state'         => [
                 'nullable',
