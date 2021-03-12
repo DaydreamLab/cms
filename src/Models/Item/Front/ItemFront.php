@@ -64,7 +64,7 @@ class ItemFront extends Item
 
     public function categorySiblings()
     {
-        return $this->where('category_id', '=', $this->category_id)->where('state', '=', 1)->orderBy('publish_up', 'desc');
+        return $this->where('category_id', '=', $this->category_id)->where('state', '=', 1)->orderBy('publish_up', 'asc');
     }
 
 
@@ -86,6 +86,6 @@ class ItemFront extends Item
             return $i->alias == $this->alias;
         });
         $next_pos = $current_pos+1;
-        return $siblings->slice( ($current_pos+1) % $siblings->count(), 1)->first();
+        return $siblings->slice( $next_pos % $siblings->count(), 1)->first();
     }
 }
