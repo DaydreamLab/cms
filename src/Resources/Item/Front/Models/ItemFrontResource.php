@@ -33,6 +33,7 @@ class ItemFrontResource extends JsonResource
             'video'                     => $this->video,
             'hits'                      => $this->hits,
             'year'                      => $this->year,
+            'breadcrumb'                => $this->breadcrumb,
             'language'                  => $this->language,
             'metadesc'                  => $this->metadesc,
             'metakeywords'              => $this->metakeywords,

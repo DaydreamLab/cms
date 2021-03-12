@@ -106,6 +106,15 @@ class ItemFront extends Item
     }
 
 
+    public function getBreadcrumbAttribute()
+    {
+        $ant_cats = CategoryFront::ancestorsOf($this->category_id);
+        return $ant_cats->map(function ($item) {
+            return $item->only(['title', 'alias']);
+        })->slice(1)->values();
+    }
+
+
     public function getYearAttribute()
     {
         $tags = $this->tags;
@@ -126,7 +135,7 @@ class ItemFront extends Item
             }
         }
 
-        $ant_cats = CategoryFront::ancestorsOf($this->category_id)->toArray();
+        $ant_cats = $this->breadcrumb;
         foreach ($ant_cats as $ant_cat) {
             if ( preg_match("/\d{4}/", $ant_cat['title']) ) {
                 return $ant_cat['title'];
