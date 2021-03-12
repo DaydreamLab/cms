@@ -63,11 +63,15 @@ class ItemAdminService extends ItemService
         if ($item && $item->featured != $input_featured) {
             if ((int) $input_featured == 1) {
                 $newest = $this->repo->findNewestFeatured();
-                $input->put('featured_ordering', $newest->featured_ordering++);
+                if ($newest) {
+                    $input->put('featured_ordering', $newest->featured_ordering++);
+                }
             } else {
                 $newer = $this->repo->findNewerFeatured($item);
-                $this->repo->updateOrdering($newer, '--');
-                $input->put('featured_ordering', null);
+                if ($newer) {
+                    $this->repo->updateOrdering($newer, '--');
+                    $input->put('featured_ordering', null);
+                }
             }
         }
 
