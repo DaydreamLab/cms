@@ -41,7 +41,7 @@ class ItemFrontResource extends JsonResource
             'tags'                      => $this->tags,
             'next'                      => $this->nextSibling->only(['title', 'alias']),
             'prev'                      => $this->prevSibling->only(['title', 'alias']),
-            'publish_up'                => $this->getDateTimeString($this->locked_at, config('daydreamlab.cms.timezone')),
+            'publish_up'                => $this->getDateTimeString($this->publish_up, config('daydreamlab.cms.timezone')),
             'publish_down'              => $this->getDateTimeString($this->publish_down, config('daydreamlab.cms.timezone')),
             'creator'                   => $this->creator
         ];

@@ -33,7 +33,7 @@ class ItemAdminListResource extends JsonResource
             'created_at'                => $this->getDateTimeString($this->created_at, config('daydreamlab.cms.timezone')),
             'updated_at'                => $this->getDateTimeString($this->updated_at, config('daydreamlab.cms.timezone')),
             'locked_at'                 => $this->getDateTimeString($this->locked_at, config('daydreamlab.cms.timezone')),
-            'publish_up'                => $this->getDateTimeString($this->locked_at, config('daydreamlab.cms.timezone')),
+            'publish_up'                => $this->getDateTimeString($this->publish_up, config('daydreamlab.cms.timezone')),
             'publish_down'              => $this->getDateTimeString($this->publish_down, config('daydreamlab.cms.timezone')),
             'creator'                   => $this->creator,
             'updater'                   => $this->updater,
