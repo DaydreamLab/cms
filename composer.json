@@ -15,6 +15,11 @@
             "DaydreamLab\\Cms\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "DaydreamLab\\Cms\\Tests\\": "tests/"
+        }
+    },
     "minimum-stability": "dev",
     "require": {
         "daydreamlab/jjaj": "dev-develop-tusa",

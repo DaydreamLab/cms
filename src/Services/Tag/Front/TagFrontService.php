@@ -33,6 +33,7 @@ class TagFrontService extends TagService
 
     public function getRelatedItems($tags)
     {
+
         $tag_ids = $tags->map(function($item, $key){
             return $item->id;
         })->all();
@@ -84,17 +85,16 @@ class TagFrontService extends TagService
 
     public function searchItems(Collection $input, $paginate = true)
     {
+
         $input->put('paginate', false);
         $limit = $input->get('limit') ?: $this->repo->getModel()->getPerPage();
         $page = $input->get('page') ?: 1;
         $input->forget('page');
-
         $tags = $this->search($input);
         $tags->each(function ($tag) {
              Hit::dispatch($tag);
         });
         $items = $this->getRelatedItems($tags);
-
         $this->status = Str::upper(Str::snake($this->type . 'SearchItemsSuccess'));
         $this->response = $paginate ? $this->repo->paginate($items, $limit, $page, []) : $items;
 
