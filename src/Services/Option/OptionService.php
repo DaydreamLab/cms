@@ -25,22 +25,24 @@ class OptionService
 
     protected $map = [];
 
-    public function __construct(CategoryAdminService $categoryAdminService,
-                                LanguageAdminService $languageAdminService,
-                                ViewlevelAdminService $viewlevelAdminService,
-                                AssetAdminService $assetAdminService,
-                                UserGroupAdminService $groupAdminService,
-                                MenuAdminService $menuAdminService,
-                                ExtrafieldGroupAdminService $extrafieldGroupAdminService,
-                                ModuleAdminService $moduleAdminService,
-                                SiteAdminService $siteAdminService)
+    public function __construct(
+        CategoryAdminService $categoryAdminService,
+        LanguageAdminService $languageAdminService,
+        ViewlevelAdminService $viewlevelAdminService,
+        AssetAdminService $assetAdminService,
+        UserGroupAdminService $groupAdminService,
+        MenuAdminService $menuAdminService,
+        ExtrafieldGroupAdminService $extrafieldGroupAdminService,
+        ModuleAdminService $moduleAdminService,
+        SiteAdminService $siteAdminService
+    )
     {
         $this->map['asset']                 = $assetAdminService;
         $this->map['extension']             = ['item, menu, module'];
         $this->map['extrafield_group']      = $extrafieldGroupAdminService;
         $this->map['item_article_category'] = $categoryAdminService;
         $this->map['item_category']         = $categoryAdminService;
-        $this->map['item_content_type']     = ['article', 'item', 'link', 'menu', 'slideshow', 'timeline'];
+        $this->map['item_content_type']     = ['article', 'item', 'link', 'slideshow', 'none'];
         $this->map['language']              = $languageAdminService;
         $this->map['menu']                  = $menuAdminService;
         $this->map['menu_category']         = $categoryAdminService;
@@ -137,7 +139,7 @@ class OptionService
 
         if ($type == 'tree')
         {
-            $default_field = array_merge($extra_fields, ['id', 'tree_list_title']);
+            $default_field = array_merge($extra_fields, ['id', 'tree_list_title', 'content_type']);
 
             return $service->search(Helper::collect($default_rules))->toFlatTree()
                 ->map( function($item, $key) use ($default_field){
