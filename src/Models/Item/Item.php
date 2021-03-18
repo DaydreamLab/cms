@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Models\Item;
 
+use DaydreamLab\Cms\Models\FullTextSearchCast;
 use DaydreamLab\Cms\Models\JsonCast;
 use DaydreamLab\Cms\Models\Tag\Tag;
 use DaydreamLab\Cms\Traits\Model\WithAccess;
@@ -63,7 +64,8 @@ class Item extends BaseModel
         'publish_up',
         'publish_down',
         'start_date',
-        'end_date'
+        'end_date',
+        'full_text_search',
     ];
 
 
@@ -77,7 +79,8 @@ class Item extends BaseModel
         'updated_by',
         'viewlevels',
         'viewlevel',
-        'extrafields_search'
+        'extrafields_search',
+        'full_text_search',
     ];
 
 
@@ -102,15 +105,16 @@ class Item extends BaseModel
 
 
     protected $casts = [
-        'params'       => 'array',
-        'extrafields'  => 'array',
-        'created_at'   => 'datetime:Y-m-d H:i:s',
-        'locked_at'    => 'datetime:Y-m-d H:i:s',
-        'publish_up'   => 'datetime:Y-m-d H:i:s',
-        'publish_down' => 'datetime:Y-m-d H:i:s',
-        'start_date'   => 'datetime:Y-m-d H:i',
-        'end_date'     => 'datetime:Y-m-d H:i',
-        'image'        => JsonCast::class,
+        'params'           => 'array',
+        'extrafields'      => 'array',
+        'created_at'       => 'datetime:Y-m-d H:i:s',
+        'locked_at'        => 'datetime:Y-m-d H:i:s',
+        'publish_up'       => 'datetime:Y-m-d H:i:s',
+        'publish_down'     => 'datetime:Y-m-d H:i:s',
+        'start_date'       => 'datetime:Y-m-d H:i',
+        'end_date'         => 'datetime:Y-m-d H:i',
+        'image'            => JsonCast::class,
+        'full_text_search' => FullTextSearchCast::class
     ];
 
 

@@ -60,4 +60,21 @@ class ItemFront extends Item
         return $this->belongsToMany(TagFront::class, 'items_tags_maps', 'item_id', 'tag_id');
     }
 
+    /**
+     * 用於全站搜尋時查找全文索引scope
+     * @param $query
+     * @param $searchWord
+     * @return mixed
+     */
+    public function scopeSearch($query, $searchWord)
+    {
+        if ($this->hasAttribute('full_text_search')) {
+            $match = 'MATCH(full_text_search) AGAINST (?)';
+            return $query->whereRaw($match, [$searchWord])
+                         ->orderByRaw($match . ' DESC', [$searchWord]);
+        }
+
+        return $query;
+    }
+
 }
