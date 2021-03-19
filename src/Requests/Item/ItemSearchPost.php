@@ -22,7 +22,7 @@ class ItemSearchPost extends ListRequest
     public function rules()
     {
         $rules = [
-            'search'        => 'nullable|string',
+            'search'        => 'nullable|string|max:20',
         ];
 
         return array_merge(parent::rules(), $rules);

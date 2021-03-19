@@ -61,9 +61,26 @@ class ItemFrontSearchPost extends ItemSearchPost
                 'nullable',
                 'integer',
                 Rule::in([0, 1])
-            ]
+            ],
         ];
 
         return array_merge($rules, parent::rules());
+    }
+
+    public function rulesInput()
+    {
+        $rulesInput = parent::rulesInput();
+
+        // 對搜尋關鍵字分詞
+        if ($rulesInput->has('search')) {
+            Jieba::init(['dict' => 'small']);
+            Finalseg::init();
+            Jieba::loadUserDict(base_path('user_dict.txt'));
+
+            $cutString = implode(' ', Jieba::cutForSearch($rulesInput->get('search')));
+            $rulesInput->put('search', $cutString);
+        }
+
+        return $rulesInput;
     }
 }
