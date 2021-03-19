@@ -66,17 +66,4 @@ class ItemFrontSearchPost extends ItemSearchPost
 
         return array_merge($rules, parent::rules());
     }
-
-    public function rulesInput()
-    {
-        $rulesInput = parent::rulesInput();
-
-        Jieba::init();
-        Finalseg::init();
-        Jieba::loadUserDict(base_path('user_dict.txt'));
-        // 對用戶輸入的訊息進行分詞處理，並處理適用於全文搜索的字串
-        $rulesInput['search'] = implode(' ', Jieba::cutForSearch($rulesInput->get('search')));
-
-        return $rulesInput;
-    }
 }
