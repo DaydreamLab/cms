@@ -77,4 +77,14 @@ class ItemFront extends Item
         return $query;
     }
 
+    public function getAliasAttribute($value)
+    {
+        // 對 alias如 aliaska(ak)進行處理變成 Alaska(AK)
+        if (preg_match('/([a-zA-Z]+)\(([a-zA-Z]+)\)/', $value, $matches)) {
+            return ucfirst($matches[1]) . '(' . strtoupper($matches[2]) . ')';
+        }
+
+        return $value;
+    }
+
 }
