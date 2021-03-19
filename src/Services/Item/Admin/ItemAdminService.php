@@ -136,6 +136,9 @@ class ItemAdminService extends ItemService
         $input->forget('tags');
         // 用於站內搜尋時給資料庫做全文檢索, 在items model中利用mutator做儲存前處理
         $tmp = $input->get('title') . ' ' . $input->get('introtext') . ' ' . $input->get('description');
+        foreach ($tags as $tag) {
+            $tmp .= ' ' . $tag['title'];
+        }
         $input->put('full_text_search', $tmp);
         unset($tmp);
 

@@ -29,12 +29,13 @@ class FullTextSearchCast implements CastsAttributes
 
         Jieba::init();
         Finalseg::init();
+        Jieba::loadUserDict(base_path('/user_dict.txt'));
         ini_set('memory_limit', '1024M');
 
         // 替換特殊字元＋移除html標籤
         $str = str_replace(
             array("\n", "\r\n", '!', '"', '#', '$', '%', '&', '\'', '(', ')', '*',
-                  '+', ', ', '-', '.', '/', ':', ';', '<', '=', '>',
+                  '+', '-', '/', ':', ';', '<', '=', '>',
                   '?', '@', '[', ']', '^', '_', '`', '{', '|',
                   '}', '~', '；', '﹔', '︰', '﹕', '：', '，', '﹐', '、',
                   '．', '﹒', '˙', '·', '。', '？', '！', '～', '‥', '‧',
