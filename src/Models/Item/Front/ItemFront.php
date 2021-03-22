@@ -45,7 +45,8 @@ class ItemFront extends Item
         'viewlevel',
         'access_title',
         'extrafields_search',
-        'extrafield_group_title'
+        'extrafield_group_title',
+        'full_text_search'
     ];
 
 
@@ -69,7 +70,7 @@ class ItemFront extends Item
     public function scopeSearch($query, $searchWord)
     {
         if ($this->hasAttribute('full_text_search')) {
-            $match = 'MATCH(full_text_search) AGAINST (?)';
+            $match = 'MATCH(full_text_search) AGAINST (? IN NATURAL LANGUAGE MODE)';
             return $query->whereRaw($match, [$searchWord])
                          ->orderByRaw($match . ' DESC', [$searchWord]);
         }

@@ -214,16 +214,6 @@ class ItemFrontService extends ItemService
             $obj['value']      = $month;
             $special_queries[] = $obj;
         }
-        // 取得文章類型 special queries
-        $category_ids = $this->categoryFrontService
-            ->getContentTypeItems()
-            ->pluck('id')
-            ->all();
-
-        $obj['type']       = 'whereIn';
-        $obj['key']        = 'category_id';
-        $obj['value']      = $category_ids;
-        $special_queries[] = $obj;
 
         return $special_queries;
     }
