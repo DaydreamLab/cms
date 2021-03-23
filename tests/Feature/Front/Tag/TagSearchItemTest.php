@@ -4,19 +4,11 @@
 namespace DaydreamLab\Cms\Tests\Feature\Front\Tag;
 
 
-use DaydreamLab\Cms\Tests\Feature\Front\Tag\BaseTestTag;
+use DaydreamLab\JJAJ\Tests\BaseTest;
 
-class TagSearchItemTest extends BaseTestTag
+class TagSearchItemTest extends BaseTest
 {
     private $baseUrl = 'api/tag/search/items';
-
-
-    public function test_get_tag_has_paginate()
-    {
-        $response = $this->post($this->baseUrl);
-
-        $this->assertHasPagination($response);
-    }
 
     public function test_get_tag_limit()
     {
@@ -39,7 +31,6 @@ class TagSearchItemTest extends BaseTestTag
             $response->assertStatus(200);
         }
     }
-
 
 
 }

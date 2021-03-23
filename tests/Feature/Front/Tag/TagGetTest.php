@@ -17,13 +17,6 @@ class TagGetTest extends BaseTest
         $response->assertStatus(200);
     }
 
-    public function test_get_tag_has_paginate()
-    {
-        $response = $this->post($this->baseUrl);
-
-        $this->assertHasPagination($response);
-    }
-
     public function test_get_tag_limit()
     {
         $response = $this->post($this->baseUrl . '?limit=3');
