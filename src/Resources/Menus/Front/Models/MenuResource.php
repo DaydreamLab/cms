@@ -5,12 +5,11 @@ namespace DaydreamLab\Cms\Resources\Menus\Front\Models;
 use DaydreamLab\Cms\Models\Category\Front\CategoryFront;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
 class MenuResource extends JsonResource
 {
-    private $hantTitles = [];
-
     /**
      * Transform the resource into an array.
      *
@@ -65,6 +64,12 @@ class MenuResource extends JsonResource
         return $result ?: $items;
     }
 
+    /**
+     * 處理 menu內部的items title顯示
+     * @param $alias
+     * @param $lang
+     * @return mixed|string
+     */
     private function getTitle($alias, $lang)
     {
         if ($lang === 'en') {
@@ -75,12 +80,18 @@ class MenuResource extends JsonResource
             return '所有友站';
         }
 
-        if (!isset($this->hantTitles[$alias])) {
-            $this->hantTitles[$alias] = CategoryFront::where('alias', $alias)
-                                                     ->where('language', $lang)
-                                                     ->first()->title;
+        if (Cache::has('hant_title_' . $alias)) {
+            return Cache::get('hant_title_' . $alias);
         }
 
-        return $this->hantTitles[$alias];
+        $title = CategoryFront::where('alias', $alias)
+                              ->where('language', $lang)
+                              ->first()->title;
+
+        // 利用cache減少查找資料庫頻率
+        // cache生命週期一小時
+        Cache::put('hant_title_' . $alias, $title, 3600);
+
+        return $title;
     }
 }
