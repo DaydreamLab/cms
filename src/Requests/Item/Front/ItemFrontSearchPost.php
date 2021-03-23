@@ -3,8 +3,7 @@
 namespace DaydreamLab\Cms\Requests\Item\Front;
 
 use DaydreamLab\Cms\Requests\Item\ItemSearchPost;
-use Fukuball\Jieba\Finalseg;
-use Fukuball\Jieba\Jieba;
+use DaydreamLab\Cms\Support\Cut;
 use Illuminate\Validation\Rule;
 
 class ItemFrontSearchPost extends ItemSearchPost
@@ -71,16 +70,10 @@ class ItemFrontSearchPost extends ItemSearchPost
     {
         $rulesInput = parent::rulesInput();
 
-//        // 對搜尋關鍵字分詞
-//        if ($rulesInput->has('search')) {
-//            Jieba::init();
-//            Finalseg::init();
-//            Jieba::loadUserDict(base_path('user_dict.txt'));
-//
-//            $cutString = implode(' ', Jieba::cutForSearch($rulesInput->get('search')));
-//
-//            $rulesInput->put('search', $cutString);
-//        }
+        // 對搜尋關鍵字分詞
+        if ($rulesInput->has('search')) {
+            $rulesInput->put('search', Cut::cutForSearch($rulesInput->get('search')));
+        }
 
         return $rulesInput;
     }
