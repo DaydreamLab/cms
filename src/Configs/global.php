@@ -1,13 +1,11 @@
 <?php
 
 return [
-
     'sitename'  => 'TUSA',
 
     'metadesc'  => '',
 
-    'metakeywords'  => [
-    ],
+    'metakeywords'  => [],
 
     'locale'            => 'zh-Hant',
 
@@ -18,7 +16,4 @@ return [
     'custom_body'       => '',
 
     'custom_footer'     => '',
-
-    'site_id'           => 1,
-
 ];

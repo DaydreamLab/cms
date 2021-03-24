@@ -1,4 +1,4 @@
-  <?php
+<?php
 
 return [
     'item' => [
@@ -11,7 +11,7 @@ return [
             'access_ids' => [1],
             'viewlevels' => [2],
         ],
-        'use_word_segmentation' => 0,
+        'use_word_segmentation' => 1,
     ],
     'form' => [
         'email' => [
