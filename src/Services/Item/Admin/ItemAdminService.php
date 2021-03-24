@@ -134,13 +134,16 @@ class ItemAdminService extends ItemService
 
         $tags = $input->get('tags') ? $input->get('tags') : [];
         $input->forget('tags');
+
         // 用於站內搜尋時給資料庫做全文檢索, 在items model中利用mutator做儲存前處理
-        $tmp = $input->get('title') . ' ' . $input->get('introtext') . ' ' . $input->get('description');
-        foreach ($tags as $tag) {
-            $tmp .= ' ' . $tag['title'];
+        if (config('cms.use_word_segmentation')) {
+            $tmp = $input->get('title') . ' ' . $input->get('introtext') . ' ' . $input->get('description');
+            foreach ($tags as $tag) {
+                $tmp .= ' ' . $tag['title'];
+            }
+            $input->put('full_text_search', $tmp);
+            unset($tmp);
         }
-        $input->put('full_text_search', $tmp);
-        unset($tmp);
 
         $result = parent::store($input, $diff);
 

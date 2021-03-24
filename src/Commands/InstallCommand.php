@@ -84,20 +84,8 @@ class InstallCommand extends Command
         $this->deleteConstants();
 
         $this->call('vendor:publish', [
-            '--tag' => 'cms-configs'
-        ]);
-
-        $this->call('vendor:publish', [
-            '--tag' => 'cms-frontend-site'
-        ]);
-
-        $this->call('vendor:publish', [
-            '--tag'     => 'cms-frontend-admin',
-            '--force'   => 1
-        ]);
-
-        $this->call('vendor:publish', [
-            '--provider' => 'Fedeisas\LaravelMailCssInliner\LaravelMailCssInlinerServiceProvider'
+            '--tag' => 'cms-configs',
+            '--force' => true,
         ]);
 
     }

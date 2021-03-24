@@ -71,7 +71,7 @@ class ItemFrontSearchPost extends ItemSearchPost
         $rulesInput = parent::rulesInput();
 
         // 對搜尋關鍵字分詞
-        if ($rulesInput->has('search')) {
+        if ($rulesInput->has('search') && config('cms.use_word_segmentation')) {
             $rulesInput->put('search', Cut::cutForSearch($rulesInput->get('search')));
         }
 

@@ -215,6 +215,19 @@ class ItemFrontService extends ItemService
             $special_queries[] = $obj;
         }
 
+        // 取得文章類型 special queries
+        if (config('cms.use_word_segmentation') == false) {
+            $category_ids = $this->categoryFrontService
+                ->getContentTypeItems()
+                ->pluck('id')
+                ->all();
+
+            $obj['type']       = 'whereIn';
+            $obj['key']        = 'category_id';
+            $obj['value']      = $category_ids;
+            $special_queries[] = $obj;
+        }
+
         return $special_queries;
     }
 
