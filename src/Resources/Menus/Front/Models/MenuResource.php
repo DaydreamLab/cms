@@ -89,8 +89,8 @@ class MenuResource extends JsonResource
                               ->first()->title;
 
         // 利用cache減少查找資料庫頻率
-        // cache生命週期一小時
-        Cache::put('hant_title_' . $alias, $title, 3600);
+        // cache生命週期30天
+        Cache::put('hant_title_' . $alias, $title, 60*60*24*30);
 
         return $title;
     }
