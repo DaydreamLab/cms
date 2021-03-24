@@ -216,7 +216,7 @@ class ItemFrontService extends ItemService
         }
 
         // 取得文章類型 special queries
-        if (config('cms.use_word_segmentation') == false) {
+        if (config('cms.item.use_word_segmentation') == false) {
             $category_ids = $this->categoryFrontService
                 ->getContentTypeItems()
                 ->pluck('id')
