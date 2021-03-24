@@ -85,7 +85,6 @@ class InstallCommand extends Command
 
         $this->call('vendor:publish', [
             '--tag' => 'cms-configs',
-            '--force' => true,
         ]);
 
     }
