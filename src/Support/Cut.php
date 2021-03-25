@@ -18,17 +18,19 @@ class Cut
      */
     private static function init(array $options = [])
     {
-        isset($options['init'])
-            ? Jieba::init($options['init'])
-            : Jieba::init();
+        $optionsArray = [
+            'init' => Jieba::class,
+            'finalSeg' => Finalseg::class,
+            'loadUserDict' => Jieba::class,
+        ];
 
-        isset($options['finalSeg'])
-            ? Finalseg::init($options['finalSeg'])
-            : Finalseg::init();
-
-        isset($options['loadUserDict'])
-            ? Jieba::loadUserDict($options['loadUserDict'])
-            : null;
+        foreach ($optionsArray as $key => $class) {
+            if (isset($options[$key]) && !empty($options['key'])) {
+                $class::init($options[$key]);
+            } else {
+                $class::init();
+            }
+        }
     }
 
     /**

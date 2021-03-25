@@ -26,7 +26,9 @@ class FullTextSearchCast implements CastsAttributes
         if ($value == '')
             return $value;
 
-        return Cut::cutForSearch($value, ['loadUserDict' => base_path('user_dict.txt')]);
+        return Cut::cutForSearch($value, [
+            'loadUserDict' => config('cms.item.load_customer_dictionary_path')
+        ]);
     }
 
 

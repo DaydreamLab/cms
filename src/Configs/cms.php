@@ -12,6 +12,7 @@ return [
             'viewlevels' => [2],
         ],
         'use_word_segmentation' => 1,
+        'load_customer_dictionary_path' => env('LOAD_CUSTOMER_DICTIONARY_PATH', base_path('user_dict.txt')),
     ],
     'form' => [
         'email' => [
