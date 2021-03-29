@@ -42,7 +42,7 @@ class OptionService
         $this->map['extrafield_group']      = $extrafieldGroupAdminService;
         $this->map['item_article_category'] = $categoryAdminService;
         $this->map['item_category']         = $categoryAdminService;
-        $this->map['item_content_type']     = ['article', 'item', 'link', 'slideshow', 'none'];
+        $this->map['item_content_type']     = ['article', 'item', 'link', 'menu', 'slideshow', 'timeline'];
         $this->map['language']              = $languageAdminService;
         $this->map['menu']                  = $menuAdminService;
         $this->map['menu_category']         = $categoryAdminService;
