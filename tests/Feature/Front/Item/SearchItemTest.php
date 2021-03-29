@@ -78,6 +78,7 @@ class SearchItemTest extends BaseTest
                              "end_date",
                              "creator",
                              "tags",
+                             "parent_category_alias",
                              "category_title",
                              "category_alias",
                              "language_title",
@@ -104,6 +105,24 @@ class SearchItemTest extends BaseTest
 
     public function test_search_hant_item_response_data_count_is_not_empty()
     {
+        if (env('USE_WORD_SEGMENTATION')) {
+            $this->hantSearchWithSegment();
+        } else {
+            $this->hantSearchWithFuzzy();
+        }
+    }
+
+    public function test_search_en_item_response_date_count_is_not_empty()
+    {
+        if (env('USE_WORD_SEGMENTATION')) {
+            $this->enSearchWithSegment();
+        } else {
+            $this->enSearchWithFuzzy();
+        }
+    }
+
+    private function hantSearchWithSegment()
+    {
         factory(Item::class)->create([
             'title'            => '測試關鍵字搜尋',
             'description'      => '天竺鼠車車醫療電動車醫療研討會數位醫療AI電子設備台美交流外貿協會',
@@ -113,11 +132,11 @@ class SearchItemTest extends BaseTest
         ]);
 
         $searchWord = '天竺鼠 研討會 電動車 中華民國';
-        $response = $this->post($this->baseUrl, [
+        $response   = $this->post($this->baseUrl, [
             'search'   => $searchWord,
             'language' => 'zh-Hant',
         ]);
-        $response = $this->getContentData($response);
+        $response   = $this->getContentData($response);
 
         $this->assertNotEmpty($response);
 
@@ -125,10 +144,9 @@ class SearchItemTest extends BaseTest
         foreach ($response as $item) {
             $this->assertContains($searchWord, $item);
         }
-
     }
 
-    public function test_search_en_item_response_date_count_is_not_empty()
+    private function enSearchWithSegment()
     {
         factory(Item::class)->create([
             'title'            => 'test for keyword search',
@@ -139,11 +157,60 @@ class SearchItemTest extends BaseTest
         ]);
 
         $searchWord = 'Taiwan technological';
-        $response = $this->post($this->baseUrl, [
+        $response   = $this->post($this->baseUrl, [
             'search'   => $searchWord,
             'language' => 'en',
         ]);
-        $response = $this->getContentData($response);
+        $response   = $this->getContentData($response);
+
+        $this->assertNotEmpty($response);
+
+        // 查找每一個item是否都至少包含一個searchWord
+        foreach ($response as $item) {
+            $this->assertContains($searchWord, $item);
+        }
+    }
+
+    private function hantSearchWithFuzzy()
+    {
+        factory(Item::class)->create([
+            'title'            => '測試關鍵字搜尋',
+            'description'      => '天竺鼠車車醫療電動車醫療研討會數位醫療AI電子設備台美交流外貿協會',
+            'category_id'      => factory(Category::class)->create()->id,
+            'language'         => 'zh-Hant',
+        ]);
+
+        $searchWord = '研討會';
+        $response   = $this->post($this->baseUrl, [
+            'search'   => $searchWord,
+            'language' => 'zh-Hant',
+        ]);
+
+        $response   = $this->getContentData($response);
+
+        $this->assertNotEmpty($response);
+
+        // 查找每一個item是否都至少包含一個searchWord
+        foreach ($response as $item) {
+            $this->assertContains($searchWord, $item);
+        }
+    }
+
+    private function enSearchWithFuzzy()
+    {
+        factory(Item::class)->create([
+            'title'            => 'test for keyword search',
+            'description'      => 'Texas is the technological hub of the United States and welcomed the Taiwan delegation to visit Texas.',
+            'category_id'      => factory(Category::class)->create()->id,
+            'language'         => 'en',
+        ]);
+
+        $searchWord = 'technological';
+        $response   = $this->post($this->baseUrl, [
+            'search'   => $searchWord,
+            'language' => 'en',
+        ]);
+        $response   = $this->getContentData($response);
 
         $this->assertNotEmpty($response);
 

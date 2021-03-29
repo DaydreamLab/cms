@@ -79,6 +79,7 @@ class GetItemTest extends BaseTest
                          "next",
                          "creator",
                          "tags",
+                         "parent_category_alias",
                          "category_title",
                          "category_alias",
                          "language_title",
