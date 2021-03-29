@@ -96,6 +96,7 @@ class Item extends BaseModel
         'creator_groups',
         'tags',
         'viewlevels',
+        'parent_category_alias',
         'category_title',
         'category_alias',
         'access_title',

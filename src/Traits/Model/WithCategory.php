@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Traits\Model;
 
 use DaydreamLab\Cms\Models\Category\Category;
 use DaydreamLab\JJAJ\Helpers\Helper;
+use Illuminate\Support\Str;
 
 
 trait WithCategory
@@ -24,8 +25,7 @@ trait WithCategory
     public function getCategoryAliasAttribute()
     {
         $category   = $this->category()->first();
-        $path       = $category ? substr($category->path, strlen('/'.$category->extension.'/')) : null;
-
+        $path = $category->alias;
         return $path;
     }
 
@@ -37,6 +37,14 @@ trait WithCategory
         return $category ? $category->title : null;
     }
 
+    public function getParentCategoryAliasAttribute()
+    {
+        $categoryPath = $this->category()->value('path');
+        $withoutItemPath = Str::after($categoryPath, '/item/');
+        $parentCategoryPath = Str::beforeLast($withoutItemPath, '/');
+
+        return $parentCategoryPath;
+    }
 
 
 }
