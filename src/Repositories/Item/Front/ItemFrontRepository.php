@@ -64,7 +64,7 @@ class ItemFrontRepository extends ItemRepository
             $copy = $items->toArray();
             $data['data'] = $copy['data'];
             unset($copy['data']);
-            $data['paginate'] = $copy;
+            $data['pagination'] = $copy;
         }
 
         return $data;
@@ -451,7 +451,7 @@ class ItemFrontRepository extends ItemRepository
         else
         {
             $data['data'] = $items;
-            $data['paginate'] = [];
+            $data['pagination'] = [];
         }
 
         return $data;
