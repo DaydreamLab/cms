@@ -51,12 +51,12 @@ class MenuResource extends JsonResource
                 $data   = $data->toArray();
                 $values = $data['data'];
                 unset($data['data']);
-                $paginate = $data;
+                $pagination = $data;
 
                 $result[$key] = [
                     'title'    => $title,
                     'items'    => $values,
-                    'paginate' => $paginate
+                    'pagination' => $pagination
                 ];
             }
         }
