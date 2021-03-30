@@ -46,6 +46,7 @@ class MenuResource extends JsonResource
 
         foreach ($items as $alias => $data) {
             $key = $alias;
+            // 當module類型是 categories 類型且依照分類拆分
             if ($data instanceof LengthAwarePaginator) {
                 $title  = $this->getTitle($alias, $this->language);
                 $data   = $data->toArray();
