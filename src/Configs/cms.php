@@ -11,7 +11,7 @@ return [
             'access_ids' => [1],
             'viewlevels' => [2],
         ],
-        'use_word_segmentation' => 1,
+        'use_word_segmentation' => 0,
         'load_customer_dictionary_path' => env('LOAD_CUSTOMER_DICTIONARY_PATH', base_path('user_dict.txt')),
     ],
     'form' => [
