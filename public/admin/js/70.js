@@ -1,18 +1,18 @@
 webpackJsonp([70],{
 
-/***/ 411:
+/***/ 406:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(449)
+  __webpack_require__(446)
 }
-var normalizeComponent = __webpack_require__(2)
+var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(451)
+var __vue_script__ = __webpack_require__(448)
 /* template */
-var __vue_template__ = __webpack_require__(454)
+var __vue_template__ = __webpack_require__(451)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -52,23 +52,23 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 449:
+/***/ 446:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(450);
+var content = __webpack_require__(447);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(256)("2c06b00b", content, false, {});
+var update = __webpack_require__(251)("4f151c59", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-24a1c216\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Users/daydreamlab/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-24a1c216\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Users/daydreamlab/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-24a1c216\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/dist/cjs.js?indentedSyntax!../../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Applications/MAMP/htdocs/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-24a1c216\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/dist/cjs.js?indentedSyntax!../../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Applications/MAMP/htdocs/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -79,28 +79,28 @@ if(false) {
 
 /***/ }),
 
-/***/ 450:
+/***/ 447:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(255)(false);
+exports = module.exports = __webpack_require__(250)(false);
 // imports
 
 
 // module
-exports.push([module.i, "/* Colors -------------------------- */\n/* Link -------------------------- */\n/* Background -------------------------- */\n/* Border -------------------------- */\n/* Navbar -------------------------- */\n/* Sidebar -------------------------- */\n/* Tab -------------------------- */\n/* Icon -------------------------- */\n/* Item -------------------------- */\n.custom-toolbar-button[data-v-24a1c216] {\n  position: absolute;\n  top: 4px;\n  right: 4px;\n}\n", ""]);
+exports.push([module.i, "\n.custom-toolbar-button[data-v-24a1c216]{position:absolute;top:4px;right:4px\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ 451:
+/***/ 448:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__plugins__ = __webpack_require__(452);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__toolbar__ = __webpack_require__(453);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__plugins__ = __webpack_require__(449);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__toolbar__ = __webpack_require__(450);
 //
 //
 //
@@ -127,7 +127,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: { Media: function Media() {
-      return __webpack_require__.e/* import() */(67/* duplicate */).then(__webpack_require__.bind(null, 366));
+      return __webpack_require__.e/* import() */(68/* duplicate */).then(__webpack_require__.bind(null, 361));
     } },
   data: function data() {
     return {
@@ -193,8 +193,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   methods: {
     handleInsertMedia: function handleInsertMedia(files) {
       var _this = this;
-      files.forEach(function (path) {
-        window.tinymce.get(_this.tinymceId).insertContent("<img src=\"/storage/media" + path + "\" >");
+      files.forEach(function (item) {
+        window.tinymce.get(_this.tinymceId).insertContent("<img src=\"/storage/media" + item.path + "\" >");
       });
     },
     onClickBtnSelectMedia: function onClickBtnSelectMedia() {
@@ -266,7 +266,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 452:
+/***/ 449:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -280,20 +280,22 @@ var plugins = ["advlist anchor autolink autosave code codesample colorpicker col
 
 /***/ }),
 
-/***/ 453:
+/***/ 450:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // Here is a list of the toolbar
 // Detail list see https://www.tinymce.com/docs/advanced/editor-control-identifiers/#toolbarcontrols
 
-var toolbar = ['searchreplace bold italic underline strikethrough alignleft aligncenter alignright outdent indent  blockquote undo redo removeformat subscript superscript code codesample', 'hr bullist numlist link image charmap preview anchor pagebreak insertdatetime media table emoticons forecolor backcolor fullscreen'];
+var toolbar = ['formatselect ' + 'fontsizeselect ' + 'searchreplace ' + 'bold ' + 'italic ' + 'underline ' + 'strikethrough ' + 'alignleft ' + 'aligncenter ' + 'alignright ' + 'outdent ' + 'indent' + 'blockquote ' + 'removeformat ' + 'subscript ' + 'superscript ' + 'code ', // <= 逗號是換行
+//'codesample ' +
+'hr ' + 'bullist ' + 'numlist ' + 'link ' + 'image ' + 'charmap ' + 'preview ' + 'anchor ' + 'pagebreak ' + 'insertdatetime ' + 'media ' + 'table ' + 'emoticons ' + 'forecolor ' + 'backcolor ' + 'fullscreen ' + 'undo ' + 'redo '];
 
 /* harmony default export */ __webpack_exports__["a"] = (toolbar);
 
 /***/ }),
 
-/***/ 454:
+/***/ 451:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {

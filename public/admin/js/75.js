@@ -1,18 +1,18 @@
 webpackJsonp([75],{
 
-/***/ 591:
+/***/ 586:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(592)
+  __webpack_require__(587)
 }
-var normalizeComponent = __webpack_require__(2)
+var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(594)
+var __vue_script__ = __webpack_require__(589)
 /* template */
-var __vue_template__ = __webpack_require__(595)
+var __vue_template__ = __webpack_require__(590)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -52,23 +52,23 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 592:
+/***/ 587:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(593);
+var content = __webpack_require__(588);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(256)("0a8fa7e0", content, false, {});
+var update = __webpack_require__(251)("772f8d84", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-67e8c7d3\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Users/daydreamlab/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TheBreadcrumb.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-67e8c7d3\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Users/daydreamlab/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TheBreadcrumb.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-67e8c7d3\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/dist/cjs.js?indentedSyntax!../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Applications/MAMP/htdocs/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TheBreadcrumb.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-67e8c7d3\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/dist/cjs.js?indentedSyntax!../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Applications/MAMP/htdocs/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TheBreadcrumb.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -79,22 +79,22 @@ if(false) {
 
 /***/ }),
 
-/***/ 593:
+/***/ 588:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(255)(false);
+exports = module.exports = __webpack_require__(250)(false);
 // imports
 
 
 // module
-exports.push([module.i, "/* Colors -------------------------- */\n/* Link -------------------------- */\n/* Background -------------------------- */\n/* Border -------------------------- */\n/* Navbar -------------------------- */\n/* Sidebar -------------------------- */\n/* Tab -------------------------- */\n/* Icon -------------------------- */\n/* Item -------------------------- */\n.breadcrumb-container {\n  line-height: 60px;\n}\n.breadcrumb--alias {\n  color: #4d4d4d;\n  cursor: text;\n}\n\n/*transitionL: breadcrumb*/\n.breadcrumb-enter-active, .breadcrumb-leave-active {\n  -webkit-transition: all 0.5s;\n  transition: all 0.5s;\n}\n.breadcrumb-enter, .breadcrumb-leave-active {\n  opacity: 0;\n  -webkit-transform: translateX(20px);\n          transform: translateX(20px);\n}\n.breadcrumb-move {\n  -webkit-transition: all 0.5s;\n  transition: all 0.5s;\n}\n.breadcrumb-leave-active {\n  position: absolute;\n}\n", ""]);
+exports.push([module.i, "\n.breadcrumb-container{line-height:60px\n}\n.breadcrumb--alias{color:#4d4d4d;cursor:text\n}\n.breadcrumb-enter-active,.breadcrumb-leave-active{-webkit-transition:all 0.5s;transition:all 0.5s\n}\n.breadcrumb-enter,.breadcrumb-leave-active{opacity:0;-webkit-transform:translateX(20px);transform:translateX(20px)\n}\n.breadcrumb-move{-webkit-transition:all 0.5s;transition:all 0.5s\n}\n.breadcrumb-leave-active{position:absolute\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ 594:
+/***/ 589:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -137,7 +137,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 595:
+/***/ 590:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {

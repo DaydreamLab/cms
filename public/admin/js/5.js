@@ -6,19 +6,19 @@ webpackJsonp([5],{
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(431)
+  __webpack_require__(423)
 }
-var normalizeComponent = __webpack_require__(2)
+var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(433)
+var __vue_script__ = __webpack_require__(425)
 /* template */
-var __vue_template__ = __webpack_require__(446)
+var __vue_template__ = __webpack_require__(444)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-6042c5f6"
+var __vue_scopeId__ = "data-v-47fabec5"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -29,7 +29,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/admin/views/content/category/components/item.vue"
+Component.options.__file = "resources/assets/admin/views/content/category/components/item-list.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -38,9 +38,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6042c5f6", Component.options)
+    hotAPI.createRecord("data-v-47fabec5", Component.options)
   } else {
-    hotAPI.reload("data-v-6042c5f6", Component.options)
+    hotAPI.reload("data-v-47fabec5", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -52,23 +52,23 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 431:
+/***/ 423:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(432);
+var content = __webpack_require__(424);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(256)("8ebb0d16", content, false, {});
+var update = __webpack_require__(251)("60fc86b0", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6042c5f6\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Users/daydreamlab/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./item.vue", function() {
-     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6042c5f6\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Users/daydreamlab/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./item.vue");
+   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-47fabec5\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/sass-loader/dist/cjs.js?indentedSyntax!../../../../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Applications/MAMP/htdocs/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./item-list.vue", function() {
+     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-47fabec5\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/sass-loader/dist/cjs.js?indentedSyntax!../../../../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Applications/MAMP/htdocs/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./item-list.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -79,27 +79,28 @@ if(false) {
 
 /***/ }),
 
-/***/ 432:
+/***/ 424:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(255)(false);
+exports = module.exports = __webpack_require__(250)(false);
 // imports
 
 
 // module
-exports.push([module.i, "/* Colors -------------------------- */\n/* Link -------------------------- */\n/* Background -------------------------- */\n/* Border -------------------------- */\n/* Navbar -------------------------- */\n/* Sidebar -------------------------- */\n/* Tab -------------------------- */\n/* Icon -------------------------- */\n/* Item -------------------------- */\n.el-collapse-item__header[data-v-6042c5f6] {\n  cursor: auto;\n  padding-left: 8px;\n}\n.el-collapse-item__header.is-disabled[data-v-6042c5f6] {\n    cursor: not-allowed;\n    background: #e6e6e6;\n}\n", ""]);
+exports.push([module.i, "\n.el-collapse[data-v-47fabec5]{margin-top:15px\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ 433:
+/***/ 425:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sortablejs__ = __webpack_require__(121);
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 //
 //
@@ -133,432 +134,211 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    MediaInput: function MediaInput() {
-      return __webpack_require__.e/* import() */(68/* duplicate */).then(__webpack_require__.bind(null, 365));
-    },
-    FieldForm: function FieldForm() {
-      return __webpack_require__.e/* import() */(72).then(__webpack_require__.bind(null, 364));
-    }
+  components: { Item: function Item() {
+      return __webpack_require__.e/* import() */(4/* duplicate */).then(__webpack_require__.bind(null, 110));
+    } },
+  data: function data() {
+    return {
+      list: [],
+      listId: "list-" + +new Date() + ((Math.random() * 1000).toFixed(0) + ""),
+      listLoading: false,
+      activeId: "",
+      isAdding: false
+    };
   },
+
   props: {
+    type: {
+      type: String,
+      required: true
+    },
     category: {
       type: Object,
       default: function _default() {
         return {};
       }
-    },
-    data: {
-      type: Object,
-      default: function _default() {
-        return {};
-      }
-    },
-    type: {
-      type: String,
-      required: true
-    },
-
-    isActive: {
-      type: Boolean,
-      default: false
-    },
-    isDisabled: {
-      type: Boolean,
-      default: false
-    }
-  },
-  data: function data() {
-    return {
-      fields: {
-        extrafield_group_id: {
-          list: this.$store.getters.extrafield_group_list,
-          custom_attrs: {
-            label: "title",
-            value: "id"
-          }
-        }
-      },
-      defaultValue: {
-        id: "",
-        title: "",
-        link: "",
-        introtext: "",
-        description: "",
-        category_id: "",
-        language: "",
-        image: "",
-        state: 1,
-        featured: 0,
-        extrafield_group_id: "",
-        extrafields: {}
-      },
-      saveLoading: false,
-      formLabelRefs: {
-        slideshow: {
-          title: "Slide 標題",
-          image: "背景圖片"
-        },
-        link: {
-          image: "Logo",
-          title: "連結標題",
-          link: "連結網址",
-          description: "連結描述"
-        },
-        menu: {
-          title: "菜名",
-          introtext: "描述",
-          description: "價錢"
-        },
-        timeline: {
-          title: "標題",
-          description: "描述"
-        }
-      }
-    };
-  },
-
-  computed: {
-    group_fields: function group_fields() {
-      return this.fields.extrafield_group_id.list[this.defaultValue.extrafield_group_id];
     }
   },
   mounted: function mounted() {
-    this.initData();
+    this.handleGetList();
   },
 
   methods: {
-    onClickBtnDelete: function onClickBtnDelete(id) {
+    onClickBtnAdd: function onClickBtnAdd() {
+      this.isAdding = true;
+      this.onChangeActive();
+    },
+    onChangeActive: function onChangeActive() {
+      var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
+
+      this.activeId = id;
+    },
+    handleOrderChange: function handleOrderChange(_ref) {
       var _this = this;
 
-      this.$$api_item_delete({
-        data: { ids: [id] },
-        fn: function fn(_ref) {
-          var msg = _ref.msg;
+      var id = _ref.id,
+          index_diff = _ref.index_diff,
+          order = _ref.order;
+
+      this.$$api_item_ordering({
+        data: {
+          id: id,
+          index_diff: index_diff,
+          order: order
+        },
+        fn: function fn(_ref2) {
+          var msg = _ref2.msg;
 
           _this.$message.success(msg);
-          _this.$emit("update");
         }
       });
     },
-    onClickBtnSave: function onClickBtnSave() {
+    handleGetList: function handleGetList() {
       var _this2 = this;
 
-      this.saveLoading = true;
+      this.listLoading = true;
+      this.$$api_item_list({
+        data: {
+          category_id: this.category.id,
+          extension: "item",
+          content_type: this.type,
+          order_by: "ordering",
+          order: "desc"
+        },
+        fn: function fn(_ref3) {
+          var data = _ref3.data;
 
-      if (this.category) {
-        this.defaultValue.category_id = this.category.id;
-        this.defaultValue.language = this.category.language;
-      }
-
-      this.$$api_item_save({
-        data: this.defaultValue,
-        fn: function fn(_ref2) {
-          var data = _ref2.data,
-              msg = _ref2.msg;
-
-          _this2.$message.success(msg);
-          _this2.$emit("update");
-          _this2.updateActiveItem();
+          _this2.list = data.items;
+          _this2.$nextTick(function () {
+            _this2.initSortableList();
+          });
         },
         finalFn: function finalFn() {
-          _this2.saveLoading = false;
+          _this2.listLoading = false;
         }
       });
     },
-    updateActiveItem: function updateActiveItem(id) {
-      this.$emit("update-active", id);
-    },
-    initData: function initData() {
-      this.defaultValue = _extends({}, this.defaultValue, this.data);
+    initSortableList: function initSortableList() {
+      var _this3 = this;
+
+      var el = document.getElementById(this.listId);
+      if (el) {
+        __WEBPACK_IMPORTED_MODULE_0_sortablejs__["a" /* default */].create(el, {
+          handle: ".sortable-handler",
+          onEnd: function onEnd(_ref4) {
+            var newIndex = _ref4.newIndex,
+                oldIndex = _ref4.oldIndex;
+
+            var _list$splice = _this3.list.splice(oldIndex, 1),
+                _list$splice2 = _slicedToArray(_list$splice, 1),
+                targetItem = _list$splice2[0];
+
+            _this3.list.splice(newIndex, 0, targetItem);
+            _this3.handleOrderChange({
+              id: _this3.list[newIndex].id,
+              index_diff: newIndex - oldIndex,
+              order: "desc"
+            });
+          }
+        });
+      }
     }
   }
 });
 
 /***/ }),
 
-/***/ 446:
+/***/ 444:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "el-collapse-item" }, [
-    _c(
-      "div",
-      {
-        staticClass: "el-collapse-item__header",
-        class: { "is-disabled": _vm.isDisabled }
-      },
-      [
-        _c(
-          "el-button",
-          {
-            staticClass: "sortable-handler",
-            attrs: { disabled: _vm.isDisabled, type: "text" }
-          },
-          [_c("font-awesome-icon", { attrs: { icon: ["fal", "arrows"] } })],
-          1
-        ),
-        _vm._v("\n    " + _vm._s(_vm.data.title) + "\n    "),
-        _c(
-          "div",
-          { staticClass: "el-collapse-item__arrow" },
-          [
-            _vm.isActive
-              ? [
-                  _c(
-                    "el-tooltip",
-                    {
-                      attrs: {
-                        effect: "dark",
-                        content: _vm.$t("TOOLBAR_CANCEL" /*取消*/),
-                        placement: "top-start"
-                      }
+  return _c(
+    "div",
+    {
+      directives: [
+        {
+          name: "loading",
+          rawName: "v-loading",
+          value: _vm.listLoading,
+          expression: "listLoading"
+        }
+      ]
+    },
+    [
+      _c(
+        "el-button",
+        {
+          attrs: { type: "primary", plain: "" },
+          on: { click: _vm.onClickBtnAdd }
+        },
+        [
+          _c("font-awesome-icon", { attrs: { icon: ["fal", "plus"] } }),
+          _vm._v("\n    " + _vm._s(_vm.$t("TOOLBAR_ADD" /*新增*/)) + "\n  ")
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _vm.list.length > 0 || _vm.isAdding
+        ? _c(
+            "div",
+            { staticClass: "el-collapse", attrs: { id: _vm.listId } },
+            [
+              _vm.isAdding
+                ? _c("Item", {
+                    attrs: {
+                      type: _vm.type,
+                      data: {
+                        extrafield_group_id: _vm.category.item_extrafield
+                      },
+                      category: _vm.category,
+                      "is-disabled": false,
+                      "is-active": ""
                     },
-                    [
-                      _c(
-                        "el-button",
-                        {
-                          attrs: { size: "small", plain: "" },
-                          on: {
-                            click: function($event) {
-                              _vm.updateActiveItem()
-                            }
-                          }
-                        },
-                        [
-                          _c("font-awesome-icon", {
-                            attrs: { icon: ["fal", "times"] }
-                          })
-                        ],
-                        1
+                    on: {
+                      "update-active": function($event) {
+                        _vm.isAdding = false
+                      },
+                      update: _vm.handleGetList
+                    }
+                  })
+                : _vm._e(),
+              _vm._v(" "),
+              _vm._l(_vm.list, function(item) {
+                return _c(
+                  "Item",
+                  {
+                    key: item.id,
+                    attrs: {
+                      type: _vm.type,
+                      category: _vm.category,
+                      data: item,
+                      "is-active": _vm.activeId === item.id,
+                      "is-disabled": Boolean(
+                        _vm.activeId && _vm.activeId !== item.id
                       )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "el-tooltip",
-                    {
-                      attrs: {
-                        effect: "dark",
-                        content: _vm.$t("TOOLBAR_SAVE" /*儲存*/),
-                        placement: "top-start"
-                      }
                     },
-                    [
-                      _c(
-                        "el-button",
-                        {
-                          attrs: {
-                            loading: _vm.saveLoading,
-                            type: "primary",
-                            size: "small"
-                          },
-                          on: { click: _vm.onClickBtnSave }
-                        },
-                        [
-                          _c("font-awesome-icon", {
-                            attrs: { icon: ["fal", "save"] }
-                          })
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ]
-              : [
-                  _c(
-                    "el-tooltip",
-                    {
-                      attrs: {
-                        effect: "dark",
-                        content: _vm.$t("TOOLBAR_EDIT" /*編輯*/),
-                        placement: "top-start"
-                      }
-                    },
-                    [
-                      _c(
-                        "el-button",
-                        {
-                          attrs: {
-                            disabled: _vm.isDisabled,
-                            type: "primary",
-                            size: "small",
-                            plain: ""
-                          },
-                          on: {
-                            click: function($event) {
-                              _vm.updateActiveItem(_vm.data.id)
-                            }
-                          }
-                        },
-                        [
-                          _c("font-awesome-icon", {
-                            attrs: { icon: ["fal", "edit"] }
-                          })
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "el-tooltip",
-                    {
-                      attrs: {
-                        effect: "dark",
-                        content: _vm.$t("TOOLBAR_DELETE" /*刪除*/),
-                        placement: "top-start"
-                      }
-                    },
-                    [
-                      _c(
-                        "el-button",
-                        {
-                          attrs: {
-                            disabled: _vm.isDisabled,
-                            type: "danger",
-                            size: "small",
-                            plain: ""
-                          },
-                          on: {
-                            click: function($event) {
-                              _vm.onClickBtnDelete(_vm.data.id)
-                            }
-                          }
-                        },
-                        [
-                          _c("font-awesome-icon", {
-                            attrs: { icon: ["fal", "trash-alt"] }
-                          })
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ]
-          ],
-          2
-        )
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _vm.isActive
-      ? _c(
-          "div",
-          { staticClass: "el-collapse-item__wrap" },
-          [
-            _c(
-              "el-form",
-              { ref: "form-data", attrs: { model: _vm.defaultValue } },
-              [
-                _vm._l(_vm.formLabelRefs[_vm.type], function(value, key) {
-                  return [
-                    key === "image"
-                      ? _c(
-                          "el-form-item",
-                          {
-                            attrs: {
-                              prop: key,
-                              label: _vm.formLabelRefs[_vm.type][key]
-                            }
-                          },
-                          [
-                            _c("MediaInput", {
-                              model: {
-                                value: _vm.defaultValue[key],
-                                callback: function($$v) {
-                                  _vm.$set(_vm.defaultValue, key, $$v)
-                                },
-                                expression: "defaultValue[key]"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      : _c(
-                          "el-form-item",
-                          {
-                            attrs: {
-                              prop: key,
-                              label: _vm.formLabelRefs[_vm.type][key]
-                            }
-                          },
-                          [
-                            _c("el-input", {
-                              model: {
-                                value: _vm.defaultValue[key],
-                                callback: function($$v) {
-                                  _vm.$set(_vm.defaultValue, key, $$v)
-                                },
-                                expression: "defaultValue[key]"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                  ]
-                }),
-                _vm._v(" "),
-                _vm.group_fields && "extrafields" in _vm.group_fields
-                  ? _c("FieldForm", {
-                      attrs: {
-                        data: _vm.defaultValue.extrafields,
-                        fields: _vm.group_fields.extrafields
-                      }
-                    })
-                  : _vm._e()
-              ],
-              2
-            )
-          ],
-          1
-        )
-      : _vm._e()
-  ])
+                    on: {
+                      "update-active": _vm.onChangeActive,
+                      update: _vm.handleGetList
+                    }
+                  },
+                  [_vm._v(_vm._s(item))]
+                )
+              })
+            ],
+            2
+          )
+        : _vm._e()
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -566,7 +346,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-6042c5f6", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-47fabec5", module.exports)
   }
 }
 

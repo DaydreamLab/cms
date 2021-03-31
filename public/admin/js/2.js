@@ -1,18 +1,18 @@
 webpackJsonp([2],{
 
-/***/ 26:
+/***/ 24:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(507)
+  __webpack_require__(502)
 }
-var normalizeComponent = __webpack_require__(2)
+var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(509)
+var __vue_script__ = __webpack_require__(504)
 /* template */
-var __vue_template__ = __webpack_require__(510)
+var __vue_template__ = __webpack_require__(505)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -52,23 +52,23 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 507:
+/***/ 502:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(508);
+var content = __webpack_require__(503);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(256)("100bbe7b", content, false, {});
+var update = __webpack_require__(251)("7b50473b", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-15828418\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Users/daydreamlab/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./login.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-15828418\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Users/daydreamlab/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./login.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-15828418\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/dist/cjs.js?indentedSyntax!../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Applications/MAMP/htdocs/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./login.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-15828418\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/dist/cjs.js?indentedSyntax!../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Applications/MAMP/htdocs/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./login.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -79,27 +79,27 @@ if(false) {
 
 /***/ }),
 
-/***/ 508:
+/***/ 503:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(255)(false);
+exports = module.exports = __webpack_require__(250)(false);
 // imports
 
 
 // module
-exports.push([module.i, "/* Colors -------------------------- */\n/* Link -------------------------- */\n/* Background -------------------------- */\n/* Border -------------------------- */\n/* Navbar -------------------------- */\n/* Sidebar -------------------------- */\n/* Tab -------------------------- */\n/* Icon -------------------------- */\n/* Item -------------------------- */\n.login-wrapper[data-v-15828418] {\n  background: -webkit-gradient(linear, left top, right top, from(#3f6c95), to(#2f3855));\n  background: linear-gradient(to right, #3f6c95 0%, #2f3855 100%);\n  height: 100vh;\n}\n.login-form__wrapper[data-v-15828418] {\n  position: absolute;\n  max-width: 600px;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n          transform: translate(-50%, -50%);\n  background: #fff;\n  border-radius: 4px;\n  padding: 30px;\n}\n.login-header[data-v-15828418] {\n  margin-bottom: 25px;\n}\n.btn--help[data-v-15828418] {\n  margin-top: 10px;\n}\n\n/*transition: login-form*/\n.login-form-enter-active[data-v-15828418], .login-form-leave-active[data-v-15828418] {\n  -webkit-transition: opacity 1s ease-in-out;\n  transition: opacity 1s ease-in-out;\n}\n.login-form-enter[data-v-15828418], .login-form-leave-to[data-v-15828418] {\n  opacity: 0;\n}\n", ""]);
+exports.push([module.i, "\n.login-wrapper[data-v-15828418]{background:-webkit-gradient(linear, left top, right top, from(#3f6c95), to(#2f3855));background:linear-gradient(to right, #3f6c95 0%, #2f3855 100%);height:100vh\n}\n.login-form__wrapper[data-v-15828418]{position:absolute;min-width:300px;max-width:600px;top:50%;left:50%;-webkit-transform:translate(-50%, -50%);transform:translate(-50%, -50%);background:#fff;border-radius:4px;padding:30px\n}\n.login-header[data-v-15828418]{margin-bottom:25px;text-align:center\n}\n.btn--help[data-v-15828418]{margin-top:10px\n}\n.login-form-enter-active[data-v-15828418],.login-form-leave-active[data-v-15828418]{-webkit-transition:opacity 1s ease-in-out;transition:opacity 1s ease-in-out\n}\n.login-form-enter[data-v-15828418],.login-form-leave-to[data-v-15828418]{opacity:0\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ 509:
+/***/ 504:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_utils___ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_utils___ = __webpack_require__(19);
 //
 //
 //
@@ -299,7 +299,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 510:
+/***/ 505:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -341,17 +341,12 @@ var render = function() {
                     }
                   },
                   [
-                    _c(
-                      "div",
-                      { staticClass: "text-center login-header" },
-                      [
-                        _c("SvgIcon", {
-                          staticStyle: { width: "100%", height: "45px" },
-                          attrs: { "icon-class": "logo" }
-                        })
-                      ],
-                      1
-                    ),
+                    _c("div", { staticClass: "text-center login-header" }, [
+                      _c("img", {
+                        staticStyle: { height: "45px" },
+                        attrs: { src: "/admin/img/logo.svg" }
+                      })
+                    ]),
                     _vm._v(" "),
                     _c(
                       "div",
@@ -398,7 +393,7 @@ var render = function() {
                                 nativeOn: {
                                   keyup: function($event) {
                                     if (
-                                      !("button" in $event) &&
+                                      !$event.type.indexOf("key") &&
                                       _vm._k(
                                         $event.keyCode,
                                         "enter",

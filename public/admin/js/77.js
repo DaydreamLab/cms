@@ -1,18 +1,18 @@
 webpackJsonp([77],{
 
-/***/ 602:
+/***/ 597:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(603)
+  __webpack_require__(598)
 }
-var normalizeComponent = __webpack_require__(2)
+var normalizeComponent = __webpack_require__(3)
 /* script */
 var __vue_script__ = null
 /* template */
-var __vue_template__ = __webpack_require__(605)
+var __vue_template__ = __webpack_require__(600)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -52,23 +52,23 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 603:
+/***/ 598:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(604);
+var content = __webpack_require__(599);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(256)("8d937530", content, false, {});
+var update = __webpack_require__(251)("692b516c", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3880c24e\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Users/daydreamlab/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TheContent.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3880c24e\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Users/daydreamlab/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TheContent.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3880c24e\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/dist/cjs.js?indentedSyntax!../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Applications/MAMP/htdocs/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TheContent.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3880c24e\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/dist/cjs.js?indentedSyntax!../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Applications/MAMP/htdocs/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TheContent.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -79,22 +79,22 @@ if(false) {
 
 /***/ }),
 
-/***/ 604:
+/***/ 599:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(255)(false);
+exports = module.exports = __webpack_require__(250)(false);
 // imports
 
 
 // module
-exports.push([module.i, "/* Colors -------------------------- */\n/* Link -------------------------- */\n/* Background -------------------------- */\n/* Border -------------------------- */\n/* Navbar -------------------------- */\n/* Sidebar -------------------------- */\n/* Tab -------------------------- */\n/* Icon -------------------------- */\n/* Item -------------------------- */\n.content-container > .list-data, .content-container > .form-data {\n  background: #fff;\n  padding: 20px;\n}\n.content-container .el-main, .content-container .el-aside {\n  padding: 0;\n  margin-right: 20px;\n  background: #fff;\n}\n\n/*transition: router*/\n.content-enter-active {\n  -webkit-animation: coming 1s;\n          animation: coming 1s;\n  -webkit-animation-delay: 0.5s;\n          animation-delay: 0.5s;\n  opacity: 0;\n}\n.content-leave-active {\n  -webkit-animation: going 1s;\n          animation: going 1s;\n}\n@-webkit-keyframes coming {\nfrom {\n    -webkit-transform: translate3d(0, -50px, 0);\n            transform: translate3d(0, -50px, 0);\n    opacity: 0;\n}\nto {\n    -webkit-transform: translate3d(0, 0, 0);\n            transform: translate3d(0, 0, 0);\n    opacity: 1;\n}\n}\n@keyframes coming {\nfrom {\n    -webkit-transform: translate3d(0, -50px, 0);\n            transform: translate3d(0, -50px, 0);\n    opacity: 0;\n}\nto {\n    -webkit-transform: translate3d(0, 0, 0);\n            transform: translate3d(0, 0, 0);\n    opacity: 1;\n}\n}\n@-webkit-keyframes going {\nfrom {\n    -webkit-transform: translate3d(0, 0, 0);\n            transform: translate3d(0, 0, 0);\n}\nto {\n    -webkit-transform: translate3d(0, -50px, 0);\n            transform: translate3d(0, -50px, 0);\n    opacity: 0;\n}\n}\n@keyframes going {\nfrom {\n    -webkit-transform: translate3d(0, 0, 0);\n            transform: translate3d(0, 0, 0);\n}\nto {\n    -webkit-transform: translate3d(0, -50px, 0);\n            transform: translate3d(0, -50px, 0);\n    opacity: 0;\n}\n}\n", ""]);
+exports.push([module.i, "\n.content-container>.list-data,.content-container>.form-data{background:#fff;padding:20px\n}\n.content-container .el-main,.content-container .el-aside{padding:0;margin-right:20px;background:#fff\n}\n.content-enter-active{-webkit-animation:coming 1s;animation:coming 1s;-webkit-animation-delay:0.5s;animation-delay:0.5s;opacity:0\n}\n.content-leave-active{-webkit-animation:going 1s;animation:going 1s\n}\n@-webkit-keyframes coming{\nfrom{-webkit-transform:translate3d(0, -50px, 0);transform:translate3d(0, -50px, 0);opacity:0\n}\nto{-webkit-transform:translate3d(0, 0, 0);transform:translate3d(0, 0, 0);opacity:1\n}\n}\n@keyframes coming{\nfrom{-webkit-transform:translate3d(0, -50px, 0);transform:translate3d(0, -50px, 0);opacity:0\n}\nto{-webkit-transform:translate3d(0, 0, 0);transform:translate3d(0, 0, 0);opacity:1\n}\n}\n@-webkit-keyframes going{\nfrom{-webkit-transform:translate3d(0, 0, 0);transform:translate3d(0, 0, 0)\n}\nto{-webkit-transform:translate3d(0, -50px, 0);transform:translate3d(0, -50px, 0);opacity:0\n}\n}\n@keyframes going{\nfrom{-webkit-transform:translate3d(0, 0, 0);transform:translate3d(0, 0, 0)\n}\nto{-webkit-transform:translate3d(0, -50px, 0);transform:translate3d(0, -50px, 0);opacity:0\n}\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ 605:
+/***/ 600:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {

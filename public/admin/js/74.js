@@ -1,18 +1,18 @@
 webpackJsonp([74],{
 
-/***/ 597:
+/***/ 592:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(598)
+  __webpack_require__(593)
 }
-var normalizeComponent = __webpack_require__(2)
+var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(600)
+var __vue_script__ = __webpack_require__(595)
 /* template */
-var __vue_template__ = __webpack_require__(601)
+var __vue_template__ = __webpack_require__(596)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -52,23 +52,23 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 598:
+/***/ 593:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(599);
+var content = __webpack_require__(594);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(256)("5cc5c1eb", content, false, {});
+var update = __webpack_require__(251)("17b068b7", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2a3bfd40\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Users/daydreamlab/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TheNavbar.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2a3bfd40\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Users/daydreamlab/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TheNavbar.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2a3bfd40\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/dist/cjs.js?indentedSyntax!../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Applications/MAMP/htdocs/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TheNavbar.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2a3bfd40\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/dist/cjs.js?indentedSyntax!../../../../node_modules/sass-resources-loader/lib/loader.js?{\"resources\":\"/Applications/MAMP/htdocs/cms-frontend/resources/assets/admin/styles/_variables.sass\"}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TheNavbar.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -79,22 +79,22 @@ if(false) {
 
 /***/ }),
 
-/***/ 599:
+/***/ 594:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(255)(false);
+exports = module.exports = __webpack_require__(250)(false);
 // imports
 
 
 // module
-exports.push([module.i, "/* Colors -------------------------- */\n/* Link -------------------------- */\n/* Background -------------------------- */\n/* Border -------------------------- */\n/* Navbar -------------------------- */\n/* Sidebar -------------------------- */\n/* Tab -------------------------- */\n/* Icon -------------------------- */\n/* Item -------------------------- */\n.navbar {\n  height: 60px;\n  -webkit-box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.15);\n          box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.15);\n}\n.navbar-left {\n    -webkit-box-flex: 1;\n        -ms-flex: 1;\n            flex: 1;\n}\n.navbar-right__item {\n    vertical-align: middle;\n}\n.navbar-right__item + .navbar-right__item {\n      padding-left: 40px;\n}\n.navbar-right__item + .navbar-right__item:before {\n        content: \"\";\n        height: 30px;\n        width: 1px;\n        background: #e6e6e6;\n        position: absolute;\n        top: calc(50% - 15px);\n        left: 20px;\n}\n.navbar-right__icontitle {\n    margin-right: 0.25em;\n}\n.navbar-right__dropdown {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n.navbar-right__dropdown_item {\n      -webkit-box-flex: 1;\n          -ms-flex: 1;\n              flex: 1;\n      padding-right: 10px;\n}\n.navbar-right__dropdown_subtitle {\n      color: #909399;\n}\n", ""]);
+exports.push([module.i, "\n.navbar{height:60px;-webkit-box-shadow:0px 1px 10px 0px rgba(0,0,0,0.15);box-shadow:0px 1px 10px 0px rgba(0,0,0,0.15)\n}\n.navbar-left{-webkit-box-flex:1;-ms-flex:1;flex:1\n}\n.navbar-right__item{vertical-align:middle\n}\n.navbar-right__item+.navbar-right__item{padding-left:40px\n}\n.navbar-right__item+.navbar-right__item:before{content:\"\";height:30px;width:1px;background:#e6e6e6;position:absolute;top:calc(50% - 15px);left:20px\n}\n.navbar-right__icontitle{margin-right:.25em\n}\n.navbar-right__dropdown{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center\n}\n.navbar-right__dropdown_item{-webkit-box-flex:1;-ms-flex:1;flex:1;padding-right:10px\n}\n.navbar-right__dropdown_subtitle{color:#909399\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ 600:
+/***/ 595:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -184,7 +184,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 601:
+/***/ 596:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -260,7 +260,8 @@ var render = function() {
                   [_c("el-dropdown-item", [_vm._v(_vm._s(site.title))])],
                   1
                 )
-              })
+              }),
+              0
             )
           ],
           1

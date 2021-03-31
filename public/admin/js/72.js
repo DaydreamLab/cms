@@ -1,12 +1,52 @@
 webpackJsonp([72,69],{
 
-/***/ 279:
+/***/ 274:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return schema; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return normalize$1; });
 /* unused harmony export denormalize */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return normalize$1; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return schema; });
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+function _extends() {
+  _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
+
+function _inheritsLoose(subClass, superClass) {
+  subClass.prototype = Object.create(superClass.prototype);
+  subClass.prototype.constructor = subClass;
+  subClass.__proto__ = superClass;
+}
+
 /**
  * Helpers to enable Immutable compatibility *without* bringing in
  * the 'immutable' package as a dependency.
@@ -23,7 +63,6 @@ function isImmutable(object) {
   return !!(object && typeof object.hasOwnProperty === 'function' && (object.hasOwnProperty('__ownerID') || // Immutable.Map
   object._map && object._map.hasOwnProperty('__ownerID'))); // Immutable.Record
 }
-
 /**
  * Denormalize an immutable entity.
  *
@@ -33,11 +72,12 @@ function isImmutable(object) {
  * @param  {function} getDenormalizedEntity
  * @return {Immutable.Map|Immutable.Record}
  */
+
 function denormalizeImmutable(schema, input, unvisit) {
   return Object.keys(schema).reduce(function (object, key) {
     // Immutable maps cast keys to strings on write so we need to ensure
     // we're accessing them using string keys.
-    var stringKey = '' + key;
+    var stringKey = "" + key;
 
     if (object.has(stringKey)) {
       return object.set(stringKey, unvisit(object.get(stringKey), schema[stringKey]));
@@ -47,171 +87,109 @@ function denormalizeImmutable(schema, input, unvisit) {
   }, input);
 }
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
-  return typeof obj;
-} : function (obj) {
-  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-};
-
-
-
-
-
-
-
-
-
-
-
-var classCallCheck = function (instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-};
-
-var createClass = function () {
-  function defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }
-
-  return function (Constructor, protoProps, staticProps) {
-    if (protoProps) defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) defineProperties(Constructor, staticProps);
-    return Constructor;
-  };
-}();
-
-
-
-
-
-
-
-var _extends = Object.assign || function (target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i];
-
-    for (var key in source) {
-      if (Object.prototype.hasOwnProperty.call(source, key)) {
-        target[key] = source[key];
-      }
-    }
-  }
-
-  return target;
-};
-
-
-
-var inherits = function (subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-  }
-
-  subClass.prototype = Object.create(superClass && superClass.prototype, {
-    constructor: {
-      value: subClass,
-      enumerable: false,
-      writable: true,
-      configurable: true
-    }
-  });
-  if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-};
-
-
-
-
-
-
-
-
-
-
-
-var possibleConstructorReturn = function (self, call) {
-  if (!self) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-
-  return call && (typeof call === "object" || typeof call === "function") ? call : self;
-};
-
 var getDefaultGetId = function getDefaultGetId(idAttribute) {
   return function (input) {
     return isImmutable(input) ? input.get(idAttribute) : input[idAttribute];
   };
 };
 
-var EntitySchema = function () {
-  function EntitySchema(key) {
-    var definition = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-    var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-    classCallCheck(this, EntitySchema);
-
-    if (!key || typeof key !== 'string') {
-      throw new Error('Expected a string key for Entity, but found ' + key + '.');
+var EntitySchema = /*#__PURE__*/function () {
+  function EntitySchema(key, definition, options) {
+    if (definition === void 0) {
+      definition = {};
     }
 
-    var _options$idAttribute = options.idAttribute,
-        idAttribute = _options$idAttribute === undefined ? 'id' : _options$idAttribute,
-        _options$mergeStrateg = options.mergeStrategy,
-        mergeStrategy = _options$mergeStrateg === undefined ? function (entityA, entityB) {
+    if (options === void 0) {
+      options = {};
+    }
+
+    if (!key || typeof key !== 'string') {
+      throw new Error("Expected a string key for Entity, but found " + key + ".");
+    }
+
+    var _options = options,
+        _options$idAttribute = _options.idAttribute,
+        idAttribute = _options$idAttribute === void 0 ? 'id' : _options$idAttribute,
+        _options$mergeStrateg = _options.mergeStrategy,
+        mergeStrategy = _options$mergeStrateg === void 0 ? function (entityA, entityB) {
       return _extends({}, entityA, entityB);
     } : _options$mergeStrateg,
-        _options$processStrat = options.processStrategy,
-        processStrategy = _options$processStrat === undefined ? function (input) {
+        _options$processStrat = _options.processStrategy,
+        processStrategy = _options$processStrat === void 0 ? function (input) {
       return _extends({}, input);
-    } : _options$processStrat;
-
-
+    } : _options$processStrat,
+        _options$fallbackStra = _options.fallbackStrategy,
+        fallbackStrategy = _options$fallbackStra === void 0 ? function (key, schema) {
+      return undefined;
+    } : _options$fallbackStra;
     this._key = key;
     this._getId = typeof idAttribute === 'function' ? idAttribute : getDefaultGetId(idAttribute);
     this._idAttribute = idAttribute;
     this._mergeStrategy = mergeStrategy;
     this._processStrategy = processStrategy;
+    this._fallbackStrategy = fallbackStrategy;
     this.define(definition);
   }
 
-  EntitySchema.prototype.define = function define(definition) {
+  var _proto = EntitySchema.prototype;
+
+  _proto.define = function define(definition) {
     this.schema = Object.keys(definition).reduce(function (entitySchema, key) {
-      var _babelHelpers$extends;
+      var _extends2;
 
       var schema = definition[key];
-      return _extends({}, entitySchema, (_babelHelpers$extends = {}, _babelHelpers$extends[key] = schema, _babelHelpers$extends));
+      return _extends({}, entitySchema, (_extends2 = {}, _extends2[key] = schema, _extends2));
     }, this.schema || {});
   };
 
-  EntitySchema.prototype.getId = function getId(input, parent, key) {
+  _proto.getId = function getId(input, parent, key) {
     return this._getId(input, parent, key);
   };
 
-  EntitySchema.prototype.merge = function merge(entityA, entityB) {
+  _proto.merge = function merge(entityA, entityB) {
     return this._mergeStrategy(entityA, entityB);
   };
 
-  EntitySchema.prototype.normalize = function normalize(input, parent, key, visit, addEntity) {
-    var _this = this;
-
-    var processedEntity = this._processStrategy(input, parent, key);
-    Object.keys(this.schema).forEach(function (key) {
-      if (processedEntity.hasOwnProperty(key) && _typeof(processedEntity[key]) === 'object') {
-        var schema = _this.schema[key];
-        processedEntity[key] = visit(processedEntity[key], processedEntity, key, schema, addEntity);
-      }
-    });
-
-    addEntity(this, processedEntity, input, parent, key);
-    return this.getId(input, parent, key);
+  _proto.fallback = function fallback(id, schema) {
+    return this._fallbackStrategy(id, schema);
   };
 
-  EntitySchema.prototype.denormalize = function denormalize(entity, unvisit) {
+  _proto.normalize = function normalize(input, parent, key, visit, addEntity, visitedEntities) {
+    var _this = this;
+
+    var id = this.getId(input, parent, key);
+    var entityType = this.key;
+
+    if (!(entityType in visitedEntities)) {
+      visitedEntities[entityType] = {};
+    }
+
+    if (!(id in visitedEntities[entityType])) {
+      visitedEntities[entityType][id] = [];
+    }
+
+    if (visitedEntities[entityType][id].some(function (entity) {
+      return entity === input;
+    })) {
+      return id;
+    }
+
+    visitedEntities[entityType][id].push(input);
+
+    var processedEntity = this._processStrategy(input, parent, key);
+
+    Object.keys(this.schema).forEach(function (key) {
+      if (processedEntity.hasOwnProperty(key) && typeof processedEntity[key] === 'object') {
+        var schema = _this.schema[key];
+        var resolvedSchema = typeof schema === 'function' ? schema(input) : schema;
+        processedEntity[key] = visit(processedEntity[key], processedEntity, key, resolvedSchema, addEntity, visitedEntities);
+      }
+    });
+    addEntity(this, processedEntity, input, parent, key);
+    return id;
+  };
+
+  _proto.denormalize = function denormalize(entity, unvisit) {
     var _this2 = this;
 
     if (isImmutable(entity)) {
@@ -227,41 +205,43 @@ var EntitySchema = function () {
     return entity;
   };
 
-  createClass(EntitySchema, [{
-    key: 'key',
-    get: function get$$1() {
+  _createClass(EntitySchema, [{
+    key: "key",
+    get: function get() {
       return this._key;
     }
   }, {
-    key: 'idAttribute',
-    get: function get$$1() {
+    key: "idAttribute",
+    get: function get() {
       return this._idAttribute;
     }
   }]);
+
   return EntitySchema;
 }();
 
-var PolymorphicSchema = function () {
+var PolymorphicSchema = /*#__PURE__*/function () {
   function PolymorphicSchema(definition, schemaAttribute) {
-    classCallCheck(this, PolymorphicSchema);
-
     if (schemaAttribute) {
       this._schemaAttribute = typeof schemaAttribute === 'string' ? function (input) {
         return input[schemaAttribute];
       } : schemaAttribute;
     }
+
     this.define(definition);
   }
 
-  PolymorphicSchema.prototype.define = function define(definition) {
+  var _proto = PolymorphicSchema.prototype;
+
+  _proto.define = function define(definition) {
     this.schema = definition;
   };
 
-  PolymorphicSchema.prototype.getSchemaAttribute = function getSchemaAttribute(input, parent, key) {
+  _proto.getSchemaAttribute = function getSchemaAttribute(input, parent, key) {
     return !this.isSingleSchema && this._schemaAttribute(input, parent, key);
   };
 
-  PolymorphicSchema.prototype.inferSchema = function inferSchema(input, parent, key) {
+  _proto.inferSchema = function inferSchema(input, parent, key) {
     if (this.isSingleSchema) {
       return this.schema;
     }
@@ -270,84 +250,94 @@ var PolymorphicSchema = function () {
     return this.schema[attr];
   };
 
-  PolymorphicSchema.prototype.normalizeValue = function normalizeValue(value, parent, key, visit, addEntity) {
+  _proto.normalizeValue = function normalizeValue(value, parent, key, visit, addEntity, visitedEntities) {
     var schema = this.inferSchema(value, parent, key);
+
     if (!schema) {
       return value;
     }
-    var normalizedValue = visit(value, parent, key, schema, addEntity);
-    return this.isSingleSchema || normalizedValue === undefined || normalizedValue === null ? normalizedValue : { id: normalizedValue, schema: this.getSchemaAttribute(value, parent, key) };
+
+    var normalizedValue = visit(value, parent, key, schema, addEntity, visitedEntities);
+    return this.isSingleSchema || normalizedValue === undefined || normalizedValue === null ? normalizedValue : {
+      id: normalizedValue,
+      schema: this.getSchemaAttribute(value, parent, key)
+    };
   };
 
-  PolymorphicSchema.prototype.denormalizeValue = function denormalizeValue(value, unvisit) {
+  _proto.denormalizeValue = function denormalizeValue(value, unvisit) {
     var schemaKey = isImmutable(value) ? value.get('schema') : value.schema;
+
     if (!this.isSingleSchema && !schemaKey) {
       return value;
     }
-    var id = isImmutable(value) ? value.get('id') : value.id;
+
+    var id = this.isSingleSchema ? undefined : isImmutable(value) ? value.get('id') : value.id;
     var schema = this.isSingleSchema ? this.schema : this.schema[schemaKey];
     return unvisit(id || value, schema);
   };
 
-  createClass(PolymorphicSchema, [{
-    key: 'isSingleSchema',
-    get: function get$$1() {
+  _createClass(PolymorphicSchema, [{
+    key: "isSingleSchema",
+    get: function get() {
       return !this._schemaAttribute;
     }
   }]);
+
   return PolymorphicSchema;
 }();
 
-var UnionSchema = function (_PolymorphicSchema) {
-  inherits(UnionSchema, _PolymorphicSchema);
+var UnionSchema = /*#__PURE__*/function (_PolymorphicSchema) {
+  _inheritsLoose(UnionSchema, _PolymorphicSchema);
 
   function UnionSchema(definition, schemaAttribute) {
-    classCallCheck(this, UnionSchema);
-
     if (!schemaAttribute) {
       throw new Error('Expected option "schemaAttribute" not found on UnionSchema.');
     }
-    return possibleConstructorReturn(this, _PolymorphicSchema.call(this, definition, schemaAttribute));
+
+    return _PolymorphicSchema.call(this, definition, schemaAttribute) || this;
   }
 
-  UnionSchema.prototype.normalize = function normalize(input, parent, key, visit, addEntity) {
-    return this.normalizeValue(input, parent, key, visit, addEntity);
+  var _proto = UnionSchema.prototype;
+
+  _proto.normalize = function normalize(input, parent, key, visit, addEntity, visitedEntities) {
+    return this.normalizeValue(input, parent, key, visit, addEntity, visitedEntities);
   };
 
-  UnionSchema.prototype.denormalize = function denormalize(input, unvisit) {
+  _proto.denormalize = function denormalize(input, unvisit) {
     return this.denormalizeValue(input, unvisit);
   };
 
   return UnionSchema;
 }(PolymorphicSchema);
 
-var ValuesSchema = function (_PolymorphicSchema) {
-  inherits(ValuesSchema, _PolymorphicSchema);
+var ValuesSchema = /*#__PURE__*/function (_PolymorphicSchema) {
+  _inheritsLoose(ValuesSchema, _PolymorphicSchema);
 
   function ValuesSchema() {
-    classCallCheck(this, ValuesSchema);
-    return possibleConstructorReturn(this, _PolymorphicSchema.apply(this, arguments));
+    return _PolymorphicSchema.apply(this, arguments) || this;
   }
 
-  ValuesSchema.prototype.normalize = function normalize(input, parent, key, visit, addEntity) {
-    var _this2 = this;
+  var _proto = ValuesSchema.prototype;
+
+  _proto.normalize = function normalize(input, parent, key, visit, addEntity, visitedEntities) {
+    var _this = this;
 
     return Object.keys(input).reduce(function (output, key, index) {
-      var _babelHelpers$extends;
+      var _extends2;
 
       var value = input[key];
-      return value !== undefined && value !== null ? _extends({}, output, (_babelHelpers$extends = {}, _babelHelpers$extends[key] = _this2.normalizeValue(value, input, key, visit, addEntity), _babelHelpers$extends)) : output;
+      return value !== undefined && value !== null ? _extends({}, output, (_extends2 = {}, _extends2[key] = _this.normalizeValue(value, input, key, visit, addEntity, visitedEntities), _extends2)) : output;
     }, {});
   };
 
-  ValuesSchema.prototype.denormalize = function denormalize(input, unvisit) {
-    var _this3 = this;
+  _proto.denormalize = function denormalize(input, unvisit) {
+    var _this2 = this;
 
     return Object.keys(input).reduce(function (output, key) {
-      var _babelHelpers$extends2;
+      var _extends3;
 
       var entityOrId = input[key];
-      return _extends({}, output, (_babelHelpers$extends2 = {}, _babelHelpers$extends2[key] = _this3.denormalizeValue(entityOrId, unvisit), _babelHelpers$extends2));
+      return _extends({}, output, (_extends3 = {}, _extends3[key] = _this2.denormalizeValue(entityOrId, unvisit), _extends3));
     }, {});
   };
 
@@ -356,8 +346,9 @@ var ValuesSchema = function (_PolymorphicSchema) {
 
 var validateSchema = function validateSchema(definition) {
   var isArray = Array.isArray(definition);
+
   if (isArray && definition.length > 1) {
-    throw new Error('Expected schema definition to be a single schema, but found ' + definition.length + '.');
+    throw new Error("Expected schema definition to be a single schema, but found " + definition.length + ".");
   }
 
   return definition[0];
@@ -369,18 +360,15 @@ var getValues = function getValues(input) {
   });
 };
 
-var normalize = function normalize(schema, input, parent, key, visit, addEntity) {
+var normalize = function normalize(schema, input, parent, key, visit, addEntity, visitedEntities) {
   schema = validateSchema(schema);
-
-  var values = getValues(input);
-
-  // Special case: Arrays pass *their* parent on to their children, since there
+  var values = getValues(input); // Special case: Arrays pass *their* parent on to their children, since there
   // is not any special information that can be gathered from themselves directly
+
   return values.map(function (value, index) {
-    return visit(value, parent, key, schema, addEntity);
+    return visit(value, parent, key, schema, addEntity, visitedEntities);
   });
 };
-
 var denormalize = function denormalize(schema, input, unvisit) {
   schema = validateSchema(schema);
   return input && input.map ? input.map(function (entityOrId) {
@@ -388,42 +376,45 @@ var denormalize = function denormalize(schema, input, unvisit) {
   }) : input;
 };
 
-var ArraySchema = function (_PolymorphicSchema) {
-  inherits(ArraySchema, _PolymorphicSchema);
+var ArraySchema = /*#__PURE__*/function (_PolymorphicSchema) {
+  _inheritsLoose(ArraySchema, _PolymorphicSchema);
 
   function ArraySchema() {
-    classCallCheck(this, ArraySchema);
-    return possibleConstructorReturn(this, _PolymorphicSchema.apply(this, arguments));
+    return _PolymorphicSchema.apply(this, arguments) || this;
   }
 
-  ArraySchema.prototype.normalize = function normalize(input, parent, key, visit, addEntity) {
-    var _this2 = this;
+  var _proto = ArraySchema.prototype;
+
+  _proto.normalize = function normalize(input, parent, key, visit, addEntity, visitedEntities) {
+    var _this = this;
 
     var values = getValues(input);
-
     return values.map(function (value, index) {
-      return _this2.normalizeValue(value, parent, key, visit, addEntity);
+      return _this.normalizeValue(value, parent, key, visit, addEntity, visitedEntities);
     }).filter(function (value) {
       return value !== undefined && value !== null;
     });
   };
 
-  ArraySchema.prototype.denormalize = function denormalize(input, unvisit) {
-    var _this3 = this;
+  _proto.denormalize = function denormalize(input, unvisit) {
+    var _this2 = this;
 
     return input && input.map ? input.map(function (value) {
-      return _this3.denormalizeValue(value, unvisit);
+      return _this2.denormalizeValue(value, unvisit);
     }) : input;
   };
 
   return ArraySchema;
 }(PolymorphicSchema);
 
-var _normalize = function _normalize(schema, input, parent, key, visit, addEntity) {
+var _normalize = function normalize(schema, input, parent, key, visit, addEntity, visitedEntities) {
   var object = _extends({}, input);
+
   Object.keys(schema).forEach(function (key) {
     var localSchema = schema[key];
-    var value = visit(input[key], input, key, localSchema, addEntity);
+    var resolvedLocalSchema = typeof localSchema === 'function' ? localSchema(input) : localSchema;
+    var value = visit(input[key], input, key, resolvedLocalSchema, addEntity, visitedEntities);
+
     if (value === undefined || value === null) {
       delete object[key];
     } else {
@@ -433,77 +424,80 @@ var _normalize = function _normalize(schema, input, parent, key, visit, addEntit
   return object;
 };
 
-var _denormalize = function _denormalize(schema, input, unvisit) {
+var _denormalize = function denormalize(schema, input, unvisit) {
   if (isImmutable(input)) {
     return denormalizeImmutable(schema, input, unvisit);
   }
 
   var object = _extends({}, input);
+
   Object.keys(schema).forEach(function (key) {
-    if (object[key]) {
+    if (object[key] != null) {
       object[key] = unvisit(object[key], schema[key]);
     }
   });
   return object;
 };
 
-var ObjectSchema = function () {
+var ObjectSchema = /*#__PURE__*/function () {
   function ObjectSchema(definition) {
-    classCallCheck(this, ObjectSchema);
-
     this.define(definition);
   }
 
-  ObjectSchema.prototype.define = function define(definition) {
+  var _proto = ObjectSchema.prototype;
+
+  _proto.define = function define(definition) {
     this.schema = Object.keys(definition).reduce(function (entitySchema, key) {
-      var _babelHelpers$extends;
+      var _extends2;
 
       var schema = definition[key];
-      return _extends({}, entitySchema, (_babelHelpers$extends = {}, _babelHelpers$extends[key] = schema, _babelHelpers$extends));
+      return _extends({}, entitySchema, (_extends2 = {}, _extends2[key] = schema, _extends2));
     }, this.schema || {});
   };
 
-  ObjectSchema.prototype.normalize = function normalize() {
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+  _proto.normalize = function normalize() {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _normalize.apply(undefined, [this.schema].concat(args));
+    return _normalize.apply(void 0, [this.schema].concat(args));
   };
 
-  ObjectSchema.prototype.denormalize = function denormalize() {
-    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+  _proto.denormalize = function denormalize() {
+    for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
       args[_key2] = arguments[_key2];
     }
 
-    return _denormalize.apply(undefined, [this.schema].concat(args));
+    return _denormalize.apply(void 0, [this.schema].concat(args));
   };
 
   return ObjectSchema;
 }();
 
-var visit = function visit(value, parent, key, schema, addEntity) {
-  if ((typeof value === 'undefined' ? 'undefined' : _typeof(value)) !== 'object' || !value) {
+var visit = function visit(value, parent, key, schema, addEntity, visitedEntities) {
+  if (typeof value !== 'object' || !value) {
     return value;
   }
 
-  if ((typeof schema === 'undefined' ? 'undefined' : _typeof(schema)) === 'object' && (!schema.normalize || typeof schema.normalize !== 'function')) {
+  if (typeof schema === 'object' && (!schema.normalize || typeof schema.normalize !== 'function')) {
     var method = Array.isArray(schema) ? normalize : _normalize;
-    return method(schema, value, parent, key, visit, addEntity);
+    return method(schema, value, parent, key, visit, addEntity, visitedEntities);
   }
 
-  return schema.normalize(value, parent, key, visit, addEntity);
+  return schema.normalize(value, parent, key, visit, addEntity, visitedEntities);
 };
 
 var addEntities = function addEntities(entities) {
   return function (schema, processedEntity, value, parent, key) {
     var schemaKey = schema.key;
     var id = schema.getId(value, parent, key);
+
     if (!(schemaKey in entities)) {
       entities[schemaKey] = {};
     }
 
     var existingEntity = entities[schemaKey][id];
+
     if (existingEntity) {
       entities[schemaKey][id] = schema.merge(existingEntity, processedEntity);
     } else {
@@ -519,22 +513,29 @@ var schema = {
   Union: UnionSchema,
   Values: ValuesSchema
 };
-
-var normalize$1 = function normalize$$1(input, schema) {
-  if (!input || (typeof input === 'undefined' ? 'undefined' : _typeof(input)) !== 'object') {
-    throw new Error('Unexpected input given to normalize. Expected type to be "object", found "' + (typeof input === 'undefined' ? 'undefined' : _typeof(input)) + '".');
+var normalize$1 = function normalize(input, schema) {
+  if (!input || typeof input !== 'object') {
+    throw new Error("Unexpected input given to normalize. Expected type to be \"object\", found \"" + (input === null ? 'null' : typeof input) + "\".");
   }
 
   var entities = {};
   var addEntity = addEntities(entities);
-
-  var result = visit(input, input, null, schema, addEntity);
-  return { entities: entities, result: result };
+  var visitedEntities = {};
+  var result = visit(input, input, null, schema, addEntity, visitedEntities);
+  return {
+    entities: entities,
+    result: result
+  };
 };
 
 var unvisitEntity = function unvisitEntity(id, schema, unvisit, getEntity, cache) {
   var entity = getEntity(id, schema);
-  if ((typeof entity === 'undefined' ? 'undefined' : _typeof(entity)) !== 'object' || entity === null) {
+
+  if (entity === undefined && schema instanceof EntitySchema) {
+    entity = schema.fallback(id, schema);
+  }
+
+  if (typeof entity !== 'object' || entity === null) {
     return entity;
   }
 
@@ -544,10 +545,9 @@ var unvisitEntity = function unvisitEntity(id, schema, unvisit, getEntity, cache
 
   if (!cache[schema.key][id]) {
     // Ensure we don't mutate it non-immutable objects
-    var entityCopy = isImmutable(entity) ? entity : _extends({}, entity);
-
-    // Need to set this first so that if it is referenced further within the
+    var entityCopy = isImmutable(entity) ? entity : _extends({}, entity); // Need to set this first so that if it is referenced further within the
     // denormalization the reference will already exist.
+
     cache[schema.key][id] = entityCopy;
     cache[schema.key][id] = schema.denormalize(entityCopy, unvisit);
   }
@@ -558,9 +558,8 @@ var unvisitEntity = function unvisitEntity(id, schema, unvisit, getEntity, cache
 var getUnvisit = function getUnvisit(entities) {
   var cache = {};
   var getEntity = getEntities(entities);
-
   return function unvisit(input, schema) {
-    if ((typeof schema === 'undefined' ? 'undefined' : _typeof(schema)) === 'object' && (!schema.denormalize || typeof schema.denormalize !== 'function')) {
+    if (typeof schema === 'object' && (!schema.denormalize || typeof schema.denormalize !== 'function')) {
       var method = Array.isArray(schema) ? denormalize : _denormalize;
       return method(schema, input, unvisit);
     }
@@ -578,20 +577,23 @@ var getUnvisit = function getUnvisit(entities) {
 };
 
 var getEntities = function getEntities(entities) {
-  var isImmutable$$1 = isImmutable(entities);
-
+  var isImmutable$1 = isImmutable(entities);
   return function (entityOrId, schema) {
     var schemaKey = schema.key;
 
-    if ((typeof entityOrId === 'undefined' ? 'undefined' : _typeof(entityOrId)) === 'object') {
+    if (typeof entityOrId === 'object') {
       return entityOrId;
     }
 
-    return isImmutable$$1 ? entities.getIn([schemaKey, entityOrId.toString()]) : entities[schemaKey][entityOrId];
+    if (isImmutable$1) {
+      return entities.getIn([schemaKey, entityOrId.toString()]);
+    }
+
+    return entities[schemaKey] && entities[schemaKey][entityOrId];
   };
 };
 
-var denormalize$1 = function denormalize$$1(input, schema, entities) {
+var denormalize$1 = function denormalize(input, schema, entities) {
   if (typeof input !== 'undefined') {
     return getUnvisit(entities)(input, schema);
   }
@@ -602,11 +604,11 @@ var denormalize$1 = function denormalize$$1(input, schema, entities) {
 
 /***/ }),
 
-/***/ 280:
+/***/ 275:
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseIsNative = __webpack_require__(304),
-    getValue = __webpack_require__(307);
+var baseIsNative = __webpack_require__(299),
+    getValue = __webpack_require__(302);
 
 /**
  * Gets the native function at `key` of `object`.
@@ -626,10 +628,10 @@ module.exports = getNative;
 
 /***/ }),
 
-/***/ 285:
+/***/ 280:
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(280);
+var getNative = __webpack_require__(275);
 
 /* Built-in method references that are verified to be native. */
 var nativeCreate = getNative(Object, 'create');
@@ -639,10 +641,10 @@ module.exports = nativeCreate;
 
 /***/ }),
 
-/***/ 286:
+/***/ 281:
 /***/ (function(module, exports, __webpack_require__) {
 
-var eq = __webpack_require__(297);
+var eq = __webpack_require__(292);
 
 /**
  * Gets the index at which the `key` is found in `array` of key-value pairs.
@@ -667,10 +669,10 @@ module.exports = assocIndexOf;
 
 /***/ }),
 
-/***/ 287:
+/***/ 282:
 /***/ (function(module, exports, __webpack_require__) {
 
-var isKeyable = __webpack_require__(325);
+var isKeyable = __webpack_require__(320);
 
 /**
  * Gets the data for `map`.
@@ -692,10 +694,10 @@ module.exports = getMapData;
 
 /***/ }),
 
-/***/ 289:
+/***/ 284:
 /***/ (function(module, exports, __webpack_require__) {
 
-var isSymbol = __webpack_require__(293);
+var isSymbol = __webpack_require__(288);
 
 /** Used as references for various `Number` constants. */
 var INFINITY = 1 / 0;
@@ -720,11 +722,11 @@ module.exports = toKey;
 
 /***/ }),
 
-/***/ 291:
+/***/ 286:
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(280),
-    root = __webpack_require__(15);
+var getNative = __webpack_require__(275),
+    root = __webpack_require__(13);
 
 /* Built-in method references that are verified to be native. */
 var Map = getNative(root, 'Map');
@@ -734,13 +736,13 @@ module.exports = Map;
 
 /***/ }),
 
-/***/ 292:
+/***/ 287:
 /***/ (function(module, exports, __webpack_require__) {
 
-var isArray = __webpack_require__(16),
-    isKey = __webpack_require__(298),
-    stringToPath = __webpack_require__(337),
-    toString = __webpack_require__(340);
+var isArray = __webpack_require__(14),
+    isKey = __webpack_require__(293),
+    stringToPath = __webpack_require__(332),
+    toString = __webpack_require__(335);
 
 /**
  * Casts `value` to a path array if it's not one.
@@ -762,7 +764,7 @@ module.exports = castPath;
 
 /***/ }),
 
-/***/ 293:
+/***/ 288:
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseGetTag = __webpack_require__(8),
@@ -798,14 +800,14 @@ module.exports = isSymbol;
 
 /***/ }),
 
-/***/ 294:
+/***/ 289:
 /***/ (function(module, exports, __webpack_require__) {
 
-var listCacheClear = __webpack_require__(319),
-    listCacheDelete = __webpack_require__(320),
-    listCacheGet = __webpack_require__(321),
-    listCacheHas = __webpack_require__(322),
-    listCacheSet = __webpack_require__(323);
+var listCacheClear = __webpack_require__(314),
+    listCacheDelete = __webpack_require__(315),
+    listCacheGet = __webpack_require__(316),
+    listCacheHas = __webpack_require__(317),
+    listCacheSet = __webpack_require__(318);
 
 /**
  * Creates an list cache object.
@@ -837,7 +839,7 @@ module.exports = ListCache;
 
 /***/ }),
 
-/***/ 295:
+/***/ 290:
 /***/ (function(module, exports) {
 
 /** Used for built-in method references. */
@@ -870,14 +872,14 @@ module.exports = toSource;
 
 /***/ }),
 
-/***/ 296:
+/***/ 291:
 /***/ (function(module, exports, __webpack_require__) {
 
-var mapCacheClear = __webpack_require__(312),
-    mapCacheDelete = __webpack_require__(324),
-    mapCacheGet = __webpack_require__(326),
-    mapCacheHas = __webpack_require__(327),
-    mapCacheSet = __webpack_require__(328);
+var mapCacheClear = __webpack_require__(307),
+    mapCacheDelete = __webpack_require__(319),
+    mapCacheGet = __webpack_require__(321),
+    mapCacheHas = __webpack_require__(322),
+    mapCacheSet = __webpack_require__(323);
 
 /**
  * Creates a map cache object to store key-value pairs.
@@ -909,7 +911,7 @@ module.exports = MapCache;
 
 /***/ }),
 
-/***/ 297:
+/***/ 292:
 /***/ (function(module, exports) {
 
 /**
@@ -953,11 +955,11 @@ module.exports = eq;
 
 /***/ }),
 
-/***/ 298:
+/***/ 293:
 /***/ (function(module, exports, __webpack_require__) {
 
-var isArray = __webpack_require__(16),
-    isSymbol = __webpack_require__(293);
+var isArray = __webpack_require__(14),
+    isSymbol = __webpack_require__(288);
 
 /** Used to match property names within property paths. */
 var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/,
@@ -989,7 +991,7 @@ module.exports = isKey;
 
 /***/ }),
 
-/***/ 299:
+/***/ 294:
 /***/ (function(module, exports) {
 
 /**
@@ -1017,10 +1019,10 @@ module.exports = arrayMap;
 
 /***/ }),
 
-/***/ 300:
+/***/ 295:
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(280);
+var getNative = __webpack_require__(275);
 
 var defineProperty = (function() {
   try {
@@ -1035,7 +1037,7 @@ module.exports = defineProperty;
 
 /***/ }),
 
-/***/ 301:
+/***/ 296:
 /***/ (function(module, exports) {
 
 /**
@@ -1062,16 +1064,16 @@ module.exports = arrayPush;
 
 /***/ }),
 
-/***/ 302:
+/***/ 297:
 /***/ (function(module, exports, __webpack_require__) {
 
-var DataView = __webpack_require__(303),
-    Map = __webpack_require__(291),
-    Promise = __webpack_require__(308),
-    Set = __webpack_require__(309),
-    WeakMap = __webpack_require__(310),
+var DataView = __webpack_require__(298),
+    Map = __webpack_require__(286),
+    Promise = __webpack_require__(303),
+    Set = __webpack_require__(304),
+    WeakMap = __webpack_require__(305),
     baseGetTag = __webpack_require__(8),
-    toSource = __webpack_require__(295);
+    toSource = __webpack_require__(290);
 
 /** `Object#toString` result references. */
 var mapTag = '[object Map]',
@@ -1127,11 +1129,11 @@ module.exports = getTag;
 
 /***/ }),
 
-/***/ 303:
+/***/ 298:
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(280),
-    root = __webpack_require__(15);
+var getNative = __webpack_require__(275),
+    root = __webpack_require__(13);
 
 /* Built-in method references that are verified to be native. */
 var DataView = getNative(root, 'DataView');
@@ -1141,13 +1143,13 @@ module.exports = DataView;
 
 /***/ }),
 
-/***/ 304:
+/***/ 299:
 /***/ (function(module, exports, __webpack_require__) {
 
-var isFunction = __webpack_require__(99),
-    isMasked = __webpack_require__(305),
-    isObject = __webpack_require__(97),
-    toSource = __webpack_require__(295);
+var isFunction = __webpack_require__(100),
+    isMasked = __webpack_require__(300),
+    isObject = __webpack_require__(98),
+    toSource = __webpack_require__(290);
 
 /**
  * Used to match `RegExp`
@@ -1195,10 +1197,10 @@ module.exports = baseIsNative;
 
 /***/ }),
 
-/***/ 305:
+/***/ 300:
 /***/ (function(module, exports, __webpack_require__) {
 
-var coreJsData = __webpack_require__(306);
+var coreJsData = __webpack_require__(301);
 
 /** Used to detect methods masquerading as native. */
 var maskSrcKey = (function() {
@@ -1222,10 +1224,10 @@ module.exports = isMasked;
 
 /***/ }),
 
-/***/ 306:
+/***/ 301:
 /***/ (function(module, exports, __webpack_require__) {
 
-var root = __webpack_require__(15);
+var root = __webpack_require__(13);
 
 /** Used to detect overreaching core-js shims. */
 var coreJsData = root['__core-js_shared__'];
@@ -1235,7 +1237,7 @@ module.exports = coreJsData;
 
 /***/ }),
 
-/***/ 307:
+/***/ 302:
 /***/ (function(module, exports) {
 
 /**
@@ -1255,11 +1257,11 @@ module.exports = getValue;
 
 /***/ }),
 
-/***/ 308:
+/***/ 303:
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(280),
-    root = __webpack_require__(15);
+var getNative = __webpack_require__(275),
+    root = __webpack_require__(13);
 
 /* Built-in method references that are verified to be native. */
 var Promise = getNative(root, 'Promise');
@@ -1269,11 +1271,11 @@ module.exports = Promise;
 
 /***/ }),
 
-/***/ 309:
+/***/ 304:
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(280),
-    root = __webpack_require__(15);
+var getNative = __webpack_require__(275),
+    root = __webpack_require__(13);
 
 /* Built-in method references that are verified to be native. */
 var Set = getNative(root, 'Set');
@@ -1283,11 +1285,11 @@ module.exports = Set;
 
 /***/ }),
 
-/***/ 310:
+/***/ 305:
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(280),
-    root = __webpack_require__(15);
+var getNative = __webpack_require__(275),
+    root = __webpack_require__(13);
 
 /* Built-in method references that are verified to be native. */
 var WeakMap = getNative(root, 'WeakMap');
@@ -1297,11 +1299,11 @@ module.exports = WeakMap;
 
 /***/ }),
 
-/***/ 311:
+/***/ 306:
 /***/ (function(module, exports, __webpack_require__) {
 
-var castPath = __webpack_require__(292),
-    toKey = __webpack_require__(289);
+var castPath = __webpack_require__(287),
+    toKey = __webpack_require__(284);
 
 /**
  * The base implementation of `_.get` without support for default values.
@@ -1328,12 +1330,12 @@ module.exports = baseGet;
 
 /***/ }),
 
-/***/ 312:
+/***/ 307:
 /***/ (function(module, exports, __webpack_require__) {
 
-var Hash = __webpack_require__(313),
-    ListCache = __webpack_require__(294),
-    Map = __webpack_require__(291);
+var Hash = __webpack_require__(308),
+    ListCache = __webpack_require__(289),
+    Map = __webpack_require__(286);
 
 /**
  * Removes all key-value entries from the map.
@@ -1356,14 +1358,14 @@ module.exports = mapCacheClear;
 
 /***/ }),
 
-/***/ 313:
+/***/ 308:
 /***/ (function(module, exports, __webpack_require__) {
 
-var hashClear = __webpack_require__(314),
-    hashDelete = __webpack_require__(315),
-    hashGet = __webpack_require__(316),
-    hashHas = __webpack_require__(317),
-    hashSet = __webpack_require__(318);
+var hashClear = __webpack_require__(309),
+    hashDelete = __webpack_require__(310),
+    hashGet = __webpack_require__(311),
+    hashHas = __webpack_require__(312),
+    hashSet = __webpack_require__(313);
 
 /**
  * Creates a hash object.
@@ -1395,10 +1397,10 @@ module.exports = Hash;
 
 /***/ }),
 
-/***/ 314:
+/***/ 309:
 /***/ (function(module, exports, __webpack_require__) {
 
-var nativeCreate = __webpack_require__(285);
+var nativeCreate = __webpack_require__(280);
 
 /**
  * Removes all key-value entries from the hash.
@@ -1417,7 +1419,7 @@ module.exports = hashClear;
 
 /***/ }),
 
-/***/ 315:
+/***/ 310:
 /***/ (function(module, exports) {
 
 /**
@@ -1441,10 +1443,10 @@ module.exports = hashDelete;
 
 /***/ }),
 
-/***/ 316:
+/***/ 311:
 /***/ (function(module, exports, __webpack_require__) {
 
-var nativeCreate = __webpack_require__(285);
+var nativeCreate = __webpack_require__(280);
 
 /** Used to stand-in for `undefined` hash values. */
 var HASH_UNDEFINED = '__lodash_hash_undefined__';
@@ -1478,10 +1480,10 @@ module.exports = hashGet;
 
 /***/ }),
 
-/***/ 317:
+/***/ 312:
 /***/ (function(module, exports, __webpack_require__) {
 
-var nativeCreate = __webpack_require__(285);
+var nativeCreate = __webpack_require__(280);
 
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
@@ -1508,10 +1510,10 @@ module.exports = hashHas;
 
 /***/ }),
 
-/***/ 318:
+/***/ 313:
 /***/ (function(module, exports, __webpack_require__) {
 
-var nativeCreate = __webpack_require__(285);
+var nativeCreate = __webpack_require__(280);
 
 /** Used to stand-in for `undefined` hash values. */
 var HASH_UNDEFINED = '__lodash_hash_undefined__';
@@ -1538,7 +1540,7 @@ module.exports = hashSet;
 
 /***/ }),
 
-/***/ 319:
+/***/ 314:
 /***/ (function(module, exports) {
 
 /**
@@ -1558,10 +1560,10 @@ module.exports = listCacheClear;
 
 /***/ }),
 
-/***/ 320:
+/***/ 315:
 /***/ (function(module, exports, __webpack_require__) {
 
-var assocIndexOf = __webpack_require__(286);
+var assocIndexOf = __webpack_require__(281);
 
 /** Used for built-in method references. */
 var arrayProto = Array.prototype;
@@ -1600,10 +1602,10 @@ module.exports = listCacheDelete;
 
 /***/ }),
 
-/***/ 321:
+/***/ 316:
 /***/ (function(module, exports, __webpack_require__) {
 
-var assocIndexOf = __webpack_require__(286);
+var assocIndexOf = __webpack_require__(281);
 
 /**
  * Gets the list cache value for `key`.
@@ -1626,10 +1628,10 @@ module.exports = listCacheGet;
 
 /***/ }),
 
-/***/ 322:
+/***/ 317:
 /***/ (function(module, exports, __webpack_require__) {
 
-var assocIndexOf = __webpack_require__(286);
+var assocIndexOf = __webpack_require__(281);
 
 /**
  * Checks if a list cache value for `key` exists.
@@ -1649,10 +1651,10 @@ module.exports = listCacheHas;
 
 /***/ }),
 
-/***/ 323:
+/***/ 318:
 /***/ (function(module, exports, __webpack_require__) {
 
-var assocIndexOf = __webpack_require__(286);
+var assocIndexOf = __webpack_require__(281);
 
 /**
  * Sets the list cache `key` to `value`.
@@ -1682,10 +1684,10 @@ module.exports = listCacheSet;
 
 /***/ }),
 
-/***/ 324:
+/***/ 319:
 /***/ (function(module, exports, __webpack_require__) {
 
-var getMapData = __webpack_require__(287);
+var getMapData = __webpack_require__(282);
 
 /**
  * Removes `key` and its value from the map.
@@ -1707,7 +1709,7 @@ module.exports = mapCacheDelete;
 
 /***/ }),
 
-/***/ 325:
+/***/ 320:
 /***/ (function(module, exports) {
 
 /**
@@ -1729,10 +1731,10 @@ module.exports = isKeyable;
 
 /***/ }),
 
-/***/ 326:
+/***/ 321:
 /***/ (function(module, exports, __webpack_require__) {
 
-var getMapData = __webpack_require__(287);
+var getMapData = __webpack_require__(282);
 
 /**
  * Gets the map value for `key`.
@@ -1752,10 +1754,10 @@ module.exports = mapCacheGet;
 
 /***/ }),
 
-/***/ 327:
+/***/ 322:
 /***/ (function(module, exports, __webpack_require__) {
 
-var getMapData = __webpack_require__(287);
+var getMapData = __webpack_require__(282);
 
 /**
  * Checks if a map value for `key` exists.
@@ -1775,10 +1777,10 @@ module.exports = mapCacheHas;
 
 /***/ }),
 
-/***/ 328:
+/***/ 323:
 /***/ (function(module, exports, __webpack_require__) {
 
-var getMapData = __webpack_require__(287);
+var getMapData = __webpack_require__(282);
 
 /**
  * Sets the map `key` to `value`.
@@ -1804,11 +1806,11 @@ module.exports = mapCacheSet;
 
 /***/ }),
 
-/***/ 329:
+/***/ 324:
 /***/ (function(module, exports, __webpack_require__) {
 
-var arrayPush = __webpack_require__(301),
-    isFlattenable = __webpack_require__(330);
+var arrayPush = __webpack_require__(296),
+    isFlattenable = __webpack_require__(325);
 
 /**
  * The base implementation of `_.flatten` with support for restricting flattening.
@@ -1849,12 +1851,12 @@ module.exports = baseFlatten;
 
 /***/ }),
 
-/***/ 330:
+/***/ 325:
 /***/ (function(module, exports, __webpack_require__) {
 
-var Symbol = __webpack_require__(17),
-    isArguments = __webpack_require__(95),
-    isArray = __webpack_require__(16);
+var Symbol = __webpack_require__(15),
+    isArguments = __webpack_require__(96),
+    isArray = __webpack_require__(14);
 
 /** Built-in value references. */
 var spreadableSymbol = Symbol ? Symbol.isConcatSpreadable : undefined;
@@ -1876,10 +1878,10 @@ module.exports = isFlattenable;
 
 /***/ }),
 
-/***/ 331:
+/***/ 326:
 /***/ (function(module, exports, __webpack_require__) {
 
-var apply = __webpack_require__(332);
+var apply = __webpack_require__(327);
 
 /* Built-in method references for those with the same name as other `lodash` methods. */
 var nativeMax = Math.max;
@@ -1919,7 +1921,7 @@ module.exports = overRest;
 
 /***/ }),
 
-/***/ 332:
+/***/ 327:
 /***/ (function(module, exports) {
 
 /**
@@ -1947,11 +1949,11 @@ module.exports = apply;
 
 /***/ }),
 
-/***/ 333:
+/***/ 328:
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseSetToString = __webpack_require__(334),
-    shortOut = __webpack_require__(336);
+var baseSetToString = __webpack_require__(329),
+    shortOut = __webpack_require__(331);
 
 /**
  * Sets the `toString` method of `func` to return `string`.
@@ -1968,12 +1970,12 @@ module.exports = setToString;
 
 /***/ }),
 
-/***/ 334:
+/***/ 329:
 /***/ (function(module, exports, __webpack_require__) {
 
-var constant = __webpack_require__(335),
-    defineProperty = __webpack_require__(300),
-    identity = __webpack_require__(96);
+var constant = __webpack_require__(330),
+    defineProperty = __webpack_require__(295),
+    identity = __webpack_require__(97);
 
 /**
  * The base implementation of `setToString` without support for hot loop shorting.
@@ -1997,7 +1999,7 @@ module.exports = baseSetToString;
 
 /***/ }),
 
-/***/ 335:
+/***/ 330:
 /***/ (function(module, exports) {
 
 /**
@@ -2030,7 +2032,7 @@ module.exports = constant;
 
 /***/ }),
 
-/***/ 336:
+/***/ 331:
 /***/ (function(module, exports) {
 
 /** Used to detect hot functions by number of calls within a span of milliseconds. */
@@ -2074,10 +2076,10 @@ module.exports = shortOut;
 
 /***/ }),
 
-/***/ 337:
+/***/ 332:
 /***/ (function(module, exports, __webpack_require__) {
 
-var memoizeCapped = __webpack_require__(338);
+var memoizeCapped = __webpack_require__(333);
 
 /** Used to match property names within property paths. */
 var rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g;
@@ -2108,10 +2110,10 @@ module.exports = stringToPath;
 
 /***/ }),
 
-/***/ 338:
+/***/ 333:
 /***/ (function(module, exports, __webpack_require__) {
 
-var memoize = __webpack_require__(339);
+var memoize = __webpack_require__(334);
 
 /** Used as the maximum memoize cache size. */
 var MAX_MEMOIZE_SIZE = 500;
@@ -2141,10 +2143,10 @@ module.exports = memoizeCapped;
 
 /***/ }),
 
-/***/ 339:
+/***/ 334:
 /***/ (function(module, exports, __webpack_require__) {
 
-var MapCache = __webpack_require__(296);
+var MapCache = __webpack_require__(291);
 
 /** Error message constants. */
 var FUNC_ERROR_TEXT = 'Expected a function';
@@ -2221,10 +2223,10 @@ module.exports = memoize;
 
 /***/ }),
 
-/***/ 340:
+/***/ 335:
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseToString = __webpack_require__(341);
+var baseToString = __webpack_require__(336);
 
 /**
  * Converts `value` to a string. An empty string is returned for `null`
@@ -2256,13 +2258,13 @@ module.exports = toString;
 
 /***/ }),
 
-/***/ 341:
+/***/ 336:
 /***/ (function(module, exports, __webpack_require__) {
 
-var Symbol = __webpack_require__(17),
-    arrayMap = __webpack_require__(299),
-    isArray = __webpack_require__(16),
-    isSymbol = __webpack_require__(293);
+var Symbol = __webpack_require__(15),
+    arrayMap = __webpack_require__(294),
+    isArray = __webpack_require__(14),
+    isSymbol = __webpack_require__(288);
 
 /** Used as references for various `Number` constants. */
 var INFINITY = 1 / 0;
@@ -2300,11 +2302,11 @@ module.exports = baseToString;
 
 /***/ }),
 
-/***/ 342:
+/***/ 337:
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseHasIn = __webpack_require__(343),
-    hasPath = __webpack_require__(344);
+var baseHasIn = __webpack_require__(338),
+    hasPath = __webpack_require__(339);
 
 /**
  * Checks if `path` is a direct or inherited property of `object`.
@@ -2341,7 +2343,7 @@ module.exports = hasIn;
 
 /***/ }),
 
-/***/ 343:
+/***/ 338:
 /***/ (function(module, exports) {
 
 /**
@@ -2361,15 +2363,15 @@ module.exports = baseHasIn;
 
 /***/ }),
 
-/***/ 344:
+/***/ 339:
 /***/ (function(module, exports, __webpack_require__) {
 
-var castPath = __webpack_require__(292),
-    isArguments = __webpack_require__(95),
-    isArray = __webpack_require__(16),
-    isIndex = __webpack_require__(98),
-    isLength = __webpack_require__(19),
-    toKey = __webpack_require__(289);
+var castPath = __webpack_require__(287),
+    isArguments = __webpack_require__(96),
+    isArray = __webpack_require__(14),
+    isIndex = __webpack_require__(99),
+    isLength = __webpack_require__(17),
+    toKey = __webpack_require__(284);
 
 /**
  * Checks if `path` exists on `object`.
@@ -2407,17 +2409,17 @@ module.exports = hasPath;
 
 /***/ }),
 
-/***/ 347:
+/***/ 342:
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseKeys = __webpack_require__(104),
-    getTag = __webpack_require__(302),
-    isArguments = __webpack_require__(95),
-    isArray = __webpack_require__(16),
-    isArrayLike = __webpack_require__(18),
-    isBuffer = __webpack_require__(100),
-    isPrototype = __webpack_require__(105),
-    isTypedArray = __webpack_require__(101);
+var baseKeys = __webpack_require__(105),
+    getTag = __webpack_require__(297),
+    isArguments = __webpack_require__(96),
+    isArray = __webpack_require__(14),
+    isArrayLike = __webpack_require__(16),
+    isBuffer = __webpack_require__(101),
+    isPrototype = __webpack_require__(106),
+    isTypedArray = __webpack_require__(102);
 
 /** `Object#toString` result references. */
 var mapTag = '[object Map]',
@@ -2491,15 +2493,15 @@ module.exports = isEmpty;
 
 /***/ }),
 
-/***/ 364:
+/***/ 360:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(2)
+var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(367)
+var __vue_script__ = __webpack_require__(362)
 /* template */
-var __vue_template__ = __webpack_require__(376)
+var __vue_template__ = __webpack_require__(371)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -2539,16 +2541,18 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 367:
+/***/ 362:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_normalizr__ = __webpack_require__(279);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_isEmpty__ = __webpack_require__(347);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_normalizr__ = __webpack_require__(274);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_isEmpty__ = __webpack_require__(342);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_isEmpty___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash_isEmpty__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_pick__ = __webpack_require__(368);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_pick__ = __webpack_require__(363);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_pick___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash_pick__);
+//
+//
 //
 //
 //
@@ -2569,7 +2573,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: { FieldFormItem: function FieldFormItem() {
-      return __webpack_require__.e/* import() */(78).then(__webpack_require__.bind(null, 410));
+      return __webpack_require__.e/* import() */(79).then(__webpack_require__.bind(null, 405));
     } },
   props: {
     fields: {
@@ -2615,11 +2619,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 368:
+/***/ 363:
 /***/ (function(module, exports, __webpack_require__) {
 
-var basePick = __webpack_require__(369),
-    flatRest = __webpack_require__(374);
+var basePick = __webpack_require__(364),
+    flatRest = __webpack_require__(369);
 
 /**
  * Creates an object composed of the picked `object` properties.
@@ -2647,11 +2651,11 @@ module.exports = pick;
 
 /***/ }),
 
-/***/ 369:
+/***/ 364:
 /***/ (function(module, exports, __webpack_require__) {
 
-var basePickBy = __webpack_require__(370),
-    hasIn = __webpack_require__(342);
+var basePickBy = __webpack_require__(365),
+    hasIn = __webpack_require__(337);
 
 /**
  * The base implementation of `_.pick` without support for individual
@@ -2673,12 +2677,12 @@ module.exports = basePick;
 
 /***/ }),
 
-/***/ 370:
+/***/ 365:
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseGet = __webpack_require__(311),
-    baseSet = __webpack_require__(371),
-    castPath = __webpack_require__(292);
+var baseGet = __webpack_require__(306),
+    baseSet = __webpack_require__(366),
+    castPath = __webpack_require__(287);
 
 /**
  * The base implementation of  `_.pickBy` without support for iteratee shorthands.
@@ -2710,14 +2714,14 @@ module.exports = basePickBy;
 
 /***/ }),
 
-/***/ 371:
+/***/ 366:
 /***/ (function(module, exports, __webpack_require__) {
 
-var assignValue = __webpack_require__(372),
-    castPath = __webpack_require__(292),
-    isIndex = __webpack_require__(98),
-    isObject = __webpack_require__(97),
-    toKey = __webpack_require__(289);
+var assignValue = __webpack_require__(367),
+    castPath = __webpack_require__(287),
+    isIndex = __webpack_require__(99),
+    isObject = __webpack_require__(98),
+    toKey = __webpack_require__(284);
 
 /**
  * The base implementation of `_.set`.
@@ -2744,6 +2748,10 @@ function baseSet(object, path, value, customizer) {
     var key = toKey(path[index]),
         newValue = value;
 
+    if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
+      return object;
+    }
+
     if (index != lastIndex) {
       var objValue = nested[key];
       newValue = customizer ? customizer(objValue, key, nested) : undefined;
@@ -2764,11 +2772,11 @@ module.exports = baseSet;
 
 /***/ }),
 
-/***/ 372:
+/***/ 367:
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseAssignValue = __webpack_require__(373),
-    eq = __webpack_require__(297);
+var baseAssignValue = __webpack_require__(368),
+    eq = __webpack_require__(292);
 
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
@@ -2799,10 +2807,10 @@ module.exports = assignValue;
 
 /***/ }),
 
-/***/ 373:
+/***/ 368:
 /***/ (function(module, exports, __webpack_require__) {
 
-var defineProperty = __webpack_require__(300);
+var defineProperty = __webpack_require__(295);
 
 /**
  * The base implementation of `assignValue` and `assignMergeValue` without
@@ -2831,12 +2839,12 @@ module.exports = baseAssignValue;
 
 /***/ }),
 
-/***/ 374:
+/***/ 369:
 /***/ (function(module, exports, __webpack_require__) {
 
-var flatten = __webpack_require__(375),
-    overRest = __webpack_require__(331),
-    setToString = __webpack_require__(333);
+var flatten = __webpack_require__(370),
+    overRest = __webpack_require__(326),
+    setToString = __webpack_require__(328);
 
 /**
  * A specialized version of `baseRest` which flattens the rest array.
@@ -2854,10 +2862,10 @@ module.exports = flatRest;
 
 /***/ }),
 
-/***/ 375:
+/***/ 370:
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseFlatten = __webpack_require__(329);
+var baseFlatten = __webpack_require__(324);
 
 /**
  * Flattens `array` a single level deep.
@@ -2883,7 +2891,7 @@ module.exports = flatten;
 
 /***/ }),
 
-/***/ 376:
+/***/ 371:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -2891,20 +2899,33 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "el-form",
-    { ref: "field-data", attrs: { model: _vm.data, "label-position": "top" } },
-    _vm._l(_vm.fields, function(field, $index) {
-      return _c(
-        "el-form-item",
-        { key: field.id, attrs: { prop: field.alias, label: field.title } },
-        [
-          _c("FieldFormItem", {
-            attrs: { "default-value": _vm.data[field.id], "field-data": field }
-          })
-        ],
+    "div",
+    [
+      _c(
+        "el-form",
+        {
+          ref: "field-data",
+          attrs: { model: _vm.data, "label-position": "top" }
+        },
+        _vm._l(_vm.fields, function(field, $index) {
+          return _c(
+            "el-form-item",
+            { key: field.id, attrs: { prop: field.alias, label: field.title } },
+            [
+              _c("FieldFormItem", {
+                attrs: {
+                  "default-value": _vm.data[field.id],
+                  "field-data": field
+                }
+              })
+            ],
+            1
+          )
+        }),
         1
       )
-    })
+    ],
+    1
   )
 }
 var staticRenderFns = []

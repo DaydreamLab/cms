@@ -1,14 +1,14 @@
 webpackJsonp([76],{
 
-/***/ 102:
+/***/ 103:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(2)
+var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(377)
+var __vue_script__ = __webpack_require__(372)
 /* template */
-var __vue_template__ = __webpack_require__(378)
+var __vue_template__ = __webpack_require__(373)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 283:
+/***/ 278:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -201,7 +201,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 /***/ }),
 
-/***/ 290:
+/***/ 285:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -216,14 +216,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 /***/ }),
 
-/***/ 377:
+/***/ 372:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_options__ = __webpack_require__(281);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_list__ = __webpack_require__(283);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mixins_list_cms__ = __webpack_require__(290);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_options__ = __webpack_require__(276);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_list__ = __webpack_require__(278);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mixins_list_cms__ = __webpack_require__(285);
 //
 //
 //
@@ -662,12 +662,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
       });
     }
+  },
+  /*TODO 會有this.searchbar.defaultValue有值 而$route.query沒有值的情況*/
+  /*TODO 如果在同一個$route.name做移動 $route.query不會跟this.searchbar.defaultValue同步*/
+  /*TODO 目前只有項目有加這段 待寫成全站套用版*/
+  watch: {
+    $route: function $route(v) {
+      var _this8 = this;
+
+      if (Object.keys(v.query).length === 0) {
+        Object.keys(this.searchbar.defaultValue).forEach(function (key) {
+          _this8.searchbar.defaultValue[key] = '';
+        });
+      }
+    }
   }
 });
 
 /***/ }),
 
-/***/ 378:
+/***/ 373:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {

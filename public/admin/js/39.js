@@ -1,14 +1,14 @@
 webpackJsonp([39],{
 
-/***/ 129:
+/***/ 131:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(2)
+var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(487)
+var __vue_script__ = __webpack_require__(484)
 /* template */
-var __vue_template__ = __webpack_require__(488)
+var __vue_template__ = __webpack_require__(485)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 284:
+/***/ 279:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -86,13 +86,18 @@ module.exports = Component.exports
                     });
                     break;
                 case "savenadd":
+                    //Checkout
+                    if (this.checkRouteNeedCheckout(this.$route.path) && query.id) {
+                        this.handleCheckout(query.id);
+                    }
                     this.$router.push({
                         path: this.$route.path
                     });
                     this.$router.go(0);
                     break;
                 case "savenclose":
-                    this.$_editMixin_onCancel();
+                    //Checkout
+                    this.$_editMixin_onCancel(query.id);
                     break;
             }
         },
@@ -108,7 +113,7 @@ module.exports = Component.exports
             });
         },
         checkRouteNeedCheckout: function checkRouteNeedCheckout(route) {
-            var checkoutArray = ["item", "category", "menu"];
+            var checkoutArray = ["item", "category", "menu", "site"];
             var _iteratorNormalCompletion = true;
             var _didIteratorError = false;
             var _iteratorError = undefined;
@@ -154,7 +159,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 288:
+/***/ 283:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -162,8 +167,10 @@ module.exports = Component.exports
     created: function created() {
         var _this = this;
 
-        this.$$eventBus.$on("onClickCMSFormDataToolbar", function (btnType) {
-            switch (btnType) {
+        this.$$eventBus.$on("onClickCMSFormDataToolbar", function (btnOpts) {
+            var type = btnOpts.type;
+
+            switch (type) {
                 case "cancel":
                     _this.$_editMixin_onCancel(_this.$route.query.id);
                     break;
@@ -171,7 +178,7 @@ module.exports = Component.exports
                 case "savenclose":
                 case "savenadd":
                     _this.handleSubmit({
-                        btn_type: btnType,
+                        btn_type: type,
                         submit_data: _this.defaultValue
                     });
                     break;
@@ -203,13 +210,13 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 487:
+/***/ 484:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_edit__ = __webpack_require__(284);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_edit_cms__ = __webpack_require__(288);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mixins_edit__ = __webpack_require__(279);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_edit_cms__ = __webpack_require__(283);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -336,7 +343,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 /***/ }),
 
-/***/ 488:
+/***/ 485:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -590,7 +597,8 @@ var render = function() {
                               option[_vm.fields.language.custom_attrs.value]
                           }
                         })
-                      })
+                      }),
+                      1
                     )
                   ],
                   1
