@@ -87,6 +87,16 @@ class InstallCommand extends Command
             '--tag' => 'cms-configs',
         ]);
 
+        $this->call('vendor:publish', [
+            '--tag' => 'cms-frontend-admin',
+            '--force'  => true,
+        ]);
+
+        $this->call('vendor:publish', [
+            '--tag' => 'cms-frontend-site',
+            '--force'  => true,
+        ]);
+
     }
 
     public function deleteConstants()
