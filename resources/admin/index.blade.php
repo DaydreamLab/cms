@@ -93,32 +93,32 @@
 </head>
 
 <body>
-    <div id="preloader">
-        <div id="loader"></div>
-    </div>
-    <div id="app"></div>
+<div id="preloader">
+    <div id="loader"></div>
+</div>
+<div id="app"></div>
 
-    <script>
-        window.onload=function () {
-                document.querySelector('#preloader').remove()
-            }
-    </script>
+<script>
+window.onload=function () {
+  document.querySelector('#preloader').remove()
+}
+</script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
 
-    @if (env('APP_ENV') === 'production')
+@if (env('APP_ENV') === 'production')
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
-    @else
+@else
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
-    @endif
-    <script src="https://unpkg.com/vue-i18n/dist/vue-i18n.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.2/vue-router.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.0.1/vuex.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.4.6/index.js"></script>
-    <script type="text/javascript" src="{{ asset(mix('/js/editor.js', 'admin')) }}"></script>
-    <script type="text/javascript" src="{{ asset(mix('/js/manifest.js', 'admin')) }}"></script>
-    <script type="text/javascript" src="{{ asset(mix('/js/vendor.js', 'admin')) }}"></script>
-    <script type="text/javascript" src="{{ asset(mix('/js/app.js', 'admin')) }}"></script>
+@endif
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue-i18n/8.15.1/vue-i18n.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.2/vue-router.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.0.1/vuex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.4.6/index.js"></script>
+<script type="text/javascript" src="{{ asset(mix('/js/editor.js', 'admin')) }}"></script>
+<script type="text/javascript" src="{{ asset(mix('/js/manifest.js', 'admin')) }}"></script>
+<script type="text/javascript" src="{{ asset(mix('/js/vendor.js', 'admin')) }}"></script>
+<script type="text/javascript" src="{{ asset(mix('/js/app.js', 'admin')) }}"></script>
 
 </body>
 
