@@ -4,7 +4,7 @@ namespace DaydreamLab\Cms\Controllers\Extrafield\Admin;
 
 use DaydreamLab\Cms\Controllers\CmsController;
 use DaydreamLab\Cms\Requests\Extrafield\Admin\ExtrafieldAdminGetItemGet;
-use DaydreamLab\Cms\Requests\Extrafield\ExtrafieldAdminCheckoutPost;
+use DaydreamLab\Cms\Requests\Extrafield\Admin\ExtrafieldAdminCheckoutPost;
 use DaydreamLab\Cms\Resources\Extrafield\Admin\Collections\ExtrafieldAdminListResourceCollection;
 use DaydreamLab\Cms\Resources\Extrafield\Admin\Models\ExtrafieldAdminResource;
 use DaydreamLab\Cms\Services\Extrafield\Admin\ExtrafieldAdminService;
