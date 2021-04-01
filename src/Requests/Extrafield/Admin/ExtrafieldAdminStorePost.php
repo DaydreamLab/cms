@@ -43,7 +43,7 @@ class ExtrafieldAdminStorePost extends AdminRequest
             'description'   => 'nullable|string',
             'params'        => 'nullable|array',
             'params.*'      => 'nullable|array',
-            'params.*.*'    => 'nullable|string',
+            'params.*.*'    => 'nullable|array',
             'access'        => 'nullable|integer',
             'ordering'      => 'nullable|integer',
             'created_by'    => 'nullable|integer',
