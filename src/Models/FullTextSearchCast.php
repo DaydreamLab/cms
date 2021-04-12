@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Models;
 
 use DaydreamLab\Cms\Support\Cut;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
+use Illuminate\Support\Facades\File;
 
 class FullTextSearchCast implements CastsAttributes
 {
@@ -26,10 +27,15 @@ class FullTextSearchCast implements CastsAttributes
         if ($value == '')
             return $value;
 
-        return Cut::cutForSearch($value, [
-            'loadUserDict' => config('cms.item.load_customer_dictionary_path')
-        ]);
+        $path = config('cms.item.load_customer_dictionary_path');
+        // path不為空且檔案存在，使用分詞時加載自定義辭典
+        if ($path && File::exists($path)) {
+            return Cut::cutForSearch($value, [
+                'loadUserDict' => $path
+            ]);
+        }
+
+        return Cut::cutForSearch($value);
     }
-
-
+    
 }
