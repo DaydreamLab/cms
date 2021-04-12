@@ -14,7 +14,7 @@ class AddColumnSearchFulltextToItemsTable extends Migration
     public function up()
     {
         // 如果有配置要使用全文索引，才加入 full_text_search field
-        if (config('cms.use_word_segmentation')) {
+        if (config('cms.item.use_word_segmentation')) {
             Schema::table('items', function (Blueprint $table) {
                 $table->text('full_text_search')->nullable()->after('description');
             });
