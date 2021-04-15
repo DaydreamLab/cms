@@ -43,6 +43,11 @@ class ItemFrontService extends ItemService
     {
         $result = $this->repo->getCategoriesItemsModule($params);
 
+        // 特殊情況, item_order_by 為開始時間或結束時間, 因為做在額外欄位(extrafields)內所以要查詢完後再做排序
+        if ($params['item_order_by'] === 'start_date' || $params['item_order_by'] === 'end_date') {
+            $result = $this->sortByEventDate($result, $params);
+        }
+
         // 代表有分類的切割
         if (gettype($result) == 'array') {
             foreach ($result as $key => $items) {
@@ -214,7 +219,7 @@ class ItemFrontService extends ItemService
             $obj['value']      = $month;
             $special_queries[] = $obj;
         }
-        
+
         return $special_queries;
     }
 
@@ -386,5 +391,28 @@ class ItemFrontService extends ItemService
         );
 
         return $table;
+    }
+
+    protected function sortByEventDate(array $result, $params)
+    {
+        $data = collect($result['data']);
+
+        $data = $data->sort(function ($a, $b) use ($params) {
+            // 取得開始或結束時間的值
+            $aDate = collect($a['extrafields'])->get($params['item_order_by'])->value;
+            $bDate = collect($b['extrafields'])->get($params['item_order_by'])->value;
+            // 比較時間大小，如果a > b 則a往後排序
+            $bool = $aDate > $bDate
+                ? 1
+                : -1;
+            // 如果排序是降冪, 則時間大的的靠前排
+            return $params['item_order'] === 'desc'
+                ? -$bool
+                : $bool;
+        });
+
+        $result['data'] = $data->toArray();
+
+        return $result;
     }
 }
