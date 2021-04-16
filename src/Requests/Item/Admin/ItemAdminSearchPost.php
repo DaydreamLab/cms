@@ -37,7 +37,7 @@ class ItemAdminSearchPost extends ItemSearchPost
             ],
             'content_type' => [
                 'nullable',
-                Rule::in(['article', 'simple-item', 'link', 'slideshow'])
+                Rule::in(['article', 'simple-item', 'link', 'slideshow', 'simple-item'])
             ],
             'extension'    => [
                 'nullable',
