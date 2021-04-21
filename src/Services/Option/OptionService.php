@@ -74,7 +74,7 @@ class OptionService
             }
             elseif ($type == 'extrafield_group')
             {
-                $data[$type] = $this->getOptionList($service, 'list', [], ['extrafields']);
+                $data[$type] = $this->getOptionList($service, 'list', ['paginate' => 0], ['extrafields']);
             }
             elseif ($type == 'item_article_category')
             {
