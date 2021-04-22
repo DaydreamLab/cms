@@ -20,6 +20,7 @@ class SiteAdminListResource extends JsonResource
             'id'                        => $this->id,
             'title'                     => $this->title,
             'url'                       => $this->url,
+            'sef'                       => $this->sef,
             'language_title'            => $this->languaue_title,
             'state'                     => $this->state,
         ];
