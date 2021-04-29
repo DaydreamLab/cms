@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Commands;
 
+use Carbon\Carbon;
 use DaydreamLab\Cms\Models\Category\Category;
 use DaydreamLab\Cms\Models\Item\Item;
 use DaydreamLab\JJAJ\Helpers\Helper;
@@ -67,7 +68,9 @@ class SitemapCommand extends Command
             foreach ($articles as $article) {
                 $url = $xml->addChild('url');
                 $url->addChild('loc', config('app.url'). '/' . $lang .'/item/' . urlencode($article->alias));
-                $url->addChild('lastmod', $article->updated_at ?: $article->created_at);
+                $url->addChild('lastmod', $article->updated_at
+                    ? Carbon::parse($article->updated_at )->format('Y-m-d')
+                    : Carbon::parse($article->created_at)->format('Y-m-d'));
             }
         }
 

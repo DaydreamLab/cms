@@ -107,9 +107,10 @@ class ItemAdminController extends CmsController
 
     public function search(ItemAdminSearchPost $request)
     {
+        Helper::startLog();
         $this->service->setUser($request->user('api'));
         $this->service->search($request->validated());
-
+Helper::showLog();
         return $this->response($this->service->status, new ItemAdminListResourceCollection($this->service->response));
     }
 }
