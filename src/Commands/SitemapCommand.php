@@ -46,7 +46,7 @@ class SitemapCommand extends Command
 
         $url = $xml->addChild('url');
         $url->addChild('loc', config('app.url'));
-        $url->addChild('lastmod', now()->toDateTimeString());
+        $url->addChild('lastmod', now()->format('Y-m-d'));
 
         $langs = ['en', 'zh-Hant'];
         $menus = ['about', 'news', 'schedule', 'award-2020', 'search', 'iot', 'connectivity', 'antenna', 'fivegplus'];
