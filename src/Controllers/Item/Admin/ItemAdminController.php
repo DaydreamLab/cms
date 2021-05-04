@@ -110,7 +110,7 @@ class ItemAdminController extends CmsController
         Helper::startLog();
         $this->service->setUser($request->user('api'));
         $this->service->search($request->validated());
-Helper::showLog();
+//Helper::showLog();
         return $this->response($this->service->status, new ItemAdminListResourceCollection($this->service->response));
     }
 }
