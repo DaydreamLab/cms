@@ -85,7 +85,7 @@ class SitemapCommand extends Command
         ];
         foreach ($menus as $menu) {
             $url = $xml->addChild('url');
-            $url->addChild('loc', config('app.url'). '/en' . $menu);
+            $url->addChild('loc', config('app.url'). '/en/' . $menu);
             $url->addChild('lastmod', now()->format('Y-m-d'));
         }
 
