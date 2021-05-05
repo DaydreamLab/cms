@@ -70,12 +70,12 @@ class SitemapCommand extends Command
             $baseUrl = config('app.url'). '/zh-TW/';
             if (in_array($article->category->alias, ['events', 'industry'])) {
                 $baseUrl .= 'news/' . $article->category->alias .'/';
+                $baseUrl .= 'item/';
+                $url->addChild('loc', $baseUrl . urlencode($article->alias));
+                $url->addChild('lastmod', $article->updated_at
+                    ? Carbon::parse($article->updated_at )->format('Y-m-d')
+                    : Carbon::parse($article->created_at)->format('Y-m-d'));
             }
-            $baseUrl .= 'item/';
-            $url->addChild('loc', $baseUrl . urlencode($article->alias));
-            $url->addChild('lastmod', $article->updated_at
-                ? Carbon::parse($article->updated_at )->format('Y-m-d')
-                : Carbon::parse($article->created_at)->format('Y-m-d'));
         }
 
 
@@ -101,12 +101,12 @@ class SitemapCommand extends Command
             $baseUrl = config('app.url'). '/en/';
             if ($article->category->alias == 'government-resources') {
                 $baseUrl .= $article->category->alias .'/';
+                $baseUrl .= 'item/';
+                $url->addChild('loc', $baseUrl . urlencode($article->alias));
+                $url->addChild('lastmod', $article->updated_at
+                    ? Carbon::parse($article->updated_at)->format('Y-m-d')
+                    : Carbon::parse($article->created_at)->format('Y-m-d'));
             }
-            $baseUrl .= 'item/';
-            $url->addChild('loc', $baseUrl . urlencode($article->alias));
-            $url->addChild('lastmod', $article->updated_at
-                ? Carbon::parse($article->updated_at)->format('Y-m-d')
-                : Carbon::parse($article->created_at)->format('Y-m-d'));
         }
 
         $xml->asXML('public/sitemap.xml');
