@@ -66,11 +66,11 @@ class SitemapCommand extends Command
         $articles = Item::whereIn('category_id', $categories->pluck('id')->all())
             ->get();
         foreach ($articles as $article) {
-            $url = $xml->addChild('url');
-            $baseUrl = config('app.url'). '/zh-TW/';
             if (in_array($article->category->alias, ['events', 'industry'])) {
+                $baseUrl = config('app.url'). '/zh-TW/';
                 $baseUrl .= 'news/' . $article->category->alias .'/';
                 $baseUrl .= 'item/';
+                $url = $xml->addChild('url');
                 $url->addChild('loc', $baseUrl . urlencode($article->alias));
                 $url->addChild('lastmod', $article->updated_at
                     ? Carbon::parse($article->updated_at )->format('Y-m-d')
@@ -96,12 +96,11 @@ class SitemapCommand extends Command
         $articles = Item::whereIn('category_id', $categories->pluck('id')->all())
             ->get();
         foreach ($articles as $article) {
-
-            $url = $xml->addChild('url');
             $baseUrl = config('app.url'). '/en/';
             if ($article->category->alias == 'government-resources') {
                 $baseUrl .= $article->category->alias .'/';
                 $baseUrl .= 'item/';
+                $url = $xml->addChild('url');
                 $url->addChild('loc', $baseUrl . urlencode($article->alias));
                 $url->addChild('lastmod', $article->updated_at
                     ? Carbon::parse($article->updated_at)->format('Y-m-d')
