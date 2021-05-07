@@ -244,15 +244,15 @@ return [
         'message'   => 'Menu front get item success'
     ],
     'MENU_ITEM_NOT_EXIST' => [
-        'code'      => 403,
+        'code'      => 404,
         'message'   => 'Menu item is not exist'
     ],
     'MENU_ADMIN_ITEM_NOT_EXIST' => [
-        'code'      => 403,
+        'code'      => 404,
         'message'   => 'Menu admin item is not exist'
     ],
     'MENU_FRONT_ITEM_NOT_EXIST' => [
-        'code'      => 403,
+        'code'      => 404,
         'message'   => 'Menu front item is not exist'
     ],
 

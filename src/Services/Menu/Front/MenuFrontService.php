@@ -88,6 +88,11 @@ class MenuFrontService extends MenuService
             'sef' => $input->get('language')
         ]))->first();
 
+        if (!$site) {
+            $this->status = Str::upper(Str::snake($this->type.'ItemNotExist'));
+
+            return false;
+        }
         $input->put('site_id', $site->id);
         $input->put('access', $this->access_ids);
 
