@@ -37,7 +37,7 @@ class ModulesTableSeeder extends Seeder
 
         $this->categoryAdminService  = app(CategoryAdminService::class);
         $data = json_decode(file_get_contents(__DIR__ . '/jsons/module.json'), true);
-        $this->migrate($data, Category::where('extension', 'module')->first());
+        //$this->migrate($data, Category::where('extension', 'module')->first());
     }
 
 
@@ -50,13 +50,13 @@ class ModulesTableSeeder extends Seeder
 
             $category['parent_id'] = $parent->id;
 
-            $category = $this->categoryAdminService->store(Helper::collect($category));
-
+            $category = $this->categoryAdminService->store(collect($category));
+/*
             foreach ($modules as $module) {
                 $module['category_id'] = $category->id;
-                $this->moduleAdminService->store(Helper::collect($module));
+                $this->moduleAdminService->store(collect($module));
             }
-
+*/
             if ($parent) {
                 $parent->appendNode($category);
             }
