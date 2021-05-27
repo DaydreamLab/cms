@@ -45,7 +45,7 @@ class MenuFrontService extends MenuService
             return false;
         }
 
-        $this->canAccess($menu->access, $this->getAccessIds());
+        //$this->canAccess($menu->access, $this->getAccessIds());
 
         $modules = [];
 

@@ -1,6 +1,8 @@
   <?php
 
 return [
+    'public_viewlevel_id' => 1,
+
     'timezone' => 'Asia/Taipei',
     'item' => [
         'front' => [

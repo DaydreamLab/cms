@@ -2,9 +2,10 @@
 
 namespace DaydreamLab\Cms\Database\Seeders;
 
+use DaydreamLab\JJAJ\Database\QueryCapsule;
 use DaydreamLab\JJAJ\Helpers\Helper;
+use DaydreamLab\User\Models\Api\Api;
 use DaydreamLab\User\Models\Asset\Asset;
-use DaydreamLab\User\Models\Asset\AssetApi;
 use DaydreamLab\User\Models\User\UserGroup;
 use DaydreamLab\User\Repositories\Asset\AssetRepository;
 use DaydreamLab\User\Services\Asset\AssetService;
@@ -37,7 +38,9 @@ class AssetsTableSeeder extends Seeder
             }
         };
 
-        $assets     = $service->search(Helper::collect(['paginate' => false, 'without_root' => 1]));
+        $q = new QueryCapsule();
+        $q = $q->where('title', '!=', 'Root');
+        $assets     = $service->search(collect(['paginate' => 0, 'q' => $q]));
         $assets->forget('pagination');
         foreach ($assets as $asset) {
             $full_path = $asset->path;
@@ -75,8 +78,8 @@ class AssetsTableSeeder extends Seeder
             $api_ids = [];
             foreach ($apis as $api)
             {
-                $api['service'] = $service;
-                $asset_api = AssetApi::create($api);
+                //$api['service'] = $service;
+                $asset_api = Api::create($api);
                 $api_ids[] = $asset_api->id;
             }
             $super_user->apis()->attach($api_ids);

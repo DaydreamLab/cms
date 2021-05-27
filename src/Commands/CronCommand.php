@@ -56,13 +56,11 @@ class CronCommand extends Command
         $items->each(function ($item, $key){
            if ($item->table == 'items') {
                $model = $this->itemModel;
-           }
-           elseif ($item->table == 'categories') {
+           } elseif ($item->table == 'categories') {
                $model = $this->categoryModel;
            }
 
            if ($item->type == 'up') {
-
                if (Carbon::parse($item->time) < Carbon::now()) {
                    $up_item = $model->find($item->item_id);
                    if ($up_item) {
@@ -71,8 +69,7 @@ class CronCommand extends Command
                    }
                    $item->delete();
                }
-           }
-           else {
+           } else {
                if (Carbon::parse($item->time) < Carbon::now()) {
                    $down_item = $model->find($item->item_id);
                    if ($down_item) {

@@ -11,36 +11,4 @@ class TagFront extends Tag
      * @var string
      */
     protected $table = 'tags';
-
-    protected $model_type = 'front';
-
-    protected $hidden = [
-        'id',
-        '_lft',
-        '_rgt',
-        'path',
-        'parent_id',
-        'ordering',
-        'state',
-        'description',
-        'access',
-        'language',
-        'locked_by',
-        'locked_at',
-        'created_by',
-        'created_at',
-        'updated_at',
-        'updated_by',
-        'locker',
-        'publish_up',
-        'publish_down',
-        'pivot',
-        'viewlevels',
-        'access_title',
-        'viewlevel',
-        'metadesc',
-        'metakeywords',
-        'params',
-        'content_type'
-    ];
 }

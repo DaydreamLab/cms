@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Services\Tag;
 
+use Carbon\Carbon;
 use DaydreamLab\Cms\Services\CmsService;
 use DaydreamLab\Cms\Repositories\Tag\TagRepository;
 use DaydreamLab\Cms\Events\Add;
@@ -9,19 +10,14 @@ use DaydreamLab\Cms\Events\Modify;
 use DaydreamLab\Cms\Events\Ordering;
 use DaydreamLab\Cms\Events\Remove;
 use DaydreamLab\Cms\Events\State;
-use DaydreamLab\JJAJ\Services\BaseService;
+use DaydreamLab\JJAJ\Exceptions\ForbiddenException;
 use DaydreamLab\JJAJ\Traits\NestedServiceTrait;
 use Illuminate\Support\Collection;
 
 class TagService extends CmsService
 {
-    use NestedServiceTrait {
-        NestedServiceTrait::addNested       as traitAddNested;
-        NestedServiceTrait::modifyNested    as traitModifiedNested;
-        NestedServiceTrait::storeNested     as traitStoreNested;
-        NestedServiceTrait::removeNested    as traitRemoveNested;
-    }
-    
+    use NestedServiceTrait;
+
     protected $modelName = 'Tag';
 
     protected $modelType = 'Base';
@@ -35,9 +31,9 @@ class TagService extends CmsService
     }
 
 
-    public function addNested(Collection $input)
+    public function add(Collection $input)
     {
-        $item = $this->traitAddNested($input);
+        $item = $this->addNested($input);
 
         event(new Add($item, $this->getServiceName(), $input, $this->user));
 
@@ -45,15 +41,25 @@ class TagService extends CmsService
     }
 
 
-    public function checkout(Collection $input)
+    public function restore(Collection $input)
     {
-        return parent::checkout($input);
+        return parent::restore($input);
     }
 
 
-    public function modifyNested(Collection $input, $parent, $item)
+    public function modify(Collection $input)
     {
-        $result = $this->traitModifiedNested($input, $parent, $item);
+        $item = $this->checkItem($input);
+
+        $result = $this->modifyNested($input, $item->parent, $item);
+
+        $restore = $this->repo->checkout($item, $this->getUser());
+        if (!$restore) {
+            throw new ForbiddenException('InsufficientPermissionRestore', [
+                'lockerName' => $item->lockerName,
+                'locked_at'    => Carbon::parse($item->locked_at)->tz($this->getUser()->timezone)
+            ], [], $this->modelName);
+        }
 
         event(new Modify($this->find($input->get('id')), $this->getServiceName(), $result, $input,$this->user));
 
@@ -63,7 +69,7 @@ class TagService extends CmsService
 
     public function remove(Collection $input)
     {
-        $result = $this->traitRemoveNested($input);
+        $result = $this->removeNested($input);
 
         event(new Remove($this->getServiceName(), $result, $input, $this->user));
 
@@ -93,9 +99,8 @@ class TagService extends CmsService
 
     public function store(Collection $input)
     {
-        $result = $this->traitStoreNested($input);
+        $result = $this->storeNested($input);
 
         return $result;
     }
-
 }

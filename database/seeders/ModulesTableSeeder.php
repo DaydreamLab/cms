@@ -27,8 +27,6 @@ class ModulesTableSeeder extends Seeder
             'extension'     => 'module',
             'ordering'      => 1,
             'access'        => 1,
-            'metadesc'      => '',
-            'metakeywords'  => '',
             'extrafields'   => [],
             'params'        => (object)[],
             'created_by'    => 1,

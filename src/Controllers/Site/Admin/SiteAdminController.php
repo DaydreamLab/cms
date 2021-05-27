@@ -15,7 +15,6 @@ use DaydreamLab\Cms\Resources\Site\Admin\Collections\SiteAdminListResourceCollec
 use DaydreamLab\Cms\Services\Site\Admin\SiteAdminService;
 use DaydreamLab\Cms\Requests\Site\Admin\SiteAdminRemovePost;
 
-
 class SiteAdminController extends CmsController
 {
     protected $modelName = 'Site';
@@ -103,5 +102,5 @@ class SiteAdminController extends CmsController
 
         return $this->response($this->service->status, $this->service->response);
     }
-    
+
 }

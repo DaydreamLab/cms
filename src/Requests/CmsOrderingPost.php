@@ -26,21 +26,25 @@ class CmsOrderingPost extends AdminRequest
     {
         return [
             'id'            => 'required|integer',
-            'index_diff'    => 'required|integer',
-            'order'         => [
-                'nullable',
-                Rule::in(['asc', 'desc'])
-            ]
+            'index_diff'    => 'nullable|integer',
+            'indexDiff'     => 'nullable|integer',
+            'parentId'      => 'nullable|integer',
+            'parent_id'     => 'nullable|integer',
         ];
     }
 
     public function validated()
     {
         $validated = parent::validated();
-
-        if (!$validated->get('order')) {
-            $validated->put('order', 'asc');
+        if ($validated->get('parentId')) {
+            $validated->put('parent_id', $validated->get('parentId'));
         }
+
+        if ($validated->get('index_diff')) {
+            $validated->put('indexDiff', $validated->get('index_diff'));
+        }
+
+        $validated->forget(['parentId', 'index_diff']);
 
         return $validated;
     }

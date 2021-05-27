@@ -1,19 +1,14 @@
 <?php
+
 namespace DaydreamLab\Cms\Models\Category;
 
-use Carbon\Carbon;
-use DaydreamLab\Cms\Models\Extrafield\Extrafield;
-use DaydreamLab\Cms\Models\Extrafield\ExtrafieldGroup;
 use DaydreamLab\Cms\Models\Item\Item;
-use DaydreamLab\Cms\Traits\Model\UserInfo;
 use DaydreamLab\Cms\Traits\Model\WithAccess;
 use DaydreamLab\Cms\Traits\Model\WithLanguage;
 use DaydreamLab\Cms\Traits\WithExtrafield;
-use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
-use DaydreamLab\User\Models\User\UserGroup;
-use DaydreamLab\User\Models\Viewlevel\Viewlevel;
+use DaydreamLab\JJAJ\Traits\UserInfo;
 use Kalnoy\Nestedset\NodeTrait;
 
 class Category extends BaseModel
@@ -55,11 +50,11 @@ class Category extends BaseModel
         'extension',
         'hits',
         'access',
-        'ordering',
         'language',
         'template',
-        'metadesc',
-        'metakeywords',
+        'ordering',
+        'featured',
+        'featured_ordering',
         'params',
         'item_extrafield_group_id',
         'extrafield_group_id',
@@ -73,11 +68,7 @@ class Category extends BaseModel
         'publish_down',
     ];
 
-//    protected $with = [
-//        'creator',
-//        'updater',
-//        'locker'
-//    ];
+
     /**
      * The attributes that should be hidden for arrays
      *
@@ -101,9 +92,6 @@ class Category extends BaseModel
      * @var array
      */
     protected $appends = [
-        'creator',
-        'updater',
-        'locker',
         'tree_title',
         'tree_list_title',
         'access_title',
@@ -115,15 +103,28 @@ class Category extends BaseModel
     protected $casts = [
         'extrafields'   => 'array',
         'params'        => 'array',
-        'locked_at'     => 'datetime:Y-m-d H:i:s',
-        'publish_up'    => 'datetime:Y-m-d H:i:s',
-        'publish_down'  => 'datetime:Y-m-d H:i:s',
     ];
 
 
     public static function boot()
     {
         self::traitBoot();
+
+        static::creating(function ($item) {
+            if ($item->state && !$item->publish_up) {
+                $item->publish_up = now();
+            }
+            $item->path = $item->parent
+                ? $item->parent->path . '/' . $item->alias
+                : '/' . $item->alias;
+        });
+
+        static::updating(function ($item) {
+            $item->path = $item->parent
+                ? $item->parent->path . '/' . $item->alias
+                : '/' . $item->alias;
+        });
+
     }
 
 

@@ -89,9 +89,6 @@ class Item extends BaseModel
      * @var array
      */
     protected $appends = [
-        'creator',
-        'updater',
-        'locker',
         'creator_groups',
         'viewlevels',
         'category_title',
@@ -114,6 +111,12 @@ class Item extends BaseModel
     public static function boot()
     {
         self::traitBoot();
+
+        static::creating(function ($item) {
+            if ($item->state && !$item->publish_up) {
+                $item->publish_up = now();
+            }
+        });
     }
 
 

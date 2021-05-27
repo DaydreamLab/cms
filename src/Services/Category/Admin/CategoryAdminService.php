@@ -19,8 +19,6 @@ class CategoryAdminService extends CategoryService
 
     protected $cmsCronJobService;
 
-    protected $search_keys = ['title', 'introtext', 'description', 'extrafields_search'];
-
     public function __construct(CategoryAdminRepository $repo)
     {
         parent::__construct($repo);
@@ -33,7 +31,7 @@ class CategoryAdminService extends CategoryService
     {
         return $this->repo->findSubTreeIds($id);
     }
-    
+
 
     public function store(Collection $input)
     {

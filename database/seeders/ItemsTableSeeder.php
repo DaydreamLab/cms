@@ -27,9 +27,7 @@ class ItemsTableSeeder extends Seeder
             'extension'     => 'item',
             'ordering'      => 1,
             'access'        => 1,
-            'metadesc'      => '',
-            'metakeywords'  => '',
-            'params'        => (object)[],
+            'params'        => [],
             'children'      => [],
             'created_by'    => 1,
         ]);

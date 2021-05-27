@@ -15,6 +15,7 @@ use DaydreamLab\Cms\Services\Category\Admin\CategoryAdminService;
 use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminStorePost;
 use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminSearchPost;
 use Illuminate\Support\Facades\DB;
+use Throwable;
 
 class CategoryAdminController extends CmsController
 {
@@ -32,16 +33,24 @@ class CategoryAdminController extends CmsController
     public function getItem(CategoryAdminGetItemGet $request)
     {
         $this->service->setUser($request->user('api'));
-        $this->service->getItem(collect(['id' => $request->route('id')]));
+        try {
+            $this->service->getItem(collect(['id' => $request->route('id')]));
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
 
-        return $this->response($this->service->status, new CategoryAdminResource($this->service->response));
+        return $this->response($this->service->status, $this->service->response, [], CategoryAdminResource::class);
     }
 
 
-    public function checkout(CmsCheckoutRemovePost $request)
+    public function restore(CmsCheckoutRemovePost $request)
     {
         $this->service->setUser($request->user('api'));
-        $this->service->checkout($request->validated());
+        try {
+            $this->service->restore($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
 
         return $this->response($this->service->status, $this->service->response);
     }
@@ -50,10 +59,11 @@ class CategoryAdminController extends CmsController
     public function ordering(CategoryAdminOrderingPost $request)
     {
         $this->service->setUser($request->user('api'));
-        $v = $request->validated();
-        DB::transaction(function () use ($v) {
-            $this->service->ordering($v);
-        });
+        try {
+            $this->service->ordering($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
 
         return $this->response($this->service->status, $this->service->response);
     }
@@ -62,7 +72,11 @@ class CategoryAdminController extends CmsController
     public function remove(CategoryAdminRemovePost $request)
     {
         $this->service->setUser($request->user('api'));
-        $this->service->remove($request->validated());
+        try {
+            $this->service->remove($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
 
         return $this->response($this->service->status, $this->service->response);
     }
@@ -71,7 +85,11 @@ class CategoryAdminController extends CmsController
     public function state(CategoryAdminStatePost $request)
     {
         $this->service->setUser($request->user('api'));
-        $this->service->state($request->validated());
+        try {
+            $this->service->state($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
 
         return $this->response($this->service->status, $this->service->response);
     }
@@ -80,23 +98,25 @@ class CategoryAdminController extends CmsController
     public function store(CategoryAdminStorePost $request)
     {
         $this->service->setUser($request->user('api'));
-        $this->service->store($request->validated());
+        try {
+            $this->service->store($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
 
-        return $this->response($this->service->status,
-            gettype($this->service->response) == 'object'
-                ? new CategoryAdminResource($this->service->response->refresh())
-                : null
-        );
+        return $this->response($this->service->status, $this->service->response, [], CategoryAdminResource::class);
     }
 
 
     public function search(CategoryAdminSearchPost $request)
     {
         $this->service->setUser($request->user('api'));
-        $this->service->search($request->validated());
+        try {
+            $this->service->search($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
 
-        return $this->response($this->service->status,
-            new CategoryAdminListResourceCollection($this->service->response)
-        );
+        return $this->response($this->service->status, $this->service->response, [], CategoryAdminListResourceCollection::class);
     }
 }

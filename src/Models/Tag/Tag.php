@@ -1,11 +1,12 @@
 <?php
+
 namespace DaydreamLab\Cms\Models\Tag;
 
 use DaydreamLab\Cms\Models\Item\Item;
 use DaydreamLab\Cms\Traits\Model\WithAccess;
 use DaydreamLab\Cms\Traits\Model\WithLanguage;
-use DaydreamLab\Cms\Traits\Model\UserInfo;
 use DaydreamLab\JJAJ\Models\BaseModel;
+use DaydreamLab\JJAJ\Traits\UserInfo;
 use Kalnoy\Nestedset\NodeTrait;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 
@@ -23,7 +24,7 @@ class Tag extends BaseModel
     protected $table = 'tags';
 
     protected $model_type = 'parent';
-    
+
     protected $order_by = 'id';
 
     protected $order = 'asc';
@@ -44,15 +45,15 @@ class Tag extends BaseModel
         'access',
         'language',
         'ordering',
-        'metadata',
-        'metakeywords',
+        'featured',
+        'featured_ordering',
         'params',
+        'publish_up',
+        'publish_down',
         'locked_by',
         'locked_at',
         'created_by',
         'updated_by',
-        'publish_up',
-        'publish_down',
     ];
 
 
@@ -65,8 +66,6 @@ class Tag extends BaseModel
         'pivot',
         '_lft',
         '_rgt',
-        'viewlevel',
-        'viewlevels'
     ];
 
 
@@ -76,10 +75,6 @@ class Tag extends BaseModel
      * @var array
      */
     protected $appends = [
-        'creator',
-        'updater',
-        'locker',
-        'viewlevels',
         'access_title',
         'language_title'
     ];
@@ -97,8 +92,23 @@ class Tag extends BaseModel
     public static function boot()
     {
         self::traitBoot();
-    }
 
+        static::creating(function ($item) {
+            if ($item->state && !$item->publish_up) {
+                $item->publish_up = now();
+            }
+            $item->path = $item->parent
+                ? $item->parent->path . '/' . $item->alias
+                : '/' . $item->alias;
+        });
+
+
+        static::updating(function ($item) {
+            $item->path = $item->parent
+                ? $item->parent->path . '/' . $item->alias
+                : '/' . $item->alias;
+        });
+    }
 
 
     public function items()

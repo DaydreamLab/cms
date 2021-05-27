@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Requests\Site\Admin;
 
+use DaydreamLab\Cms\Helpers\RequestHelper;
 use DaydreamLab\JJAJ\Requests\AdminRequest;
 use Illuminate\Validation\Rule;
 
@@ -43,5 +44,14 @@ class SiteAdminStorePost extends AdminRequest
             'ordering'      => 'nullable|integer',
         ];
         return array_merge(parent::rules(), $rules);
+    }
+
+
+    public function validated()
+    {
+        $validated = parent::validated();
+        $validated->put('params', RequestHelper::handleParams($validated->get('params')));
+
+        return $validated;
     }
 }

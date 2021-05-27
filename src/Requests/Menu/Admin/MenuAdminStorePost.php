@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Requests\Menu\Admin;
 
+use DaydreamLab\Cms\Helpers\RequestHelper;
 use DaydreamLab\JJAJ\Requests\AdminRequest;
 use Illuminate\Validation\Rule;
 
@@ -48,6 +49,16 @@ class MenuAdminStorePost extends AdminRequest
             'publish_up'    => 'nullable|date',
             'publish_down'  => 'nullable|date',
         ];
+
         return array_merge( parent::rules(), $rules);
+    }
+
+
+    public function validated()
+    {
+        $validated = parent::validated();
+        $validated->put('params', RequestHelper::handleParams($validated->get('params')));
+
+        return $validated;
     }
 }

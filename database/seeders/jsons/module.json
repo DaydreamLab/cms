@@ -10,8 +10,6 @@
     "description"   : "此模組可以顯示主分類中所包含的分類列表",
     "extension"     : "module",
     "access"        : 1,
-    "metadesc"      : "",
-    "metakeywords"  : "",
     "extrafields"   : [],
     "created_by"    : 1,
     "modules"       : []
@@ -27,8 +25,6 @@
     "description"   : "此模組將會顯示一個或是多個分類中的文章清單",
     "extension"     : "module",
     "access"        : 1,
-    "metadesc"      : "",
-    "metakeywords"  : "",
     "extrafields"   : [],
     "created_by"    : 1,
     "modules"       : []
@@ -44,8 +40,6 @@
     "description"   : "此模組可以指定一個或是多個指定文章",
     "extension"     : "module",
     "access"        : 1,
-    "metadesc"      : "",
-    "metakeywords"  : "",
     "extrafields"   : [],
     "created_by"    : 1,
     "modules"       : []
@@ -61,8 +55,6 @@
     "description"   : "",
     "extension"     : "module",
     "access"        : 1,
-    "metadesc"      : "",
-    "metakeywords"  : "",
     "extrafields"   : [],
     "created_by"    : 1,
     "modules"       : []
@@ -78,8 +70,6 @@
     "description"   : "此模組可以顯示選單列表與其子選單",
     "extension"     : "module",
     "access"        : 1,
-    "metadesc"      : "",
-    "metakeywords"  : "",
     "extrafields"   : [],
     "created_by"    : 1,
     "modules"       : []

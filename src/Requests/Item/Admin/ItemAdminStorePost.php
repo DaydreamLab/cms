@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Requests\Item\Admin;
 
+use DaydreamLab\Cms\Helpers\RequestHelper;
 use DaydreamLab\JJAJ\Requests\AdminRequest;
 use Illuminate\Validation\Rule;
 
@@ -68,5 +69,14 @@ class ItemAdminStorePost extends AdminRequest
             'publish_down'          => 'nullable|date_format:Y-m-d H:i:s',
         ];
         return array_merge(parent::rules(), $rules);
+    }
+
+
+    public function validated()
+    {
+        $validated = parent::validated();
+        $validated->put('params', RequestHelper::handleParams($validated->get('params')));
+
+        return $validated;
     }
 }

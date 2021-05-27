@@ -58,14 +58,14 @@ Route::post('api/admin/category/store', [CategoryAdminController::class, 'store'
     ->middleware(['expired','admin']);
 Route::post('api/admin/category/search', [CategoryAdminController::class, 'search'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/category/checkout', [CategoryAdminController::class, 'checkout'])
+Route::post('api/admin/category/restore', [CategoryAdminController::class, 'restore'])
     ->middleware(['expired','admin']);
 Route::post('api/admin/category/ordering', [CategoryAdminController::class, 'ordering'])
     ->middleware(['expired','admin']);
 Route::get('api/admin/category/{id}', [CategoryAdminController::class, 'getItem'])
     ->middleware(['expired','admin']);
 
-Route::post('api/admin/extrafield/checkout', [ExtrafieldAdminController::class, 'checkout'])
+Route::post('api/admin/extrafield/restore', [ExtrafieldAdminController::class, 'restore'])
     ->middleware(['expired','admin']);
 Route::post('api/admin/extrafield/remove', [ExtrafieldAdminController::class, 'remove'])
     ->middleware(['expired','admin']);
@@ -79,7 +79,7 @@ Route::get('api/admin/extrafield/{id}', [ExtrafieldAdminController::class, 'getI
     ->middleware(['expired','admin']);
 
 
-Route::post('api/admin/extrafield/group/checkout', [ExtrafieldGroupAdminController::class, 'checkout'])
+Route::post('api/admin/extrafield/group/restore', [ExtrafieldGroupAdminController::class, 'restore'])
     ->middleware(['expired','admin']);
 Route::post('api/admin/extrafield/group/remove', [ExtrafieldGroupAdminController::class, 'remove'])
     ->middleware(['expired','admin']);
@@ -109,7 +109,7 @@ Route::post('api/admin/item/store', [ItemAdminController::class, 'store'])
     ->middleware(['expired','admin']);
 Route::post('api/admin/item/search', [ItemAdminController::class, 'search'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/item/checkout', [ItemAdminController::class, 'checkout'])
+Route::post('api/admin/item/restore', [ItemAdminController::class, 'restore'])
     ->middleware(['expired','admin']);
 Route::post('api/admin/item/featured', [ItemAdminController::class, 'featured'])
     ->middleware(['expired','admin']);
@@ -139,7 +139,7 @@ Route::post('api/admin/menu/state', [MenuAdminController::class, 'state'])
     ->middleware(['expired','admin']);
 Route::post('api/admin/menu/search', [MenuAdminController::class, 'search'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/menu/checkout', [MenuAdminController::class, 'checkout'])
+Route::post('api/admin/menu/restore', [MenuAdminController::class, 'restore'])
     ->middleware(['expired','admin']);
 Route::post('api/admin/menu/ordering', [MenuAdminController::class, 'ordering'])
     ->middleware(['expired','admin']);
@@ -154,7 +154,7 @@ Route::post('api/admin/module/state', [ModuleAdminController::class, 'state'])
     ->middleware(['expired','admin']);
 Route::post('api/admin/module/search', [ModuleAdminController::class, 'search'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/module/checkout', [ModuleAdminController::class, 'checkout'])
+Route::post('api/admin/module/restore', [ModuleAdminController::class, 'restore'])
     ->middleware(['expired','admin']);
 Route::get('api/admin/module/{id}', [ModuleAdminController::class, 'getItem'])
     ->middleware(['expired','admin']);
@@ -167,7 +167,7 @@ Route::post('api/admin/setting/store', [SettingAdminController::class, 'store'])
 Route::get('api/admin/setting', [SettingAdminController::class, 'getItem'])
     ->middleware(['expired','admin']);
 
-Route::post('api/admin/site/checkout', [SiteAdminController::class, 'checkout'])
+Route::post('api/admin/site/restore', [SiteAdminController::class, 'restore'])
     ->middleware(['expired','admin']);
 Route::post('api/admin/site/remove', [SiteAdminController::class, 'remove'])
     ->middleware(['expired','admin']);
@@ -186,13 +186,13 @@ Route::get('api/admin/site/{id}', [SiteAdminController::class, 'getItem'])
 
 Route::post('api/admin/tag/remove', [TagAdminController::class, 'remove'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/tag/store', [TagAdminController::class, 'store'])
-    ->middleware(['expired','admin']);
+Route::post('api/admin/tag/store', [TagAdminController::class, 'store']);
+    //->middleware(['expired','admin']);
 Route::post('api/admin/tag/search', [TagAdminController::class, 'search'])
     ->middleware(['expired','admin']);
 Route::post('api/admin/tag/state', [TagAdminController::class, 'state'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/tag/checkout',[TagAdminController::class, 'checkout'])
+Route::post('api/admin/tag/restore',[TagAdminController::class, 'restore'])
     ->middleware(['expired','admin']);
 Route::post('api/admin/tag/ordering', [TagAdminController::class, 'ordering'])
     ->middleware(['expired','admin']);

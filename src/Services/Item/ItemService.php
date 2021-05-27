@@ -38,22 +38,7 @@ class ItemService extends CmsService
 
     public function featured(Collection $input)
     {
-        $result = false;
-        foreach ($input->get('ids') as $id) {
-            $item = $this->checkItem(collect(['id' => $id]));
-            $result =  $this->repo->featured($item, $input->get('featured'));
-            if(!$result) break;
-        }
-
-        $action = $input->get('featured') == 0
-            ? 'Unfeatured'
-            : 'Featured';
-        if ($result) {
-            $this->status   = $action.'Success';
-        } else {
-            $this->status   = $action.'Fail';
-            $this->response = null;
-        }
+        $result = parent::featured($input);
 
         event(new Featured($this->getServiceName(), $result, $input, $this->user));
 

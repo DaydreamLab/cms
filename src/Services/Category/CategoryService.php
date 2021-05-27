@@ -40,9 +40,9 @@ class CategoryService extends CmsService
     }
 
 
-    public function checkout(Collection $input)
+    public function restore(Collection $input)
     {
-        return parent::checkout($input);
+        return parent::restore($input);
     }
 
 

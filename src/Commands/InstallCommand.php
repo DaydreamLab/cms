@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Commands;
 
+use DaydreamLab\Cms\Models\Tag\Tag;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
@@ -71,6 +72,12 @@ class InstallCommand extends Command
      */
     public function handle()
     {
+        Tag::truncate();
+        $this->call('db:seed', [
+            '--class' => $this->seeder_namespace . 'TagsTableSeeder'
+        ]);
+
+        exit();
         $this->call('user:install');
 
         foreach ($this->seeders as $seeder) {
@@ -108,8 +115,8 @@ class InstallCommand extends Command
 
     public function deleteResources()
     {
-        File::deleteDirectory('resources/js');
-        File::deleteDirectory('resources/assets');
-        File::deleteDirectory('resources/views');
+        File::deleteDirectory('Resources/js');
+        File::deleteDirectory('Resources/assets');
+        File::deleteDirectory('Resources/views');
     }
 }

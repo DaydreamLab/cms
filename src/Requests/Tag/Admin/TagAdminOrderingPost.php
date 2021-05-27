@@ -28,6 +28,7 @@ class TagAdminOrderingPost extends CmsOrderingPost
     {
         $rules = [
         ];
+
         return array_merge(parent::rules(), $rules);
     }
 }

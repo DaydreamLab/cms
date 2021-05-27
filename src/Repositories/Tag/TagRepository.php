@@ -2,11 +2,11 @@
 
 namespace DaydreamLab\Cms\Repositories\Tag;
 
-use DaydreamLab\JJAJ\Repositories\BaseRepository;
+use DaydreamLab\Cms\Repositories\CmsRepository;
 use DaydreamLab\Cms\Models\Tag\Tag;
 use DaydreamLab\JJAJ\Traits\NestedRepositoryTrait;
 
-class TagRepository extends BaseRepository
+class TagRepository extends CmsRepository
 {
     use NestedRepositoryTrait;
 
