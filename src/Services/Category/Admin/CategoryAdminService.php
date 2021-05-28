@@ -35,31 +35,22 @@ class CategoryAdminService extends CategoryService
 
     public function store(Collection $input)
     {
-        if (InputHelper::null($input, 'extension')){
+        if (!$input->get('extension')){
             $input->put('extension', 'item');
         }
 
-        if (InputHelper::null($input, 'publish_up')) {
-            $input->put('publish_up', now()->toDateTimeString()) ;
-        }
+        $item = parent::store($input);
 
-        $result = parent::store($input);
-
-        if ($input->get('id')) {
-            $item = $this->checkItem(collect(['id' => $input->get('id')]));
-        } else {
-            $item = $result->refresh();
-        }
 
         $this->setCronJob($input, $item);
 
-        return $result;
+        return $item;
     }
 
 
     public function search(Collection $input)
     {
-        if (InputHelper::null($input, 'extension')) {
+        if (!$input->get('extension')) {
             $input->forget('extension');
             $input->put('extension', 'item');
         }

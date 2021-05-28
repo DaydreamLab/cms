@@ -44,9 +44,9 @@ class CategoryService extends CmsService
     }
 
 
-    public function modify(Collection $input, $parent, $item)
+    public function modify(Collection $input)
     {
-        $result =  parent::modifyNested($input, $parent, $item);
+        $result =  parent::modifyNested($input);
 
         event(new Modify($this->find($input->get('id')), $this->getServiceName(), $result, $input,$this->user));
 

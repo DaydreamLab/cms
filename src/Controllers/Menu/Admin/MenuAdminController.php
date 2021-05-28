@@ -75,7 +75,7 @@ class MenuAdminController extends CmsController
     public function store(MenuAdminStorePost $request)
     {
         $validated = $request->validated();
-        if (InputHelper::null($validated, 'host')) {
+        if (!$validated->get('host')) {
             $validated->put('host', $request->getHttpHost());
         }
         $this->service->setUser($request->user('api'));

@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Commands;
 
 use DaydreamLab\Cms\Models\Tag\Tag;
 use DaydreamLab\JJAJ\Helpers\Helper;
+use DaydreamLab\User\Models\Asset\Asset;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 
@@ -72,11 +73,9 @@ class InstallCommand extends Command
      */
     public function handle()
     {
-        Tag::truncate();
-        $this->call('db:seed', [
-            '--class' => $this->seeder_namespace . 'TagsTableSeeder'
-        ]);
-
+        Asset::truncate();
+        $this->call('db:seed',  ['--class' =>  'DaydreamLab\\User\\Database\\Seeders\\AssetsTableSeeder']);
+        $this->call('db:seed',  ['--class' =>  'DaydreamLab\\Cms\\Database\\Seeders\\AssetsTableSeeder']);
         exit();
         $this->call('user:install');
 
