@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Controllers\Tag\Admin;
 
 use DaydreamLab\Cms\Controllers\CmsController;
+use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminFeaturedPost;
 use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminGetItemGet;
 use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminStorePost;
 use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminStatePost;
@@ -28,11 +29,11 @@ class TagAdminController extends CmsController
     }
 
 
-    public function restore(TagAdminCheckoutPost $request)
+    public function featured(TagAdminFeaturedPost $request)
     {
         $this->service->setUser($request->user('api'));
         try {
-            $this->service->restore($request->validated());
+            $this->service->featured($request->validated());
         } catch (Throwable $t) {
             $this->handleException($t);
         }
@@ -58,7 +59,7 @@ class TagAdminController extends CmsController
     {
         $this->service->setUser($request->user('api'));
         try {
-            $this->service->ordering($request->validated());
+            $this->service->modify($request->validated());
         } catch (Throwable $t) {
             $this->handleException($t);
         }
@@ -80,24 +81,11 @@ class TagAdminController extends CmsController
     }
 
 
-    public function store(TagAdminStorePost $request)
+    public function restore(TagAdminCheckoutPost $request)
     {
         $this->service->setUser($request->user('api'));
         try {
-            $this->service->store($request->validated());
-        } catch (Throwable $t) {
-            $this->handleException($t);
-        }
-
-        return $this->response($this->service->status, $this->service->response, [], TagAdminResource::class);
-    }
-
-
-    public function state(TagAdminStatePost $request)
-    {
-        $this->service->setUser($request->user('api'));
-        try {
-            $this->service->state($request->validated());
+            $this->service->restore($request->validated());
         } catch (Throwable $t) {
             $this->handleException($t);
         }
@@ -116,5 +104,31 @@ class TagAdminController extends CmsController
         }
 
         return $this->response($this->service->status, $this->service->response, [], TagAdminListResourceCollection::class);
+    }
+
+
+    public function state(TagAdminStatePost $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->state($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
+
+    public function store(TagAdminStorePost $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->store($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response, [], TagAdminResource::class);
     }
 }

@@ -36,7 +36,4 @@ trait WithCategory
 
         return $category ? $category->title : null;
     }
-
-
-
 }

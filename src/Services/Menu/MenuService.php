@@ -12,20 +12,16 @@ use DaydreamLab\Cms\Services\CmsService;
 use DaydreamLab\Cms\Traits\Model\WithAccess;
 use DaydreamLab\Cms\Traits\Model\WithCategory;
 use DaydreamLab\Cms\Traits\Model\WithLanguage;
-use DaydreamLab\JJAJ\Traits\NestedServiceTrait;
 use Illuminate\Support\Collection;
 
 class MenuService extends CmsService
 {
-    use WithCategory, WithLanguage, WithAccess, NestedServiceTrait {
-        NestedServiceTrait::modifyNested as traitModifyNested;
-    }
+    use WithCategory, WithLanguage, WithAccess;
 
     protected $package = 'Cms';
 
     protected $modelName = 'Menu';
 
-    protected $modelType = 'Base';
 
     public function __construct(MenuRepository $repo)
     {
@@ -44,15 +40,15 @@ class MenuService extends CmsService
     }
 
 
-    public function checkout(Collection $input)
+    public function restore(Collection $input)
     {
-        return parent::checkout($input);
+        return parent::restore($input);
     }
 
 
-    public function modifyNested(Collection $input, $parent, $item)
+    public function modify(Collection $input, $parent, $item)
     {
-        $result = $this->traitModifyNested($input, $parent, $item);
+        $result = parent::modifyNested($input, $parent, $item);
 
         event(new Modify($this->find($input->get('id')), $this->getServiceName(), $result, $input,$this->user));
 
@@ -65,16 +61,6 @@ class MenuService extends CmsService
         $result = $this->removeNested($input);
 
         event(new Remove($this->getServiceName(), $result, $input, $this->user));
-
-        return $result;
-    }
-
-
-    public function ordering(Collection $input)
-    {
-        $result =  parent::ordering($input);
-
-        event(new Ordering($this->getServiceName(), $result, $input, $this->user));
 
         return $result;
     }

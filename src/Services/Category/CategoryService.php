@@ -6,20 +6,12 @@ use DaydreamLab\Cms\Repositories\Category\CategoryRepository;
 use DaydreamLab\Cms\Services\CmsService;
 use DaydreamLab\JJAJ\Events\Add;
 use DaydreamLab\JJAJ\Events\Modify;
-use DaydreamLab\JJAJ\Events\Ordering;
 use DaydreamLab\JJAJ\Events\Remove;
 use DaydreamLab\JJAJ\Events\State;
-use DaydreamLab\JJAJ\Services\BaseService;
-use DaydreamLab\JJAJ\Traits\NestedServiceTrait;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 
 class CategoryService extends CmsService
 {
-    use NestedServiceTrait{
-        NestedServiceTrait::modifyNested as traitModifyNested;
-    }
-
     protected $modelName = 'Category';
 
     protected $modelType = 'Base';
@@ -52,21 +44,11 @@ class CategoryService extends CmsService
     }
 
 
-    public function modifyNested(Collection $input, $parent, $item)
+    public function modify(Collection $input, $parent, $item)
     {
-        $result = $this->traitModifyNested($input, $parent, $item);
+        $result =  parent::modifyNested($input, $parent, $item);
 
         event(new Modify($this->find($input->get('id')), $this->getServiceName(), $result, $input,$this->user));
-
-        return $result;
-    }
-
-
-    public function ordering(Collection $input)
-    {
-        $result =  parent::ordering($input);
-
-        event(new Ordering($this->getServiceName(), $result, $input, $this->user));
 
         return $result;
     }

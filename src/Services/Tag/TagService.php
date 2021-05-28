@@ -11,13 +11,10 @@ use DaydreamLab\Cms\Events\Ordering;
 use DaydreamLab\Cms\Events\Remove;
 use DaydreamLab\Cms\Events\State;
 use DaydreamLab\JJAJ\Exceptions\ForbiddenException;
-use DaydreamLab\JJAJ\Traits\NestedServiceTrait;
 use Illuminate\Support\Collection;
 
 class TagService extends CmsService
 {
-    use NestedServiceTrait;
-
     protected $modelName = 'Tag';
 
     protected $modelType = 'Base';

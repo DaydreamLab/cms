@@ -186,8 +186,8 @@ Route::get('api/admin/site/{id}', [SiteAdminController::class, 'getItem'])
 
 Route::post('api/admin/tag/remove', [TagAdminController::class, 'remove'])
     ->middleware(['expired','admin']);
-Route::post('api/admin/tag/store', [TagAdminController::class, 'store']);
-    //->middleware(['expired','admin']);
+Route::post('api/admin/tag/store', [TagAdminController::class, 'store'])
+    ->middleware(['expired','admin']);
 Route::post('api/admin/tag/search', [TagAdminController::class, 'search'])
     ->middleware(['expired','admin']);
 Route::post('api/admin/tag/state', [TagAdminController::class, 'state'])
@@ -195,6 +195,8 @@ Route::post('api/admin/tag/state', [TagAdminController::class, 'state'])
 Route::post('api/admin/tag/restore',[TagAdminController::class, 'restore'])
     ->middleware(['expired','admin']);
 Route::post('api/admin/tag/ordering', [TagAdminController::class, 'ordering'])
+    ->middleware(['expired','admin']);
+Route::post('api/admin/tag/featured', [TagAdminController::class, 'featured'])
     ->middleware(['expired','admin']);
 Route::get('api/admin/tag/{id}', [TagAdminController::class, 'getItem'])
     ->middleware(['expired','admin']);

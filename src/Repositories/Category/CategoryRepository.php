@@ -4,12 +4,9 @@ namespace DaydreamLab\Cms\Repositories\Category;
 
 use DaydreamLab\Cms\Models\Category\Category;
 use DaydreamLab\Cms\Repositories\CmsRepository;
-use DaydreamLab\JJAJ\Traits\NestedRepositoryTrait;
 
 class CategoryRepository extends CmsRepository
 {
-    use NestedRepositoryTrait;
-
     public function __construct(Category $model)
     {
         parent::__construct($model);
