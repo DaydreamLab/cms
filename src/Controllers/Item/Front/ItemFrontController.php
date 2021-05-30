@@ -27,10 +27,10 @@ class ItemFrontController extends CmsController
     {
         $this->service->setUser($request->user('api'));
         $this->service->getItemByAlias(Helper::collect([
-            'alias'     => $request->route('alias'),
+            'alias'     => $request->route('alias')/*,
             'language'  => $request->get('language') != ''
                 ? $request->get('language')
-                : config('daydreamlab.global.locale')
+                : config('daydreamlab.global.locale')*/
         ]));
 
         return $this->response($this->service->status, new ItemFrontResource($this->service->response));
