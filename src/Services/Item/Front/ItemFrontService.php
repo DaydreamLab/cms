@@ -296,7 +296,7 @@ class ItemFrontService extends ItemService
         $special_queries = $this->getSpecialQueries($input);
         $language = $input->get('language') != ''
             ? [$input->get('language')]
-            : ['*',config('daydreamlab.global.locale')];
+            : ['*','zh-TW'];
 
         // 如果有傳 category_alias
         if (!InputHelper::null($input, 'category_alias')) {
@@ -306,12 +306,12 @@ class ItemFrontService extends ItemService
                         'type'  => 'whereIn',
                         'key'   => 'alias',
                         'value' => $input->get('category_alias'),
-                    ]/*,
+                    ],
                     [
                         'type'  => 'whereIn',
                         'key'   => 'language',
                         'value' =>  $language
-                    ]*/
+                    ]
                 ],
 
                 'paginate'      => false
