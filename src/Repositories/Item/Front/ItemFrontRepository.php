@@ -35,6 +35,7 @@ class ItemFrontRepository extends ItemRepository
             ->whereIn('category_id', $category_ids)
             ->where('state', 1)
             ->whereIn('access', $params['access_ids'])
+            ->where('publish_up', '<', now())
             ->orderBy($params['item_order_by'], $params['item_order'])
             ->orderBy('publish_up', 'desc');
 
