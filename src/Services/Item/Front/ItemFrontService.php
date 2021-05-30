@@ -306,12 +306,12 @@ class ItemFrontService extends ItemService
                         'type'  => 'whereIn',
                         'key'   => 'alias',
                         'value' => $input->get('category_alias'),
-                    ],
+                    ]/*,
                     [
                         'type'  => 'whereIn',
                         'key'   => 'language',
                         'value' =>  $language
-                    ]
+                    ]*/
                 ],
 
                 'paginate'      => false
