@@ -35,7 +35,8 @@ class TagAdminStorePost extends AdminRequest
             'alias'         => 'nullable|string',
             'state'         => ['nullable', Rule::in([0,1,-1,-2])],
             'description'   => 'nullable|string',
-            'content_type'  => ['nullable', Rule::in(['item', 'category'])],
+            'extension'     => 'nullable|string',
+            'content_type'  => ['nullable', Rule::in(['article', 'category'])],
             'hits'          => 'nullable|integer',
             'access'        => 'nullable|integer',
             'language'      => 'nullable|string',
@@ -57,6 +58,12 @@ class TagAdminStorePost extends AdminRequest
     {
         $validated = parent::validated();
         $validated->put('params', RequestHelper::handleParams($validated->get('params')));
+        if (!$validated->get('extension')) {
+            $validated->put('extension', 'item');
+            if (!$validated->get('content_type')) {
+                $validated->put('content_type', 'article');
+            }
+        }
 
         return $validated;
     }

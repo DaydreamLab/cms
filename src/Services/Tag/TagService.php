@@ -50,14 +50,6 @@ class TagService extends CmsService
 
         $result = $this->modifyNested($input, $item->parent, $item);
 
-        $restore = $this->repo->checkout($item, $this->getUser());
-        if (!$restore) {
-            throw new ForbiddenException('InsufficientPermissionRestore', [
-                'lockerName' => $item->lockerName,
-                'locked_at'    => Carbon::parse($item->locked_at)->tz($this->getUser()->timezone)
-            ], [], $this->modelName);
-        }
-
         event(new Modify($this->find($input->get('id')), $this->getServiceName(), $result, $input,$this->user));
 
         return $result;
@@ -86,7 +78,7 @@ class TagService extends CmsService
 
     public function ordering(Collection $input)
     {
-        $result =  parent::ordering($input);
+        $result =  parent::orderingNested($input);
 
         event(new Ordering($this->getServiceName(), $result, $input, $this->user));
 

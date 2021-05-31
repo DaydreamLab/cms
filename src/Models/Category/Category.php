@@ -9,6 +9,7 @@ use DaydreamLab\Cms\Traits\WithExtrafield;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\JJAJ\Traits\UserInfo;
+use Illuminate\Support\Str;
 use Kalnoy\Nestedset\NodeTrait;
 
 class Category extends BaseModel
@@ -114,6 +115,11 @@ class Category extends BaseModel
             if ($item->state && !$item->publish_up) {
                 $item->publish_up = now();
             }
+
+            if (!$item->alias) {
+                $item->alias = Str::random(8);
+            }
+
             $item->path = $item->parent
                 ? $item->parent->path . '/' . $item->alias
                 : '/' . $item->alias;

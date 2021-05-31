@@ -7,6 +7,7 @@ use DaydreamLab\Cms\Traits\Model\WithAccess;
 use DaydreamLab\Cms\Traits\Model\WithLanguage;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\UserInfo;
+use Illuminate\Support\Str;
 use Kalnoy\Nestedset\NodeTrait;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 
@@ -40,6 +41,7 @@ class Tag extends BaseModel
         'path',
         'state',
         'description',
+        'extension',
         'content_type',
         'hits',
         'access',
@@ -97,13 +99,10 @@ class Tag extends BaseModel
             if ($item->state && !$item->publish_up) {
                 $item->publish_up = now();
             }
-            $item->path = $item->parent
-                ? $item->parent->path . '/' . $item->alias
-                : '/' . $item->alias;
-        });
 
-
-        static::updating(function ($item) {
+            if (!$item->alias) {
+                $item->alias = Str::random(8);
+            }
             $item->path = $item->parent
                 ? $item->parent->path . '/' . $item->alias
                 : '/' . $item->alias;

@@ -11,6 +11,7 @@ use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\User\Models\Viewlevel\Viewlevel;
+use Illuminate\Support\Str;
 use Kalnoy\Nestedset\NodeTrait;
 
 class Menu extends BaseModel
@@ -101,6 +102,11 @@ class Menu extends BaseModel
             if ($item->state && !$item->publish_up) {
                 $item->publish_up = now();
             }
+
+            if (!$item->alias) {
+                $item->alias = Str::random(8);
+            }
+
             $item->path = $item->parent
                 ? $item->parent->path . '/' . $item->alias
                 : '/' . $item->alias;

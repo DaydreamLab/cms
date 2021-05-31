@@ -13,6 +13,7 @@ use DaydreamLab\Cms\Requests\Menu\Admin\MenuAdminStorePost;
 use DaydreamLab\Cms\Requests\Menu\Admin\MenuAdminStatePost;
 use DaydreamLab\Cms\Requests\Menu\Admin\MenuAdminSearchPost;
 use DaydreamLab\Cms\Requests\Menu\Admin\MenuAdminOrderingPost;
+use Throwable;
 
 class MenuAdminController extends CmsController
 {
@@ -30,6 +31,11 @@ class MenuAdminController extends CmsController
     public function getItem(MenuAdminGetItemGet $request)
     {
         $this->service->setUser($request->user('api'));
+        try {
+
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
         $this->service->getItem(collect(['id' => $request->route('id')]));
 
         return $this->response($this->service->status, new MenuAdminResource($this->service->response));
@@ -39,7 +45,11 @@ class MenuAdminController extends CmsController
     public function checkout(MenuAdminRemovePost $request)
     {
         $this->service->setUser($request->user('api'));
-        $this->service->checkout($request->validated());
+        try {
+            $this->service->checkout($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
 
         return $this->response($this->service->status, $this->service->response);
     }
@@ -48,7 +58,11 @@ class MenuAdminController extends CmsController
     public function ordering(MenuAdminOrderingPost $request)
     {
         $this->service->setUser($request->user('api'));
-        $this->service->ordering($request->validated());
+        try {
+            $this->service->ordering($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
 
         return $this->response($this->service->status, $this->service->response);
     }
@@ -57,7 +71,11 @@ class MenuAdminController extends CmsController
     public function remove(MenuAdminRemovePost $request)
     {
         $this->service->setUser($request->user('api'));
-        $this->service->remove($request->validated());
+        try {
+            $this->service->remove($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
 
         return $this->response($this->service->status, $this->service->response);
     }
@@ -66,7 +84,11 @@ class MenuAdminController extends CmsController
     public function state(MenuAdminStatePost $request)
     {
         $this->service->setUser($request->user('api'));
-        $this->service->state($request->validated());
+        try {
+            $this->service->state($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
 
         return $this->response($this->service->status, $this->service->response);
     }
@@ -81,6 +103,13 @@ class MenuAdminController extends CmsController
         $this->service->setUser($request->user('api'));
         $this->service->store($validated);
 
+        try {
+
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+
         return $this->response($this->service->status,
             gettype($this->service->response) == 'object'
                 ? new MenuAdminResource($this->service->response->refresh())
@@ -92,7 +121,11 @@ class MenuAdminController extends CmsController
     public function search(MenuAdminSearchPost $request)
     {
         $this->service->setUser($request->user('api'));
-        $this->service->search($request->validated());
+        try {
+            $this->service->search($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
 
         return $this->response($this->service->status, new MenuAdminListResourceCollection($this->service->response));
     }

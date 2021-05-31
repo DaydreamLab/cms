@@ -73,10 +73,10 @@ class InstallCommand extends Command
      */
     public function handle()
     {
-        Asset::truncate();
-        $this->call('db:seed',  ['--class' =>  'DaydreamLab\\User\\Database\\Seeders\\AssetsTableSeeder']);
-        $this->call('db:seed',  ['--class' =>  'DaydreamLab\\Cms\\Database\\Seeders\\AssetsTableSeeder']);
-        exit();
+//        Asset::truncate();
+//        $this->call('db:seed',  ['--class' =>  'DaydreamLab\\User\\Database\\Seeders\\AssetsTableSeeder']);
+//        $this->call('db:seed',  ['--class' =>  'DaydreamLab\\Cms\\Database\\Seeders\\AssetsTableSeeder']);
+//        exit();
         $this->call('user:install');
 
         foreach ($this->seeders as $seeder) {

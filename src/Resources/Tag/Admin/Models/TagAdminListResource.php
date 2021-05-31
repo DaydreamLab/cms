@@ -25,6 +25,7 @@ class TagAdminListResource extends JsonResource
             'state'                     => $this->state,
             'description'               => $this->description,
             'content_type'              => $this->content_type,
+            'extension'                 => $this->extension,
             'hits'                      => $this->hits,
             'access'                    => $this->access,
             'language_title'            => $this->language_title,

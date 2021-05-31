@@ -21,7 +21,8 @@ class CreateTagsTable extends Migration
             $table->string('path');
             $table->tinyInteger('state')->nullable()->default(1);
             $table->text('description')->nullable();
-            $table->string('content_type')->nullable()->default('item');
+            $table->string('extension')->nullable();
+            $table->string('content_type')->nullable();
             $table->unsignedInteger('hits')->nullable()->default(0);
             $table->unsignedInteger('access')->nullable()->default(1);
             $table->string('language')->nullable()->default('*');
@@ -31,7 +32,7 @@ class CreateTagsTable extends Migration
             $table->unsignedBigInteger('featured_ordering')->nullable();
             $table->timestamp('publish_up')->nullable();
             $table->timestamp('publish_down')->nullable();
-            $table->unsignedInteger('locked_by')->nullable()->default(0);
+            $table->unsignedInteger('locked_by')->nullable();
             $table->timestamp('locked_at')->nullable();
             $table->unsignedInteger('created_by');
             $table->unsignedInteger('updated_by')->nullable();
