@@ -32,8 +32,6 @@ class SettingFrontService extends SettingService
 
         if($site_setting)
         {
-            $data['metadesc']       = $site_setting->metadesc       ?: $global['metadesc'];
-            $data['metakeywords']   = $site_setting->metakeywords   ?: $global['metakeywords'];
             $data['sitename']       = $site_setting->sitename       ?: $global['sitename'];
             $data['locale']         = $global['locale'];
             $data['custom_header']  = $global['custom_head'];

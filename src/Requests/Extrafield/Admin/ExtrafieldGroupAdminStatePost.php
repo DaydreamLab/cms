@@ -6,7 +6,7 @@ use DaydreamLab\Cms\Requests\CmStatePost;
 
 class ExtrafieldGroupAdminStatePost extends CmStatePost
 {
-    protected $apiMethod = 'updateExtrafieldGroupState';
+    protected $apiMethod = 'stateExtrafieldGroup';
 
     protected $modelName = 'ExtrafieldGroup';
     /**
@@ -29,6 +29,6 @@ class ExtrafieldGroupAdminStatePost extends CmStatePost
         $rules = [
             //
         ];
-        return array_merge($rules, parent::rules());
+        return array_merge(parent::rules(), $rules);
     }
 }

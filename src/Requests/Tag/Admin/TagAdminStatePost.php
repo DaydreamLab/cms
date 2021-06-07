@@ -6,7 +6,7 @@ use DaydreamLab\Cms\Requests\CmStatePost;
 
 class TagAdminStatePost extends CmStatePost
 {
-    protected $apiMethod = 'updateTagState';
+    protected $apiMethod = 'stateTag';
 
     protected $modelName = 'Tag';
     /**

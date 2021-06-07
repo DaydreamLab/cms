@@ -15,8 +15,6 @@ class CategoryAdminService extends CategoryService
 {
     use CmsCronJob;
 
-    protected $modelType = 'Admin';
-
     protected $cmsCronJobService;
 
     public function __construct(CategoryAdminRepository $repo)
@@ -41,36 +39,8 @@ class CategoryAdminService extends CategoryService
 
         $item = parent::store($input);
 
-
         $this->setCronJob($input, $item);
 
         return $item;
-    }
-
-
-    public function search(Collection $input)
-    {
-        if (!$input->get('extension')) {
-            $input->forget('extension');
-            $input->put('extension', 'item');
-        }
-
-        $limit = $input->get('limit');
-        $paginate = $input->get('paginate');
-
-        $input->put('paginate', 0);
-        $input->put('limit', 99999999);
-
-        $result = parent::search($input);
-
-        $data = $result->toFlatTree();
-
-        if ($paginate) {
-            $this->response = $this->repo->paginate($data, $limit, $input->get('page') ?: 1);
-        } else {
-            $this->response = $data;
-        }
-
-        return $this->response;
     }
 }

@@ -2,12 +2,10 @@
 
 namespace DaydreamLab\Cms\Resources\Menu\Admin\Models;
 
-use DaydreamLab\Cms\Traits\Resource\CmsResource;
-use Illuminate\Http\Resources\Json\JsonResource;
+use DaydreamLab\JJAJ\Resources\BaseJsonResource;
 
-class MenuAdminListResource extends JsonResource
+class MenuAdminListResource extends BaseJsonResource
 {
-    use CmsResource;
     /**
      * Transform the resource into an array.
      *

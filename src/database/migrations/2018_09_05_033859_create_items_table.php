@@ -26,13 +26,11 @@ class CreateItemsTable extends Migration
             $table->text('description')->nullable();
             $table->text('video')->nullable();
             $table->text('link')->nullable();
-            $table->unsignedInteger('hits');
+            $table->unsignedInteger('hits')->default(0);
             $table->unsignedInteger('access');
             $table->unsignedTinyInteger('featured')->default(0);
             $table->unsignedInteger('featured_ordering')->nullable();
             $table->string('language')->default('*');
-            $table->string('metadesc')->nullable();
-            $table->string('metakeywords')->nullable();
             //$table->string('content_type')->nullable()->default('article');
             $table->text('params')->nullable();
             $table->unsignedInteger('extrafield_group_id')->nullable();

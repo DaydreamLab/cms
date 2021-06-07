@@ -17,11 +17,6 @@ class TagService extends CmsService
 {
     protected $modelName = 'Tag';
 
-    protected $modelType = 'Base';
-
-    protected $type = 'Tag';
-
-
     public function __construct(TagRepository $repo)
     {
         parent::__construct($repo);
@@ -30,7 +25,7 @@ class TagService extends CmsService
 
     public function add(Collection $input)
     {
-        $item = $this->addNested($input);
+        $item = parent::addNested($input);
 
         event(new Add($item, $this->getServiceName(), $input, $this->user));
 
@@ -48,7 +43,7 @@ class TagService extends CmsService
     {
         $item = $this->checkItem($input);
 
-        $result = $this->modifyNested($input, $item->parent, $item);
+        $result = parent::modifyNested($input, $item->parent, $item);
 
         event(new Modify($this->find($input->get('id')), $this->getServiceName(), $result, $input,$this->user));
 
@@ -58,7 +53,7 @@ class TagService extends CmsService
 
     public function remove(Collection $input)
     {
-        $result = $this->removeNested($input);
+        $result = parent::removeNested($input);
 
         event(new Remove($this->getServiceName(), $result, $input, $this->user));
 
@@ -88,7 +83,7 @@ class TagService extends CmsService
 
     public function store(Collection $input)
     {
-        $result = $this->storeNested($input);
+        $result = parent::storeNested($input);
 
         return $result;
     }

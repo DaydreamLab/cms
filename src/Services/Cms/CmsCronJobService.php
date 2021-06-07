@@ -3,15 +3,11 @@
 namespace DaydreamLab\Cms\Services\Cms;
 
 use DaydreamLab\Cms\Repositories\Cms\CmsCronJobRepository;
-use DaydreamLab\JJAJ\Services\BaseService;
+use DaydreamLab\Cms\Services\CmsService;
 
-class CmsCronJobService extends BaseService
+class CmsCronJobService extends CmsService
 {
-    protected $package = 'Cms';
-
     protected $modelName = 'CmsCronJob';
-
-    protected $modelType = 'Base';
 
     public function __construct(CmsCronJobRepository $repo)
     {

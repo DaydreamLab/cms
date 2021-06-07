@@ -44,7 +44,7 @@ class ModuleAdminStorePost extends AdminRequest
             'publish_up'    => 'nullable|date',
             'publish_down'  => 'nullable|date',
         ];
-        return array_merge($rules, parent::rules());
+        return array_merge(parent::rules(), $rules);
     }
 
     public function validated()

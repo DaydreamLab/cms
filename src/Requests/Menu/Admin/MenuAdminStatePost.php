@@ -6,7 +6,7 @@ use DaydreamLab\Cms\Requests\CmStatePost;
 
 class MenuAdminStatePost extends CmStatePost
 {
-    protected $apiMethod = 'updateMenuState';
+    protected $apiMethod = 'stateMenu';
 
     protected $modelName = 'Menu';
     /**
@@ -29,6 +29,6 @@ class MenuAdminStatePost extends CmStatePost
         $rules = [
             //
         ];
-        return array_merge($rules, parent::rules());
+        return array_merge(parent::rules(), $rules);
     }
 }

@@ -6,7 +6,7 @@ use DaydreamLab\Cms\Requests\CmsOrderingPost;
 
 class SiteAdminOrderingPost extends CmsOrderingPost
 {
-    protected $apiMethod = 'editSite';
+    protected $apiMethod = 'orderingSite';
 
     protected $modelName = 'Site';
     /**
@@ -29,6 +29,6 @@ class SiteAdminOrderingPost extends CmsOrderingPost
         $rules = [
             //
         ];
-        return array_merge($rules, parent::rules());
+        return array_merge(parent::rules(), $rules);
     }
 }

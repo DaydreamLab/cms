@@ -2,12 +2,10 @@
 
 namespace DaydreamLab\Cms\Resources\Item\Front\Models;
 
-use DaydreamLab\Cms\Traits\Resource\CmsResource;
-use Illuminate\Http\Resources\Json\JsonResource;
+use DaydreamLab\JJAJ\Resources\BaseJsonResource;
 
-class ItemFrontListResource extends JsonResource
+class ItemFrontListResource extends BaseJsonResource
 {
-    use CmsResource;
     /**
      * Transform the resource into an array.
      *

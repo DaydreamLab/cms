@@ -29,4 +29,14 @@ class SiteAdminGetListGet extends CmsGetItemGet
     {
         return parent::rules();
     }
+
+
+    public function validated()
+    {
+        $validated = parent::validated();
+        $validated->put('state', 1);
+        $validated->put('paginate', 0);
+
+        return $validated;
+    }
 }

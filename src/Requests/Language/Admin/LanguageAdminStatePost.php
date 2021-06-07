@@ -6,7 +6,7 @@ use DaydreamLab\Cms\Requests\CmStatePost;
 
 class LanguageAdminStatePost extends CmStatePost
 {
-    protected $apiMethod = 'updateLanguageState';
+    protected $apiMethod = 'stateLanguage';
 
     protected $modelName = 'Language';
     /**
@@ -29,6 +29,6 @@ class LanguageAdminStatePost extends CmStatePost
         $rules = [
             //
         ];
-        return array_merge($rules, parent::rules());
+        return array_merge(parent::rules(), $rules);
     }
 }

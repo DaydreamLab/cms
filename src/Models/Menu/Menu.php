@@ -1,22 +1,18 @@
 <?php
 namespace DaydreamLab\Cms\Models\Menu;
 
-use DaydreamLab\Cms\Models\Category\Category;
-use DaydreamLab\Cms\Models\Module\Module;
 use DaydreamLab\Cms\Models\Site\Site;
-use DaydreamLab\Cms\Traits\Model\WithAccess;
+use DaydreamLab\User\Traits\Model\WithAccess;
 use DaydreamLab\Cms\Traits\Model\WithCategory;
 use DaydreamLab\Cms\Traits\Model\WithLanguage;
-use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
-use DaydreamLab\User\Models\Viewlevel\Viewlevel;
 use Illuminate\Support\Str;
 use Kalnoy\Nestedset\NodeTrait;
 
 class Menu extends BaseModel
 {
-    use NodeTrait, WithCategory, WithAccess, WithLanguage,
+    use NodeTrait, WithAccess, WithCategory, WithLanguage,
         RecordChanger {
         RecordChanger::boot as traitBoot;
     }
@@ -49,8 +45,6 @@ class Menu extends BaseModel
         'description',
         'language',
         'params',
-        'metadata',
-        'metakeywords',
         'locked_by',
         'locked_at',
         'created_by',
@@ -107,12 +101,6 @@ class Menu extends BaseModel
                 $item->alias = Str::random(8);
             }
 
-            $item->path = $item->parent
-                ? $item->parent->path . '/' . $item->alias
-                : '/' . $item->alias;
-        });
-
-        static::updating(function ($item) {
             $item->path = $item->parent
                 ? $item->parent->path . '/' . $item->alias
                 : '/' . $item->alias;

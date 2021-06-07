@@ -26,10 +26,9 @@ class CmsOrderingPost extends AdminRequest
     {
         return [
             'id'            => 'required|integer',
-            'index_diff'    => 'nullable|integer',
-            'indexDiff'     => 'nullable|integer',
             'parentId'      => 'nullable|integer',
             'parent_id'     => 'nullable|integer',
+            'ordering'      => 'nullable|integer',
         ];
     }
 
@@ -39,12 +38,6 @@ class CmsOrderingPost extends AdminRequest
         if ($validated->get('parentId')) {
             $validated->put('parent_id', $validated->get('parentId'));
         }
-
-        if ($validated->get('index_diff')) {
-            $validated->put('indexDiff', $validated->get('index_diff'));
-        }
-
-        $validated->forget(['parentId', 'index_diff']);
 
         return $validated;
     }

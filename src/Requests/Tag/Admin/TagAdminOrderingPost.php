@@ -6,7 +6,7 @@ use DaydreamLab\Cms\Requests\CmsOrderingPost;
 
 class TagAdminOrderingPost extends CmsOrderingPost
 {
-    protected $apiMethod = 'editTag';
+    protected $apiMethod = 'orderingTag';
 
     protected $modelName = 'Tag';
     /**

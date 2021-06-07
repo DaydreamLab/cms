@@ -2,11 +2,11 @@
 
 namespace DaydreamLab\Cms\Requests\Item\Admin;
 
-use DaydreamLab\Cms\Requests\CmsCheckoutRemovePost;
+use DaydreamLab\Cms\Requests\CmsFeaturedOrderingPost;
 
-class ItemAdminCheckoutPost extends CmsCheckoutRemovePost
+class ItemAdminFeaturedOrderingPost extends CmsFeaturedOrderingPost
 {
-    protected $apiMethod = 'checkoutItem';
+    protected $apiMethod = 'featuredOrderingItem';
 
     protected $modelName = 'Item';
     /**
@@ -26,9 +26,17 @@ class ItemAdminCheckoutPost extends CmsCheckoutRemovePost
      */
     public function rules()
     {
-        $rules = [
-            //
+        return [
+            'id'                => 'required|integer',
+            'featuredOrdering'  => 'nullable|integer'
         ];
-        return array_merge($rules, parent::rules());
+    }
+
+
+    public function validated()
+    {
+        $validated = parent::validated();
+
+        return $validated;
     }
 }

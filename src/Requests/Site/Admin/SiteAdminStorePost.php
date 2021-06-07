@@ -34,8 +34,7 @@ class SiteAdminStorePost extends AdminRequest
             'url'           => 'required|string',
             'sitename'      => 'required|string',
             'sef'           => 'required|string',
-            'metadesc'      => 'nullable|string',
-            'metakeywords'  => 'nullable|string',
+            'params'        => 'nullable|array',
             'state'         => [
                 'nullable',
                 Rule::in([0,1])

@@ -1,14 +1,15 @@
 <?php
 
-namespace DaydreamLab\Cms\Requests\Extrafield\Admin;
+namespace DaydreamLab\Cms\Requests\Tag\Admin;
 
-use DaydreamLab\Cms\Requests\CmsCheckoutRemovePost;
+use DaydreamLab\Cms\Requests\CmsFeaturedOrderingPost;
+use function Psy\sh;
 
-class ExtrafieldGroupAdminCheckoutPost extends CmsCheckoutRemovePost
+class TagAdminFeaturedOrderingPost extends CmsFeaturedOrderingPost
 {
-    protected $apiMethod = 'checkoutExtrafieldGroup';
+    protected $apiMethod = 'featuredOrderingTag';
 
-    protected $modelName = 'ExtrafieldGroup';
+    protected $modelName = 'Tag';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -26,8 +27,9 @@ class ExtrafieldGroupAdminCheckoutPost extends CmsCheckoutRemovePost
      */
     public function rules()
     {
-        $rules =  [
+        $rules = [
         ];
+
         return array_merge(parent::rules(), $rules);
     }
 }

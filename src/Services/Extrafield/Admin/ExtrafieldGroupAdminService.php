@@ -7,10 +7,6 @@ use DaydreamLab\Cms\Services\Extrafield\ExtrafieldGroupService;
 
 class ExtrafieldGroupAdminService extends ExtrafieldGroupService
 {
-    protected $modelType = 'Admin';
-
-    protected $search_keys = ['title', 'description'];
-
     public function __construct(ExtrafieldGroupAdminRepository $repo)
     {
         parent::__construct($repo);

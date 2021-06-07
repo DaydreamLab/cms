@@ -6,7 +6,7 @@ use DaydreamLab\Cms\Requests\CmsFeaturedPost;
 
 class TagAdminFeaturedPost extends CmsFeaturedPost
 {
-    protected $apiMethod = 'updateTagState';
+    protected $apiMethod = 'featuredTag';
 
     protected $modelName = 'Tag';
     /**

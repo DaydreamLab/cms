@@ -6,7 +6,7 @@ use DaydreamLab\Cms\Requests\CmStatePost;
 
 class ExtrafieldAdminStatePost extends CmStatePost
 {
-    protected $apiMethod = 'updateExtrafieldState';
+    protected $apiMethod = 'stateExtrafield';
 
     protected $modelName = 'Extrafield';
     /**

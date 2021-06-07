@@ -2,13 +2,11 @@
 
 namespace DaydreamLab\Cms\Resources\Tag\Admin\Models;
 
-use DaydreamLab\Cms\Traits\Resource\CmsResource;
 use DaydreamLab\Dddream\Helpers\ResourceHelper;
-use Illuminate\Http\Resources\Json\JsonResource;
+use DaydreamLab\JJAJ\Resources\BaseJsonResource;
 
-class TagAdminListResource extends JsonResource
+class TagAdminListResource extends BaseJsonResource
 {
-    use CmsResource;
     /**
      * Transform the resource into an array.
      *

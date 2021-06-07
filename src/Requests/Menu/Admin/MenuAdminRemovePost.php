@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Menu\Admin;
 
-use DaydreamLab\Cms\Requests\CmsCheckoutRemovePost;
+use DaydreamLab\Cms\Requests\CmsRestoreRemovePost;
 
-class MenuAdminRemovePost extends CmsCheckoutRemovePost
+class MenuAdminRemovePost extends CmsRestoreRemovePost
 {
     protected $apiMethod = 'deleteMenu';
 
@@ -29,6 +29,6 @@ class MenuAdminRemovePost extends CmsCheckoutRemovePost
         $rules = [
             //
         ];
-        return array_merge($rules, parent::rules());
+        return array_merge(parent::rules(), $rules);
     }
 }

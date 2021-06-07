@@ -3,11 +3,10 @@
 namespace DaydreamLab\Cms\Requests\Item\Admin;
 
 use DaydreamLab\Cms\Requests\CmsOrderingPost;
-use Illuminate\Validation\Rule;
 
 class ItemAdminOrderingPost extends CmsOrderingPost
 {
-    protected $apiMethod = 'editItem';
+    protected $apiMethod = 'orderingItem';
 
     protected $modelName = 'Item';
     /**
@@ -27,20 +26,15 @@ class ItemAdminOrderingPost extends CmsOrderingPost
      */
     public function rules()
     {
-        $rules = [
-            'orderingKey' => ['nullable', Rule::in(['ordering', 'featured_ordering'])]
-        ];
-        return array_merge($rules, parent::rules());
+        $rules = [];
+
+        return array_merge(parent::rules(), $rules);
     }
 
 
     public function validated()
     {
         $validated = parent::validated();
-
-        if (!$validated->get('orderingKey')) {
-            $validated->put('orderingKey', 'ordering');
-        }
 
         return $validated;
     }

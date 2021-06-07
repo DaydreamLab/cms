@@ -39,7 +39,18 @@ class CategoryAdminSearchPost extends ListRequest
             'created_by'    => 'nullable|integer',
             'access'        => 'nullable|integer',
         ];
-        
+
         return array_merge(parent::rules(), $rules);
+    }
+
+
+    public function validated()
+    {
+        $validated = parent::validated();
+        if (!$validated->get('extension')) {
+            $validated->put('extension', 'item');
+        }
+
+        return $validated;
     }
 }

@@ -6,7 +6,7 @@ use DaydreamLab\Cms\Requests\CmStatePost;
 
 class CategoryAdminStatePost extends CmStatePost
 {
-    protected $apiMethod = 'updateCategoryState';
+    protected $apiMethod = 'stateCategory';
 
     protected $modelName = 'Category';
     /**
@@ -29,6 +29,6 @@ class CategoryAdminStatePost extends CmStatePost
         $rules = [
             //
         ];
-        return array_merge($rules, parent::rules());
+        return array_merge(parent::rules(), $rules);
     }
 }

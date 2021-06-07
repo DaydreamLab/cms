@@ -2,16 +2,15 @@
 namespace DaydreamLab\Cms\Models\Site;
 
 use DaydreamLab\Cms\Models\Language\Language;
-use DaydreamLab\Cms\Traits\Model\WithAccess;
+use DaydreamLab\User\Traits\Model\WithAccess;
 use DaydreamLab\Cms\Traits\Model\WithLanguage;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
-use DaydreamLab\Cms\Traits\Model\UserInfo;
-use DaydreamLab\JJAJ\Helpers\Helper;
+use DaydreamLab\JJAJ\Traits\UserInfo;
 use DaydreamLab\JJAJ\Models\BaseModel;
 
 class Site extends BaseModel
 {
-    use WithLanguage, WithAccess, UserInfo, 
+    use WithLanguage, WithAccess, UserInfo,
         RecordChanger {
         RecordChanger::boot as traitBoot;
     }
@@ -36,11 +35,10 @@ class Site extends BaseModel
         'url',
         'sitename',
         'sef',
-        'metakeywords',
-        'metadesc',
         'state',
         'access',
         'ordering',
+        'params',
         'created_by',
         'updated_by',
         'locked_by',
@@ -64,26 +62,17 @@ class Site extends BaseModel
      */
     protected $appends = [
         'language_title',
-        'creator',
-        'updater',
-        'locker',
     ];
 
 
     protected $casts = [
-        'locked_at' => 'datetime:Y-m-d H:i:s',
+        'params' => 'array',
     ];
 
 
     public static function boot()
     {
         self::traitBoot();
-    }
-
-
-    public function language()
-    {
-        return $this->belongsTo(Language::class, 'sef', 'sef')->where('type', '=', 'content');
     }
 
 
@@ -94,4 +83,9 @@ class Site extends BaseModel
         return $language? $language->title : 'Site sef error';
     }
 
+
+    public function language()
+    {
+        return $this->belongsTo(Language::class, 'sef', 'sef')->where('type', '=', 'content');
+    }
 }

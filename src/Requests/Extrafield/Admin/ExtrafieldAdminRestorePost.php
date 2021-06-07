@@ -1,14 +1,14 @@
 <?php
 
-namespace DaydreamLab\Cms\Requests\Tag\Admin;
+namespace DaydreamLab\Cms\Requests\Extrafield\Admin;
 
-use DaydreamLab\Cms\Requests\CmsCheckoutRemovePost;
+use DaydreamLab\Cms\Requests\CmsRestoreRemovePost;
 
-class TagAdminCheckoutPost extends CmsCheckoutRemovePost
+class ExtrafieldAdminRestorePost extends CmsRestoreRemovePost
 {
-    protected $apiMethod = 'checkoutTag';
+    protected $apiMethod = 'restoreExtrafield';
 
-    protected $modelName = 'Tag';
+    protected $modelName = 'Extrafield';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -26,8 +26,7 @@ class TagAdminCheckoutPost extends CmsCheckoutRemovePost
      */
     public function rules()
     {
-        $rules = [
-            //
+        $rules =  [
         ];
         return array_merge(parent::rules(), $rules);
     }

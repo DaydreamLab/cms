@@ -12,8 +12,6 @@ class MenuFrontController extends CmsController
 {
     protected $modelName = 'Menu';
 
-    protected $modelType = 'Front';
-
     public function __construct(MenuFrontService $service)
     {
         parent::__construct($service);

@@ -14,8 +14,6 @@ class CategoryService extends CmsService
 {
     protected $modelName = 'Category';
 
-    protected $modelType = 'Base';
-
     public function __construct(CategoryRepository $repo)
     {
         parent::__construct($repo);
@@ -32,12 +30,6 @@ class CategoryService extends CmsService
     }
 
 
-    public function restore(Collection $input)
-    {
-        return parent::restore($input);
-    }
-
-
     public function findDescendantOf($id)
     {
         return $this->repo->findDescendantOf($id);
@@ -46,7 +38,9 @@ class CategoryService extends CmsService
 
     public function modify(Collection $input)
     {
-        $result =  parent::modifyNested($input);
+        $item = $this->checkItem($input);
+
+        $result = parent::modifyNested($input, $item->parent, $item);
 
         event(new Modify($this->find($input->get('id')), $this->getServiceName(), $result, $input,$this->user));
 

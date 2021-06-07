@@ -2,11 +2,11 @@
 
 namespace DaydreamLab\Cms\Requests\Site\Admin;
 
-use DaydreamLab\Cms\Requests\CmsCheckoutRemovePost;
+use DaydreamLab\Cms\Requests\CmsRestoreRemovePost;
 
-class SiteAdminCheckoutPost extends CmsCheckoutRemovePost
+class SiteAdminRestorePost extends CmsRestoreRemovePost
 {
-    protected $apiMethod = 'checkoutSite';
+    protected $apiMethod = 'restoreSite';
 
     protected $modelName = 'Site';
     /**

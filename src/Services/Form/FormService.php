@@ -14,8 +14,6 @@ class FormService extends CmsService
 {
     protected $modelName = 'Form';
 
-    protected $modelType = 'Base';
-
     public function __construct(FormRepository $repo)
     {
         parent::__construct($repo);

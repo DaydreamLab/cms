@@ -3,7 +3,7 @@
 namespace DaydreamLab\Cms\Models\Tag;
 
 use DaydreamLab\Cms\Models\Item\Item;
-use DaydreamLab\Cms\Traits\Model\WithAccess;
+use DaydreamLab\User\Traits\Model\WithAccess;
 use DaydreamLab\Cms\Traits\Model\WithLanguage;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\UserInfo;
@@ -36,6 +36,7 @@ class Tag extends BaseModel
      * @var array
      */
     protected $fillable = [
+        'parent_id',
         'title',
         'alias',
         'path',
@@ -66,8 +67,8 @@ class Tag extends BaseModel
      */
     protected $hidden = [
         'pivot',
-        '_lft',
-        '_rgt',
+//        '_lft',
+//        '_rgt',
     ];
 
 

@@ -3,30 +3,55 @@
 namespace DaydreamLab\Cms\Controllers\Category\Admin;
 
 use DaydreamLab\Cms\Controllers\CmsController;
+use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminFeaturedPost;
 use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminGetItemGet;
 use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminOrderingPost;
 use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminRemovePost;
+use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminRestorePost;
 use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminStatePost;
-use DaydreamLab\Cms\Requests\CmsCheckoutRemovePost;
+use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminOrderingPost;
+use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminFeaturedPost;
 use DaydreamLab\Cms\Resources\Category\Admin\Collections\CategoryAdminListResourceCollection;
 use DaydreamLab\Cms\Resources\Category\Admin\Models\CategoryAdminResource;
-use DaydreamLab\JJAJ\Controllers\BaseController;
 use DaydreamLab\Cms\Services\Category\Admin\CategoryAdminService;
 use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminStorePost;
 use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminSearchPost;
-use Illuminate\Support\Facades\DB;
 use Throwable;
 
 class CategoryAdminController extends CmsController
 {
     protected $modelName = 'Category';
 
-    protected $modelType = 'Admin';
-
     public function __construct(CategoryAdminService $service)
     {
         parent::__construct($service);
         $this->service = $service;
+    }
+
+
+    public function featured(CategoryAdminFeaturedPost $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->featured($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
+
+    public function featuredOrdering(ItemAdminOrderingPost $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->ordering($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
@@ -43,24 +68,11 @@ class CategoryAdminController extends CmsController
     }
 
 
-    public function restore(CmsCheckoutRemovePost $request)
-    {
-        $this->service->setUser($request->user('api'));
-        try {
-            $this->service->restore($request->validated());
-        } catch (Throwable $t) {
-            $this->handleException($t);
-        }
-
-        return $this->response($this->service->status, $this->service->response);
-    }
-
-
     public function ordering(CategoryAdminOrderingPost $request)
     {
         $this->service->setUser($request->user('api'));
         try {
-            $this->service->ordering($request->validated());
+            $this->service->orderingNested($request->validated());
         } catch (Throwable $t) {
             $this->handleException($t);
         }
@@ -79,6 +91,32 @@ class CategoryAdminController extends CmsController
         }
 
         return $this->response($this->service->status, $this->service->response);
+    }
+
+
+    public function restore(CategoryAdminRestorePost $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->restore($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
+
+    public function search(CategoryAdminSearchPost $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->search($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response, [], CategoryAdminListResourceCollection::class);
     }
 
 
@@ -105,18 +143,5 @@ class CategoryAdminController extends CmsController
         }
 
         return $this->response($this->service->status, $this->service->response, [], CategoryAdminResource::class);
-    }
-
-
-    public function search(CategoryAdminSearchPost $request)
-    {
-        $this->service->setUser($request->user('api'));
-        try {
-            $this->service->search($request->validated());
-        } catch (Throwable $t) {
-            $this->handleException($t);
-        }
-
-        return $this->response($this->service->status, $this->service->response, [], CategoryAdminListResourceCollection::class);
     }
 }

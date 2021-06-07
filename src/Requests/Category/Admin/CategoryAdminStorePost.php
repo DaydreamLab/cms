@@ -69,6 +69,9 @@ class CategoryAdminStorePost extends AdminRequest
     {
         $validated = parent::validated();
         $validated->put('params', RequestHelper::handleParams($validated->get('params')));
+        if (!$validated->get('extension')) {
+            $validated->put('extension', 'item');
+        }
 
         return $validated;
     }

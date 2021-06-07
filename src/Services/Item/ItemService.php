@@ -17,8 +17,6 @@ class ItemService extends CmsService
 {
     protected $modelName = 'Item';
 
-    protected $modelType = 'Base';
-
     public function __construct(ItemRepository $repo)
     {
         parent::__construct($repo);

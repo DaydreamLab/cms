@@ -16,9 +16,6 @@ class ModuleService extends CmsService
 {
     protected $modelName = 'Module';
 
-    protected $modelType = 'Base';
-
-
     public function __construct(ModuleRepository $repo)
     {
         parent::__construct($repo);

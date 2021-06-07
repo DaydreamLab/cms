@@ -5,11 +5,10 @@ namespace DaydreamLab\Cms\Services\Menu;
 use DaydreamLab\Cms\Repositories\Menu\MenuRepository;
 use DaydreamLab\Cms\Events\Add;
 use DaydreamLab\Cms\Events\Modify;
-use DaydreamLab\Cms\Events\Ordering;
 use DaydreamLab\Cms\Events\Remove;
 use DaydreamLab\Cms\Events\State;
 use DaydreamLab\Cms\Services\CmsService;
-use DaydreamLab\Cms\Traits\Model\WithAccess;
+use DaydreamLab\User\Traits\Model\WithAccess;
 use DaydreamLab\Cms\Traits\Model\WithCategory;
 use DaydreamLab\Cms\Traits\Model\WithLanguage;
 use Illuminate\Support\Collection;
@@ -18,10 +17,7 @@ class MenuService extends CmsService
 {
     use WithCategory, WithLanguage, WithAccess;
 
-    protected $package = 'Cms';
-
     protected $modelName = 'Menu';
-
 
     public function __construct(MenuRepository $repo)
     {
@@ -46,9 +42,11 @@ class MenuService extends CmsService
     }
 
 
-    public function modify(Collection $input, $parent, $item)
+    public function modify(Collection $input)
     {
-        $result = parent::modifyNested($input, $parent, $item);
+        $item = $this->checkItem($input);
+
+        $result = parent::modifyNested($input, $item->parent, $item);
 
         event(new Modify($this->find($input->get('id')), $this->getServiceName(), $result, $input,$this->user));
 

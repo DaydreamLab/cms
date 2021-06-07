@@ -9,6 +9,8 @@ class SiteAdminSearchPost extends ListRequest
     protected $apiMethod = 'searchSite';
 
     protected $modelName = 'Site';
+
+    protected $searchKeys = ['title'];
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -29,6 +31,6 @@ class SiteAdminSearchPost extends ListRequest
         $rules = [
             //
         ];
-        return array_merge($rules, parent::rules());
+        return array_merge(parent::rules(), $rules);
     }
 }

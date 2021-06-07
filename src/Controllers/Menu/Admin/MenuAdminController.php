@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Controllers\Menu\Admin;
 
 use DaydreamLab\Cms\Controllers\CmsController;
 use DaydreamLab\Cms\Requests\Menu\Admin\MenuAdminGetItemGet;
+use DaydreamLab\Cms\Requests\Module\Admin\ModuleAdminRestorePost;
 use DaydreamLab\Cms\Resources\Menu\Admin\Collections\MenuAdminListResourceCollection;
 use DaydreamLab\Cms\Resources\Menu\Admin\Models\MenuAdminResource;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
@@ -13,13 +14,12 @@ use DaydreamLab\Cms\Requests\Menu\Admin\MenuAdminStorePost;
 use DaydreamLab\Cms\Requests\Menu\Admin\MenuAdminStatePost;
 use DaydreamLab\Cms\Requests\Menu\Admin\MenuAdminSearchPost;
 use DaydreamLab\Cms\Requests\Menu\Admin\MenuAdminOrderingPost;
+use DaydreamLab\JJAJ\Resources\BaseResourceCollection;
 use Throwable;
 
 class MenuAdminController extends CmsController
 {
     protected $modelName = 'Menu';
-
-    protected $modelType = 'Admin';
 
     public function __construct(MenuAdminService $service)
     {
@@ -32,26 +32,12 @@ class MenuAdminController extends CmsController
     {
         $this->service->setUser($request->user('api'));
         try {
-
-        } catch (Throwable $t) {
-            $this->handleException($t);
-        }
-        $this->service->getItem(collect(['id' => $request->route('id')]));
-
-        return $this->response($this->service->status, new MenuAdminResource($this->service->response));
-    }
-
-
-    public function checkout(MenuAdminRemovePost $request)
-    {
-        $this->service->setUser($request->user('api'));
-        try {
-            $this->service->checkout($request->validated());
+            $this->service->getItem(collect(['id' => $request->route('id')]));
         } catch (Throwable $t) {
             $this->handleException($t);
         }
 
-        return $this->response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response, [], MenuAdminResource::class);
     }
 
 
@@ -81,6 +67,32 @@ class MenuAdminController extends CmsController
     }
 
 
+    public function restore(ModuleAdminRestorePost $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->restore($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
+
+    public function search(MenuAdminSearchPost $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->search($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response, [], MenuAdminListResourceCollection::class);
+    }
+
+
     public function state(MenuAdminStatePost $request)
     {
         $this->service->setUser($request->user('api'));
@@ -96,37 +108,13 @@ class MenuAdminController extends CmsController
 
     public function store(MenuAdminStorePost $request)
     {
-        $validated = $request->validated();
-        if (!$validated->get('host')) {
-            $validated->put('host', $request->getHttpHost());
-        }
         $this->service->setUser($request->user('api'));
-        $this->service->store($validated);
-
         try {
-
+            $this->service->store($request->validated());
         } catch (Throwable $t) {
             $this->handleException($t);
         }
 
-
-        return $this->response($this->service->status,
-            gettype($this->service->response) == 'object'
-                ? new MenuAdminResource($this->service->response->refresh())
-                : $this->service->response
-        );
-    }
-
-
-    public function search(MenuAdminSearchPost $request)
-    {
-        $this->service->setUser($request->user('api'));
-        try {
-            $this->service->search($request->validated());
-        } catch (Throwable $t) {
-            $this->handleException($t);
-        }
-
-        return $this->response($this->service->status, new MenuAdminListResourceCollection($this->service->response));
+        return $this->response($this->service->status, $this->service->response, [], MenuAdminResource::class);
     }
 }

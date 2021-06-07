@@ -7,14 +7,8 @@ use DaydreamLab\Cms\Services\Module\ModuleService;
 
 class ModuleAdminService extends ModuleService
 {
-    protected $modelType = 'Admin';
-
-    protected $search_keys = ['title', 'description'];
-
     public function __construct(ModuleAdminRepository $repo)
     {
         parent::__construct($repo);
     }
-
-
 }

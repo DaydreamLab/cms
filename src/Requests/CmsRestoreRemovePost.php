@@ -4,7 +4,7 @@ namespace DaydreamLab\Cms\Requests;
 
 use DaydreamLab\JJAJ\Requests\AdminRequest;
 
-class CmsCheckoutRemovePost extends AdminRequest
+class CmsRestoreRemovePost extends AdminRequest
 {
     /**
      * Determine if the user is authorized to make this request.

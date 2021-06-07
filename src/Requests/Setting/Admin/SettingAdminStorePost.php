@@ -29,8 +29,6 @@ class SettingAdminStorePost extends AdminRequest
     {
         $rules = [
             'sitename'      => 'required|string',
-            'metadesc'      => 'nullable|string',
-            'metakeywords'  => 'nullable|string',
             'locale'        => 'required|string',
             'locale_admin'  => 'required|string',
             'custom_head'   => 'nullable|string',

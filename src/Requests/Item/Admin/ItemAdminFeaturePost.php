@@ -8,7 +8,7 @@ use Illuminate\Validation\Rule;
 
 class ItemAdminFeaturePost extends AdminRequest
 {
-    protected $apiMethod = 'updateItemFeatured';
+    protected $apiMethod = 'featuredItem';
 
     protected $modelName = 'Item';
     /**

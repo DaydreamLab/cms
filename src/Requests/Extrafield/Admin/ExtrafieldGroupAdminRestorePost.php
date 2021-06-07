@@ -1,14 +1,14 @@
 <?php
 
-namespace DaydreamLab\Cms\Requests\Category\Admin;
+namespace DaydreamLab\Cms\Requests\Extrafield\Admin;
 
-use DaydreamLab\Cms\Requests\CmsCheckoutRemovePost;
+use DaydreamLab\Cms\Requests\CmsRestoreRemovePost;
 
-class CategoryAdminCheckoutPost extends CmsCheckoutRemovePost
+class ExtrafieldGroupAdminRestorePost extends CmsRestoreRemovePost
 {
-    protected $apiMethod = 'editCategory';
+    protected $apiMethod = 'restoreExtrafieldGroup';
 
-    protected $modelName = 'Category';
+    protected $modelName = 'ExtrafieldGroup';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -26,9 +26,8 @@ class CategoryAdminCheckoutPost extends CmsCheckoutRemovePost
      */
     public function rules()
     {
-        $rules = [
-            //
+        $rules =  [
         ];
-        return array_merge($rules, parent::rules());
+        return array_merge(parent::rules(), $rules);
     }
 }

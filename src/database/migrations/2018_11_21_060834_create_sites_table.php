@@ -19,11 +19,10 @@ class CreateSitesTable extends Migration
             $table->string('url');
             $table->string('sitename');
             $table->string('sef');
-            $table->text('metakeywords')->nullable();
-            $table->text('metadesc')->nullable();
             $table->unsignedTinyInteger('state')->nulalble()->default(1);
             $table->unsignedInteger('access')->default(1);
             $table->unsignedInteger('ordering')->nullable();
+            $table->text('params')->nullable();
             $table->unsignedInteger('locked_by')->nullable()->default(0);
             $table->timestamp('locked_at')->nullable();
             $table->unsignedInteger('created_by');

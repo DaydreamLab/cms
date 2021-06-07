@@ -3,12 +3,12 @@
 namespace DaydreamLab\Cms\Models\Category;
 
 use DaydreamLab\Cms\Models\Item\Item;
-use DaydreamLab\Cms\Traits\Model\WithAccess;
 use DaydreamLab\Cms\Traits\Model\WithLanguage;
 use DaydreamLab\Cms\Traits\WithExtrafield;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\JJAJ\Traits\UserInfo;
+use DaydreamLab\User\Traits\Model\WithAccess;
 use Illuminate\Support\Str;
 use Kalnoy\Nestedset\NodeTrait;
 
@@ -124,13 +124,6 @@ class Category extends BaseModel
                 ? $item->parent->path . '/' . $item->alias
                 : '/' . $item->alias;
         });
-
-        static::updating(function ($item) {
-            $item->path = $item->parent
-                ? $item->parent->path . '/' . $item->alias
-                : '/' . $item->alias;
-        });
-
     }
 
 

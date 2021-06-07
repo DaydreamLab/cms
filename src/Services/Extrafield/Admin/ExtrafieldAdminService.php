@@ -8,11 +8,7 @@ use Illuminate\Support\Collection;
 
 class ExtrafieldAdminService extends ExtrafieldService
 {
-    protected $modelType = 'Admin';
-
     protected $extrafiledGroupAdminService;
-
-    protected $search_keys = ['title', 'description'];
 
     public function __construct(
         ExtrafieldAdminRepository $repo,
@@ -24,17 +20,6 @@ class ExtrafieldAdminService extends ExtrafieldService
         $this->extrafiledGroupAdminService = $extrafieldGroupAdminService;
     }
 
-    public function getItem($id)
-    {
-        $this->repo->with('group');
-
-        $item = parent::getItem($id)->makeHidden(['group']);
-
-        $item->group_title = $item->group->title;
-
-        return $item;
-    }
-
 
     public function store(Collection $input)
     {
@@ -42,5 +27,4 @@ class ExtrafieldAdminService extends ExtrafieldService
 
         return parent::store($input);
     }
-
 }

@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Module\Admin;
 
-use DaydreamLab\Cms\Requests\CmsCheckoutRemovePost;
+use DaydreamLab\Cms\Requests\CmsRestoreRemovePost;
 
-class ModuleAdminRemovePost extends CmsCheckoutRemovePost
+class ModuleAdminRemovePost extends CmsRestoreRemovePost
 {
     protected $apiMethod = 'deleteModule';
 
@@ -29,6 +29,6 @@ class ModuleAdminRemovePost extends CmsCheckoutRemovePost
         $rules = [
             //
         ];
-        return array_merge($rules, parent::rules());
+        return array_merge(parent::rules(), $rules);
     }
 }

@@ -11,10 +11,6 @@ use Illuminate\Support\Str;
 
 class SettingAdminService extends SettingService
 {
-    protected $type = 'Admin';
-
-    protected $modelType = 'Admin';
-
     public function __construct(SiteAdminService $siteAdminService)
     {
         parent::__construct($siteAdminService);

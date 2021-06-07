@@ -3,13 +3,15 @@
 namespace DaydreamLab\Cms\Controllers\Tag\Admin;
 
 use DaydreamLab\Cms\Controllers\CmsController;
+use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminFeaturedOrderingPost;
 use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminFeaturedPost;
 use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminGetItemGet;
+use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminRestorePost;
 use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminStorePost;
 use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminStatePost;
 use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminSearchPost;
 use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminRemovePost;
-use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminCheckoutPost;
+
 use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminOrderingPost;
 use DaydreamLab\Cms\Resources\Tag\Admin\Models\TagAdminResource;
 use DaydreamLab\Cms\Resources\Tag\Admin\Collections\TagAdminListResourceCollection;
@@ -19,8 +21,6 @@ use Throwable;
 class TagAdminController extends CmsController
 {
     protected $modelName = 'Tag';
-
-    protected $modelType = 'Admin';
 
     public function __construct(TagAdminService $service)
     {
@@ -34,6 +34,19 @@ class TagAdminController extends CmsController
         $this->service->setUser($request->user('api'));
         try {
             $this->service->featured($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
+
+    public function featuredOrdering(TagAdminFeaturedOrderingPost $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->featuredOrdering($request->validated());
         } catch (Throwable $t) {
             $this->handleException($t);
         }
@@ -59,7 +72,7 @@ class TagAdminController extends CmsController
     {
         $this->service->setUser($request->user('api'));
         try {
-            $this->service->modify($request->validated());
+            $this->service->ordering($request->validated());
         } catch (Throwable $t) {
             $this->handleException($t);
         }
@@ -81,7 +94,7 @@ class TagAdminController extends CmsController
     }
 
 
-    public function restore(TagAdminCheckoutPost $request)
+    public function restore(TagAdminRestorePost $request)
     {
         $this->service->setUser($request->user('api'));
         try {

@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Requests\Extrafield\Admin;
 
 use DaydreamLab\JJAJ\Requests\ListRequest;
+use Illuminate\Validation\Rule;
 
 class ExtrafieldGroupAdminSearchPost extends ListRequest
 {
@@ -27,7 +28,8 @@ class ExtrafieldGroupAdminSearchPost extends ListRequest
     public function rules()
     {
         $rules = [
+            'state' => ['nullable', Rule::in([0, 1, -2])]
         ];
-        return array_merge($rules, parent::rules());
+        return array_merge(parent::rules(), $rules);
     }
 }

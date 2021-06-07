@@ -1,8 +1,9 @@
 <?php
+
 namespace DaydreamLab\Cms\Models\Extrafield;
 
-use DaydreamLab\Cms\Traits\Model\WithAccess;
-use DaydreamLab\Cms\Traits\Model\UserInfo;
+use DaydreamLab\User\Traits\Model\WithAccess;
+use DaydreamLab\JJAJ\Traits\UserInfo;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\JJAJ\Models\BaseModel;
 

@@ -6,7 +6,7 @@ use DaydreamLab\Cms\Requests\CmStatePost;
 
 class SiteAdminStatePost extends CmStatePost
 {
-    protected $apiMethod = 'updateSiteState';
+    protected $apiMethod = 'stateSite';
 
     protected $modelName = 'Site';
     /**
@@ -29,6 +29,6 @@ class SiteAdminStatePost extends CmStatePost
         $rules = [
             //
         ];
-        return array_merge($rules, parent::rules());
+        return array_merge(parent::rules(), $rules);
     }
 }

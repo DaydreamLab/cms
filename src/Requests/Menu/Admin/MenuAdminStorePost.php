@@ -44,8 +44,6 @@ class MenuAdminStorePost extends AdminRequest
             'description'   => 'nullable|string',
             'language'      => 'required|string',
             'params'        => 'nullable|array',
-            'metadata'      => 'nullable|string',
-            'metakeywords'  => 'nullable|string',
             'publish_up'    => 'nullable|date',
             'publish_down'  => 'nullable|date',
         ];
@@ -57,6 +55,9 @@ class MenuAdminStorePost extends AdminRequest
     public function validated()
     {
         $validated = parent::validated();
+        if (!$validated->get('host')) {
+            $validated->put('host', $this->getHttpHost());
+        }
         $validated->put('params', RequestHelper::handleParams($validated->get('params')));
 
         return $validated;

@@ -6,7 +6,7 @@ use DaydreamLab\Cms\Requests\CmsOrderingPost;
 
 class CategoryAdminOrderingPost extends CmsOrderingPost
 {
-    protected $apiMethod = 'editCategory';
+    protected $apiMethod = 'orderingCategory';
 
     protected $modelName = 'Category';
     /**
@@ -28,6 +28,6 @@ class CategoryAdminOrderingPost extends CmsOrderingPost
     {
         $rules = [
         ];
-        return array_merge($rules, parent::rules());
+        return array_merge(parent::rules(), $rules);
     }
 }

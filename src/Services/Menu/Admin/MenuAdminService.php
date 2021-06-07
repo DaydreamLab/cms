@@ -7,10 +7,6 @@ use DaydreamLab\Cms\Services\Menu\MenuService;
 
 class MenuAdminService extends MenuService
 {
-    protected $modelType = 'Admin';
-
-    protected $search_keys = ['title', 'description'];
-
     public function __construct(MenuAdminRepository $repo)
     {
         parent::__construct($repo);

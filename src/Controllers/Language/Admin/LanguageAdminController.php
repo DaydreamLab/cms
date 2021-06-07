@@ -11,12 +11,11 @@ use DaydreamLab\Cms\Requests\Language\Admin\LanguageAdminRemovePost;
 use DaydreamLab\Cms\Requests\Language\Admin\LanguageAdminStorePost;
 use DaydreamLab\Cms\Requests\Language\Admin\LanguageAdminStatePost;
 use DaydreamLab\Cms\Requests\Language\Admin\LanguageAdminSearchPost;
+use Throwable;
 
 class LanguageAdminController extends CmsController
 {
     protected $modelName = 'Language';
-
-    protected $modelType = 'Admin';
 
     public function __construct(LanguageAdminService $service)
     {
@@ -28,25 +27,50 @@ class LanguageAdminController extends CmsController
     public function getItem(LanguageAdminGetItemGet $request)
     {
         $this->service->setUser($request->user('api'));
-        $this->service->getItem(collect(['id' => $request->route('id')]));
+        try {
+            $this->service->getItem(collect(['id' => $request->route('id')]));
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
 
-        return $this->response($this->service->status, new LanguageAdminResource($this->service->response));
+        return $this->response($this->service->status, $this->service->response, [], LanguageAdminResource::class);
     }
 
 
     public function remove(LanguageAdminRemovePost $request)
     {
         $this->service->setUser($request->user('api'));
-        $this->service->remove($request->validated());
+        try {
+            $this->service->remove($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
 
         return $this->response($this->service->status, $this->service->response);
+    }
+
+
+    public function search(LanguageAdminSearchPost $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->search($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response, [], LanguageAdminListResourceCollection::class);
     }
 
 
     public function state(LanguageAdminStatePost $request)
     {
         $this->service->setUser($request->user('api'));
-        $this->service->state($request->validated());
+        try {
+            $this->service->state($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
 
         return $this->response($this->service->status, $this->service->response);
     }
@@ -55,23 +79,12 @@ class LanguageAdminController extends CmsController
     public function store(LanguageAdminStorePost $request)
     {
         $this->service->setUser($request->user('api'));
-        $this->service->store($request->validated());
+        try {
+            $this->service->store($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
 
-        return $this->response($this->service->status,
-            gettype($this->service->response) == 'object'
-            ? new LanguageAdminResource($this->service->response->refresh())
-            : $this->service->response
-        );
-    }
-
-
-    public function search(LanguageAdminSearchPost $request)
-    {
-        $this->service->setUser($request->user('api'));
-        $this->service->search($request->validated());
-
-        return $this->response($this->service->status,
-            new LanguageAdminListResourceCollection($this->service->response)
-        );
+        return $this->response($this->service->status, $this->service->response, [], LanguageAdminResource::class);
     }
 }

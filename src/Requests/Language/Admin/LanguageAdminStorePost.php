@@ -6,6 +6,9 @@ use DaydreamLab\JJAJ\Requests\AdminRequest;
 
 class LanguageAdminStorePost extends AdminRequest
 {
+    protected $apiMethod = 'storeLanguage';
+
+    protected $modelName = 'Language';
     /**
      * Determine if the user is authorized to make this request.
      *

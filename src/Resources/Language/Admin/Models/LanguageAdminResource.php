@@ -2,12 +2,10 @@
 
 namespace DaydreamLab\Cms\Resources\Language\Admin\Models;
 
-use DaydreamLab\Cms\Traits\Resource\CmsResource;
-use Illuminate\Http\Resources\Json\JsonResource;
+use DaydreamLab\JJAJ\Resources\BaseJsonResource;
 
-class LanguageAdminResource extends JsonResource
+class LanguageAdminResource extends BaseJsonResource
 {
-    use CmsResource;
     /**
      * Transform the resource into an array.
      *
@@ -16,6 +14,7 @@ class LanguageAdminResource extends JsonResource
      */
     public function toArray($request)
     {
+        $tz = $request->user('api')->timezone;
         return [
             'id'                        => $this->id,
             'title'                     => $this->title,
@@ -25,12 +24,10 @@ class LanguageAdminResource extends JsonResource
             'image'                     => $this->image,
             'state'                     => $this->state,
             'description'               => $this->description,
-            'created_at'                => $this->getDateTimeString($this->created_at, config('daydreamlab.cms.timezone')),
-            'updated_at'                => $this->getDateTimeString($this->updated_at, config('daydreamlab.cms.timezone')),
-            'publish_up'                => $this->getDateTimeString($this->locked_at, config('daydreamlab.cms.timezone')),
-            'publish_down'              => $this->getDateTimeString($this->publish_down, config('daydreamlab.cms.timezone')),
-            'creator'                   => $this->creator,
-            'updater'                   => $this->updater,
+            'created_at'                => $this->getDateTimeString($this->created_at, $tz),
+            'updated_at'                => $this->getDateTimeString($this->updated_at, $tz),
+            'creatorName'               => $this->creatorName,
+            'updaterName'               => $this->updaterName,
         ];
     }
 }

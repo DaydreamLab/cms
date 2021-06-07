@@ -2,13 +2,11 @@
 
 namespace DaydreamLab\Cms\Resources\Tag\Front\Models;
 
-use DaydreamLab\Cms\Traits\Resource\CmsResource;
 use DaydreamLab\Dddream\Helpers\ResourceHelper;
-use Illuminate\Http\Resources\Json\JsonResource;
+use DaydreamLab\JJAJ\Resources\BaseJsonResource;
 
-class TagFrontResource extends JsonResource
+class TagFrontResource extends BaseJsonResource
 {
-    use CmsResource;
     /**
      * Transform the resource into an array.
      *
@@ -30,8 +28,6 @@ class TagFrontResource extends JsonResource
             'hits'                      => $this->hits,
             //'access'                    => $this->access,
             'language'                  => $this->language,
-            'metadesc'                  => $this->metadesc,
-            'metakeywords'              => $this->metakeywords,
             //'params'                    => $this->params,
             'created_at'                => $this->getDateTimeString($this->created_at, config('daydreamlab.cms.timezone')),
             'updated_at'                => $this->getDateTimeString($this->updated_at, config('daydreamlab.cms.timezone')),

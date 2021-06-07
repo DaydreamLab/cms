@@ -29,18 +29,6 @@ class InstallCommand extends Command
 
 
     protected $constants = [
-        'category',
-        'cron',
-        'extrafield',
-        'item',
-        'language',
-        'menu',
-        'module',
-        'option',
-        'pagebuilder',
-        'setting',
-        'site',
-        'tag',
     ];
 
 
@@ -73,10 +61,12 @@ class InstallCommand extends Command
      */
     public function handle()
     {
-//        Asset::truncate();
-//        $this->call('db:seed',  ['--class' =>  'DaydreamLab\\User\\Database\\Seeders\\AssetsTableSeeder']);
-//        $this->call('db:seed',  ['--class' =>  'DaydreamLab\\Cms\\Database\\Seeders\\AssetsTableSeeder']);
-//        exit();
+        Tag::truncate();
+        $this->call('db:seed', [
+            '--class' => $this->seeder_namespace . 'TagsTableSeeder'
+        ]);
+        exit();
+
         $this->call('user:install');
 
         foreach ($this->seeders as $seeder) {
@@ -88,8 +78,7 @@ class InstallCommand extends Command
 
         $this->deleteConstants();
 
-        if ($this->option('publish'))
-        {
+        if ($this->option('publish')) {
             $this->call('cms:publish');
         }
 

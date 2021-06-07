@@ -11,11 +11,7 @@ use DaydreamLab\Cms\Requests\Item\Front\ItemFrontSearchPost;
 
 class ItemFrontController extends CmsController
 {
-    protected $package = 'Cms';
-
     protected $modelName = 'Item';
-
-    protected $modelType = 'Front';
 
     public function __construct(ItemFrontService $service)
     {

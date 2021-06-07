@@ -4,7 +4,7 @@ namespace DaydreamLab\Cms\Controllers\Extrafield\Admin;
 
 use DaydreamLab\Cms\Controllers\CmsController;
 use DaydreamLab\Cms\Requests\Extrafield\Admin\ExtrafieldAdminGetItemGet;
-use DaydreamLab\Cms\Requests\Extrafield\Admin\ExtrafieldAdminCheckoutPost;
+use DaydreamLab\Cms\Requests\Extrafield\Admin\ExtrafieldAdminRestorePost;
 use DaydreamLab\Cms\Resources\Extrafield\Admin\Collections\ExtrafieldAdminListResourceCollection;
 use DaydreamLab\Cms\Resources\Extrafield\Admin\Models\ExtrafieldAdminResource;
 use DaydreamLab\Cms\Services\Extrafield\Admin\ExtrafieldAdminService;
@@ -12,12 +12,11 @@ use DaydreamLab\Cms\Requests\Extrafield\Admin\ExtrafieldAdminRemovePost;
 use DaydreamLab\Cms\Requests\Extrafield\Admin\ExtrafieldAdminStorePost;
 use DaydreamLab\Cms\Requests\Extrafield\Admin\ExtrafieldAdminStatePost;
 use DaydreamLab\Cms\Requests\Extrafield\Admin\ExtrafieldAdminSearchPost;
+use Throwable;
 
 class ExtrafieldAdminController extends CmsController
 {
     protected $modelName = 'Extrafield';
-
-    protected $modelType = 'Admin';
 
     public function __construct(ExtrafieldAdminService $service)
     {
@@ -26,37 +25,66 @@ class ExtrafieldAdminController extends CmsController
     }
 
 
-    public function checkout(ExtrafieldAdminCheckoutPost $request)
-    {
-        $this->service->setUser($request->user('api'));
-        $this->service->checkout($request->validated());
-
-        return $this->response($this->service->status, $this->service->response);
-    }
-
-
     public function getItem(ExtrafieldAdminGetItemGet $request)
     {
         $this->service->setUser($request->user('api'));
-        $this->service->getItem(collect(['id' => $request->route('id')]));
+        try {
+            $this->service->getItem(collect(['id' => $request->route('id')]));
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
 
-        return $this->response($this->service->status, new ExtrafieldAdminResource($this->service->response));
+        return $this->response($this->service->status, $this->service->response, [], ExtrafieldAdminResource::class);
     }
 
 
     public function remove(ExtrafieldAdminRemovePost $request)
     {
         $this->service->setUser($request->user('api'));
-        $this->service->remove($request->validated());
+        try {
+            $this->service->remove($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
 
         return $this->response($this->service->status, $this->service->response);
+    }
+
+
+    public function restore(ExtrafieldAdminRestorePost $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->restore($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
+
+    public function search(ExtrafieldAdminSearchPost $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->search($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response, [], ExtrafieldAdminListResourceCollection::class);
     }
 
 
     public function state(ExtrafieldAdminStatePost $request)
     {
         $this->service->setUser($request->user('api'));
-        $this->service->state($request->validated());
+        try {
+            $this->service->state($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
 
         return $this->response($this->service->status, $this->service->response);
     }
@@ -65,21 +93,12 @@ class ExtrafieldAdminController extends CmsController
     public function store(ExtrafieldAdminStorePost $request)
     {
         $this->service->setUser($request->user('api'));
-        $this->service->store($request->validated());
+        try {
+            $this->service->store($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
 
-        return $this->response($this->service->status,
-            gettype($this->service->response) == 'object'
-            ? new ExtrafieldAdminResource($this->service->response->refresh())
-            : $this->service->response
-        );
-    }
-
-
-    public function search(ExtrafieldAdminSearchPost $request)
-    {
-        $this->service->setUser($request->user('api'));
-        $this->service->search($request->validated());
-
-        return $this->response($this->service->status, new ExtrafieldAdminListResourceCollection($this->service->response));
+        return $this->response($this->service->status, $this->service->response, [], ExtrafieldAdminResource::class);
     }
 }

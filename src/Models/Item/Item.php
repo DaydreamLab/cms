@@ -2,13 +2,13 @@
 namespace DaydreamLab\Cms\Models\Item;
 
 use DaydreamLab\Cms\Models\Tag\Tag;
-use DaydreamLab\Cms\Traits\Model\UserInfo;
-use DaydreamLab\Cms\Traits\Model\WithAccess;
+use DaydreamLab\JJAJ\Traits\UserInfo;
 use DaydreamLab\Cms\Traits\Model\WithCategory;
 use DaydreamLab\Cms\Traits\Model\WithLanguage;
 use DaydreamLab\Cms\Traits\WithExtrafield;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
+use DaydreamLab\User\Traits\Model\WithAccess;
 
 class Item extends BaseModel
 {
@@ -49,8 +49,6 @@ class Item extends BaseModel
         'featured_ordering',
         'ordering',
         'language',
-        'metadesc',
-        'metakeywords',
         'params',
         'extrafield_group_id',
         'extrafields',
@@ -115,6 +113,10 @@ class Item extends BaseModel
         static::creating(function ($item) {
             if ($item->state && !$item->publish_up) {
                 $item->publish_up = now();
+            }
+
+            if (!$item->hits) {
+                $item->hits = 0;
             }
         });
     }

@@ -2,13 +2,10 @@
 
 namespace DaydreamLab\Cms\Resources\Category\Front\Models;
 
-use DaydreamLab\Cms\Traits\Resource\CmsResource;
-use DaydreamLab\Dddream\Helpers\ResourceHelper;
-use Illuminate\Http\Resources\Json\JsonResource;
+use DaydreamLab\JJAJ\Resources\BaseJsonResource;
 
-class CategoryFrontResource extends JsonResource
+class CategoryFrontResource extends BaseJsonResource
 {
-    use CmsResource;
     /**
      * Transform the resource into an array.
      *
@@ -31,8 +28,6 @@ class CategoryFrontResource extends JsonResource
             'hits'                      => $this->hits,
             'access'                    => $this->access,
             'language'                  => $this->language,
-            'metadesc'                  => $this->metadesc,
-            'metakeywords'              => $this->metakeywords,
             'params'                    => $this->params,
             'child_categories'          => $this->children->map(function ($c) {
                 return ['title' => $c->title, 'alias' => $c->alias];

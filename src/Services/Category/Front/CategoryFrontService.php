@@ -4,23 +4,11 @@ namespace DaydreamLab\Cms\Services\Category\Front;
 
 use DaydreamLab\Cms\Repositories\Category\Front\CategoryFrontRepository;
 use DaydreamLab\Cms\Services\Category\CategoryService;
-use DaydreamLab\Cms\Services\Item\Front\ItemFrontService;
-use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
-use DaydreamLab\JJAJ\Traits\LoggedIn;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 
 class CategoryFrontService extends CategoryService
 {
-
-    protected $modelType = 'Front';
-
-    protected $search_keys = ['title', 'introtext', 'description', 'extrafields_search'];
-
-
-    //protected $itemFrontService;
-
     public function __construct(CategoryFrontRepository $repo)
     {
         parent::__construct($repo);
@@ -44,10 +32,8 @@ class CategoryFrontService extends CategoryService
     public function getItem($id)
     {
         $item = parent::getItem($id);
-
-        $this->canAccess($item->access, $this->access_ids);
-
         $item->hits++;
+
         return $item->save();
     }
 
