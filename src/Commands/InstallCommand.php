@@ -61,11 +61,11 @@ class InstallCommand extends Command
      */
     public function handle()
     {
-        Tag::truncate();
-        $this->call('db:seed', [
-            '--class' => $this->seeder_namespace . 'TagsTableSeeder'
-        ]);
-        exit();
+//        Tag::truncate();
+//        $this->call('db:seed', [
+//            '--class' => $this->seeder_namespace . 'TagsTableSeeder'
+//        ]);
+//        exit();
 
         $this->call('user:install');
 
