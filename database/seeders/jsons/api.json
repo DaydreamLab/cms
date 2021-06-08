@@ -240,13 +240,13 @@
         "created_by": 1
     },
     {
-        "name": " 精選項目",
+        "name": "精選項目",
         "method": "featuredItem",
         "url": "/admin/item/featured",
         "created_by": 1
     },
     {
-        "name": " 精選項目排序",
+        "name": "精選項目排序",
         "method": "featuredOrderingItem",
         "url": "/admin/item/featured/ordering",
         "created_by": 1

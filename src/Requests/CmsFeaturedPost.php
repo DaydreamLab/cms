@@ -24,10 +24,12 @@ class CmsFeaturedPost extends AdminRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'ids'       => 'required|array',
             'ids.*'     => 'required|integer',
             'featured'  => ['required', Rule::in([0,1])]
         ];
+
+        return array_merge(parent::rules(), $rules);
     }
 }

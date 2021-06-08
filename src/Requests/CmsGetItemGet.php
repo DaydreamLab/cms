@@ -23,8 +23,9 @@ class CmsGetItemGet extends AdminRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
 
         ];
+        return array_merge(parent::rules(), $rules);
     }
 }

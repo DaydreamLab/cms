@@ -24,12 +24,14 @@ class CmsOrderingNestedPost extends AdminRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'id'            => 'required|integer',
             'parentId'      => 'nullable|integer',
             'parent_id'     => 'nullable|integer',
             'ordering'      => 'nullable|integer',
         ];
+
+        return array_merge(parent::rules(), $rules);
     }
 
     public function validated()

@@ -29,7 +29,7 @@ class OptionAdminGetListPost extends AdminRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'types'      => 'nullable|array',
             'types.*'    => [
                 'nullable',
@@ -51,5 +51,7 @@ class OptionAdminGetListPost extends AdminRequest
                 ])
             ]
         ];
+
+        return array_merge(parent::rules(), $rules);
     }
 }

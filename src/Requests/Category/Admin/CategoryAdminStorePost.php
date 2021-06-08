@@ -44,6 +44,7 @@ class CategoryAdminStorePost extends AdminRequest
             'extension'             => 'nullable|string',
             'hits'                  => 'nullable|integer',
             'access'                => 'nullable|integer',
+            'access'                => 'nullable|integer',
             'ordering'              => 'nullable|integer',
             'featuredg'             => ['nullable', Rule::in([0,1])],
             'featured_ordering'     => 'nullable|integer',

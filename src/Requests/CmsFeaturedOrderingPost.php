@@ -24,10 +24,12 @@ class CmsFeaturedOrderingPost extends AdminRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'id'                => 'required|integer',
             'featuredOrdering'  => 'nullable|integer'
         ];
+
+        return array_merge(parent::rules(), $rules);
     }
 
 

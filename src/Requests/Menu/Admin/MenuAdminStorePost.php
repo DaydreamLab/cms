@@ -42,6 +42,7 @@ class MenuAdminStorePost extends AdminRequest
                 Rule::in([0,1,-2])
             ],
             'description'   => 'nullable|string',
+            'ordering'      => 'nullable|integer',
             'language'      => 'required|string',
             'params'        => 'nullable|array',
             'publish_up'    => 'nullable|date',

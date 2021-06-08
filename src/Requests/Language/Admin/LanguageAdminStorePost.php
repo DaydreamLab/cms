@@ -36,8 +36,6 @@ class LanguageAdminStorePost extends AdminRequest
             'description'   => 'nullable|string',
             'image'         => 'nullable|string',
             //'order'         => 'nullable|integer',
-            //'metadesc'      => 'nullable|string',
-            //'metakeywords'  => 'nullable|string',
             //'sitename'      => 'nullable|string',
             //'access'        => 'nullable|integer'
         ];

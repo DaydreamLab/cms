@@ -24,7 +24,7 @@ class CmStatePost extends AdminRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'ids'       => 'required|array',
             'ids.*'     => 'required|integer',
             'state'     => [
@@ -33,5 +33,7 @@ class CmStatePost extends AdminRequest
                 Rule::in([0,1,-1,-2])
             ]
         ];
+
+        return array_merge(parent::rules(), $rules);
     }
 }
