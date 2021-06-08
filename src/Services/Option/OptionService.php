@@ -8,17 +8,18 @@ use DaydreamLab\Cms\Services\Language\Admin\LanguageAdminService;
 use DaydreamLab\Cms\Services\Menu\Admin\MenuAdminService;
 use DaydreamLab\Cms\Services\Module\Admin\ModuleAdminService;
 use DaydreamLab\Cms\Services\Site\Admin\SiteAdminService;
-use DaydreamLab\JJAJ\Helpers\Helper;
+use DaydreamLab\JJAJ\Database\QueryCapsule;
+use DaydreamLab\JJAJ\Traits\LoggedIn;
 use DaydreamLab\User\Services\Asset\Admin\AssetAdminService;
 use DaydreamLab\User\Services\User\Admin\UserGroupAdminService;
 use DaydreamLab\User\Services\Viewlevel\Admin\ViewlevelAdminService;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 
 class OptionService
 {
-    protected $type = 'Option';
+    use LoggedIn;
+
+    protected $modelName = 'Option';
 
     public $status;
 
@@ -60,63 +61,45 @@ class OptionService
         foreach ($input->get('types') as $type)
         {
             $service = $this->map[$type];
-
-            if ($type == 'asset')
-            {
-                $data[$type] = $this->getOptionList($service, 'tree');
-            }
-            elseif ($type == 'extension')
-            {
+            $q = new QueryCapsule();
+            $q = $q->where('paginate', 0);
+            if ($type == 'asset') {
+                $data[$type] = $this->getOptionList($service, 'tree', $q, []);
+            } elseif ($type == 'extension') {
                 $data[$type] = $service;
-            }
-            elseif ($type == 'extrafield_group')
-            {
-                $data[$type] = $this->getOptionList($service, 'list', [], ['extrafields']);
-            }
-            elseif ($type == 'item_article_category')
-            {
-                $data[$type] = $this->getOptionList($service, 'tree', ['extension' => 'item', 'content_type' => 'article']);
-            }
-            elseif ($type == 'item_category')
-            {
-                $data[$type] = $this->getOptionList($service, 'tree', ['extension' => 'item']);
-            }
-            elseif ($type == 'item_content_type')
-            {
+            } elseif ($type == 'extrafield_group') {
+                $data[$type] = $this->getOptionList($service, 'list', $q, ['extrafields']);
+            } elseif ($type == 'item_article_category') {
+                $q = $q->where('extension', 'item')->where('content_type', 'article');
+                $data[$type] = $this->getOptionList($service, 'tree', $q);
+            } elseif ($type == 'item_category') {
+                $q = $q->where('extension', 'item');
+                $data[$type] = $this->getOptionList($service, 'tree', $q);
+            } elseif ($type == 'item_content_type') {
                 $data[$type] = $service;
-            }
-            elseif ($type == 'language')
-            {
-                $data[$type] = $this->getOptionList($service, 'list', ['type' => 'content'], ['sef']);
-            }
-            elseif ($type == 'menu')
-            {
-                $data[$type] = $this->getOptionList($service, 'tree');
-            }
-            elseif ($type == 'menu_category')
-            {
-                $data[$type] = $this->getOptionList($service, 'tree', ['extension' => 'menu']);
-            }
-            elseif ($type == 'module')
-            {
-                $data[$type] = $this->getOptionList($service, 'list');
-            }
-            elseif ($type == 'module_category')
-            {
-                $data[$type] = $this->getOptionList($service, 'tree', ['extension' => 'module', 'without_root' => 1], ['alias']);
-            }
-            elseif ($type == 'site')
-            {
-                $data[$type] = $this->getOptionList($service, 'list', [], ['url']);
-            }
-            elseif ($type == 'user_group')
-            {
-                $data[$type] = $this->getOptionList($service, 'tree', ['without_root' => 1]);
-            }
-            elseif ($type == 'viewlevel')
-            {
-                $user = Auth::guard('api')->user();
-                $data[$type] = $this->getOptionList($service, 'list', ['special_queries' => [['type'=> 'whereIn', 'key' => 'id', 'value' => $user->access_ids]]]);
+            } elseif ($type == 'language') {
+                $q = $q->where('type', 'content');
+                $data[$type] = $this->getOptionList($service, 'list', $q, ['sef']);
+            } elseif ($type == 'menu') {
+                $data[$type] = $this->getOptionList($service, 'tree', $q);
+            } elseif ($type == 'menu_category') {
+                $q = $q->where('extension', 'menu');
+                $data[$type] = $this->getOptionList($service, 'tree', $q);
+            } elseif ($type == 'module') {
+                $data[$type] = $this->getOptionList($service, 'list', $q);
+            } elseif ($type == 'module_category') {
+                $q = $q->where('extension', 'module')
+                    ->where('title', '!=', 'ROOT');
+                $data[$type] = $this->getOptionList($service, 'tree', $q , ['alias']);
+            } elseif ($type == 'site') {
+                $data[$type] = $this->getOptionList($service, 'list', $q, ['url']);
+            } elseif ($type == 'user_group') {
+                $q = $q->where('title', '!=', 'ROOT');
+                $data[$type] = $this->getOptionList($service, 'tree', $q);
+            } elseif ($type == 'viewlevel') {
+                $user = $this->getUser();
+                $q = $q->whereIn('id', $user->accessIds);
+                $data[$type] = $this->getOptionList($service, 'list', $q);
             }
         }
 
@@ -133,23 +116,17 @@ class OptionService
      * @param array $extra_fields
      * @return mixed
      */
-    public function getOptionList($service, $type, $extra_rules = [], $extra_fields = [])
+    public function getOptionList($service, $type, $q = null, $extra_fields = [])
     {
-        $default_rules = array_merge($extra_rules, ['paginate' => false]);
-
-        if ($type == 'tree')
-        {
+        if ($type == 'tree') {
             $default_field = array_merge($extra_fields, ['id', 'tree_list_title']);
-
-            return $service->search(Helper::collect($default_rules))//->toFlatTree()
+            return $service->search(collect(['q' => $q]))//->toFlatTree()
                 ->map( function($item, $key) use ($default_field){
                     return $item->only($default_field);
                 });
-        }
-        else
-        {
+        } else {
             $default_field = array_merge($extra_fields, ['id', 'title']);
-            return $service->search(Helper::collect($extra_rules))
+            return $service->search(collect(['q' => $q]))
                 ->map( function($item, $key) use ($default_field) {
                     return $item->only($default_field);
                 });

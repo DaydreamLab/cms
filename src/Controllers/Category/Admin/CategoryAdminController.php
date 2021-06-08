@@ -3,14 +3,13 @@
 namespace DaydreamLab\Cms\Controllers\Category\Admin;
 
 use DaydreamLab\Cms\Controllers\CmsController;
+use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminFeaturedOrderingPost;
 use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminFeaturedPost;
 use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminGetItemGet;
-use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminOrderingPost;
+use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminOrderingNestedPost;
 use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminRemovePost;
 use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminRestorePost;
 use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminStatePost;
-use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminOrderingPost;
-use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminFeaturedPost;
 use DaydreamLab\Cms\Resources\Category\Admin\Collections\CategoryAdminListResourceCollection;
 use DaydreamLab\Cms\Resources\Category\Admin\Models\CategoryAdminResource;
 use DaydreamLab\Cms\Services\Category\Admin\CategoryAdminService;
@@ -42,7 +41,7 @@ class CategoryAdminController extends CmsController
     }
 
 
-    public function featuredOrdering(ItemAdminOrderingPost $request)
+    public function featuredOrdering(CategoryAdminFeaturedOrderingPost $request)
     {
         $this->service->setUser($request->user('api'));
         try {
@@ -68,11 +67,11 @@ class CategoryAdminController extends CmsController
     }
 
 
-    public function ordering(CategoryAdminOrderingPost $request)
+    public function ordering(CategoryAdminOrderingNestedPost $request)
     {
         $this->service->setUser($request->user('api'));
         try {
-            $this->service->orderingNested($request->validated());
+            $this->service->ordering($request->validated());
         } catch (Throwable $t) {
             $this->handleException($t);
         }

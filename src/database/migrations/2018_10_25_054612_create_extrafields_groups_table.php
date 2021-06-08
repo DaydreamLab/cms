@@ -18,6 +18,7 @@ class CreateExtrafieldsGroupsTable extends Migration
             $table->string('title');
             $table->tinyInteger('state')->default(1);
             $table->text('description')->nullable();
+            $table->unsignedBigInteger('ordering')->nullable();
             $table->unsignedInteger('access')->nullable()->default(1);
             $table->unsignedInteger('locked_by')->nullable()->default(0);
             $table->timestamp('locked_at')->nullable();

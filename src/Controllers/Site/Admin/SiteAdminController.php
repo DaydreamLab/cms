@@ -4,7 +4,6 @@ namespace DaydreamLab\Cms\Controllers\Site\Admin;
 
 use DaydreamLab\Cms\Controllers\CmsController;
 use DaydreamLab\Cms\Requests\Site\Admin\SiteAdminGetItemGet;
-use DaydreamLab\Cms\Requests\Site\Admin\SiteAdminGetListGet;
 use DaydreamLab\Cms\Requests\Site\Admin\SiteAdminRestorePost;
 use DaydreamLab\Cms\Requests\Site\Admin\SiteAdminStorePost;
 use DaydreamLab\Cms\Requests\Site\Admin\SiteAdminSearchPost;
@@ -36,21 +35,6 @@ class SiteAdminController extends CmsController
         }
 
         return $this->response($this->service->status, $this->service->response, [],  SiteAdminResource::class);
-    }
-
-
-    public function getList(SiteAdminGetListGet $request)
-    {
-        $this->service->setUser($request->user('api'));
-        try {
-            $this->service->search($request->validated());
-        } catch (Throwable $t) {
-            $this->handleException($t);
-        }
-
-        return $this->response($this->service->status, $this->service->response->map(function ($item) {
-            return $item->only(['id', 'title', 'url']);
-        }));
     }
 
 

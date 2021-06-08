@@ -1,14 +1,14 @@
 <?php
 
-namespace DaydreamLab\Cms\Requests\Item\Admin;
+namespace DaydreamLab\Cms\Requests\Category\Admin;
 
-use DaydreamLab\Cms\Requests\CmsFeaturedOrderingPost;
+use DaydreamLab\Cms\Requests\CmsOrderingNestedPost;
 
-class ItemAdminFeaturedOrderingPost extends CmsFeaturedOrderingPost
+class CategoryAdminOrderingNestedPost extends CmsOrderingNestedPost
 {
-    protected $apiMethod = 'featuredOrderingItem';
+    protected $apiMethod = 'orderingCategory';
 
-    protected $modelName = 'Item';
+    protected $modelName = 'Category';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -28,15 +28,6 @@ class ItemAdminFeaturedOrderingPost extends CmsFeaturedOrderingPost
     {
         $rules = [
         ];
-
         return array_merge(parent::rules(), $rules);
-    }
-
-
-    public function validated()
-    {
-        $validated = parent::validated();
-
-        return $validated;
     }
 }

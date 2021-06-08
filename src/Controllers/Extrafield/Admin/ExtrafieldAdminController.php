@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Controllers\Extrafield\Admin;
 
 use DaydreamLab\Cms\Controllers\CmsController;
 use DaydreamLab\Cms\Requests\Extrafield\Admin\ExtrafieldAdminGetItemGet;
+use DaydreamLab\Cms\Requests\Extrafield\Admin\ExtrafieldAdminOrderingPost;
 use DaydreamLab\Cms\Requests\Extrafield\Admin\ExtrafieldAdminRestorePost;
 use DaydreamLab\Cms\Resources\Extrafield\Admin\Collections\ExtrafieldAdminListResourceCollection;
 use DaydreamLab\Cms\Resources\Extrafield\Admin\Models\ExtrafieldAdminResource;
@@ -35,6 +36,19 @@ class ExtrafieldAdminController extends CmsController
         }
 
         return $this->response($this->service->status, $this->service->response, [], ExtrafieldAdminResource::class);
+    }
+
+
+    public function ordering(ExtrafieldAdminOrderingPost $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->ordering($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
     }
 
 

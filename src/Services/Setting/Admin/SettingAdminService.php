@@ -6,8 +6,6 @@ use DaydreamLab\Cms\Services\Setting\SettingService;
 use DaydreamLab\Cms\Services\Site\Admin\SiteAdminService;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Str;
-
 
 class SettingAdminService extends SettingService
 {

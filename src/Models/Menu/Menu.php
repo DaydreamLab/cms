@@ -36,7 +36,6 @@ class Menu extends BaseModel
     protected $fillable = [
         'title',
         'alias',
-        'ordering',
         'path',
         'host',
         'site_id',
@@ -45,6 +44,7 @@ class Menu extends BaseModel
         'description',
         'language',
         'params',
+        'ordering',
         'locked_by',
         'locked_at',
         'created_by',

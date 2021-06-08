@@ -1,14 +1,14 @@
 <?php
 
-namespace DaydreamLab\Cms\Requests\Item\Admin;
+namespace DaydreamLab\Cms\Requests\Extrafield\Admin;
 
-use DaydreamLab\Cms\Requests\CmsFeaturedOrderingPost;
+use DaydreamLab\Cms\Requests\CmsOrderingPost;
 
-class ItemAdminFeaturedOrderingPost extends CmsFeaturedOrderingPost
+class ExtrafieldAdminOrderingPost extends CmsOrderingPost
 {
-    protected $apiMethod = 'featuredOrderingItem';
+    protected $apiMethod = 'deleteExtrafield';
 
-    protected $modelName = 'Item';
+    protected $modelName = 'Extrafield';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -27,16 +27,8 @@ class ItemAdminFeaturedOrderingPost extends CmsFeaturedOrderingPost
     public function rules()
     {
         $rules = [
+            //
         ];
-
         return array_merge(parent::rules(), $rules);
-    }
-
-
-    public function validated()
-    {
-        $validated = parent::validated();
-
-        return $validated;
     }
 }

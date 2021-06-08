@@ -39,6 +39,7 @@ class Module extends BaseModel
         'access',
         'language',
         'params',
+        'ordering',
         'locked_by',
         'locked_at',
         'created_by',

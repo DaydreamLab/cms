@@ -30,6 +30,7 @@ class ExtrafieldGroup extends BaseModel
         'state',
         'description',
         'access',
+        'ordering',
         'locked_by',
         'locked_at',
         'created_by',

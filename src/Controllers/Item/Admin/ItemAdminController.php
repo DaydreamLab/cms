@@ -145,6 +145,9 @@ class ItemAdminController extends CmsController
     }
 
 
+    /**
+     * 測試排序功能
+     */
     public function test()
     {
 //        # 1-1

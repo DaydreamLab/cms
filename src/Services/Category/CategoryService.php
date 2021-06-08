@@ -48,6 +48,12 @@ class CategoryService extends CmsService
     }
 
 
+    public function ordering(Collection $input)
+    {
+        return parent::orderingNested($input);
+    }
+
+
     public function remove(Collection $input ,$diff = false)
     {
         $result = $this->removeNested($input);

@@ -26,18 +26,15 @@ class CategoryAdminFeaturedOrderingPost extends CmsFeaturedOrderingPost
      */
     public function rules()
     {
-        return [
-            'id'                => 'required|integer',
-            'featuredOrdering'  => 'nullable|integer'
-        ];
+        $rules = [];
+
+        return array_merge(parent::rules(), $rules);
     }
 
 
     public function validated()
     {
         $validated = parent::validated();
-        $validated->put('featured_ordering', $validated->get('featuredOrdering') ?: 0);
-        $validated->forget('featuredOrdering');
 
         return $validated;
     }

@@ -23,6 +23,7 @@ class CreateModulesTable extends Migration
             $table->unsignedInteger('access')->nullalbe()->default(1);
             $table->string('language')->nullable()->default('*');
             $table->text('params')->nullable();
+            $table->unsignedBigInteger('ordering')->nullable();
             $table->unsignedInteger('locked_by')->nullable()->default(0);
             $table->timestamp('locked_at')->nullable();
             $table->unsignedInteger('created_by');

@@ -5,7 +5,7 @@ namespace DaydreamLab\Cms\Requests;
 use DaydreamLab\JJAJ\Requests\AdminRequest;
 use Illuminate\Validation\Rule;
 
-class CmsOrderingPost extends AdminRequest
+class CmsOrderingNestedPost extends AdminRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,6 +26,8 @@ class CmsOrderingPost extends AdminRequest
     {
         return [
             'id'            => 'required|integer',
+            'parentId'      => 'nullable|integer',
+            'parent_id'     => 'nullable|integer',
             'ordering'      => 'nullable|integer',
         ];
     }
@@ -33,6 +35,9 @@ class CmsOrderingPost extends AdminRequest
     public function validated()
     {
         $validated = parent::validated();
+        if ($validated->get('parentId')) {
+            $validated->put('parent_id', $validated->get('parentId'));
+        }
 
         return $validated;
     }

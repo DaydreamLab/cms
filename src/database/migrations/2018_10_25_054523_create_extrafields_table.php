@@ -24,6 +24,7 @@ class CreateExtrafieldsTable extends Migration
             $table->string('value')->nullable();
             $table->text('description')->nullable();
             $table->text('params')->nullable();
+            $table->text('ordering')->nullable();
             $table->unsignedInteger('access')->nullable()->default(1);
             $table->unsignedInteger('ordering')->nullable();
             $table->unsignedInteger('locked_by')->nullable()->default(0);

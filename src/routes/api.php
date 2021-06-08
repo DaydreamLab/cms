@@ -73,6 +73,8 @@ Route::get('api/admin/category/{id}', [CategoryAdminController::class, 'getItem'
     ->middleware(['expired','admin']);
 
 # 額外欄位 Extrafield
+Route::post('api/admin/extrafield/ordering', [ExtrafieldAdminController::class, 'ordering'])
+    ->middleware(['expired','admin']);
 Route::post('api/admin/extrafield/remove', [ExtrafieldAdminController::class, 'remove'])
     ->middleware(['expired','admin']);
 Route::post('api/admin/extrafield/restore', [ExtrafieldAdminController::class, 'restore'])
@@ -87,6 +89,8 @@ Route::get('api/admin/extrafield/{id}', [ExtrafieldAdminController::class, 'getI
     ->middleware(['expired','admin']);
 
 # 額外欄位群組 Extrafield Group
+Route::post('api/admin/extrafield/group/ordering', [ExtrafieldGroupAdminController::class, 'ordering'])
+    ->middleware(['expired','admin']);
 Route::post('api/admin/extrafield/group/restore', [ExtrafieldGroupAdminController::class, 'restore'])
     ->middleware(['expired','admin']);
 Route::post('api/admin/extrafield/group/remove', [ExtrafieldGroupAdminController::class, 'remove'])
@@ -111,8 +115,8 @@ Route::get('api/admin/form/{id}', [FormAdminController::class, 'getItem'])
     ->middleware(['expired','admin']);
 
 # 項目 Item
-Route::get('api/admin/item/test', [ItemAdminController::class, 'test'])
-    ->middleware(['expired','admin']);
+//Route::get('api/admin/item/test', [ItemAdminController::class, 'test'])
+//    ->middleware(['expired','admin']);
 Route::post('api/admin/item/featured', [ItemAdminController::class, 'featured'])
     ->middleware(['expired','admin']);
 Route::post('api/admin/item/featured/ordering', [ItemAdminController::class, 'featuredOrdering'])
@@ -161,6 +165,8 @@ Route::get('api/admin/menu/{id}', [MenuAdminController::class, 'getItem'])
     ->middleware(['expired','admin']);
 
 # 模組 Module
+Route::post('api/admin/module/ordering', [ModuleAdminController::class, 'ordering'])
+    ->middleware(['expired','admin']);
 Route::post('api/admin/module/remove', [ModuleAdminController::class, 'remove'])
     ->middleware(['expired','admin']);
 Route::post('api/admin/module/restore', [ModuleAdminController::class, 'restore'])
@@ -185,10 +191,6 @@ Route::get('api/admin/setting', [SettingAdminController::class, 'getItem'])
     ->middleware(['expired','admin']);
 
 # 多網站 Site
-Route::get('api/admin/site/list', [SiteAdminController::class, 'getList'])
-    ->middleware(['expired','admin']);
-Route::post('api/admin/site/ordering', [SiteAdminController::class, 'ordering'])
-    ->middleware(['expired','admin']);
 Route::post('api/admin/site/remove', [SiteAdminController::class, 'remove'])
     ->middleware(['expired','admin']);
 Route::post('api/admin/site/restore', [SiteAdminController::class, 'restore'])

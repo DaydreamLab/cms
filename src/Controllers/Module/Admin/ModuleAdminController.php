@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Controllers\Module\Admin;
 
 use DaydreamLab\Cms\Controllers\CmsController;
 use DaydreamLab\Cms\Requests\Module\Admin\ModuleAdminGetItemGet;
+use DaydreamLab\Cms\Requests\Module\Admin\ModuleAdminOrderingPost;
 use DaydreamLab\Cms\Requests\Module\Admin\ModuleAdminRestorePost;
 use DaydreamLab\Cms\Resources\Module\Admin\Collections\ModuleAdminListResourceCollection;
 use DaydreamLab\Cms\Resources\Module\Admin\Models\ModuleAdminResource;
@@ -35,6 +36,19 @@ class ModuleAdminController extends CmsController
         }
 
         return $this->response($this->service->status, $this->service->response, [], ModuleAdminResource::class);
+    }
+
+
+    public function ordering(ModuleAdminOrderingPost $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->ordering($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
     }
 
 

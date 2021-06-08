@@ -7,6 +7,11 @@ use Illuminate\Validation\Rule;
 
 class OptionAdminGetListPost extends AdminRequest
 {
+    protected $package = 'Cms';
+
+    protected $apiMethod = 'getOption';
+
+    protected $modelName = 'Option';
     /**
      * Determine if the user is authorized to make this request.
      *

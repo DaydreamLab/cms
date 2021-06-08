@@ -2,11 +2,11 @@
 
 namespace DaydreamLab\Cms\Requests\Category\Admin;
 
-use DaydreamLab\Cms\Requests\CmsOrderingPost;
+use DaydreamLab\Cms\Requests\CmsFeaturedPost;
 
-class CategoryAdminOrderingPost extends CmsOrderingPost
+class CategoryAdminFeaturedPost extends CmsFeaturedPost
 {
-    protected $apiMethod = 'orderingCategory';
+    protected $apiMethod = 'featuredCategory';
 
     protected $modelName = 'Category';
     /**
@@ -27,6 +27,7 @@ class CategoryAdminOrderingPost extends CmsOrderingPost
     public function rules()
     {
         $rules = [
+            //
         ];
         return array_merge(parent::rules(), $rules);
     }
