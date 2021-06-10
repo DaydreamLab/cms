@@ -1,0 +1,79 @@
+[
+    {
+        "title": "首頁",
+        "state": 1,
+        "assets": [
+            {
+                "title": "slideshow 列表",
+                "path": "/slideshow",
+                "full_path": "/slideshow",
+                "component": "slideshow/list",
+                "type": "menu",
+                "state": 1,
+                "showNav": 1,
+                "apis": [
+                    "getItem",
+                    "addItem",
+                    "editItem",
+                    "deleteItem",
+                    "searchItem",
+                    "restoreItem",
+                    "orderingItem"
+                ]
+            },
+            {
+                "title": "slideshow 管理",
+                "path": "/slideshow",
+                "full_path": "/slideshow",
+                "component": "slideshow/edit",
+                "type": "menu",
+                "state": 1,
+                "showNav": 1,
+                "apis": [
+                    "addItem",
+                    "editItem"
+                ]
+            }
+        ]
+    },
+    {
+        "title": "代理品牌",
+        "state": 1,
+        "assets": [
+            {
+                "title": "品牌列表",
+                "path": "/brand",
+                "full_path": "/brand",
+                "component": "brand/list",
+                "type": "menu",
+                "state": 1,
+                "showNav": 1,
+                "apis": [
+                    "getBrand",
+                    "addBrand",
+                    "editBrand",
+                    "deleteBrand",
+                    "searchBrand",
+                    "restoreBrand",
+                    "orderingBrand"
+                ],
+                "defaultApis": [
+
+                ]
+            },
+            {
+                "title": "品牌管理",
+                "path": "/brand",
+                "full_path": "/brand",
+                "component": "brand/edit",
+                "type": "menu",
+                "state": 1,
+                "showNav": 1,
+                "apis": [
+                    "addBrand",
+                    "editBrand"
+                ]
+            }
+        ]
+    }
+]

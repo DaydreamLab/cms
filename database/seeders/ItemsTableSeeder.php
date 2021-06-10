@@ -61,7 +61,6 @@ class ItemsTableSeeder extends Seeder
             {
                 self::migrate($childern, $category);
             }
-
         }
     }
 }

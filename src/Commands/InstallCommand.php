@@ -42,6 +42,7 @@ class InstallCommand extends Command
         'ModulesTableSeeder',
         'TagsTableSeeder',
         'CategoriesTableSeeder',
+        'ZeroneAssetsGroupTableSeeder',
     ];
 
 
@@ -77,8 +78,6 @@ class InstallCommand extends Command
             ]);
         }
 
-        $this->deleteConstants();
-
         if ($this->option('publish')) {
             $this->call('cms:publish');
         }
@@ -92,14 +91,6 @@ class InstallCommand extends Command
         ]);
     }
 
-
-    public function deleteConstants()
-    {
-        $constants_path     = 'config/constants/';
-        foreach ($this->constants as $constant) {
-            File::delete($constants_path . $constant . '.php');
-        }
-    }
 
 
     public function deleteResources()
