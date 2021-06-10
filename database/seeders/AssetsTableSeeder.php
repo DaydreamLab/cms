@@ -21,32 +21,32 @@ class AssetsTableSeeder extends Seeder
      */
     public function run()
     {
-        $data = json_decode(file_get_contents(__DIR__ . '/jsons/asset.json'), true);
-
-        $this->migrate($data, Asset::find(1));
-
-        $service    = new AssetService(new AssetRepository(new Asset()));
-
-        $combine_path = function ($parent_id, $full_path) use (&$combine_path, $service) {
-            if($parent_id == 1) {
-                return $full_path;
-            }
-            else {
-                $parent = $service->find($parent_id);
-                $full_path = $parent->path . $full_path;
-                return $combine_path($parent->parent_id, $full_path);
-            }
-        };
-
-        $q = new QueryCapsule();
-        $q = $q->where('title', '!=', 'Root');
-        $assets     = $service->search(collect(['paginate' => 0, 'q' => $q]));
-        $assets->forget('pagination');
-        foreach ($assets as $asset) {
-            $full_path = $asset->path;
-            $asset->full_path = $combine_path($asset->parent_id, $full_path);
-            $asset->save();
-        }
+//        $data = json_decode(file_get_contents(__DIR__ . '/jsons/asset.json'), true);
+//
+//        $this->migrate($data, Asset::find(1));
+//
+//        $service    = new AssetService(new AssetRepository(new Asset()));
+//
+//        $combine_path = function ($parent_id, $full_path) use (&$combine_path, $service) {
+//            if($parent_id == 1) {
+//                return $full_path;
+//            }
+//            else {
+//                $parent = $service->find($parent_id);
+//                $full_path = $parent->path . $full_path;
+//                return $combine_path($parent->parent_id, $full_path);
+//            }
+//        };
+//
+//        $q = new QueryCapsule();
+//        $q = $q->where('title', '!=', 'Root');
+//        $assets     = $service->search(collect(['paginate' => 0, 'q' => $q]));
+//        $assets->forget('pagination');
+//        foreach ($assets as $asset) {
+//            $full_path = $asset->path;
+//            $asset->full_path = $combine_path($asset->parent_id, $full_path);
+//            $asset->save();
+//        }
     }
 
     public function migrate($data, $parent)

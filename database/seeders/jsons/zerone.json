@@ -4,7 +4,7 @@
         "state": 1,
         "assets": [
             {
-                "title": "slideshow 列表",
+                "title": "slideshow",
                 "path": "/slideshow",
                 "full_path": "/slideshow",
                 "component": "slideshow/list",
@@ -17,22 +17,16 @@
                     "editItem",
                     "deleteItem",
                     "searchItem",
+                    "stateItem",
                     "restoreItem",
                     "orderingItem"
-                ]
-            },
-            {
-                "title": "slideshow 管理",
-                "path": "/slideshow",
-                "full_path": "/slideshow",
-                "component": "slideshow/edit",
-                "type": "menu",
-                "state": 1,
-                "showNav": 1,
-                "apis": [
-                    "addItem",
-                    "editItem"
-                ]
+                ],
+                "defaultApis": {
+                    "getOption": ["checked", "hidden"],
+                    "uploadMedia": ["checked", "hidden"],
+                    "getMediaAllItems": ["checked", "hidden"],
+                    "getMediaAllFolders": ["checked", "hidden"]
+                }
             }
         ]
     },
@@ -41,7 +35,7 @@
         "state": 1,
         "assets": [
             {
-                "title": "品牌列表",
+                "title": "品牌管理",
                 "path": "/brand",
                 "full_path": "/brand",
                 "component": "brand/list",
@@ -54,24 +48,563 @@
                     "editBrand",
                     "deleteBrand",
                     "searchBrand",
+                    "stateBrand",
                     "restoreBrand",
                     "orderingBrand"
-                ],
-                "defaultApis": [
-
                 ]
-            },
+            }
+        ]
+    },
+    {
+        "title": "產品管理",
+        "state": 1,
+        "assets": [
             {
-                "title": "品牌管理",
-                "path": "/brand",
-                "full_path": "/brand",
-                "component": "brand/edit",
+                "title": "產品類別管理",
+                "path": "/product-category",
+                "full_path": "/product-category",
+                "component": "product-category/list",
                 "type": "menu",
                 "state": 1,
                 "showNav": 1,
                 "apis": [
-                    "addBrand",
-                    "editBrand"
+                    "getProductCategory",
+                    "addProductCategory",
+                    "editProductCategory",
+                    "deleteProductCategory",
+                    "searchProductCategory",
+                    "stateProductCategory",
+                    "restoreProductCategory",
+                    "orderingProductCategory"
+                ]
+            },
+            {
+                "title": "產品資料管理",
+                "path": "/product-series",
+                "full_path": "/product-series",
+                "component": "product-series/list",
+                "type": "menu",
+                "state": 1,
+                "showNav": 1,
+                "apis": [
+                    "getProductSeries",
+                    "addProductSeries",
+                    "editProductSeries",
+                    "deleteProductSeries",
+                    "searchProductSeries",
+                    "stateProductSeries",
+                    "restoreProductSeries",
+                    "orderingProductSeries"
+                ],
+                "defaultApis": {
+                    "getOption": ["checked", "hidden"],
+                    "uploadMedia": ["checked", "hidden"],
+                    "getMediaAllItems": ["checked", "hidden"],
+                    "getMediaAllFolders": ["checked", "hidden"],
+                    "addProduct": ["checked", "hidden"]
+                }
+            }
+        ]
+    },
+    {
+        "title": "解決方案",
+        "state": 1,
+        "assets": [
+            {
+                "title": "解決方案管理",
+                "path": "/solution",
+                "full_path": "/solution",
+                "component": "solution/list",
+                "type": "menu",
+                "state": 1,
+                "showNav": 1,
+                "apis": [
+                    "getItem",
+                    "addItem",
+                    "editItem",
+                    "deleteItem",
+                    "searchItem",
+                    "restoreItem",
+                    "stateItem",
+                    "orderingItem"
+                ],
+                "defaultApis": {
+                    "getOption": ["checked", "hidden"],
+                    "uploadMedia": ["checked", "hidden"],
+                    "getMediaAllItems": ["checked", "hidden"],
+                    "getMediaAllFolders": ["checked", "hidden"]
+                }
+            }
+        ]
+    },
+    {
+        "title": "成功案例",
+        "state": 1,
+        "assets": [
+            {
+                "title": "成功案例管理",
+                "path": "/success-case",
+                "full_path": "/success-case",
+                "component": "success-case/list",
+                "type": "menu",
+                "state": 1,
+                "showNav": 1,
+                "apis": [
+                    "getItem",
+                    "addItem",
+                    "editItem",
+                    "deleteItem",
+                    "searchItem",
+                    "restoreItem",
+                    "stateItem",
+                    "orderingItem"
+                ],
+                "defaultApis": {
+                    "getOption": ["checked", "hidden"],
+                    "uploadMedia": ["checked", "hidden"],
+                    "getMediaAllItems": ["checked", "hidden"],
+                    "getMediaAllFolders": ["checked", "hidden"]
+                }
+            }
+        ]
+    },
+    {
+        "title": "下載檔案管理",
+        "state": 1,
+        "assets": [
+            {
+                "title": "檔案類別管理",
+                "path": "/file-category",
+                "full_path": "/file-category",
+                "component": "file-category/list",
+                "type": "menu",
+                "state": 1,
+                "showNav": 1,
+                "apis": [
+                    "getFileCategory",
+                    "addFileCategory",
+                    "editFileCategory",
+                    "deleteFileCategory",
+                    "searchFileCategory",
+                    "restoreFileCategory",
+                    "stateFileCategory",
+                    "orderingFileCategory"
+                ]
+            },
+            {
+                "title": "檔案管理",
+                "path": "/file",
+                "full_path": "/file",
+                "component": "file/list",
+                "type": "menu",
+                "state": 1,
+                "showNav": 1,
+                "apis": [
+                    "getFile",
+                    "addFile",
+                    "editFile",
+                    "deleteFile",
+                    "searchFile",
+                    "restoreFile",
+                    "stateFile",
+                    "orderingFile"
+                ],
+                "defaultApis": {
+                    "getOption": ["checked", "hidden"]
+                }
+            }
+        ]
+    },
+    {
+        "title": "零壹新訊",
+        "state": 1,
+        "assets": [
+            {
+                "title": "最新消息",
+                "path": "/news",
+                "full_path": "/news",
+                "component": "news/list",
+                "type": "menu",
+                "state": 1,
+                "showNav": 1,
+                "apis": [
+                    "getItem",
+                    "addItem",
+                    "editItem",
+                    "deleteItem",
+                    "searchItem",
+                    "restoreItem",
+                    "stateItem",
+                    "orderingItem"
+                ],
+                "defaultApis": {
+                    "getOption": ["checked", "hidden"],
+                    "uploadMedia": ["checked", "hidden"],
+                    "getMediaAllItems": ["checked", "hidden"],
+                    "getMediaAllFolders": ["checked", "hidden"]
+                }
+            },
+            {
+                "title": "促銷訊息",
+                "path": "/promotion",
+                "full_path": "/promotion",
+                "component": "promotion/list",
+                "type": "menu",
+                "state": 1,
+                "showNav": 1,
+                "apis": [
+                    "getItem",
+                    "addItem",
+                    "editItem",
+                    "deleteItem",
+                    "searchItem",
+                    "restoreItem",
+                    "stateItem",
+                    "orderingItem"
+                ],
+                "defaultApis": {
+                    "getOption": ["checked", "hidden"],
+                    "uploadMedia": ["checked", "hidden"],
+                    "getMediaAllItems": ["checked", "hidden"],
+                    "getMediaAllFolders": ["checked", "hidden"]
+                }
+            }
+        ]
+    },
+    {
+        "title": "零壹影片管理",
+        "state": 1,
+        "assets": [
+            {
+                "title": "零壹影片",
+                "path": "/video",
+                "full_path": "/video",
+                "component": "video/list",
+                "type": "menu",
+                "state": 1,
+                "showNav": 1,
+                "apis": [
+                    "getItem",
+                    "addItem",
+                    "editItem",
+                    "deleteItem",
+                    "searchItem",
+                    "restoreItem",
+                    "stateItem",
+                    "orderingItem"
+                ]
+            }
+        ]
+    },
+    {
+        "title": "靜態頁面",
+        "state": 1,
+        "assets": [
+            {
+                "title": "零壹大事紀",
+                "path": "/memorabilia",
+                "full_path": "/memorabilia",
+                "component": "memorabilia/list",
+                "type": "menu",
+                "state": 1,
+                "showNav": 1,
+                "apis": [
+                    "getItem",
+                    "addItem",
+                    "editItem",
+                    "deleteItem",
+                    "searchItem",
+                    "restoreItem",
+                    "stateItem",
+                    "orderingItem"
+                ]
+            },
+            {
+                "title": "財務資訊",
+                "path": "/financial-info",
+                "full_path": "/financial-info",
+                "component": "financial-info/list",
+                "type": "menu",
+                "state": 1,
+                "showNav": 1,
+                "apis": [
+                    "getItem",
+                    "addItem",
+                    "editItem",
+                    "deleteItem",
+                    "searchItem",
+                    "restoreItem",
+                    "stateItem",
+                    "orderingItem"
+                ],
+                "defaultApis": {
+                    "getOption": ["checked", "hidden"],
+                    "uploadMedia": ["checked", "hidden"],
+                    "getMediaAllItems": ["checked", "hidden"],
+                    "getMediaAllFolders": ["checked", "hidden"]
+                }
+            },
+            {
+                "title": "重要規章",
+                "path": "/regulations",
+                "full_path": "/regulations",
+                "component": "regulations/list",
+                "type": "menu",
+                "state": 1,
+                "showNav": 1,
+                "apis": [
+                    "getItem",
+                    "addItem",
+                    "editItem",
+                    "deleteItem",
+                    "searchItem",
+                    "restoreItem",
+                    "stateItem",
+                    "orderingItem"
+                ],
+                "defaultApis": {
+                    "getOption": ["checked", "hidden"],
+                    "uploadMedia": ["checked", "hidden"],
+                    "getMediaAllItems": ["checked", "hidden"],
+                    "getMediaAllFolders": ["checked", "hidden"]
+                }
+            },
+            {
+                "title": "股東專欄",
+                "path": "/shareholder",
+                "full_path": "/shareholder",
+                "component": "shareholder/list",
+                "type": "menu",
+                "state": 1,
+                "showNav": 1,
+                "apis": [
+                    "getItem",
+                    "addItem",
+                    "editItem",
+                    "deleteItem",
+                    "searchItem",
+                    "restoreItem",
+                    "stateItem",
+                    "orderingItem"
+                ],
+                "defaultApis": {
+                    "getOption": ["checked", "hidden"],
+                    "uploadMedia": ["checked", "hidden"],
+                    "getMediaAllItems": ["checked", "hidden"],
+                    "getMediaAllFolders": ["checked", "hidden"]
+                }
+            }
+        ]
+    },
+    {
+        "title": "熱搜管理",
+        "state": 1,
+        "assets": [
+            {
+                "title": "熱搜關鍵字管理",
+                "path": "/search-keywords",
+                "full_path": "/search-keywords",
+                "component": "search-keywords/list",
+                "type": "menu",
+                "state": 1,
+                "showNav": 1,
+                "apis": [
+                    "getTag",
+                    "addTag",
+                    "editTag",
+                    "deleteTag",
+                    "searchTag",
+                    "restoreTag",
+                    "stateTag",
+                    "orderingTag"
+                ]
+            }
+        ]
+    },
+    {
+        "title": "電子報管理",
+        "state": 1,
+        "assets": [
+            {
+                "title": "電子報類別管理",
+                "path": "/newsletter",
+                "full_path": "/newsletter",
+                "component": "newsletter/list",
+                "type": "menu",
+                "state": 1,
+                "showNav": 1,
+                "apis": [
+                    "getCategory",
+                    "addCategory",
+                    "editCategory",
+                    "deleteCategory",
+                    "searchCategory",
+                    "restoreCategory",
+                    "stateCategory",
+                    "orderingCategory"
+                ],
+                "defaultApis": {
+                    "getOption": ["checked", "hidden"],
+                    "uploadMedia": ["checked", "hidden"],
+                    "getMediaAllItems": ["checked", "hidden"],
+                    "getMediaAllFolders": ["checked", "hidden"]
+                }
+            },
+            {
+                "title": "電子報內容管理",
+                "path": "/news",
+                "full_path": "/news",
+                "component": "news/list",
+                "type": "menu",
+                "state": 1,
+                "showNav": 1,
+                "apis": [
+                    "getNewsletter",
+                    "addNewsletter",
+                    "editNewsletter",
+                    "deleteNewsletter",
+                    "searchNewsletter",
+                    "restoreNewsletter",
+                    "stateNewsletter",
+                    "orderingNewsletter"
+                ],
+                "defaultApis": {
+                    "getOption": ["checked", "hidden"],
+                    "uploadMedia": ["checked", "hidden"],
+                    "getMediaAllItems": ["checked", "hidden"],
+                    "getMediaAllFolders": ["checked", "hidden"]
+                }
+            },
+            {
+                "title": "訂閱管理",
+                "path": "/newsletter-subscription",
+                "full_path": "/newsletter-subscription",
+                "component": "newsletter-subscription/list",
+                "type": "menu",
+                "state": 1,
+                "showNav": 1,
+                "apis": [
+                    "getNewsletterSubscription",
+                    "addNewsletterSubscription",
+                    "editNewsletterSubscription",
+                    "deleteNewsletterSubscription",
+                    "searchNewsletterSubscription",
+                    "restoreNewsletterSubscription",
+                    "stateNewsletterSubscription",
+                    "orderingNewsletterSubscription"
+                ]
+            }
+        ]
+    },
+    {
+        "title": "會員管理",
+        "state": 1,
+        "assets": [
+            {
+                "title": "會員管理",
+                "path": "/user",
+                "full_path": "/user",
+                "component": "user/list",
+                "type": "menu",
+                "state": 1,
+                "showNav": 1,
+                "apis": [
+                    "getUser",
+                    "searchUserGroup"
+                ]
+            },
+            {
+                "title": "統編資料管理",
+                "path": "/company",
+                "full_path": "/company",
+                "component": "company/list",
+                "type": "menu",
+                "state": 1,
+                "showNav": 1,
+                "apis": [
+                    "getCompany",
+                    "addCompany",
+                    "editCompany",
+                    "deleteCompany",
+                    "searchCompany"
+                ]
+            }
+        ]
+    },
+    {
+        "title": "權限管理",
+        "state": 1,
+        "assets": [
+            {
+                "title": "權限群組管理",
+                "path": "/user-groups",
+                "full_path": "/user-groups",
+                "component": "user-groups/list",
+                "type": "menu",
+                "state": 1,
+                "showNav": 1,
+                "apis": [
+                    "getUserGroup",
+                    "addUserGroup",
+                    "editUserGroup",
+                    "deleteUserGroup",
+                    "searchUserGroup"
+                ]
+            },
+            {
+                "title": "權限群組管理",
+                "path": "/user-groups",
+                "full_path": "/user-groups",
+                "component": "user-groups/list",
+                "type": "menu",
+                "state": 1,
+                "showNav": 1,
+                "apis": [
+                    "getUser",
+                    "addUser",
+                    "editUser",
+                    "deleteUser",
+                    "searchUser",
+                    "blockUser"
+                ]
+            }
+        ]
+    },
+    {
+        "title": "客服留言",
+        "state": 1,
+        "assets": [
+            {
+                "title": "客服留言管理",
+                "path": "/customer-message",
+                "full_path": "/customer-message",
+                "component": "customer-message/list",
+                "type": "menu",
+                "state": 1,
+                "showNav": 1,
+                "apis": [
+                    "getCustomerMessage",
+                    "editItem",
+                    "searchItem"
+                ]
+            }
+        ]
+    },
+    {
+        "title": "全站SEO設定",
+        "state": 1,
+        "assets": [
+            {
+                "title": "SEO設定",
+                "path": "/settings",
+                "full_path": "/settings",
+                "component": "settings/list",
+                "type": "menu",
+                "state": 1,
+                "showNav": 1,
+                "apis": [
+                    "getItem",
+                    "editItem"
                 ]
             }
         ]

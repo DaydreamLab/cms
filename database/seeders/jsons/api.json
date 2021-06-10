@@ -499,8 +499,8 @@
     },
     {
         "name": "取得所有媒體檔案目錄",
-        "method": "getMediaAllFolder",
-        "url": "/admin/media/getAllFolder",
+        "method": "getMediaAllFolders",
+        "url": "/admin/media/getAllFolders",
         "created_by": 1
     },
     {
