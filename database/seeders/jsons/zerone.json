@@ -28,7 +28,8 @@
                     "getMediaAllFolders": ["checked", "hidden"]
                 }
             }
-        ]
+        ],
+        "userGroups": ["Administrator", "Super User"]
     },
     {
         "title": "代理品牌",
@@ -53,7 +54,8 @@
                     "orderingBrand"
                 ]
             }
-        ]
+        ],
+        "userGroups": ["Administrator", "Super User"]
     },
     {
         "title": "產品管理",
@@ -104,7 +106,8 @@
                     "addProduct": ["checked", "hidden"]
                 }
             }
-        ]
+        ],
+        "userGroups": ["Administrator", "Super User"]
     },
     {
         "title": "解決方案",
@@ -135,7 +138,8 @@
                     "getMediaAllFolders": ["checked", "hidden"]
                 }
             }
-        ]
+        ],
+        "userGroups": ["Administrator", "Super User"]
     },
     {
         "title": "成功案例",
@@ -166,7 +170,8 @@
                     "getMediaAllFolders": ["checked", "hidden"]
                 }
             }
-        ]
+        ],
+        "userGroups": ["Administrator", "Super User"]
     },
     {
         "title": "下載檔案管理",
@@ -213,7 +218,8 @@
                     "getOption": ["checked", "hidden"]
                 }
             }
-        ]
+        ],
+        "userGroups": ["Administrator", "Super User"]
     },
     {
         "title": "零壹新訊",
@@ -269,7 +275,8 @@
                     "getMediaAllFolders": ["checked", "hidden"]
                 }
             }
-        ]
+        ],
+        "userGroups": ["Administrator", "Super User"]
     },
     {
         "title": "零壹影片管理",
@@ -294,7 +301,8 @@
                     "orderingItem"
                 ]
             }
-        ]
+        ],
+        "userGroups": ["Administrator", "Super User"]
     },
     {
         "title": "靜態頁面",
@@ -394,7 +402,8 @@
                     "getMediaAllFolders": ["checked", "hidden"]
                 }
             }
-        ]
+        ],
+        "userGroups": ["Administrator", "Super User"]
     },
     {
         "title": "熱搜管理",
@@ -419,7 +428,8 @@
                     "orderingTag"
                 ]
             }
-        ]
+        ],
+        "userGroups": ["Administrator", "Super User"]
     },
     {
         "title": "電子報管理",
@@ -494,7 +504,8 @@
                     "orderingNewsletterSubscription"
                 ]
             }
-        ]
+        ],
+        "userGroups": ["Administrator", "Super User"]
     },
     {
         "title": "會員管理",
@@ -529,7 +540,8 @@
                     "searchCompany"
                 ]
             }
-        ]
+        ],
+        "userGroups": ["Administrator", "Super User"]
     },
     {
         "title": "權限管理",
@@ -568,7 +580,8 @@
                     "blockUser"
                 ]
             }
-        ]
+        ],
+        "userGroups": ["Administrator", "Super User"]
     },
     {
         "title": "客服留言",
@@ -588,7 +601,8 @@
                     "searchItem"
                 ]
             }
-        ]
+        ],
+        "userGroups": ["Administrator", "Super User"]
     },
     {
         "title": "全站SEO設定",
@@ -607,6 +621,7 @@
                     "editItem"
                 ]
             }
-        ]
+        ],
+        "userGroups": ["Administrator", "Super User"]
     }
 ]
