@@ -1,15 +1,13 @@
 <?php
 
-namespace DaydreamLab\Cms\Requests\Language\Admin;
+namespace DaydreamLab\Cms\Requests;
 
-use DaydreamLab\Cms\Requests\CmSearchPost;
-use Illuminate\Validation\Rule;
+use DaydreamLab\JJAJ\Requests\ListRequest;
 
-class LanguageAdminSearchPost extends CmSearchPost
+class CmSearchPost extends ListRequest
 {
-    protected $apiMethod = 'searchLanguage';
+    protected $package = 'Cms';
 
-    protected $modelName = 'Language';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -28,11 +26,8 @@ class LanguageAdminSearchPost extends CmSearchPost
     public function rules()
     {
         $rules = [
-            'type'  => [
-                'nullable',
-                Rule::in(['content', 'system'])
-            ]
         ];
+
         return array_merge(parent::rules(), $rules);
     }
 }

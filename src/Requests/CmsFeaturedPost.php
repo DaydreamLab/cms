@@ -7,6 +7,8 @@ use Illuminate\Validation\Rule;
 
 class CmsFeaturedPost extends AdminRequest
 {
+    protected $package = 'Cms';
+
     /**
      * Determine if the user is authorized to make this request.
      *

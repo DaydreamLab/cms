@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Site\Admin;
 
-use DaydreamLab\JJAJ\Requests\ListRequest;
+use DaydreamLab\Cms\Requests\CmSearchPost;
 
-class SiteAdminSearchPost extends ListRequest
+class SiteAdminSearchPost extends CmSearchPost
 {
     protected $apiMethod = 'searchSite';
 

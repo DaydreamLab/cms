@@ -2,11 +2,11 @@
 
 namespace DaydreamLab\Cms\Requests\Module\Admin;
 
+use DaydreamLab\Cms\Requests\CmSearchPost;
 use DaydreamLab\Cms\Requests\Module\ModuleSearchPost;
-use DaydreamLab\JJAJ\Requests\ListRequest;
 use Illuminate\Validation\Rule;
 
-class ModuleAdminSearchPost extends ListRequest
+class ModuleAdminSearchPost extends CmSearchPost
 {
     protected $apiMethod = 'searchModule';
 
