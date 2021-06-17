@@ -1,4 +1,4 @@
-  <?php
+<?php
 
 return [
     'public_viewlevel_id' => 1,
