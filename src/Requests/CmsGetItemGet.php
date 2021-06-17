@@ -6,6 +6,8 @@ use DaydreamLab\JJAJ\Requests\AdminRequest;
 
 class CmsGetItemGet extends AdminRequest
 {
+    protected $package = 'Cms';
+
     /**
      * Determine if the user is authorized to make this request.
      *

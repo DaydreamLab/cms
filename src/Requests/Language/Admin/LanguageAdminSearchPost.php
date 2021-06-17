@@ -2,10 +2,10 @@
 
 namespace DaydreamLab\Cms\Requests\Language\Admin;
 
-use DaydreamLab\JJAJ\Requests\ListRequest;
+use DaydreamLab\Cms\Requests\CmSearchPost;
 use Illuminate\Validation\Rule;
 
-class LanguageAdminSearchPost extends ListRequest
+class LanguageAdminSearchPost extends CmSearchPost
 {
     protected $apiMethod = 'searchLanguage';
 

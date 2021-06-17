@@ -2,10 +2,10 @@
 
 namespace DaydreamLab\Cms\Requests\Item\Admin;
 
-use DaydreamLab\JJAJ\Requests\ListRequest;
+use DaydreamLab\Cms\Requests\CmSearchPost;
 use Illuminate\Validation\Rule;
 
-class ItemAdminSearchPost extends ListRequest
+class ItemAdminSearchPost extends CmSearchPost
 {
     protected $apiMethod = 'searchItem';
 
