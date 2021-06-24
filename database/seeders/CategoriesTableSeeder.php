@@ -26,5 +26,25 @@ class CategoriesTableSeeder extends Seeder
             'children'      => [],
             'created_by'    => 1,
         ]);
+        
+        $slideshow = Category::create([
+            'title'         => 'Slideshow',
+            'alias'         => 'slideshow',
+            'path'          => '/item/slideshow',
+            'state'         => 1,
+            'introimage'    => '',
+            'introtext'     => '',
+            'image'         => '',
+            'description'   => '',
+            'content_type'  => 'slideshow',
+            'extension'     => 'item',
+            'ordering'      => 1,
+            'access'        => 1,
+            'params'        => [],
+            'children'      => [],
+            'created_by'    => 1,
+        ]);
+        
+        $category_root->appendNode($slideshow);
     }
 }
