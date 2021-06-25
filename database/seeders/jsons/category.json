@@ -1,0 +1,36 @@
+[
+  {
+    "title"         : "ROOT",
+    "alias"         : "item",
+    "path"          : "/item",
+    "state"         : 1,
+    "introimage"    : "",
+    "introtext"     : "",
+    "image"         : "",
+    "description"   : "",
+    "extension"     : "item",
+    "ordering"      : 1,
+    "access"        : 1,
+    "params"        : {},
+    "children"      : [
+      {
+        "title"       : "Slideshow",
+        "alias"       : "slideshow",
+        "path"        : "/item/slideshow",
+        "state"       : 1,
+        "introimage"  : "",
+        "introtext"   : "",
+        "image"       : "",
+        "description" : "",
+        "content_type": "slideshow",
+        "extension"   : "item",
+        "ordering"    : 1,
+        "access"      : 1,
+        "params"      : {},
+        "children"    : [],
+        "created_by": 1
+      }
+    ],
+    "created_by"    : 1
+  }
+]

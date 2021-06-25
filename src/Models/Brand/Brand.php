@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Models\Brand;
 
+use DaydreamLab\Cms\Models\Item\Item;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 
@@ -72,4 +73,16 @@ class Brand extends BaseModel
         self::traitBoot();
     }
 
+
+    public function brandContacts()
+    {
+        return $this->belongsToMany(BrandContact::class, 'brands_contacts_maps', 'brand_id', 'brand_contact_id');
+    }
+
+
+    public function linkedItems()
+    {
+        return $this->belongsToMany(Item::class, 'brands_items_maps', 'brand_id', 'item_id')
+            ->withPivot('content_type');
+    }
 }

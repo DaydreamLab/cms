@@ -23,7 +23,7 @@ class BrandAdminStoreRequest extends AdminRequest
      */
     public function rules()
     {
-        $rules =[
+        $rules = [
             //
         ];
 

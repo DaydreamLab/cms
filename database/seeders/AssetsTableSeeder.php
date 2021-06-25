@@ -75,17 +75,6 @@ class AssetsTableSeeder extends Seeder
                 $parent->appendNode($asset);
             }
 
-//            $api_ids = [];
-//            foreach ($apis as $api)
-//            {
-//                //$api['service'] = $service;
-//                $asset_api = Api::create($api);
-//                $api_ids[] = $asset_api->id;
-//            }
-//            $super_user->apis()->attach($api_ids);
-//            $administrator->apis()->attach($api_ids);
-//            $asset->apis()->attach($api_ids);
-
             if (count($children))
             {
                 self::migrate($children, $asset);

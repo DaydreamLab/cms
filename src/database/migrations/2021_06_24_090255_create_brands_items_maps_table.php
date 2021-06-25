@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBrandsContactsMapsTable extends Migration
+class CreateBrandsItemsMapsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateBrandsContactsMapsTable extends Migration
      */
     public function up()
     {
-        Schema::create('brands_contacts_maps', function (Blueprint $table) {
+        Schema::create('brands_items_maps', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedInteger('brand_id');
-            $table->unsignedInteger('brand_contact_id');
+            $table->unsignedInteger('item_id');
+            $table->string('content_type');
 
             $table->timestamps();
         });
@@ -29,6 +30,6 @@ class CreateBrandsContactsMapsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('brands_contacts_maps');
+        Schema::dropIfExists('brands_items_maps');
     }
 }

@@ -57,7 +57,7 @@ class BrandContact extends BaseModel
 
 
     protected $casts = [
-        'locked_at' => 'datetime:Y-m-d H:i:s',
+
     ];
 
 
@@ -66,4 +66,9 @@ class BrandContact extends BaseModel
         self::traitBoot();
     }
 
+
+    public function brands()
+    {
+        return $this->belongsToMany(Brand::class, 'brands_contacts_maps', 'brand_contact_id', 'brand_id');
+    }
 }

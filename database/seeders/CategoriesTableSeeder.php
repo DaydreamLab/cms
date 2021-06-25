@@ -10,41 +10,27 @@ class CategoriesTableSeeder extends Seeder
 {
     public function run()
     {
-        $category_root = Category::create([
-            'title'         => 'ROOT',
-            'alias'         => 'item',
-            'path'          => '/item',
-            'state'         => 1,
-            'introimage'    => '',
-            'introtext'     => '',
-            'image'         => '',
-            'description'   => '',
-            'extension'     => 'item',
-            'ordering'      => 1,
-            'access'        => 1,
-            'params'        => [],
-            'children'      => [],
-            'created_by'    => 1,
-        ]);
-        
-        $slideshow = Category::create([
-            'title'         => 'Slideshow',
-            'alias'         => 'slideshow',
-            'path'          => '/item/slideshow',
-            'state'         => 1,
-            'introimage'    => '',
-            'introtext'     => '',
-            'image'         => '',
-            'description'   => '',
-            'content_type'  => 'slideshow',
-            'extension'     => 'item',
-            'ordering'      => 1,
-            'access'        => 1,
-            'params'        => [],
-            'children'      => [],
-            'created_by'    => 1,
-        ]);
-        
-        $category_root->appendNode($slideshow);
+        $data = json_decode(file_get_contents(__DIR__.'/jsons/category.json'), true);
+        $this->migrate($data, null);
+    }
+    
+    
+    public function migrate($data, $parent)
+    {
+        foreach ($data as $category) {
+            $children = $category['children'];
+            unset($category['children']);
+            
+            $c = Category::create($category);
+            
+            if ($parent) {
+                $parent->appendNode($c);
+            }
+
+            if (count($children))
+            {
+                self::migrate($children, $c);
+            }
+        }
     }
 }

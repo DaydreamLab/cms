@@ -1,5 +1,6 @@
 <?php
 
+use DaydreamLab\Cms\Controllers\Brand\Admin\BrandAdminController;
 use DaydreamLab\Cms\Controllers\Category\Front\CategoryFrontController;
 use DaydreamLab\Cms\Controllers\Category\Admin\CategoryAdminController;
 use DaydreamLab\Cms\Controllers\Item\Admin\ItemAdminController;
@@ -50,6 +51,10 @@ Route::get('api/tag/{alias}', [TagFrontController::class, 'getItemByAlias']);
 
 
 /************************************  後台 API  ************************************/
+# 品牌 Brand
+
+Route::post('api/admin/brand/store', [BrandAdminController::class, 'store'])
+    ->middleware(['expired','admin']);
 
 # 分類 Category
 
