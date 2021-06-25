@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Services\Brand\Admin;
 
 use DaydreamLab\Cms\Repositories\Brand\Admin\BrandAdminRepository;
 use DaydreamLab\Cms\Services\Brand\BrandService;
+use Illuminate\Support\Collection;
 
 class BrandAdminService extends BrandService
 {
@@ -11,5 +12,14 @@ class BrandAdminService extends BrandService
     {
         parent::__construct($repo);
         $this->repo = $repo;
+    }
+
+
+    public function store(Collection $input)
+    {
+
+        $brand = parent::store($input);
+
+        return $brand;
     }
 }
