@@ -4,10 +4,12 @@ namespace DaydreamLab\Cms\Controllers\Item\Front;
 
 use DaydreamLab\Cms\Controllers\CmsController;
 use DaydreamLab\Cms\Requests\Item\Front\ItemFrontGetItemGet;
+use DaydreamLab\Cms\Resources\Item\Front\Collections\ItemFrontListResourceCollection;
 use DaydreamLab\Cms\Resources\Item\Front\Models\ItemFrontResource;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\Cms\Services\Item\Front\ItemFrontService;
 use DaydreamLab\Cms\Requests\Item\Front\ItemFrontSearchPost;
+use Throwable;
 
 class ItemFrontController extends CmsController
 {
@@ -22,22 +24,30 @@ class ItemFrontController extends CmsController
     public function getItemByAlias(ItemFrontGetItemGet $request)
     {
         $this->service->setUser($request->user('api'));
-        $this->service->getItemByAlias(Helper::collect([
-            'alias'     => $request->route('alias'),
-            'language'  => $request->get('language') != ''
-                ? $request->get('language')
-                : config('daydreamlab.global.locale')
-        ]));
+        try {
+            $this->service->getItemByAlias(Helper::collect([
+                'alias'     => $request->route('alias'),
+                'language'  => $request->get('language') != ''
+                    ? $request->get('language')
+                    : config('daydreamlab.global.locale')
+            ]));
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
 
-        return $this->response($this->service->status, new ItemFrontResource($this->service->response));
+        return $this->response($this->service->status, $this->service->response, [], ItemFrontResource::class);
     }
 
 
     public function search(ItemFrontSearchPost $request)
     {
         $this->service->setUser($request->user('api'));
-        $this->service->search($request->validated());
+        try {
+            $this->service->search($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
 
-        return $this->response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response, [], ItemFrontListResourceCollection::class);
     }
 }

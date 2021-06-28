@@ -147,8 +147,7 @@ class ItemFrontService extends ItemService
     {
         $item = $this->search($input, false)->first();
         if ($item) {
-            $item->hits++;
-            $this->update($item, $item);
+            $this->update($item, collect($item->toArray()));
 
             $prev_and_next  = $this->repo->getPreviousAndNext($item);
             $item->previous = $prev_and_next['previous'];
@@ -206,41 +205,23 @@ class ItemFrontService extends ItemService
 
     public function getSpecialQueries(Collection $input)
     {
-        $special_queries = [];
-        // 取得後門的 special queries
-        if (!InputHelper::null($input, 'special_queries')) {
-            $special_queries = array_merge($special_queries, $input->get('special_queries'));
-        }
+        $q = $input->get('q');
+
         // 取得年份 special queries
         if (!InputHelper::null($input, 'year')) {
             $year = $input->get('year');
             $input->forget('year');
-            $obj['type']        = 'whereYear';
-            $obj['key']         = 'publish_up';
-            $obj['value']       = $year;
-            $special_queries[]  = $obj;
+            $q = $q->whereYear('publish_up', $year);
         }
 
         // 取得月份 special queries
         if (!InputHelper::null($input, 'month')) {
             $month = $input->get('month');
             $input->forget('month');
-            $obj['type']        = 'whereMonth';
-            $obj['key']         = 'publish_up';
-            $obj['value']       = $month;
-            $special_queries[]  = $obj;
+            $q = $q->whereMonth('publish_up', $month);
         }
 
-        // 取得文章類型 special queries
-        $categories = $this->categoryFrontService->getContentTypeItems();
-        $category_ids = $categories->pluck('id');
-
-        $obj['type']        = 'whereIn';
-        $obj['key']         = 'category_id';
-        $obj['value']       = $category_ids;
-        $special_queries[]  = $obj;
-
-        return $special_queries;
+        return $q;
     }
 
 
@@ -292,13 +273,14 @@ class ItemFrontService extends ItemService
     public function search(Collection $input, $paginate = true)
     {
         $input->put('paginate', $paginate);
-        $special_queries = $this->getSpecialQueries($input);
+        $q = $this->getSpecialQueries($input);
         $language = $input->get('language') != ''
             ? [$input->get('language')]
             : ['*',config('daydreamlab.global.locale')];
 
         // 如果有傳 category_alias
         if (!InputHelper::null($input, 'category_alias')) {
+
             $category_ids = $this->categoryFrontService->search(Helper::collect([
                 'special_queries' => [
                     [
@@ -312,23 +294,16 @@ class ItemFrontService extends ItemService
                         'value' =>  $language
                     ]
                 ],
-
                 'paginate'      => false
             ]))->map(function ($item, $key) {
                 return $item->id;
             })->all();
 
-            $special_queries[] = [
-                'type'  => 'whereIn',
-                'key'   => 'category_id',
-                'value' => $category_ids
-            ];
+            $q = $q->whereIn('category_id', $category_ids);
 
             $input->forget('category_alias');
         }
 
-        $input->forget('special_queries');
-        $input->put('special_queries', $special_queries);
         $input->put('state', 1);
         $copy = Helper::collect($input->toArray());
 
@@ -346,7 +321,6 @@ class ItemFrontService extends ItemService
         }
 
         $this->response = $data;
-
 
         event(new Search($input, $this->user));
 
