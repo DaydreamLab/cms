@@ -7,6 +7,7 @@ use DaydreamLab\Cms\Events\Search;
 use DaydreamLab\Cms\Repositories\Item\Front\ItemFrontRepository;
 use DaydreamLab\Cms\Services\Category\Front\CategoryFrontService;
 use DaydreamLab\Cms\Services\Item\ItemService;
+use DaydreamLab\JJAJ\Database\QueryCapsule;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
 use DaydreamLab\User\Services\User\Front\UserGroupFrontService;
@@ -281,20 +282,11 @@ class ItemFrontService extends ItemService
         // 如果有傳 category_alias
         if (!InputHelper::null($input, 'category_alias')) {
 
+            $c_q = new QueryCapsule();
+            $c_q = $c_q->whereIn('alias', $input->get('category_alias'))->whereIn('language', $language);
             $category_ids = $this->categoryFrontService->search(Helper::collect([
-                'special_queries' => [
-                    [
-                        'type'  => 'whereIn',
-                        'key'   => 'alias',
-                        'value' => $input->get('category_alias'),
-                    ],
-                    [
-                        'type'  => 'whereIn',
-                        'key'   => 'language',
-                        'value' =>  $language
-                    ]
-                ],
-                'paginate'      => false
+                'q' => $c_q,
+                'paginate' => false
             ]))->map(function ($item, $key) {
                 return $item->id;
             })->all();
@@ -305,6 +297,7 @@ class ItemFrontService extends ItemService
         }
 
         $input->put('state', 1);
+        $input->put('q', $q);
         $copy = Helper::collect($input->toArray());
 
         $items = parent::search($input);
