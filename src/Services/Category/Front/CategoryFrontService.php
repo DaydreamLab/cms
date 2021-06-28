@@ -56,9 +56,6 @@ class CategoryFrontService extends CategoryService
 
     public function search(Collection $input)
     {
-        if (InputHelper::null($input, 'content_type')) {
-            $input->put('content_type', 'article');
-        }
 
         return parent::search($input);
     }
