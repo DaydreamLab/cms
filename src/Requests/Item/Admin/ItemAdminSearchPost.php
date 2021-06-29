@@ -38,6 +38,8 @@ class ItemAdminSearchPost extends CmSearchPost
                 'nullable',
                 Rule::in([0,1])
             ],
+            'content_type' => 'nullable|string',
+            'extension' => 'nullable|string',
 //            'content_type'  => [
 //                'nullable',
 //                Rule::in(['article', 'item', 'link', 'menu', 'slideshow', 'timeline'])
