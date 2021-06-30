@@ -6,6 +6,7 @@ use DaydreamLab\Cms\Models\Extrafield\Admin\ExtrafieldAdmin;
 use DaydreamLab\Cms\Models\Extrafield\Admin\ExtrafieldGroupAdmin;
 use DaydreamLab\Cms\Models\Extrafield\Extrafield;
 use DaydreamLab\Cms\Models\Extrafield\ExtrafieldGroup;
+use DaydreamLab\Cms\Models\Extrafield\ExtrafieldValue;
 use DaydreamLab\Cms\Models\Extrafield\Front\ExtrafieldFront;
 use DaydreamLab\Cms\Models\Extrafield\Front\ExtrafieldGroupFront;
 use DaydreamLab\JJAJ\Helpers\Helper;
@@ -23,51 +24,17 @@ trait WithExtrafield
 
     public function getExtrafieldsAttribute($value)
     {
-        $value = $value ? $value : json_encode([]);
-        $extrafield_ids = [];
-        foreach (json_decode($value) as $extrafield)
-        {
-            $extrafield_ids[] = $extrafield->id;
-        }
-
-
-        if($this->model_type == 'parent')
-        {
-            $extrafields_data = Extrafield::whereIn('id', $extrafield_ids)->get();
-        }
-        elseif($this->model_type == 'front')
-        {
-            $extrafields_data = ExtrafieldFront::whereIn('id', $extrafield_ids)->get();
-        }
-        else
-        {
-            $extrafields_data = ExtrafieldAdmin::whereIn('id', $extrafield_ids)->get();
-        }
-
-        // 組合實際的資料與額外欄位的初始定義
-        $data = (object)[];
-        foreach ($extrafields_data as $extrafield_data)
-        {
-            foreach (json_decode($value) as $extrafield)
-            {
-                if($extrafield->id == $extrafield_data->id) {
-                    $extrafield_data->value  = $extrafield->value;
-                    $extrafield_data->params = empty($extrafield->params) ? $extrafield_data->params : $extrafield->params;
-                }
-            }
-
-            if($this->model_type == 'parent')
-            {
-                $data->{$extrafield_data->id} = (object) $extrafield_data;
-            }
-            elseif($this->model_type == 'front')
-            {
-                $data->{$extrafield_data->alias} = (object) $extrafield_data;
-            }
-            else
-            {
-                $data->{$extrafield_data->id} = (object) $extrafield_data;
-            }
+        $data = [];
+        $extrafields = Extrafield::where('content_type', $this->category->content_type)->get()->toArray();
+        $extrafields = array_merge($extrafields, Extrafield::where('category_id', $this->category->id)->get()->toArray());
+        foreach ($extrafields as $extrafield) {
+            $e['id'] = $extrafield['id'];
+            $e['alias'] = $extrafield['alias'];
+            $e['title'] = $extrafield['title'];
+            $e_v = ExtrafieldValue::where('item_id', $this->id)->where('extrafield_id', $extrafield['id'])->first();
+            $e['value'] = ($e_v) ? $e_v->value : '';
+            $e['params'] = $extrafield['params'];
+            $data[$e['alias']] = $e;
         }
 
         return $data;
@@ -101,19 +68,6 @@ trait WithExtrafield
         }
 
         return $this->class_extrafield_group;
-    }
-
-
-    public function setExtrafieldsAttribute($value)
-    {
-        $data = [];
-
-        foreach ($value as $item)
-        {
-            $data[] = (object)$item;
-        }
-
-        $this->attributes['extrafields'] = json_encode($data);
     }
 
 }

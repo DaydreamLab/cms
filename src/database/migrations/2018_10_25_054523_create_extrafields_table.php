@@ -15,6 +15,8 @@ class CreateExtrafieldsTable extends Migration
     {
         Schema::create('extrafields', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('category_id')->nullable();
+            $table->string('content_type')->nullable();
             $table->string('title');
             $table->string('alias')->nullable();
             $table->unsignedInteger('group_id')->nullable();

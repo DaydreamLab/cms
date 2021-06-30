@@ -81,7 +81,7 @@
         "children"    : [
           {
             "title"       : "最新消息",
-            "alias"       : "latest",
+            "alias"       : "bulletin",
             "path"        : "/item/news/latest",
             "state"       : 1,
             "introimage"  : "",

@@ -24,6 +24,8 @@ class CreateBrandsTable extends Migration
             $table->string('logo_image')->nullable();
             $table->string('banner_image')->nullable();
             $table->string('banner_link')->nullable();
+            $table->text('metadesc')->nullable();
+            $table->string('metakeywords')->nullable();
 
             $table->tinyInteger('state')->default(1);
             $table->unsignedInteger('locked_by')->nullable()->default(0);

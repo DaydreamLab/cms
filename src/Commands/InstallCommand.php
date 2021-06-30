@@ -37,6 +37,7 @@ class InstallCommand extends Command
         'AssetsTableSeeder',
         'CategoriesTableSeeder',
         'ItemsTableSeeder',
+        'ExtrafieldsTableSeeder',
         'SitesTableSeeder',
         'LanguagesTableSeeder',
         'MenusTableSeeder',
@@ -63,11 +64,6 @@ class InstallCommand extends Command
      */
     public function handle()
     {
-//        Tag::truncate();
-//        $this->call('db:seed', [
-//            '--class' => $this->seeder_namespace . 'TagsTableSeeder'
-//        ]);
-//        exit();
 
         $this->call('user:install');
 

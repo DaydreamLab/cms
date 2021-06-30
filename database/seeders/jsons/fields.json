@@ -1,0 +1,29 @@
+ [
+   {
+     "content_type": "article",
+     "title": "報名開始時間",
+     "alias": "register_start",
+     "type": "datetime",
+     "required": 0,
+     "access": 1,
+     "created_by": 1
+   },
+   {
+     "content_type": "article",
+     "title": "報名截止時間",
+     "alias": "register_end",
+     "type": "datetime",
+     "required": 0,
+     "access": 1,
+     "created_by": 1
+   },
+   {
+     "category_id": 7,
+     "title": "EDM下載",
+     "alias": "edm_download",
+     "type": "text",
+     "required": 0,
+     "access": 1,
+     "created_by": 1
+   }
+ ]

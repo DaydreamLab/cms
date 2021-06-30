@@ -28,6 +28,7 @@ class Extrafield extends BaseModel
      */
     protected $fillable = [
         'title',
+        'content_type',
         'alias',
         'group_id',
         'state',
@@ -68,9 +69,9 @@ class Extrafield extends BaseModel
     protected $appends = [
         'access_title',
         'group_title',
-        'creator',
-        'updater',
-        'locker',
+        //'creator',
+        //'updater',
+        //'locker',
     ];
 
 
@@ -97,6 +98,6 @@ class Extrafield extends BaseModel
 
     public function getGroupTitleAttribute()
     {
-        return $this->group()->first()->title;
+        return '';//$this->group()->first()->title;
     }
 }

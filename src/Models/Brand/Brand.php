@@ -37,6 +37,8 @@ class Brand extends BaseModel
         'logo_image',
         'banner_image',
         'banner_link',
+        'metadesc',
+        'metakeywords',
         'state',
         'locked_by',
         'locked_at',

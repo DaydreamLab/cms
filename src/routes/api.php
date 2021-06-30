@@ -56,6 +56,10 @@ Route::get('api/tag/{alias}', [TagFrontController::class, 'getItemByAlias']);
 Route::post('api/admin/brand/store', [BrandAdminController::class, 'store'])
     ->middleware(['expired','admin']);
 
+# 最新消息
+
+# 促銷消息
+
 # 分類 Category
 
 Route::post('api/admin/category/featured', [CategoryAdminController::class, 'featured'])
