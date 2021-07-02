@@ -125,7 +125,16 @@
      "created_by": 1
    },
    {
-     "content_type": "article",
+     "content_type": "bulletin",
+     "title": "副標題",
+     "alias": "subtitle",
+     "type": "text",
+     "required": 0,
+     "access": 1,
+     "created_by": 1
+   },
+   {
+     "content_type": "bulletin",
      "title": "報名開始時間",
      "alias": "register_start",
      "type": "datetime",
@@ -134,7 +143,7 @@
      "created_by": 1
    },
    {
-     "content_type": "article",
+     "content_type": "bulletin",
      "title": "報名截止時間",
      "alias": "register_end",
      "type": "datetime",
@@ -143,9 +152,280 @@
      "created_by": 1
    },
    {
-     "category_id": 7,
+     "content_type": "bulletin",
+     "title": "活動對象",
+     "alias": "target_user",
+     "type": "select",
+     "params": {
+       "option": [
+         {
+           "name": "所有對象",
+           "value": "所有對象"
+         },
+         {
+           "name": "一般會員",
+           "value": "一般會員"
+         },
+         {
+           "name": "經銷會員",
+           "value": "經銷會員"
+         }
+       ]
+     },
+     "required": 0,
+     "access": 1,
+     "created_by": 1
+   },
+   {
+     "content_type": "bulletin",
+     "title": "首頁顯示",
+     "alias": "top_page_show",
+     "type": "radio",
+     "params": {
+       "option": [
+         {
+           "name": "是",
+           "value": "1"
+         },
+         {
+           "name": "否",
+           "value": "0"
+         }
+       ]
+     },
+     "required": 0,
+     "access": 1,
+     "created_by": 1
+   },
+   {
+     "content_type": "bulletin",
+     "title": "品牌頁顯示",
+     "alias": "brand_page_show",
+     "type": "radio",
+     "params": {
+       "option": [
+         {
+           "name": "是",
+           "value": "1"
+         },
+         {
+           "name": "否",
+           "value": "0"
+         }
+       ]
+     },
+     "required": 0,
+     "access": 1,
+     "created_by": 1
+   },
+   {
+     "content_type": "promotion",
+     "title": "副標題",
+     "alias": "subtitle",
+     "type": "text",
+     "required": 0,
+     "access": 1,
+     "created_by": 1
+   },
+   {
+     "content_type": "promotion",
+     "title": "報名開始時間",
+     "alias": "register_start",
+     "type": "datetime",
+     "required": 0,
+     "access": 1,
+     "created_by": 1
+   },
+   {
+     "content_type": "promotion",
+     "title": "報名截止時間",
+     "alias": "register_end",
+     "type": "datetime",
+     "required": 0,
+     "access": 1,
+     "created_by": 1
+   },
+   {
+     "content_type": "promotion",
+     "title": "優惠價格",
+     "alias": "sale_price",
+     "type": "text",
+     "required": 0,
+     "access": 1,
+     "created_by": 1
+   },
+   {
+     "content_type": "promotion",
+     "title": "好康特惠",
+     "alias": "sale_description",
+     "type": "textarea",
+     "required": 0,
+     "access": 1,
+     "created_by": 1
+   },
+   {
+     "content_type": "promotion",
+     "title": "活動對象",
+     "alias": "target_user",
+     "type": "select",
+     "params": {
+       "option": [
+         {
+           "name": "所有對象",
+           "value": "所有對象"
+         },
+         {
+           "name": "一般會員",
+           "value": "一般會員"
+         },
+         {
+           "name": "經銷會員",
+           "value": "經銷會員"
+         }
+       ]
+     },
+     "required": 0,
+     "access": 1,
+     "created_by": 1
+   },
+   {
+     "content_type": "promotion",
+     "title": "首頁顯示",
+     "alias": "top_page_show",
+     "type": "radio",
+     "params": {
+       "option": [
+         {
+           "name": "是",
+           "value": "1"
+         },
+         {
+           "name": "否",
+           "value": "0"
+         }
+       ]
+     },
+     "required": 0,
+     "access": 1,
+     "created_by": 1
+   },
+   {
+     "content_type": "promotion",
+     "title": "品牌頁顯示",
+     "alias": "brand_page_show",
+     "type": "radio",
+     "params": {
+       "option": [
+         {
+           "name": "是",
+           "value": "1"
+         },
+         {
+           "name": "否",
+           "value": "0"
+         }
+       ]
+     },
+     "required": 0,
+     "access": 1,
+     "created_by": 1
+   },
+   {
+     "content_type": "promotion",
+     "title": "經銷限定",
+     "alias": "dealer_only",
+     "type": "radio",
+     "params": {
+       "option": [
+         {
+           "name": "是",
+           "value": "1"
+         },
+         {
+           "name": "否",
+           "value": "0"
+         }
+       ]
+     },
+     "required": 0,
+     "access": 1,
+     "created_by": 1
+   },
+   {
+     "content_type": "promotion",
      "title": "EDM下載",
      "alias": "edm_download",
+     "type": "text",
+     "required": 0,
+     "access": 1,
+     "created_by": 1
+   },
+   {
+     "content_type": "promotion",
+     "title": "產品資料",
+     "alias": "product_data",
+     "type": "repeater",
+     "params": {
+       "fields": [
+         {
+           "name": "連結文字",
+           "key": "link_name",
+           "type": "text"
+         },
+         {
+           "name": "連結網址",
+           "key": "link_url",
+           "type": "text"
+         }
+       ]
+     },
+     "required": 0,
+     "access": 1,
+     "created_by": 1
+   },
+   {
+     "content_type": "video",
+     "title": "副標題",
+     "alias": "subtitle",
+     "type": "text",
+     "required": 0,
+     "access": 1,
+     "created_by": 1
+   },
+   {
+     "content_type": "video",
+     "title": "影片連結URL",
+     "alias": "video_url",
+     "type": "text",
+     "required": 0,
+     "access": 1,
+     "created_by": 1
+   },
+   {
+     "content_type": "video",
+     "title": "品牌頁顯示",
+     "alias": "brand_page_show",
+     "type": "radio",
+     "params": {
+       "option": [
+         {
+           "name": "是",
+           "value": "1"
+         },
+         {
+           "name": "否",
+           "value": "0"
+         }
+       ]
+     },
+     "required": 0,
+     "access": 1,
+     "created_by": 1
+   },
+   {
+     "content_type": "video",
+     "title": "Youtube影片連結",
+     "alias": "youtube_url",
      "type": "text",
      "required": 0,
      "access": 1,

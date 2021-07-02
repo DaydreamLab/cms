@@ -65,14 +65,6 @@ class ItemAdminStorePost extends AdminRequest
             'tags.*.title'          => 'nullable|string',
             'publish_up'            => 'nullable|date_format:Y-m-d H:i:s',
             'publish_down'          => 'nullable|date_format:Y-m-d H:i:s',
-
-            'products'              => 'nullable|array',
-            'products.*'            => 'nullable|array',
-            'products.*.id'         => 'nullable|integer',
-
-            'brands'                => 'nullable|array',
-            'brands.*'              => 'nullable|array',
-            'brands.*.id'           => 'nullable|integer'
         ];
         return array_merge(parent::rules(), $rules);
     }

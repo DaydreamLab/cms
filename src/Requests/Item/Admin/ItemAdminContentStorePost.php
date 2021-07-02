@@ -58,7 +58,7 @@ class ItemAdminContentStorePost extends AdminRequest
             'extrafields'           => 'nullable|array',
             'extrafields.*'         => 'nullable|array',
             'extrafields.*.id'      => 'nullable|integer',
-            'extrafields.*.value'   => 'nullable|string',
+            'extrafields.*.value'   => 'nullable',
             'tags'                  => 'nullable|array',
             'tags.*'                => 'nullable|array',
             'tags.*.id'             => 'nullable|integer',

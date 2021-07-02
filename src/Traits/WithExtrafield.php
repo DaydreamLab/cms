@@ -29,10 +29,23 @@ trait WithExtrafield
         $extrafields = array_merge($extrafields, Extrafield::where('category_id', $this->category->id)->get()->toArray());
         foreach ($extrafields as $extrafield) {
             $e['id'] = $extrafield['id'];
+            $e['type'] = $extrafield['type'];
             $e['alias'] = $extrafield['alias'];
             $e['title'] = $extrafield['title'];
             $e_v = ExtrafieldValue::where('item_id', $this->id)->where('extrafield_id', $extrafield['id'])->first();
-            $e['value'] = ($e_v) ? $e_v->value : '';
+            if (!$e_v) {
+                if ($extrafield['type'] == 'repeater') {
+                    $e['value'] = [];
+                } else {
+                    $e['value'] = '';
+                }
+            } else {
+                if ($extrafield['type'] == 'repeater') {
+                    $e['value'] = json_decode($e_v->value, true);
+                } else {
+                    $e['value'] = $e_v->value;
+                }
+            }
             $e['params'] = $extrafield['params'];
             $data[$e['alias']] = $e;
         }

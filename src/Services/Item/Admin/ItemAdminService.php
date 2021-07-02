@@ -107,21 +107,37 @@ class ItemAdminService extends ItemService
 
         $result = parent::store($input);
 
+        # 存入額外欄位
         if ($input->has('id')) {
             $item_id = $input->get('id');
         } else {
             $item_id = $result->id;
         }
         foreach ($extrafields as $extrafield) {
+            $e = Extrafield::where('id', $extrafield['id'])->first();
             $e_v = ExtrafieldValue::where('item_id', $item_id)->where('extrafield_id', $extrafield['id'])->first();
             if (!$e_v) {
-                $e_v = ExtrafieldValue::create([
-                    'extrafield_id' => $extrafield['id'],
-                    'item_id' => $item_id
-                ]);
+                if ($e->type == 'repeater') {
+                    $e_v = ExtrafieldValue::create([
+                        'extrafield_id' => $extrafield['id'],
+                        'item_id' => $item_id,
+                        'value' => json_encode($extrafield['value'])
+                    ]);
+                } else {
+                    $e_v = ExtrafieldValue::create([
+                        'extrafield_id' => $extrafield['id'],
+                        'item_id' => $item_id,
+                        'value' => $extrafield['value']
+                    ]);
+                }
+            } else {
+                if ($e->type == 'repeater') {
+                    $e_v->value = json_encode($extrafield['value']);
+                } else {
+                    $e_v->value = $extrafield['value'];
+                }
+                $e_v->save();
             }
-            $e_v->value = $extrafield['value'];
-            $e_v->save();
         }
 
         $this->setCronJob($input, $result);
