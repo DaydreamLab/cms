@@ -430,5 +430,23 @@
      "required": 0,
      "access": 1,
      "created_by": 1
+   },
+   {
+     "content_type": "memorabilia",
+     "title": "年份",
+     "alias": "year",
+     "type": "text",
+     "required": 0,
+     "access": 1,
+     "created_by": 1
+   },
+   {
+     "content_type": "memorabilia",
+     "title": "月份",
+     "alias": "month",
+     "type": "text",
+     "required": 0,
+     "access": 1,
+     "created_by": 1
    }
  ]

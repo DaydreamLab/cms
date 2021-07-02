@@ -65,5 +65,29 @@
         "access": 1
       }
     ]
+  },
+  {
+    "alias": "video",
+    "item": [
+      {
+        "alias": "video-001",
+        "title": "Microsoft365 X Veeam 疫同攜手打造安全防線",
+        "description": "",
+        "language": "*",
+        "access": 1
+      }
+    ]
+  },
+  {
+    "alias": "memorabilia",
+    "item": [
+      {
+        "alias": "memorabilia-001",
+        "title": "大事紀1",
+        "description": "大事記大事記大事記大事記大事記大事記大事記大事記大事記",
+        "language": "*",
+        "access": 1
+      }
+    ]
   }
 ]
