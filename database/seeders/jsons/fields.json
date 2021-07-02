@@ -1,5 +1,130 @@
  [
    {
+     "content_type": "solution",
+     "title": "副標題",
+     "alias": "subtitle",
+     "type": "text",
+     "required": 0,
+     "access": 1,
+     "created_by": 1
+   },
+   {
+     "content_type": "solution",
+     "title": "產品分類",
+     "alias": "product_category",
+     "type": "select",
+     "params": {
+       "option": [
+         {
+           "name": "IT基礎架構",
+           "value": "IT基礎架構"
+         },
+         {
+           "name": "網路資訊安全",
+           "value": "網路資訊安全"
+         },
+         {
+           "name": "雲平台與應用",
+           "value": "雲平台與應用"
+         },
+         {
+           "name": "大數據與應用",
+           "value": "大數據與應用"
+         },
+         {
+           "name": "資料安全防護",
+           "value": "資料安全防護"
+         },
+         {
+           "name": "資安事件管理",
+           "value": "資安事件管理"
+         },
+         {
+           "name": "MetaDefender Core",
+           "value": "MetaDefender Core"
+         }
+       ]
+     },
+     "required": 0,
+     "access": 1,
+     "created_by": 1
+   },
+   {
+     "content_type": "solution",
+     "title": "產業分類",
+     "alias": "industry_category",
+     "type": "select",
+     "params": {
+        "option": [
+          {
+            "name": "公共行政與國防",
+            "value": "公共行政與國防"
+          },
+          {
+            "name": "其他服務業",
+            "value": "其他服務業"
+          },
+          {
+            "name": "資訊及通訊業",
+            "value": "資訊及通訊業"
+          },
+          {
+            "name": "網路視訊會議系統",
+            "value": "網路視訊會議系統"
+          },
+          {
+            "name": "教育業",
+            "value": "教育業"
+          }
+        ]
+     },
+     "required": 0,
+     "access": 1,
+     "created_by": 1
+   },
+   {
+     "content_type": "case",
+     "title": "副標題",
+     "alias": "subtitle",
+     "type": "text",
+     "required": 0,
+     "access": 1,
+     "created_by": 1
+   },
+   {
+     "content_type": "case",
+     "title": "產業分類",
+     "alias": "industry_category",
+     "type": "select",
+     "params": {
+       "option": [
+         {
+           "name": "公共行政與國防",
+           "value": "公共行政與國防"
+         },
+         {
+           "name": "其他服務業",
+           "value": "其他服務業"
+         },
+         {
+           "name": "資訊及通訊業",
+           "value": "資訊及通訊業"
+         },
+         {
+           "name": "網路視訊會議系統",
+           "value": "網路視訊會議系統"
+         },
+         {
+           "name": "教育業",
+           "value": "教育業"
+         }
+       ]
+     },
+     "required": 0,
+     "access": 1,
+     "created_by": 1
+   },
+   {
      "content_type": "article",
      "title": "報名開始時間",
      "alias": "register_start",

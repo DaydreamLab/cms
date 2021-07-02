@@ -56,9 +56,33 @@ Route::get('api/tag/{alias}', [TagFrontController::class, 'getItemByAlias']);
 Route::post('api/admin/brand/store', [BrandAdminController::class, 'store'])
     ->middleware(['expired','admin']);
 
+# 產品
+
+# content type 共通
+
+Route::post('api/admin/item/{content_type}/search', [ItemAdminController::class, 'search'])
+    ->middleware(['expired','admin']);
+Route::post('api/admin/item/{content_type}/store', [ItemAdminController::class, 'storeContent'])
+    ->middleware(['expired','admin']);
+
+# 解決方案
+
+# 成功案例
+
 # 最新消息
 
 # 促銷消息
+
+# 01影片
+
+# 大事紀
+
+# 財務資訊
+
+# 重要規章
+
+# 股東專欄
+
 
 # 分類 Category
 

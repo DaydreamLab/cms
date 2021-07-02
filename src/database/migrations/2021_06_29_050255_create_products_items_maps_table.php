@@ -17,7 +17,6 @@ class CreateProductsItemsMapsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedInteger('product_id');
             $table->unsignedInteger('item_id');
-            $table->string('content_type');
 
             $table->timestamps();
         });

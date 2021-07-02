@@ -38,16 +38,8 @@ class ItemAdminSearchPost extends CmSearchPost
                 'nullable',
                 Rule::in([0,1])
             ],
-            'content_type' => 'nullable|string',
-            'extension' => 'nullable|string',
-//            'content_type'  => [
-//                'nullable',
-//                Rule::in(['article', 'item', 'link', 'menu', 'slideshow', 'timeline'])
-//            ],
-//            'extension'     => [
-//                'nullable',
-//                Rule::in(['item', 'module', 'menu'])
-//            ],
+            'content_type'  => 'nullable|string',
+            'extension'     => 'nullable|string',
             'access'        => 'nullable|integer',
             'language'      => 'nullable|string|max:5',
             'order_by'      => [
@@ -74,5 +66,17 @@ class ItemAdminSearchPost extends CmSearchPost
             ]
         ];
         return array_merge(parent::rules(), $rules);
+    }
+
+
+    public function validated()
+    {
+        $validated = parent::validated();
+
+        if ( $content_type = $this->route('content_type') ) {
+            $validated->put('content_type', $content_type);
+        }
+
+        return $validated;
     }
 }

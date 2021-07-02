@@ -10,6 +10,7 @@ use DaydreamLab\Cms\Resources\Item\Admin\Models\ItemAdminResource;
 use DaydreamLab\Cms\Resources\Item\Admin\Collections\ItemAdminListResourceCollection;
 use DaydreamLab\Cms\Services\Item\Admin\ItemAdminService;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminRemovePost;
+use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminContentStorePost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminStorePost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminStatePost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminSearchPost;
@@ -133,6 +134,19 @@ class ItemAdminController extends CmsController
 
 
     public function store(ItemAdminStorePost $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->store($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response, [], ItemAdminResource::class);
+    }
+
+
+    public function storeContent(ItemAdminContentStorePost $request)
     {
         $this->service->setUser($request->user('api'));
         try {

@@ -2,6 +2,8 @@
 
 namespace DaydreamLab\Cms\Services\Item\Admin;
 
+use DaydreamLab\Cms\Models\Extrafield\Extrafield;
+use DaydreamLab\Cms\Models\Extrafield\ExtrafieldValue;
 use DaydreamLab\Cms\Repositories\Item\Admin\ItemAdminRepository;
 use DaydreamLab\Cms\Services\Category\Admin\CategoryAdminService;
 use DaydreamLab\Cms\Services\Cms\CmsCronJobService;
@@ -99,8 +101,28 @@ class ItemAdminService extends ItemService
         }, $tags);
         $input->put('tagIds', $tagIds);
 
+        # 改用其他方法處理額外欄位
+        $extrafields = $input->get('extrafields') ? : [];
+        $input->forget('extrafields');
+
         $result = parent::store($input);
 
+        if ($input->has('id')) {
+            $item_id = $input->get('id');
+        } else {
+            $item_id = $result->id;
+        }
+        foreach ($extrafields as $extrafield) {
+            $e_v = ExtrafieldValue::where('item_id', $item_id)->where('extrafield_id', $extrafield['id'])->first();
+            if (!$e_v) {
+                $e_v = ExtrafieldValue::create([
+                    'extrafield_id' => $extrafield['id'],
+                    'item_id' => $item_id
+                ]);
+            }
+            $e_v->value = $extrafield['value'];
+            $e_v->save();
+        }
 
         $this->setCronJob($input, $result);
 

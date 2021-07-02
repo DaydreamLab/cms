@@ -17,7 +17,7 @@ class CreateExtrafieldsValuesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('extrafield_id');
             $table->unsignedInteger('item_id');
-            $table->string('value');
+            $table->string('value')->nullable();
             $table->timestamps();
         });
     }
