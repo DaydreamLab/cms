@@ -448,5 +448,169 @@
      "required": 0,
      "access": 1,
      "created_by": 1
+   },
+   {
+     "content_type": "finance",
+     "title": "檔案上傳",
+     "alias": "file_upload",
+     "type": "radio",
+     "params": {
+       "option": [
+         {
+           "name": "上傳檔案",
+           "value": "上傳檔案"
+         },
+         {
+           "name": "連結網址",
+           "value": "連結網址"
+         }
+       ]
+     },
+     "required": 0,
+     "access": 1,
+     "created_by": 1
+   },
+   {
+     "content_type": "finance",
+     "title": "上傳檔案url",
+     "alias": "file_url",
+     "type": "text",
+     "required": 0,
+     "access": 1,
+     "created_by": 1
+   },
+   {
+     "content_type": "finance",
+     "title": "連結網址url",
+     "alias": "web_url",
+     "type": "text",
+     "required": 0,
+     "access": 1,
+     "created_by": 1
+   },
+   {
+     "content_type": "finance",
+     "title": "年份",
+     "alias": "year",
+     "type": "text",
+     "required": 0,
+     "access": 1,
+     "created_by": 1
+   },
+   {
+     "content_type": "rules",
+     "title": "檔案上傳",
+     "alias": "file_upload",
+     "type": "radio",
+     "params": {
+       "option": [
+         {
+           "name": "上傳檔案",
+           "value": "上傳檔案"
+         },
+         {
+           "name": "連結網址",
+           "value": "連結網址"
+         }
+       ]
+     },
+     "required": 0,
+     "access": 1,
+     "created_by": 1
+   },
+   {
+     "content_type": "rules",
+     "title": "上傳檔案url",
+     "alias": "file_url",
+     "type": "text",
+     "required": 0,
+     "access": 1,
+     "created_by": 1
+   },
+   {
+     "content_type": "rules",
+     "title": "連結網址url",
+     "alias": "web_url",
+     "type": "text",
+     "required": 0,
+     "access": 1,
+     "created_by": 1
+   },
+   {
+     "content_type": "stockholder",
+     "title": "檔案上傳",
+     "alias": "file_upload",
+     "type": "radio",
+     "params": {
+       "option": [
+         {
+           "name": "上傳檔案",
+           "value": "上傳檔案"
+         },
+         {
+           "name": "連結網址",
+           "value": "連結網址"
+         }
+       ]
+     },
+     "required": 0,
+     "access": 1,
+     "created_by": 1
+   },
+   {
+     "content_type": "stockholder",
+     "title": "上傳檔案url",
+     "alias": "file_url",
+     "type": "text",
+     "required": 0,
+     "access": 1,
+     "created_by": 1
+   },
+   {
+     "content_type": "stockholder",
+     "title": "連結網址url",
+     "alias": "web_url",
+     "type": "text",
+     "required": 0,
+     "access": 1,
+     "created_by": 1
+   },
+   {
+     "content_type": "stockholder",
+     "title": "年份",
+     "alias": "year",
+     "type": "text",
+     "required": 0,
+     "access": 1,
+     "created_by": 1
+   },
+   {
+     "content_type": "stockholder",
+     "title": "文件項目",
+     "alias": "document_type",
+     "type": "select",
+     "params": {
+       "option": [
+         {
+           "name": "股東會年報",
+           "value": "股東會年報"
+         },
+         {
+           "name": "股東會開會通知",
+           "value": "股東會開會通知"
+         },
+         {
+           "name": "股東會議事手冊",
+           "value": "股東會議事手冊"
+         },
+         {
+           "name": "股東會議事錄",
+           "value": "股東會議事錄"
+         }
+       ]
+     },
+     "required": 0,
+     "access": 1,
+     "created_by": 1
    }
  ]

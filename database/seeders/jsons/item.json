@@ -89,5 +89,38 @@
         "access": 1
       }
     ]
+  },
+  {
+    "alias": "finance",
+    "item": [
+      {
+        "alias": "finance-001",
+        "title": "財務資訊1",
+        "language": "*",
+        "access": 1
+      }
+    ]
+  },
+  {
+    "alias": "rules",
+    "item": [
+      {
+        "alias": "rules-001",
+        "title": "重要規章1",
+        "language": "*",
+        "access": 1
+      }
+    ]
+  },
+  {
+    "alias": "stockholder",
+    "item": [
+      {
+        "alias": "stockholder-001",
+        "title": "股東專欄1",
+        "language": "*",
+        "access": 1
+      }
+    ]
   }
 ]
