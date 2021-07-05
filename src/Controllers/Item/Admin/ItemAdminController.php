@@ -159,6 +159,17 @@ class ItemAdminController extends CmsController
     }
 
 
+    public function getContentItem(ItemAdminGetItemGet $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->getItem(collect(['id' => $request->route('id')]));
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response, [], ItemAdminResource::class);
+    }
     /**
      * 測試排序功能
      */

@@ -64,6 +64,8 @@ Route::post('api/admin/item/{content_type}/search', [ItemAdminController::class,
     ->middleware(['expired','admin']);
 Route::post('api/admin/item/{content_type}/store', [ItemAdminController::class, 'storeContent'])
     ->middleware(['expired','admin']);
+Route::get('api/admin/item/{content_type}/{id}', [ItemAdminController::class, 'getContentItem'])
+    ->middleware(['expired','admin']);
 
 # 解決方案
 
