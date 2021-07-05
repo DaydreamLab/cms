@@ -1,6 +1,8 @@
 <?php
 namespace DaydreamLab\Cms\Models\Item;
 
+use DaydreamLab\Cms\Models\Brand\Brand;
+use DaydreamLab\Cms\Models\Product\Product;
 use DaydreamLab\Cms\Models\Tag\Tag;
 use DaydreamLab\JJAJ\Traits\UserInfo;
 use DaydreamLab\Cms\Traits\Model\WithCategory;
@@ -140,5 +142,18 @@ class Item extends BaseModel
     {
         return $this->belongsToMany(Tag::class, 'items_tags_maps', 'item_id', 'tag_id')
             ->where('state', 1);
+    }
+
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'products_items_maps', 'item_id', 'product_id');
+    }
+
+
+    public function brands()
+    {
+        return $this->belongsToMany(Brand::class, 'brands_items_maps', 'item_id', 'brand_id')
+            ->withPivot('content_type');
     }
 }

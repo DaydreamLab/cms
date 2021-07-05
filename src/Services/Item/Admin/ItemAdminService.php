@@ -42,6 +42,22 @@ class ItemAdminService extends ItemService
         if (count($tagIds)) {
             $item->tags()->attach($input->get('tagIds'));
         }
+
+        $brands = $input->get('brands') ? $input->get('brands') : [];
+        $brand_ids = array_map(function($brand) {
+            return $brand['id'];
+        }, $brands);
+        if (count($brand_ids)) {
+            $item->brands()->attach($brand_ids);
+        }
+
+        $products = $input->get('products') ? $input->get('products') : [];
+        $product_ids = array_map(function($product) {
+            return $product['id'];
+        }, $products);
+        if (count($product_ids)) {
+            $item->products()->attach($product_ids);
+        }
     }
 
 
@@ -50,6 +66,22 @@ class ItemAdminService extends ItemService
         $tagIds = $input->get('tagIds') ?: [];
         if (count($tagIds)) {
             $item->tags()->sync($tagIds);
+        }
+
+        $brands = $input->get('brands') ? $input->get('brands') : [];
+        $brand_ids = array_map(function($brand) {
+            return $brand['id'];
+        }, $brands);
+        if (count($brand_ids)) {
+            $item->brands()->sync($brand_ids);
+        }
+
+        $products = $input->get('products') ? $input->get('products') : [];
+        $product_ids = array_map(function($product) {
+            return $product['id'];
+        }, $products);
+        if (count($product_ids)) {
+            $item->products()->sync($product_ids);
         }
     }
 

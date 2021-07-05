@@ -3,11 +3,13 @@
 namespace DaydreamLab\cms\Models\Product;
 
 use DaydreamLab\JJAJ\Traits\RecordChanger;
+use DaydreamLab\JJAJ\Traits\UserInfo;
+use DaydreamLab\Cms\Models\Item\Item;
 use DaydreamLab\JJAJ\Models\BaseModel;
 
 class Product extends BaseModel
 {
-    use RecordChanger {
+    use RecordChanger, UserInfo {
         RecordChanger::boot as traitBoot;
     }
     /**
@@ -75,4 +77,9 @@ class Product extends BaseModel
         self::traitBoot();
     }
 
+
+    public function items()
+    {
+        return $this->belongsToMany(Item::class, 'products_items_maps', 'product_id', 'item_id');
+    }
 }

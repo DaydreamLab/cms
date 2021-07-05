@@ -68,21 +68,13 @@ Route::get('api/admin/item/{content_type}/{id}', [ItemAdminController::class, 'g
     ->middleware(['expired','admin']);
 
 # 解決方案
-
 # 成功案例
-
 # 最新消息
-
 # 促銷消息
-
 # 01影片
-
 # 大事紀
-
 # 財務資訊
-
 # 重要規章
-
 # 股東專欄
 
 
