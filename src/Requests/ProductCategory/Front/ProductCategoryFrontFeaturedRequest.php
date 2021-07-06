@@ -1,8 +1,8 @@
 <?php
 
-namespace DaydreamLab\cms\Requests\ProductCategory\Front;
+namespace DaydreamLab\Cms\Requests\ProductCategory\Front;
 
-use DaydreamLab\cms\Requests\cmsFeaturedRequest;
+use DaydreamLab\Cms\Requests\cmsFeaturedRequest;
 
 class ProductCategoryFrontFeaturedRequest extends cmsFeaturedRequest
 {

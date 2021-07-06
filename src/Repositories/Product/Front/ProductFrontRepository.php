@@ -1,9 +1,9 @@
 <?php
 
-namespace DaydreamLab\cms\Repositories\Product\Front;
+namespace DaydreamLab\Cms\Repositories\Product\Front;
 
-use DaydreamLab\cms\Models\Product\Front\ProductFront;
-use DaydreamLab\cms\Repositories\Product\ProductRepository;
+use DaydreamLab\Cms\Models\Product\Front\ProductFront;
+use DaydreamLab\Cms\Repositories\Product\ProductRepository;
 
 class ProductFrontRepository extends ProductRepository
 {

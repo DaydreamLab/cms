@@ -1,9 +1,9 @@
 <?php
 
-namespace DaydreamLab\cms\Repositories\ProductCategory;
+namespace DaydreamLab\Cms\Repositories\ProductCategory;
 
-use DaydreamLab\cms\Models\ProductCategory\ProductCategory;
-use DaydreamLab\cms\Repositories\cmsRepository;
+use DaydreamLab\Cms\Models\ProductCategory\ProductCategory;
+use DaydreamLab\Cms\Repositories\cmsRepository;
 
 class ProductCategoryRepository extends cmsRepository
 {

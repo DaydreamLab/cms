@@ -1,8 +1,8 @@
 <?php
 
-namespace DaydreamLab\cms\Requests\Product\Admin;
+namespace DaydreamLab\Cms\Requests\Product\Admin;
 
-use DaydreamLab\cms\Requests\cmsRestoreRequest;
+use DaydreamLab\Cms\Requests\cmsRestoreRequest;
 
 class ProductAdminRestoreRequest extends cmsRestoreRequest
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace DaydreamLab\cms\Models\Product;
+namespace DaydreamLab\Cms\Models\Product;
 
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\JJAJ\Traits\UserInfo;

@@ -1,9 +1,9 @@
 <?php
 
-namespace DaydreamLab\cms\Controllers\ProductCategory\Front;
+namespace DaydreamLab\Cms\Controllers\ProductCategory\Front;
 
-use DaydreamLab\cms\Controllers\cmsController;
-use DaydreamLab\cms\Services\cmsService;
+use DaydreamLab\Cms\Controllers\cmsController;
+use DaydreamLab\Cms\Services\cmsService;
 
 class ProductCategoryFrontController extends cmsController
 {

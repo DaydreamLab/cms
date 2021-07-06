@@ -1,8 +1,8 @@
 <?php
 
-namespace DaydreamLab\cms\Requests\Product\Front;
+namespace DaydreamLab\Cms\Requests\Product\Front;
 
-use DaydreamLab\cms\Requests\cmsGetItemRequest;
+use DaydreamLab\Cms\Requests\cmsGetItemRequest;
 
 class ProductFrontGetItemRequest extends cmsGetItemRequest
 {

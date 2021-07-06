@@ -1,6 +1,6 @@
 <?php
 
-namespace DaydreamLab\cms\Requests\ProductCategory\Front;
+namespace DaydreamLab\Cms\Requests\ProductCategory\Front;
 
 use DaydreamLab\JJAJ\Requests\AdminRequest;
 

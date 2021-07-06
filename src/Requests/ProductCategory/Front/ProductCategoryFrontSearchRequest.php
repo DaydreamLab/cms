@@ -1,8 +1,8 @@
 <?php
 
-namespace DaydreamLab\cms\Requests\ProductCategory\Front;
+namespace DaydreamLab\Cms\Requests\ProductCategory\Front;
 
-use DaydreamLab\cms\Requests\cmsSearchRequest;
+use DaydreamLab\Cms\Requests\cmsSearchRequest;
 
 class ProductCategoryFrontSearchRequest extends cmsSearchRequest
 {

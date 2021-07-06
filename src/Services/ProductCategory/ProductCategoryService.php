@@ -1,9 +1,9 @@
 <?php
 
-namespace DaydreamLab\cms\Services\ProductCategory;
+namespace DaydreamLab\Cms\Services\ProductCategory;
 
-use DaydreamLab\cms\Repositories\ProductCategory\ProductCategoryRepository;
-use DaydreamLab\cms\Services\cmsService;
+use DaydreamLab\Cms\Repositories\ProductCategory\ProductCategoryRepository;
+use DaydreamLab\Cms\Services\cmsService;
 use Illuminate\Support\Collection;
 
 class ProductCategoryService extends cmsService
@@ -27,29 +27,18 @@ class ProductCategoryService extends cmsService
     }
 
 
-    public function featured(Collection $input)
+    public function findDescendantOf($id)
     {
-        $item = parent::featured($input);
-
-        //event(new Add($item, $this->model_name, $input, $this->user));
-
-        return $item;
+        return $this->repo->findDescendantOf($id);
     }
 
-
-    public function featuredOrdering(Collection $input)
-    {
-        $item = parent::featuredOrdering($input);
-
-        //event(new Add($item, $this->model_name, $input, $this->user));
-
-        return $item;
-    }
 
 
     public function modify(Collection $input)
     {
-        $result =  parent::modify($input);
+        $item = $this->checkItem($input);
+
+        $result = parent::modifyNested($input, $item->parent, $item);$result =  parent::modify($input);
 
         //event(new Modify($this->find($input->id), $this->model_name, $result, $input, $this->user));
 
@@ -102,6 +91,14 @@ class ProductCategoryService extends cmsService
         $result = parent::state($input);
 
         //event(new State($this->model_name, $result, $input, $this->user));
+
+        return $result;
+    }
+
+
+    public function store(Collection $input)
+    {
+        $result = $this->storeNested($input);
 
         return $result;
     }

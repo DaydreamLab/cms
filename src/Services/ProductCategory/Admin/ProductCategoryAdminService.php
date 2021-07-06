@@ -1,9 +1,10 @@
 <?php
 
-namespace DaydreamLab\cms\Services\ProductCategory\Admin;
+namespace DaydreamLab\Cms\Services\ProductCategory\Admin;
 
-use DaydreamLab\cms\Repositories\ProductCategory\Admin\ProductCategoryAdminRepository;
-use DaydreamLab\cms\Services\ProductCategory\ProductCategoryService;
+use DaydreamLab\Cms\Repositories\ProductCategory\Admin\ProductCategoryAdminRepository;
+use DaydreamLab\Cms\Services\ProductCategory\ProductCategoryService;
+use Illuminate\Support\Collection;
 
 class ProductCategoryAdminService extends ProductCategoryService
 {
@@ -11,5 +12,12 @@ class ProductCategoryAdminService extends ProductCategoryService
     {
         parent::__construct($repo);
         $this->repo = $repo;
+    }
+
+    public function store(Collection $input)
+    {
+        $item = parent::store($input);
+
+        return $item;
     }
 }

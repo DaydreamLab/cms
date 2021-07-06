@@ -1,8 +1,8 @@
 <?php
 
-namespace DaydreamLab\cms\Requests\Product\Admin;
+namespace DaydreamLab\Cms\Requests\Product\Admin;
 
-use DaydreamLab\cms\Requests\cmsStateRequest;
+use DaydreamLab\Cms\Requests\cmsStateRequest;
 
 class ProductAdminStateRequest extends cmsStateRequest
 {

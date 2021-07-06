@@ -1,8 +1,8 @@
 <?php
 
-namespace DaydreamLab\cms\Requests\ProductCategory\Admin;
+namespace DaydreamLab\Cms\Requests\ProductCategory\Admin;
 
-use DaydreamLab\cms\Requests\cmsRemoveRequest;
+use DaydreamLab\Cms\Requests\cmsRemoveRequest;
 
 class ProductCategoryAdminRemoveRequest extends cmsRemoveRequest
 {

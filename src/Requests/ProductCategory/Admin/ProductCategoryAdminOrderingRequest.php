@@ -1,8 +1,8 @@
 <?php
 
-namespace DaydreamLab\cms\Requests\ProductCategory\Admin;
+namespace DaydreamLab\Cms\Requests\ProductCategory\Admin;
 
-use DaydreamLab\cms\Requests\cmsOrderingRequest;
+use DaydreamLab\Cms\Requests\cmsOrderingRequest;
 
 class ProductCategoryAdminOrderingRequest extends cmsOrderingRequest
 {

@@ -1,11 +1,14 @@
 <?php
 
-namespace DaydreamLab\cms\Requests\ProductCategory\Admin;
+namespace DaydreamLab\Cms\Requests\ProductCategory\Admin;
 
 use DaydreamLab\JJAJ\Requests\AdminRequest;
 
 class ProductCategoryAdminStoreRequest extends AdminRequest
 {
+    protected $apiMethod = 'storeProductCategory';
+
+    protected $modelName = 'ProductCategory';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -24,7 +27,13 @@ class ProductCategoryAdminStoreRequest extends AdminRequest
     public function rules()
     {
         $rules =[
-            //
+            'id'                => 'nullable|integer',
+            'parent_id'         => 'nullable|integer',
+            'title'             => 'required|string',
+            'code'              => 'required|string',
+            'description'       => 'nullable|string',
+            'memo'              => 'nullable|string',
+            'state'             => ['nullable', Rule::in([0,1,-1,-2])]
         ];
 
         return array_merge(parent::rules(), $rules);

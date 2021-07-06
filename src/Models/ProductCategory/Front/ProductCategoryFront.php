@@ -1,7 +1,7 @@
 <?php
-namespace DaydreamLab\cms\Models\ProductCategory\Front;
+namespace DaydreamLab\Cms\Models\ProductCategory\Front;
 
-use DaydreamLab\cms\Models\ProductCategory\ProductCategory;
+use DaydreamLab\Cms\Models\ProductCategory\ProductCategory;
 
 class ProductCategoryFront extends ProductCategory
 {

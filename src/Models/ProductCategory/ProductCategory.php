@@ -1,6 +1,6 @@
 <?php
 
-namespace DaydreamLab\cms\Models\ProductCategory;
+namespace DaydreamLab\Cms\Models\ProductCategory;
 
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\JJAJ\Models\BaseModel;

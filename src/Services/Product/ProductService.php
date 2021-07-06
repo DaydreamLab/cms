@@ -1,9 +1,9 @@
 <?php
 
-namespace DaydreamLab\cms\Services\Product;
+namespace DaydreamLab\Cms\Services\Product;
 
-use DaydreamLab\cms\Repositories\Product\ProductRepository;
-use DaydreamLab\cms\Services\cmsService;
+use DaydreamLab\Cms\Repositories\Product\ProductRepository;
+use DaydreamLab\Cms\Services\cmsService;
 use Illuminate\Support\Collection;
 
 class ProductService extends cmsService

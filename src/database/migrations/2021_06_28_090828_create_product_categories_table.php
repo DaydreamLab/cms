@@ -22,6 +22,7 @@ class CreateProductCategoriesTable extends Migration
             $table->text('memo')->nullable();
 
             $table->tinyInteger('state')->default(1);
+            $table->unsignedInteger('ordering')->nullable();
             $table->unsignedInteger('locked_by')->nullable()->default(0);
             $table->timestamp('locked_at')->nullable();
             $table->unsignedInteger('created_by');

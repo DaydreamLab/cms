@@ -1,9 +1,9 @@
 <?php
 
-namespace DaydreamLab\cms\Services\Product\Admin;
+namespace DaydreamLab\Cms\Services\Product\Admin;
 
-use DaydreamLab\cms\Repositories\Product\Admin\ProductAdminRepository;
-use DaydreamLab\cms\Services\Product\ProductService;
+use DaydreamLab\Cms\Repositories\Product\Admin\ProductAdminRepository;
+use DaydreamLab\Cms\Services\Product\ProductService;
 
 class ProductAdminService extends ProductService
 {

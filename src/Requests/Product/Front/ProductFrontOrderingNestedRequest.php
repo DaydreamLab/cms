@@ -1,8 +1,8 @@
 <?php
 
-namespace DaydreamLab\cms\Requests\Product\Front;
+namespace DaydreamLab\Cms\Requests\Product\Front;
 
-use DaydreamLab\cms\Requests\cmsOrderingNestedRequest;
+use DaydreamLab\Cms\Requests\cmsOrderingNestedRequest;
 
 class ProductFrontOrderingNestedRequest extends cmsOrderingNestedRequest
 {

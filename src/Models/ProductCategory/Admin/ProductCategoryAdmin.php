@@ -1,7 +1,7 @@
 <?php
-namespace DaydreamLab\cms\Models\ProductCategory\Admin;
+namespace DaydreamLab\Cms\Models\ProductCategory\Admin;
 
-use DaydreamLab\cms\Models\ProductCategory\ProductCategory;
+use DaydreamLab\Cms\Models\ProductCategory\ProductCategory;
 
 class ProductCategoryAdmin extends ProductCategory
 {
