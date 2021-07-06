@@ -122,5 +122,129 @@
         "access": 1
       }
     ]
+  },
+  {
+    "alias": "solution_category",
+    "item": [
+      {
+        "alias": "IT基礎架構",
+        "title": "IT基礎架構",
+        "language": "*",
+        "access": 1,
+        "extrafields": [
+          {
+            "id": 41,
+            "value": [19, 20, 21, 22, 23]
+          }
+        ]
+      },
+      {
+        "alias": "網路資訊安全",
+        "title": "網路資訊安全",
+        "language": "*",
+        "access": 1,
+        "extrafields": [
+          {
+            "id": 41,
+            "value": [19, 20, 21, 22, 23]
+          }
+        ]
+      },
+      {
+        "alias": "雲平台與應用",
+        "title": "雲平台與應用",
+        "language": "*",
+        "access": 1,
+        "extrafields": [
+          {
+            "id": 41,
+            "value": [19, 20, 21, 22, 23]
+          }
+        ]
+      },
+      {
+        "alias": "大數據與應用",
+        "title": "大數據與應用",
+        "language": "*",
+        "access": 1,
+        "extrafields": [
+          {
+            "id": 41,
+            "value": [19, 20, 21, 22, 23]
+          }
+        ]
+      },
+      {
+        "alias": "資料安全防護",
+        "title": "資料安全防護",
+        "language": "*",
+        "access": 1,
+        "extrafields": [
+          {
+            "id": 41,
+            "value": [19, 20, 21, 22, 23]
+          }
+        ]
+      },
+      {
+        "alias": "資安事件管理",
+        "title": "資安事件管理",
+        "language": "*",
+        "access": 1,
+        "extrafields": [
+          {
+            "id": 41,
+            "value": [19, 20, 21, 22, 23]
+          }
+        ]
+      },
+      {
+        "alias": "MetaDefenderCore",
+        "title": "MetaDefender Core",
+        "language": "*",
+        "access": 1,
+        "extrafields": [
+          {
+            "id": 41,
+            "value": [19, 20, 21, 22, 23]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "alias": "industry_category",
+    "item": [
+      {
+        "alias": "公共行政與國防",
+        "title": "公共行政與國防",
+        "language": "*",
+        "access": 1
+      },
+      {
+        "alias": "其他服務業",
+        "title": "其他服務業",
+        "language": "*",
+        "access": 1
+      },
+      {
+        "alias": "資訊及通訊業",
+        "title": "資訊及通訊業",
+        "language": "*",
+        "access": 1
+      },
+      {
+        "alias": "網路視訊會議系統",
+        "title": "網路視訊會議系統",
+        "language": "*",
+        "access": 1
+      },
+      {
+        "alias": "教育業",
+        "title": "教育業",
+        "language": "*",
+        "access": 1
+      }
+    ]
   }
 ]

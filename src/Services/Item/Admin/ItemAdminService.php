@@ -134,6 +134,7 @@ class ItemAdminService extends ItemService
         $input->put('tagIds', $tagIds);
 
         # 改用其他方法處理額外欄位
+        $json_data_field_type = ['multiSelect', 'repeater'];
         $extrafields = $input->get('extrafields') ? : [];
         $input->forget('extrafields');
 
@@ -149,7 +150,7 @@ class ItemAdminService extends ItemService
             $e = Extrafield::where('id', $extrafield['id'])->first();
             $e_v = ExtrafieldValue::where('item_id', $item_id)->where('extrafield_id', $extrafield['id'])->first();
             if (!$e_v) {
-                if ($e->type == 'repeater') {
+                if ( in_array($e->type, $json_data_field_type) ) {
                     $e_v = ExtrafieldValue::create([
                         'extrafield_id' => $extrafield['id'],
                         'item_id' => $item_id,
@@ -163,7 +164,7 @@ class ItemAdminService extends ItemService
                     ]);
                 }
             } else {
-                if ($e->type == 'repeater') {
+                if ( in_array($e->type, $json_data_field_type) ) {
                     $e_v->value = json_encode($extrafield['value']);
                 } else {
                     $e_v->value = $extrafield['value'];

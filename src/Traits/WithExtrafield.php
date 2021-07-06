@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Traits;
 
+use DaydreamLab\Cms\Models\Item\Item;
 use DaydreamLab\Cms\Models\Extrafield\Admin\ExtrafieldAdmin;
 use DaydreamLab\Cms\Models\Extrafield\Admin\ExtrafieldGroupAdmin;
 use DaydreamLab\Cms\Models\Extrafield\Extrafield;
@@ -24,6 +25,7 @@ trait WithExtrafield
 
     public function getExtrafieldsAttribute($value)
     {
+        $json_data_field_type = ['multiSelect', 'repeater'];
         $data = [];
         $extrafields = Extrafield::where('content_type', $this->category->content_type)->get()->toArray();
         $extrafields = array_merge($extrafields, Extrafield::where('category_id', $this->category->id)->get()->toArray());
@@ -34,19 +36,31 @@ trait WithExtrafield
             $e['title'] = $extrafield['title'];
             $e_v = ExtrafieldValue::where('item_id', $this->id)->where('extrafield_id', $extrafield['id'])->first();
             if (!$e_v) {
-                if ($extrafield['type'] == 'repeater') {
+                if ( in_array($extrafield['type'], $json_data_field_type) ) {
                     $e['value'] = [];
                 } else {
                     $e['value'] = '';
                 }
             } else {
-                if ($extrafield['type'] == 'repeater') {
+                if ( in_array($extrafield['type'], $json_data_field_type) ) {
                     $e['value'] = json_decode($e_v->value, true);
                 } else {
                     $e['value'] = $e_v->value;
                 }
             }
-            $e['params'] = $extrafield['params'];
+            if ( isset($extrafield['params']['type']) ) {
+                if ( $extrafield['params']['type'] == 'category' ) {
+                    $items = Item::where('category_id', $extrafield['params']['category_id'])->where('state', 1)->get();
+                    $options = $items->map(function ($i) {
+                        return ['name' => $i->title, 'value' => $i->id];
+                    })->toArray();
+                } else {
+                    $options = [];
+                }
+                $e['params'] = ['option' => $options];
+            } else {
+                $e['params'] = $extrafield['params'];
+            }
             $data[$e['alias']] = $e;
         }
 

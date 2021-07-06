@@ -200,6 +200,40 @@
         "params"      : {},
         "children"    : [],
         "created_by": 1
+      },
+      {
+        "title"       : "產品分類",
+        "alias"       : "solution_category",
+        "path"        : "/item/solution_category",
+        "state"       : 1,
+        "introimage"  : "",
+        "introtext"   : "",
+        "image"       : "",
+        "description" : "",
+        "content_type": "solution_category",
+        "extension"   : "item",
+        "ordering"    : 1,
+        "access"      : 1,
+        "params"      : {},
+        "children"    : [],
+        "created_by": 1
+      },
+      {
+        "title"       : "產業分類",
+        "alias"       : "industry_category",
+        "path"        : "/item/industry_category",
+        "state"       : 1,
+        "introimage"  : "",
+        "introtext"   : "",
+        "image"       : "",
+        "description" : "",
+        "content_type": "industry_category",
+        "extension"   : "item",
+        "ordering"    : 1,
+        "access"      : 1,
+        "params"      : {},
+        "children"    : [],
+        "created_by": 1
       }
     ],
     "created_by"    : 1

@@ -11,6 +11,8 @@ use DaydreamLab\Cms\Controllers\Menu\Front\MenuFrontController;
 use DaydreamLab\Cms\Controllers\Menu\Admin\MenuAdminController;
 use DaydreamLab\Cms\Controllers\Module\Front\ModuleFrontController;
 use DaydreamLab\Cms\Controllers\Module\Admin\ModuleAdminController;
+use DaydreamLab\cms\Controllers\Product\Admin\ProductAdminController;
+use DaydreamLab\cms\Controllers\ProductCategory\Admin\ProductCategoryAdminController;
 use DaydreamLab\Cms\Controllers\Setting\Front\SettingFrontController;
 use DaydreamLab\Cms\Controllers\Tag\Front\TagFrontController;
 use DaydreamLab\Cms\Controllers\Tag\Admin\TagAdminController;
@@ -57,6 +59,12 @@ Route::post('api/admin/brand/store', [BrandAdminController::class, 'store'])
     ->middleware(['expired','admin']);
 
 # 產品
+Route::post('api/admin/product/store', [ProductAdminController::class, 'store'])
+    ->middleware(['expired', 'admin']);
+
+# 產品分類
+Route::post('api/admin/product/category/store', [ProductCategoryAdminController::class, 'store'])
+    ->middleware(['expired', 'admin']);
 
 # content type 共通
 
