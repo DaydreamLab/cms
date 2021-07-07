@@ -15,6 +15,7 @@ class CreateBrandsContactsTable extends Migration
     {
         Schema::create('brands_contacts', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('brand_id');
             $table->string('first_name');
             $table->string('last_name');
             $table->string('gender');

@@ -59,10 +59,14 @@ Route::post('api/admin/brand/store', [BrandAdminController::class, 'store'])
     ->middleware(['expired','admin']);
 
 # 產品
+Route::post('api/admin/product/search', [ProductAdminController::class, 'search'])
+    ->middleware(['expired', 'admin']);
 Route::post('api/admin/product/store', [ProductAdminController::class, 'store'])
     ->middleware(['expired', 'admin']);
 
 # 產品分類
+Route::post('api/admin/product/category/search', [ProductCategoryAdminController::class, 'search'])
+    ->middleware(['expired', 'admin']);
 Route::post('api/admin/product/category/store', [ProductCategoryAdminController::class, 'store'])
     ->middleware(['expired', 'admin']);
 

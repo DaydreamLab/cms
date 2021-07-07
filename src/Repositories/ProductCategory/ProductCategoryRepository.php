@@ -14,4 +14,14 @@ class ProductCategoryRepository extends cmsRepository
         parent::__construct($model);
         $this->model = $model;
     }
+
+
+    public function findSubTreeIds($id)
+    {
+        $category = $this->find($id);
+        $descendants = $category->descendants->pluck('id')->all();
+        $descendants[] = $id;
+
+        return $descendants;
+    }
 }

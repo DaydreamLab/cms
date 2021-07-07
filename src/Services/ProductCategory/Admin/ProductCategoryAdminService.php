@@ -14,6 +14,13 @@ class ProductCategoryAdminService extends ProductCategoryService
         $this->repo = $repo;
     }
 
+
+    public function findSubTreeIds($id)
+    {
+        return $this->repo->findSubTreeIds($id);
+    }
+
+
     public function store(Collection $input)
     {
         $item = parent::store($input);

@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\ProductCategory\Admin;
 
-use DaydreamLab\Cms\Requests\cmsSearchRequest;
+use DaydreamLab\Cms\Requests\CmsSearchPost;
 
-class ProductCategoryAdminSearchRequest extends cmsSearchRequest
+class ProductCategoryAdminSearchRequest extends CmsSearchPost
 {
     /**
      * Determine if the user is authorized to make this request.
