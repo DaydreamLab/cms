@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Menu\Admin;
 
-use DaydreamLab\Cms\Requests\CmSearchPost;
+use DaydreamLab\Cms\Requests\CmsSearchPost;
 
-class MenuAdminSearchPost extends CmSearchPost
+class MenuAdminSearchPost extends CmsSearchPost
 {
     protected $apiMethod = 'searchMenu';
 

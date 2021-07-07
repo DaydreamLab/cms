@@ -4,7 +4,7 @@ namespace DaydreamLab\Cms\Requests;
 
 use DaydreamLab\JJAJ\Requests\ListRequest;
 
-class CmSearchPost extends ListRequest
+class CmsSearchPost extends ListRequest
 {
     protected $package = 'Cms';
 

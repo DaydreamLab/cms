@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Module\Admin;
 
-use DaydreamLab\Cms\Requests\CmStatePost;
+use DaydreamLab\Cms\Requests\CmsStatePost;
 
-class ModuleAdminStatePost extends CmStatePost
+class ModuleAdminStatePost extends CmsStatePost
 {
     protected $apiMethod = 'stateModule';
 
