@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Requests\ProductCategory\Admin;
 
 use DaydreamLab\JJAJ\Requests\AdminRequest;
+use Illuminate\Validation\Rule;
 
 class ProductCategoryAdminStoreRequest extends AdminRequest
 {
@@ -26,7 +27,7 @@ class ProductCategoryAdminStoreRequest extends AdminRequest
      */
     public function rules()
     {
-        $rules =[
+        $rules = [
             'id'                => 'nullable|integer',
             'parent_id'         => 'nullable|integer',
             'title'             => 'required|string',

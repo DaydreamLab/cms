@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Requests\ProductCategory\Admin;
 
 use DaydreamLab\Cms\Requests\CmsSearchPost;
+use Illuminate\Validation\Rule;
 
 class ProductCategoryAdminSearchRequest extends CmsSearchPost
 {
@@ -27,7 +28,12 @@ class ProductCategoryAdminSearchRequest extends CmsSearchPost
     public function rules()
     {
         $rules =[
-            //
+            'id'            => 'nullable|integer',
+            'state'         => [
+                'nullable',
+                'integer',
+                Rule::in([0,1,-1,-2])
+            ],
         ];
 
         return array_merge(parent::rules(), $rules);

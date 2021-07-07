@@ -69,6 +69,8 @@ Route::post('api/admin/product/category/search', [ProductCategoryAdminController
     ->middleware(['expired', 'admin']);
 Route::post('api/admin/product/category/store', [ProductCategoryAdminController::class, 'store'])
     ->middleware(['expired', 'admin']);
+Route::get('api/admin/product/category/{id}', [ProductCategoryAdminController::class, 'getItem'])
+    ->middleware(['expired', 'admin']);
 
 # content type 共通
 

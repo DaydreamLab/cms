@@ -33,6 +33,7 @@ class ProductCategory extends BaseModel
         'description',
         'memo',
         'state',
+        'ordering',
         'created_by',
         'updated_by'
     ];

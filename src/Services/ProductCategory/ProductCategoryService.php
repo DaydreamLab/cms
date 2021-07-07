@@ -19,7 +19,7 @@ class ProductCategoryService extends cmsService
 
     public function add(Collection $input)
     {
-        $item = parent::add($input);
+        $item = parent::addNested($input);
 
         //event(new Add($item, $this->model_name, $input, $this->user));
 
@@ -47,16 +47,6 @@ class ProductCategoryService extends cmsService
 
 
     public function ordering(Collection $input)
-    {
-        $result = parent::ordering($input);
-
-        //event(new Ordering($this->model_name, $result, $input, $orderingKey, $this->user));
-
-        return $result;
-    }
-
-
-    public function orderingNested(Collection $input)
     {
         $result = parent::orderingNested($input);
 

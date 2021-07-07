@@ -16,9 +16,18 @@ class ProductCategoryAdminResource extends BaseJsonResource
     {
         $tz = $request->user('api')->timezone;
         return [
-            'id'                        => $this->id,
-            'title'                     => $this->title,
-
+            'id'            => $this->id,
+            'title'         => $this->title,
+            'code'          => $this->code,
+            'description'   => $this->description,
+            'memo'          => $this->memo,
+            'state'         => $this->state,
+            'created_at'    => $this->getDateTimeString($this->created_at, $tz),
+            'updated_at'    => $this->getDateTimeString($this->updated_at, $tz),
+            'locked_at'     => $this->getDateTimeString($this->locked_at, $tz),
+            'creatorName'   => $this->creatorName,
+            'updaterName'   => $this->updaterName,
+            'lockerName'    => $this->lockerName
         ];
     }
 }
