@@ -16,6 +16,12 @@ class ProductCategoryRepository extends cmsRepository
     }
 
 
+    public function findDescendantOf($id)
+    {
+        return $this->model->whereDescendantOf($id)->get();
+    }
+    
+
     public function findSubTreeIds($id)
     {
         $category = $this->find($id);

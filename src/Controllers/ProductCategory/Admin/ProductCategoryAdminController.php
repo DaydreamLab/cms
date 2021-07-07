@@ -5,13 +5,13 @@ namespace DaydreamLab\Cms\Controllers\ProductCategory\Admin;
 use DaydreamLab\Cms\Controllers\cmsController;
 use DaydreamLab\Cms\Requests\ProductCategory\Admin\ProductCategoryAdminSearchRequest;
 use DaydreamLab\Cms\Resources\ProductCategory\Admin\Collections\ProductCategoryAdminListResourceCollection;
-use DaydreamLab\Cms\Services\cmsService;
+use DaydreamLab\Cms\Services\ProductCategory\Admin\ProductCategoryAdminService;
 
 class ProductCategoryAdminController extends cmsController
 {
     protected $modelName = 'ProductCategory';
 
-    public function __construct(cmsService $service)
+    public function __construct(ProductCategoryAdminService $service)
     {
         parent::__construct($service);
         $this->service = $service;

@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Resources\ProductCategory\Admin\Models;
 
-use DaydreamLab\JJAJ\Resources\BaseJsonResource;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-class ProductCategoryAdminResource extends BaseJsonResource
+class ProductCategoryAdminListResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,10 +14,9 @@ class ProductCategoryAdminResource extends BaseJsonResource
      */
     public function toArray($request)
     {
-        $tz = $request->user('api')->timezone;
         return [
-            'id'                        => $this->id,
-            'title'                     => $this->title,
+            'id'                    => $this->id,
+            'title'                 => $this->title,
 
         ];
     }

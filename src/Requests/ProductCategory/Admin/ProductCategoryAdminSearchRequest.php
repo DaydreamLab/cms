@@ -6,6 +6,9 @@ use DaydreamLab\Cms\Requests\CmsSearchPost;
 
 class ProductCategoryAdminSearchRequest extends CmsSearchPost
 {
+    protected $apiMethod = 'searchProductCategory';
+
+    protected $modelName = 'ProductCategory';
     /**
      * Determine if the user is authorized to make this request.
      *
