@@ -5,7 +5,7 @@ namespace DaydreamLab\Cms\Requests;
 use DaydreamLab\JJAJ\Requests\AdminRequest;
 use Illuminate\Validation\Rule;
 
-class CmStatePost extends AdminRequest
+class CmsStatePost extends AdminRequest
 {
     protected $package = 'Cms';
 

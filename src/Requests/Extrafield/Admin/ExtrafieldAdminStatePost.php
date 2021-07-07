@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Extrafield\Admin;
 
-use DaydreamLab\Cms\Requests\CmStatePost;
+use DaydreamLab\Cms\Requests\CmsStatePost;
 
-class ExtrafieldAdminStatePost extends CmStatePost
+class ExtrafieldAdminStatePost extends CmsStatePost
 {
     protected $apiMethod = 'stateExtrafield';
 
