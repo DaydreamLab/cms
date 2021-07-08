@@ -145,12 +145,6 @@ class Item extends BaseModel
     }
 
 
-    public function products()
-    {
-        return $this->belongsToMany(Product::class, 'products_items_maps', 'item_id', 'product_id');
-    }
-
-
     public function brands()
     {
         return $this->belongsToMany(Brand::class, 'brands_items_maps', 'item_id', 'brand_id')

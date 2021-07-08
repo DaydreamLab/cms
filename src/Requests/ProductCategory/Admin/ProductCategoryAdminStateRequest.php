@@ -2,10 +2,13 @@
 
 namespace DaydreamLab\Cms\Requests\ProductCategory\Admin;
 
-use DaydreamLab\Cms\Requests\cmsStateRequest;
+use DaydreamLab\Cms\Requests\CmsStatePost;
 
-class ProductCategoryAdminStateRequest extends cmsStateRequest
+class ProductCategoryAdminStateRequest extends CmsStatePost
 {
+    protected $apiMethod = 'stateProductCategory';
+
+    protected $modelName = 'ProductCategory';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -30,11 +33,4 @@ class ProductCategoryAdminStateRequest extends cmsStateRequest
         return array_merge(parent::rules(), $rules);
     }
 
-
-    public function validated()
-    {
-        $validated = parent::validated();
-
-        return $validated;
-    }
 }

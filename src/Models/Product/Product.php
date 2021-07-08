@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Models\Product;
 
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\JJAJ\Traits\UserInfo;
+use DaydreamLab\Cms\Models\Brand\Brand;
 use DaydreamLab\Cms\Models\Item\Item;
 use DaydreamLab\JJAJ\Models\BaseModel;
 
@@ -78,8 +79,8 @@ class Product extends BaseModel
     }
 
 
-    public function items()
+    public function brands()
     {
-        return $this->belongsToMany(Item::class, 'products_items_maps', 'product_id', 'item_id');
+        return $this->belongsToMany(Brand::class, 'brands_items_maps', 'product_id', 'brand_id');
     }
 }

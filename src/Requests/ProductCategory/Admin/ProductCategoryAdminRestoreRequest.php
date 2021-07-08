@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\ProductCategory\Admin;
 
-use DaydreamLab\Cms\Requests\cmsRestoreRequest;
+use DaydreamLab\Cms\Requests\CmsRestoreRemovePost;
 
-class ProductCategoryAdminRestoreRequest extends cmsRestoreRequest
+class ProductCategoryAdminRestoreRequest extends CmsRestoreRemovePost
 {
     /**
      * Determine if the user is authorized to make this request.

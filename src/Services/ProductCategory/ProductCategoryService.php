@@ -58,7 +58,7 @@ class ProductCategoryService extends cmsService
 
     public function remove(Collection $input)
     {
-        $result =  parent::remove($input);
+        $result =  parent::removeNested($input);
 
         //event(new Remove($this->model_name, $result, $input, $this->user));
 

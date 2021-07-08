@@ -38,4 +38,12 @@ class CmsStatePost extends AdminRequest
 
         return array_merge(parent::rules(), $rules);
     }
+
+
+    public function validated()
+    {
+        $validated = parent::validated();
+        $validated->forget('q');
+        return $validated;
+    }
 }

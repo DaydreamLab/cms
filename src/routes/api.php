@@ -65,7 +65,13 @@ Route::post('api/admin/product/store', [ProductAdminController::class, 'store'])
     ->middleware(['expired', 'admin']);
 
 # 產品分類
+Route::post('api/admin/product/category/remove', [ProductCategoryAdminController::class, 'remove'])
+    ->middleware(['expired', 'admin']);
+Route::post('api/admin/product/category/restore', [ProductCategoryAdminController::class, 'restore'])
+    ->middleware(['expired', 'admin']);
 Route::post('api/admin/product/category/search', [ProductCategoryAdminController::class, 'search'])
+    ->middleware(['expired', 'admin']);
+Route::post('api/admin/product/category/state', [ProductCategoryAdminController::class, 'state'])
     ->middleware(['expired', 'admin']);
 Route::post('api/admin/product/category/store', [ProductCategoryAdminController::class, 'store'])
     ->middleware(['expired', 'admin']);

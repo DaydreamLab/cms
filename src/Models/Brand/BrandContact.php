@@ -27,6 +27,7 @@ class BrandContact extends BaseModel
      * @var array
      */
     protected $fillable = [
+        'brand_id',
         'first_name',
         'last_name',
         'gender',
