@@ -2,10 +2,14 @@
 
 namespace DaydreamLab\Cms\Requests\Brand\Admin;
 
-use DaydreamLab\Cms\Requests\CmsSearchRequest;
+use DaydreamLab\Cms\Requests\CmsSearchPost;
+use Illuminate\Validation\Rule;
 
-class BrandAdminSearchRequest extends CmsSearchRequest
+class BrandAdminSearchRequest extends CmsSearchPost
 {
+    protected $apiMethod = 'searchBrand';
+
+    protected $modelName = 'Brand';
     /**
      * Determine if the user is authorized to make this request.
      *

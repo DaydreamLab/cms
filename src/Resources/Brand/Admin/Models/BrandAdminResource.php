@@ -16,8 +16,27 @@ class BrandAdminResource extends BaseJsonResource
     {
         $tz = $request->user('api')->timezone;
         return [
-            'id'                        => $this->id,
-
+            'id'                    => $this->id,
+            'code'                  => $this->code,
+            'alias'                 => $this->alias,
+            'title'                 => $this->title,
+            'description'           => $this->description,
+            'factory_url'           => $this->factory_url,
+            'brand_contacts'        => $this->brand_contacts,
+            'contact_email'         => $this->contact_email,
+            'business_representitive' => $this->business_representitive,
+            'logo_image'            => $this->logo_image,
+            'banner_image'          => $this->banner_image,
+            'banner_link'           => $this->banner_link,
+            'metadesc'              => $this->metadesc,
+            'metakeywords'          => $this->metakeywords,
+            'state'                 => $this->state,
+            'created_at'            => $this->getDateTimeString($this->created_at, $tz),
+            'updated_at'            => $this->getDateTimeString($this->updated_at, $tz),
+            'locked_at'             => $this->getDateTimeString($this->locked_at, $tz),
+            'creatorName'           => $this->creatorName,
+            'updaterName'           => $this->updaterName,
+            'lockerName'            => $this->lockerName
         ];
     }
 }

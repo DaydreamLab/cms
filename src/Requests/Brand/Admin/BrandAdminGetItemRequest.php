@@ -2,10 +2,13 @@
 
 namespace DaydreamLab\Cms\Requests\Brand\Admin;
 
-use DaydreamLab\Cms\Requests\CmsGetItemRequest;
+use DaydreamLab\Cms\Requests\CmsGetItemGet;
 
-class BrandAdminGetItemRequest extends CmsGetItemRequest
+class BrandAdminGetItemRequest extends CmsGetItemGet
 {
+    protected $apiMethod = 'getBrand';
+
+    protected $modelName = 'Brand';
     /**
      * Determine if the user is authorized to make this request.
      *
