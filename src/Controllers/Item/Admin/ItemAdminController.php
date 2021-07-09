@@ -10,6 +10,7 @@ use DaydreamLab\Cms\Resources\Item\Admin\Models\ItemAdminResource;
 use DaydreamLab\Cms\Resources\Item\Admin\Collections\ItemAdminListResourceCollection;
 use DaydreamLab\Cms\Services\Item\Admin\ItemAdminService;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminRemovePost;
+use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminContentSearchPost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminContentStorePost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminStorePost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminStatePost;
@@ -56,6 +57,19 @@ class ItemAdminController extends CmsController
 
 
     public function getItem(ItemAdminGetItemGet $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->getItem(collect(['id' => $request->route('id')]));
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response, [], ItemAdminResource::class);
+    }
+
+
+    public function getContentItem(ItemAdminGetItemGet $request)
     {
         $this->service->setUser($request->user('api'));
         try {
@@ -120,6 +134,19 @@ class ItemAdminController extends CmsController
     }
 
 
+    public function searchContent(ItemAdminContentSearchPost $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->search($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response, [], ItemAdminListResourceCollection::class);
+    }
+
+
     public function state(ItemAdminStatePost $request)
     {
         $this->service->setUser($request->user('api'));
@@ -158,18 +185,6 @@ class ItemAdminController extends CmsController
         return $this->response($this->service->status, $this->service->response, [], ItemAdminResource::class);
     }
 
-
-    public function getContentItem(ItemAdminGetItemGet $request)
-    {
-        $this->service->setUser($request->user('api'));
-        try {
-            $this->service->getItem(collect(['id' => $request->route('id')]));
-        } catch (Throwable $t) {
-            $this->handleException($t);
-        }
-
-        return $this->response($this->service->status, $this->service->response, [], ItemAdminResource::class);
-    }
     /**
      * 測試排序功能
      */
