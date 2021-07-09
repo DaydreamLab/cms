@@ -2,10 +2,13 @@
 
 namespace DaydreamLab\Cms\Requests\Brand\Admin;
 
-use DaydreamLab\Cms\Requests\CmsRestoreRequest;
+use DaydreamLab\Cms\Requests\CmsRestoreRemovePost;
 
-class BrandAdminRestoreRequest extends CmsRestoreRequest
+class BrandAdminRestoreRequest extends CmsRestoreRemovePost
 {
+    protected $apiMethod = 'restoreBrand';
+
+    protected $modelName = 'Brand';
     /**
      * Determine if the user is authorized to make this request.
      *

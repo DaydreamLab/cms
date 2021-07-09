@@ -17,6 +17,8 @@ class BrandAdminService extends BrandService
 
     public function store(Collection $input)
     {
+        $contacts = $input->get('brand_contacts');
+        $input->forget('brand_contacts');
 
         $brand = parent::store($input);
 

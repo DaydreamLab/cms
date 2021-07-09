@@ -19,6 +19,7 @@ class CreateBrandsTable extends Migration
             $table->string('alias');
             $table->string('title')->nullable();
             $table->text('description')->nullable();
+            $table->string('factory_url')->nullable();
             $table->string('contact_email')->nullable();
             $table->string('business_representitive')->nullable();
             $table->string('logo_image')->nullable();

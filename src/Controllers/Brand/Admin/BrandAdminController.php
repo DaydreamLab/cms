@@ -3,8 +3,14 @@
 namespace DaydreamLab\Cms\Controllers\Brand\Admin;
 
 use DaydreamLab\Cms\Controllers\CmsController;
-use DaydreamLab\Cms\Resources\Brand\Admin\Models\BrandAdminResource;
+use DaydreamLab\Cms\Requests\Brand\Admin\BrandAdminGetItemRequest;
+use DaydreamLab\Cms\Requests\Brand\Admin\BrandAdminRemoveRequest;
+use DaydreamLab\Cms\Requests\Brand\Admin\BrandAdminRestoreRequest;
+use DaydreamLab\Cms\Requests\Brand\Admin\BrandAdminSearchRequest;
+use DaydreamLab\Cms\Requests\Brand\Admin\BrandAdminStateRequest;
 use DaydreamLab\Cms\Requests\Brand\Admin\BrandAdminStoreRequest;
+use DaydreamLab\Cms\Resources\Brand\Admin\Collections\BrandAdminListResourceCollection;
+use DaydreamLab\Cms\Resources\Brand\Admin\Models\BrandAdminResource;
 use DaydreamLab\Cms\Services\Brand\Admin\BrandAdminService;
 
 class BrandAdminController extends CmsController
@@ -15,6 +21,19 @@ class BrandAdminController extends CmsController
     {
         parent::__construct($service);
         $this->service = $service;
+    }
+
+
+    public function search(BrandAdminSearchRequest $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->search($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response, [], BrandAdminListResourceCollection::class);
     }
 
 

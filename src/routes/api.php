@@ -55,6 +55,8 @@ Route::get('api/tag/{alias}', [TagFrontController::class, 'getItemByAlias']);
 /************************************  後台 API  ************************************/
 # 品牌 Brand
 
+Route::post('api/admin/brand/search', [BrandAdminController::class, 'search'])
+    ->middleware(['expired','admin']);
 Route::post('api/admin/brand/store', [BrandAdminController::class, 'store'])
     ->middleware(['expired','admin']);
 
@@ -88,7 +90,7 @@ Route::get('api/admin/product/category/{id}', [ProductCategoryAdminController::c
 
 # content type 共通
 
-Route::post('api/admin/item/{content_type}/search', [ItemAdminController::class, 'search'])
+Route::post('api/admin/item/{content_type}/search', [ItemAdminController::class, 'searchContent'])
     ->middleware(['expired','admin']);
 Route::post('api/admin/item/{content_type}/store', [ItemAdminController::class, 'storeContent'])
     ->middleware(['expired','admin']);

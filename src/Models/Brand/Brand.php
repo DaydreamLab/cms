@@ -5,11 +5,12 @@ namespace DaydreamLab\Cms\Models\Brand;
 use DaydreamLab\Cms\Models\Product\Product;
 use DaydreamLab\Cms\Models\Item\Item;
 use DaydreamLab\JJAJ\Models\BaseModel;
+use DaydreamLab\JJAJ\Traits\UserInfo;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 
 class Brand extends BaseModel
 {
-    use RecordChanger {
+    use RecordChanger, UserInfo {
         RecordChanger::boot as traitBoot;
     }
     /**
@@ -33,6 +34,7 @@ class Brand extends BaseModel
         'alias',
         'title',
         'description',
+        'factory_url',
         'contact_email',
         'business_representitive',
         'logo_image',
