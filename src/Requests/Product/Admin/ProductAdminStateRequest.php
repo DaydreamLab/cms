@@ -2,10 +2,13 @@
 
 namespace DaydreamLab\Cms\Requests\Product\Admin;
 
-use DaydreamLab\Cms\Requests\cmsStateRequest;
+use DaydreamLab\Cms\Requests\CmsStatePost;
 
-class ProductAdminStateRequest extends cmsStateRequest
+class ProductAdminStateRequest extends CmsStatePost
 {
+    protected $apiMethod = 'stateProduct';
+
+    protected $modelName = 'Product';
     /**
      * Determine if the user is authorized to make this request.
      *

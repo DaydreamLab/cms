@@ -79,19 +79,20 @@ class Brand extends BaseModel
 
     public function brandContacts()
     {
-        return $this->belongsToMany(BrandContact::class, 'brands_contacts_maps', 'brand_id', 'brand_contact_id');
+        return $this->hasMany(BrandContact::class, 'brand_id', 'id');
     }
 
 
     public function linkedItems()
     {
         return $this->belongsToMany(Item::class, 'brands_items_maps', 'brand_id', 'item_id')
-            ->withPivot('content_type');
+            ->withPivot('content_type')->withTimestamps();
     }
 
 
     public function products()
     {
-        return $this->belongsToMany(Product::class, 'brands_products_maps', 'brand_id', 'product_id');
+        return $this->belongsToMany(Product::class, 'brands_products_maps', 'brand_id', 'product_id')
+            ->withTimestamps();
     }
 }

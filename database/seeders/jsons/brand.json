@@ -1,0 +1,12 @@
+[
+  {
+    "code": "TEST1",
+    "title": "測試用品牌1",
+    "state": 1
+  },
+  {
+    "code": "TEST2",
+    "title": "測試用品牌2",
+    "state": 1
+  }
+]

@@ -42,7 +42,8 @@ class ProductsTableSeeder extends Seeder
             }
             # products
             foreach ($products as $product) {
-
+                $product['product_category_id'] = $product_category->id;
+                $this->productService->store(collect($product));
             }
 
             if (count($children))

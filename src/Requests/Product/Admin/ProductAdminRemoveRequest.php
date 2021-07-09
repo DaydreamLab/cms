@@ -2,10 +2,13 @@
 
 namespace DaydreamLab\Cms\Requests\Product\Admin;
 
-use DaydreamLab\Cms\Requests\cmsRemoveRequest;
+use DaydreamLab\Cms\Requests\CmsRestoreRemovePost;
 
-class ProductAdminRemoveRequest extends cmsRemoveRequest
+class ProductAdminRemoveRequest extends CmsRestoreRemovePost
 {
+    protected $apiMethod = 'removeProduct';
+
+    protected $modelName = 'Product';
     /**
      * Determine if the user is authorized to make this request.
      *

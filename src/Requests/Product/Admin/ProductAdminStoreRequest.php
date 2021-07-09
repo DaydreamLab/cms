@@ -3,9 +3,13 @@
 namespace DaydreamLab\Cms\Requests\Product\Admin;
 
 use DaydreamLab\JJAJ\Requests\AdminRequest;
+use Illuminate\Validation\Rule;
 
 class ProductAdminStoreRequest extends AdminRequest
 {
+    protected $apiMethod = 'storeProduct';
+
+    protected $modelName = 'Product';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -23,8 +27,25 @@ class ProductAdminStoreRequest extends AdminRequest
      */
     public function rules()
     {
-        $rules =[
-            //
+        $rules = [
+            'id'                    => 'nullable|integer',
+            'product_category_id'   => 'required|integer',
+            'alias'                 => 'nullable|string',
+            'title'                 => 'required|string',
+            'description'           => 'nullable|string',
+            'products'              => 'nullable|array',
+            'products.*'            => 'nullable|array',
+            'products.*.name'       => 'nullable|string',
+            'products.*.description'=> 'nullable|string',
+            'products.*.price'      => 'nullable|integer',
+            'files'                 => 'nullable|string',
+            'state'                 => [
+                'required',
+                Rule::in([0,1])
+            ],
+            'brands'                => 'nullable|array',
+            'brands.*'              => 'nullable|array',
+            'brands.*.id'           => 'nullable|integer'
         ];
 
         return array_merge(parent::rules(), $rules);

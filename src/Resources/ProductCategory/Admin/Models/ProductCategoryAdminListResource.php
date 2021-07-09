@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Resources\ProductCategory\Admin\Models;
 
-use Illuminate\Http\Resources\Json\JsonResource;
+use DaydreamLab\JJAJ\Resources\BaseJsonResource;
 
-class ProductCategoryAdminListResource extends JsonResource
+class ProductCategoryAdminListResource extends BaseJsonResource
 {
     /**
      * Transform the resource into an array.

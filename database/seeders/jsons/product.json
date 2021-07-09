@@ -8,7 +8,21 @@
         "code": "1",
         "children": [],
         "products": [
-
+          {
+            "title": "IT基礎架構產品1",
+            "brands": [
+              {
+                "id": 1
+              }
+            ],
+            "products": [
+              {
+                "name": "產品型號",
+                "description": "產品說明",
+                "price": 1000
+              }
+            ]
+          }
         ]
       }
     ],
