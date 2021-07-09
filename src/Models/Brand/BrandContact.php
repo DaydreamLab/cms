@@ -68,8 +68,8 @@ class BrandContact extends BaseModel
     }
 
 
-    public function brands()
+    public function brand()
     {
-        return $this->belongsToMany(Brand::class, 'brands_contacts_maps', 'brand_contact_id', 'brand_id');
+        return $this->belongsTo(Brand::class, 'brand_id', 'id');
     }
 }
