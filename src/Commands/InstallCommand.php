@@ -33,20 +33,21 @@ class InstallCommand extends Command
 
 
     protected $seeders = [
-//        'ApisTableSeeder',
-//        'AssetsTableSeeder',
-//        'BrandsTableSeeder',
-//        'CategoriesTableSeeder',
-//        'ExtrafieldsTableSeeder',
-//        'ProductsTableSeeder',
-//        'ItemsTableSeeder',
-//        'SitesTableSeeder',
-//        'LanguagesTableSeeder',
-//        'MenusTableSeeder',
-//        'ModulesTableSeeder',
-//        'TagsTableSeeder',
-//        'ZeroneAssetsGroupTableSeeder',
+        'ApisTableSeeder',
+        'AssetsTableSeeder',
+        'BrandsTableSeeder',
+        'CategoriesTableSeeder',
+        'ExtrafieldsTableSeeder',
+        'ProductsTableSeeder',
+        'ItemsTableSeeder',
+        'SitesTableSeeder',
+        'LanguagesTableSeeder',
+        'MenusTableSeeder',
+        'ModulesTableSeeder',
+        'TagsTableSeeder',
+        'ZeroneAssetsGroupTableSeeder',
         'ZeroneCompanyTableSeeder',
+        'ZeroneUserTableSeeder',
     ];
 
 
@@ -67,6 +68,10 @@ class InstallCommand extends Command
      */
     public function handle()
     {
+        $this->call('db:seed', [
+            '--class' => $this->seeder_namespace . 'ZeroneUserTableSeeder'
+        ]);
+        exit();
         $this->call('user:install');
 
         foreach ($this->seeders as $seeder) {
