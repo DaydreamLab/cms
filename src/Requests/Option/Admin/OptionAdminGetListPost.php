@@ -35,6 +35,7 @@ class OptionAdminGetListPost extends AdminRequest
                 'nullable',
                 Rule::in([
                     'asset',
+                    'brand',
                     'extension',
                     'extrafield_group',
                     'item_category',

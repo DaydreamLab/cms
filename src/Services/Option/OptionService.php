@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Services\Option;
 
+use DaydreamLab\Cms\Services\Brand\Admin\BrandAdminService;
 use DaydreamLab\Cms\Services\Category\Admin\CategoryAdminService;
 use DaydreamLab\Cms\Services\Extrafield\Admin\ExtrafieldGroupAdminService;
 use DaydreamLab\Cms\Services\Language\Admin\LanguageAdminService;
@@ -37,9 +38,11 @@ class OptionService
                                 ExtrafieldGroupAdminService $extrafieldGroupAdminService,
                                 ModuleAdminService $moduleAdminService,
                                 ProductCategoryAdminService $productCategoryAdminService,
+                                BrandAdminService $brandAdminService,
                                 SiteAdminService $siteAdminService)
     {
         $this->map['asset']                 = $assetAdminService;
+        $this->map['brand']                 = $brandAdminService;
         $this->map['extension']             = ['item, menu, module'];
         $this->map['extrafield_group']      = $extrafieldGroupAdminService;
         $this->map['item_article_category'] = $categoryAdminService;
@@ -65,9 +68,11 @@ class OptionService
         {
             $service = $this->map[$type];
             $q = new QueryCapsule();
-            $q = $q->where('paginate', 0);
+            //$q = $q->where('paginate', 0);
             if ($type == 'asset') {
                 $data[$type] = $this->getOptionList($service, 'tree', $q, []);
+            } elseif ($type == 'brand') {
+                $data[$type] = $this->getOptionList($service, 'list', $q);
             } elseif ($type == 'extension') {
                 $data[$type] = $service;
             } elseif ($type == 'extrafield_group') {
@@ -95,7 +100,7 @@ class OptionService
                     ->where('title', '!=', 'ROOT');
                 $data[$type] = $this->getOptionList($service, 'tree', $q , ['alias']);
             } elseif ($type == 'product_category') {
-
+                $data[$type] = $this->getOptionList($service, 'tree', $q);
             } elseif ($type == 'site') {
                 $data[$type] = $this->getOptionList($service, 'list', $q, ['url']);
             } elseif ($type == 'user_group') {
