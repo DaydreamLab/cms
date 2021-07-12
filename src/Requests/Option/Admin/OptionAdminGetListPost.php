@@ -48,6 +48,8 @@ class OptionAdminGetListPost extends AdminRequest
                     'module',
                     'module_category',
                     'product_category',
+                    'solution_category',
+                    'industry_category',
                     'user_group',
                     'viewlevel',
                 ])

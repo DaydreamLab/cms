@@ -5,6 +5,7 @@ namespace DaydreamLab\Cms\Services\Option;
 use DaydreamLab\Cms\Services\Brand\Admin\BrandAdminService;
 use DaydreamLab\Cms\Services\Category\Admin\CategoryAdminService;
 use DaydreamLab\Cms\Services\Extrafield\Admin\ExtrafieldGroupAdminService;
+use DaydreamLab\Cms\Services\Item\Admin\ItemAdminService;
 use DaydreamLab\Cms\Services\Language\Admin\LanguageAdminService;
 use DaydreamLab\Cms\Services\Menu\Admin\MenuAdminService;
 use DaydreamLab\Cms\Services\Module\Admin\ModuleAdminService;
@@ -36,6 +37,7 @@ class OptionService
                                 UserGroupAdminService $groupAdminService,
                                 MenuAdminService $menuAdminService,
                                 ExtrafieldGroupAdminService $extrafieldGroupAdminService,
+                                ItemAdminService $itemAdminService,
                                 ModuleAdminService $moduleAdminService,
                                 ProductCategoryAdminService $productCategoryAdminService,
                                 BrandAdminService $brandAdminService,
@@ -54,6 +56,8 @@ class OptionService
         $this->map['module']                = $moduleAdminService;
         $this->map['module_category']       = $categoryAdminService;
         $this->map['product_category']      = $productCategoryAdminService;
+        $this->map['solution_category']     = $itemAdminService;
+        $this->map['industry_category']     = $itemAdminService;
         $this->map['site']                  = $siteAdminService;
         $this->map['user_group']            = $groupAdminService;
         $this->map['viewlevel']             = $viewlevelAdminService;
@@ -70,46 +74,62 @@ class OptionService
             $q = new QueryCapsule();
             //$q = $q->where('paginate', 0);
             if ($type == 'asset') {
-                $data[$type] = $this->getOptionList($service, 'tree', $q, []);
+                $data[$type] = $this->getOptionList($service, 'tree', collect(['q' => $q]), []);
             } elseif ($type == 'brand') {
-                $data[$type] = $this->getOptionList($service, 'list', $q);
+                $data[$type] = $this->getOptionList($service, 'list', collect(['q' => $q]));
             } elseif ($type == 'extension') {
                 $data[$type] = $service;
             } elseif ($type == 'extrafield_group') {
-                $data[$type] = $this->getOptionList($service, 'list', $q, ['extrafields']);
+                $data[$type] = $this->getOptionList($service, 'list', collect(['q' => $q]), ['extrafields']);
             } elseif ($type == 'item_article_category') {
                 $q = $q->where('extension', 'item')->where('content_type', 'article');
-                $data[$type] = $this->getOptionList($service, 'tree', $q);
+                $data[$type] = $this->getOptionList($service, 'tree', collect(['q' => $q]));
             } elseif ($type == 'item_category') {
                 $q = $q->where('extension', 'item');
-                $data[$type] = $this->getOptionList($service, 'tree', $q);
+                $data[$type] = $this->getOptionList($service, 'tree', collect(['q' => $q]));
             } elseif ($type == 'item_content_type') {
                 $data[$type] = $service;
             } elseif ($type == 'language') {
                 $q = $q->where('type', 'content');
-                $data[$type] = $this->getOptionList($service, 'list', $q, ['sef']);
+                $data[$type] = $this->getOptionList($service, 'list', collect(['q' => $q]), ['sef']);
             } elseif ($type == 'menu') {
-                $data[$type] = $this->getOptionList($service, 'tree', $q);
+                $data[$type] = $this->getOptionList($service, 'tree', collect(['q' => $q]));
             } elseif ($type == 'menu_category') {
                 $q = $q->where('extension', 'menu');
-                $data[$type] = $this->getOptionList($service, 'tree', $q);
+                $data[$type] = $this->getOptionList($service, 'tree', collect(['q' => $q]));
             } elseif ($type == 'module') {
-                $data[$type] = $this->getOptionList($service, 'list', $q);
+                $data[$type] = $this->getOptionList($service, 'list', collect(['q' => $q]));
             } elseif ($type == 'module_category') {
                 $q = $q->where('extension', 'module')
                     ->where('title', '!=', 'ROOT');
-                $data[$type] = $this->getOptionList($service, 'tree', $q , ['alias']);
+                $data[$type] = $this->getOptionList($service, 'tree', collect(['q' => $q]) , ['alias']);
             } elseif ($type == 'product_category') {
-                $data[$type] = $this->getOptionList($service, 'tree', $q);
+                $data[$type] = $this->getOptionList($service, 'tree', collect(['q' => $q]));
+            } elseif ($type == 'solution_category') {
+                $q = $q->orderBy('id', 'asc');
+                $data[$type] = $this->getOptionList($service, 'list', collect(
+                    [
+                        'q' => $q,
+                        'content_type' => 'solution_category',
+                    ]
+                ));
+            } elseif ($type == 'industry_category') {
+                $q = $q->orderBy('id', 'asc');
+                $data[$type] = $this->getOptionList($service, 'list', collect(
+                    [
+                        'q' => $q,
+                        'content_type' => 'industry_category',
+                    ]
+                ));
             } elseif ($type == 'site') {
-                $data[$type] = $this->getOptionList($service, 'list', $q, ['url']);
+                $data[$type] = $this->getOptionList($service, 'list', collect(['q' => $q]), ['url']);
             } elseif ($type == 'user_group') {
                 $q = $q->where('title', '!=', 'ROOT');
-                $data[$type] = $this->getOptionList($service, 'tree', $q);
+                $data[$type] = $this->getOptionList($service, 'tree', collect(['q' => $q]));
             } elseif ($type == 'viewlevel') {
                 $user = $this->getUser();
                 $q = $q->whereIn('id', $user->accessIds);
-                $data[$type] = $this->getOptionList($service, 'list', $q);
+                $data[$type] = $this->getOptionList($service, 'list', collect(['q' => $q]));
             }
         }
 
@@ -126,17 +146,17 @@ class OptionService
      * @param array $extra_fields
      * @return mixed
      */
-    public function getOptionList($service, $type, $q = null, $extra_fields = [])
+    public function getOptionList($service, $type, $input, $extra_fields = [])
     {
         if ($type == 'tree') {
             $default_field = array_merge($extra_fields, ['id', 'tree_list_title']);
-            return $service->search(collect(['q' => $q]))//->toFlatTree()
+            return $service->search($input)//->toFlatTree()
                 ->map( function($item, $key) use ($default_field){
                     return $item->only($default_field);
                 });
         } else {
             $default_field = array_merge($extra_fields, ['id', 'title']);
-            return $service->search(collect(['q' => $q]))
+            return $service->search($input)
                 ->map( function($item, $key) use ($default_field) {
                     return $item->only($default_field);
                 });
