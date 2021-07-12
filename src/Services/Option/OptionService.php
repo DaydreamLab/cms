@@ -7,6 +7,7 @@ use DaydreamLab\Cms\Services\Extrafield\Admin\ExtrafieldGroupAdminService;
 use DaydreamLab\Cms\Services\Language\Admin\LanguageAdminService;
 use DaydreamLab\Cms\Services\Menu\Admin\MenuAdminService;
 use DaydreamLab\Cms\Services\Module\Admin\ModuleAdminService;
+use DaydreamLab\Cms\Services\ProductCategory\Admin\ProductCategoryAdminService;
 use DaydreamLab\Cms\Services\Site\Admin\SiteAdminService;
 use DaydreamLab\JJAJ\Database\QueryCapsule;
 use DaydreamLab\JJAJ\Traits\LoggedIn;
@@ -35,6 +36,7 @@ class OptionService
                                 MenuAdminService $menuAdminService,
                                 ExtrafieldGroupAdminService $extrafieldGroupAdminService,
                                 ModuleAdminService $moduleAdminService,
+                                ProductCategoryAdminService $productCategoryAdminService,
                                 SiteAdminService $siteAdminService)
     {
         $this->map['asset']                 = $assetAdminService;
@@ -48,6 +50,7 @@ class OptionService
         $this->map['menu_category']         = $categoryAdminService;
         $this->map['module']                = $moduleAdminService;
         $this->map['module_category']       = $categoryAdminService;
+        $this->map['product_category']      = $productCategoryAdminService;
         $this->map['site']                  = $siteAdminService;
         $this->map['user_group']            = $groupAdminService;
         $this->map['viewlevel']             = $viewlevelAdminService;
@@ -91,6 +94,8 @@ class OptionService
                 $q = $q->where('extension', 'module')
                     ->where('title', '!=', 'ROOT');
                 $data[$type] = $this->getOptionList($service, 'tree', $q , ['alias']);
+            } elseif ($type == 'product_category') {
+
             } elseif ($type == 'site') {
                 $data[$type] = $this->getOptionList($service, 'list', $q, ['url']);
             } elseif ($type == 'user_group') {

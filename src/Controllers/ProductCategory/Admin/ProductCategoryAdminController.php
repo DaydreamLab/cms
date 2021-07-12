@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Controllers\ProductCategory\Admin;
 
 use DaydreamLab\Cms\Controllers\cmsController;
 use DaydreamLab\Cms\Requests\ProductCategory\Admin\ProductCategoryAdminGetItemRequest;
+use DaydreamLab\Cms\Requests\ProductCategory\Admin\ProductCategoryAdminGetTreeRequest;
 use DaydreamLab\Cms\Requests\ProductCategory\Admin\ProductCategoryAdminRemoveRequest;
 use DaydreamLab\Cms\Requests\ProductCategory\Admin\ProductCategoryAdminRestoreRequest;
 use DaydreamLab\Cms\Requests\ProductCategory\Admin\ProductCategoryAdminSearchRequest;
@@ -99,5 +100,18 @@ class ProductCategoryAdminController extends cmsController
         }
 
         return $this->response($this->service->status, $this->service->response, [], ProductCategoryAdminResource::class);
+    }
+
+
+    public function tree(ProductCategoryAdminGetTreeRequest $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->tree();
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
     }
 }

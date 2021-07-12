@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Services\ProductCategory\Admin;
 
 use DaydreamLab\Cms\Repositories\ProductCategory\Admin\ProductCategoryAdminRepository;
+use DaydreamLab\Cms\Resources\ProductCategory\Admin\Models\ProductCategoryAdminListResource;
 use DaydreamLab\Cms\Services\ProductCategory\ProductCategoryService;
 use Illuminate\Support\Collection;
 
@@ -26,5 +27,18 @@ class ProductCategoryAdminService extends ProductCategoryService
         $item = parent::store($input);
 
         return $item;
+    }
+
+
+    public function tree()
+    {
+        $all = $this->all();
+
+        $tree = $all->toTree();
+
+        $this->status = 'GetTreeListSuccess';
+        $this->response = $tree;
+
+        return $tree;
     }
 }

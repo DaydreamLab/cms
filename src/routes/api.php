@@ -93,6 +93,8 @@ Route::post('api/admin/product/category/state', [ProductCategoryAdminController:
     ->middleware(['expired', 'admin']);
 Route::post('api/admin/product/category/store', [ProductCategoryAdminController::class, 'store'])
     ->middleware(['expired', 'admin']);
+Route::get('api/admin/product/category/tree', [ProductCategoryAdminController::class, 'tree'])
+    ->middleware(['expired', 'admin']);
 Route::get('api/admin/product/category/{id}', [ProductCategoryAdminController::class, 'getItem'])
     ->middleware(['expired', 'admin']);
 

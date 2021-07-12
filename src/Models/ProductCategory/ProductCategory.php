@@ -45,6 +45,8 @@ class ProductCategory extends BaseModel
      * @var array
      */
     protected $hidden = [
+        '_lft',
+        '_rgt',
     ];
 
 
