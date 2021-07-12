@@ -55,10 +55,18 @@ Route::get('api/tag/{alias}', [TagFrontController::class, 'getItemByAlias']);
 /************************************  後台 API  ************************************/
 # 品牌 Brand
 
+Route::post('api/admin/brand/remove', [BrandAdminController::class, 'remove'])
+    ->middleware(['expired', 'admin']);
+Route::post('api/admin/brand/restore', [BrandAdminController::class, 'restore'])
+    ->middleware(['expired', 'admin']);
 Route::post('api/admin/brand/search', [BrandAdminController::class, 'search'])
     ->middleware(['expired','admin']);
+Route::post('api/admin/brand/state', [BrandAdminController::class, 'state'])
+    ->middleware(['expired', 'admin']);
 Route::post('api/admin/brand/store', [BrandAdminController::class, 'store'])
     ->middleware(['expired','admin']);
+Route::get('api/admin/brand/{id}', [BrandAdminController::class, 'getItem'])
+    ->middleware(['expired', 'admin']);
 
 # 產品
 Route::post('api/admin/product/remove', [ProductAdminController::class, 'remove'])

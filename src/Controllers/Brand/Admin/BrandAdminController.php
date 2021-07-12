@@ -24,6 +24,45 @@ class BrandAdminController extends CmsController
     }
 
 
+    public function getItem(BrandAdminGetItemRequest $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->getItem(collect(['id' => $request->route('id')]));
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response, [], BrandAdminResource::class);
+    }
+
+
+    public function remove(BrandAdminRemoveRequest $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->remove($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
+
+    public function restore(BrandAdminRestoreRequest $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->restore($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
+
     public function search(BrandAdminSearchRequest $request)
     {
         $this->service->setUser($request->user('api'));
@@ -34,6 +73,19 @@ class BrandAdminController extends CmsController
         }
 
         return $this->response($this->service->status, $this->service->response, [], BrandAdminListResourceCollection::class);
+    }
+
+
+    public function state(BrandAdminStateRequest $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->state($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
