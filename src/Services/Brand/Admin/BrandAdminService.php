@@ -14,14 +14,4 @@ class BrandAdminService extends BrandService
         $this->repo = $repo;
     }
 
-
-    public function store(Collection $input)
-    {
-        $contacts = $input->get('brand_contacts');
-        $input->forget('brand_contacts');
-
-        $brand = parent::store($input);
-
-        return $brand;
-    }
 }

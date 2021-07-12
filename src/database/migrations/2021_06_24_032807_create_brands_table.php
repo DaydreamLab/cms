@@ -20,6 +20,7 @@ class CreateBrandsTable extends Migration
             $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->string('factory_url')->nullable();
+            $table->mediumText('contact')->nullable();
             $table->string('contact_email')->nullable();
             $table->string('business_representitive')->nullable();
             $table->string('logo_image')->nullable();
@@ -27,6 +28,7 @@ class CreateBrandsTable extends Migration
             $table->string('banner_link')->nullable();
             $table->text('metadesc')->nullable();
             $table->string('metakeywords')->nullable();
+            $table->mediumText('tracking')->nullable();
 
             $table->tinyInteger('state')->default(1);
             $table->unsignedInteger('locked_by')->nullable()->default(0);

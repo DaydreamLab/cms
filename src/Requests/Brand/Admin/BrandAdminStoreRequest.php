@@ -29,7 +29,7 @@ class BrandAdminStoreRequest extends AdminRequest
     {
         $rules = [
             'id'                        => 'nullable|integer',
-            'code'                      => 'nullable|integer',
+            'code'                      => 'nullable|string',
             'alias'                     => 'nullable|string',
             'title'                     => 'required|string',
             'description'               => 'nullable|string',
@@ -46,14 +46,18 @@ class BrandAdminStoreRequest extends AdminRequest
                 Rule::in([0,1])
             ],
 
-            'brand_contacts'                    => 'nullable|array',
-            'brand_contacts.*'                  => 'nullable|array',
-            'brand_contacts.*.first_name'       => 'nullable|string',
-            'brand_contacts.*.last_name'        => 'nullable|string',
-            'brand_contacts.*.gender'           => 'nullable|string',
-            'brand_contacts.*.phone_code'       => 'nullable|string',
-            'brand_contacts.*.phone_number'     => 'nullable|string',
-            'brand_contacts.*.phone_extension'  => 'nullable|string'
+            'contact'                   => 'nullable|array',
+            'contact.*'                 => 'nullable|array',
+            'contact.*.last_name'       => 'nullable|string',
+            'contact.*.gender'          => 'nullable|string',
+            'contact.*.phone_code'      => 'nullable|string',
+            'contact.*.phone_number'    => 'nullable|string',
+            'contact.*.phone_extension' => 'nullable|string',
+
+            'tracking'                  => 'nullable|array',
+            'tracking.*'                => 'nullable|array',
+            'tracking.*.type'           => 'nullable|string',
+            'tracking.*.code'           => 'nullable|string'
         ];
 
         return array_merge(parent::rules(), $rules);

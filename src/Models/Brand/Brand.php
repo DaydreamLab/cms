@@ -35,6 +35,8 @@ class Brand extends BaseModel
         'title',
         'description',
         'factory_url',
+        'contact',
+        'brand_contacts',
         'contact_email',
         'business_representitive',
         'logo_image',
@@ -42,6 +44,7 @@ class Brand extends BaseModel
         'banner_link',
         'metadesc',
         'metakeywords',
+        'tracking',
         'state',
         'locked_by',
         'locked_at',
@@ -69,6 +72,8 @@ class Brand extends BaseModel
 
 
     protected $casts = [
+        'contact' => 'array',
+        'tracking' => 'array',
         'locked_at' => 'datetime:Y-m-d H:i:s',
     ];
 
@@ -76,12 +81,6 @@ class Brand extends BaseModel
     public static function boot()
     {
         self::traitBoot();
-    }
-
-
-    public function brandContacts()
-    {
-        return $this->hasMany(BrandContact::class, 'brand_id', 'id');
     }
 
 
