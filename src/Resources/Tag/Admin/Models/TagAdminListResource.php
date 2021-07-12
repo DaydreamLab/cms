@@ -15,6 +15,7 @@ class TagAdminListResource extends BaseJsonResource
      */
     public function toArray($request)
     {
+        $params = $this->params;
         return [
             'id'                        => $this->id,
             'title'                     => $this->title,
@@ -25,6 +26,7 @@ class TagAdminListResource extends BaseJsonResource
             'content_type'              => $this->content_type,
             'extension'                 => $this->extension,
             'hits'                      => $this->hits,
+            'show_in_search'            => isset($params['show_in_search']) ? $params['show_in_search'] : 0,
             'access'                    => $this->access,
             'language_title'            => $this->language_title,
         ];

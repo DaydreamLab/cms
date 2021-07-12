@@ -46,6 +46,7 @@ class TagAdminStorePost extends AdminRequest
             'params'        => 'nullable|array',
             'params.meta'   => 'nullable|array',
             'params.seo'    => 'nullable|array',
+            'show_in_search' => ['nullable', Rule::in([0,1])],
             'publish_up'    => 'nullable|date',
             'publish_down'  => 'nullable|date',
         ];
@@ -57,7 +58,11 @@ class TagAdminStorePost extends AdminRequest
     public function validated()
     {
         $validated = parent::validated();
-        $validated->put('params', RequestHelper::handleParams($validated->get('params')));
+        $params = RequestHelper::handleParams($validated->get('params'));
+        if ($show_in_search = $validated->get('show_in_search')) {
+            $params['show_in_search'] = $show_in_search;
+        }
+        $validated->put('params', $params);
         if (!$validated->get('extension')) {
             $validated->put('extension', 'item');
             if (!$validated->get('content_type')) {
