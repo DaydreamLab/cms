@@ -89,21 +89,20 @@
                 "state": 1,
                 "showNav": 1,
                 "apis": [
-                    "getProductSeries",
-                    "addProductSeries",
-                    "editProductSeries",
-                    "deleteProductSeries",
-                    "searchProductSeries",
-                    "stateProductSeries",
-                    "restoreProductSeries",
-                    "orderingProductSeries"
+                    "getProduct",
+                    "addProduct",
+                    "editProduc",
+                    "deleteProduct",
+                    "searchProduct",
+                    "stateProduct",
+                    "restoreProduct",
+                    "orderingProduct"
                 ],
                 "defaultApis": {
                     "getOption": ["checked", "hidden"],
                     "uploadMedia": ["checked", "hidden"],
                     "getMediaAllItems": ["checked", "hidden"],
-                    "getMediaAllFolders": ["checked", "hidden"],
-                    "addProduct": ["checked", "hidden"]
+                    "getMediaAllFolders": ["checked", "hidden"]
                 }
             }
         ],
