@@ -1,0 +1,19 @@
+[
+    {
+        "title": "經銷會員",
+        "canDelete": 0,
+        "groups": [
+            "Public",
+            "一般會員",
+            "經銷會員"
+        ]
+    },
+    {
+        "title": "一般會員",
+        "canDelete": 0,
+        "groups": [
+            "Public",
+            "一般會員"
+        ]
+    }
+]

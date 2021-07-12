@@ -1,0 +1,18 @@
+[
+    {
+        "title": "經銷會員",
+        "parentTitle": "Registered",
+        "description": "",
+        "canDelete": 0,
+        "access": 1,
+        "children": [
+            {
+                "title": "一般會員",
+                "description": "",
+                "canDelete": 0,
+                "access": 1,
+                "children": []
+            }
+        ]
+    }
+]
