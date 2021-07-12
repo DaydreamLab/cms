@@ -520,5 +520,131 @@
         "method": "removeFile",
         "url": "/admin/file/remove",
         "created_by": 1
+    },
+    {
+        "name": "取得品牌",
+        "method": "getBrand",
+        "url": "/admin/brand/{id}",
+        "created_by": 1
+    },
+    {
+        "name": "新增品牌",
+        "method": "addBrand",
+        "url": "/admin/brand/store",
+        "created_by": 1
+    },
+    {
+        "name": "編輯品牌",
+        "method": "editBrand",
+        "url": "/admin/brand/store",
+        "created_by": 1
+    },
+    {
+        "name": "刪除品牌",
+        "method": "deleteBrand",
+        "url": "/admin/brand/remove",
+        "created_by": 1
+    },
+    {
+        "name": "搜尋品牌",
+        "method": "searchBrand",
+        "url": "/admin/brand/search",
+        "created_by": 1
+    },
+    {
+        "name": "更新品牌狀態",
+        "method": "stateBrand",
+        "url": "/admin/brand/state",
+        "created_by": 1
+    },
+    {
+        "name": "回存品牌",
+        "method": "restoreBrand",
+        "url": "/admin/brand/restore",
+        "created_by": 1
+    },
+    {
+        "name": "取得產品類別",
+        "method": "getProductCategory",
+        "url": "/admin/product/category/{id}",
+        "created_by": 1
+    },
+    {
+        "name": "新增產品類別",
+        "method": "addProductCategory",
+        "url": "/admin/product/category/store",
+        "created_by": 1
+    },
+    {
+        "name": "編輯產品類別",
+        "method": "editProductCategory",
+        "url": "/admin/product/category/store",
+        "created_by": 1
+    },
+    {
+        "name": "刪除產品類別",
+        "method": "deleteProductCategory",
+        "url": "/admin/product/category/remove",
+        "created_by": 1
+    },
+    {
+        "name": "搜尋產品類別",
+        "method": "searchProductCategory",
+        "url": "/admin/product/category/search",
+        "created_by": 1
+    },
+    {
+        "name": "更新產品類別狀態",
+        "method": "stateProductCategory",
+        "url": "/admin/product/category/state",
+        "created_by": 1
+    },
+    {
+        "name": "回存產品類別",
+        "method": "restoreProductCategory",
+        "url": "/admin/product/category/restore",
+        "created_by": 1
+    },
+    {
+        "name": "取得產品資料",
+        "method": "getProduct",
+        "url": "/admin/product/{id}",
+        "created_by": 1
+    },
+    {
+        "name": "新增產品資料",
+        "method": "addProduct",
+        "url": "/admin/product/store",
+        "created_by": 1
+    },
+    {
+        "name": "編輯產品資料",
+        "method": "editProduct",
+        "url": "/admin/product/store",
+        "created_by": 1
+    },
+    {
+        "name": "刪除產品資料",
+        "method": "deleteProduct",
+        "url": "/admin/product/remove",
+        "created_by": 1
+    },
+    {
+        "name": "搜尋產品資料",
+        "method": "searchProduct",
+        "url": "/admin/product/search",
+        "created_by": 1
+    },
+    {
+        "name": "更新產品資料狀態",
+        "method": "stateProduct",
+        "url": "/admin/product/state",
+        "created_by": 1
+    },
+    {
+        "name": "回存產品資料",
+        "method": "restoreProduct",
+        "url": "/admin/product/restore",
+        "created_by": 1
     }
 ]
