@@ -2,8 +2,8 @@
 
 namespace DaydreamLab\Cms\Database\Seeders;
 
-use DaydreamLab\Cms\Models\Category\Category;
 use DaydreamLab\User\Models\Company\Company;
+use DaydreamLab\User\Models\Company\CompanyCategory;
 use Illuminate\Database\Seeder;
 
 class ZeroneCompanyTableSeeder extends Seeder
@@ -20,7 +20,7 @@ class ZeroneCompanyTableSeeder extends Seeder
         $this->migrate($data, null);
 
         # 建立廠商
-        $companyCategories = Category::where('extension', 'company')->whereNotNull('parent_id')->get();
+        $companyCategories = CompanyCategory::all();
         $data = getJson(__DIR__ . '/jsons/zerone-company.json', true);
         foreach ($data as $companyInput) {
             $companyData = [
@@ -57,7 +57,7 @@ class ZeroneCompanyTableSeeder extends Seeder
             $children = $inputItem['children'];
             unset($inputItem['children']);
 
-            $category = Category::create($inputItem);
+            $category = CompanyCategory::create($inputItem);
 
             if ($parentNode) {
                 $parentNode->appendNode($category);

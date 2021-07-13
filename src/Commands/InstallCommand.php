@@ -66,7 +66,7 @@ class InstallCommand extends Command
     public function handle()
     {
 //        $this->call('db:seed', [
-//            '--class' => $this->seeder_namespace . 'ZeroneUserTableSeeder'
+//            '--class' => $this->seeder_namespace . 'ZeroneCompanyTableSeeder'
 //        ]);
 //        exit();
 
