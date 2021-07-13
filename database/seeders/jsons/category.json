@@ -244,13 +244,29 @@
         "introtext"   : "",
         "image"       : "",
         "description" : "",
-        "content_type": "newsletter_category",
-        "extension"   : "item",
+        "content_type": "",
+        "extension"   : "newsletter",
         "ordering"    : 1,
         "access"      : 1,
         "params"      : {},
         "children"    : [
-
+          {
+            "title"       : "零壹電子報",
+            "alias"       : "01_newsletter",
+            "path"        : "/item/newsletter_category/newsletter",
+            "state"       : 1,
+            "introimage"  : "",
+            "introtext"   : "",
+            "image"       : "",
+            "description" : "",
+            "content_type": "",
+            "extension"   : "newsletter",
+            "ordering"    : 1,
+            "access"      : 1,
+            "params"      : {},
+            "children"    : [],
+            "created_by": 1
+          }
         ],
         "created_by": 1
       }

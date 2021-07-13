@@ -33,6 +33,7 @@ class ItemAdminContentStorePost extends AdminRequest
             'id'                    => 'nullable|integer',
             'title'                 => 'required|string',
             'alias'                 => 'nullable|string',
+            'category_id'           => 'required|integer',
             'state'                 => [
                 'required',
                 Rule::in([0,1])
@@ -82,18 +83,6 @@ class ItemAdminContentStorePost extends AdminRequest
     {
         $validated = parent::validated();
         $validated->put('params', RequestHelper::handleParams($validated->get('params')));
-
-        if ( $content_type = $this->route('content_type') ) {
-            $category = Category::where('content_type', $content_type)->first();
-            if (!$category) {
-                $validated->put('category_id', 1);
-            } else {
-                $validated->put('content_type', $content_type);
-                $validated->put('category_id', $category->id);
-            }
-        } else {
-            $validated->put('category_id', 1);
-        }
 
         return $validated;
     }
