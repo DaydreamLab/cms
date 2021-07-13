@@ -142,10 +142,10 @@ class ItemAdminService extends ItemService
 
         # 存入額外欄位
         if ($input->has('id')) {
-            $item_id = $input->get('id');
-        } else {
-            $item_id = $result->id;
+            $result = $this->find($input->get('id'));
         }
+        $item_id = $result->id;
+
         foreach ($extrafields as $extrafield) {
             $e = Extrafield::where('id', $extrafield['id'])->first();
             $e_v = ExtrafieldValue::where('item_id', $item_id)->where('extrafield_id', $extrafield['id'])->first();
