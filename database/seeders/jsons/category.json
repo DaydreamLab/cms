@@ -234,6 +234,25 @@
         "params"      : {},
         "children"    : [],
         "created_by": 1
+      },
+      {
+        "title"       : "電子報類別",
+        "alias"       : "newsletter_category",
+        "path"        : "/item/newsletter_category",
+        "state"       : 1,
+        "introimage"  : "",
+        "introtext"   : "",
+        "image"       : "",
+        "description" : "",
+        "content_type": "newsletter_category",
+        "extension"   : "item",
+        "ordering"    : 1,
+        "access"      : 1,
+        "params"      : {},
+        "children"    : [
+
+        ],
+        "created_by": 1
       }
     ],
     "created_by"    : 1
