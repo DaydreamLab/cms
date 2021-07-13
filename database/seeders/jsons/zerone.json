@@ -109,6 +109,38 @@
         "userGroups": ["Administrator", "Super User"]
     },
     {
+        "title": "產業分類",
+        "state": 1,
+        "assets": [
+            {
+                "title": "產業分類管理",
+                "path": "/industry-category",
+                "full_path": "/industry-category",
+                "component": "/industry-category/list",
+                "type": "menu",
+                "state": 1,
+                "showNav": 1,
+                "apis": [
+                    "getItem",
+                    "addItem",
+                    "editItem",
+                    "deleteItem",
+                    "searchItem",
+                    "restoreItem",
+                    "stateItem",
+                    "orderingItem"
+                ],
+                "defaultApis": {
+                    "getOption": ["checked", "hidden"],
+                    "uploadMedia": ["checked", "hidden"],
+                    "getMediaAllItems": ["checked", "hidden"],
+                    "getMediaAllFolders": ["checked", "hidden"]
+                }
+            }
+        ],
+        "userGroups": ["Administrator", "Super User"]
+    },
+    {
         "title": "解決方案",
         "state": 1,
         "assets": [
@@ -117,6 +149,31 @@
                 "path": "/solution",
                 "full_path": "/solution",
                 "component": "solution/list",
+                "type": "menu",
+                "state": 1,
+                "showNav": 1,
+                "apis": [
+                    "getItem",
+                    "addItem",
+                    "editItem",
+                    "deleteItem",
+                    "searchItem",
+                    "restoreItem",
+                    "stateItem",
+                    "orderingItem"
+                ],
+                "defaultApis": {
+                    "getOption": ["checked", "hidden"],
+                    "uploadMedia": ["checked", "hidden"],
+                    "getMediaAllItems": ["checked", "hidden"],
+                    "getMediaAllFolders": ["checked", "hidden"]
+                }
+            },
+            {
+                "title": "類別分類管理",
+                "path": "/solution-category",
+                "full_path": "/solution-category",
+                "component": "solution-category/list",
                 "type": "menu",
                 "state": 1,
                 "showNav": 1,
