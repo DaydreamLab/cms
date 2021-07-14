@@ -14,7 +14,6 @@ class TagFrontService extends TagService
 
     protected $itemFrontService;
 
-    protected $search_keys = ['title'];
 
     public function __construct(TagFrontRepository $repo,
                                 ItemFrontService $itemFrontService)

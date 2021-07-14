@@ -6,6 +6,7 @@ class RequestHelper
 {
     public static function handleParams($inputParams): array
     {
+        $params = $inputParams;
         $meta = [];
         if (isset($inputParams['meta'])) {
             $inputMeta = $inputParams['meta'];
@@ -17,6 +18,7 @@ class RequestHelper
             $meta['keywords'] = '';
             $meta['description'] = '';
         }
+        $params['meta'] = $meta;
 
         $seo = [];
         if(isset($inputParams['seo'])) {
@@ -33,10 +35,8 @@ class RequestHelper
                 }
             }
         }
+        $params['seo'] = $seo;
 
-        return [
-            'meta'  => $meta,
-            'seo'   => $seo
-        ];
+        return $params;
     }
 }

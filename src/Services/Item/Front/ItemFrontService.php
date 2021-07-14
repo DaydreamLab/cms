@@ -22,7 +22,6 @@ class ItemFrontService extends ItemService
 
     protected $userGroupFrontService;
 
-    protected $search_keys = ['title', 'introtext', 'description', 'extrafields_search'];
 
     public function __construct(ItemFrontRepository $repo,
                                 CategoryFrontService $categoryFrontService,

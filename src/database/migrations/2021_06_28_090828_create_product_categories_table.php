@@ -20,6 +20,7 @@ class CreateProductCategoriesTable extends Migration
             $table->string('code');
             $table->text('description')->nullable();
             $table->text('memo')->nullable();
+            $table->text('params')->nullable();
 
             $table->tinyInteger('state')->default(1);
             $table->unsignedInteger('ordering')->nullable();

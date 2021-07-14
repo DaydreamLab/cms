@@ -557,5 +557,14 @@
      "required": 0,
      "access": 1,
      "created_by": 1
+   },
+   {
+     "content_type": "newsletter_category",
+     "title": "試閱",
+     "alias": "preview",
+     "type": "text",
+     "required": 0,
+     "access": 1,
+     "created_by": 1
    }
  ]

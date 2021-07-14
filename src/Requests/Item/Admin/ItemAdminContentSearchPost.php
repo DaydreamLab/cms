@@ -10,6 +10,8 @@ class ItemAdminContentSearchPost extends CmsSearchPost
     protected $apiMethod = 'searchItem';
 
     protected $modelName = 'Item';
+
+    protected $searchKeys = ['title'];
     /**
      * Determine if the user is authorized to make this request.
      *

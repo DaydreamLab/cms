@@ -35,6 +35,7 @@ class ProductCategory extends BaseModel
         'code',
         'description',
         'memo',
+        'params',
         'state',
         'ordering',
         'created_by',
@@ -59,6 +60,11 @@ class ProductCategory extends BaseModel
      * @var array
      */
     protected $appends = [
+    ];
+
+
+    protected $casts = [
+        'params' => 'array'
     ];
 
 

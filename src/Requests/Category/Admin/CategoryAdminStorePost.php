@@ -13,7 +13,6 @@ class CategoryAdminStorePost extends AdminRequest
 
     protected $modelName = 'Category';
 
-    protected $search_keys = ['title', 'introtext', 'description', 'extrafields_search'];
     /**
      * Determine if the user is authorized to make this request.
      *

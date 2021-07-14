@@ -7,7 +7,9 @@ use DaydreamLab\Cms\Models\Item\Item;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminFeaturedOrderingPost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminGetItemGet;
 use DaydreamLab\Cms\Resources\Item\Admin\Models\ItemAdminResource;
+use DaydreamLab\Cms\Resources\Item\Admin\Models\ItemContentAdminResource;
 use DaydreamLab\Cms\Resources\Item\Admin\Collections\ItemAdminListResourceCollection;
+use DaydreamLab\Cms\Resources\Item\Admin\Collections\ItemContentAdminListResourceCollection;
 use DaydreamLab\Cms\Services\Item\Admin\ItemAdminService;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminRemovePost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminContentSearchPost;
@@ -78,7 +80,7 @@ class ItemAdminController extends CmsController
             $this->handleException($t);
         }
 
-        return $this->response($this->service->status, $this->service->response, [], ItemAdminResource::class);
+        return $this->response($this->service->status, $this->service->response, [], ItemContentAdminResource::class);
     }
 
 
@@ -169,7 +171,7 @@ class ItemAdminController extends CmsController
             $this->handleException($t);
         }
 
-        return $this->response($this->service->status, $this->service->response, [], ItemAdminListResourceCollection::class);
+        return $this->response($this->service->status, $this->service->response, [], ItemContentAdminListResourceCollection::class);
     }
 
 
@@ -221,7 +223,7 @@ class ItemAdminController extends CmsController
             $this->handleException($t);
         }
 
-        return $this->response($this->service->status, $this->service->response, [], ItemAdminResource::class);
+        return $this->response($this->service->status, $this->service->response, [], ItemContentAdminResource::class);
     }
 
     /**

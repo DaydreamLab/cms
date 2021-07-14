@@ -37,6 +37,7 @@ class Product extends BaseModel
         'description',
         'products',
         'files',
+        'params',
         'state',
         'locked_by',
         'locked_at',
@@ -68,6 +69,7 @@ class Product extends BaseModel
     protected $casts = [
         'products' => 'array',
         'files' => 'array',
+        'params' => 'array',
         'locked_at' => 'datetime:Y-m-d H:i:s',
         'publish_up' => 'datetime:Y-m-d H:i:s',
         'publish_down' => 'datetime:Y-m-d H:i:s',

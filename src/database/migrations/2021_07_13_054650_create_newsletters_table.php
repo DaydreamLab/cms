@@ -15,7 +15,7 @@ class CreateNewslettersTable extends Migration
     {
         Schema::create('newsletters', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedInteger('category_id');
+            $table->unsignedInteger('newsletter_category_id');
 
 
             $table->tinyInteger('state')->default(1);

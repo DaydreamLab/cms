@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->text('description')->nullable();
             $table->mediumText('products')->nullable();
             $table->text('files')->nullable();
+            $table->text('params')->nullable();
 
             $table->tinyInteger('state')->default(1);
             $table->unsignedInteger('locked_by')->nullable()->default(0);

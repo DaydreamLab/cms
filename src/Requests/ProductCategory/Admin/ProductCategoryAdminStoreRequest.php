@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Requests\ProductCategory\Admin;
 
+use DaydreamLab\Cms\Helpers\RequestHelper;
 use DaydreamLab\JJAJ\Requests\AdminRequest;
 use Illuminate\Validation\Rule;
 
@@ -34,6 +35,7 @@ class ProductCategoryAdminStoreRequest extends AdminRequest
             'code'              => 'required|string',
             'description'       => 'nullable|string',
             'memo'              => 'nullable|string',
+            'params'            => 'nullable|array',
             'state'             => ['nullable', Rule::in([0,1,-1,-2])]
         ];
 
@@ -44,6 +46,7 @@ class ProductCategoryAdminStoreRequest extends AdminRequest
     public function validated()
     {
         $validated = parent::validated();
+        $validated->put('params', RequestHelper::handleParams($validated->get('params')));
 
         return $validated;
     }
