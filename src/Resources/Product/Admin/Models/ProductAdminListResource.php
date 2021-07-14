@@ -19,7 +19,9 @@ class ProductAdminListResource extends BaseJsonResource
             'id'                => $this->id,
             'alias'             => $this->alias,
             'title'             => $this->title,
-            'brand_title'       => ($this->brand) ? $this->brand->title : '',
+            'brand_title'       => $this->brands->map(function($b) {
+                return $b->title;
+            }),
             'parent_category'   => $this->productCategory->parent->title,
             'category'          => $this->productCategory->title,
             'publish_up'        => $this->getDateTimeString($this->publish_up, $tz),

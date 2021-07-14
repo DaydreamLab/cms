@@ -21,6 +21,7 @@ class ProductCategoryAdminResource extends BaseJsonResource
             'code'          => $this->code,
             'description'   => $this->description,
             'memo'          => $this->memo,
+            'params'        => $this->params,
             'parent_id'     => $this->parent_id,
             'state'         => $this->state,
             'created_at'    => $this->getDateTimeString($this->created_at, $tz),

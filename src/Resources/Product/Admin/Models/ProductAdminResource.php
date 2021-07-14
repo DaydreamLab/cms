@@ -22,6 +22,7 @@ class ProductAdminResource extends BaseJsonResource
             'description'       => $this->description,
             'products'          => $this->products,
             'files'             => $this->files,
+            'params'            => $this->params,
             'state'             => $this->state,
             'brands'            => $this->brands->map(function($b) {
                 return $b->only(['id', 'title']);
