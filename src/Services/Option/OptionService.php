@@ -76,7 +76,7 @@ class OptionService
             }
             elseif ($type == 'item_article_category')
             {
-                $data[$type] = $this->getOptionList($service, 'tree', ['extension' => 'item', 'content_type' => 'article']);
+                $data[$type] = $this->getOptionList($service, 'tree', ['extension' => 'item'/*, 'content_type' => 'article'*/]);
             }
             elseif ($type == 'item_category')
             {
