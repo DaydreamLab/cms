@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Requests\Category\Admin;
 
+use Carbon\Carbon;
 use DaydreamLab\Cms\Helpers\RequestHelper;
 use DaydreamLab\JJAJ\Requests\AdminRequest;
 use Illuminate\Validation\Rule;
@@ -72,6 +73,16 @@ class CategoryAdminStorePost extends AdminRequest
         $validated->put('params', RequestHelper::handleParams($validated->get('params')));
         if (!$validated->get('extension')) {
             $validated->put('extension', 'item');
+        }
+
+        if ( $publish_up = $validated->get('publish_up') ) {
+            $utc_publish_up = Carbon::parse($publish_up, $this->user('api')->timezone);
+            $validated->put('publish_up', $utc_publish_up->tz(config('app.timezone'))->format('Y-m-d H:i:s'));
+        }
+
+        if ( $publish_down = $validated->get('publish_down') ) {
+            $utc_publish_down = Carbon::parse($publish_down, $this->user('api')->timezone);
+            $validated->put('publish_down', $utc_publish_down->tz(config('app.timezone'))->format('Y-m-d H:i:s'));
         }
 
         return $validated;

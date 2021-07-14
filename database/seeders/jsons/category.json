@@ -266,6 +266,23 @@
             "params"      : {},
             "children"    : [],
             "created_by": 1
+          },
+          {
+            "title"       : "零壹快訊",
+            "alias"       : "01_breakingNews",
+            "path"        : "/item/newsletter_category/breakingNews",
+            "state"       : 1,
+            "introimage"  : "",
+            "introtext"   : "",
+            "image"       : "",
+            "description" : "",
+            "content_type": "",
+            "extension"   : "newsletter",
+            "ordering"    : 1,
+            "access"      : 1,
+            "params"      : {},
+            "children"    : [],
+            "created_by": 1
           }
         ],
         "created_by": 1

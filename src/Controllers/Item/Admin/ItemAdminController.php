@@ -108,7 +108,33 @@ class ItemAdminController extends CmsController
     }
 
 
+    public function removeContent(ItemAdminRemovePost $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->remove($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
+
     public function restore(ItemAdminRestorePost $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->restore($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
+
+    public function restoreContent(ItemAdminRestorePost $request)
     {
         $this->service->setUser($request->user('api'));
         try {
@@ -148,6 +174,19 @@ class ItemAdminController extends CmsController
 
 
     public function state(ItemAdminStatePost $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->state($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
+
+    public function stateContent(ItemAdminStatePost $request)
     {
         $this->service->setUser($request->user('api'));
         try {
