@@ -1,1 +1,4769 @@
-webpackJsonp([66],{"+dYt":function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default=[{name:"取得所有標籤列表",method:"list",path:"/admin/tag/search",type:"post"},{name:"取得單一標籤資訊",method:"get",path:"/admin/tag/*",type:"get"},{name:"新增/修改單一標籤",method:"save",path:"/admin/tag/store",type:"post"},{name:"修改單一標籤排序",method:"ordering",path:"/admin/tag/ordering",type:"post"},{name:"刪除一至多個標籤",method:"delete",path:"/admin/tag/remove",type:"post"},{name:"修改一至多個標籤發布狀態",method:"updateState",path:"/admin/tag/state",type:"post"},{name:"修改一至多個標籤回存狀態",method:"checkout",path:"/admin/tag/checkout",type:"post"}]},"/eQR":function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default=[{name:"取得所有分類列表",method:"list",path:"/admin/category/search",type:"post"},{name:"取得單一分類資訊",method:"get",path:"/admin/category/*",type:"get"},{name:"新增/修改單一分類",method:"save",path:"/admin/category/store",type:"post"},{name:"修改單一分類排序",method:"ordering",path:"/admin/category/ordering",type:"post"},{name:"刪除一至多個分類",method:"delete",path:"/admin/category/remove",type:"post"},{name:"修改一至多個分類發布狀態",method:"updateState",path:"/admin/category/state",type:"post"},{name:"修改一至多個分類回存狀態",method:"checkout",path:"/admin/category/checkout",type:"post"}]},0:function(e,t,n){n("M2xZ"),e.exports=n("Sl7t")},"029B":function(e,t,n){var a={"./":"1XOF","./en":"h9Td","./en/":"h9Td","./en/content.json":"dHrm","./en/global.json":"AklH","./en/index":"h9Td","./en/index.js":"h9Td","./en/mod_menu.json":"jgQn","./index":"1XOF","./index.js":"1XOF","./zh-TW":"mNVi","./zh-TW/":"mNVi","./zh-TW/content.json":"NZ3F","./zh-TW/content.sys.json":"K3bE","./zh-TW/develop.sys.json":"BrCa","./zh-TW/error.json":"aPUY","./zh-TW/global.json":"iv4H","./zh-TW/index":"mNVi","./zh-TW/index.js":"mNVi","./zh-TW/menu.sys.json":"pBaD","./zh-TW/mod_menu.json":"V4Dj","./zh-TW/module.sys.json":"x0Kq","./zh-TW/system.sys.json":"6guH","./zh-TW/user.sys.json":"t8hI"};function o(e){return n(r(e))}function r(e){var t=a[e];if(!(t+1))throw new Error("Cannot find module '"+e+"'.");return t}o.keys=function(){return Object.keys(a)},o.resolve=r,e.exports=o,o.id="029B"},"02Aw":function(e,t){e.exports={render:function(){var e=this.$createElement,t=this._self._c||e;return t("div",{attrs:{id:"app"}},[t("router-view")],1)},staticRenderFns:[]}},"1/uV":function(e,t,n){var a=n("VU/8")(n("G02S"),n("02Aw"),!1,null,null,null);e.exports=a.exports},"1XOF":function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var a=n("lRwf"),o=n.n(a),r=n("Av8/"),i=n.n(r);o.a.use(i.a);var s={};[{code:"en",title:"English"},{code:"zh-TW",title:"繁體中文"}].forEach(function(e){s[e.code]=Object.assign(n("029B")("./"+e.code).default,n("pbL6")("./"+e.code).default)});var l=new i.a({locale:"zh-TW",fallbackLocale:"zh-TW",messages:s});t.default=l},"5+BT":function(e,t){e.exports={render:function(){var e=this,t=e.$createElement,n=e._self._c||t;return n("el-row",{attrs:{type:"flex",justify:"space-between"}},[n("el-col",{attrs:{span:4}},[n("div",{staticClass:"list-header"},[e._t("ddl-header-before")],2)]),e._v(" "),n("el-col",{staticClass:"list-searchbar",attrs:{span:20}},[e.fields&&e.fields.length?n("div",[n("FormData",{attrs:{"default-value":e.defaultValue,"field-list":e.fields,setting:e.setting},on:{"on-submit":e.onSearch,"on-reset":e.onSearchReset}})],1):e._e(),e._v(" "),n("div",{staticClass:"list-header"},[e._t("ddl-header-after")],2)])],1)},staticRenderFns:[]}},"51Ih":function(e,t,n){"use strict";function a(e){if(!(e instanceof Array))return!1;var t=[];return e.forEach(function(e){var o=e.path,r=e.full_path,i=e.component,s=e.title,l=e.redirect,u=e.children,_=e.icon,d=e.showNav,c=e.type,m=e.id;i=i||"layout",u&&u instanceof Array&&(u=a(u));var E={path:r||o,component:function(){return"layout"===i?n.e(45).then(n.bind(null,"z28O")):n("rP06")("./"+i)},name:s,children:u,meta:{icon:_,showNav:d,type:c,id:m}};l&&(E.redirect=l),t.push(E)}),t}var o=n("oX2q"),r=n("lRwf"),i=n.n(r),s=n("OMN4"),l=n.n(s),u=n("Rf8U"),_=n.n(u),d=n("mw3O"),c=n.n(d),m=n("1XOF");Object({MIX_PUSHER_APP_CLUSTER:"mt1",MIX_PUSHER_APP_KEY:"",NODE_ENV:"production"});var E="/api",p="code",f="data",h="message",T={errorFlag:!1,get getErrorFlag(){return this.errorFlag},set setErrorFlag(e){this.errorFlag=e},statusError:{400:function(e){var t=[];Object.keys(e.data).forEach(function(e){t=[].concat(function(e){if(Array.isArray(e)){for(var t=0,n=Array(e.length);t<e.length;t++)n[t]=e[t];return n}return Array.from(e)}(t),[m.default.t("ERROR_INPUT_"+e.toUpperCase())])}),this.$message({showClose:!0,message:t.join(", "),type:"error"})},401:function(){var e=this;this.errorFlag||(this.setErrorFlag=!0,this.$store.dispatch("remove_userinfo").then(function(){e.setErrorFlag=!1,e.$router.replace({path:"/login"})}))}},requestError:function(e){var t="Request Error";if(e){var n=e.data;t="Request Error: "+n.code+", "+n.message}this.$message({showClose:!0,message:t,type:"error"})}},O="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};i.a.use(_.a,l.a);var A=document.head.querySelector('meta[name="csrf-token"]');A&&(i.a.axios.defaults.headers.common["X-CSRF-TOKEN"]=A.content),i.a.axios.defaults.baseURL=E;var g=function(){var e=this,t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{},n=t.type,a=t.path,o=t.pathVar,r=void 0===o?"":o,s=t.data,l=t.fn,u=t.errFn,_=t.finalFn,d=t.tokenFlag,m=t.headers,E=t.opts,A={method:n,url:a=a.replace(/\*/g,r),headers:m&&"object"===(void 0===m?"undefined":O(m))?m:{}};if(A["get"===n?"params":"data"]=m&&m["Content-Type"]?s:c.a.stringify(s),d||(A.headers.Authorization="Bearer "+this.$store.state.user.user_token),E&&"object"===(void 0===E?"undefined":O(E)))for(var g in E)A[g]=E[g];i.a.axios(A).then(function(e){var t=e.data;t[f]?l({data:t[f],msg:t[h]}):l({msg:t[h]})}).catch(function(t){try{var n=t.response.data;T.statusError[n[p]]?T.statusError[n[p]].call(e,n):u?u.call(e,n[h]):T.requestError.call(e,t.response)}catch(e){}}).finally(function(){if(_)return _.call(e)})};n.d(t,"c",function(){return a}),n.d(t,"a",function(){return o.a}),n.d(t,"b",function(){return g})},"6R87":function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default=[{name:"取得所有接口列表",method:"list",path:"/admin/asset/api/search",type:"post"},{name:"新增/修改單一接口",method:"save",path:"/admin/asset/api/store",type:"post"},{name:"刪除一至多個接口",method:"delete",path:"/admin/asset/api/remove",type:"post"},{name:"取得單一接口",method:"get",path:"/admin/asset/api/*",type:"get"}]},"6guH":function(e,t){e.exports={COM_SYSTEM_SETTINGS_TITLE:"全站設定",COM_SYSTEM_LANGUAGE_MANAGER_TITLE:"語言",COM_SYSTEM_LANGUAGE_EDIT_TITLE:"編輯語言",COM_SYSTEM_SITE_MANAGER_TITLE:"多網站",COM_SYSTEM_SITE_EDIT_TITLE:"編輯網站"}},"70zi":function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default=[{name:"取得所有項目列表",method:"list",path:"/admin/item/search",type:"post"},{name:"取得單一項目資訊",method:"get",path:"/admin/item/*",type:"get"},{name:"新增/修改單一項目",method:"save",path:"/admin/item/store",type:"post"},{name:"修改單一項目排序",method:"ordering",path:"/admin/item/ordering",type:"post"},{name:"刪除一至多個項目",method:"delete",path:"/admin/item/remove",type:"post"},{name:"修改一至多個項目發布狀態",method:"updateState",path:"/admin/item/state",type:"post"},{name:"修改一至多個項目精選狀態",method:"updateFeatured",path:"/admin/item/featured",type:"post"},{name:"修改一至多個項目回存狀態",method:"checkout",path:"/admin/item/checkout",type:"post"}]},"724s":function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var a,o=n("AO6e"),r=n("oX2q");function i(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var s={errorlog_list:[],language:r.a.get("language")||"tw",site_list:r.a.get("site_list")||"",asset_list:r.a.get("asset_list")||"",menu_list:r.a.get("menu_list")||"",module_list:r.a.get("module_list")||"",viewlevel_list:r.a.get("viewlevel_list")||"",item_category_list:r.a.get("item_category_list")||"",item_article_category_list:r.a.get("item_article_category_list")||"",language_list:r.a.get("language_list")||"",menu_category_list:r.a.get("menu_category_list")||"",module_category_list:r.a.get("module_category_list")||"",content_type_list:r.a.get("content_type_list")||"",extrafield_group_list:r.a.get("extrafield_group_list")||"",user_group_list:r.a.get("user_group_list")||""},l={update_error_logs:function(e,t){(0,e.commit)(o.f,t)},update_option_related_list:function(e,t){var n=e.commit,a=t.type,r=t.data;n(o.g,{type:a,data:r})},remove_option_related_list:function(e){var t=e.commit;["item_category","item_article_category","menu_category","language","viewlevel","extrafield_group","site","user_group"].forEach(function(e){t(o.g,{type:e,data:""})})}},u=(i(a={},o.f,function(e,t){e.errorlog_list.push(t)}),i(a,o.g,function(e,t){var n=t.type,a=t.data;e[n+"_list"]=a,r.a.set(n+"_list",e[n+"_list"])}),i(a,"set_language",function(e,t){e.language=t,r.a.set("language",e.language)}),i(a,"update_site_list",function(e,t){e.site_list=t,r.a.set("site_list",e.site_list)}),a);t.default={state:s,actions:l,mutations:u}},"7YDL":function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var a={components:{DdlInput:function(){return n.e(47).then(n.bind(null,"JNTI"))},DdlTextarea:function(){return n.e(46).then(n.bind(null,"S6Ny"))},DdlCheckbox:function(){return n.e(63).then(n.bind(null,"WeaK"))},DdlRadio:function(){return n.e(55).then(n.bind(null,"eYHw"))},DdlSelect:function(){return n.e(54).then(n.bind(null,"TlSY"))},DdlSwitch:function(){return n.e(53).then(n.bind(null,"+V+m"))},DdlCascader:function(){return n.e(64).then(n.bind(null,"zhZL"))},DdlDate:function(){return n.e(62).then(n.bind(null,"dFu6"))},DdlDateRange:function(){return n.e(60).then(n.bind(null,"SnRv"))},DdlDateYear:function(){return n.e(56).then(n.bind(null,"NwZw"))},DdlDateMonth:function(){return n.e(61).then(n.bind(null,"fsm0"))},DdlDateWeek:function(){return n.e(57).then(n.bind(null,"hlZ1"))},DdlTime:function(){return n.e(52).then(n.bind(null,"4a96"))},DdlTimeRange:function(){return n.e(49).then(n.bind(null,"Ge9h"))},DdlTimeFixed:function(){return n.e(51).then(n.bind(null,"fNRA"))},DdlTimeFixedRange:function(){return n.e(50).then(n.bind(null,"mmNi"))},DdlDateTime:function(){return n.e(59).then(n.bind(null,"+57H"))},DdlDateTimeRange:function(){return n.e(58).then(n.bind(null,"wxT4"))},DdlTree:function(){return n.e(48).then(n.bind(null,"XV0g"))}},name:"FormData",props:{defaultValue:{type:Object,default:function(){return{}}},fieldList:{type:Array,required:!0,default:function(){return[]}},rules:{type:Object,default:function(){return{}}},setting:{type:Object,default:function(){return{}}},toolbar:{type:Object,default:function(){return{}}}},data:function(){return{fields:this.fieldList,components:{input:"DdlInput",textarea:"DdlTextarea",select:"DdlSelect",radio:"DdlRadio",switch:"DdlSwitch",cascader:"DdlCascader",checkbox:"DdlCheckbox",date:"DdlDate",daterange:"DdlDateRange",year:"DdlDateYear",month:"DdlDateMonth",week:"DdlDateWeek",time:"DdlTime",timerange:"DdlTimeRange",timefixed:"DdlTimeFixed",timefixedrange:"DdlTimeFixedRange",datetime:"DdlDateTime",datetimerange:"DdlDateTimeRange",editor:"DdlEditor",tree:"DdlTree"},temp_field_obj:{},submit_info:{}}},computed:{submit_data:function(){return this.defaultValue}},watch:{fieldList:{deep:!0,handler:function(e){e&&(this.fields=e)}},setting:function(e){this.setting=e},toolbar:function(e){this.initToolbar(e)}},mounted:function(){var e=this;this.setting&&"search"!==this.setting.type&&(this.initToolbar(this.toolbar),this.$$eventBus.$on("onClickFormDataToolbar",function(t){e.onBtnEvent(t)}))},beforeDestroy:function(){this.setting&&"search"!==this.setting.type&&(this.initToolbar(),this.$$eventBus.$off("onClickFormDataToolbar"))},methods:{onSubmit:function(){var e=this,t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:"",n={submit_data:this.submit_data,btn_type:t};this.rules?this.$refs["form-data"].validate(function(t){t&&e.$emit("on-submit",n)}):this.$emit("on-submit",n)},onReset:function(){this.$refs["form-data"].resetFields(),this.$emit("on-reset")},onCancel:function(){this.$emit("on-cancel")},onBtnEvent:function(e){var t=e.type;switch(t){case"cancel":this.onCancel();break;case"save":case"savenclose":case"savenadd":this.onSubmit(t)}},initToolbar:function(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{};this.$$eventBus.$emit("onInitToolbar",{name:"FormData",data:e})}}};t.default=a},AO6e:function(e,t,n){"use strict";n.d(t,"j",function(){return a}),n.d(t,"c",function(){return o}),n.d(t,"l",function(){return r}),n.d(t,"e",function(){return i}),n.d(t,"h",function(){return s}),n.d(t,"a",function(){return l}),n.d(t,"k",function(){return u}),n.d(t,"d",function(){return _}),n.d(t,"i",function(){return d}),n.d(t,"b",function(){return c}),n.d(t,"f",function(){return m}),n.d(t,"g",function(){return E});var a="UPDATE_USER_INFO",o="REMOVE_USER_INFO",r="UPDATE_USER_TOKEN",i="REMOVE_USER_TOKEN",s="UPDATE_REMEMBER",l="REMOVE_REMEMBER",u="UPDATE_USER_ROUTES",_="REMOVE_USER_ROUTES",d="UPDATE_USER_ACCESS",c="REMOVE_USER_ACCESS",m="UPDATE_ERROR_LOGS",E="UPDATE_OPTION_RELATED_LIST"},AklH:function(e,t){e.exports={YES:"是",NO:"否",ALL:"所有",ALL_LANGUAGE:"所有",LOGIN:"登入",LOGOUT:"登出",PUBLISHED:"發佈的",UNPUBLISHED:"停止發佈的",ARCHIVED:"封存",TRASHED:"刪除至回收桶中",TOOLBAR_ADD:"新增",TOOLBAR_EDIT:"編輯",TOOLBAR_TRASH:"回收",TOOLBAR_DELETE:"刪除",TOOLBAR_RESTORE:"恢復",TOOLBAR_SAVE:"儲存",TOOLBAR_SAVE_AND_ADD:"儲存&新增",TOOLBAR_SAVE_AND_CLOSE:"儲存&關閉",TOOLBAR_CANCEL:"取消",TOOLBAR_PUBLISH:"發佈",TOOLBAR_UNPUBLISH:"停止發佈",TOOLBAR_FEATURED:"精選",TOOLBAR_UNFEATURED:"取消精選",TOOLBAR_CHECKOUT:"回存",TOOLBAR_KEYWORDS:"輸入關鍵字"}},Aor9:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var a,o=n("AO6e"),r=n("oX2q");function i(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function s(e){if(Array.isArray(e)){for(var t=0,n=Array(e.length);t<e.length;t++)n[t]=e[t];return n}return Array.from(e)}var l={user_token:r.a.get("user_token")||"",user_info:r.a.get("user_info")||{},user_routes:r.a.get("user_routes")||[],user_access:r.a.get("user_access")||{},remember:{remember_flag:!!r.a.get("remember_flag"),remember_login_info:r.a.get("remember_login_info")||{email:"",token:""}}},u={update_userinfo:function(e,t){var n=e.commit;return new Promise(function(e,a){n(o.j,t),n(o.l,t.token),e()})},remove_userinfo:function(e){var t=e.commit;t(o.c),t(o.e),t(o.d),t(o.b)},update_remember:function(e,t){var n=e.commit,a=t.remember_flag,r=t.remember_login_info;n(o.h,{remember_flag:a,remember_login_info:r})},remove_remember:function(e){(0,e.commit)(o.a)},update_user_routes:function(e,t){var n=e.commit,a=t.routes,r=t.redirect;n(o.k,{routes:a,redirect:r})},update_user_access:function(e,t){(0,e.commit)(o.i,t)}},_=(i(a={},o.l,function(e,t){e.user_token=t,r.a.set("user_token",e.user_token)}),i(a,o.e,function(e){r.a.remove("user_token"),e.user_token=""}),i(a,o.j,function(e,t){e.user_info=t,r.a.set("user_info",e.user_info)}),i(a,o.c,function(e){r.a.remove("user_info"),e.user_info={}}),i(a,o.h,function(e,t){e.remember.remember_flag=t.remember_flag,e.remember.remember_login_info=t.remember_login_info,r.a.set("remember_flag",e.remember.remember_flag),r.a.set("remember_login_info",e.remember.remember_login_info)}),i(a,o.a,function(e){r.a.remove("remember_flag"),r.a.remove("remember_login_info"),e.remember.remember_flag=!1,e.remember.remember_login_info={email:"",token:""}}),i(a,o.k,function(e,t){var n=t.routes,a=t.redirect;0===n.filter(function(e){return"/"===e.path}).length&&(n=[].concat(s(n),[{path:"/",redirect:a,enabled:1,showNav:!1}])),n=[].concat(s(n),[{path:"*",redirect:"/error/404",enabled:1,showNav:!1}]),e.user_routes=n,r.a.set("user_routes",n)}),i(a,o.d,function(e){e.user_routes=[],r.a.remove("user_routes")}),i(a,o.i,function(e,t){e.user_access=t,r.a.set("user_access",t)}),i(a,o.b,function(e){e.user_access={},r.a.remove("user_access")}),a);t.default={state:l,actions:u,mutations:_}},AuqY:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default=[{name:"登入",method:"login",path:"/user/login",type:"post"},{name:"登出",method:"logout",path:"/user/logout",type:"get"},{name:"取得會員可走訪頁面列表與接口列表",method:"getPages",path:"/admin/user/page",type:"get"},{name:"取得所有會員列表",method:"list",path:"/admin/user/search",type:"post"},{name:"取得單一會員資訊",method:"get",path:"/admin/user/*",type:"get"},{name:"新增/修改單一會員",method:"save",path:"/admin/user/store",type:"post"},{name:"刪除一至多個會員",method:"delete",path:"/admin/user/remove",type:"post"},{name:"修改一至多個會員封鎖狀態",method:"updateBlock",path:"/admin/user/block",type:"post"},{name:"取得所有會員群組列表",method:"listGroup",path:"/admin/user/group/search",type:"post"},{name:"取得所有會員群組列表(樹狀結構)",method:"listTreeGroup",path:"/admin/user/group/tree",type:"get"},{name:"取得所有會員群組列表(樹狀清單)",method:"listOptionGroup",path:"/admin/user/group/treeList",type:"get"},{name:"刪除一至多個會員群組",method:"deleteGroup",path:"/admin/user/group/remove",type:"post"},{name:"新增/修改單一會員群組",method:"saveGroup",path:"/admin/user/group/store",type:"post"},{name:"取得單一會員群組",method:"getGroup",path:"/admin/user/group/*",type:"get"},{name:"修改單一會員排序",method:"orderingGroup",path:"/admin/user/group/ordering",type:"post"},{name:"取得單一會員群組可走訪頁面列表(樹狀結構)與接口列表",method:"groupPages",path:"/admin/user/group/*/page",type:"get"}]},"Av8/":function(e,t){e.exports=VueI18n},BrCa:function(e,t){e.exports={COM_DEV:"開發人員",COM_DEV_APIS_TITLE:"APIs",COM_DEV_API_MANAGER_TITLE:"API管理",COM_DEV_API_EDIT_TITLE:"編輯API",COM_DEV_ASSETS_TITLE:"資源",COM_DEV_ASSET_MANAGER_TITLE:"資源管理",COM_DEV_ASSET_EDIT_TITLE:"編輯資源",COM_DEV_ASSET_ASSIGN_GROUP_TITLE:"指定群組",COM_DEV_ASSET_ASSIGN_API_TITLE:"指定API",COM_DEV_ASSET_GROUP_MANAGER_TITLE:"資源群組",COM_DEV_ASSET_GROUP_EDIT_TITLE:"編輯資源群組"}},CXHS:function(e,t,n){var a={"./global.js":"zTuk","./sys.js":"724s","./user.js":"Aor9"};function o(e){return n(r(e))}function r(e){var t=a[e];if(!(t+1))throw new Error("Cannot find module '"+e+"'.");return t}o.keys=function(){return Object.keys(a)},o.resolve=r,e.exports=o,o.id="CXHS"},"Edy+":function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default={props:{search:{type:Object,default:function(){return{}}}},data:function(){return{disabled:!0}},computed:{defaultValue:function(){return this.search.defaultValue||{}},fields:function(){return this.search.fields||[]},setting:function(){return this.search.setting||{inline:!0,type:"search"}}},methods:{onSearch:function(e){var t=e.submit_data;this.$emit("search",t)},onSearchReset:function(){this.$emit("search-reset")}}}},G02S:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default={name:"App",watch:{"$store.state.user.user_token":function(e){var t=this;e&&(this.$$api_setting_get({fn:function(e){var n=e.data;t.$store.commit("set_language",n.items.locale_admin)}}),this.$$api_site_list({fn:function(e){var n=e.data;t.$store.commit("update_site_list",n.items)}}))}}}},I66U:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default=[{name:"取得所有存取層級列表",method:"list",path:"/admin/viewlevel/search",type:"post"},{name:"取得單一存取層級資訊",method:"get",path:"/admin/viewlevel/*",type:"get"},{name:"新增/修改單一存取層級",method:"save",path:"/admin/viewlevel/store",type:"post"},{name:"修改單一存取層級排序",method:"ordering",path:"/admin/viewlevel/ordering",type:"post"},{name:"刪除一至多個存取層級",method:"delete",path:"/admin/viewlevel/remove",type:"post"}]},IOMc:function(e,t,n){var a=n("VU/8")(n("7YDL"),n("vlfD"),!1,null,null,null);e.exports=a.exports},IoEb:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default=[{name:"取得所有選單列表",method:"list",path:"/admin/menu/search",type:"post"},{name:"取得單一選單資訊",method:"get",path:"/admin/menu/*",type:"get"},{name:"新增/修改單一選單",method:"save",path:"/admin/menu/store",type:"post"},{name:"刪除一至多個選單",method:"delete",path:"/admin/menu/remove",type:"post"},{name:"修改一至多個選單發布狀態",method:"updateState",path:"/admin/menu/state",type:"post"},{name:"修改一至多個選單回存狀態",method:"checkout",path:"/admin/menu/checkout",type:"post"}]},K3bE:function(e,t){e.exports={COM_CONTENT:"內容",COM_CONTENT_ITEM_MANAGER_TITLE:"項目",COM_CONTENT_ITEM_EDIT_TITLE:"編輯項目",COM_CONTENT_CATEGORY_MANAGER_TITLE:"分類",COM_CONTENT_CATEGORY_EDIT_TITLE:"編輯分類",COM_CONTENT_TAG_MANAGER_TITLE:"標籤",COM_CONTENT_TAG_EDIT_TITLE:"編輯標籤",COM_CONTENT_EXTRAFIELD_MANAGER_TITLE:"附加欄位",COM_CONTENT_EXTRAFIELD_EDIT_TITLE:"編輯附加欄位",COM_CONTENT_EXTRAFIELD_GROUP_MANAGER_TITLE:"附加欄位群組",COM_CONTENT_EXTRAFIELD_GROUP_EDIT_TITLE:"編輯附加欄位群組",COM_CONTENT_MEDIA_MANAGER_TITLE:"媒體管理",COM_CONTENT_SEARCH_STATISTICS_TITLE:"全站搜尋統計"}},L6X4:function(e,t){},M2xZ:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var a=n("lRwf"),o=n.n(a),r=n("1XOF"),i=n("l6IN"),s=n.n(i),l=n("1e6/"),u=n("C/JF"),_=n("3nTA"),d=n("1/uV"),c=n.n(d),m=n("gcp9"),E=n("hgup"),p=n("9uKM"),f=n.n(p),h=n("ZUlB"),T=n.n(h).a,O=n("IOMc"),A={ListData:T,FormData:n.n(O).a},g=n("51Ih"),I=n("zC91"),L=[];I.keys().forEach(function(e){L.push({module:e.split(".")[1].split("/")[1],list:I(e).default})});var y=L,v="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},R={};y.forEach(function(e,t){"object"===(void 0===e?"undefined":v(e))&&e.list&&Array.isArray(e.list)&&e.list.forEach(function(n,a){var o,r;R["api_"+e.module+"_"+n.method]=(o=t,r=a,function(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{},t=e.type,n=void 0===t?y[o].list[r].type:t,a=e.path,i=void 0===a?y[o].list[r].path:a,s=e.data,l=e.fn,u=e.errFn,_=e.finalFn,d=e.headers,c=e.opts,m=e.pathVar,E=e.tokenFlag;g.b.call(this,{type:n,path:i,data:s,fn:l,errFn:u,finalFn:_,headers:d,opts:c,pathVar:m,tokenFlag:E})})})}),R.eventBus=new o.a;var D=R,b={watch:{"$store.getters.language":function(e){this.$i18n.locale=e}}},S={Can:{inserted:function(e,t){var n,a,o=E.a.state.user.user_access[m.a.currentRoute.meta.id],r=!o||(n=t.value,a=o,Array.isArray(n)?[n,a].reduce(function(e,t){return e.filter(function(e){return t.includes(e)})}).length>0:a.includes(n)),i="not"===t.arg;(r&&i||!r&&!i)&&e.parentNode&&e.parentNode.removeChild(e)}}},N=n("xNPZ"),M=n.n(N);var P={displayDateFormat:function(e){var t=M.a.tz.guess();if(e)return M.a.tz(M.a.utc(e),t).format("YYYY-MM-DD HH:mm:ss")},storeDateFormat:function(e){var t=M.a.tz.guess(),n=M.a.tz(e,"YYYY-MM-DD HH:mm:ss",t);if(e)return n.utc().format("YYYY-MM-DD HH:mm:ss")}};o.a.use({install:function(e,t){e.mixin(b),f()(D,function(t,n){e.prototype["$$"+n]=t}),f()(S,function(t,n){e.directive(n,t)})}}),f()(P,function(e,t){o.a.filter(t,e)}),f()(A,function(e,t){var n=t.replace(/([A-Z])/g,"-$1").toLowerCase();n&&"-"===n[0]&&(n=n.replace("-","")),o.a.component(t,e)}),o.a.use(s.a,{i18n:function(e,t){return r.default.t(e,t)}}),o.a.component("font-awesome-icon",l.a),u.c.add(_.a,n("eh3n").definition,n("X64x").definition),o.a.config.productionTip=!1,o.a.config.devtools=!1;new o.a({el:"#app",i18n:r.default,router:m.a,store:E.a,render:function(e){return e(c.a)}})},MMVU:function(e,t,n){var a={"./content.json":"dHrm","./global.json":"AklH","./mod_menu.json":"jgQn"};function o(e){return n(r(e))}function r(e){var t=a[e];if(!(t+1))throw new Error("Cannot find module '"+e+"'.");return t}o.keys=function(){return Object.keys(a)},o.resolve=r,e.exports=o,o.id="MMVU"},NZ3F:function(e,t){e.exports={CONTENT_FIELD_INTRO_IMAGE_LABEL:"摘要圖片",CONTENT_FIELD_MAIN_IMAGE_LABEL:"主要圖片"}},OMN4:function(e,t){e.exports=axios},SJI6:function(e,t){e.exports=Vuex},Sl7t:function(e,t){},V4Dj:function(e,t){e.exports={MOD_GLOBAL_MENU_CONTROL_PANEL:"控制台",MOD_GLOBAL_MENU_SYSTEM:"系統",MOD_GLOBAL_MENU_PAGE:"頁面"}},"Wr7+":function(e,t){},XERp:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default=[{name:"取得關鍵字搜尋列表",method:"searchList",path:"/admin/search/keywordlist",type:"post"},{name:"取得操作紀錄",method:"log",path:"/admin/log/search",type:"post"}]},ZUlB:function(e,t,n){var a=n("VU/8")(n("h+zn"),n("w2bW"),!1,function(e){n("Wr7+")},null,null);e.exports=a.exports},aPUY:function(e,t){e.exports={ERROR_INPUT_IDS:"請至少勾選一個項目",ERROR_INPUT_GROUP_IDS:"請至少指定一個會員群組",ERROR_INPUT_EMAIL:"請輸入Email",ERROR_INPUT_FIRST_NAME:"請輸入姓氏",ERROR_INPUT_LAST_NAME:"請輸入名字",ERROR_INPUT_TITLE:"請填寫標題",ERROR_INPUT_CATEGORY_ID:"請選擇分類",ERROR_INPUT_LANGUAGE:"請選擇語言",ERROR_INPUT_STATE:"請選擇狀態",ERROR_INPUT_FEATURED:"請選擇是否精選",ERROR_INPUT_PASSWORD:"請輸入正確的密碼",ERROR_INPUT_PASSWORD_CONFIRMATION:"請輸入相同的密碼"}},dHrm:function(e,t){e.exports={}},dT7D:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default=[{name:"取得CMS相關下拉選單列表",method:"list",path:"/admin/option/list",type:"post"}]},gcp9:function(e,t,n){"use strict";var a=n("lRwf"),o=n.n(a),r=n("pRNm"),i=n.n(r),s=n("51Ih"),l=[{path:"/login",component:function(e){return n.e(2).then(function(){var t=[n("OE+S")];e.apply(null,t)}.bind(this)).catch(n.oe)},name:"LOGIN",meta:{showNav:0}},{path:"/error",component:function(e){return n.e(0).then(function(){var t=[n("vFSv")];e.apply(null,t)}.bind(this)).catch(n.oe)},name:"ERROR",meta:{showNav:0},children:[{path:"401",component:function(e){return n.e(8).then(function(){var t=[n("m9vE")];e.apply(null,t)}.bind(this)).catch(n.oe)},name:"401",meta:{showNav:0}},{path:"404",component:function(e){return n.e(3).then(function(){var t=[n("wCXO")];e.apply(null,t)}.bind(this)).catch(n.oe)},name:"404",meta:{showNav:0}},{path:"500",component:function(e){return n.e(7).then(function(){var t=[n("mIT5")];e.apply(null,t)}.bind(this)).catch(n.oe)},name:"500",meta:{showNav:0}}]}],u=n("1XOF"),_=n("hgup"),d=s.a.get("user_routes")||[];o.a.use(i.a);var c=function(){return new i.a({base:"/dashboard",mode:"history",scrollBehavior:function(){return{y:0}},routes:l.concat(Object(s.c)(d)),linkActiveClass:"active"})},m=c();var E=["/login"];m.beforeEach(function(e,t,n){_.a.state.user.user_token?"/login"===e.path?n({path:"/"}):n():E.includes(e.path)?n():n({path:"/login"})}),m.afterEach(function(e){e.name&&(document.title=u.default.t(e.name)+" - "+_.a.state.global.site_name),window.innerWidth<=1024&&_.a.commit("left_menu","close")});t.a=m},"h+zn":function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var a=n("/dO2"),o=n("mUN1"),r=n.n(o),i=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var a in n)Object.prototype.hasOwnProperty.call(n,a)&&(e[a]=n[a])}return e},s={name:"ListData",components:{DdlTableHeader:r.a},data:function(){return{table_id:"table-"+ +new Date+(1e3*Math.random()).toFixed(0),batch:{flag:!1,datas:[],ids:[]},loading:this.listLoading,list_btns:this.listBtns,fields:this.fieldList,sort_enabled:!1}},props:{list:{type:Array,required:!0},listLoading:{type:Object,default:function(){return{flag:!1,text:""}}},listBtns:{type:Object,default:function(){return{}}},fieldList:{type:Array,required:!0},sort:{type:Object,default:function(){return{show:!1,enabled:!1,data:""}}},toolbar:{type:Object,default:function(){return{}}},searchbar:{type:Object,default:function(){return{}}},pagination:{type:Object,default:function(){return{}}}},watch:{"batch.flag":function(e){this.$$eventBus.$emit("onListDataSelectChange",e)},listLoading:{deep:!0,handler:function(e){this.loading=e}},listBtns:function(e){this.list_btns=e},fieldList:function(e){e&&(this.fields=e)},toolbar:{deep:!0,handler:function(e){this.initToolbar(e)}}},mounted:function(){var e=this;this.initToolbar(this.toolbar),this.$$eventBus.$on("onClickListDataToolbar",function(t){e.onBtnEvent(t)}),this.initSortable()},beforeDestroy:function(){this.initToolbar(),this.$$eventBus.$off("onClickListDataToolbar")},methods:{handelRowClass:function(e){var t=e.row;e.rowIndex;return this.sort.data?t.parent_id===this.sort.data.parent_id?"sortable-enabled":"sortable-disabled":"sortable-enabled"},onSelectionChange:function(e){var t=this;this.batch.datas=e,this.batch.ids=[],e.length?(this.batch.flag=!0,e.forEach(function(n,a){return t.batch.ids.push(e[a].id)})):this.batch.flag=!1,this.$emit("selection-change",{ids:this.batch.ids,datas:this.batch.datas})},onSearch:function(e){this.$emit("search",e)},onSearchReset:function(){this.$emit("search-reset")},onBatchDelete:function(){this.$emit("click-batch-delete",{ids:this.batch.ids,datas:this.batch.datas})},onBatchTrash:function(){this.$emit("click-batch-trash",{ids:this.batch.ids,state:-2})},onBatchRestore:function(){this.$emit("click-batch-restore",{ids:this.batch.ids,state:1})},onBtnEvent:function(e){switch(e.type){case"add":this.$emit("click-add");break;case"edit":var t=this.batch.flag?i({},e,{data:this.batch.datas[0]}):e;this.$emit("click-edit",t);break;case"trash":this.onBatchTrash();break;case"delete":this.onBatchDelete();break;case"restore":this.onBatchRestore();break;case"checkout":this.$emit("click-checkout",e);break;case"custom":this.onCustomBtnEvent(e);break;default:this.$emit("on-click-btn",e)}},onCustomBtnEvent:function(e){e.btn.fn?e.btn.fn(i({},e,{ids:this.batch.ids,datas:this.batch.datas})):this.$emit("on-click-btn",e)},onChangeCurrentPage:function(e){this.$emit("change-current-page",e)},onChangePageSize:function(e){this.$emit("change-page-size",e)},onSortChange:function(e){var t=e.prop,n=e.order;"ordering"===t&&n&&(this.sort_enabled=!0,this.sort.ordering=n,this.$emit("on-sort-change",n)),n||(this.sort_enabled=!1,this.sort.ordering="")},initToolbar:function(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{};this.$$eventBus.$emit("onInitToolbar",{name:"ListData",data:e})},initSortable:function(){var e=this,t=document.querySelectorAll("#"+this.table_id+" .el-table__body-wrapper > table > tbody")[0];a.a.create(t,{handle:".sortable-handler",filter:".sortable-disabled",draggable:".sortable-enabled",preventOnFilter:!0,onChoose:function(e){e.oldIndex},onStart:function(t){var n=t.oldIndex;e.sort.data=e.list[n]},onEnd:function(t){var n=t.newIndex,a=t.oldIndex,o=e.list.splice(a,1)[0];e.list.splice(n,0,o),e.$emit("on-order-change",{id:e.list[n].id,index_diff:n-a,order:e.sort.ordering.replace("ending","")}),e.sort.data=""},onMove:function(e){return!e.related.classList.contains("sortable-disabled")}})}}};t.default=s},h9Td:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var a=n("MMVU"),o={};a.keys().forEach(function(e){o=Object.assign(o,a(e))}),t.default=o},hgup:function(e,t,n){"use strict";var a=n("lRwf"),o=n.n(a),r=n("SJI6"),i=n.n(r),s={language:function(e){return e.sys.language},site_list:function(e){return e.sys.site_list},asset_list:function(e){return e.sys.asset_list},menu_list:function(e){return e.sys.menu_list},module_list:function(e){return e.sys.module_list},viewlevel_list:function(e){return e.sys.viewlevel_list},item_category_list:function(e){return e.sys.item_category_list},item_article_category_list:function(e){return e.sys.item_article_category_list},language_list:function(e){return e.sys.language_list},menu_category_list:function(e){return e.sys.menu_category_list},module_category_list:function(e){return e.sys.module_category_list},content_type_list:function(e){return e.sys.content_type_list},extrafield_group_list:function(e){return e.sys.extrafield_group_list},user_group_list:function(e){return e.sys.user_group_list}},l=n("CXHS"),u={};l.keys().forEach(function(e){var t=e.split(".")[1].split("/")[1];u[t]=l(e).default}),o.a.use(i.a);t.a=new i.a.Store({modules:u,getters:s})},iv4H:function(e,t){e.exports={YES:"是",NO:"否",ALL:"所有",ALL_LANGUAGE:"所有",NONE:"無",LOGIN:"登入",LOGIN_LOADING:"登入中⋯⋯",LOGOUT:"登出",PUBLISHED:"發佈的",UNPUBLISHED:"停止發佈的",PENDING:"待上架",EXPIRED:"已下架",ARCHIVED:"封存",TRASHED:"刪除至回收桶中",FEATURED:"精選",NOT_FEATURED:"非精選",DISABLED:"停用",SELECT:"選擇",TOOLBAR_ADD:"新增",TOOLBAR_EDIT:"編輯",TOOLBAR_TRASH:"回收",TOOLBAR_DELETE:"刪除",TOOLBAR_RENAME:"重新命名",TOOLBAR_RENAME_DIR:"重新命名資料夾",TOOLBAR_RESTORE:"恢復",TOOLBAR_SAVE:"儲存",TOOLBAR_SAVE_AND_ADD:"儲存&新增",TOOLBAR_SAVE_AND_CLOSE:"儲存&關閉",TOOLBAR_CANCEL:"取消",TOOLBAR_PUBLISH:"發佈",TOOLBAR_UNPUBLISH:"停止發佈",TOOLBAR_FEATURED:"精選",TOOLBAR_UNFEATURED:"取消精選",TOOLBAR_CHECKOUT:"回存",TOOLBAR_BLOCK:"封鎖",TOOLBAR_UNBLOCK:"解除封鎖",TOOLBAR_KEYWORDS:"輸入關鍵字",SEARCHBAR_SEARCH:"搜尋",SEARCHBAR_RESET:"重置",LIST_DATA_HEADING_ID:"ID",LIST_DATA_HEADING_LANGUAGE:"語言",LIST_DATA_IMAGE_LABEL:"圖片",LIST_DATA_INTRO_IMAGE_LABEL:"摘要圖片",LIST_DATA_AUTHOR_LABEL:"作者",LIST_DATA_MODIFIED_DATE_LABEL:"修改日期",LIST_DATA_MODIFIED_BY_LABEL:"最後修改者",LIST_DATA_CREATED_DATE_LABEL:"建立日期",LIST_DATA_HITS_LABEL:"點擊",LIST_DATA_ACTIONS_LABEL:"操作",LIST_DATA_LOADING_TEXT:"載入中⋯⋯",OPTION_ORDER_BY:"排序依據",OPTION_ORDER:"排序方式",OPTION_ITEM_COUNT:"顯示項目總數量",OPTION_ITEM_SPLIT_ITEMS:"是否依照分類區隔資料？",OPTION_FEATURED_DISPLAY:"精選項目",OPTION_FEATURED_SPLIT_ITEMS:"是否置頂？",OPTION_FEATURED_COUNT:"精選項目數量",OPTION_FEATURED_ORDER_BY:"精選排序依據",OPTION_FEATURED_ORDER:"精選排序方式",OPTION_SELECT:"- 選擇{name} -",OPTION_NONE:"- 無 -",OPTION_STATE:"狀態",OPTION_BLOCK:"封鎖狀態",OPTION_ITEM:"項目",OPTION_CATEGORY:"分類",OPTION_PARENT_CATEGORY:"上層分類",OPTION_LANGUAGE:"語言",OPTION_FEATURED:"精選",OPTION_REQUIRED:"必填",OPTION_TAG:"標籤",OPTION_TYPE:"類型",OPTION_GROUP:"群組",OPTION_PARENT_GROUP:"上層群組",OPTION_USER_REDIRECT:"登入後頁面",OPTION_MENU:"選單",OPTION_PARENT_MENU:"上層選單",OPTION_EXTENSION:"擴充類型",OPTION_EXTENSION_MENU:"選單",OPTION_EXTENSION_MODULE:"模組",OPTION_EXTENSION_ITEM:"項目",OPTION_CONTENT_TYPE:"內容類型",OPTION_CONTENT_TYPE_ARTICLE:"文章",OPTION_CONTENT_TYPE_MENU:"菜單",OPTION_CONTENT_TYPE_TIMELINE:"時間軸",OPTION_CONTENT_TYPE_SLIDESHOW:"Slideshow",OPTION_CONTENT_TYPE_LINK:"連結","OPTION_CONTENT_TYPE_SIMPLE-ITEM":"簡單項目",OPTION_EXTRAFIELD_GROUP:"欄位群組",OPTION_ITEM_EXTRAFIELD_GROUP:"項目欄位群組",OPTION_EXTRAFIELD_TYPE:"欄位類型",OPTION_EXTRAFIELD_TYPE_TEXT:"文字欄位",OPTION_EXTRAFIELD_TYPE_TEXTAREA:"文字區",OPTION_EXTRAFIELD_TYPE_SELECT:"下拉選擇",OPTION_EXTRAFIELD_TYPE_MULTIPLESELECT:"多選列表",OPTION_EXTRAFIELD_TYPE_RADIO:"單選按鈕",OPTION_EXTRAFIELD_TYPE_LINK:"連結",OPTION_EXTRAFIELD_TYPE_DATE:"日期",OPTION_EXTRAFIELD_TYPE_DATETIME:"日期時間",OPTION_EXTRAFIELD_TYPE_IMAGE:"圖片",OPTION_EXTRAFIELD_TYPE_COLOR:"顏色選擇器",FIELD_TITLE_LABEL:"標題",FIELD_ALIAS_LABEL:"別名",FIELD_INTRO_TEXT_LABEL:"摘要文字",FIELD_DESCRIPTION_LABEL:"描述",FIELD_ITEM_DESCRIPTION_LABEL:"內容文字",FIELD_CATEGORY_DESCRIPTION_LABEL:"分類描述",FIELD_LANGUAGE_LABEL:"語言",FIELD_ACCESS_LEVEL:"存取層級",FIELD_PUBLISH_UP_DATE:"起始發佈日期",FIELD_PUBLISH_DOWN_DATE:"結束發佈日期",FIELD_META_DESCRIPTION_LABEL:"Meta 說明",FIELD_META_KEYWORDS_LABEL:"Meta 關鍵字",FIELD_MAIN_IMAGE_SAME_AS_INTRO_IMAGE_LABEL:"套用摘要圖片路徑",FIELD_MEDIA_PREVIEW_SELECTED_IMAGE:"預覽",FIELD_MEDIA_PREVIEW_EMPTY:"沒有選擇圖片",FIELD_MENU_CHOOSE_MODULE:"選擇模組",FIELD_SEARCH_KEYWORD:"搜尋關鍵字",FIELD_SEARCH_COUNT:"次數",FIELD_SEARCH_START_DATE:"起始日期",FIELD_SEARCH_END_DATE:"結束日期",FIELD_EXTRAFIELD_DEFAULT_VALUE:"預設值",FIELD_EXTRAFIELD_DISPLAY_NULL_OPTION:"顯示空選項",FIELD_EXTRAFIELD_TEXTAREA_ROWS:"列數",FIELD_EXTRAFIELD_TEXTAREA_USE_EDITOR:" 使用編輯器",FIELD_EXTRAFIELD_DATE_DISPLAY_FORMAT:"顯示格式",LANGUAGE_TAB_SITE_NAME_AND_METADATA:"網站名稱 & Metadata",LANGUAGE_FIELD_LANG_TAG_LABEL:"語言標籤",LANGUAGE_FIELD_LANG_CODE_LABEL:"網址語言代碼",LANGUAGE_FIELD_TYPE_LABEL:"語言類型",LANGUAGE_FIELD_TYPE_SYSTEM:"系統",LANGUAGE_FIELD_TYPE_CONTENT:"內容",LANGUAGE_FIELD_CUSTOM_SITE_NAME_LABEL:"自訂網站名稱",EXTRAFIELD_TYPE_TEXT:"文字欄位",EXTRAFIELD_TYPE_TEXTAREA:"文字區",EXTRAFIELD_TYPE_SELECT:"下拉選單",EXTRAFIELD_TYPE_MULTIPLESELECT:"多選列表",EXTRAFIELD_TYPE_RADIO:"單選按鈕",EXTRAFIELD_TYPE_LINK:"連結",EXTRAFIELD_TYPE_DATE:"日期",EXTRAFIELD_TYPE_DATETIME:"日期時間",EXTRAFIELD_TYPE_IMAGE:"圖片",EXTRAFIELD_TYPE_LINK_TEXT:"連結文字",EXTRAFIELD_TYPE_LINK_URL:"網址",EXTRAFIELD_TYPE_LINK_OPEN_IN:"開啟於",EXTRAFIELD_TYPE_LINK_OPEN_IN_SAME_WINDOW:"相同視窗",EXTRAFIELD_TYPE_LINK_OPEN_IN_NEW_WINDOW:"新視窗",MENU_FIELD_SITE_NAME_LABEL:"網站",SITE_FIELD_URL_LABEL:"網址",MEDIA_LIST_VIEW:"列表",MEDIA_THUMB_VIEW:"縮圖",MEDIA_UPLOAD_FILE:"上傳檔案",MEDIA_UPLOAD_FILE_LIMIT:"最大大小: 10MB",MEDIA_ITEMS:"項目:",MEDIA_UPLOAD:"上傳",MEDIA_SELECT_FILE:"選擇檔案",MEDIA_CREATE_DIR:"新增資料夾",MEDIA_CREATE:"建立",MEDIA_RENAME:"重新命名",MEDIA_NAME:"名稱",MEDIA_SIZE:"大小",MEDIA_TYPE:"種類",MEDIA_MODIFIED_DATE:"修改日期",EDITOR_CHOOSE_IMAGE_FROM_MEDIA:"從媒體選擇圖片",USER_OPTION_BLOCK:"已封鎖",USER_OPTION_ACTIVE:"啟用狀態",USER_ACTIVATED:"已啟用",USER_UNACTIVATED:"未啟用",USER_BLOCKED:"已封鎖",USER_TAB_DETAIL:"會員資料",USER_TAB_ASSIGN_GROUP:"指定會員群組",USER_FIELD_FIRST_NAME:"姓氏",USER_FIELD_LAST_NAME:"名字",USER_FIELD_EMAIL:"Email",USER_FIELD_PASSWORD:"密碼",USER_FIELD_PASSWORD_CONFIRMATION:"再次輸入密碼",SETTING_FIELD_SITE_NAME_LABEL:"網站名稱",SETTING_FIELD_SITE_LANG_LABEL:"網站語言",SETTING_FIELD_ADMIN_LANG_LABEL:"管理區語言",GLOBAL_FIELDSET_OPTIONS:"選項",GLOBAL_FIELDSET_BASIC_OPTIONS:"基本",GLOBAL_FIELDSET_METADATA_OPTIONS:"Metadata",GLOBAL_FIELDSET_IMAGE_OPTIONS:"圖片",GLOBAL_FIELDSET_PARAMS_OPTIONS:"參數",GLOBAL_FIELDSET_EXTRAFIELD_OPTIONS:"附加欄位",GLOBAL_FIELDSET_CONTENT_MANAGE_PREFIX:"項目管理：{name}",GLOBAL_USERNAME:"帳號",GLOBAL_PASSWORD:"密碼",GLOBAL_REMEMBER_ME:"記住帳號",GLOBAL_ROOT:"根",GLOBAL_VIEW_SITE:"預覽網站",GLOBAL_HOMEPAGE:"首頁",GLOBAL_CONFIRM_DELETE:"你確定想要移除？確認後將永久刪除選定的項目！",GLOBAL_CONFIRM_LOGOUT:"你確定要登出？",GLOBAL_LOGIN_SUCCESS:"登入成功",GLOBAL_LOGOUT_SUCCESS:"成功登出",ERROR:"錯誤",ERROR_PLEASE_ENTER_USER_NAME:"請輸入帳號",ERROR_PLEASE_ENTER_VALID_EMAIL:"請輸入有效的Email",ERROR_PLEASE_ENTER_PASSWORD:"請輸入密碼",ERROR_PLEASE_ENTER_PASSWORD_CONFIRMATION:"請輸入相同的密碼",ERROR_PLEASE_ENTER_VALID_PASSWORD:"請輸入有效的密碼: 8~16碼英文或數字",ERROR_PLEASE_LOGIN:"請先登入"}},jMJb:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default=[{name:"取得所有欄位列表",method:"list",path:"/admin/extrafield/search",type:"post"},{name:"新增/修改單一欄位",method:"save",path:"/admin/extrafield/store",type:"post"},{name:"刪除一至多個欄位",method:"delete",path:"/admin/extrafield/remove",type:"post"},{name:"修改一至多個欄位回存狀態",method:"checkout",path:"/admin/extrafield/checkout",type:"post"},{name:"取得單一欄位",method:"get",path:"/admin/extrafield/*",type:"get"},{name:"取得所有欄位群組列表",method:"listGroup",path:"/admin/extrafield/group/search",type:"post"},{name:"刪除一至多個欄位群組",method:"deleteGroup",path:"/admin/extrafield/group/remove",type:"post"},{name:"新增/修改單一欄位群組",method:"saveGroup",path:"/admin/extrafield/group/store",type:"post"},{name:"取得單一欄位群組",method:"getGroup",path:"/admin/extrafield/group/*",type:"get"}]},jgQn:function(e,t){e.exports={MOD_GLOBAL_MENU_CONTROL_PANEL:"控制台",MOD_GLOBAL_MENU_SYSTEM:"系統",MOD_GLOBAL_MENU_PAGE:"頁面"}},jjid:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default=[{name:"取得所有資料夾列表",method:"listFolder",path:"/admin/media/folder/all",type:"get"},{name:"新增單一資料夾",method:"createFolder",path:"/admin/media/folder/create",type:"post"},{name:"取得單一資料夾內檔案列表",method:"listFile",path:"/admin/media/folder/items",type:"post"},{name:"上傳一至多個檔案",method:"uploadFile",path:"/admin/media/upload",type:"post"},{name:"刪除一至多個檔案或資料夾",method:"delete",path:"/admin/media/remove",type:"post"},{name:"移動單一資料夾或檔案",method:"move",path:"/admin/media/move",type:"post"},{name:"重新命名資料夾或檔案",method:"rename",path:"/admin/media/rename",type:"post"}]},jzNx:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default=[{name:"取得所有網站列表",method:"list",path:"/admin/site/search",type:"post"},{name:"新增/修改單一網站",method:"save",path:"/admin/site/store",type:"post"},{name:"取得單一網站",method:"get",path:"/admin/site/*",type:"get"},{name:"修改一至多個網站回存狀態",method:"checkout",path:"/admin/site/checkout",type:"post"}]},l6IN:function(e,t){e.exports=ELEMENT},lRwf:function(e,t){e.exports=Vue},lf4D:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default=[{name:"取得所有語言列表",method:"list",path:"/admin/language/search",type:"post"},{name:"取得所有語言列表(下拉選單用)",method:"listOption",path:"/admin/language/list",type:"get"},{name:"新增/修改單一語言",method:"save",path:"/admin/language/store",type:"post"},{name:"刪除一至多個語言",method:"delete",path:"/admin/language/remove",type:"post"},{name:"修改一至多個語言發布狀態",method:"updateState",path:"/admin/language/state",type:"post"},{name:"取得單一語言",method:"get",path:"/admin/language/*",type:"get"}]},mNVi:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var a=n("wbJs"),o={};a.keys().forEach(function(e){o=Object.assign(o,a(e))}),t.default=o},mUN1:function(e,t,n){var a=n("VU/8")(n("Edy+"),n("5+BT"),!1,function(e){n("L6X4")},"data-v-3d7b75de",null);e.exports=a.exports},nlm6:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default=[{name:"取得設定",method:"get",path:"/admin/setting",type:"get"},{name:"儲存設定",method:"save",path:"/admin/setting/store",type:"post"}]},oX2q:function(e,t,n){"use strict";var a="ddrmlab_admin_",o="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},r=function(){function e(e,t){for(var n=0;n<t.length;n++){var a=t[n];a.enumerable=a.enumerable||!1,a.configurable=!0,"value"in a&&(a.writable=!0),Object.defineProperty(e,a.key,a)}}return function(t,n,a){return n&&e(t.prototype,n),a&&e(t,a),t}}();var i=function(){function e(){!function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,e),this.store=window.localStorage,this.prefix=a}return r(e,[{key:"set",value:function(e,t,n){try{t=JSON.stringify(t)}catch(e){}this.store.setItem(this.prefix+e,t),n&&n()}},{key:"get",value:function(e){if(!e)throw new Error("没有找到key。");if("object"===(void 0===e?"undefined":o(e)))throw new Error("key不能是一个对象。");var t=this.store.getItem(this.prefix+e);if(null!==t)try{t=JSON.parse(t)}catch(e){}return t}},{key:"remove",value:function(e){this.store.removeItem(this.prefix+e)}}]),e}();t.a=new i},pBaD:function(e,t){e.exports={COM_MENUS:"選單",COM_MENUS_ITEM_MANAGER_TITLE:"選單管理",COM_MENUS_ITEM_EDIT_TITLE:"編輯選單"}},pRNm:function(e,t){e.exports=VueRouter},rP06:function(e,t,n){var a={"./":["uTj8",6],"./App":["1/uV"],"./App.vue":["1/uV"],"./api/edit":["4VG2",28],"./api/edit.vue":["4VG2",28],"./api/list":["PEVp",43],"./api/list.vue":["PEVp",43],"./asset/assign/group":["tp+D",35],"./asset/assign/group.vue":["tp+D",35],"./asset/edit":["71Dd",27],"./asset/edit.vue":["71Dd",27],"./asset/group/edit":["gzhe",44],"./asset/group/edit.vue":["gzhe",44],"./asset/group/list":["/u09",42],"./asset/group/list.vue":["/u09",42],"./asset/list":["d42U",41],"./asset/list.vue":["d42U",41],"./content/category/components/item":["t2Pn",4],"./content/category/components/item-list":["G4vn",5],"./content/category/components/item-list.vue":["G4vn",5],"./content/category/components/item.vue":["t2Pn",4],"./content/category/edit":["Hxkr",23],"./content/category/edit.vue":["Hxkr",23],"./content/category/list":["E7pJ",17],"./content/category/list.vue":["E7pJ",17],"./content/field/components/type-form":["vo1Z",1],"./content/field/components/type-form.vue":["vo1Z",1],"./content/field/edit":["3/Es",22],"./content/field/edit.vue":["3/Es",22],"./content/field/group/edit":["GW5i",34],"./content/field/group/edit.vue":["GW5i",34],"./content/field/group/list":["hdYX",33],"./content/field/group/list.vue":["hdYX",33],"./content/field/list":["qT/r",12],"./content/field/list.vue":["qT/r",12],"./content/item/edit":["Mf0b",21],"./content/item/edit.vue":["Mf0b",21],"./content/item/list":["0tC/",16],"./content/item/list.vue":["0tC/",16],"./content/media":["W35m",32],"./content/media.vue":["W35m",32],"./content/search":["HY7U",25],"./content/search.vue":["HY7U",25],"./content/tag/edit":["SwNa",39],"./content/tag/edit.vue":["SwNa",39],"./content/tag/list":["znxx",37],"./content/tag/list.vue":["znxx",37],"./error":["vFSv",0],"./error/":["vFSv",0],"./error/401":["m9vE",8],"./error/401.vue":["m9vE",8],"./error/404":["wCXO",3],"./error/404.vue":["wCXO",3],"./error/500":["mIT5",7],"./error/500.vue":["mIT5",7],"./error/index":["vFSv",0],"./error/index.vue":["vFSv",0],"./index":["uTj8",6],"./index.vue":["uTj8",6],"./login":["OE+S",2],"./login.vue":["OE+S",2],"./menu/edit":["iqjz",20],"./menu/edit.vue":["iqjz",20],"./menu/list":["qy1V",11],"./menu/list.vue":["qy1V",11],"./module/components/params-form":["gWYc",9],"./module/components/params-form.vue":["gWYc",9],"./module/edit":["wgjB",14],"./module/edit.vue":["wgjB",14],"./module/list":["ZBUK",10],"./module/list.vue":["ZBUK",10],"./system/language/edit":["XFpV",38],"./system/language/edit.vue":["XFpV",38],"./system/language/list":["o58t",36],"./system/language/list.vue":["o58t",36],"./system/setting":["WRjr",31],"./system/setting.vue":["WRjr",31],"./system/site/edit":["o+7q",19],"./system/site/edit.vue":["o+7q",19],"./system/site/list":["qY2e",15],"./system/site/list.vue":["qY2e",15],"./user/edit":["jgiN",18],"./user/edit.vue":["jgiN",18],"./user/group/edit":["NREM",13],"./user/group/edit.vue":["NREM",13],"./user/group/list":["n4AK",40],"./user/group/list.vue":["n4AK",40],"./user/list":["EaIo",26],"./user/list.vue":["EaIo",26],"./user/log":["0Aam",24],"./user/log.vue":["0Aam",24],"./user/viewlevel/edit":["Hee1",30],"./user/viewlevel/edit.vue":["Hee1",30],"./user/viewlevel/list":["BtH1",29],"./user/viewlevel/list.vue":["BtH1",29]};function o(e){var t=a[e];return t?Promise.all(t.slice(1).map(n.e)).then(function(){return n(t[0])}):Promise.reject(new Error("Cannot find module '"+e+"'."))}o.keys=function(){return Object.keys(a)},o.id="rP06",e.exports=o},t8hI:function(e,t){e.exports={COM_USERS:"會員",COM_USERS_USER_MANAGER_TITLE:"管理",COM_USERS_USER_EDIT_TITLE:"編輯會員",COM_USERS_GROUPS_MANAGER_TITLE:"群組管理",COM_USERS_GROUPS_EDIT_TITLE:"編輯會員群組",COM_USERS_VIEWLEVEL_MANAGER_TITLE:"存取層級",COM_USERS_VIEWLEVEL_EDIT_TITLE:"編輯存取層級",COM_USERS_LOG:"會員歷程紀錄"}},u4hi:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default=[{name:"取得所有資源列表",method:"list",path:"/admin/asset/search",type:"post"},{name:"新增/修改單一資源",method:"save",path:"/admin/asset/store",type:"post"},{name:"刪除一至多個資源",method:"delete",path:"/admin/asset/remove",type:"post"},{name:"取得單一資源",method:"get",path:"/admin/asset/*",type:"get"},{name:"修改單一資源排序",method:"ordering",path:"/admin/asset/ordering",type:"post"},{name:"修改一至多個資源啟用狀態",method:"updateState",path:"/admin/asset/state",type:"post"},{name:"取得單一資源所屬的群組",method:"group",path:"/admin/asset/*/groups",type:"get"},{name:"修改單一資源所屬的群組",method:"assignGroup",path:"/admin/asset/group/map/store",type:"post"},{name:"取得所有資源群組列表",method:"listGroup",path:"/admin/asset/group/search",type:"post"},{name:"刪除一至多個資源群組",method:"deleteGroup",path:"/admin/asset/group/remove",type:"post"},{name:"新增/修改單一資源群組",method:"saveGroup",path:"/admin/asset/group/store",type:"post"},{name:"取得單一資源群組",method:"getGroup",path:"/admin/asset/group/*",type:"get"},{name:"修改一至多個資源群組發布狀態",method:"updateGroupState",path:"/admin/asset/group/state",type:"post"}]},vlfD:function(e,t){e.exports={render:function(){var e=this,t=e.$createElement,n=e._self._c||t;return n("el-form",{ref:"form-data",staticClass:"form-data",attrs:{"label-width":"100px",inline:e.setting.inline,rules:e.rules,model:e.submit_data}},[e._l(e.fields,function(t,a){return!t.condition||"function"!=typeof t.condition||"function"==typeof t.condition&&!0===t.condition({data:e.submit_data})?n("el-form-item",e._b({key:a,staticClass:"edit-form",attrs:{label:t.label,prop:t.key}},"el-form-item",t.attrs||{},!1),[n(e.components[t.type]||"DdlInput",{tag:"component",attrs:{"field-data":t,"submit-data":e.submit_data,"submit-info":e.submit_info,"temp-field-obj":e.temp_field_obj}})],1):e._e()}),e._v(" "),"search"===e.setting.type?n("el-form-item",[n("el-button",{attrs:{type:"primary",icon:"fal fa-search"},on:{click:e.onSubmit}},[e._v(e._s(e.$t("SEARCHBAR_SEARCH")))]),e._v(" "),n("el-button",{on:{click:e.onReset}},[e._v(e._s(e.$t("SEARCHBAR_RESET")))])],1):e._e()],2)},staticRenderFns:[]}},w2bW:function(e,t){e.exports={render:function(){var e=this,t=e.$createElement,n=e._self._c||t;return n("div",{staticClass:"list-data"},[n("ddl-table-header",{attrs:{search:e.searchbar},on:{search:e.onSearch,"search-reset":e.onSearchReset}},[n("span",{attrs:{slot:"ddl-header-after"},slot:"ddl-header-after"},[e._t("header-after")],2),e._v(" "),n("span",{attrs:{slot:"ddl-header-before"},slot:"ddl-header-before"},[n("h2",[e._v(e._s(e.$t(e.$route.matched[e.$route.matched.length-1].name)))]),e._v(" "),e._t("header-before")],2)]),e._v(" "),n("el-table",{directives:[{name:"loading",rawName:"v-loading",value:e.loading.flag,expression:"loading.flag"}],staticStyle:{width:"100%"},attrs:{id:e.table_id,data:e.list,"element-loading-text":e.loading.text||e.$t("LIST_DATA_LOADING_TEXT"),"row-class-name":e.handelRowClass,"row-key":"id",border:"",align:"center"},on:{"selection-change":e.onSelectionChange,"sort-change":e.onSortChange}},[e.sort&&e.sort.show?n("el-table-column",{attrs:{sortable:"custom",width:"45",prop:"ordering"},scopedSlots:e._u([{key:"default",fn:function(t){return[n("el-button",{staticClass:"caret-wrapper sortable-handler",attrs:{type:"text",disabled:!e.sort_enabled}},[n("font-awesome-icon",{attrs:{icon:["fal","ellipsis-v"]}})],1)]}}],null,!1,3714561438)}):e._e(),e._v(" "),n("el-table-column",{attrs:{type:"selection",width:"55"}}),e._v(" "),e._l(e.fields,function(t,a){return[t.type?e._e():n("el-table-column",{style:t.style,attrs:{prop:t.key,label:t.label,align:t.align||"left",sortable:t.sort||!0,formatter:t.formatter,filters:t.filter_list,"filter-method":t.filter_method,"filter-multiple":t.filter_multiple,width:t.width}}),e._v(" "),t.type&&"image"===t.type?n("el-table-column",{attrs:{prop:t.key,label:t.label,align:t.align||"left",width:t.width},scopedSlots:e._u([{key:"default",fn:function(e){return[n("img",{attrs:{src:(t.host||"")+e.row[t.key],alt:""}})]}}],null,!0)}):e._e(),e._v(" "),t.type&&"link"===t.type?n("el-table-column",{attrs:{prop:t.key,label:t.label,sortable:t.sort||!0,align:t.align||"left",width:t.width},scopedSlots:e._u([{key:"default",fn:function(a){return[n("a",{attrs:{target:t.link_target||"_self",href:a.row[t.key]}},[e._v(e._s(t.link_text||a.row[t.key]))])]}}],null,!0)}):e._e(),e._v(" "),t.type&&"icon"===t.type?n("el-table-column",{attrs:{prop:t.key,label:t.label,align:t.align||"center",sortable:t.sort||!0,formatter:t.formatter,width:t.width},scopedSlots:e._u([{key:"default",fn:function(a){return[a.column.formatter(a.row[t.key]).icon?n("font-awesome-icon",{style:a.column.formatter(a.row[t.key]).style,attrs:{icon:a.column.formatter(a.row[t.key]).icon}}):e._e()]}}],null,!0)},[e._v("\n        "+e._s(t.sort)+"\n        ")]):e._e(),e._v(" "),t.type&&"label"===t.type?n("el-table-column",{attrs:{prop:t.key,label:t.label,align:t.align||"center",sortable:t.sort||!0,formatter:t.formatter,width:t.width},scopedSlots:e._u([{key:"default",fn:function(a){return[n("div",{staticClass:"text-label",class:a.column.formatter(a.row[t.key]).color},[e._v(e._s(a.column.formatter(a.row[t.key]).text))])]}}],null,!0)}):e._e(),e._v(" "),t.type&&"icon-label"===t.type?n("el-table-column",{attrs:{prop:t.key,label:t.label,align:t.align||"center",sortable:t.sort||!0,formatter:t.formatter,width:t.width},scopedSlots:e._u([{key:"default",fn:function(e){return[n("div",{staticClass:"text-label",class:e.column.formatter(e.row[t.key]).color},[n("font-awesome-icon",{attrs:{icon:e.column.formatter(e.row[t.key]).icon}})],1)]}}],null,!0)}):e._e(),e._v(" "),t.type&&"publish-label"===t.type?n("el-table-column",{attrs:{prop:t.key,label:t.label,align:t.align||"center",sortable:t.sort||!0,formatter:t.formatter,width:t.width},scopedSlots:e._u([{key:"default",fn:function(t){return[n("div",{staticClass:"text-label",class:t.column.formatter(t.row).color},[e._v(e._s(t.column.formatter(t.row).text))])]}}],null,!0)}):e._e(),e._v(" "),t.type&&"editable"===t.type?n("el-table-column",{attrs:{prop:t.key,label:t.label,align:t.align||"left",sortable:t.sort||!0,formatter:t.formatter,width:t.width},scopedSlots:e._u([{key:"default",fn:function(a){return n("span",{},[n("el-tooltip",{attrs:{placement:"top"}},[n("div",{attrs:{slot:"content"},slot:"content"},[n("strong",[e._v(e._s(e.$t("TOOLBAR_CHECKOUT")))]),e._v(" "),n("br"),e._v("\n              "+e._s(a.row.locker)+"\n              "),n("br"),e._v("\n              "+e._s(e._f("displayDateFormat")(a.row.locked_at))+"\n            ")]),e._v(" "),a.row.locked_by?n("el-button",{staticClass:"btn--checkout",attrs:{size:"mini"},on:{click:function(t){return e.onBtnEvent({type:"checkout",data:a.row})}}},[n("font-awesome-icon",{attrs:{icon:["fal","lock-alt"]}})],1):e._e()],1),e._v(" "),[a.row.locked_by&&a.row.locked_by!==e.$store.state.user.user_info.id?n("span",[n("span",{domProps:{innerHTML:e._s(a.row[t.key])}})]):n("span",{staticClass:"editable_title",domProps:{innerHTML:e._s(a.column.formatter&&a.column.formatter(a.row[t.key])||a.row[t.key])},on:{click:function(t){return e.onBtnEvent({type:"edit",data:a.row})}}})],e._v(" "),n("span",{directives:[{name:"can",rawName:"v-can:not",value:["edit","editOwn","editOther"],expression:"['edit', 'editOwn', 'editOther']",arg:"not"}],domProps:{innerHTML:e._s(a.row[t.key])}})],2)}}],null,!0)}):e._e()]}),e._v(" "),"btns"in e.list_btns?n("el-table-column",{attrs:{label:e.list_btns.label||e.$t("LIST_DATA_ACTIONS_LABEL"),context:e._self},scopedSlots:e._u([{key:"default",fn:function(t){return e._l(e.list_btns.btns,function(a,o){return e.list_btns.btns&&(!a.condition||"function"!=typeof a.condition||"function"==typeof a.condition&&!0===a.condition({list:e.list,data:t.row,dataIndex:t.$index,btnIndex:o,btn:a}))?n("el-button",{key:o,attrs:{type:a.type||"info",size:"mini"},on:{click:function(n){return e.onCustomBtnEvent({list:e.list,data:t.row,dataIndex:t.$index,btnIndex:o,btn:a})}}},[e._v("\n          "+e._s("string"==typeof a.text?a.text:"function"==typeof a.text?a.text({list:e.list,data:t.row,dataIndex:t.$index,btnIndex:o,btn:a}):"")+"\n        ")]):e._e()})}}],null,!1,2307452654)}):e._e()],2),e._v(" "),n("div",{staticClass:"list-pagination"},[e.pagination&&(void 0!==e.pagination.total&&e.pagination.total>0||void 0!==e.pagination["page-count"]&&e.pagination["page-count"]>0)?n("el-pagination",{attrs:{"page-size":e.pagination.page_size,"page-sizes":e.pagination.page_sizes,"page-count":e.pagination["page-count"],layout:e.pagination.layout,total:e.pagination.total,"current-page":e.pagination.current_page},on:{"current-change":e.onChangeCurrentPage,"size-change":e.onChangePageSize}}):e._e()],1)],1)},staticRenderFns:[]}},wV5z:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default=[{name:"取得所有模組列表",method:"list",path:"/admin/module/search",type:"post"},{name:"取得單一模組資訊",method:"get",path:"/admin/module/*",type:"get"},{name:"新增/修改單一模組",method:"save",path:"/admin/module/store",type:"post"},{name:"刪除一至多個模組",method:"delete",path:"/admin/module/remove",type:"post"},{name:"修改一至多個模組回存狀態",method:"checkout",path:"/admin/module/checkout",type:"post"}]},wbJs:function(e,t,n){var a={"./content.json":"NZ3F","./content.sys.json":"K3bE","./develop.sys.json":"BrCa","./error.json":"aPUY","./global.json":"iv4H","./menu.sys.json":"pBaD","./mod_menu.json":"V4Dj","./module.sys.json":"x0Kq","./system.sys.json":"6guH","./user.sys.json":"t8hI"};function o(e){return n(r(e))}function r(e){var t=a[e];if(!(t+1))throw new Error("Cannot find module '"+e+"'.");return t}o.keys=function(){return Object.keys(a)},o.resolve=r,e.exports=o,o.id="wbJs"},x0Kq:function(e,t){e.exports={COM_MODULES:"模組",COM_MODULES_ITEM_MANAGER_TITLE:"模組管理",COM_MODULES_ITEM_EDIT_TITLE:"編輯模組"}},zC91:function(e,t,n){var a={"./api.js":"6R87","./asset.js":"u4hi","./category.js":"/eQR","./field.js":"jMJb","./item.js":"70zi","./language.js":"lf4D","./media.js":"jjid","./menu.js":"IoEb","./module.js":"wV5z","./observer.js":"XERp","./option.js":"dT7D","./setting.js":"nlm6","./site.js":"jzNx","./tag.js":"+dYt","./user.js":"AuqY","./viewlevel.js":"I66U"};function o(e){return n(r(e))}function r(e){var t=a[e];if(!(t+1))throw new Error("Cannot find module '"+e+"'.");return t}o.keys=function(){return Object.keys(a)},o.resolve=r,e.exports=o,o.id="zC91"},zTuk:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var a=n("oX2q"),o={site_name:"Daydream Lab CMS",author_name:"Daydream Lab Intl.",author_link:"http://www.daydream-lab.com/",left_open:a.a.get("left_open")||!0,is_login_refresh:!1},r={left_menu:function(e,t){"open"===t?(e.left_open=!0,a.a.set("left_open",!0)):"close"===t?(e.left_open=!1,a.a.set("left_open",!1)):"toggle"===t&&(e.left_open=!e.left_open,a.a.set("left_open",e.left_open))}};t.default={state:o,actions:{},mutations:r}}},[0]);
+webpackJsonp([66],[
+/* 0 */
+/***/ (function(module, exports) {
+
+module.exports = Vue;
+
+/***/ }),
+/* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_i18n__ = __webpack_require__(150);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_i18n___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_i18n__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_configs_translation__ = __webpack_require__(151);
+
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_i18n___default.a);
+
+// 引入 language 預設數值
+
+
+var messages = {};
+__WEBPACK_IMPORTED_MODULE_2_configs_translation__["c" /* SUPPORTED_LANGUAGES */].forEach(function (lang) {
+    messages[lang.code] = Object.assign(__webpack_require__(152)("./" + lang.code).default, __webpack_require__(155)("./" + lang.code).default);
+});
+var i18n = new __WEBPACK_IMPORTED_MODULE_1_vue_i18n___default.a({
+    locale: __WEBPACK_IMPORTED_MODULE_2_configs_translation__["a" /* DEFAULT_LANGUAGE */], // set locale
+    fallbackLocale: __WEBPACK_IMPORTED_MODULE_2_configs_translation__["b" /* FALLBACK_LANGUAGE */],
+    messages: messages // set locale messages
+});
+
+/* harmony default export */ __webpack_exports__["default"] = (i18n);
+
+/***/ }),
+/* 2 */,
+/* 3 */,
+/* 4 */,
+/* 5 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+var files = __webpack_require__(153);
+var locales = {};
+files.keys().forEach(function (key) {
+    locales = Object.assign(locales, files(key));
+});
+
+/* harmony default export */ __webpack_exports__["default"] = (locales);
+
+/***/ }),
+/* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+var files = __webpack_require__(154);
+var locales = {};
+files.keys().forEach(function (key) {
+    locales = Object.assign(locales, files(key));
+});
+
+/* harmony default export */ __webpack_exports__["default"] = (locales);
+
+/***/ }),
+/* 7 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_configs_global__ = __webpack_require__(182);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+
+
+var Store = function () {
+    function Store() {
+        _classCallCheck(this, Store);
+
+        this.store = window.localStorage;
+        this.prefix = __WEBPACK_IMPORTED_MODULE_0_configs_global__["a" /* DB_PREFIX */];
+    }
+
+    _createClass(Store, [{
+        key: "set",
+        value: function set(key, value, fn) {
+            try {
+                value = JSON.stringify(value);
+            } catch (e) {}
+
+            this.store.setItem(this.prefix + key, value);
+
+            fn && fn();
+        }
+    }, {
+        key: "get",
+        value: function get(key) {
+            if (!key) {
+                throw new Error("没有找到key。");
+            }
+            if ((typeof key === "undefined" ? "undefined" : _typeof(key)) === "object") {
+                throw new Error("key不能是一个对象。");
+            }
+            var value = this.store.getItem(this.prefix + key);
+            if (value !== null) {
+                try {
+                    value = JSON.parse(value);
+                } catch (e) {}
+            }
+            return value;
+        }
+    }, {
+        key: "remove",
+        value: function remove(key) {
+            this.store.removeItem(this.prefix + key);
+        }
+    }]);
+
+    return Store;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (new Store());
+
+/***/ }),
+/* 8 */,
+/* 9 */,
+/* 10 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(178);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vuex__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__getters__ = __webpack_require__(179);
+
+
+
+
+
+var requireModule = __webpack_require__(180);
+var modules = {};
+requireModule.keys().forEach(function (fileName) {
+    var moduleName = fileName.split(".")[1].split("/")[1];
+    modules[moduleName] = requireModule(fileName).default;
+});
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex___default.a);
+
+/* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vuex___default.a.Store({
+    modules: modules,
+    getters: __WEBPACK_IMPORTED_MODULE_2__getters__["a" /* default */]
+}));
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(3)
+/* script */
+var __vue_script__ = __webpack_require__(162)
+/* template */
+var __vue_template__ = __webpack_require__(163)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/admin/views/App.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3298454c", Component.options)
+  } else {
+    hotAPI.reload("data-v-3298454c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 12 */,
+/* 13 */,
+/* 14 */,
+/* 15 */,
+/* 16 */,
+/* 17 */,
+/* 18 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export resetRouter */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(164);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_router__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_utils___ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_router_routes__ = __webpack_require__(192);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__lang___ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_store___ = __webpack_require__(10);
+
+
+
+
+
+
+var userRoutes = __WEBPACK_IMPORTED_MODULE_2_utils___["a" /* Storage */].get("user_routes") || [];
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_router___default.a);
+
+var createRouter = function createRouter() {
+    return new __WEBPACK_IMPORTED_MODULE_1_vue_router___default.a({
+        base: "/dashboard",
+        mode: "history",
+        scrollBehavior: function scrollBehavior() {
+            return { y: 0 };
+        },
+        routes: __WEBPACK_IMPORTED_MODULE_3_router_routes__["a" /* default */].concat(Object(__WEBPACK_IMPORTED_MODULE_2_utils___["c" /* formatRoutes */])(userRoutes)),
+        linkActiveClass: "active"
+    });
+};
+
+var router = createRouter();
+
+function resetRouter() {
+    var newRouter = createRouter();
+    router.matcher = newRouter.matcher; //重置 Routes
+}
+
+var routeWhiteList = ["/login"];
+
+router.beforeEach(function (to, from, next) {
+    if (__WEBPACK_IMPORTED_MODULE_5_store___["a" /* default */].state.user.user_token) {
+        to.path === "/login" ? next({ path: "/" }) : next();
+    } else {
+        routeWhiteList.includes(to.path) ? next() : next({ path: "/login" });
+    }
+});
+
+router.afterEach(function (to) {
+    if (to.name) document.title = __WEBPACK_IMPORTED_MODULE_4__lang___["default"].t(to.name) + " - " + __WEBPACK_IMPORTED_MODULE_5_store___["a" /* default */].state.global.site_name;
+    if (window.innerWidth <= 1024) __WEBPACK_IMPORTED_MODULE_5_store___["a" /* default */].commit("left_menu", "close");
+});
+
+/* harmony default export */ __webpack_exports__["a"] = (router);
+
+/***/ }),
+/* 19 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__format_routes__ = __webpack_require__(165);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__storage__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ajax__ = __webpack_require__(185);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_0__format_routes__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_1__storage__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_2__ajax__["a"]; });
+
+
+
+
+
+
+/***/ }),
+/* 20 */,
+/* 21 */,
+/* 22 */,
+/* 23 */,
+/* 24 */,
+/* 25 */
+/***/ (function(module, exports) {
+
+module.exports = {}
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports) {
+
+module.exports = {"YES":"是","NO":"否","ALL":"所有","ALL_LANGUAGE":"所有","LOGIN":"登入","LOGOUT":"登出","PUBLISHED":"發佈的","UNPUBLISHED":"停止發佈的","ARCHIVED":"封存","TRASHED":"刪除至回收桶中","TOOLBAR_ADD":"新增","TOOLBAR_EDIT":"編輯","TOOLBAR_TRASH":"回收","TOOLBAR_DELETE":"刪除","TOOLBAR_RESTORE":"恢復","TOOLBAR_SAVE":"儲存","TOOLBAR_SAVE_AND_ADD":"儲存&新增","TOOLBAR_SAVE_AND_CLOSE":"儲存&關閉","TOOLBAR_CANCEL":"取消","TOOLBAR_PUBLISH":"發佈","TOOLBAR_UNPUBLISH":"停止發佈","TOOLBAR_FEATURED":"精選","TOOLBAR_UNFEATURED":"取消精選","TOOLBAR_CHECKOUT":"回存","TOOLBAR_KEYWORDS":"輸入關鍵字"}
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports) {
+
+module.exports = {"MOD_GLOBAL_MENU_CONTROL_PANEL":"控制台","MOD_GLOBAL_MENU_SYSTEM":"系統","MOD_GLOBAL_MENU_PAGE":"頁面"}
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports) {
+
+module.exports = {"CONTENT_FIELD_INTRO_IMAGE_LABEL":"摘要圖片","CONTENT_FIELD_MAIN_IMAGE_LABEL":"主要圖片"}
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports) {
+
+module.exports = {"COM_CONTENT":"內容","COM_CONTENT_ITEM_MANAGER_TITLE":"項目","COM_CONTENT_ITEM_EDIT_TITLE":"編輯項目","COM_CONTENT_CATEGORY_MANAGER_TITLE":"分類","COM_CONTENT_CATEGORY_EDIT_TITLE":"編輯分類","COM_CONTENT_TAG_MANAGER_TITLE":"標籤","COM_CONTENT_TAG_EDIT_TITLE":"編輯標籤","COM_CONTENT_EXTRAFIELD_MANAGER_TITLE":"附加欄位","COM_CONTENT_EXTRAFIELD_EDIT_TITLE":"編輯附加欄位","COM_CONTENT_EXTRAFIELD_GROUP_MANAGER_TITLE":"附加欄位群組","COM_CONTENT_EXTRAFIELD_GROUP_EDIT_TITLE":"編輯附加欄位群組","COM_CONTENT_MEDIA_MANAGER_TITLE":"媒體管理","COM_CONTENT_SEARCH_STATISTICS_TITLE":"全站搜尋統計"}
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports) {
+
+module.exports = {"COM_DEV":"開發人員","COM_DEV_APIS_TITLE":"APIs","COM_DEV_API_MANAGER_TITLE":"API管理","COM_DEV_API_EDIT_TITLE":"編輯API","COM_DEV_ASSETS_TITLE":"資源","COM_DEV_ASSET_MANAGER_TITLE":"資源管理","COM_DEV_ASSET_EDIT_TITLE":"編輯資源","COM_DEV_ASSET_ASSIGN_GROUP_TITLE":"指定群組","COM_DEV_ASSET_ASSIGN_API_TITLE":"指定API","COM_DEV_ASSET_GROUP_MANAGER_TITLE":"資源群組","COM_DEV_ASSET_GROUP_EDIT_TITLE":"編輯資源群組"}
+
+/***/ }),
+/* 31 */
+/***/ (function(module, exports) {
+
+module.exports = {"ERROR_INPUT_IDS":"請至少勾選一個項目","ERROR_INPUT_GROUP_IDS":"請至少指定一個會員群組","ERROR_INPUT_EMAIL":"請輸入Email","ERROR_INPUT_FIRST_NAME":"請輸入姓氏","ERROR_INPUT_LAST_NAME":"請輸入名字","ERROR_INPUT_TITLE":"請填寫標題","ERROR_INPUT_CATEGORY_ID":"請選擇分類","ERROR_INPUT_LANGUAGE":"請選擇語言","ERROR_INPUT_STATE":"請選擇狀態","ERROR_INPUT_FEATURED":"請選擇是否精選","ERROR_INPUT_PASSWORD":"請輸入正確的密碼","ERROR_INPUT_PASSWORD_CONFIRMATION":"請輸入相同的密碼"}
+
+/***/ }),
+/* 32 */
+/***/ (function(module, exports) {
+
+module.exports = {"YES":"是","NO":"否","ALL":"所有","ALL_LANGUAGE":"所有","NONE":"無","LOGIN":"登入","LOGIN_LOADING":"登入中⋯⋯","LOGOUT":"登出","PUBLISHED":"發佈的","UNPUBLISHED":"停止發佈的","PENDING":"待上架","EXPIRED":"已下架","ARCHIVED":"封存","TRASHED":"刪除至回收桶中","FEATURED":"精選","NOT_FEATURED":"非精選","DISABLED":"停用","SELECT":"選擇","TOOLBAR_ADD":"新增","TOOLBAR_EDIT":"編輯","TOOLBAR_TRASH":"回收","TOOLBAR_DELETE":"刪除","TOOLBAR_RENAME":"重新命名","TOOLBAR_RENAME_DIR":"重新命名資料夾","TOOLBAR_RESTORE":"恢復","TOOLBAR_SAVE":"儲存","TOOLBAR_SAVE_AND_ADD":"儲存&新增","TOOLBAR_SAVE_AND_CLOSE":"儲存&關閉","TOOLBAR_CANCEL":"取消","TOOLBAR_PUBLISH":"發佈","TOOLBAR_UNPUBLISH":"停止發佈","TOOLBAR_FEATURED":"精選","TOOLBAR_UNFEATURED":"取消精選","TOOLBAR_CHECKOUT":"回存","TOOLBAR_BLOCK":"封鎖","TOOLBAR_UNBLOCK":"解除封鎖","TOOLBAR_KEYWORDS":"輸入關鍵字","SEARCHBAR_SEARCH":"搜尋","SEARCHBAR_RESET":"重置","LIST_DATA_HEADING_ID":"ID","LIST_DATA_HEADING_LANGUAGE":"語言","LIST_DATA_IMAGE_LABEL":"圖片","LIST_DATA_INTRO_IMAGE_LABEL":"摘要圖片","LIST_DATA_AUTHOR_LABEL":"作者","LIST_DATA_MODIFIED_DATE_LABEL":"修改日期","LIST_DATA_MODIFIED_BY_LABEL":"最後修改者","LIST_DATA_CREATED_DATE_LABEL":"建立日期","LIST_DATA_HITS_LABEL":"點擊","LIST_DATA_ACTIONS_LABEL":"操作","LIST_DATA_LOADING_TEXT":"載入中⋯⋯","OPTION_ORDER_BY":"排序依據","OPTION_ORDER":"排序方式","OPTION_ITEM_COUNT":"顯示項目總數量","OPTION_ITEM_SPLIT_ITEMS":"是否依照分類區隔資料？","OPTION_FEATURED_DISPLAY":"精選項目","OPTION_FEATURED_SPLIT_ITEMS":"是否置頂？","OPTION_FEATURED_COUNT":"精選項目數量","OPTION_FEATURED_ORDER_BY":"精選排序依據","OPTION_FEATURED_ORDER":"精選排序方式","OPTION_SELECT":"- 選擇{name} -","OPTION_NONE":"- 無 -","OPTION_STATE":"狀態","OPTION_BLOCK":"封鎖狀態","OPTION_ITEM":"項目","OPTION_CATEGORY":"分類","OPTION_PARENT_CATEGORY":"上層分類","OPTION_LANGUAGE":"語言","OPTION_FEATURED":"精選","OPTION_REQUIRED":"必填","OPTION_TAG":"標籤","OPTION_TYPE":"類型","OPTION_GROUP":"群組","OPTION_PARENT_GROUP":"上層群組","OPTION_USER_REDIRECT":"登入後頁面","OPTION_MENU":"選單","OPTION_PARENT_MENU":"上層選單","OPTION_EXTENSION":"擴充類型","OPTION_EXTENSION_MENU":"選單","OPTION_EXTENSION_MODULE":"模組","OPTION_EXTENSION_ITEM":"項目","OPTION_CONTENT_TYPE":"內容類型","OPTION_CONTENT_TYPE_ARTICLE":"文章","OPTION_CONTENT_TYPE_MENU":"菜單","OPTION_CONTENT_TYPE_TIMELINE":"時間軸","OPTION_CONTENT_TYPE_SLIDESHOW":"Slideshow","OPTION_CONTENT_TYPE_LINK":"連結","OPTION_CONTENT_TYPE_SIMPLE-ITEM":"簡單項目","OPTION_EXTRAFIELD_GROUP":"欄位群組","OPTION_ITEM_EXTRAFIELD_GROUP":"項目欄位群組","OPTION_EXTRAFIELD_TYPE":"欄位類型","OPTION_EXTRAFIELD_TYPE_TEXT":"文字欄位","OPTION_EXTRAFIELD_TYPE_TEXTAREA":"文字區","OPTION_EXTRAFIELD_TYPE_SELECT":"下拉選擇","OPTION_EXTRAFIELD_TYPE_MULTIPLESELECT":"多選列表","OPTION_EXTRAFIELD_TYPE_RADIO":"單選按鈕","OPTION_EXTRAFIELD_TYPE_LINK":"連結","OPTION_EXTRAFIELD_TYPE_DATE":"日期","OPTION_EXTRAFIELD_TYPE_DATETIME":"日期時間","OPTION_EXTRAFIELD_TYPE_IMAGE":"圖片","OPTION_EXTRAFIELD_TYPE_COLOR":"顏色選擇器","FIELD_TITLE_LABEL":"標題","FIELD_ALIAS_LABEL":"別名","FIELD_INTRO_TEXT_LABEL":"摘要文字","FIELD_DESCRIPTION_LABEL":"描述","FIELD_ITEM_DESCRIPTION_LABEL":"內容文字","FIELD_CATEGORY_DESCRIPTION_LABEL":"分類描述","FIELD_LANGUAGE_LABEL":"語言","FIELD_ACCESS_LEVEL":"存取層級","FIELD_PUBLISH_UP_DATE":"起始發佈日期","FIELD_PUBLISH_DOWN_DATE":"結束發佈日期","FIELD_META_DESCRIPTION_LABEL":"Meta 說明","FIELD_META_KEYWORDS_LABEL":"Meta 關鍵字","FIELD_MAIN_IMAGE_SAME_AS_INTRO_IMAGE_LABEL":"套用摘要圖片路徑","FIELD_MEDIA_PREVIEW_SELECTED_IMAGE":"預覽","FIELD_MEDIA_PREVIEW_EMPTY":"沒有選擇圖片","FIELD_MENU_CHOOSE_MODULE":"選擇模組","FIELD_SEARCH_KEYWORD":"搜尋關鍵字","FIELD_SEARCH_COUNT":"次數","FIELD_SEARCH_START_DATE":"起始日期","FIELD_SEARCH_END_DATE":"結束日期","FIELD_EXTRAFIELD_DEFAULT_VALUE":"預設值","FIELD_EXTRAFIELD_DISPLAY_NULL_OPTION":"顯示空選項","FIELD_EXTRAFIELD_TEXTAREA_ROWS":"列數","FIELD_EXTRAFIELD_TEXTAREA_USE_EDITOR":" 使用編輯器","FIELD_EXTRAFIELD_DATE_DISPLAY_FORMAT":"顯示格式","LANGUAGE_TAB_SITE_NAME_AND_METADATA":"網站名稱 & Metadata","LANGUAGE_FIELD_LANG_TAG_LABEL":"語言標籤","LANGUAGE_FIELD_LANG_CODE_LABEL":"網址語言代碼","LANGUAGE_FIELD_TYPE_LABEL":"語言類型","LANGUAGE_FIELD_TYPE_SYSTEM":"系統","LANGUAGE_FIELD_TYPE_CONTENT":"內容","LANGUAGE_FIELD_CUSTOM_SITE_NAME_LABEL":"自訂網站名稱","EXTRAFIELD_TYPE_TEXT":"文字欄位","EXTRAFIELD_TYPE_TEXTAREA":"文字區","EXTRAFIELD_TYPE_SELECT":"下拉選單","EXTRAFIELD_TYPE_MULTIPLESELECT":"多選列表","EXTRAFIELD_TYPE_RADIO":"單選按鈕","EXTRAFIELD_TYPE_LINK":"連結","EXTRAFIELD_TYPE_DATE":"日期","EXTRAFIELD_TYPE_DATETIME":"日期時間","EXTRAFIELD_TYPE_IMAGE":"圖片","EXTRAFIELD_TYPE_LINK_TEXT":"連結文字","EXTRAFIELD_TYPE_LINK_URL":"網址","EXTRAFIELD_TYPE_LINK_OPEN_IN":"開啟於","EXTRAFIELD_TYPE_LINK_OPEN_IN_SAME_WINDOW":"相同視窗","EXTRAFIELD_TYPE_LINK_OPEN_IN_NEW_WINDOW":"新視窗","MENU_FIELD_SITE_NAME_LABEL":"網站","SITE_FIELD_URL_LABEL":"網址","MEDIA_LIST_VIEW":"列表","MEDIA_THUMB_VIEW":"縮圖","MEDIA_UPLOAD_FILE":"上傳檔案","MEDIA_UPLOAD_FILE_LIMIT":"最大大小: 10MB","MEDIA_ITEMS":"項目:","MEDIA_UPLOAD":"上傳","MEDIA_SELECT_FILE":"選擇檔案","MEDIA_CREATE_DIR":"新增資料夾","MEDIA_CREATE":"建立","MEDIA_RENAME":"重新命名","MEDIA_NAME":"名稱","MEDIA_SIZE":"大小","MEDIA_TYPE":"種類","MEDIA_MODIFIED_DATE":"修改日期","EDITOR_CHOOSE_IMAGE_FROM_MEDIA":"從媒體選擇圖片","USER_OPTION_BLOCK":"已封鎖","USER_OPTION_ACTIVE":"啟用狀態","USER_ACTIVATED":"已啟用","USER_UNACTIVATED":"未啟用","USER_BLOCKED":"已封鎖","USER_TAB_DETAIL":"會員資料","USER_TAB_ASSIGN_GROUP":"指定會員群組","USER_FIELD_FIRST_NAME":"姓氏","USER_FIELD_LAST_NAME":"名字","USER_FIELD_EMAIL":"Email","USER_FIELD_PASSWORD":"密碼","USER_FIELD_PASSWORD_CONFIRMATION":"再次輸入密碼","SETTING_FIELD_SITE_NAME_LABEL":"網站名稱","SETTING_FIELD_SITE_LANG_LABEL":"網站語言","SETTING_FIELD_ADMIN_LANG_LABEL":"管理區語言","GLOBAL_FIELDSET_OPTIONS":"選項","GLOBAL_FIELDSET_BASIC_OPTIONS":"基本","GLOBAL_FIELDSET_METADATA_OPTIONS":"Metadata","GLOBAL_FIELDSET_IMAGE_OPTIONS":"圖片","GLOBAL_FIELDSET_PARAMS_OPTIONS":"參數","GLOBAL_FIELDSET_EXTRAFIELD_OPTIONS":"附加欄位","GLOBAL_FIELDSET_CONTENT_MANAGE_PREFIX":"項目管理：{name}","GLOBAL_USERNAME":"帳號","GLOBAL_PASSWORD":"密碼","GLOBAL_REMEMBER_ME":"記住帳號","GLOBAL_ROOT":"根","GLOBAL_VIEW_SITE":"預覽網站","GLOBAL_HOMEPAGE":"首頁","GLOBAL_CONFIRM_DELETE":"你確定想要移除？確認後將永久刪除選定的項目！","GLOBAL_CONFIRM_LOGOUT":"你確定要登出？","GLOBAL_LOGIN_SUCCESS":"登入成功","GLOBAL_LOGOUT_SUCCESS":"成功登出","ERROR":"錯誤","ERROR_PLEASE_ENTER_USER_NAME":"請輸入帳號","ERROR_PLEASE_ENTER_VALID_EMAIL":"請輸入有效的Email","ERROR_PLEASE_ENTER_PASSWORD":"請輸入密碼","ERROR_PLEASE_ENTER_PASSWORD_CONFIRMATION":"請輸入相同的密碼","ERROR_PLEASE_ENTER_VALID_PASSWORD":"請輸入有效的密碼: 8~16碼英文或數字","ERROR_PLEASE_LOGIN":"請先登入"}
+
+/***/ }),
+/* 33 */
+/***/ (function(module, exports) {
+
+module.exports = {"COM_MENUS":"選單","COM_MENUS_ITEM_MANAGER_TITLE":"選單管理","COM_MENUS_ITEM_EDIT_TITLE":"編輯選單"}
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports) {
+
+module.exports = {"MOD_GLOBAL_MENU_CONTROL_PANEL":"控制台","MOD_GLOBAL_MENU_SYSTEM":"系統","MOD_GLOBAL_MENU_PAGE":"頁面"}
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports) {
+
+module.exports = {"COM_MODULES":"模組","COM_MODULES_ITEM_MANAGER_TITLE":"模組管理","COM_MODULES_ITEM_EDIT_TITLE":"編輯模組"}
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports) {
+
+module.exports = {"COM_SYSTEM_SETTINGS_TITLE":"全站設定","COM_SYSTEM_LANGUAGE_MANAGER_TITLE":"語言","COM_SYSTEM_LANGUAGE_EDIT_TITLE":"編輯語言","COM_SYSTEM_SITE_MANAGER_TITLE":"多網站","COM_SYSTEM_SITE_EDIT_TITLE":"編輯網站"}
+
+/***/ }),
+/* 37 */
+/***/ (function(module, exports) {
+
+module.exports = {"COM_USERS":"會員","COM_USERS_USER_MANAGER_TITLE":"管理","COM_USERS_USER_EDIT_TITLE":"編輯會員","COM_USERS_GROUPS_MANAGER_TITLE":"群組管理","COM_USERS_GROUPS_EDIT_TITLE":"編輯會員群組","COM_USERS_VIEWLEVEL_MANAGER_TITLE":"存取層級","COM_USERS_VIEWLEVEL_EDIT_TITLE":"編輯存取層級","COM_USERS_LOG":"會員歷程紀錄"}
+
+/***/ }),
+/* 38 */,
+/* 39 */,
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */,
+/* 51 */,
+/* 52 */,
+/* 53 */,
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */,
+/* 61 */,
+/* 62 */,
+/* 63 */,
+/* 64 */,
+/* 65 */,
+/* 66 */,
+/* 67 */,
+/* 68 */,
+/* 69 */,
+/* 70 */,
+/* 71 */,
+/* 72 */,
+/* 73 */,
+/* 74 */,
+/* 75 */,
+/* 76 */,
+/* 77 */,
+/* 78 */,
+/* 79 */,
+/* 80 */,
+/* 81 */,
+/* 82 */,
+/* 83 */,
+/* 84 */,
+/* 85 */,
+/* 86 */,
+/* 87 */,
+/* 88 */,
+/* 89 */,
+/* 90 */,
+/* 91 */,
+/* 92 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return UPDATE_USER_INFO; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return REMOVE_USER_INFO; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return UPDATE_USER_TOKEN; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return REMOVE_USER_TOKEN; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return UPDATE_REMEMBER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return REMOVE_REMEMBER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return UPDATE_USER_ROUTES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return REMOVE_USER_ROUTES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return UPDATE_USER_ACCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return REMOVE_USER_ACCESS; });
+/* unused harmony export UPDATE_ROLES */
+/* unused harmony export UPDATE_ASSETS */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return UPDATE_ERROR_LOGS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return UPDATE_OPTION_RELATED_LIST; });
+/**
+ * user
+ */
+
+var UPDATE_USER_INFO = "UPDATE_USER_INFO";
+var REMOVE_USER_INFO = "REMOVE_USER_INFO";
+
+var UPDATE_USER_TOKEN = "UPDATE_USER_TOKEN";
+var REMOVE_USER_TOKEN = "REMOVE_USER_TOKEN";
+
+var UPDATE_REMEMBER = "UPDATE_REMEMBER";
+var REMOVE_REMEMBER = "REMOVE_REMEMBER";
+
+var UPDATE_USER_ROUTES = "UPDATE_USER_ROUTES";
+var REMOVE_USER_ROUTES = "REMOVE_USER_ROUTES";
+
+var UPDATE_USER_ACCESS = "UPDATE_USER_ACCESS";
+var REMOVE_USER_ACCESS = "REMOVE_USER_ACCESS";
+
+var UPDATE_ROLES = "UPDATE_ROLES";
+
+/**
+ * asset
+ */
+var UPDATE_ASSETS = "UPDATE_ASSETS";
+
+var UPDATE_ERROR_LOGS = "UPDATE_ERROR_LOGS";
+
+/**
+ * sys
+ */
+var UPDATE_OPTION_RELATED_LIST = "UPDATE_OPTION_RELATED_LIST";
+
+/***/ }),
+/* 93 */,
+/* 94 */,
+/* 95 */,
+/* 96 */,
+/* 97 */,
+/* 98 */,
+/* 99 */,
+/* 100 */,
+/* 101 */,
+/* 102 */,
+/* 103 */,
+/* 104 */,
+/* 105 */,
+/* 106 */,
+/* 107 */,
+/* 108 */,
+/* 109 */,
+/* 110 */,
+/* 111 */,
+/* 112 */,
+/* 113 */,
+/* 114 */,
+/* 115 */,
+/* 116 */,
+/* 117 */,
+/* 118 */,
+/* 119 */,
+/* 120 */,
+/* 121 */,
+/* 122 */,
+/* 123 */,
+/* 124 */,
+/* 125 */,
+/* 126 */,
+/* 127 */,
+/* 128 */,
+/* 129 */,
+/* 130 */,
+/* 131 */,
+/* 132 */,
+/* 133 */,
+/* 134 */,
+/* 135 */,
+/* 136 */,
+/* 137 */,
+/* 138 */,
+/* 139 */,
+/* 140 */,
+/* 141 */,
+/* 142 */,
+/* 143 */,
+/* 144 */,
+/* 145 */,
+/* 146 */,
+/* 147 */,
+/* 148 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(149);
+module.exports = __webpack_require__(247);
+
+
+/***/ }),
+/* 149 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__lang__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui__ = __webpack_require__(156);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_element_ui__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__fortawesome_vue_fontawesome__ = __webpack_require__(111);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__fortawesome_fontawesome_svg_core__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__fortawesome_pro_light_svg_icons__ = __webpack_require__(159);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__views_App__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__views_App___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__views_App__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_router___ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_store___ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__register__ = __webpack_require__(193);
+
+
+
+// Using Element UI
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_element_ui___default.a, {
+    i18n: function i18n(key, value) {
+        return __WEBPACK_IMPORTED_MODULE_1__lang__["default"].t(key, value);
+    }
+});
+
+// Using FontAwesome
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component("font-awesome-icon", __WEBPACK_IMPORTED_MODULE_3__fortawesome_vue_fontawesome__["a" /* FontAwesomeIcon */]);
+
+
+
+// import { faStar } from "@fortawesome/free-solid-svg-icons/faStar";
+// import { faCaretDown } from "@fortawesome/free-solid-svg-icons/faCaretDown";
+
+__WEBPACK_IMPORTED_MODULE_4__fortawesome_fontawesome_svg_core__["c" /* library */].add(__WEBPACK_IMPORTED_MODULE_5__fortawesome_pro_light_svg_icons__["a" /* fal */], __webpack_require__(160).definition, __webpack_require__(161).definition);
+
+
+
+
+
+// import "./icons";
+
+
+// Remove the productionTip in dev tool console
+if (false) {
+    Vue.config.productionTip = false;
+    Vue.config.devtools = false;
+}
+var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
+    el: "#app",
+    i18n: __WEBPACK_IMPORTED_MODULE_1__lang__["default"],
+    router: __WEBPACK_IMPORTED_MODULE_7_router___["a" /* default */],
+    store: __WEBPACK_IMPORTED_MODULE_8_store___["a" /* default */],
+    render: function render(h) {
+        return h(__WEBPACK_IMPORTED_MODULE_6__views_App___default.a);
+    }
+});
+
+/***/ }),
+/* 150 */
+/***/ (function(module, exports) {
+
+module.exports = VueI18n;
+
+/***/ }),
+/* 151 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DEFAULT_LANGUAGE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return FALLBACK_LANGUAGE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return SUPPORTED_LANGUAGES; });
+var DEFAULT_LANGUAGE = "zh-TW"; // 預設語言
+var FALLBACK_LANGUAGE = "zh-TW"; // 當某個語言不存在時，提供一個默認的語言去處理
+
+var SUPPORTED_LANGUAGES = [{
+    code: "en",
+    title: "English"
+}, {
+    code: "zh-TW",
+    title: "繁體中文"
+}];
+
+/***/ }),
+/* 152 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"./": 1,
+	"./en": 5,
+	"./en/": 5,
+	"./en/content.json": 25,
+	"./en/global.json": 26,
+	"./en/index": 5,
+	"./en/index.js": 5,
+	"./en/mod_menu.json": 27,
+	"./index": 1,
+	"./index.js": 1,
+	"./zh-TW": 6,
+	"./zh-TW/": 6,
+	"./zh-TW/content.json": 28,
+	"./zh-TW/content.sys.json": 29,
+	"./zh-TW/develop.sys.json": 30,
+	"./zh-TW/error.json": 31,
+	"./zh-TW/global.json": 32,
+	"./zh-TW/index": 6,
+	"./zh-TW/index.js": 6,
+	"./zh-TW/menu.sys.json": 33,
+	"./zh-TW/mod_menu.json": 34,
+	"./zh-TW/module.sys.json": 35,
+	"./zh-TW/system.sys.json": 36,
+	"./zh-TW/user.sys.json": 37
+};
+function webpackContext(req) {
+	return __webpack_require__(webpackContextResolve(req));
+};
+function webpackContextResolve(req) {
+	var id = map[req];
+	if(!(id + 1)) // check for number or string
+		throw new Error("Cannot find module '" + req + "'.");
+	return id;
+};
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = 152;
+
+/***/ }),
+/* 153 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"./content.json": 25,
+	"./global.json": 26,
+	"./mod_menu.json": 27
+};
+function webpackContext(req) {
+	return __webpack_require__(webpackContextResolve(req));
+};
+function webpackContextResolve(req) {
+	var id = map[req];
+	if(!(id + 1)) // check for number or string
+		throw new Error("Cannot find module '" + req + "'.");
+	return id;
+};
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = 153;
+
+/***/ }),
+/* 154 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"./content.json": 28,
+	"./content.sys.json": 29,
+	"./develop.sys.json": 30,
+	"./error.json": 31,
+	"./global.json": 32,
+	"./menu.sys.json": 33,
+	"./mod_menu.json": 34,
+	"./module.sys.json": 35,
+	"./system.sys.json": 36,
+	"./user.sys.json": 37
+};
+function webpackContext(req) {
+	return __webpack_require__(webpackContextResolve(req));
+};
+function webpackContextResolve(req) {
+	var id = map[req];
+	if(!(id + 1)) // check for number or string
+		throw new Error("Cannot find module '" + req + "'.");
+	return id;
+};
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = 154;
+
+/***/ }),
+/* 155 */,
+/* 156 */
+/***/ (function(module, exports) {
+
+module.exports = ELEMENT;
+
+/***/ }),
+/* 157 */,
+/* 158 */,
+/* 159 */,
+/* 160 */,
+/* 161 */,
+/* 162 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "App",
+  watch: {
+    "$store.state.user.user_token": function $storeStateUserUser_token(value) {
+      var _this = this;
+
+      if (value) {
+        // 取得後台語言設定
+        this.$$api_setting_get({
+          fn: function fn(_ref) {
+            var data = _ref.data;
+
+            _this.$store.commit("set_language", data.items.locale_admin);
+          }
+        });
+        // 取得後台管理網站列表
+        this.$$api_site_list({
+          fn: function fn(_ref2) {
+            var data = _ref2.data;
+
+            _this.$store.commit("update_site_list", data.items);
+          }
+        });
+      }
+    }
+  }
+});
+
+/***/ }),
+/* 163 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "app" } }, [_c("router-view")], 1)
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-3298454c", module.exports)
+  }
+}
+
+/***/ }),
+/* 164 */
+/***/ (function(module, exports) {
+
+module.exports = VueRouter;
+
+/***/ }),
+/* 165 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = formatRoutes;
+function formatRoutes(routers) {
+    //簡單檢查是否是可以處理的數據
+    if (!(routers instanceof Array)) {
+        return false;
+    }
+    //處理後的容器
+    var fmRouters = [];
+    routers.forEach(function (router) {
+        // 取得 router 內變數
+        var path = router.path,
+            full_path = router.full_path,
+            _component = router.component,
+            title = router.title,
+            redirect = router.redirect,
+            children = router.children,
+            icon = router.icon,
+            showNav = router.showNav,
+            type = router.type,
+            id = router.id;
+
+
+        _component = _component ? _component : "layout";
+        //如果有子組件，遞歸處理
+        if (children && children instanceof Array) {
+            children = formatRoutes(children);
+        }
+        var fmRouter = {
+            path: full_path || path,
+            component: function component() {
+                //拚出相對路徑，由於component無法識別變量
+                //利用Webpack 的 Code-Splitting 功能
+                return _component === "layout" ? __webpack_require__.e/* import() */(45).then(__webpack_require__.bind(null, 251)) : __webpack_require__(166)("./" + _component);
+            },
+            name: title,
+            children: children,
+            meta: {
+                icon: icon,
+                showNav: showNav,
+                type: type,
+                id: id
+            }
+        };
+        if (redirect) {
+            fmRouter.redirect = redirect;
+        }
+        fmRouters.push(fmRouter);
+    });
+    return fmRouters;
+}
+
+/***/ }),
+/* 166 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"./": [
+		23,
+		6
+	],
+	"./App": [
+		11
+	],
+	"./App.vue": [
+		11
+	],
+	"./api/edit": [
+		113,
+		28
+	],
+	"./api/edit.vue": [
+		113,
+		28
+	],
+	"./api/list": [
+		114,
+		43
+	],
+	"./api/list.vue": [
+		114,
+		43
+	],
+	"./asset/assign/group": [
+		115,
+		35
+	],
+	"./asset/assign/group.vue": [
+		115,
+		35
+	],
+	"./asset/edit": [
+		116,
+		27
+	],
+	"./asset/edit.vue": [
+		116,
+		27
+	],
+	"./asset/group/edit": [
+		117,
+		44
+	],
+	"./asset/group/edit.vue": [
+		117,
+		44
+	],
+	"./asset/group/list": [
+		118,
+		42
+	],
+	"./asset/group/list.vue": [
+		118,
+		42
+	],
+	"./asset/list": [
+		119,
+		41
+	],
+	"./asset/list.vue": [
+		119,
+		41
+	],
+	"./content/category/components/item": [
+		109,
+		4
+	],
+	"./content/category/components/item-list": [
+		108,
+		5
+	],
+	"./content/category/components/item-list.vue": [
+		108,
+		5
+	],
+	"./content/category/components/item.vue": [
+		109,
+		4
+	],
+	"./content/category/edit": [
+		121,
+		23
+	],
+	"./content/category/edit.vue": [
+		121,
+		23
+	],
+	"./content/category/list": [
+		122,
+		17
+	],
+	"./content/category/list.vue": [
+		122,
+		17
+	],
+	"./content/field/components/type-form": [
+		110,
+		1
+	],
+	"./content/field/components/type-form.vue": [
+		110,
+		1
+	],
+	"./content/field/edit": [
+		123,
+		22
+	],
+	"./content/field/edit.vue": [
+		123,
+		22
+	],
+	"./content/field/group/edit": [
+		124,
+		34
+	],
+	"./content/field/group/edit.vue": [
+		124,
+		34
+	],
+	"./content/field/group/list": [
+		125,
+		33
+	],
+	"./content/field/group/list.vue": [
+		125,
+		33
+	],
+	"./content/field/list": [
+		126,
+		13
+	],
+	"./content/field/list.vue": [
+		126,
+		13
+	],
+	"./content/item/edit": [
+		127,
+		21
+	],
+	"./content/item/edit.vue": [
+		127,
+		21
+	],
+	"./content/item/list": [
+		102,
+		16
+	],
+	"./content/item/list.vue": [
+		102,
+		16
+	],
+	"./content/media": [
+		128,
+		32
+	],
+	"./content/media.vue": [
+		128,
+		32
+	],
+	"./content/search": [
+		129,
+		25
+	],
+	"./content/search.vue": [
+		129,
+		25
+	],
+	"./content/tag/edit": [
+		130,
+		39
+	],
+	"./content/tag/edit.vue": [
+		130,
+		39
+	],
+	"./content/tag/list": [
+		131,
+		37
+	],
+	"./content/tag/list.vue": [
+		131,
+		37
+	],
+	"./error": [
+		4,
+		0
+	],
+	"./error/": [
+		4,
+		0
+	],
+	"./error/401": [
+		20,
+		8
+	],
+	"./error/401.vue": [
+		20,
+		8
+	],
+	"./error/404": [
+		21,
+		3
+	],
+	"./error/404.vue": [
+		21,
+		3
+	],
+	"./error/500": [
+		22,
+		7
+	],
+	"./error/500.vue": [
+		22,
+		7
+	],
+	"./error/index": [
+		4,
+		0
+	],
+	"./error/index.vue": [
+		4,
+		0
+	],
+	"./index": [
+		23,
+		6
+	],
+	"./index.vue": [
+		23,
+		6
+	],
+	"./login": [
+		24,
+		2
+	],
+	"./login.vue": [
+		24,
+		2
+	],
+	"./menu/edit": [
+		132,
+		20
+	],
+	"./menu/edit.vue": [
+		132,
+		20
+	],
+	"./menu/list": [
+		133,
+		12
+	],
+	"./menu/list.vue": [
+		133,
+		12
+	],
+	"./module/components/params-form": [
+		107,
+		9
+	],
+	"./module/components/params-form.vue": [
+		107,
+		9
+	],
+	"./module/edit": [
+		134,
+		14
+	],
+	"./module/edit.vue": [
+		134,
+		14
+	],
+	"./module/list": [
+		135,
+		11
+	],
+	"./module/list.vue": [
+		135,
+		11
+	],
+	"./system/language/edit": [
+		136,
+		38
+	],
+	"./system/language/edit.vue": [
+		136,
+		38
+	],
+	"./system/language/list": [
+		137,
+		36
+	],
+	"./system/language/list.vue": [
+		137,
+		36
+	],
+	"./system/setting": [
+		138,
+		31
+	],
+	"./system/setting.vue": [
+		138,
+		31
+	],
+	"./system/site/edit": [
+		139,
+		19
+	],
+	"./system/site/edit.vue": [
+		139,
+		19
+	],
+	"./system/site/list": [
+		140,
+		15
+	],
+	"./system/site/list.vue": [
+		140,
+		15
+	],
+	"./user/edit": [
+		141,
+		18
+	],
+	"./user/edit.vue": [
+		141,
+		18
+	],
+	"./user/group/edit": [
+		142,
+		10
+	],
+	"./user/group/edit.vue": [
+		142,
+		10
+	],
+	"./user/group/list": [
+		143,
+		40
+	],
+	"./user/group/list.vue": [
+		143,
+		40
+	],
+	"./user/list": [
+		144,
+		26
+	],
+	"./user/list.vue": [
+		144,
+		26
+	],
+	"./user/log": [
+		145,
+		24
+	],
+	"./user/log.vue": [
+		145,
+		24
+	],
+	"./user/viewlevel/edit": [
+		146,
+		30
+	],
+	"./user/viewlevel/edit.vue": [
+		146,
+		30
+	],
+	"./user/viewlevel/list": [
+		147,
+		29
+	],
+	"./user/viewlevel/list.vue": [
+		147,
+		29
+	]
+};
+function webpackAsyncContext(req) {
+	var ids = map[req];
+	if(!ids)
+		return Promise.reject(new Error("Cannot find module '" + req + "'."));
+	return Promise.all(ids.slice(1).map(__webpack_require__.e)).then(function() {
+		return __webpack_require__(ids[0]);
+	});
+};
+webpackAsyncContext.keys = function webpackAsyncContextKeys() {
+	return Object.keys(map);
+};
+webpackAsyncContext.id = 166;
+module.exports = webpackAsyncContext;
+
+/***/ }),
+/* 167 */,
+/* 168 */,
+/* 169 */,
+/* 170 */,
+/* 171 */,
+/* 172 */,
+/* 173 */,
+/* 174 */,
+/* 175 */,
+/* 176 */,
+/* 177 */,
+/* 178 */
+/***/ (function(module, exports) {
+
+module.exports = Vuex;
+
+/***/ }),
+/* 179 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var getters = {
+    language: function language(state) {
+        return state.sys.language;
+    },
+    site_list: function site_list(state) {
+        return state.sys.site_list;
+    },
+    asset_list: function asset_list(state) {
+        return state.sys.asset_list;
+    },
+    menu_list: function menu_list(state) {
+        return state.sys.menu_list;
+    },
+    module_list: function module_list(state) {
+        return state.sys.module_list;
+    },
+    viewlevel_list: function viewlevel_list(state) {
+        return state.sys.viewlevel_list;
+    },
+    item_category_list: function item_category_list(state) {
+        return state.sys.item_category_list;
+    },
+    item_article_category_list: function item_article_category_list(state) {
+        return state.sys.item_article_category_list;
+    },
+    language_list: function language_list(state) {
+        return state.sys.language_list;
+    },
+    menu_category_list: function menu_category_list(state) {
+        return state.sys.menu_category_list;
+    },
+    module_category_list: function module_category_list(state) {
+        return state.sys.module_category_list;
+    },
+    content_type_list: function content_type_list(state) {
+        return state.sys.content_type_list;
+    },
+    extrafield_group_list: function extrafield_group_list(state) {
+        return state.sys.extrafield_group_list;
+    },
+    user_group_list: function user_group_list(state) {
+        return state.sys.user_group_list;
+    }
+};
+/* harmony default export */ __webpack_exports__["a"] = (getters);
+
+/***/ }),
+/* 180 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"./global.js": 181,
+	"./sys.js": 183,
+	"./user.js": 184
+};
+function webpackContext(req) {
+	return __webpack_require__(webpackContextResolve(req));
+};
+function webpackContextResolve(req) {
+	var id = map[req];
+	if(!(id + 1)) // check for number or string
+		throw new Error("Cannot find module '" + req + "'.");
+	return id;
+};
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = 180;
+
+/***/ }),
+/* 181 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_utils_storage__ = __webpack_require__(7);
+
+
+var defaults = {
+    site_name: "Daydream Lab CMS",
+    author_name: "Daydream Lab Intl.",
+    author_link: "http://www.daydream-lab.com/",
+    left_open: __WEBPACK_IMPORTED_MODULE_0_utils_storage__["a" /* default */].get("left_open") || true,
+    is_login_refresh: false // for refreshing routes
+};
+
+var state = defaults;
+
+var actions = {};
+
+var mutations = {
+    left_menu: function left_menu(state, option) {
+        if (option === "open") {
+            state.left_open = true;
+            __WEBPACK_IMPORTED_MODULE_0_utils_storage__["a" /* default */].set("left_open", true);
+        } else if (option === "close") {
+            state.left_open = false;
+            __WEBPACK_IMPORTED_MODULE_0_utils_storage__["a" /* default */].set("left_open", false);
+        } else if (option === "toggle") {
+            state.left_open = !state.left_open;
+            __WEBPACK_IMPORTED_MODULE_0_utils_storage__["a" /* default */].set("left_open", state.left_open);
+        }
+    }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    state: state,
+    actions: actions,
+    mutations: mutations
+});
+
+/***/ }),
+/* 182 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DB_PREFIX; });
+var DB_PREFIX = "ddrmlab_admin_";
+
+/***/ }),
+/* 183 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mutation_types__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_utils_storage__ = __webpack_require__(7);
+var _mutations;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+var defaults = {
+    errorlog_list: [],
+    language: __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].get("language") || "tw",
+    site_list: __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].get("site_list") || "",
+    asset_list: __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].get("asset_list") || "",
+    menu_list: __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].get("menu_list") || "",
+    module_list: __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].get("module_list") || "",
+    viewlevel_list: __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].get("viewlevel_list") || "",
+    item_category_list: __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].get("item_category_list") || "",
+    item_article_category_list: __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].get("item_article_category_list") || "",
+    language_list: __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].get("language_list") || "",
+    menu_category_list: __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].get("menu_category_list") || "",
+    module_category_list: __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].get("module_category_list") || "",
+    content_type_list: __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].get("content_type_list") || "",
+    extrafield_group_list: __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].get("extrafield_group_list") || "",
+    user_group_list: __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].get("user_group_list") || ""
+};
+
+var state = defaults;
+
+var actions = {
+    update_error_logs: function update_error_logs(_ref, data) {
+        var commit = _ref.commit;
+
+        commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["f" /* UPDATE_ERROR_LOGS */], data);
+    },
+    update_option_related_list: function update_option_related_list(_ref2, _ref3) {
+        var commit = _ref2.commit;
+        var type = _ref3.type,
+            data = _ref3.data;
+
+        commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["g" /* UPDATE_OPTION_RELATED_LIST */], { type: type, data: data });
+    },
+    remove_option_related_list: function remove_option_related_list(_ref4) {
+        var commit = _ref4.commit;
+
+        var params = ["item_category", "item_article_category", "menu_category", "language", "viewlevel", "extrafield_group", "site", "user_group"];
+        params.forEach(function (param) {
+            commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["g" /* UPDATE_OPTION_RELATED_LIST */], { type: param, data: "" });
+        });
+    }
+};
+
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["f" /* UPDATE_ERROR_LOGS */], function (state, data) {
+    state.errorlog_list.push(data);
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["g" /* UPDATE_OPTION_RELATED_LIST */], function (state, _ref5) {
+    var type = _ref5.type,
+        data = _ref5.data;
+
+    state[type + "_list"] = data;
+    __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].set(type + "_list", state[type + "_list"]);
+}), _defineProperty(_mutations, "set_language", function set_language(state, language) {
+    state.language = language;
+    __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].set("language", state.language);
+}), _defineProperty(_mutations, "update_site_list", function update_site_list(state, sites) {
+    state.site_list = sites;
+    __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].set("site_list", state.site_list);
+}), _mutations);
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    state: state,
+    actions: actions,
+    mutations: mutations
+});
+
+/***/ }),
+/* 184 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mutation_types__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_utils_storage__ = __webpack_require__(7);
+var _mutations;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+
+
+
+var defaults = {
+    user_token: __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].get("user_token") || "",
+    user_info: __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].get("user_info") || {},
+
+    // 登入成功後，使用者可走訪的路由與可看到的按鈕
+    user_routes: __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].get("user_routes") || [],
+    user_access: __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].get("user_access") || {},
+
+    remember: {
+        remember_flag: __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].get("remember_flag") ? true : false,
+        remember_login_info: __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].get("remember_login_info") || {
+            email: "",
+            token: ""
+        }
+    }
+};
+
+var state = defaults;
+
+var actions = {
+    update_userinfo: function update_userinfo(_ref, user_info) {
+        var commit = _ref.commit;
+
+        return new Promise(function (resolve, reject) {
+            commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["j" /* UPDATE_USER_INFO */], user_info);
+            commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["l" /* UPDATE_USER_TOKEN */], user_info.token);
+            resolve();
+        });
+    },
+    remove_userinfo: function remove_userinfo(_ref2) {
+        var commit = _ref2.commit;
+
+        commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["c" /* REMOVE_USER_INFO */]);
+        commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["e" /* REMOVE_USER_TOKEN */]);
+        commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["d" /* REMOVE_USER_ROUTES */]);
+        commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["b" /* REMOVE_USER_ACCESS */]);
+    },
+    update_remember: function update_remember(_ref3, _ref4) {
+        var commit = _ref3.commit;
+        var remember_flag = _ref4.remember_flag,
+            remember_login_info = _ref4.remember_login_info;
+
+        commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["h" /* UPDATE_REMEMBER */], {
+            remember_flag: remember_flag,
+            remember_login_info: remember_login_info
+        });
+    },
+    remove_remember: function remove_remember(_ref5) {
+        var commit = _ref5.commit;
+
+        commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["a" /* REMOVE_REMEMBER */]);
+    },
+
+    update_user_routes: function update_user_routes(_ref6, _ref7) {
+        var commit = _ref6.commit;
+        var routes = _ref7.routes,
+            redirect = _ref7.redirect;
+
+        commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["k" /* UPDATE_USER_ROUTES */], { routes: routes, redirect: redirect });
+        // return new Promise(resolve => {
+        //     commit(types.UPDATE_USER_ROUTES, { routes, redirect });
+        //     resolve();
+        // });
+    },
+    update_user_access: function update_user_access(_ref8, access) {
+        var commit = _ref8.commit;
+
+        commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["i" /* UPDATE_USER_ACCESS */], access);
+    }
+};
+
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["l" /* UPDATE_USER_TOKEN */], function (state, user_token) {
+    state.user_token = user_token;
+    __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].set("user_token", state.user_token);
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["e" /* REMOVE_USER_TOKEN */], function (state) {
+    __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].remove("user_token");
+    state.user_token = "";
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["j" /* UPDATE_USER_INFO */], function (state, user_info) {
+    state.user_info = user_info;
+    __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].set("user_info", state.user_info);
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["c" /* REMOVE_USER_INFO */], function (state) {
+    __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].remove("user_info");
+    state.user_info = {};
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["h" /* UPDATE_REMEMBER */], function (state, user_info) {
+    state.remember.remember_flag = user_info.remember_flag;
+    state.remember.remember_login_info = user_info.remember_login_info;
+
+    __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].set("remember_flag", state.remember.remember_flag);
+    __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].set("remember_login_info", state.remember.remember_login_info);
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["a" /* REMOVE_REMEMBER */], function (state) {
+    __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].remove("remember_flag");
+    __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].remove("remember_login_info");
+
+    state.remember.remember_flag = false;
+    state.remember.remember_login_info = {
+        email: "",
+        token: ""
+    };
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["k" /* UPDATE_USER_ROUTES */], function (state, _ref9) {
+    var routes = _ref9.routes,
+        redirect = _ref9.redirect;
+
+    var routeIncludeIndex = routes.filter(function (route) {
+        return route.path === "/";
+    });
+    // fix user doesn't have dashboard asset
+    if (routeIncludeIndex.length === 0) {
+        routes = [].concat(_toConsumableArray(routes), [{
+            path: "/",
+            redirect: redirect,
+            enabled: 1,
+            showNav: false
+        }]);
+    }
+    // ensure error page would be the last one
+    routes = [].concat(_toConsumableArray(routes), [{
+        path: "*",
+        redirect: "/error/404",
+        enabled: 1,
+        showNav: false
+    }]);
+    state.user_routes = routes;
+    __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].set("user_routes", routes);
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["d" /* REMOVE_USER_ROUTES */], function (state) {
+    state.user_routes = [];
+    __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].remove("user_routes");
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["i" /* UPDATE_USER_ACCESS */], function (state, access) {
+    state.user_access = access;
+    __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].set("user_access", access);
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["b" /* REMOVE_USER_ACCESS */], function (state) {
+    state.user_access = {};
+    __WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* default */].remove("user_access");
+}), _mutations);
+/* harmony default export */ __webpack_exports__["default"] = ({
+    state: state,
+    actions: actions,
+    mutations: mutations
+});
+
+/***/ }),
+/* 185 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(186);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_axios__ = __webpack_require__(187);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_qs__ = __webpack_require__(188);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_qs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_qs__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_configs_ajax__ = __webpack_require__(191);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+
+
+
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_axios___default.a, __WEBPACK_IMPORTED_MODULE_1_axios___default.a);
+
+// 導入封裝的回調函數與設定
+
+
+var csrf_token = document.head.querySelector('meta[name="csrf-token"]');
+
+if (csrf_token) {
+    __WEBPACK_IMPORTED_MODULE_0_vue___default.a.axios.defaults.headers.common["X-CSRF-TOKEN"] = csrf_token.content;
+} else {
+    console.error("CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token");
+}
+
+// 動態設置本機與線上接口域名
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.axios.defaults.baseURL = __WEBPACK_IMPORTED_MODULE_4_configs_ajax__["b" /* setting */].host;
+
+/**
+ * 封装axios的通用请求
+ * @param  {string}   type      get或post
+ * @param  {string}   url       請求的接口URL
+ * @param  {object}   data      傳的參數，沒有則傳空對象
+ * @param  {Function} fn        成功的回調函數
+ * @param  {Function} errFn     錯誤的回調函數
+ * @param  {Function} finalFn   不論成功與否的回調函數
+ * @param  {boolean}  tokenFlag 是否需要攜帶token參數。true，不需要；false，需要
+ */
+
+/**
+ * 要新增參數也要在 register/plugin.js 新增
+ */
+/* harmony default export */ __webpack_exports__["a"] = (function () {
+    var _this = this;
+
+    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        type = _ref.type,
+        path = _ref.path,
+        _ref$pathVar = _ref.pathVar,
+        pathVar = _ref$pathVar === undefined ? "" : _ref$pathVar,
+        data = _ref.data,
+        fn = _ref.fn,
+        errFn = _ref.errFn,
+        finalFn = _ref.finalFn,
+        tokenFlag = _ref.tokenFlag,
+        headers = _ref.headers,
+        opts = _ref.opts;
+
+    /**
+     * 若 path 裡面有包含 * 則以 pathVar 取代
+     */
+    path = path.replace(/\*/g, pathVar);
+
+    var options = {
+        method: type,
+        url: path,
+        headers: headers && (typeof headers === "undefined" ? "undefined" : _typeof(headers)) === "object" ? headers : {}
+    };
+
+    options[type === "get" ? "params" : "data"] = headers && headers["Content-Type"] ? data : __WEBPACK_IMPORTED_MODULE_3_qs___default.a.stringify(data);
+
+    if (!tokenFlag) {
+        options.headers["Authorization"] = "Bearer " + this.$store.state.user.user_token;
+    }
+
+    //axios 參數
+    if (opts && (typeof opts === "undefined" ? "undefined" : _typeof(opts)) === "object") {
+        for (var f in opts) {
+            options[f] = opts[f];
+        }
+    }
+
+    //發送請求
+    __WEBPACK_IMPORTED_MODULE_0_vue___default.a.axios(options).then(function (res) {
+        var res_data = res.data;
+        if (res_data[__WEBPACK_IMPORTED_MODULE_4_configs_ajax__["b" /* setting */].response_data_field]) {
+            // 若是 data 內有值
+            fn({
+                data: res_data[__WEBPACK_IMPORTED_MODULE_4_configs_ajax__["b" /* setting */].response_data_field],
+                msg: res_data[__WEBPACK_IMPORTED_MODULE_4_configs_ajax__["b" /* setting */].response_message_field]
+            });
+        } else {
+            // 若是 data 為空
+            fn({ msg: res_data[__WEBPACK_IMPORTED_MODULE_4_configs_ajax__["b" /* setting */].response_message_field] });
+        }
+    }).catch(function (err) {
+        try {
+            var err_res_data = err.response.data;
+            // 若有設定特定狀態碼處理
+            if (__WEBPACK_IMPORTED_MODULE_4_configs_ajax__["a" /* errorHandler */].statusError[err_res_data[__WEBPACK_IMPORTED_MODULE_4_configs_ajax__["b" /* setting */].response_status_code_field]]) {
+                __WEBPACK_IMPORTED_MODULE_4_configs_ajax__["a" /* errorHandler */].statusError[err_res_data[__WEBPACK_IMPORTED_MODULE_4_configs_ajax__["b" /* setting */].response_status_code_field]].call(_this, err_res_data);
+            } else {
+                if (errFn) {
+                    errFn.call(_this, err_res_data[__WEBPACK_IMPORTED_MODULE_4_configs_ajax__["b" /* setting */].response_message_field]);
+                } else {
+                    __WEBPACK_IMPORTED_MODULE_4_configs_ajax__["a" /* errorHandler */].requestError.call(_this, err.response);
+                }
+            }
+        } catch (error) {
+            console.log(err);
+        }
+    }).finally(function () {
+        if (finalFn) return finalFn.call(_this);
+    });
+});
+
+/***/ }),
+/* 186 */
+/***/ (function(module, exports) {
+
+module.exports = axios;
+
+/***/ }),
+/* 187 */,
+/* 188 */,
+/* 189 */,
+/* 190 */,
+/* 191 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return setting; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return errorHandler; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lang___ = __webpack_require__(1);
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+
+var env = Object({"MIX_PUSHER_APP_CLUSTER":"mt1","MIX_PUSHER_APP_KEY":"","NODE_ENV":"development"});
+
+var setting = {
+    host: "/api",
+    response_status_code_field: "code",
+    response_status_code_success_value: 200,
+    response_data_field: "data",
+    response_message_field: "message"
+};
+
+var errorHandler = {
+    errorFlag: false,
+    get getErrorFlag() {
+        return this.errorFlag;
+    },
+    set setErrorFlag(flag) {
+        this.errorFlag = flag;
+    },
+    statusError: {
+        400: function _(err) {
+            var msgArray = [];
+
+            Object.keys(err.data).forEach(function (key) {
+                msgArray = [].concat(_toConsumableArray(msgArray), [__WEBPACK_IMPORTED_MODULE_0_lang___["default"].t("ERROR_INPUT_" + key.toUpperCase())]);
+            });
+
+            this.$message({
+                showClose: true,
+                message: msgArray.join(", "),
+                type: "error"
+            });
+        },
+        // 未登錄、沒有權限
+        401: function _() {
+            var _this = this;
+
+            if (!this.errorFlag) {
+                this.setErrorFlag = true;
+                this.$store.dispatch("remove_userinfo").then(function () {
+                    _this.setErrorFlag = false;
+                    _this.$router.replace({
+                        path: "/login"
+                        // query: {
+                        //     redirect: this.$route.path
+                        // }
+                    });
+                });
+            }
+        }
+    },
+    requestError: function requestError(err) {
+        var errMsg = "Request Error";
+
+        if (err) {
+            var _err$data = err.data,
+                code = _err$data.code,
+                message = _err$data.message;
+
+            errMsg = "Request Error: " + code + ", " + message;
+        }
+
+        this.$message({
+            showClose: true,
+            message: errMsg,
+            type: "error"
+        });
+    }
+};
+
+
+
+/***/ }),
+/* 192 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ([{
+    path: "/login",
+    component: function component(resolve) {
+        return __webpack_require__.e/* require */(2/* duplicate */).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(24)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+    },
+    name: "LOGIN",
+    meta: {
+        showNav: 0
+    }
+}, {
+    path: "/error",
+    component: function component(resolve) {
+        return __webpack_require__.e/* require */(0/* duplicate */).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(4)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+    },
+    name: "ERROR",
+    meta: {
+        showNav: 0
+    },
+    children: [{
+        path: "401",
+        component: function component(resolve) {
+            return __webpack_require__.e/* require */(8/* duplicate */).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(20)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+        },
+        name: "401",
+        meta: {
+            showNav: 0
+        }
+    }, {
+        path: "404",
+        component: function component(resolve) {
+            return __webpack_require__.e/* require */(3/* duplicate */).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(21)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+        },
+        name: "404",
+        meta: {
+            showNav: 0
+        }
+    }, {
+        path: "500",
+        component: function component(resolve) {
+            return __webpack_require__.e/* require */(7/* duplicate */).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(22)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+        },
+        name: "500",
+        meta: {
+            showNav: 0
+        }
+    }]
+}]);
+
+/***/ }),
+/* 193 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_each__ = __webpack_require__(194);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_each___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash_each__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__component__ = __webpack_require__(203);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__plugin__ = __webpack_require__(220);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mixin__ = __webpack_require__(239);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__directive__ = __webpack_require__(240);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__filter__ = __webpack_require__(242);
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * 把一些全局对象和一些全局方法，注册到Vue原型上
+ */
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use({
+    install: function install(Vue, options) {
+        Vue.mixin(__WEBPACK_IMPORTED_MODULE_4__mixin__["a" /* default */]);
+
+        //注册全局方法，如常用的接口方法，工具方法等。
+        __WEBPACK_IMPORTED_MODULE_1_lodash_each___default()(__WEBPACK_IMPORTED_MODULE_3__plugin__["a" /* default */], function (item, key) {
+            Vue.prototype["$$" + key] = item;
+        });
+
+        __WEBPACK_IMPORTED_MODULE_1_lodash_each___default()(__WEBPACK_IMPORTED_MODULE_5__directive__["a" /* default */], function (item, key) {
+            Vue.directive(key, item);
+        });
+    }
+});
+
+__WEBPACK_IMPORTED_MODULE_1_lodash_each___default()(__WEBPACK_IMPORTED_MODULE_6__filter__["a" /* default */], function (item, key) {
+    __WEBPACK_IMPORTED_MODULE_0_vue___default.a.filter(key, item);
+});
+
+__WEBPACK_IMPORTED_MODULE_1_lodash_each___default()(__WEBPACK_IMPORTED_MODULE_2__component__["a" /* default */], function (item, key) {
+    var cpName = key.replace(/([A-Z])/g, "-$1").toLowerCase();
+    if (cpName && cpName[0] === "-") {
+        cpName = cpName.replace("-", "");
+    }
+
+    __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component(key, item);
+});
+
+/***/ }),
+/* 194 */,
+/* 195 */,
+/* 196 */,
+/* 197 */,
+/* 198 */,
+/* 199 */,
+/* 200 */,
+/* 201 */,
+/* 202 */,
+/* 203 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_cps_list_data__ = __webpack_require__(204);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_cps_form_data__ = __webpack_require__(214);
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    ListData: __WEBPACK_IMPORTED_MODULE_0_cps_list_data__["a" /* default */],
+    FormData: __WEBPACK_IMPORTED_MODULE_1_cps_form_data__["a" /* default */]
+});
+
+/***/ }),
+/* 204 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ListData_vue__ = __webpack_require__(205);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ListData_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ListData_vue__);
+
+/* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0__ListData_vue___default.a);
+
+/***/ }),
+/* 205 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(206)
+}
+var normalizeComponent = __webpack_require__(3)
+/* script */
+var __vue_script__ = __webpack_require__(207)
+/* template */
+var __vue_template__ = __webpack_require__(213)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/admin/components/list-data/ListData.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-ef00903a", Component.options)
+  } else {
+    hotAPI.reload("data-v-ef00903a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 206 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 207 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ListData_js__ = __webpack_require__(208);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = (__WEBPACK_IMPORTED_MODULE_0__ListData_js__["a" /* default */]);
+
+/***/ }),
+/* 208 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sortablejs__ = __webpack_require__(120);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__DdlTableHeader_vue__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__DdlTableHeader_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__DdlTableHeader_vue__);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    name: "ListData",
+    components: { DdlTableHeader: __WEBPACK_IMPORTED_MODULE_1__DdlTableHeader_vue___default.a },
+    data: function data() {
+        return {
+            table_id: "table-" + +new Date() + ((Math.random() * 1000).toFixed(0) + ""), //拖曳表格ID 避免全部的表格都是相同
+            batch: {
+                flag: false,
+                datas: [],
+                ids: []
+            },
+            loading: this.listLoading, //列表載入
+            list_btns: this.listBtns, //資料表內自訂按鈕
+            fields: this.fieldList, //字段數組
+            sort_enabled: false
+        };
+    },
+
+    props: {
+        list: {
+            type: Array,
+            required: true
+        },
+        listLoading: {
+            type: Object,
+            default: function _default() {
+                return {
+                    flag: false,
+                    text: ""
+                };
+            }
+        },
+        listBtns: {
+            type: Object,
+            default: function _default() {
+                return {};
+            }
+        },
+        fieldList: {
+            type: Array,
+            required: true
+        },
+        //是否顯示排序
+        sort: {
+            type: Object,
+            default: function _default() {
+                return {
+                    show: false,
+                    enabled: false,
+                    data: ""
+                };
+            }
+        },
+        // 工具列：新增編輯按鈕等
+        toolbar: {
+            type: Object,
+            default: function _default() {
+                return {};
+            }
+        },
+        //搜尋、篩選列
+        searchbar: {
+            type: Object,
+            default: function _default() {
+                return {};
+            }
+        },
+
+        pagination: {
+            type: Object,
+            default: function _default() {
+                return {};
+            }
+        }
+    },
+    watch: {
+        "batch.flag": function batchFlag(v) {
+            this.$$eventBus.$emit("onListDataSelectChange", v);
+        },
+
+        listLoading: {
+            deep: true,
+            handler: function handler(v) {
+                this.loading = v;
+            }
+        },
+        listBtns: function listBtns(v) {
+            this.list_btns = v;
+        },
+        fieldList: function fieldList(v) {
+            if (v) {
+                this.fields = v;
+            }
+        },
+
+        toolbar: {
+            deep: true,
+            handler: function handler(v) {
+                this.initToolbar(v);
+            }
+        }
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        this.initToolbar(this.toolbar);
+        this.$$eventBus.$on("onClickListDataToolbar", function (btnOpts) {
+            _this.onBtnEvent(btnOpts);
+        });
+        this.initSortable();
+    },
+    beforeDestroy: function beforeDestroy() {
+        this.initToolbar();
+        this.$$eventBus.$off("onClickListDataToolbar");
+    },
+
+    methods: {
+        handelRowClass: function handelRowClass(_ref) {
+            var row = _ref.row,
+                rowIndex = _ref.rowIndex;
+
+            if (this.sort.data) {
+                return row.parent_id === this.sort.data.parent_id ? "sortable-enabled" : "sortable-disabled";
+            } else {
+                return "sortable-enabled";
+            }
+        },
+
+        /**
+         * 表格列表觸發CheckBox的事件
+         * @param  {array} val 當前選中的用戶信息數組，每個元素是用戶信息對象
+         */
+        onSelectionChange: function onSelectionChange(val) {
+            var _this2 = this;
+
+            this.batch.datas = val;
+            this.batch.ids = [];
+            if (val.length) {
+                this.batch.flag = true;
+                val.forEach(function (el, index) {
+                    return _this2.batch.ids.push(val[index].id);
+                });
+            } else {
+                this.batch.flag = false;
+            }
+
+            /**
+             * 改變CheckBox事件，第一個參數是ID數組，第二個參數二維數組，每個數組是選中的對象
+             */
+            this.$emit("selection-change", {
+                ids: this.batch.ids,
+                datas: this.batch.datas
+            });
+        },
+
+
+        /**
+         * 搜尋事件
+         * @param {Object} submit_data 搜尋表單的值
+         */
+        onSearch: function onSearch(submit_data) {
+            this.$emit("search", submit_data);
+        },
+        onSearchReset: function onSearchReset() {
+            this.$emit("search-reset");
+        },
+
+        /**
+         * 刪除事件
+         * @param  {object || boolean} user  當前信息對象或者為佈爾值,為佈爾值時，代表是批量刪除
+         * @param  {number} index 當前列表索引
+         */
+
+        onBatchDelete: function onBatchDelete() {
+            this.$emit("click-batch-delete", {
+                ids: this.batch.ids,
+                datas: this.batch.datas
+            });
+        },
+        onBatchTrash: function onBatchTrash() {
+            this.$emit("click-batch-trash", {
+                ids: this.batch.ids,
+                state: -2
+            });
+        },
+        onBatchRestore: function onBatchRestore() {
+            this.$emit("click-batch-restore", {
+                ids: this.batch.ids,
+                state: 1
+            });
+        },
+
+        /**
+         * 點擊按鈕事件
+         * @param opts  組裝的返回參數
+         * @param.attr  opts.type   string  按鈕類型，內置四個(添加，查看，修改，刪除)
+         * @param.attr  opts.data   object  當點擊列表中的按鈕時，此值為當前行數據
+         */
+        onBtnEvent: function onBtnEvent(opts) {
+            var type = opts.type;
+
+            switch (type) {
+                case "add":
+                    this.$emit("click-add");
+                    break;
+                case "edit":
+                    var editData = this.batch.flag ? _extends({}, opts, {
+                        data: this.batch.datas[0]
+                    }) : opts;
+
+                    this.$emit("click-edit", editData);
+                    break;
+
+                case "trash":
+                    this.onBatchTrash();
+                    break;
+                case "delete":
+                    this.onBatchDelete();
+                    break;
+                case "restore":
+                    this.onBatchRestore();
+                    break;
+                case "checkout":
+                    this.$emit("click-checkout", opts);
+                    break;
+                case "custom":
+                    this.onCustomBtnEvent(opts);
+                    break;
+                default:
+                    this.$emit("on-click-btn", opts);
+            }
+        },
+
+
+        /**
+         * 自定義按鈕事件
+         * @param opts
+         */
+        onCustomBtnEvent: function onCustomBtnEvent(opts) {
+            if (opts.btn.fn) {
+                opts.btn.fn(_extends({}, opts, {
+                    ids: this.batch.ids,
+                    datas: this.batch.datas
+                }));
+            } else {
+                this.$emit("on-click-btn", opts);
+            }
+        },
+
+
+        /**
+         * 改變當前頁碼事件
+         * @param  {number} page 當前頁麵
+         */
+        onChangeCurrentPage: function onChangeCurrentPage(page) {
+            this.$emit("change-current-page", page);
+        },
+
+
+        /**
+         * 改變每頁顯示的數量事件
+         * @param  {number} page_size 每頁顯示的數量
+         */
+        onChangePageSize: function onChangePageSize(pageSize) {
+            this.$emit("change-page-size", pageSize);
+        },
+        onSortChange: function onSortChange(_ref2) {
+            var prop = _ref2.prop,
+                order = _ref2.order;
+
+            if (prop === "ordering" && order) {
+                this.sort_enabled = true;
+                this.sort.ordering = order;
+                this.$emit("on-sort-change", order);
+            }
+            if (!order) {
+                this.sort_enabled = false;
+                this.sort.ordering = "";
+            }
+        },
+        initToolbar: function initToolbar() {
+            var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+            this.$$eventBus.$emit("onInitToolbar", {
+                name: "ListData",
+                data: data
+            });
+        },
+
+        /**
+         * 表格列表觸發 sortable-handler 的事件
+         * @param {String} id 當前移動的對象 id
+         * @param {String} index_diff 當前移動的對象 index 的變化
+         * @param order 當前排序 asc/desc
+         */
+        initSortable: function initSortable() {
+            var _this3 = this;
+
+            var el = document.querySelectorAll("#" + this.table_id + " .el-table__body-wrapper > table > tbody")[0];
+            __WEBPACK_IMPORTED_MODULE_0_sortablejs__["a" /* default */].create(el, {
+                handle: ".sortable-handler",
+                filter: ".sortable-disabled",
+                draggable: ".sortable-enabled",
+                preventOnFilter: true,
+                onChoose: function onChoose(_ref3) {
+                    var oldIndex = _ref3.oldIndex;
+                },
+                onStart: function onStart(_ref4) {
+                    var oldIndex = _ref4.oldIndex;
+
+                    _this3.sort.data = _this3.list[oldIndex];
+                },
+                onEnd: function onEnd(_ref5) {
+                    var newIndex = _ref5.newIndex,
+                        oldIndex = _ref5.oldIndex;
+
+                    var targetRow = _this3.list.splice(oldIndex, 1)[0];
+                    _this3.list.splice(newIndex, 0, targetRow);
+                    _this3.$emit("on-order-change", {
+                        id: _this3.list[newIndex].id,
+                        index_diff: newIndex - oldIndex,
+                        order: _this3.sort.ordering.replace("ending", "")
+                    });
+
+                    _this3.sort.data = "";
+                },
+                onMove: function onMove(event) {
+                    return !event.related.classList.contains("sortable-disabled");
+                }
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 209 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(210)
+}
+var normalizeComponent = __webpack_require__(3)
+/* script */
+var __vue_script__ = __webpack_require__(211)
+/* template */
+var __vue_template__ = __webpack_require__(212)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-3d41c12a"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/admin/components/list-data/DdlTableHeader.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3d41c12a", Component.options)
+  } else {
+    hotAPI.reload("data-v-3d41c12a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 210 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 211 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    search: {
+      type: Object,
+      default: function _default() {
+        return {};
+      }
+    }
+  },
+  data: function data() {
+    return {
+      disabled: true
+    };
+  },
+
+  computed: {
+    defaultValue: function defaultValue() {
+      return this.search.defaultValue || {};
+    },
+    fields: function fields() {
+      return this.search.fields || [];
+    },
+    setting: function setting() {
+      return this.search.setting || { inline: true, type: "search" };
+    }
+  },
+  methods: {
+    onSearch: function onSearch(_ref) {
+      var submit_data = _ref.submit_data;
+
+      this.$emit("search", submit_data);
+    },
+    onSearchReset: function onSearchReset() {
+      this.$emit("search-reset");
+    }
+  }
+});
+
+/***/ }),
+/* 212 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "el-row",
+    { attrs: { type: "flex", justify: "space-between" } },
+    [
+      _c("el-col", { attrs: { span: 4 } }, [
+        _c(
+          "div",
+          { staticClass: "list-header" },
+          [_vm._t("ddl-header-before")],
+          2
+        )
+      ]),
+      _vm._v(" "),
+      _c("el-col", { staticClass: "list-searchbar", attrs: { span: 20 } }, [
+        _vm.fields && _vm.fields.length
+          ? _c(
+              "div",
+              [
+                _c("FormData", {
+                  attrs: {
+                    "default-value": _vm.defaultValue,
+                    "field-list": _vm.fields,
+                    setting: _vm.setting
+                  },
+                  on: {
+                    "on-submit": _vm.onSearch,
+                    "on-reset": _vm.onSearchReset
+                  }
+                })
+              ],
+              1
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "list-header" },
+          [_vm._t("ddl-header-after")],
+          2
+        )
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-3d41c12a", module.exports)
+  }
+}
+
+/***/ }),
+/* 213 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "list-data" },
+    [
+      _c(
+        "ddl-table-header",
+        {
+          attrs: { search: _vm.searchbar },
+          on: { search: _vm.onSearch, "search-reset": _vm.onSearchReset }
+        },
+        [
+          _c(
+            "span",
+            { attrs: { slot: "ddl-header-after" }, slot: "ddl-header-after" },
+            [_vm._t("header-after")],
+            2
+          ),
+          _vm._v(" "),
+          _c(
+            "span",
+            { attrs: { slot: "ddl-header-before" }, slot: "ddl-header-before" },
+            [
+              _c("h2", [
+                _vm._v(
+                  _vm._s(
+                    _vm.$t(
+                      _vm.$route.matched[_vm.$route.matched.length - 1].name
+                    )
+                  )
+                )
+              ]),
+              _vm._v(" "),
+              _vm._t("header-before")
+            ],
+            2
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "el-table",
+        {
+          directives: [
+            {
+              name: "loading",
+              rawName: "v-loading",
+              value: _vm.loading.flag,
+              expression: "loading.flag"
+            }
+          ],
+          staticStyle: { width: "100%" },
+          attrs: {
+            id: _vm.table_id,
+            data: _vm.list,
+            "element-loading-text":
+              _vm.loading.text || _vm.$t("LIST_DATA_LOADING_TEXT") /*載入中⋯⋯*/,
+            "row-class-name": _vm.handelRowClass,
+            "row-key": "id",
+            border: "",
+            align: "center"
+          },
+          on: {
+            "selection-change": _vm.onSelectionChange,
+            "sort-change": _vm.onSortChange
+          }
+        },
+        [
+          _vm.sort && _vm.sort.show
+            ? _c("el-table-column", {
+                attrs: { sortable: "custom", width: "45", prop: "ordering" },
+                scopedSlots: _vm._u(
+                  [
+                    {
+                      key: "default",
+                      fn: function(scope) {
+                        return [
+                          _c(
+                            "el-button",
+                            {
+                              staticClass: "caret-wrapper sortable-handler",
+                              attrs: {
+                                type: "text",
+                                disabled: !_vm.sort_enabled
+                              }
+                            },
+                            [
+                              _c("font-awesome-icon", {
+                                attrs: { icon: ["fal", "ellipsis-v"] }
+                              })
+                            ],
+                            1
+                          )
+                        ]
+                      }
+                    }
+                  ],
+                  null,
+                  false,
+                  3714561438
+                )
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          _c("el-table-column", { attrs: { type: "selection", width: "55" } }),
+          _vm._v(" "),
+          _vm._l(_vm.fields, function(field, index) {
+            return [
+              !field.type
+                ? _c("el-table-column", {
+                    style: field.style,
+                    attrs: {
+                      prop: field.key,
+                      label: field.label,
+                      align: field.align || "left",
+                      sortable: field.sort || true,
+                      formatter: field.formatter,
+                      filters: field.filter_list,
+                      "filter-method": field.filter_method,
+                      "filter-multiple": field.filter_multiple,
+                      width: field.width
+                    }
+                  })
+                : _vm._e(),
+              _vm._v(" "),
+              field.type && field.type === "image"
+                ? _c("el-table-column", {
+                    attrs: {
+                      prop: field.key,
+                      label: field.label,
+                      align: field.align || "left",
+                      width: field.width
+                    },
+                    scopedSlots: _vm._u(
+                      [
+                        {
+                          key: "default",
+                          fn: function(scope) {
+                            return [
+                              _c("img", {
+                                attrs: {
+                                  src:
+                                    (field.host || "") + scope.row[field.key],
+                                  alt: ""
+                                }
+                              })
+                            ]
+                          }
+                        }
+                      ],
+                      null,
+                      true
+                    )
+                  })
+                : _vm._e(),
+              _vm._v(" "),
+              field.type && field.type === "link"
+                ? _c("el-table-column", {
+                    attrs: {
+                      prop: field.key,
+                      label: field.label,
+                      sortable: field.sort || true,
+                      align: field.align || "left",
+                      width: field.width
+                    },
+                    scopedSlots: _vm._u(
+                      [
+                        {
+                          key: "default",
+                          fn: function(scope) {
+                            return [
+                              _c(
+                                "a",
+                                {
+                                  attrs: {
+                                    target: field.link_target || "_self",
+                                    href: scope.row[field.key]
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    _vm._s(
+                                      field.link_text || scope.row[field.key]
+                                    )
+                                  )
+                                ]
+                              )
+                            ]
+                          }
+                        }
+                      ],
+                      null,
+                      true
+                    )
+                  })
+                : _vm._e(),
+              _vm._v(" "),
+              field.type && field.type === "icon"
+                ? _c(
+                    "el-table-column",
+                    {
+                      attrs: {
+                        prop: field.key,
+                        label: field.label,
+                        align: field.align || "center",
+                        sortable: field.sort || true,
+                        formatter: field.formatter,
+                        width: field.width
+                      },
+                      scopedSlots: _vm._u(
+                        [
+                          {
+                            key: "default",
+                            fn: function(scope) {
+                              return [
+                                scope.column.formatter(scope.row[field.key])
+                                  .icon
+                                  ? _c("font-awesome-icon", {
+                                      style: scope.column.formatter(
+                                        scope.row[field.key]
+                                      ).style,
+                                      attrs: {
+                                        icon: scope.column.formatter(
+                                          scope.row[field.key]
+                                        ).icon
+                                      }
+                                    })
+                                  : _vm._e()
+                              ]
+                            }
+                          }
+                        ],
+                        null,
+                        true
+                      )
+                    },
+                    [_vm._v("\n        " + _vm._s(field.sort) + "\n        ")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              field.type && field.type === "label"
+                ? _c("el-table-column", {
+                    attrs: {
+                      prop: field.key,
+                      label: field.label,
+                      align: field.align || "center",
+                      sortable: field.sort || true,
+                      formatter: field.formatter,
+                      width: field.width
+                    },
+                    scopedSlots: _vm._u(
+                      [
+                        {
+                          key: "default",
+                          fn: function(scope) {
+                            return [
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "text-label",
+                                  class: scope.column.formatter(
+                                    scope.row[field.key]
+                                  ).color
+                                },
+                                [
+                                  _vm._v(
+                                    _vm._s(
+                                      scope.column.formatter(
+                                        scope.row[field.key]
+                                      ).text
+                                    )
+                                  )
+                                ]
+                              )
+                            ]
+                          }
+                        }
+                      ],
+                      null,
+                      true
+                    )
+                  })
+                : _vm._e(),
+              _vm._v(" "),
+              field.type && field.type === "icon-label"
+                ? _c("el-table-column", {
+                    attrs: {
+                      prop: field.key,
+                      label: field.label,
+                      align: field.align || "center",
+                      sortable: field.sort || true,
+                      formatter: field.formatter,
+                      width: field.width
+                    },
+                    scopedSlots: _vm._u(
+                      [
+                        {
+                          key: "default",
+                          fn: function(scope) {
+                            return [
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "text-label",
+                                  class: scope.column.formatter(
+                                    scope.row[field.key]
+                                  ).color
+                                },
+                                [
+                                  _c("font-awesome-icon", {
+                                    attrs: {
+                                      icon: scope.column.formatter(
+                                        scope.row[field.key]
+                                      ).icon
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ]
+                          }
+                        }
+                      ],
+                      null,
+                      true
+                    )
+                  })
+                : _vm._e(),
+              _vm._v(" "),
+              field.type && field.type === "publish-label"
+                ? _c("el-table-column", {
+                    attrs: {
+                      prop: field.key,
+                      label: field.label,
+                      align: field.align || "center",
+                      sortable: field.sort || true,
+                      formatter: field.formatter,
+                      width: field.width
+                    },
+                    scopedSlots: _vm._u(
+                      [
+                        {
+                          key: "default",
+                          fn: function(scope) {
+                            return [
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "text-label",
+                                  class: scope.column.formatter(scope.row).color
+                                },
+                                [
+                                  _vm._v(
+                                    _vm._s(
+                                      scope.column.formatter(scope.row).text
+                                    )
+                                  )
+                                ]
+                              )
+                            ]
+                          }
+                        }
+                      ],
+                      null,
+                      true
+                    )
+                  })
+                : _vm._e(),
+              _vm._v(" "),
+              field.type && field.type === "editable"
+                ? _c("el-table-column", {
+                    attrs: {
+                      prop: field.key,
+                      label: field.label,
+                      align: field.align || "left",
+                      sortable: field.sort || true,
+                      formatter: field.formatter,
+                      width: field.width
+                    },
+                    scopedSlots: _vm._u(
+                      [
+                        {
+                          key: "default",
+                          fn: function(scope) {
+                            return _c(
+                              "span",
+                              {},
+                              [
+                                _c(
+                                  "el-tooltip",
+                                  { attrs: { placement: "top" } },
+                                  [
+                                    _c(
+                                      "div",
+                                      {
+                                        attrs: { slot: "content" },
+                                        slot: "content"
+                                      },
+                                      [
+                                        _c("strong", [
+                                          _vm._v(
+                                            _vm._s(
+                                              _vm.$t(
+                                                "TOOLBAR_CHECKOUT"
+                                              ) /*回存*/
+                                            )
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("br"),
+                                        _vm._v(
+                                          "\n              " +
+                                            _vm._s(scope.row["locker"]) +
+                                            "\n              "
+                                        ),
+                                        _c("br"),
+                                        _vm._v(
+                                          "\n              " +
+                                            _vm._s(
+                                              _vm._f("displayDateFormat")(
+                                                scope.row["locked_at"]
+                                              )
+                                            ) +
+                                            "\n            "
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    scope.row.locked_by
+                                      ? _c(
+                                          "el-button",
+                                          {
+                                            staticClass: "btn--checkout",
+                                            attrs: { size: "mini" },
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.onBtnEvent({
+                                                  type: "checkout",
+                                                  data: scope.row
+                                                })
+                                              }
+                                            }
+                                          },
+                                          [
+                                            _c("font-awesome-icon", {
+                                              attrs: {
+                                                icon: ["fal", "lock-alt"]
+                                              }
+                                            })
+                                          ],
+                                          1
+                                        )
+                                      : _vm._e()
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                [
+                                  !scope.row["locked_by"] ||
+                                  scope.row["locked_by"] ===
+                                    _vm.$store.state.user.user_info.id
+                                    ? _c("span", {
+                                        staticClass: "editable_title",
+                                        domProps: {
+                                          innerHTML: _vm._s(
+                                            (scope.column.formatter &&
+                                              scope.column.formatter(
+                                                scope.row[field.key]
+                                              )) ||
+                                              scope.row[field.key]
+                                          )
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.onBtnEvent({
+                                              type: "edit",
+                                              data: scope.row
+                                            })
+                                          }
+                                        }
+                                      })
+                                    : _c("span", [
+                                        _c("span", {
+                                          domProps: {
+                                            innerHTML: _vm._s(
+                                              scope.row[field.key]
+                                            )
+                                          }
+                                        })
+                                      ])
+                                ],
+                                _vm._v(" "),
+                                _c("span", {
+                                  directives: [
+                                    {
+                                      name: "can",
+                                      rawName: "v-can:not",
+                                      value: ["edit", "editOwn", "editOther"],
+                                      expression:
+                                        "['edit', 'editOwn', 'editOther']",
+                                      arg: "not"
+                                    }
+                                  ],
+                                  domProps: {
+                                    innerHTML: _vm._s(scope.row[field.key])
+                                  }
+                                })
+                              ],
+                              2
+                            )
+                          }
+                        }
+                      ],
+                      null,
+                      true
+                    )
+                  })
+                : _vm._e()
+            ]
+          }),
+          _vm._v(" "),
+          "btns" in _vm.list_btns
+            ? _c("el-table-column", {
+                attrs: {
+                  label:
+                    _vm.list_btns.label ||
+                    _vm.$t("LIST_DATA_ACTIONS_LABEL") /*操作*/,
+                  context: _vm._self
+                },
+                scopedSlots: _vm._u(
+                  [
+                    {
+                      key: "default",
+                      fn: function(scope) {
+                        return _vm._l(_vm.list_btns.btns, function(btn, index) {
+                          return _vm.list_btns.btns &&
+                            (!btn.condition ||
+                              typeof btn.condition !== "function" ||
+                              (typeof btn.condition === "function" &&
+                                btn.condition({
+                                  list: _vm.list,
+                                  data: scope.row,
+                                  dataIndex: scope.$index,
+                                  btnIndex: index,
+                                  btn: btn
+                                }) === true))
+                            ? _c(
+                                "el-button",
+                                {
+                                  key: index,
+                                  attrs: {
+                                    type: btn.type || "info",
+                                    size: "mini"
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.onCustomBtnEvent({
+                                        list: _vm.list,
+                                        data: scope.row,
+                                        dataIndex: scope.$index,
+                                        btnIndex: index,
+                                        btn: btn
+                                      })
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n          " +
+                                      _vm._s(
+                                        typeof btn.text === "string"
+                                          ? btn.text
+                                          : typeof btn.text === "function"
+                                          ? btn.text({
+                                              list: _vm.list,
+                                              data: scope.row,
+                                              dataIndex: scope.$index,
+                                              btnIndex: index,
+                                              btn: btn
+                                            })
+                                          : ""
+                                      ) +
+                                      "\n        "
+                                  )
+                                ]
+                              )
+                            : _vm._e()
+                        })
+                      }
+                    }
+                  ],
+                  null,
+                  false,
+                  2307452654
+                )
+              })
+            : _vm._e()
+        ],
+        2
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "list-pagination" },
+        [
+          _vm.pagination &&
+          ((_vm.pagination.total !== undefined && _vm.pagination.total > 0) ||
+            (_vm.pagination["page-count"] !== undefined &&
+              _vm.pagination["page-count"] > 0))
+            ? _c("el-pagination", {
+                attrs: {
+                  "page-size": _vm.pagination.page_size,
+                  "page-sizes": _vm.pagination.page_sizes,
+                  "page-count": _vm.pagination["page-count"],
+                  layout: _vm.pagination.layout,
+                  total: _vm.pagination.total,
+                  "current-page": _vm.pagination.current_page
+                },
+                on: {
+                  "current-change": _vm.onChangeCurrentPage,
+                  "size-change": _vm.onChangePageSize
+                }
+              })
+            : _vm._e()
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-ef00903a", module.exports)
+  }
+}
+
+/***/ }),
+/* 214 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__FormData_vue__ = __webpack_require__(215);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__FormData_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__FormData_vue__);
+
+/* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0__FormData_vue___default.a);
+
+/***/ }),
+/* 215 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(3)
+/* script */
+var __vue_script__ = __webpack_require__(216)
+/* template */
+var __vue_template__ = __webpack_require__(219)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/admin/components/form-data/FormData.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-72b26caf", Component.options)
+  } else {
+    hotAPI.reload("data-v-72b26caf", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 216 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__FormData_js__ = __webpack_require__(217);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = (__WEBPACK_IMPORTED_MODULE_0__FormData_js__["a" /* default */]);
+
+/***/ }),
+/* 217 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fields___ = __webpack_require__(218);
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    components: __WEBPACK_IMPORTED_MODULE_0__fields___["a" /* default */],
+    name: "FormData",
+    props: {
+        defaultValue: {
+            type: Object,
+            default: function _default() {
+                return {};
+            }
+        },
+        fieldList: {
+            type: Array,
+            required: true,
+            default: function _default() {
+                return [];
+            }
+        },
+        rules: {
+            type: Object,
+            default: function _default() {
+                return {};
+            }
+        },
+
+        setting: {
+            type: Object,
+            default: function _default() {
+                return {};
+            }
+        },
+        toolbar: {
+            type: Object,
+            default: function _default() {
+                return {};
+            }
+        }
+    },
+
+    data: function data() {
+        return {
+            fields: this.fieldList,
+            components: {
+                input: "DdlInput",
+                textarea: "DdlTextarea",
+                select: "DdlSelect",
+                radio: "DdlRadio",
+                switch: "DdlSwitch",
+                cascader: "DdlCascader",
+                checkbox: "DdlCheckbox",
+                date: "DdlDate",
+                daterange: "DdlDateRange",
+                year: "DdlDateYear",
+                month: "DdlDateMonth",
+                week: "DdlDateWeek",
+                time: "DdlTime",
+                timerange: "DdlTimeRange",
+                timefixed: "DdlTimeFixed",
+                timefixedrange: "DdlTimeFixedRange",
+                datetime: "DdlDateTime",
+                datetimerange: "DdlDateTimeRange",
+                editor: "DdlEditor",
+                tree: "DdlTree"
+            },
+            temp_field_obj: {},
+            submit_info: {}
+        };
+    },
+
+    computed: {
+        submit_data: function submit_data() {
+            return this.defaultValue;
+        }
+    },
+    /**
+     * 监控参数
+     * @type {Object}
+     */
+    watch: {
+        fieldList: {
+            deep: true,
+            handler: function handler(v) {
+                if (v) {
+                    this.fields = v;
+                }
+            }
+        },
+        setting: function setting(v) {
+            this.setting = v;
+        },
+        toolbar: function toolbar(v) {
+            this.initToolbar(v);
+        }
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        if (this.setting && this.setting.type !== "search") {
+            this.initToolbar(this.toolbar);
+            this.$$eventBus.$on("onClickFormDataToolbar", function (btnOpts) {
+                _this.onBtnEvent(btnOpts);
+            });
+        }
+    },
+    beforeDestroy: function beforeDestroy() {
+        if (this.setting && this.setting.type !== "search") {
+            this.initToolbar();
+            this.$$eventBus.$off("onClickFormDataToolbar");
+        }
+    },
+
+    methods: {
+        onSubmit: function onSubmit() {
+            var _this2 = this;
+
+            var btnType = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
+
+            var submitData = {
+                submit_data: this.submit_data,
+                btn_type: btnType
+            };
+            if (this.rules) {
+                this.$refs["form-data"].validate(function (valid) {
+                    if (valid) {
+                        _this2.$emit("on-submit", submitData);
+                    }
+                });
+            } else {
+                this.$emit("on-submit", submitData);
+            }
+        },
+        onReset: function onReset() {
+            this.$refs["form-data"].resetFields();
+            this.$emit("on-reset");
+        },
+        onCancel: function onCancel() {
+            this.$emit("on-cancel");
+        },
+        onBtnEvent: function onBtnEvent(opts) {
+            var type = opts.type;
+
+            switch (type) {
+                case "cancel":
+                    this.onCancel();
+                    break;
+                case "save":
+                case "savenclose":
+                case "savenadd":
+                    this.onSubmit(type);
+                    break;
+            }
+        },
+        initToolbar: function initToolbar() {
+            var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+            this.$$eventBus.$emit("onInitToolbar", {
+                name: "FormData",
+                data: data
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 218 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+    DdlInput: function DdlInput() {
+        return __webpack_require__.e/* import() */(47).then(__webpack_require__.bind(null, 252));
+    },
+    DdlTextarea: function DdlTextarea() {
+        return __webpack_require__.e/* import() */(46).then(__webpack_require__.bind(null, 253));
+    },
+    DdlCheckbox: function DdlCheckbox() {
+        return __webpack_require__.e/* import() */(63).then(__webpack_require__.bind(null, 254));
+    },
+    DdlRadio: function DdlRadio() {
+        return __webpack_require__.e/* import() */(55).then(__webpack_require__.bind(null, 255));
+    },
+    DdlSelect: function DdlSelect() {
+        return __webpack_require__.e/* import() */(54).then(__webpack_require__.bind(null, 256));
+    },
+    DdlSwitch: function DdlSwitch() {
+        return __webpack_require__.e/* import() */(53).then(__webpack_require__.bind(null, 257));
+    },
+    DdlCascader: function DdlCascader() {
+        return __webpack_require__.e/* import() */(64).then(__webpack_require__.bind(null, 258));
+    },
+    DdlDate: function DdlDate() {
+        return __webpack_require__.e/* import() */(62).then(__webpack_require__.bind(null, 259));
+    },
+    DdlDateRange: function DdlDateRange() {
+        return __webpack_require__.e/* import() */(60).then(__webpack_require__.bind(null, 260));
+    },
+    DdlDateYear: function DdlDateYear() {
+        return __webpack_require__.e/* import() */(56).then(__webpack_require__.bind(null, 261));
+    },
+    DdlDateMonth: function DdlDateMonth() {
+        return __webpack_require__.e/* import() */(61).then(__webpack_require__.bind(null, 262));
+    },
+    DdlDateWeek: function DdlDateWeek() {
+        return __webpack_require__.e/* import() */(57).then(__webpack_require__.bind(null, 263));
+    },
+    DdlTime: function DdlTime() {
+        return __webpack_require__.e/* import() */(52).then(__webpack_require__.bind(null, 264));
+    },
+    DdlTimeRange: function DdlTimeRange() {
+        return __webpack_require__.e/* import() */(49).then(__webpack_require__.bind(null, 265));
+    },
+    DdlTimeFixed: function DdlTimeFixed() {
+        return __webpack_require__.e/* import() */(51).then(__webpack_require__.bind(null, 266));
+    },
+    DdlTimeFixedRange: function DdlTimeFixedRange() {
+        return __webpack_require__.e/* import() */(50).then(__webpack_require__.bind(null, 267));
+    },
+    DdlDateTime: function DdlDateTime() {
+        return __webpack_require__.e/* import() */(59).then(__webpack_require__.bind(null, 268));
+    },
+    DdlDateTimeRange: function DdlDateTimeRange() {
+        return __webpack_require__.e/* import() */(58).then(__webpack_require__.bind(null, 269));
+    },
+    DdlTree: function DdlTree() {
+        return __webpack_require__.e/* import() */(48).then(__webpack_require__.bind(null, 270));
+    }
+});
+
+/***/ }),
+/* 219 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "el-form",
+    {
+      ref: "form-data",
+      staticClass: "form-data",
+      attrs: {
+        "label-width": "100px",
+        inline: _vm.setting.inline,
+        rules: _vm.rules,
+        model: _vm.submit_data
+      }
+    },
+    [
+      _vm._l(_vm.fields, function(field, $index) {
+        return !field.condition ||
+          typeof field.condition !== "function" ||
+          (typeof field.condition === "function" &&
+            field.condition({ data: _vm.submit_data }) === true)
+          ? _c(
+              "el-form-item",
+              _vm._b(
+                {
+                  key: $index,
+                  staticClass: "edit-form",
+                  attrs: { label: field.label, prop: field.key }
+                },
+                "el-form-item",
+                field.attrs || {},
+                false
+              ),
+              [
+                _c(_vm.components[field.type] || "DdlInput", {
+                  tag: "component",
+                  attrs: {
+                    "field-data": field,
+                    "submit-data": _vm.submit_data,
+                    "submit-info": _vm.submit_info,
+                    "temp-field-obj": _vm.temp_field_obj
+                  }
+                })
+              ],
+              1
+            )
+          : _vm._e()
+      }),
+      _vm._v(" "),
+      _vm.setting.type === "search"
+        ? _c(
+            "el-form-item",
+            [
+              _c(
+                "el-button",
+                {
+                  attrs: { type: "primary", icon: "fal fa-search" },
+                  on: { click: _vm.onSubmit }
+                },
+                [_vm._v(_vm._s(_vm.$t("SEARCHBAR_SEARCH") /*搜尋*/))]
+              ),
+              _vm._v(" "),
+              _c("el-button", { on: { click: _vm.onReset } }, [
+                _vm._v(_vm._s(_vm.$t("SEARCHBAR_RESET") /*重置*/))
+              ])
+            ],
+            1
+          )
+        : _vm._e()
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-72b26caf", module.exports)
+  }
+}
+
+/***/ }),
+/* 220 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_utils___ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__apis___ = __webpack_require__(221);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue__);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+
+
+
+
+var plugins = {};
+
+__WEBPACK_IMPORTED_MODULE_1__apis___["a" /* default */].forEach(function (mod, $i) {
+    if ((typeof mod === "undefined" ? "undefined" : _typeof(mod)) === "object" && mod.list && Array.isArray(mod.list)) {
+        mod.list.forEach(function (api, $j) {
+            plugins["api_" + mod.module + "_" + api.method] = function (n, m) {
+                return function () {
+                    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+                        _ref$type = _ref.type,
+                        type = _ref$type === undefined ? __WEBPACK_IMPORTED_MODULE_1__apis___["a" /* default */][n].list[m].type : _ref$type,
+                        _ref$path = _ref.path,
+                        path = _ref$path === undefined ? __WEBPACK_IMPORTED_MODULE_1__apis___["a" /* default */][n].list[m].path : _ref$path,
+                        data = _ref.data,
+                        fn = _ref.fn,
+                        errFn = _ref.errFn,
+                        finalFn = _ref.finalFn,
+                        headers = _ref.headers,
+                        opts = _ref.opts,
+                        pathVar = _ref.pathVar,
+                        tokenFlag = _ref.tokenFlag;
+
+                    __WEBPACK_IMPORTED_MODULE_0_utils___["b" /* ajax */].call(this, {
+                        type: type,
+                        path: path,
+                        data: data,
+                        fn: fn,
+                        errFn: errFn,
+                        finalFn: finalFn,
+                        headers: headers,
+                        opts: opts,
+                        pathVar: pathVar,
+                        tokenFlag: tokenFlag
+                    });
+                };
+            }($i, $j);
+        });
+    }
+});
+
+plugins["eventBus"] = new __WEBPACK_IMPORTED_MODULE_2_vue___default.a();
+
+/* harmony default export */ __webpack_exports__["a"] = (plugins);
+
+/***/ }),
+/* 221 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var requireFile = __webpack_require__(222);
+var requests = [];
+requireFile.keys().forEach(function (fileName) {
+    requests.push({
+        module: fileName.split(".")[1].split("/")[1],
+        list: requireFile(fileName).default
+    });
+});
+
+/* harmony default export */ __webpack_exports__["a"] = (requests);
+
+/***/ }),
+/* 222 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"./api.js": 223,
+	"./asset.js": 224,
+	"./category.js": 225,
+	"./field.js": 226,
+	"./item.js": 227,
+	"./language.js": 228,
+	"./media.js": 229,
+	"./menu.js": 230,
+	"./module.js": 231,
+	"./observer.js": 232,
+	"./option.js": 233,
+	"./setting.js": 234,
+	"./site.js": 235,
+	"./tag.js": 236,
+	"./user.js": 237,
+	"./viewlevel.js": 238
+};
+function webpackContext(req) {
+	return __webpack_require__(webpackContextResolve(req));
+};
+function webpackContextResolve(req) {
+	var id = map[req];
+	if(!(id + 1)) // check for number or string
+		throw new Error("Cannot find module '" + req + "'.");
+	return id;
+};
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = 222;
+
+/***/ }),
+/* 223 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony default export */ __webpack_exports__["default"] = ([{
+    name: "取得所有接口列表",
+    method: "list",
+    path: "/admin/asset/api/search",
+    type: "post"
+}, {
+    name: "新增/修改單一接口",
+    method: "save",
+    path: "/admin/asset/api/store",
+    type: "post"
+}, {
+    name: "刪除一至多個接口",
+    method: "delete",
+    path: "/admin/asset/api/remove",
+    type: "post"
+}, {
+    name: "取得單一接口",
+    method: "get",
+    path: "/admin/asset/api/*",
+    type: "get"
+}]);
+
+/***/ }),
+/* 224 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony default export */ __webpack_exports__["default"] = ([{
+    name: "取得所有資源列表",
+    method: "list",
+    path: "/admin/asset/search",
+    type: "post"
+}, {
+    name: "新增/修改單一資源",
+    method: "save",
+    path: "/admin/asset/store",
+    type: "post"
+}, {
+    name: "刪除一至多個資源",
+    method: "delete",
+    path: "/admin/asset/remove",
+    type: "post"
+}, {
+    name: "取得單一資源",
+    method: "get",
+    path: "/admin/asset/*",
+    type: "get"
+}, {
+    name: "修改單一資源排序",
+    method: "ordering",
+    path: "/admin/asset/ordering",
+    type: "post"
+}, {
+    name: "修改一至多個資源啟用狀態",
+    method: "updateState",
+    path: "/admin/asset/state",
+    type: "post"
+}, {
+    name: "取得單一資源所屬的群組",
+    method: "group",
+    path: "/admin/asset/*/groups",
+    type: "get"
+}, {
+    name: "修改單一資源所屬的群組",
+    method: "assignGroup",
+    path: "/admin/asset/group/map/store",
+    type: "post"
+}, {
+    name: "取得所有資源群組列表",
+    method: "listGroup",
+    path: "/admin/asset/group/search",
+    type: "post"
+}, {
+    name: "刪除一至多個資源群組",
+    method: "deleteGroup",
+    path: "/admin/asset/group/remove",
+    type: "post"
+}, {
+    name: "新增/修改單一資源群組",
+    method: "saveGroup",
+    path: "/admin/asset/group/store",
+    type: "post"
+}, {
+    name: "取得單一資源群組",
+    method: "getGroup",
+    path: "/admin/asset/group/*",
+    type: "get"
+}, {
+    name: "修改一至多個資源群組發布狀態",
+    method: "updateGroupState",
+    path: "/admin/asset/group/state",
+    type: "post"
+}]);
+
+/***/ }),
+/* 225 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony default export */ __webpack_exports__["default"] = ([{
+    name: "取得所有分類列表",
+    method: "list",
+    path: "/admin/category/search",
+    type: "post"
+}, {
+    name: "取得單一分類資訊",
+    method: "get",
+    path: "/admin/category/*",
+    type: "get"
+}, {
+    name: "新增/修改單一分類",
+    method: "save",
+    path: "/admin/category/store",
+    type: "post"
+}, {
+    name: "修改單一分類排序",
+    method: "ordering",
+    path: "/admin/category/ordering",
+    type: "post"
+}, {
+    name: "刪除一至多個分類",
+    method: "delete",
+    path: "/admin/category/remove",
+    type: "post"
+}, {
+    name: "修改一至多個分類發布狀態",
+    method: "updateState",
+    path: "/admin/category/state",
+    type: "post"
+}, {
+    name: "修改一至多個分類回存狀態",
+    method: "checkout",
+    path: "/admin/category/checkout",
+    type: "post"
+}]);
+
+/***/ }),
+/* 226 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony default export */ __webpack_exports__["default"] = ([{
+    name: "取得所有欄位列表",
+    method: "list",
+    path: "/admin/extrafield/search",
+    type: "post"
+}, {
+    name: "新增/修改單一欄位",
+    method: "save",
+    path: "/admin/extrafield/store",
+    type: "post"
+}, {
+    name: "刪除一至多個欄位",
+    method: "delete",
+    path: "/admin/extrafield/remove",
+    type: "post"
+}, {
+    name: "修改一至多個欄位回存狀態",
+    method: "checkout",
+    path: "/admin/extrafield/checkout",
+    type: "post"
+}, {
+    name: "取得單一欄位",
+    method: "get",
+    path: "/admin/extrafield/*",
+    type: "get"
+}, {
+    name: "取得所有欄位群組列表",
+    method: "listGroup",
+    path: "/admin/extrafield/group/search",
+    type: "post"
+}, {
+    name: "刪除一至多個欄位群組",
+    method: "deleteGroup",
+    path: "/admin/extrafield/group/remove",
+    type: "post"
+}, {
+    name: "新增/修改單一欄位群組",
+    method: "saveGroup",
+    path: "/admin/extrafield/group/store",
+    type: "post"
+}, {
+    name: "取得單一欄位群組",
+    method: "getGroup",
+    path: "/admin/extrafield/group/*",
+    type: "get"
+}]);
+
+/***/ }),
+/* 227 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony default export */ __webpack_exports__["default"] = ([{
+    name: "取得所有項目列表",
+    method: "list",
+    path: "/admin/item/search",
+    type: "post"
+}, {
+    name: "取得單一項目資訊",
+    method: "get",
+    path: "/admin/item/*",
+    type: "get"
+}, {
+    name: "新增/修改單一項目",
+    method: "save",
+    path: "/admin/item/store",
+    type: "post"
+}, {
+    name: "修改單一項目排序",
+    method: "ordering",
+    path: "/admin/item/ordering",
+    type: "post"
+}, {
+    name: "刪除一至多個項目",
+    method: "delete",
+    path: "/admin/item/remove",
+    type: "post"
+}, {
+    name: "修改一至多個項目發布狀態",
+    method: "updateState",
+    path: "/admin/item/state",
+    type: "post"
+}, {
+    name: "修改一至多個項目精選狀態",
+    method: "updateFeatured",
+    path: "/admin/item/featured",
+    type: "post"
+}, {
+    name: "修改一至多個項目回存狀態",
+    method: "checkout",
+    path: "/admin/item/checkout",
+    type: "post"
+}]);
+
+/***/ }),
+/* 228 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony default export */ __webpack_exports__["default"] = ([{
+    name: "取得所有語言列表",
+    method: "list",
+    path: "/admin/language/search",
+    type: "post"
+}, {
+    name: "取得所有語言列表(下拉選單用)",
+    method: "listOption",
+    path: "/admin/language/list",
+    type: "get"
+}, {
+    name: "新增/修改單一語言",
+    method: "save",
+    path: "/admin/language/store",
+    type: "post"
+}, {
+    name: "刪除一至多個語言",
+    method: "delete",
+    path: "/admin/language/remove",
+    type: "post"
+}, {
+    name: "修改一至多個語言發布狀態",
+    method: "updateState",
+    path: "/admin/language/state",
+    type: "post"
+}, {
+    name: "取得單一語言",
+    method: "get",
+    path: "/admin/language/*",
+    type: "get"
+}]);
+
+/***/ }),
+/* 229 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony default export */ __webpack_exports__["default"] = ([{
+    name: "取得所有資料夾列表",
+    method: "listFolder",
+    path: "/admin/media/folder/all",
+    type: "get"
+}, {
+    name: "新增單一資料夾",
+    method: "createFolder",
+    path: "/admin/media/folder/create",
+    type: "post"
+}, {
+    name: "取得單一資料夾內檔案列表",
+    method: "listFile",
+    path: "/admin/media/folder/items",
+    type: "post"
+}, {
+    name: "上傳一至多個檔案",
+    method: "uploadFile",
+    path: "/admin/media/upload",
+    type: "post"
+}, {
+    name: "刪除一至多個檔案或資料夾",
+    method: "delete",
+    path: "/admin/media/remove",
+    type: "post"
+}, {
+    name: "移動單一資料夾或檔案",
+    method: "move",
+    path: "/admin/media/move",
+    type: "post"
+}, {
+    name: "重新命名資料夾或檔案",
+    method: "rename",
+    path: "/admin/media/rename",
+    type: "post"
+}]);
+
+/***/ }),
+/* 230 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony default export */ __webpack_exports__["default"] = ([{
+    name: "取得所有選單列表",
+    method: "list",
+    path: "/admin/menu/search",
+    type: "post"
+}, {
+    name: "取得單一選單資訊",
+    method: "get",
+    path: "/admin/menu/*",
+    type: "get"
+}, {
+    name: "新增/修改單一選單",
+    method: "save",
+    path: "/admin/menu/store",
+    type: "post"
+}, {
+    name: "刪除一至多個選單",
+    method: "delete",
+    path: "/admin/menu/remove",
+    type: "post"
+}, {
+    name: "修改一至多個選單發布狀態",
+    method: "updateState",
+    path: "/admin/menu/state",
+    type: "post"
+}, {
+    name: "修改一至多個選單回存狀態",
+    method: "checkout",
+    path: "/admin/menu/checkout",
+    type: "post"
+}]);
+
+/***/ }),
+/* 231 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony default export */ __webpack_exports__["default"] = ([{
+    name: "取得所有模組列表",
+    method: "list",
+    path: "/admin/module/search",
+    type: "post"
+}, {
+    name: "取得單一模組資訊",
+    method: "get",
+    path: "/admin/module/*",
+    type: "get"
+}, {
+    name: "新增/修改單一模組",
+    method: "save",
+    path: "/admin/module/store",
+    type: "post"
+}, {
+    name: "刪除一至多個模組",
+    method: "delete",
+    path: "/admin/module/remove",
+    type: "post"
+}, {
+    name: "修改一至多個模組回存狀態",
+    method: "checkout",
+    path: "/admin/module/checkout",
+    type: "post"
+}]);
+
+/***/ }),
+/* 232 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony default export */ __webpack_exports__["default"] = ([{
+    name: "取得關鍵字搜尋列表",
+    method: "searchList",
+    path: "/admin/search/keywordlist",
+    type: "post"
+}, {
+    name: "取得操作紀錄",
+    method: "log",
+    path: "/admin/log/search",
+    type: "post"
+}]);
+
+/***/ }),
+/* 233 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony default export */ __webpack_exports__["default"] = ([{
+    name: "取得CMS相關下拉選單列表",
+    method: "list",
+    path: "/admin/option/list",
+    type: "post"
+}]);
+
+/***/ }),
+/* 234 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony default export */ __webpack_exports__["default"] = ([{
+    name: "取得設定",
+    method: "get",
+    path: "/admin/setting",
+    type: "get"
+}, {
+    name: "儲存設定",
+    method: "save",
+    path: "/admin/setting/store",
+    type: "post"
+}]);
+
+/***/ }),
+/* 235 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony default export */ __webpack_exports__["default"] = ([{
+    name: "取得所有網站列表",
+    method: "list",
+    path: "/admin/site/search",
+    type: "post"
+}, {
+    name: "新增/修改單一網站",
+    method: "save",
+    path: "/admin/site/store",
+    type: "post"
+}, {
+    name: "取得單一網站",
+    method: "get",
+    path: "/admin/site/*",
+    type: "get"
+}, {
+    name: "修改一至多個網站回存狀態",
+    method: "checkout",
+    path: "/admin/site/checkout",
+    type: "post"
+}]);
+
+/***/ }),
+/* 236 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony default export */ __webpack_exports__["default"] = ([{
+    name: "取得所有標籤列表",
+    method: "list",
+    path: "/admin/tag/search",
+    type: "post"
+}, {
+    name: "取得單一標籤資訊",
+    method: "get",
+    path: "/admin/tag/*",
+    type: "get"
+}, {
+    name: "新增/修改單一標籤",
+    method: "save",
+    path: "/admin/tag/store",
+    type: "post"
+}, {
+    name: "修改單一標籤排序",
+    method: "ordering",
+    path: "/admin/tag/ordering",
+    type: "post"
+}, {
+    name: "刪除一至多個標籤",
+    method: "delete",
+    path: "/admin/tag/remove",
+    type: "post"
+}, {
+    name: "修改一至多個標籤發布狀態",
+    method: "updateState",
+    path: "/admin/tag/state",
+    type: "post"
+}, {
+    name: "修改一至多個標籤回存狀態",
+    method: "checkout",
+    path: "/admin/tag/checkout",
+    type: "post"
+}]);
+
+/***/ }),
+/* 237 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony default export */ __webpack_exports__["default"] = ([{
+    name: "登入",
+    method: "login",
+    path: "/user/login",
+    type: "post"
+}, {
+    name: "登出",
+    method: "logout",
+    path: "/user/logout",
+    type: "get"
+}, {
+    name: "取得會員可走訪頁面列表與接口列表",
+    method: "getPages",
+    path: "/admin/user/page",
+    type: "get"
+}, {
+    name: "取得所有會員列表",
+    method: "list",
+    path: "/admin/user/search",
+    type: "post"
+}, {
+    name: "取得單一會員資訊",
+    method: "get",
+    path: "/admin/user/*",
+    type: "get"
+}, {
+    name: "新增/修改單一會員",
+    method: "save",
+    path: "/admin/user/store",
+    type: "post"
+}, {
+    name: "刪除一至多個會員",
+    method: "delete",
+    path: "/admin/user/remove",
+    type: "post"
+}, {
+    name: "修改一至多個會員封鎖狀態",
+    method: "updateBlock",
+    path: "/admin/user/block",
+    type: "post"
+}, {
+    name: "取得所有會員群組列表",
+    method: "listGroup",
+    path: "/admin/user/group/search",
+    type: "post"
+}, {
+    name: "取得所有會員群組列表(樹狀結構)",
+    method: "listTreeGroup",
+    path: "/admin/user/group/tree",
+    type: "get"
+}, {
+    name: "取得所有會員群組列表(樹狀清單)",
+    method: "listOptionGroup",
+    path: "/admin/user/group/treeList",
+    type: "get"
+}, {
+    name: "刪除一至多個會員群組",
+    method: "deleteGroup",
+    path: "/admin/user/group/remove",
+    type: "post"
+}, {
+    name: "新增/修改單一會員群組",
+    method: "saveGroup",
+    path: "/admin/user/group/store",
+    type: "post"
+}, {
+    name: "取得單一會員群組",
+    method: "getGroup",
+    path: "/admin/user/group/*",
+    type: "get"
+}, {
+    name: "修改單一會員排序",
+    method: "orderingGroup",
+    path: "/admin/user/group/ordering",
+    type: "post"
+}, {
+    name: "取得單一會員群組可走訪頁面列表(樹狀結構)與接口列表",
+    method: "groupPages",
+    path: "/admin/user/group/*/page",
+    type: "get"
+}]);
+
+/***/ }),
+/* 238 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony default export */ __webpack_exports__["default"] = ([{
+    name: "取得所有存取層級列表",
+    method: "list",
+    path: "/admin/viewlevel/search",
+    type: "post"
+}, {
+    name: "取得單一存取層級資訊",
+    method: "get",
+    path: "/admin/viewlevel/*",
+    type: "get"
+}, {
+    name: "新增/修改單一存取層級",
+    method: "save",
+    path: "/admin/viewlevel/store",
+    type: "post"
+}, {
+    name: "修改單一存取層級排序",
+    method: "ordering",
+    path: "/admin/viewlevel/ordering",
+    type: "post"
+}, {
+    name: "刪除一至多個存取層級",
+    method: "delete",
+    path: "/admin/viewlevel/remove",
+    type: "post"
+}]);
+
+/***/ }),
+/* 239 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+    watch: {
+        "$store.getters.language": function $storeGettersLanguage(lang) {
+            this.$i18n.locale = lang;
+        }
+    }
+});
+
+/***/ }),
+/* 240 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_directives_can__ = __webpack_require__(241);
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    Can: __WEBPACK_IMPORTED_MODULE_0_directives_can__["a" /* default */]
+});
+
+/***/ }),
+/* 241 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_store___ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_router___ = __webpack_require__(18);
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    inserted: function inserted(el, binding) {
+        var userAssetAccess = __WEBPACK_IMPORTED_MODULE_0_store___["a" /* default */].state.user.user_access[__WEBPACK_IMPORTED_MODULE_1_router___["a" /* default */].currentRoute.meta.id];
+
+        var checkPermission = function checkPermission(access, userAccess) {
+            if (Array.isArray(access)) {
+                var comparingArrays = [access, userAccess];
+                var duplicateValueArray = comparingArrays.reduce(function (a, b) {
+                    return a.filter(function (c) {
+                        return b.includes(c);
+                    });
+                });
+                return duplicateValueArray.length > 0;
+            } else {
+                return userAccess.includes(access);
+            }
+        };
+
+        var hasPermission = userAssetAccess ? checkPermission(binding.value, userAssetAccess) : true;
+
+        var forNoPermission = binding.arg === "not";
+
+        if (hasPermission && forNoPermission || !hasPermission && !forNoPermission) {
+            el.parentNode && el.parentNode.removeChild(el);
+        }
+    }
+});
+
+/***/ }),
+/* 242 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_utils_format_date__ = __webpack_require__(243);
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    displayDateFormat: __WEBPACK_IMPORTED_MODULE_0_utils_format_date__["a" /* displayDateFormat */],
+    storeDateFormat: __WEBPACK_IMPORTED_MODULE_0_utils_format_date__["b" /* storeDateFormat */]
+});
+
+/***/ }),
+/* 243 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = displayDateFormat;
+/* harmony export (immutable) */ __webpack_exports__["b"] = storeDateFormat;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment_timezone__ = __webpack_require__(244);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment_timezone___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment_timezone__);
+
+function displayDateFormat(date) {
+    var localTimezone = __WEBPACK_IMPORTED_MODULE_0_moment_timezone___default.a.tz.guess();
+
+    if (date) return __WEBPACK_IMPORTED_MODULE_0_moment_timezone___default.a.tz(__WEBPACK_IMPORTED_MODULE_0_moment_timezone___default.a.utc(date), localTimezone).format("YYYY-MM-DD HH:mm:ss");
+}
+
+function storeDateFormat(date) {
+    var localTimezone = __WEBPACK_IMPORTED_MODULE_0_moment_timezone___default.a.tz.guess();
+    var localTime = __WEBPACK_IMPORTED_MODULE_0_moment_timezone___default.a.tz(date, "YYYY-MM-DD HH:mm:ss", localTimezone);
+
+    if (date) return localTime.utc().format("YYYY-MM-DD HH:mm:ss");
+}
+
+/***/ }),
+/* 244 */,
+/* 245 */,
+/* 246 */,
+/* 247 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ })
+],[148]);
