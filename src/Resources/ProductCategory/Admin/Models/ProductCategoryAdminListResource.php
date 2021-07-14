@@ -17,7 +17,7 @@ class ProductCategoryAdminListResource extends BaseJsonResource
         return [
             'id'            => $this->id,
             'title'         => $this->title,
-            'code'          => ($this->parent) ? $this->parent->code.'-'. $this->code : $this->code,
+            'alias'         => ($this->parent) ? $this->parent->alias.'-'.$this->alias : $this->alias,
         ];
     }
 }

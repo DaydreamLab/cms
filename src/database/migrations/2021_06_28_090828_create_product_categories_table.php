@@ -17,7 +17,7 @@ class CreateProductCategoriesTable extends Migration
             $table->bigIncrements('id');
             $table->nestedSet();
             $table->string('title');
-            $table->string('code');
+            $table->string('alias');
             $table->text('description')->nullable();
             $table->text('memo')->nullable();
             $table->text('params')->nullable();

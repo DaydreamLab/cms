@@ -32,7 +32,7 @@ class ProductCategory extends BaseModel
      */
     protected $fillable = [
         'title',
-        'code',
+        'alias',
         'description',
         'memo',
         'params',

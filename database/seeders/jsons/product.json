@@ -1,11 +1,11 @@
 [
   {
     "title": "IT基礎架構",
-    "code": "A",
+    "alias": "A",
     "children": [
       {
         "title": "1",
-        "code": "1",
+        "alias": "1",
         "children": [],
         "products": [
           {
@@ -30,11 +30,11 @@
   },
   {
     "title": "網路暨資訊安全",
-    "code": "B",
+    "alias": "B",
     "children": [
       {
         "title": "1",
-        "code": "1",
+        "alias": "1",
         "children": [],
         "products": [
 
@@ -45,11 +45,11 @@
   },
   {
     "title": "雲平台與應用",
-    "code": "C",
+    "alias": "C",
     "children": [
       {
         "title": "1",
-        "code": "1",
+        "alias": "1",
         "children": [],
         "products": [
 
@@ -60,11 +60,11 @@
   },
   {
     "title": "大數據與應用",
-    "code": "D",
+    "alias": "D",
     "children": [
       {
         "title": "1",
-        "code": "1",
+        "alias": "1",
         "children": [],
         "products": [
 
@@ -75,11 +75,11 @@
   },
   {
     "title": "供契投標採購",
-    "code": "E",
+    "alias": "E",
     "children": [
       {
         "title": "1",
-        "code": "1",
+        "alias": "1",
         "children": [],
         "products": [
 
@@ -90,11 +90,11 @@
   },
   {
     "title": "雲端服務網",
-    "code": "F",
+    "alias": "F",
     "children": [
       {
         "title": "1",
-        "code": "1",
+        "alias": "1",
         "children": [],
         "products": [
 
@@ -105,11 +105,11 @@
   },
   {
     "title": "ZOiPS數位監控",
-    "code": "G",
+    "alias": "G",
     "children": [
       {
         "title": "1",
-        "code": "1",
+        "alias": "1",
         "children": [],
         "products": [
 

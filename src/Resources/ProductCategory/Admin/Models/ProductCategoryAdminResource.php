@@ -18,7 +18,7 @@ class ProductCategoryAdminResource extends BaseJsonResource
         return [
             'id'            => $this->id,
             'title'         => $this->title,
-            'code'          => $this->code,
+            'alias'         => $this->alias,
             'description'   => $this->description,
             'memo'          => $this->memo,
             'params'        => $this->params,
