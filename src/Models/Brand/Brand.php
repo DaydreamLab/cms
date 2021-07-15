@@ -43,6 +43,7 @@ class Brand extends BaseModel
         'logo_image',
         'banner_image',
         'banner_link',
+        'metatitle',
         'metadesc',
         'metakeywords',
         'tracking',

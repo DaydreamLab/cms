@@ -29,6 +29,7 @@ class BrandAdminResource extends BaseJsonResource
             'logo_image'            => $this->logo_image,
             'banner_image'          => $this->banner_image,
             'banner_link'           => $this->banner_link,
+            'metatitle'             => $this->metatitle,
             'metadesc'              => $this->metadesc,
             'metakeywords'          => $this->metakeywords,
             'tracking'              => $this->tracking,
