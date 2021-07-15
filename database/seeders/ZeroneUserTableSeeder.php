@@ -116,9 +116,9 @@ class ZeroneUserTableSeeder extends Seeder
         $data = getJson(__DIR__ . '/jsons/zerone-users.json', true);
         $invalid = [];
         foreach ($data as $index => $userInput) {
-       
+
 //            $data = [
-//                'email'     => $userInput['MemberID'],
+//                'email'     => Str::lower($userInput['MemberID']),
 //                'name'      => $userInput['MemberName'],
 //                'activate'  => 1,
 //            ];
