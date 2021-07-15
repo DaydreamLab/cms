@@ -17,7 +17,6 @@
     },
     "minimum-stability": "dev",
     "require": {
-        "daydreamlab/jjaj": "dev-base/v2",
         "daydreamlab/user": "dev-01/dev",
         "daydreamlab/media": "dev-base/v2",
         "fedeisas/laravel-mail-css-inliner": "^4.0"
