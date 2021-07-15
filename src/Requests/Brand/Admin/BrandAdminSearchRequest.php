@@ -10,6 +10,8 @@ class BrandAdminSearchRequest extends CmsSearchPost
     protected $apiMethod = 'searchBrand';
 
     protected $modelName = 'Brand';
+
+    protected $searchKeys = ['title', 'title_zhtw', 'description'];
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -27,8 +29,12 @@ class BrandAdminSearchRequest extends CmsSearchPost
      */
     public function rules()
     {
-        $rules =[
-            //
+        $rules = [
+            'state'         => [
+                'nullable',
+                'integer',
+                Rule::in([0,1,-1,-2])
+            ]
         ];
 
         return array_merge(parent::rules(), $rules);
