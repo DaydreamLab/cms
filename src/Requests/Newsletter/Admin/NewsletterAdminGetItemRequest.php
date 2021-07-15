@@ -6,6 +6,9 @@ use DaydreamLab\Cms\Requests\CmsGetItemRequest;
 
 class NewsletterAdminGetItemRequest extends CmsGetItemRequest
 {
+    protected $apiMethod = 'getNewsletter';
+
+    protected $modelName = 'Newsletter';
     /**
      * Determine if the user is authorized to make this request.
      *

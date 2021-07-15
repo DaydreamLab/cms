@@ -6,7 +6,7 @@ use DaydreamLab\Cms\Requests\CmsRestoreRemovePost;
 
 class ProductCategoryAdminRemoveRequest extends CmsRestoreRemovePost
 {
-    protected $apiMethod = 'removeProductCategory';
+    protected $apiMethod = 'deleteProductCategory';
 
     protected $modelName = 'ProductCategory';
     /**

@@ -20,7 +20,7 @@ class ProductAdminResource extends BaseJsonResource
             'alias'             => $this->alias,
             'title'             => $this->title,
             'description'       => $this->description,
-            'products'          => $this->products,
+            'product_data'      => ($this->product_data == null) ? [] : $this->product_data,
             'files'             => $this->files,
             'params'            => $this->params,
             'state'             => $this->state,

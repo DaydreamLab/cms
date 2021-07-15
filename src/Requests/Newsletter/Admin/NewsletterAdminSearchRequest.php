@@ -6,6 +6,9 @@ use DaydreamLab\Cms\Requests\CmsSearchRequest;
 
 class NewsletterAdminSearchRequest extends CmsSearchRequest
 {
+    protected $apiMethod = 'searchNewsletter';
+
+    protected $modelName = 'Newsletter';
     /**
      * Determine if the user is authorized to make this request.
      *

@@ -6,6 +6,9 @@ use DaydreamLab\Cms\Requests\CmsRemoveRequest;
 
 class NewsletterAdminRemoveRequest extends CmsRemoveRequest
 {
+    protected $apiMethod = 'deleteNewsletter';
+
+    protected $modelName = 'Newsletter';
     /**
      * Determine if the user is authorized to make this request.
      *

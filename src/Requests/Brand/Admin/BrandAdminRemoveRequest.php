@@ -6,7 +6,7 @@ use DaydreamLab\Cms\Requests\CmsRestoreRemovePost;
 
 class BrandAdminRemoveRequest extends CmsRestoreRemovePost
 {
-    protected $apiMethod = 'removeBrand';
+    protected $apiMethod = 'deleteBrand';
 
     protected $modelName = 'Brand';
     /**

@@ -2,10 +2,14 @@
 
 namespace DaydreamLab\Cms\Requests\Newsletter\Admin;
 
+use DaydreamLab\Cms\Helpers\RequestHelper;
 use DaydreamLab\Cms\Requests\CmsStoreRequest;
 
 class NewsletterAdminStoreRequest extends CmsStoreRequest
 {
+    protected $apiMethod = 'storeNewsletter';
+
+    protected $modelName = 'Newsletter';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -23,8 +27,26 @@ class NewsletterAdminStoreRequest extends CmsStoreRequest
      */
     public function rules()
     {
-        $rules =[
-            //
+        $rules = [
+            'newletter_category_id' => 'required|integer',
+            'title'                 => 'required|string',
+            'number'                => 'required|string',
+            'image'                 => 'nullable|string',
+            'description'           => 'nullable|string',
+            'url'                   => 'nullable|string',
+            'display_topic'         => 'nullable|boolean',
+            'information'           => 'required|array',
+            'information.*'         => 'nullable|array',
+            'information.*.title'   => 'nullable|string',
+            'information.*.url'     => 'nullable|string',
+            'params'                => 'nullable|array',
+            'state'                 => [
+                'required',
+                Rule::in([0,1])
+            ],
+            'ordering'              => 'nullable|integer',
+            'publish_up'            => 'nullable|date_format:Y-m-d H:i:s',
+            'publish_down'          => 'nullable|date_format:Y-m-d H:i:s',
         ];
 
         return array_merge(parent::rules(), $rules);
@@ -34,6 +56,7 @@ class NewsletterAdminStoreRequest extends CmsStoreRequest
     public function validated()
     {
         $validated = parent::validated();
+        $validated->put('params', RequestHelper::handleParams($validated->get('params')));
 
         return $validated;
     }

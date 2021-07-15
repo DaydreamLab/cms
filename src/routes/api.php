@@ -11,6 +11,7 @@ use DaydreamLab\Cms\Controllers\Menu\Front\MenuFrontController;
 use DaydreamLab\Cms\Controllers\Menu\Admin\MenuAdminController;
 use DaydreamLab\Cms\Controllers\Module\Front\ModuleFrontController;
 use DaydreamLab\Cms\Controllers\Module\Admin\ModuleAdminController;
+use DaydreamLab\Cms\Controllers\Newsletter\Admin\NewsletterAdminController;
 use DaydreamLab\Cms\Controllers\Product\Admin\ProductAdminController;
 use DaydreamLab\Cms\Controllers\ProductCategory\Admin\ProductCategoryAdminController;
 use DaydreamLab\Cms\Controllers\Setting\Front\SettingFrontController;
@@ -99,6 +100,15 @@ Route::get('api/admin/product/category/{id}', [ProductCategoryAdminController::c
     ->middleware(['expired', 'admin']);
 
 # content type 共通
+# 解決方案
+# 成功案例
+# 最新消息
+# 促銷消息
+# 01影片
+# 大事紀
+# 財務資訊
+# 重要規章
+# 股東專欄
 
 Route::post('api/admin/item/{content_type}/remove', [ItemAdminController::class, 'removeContent'])
     ->middleware(['expired','admin']);
@@ -113,16 +123,19 @@ Route::post('api/admin/item/{content_type}/store', [ItemAdminController::class, 
 Route::get('api/admin/item/{content_type}/{id}', [ItemAdminController::class, 'getContentItem'])
     ->middleware(['expired','admin']);
 
-# 解決方案
-# 成功案例
-# 最新消息
-# 促銷消息
-# 01影片
-# 大事紀
-# 財務資訊
-# 重要規章
-# 股東專欄
-
+# 電子報
+Route::post('api/admin/newsletter/remove', [NewsletterAdminController::class, 'remove'])
+    ->middleware(['expired', 'admin']);
+Route::post('api/admin/newsletter/restore', [NewsletterAdminController::class, 'restore'])
+    ->middleware(['expired', 'admin']);
+Route::post('api/admin/newsletter/search', [NewsletterAdminController::class, 'search'])
+    ->middleware(['expired', 'admin']);
+Route::post('api/admin/newsletter/state', [NewsletterAdminController::class, 'state'])
+    ->middleware(['expired', 'admin']);
+Route::post('api/admin/newsletter/store', [NewsletterAdminController::class, 'store'])
+    ->middleware(['expired', 'admin']);
+Route::get('api/admin/newsletter/{id}', [NewsletterAdminController::class, 'getItem'])
+    ->middleware(['expired', 'admin']);
 
 # 分類 Category
 

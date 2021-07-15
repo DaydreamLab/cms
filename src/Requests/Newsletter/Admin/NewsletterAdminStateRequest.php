@@ -6,6 +6,9 @@ use DaydreamLab\Cms\Requests\CmsStateRequest;
 
 class NewsletterAdminStateRequest extends CmsStateRequest
 {
+    protected $apiMethod = 'stateNewsletter';
+
+    protected $modelName = 'Newsletter';
     /**
      * Determine if the user is authorized to make this request.
      *

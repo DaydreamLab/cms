@@ -6,6 +6,9 @@ use DaydreamLab\Cms\Requests\CmsRestoreRequest;
 
 class NewsletterAdminRestoreRequest extends CmsRestoreRequest
 {
+    protected $apiMethod = 'restoreNewsletter';
+
+    protected $modelName = 'Newsletter';
     /**
      * Determine if the user is authorized to make this request.
      *
