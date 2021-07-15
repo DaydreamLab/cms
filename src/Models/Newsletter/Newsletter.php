@@ -2,10 +2,10 @@
 
 namespace DaydreamLab\Cms\Models\Newsletter;
 
-use DaydreamLab\Cms\Models\CmsModel;
+use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 
-class Newsletter extends CmsModel
+class Newsletter extends BaseModel
 {
     use RecordChanger {
         RecordChanger::boot as traitBoot;
@@ -18,7 +18,7 @@ class Newsletter extends CmsModel
     protected $table = 'newsletters';
 
 
-    protected $name = 'Newsletter';
+    protected $model_type = 'parent';
 
 
     /**
@@ -27,12 +27,23 @@ class Newsletter extends CmsModel
      * @var array
      */
     protected $fillable = [
+        'newsletter_category_id',
         'title',
-        'category_id',
-        'state',
+        'image',
+        'number',
         'description',
+        'url',
+        'display_topic',
+        'information',
+        'params',
+        'state',
+        'ordering',
+        'locked_by',
+        'locked_at',
         'created_by',
-        'updated_by'
+        'updated_by',
+        'publish_up',
+        'publish_down'
     ];
 
 
@@ -51,6 +62,14 @@ class Newsletter extends CmsModel
      * @var array
      */
     protected $appends = [
+    ];
+
+
+    protected $casts = [
+        'params' => 'array',
+        'locked_at' => 'datetime:Y-m-d H:i:s',
+        'publish_up' => 'datetime:Y-m-d H:i:s',
+        'publish_down' => 'datetime:Y-m-d H:i:s'
     ];
 
 

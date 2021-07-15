@@ -150,4 +150,11 @@ class Item extends BaseModel
         return $this->belongsToMany(Brand::class, 'brands_items_maps', 'item_id', 'brand_id')
             ->withTimestamps();
     }
+
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'items_products_maps', 'item_id', 'product_id')
+            ->withTimestamps();
+    }
 }

@@ -12,5 +12,5 @@ class NewsletterFront extends Newsletter
      */
     protected $table = 'newsletters';
 
-
+    protected $model_type = 'front';
 }

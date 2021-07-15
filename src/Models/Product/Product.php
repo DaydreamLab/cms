@@ -3,11 +3,11 @@
 namespace DaydreamLab\Cms\Models\Product;
 
 use DaydreamLab\Cms\Models\ProductCategory\ProductCategory;
-use DaydreamLab\JJAJ\Traits\RecordChanger;
-use DaydreamLab\JJAJ\Traits\UserInfo;
 use DaydreamLab\Cms\Models\Brand\Brand;
 use DaydreamLab\Cms\Models\Item\Item;
 use DaydreamLab\JJAJ\Models\BaseModel;
+use DaydreamLab\JJAJ\Traits\RecordChanger;
+use DaydreamLab\JJAJ\Traits\UserInfo;
 
 class Product extends BaseModel
 {
@@ -35,7 +35,7 @@ class Product extends BaseModel
         'alias',
         'title',
         'description',
-        'products',
+        'product_data',
         'files',
         'params',
         'state',
@@ -63,16 +63,18 @@ class Product extends BaseModel
      * @var array
      */
     protected $appends = [
+        'parent_category',
+        'category'
     ];
 
 
     protected $casts = [
-        'products' => 'array',
+        'product_data' => 'array',
         'files' => 'array',
         'params' => 'array',
         'locked_at' => 'datetime:Y-m-d H:i:s',
         'publish_up' => 'datetime:Y-m-d H:i:s',
-        'publish_down' => 'datetime:Y-m-d H:i:s',
+        'publish_down' => 'datetime:Y-m-d H:i:s'
     ];
 
 
@@ -89,8 +91,28 @@ class Product extends BaseModel
     }
 
 
+    public function items()
+    {
+        return $this->belongsToMany(Item::class, 'items_products_maps', 'product_id', 'item_id')
+            ->withTimestamps();
+    }
+
+
     public function productCategory()
     {
         return $this->belongsTo(ProductCategory::class, 'product_category_id', 'id');
+    }
+
+
+    public function getCategoryAttribute()
+    {
+        return ($this->productCategory) ? $this->productCategory->title : '';
+    }
+
+
+    public function getParentCategoryAttribute()
+    {
+        $category = $this->productCategory;
+        return ($category && $category->parent) ? $category->parent->title : '';
     }
 }
