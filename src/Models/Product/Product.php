@@ -63,6 +63,7 @@ class Product extends BaseModel
      * @var array
      */
     protected $appends = [
+        'brand_title',
         'parent_category',
         'category'
     ];
@@ -95,6 +96,14 @@ class Product extends BaseModel
     {
         return $this->belongsToMany(Item::class, 'items_products_maps', 'product_id', 'item_id')
             ->withTimestamps();
+    }
+
+
+    public function getBrandTitleAttribute()
+    {
+        return $this->brands->map(function($b) {
+            return $b->title;
+        });
     }
 
 
