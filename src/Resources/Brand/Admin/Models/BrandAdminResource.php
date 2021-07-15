@@ -20,6 +20,7 @@ class BrandAdminResource extends BaseJsonResource
             'code'                  => $this->code,
             'alias'                 => $this->alias,
             'title'                 => $this->title,
+            'title_zhtw'            => $this->title_zhtw,
             'description'           => $this->description,
             'factory_url'           => $this->factory_url,
             'contact'               => $this->contact,
