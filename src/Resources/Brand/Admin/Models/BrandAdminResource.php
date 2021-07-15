@@ -20,6 +20,7 @@ class BrandAdminResource extends BaseJsonResource
             'code'                  => $this->code,
             'alias'                 => $this->alias,
             'title'                 => $this->title,
+            'title_zhtw'            => $this->title_zhtw,
             'description'           => $this->description,
             'factory_url'           => $this->factory_url,
             'contact'               => $this->contact,
@@ -28,6 +29,7 @@ class BrandAdminResource extends BaseJsonResource
             'logo_image'            => $this->logo_image,
             'banner_image'          => $this->banner_image,
             'banner_link'           => $this->banner_link,
+            'metatitle'             => $this->metatitle,
             'metadesc'              => $this->metadesc,
             'metakeywords'          => $this->metakeywords,
             'tracking'              => $this->tracking,
@@ -37,7 +39,8 @@ class BrandAdminResource extends BaseJsonResource
             'locked_at'             => $this->getDateTimeString($this->locked_at, $tz),
             'creatorName'           => $this->creatorName,
             'updaterName'           => $this->updaterName,
-            'lockerName'            => $this->lockerName
+            'lockerName'            => $this->lockerName,
+            'tags'                  => $this->tags
         ];
     }
 }

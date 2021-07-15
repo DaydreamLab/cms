@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('alias');
             $table->string('title');
             $table->text('description')->nullable();
-            $table->mediumText('products')->nullable();
+            $table->mediumText('product_data')->nullable();
             $table->text('files')->nullable();
             $table->text('params')->nullable();
 

@@ -32,6 +32,7 @@ class BrandAdminStoreRequest extends AdminRequest
             'code'                      => 'nullable|string',
             'alias'                     => 'nullable|string',
             'title'                     => 'required|string',
+            'title_zhtw'                  => 'nullable|string',
             'description'               => 'nullable|string',
             'factory_url'               => 'nullable|string',
             'contact_email'             => 'nullable|string',
@@ -39,6 +40,7 @@ class BrandAdminStoreRequest extends AdminRequest
             'logo_image'                => 'nullable|string',
             'banner_image'              => 'nullable|string',
             'banner_link'               => 'nullable|string',
+            'metatitle'                 => 'nullable|string',
             'metadesc'                  => 'nullable|string',
             'metakeywords'              => 'nullable|string',
             'state'                     => [

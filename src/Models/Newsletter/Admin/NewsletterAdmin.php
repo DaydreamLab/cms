@@ -12,5 +12,5 @@ class NewsletterAdmin extends Newsletter
      */
     protected $table = 'newsletters';
 
-
+    protected $model_type = 'admin';
 }

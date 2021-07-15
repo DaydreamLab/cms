@@ -20,6 +20,7 @@ class BrandAdminListResource extends BaseJsonResource
             'code'                  => $this->code,
             'alias'                 => $this->alias,
             'title'                 => $this->title,
+            'title_zhtw'            => $this->title_zhtw,
             'description'           => $this->description,
             'state'                 => $this->state,
             'created_at'            => $this->getDateTimeString($this->created_at, $tz),
