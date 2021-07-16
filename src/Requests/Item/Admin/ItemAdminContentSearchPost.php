@@ -27,7 +27,6 @@ class ItemAdminContentSearchPost extends CmsSearchPost
             $typeString .= Str::ucfirst($part);
         }
         $this->apiMethod = $typeString;
-        show($this->apiMethod);
         return parent::authorize();
     }
 
