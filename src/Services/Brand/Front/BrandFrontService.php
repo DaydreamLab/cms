@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Services\Brand\Front;
 
 use DaydreamLab\Cms\Repositories\Brand\Front\BrandFrontRepository;
 use DaydreamLab\Cms\Services\Brand\BrandService;
+use Illuminate\Support\Collection;
 
 class BrandFrontService extends BrandService
 {
@@ -11,5 +12,15 @@ class BrandFrontService extends BrandService
     {
         parent::__construct($repo);
         $this->repo = $repo;
+    }
+
+
+    public function getItemByAlias(Collection $input)
+    {
+        $brand = $this->findBy('alias', '=', $input->get('alias'))->first();
+        $this->status = 'GetItemSuccess';
+        $this->response = $brand;
+
+        return $brand;
     }
 }

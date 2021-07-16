@@ -1,6 +1,7 @@
 <?php
 
 use DaydreamLab\Cms\Controllers\Brand\Admin\BrandAdminController;
+use DaydreamLab\Cms\Controllers\Brand\Front\BrandFrontController;
 use DaydreamLab\Cms\Controllers\Category\Front\CategoryFrontController;
 use DaydreamLab\Cms\Controllers\Category\Admin\CategoryAdminController;
 use DaydreamLab\Cms\Controllers\Item\Admin\ItemAdminController;
@@ -54,6 +55,8 @@ Route::get('api/tag/{alias}', [TagFrontController::class, 'getItemByAlias']);
 
 # 電子報訂閱
 Route::post('api/newsletter/subscribe', [NewsletterSubscriptionFrontController::class, 'store']);
+
+Route::get('api/brand/{alias}', [BrandFrontController::class, 'getItemByAlias']);
 
 /************************************  後台 API  ************************************/
 # 品牌 Brand

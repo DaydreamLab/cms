@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Brand\Front;
 
-use DaydreamLab\Cms\Requests\CmsSearchRequest;
+use DaydreamLab\Cms\Requests\CmsSearchPost;
 
-class BrandFrontSearchRequest extends CmsSearchRequest
+class BrandFrontSearchRequest extends CmsSearchPost
 {
     /**
      * Determine if the user is authorized to make this request.

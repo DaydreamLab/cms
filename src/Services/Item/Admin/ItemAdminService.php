@@ -38,9 +38,12 @@ class ItemAdminService extends ItemService
 
     public function addMapping($item, $input)
     {
-        $tagIds = $input->get('tagIds') ?: [];
+        $tags = $input->get('tags') ? $input->get('tags') : [];
+        $tagIds = array_map(function($tag) {
+            return $tag['id'];
+        }, $tags);
         if (count($tagIds)) {
-            $item->tags()->attach($input->get('tagIds'));
+            $item->tags()->attach($tagIds);
         }
 
         $brands = $input->get('brands') ? $input->get('brands') : [];
@@ -68,24 +71,24 @@ class ItemAdminService extends ItemService
 
     public function modifyMapping($item, $input)
     {
-        $tagIds = $input->get('tagIds') ?: [];
-        if (count($tagIds)) {
+        if ( $input->get('tags') !== null ) {
+            $tagIds = array_map(function($tag) {
+                return $tag['id'];
+            }, $input->get('tags'));
             $item->tags()->sync($tagIds);
         }
 
-        $brands = $input->get('brands') ? $input->get('brands') : [];
-        $brand_ids = array_map(function($brand) {
-            return $brand['id'];
-        }, $brands);
-        if (count($brand_ids)) {
+        if ( $input->get('brands') !== null ) {
+            $brand_ids = array_map(function($brand) {
+                return $brand['id'];
+            }, $input->get('brands'));
             $item->brands()->sync($brand_ids);
         }
 
-        $products = $input->get('products') ? $input->get('products') : [];
-        $product_ids = array_map(function($product) {
-            return $product['id'];
-        }, $products);
-        if (count($product_ids)) {
+        if ( $input->get('products') !== null ) {
+            $product_ids = array_map(function($product) {
+                return $product['id'];
+            }, $input->get('products'));
             $item->products()->sync($product_ids);
         }
 
@@ -136,12 +139,6 @@ class ItemAdminService extends ItemService
             $input->put('publish_up', now());
             $input->publish_up = now()->toDateTimeString();
         }
-
-        $tags = $input->get('tags') ? $input->get('tags') : [];
-        $tagIds = array_map(function($tag) {
-            return $tag['id'];
-        }, $tags);
-        $input->put('tagIds', $tagIds);
 
         # 改用其他方法處理額外欄位
         $json_data_field_type = ['multiSelect', 'repeater'];
