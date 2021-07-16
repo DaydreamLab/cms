@@ -32,11 +32,10 @@ class ProductAdminService extends ProductService
 
     public function modifyMapping($item, $input)
     {
-        $brands = $input->get('brands') ? $input->get('brands') : [];
-        $brand_ids = array_map(function($brand) {
-            return $brand['id'];
-        }, $brands);
-        if (count($brand_ids)) {
+        if ( $input->get('brands') !== null ) {
+            $brand_ids = array_map(function($brand) {
+                return $brand['id'];
+            }, $input->get('brands'));
             $item->brands()->sync($brand_ids);
         }
     }

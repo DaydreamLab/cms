@@ -15,6 +15,29 @@ class BrandAdminService extends BrandService
     }
 
 
+    public function addMapping($item, $input)
+    {
+        $tags = $input->get('tags') ? $input->get('tags') : [];
+        $tagIds = array_map(function($tag) {
+            return $tag['id'];
+        }, $tags);
+        if (count($tagIds)) {
+            $item->tags()->attach($tagIds);
+        }
+    }
+
+
+    public function modifyMapping($item, $input)
+    {
+        if ( $input->get('tags') !== null ) {
+            $tagIds = array_map(function($tag) {
+                return $tag['id'];
+            }, $input->get('tags'));
+            $item->tags()->sync($tagIds);
+        }
+    }
+
+
     public function store(Collection $input)
     {
         $result = parent::store($input);

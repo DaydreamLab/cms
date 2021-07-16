@@ -48,6 +48,10 @@ class BrandAdminStoreRequest extends AdminRequest
                 Rule::in([0,1])
             ],
 
+            'tags'                  => 'nullable|array',
+            'tags.*'                => 'nullable|array',
+            'tags.*.id'             => 'nullable|integer',
+
             'contact'                   => 'nullable|array',
             'contact.*'                 => 'nullable|array',
             'contact.*.last_name'       => 'nullable|string',
