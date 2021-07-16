@@ -19,6 +19,7 @@ class ProductAdminListResource extends BaseJsonResource
             'id'                => $this->id,
             'alias'             => $this->alias,
             'title'             => $this->title,
+            'state'             => $this->state,
             'brand_title'       => $this->brand_title,
             'parent_category'   => $this->productCategory->parent->title,
             'category'          => $this->productCategory->title,
