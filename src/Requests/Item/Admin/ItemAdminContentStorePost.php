@@ -74,7 +74,10 @@ class ItemAdminContentStorePost extends AdminRequest
 
             'brands'                => 'nullable|array',
             'brands.*'              => 'nullable|array',
-            'brands.*.id'           => 'nullable|integer'
+            'brands.*.id'           => 'nullable|integer',
+
+            'userGroupIds'          => 'nullable|array',
+            'userGroupIds.*'        => 'nullable|integer',
         ];
         return array_merge(parent::rules(), $rules);
     }

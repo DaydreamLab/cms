@@ -3,15 +3,11 @@
 namespace DaydreamLab\Cms\Listeners;
 
 use DaydreamLab\JJAJ\Helpers\Helper;
-use DaydreamLab\Observer\Services\Log\LogService;
 
 class CmsEventSubscriber
 {
-    protected $logService;
-
-    public function __construct(LogService $logService)
+    public function __construct()
     {
-        $this->logService = $logService;
     }
 
 

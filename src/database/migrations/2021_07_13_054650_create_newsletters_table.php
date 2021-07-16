@@ -17,6 +17,7 @@ class CreateNewslettersTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedInteger('newsletter_category_id');
             $table->string('title');
+            $table->string('alias');
             $table->string('image')->nullable();
             $table->string('number')->nullable();
             $table->string('description')->nullable();

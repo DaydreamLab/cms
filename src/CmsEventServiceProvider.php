@@ -8,7 +8,7 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider;
 class CmsEventServiceProvider extends EventServiceProvider
 {
     protected $subscribe = [
-        CmsEventSubscriber::class
+        //CmsEventSubscriber::class
     ];
 
 

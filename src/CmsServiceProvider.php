@@ -2,6 +2,8 @@
 
 namespace DaydreamLab\Cms;
 
+use DaydreamLab\Cms\Models\Newsletter\Newsletter;
+use DaydreamLab\User\Models\User\User;
 use Illuminate\Support\ServiceProvider;
 
 class CmsServiceProvider extends ServiceProvider
@@ -35,6 +37,10 @@ class CmsServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
         $this->loadRoutesFrom(__DIR__.'/routes/api.php');
         $this->loadRoutesFrom(__DIR__.'/routes/web.php');
+
+        User::addCustomRelation('newsletters', function (User $user) {
+
+        });
     }
 
     /**

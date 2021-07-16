@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Models\Newsletter;
 
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
+use DaydreamLab\User\Models\User\UserGroup;
 
 class Newsletter extends BaseModel
 {
@@ -29,6 +30,7 @@ class Newsletter extends BaseModel
     protected $fillable = [
         'newsletter_category_id',
         'title',
+        'alias',
         'image',
         'number',
         'description',
@@ -78,4 +80,10 @@ class Newsletter extends BaseModel
         self::traitBoot();
     }
 
+
+    public function userGroups()
+    {
+        return $this->belongsToMany(UserGroup::class, 'newsletter_category_user_group_maps', 'category_id', 'group_id')
+            ->withTimestamps();
+    }
 }
