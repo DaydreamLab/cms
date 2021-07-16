@@ -45,6 +45,8 @@ class ProductAdminStoreRequest extends AdminRequest
                 'required',
                 Rule::in([0,1])
             ],
+            'publish_up'            => 'nullable|date_format:Y-m-d H:i:s',
+            'publish_down'          => 'nullable|date_format:Y-m-d H:i:s',
             'brands'                => 'nullable|array',
             'brands.*'              => 'nullable|array',
             'brands.*.id'           => 'nullable|integer'
@@ -58,6 +60,16 @@ class ProductAdminStoreRequest extends AdminRequest
     {
         $validated = parent::validated();
         $validated->put('params', RequestHelper::handleParams($validated->get('params')));
+
+        if ( $publish_up = $validated->get('publish_up') ) {
+            $utc_publish_up = Carbon::parse($publish_up, $this->user('api')->timezone);
+            $validated->put('publish_up', $utc_publish_up->tz(config('app.timezone'))->format('Y-m-d H:i:s'));
+        }
+
+        if ( $publish_down = $validated->get('publish_down') ) {
+            $utc_publish_down = Carbon::parse($publish_down, $this->user('api')->timezone);
+            $validated->put('publish_down', $utc_publish_down->tz(config('app.timezone'))->format('Y-m-d H:i:s'));
+        }
 
         return $validated;
     }

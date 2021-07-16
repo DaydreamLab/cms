@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Requests\Item\Admin;
 
 use DaydreamLab\Cms\Requests\CmsSearchPost;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class ItemAdminContentSearchPost extends CmsSearchPost
@@ -19,6 +20,13 @@ class ItemAdminContentSearchPost extends CmsSearchPost
      */
     public function authorize()
     {
+        $content_type = $this->route('content_type');
+        $parts = explode('_', $content_type);
+        $typeString = 'search';
+        foreach ($parts as $part) {
+            $typeString .= Str::ucfirst($part);
+        }
+        $this->apiMethod = $typeString;
         return parent::authorize();
     }
 
@@ -86,6 +94,31 @@ class ItemAdminContentSearchPost extends CmsSearchPost
             });
         }
         $validated->forget('brand_id');
+
+        if ( $validated->get('category_id') == '' ) {
+            $validated->forget('category_id');
+        }
+
+        if ( $validated->get('featured') == '' ) {
+            $validated->forget('featured');
+        }
+
+        if ( $validated->get('language') == '' ) {
+            $validated->forget('language');
+        }
+
+        if ( $validated->get('state') == '' ) {
+            $validated->forget('state');
+            $validated['q'] = $this->q->whereIn('state', [0, 1]);
+        }
+
+        if ( $validated->get('search') == '' ) {
+            $validated->forget('search');
+        }
+
+        if ( $validated->get('access') == '' ) {
+            $validated->forget('access');
+        }
 
         return $validated;
     }

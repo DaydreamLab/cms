@@ -76,7 +76,9 @@ class OptionService
             if ($type == 'asset') {
                 $data[$type] = $this->getOptionList($service, 'tree', collect(['q' => $q]), []);
             } elseif ($type == 'brand') {
-                $data[$type] = $this->getOptionList($service, 'list', collect(['q' => $q]));
+                $data[$type] = $this->getOptionList($service, 'list', collect(
+                    ['q' => $q->where('state', 1)]
+                ));
             } elseif ($type == 'extension') {
                 $data[$type] = $service;
             } elseif ($type == 'extrafield_group') {
@@ -104,12 +106,14 @@ class OptionService
                     ->where('title', '!=', 'ROOT');
                 $data[$type] = $this->getOptionList($service, 'tree', collect(['q' => $q]) , ['alias']);
             } elseif ($type == 'product_category') {
-                $data[$type] = $this->getOptionList($service, 'tree', collect(['q' => $q]));
+                $data[$type] = $this->getOptionList($service, 'tree', collect(
+                    ['q' => $q->where('state', 1)]
+                ));
             } elseif ($type == 'solution_category') {
                 $q = $q->orderBy('id', 'asc');
                 $data[$type] = $this->getOptionList($service, 'list', collect(
                     [
-                        'q' => $q,
+                        'q' => $q->where('state', 1),
                         'content_type' => 'solution_category',
                     ]
                 ));
@@ -117,7 +121,7 @@ class OptionService
                 $q = $q->orderBy('id', 'asc');
                 $data[$type] = $this->getOptionList($service, 'list', collect(
                     [
-                        'q' => $q,
+                        'q' => $q->where('state', 1),
                         'content_type' => 'industry_category',
                     ]
                 ));

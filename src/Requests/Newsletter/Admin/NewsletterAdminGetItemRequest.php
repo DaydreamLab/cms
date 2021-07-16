@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Newsletter\Admin;
 
-use DaydreamLab\Cms\Requests\CmsGetItemRequest;
+use DaydreamLab\Cms\Requests\CmsGetItemGet;
 
-class NewsletterAdminGetItemRequest extends CmsGetItemRequest
+class NewsletterAdminGetItemRequest extends CmsGetItemGet
 {
     protected $apiMethod = 'getNewsletter';
 

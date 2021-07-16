@@ -12,14 +12,14 @@
                 "state": 1,
                 "showNav": 1,
                 "apis": [
-                    "getItem",
-                    "addItem",
-                    "editItem",
-                    "deleteItem",
-                    "searchItem",
-                    "stateItem",
-                    "restoreItem",
-                    "orderingItem"
+                    "getSlideshow",
+                    "addSlideshow",
+                    "editSlideshow",
+                    "deleteSlideshow",
+                    "searchSlideshow",
+                    "stateSlideshow",
+                    "restoreSlideshow",
+                    "orderingSlideshow"
                 ],
                 "defaultApis": {
                     "getOption": ["checked", "hidden"],
@@ -121,14 +121,14 @@
                 "state": 1,
                 "showNav": 1,
                 "apis": [
-                    "getItem",
-                    "addItem",
-                    "editItem",
-                    "deleteItem",
-                    "searchItem",
-                    "restoreItem",
-                    "stateItem",
-                    "orderingItem"
+                    "getIndustryCategory",
+                    "addIndustryCategory",
+                    "editIndustryCategory",
+                    "deleteIndustryCategory",
+                    "searchIndustryCategory",
+                    "restoreIndustryCategory",
+                    "stateIndustryCategory",
+                    "orderingIndustryCategory"
                 ],
                 "defaultApis": {
                     "getOption": ["checked", "hidden"],
@@ -153,14 +153,14 @@
                 "state": 1,
                 "showNav": 1,
                 "apis": [
-                    "getItem",
-                    "addItem",
-                    "editItem",
-                    "deleteItem",
-                    "searchItem",
-                    "restoreItem",
-                    "stateItem",
-                    "orderingItem"
+                    "getSolution",
+                    "addSolution",
+                    "editSolution",
+                    "deleteSolution",
+                    "searchSolution",
+                    "restoreSolution",
+                    "stateSolution",
+                    "orderingSolution"
                 ],
                 "defaultApis": {
                     "getOption": ["checked", "hidden"],
@@ -178,14 +178,14 @@
                 "state": 1,
                 "showNav": 1,
                 "apis": [
-                    "getItem",
-                    "addItem",
-                    "editItem",
-                    "deleteItem",
-                    "searchItem",
-                    "restoreItem",
-                    "stateItem",
-                    "orderingItem"
+                    "getSolutionCategory",
+                    "addSolutionCategory",
+                    "editSolutionCategory",
+                    "deleteSolutionCategory",
+                    "searchSolutionCategory",
+                    "restoreSolutionCategory",
+                    "stateSolutionCategory",
+                    "orderingSolutionCategory"
                 ],
                 "defaultApis": {
                     "getOption": ["checked", "hidden"],
@@ -210,14 +210,14 @@
                 "state": 1,
                 "showNav": 1,
                 "apis": [
-                    "getItem",
-                    "addItem",
-                    "editItem",
-                    "deleteItem",
-                    "searchItem",
-                    "restoreItem",
-                    "stateItem",
-                    "orderingItem"
+                    "getCase",
+                    "addCase",
+                    "editCase",
+                    "deleteCase",
+                    "searchCase",
+                    "restoreCase",
+                    "stateCase",
+                    "orderingCase"
                 ],
                 "defaultApis": {
                     "getOption": ["checked", "hidden"],
@@ -283,21 +283,21 @@
         "assets": [
             {
                 "title": "最新消息",
-                "path": "/news",
-                "full_path": "/news",
-                "component": "news/list",
+                "path": "/bulletin",
+                "full_path": "/bulletin",
+                "component": "bulletin/list",
                 "type": "menu",
                 "state": 1,
                 "showNav": 1,
                 "apis": [
-                    "getItem",
-                    "addItem",
-                    "editItem",
-                    "deleteItem",
-                    "searchItem",
-                    "restoreItem",
-                    "stateItem",
-                    "orderingItem"
+                    "getBulletin",
+                    "addBulletin",
+                    "editBulletin",
+                    "deleteBulletin",
+                    "searchBulletin",
+                    "restoreBulletin",
+                    "stateBulletin",
+                    "orderingBulletin"
                 ],
                 "defaultApis": {
                     "getOption": ["checked", "hidden"],
@@ -315,14 +315,14 @@
                 "state": 1,
                 "showNav": 1,
                 "apis": [
-                    "getItem",
-                    "addItem",
-                    "editItem",
-                    "deleteItem",
-                    "searchItem",
-                    "restoreItem",
-                    "stateItem",
-                    "orderingItem"
+                    "getPromotion",
+                    "addPromotion",
+                    "editPromotion",
+                    "deletePromotion",
+                    "searchPromotion",
+                    "restorePromotion",
+                    "statePromotion",
+                    "orderingPromotion"
                 ],
                 "defaultApis": {
                     "getOption": ["checked", "hidden"],
@@ -347,14 +347,14 @@
                 "state": 1,
                 "showNav": 1,
                 "apis": [
-                    "getItem",
-                    "addItem",
-                    "editItem",
-                    "deleteItem",
-                    "searchItem",
-                    "restoreItem",
-                    "stateItem",
-                    "orderingItem"
+                    "getVideo",
+                    "addVideo",
+                    "editVideo",
+                    "deleteVideo",
+                    "searchVideo",
+                    "restoreVideo",
+                    "stateVideo",
+                    "orderingVideo"
                 ]
             }
         ],
@@ -373,33 +373,33 @@
                 "state": 1,
                 "showNav": 1,
                 "apis": [
-                    "getItem",
-                    "addItem",
-                    "editItem",
-                    "deleteItem",
-                    "searchItem",
-                    "restoreItem",
-                    "stateItem",
-                    "orderingItem"
+                    "getMemorabilia",
+                    "addMemorabilia",
+                    "editMemorabilia",
+                    "deleteMemorabilia",
+                    "searchMemorabilia",
+                    "restoreMemorabilia",
+                    "stateMemorabilia",
+                    "orderingMemorabilia"
                 ]
             },
             {
                 "title": "財務資訊",
-                "path": "/financial-info",
-                "full_path": "/financial-info",
-                "component": "financial-info/list",
+                "path": "/finance",
+                "full_path": "/finance",
+                "component": "finance/list",
                 "type": "menu",
                 "state": 1,
                 "showNav": 1,
                 "apis": [
-                    "getItem",
-                    "addItem",
-                    "editItem",
-                    "deleteItem",
-                    "searchItem",
-                    "restoreItem",
-                    "stateItem",
-                    "orderingItem"
+                    "getFinance",
+                    "addFinance",
+                    "editFinance",
+                    "deleteFinance",
+                    "searchFinance",
+                    "restoreFinance",
+                    "stateFinance",
+                    "orderingFinance"
                 ],
                 "defaultApis": {
                     "getOption": ["checked", "hidden"],
@@ -410,21 +410,21 @@
             },
             {
                 "title": "重要規章",
-                "path": "/regulations",
-                "full_path": "/regulations",
-                "component": "regulations/list",
+                "path": "/rules",
+                "full_path": "/rules",
+                "component": "rules/list",
                 "type": "menu",
                 "state": 1,
                 "showNav": 1,
                 "apis": [
-                    "getItem",
-                    "addItem",
-                    "editItem",
-                    "deleteItem",
-                    "searchItem",
-                    "restoreItem",
-                    "stateItem",
-                    "orderingItem"
+                    "getRules",
+                    "addRules",
+                    "editRules",
+                    "deleteRules",
+                    "searchRules",
+                    "restoreRules",
+                    "stateRules",
+                    "orderingRules"
                 ],
                 "defaultApis": {
                     "getOption": ["checked", "hidden"],
@@ -435,21 +435,21 @@
             },
             {
                 "title": "股東專欄",
-                "path": "/shareholder",
-                "full_path": "/shareholder",
-                "component": "shareholder/list",
+                "path": "/stockholder",
+                "full_path": "/stockholder",
+                "component": "stockholder/list",
                 "type": "menu",
                 "state": 1,
                 "showNav": 1,
                 "apis": [
-                    "getItem",
-                    "addItem",
-                    "editItem",
-                    "deleteItem",
-                    "searchItem",
-                    "restoreItem",
-                    "stateItem",
-                    "orderingItem"
+                    "getStockholder",
+                    "addStockholder",
+                    "editStockholder",
+                    "deleteStockholder",
+                    "searchStockholder",
+                    "restoreStockholder",
+                    "stateStockholder",
+                    "orderingStockholder"
                 ],
                 "defaultApis": {
                     "getOption": ["checked", "hidden"],
@@ -500,14 +500,14 @@
                 "state": 1,
                 "showNav": 1,
                 "apis": [
-                    "getCategory",
-                    "addCategory",
-                    "editCategory",
-                    "deleteCategory",
-                    "searchCategory",
-                    "restoreCategory",
-                    "stateCategory",
-                    "orderingCategory"
+                    "getNewsletterCategory",
+                    "addNewsletterCategory",
+                    "editNewsletterCategory",
+                    "deleteNewsletterCategory",
+                    "searchNewsletterCategory",
+                    "restoreNewsletterCategory",
+                    "stateNewsletterCategory",
+                    "orderingNewsletterCategory"
                 ],
                 "defaultApis": {
                     "getOption": ["checked", "hidden"],

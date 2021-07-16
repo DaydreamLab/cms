@@ -2,9 +2,10 @@
 
 namespace DaydreamLab\Cms\Requests\Newsletter\Admin;
 
-use DaydreamLab\Cms\Requests\CmsSearchRequest;
+use DaydreamLab\Cms\Requests\CmsSearchPost;
+use Illuminate\Validation\Rule;
 
-class NewsletterAdminSearchRequest extends CmsSearchRequest
+class NewsletterAdminSearchRequest extends CmsSearchPost
 {
     protected $apiMethod = 'searchNewsletter';
 
@@ -26,8 +27,12 @@ class NewsletterAdminSearchRequest extends CmsSearchRequest
      */
     public function rules()
     {
-        $rules =[
-            //
+        $rules = [
+            'state'         => [
+                'nullable',
+                'integer',
+                Rule::in([0,1,-1,-2])
+            ]
         ];
 
         return array_merge(parent::rules(), $rules);
@@ -37,6 +42,11 @@ class NewsletterAdminSearchRequest extends CmsSearchRequest
     public function validated()
     {
         $validated = parent::validated();
+
+        if ($validated->get('state') == '') {
+            $validated->forget('state');
+            $validated['q'] = $this->q->whereIn('state', [0, 1]);
+        }
 
         return $validated;
     }

@@ -73,10 +73,6 @@ class ItemAdminSearchPost extends CmsSearchPost
     {
         $validated = parent::validated();
 
-        if ( $content_type = $this->route('content_type') ) {
-            $validated->put('content_type', $content_type);
-        }
-
         return $validated;
     }
 }

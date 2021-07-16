@@ -53,6 +53,15 @@ class ProductAdminSearchRequest extends CmsSearchPost
         }
         $validated->forget('brand_id');
 
+        if ($validated->get('state') == '') {
+            $validated->forget('state');
+            $validated['q'] = $this->q->whereIn('state', [0, 1]);
+        }
+
+        if ($validated->get('product_category_id') == '') {
+            $validated->forget('product_category_id');
+        }
+
         return $validated;
     }
 }
