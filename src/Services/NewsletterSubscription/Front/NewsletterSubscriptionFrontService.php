@@ -108,6 +108,8 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
                 }
             }
         }
+
+        $this->response = null;
     }
 
 
