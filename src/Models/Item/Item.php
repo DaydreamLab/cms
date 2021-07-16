@@ -10,6 +10,7 @@ use DaydreamLab\Cms\Traits\Model\WithLanguage;
 use DaydreamLab\Cms\Traits\WithExtrafield;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
+use DaydreamLab\User\Models\User\UserGroup;
 use DaydreamLab\User\Traits\Model\WithAccess;
 
 class Item extends BaseModel
@@ -124,6 +125,13 @@ class Item extends BaseModel
     }
 
 
+    public function brands()
+    {
+        return $this->belongsToMany(Brand::class, 'brands_items_maps', 'item_id', 'brand_id')
+            ->withTimestamps();
+    }
+
+
     public function getCreatorGroupsAttribute()
     {
         $creator = $this->creator()->first();
@@ -138,16 +146,9 @@ class Item extends BaseModel
     }
 
 
-    public function tags()
+    public function newsletterUserGroups()
     {
-        return $this->belongsToMany(Tag::class, 'items_tags_maps', 'item_id', 'tag_id')
-            ->where('state', 1);
-    }
-
-
-    public function brands()
-    {
-        return $this->belongsToMany(Brand::class, 'brands_items_maps', 'item_id', 'brand_id')
+        return $this->belongsToMany(UserGroup::class, 'newsletter_category_user_group_maps', 'category_id', 'group_id')
             ->withTimestamps();
     }
 
@@ -156,5 +157,12 @@ class Item extends BaseModel
     {
         return $this->belongsToMany(Product::class, 'items_products_maps', 'item_id', 'product_id')
             ->withTimestamps();
+    }
+
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'items_tags_maps', 'item_id', 'tag_id')
+            ->where('state', 1);
     }
 }

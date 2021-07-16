@@ -1,13 +1,14 @@
 <?php
 
-namespace DaydreamLab\Cms\Requests;
+namespace DaydreamLab\Cms\Requests\NewsletterSubscription\Admin;
 
-use DaydreamLab\JJAJ\Requests\BaseStateRequest;
+use DaydreamLab\Cms\Requests\CmsSearchPost;
 
-abstract class CmsStateRequest extends BaseStateRequest
+class NewsletterSubscriptionAdminSearchRequest extends CmsSearchPost
 {
-    protected $package = 'Cms';
+    protected $modelName = 'NewsletterSubscription';
 
+    protected $apiMethod = 'searchNewsletterSubscription';
     /**
      * Determine if the user is authorized to make this request.
      *

@@ -43,8 +43,8 @@ class InstallCommand extends Command
         'ModulesTableSeeder',
         'TagsTableSeeder',
         'ZeroneAssetsGroupTableSeeder',
-        //'ZeroneCompanyTableSeeder',
-        //'ZeroneUserTableSeeder',
+        'ZeroneCompanyTableSeeder',
+        'ZeroneUserTableSeeder',
     ];
 
 

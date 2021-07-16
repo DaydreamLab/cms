@@ -1,6 +1,6 @@
 <?php
 
-namespace DaydreamLab\Dsth\Requests\ComponentBase;
+namespace DaydreamLab\Cms\Requests;
 
 use DaydreamLab\JJAJ\Requests\BaseStoreRequest;
 

@@ -1,13 +1,14 @@
 <?php
 
-namespace DaydreamLab\Cms\Requests;
+namespace DaydreamLab\Cms\Requests\NewsletterSubscription\Front;
 
-use DaydreamLab\JJAJ\Requests\BaseStateRequest;
+use DaydreamLab\Cms\Requests\CmsStoreRequest;
 
-abstract class CmsStateRequest extends BaseStateRequest
+class NewsletterSubscriptionFrontStoreRequest extends CmsStoreRequest
 {
-    protected $package = 'Cms';
+    protected $modelName = 'NewsletterSubscription';
 
+    protected $apiMethod = 'storeNewsletterSubscription';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -26,7 +27,9 @@ abstract class CmsStateRequest extends BaseStateRequest
     public function rules()
     {
         $rules = [
-            //
+            'email'             => 'nullable|email',
+            'categoriesAlias'   => 'nullable|array',
+            'categoriesAlias.*' => 'nullable|string',
         ];
 
         return array_merge(parent::rules(), $rules);

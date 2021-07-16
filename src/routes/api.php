@@ -23,6 +23,7 @@ use DaydreamLab\Cms\Controllers\Language\Admin\LanguageAdminController;
 use DaydreamLab\Cms\Controllers\Setting\Admin\SettingAdminController;
 use DaydreamLab\Cms\Controllers\Site\Admin\SiteAdminController;
 use DaydreamLab\Cms\Controllers\Option\OptionController;
+use DaydreamLab\Cms\Controllers\NewsletterSubscription\Front\NewsletterSubscriptionFrontController;
 /*
  *
 |--------------------------------------------------------------------------
@@ -51,7 +52,8 @@ Route::post('api/tag/search', [TagFrontController::class, 'search']);
 Route::post('api/tag/search/items', [TagFrontController::class, 'searchItems']);
 Route::get('api/tag/{alias}', [TagFrontController::class, 'getItemByAlias']);
 
-
+# 電子報訂閱
+Route::post('api/newsletter/subscribe', [NewsletterSubscriptionFrontController::class, 'store']);
 
 /************************************  後台 API  ************************************/
 # 品牌 Brand

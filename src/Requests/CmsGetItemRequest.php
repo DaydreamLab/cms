@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests;
 
-use DaydreamLab\JJAJ\Requests\BaseStateRequest;
+use DaydreamLab\JJAJ\Requests\BaseGetItemRequest;
 
-abstract class CmsStateRequest extends BaseStateRequest
+abstract class CmsGetItemRequest extends BaseGetItemRequest
 {
     protected $package = 'Cms';
 

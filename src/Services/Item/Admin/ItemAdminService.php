@@ -58,6 +58,11 @@ class ItemAdminService extends ItemService
         if (count($product_ids)) {
             $item->products()->attach($product_ids);
         }
+
+        $newsletterUserGroupIds = $input->get('newsletterUserGroupIds') ?: [];
+        if (count($newsletterUserGroupIds)) {
+            $item->newsletterUserGroups()->attach($newsletterUserGroupIds);
+        }
     }
 
 
@@ -82,6 +87,11 @@ class ItemAdminService extends ItemService
         }, $products);
         if (count($product_ids)) {
             $item->products()->sync($product_ids);
+        }
+
+        $newsletterUserGroupIds = $input->get('newsletterUserGroupIds') ?: [];
+        if (count($newsletterUserGroupIds)) {
+            $item->newsletterUserGroups()->sync($newsletterUserGroupIds);
         }
     }
 
