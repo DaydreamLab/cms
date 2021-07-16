@@ -26,8 +26,12 @@ class NewsletterAdminSearchRequest extends CmsSearchRequest
      */
     public function rules()
     {
-        $rules =[
-            //
+        $rules = [
+            'state'         => [
+                'nullable',
+                'integer',
+                Rule::in([0,1,-1,-2])
+            ]
         ];
 
         return array_merge(parent::rules(), $rules);

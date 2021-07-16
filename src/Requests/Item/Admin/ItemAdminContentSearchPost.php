@@ -87,6 +87,10 @@ class ItemAdminContentSearchPost extends CmsSearchPost
         }
         $validated->forget('brand_id');
 
+        if ($validated->get('state') == '') {
+            $validated->forget('state');
+        }
+
         return $validated;
     }
 }

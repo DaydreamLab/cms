@@ -43,6 +43,9 @@ class ProductCategoryAdminSearchRequest extends CmsSearchPost
     public function validated()
     {
         $validated = parent::validated();
+        if ($validated->get('state') == '') {
+            $validated->forget('state');
+        }
 
         return $validated;
     }
