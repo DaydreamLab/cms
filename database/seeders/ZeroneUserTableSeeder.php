@@ -3,6 +3,8 @@
 namespace DaydreamLab\Cms\Database\Seeders;
 
 use DaydreamLab\Cms\Models\Category\Category;
+use DaydreamLab\Cms\Models\Item\Item;
+use DaydreamLab\Cms\Models\NewsletterSubscription\NewsletterSubscription;
 use DaydreamLab\User\Models\Company\Company;
 use DaydreamLab\User\Models\User\User;
 use DaydreamLab\User\Models\User\UserGroup;
@@ -110,58 +112,83 @@ class ZeroneUserTableSeeder extends Seeder
             $targetGroup->save();
         }
 
-        $normal = UserGroup::where('title', '經銷會員')->first();
-        $dealer = UserGroup::where('title', '一般會員')->first();
+        $normal = UserGroup::where('title', '一般會員')->first();
+        $dealer = UserGroup::where('title', '經銷會員')->first();
         # 建立會員
         $data = getJson(__DIR__ . '/jsons/zerone-users.json', true);
         $invalid = [];
         foreach ($data as $index => $userInput) {
 
-//            $data = [
-//                'email'     => Str::lower($userInput['MemberID']),
-//                'name'      => $userInput['MemberName'],
-//                'activate'  => 1,
-//            ];
-//
-//            $result = $this->checkMobilePhone($userInput['MemberPhone']);
-//            if ($result) {
-//                $data['mobilePhone'] = '0'.$result;
-//                $data['password'] = bcrypt(Str::random());
-//            } else {
-//                $invalid[] = $userInput;
-//                continue;
-//            }
-//
-//            if ($userInput['category'] == 0) {
-//                $data['groupIds'] = [$normal->id];
-//            } elseif ($userInput['category'] == 1) {
-//                $data['groupIds'] = [$dealer->id];
-//            } else {
-//                $data['groupIds'] = [$dealer->id];
-//                $data['block'] = 1;
-//            }
-//
-//            $companyResult = $this->checkAddress($userInput['CompanyAddress']);
-//            $companyResult['name'] = $userInput['CompanyName'];
-//            $companyResult['phoneCode'] = $userInput['CompanyTel_Area'] != 'NULL'
-//                ? '0'.$userInput['CompanyTel_Area']
-//                : null;
-//            $companyResult['phone'] = $userInput['CompanyTel'];
-//            $companyResult['extNumber'] = $userInput['CompanyExt'];
-//            $companyResult['department'] = $userInput['MemberDep'];
-//            $companyResult['department'] = $userInput['MemberDep'];
-//            $companyResult['jobTitle'] = $userInput['MemberProfessional'];
-//            $companyResult['vat'] = $userInput['統編'];
-//            $data['company'] = $companyResult;
-//
-//            Passport::actingAs(User::find(1));
-//            $userService = app(UserAdminService::class);
-//            $existPhone = $userService->findBy('mobilePhone', '=', $data['mobilePhone'])->first();
-//            if ($existPhone) {
-//                $invalid[] = $userInput;
-//            } else {
-////                $user = app(UserAdminService::class)->store(collect($data));
-//            }
+            if ($index < 10) {
+                $data = [
+                    'email'     => Str::lower($userInput['MemberID']),
+                    'name'      => $userInput['MemberName'],
+                ];
+
+                $result = $this->checkMobilePhone($userInput['MemberPhone']);
+                if ($result) {
+                    $data['mobilePhone'] = '0'.$result;
+                    $data['password'] = bcrypt(Str::random());
+                } else {
+                    $invalid[] = $userInput;
+                    continue;
+                }
+
+                /**
+                 * 0: 一般會員
+                 * 1: 經銷會員
+                 * 2: 被封鎖的經銷會員
+                 */
+                if ($userInput['category'] == 0) {
+                    $data['groupIds'] = [$normal->id];
+                } elseif ($userInput['category'] == 1) {
+                    $data['groupIds'] = [$dealer->id];
+                } else {
+                    $data['groupIds'] = [$dealer->id];
+                    $data['block'] = 1;
+                }
+
+                $companyResult = $this->checkAddress($userInput['CompanyAddress']);
+                $companyResult['name'] = $userInput['CompanyName'];
+                $companyResult['phoneCode'] = $userInput['CompanyTel_Area'] != 'NULL'
+                    ? '0'.$userInput['CompanyTel_Area']
+                    : null;
+                $companyResult['phone'] = $userInput['CompanyTel'];
+                $companyResult['extNumber'] = $userInput['CompanyExt'];
+                $companyResult['department'] = $userInput['MemberDep'];
+                $companyResult['department'] = $userInput['MemberDep'];
+                $companyResult['jobTitle'] = $userInput['MemberProfessional'];
+                $companyResult['vat'] = $userInput['統編'];
+                $data['company'] = $companyResult;
+
+                Passport::actingAs(User::find(1));
+                $userService = app(UserAdminService::class);
+                $existPhone = $userService->findBy('mobilePhone', '=', $data['mobilePhone'])->first();
+                if ($existPhone) {
+                    $invalid[] = $userInput;
+                } else {
+                    $user = app(UserAdminService::class)->store(collect($data));
+                    $allNewsletterCategories = Item::whereHas('category', function ($q) {
+                        $q->where('content_type', 'newsletter_category');
+                    })->get();
+
+                    # 依照會員等級，找出所有電子報中，吻合會員所屬可訂閱的電子報
+                    $userSubscribeCategories = $allNewsletterCategories->filter(function ($category) use ($user) {
+                        $categoryUserGroupIds = $category->newsletterUserGroups->pluck('id');
+
+                        return $categoryUserGroupIds->intersect($user->accessGroupIds)->count() == $categoryUserGroupIds->count();
+                    });
+
+                    $subscription = NewsletterSubscription::create([
+                        'user_id' => $user->id,
+                        'email'   => $user->email,
+                        'created_by' => 1
+                    ]);
+                    $subscription->newsletterCategories()->attach($userSubscribeCategories->pluck('id')->all());
+                }
+            } else {
+                break;
+            }
         }
         # 把有問題的資料存出來
         Storage::disk('public')->put('invalid-user.json', response()->json($invalid));

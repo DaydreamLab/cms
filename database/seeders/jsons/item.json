@@ -255,14 +255,14 @@
         "title": "零壹電子報",
         "language": "*",
         "access": 1,
-        "newsletterUserGroupIds": [1,2,6]
+        "newsletterUserGroupIds": [1,7]
       },
       {
         "alias": "01_breaking",
         "title": "零壹快訊",
         "language": "*",
         "access": 1,
-        "newsletterUserGroupIds": [7]
+        "newsletterUserGroupIds": [6]
       }
     ]
   }

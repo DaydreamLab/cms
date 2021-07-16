@@ -22,29 +22,33 @@ class ZeroneCompanyTableSeeder extends Seeder
         # 建立廠商
         $companyCategories = CompanyCategory::all();
         $data = getJson(__DIR__ . '/jsons/zerone-company.json', true);
-        foreach ($data as $companyInput) {
-            $companyData = [
-                'name'      => $companyInput['CompName'],
-                'vat'       => $companyInput['CompNo'],
-                'domain'    => $companyInput['Domain'],
-                'created_by'=> 1,
-            ];
+        foreach ($data as $index => $companyInput) {
+            if ($index < 10) {
+                $companyData = [
+                    'name'      => $companyInput['CompName'],
+                    'vat'       => $companyInput['CompNo'],
+                    'domain'    => $companyInput['Domain'],
+                    'created_by'=> 1,
+                ];
 
-            if ($companyData['vat'] == 'NULL') {
-                $companyData['vat'] = null;
-            }
+                if ($companyData['vat'] == 'NULL') {
+                    $companyData['vat'] = null;
+                }
 
-            if ($companyInput['type'] == '0') {
-                $companyData['category_id'] = $companyCategories->where('title', '競爭廠商')->first()->id;
-            } elseif ($companyInput['type'] == '1') {
-                $companyData['category_id'] = $companyCategories->where('title', '經銷會員')->first()->id;
-            } elseif ($companyInput['type'] == '3') {
-                $companyData['category_id'] = $companyCategories->where('title', '原廠')->first()->id;
+                if ($companyInput['type'] == '0') {
+                    $companyData['category_id'] = $companyCategories->where('title', '競爭廠商')->first()->id;
+                } elseif ($companyInput['type'] == '1') {
+                    $companyData['category_id'] = $companyCategories->where('title', '經銷會員')->first()->id;
+                } elseif ($companyInput['type'] == '3') {
+                    $companyData['category_id'] = $companyCategories->where('title', '原廠')->first()->id;
+                } else {
+                    $companyData['category_id'] = $companyCategories->where('title', '零壹員工')->first()->id;
+                }
+
+                $company = Company::create($companyData);
             } else {
-                $companyData['category_id'] = $companyCategories->where('title', '零壹員工')->first()->id;
+                break;
             }
-
-            $company = Company::create($companyData);
         }
     }
 

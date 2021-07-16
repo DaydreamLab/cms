@@ -37,7 +37,20 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
     {
         $user = Auth::guard('api')->user();
         if ($user) {
-            $input->put('user_id', $user->id);
+            $wantCategories = Item::whereIn('alias', $input->get('newsletterCategoriesAlias') ?: [])
+                ->whereHas('category', function ($q) {
+                    $q->where('content_type', 'newsletter_category');
+                })
+                ->get();
+
+            # 找出是否有訂閱紀錄
+            $subscription = $this->findBy('user_id', '=', $user->id)->first();
+
+            $data = [
+                'user_id' => $user->id,
+                'email'   => $user->email,
+                'newsletterCategoryIds' => $wantCategories->pluck('id')->all()
+            ];
         } else {
             $inputEmail =  $input->get('email');
             # 沒有登入會員一定要填 email
@@ -53,7 +66,7 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
 
             if ($targetUser) {
                 # 找出想要訂閱的電子報分類
-                $wantCategories = Item::whereIn('alias', $input->get('categoriesAlias') ?: [])
+                $wantCategories = Item::whereIn('alias', $input->get('newsletterCategoriesAlias') ?: [])
                     ->whereHas('category', function ($q) {
                         $q->where('content_type', 'newsletter_category');
                     })
@@ -77,14 +90,8 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
                     'email'   => $targetUser->email,
                     'newsletterCategoryIds' => $availableCategoryIds
                 ];
-                if ($subscription) {
-                    $data['id'] = $subscription->id;
-                    $this->modify(collect($data));
-                } else {
-                    $this->add(collect($data));
-                }
             } else {
-                $availableCategories = Item::whereIn('alias', $input->get('categoriesAlias') ?:[])
+                $availableCategories = Item::whereIn('alias', $input->get('newsletterCategoriesAlias') ?:[])
                     ->whereHas('category', function ($q) {
                         $q->where('content_type', 'newsletter_category');
                     })
@@ -99,14 +106,14 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
                     'email'   => $inputEmail,
                     'newsletterCategoryIds' => $availableCategories->pluck('id')->all()
                 ];
-
-                if ($subscription) {
-                    $data['id'] = $subscription->id;
-                    $this->modify(collect($data));
-                } else {
-                    $this->add(collect($data));
-                }
             }
+        }
+
+        if ($subscription) {
+            $data['id'] = $subscription->id;
+            $this->modify(collect($data));
+        } else {
+            $this->add(collect($data));
         }
 
         $this->response = null;
