@@ -47,13 +47,11 @@ class ProductAdminService extends ProductService
         if (!InputHelper::null($input, 'product_category_id')) {
             $categoryAdminService = app(ProductCategoryAdminService::class);
             $category_ids = $categoryAdminService->findSubTreeIds($input->get('product_category_id'));
-        } else {
-            $category_ids = [$input->get('product_category_id')];
+            $q = $input->get('q');
+            $q = $q->whereIn('product_category_id', $category_ids);
+            $input->put('q', $q);
+            $input->forget('product_category_id');
         }
-        $q = $input->get('q');
-        $q = $q->whereIn('product_category_id', $category_ids);
-        $input->put('q', $q);
-        $input->forget('product_category_id');
 
         return parent::search($input);
     }
