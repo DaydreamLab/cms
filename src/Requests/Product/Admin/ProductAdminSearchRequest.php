@@ -55,6 +55,7 @@ class ProductAdminSearchRequest extends CmsSearchPost
 
         if ($validated->get('state') == '') {
             $validated->forget('state');
+            $validated['q'] = $this->q->whereIn('state', [0, 1]);
         }
 
         if ($validated->get('product_category_id') == '') {
