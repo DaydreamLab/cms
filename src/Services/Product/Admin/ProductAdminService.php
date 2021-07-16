@@ -2,8 +2,11 @@
 
 namespace DaydreamLab\Cms\Services\Product\Admin;
 
+use DaydreamLab\Cms\Models\ProductCategory\Admin\ProductCategoryAdmin;
 use DaydreamLab\Cms\Repositories\Product\Admin\ProductAdminRepository;
 use DaydreamLab\Cms\Services\Product\ProductService;
+use DaydreamLab\Cms\Services\ProductCategory\Admin\ProductCategoryAdminService;
+use Illuminate\Support\Collection;
 
 class ProductAdminService extends ProductService
 {
@@ -35,5 +38,20 @@ class ProductAdminService extends ProductService
         if (count($brand_ids)) {
             $item->brands()->sync($brand_ids);
         }
+    }
+
+
+    public function search(Collection $input)
+    {
+        if (!InputHelper::null($input, 'product_category_id')) {
+            $categoryAdminService = app(ProductCategoryAdminService::class);
+            $category_ids = $this->categoryAdminService->findSubTreeIds($input->get('product_category_id'));
+        }
+        $q = $input->get('q');
+        $q = $q->whereIn('product_category_id', $category_ids);
+        $input->put('q', $q);
+        $input->forget('product_category_id');
+
+        return parent::search($input);
     }
 }

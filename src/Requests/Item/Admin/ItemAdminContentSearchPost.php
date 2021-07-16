@@ -95,9 +95,29 @@ class ItemAdminContentSearchPost extends CmsSearchPost
         }
         $validated->forget('brand_id');
 
-        if ($validated->get('state') == '') {
+        if ( $validated->get('category_id') == '' ) {
+            $validated->forget('category_id');
+        }
+
+        if ( $validated->get('featured') == '' ) {
+            $validated->forget('featured');
+        }
+
+        if ( $validated->get('language') == '' ) {
+            $validated->forget('language');
+        }
+
+        if ( $validated->get('state') == '' ) {
             $validated->forget('state');
             $validated['q'] = $this->q->whereIn('state', [0, 1]);
+        }
+
+        if ( $validated->get('search') == '' ) {
+            $validated->forget('search');
+        }
+
+        if ( $validated->get('access') == '' ) {
+            $validated->forget('access');
         }
 
         return $validated;
