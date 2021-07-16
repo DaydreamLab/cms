@@ -4,22 +4,26 @@ namespace DaydreamLab\Cms\Controllers\Item\Admin;
 
 use DaydreamLab\Cms\Controllers\CmsController;
 use DaydreamLab\Cms\Models\Item\Item;
+use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminContentGetItemGet;
+use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminContentRemovePost;
+use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminContentRestorePost;
+use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminContentSearchPost;
+use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminContentStatePost;
+use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminContentStorePost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminFeaturedOrderingPost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminGetItemGet;
-use DaydreamLab\Cms\Resources\Item\Admin\Models\ItemAdminResource;
-use DaydreamLab\Cms\Resources\Item\Admin\Models\ItemContentAdminResource;
-use DaydreamLab\Cms\Resources\Item\Admin\Collections\ItemAdminListResourceCollection;
-use DaydreamLab\Cms\Resources\Item\Admin\Collections\ItemContentAdminListResourceCollection;
-use DaydreamLab\Cms\Services\Item\Admin\ItemAdminService;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminRemovePost;
-use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminContentSearchPost;
-use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminContentStorePost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminStorePost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminStatePost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminSearchPost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminRestorePost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminFeaturePost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminOrderingPost;
+use DaydreamLab\Cms\Resources\Item\Admin\Models\ItemAdminResource;
+use DaydreamLab\Cms\Resources\Item\Admin\Models\ItemContentAdminResource;
+use DaydreamLab\Cms\Resources\Item\Admin\Collections\ItemAdminListResourceCollection;
+use DaydreamLab\Cms\Resources\Item\Admin\Collections\ItemContentAdminListResourceCollection;
+use DaydreamLab\Cms\Services\Item\Admin\ItemAdminService;
 use Throwable;
 
 class ItemAdminController extends CmsController
@@ -71,7 +75,7 @@ class ItemAdminController extends CmsController
     }
 
 
-    public function getContentItem(ItemAdminGetItemGet $request)
+    public function getContentItem(ItemAdminContentGetItemGet $request)
     {
         $this->service->setUser($request->user('api'));
         try {
@@ -110,7 +114,7 @@ class ItemAdminController extends CmsController
     }
 
 
-    public function removeContent(ItemAdminRemovePost $request)
+    public function removeContent(ItemAdminContentRemovePost $request)
     {
         $this->service->setUser($request->user('api'));
         try {
@@ -136,7 +140,7 @@ class ItemAdminController extends CmsController
     }
 
 
-    public function restoreContent(ItemAdminRestorePost $request)
+    public function restoreContent(ItemAdminContentRestorePost $request)
     {
         $this->service->setUser($request->user('api'));
         try {
@@ -188,7 +192,7 @@ class ItemAdminController extends CmsController
     }
 
 
-    public function stateContent(ItemAdminStatePost $request)
+    public function stateContent(ItemAdminContentStatePost $request)
     {
         $this->service->setUser($request->user('api'));
         try {

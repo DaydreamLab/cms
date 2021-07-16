@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use DaydreamLab\Cms\Helpers\RequestHelper;
 use DaydreamLab\Cms\Models\Category\Category;
 use DaydreamLab\JJAJ\Requests\AdminRequest;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class ItemAdminContentStorePost extends AdminRequest
@@ -20,6 +21,13 @@ class ItemAdminContentStorePost extends AdminRequest
      */
     public function authorize()
     {
+        $content_type = $this->route('content_type');
+        $parts = explode('_', $content_type);
+        $typeString = 'store';
+        foreach ($parts as $part) {
+            $typeString .= Str::ucfirst($part);
+        }
+        $this->apiMethod = $typeString;
         return parent::authorize();
     }
 

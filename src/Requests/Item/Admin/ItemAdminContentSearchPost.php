@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Requests\Item\Admin;
 
 use DaydreamLab\Cms\Requests\CmsSearchPost;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class ItemAdminContentSearchPost extends CmsSearchPost
@@ -19,6 +20,14 @@ class ItemAdminContentSearchPost extends CmsSearchPost
      */
     public function authorize()
     {
+        $content_type = $this->route('content_type');
+        $parts = explode('_', $content_type);
+        $typeString = 'search';
+        foreach ($parts as $part) {
+            $typeString .= Str::ucfirst($part);
+        }
+        $this->apiMethod = $typeString;
+        show($this->apiMethod);
         return parent::authorize();
     }
 
