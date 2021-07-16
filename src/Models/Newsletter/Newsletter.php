@@ -67,6 +67,7 @@ class Newsletter extends BaseModel
 
     protected $casts = [
         'params' => 'array',
+        'information' => 'array',
         'locked_at' => 'datetime:Y-m-d H:i:s',
         'publish_up' => 'datetime:Y-m-d H:i:s',
         'publish_down' => 'datetime:Y-m-d H:i:s'

@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Newsletter\Admin;
 
-use DaydreamLab\Cms\Requests\CmsRemoveRequest;
+use DaydreamLab\Cms\Requests\CmsRestoreRemovePost;
 
-class NewsletterAdminRemoveRequest extends CmsRemoveRequest
+class NewsletterAdminRemoveRequest extends CmsRestoreRemovePost
 {
     protected $apiMethod = 'deleteNewsletter';
 

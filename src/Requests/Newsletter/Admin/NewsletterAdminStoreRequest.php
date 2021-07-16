@@ -3,9 +3,10 @@
 namespace DaydreamLab\Cms\Requests\Newsletter\Admin;
 
 use DaydreamLab\Cms\Helpers\RequestHelper;
-use DaydreamLab\Cms\Requests\CmsStoreRequest;
+use DaydreamLab\JJAJ\Requests\AdminRequest;
+use Illuminate\Validation\Rule;
 
-class NewsletterAdminStoreRequest extends CmsStoreRequest
+class NewsletterAdminStoreRequest extends AdminRequest
 {
     protected $apiMethod = 'storeNewsletter';
 
@@ -28,7 +29,7 @@ class NewsletterAdminStoreRequest extends CmsStoreRequest
     public function rules()
     {
         $rules = [
-            'newletter_category_id' => 'required|integer',
+            'newsletter_category_id' => 'required|integer',
             'title'                 => 'required|string',
             'number'                => 'required|string',
             'image'                 => 'nullable|string',
