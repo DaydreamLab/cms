@@ -1,6 +1,7 @@
 <?php
 
 use DaydreamLab\Cms\Controllers\Brand\Admin\BrandAdminController;
+use DaydreamLab\Cms\Controllers\Brand\Front\BrandFrontController;
 use DaydreamLab\Cms\Controllers\Category\Front\CategoryFrontController;
 use DaydreamLab\Cms\Controllers\Category\Admin\CategoryAdminController;
 use DaydreamLab\Cms\Controllers\Item\Admin\ItemAdminController;
@@ -51,7 +52,7 @@ Route::post('api/tag/search', [TagFrontController::class, 'search']);
 Route::post('api/tag/search/items', [TagFrontController::class, 'searchItems']);
 Route::get('api/tag/{alias}', [TagFrontController::class, 'getItemByAlias']);
 
-
+Route::get('api/brand/{alias}', [BrandFrontController::class, 'getItemByAlias']);
 
 /************************************  後台 API  ************************************/
 # 品牌 Brand

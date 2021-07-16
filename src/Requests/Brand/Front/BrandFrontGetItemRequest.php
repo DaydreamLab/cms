@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Brand\Front;
 
-use DaydreamLab\Cms\Requests\CmsGetItemRequest;
+use DaydreamLab\Cms\Requests\CmsGetItemGet;
 
-class BrandFrontGetItemRequest extends CmsGetItemRequest
+class BrandFrontGetItemRequest extends CmsGetItemGet
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -34,6 +34,7 @@ class BrandFrontGetItemRequest extends CmsGetItemRequest
     public function validated()
     {
         $validated = parent::validated();
+        $validated['alias'] = $this->route('alias');
 
         return $validated;
     }
