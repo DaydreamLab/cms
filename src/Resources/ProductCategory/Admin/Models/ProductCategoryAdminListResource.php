@@ -19,7 +19,7 @@ class ProductCategoryAdminListResource extends BaseJsonResource
             'title'         => $this->title,
             'alias'         => ($this->parent) ? $this->parent->alias.'-'.$this->alias : $this->alias,
             'state'         => $this->state,
-            'locker'        => ($this->locker) ? $this->locker->only(['id', 'name']) : []
+            'locker'        => ($this->locker) ? $this->locker->only(['id', 'uuid', 'name']) : []
         ];
     }
 }

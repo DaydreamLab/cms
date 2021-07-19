@@ -39,7 +39,7 @@ class ItemContentAdminListResource extends BaseJsonResource
                 'title' => $this->category->title,
                 'alias' => $this->category->alias
             ],
-            'locker'                    => ($this->locker) ? $this->locker->only(['id', 'name']) : []
+            'locker'                    => ($this->locker) ? $this->locker->only(['id', 'uuid', 'name']) : []
         ];
     }
 }

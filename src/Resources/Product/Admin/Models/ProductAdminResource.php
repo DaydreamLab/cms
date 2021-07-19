@@ -35,7 +35,7 @@ class ProductAdminResource extends BaseJsonResource
             'creatorName'       => $this->creatorName,
             'updaterName'       => $this->updaterName,
             'lockerName'        => $this->lockerName,
-            'locker'            => ($this->locker) ? $this->locker->only(['id', 'name']) : []
+            'locker'            => ($this->locker) ? $this->locker->only(['id', 'uuid', 'name']) : []
         ];
     }
 }

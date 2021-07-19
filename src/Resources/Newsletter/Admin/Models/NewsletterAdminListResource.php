@@ -19,7 +19,7 @@ class NewsletterAdminListResource extends BaseJsonResource
             'id'                => $this->id,
 
             'title'             => $this->title,
-            'locker'            => ($this->locker) ? $this->locker->only(['id', 'name']) : []
+            'locker'            => ($this->locker) ? $this->locker->only(['id', 'uuid', 'name']) : []
         ];
     }
 }
