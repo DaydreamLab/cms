@@ -31,7 +31,6 @@ class Brand extends BaseModel
      * @var array
      */
     protected $fillable = [
-        'code',
         'alias',
         'title',
         'title_zhtw',
@@ -44,9 +43,7 @@ class Brand extends BaseModel
         'logo_image',
         'banner_image',
         'banner_link',
-        'metatitle',
-        'metadesc',
-        'metakeywords',
+        'params',
         'tracking',
         'state',
         'locked_by',
@@ -76,6 +73,7 @@ class Brand extends BaseModel
 
     protected $casts = [
         'contact' => 'array',
+        'params'    => 'array',
         'tracking' => 'array',
         'locked_at' => 'datetime:Y-m-d H:i:s',
     ];

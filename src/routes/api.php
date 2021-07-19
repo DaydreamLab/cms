@@ -56,6 +56,7 @@ Route::get('api/tag/{alias}', [TagFrontController::class, 'getItemByAlias']);
 # 電子報訂閱
 Route::post('api/newsletter/subscribe', [NewsletterSubscriptionFrontController::class, 'store']);
 
+# 品牌前台API
 Route::get('api/brand/{alias}', [BrandFrontController::class, 'getItemByAlias']);
 
 /************************************  後台 API  ************************************/

@@ -15,7 +15,6 @@ class CreateBrandsTable extends Migration
     {
         Schema::create('brands', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('code');
             $table->string('alias');
             $table->string('title')->nullable();
             $table->string('title_zhtw')->nullable();
@@ -27,9 +26,7 @@ class CreateBrandsTable extends Migration
             $table->string('logo_image')->nullable();
             $table->string('banner_image')->nullable();
             $table->string('banner_link')->nullable();
-            $table->string('metatitle')->nullable();
-            $table->text('metadesc')->nullable();
-            $table->string('metakeywords')->nullable();
+            $table->text('params')->nullable();
             $table->mediumText('tracking')->nullable();
 
             $table->tinyInteger('state')->default(1);

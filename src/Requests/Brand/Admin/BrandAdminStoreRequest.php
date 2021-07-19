@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Requests\Brand\Admin;
 
+use DaydreamLab\Cms\Helpers\RequestHelper;
 use DaydreamLab\JJAJ\Requests\AdminRequest;
 use Illuminate\Validation\Rule;
 
@@ -29,10 +30,9 @@ class BrandAdminStoreRequest extends AdminRequest
     {
         $rules = [
             'id'                        => 'nullable|integer',
-            'code'                      => 'nullable|string',
             'alias'                     => 'nullable|string',
             'title'                     => 'required|string',
-            'title_zhtw'                  => 'nullable|string',
+            'title_zhtw'                => 'nullable|string',
             'description'               => 'nullable|string',
             'factory_url'               => 'nullable|string',
             'contact_email'             => 'nullable|string',
@@ -40,9 +40,7 @@ class BrandAdminStoreRequest extends AdminRequest
             'logo_image'                => 'nullable|string',
             'banner_image'              => 'nullable|string',
             'banner_link'               => 'nullable|string',
-            'metatitle'                 => 'nullable|string',
-            'metadesc'                  => 'nullable|string',
-            'metakeywords'              => 'nullable|string',
+            'params'                    => 'nullable|array',
             'state'                     => [
                 'required',
                 Rule::in([0,1])
@@ -73,6 +71,7 @@ class BrandAdminStoreRequest extends AdminRequest
     public function validated()
     {
         $validated = parent::validated();
+        $validated->put('params', RequestHelper::handleParams($validated->get('params')));
 
         return $validated;
     }
