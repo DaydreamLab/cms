@@ -7,6 +7,7 @@ use DaydreamLab\Cms\Requests\Brand\Front\BrandFrontGetItemRequest;
 use DaydreamLab\Cms\Requests\Brand\Front\BrandFrontSearchRequest;
 use DaydreamLab\Cms\Resources\Brand\Front\Models\BrandFrontResource;
 use DaydreamLab\Cms\Services\Brand\Front\BrandFrontService;
+use Throwable;
 
 class BrandFrontController extends CmsController
 {
