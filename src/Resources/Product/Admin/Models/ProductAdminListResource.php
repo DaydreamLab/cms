@@ -25,6 +25,7 @@ class ProductAdminListResource extends BaseJsonResource
             'category'          => $this->productCategory->title,
             'publish_up'        => $this->getDateTimeString($this->publish_up, $tz),
             'publish_down'      => $this->getDateTimeString($this->publish_down, $tz),
+            'locker'            => ($this->locker) ? $this->locker->only(['id', 'name']) : []
         ];
     }
 }

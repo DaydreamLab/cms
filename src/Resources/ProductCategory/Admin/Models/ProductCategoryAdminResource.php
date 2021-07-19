@@ -29,7 +29,8 @@ class ProductCategoryAdminResource extends BaseJsonResource
             'locked_at'     => $this->getDateTimeString($this->locked_at, $tz),
             'creatorName'   => $this->creatorName,
             'updaterName'   => $this->updaterName,
-            'lockerName'    => $this->lockerName
+            'lockerName'    => $this->lockerName,
+            'locker'        => ($this->locker) ? $this->locker->only(['id', 'name']) : []
         ];
     }
 }

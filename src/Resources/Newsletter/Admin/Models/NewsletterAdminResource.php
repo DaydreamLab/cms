@@ -28,7 +28,8 @@ class NewsletterAdminResource extends BaseJsonResource
             'publish_down'      => $this->getDateTimeString($this->publish_down, $tz),
             'creatorName'       => $this->creatorName,
             'updaterName'       => $this->updaterName,
-            'lockerName'        => $this->lockerName
+            'lockerName'        => $this->lockerName,
+            'locker'            => ($this->locker) ? $this->locker->only(['id', 'name']) : []
         ];
     }
 }
