@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Database\Seeders;
 
+use DaydreamLab\Cms\Helpers\RequestHelper;
 use DaydreamLab\Cms\Services\Brand\Admin\BrandAdminService;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use Illuminate\Database\Seeder;
@@ -16,6 +17,7 @@ class BrandsTableSeeder extends Seeder
         $this->brandService = app(BrandAdminService::class);
 
         foreach ($data as $brand) {
+            $brand['params'] = RequestHelper::handleParams([]);
             $this->brandService->store(collect($brand));
         }
     }

@@ -23,8 +23,12 @@ class BrandAdminListResource extends BaseJsonResource
             'title_zhtw'            => $this->title_zhtw,
             'description'           => $this->description,
             'state'                 => $this->state,
+            'locked_at'             => $this->getDateTimeString($this->locked_at, $tz),
             'created_at'            => $this->getDateTimeString($this->created_at, $tz),
             'updated_at'            => $this->getDateTimeString($this->updated_at, $tz),
+            'creatorName'           => $this->creatorName,
+            'updaterName'           => $this->updaterName,
+            'lockerName'            => $this->lockerName,
         ];
     }
 }

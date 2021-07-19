@@ -98,6 +98,7 @@ class ItemAdminContentStorePost extends AdminRequest
 
         if ( !$validated->get('id') ) {
             $content_type = $this->route('content_type');
+            $validated->put('content_type', $content_type);
             $category = Category::where('content_type', $content_type)->first();
             if (!$category) {
                 $validated->put('category_id', 1);

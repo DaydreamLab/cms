@@ -144,6 +144,8 @@ class ItemAdminService extends ItemService
         $json_data_field_type = ['multiSelect', 'repeater'];
         $extrafields = $input->get('extrafields') ? : [];
         $input->forget('extrafields');
+        $content_type = $input->get('content_type');
+        $input->forget('content_type');
 
         $result = parent::store($input);
 
@@ -154,18 +156,22 @@ class ItemAdminService extends ItemService
         $item_id = $result->id;
 
         foreach ($extrafields as $extrafield) {
-            $e = Extrafield::where('id', $extrafield['id'])->first();
-            $e_v = ExtrafieldValue::where('item_id', $item_id)->where('extrafield_id', $extrafield['id'])->first();
+            if (isset($extrafield['id'])) {
+                $e = Extrafield::where('id', $extrafield['id'])->first();
+            } else {
+                $e = Extrafield::where('content_type', $content_type)->where('alias', $extrafield['alias'])->first();
+            }
+            $e_v = ExtrafieldValue::where('item_id', $item_id)->where('extrafield_id', $e->id)->first();
             if (!$e_v) {
                 if ( in_array($e->type, $json_data_field_type) ) {
                     $e_v = ExtrafieldValue::create([
-                        'extrafield_id' => $extrafield['id'],
+                        'extrafield_id' => $e->id,
                         'item_id' => $item_id,
                         'value' => json_encode($extrafield['value'])
                     ]);
                 } else {
                     $e_v = ExtrafieldValue::create([
-                        'extrafield_id' => $extrafield['id'],
+                        'extrafield_id' => $e->id,
                         'item_id' => $item_id,
                         'value' => $extrafield['value']
                     ]);

@@ -26,6 +26,7 @@ class ItemContentAdminListResource extends BaseJsonResource
             'brands'                    => $this->brands->map(function ($b) {
                 return $b->only(['id', 'title']);
             }),
+            'extrafields'               => $this->extrafields,
             'created_at'                => $this->getDateTimeString($this->created_at, $tz),
             'updated_at'                => $this->getDateTimeString($this->updated_at, $tz),
             'locked_at'                 => $this->getDateTimeString($this->locked_at, $tz),
