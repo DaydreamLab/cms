@@ -12,6 +12,7 @@ use DaydreamLab\Cms\Requests\Product\Admin\ProductAdminStoreRequest;
 use DaydreamLab\Cms\Resources\Product\Admin\Collections\ProductAdminListResourceCollection;
 use DaydreamLab\Cms\Resources\Product\Admin\Models\ProductAdminResource;
 use DaydreamLab\Cms\Services\Product\Admin\ProductAdminService;
+use Throwable;
 
 class ProductAdminController extends cmsController
 {

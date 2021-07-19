@@ -13,6 +13,7 @@ use DaydreamLab\Cms\Requests\ProductCategory\Admin\ProductCategoryAdminStoreRequ
 use DaydreamLab\Cms\Resources\ProductCategory\Admin\Collections\ProductCategoryAdminListResourceCollection;
 use DaydreamLab\Cms\Resources\ProductCategory\Admin\Models\ProductCategoryAdminResource;
 use DaydreamLab\Cms\Services\ProductCategory\Admin\ProductCategoryAdminService;
+use Throwable;
 
 class ProductCategoryAdminController extends cmsController
 {

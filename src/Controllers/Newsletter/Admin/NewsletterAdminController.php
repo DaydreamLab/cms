@@ -12,6 +12,7 @@ use DaydreamLab\Cms\Requests\Newsletter\Admin\NewsletterAdminStoreRequest;
 use DaydreamLab\Cms\Resources\Newsletter\Admin\Collections\NewsletterAdminListResourceCollection;
 use DaydreamLab\Cms\Resources\Newsletter\Admin\Models\NewsletterAdminResource;
 use DaydreamLab\Cms\Services\Newsletter\Admin\NewsletterAdminService;
+use Throwable;
 
 class NewsletterAdminController extends CmsController
 {

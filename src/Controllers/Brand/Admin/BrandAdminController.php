@@ -12,6 +12,7 @@ use DaydreamLab\Cms\Requests\Brand\Admin\BrandAdminStoreRequest;
 use DaydreamLab\Cms\Resources\Brand\Admin\Collections\BrandAdminListResourceCollection;
 use DaydreamLab\Cms\Resources\Brand\Admin\Models\BrandAdminResource;
 use DaydreamLab\Cms\Services\Brand\Admin\BrandAdminService;
+use Throwable;
 
 class BrandAdminController extends CmsController
 {
