@@ -1,10 +1,10 @@
 <?php
 
-namespace DaydreamLab\Cms\Resources\Item\Admin\Models;
+namespace DaydreamLab\Cms\Resources\Item\Front\Models;
 
 use DaydreamLab\JJAJ\Resources\BaseJsonResource;
 
-class ItemContentAdminResource extends BaseJsonResource
+class ItemContentFrontResource extends BaseJsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,7 +14,7 @@ class ItemContentAdminResource extends BaseJsonResource
      */
     public function toArray($request)
     {
-        $tz = $request->user('api')->timezone;
+
         return [
             'id'                        => $this->id,
             'title'                     => $this->title,
@@ -37,21 +37,11 @@ class ItemContentAdminResource extends BaseJsonResource
             'language'                  => $this->language,
             'params'                    => $this->params,
             'tags'                      => $this->tags,
-            'brands'                    => $this->brands->map(function ($b) {
-                return $b->only(['id', 'title']);
-            }),
-            'products'                  => $this->products,
+
+
 
             'extrafields'               => $this->extrafields,
-            'created_at'                => $this->getDateTimeString($this->created_at, $tz),
-            'updated_at'                => $this->getDateTimeString($this->updated_at, $tz),
-            'locked_at'                 => $this->getDateTimeString($this->locked_at, $tz),
-            'publish_up'                => $this->getDateTimeString($this->publish_up, $tz),
-            'publish_down'              => $this->getDateTimeString($this->publish_down, $tz),
-            'creatorName'               => $this->creatorName,
-            'updaterName'               => $this->updaterName,
-            'lockerName'                => $this->lockerName,
-            'locker'                    => ($this->locker) ? $this->locker->only(['id', 'uuid', 'name']) : []
+
         ];
     }
 }

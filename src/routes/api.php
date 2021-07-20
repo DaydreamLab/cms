@@ -59,6 +59,17 @@ Route::post('api/newsletter/subscribe', [NewsletterSubscriptionFrontController::
 # 品牌前台API
 Route::get('api/brand/{alias}', [BrandFrontController::class, 'getItemByAlias']);
 
+# 解決方案
+# 成功案例
+# 最新消息
+# 促銷消息
+# 01影片
+# 大事紀
+# 財務資訊
+# 重要規章
+# 股東專欄
+Route::get('api/item/{content_type}/{alias}', [ItemFrontController::class, 'getContentByAlias']);
+
 /************************************  後台 API  ************************************/
 # 品牌 Brand
 

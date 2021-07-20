@@ -1,10 +1,10 @@
 <?php
 
-namespace DaydreamLab\Cms\Resources\Brand\Admin\Models;
+namespace DaydreamLab\Cms\Resources\Brand\Front\Models;
 
 use DaydreamLab\JJAJ\Resources\BaseJsonResource;
 
-class BrandAdminResource extends BaseJsonResource
+class BrandFrontResource extends BaseJsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,7 +14,6 @@ class BrandAdminResource extends BaseJsonResource
      */
     public function toArray($request)
     {
-        $tz = $request->user('api')->timezone;
         return [
             'id'                    => $this->id,
             'alias'                 => $this->alias,
@@ -29,15 +28,7 @@ class BrandAdminResource extends BaseJsonResource
             'banner_image'          => $this->banner_image,
             'banner_link'           => $this->banner_link,
             'params'                => $this->params,
-            'tracking'              => ($this->tracking == null) ? [] : $this->tracking,
-            'state'                 => $this->state,
-            'created_at'            => $this->getDateTimeString($this->created_at, $tz),
-            'updated_at'            => $this->getDateTimeString($this->updated_at, $tz),
-            'locked_at'             => $this->getDateTimeString($this->locked_at, $tz),
-            'creatorName'           => $this->creatorName,
-            'updaterName'           => $this->updaterName,
-            'lockerName'            => $this->lockerName,
-            'locker'                => ($this->locker) ? $this->locker->only(['id', 'uuid', 'name']) : [],
+
             'tags'                  => $this->tags
         ];
     }

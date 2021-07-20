@@ -14,7 +14,7 @@ use Kalnoy\Nestedset\NodeTrait;
 
 class Category extends BaseModel
 {
-    use NodeTrait, WithAccess, WithLanguage, WithExtrafield, UserInfo,
+    use NodeTrait, WithAccess, WithLanguage, /*WithExtrafield,*/ UserInfo,
         RecordChanger {
         RecordChanger::boot as traitBoot;
     }
