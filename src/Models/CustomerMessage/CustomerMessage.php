@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Models\CustomerMessage;
 
 use DaydreamLab\Cms\Models\Brand\Brand;
 use DaydreamLab\Cms\Models\CmsModel;
+use DaydreamLab\Cms\Models\CustomerMessageReply\CustomerMessageReply;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\JJAJ\Traits\UserInfo;
 
@@ -92,5 +93,11 @@ class CustomerMessage extends CmsModel
     public function brand()
     {
         return $this->hasOne(Brand::class, 'id', 'brand_id');
+    }
+
+
+    public function replies()
+    {
+        return $this->hasMany(CustomerMessageReply::class, 'messageId', 'id');
     }
 }

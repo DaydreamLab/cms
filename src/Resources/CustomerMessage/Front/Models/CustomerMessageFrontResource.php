@@ -1,11 +1,11 @@
 <?php
 
-namespace DaydreamLab\Cms\Resources\CustomerMessage\Admin\Models;
+namespace DaydreamLab\Cms\Resources\CustomerMessage\Front\Models;
 
 use DaydreamLab\Cms\Resources\CustomerMessageReply\Admin\Collections\CustomerMessageReplyAdminListResourceCollection;
 use DaydreamLab\JJAJ\Resources\BaseJsonResource;
 
-class CustomerMessageAdminResource extends BaseJsonResource
+class CustomerMessageFrontResource extends BaseJsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,15 +15,12 @@ class CustomerMessageAdminResource extends BaseJsonResource
      */
     public function toArray($request)
     {
-        $tz = $request->user('api')->timezone;
+        $tz = 'Asia/Taipei';
 
         return [
-            'id'            => $this->id,
-            'brandId'       => $this->brand_id,
             'brandTitle'    => $this->brand->title,
             'name'          => $this->name,
             'type'          => $this->type,
-            'status'        => $this->status,
             'email'         => $this->email,
             'backupEmail'   => $this->backupEmail,
             'phoneCode'     => $this->phoneCode,
@@ -39,13 +36,8 @@ class CustomerMessageAdminResource extends BaseJsonResource
             'message'       => nl2br($this->message),
             'companyName'   => $this->companyName,
             'jobTitle'      => $this->jobTitle,
-            'locked_at'     => $this->getDateTimeString($this->locked_at, $tz),
             'created_at'    => $this->getDateTimeString($this->created_at, $tz),
             'updated_at'    => $this->getDateTimeString($this->updated_at, $tz),
-            'lockerName'    => $this->lockerName,
-            'creatorName'   => $this->creatorName,
-            'updaterName'   => $this->updaterName,
-            'replies'       => new CustomerMessageReplyAdminListResourceCollection($this->replies, false)
         ];
     }
 }

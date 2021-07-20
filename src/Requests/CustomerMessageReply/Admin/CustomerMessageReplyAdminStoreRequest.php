@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Requests\CustomerMessageReply\Admin;
 
 use DaydreamLab\Cms\Requests\ComponentBase\CmsStoreRequest;
+use Illuminate\Validation\Rule;
 
 class CustomerMessageReplyAdminStoreRequest extends CmsStoreRequest
 {
@@ -27,7 +28,11 @@ class CustomerMessageReplyAdminStoreRequest extends CmsStoreRequest
     public function rules()
     {
         $rules = [
-            //
+            'messageId'     => 'required|integer',
+            'channels'      => 'required|array',
+            'channels.*'    => ['required', Rule::in('mail', 'sms')],
+            'subject'       => 'required|string',
+            'content'       => 'required|string',
         ];
 
         return array_merge(parent::rules(), $rules);

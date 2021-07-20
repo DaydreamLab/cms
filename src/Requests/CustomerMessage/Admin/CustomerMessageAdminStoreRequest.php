@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Requests\CustomerMessage\Admin;
 
+use DaydreamLab\Cms\Helpers\DataHelper;
 use DaydreamLab\Cms\Requests\ComponentBase\CmsStoreRequest;
 use Illuminate\Validation\Rule;
 
@@ -31,8 +32,8 @@ class CustomerMessageAdminStoreRequest extends CmsStoreRequest
             'id'            => 'nullable|string',
             'brandId'       => 'required|integer',
             'name'          => 'required|string',
-            'type'          => ['required', Rule::in(['產品詢價', '客訴反應', '合作提案', '技術問題', '零壹課程', '其他'])],
-            'status'        => ['required', Rule::in(['待處理', '處理中', '已處理'])],
+            'type'          => ['required', Rule::in(DataHelper::CUSTOMER_MESSAGE_TYPES)],
+            'status'        => ['required', Rule::in(DataHelper::CUSTOMER_MESSAGE_STATUS)],
             'email'         => 'required|email',
             'backupEmail'   => 'nullable|email',
             'phoneCode'     => 'nullable|numeric',

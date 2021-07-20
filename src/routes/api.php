@@ -27,6 +27,7 @@ use DaydreamLab\Cms\Controllers\Option\OptionController;
 use DaydreamLab\Cms\Controllers\NewsletterSubscription\Front\NewsletterSubscriptionFrontController;
 use DaydreamLab\Cms\Controllers\CustomerMessage\Admin\CustomerMessageAdminController;
 use DaydreamLab\Cms\Controllers\CustomerMessage\Front\CustomerMessageFrontController;
+use DaydreamLab\Cms\Controllers\CustomerMessageReply\Admin\CustomerMessageReplyAdminController;
 /*
  *
 |--------------------------------------------------------------------------
@@ -54,6 +55,10 @@ Route::get('api/setting/{locale}', [SettingFrontController::class, 'getItem']);
 Route::post('api/tag/search', [TagFrontController::class, 'search']);
 Route::post('api/tag/search/items', [TagFrontController::class, 'searchItems']);
 Route::get('api/tag/{alias}', [TagFrontController::class, 'getItemByAlias']);
+
+
+# 顧客留言
+Route::post('api/customer/message/send', [CustomerMessageFrontController::class, 'store']);
 
 # 電子報訂閱
 Route::post('api/newsletter/subscribe', [NewsletterSubscriptionFrontController::class, 'store']);
@@ -341,8 +346,8 @@ Route::post('api/admin/customer/message/search', [CustomerMessageAdminController
 Route::post('api/admin/customer/message/restore', [CustomerMessageAdminController::class, 'restore'])
     ->middleware(['expired','admin']);
 # 回覆顧客留言
-//Route::post('api/admin/customer/message/reply', [CustomerMessageAdminController::class, 'reply'])
-//    ->middleware(['expired','admin']);
+Route::post('api/admin/customer/message/reply', [CustomerMessageReplyAdminController::class, 'store'])
+    ->middleware(['expired','admin']);
 # 取得顧客留言
 Route::get('api/admin/customer/message/{id}', [CustomerMessageAdminController::class, 'getItem'])
     ->middleware(['expired','admin']);
