@@ -80,7 +80,8 @@ class Item extends BaseModel
         'updated_by',
         'viewlevels',
         'viewlevel',
-        'extrafields_search'
+        'extrafields_search',
+        'extrafield_group_id'
     ];
 
 
@@ -96,7 +97,7 @@ class Item extends BaseModel
         'category_alias',
         'access_title',
         'language_title',
-        'extrafield_group_title'
+        //'extrafield_group_title'
     ];
 
 

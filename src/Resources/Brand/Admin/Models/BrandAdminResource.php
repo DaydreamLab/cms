@@ -17,7 +17,6 @@ class BrandAdminResource extends BaseJsonResource
         $tz = $request->user('api')->timezone;
         return [
             'id'                    => $this->id,
-            'code'                  => $this->code,
             'alias'                 => $this->alias,
             'title'                 => $this->title,
             'title_zhtw'            => $this->title_zhtw,

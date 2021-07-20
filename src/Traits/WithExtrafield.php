@@ -37,9 +37,9 @@ trait WithExtrafield
             $e_v = ExtrafieldValue::where('item_id', $this->id)->where('extrafield_id', $extrafield['id'])->first();
             if (!$e_v) {
                 if ( in_array($extrafield['type'], $json_data_field_type) ) {
-                    $e['value'] = [];
+                    $e['value'] = ($extrafield['value']) ? json_decode($extrafield['value'], true) : [];
                 } else {
-                    $e['value'] = '';
+                    $e['value'] = ($extrafield['value'] !== null) ? $extrafield['value'] : '';
                 }
             } else {
                 if ( in_array($extrafield['type'], $json_data_field_type) ) {

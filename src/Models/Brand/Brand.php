@@ -88,7 +88,7 @@ class Brand extends BaseModel
     public function items()
     {
         return $this->belongsToMany(Item::class, 'brands_items_maps', 'brand_id', 'item_id')
-            ->withPivot('content_type')->withTimestamps();
+            ->withTimestamps();
     }
 
 

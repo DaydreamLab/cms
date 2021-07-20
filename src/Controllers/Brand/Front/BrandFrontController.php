@@ -20,11 +20,11 @@ class BrandFrontController extends CmsController
     }
 
 
-    public function getItemByAlias(BrandFrontGetItemRequest $request)
+    public function getBrandByAlias(BrandFrontGetItemRequest $request)
     {
         $this->service->setUser($request->user('api'));
         try {
-            $this->service->getItemByAlias($request->validated());
+            $this->service->getBrandByAlias($request->validated());
         } catch (Throwable $t) {
             $this->handleException($t);
         }

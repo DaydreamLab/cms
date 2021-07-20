@@ -14,7 +14,7 @@ use Kalnoy\Nestedset\NodeTrait;
 
 class Category extends BaseModel
 {
-    use NodeTrait, WithAccess, WithLanguage, WithExtrafield, UserInfo,
+    use NodeTrait, WithAccess, WithLanguage, /*WithExtrafield,*/ UserInfo,
         RecordChanger {
         RecordChanger::boot as traitBoot;
     }
@@ -97,7 +97,7 @@ class Category extends BaseModel
         'tree_list_title',
         'access_title',
         'language_title',
-        'extrafield_group_title',
+        //'extrafield_group_title',
     ];
 
 

@@ -88,6 +88,7 @@
      "title": "活動對象",
      "alias": "target_user",
      "type": "select",
+     "value": "所有對象",
      "params": {
        "option": [
          {
@@ -113,6 +114,7 @@
      "title": "首頁顯示",
      "alias": "top_page_show",
      "type": "radio",
+     "value": 0,
      "params": {
        "option": [
          {
@@ -134,6 +136,7 @@
      "title": "品牌頁顯示",
      "alias": "brand_page_show",
      "type": "radio",
+     "value": 0,
      "params": {
        "option": [
          {
@@ -200,6 +203,7 @@
      "title": "活動對象",
      "alias": "target_user",
      "type": "select",
+     "value": "所有對象",
      "params": {
        "option": [
          {
@@ -225,6 +229,7 @@
      "title": "首頁顯示",
      "alias": "top_page_show",
      "type": "radio",
+     "value": 0,
      "params": {
        "option": [
          {
@@ -246,6 +251,7 @@
      "title": "品牌頁顯示",
      "alias": "brand_page_show",
      "type": "radio",
+     "value": 0,
      "params": {
        "option": [
          {
@@ -267,6 +273,7 @@
      "title": "經銷限定",
      "alias": "dealer_only",
      "type": "radio",
+     "value": 0,
      "params": {
        "option": [
          {

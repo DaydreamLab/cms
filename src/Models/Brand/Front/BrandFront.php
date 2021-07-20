@@ -13,4 +13,26 @@ class BrandFront extends Brand
     protected $table = 'brands';
 
     protected $model_type = 'front';
+
+
+    /**
+     * The attributes that should be append for arrays
+     *
+     * @var array
+     */
+    protected $appends = [
+
+    ];
+
+
+    public function getItemsAttribute()
+    {
+        $items = $this->items()->get();
+        $data = [];
+        foreach ($items as $item) {
+            $data[$item->category->content_type][] = $item;
+        }
+
+        return $data;
+    }
 }
