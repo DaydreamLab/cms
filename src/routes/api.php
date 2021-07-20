@@ -57,7 +57,7 @@ Route::get('api/tag/{alias}', [TagFrontController::class, 'getItemByAlias']);
 Route::post('api/newsletter/subscribe', [NewsletterSubscriptionFrontController::class, 'store']);
 
 # 品牌前台API
-Route::get('api/brand/{alias}', [BrandFrontController::class, 'getItemByAlias']);
+Route::get('api/brand/{alias}', [BrandFrontController::class, 'getBrandByAlias']);
 
 # 解決方案
 # 成功案例
@@ -68,6 +68,7 @@ Route::get('api/brand/{alias}', [BrandFrontController::class, 'getItemByAlias'])
 # 財務資訊
 # 重要規章
 # 股東專欄
+Route::post('api/item/{content_type}/search', [ItemFrontController::class, 'searchContent']);
 Route::get('api/item/{content_type}/{alias}', [ItemFrontController::class, 'getContentByAlias']);
 
 /************************************  後台 API  ************************************/

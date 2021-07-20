@@ -25,5 +25,14 @@ class BrandFront extends Brand
     ];
 
 
+    public function getItemsAttribute()
+    {
+        $items = $this->items()->get();
+        $data = [];
+        foreach ($items as $item) {
+            $data[$item->category->content_type][] = $item;
+        }
 
+        return $data;
+    }
 }

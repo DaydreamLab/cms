@@ -28,7 +28,8 @@ class BrandFrontResource extends BaseJsonResource
             'banner_image'          => $this->banner_image,
             'banner_link'           => $this->banner_link,
             'params'                => $this->params,
-
+            'items'                 => $this->items,
+            'products'              => $this->products,
             'tags'                  => $this->tags
         ];
     }

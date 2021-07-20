@@ -15,7 +15,7 @@ class BrandFrontService extends BrandService
     }
 
 
-    public function getItemByAlias(Collection $input)
+    public function getBrandByAlias(Collection $input)
     {
         $brand = $this->findBy('alias', '=', $input->get('alias'))->first();
         $this->status = 'GetItemSuccess';

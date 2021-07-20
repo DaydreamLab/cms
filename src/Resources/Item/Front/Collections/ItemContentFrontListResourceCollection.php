@@ -1,13 +1,13 @@
 <?php
 
-namespace DaydreamLab\Cms\Resources\Item\Admin\Collections;
+namespace DaydreamLab\Cms\Resources\Item\Front\Collections;
 
-use DaydreamLab\Cms\Resources\Item\Admin\Models\ItemAdminListResource;
+use DaydreamLab\Cms\Resources\Item\Front\Models\ItemContentFrontListResource;
 use DaydreamLab\JJAJ\Resources\BaseResourceCollection;
 
-class ItemAdminListResourceCollection extends BaseResourceCollection
+class ItemContentFrontListResourceCollection extends BaseResourceCollection
 {
-    public $collects = ItemAdminListResource::class;
+    public $collects = ItemContentFrontListResource::class;
 
     /**
      * Transform the resource collection into an array.

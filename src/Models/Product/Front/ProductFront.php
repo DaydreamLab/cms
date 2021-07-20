@@ -13,4 +13,5 @@ class ProductFront extends Product
     protected $table = 'products';
 
     protected $model_type = 'front';
+
 }
