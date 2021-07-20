@@ -25,6 +25,8 @@ use DaydreamLab\Cms\Controllers\Setting\Admin\SettingAdminController;
 use DaydreamLab\Cms\Controllers\Site\Admin\SiteAdminController;
 use DaydreamLab\Cms\Controllers\Option\OptionController;
 use DaydreamLab\Cms\Controllers\NewsletterSubscription\Front\NewsletterSubscriptionFrontController;
+use DaydreamLab\Cms\Controllers\CustomerMessage\Admin\CustomerMessageAdminController;
+use DaydreamLab\Cms\Controllers\CustomerMessage\Front\CustomerMessageFrontController;
 /*
  *
 |--------------------------------------------------------------------------
@@ -326,4 +328,21 @@ Route::post('api/admin/tag/state', [TagAdminController::class, 'state'])
 Route::post('api/admin/tag/store', [TagAdminController::class, 'store'])
     ->middleware(['expired','admin']);
 Route::get('api/admin/tag/{id}', [TagAdminController::class, 'getItem'])
+    ->middleware(['expired','admin']);
+
+/******************* 客戶留言 *******************/
+# 新增/編輯 顧客留言
+Route::post('api/admin/customer/message/store', [CustomerMessageAdminController::class, 'store'])
+    ->middleware(['expired','admin']);
+# 搜尋顧客留言
+Route::post('api/admin/customer/message/search', [CustomerMessageAdminController::class, 'search'])
+    ->middleware(['expired','admin']);
+# 回存顧客留言
+Route::post('api/admin/customer/message/restore', [CustomerMessageAdminController::class, 'restore'])
+    ->middleware(['expired','admin']);
+# 回覆顧客留言
+//Route::post('api/admin/customer/message/reply', [CustomerMessageAdminController::class, 'reply'])
+//    ->middleware(['expired','admin']);
+# 取得顧客留言
+Route::get('api/admin/customer/message/{id}', [CustomerMessageAdminController::class, 'getItem'])
     ->middleware(['expired','admin']);
