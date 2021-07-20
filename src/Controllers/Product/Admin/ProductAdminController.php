@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Controllers\Product\Admin;
 
 use DaydreamLab\Cms\Controllers\cmsController;
 use DaydreamLab\Cms\Requests\Product\Admin\ProductAdminGetItemRequest;
+use DaydreamLab\Cms\Requests\Product\Admin\ProductAdminImportRequest;
 use DaydreamLab\Cms\Requests\Product\Admin\ProductAdminRemoveRequest;
 use DaydreamLab\Cms\Requests\Product\Admin\ProductAdminRestoreRequest;
 use DaydreamLab\Cms\Requests\Product\Admin\ProductAdminSearchRequest;
@@ -22,6 +23,34 @@ class ProductAdminController extends cmsController
     {
         parent::__construct($service);
         $this->service = $service;
+    }
+
+
+    public function import(ProductAdminImportRequest $request)
+    {
+        $product = $this->service->find($request->id);
+
+
+        $file = $request->file;
+        $csv_rows = str_getcsv($file->get(), "\n");
+
+        $header = str_getcsv($csv_rows[0]);
+        unset($csv_rows[0]);
+
+        $data = [];
+        foreach ($csv_rows as $csv_row) {
+            $parsed_row = str_getcsv($csv_row);
+            $p = [];
+            foreach ($parsed_row as $key => $col) {
+                $p[$header[$key]] = $col;
+            }
+            $data[] = $p;
+        }
+
+        $product->product_data = $data;
+        $product->save();
+
+        return $this->response('ImportSuccess', $product->refresh());
     }
 
 
