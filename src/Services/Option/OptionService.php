@@ -55,6 +55,8 @@ class OptionService
         $this->map['menu_category']         = $categoryAdminService;
         $this->map['module']                = $moduleAdminService;
         $this->map['module_category']       = $categoryAdminService;
+        $this->map['product_parent_category'] = $productCategoryAdminService;
+        $this->map['product_child_category']  = $productCategoryAdminService;
         $this->map['product_category']      = $productCategoryAdminService;
         $this->map['solution_category']     = $itemAdminService;
         $this->map['industry_category']     = $itemAdminService;
@@ -108,6 +110,14 @@ class OptionService
             } elseif ($type == 'product_category') {
                 $data[$type] = $this->getOptionList($service, 'tree', collect(
                     ['q' => $q->where('state', 1)]
+                ));
+            } elseif ($type == 'product_parent_category') {
+                $data[$type] = $this->getOptionList($service, 'list', collect(
+                    ['q' => $q->where('state', 1)->where('parent_id', null)]
+                ));
+            } elseif ($type == 'product_child_category') {
+                $data[$type] = $this->getOptionList($service, 'list', collect(
+                    ['q' => $q->where('state', 1)->where('parent_id', '!=', null)]
                 ));
             } elseif ($type == 'solution_category') {
                 $q = $q->orderBy('id', 'asc');
