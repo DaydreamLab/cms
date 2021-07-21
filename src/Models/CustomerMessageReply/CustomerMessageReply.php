@@ -4,10 +4,11 @@ namespace DaydreamLab\Cms\Models\CustomerMessageReply;
 
 use DaydreamLab\Cms\Models\CmsModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
+use DaydreamLab\JJAJ\Traits\UserInfo;
 
 class CustomerMessageReply extends CmsModel
 {
-    use RecordChanger {
+    use UserInfo, RecordChanger {
         RecordChanger::boot as traitBoot;
     }
     /**
@@ -27,10 +28,10 @@ class CustomerMessageReply extends CmsModel
      * @var array
      */
     protected $fillable = [
-        'title',
-        'category_id',
-        'state',
-        'description',
+        'messageId',
+        'channels',
+        'subject',
+        'content',
         'created_by',
         'updated_by'
     ];
@@ -54,9 +55,12 @@ class CustomerMessageReply extends CmsModel
     ];
 
 
+    protected $casts = [
+        'channels' => 'array'
+    ];
+
     public static function boot()
     {
         self::traitBoot();
     }
-
 }
