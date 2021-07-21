@@ -19,6 +19,7 @@ class ProductAdminResource extends BaseJsonResource
             'id'                => $this->id,
             'alias'             => $this->alias,
             'title'             => $this->title,
+            'product_category_id' => $this->product_category_id,
             'description'       => $this->description,
             'product_data'      => ($this->product_data == null) ? [] : $this->product_data,
             'files'             => $this->files,
