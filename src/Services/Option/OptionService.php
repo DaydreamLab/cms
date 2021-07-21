@@ -2,6 +2,8 @@
 
 namespace DaydreamLab\Cms\Services\Option;
 
+use DaydreamLab\Cms\Models\Extrafield\Extrafield;
+use DaydreamLab\Cms\Models\Extrafield\ExtrafieldValue;
 use DaydreamLab\Cms\Services\Brand\Admin\BrandAdminService;
 use DaydreamLab\Cms\Services\Category\Admin\CategoryAdminService;
 use DaydreamLab\Cms\Services\Extrafield\Admin\ExtrafieldGroupAdminService;
@@ -63,6 +65,7 @@ class OptionService
         $this->map['site']                  = $siteAdminService;
         $this->map['user_group']            = $groupAdminService;
         $this->map['viewlevel']             = $viewlevelAdminService;
+        $this->map['memorabilia_year']      = $extrafieldGroupAdminService;
     }
 
 
@@ -144,6 +147,16 @@ class OptionService
                 $user = $this->getUser();
                 $q = $q->whereIn('id', $user->accessIds);
                 $data[$type] = $this->getOptionList($service, 'list', collect(['q' => $q]));
+            } elseif ($type == 'memorabilia_year') {
+                $ex = Extrafield::where('content_type', 'memorabilia')->where('alias', 'year')->first();
+                if ($ex) {
+                    $years = ExtrafieldValue::where('extrafield_id', $ex->id)->get();
+                    $data[$type] = $years->map(function ($y) {
+                        return $y->value;
+                    })->unique()->values();
+                } else {
+                    $data[$type] = [];
+                }
             }
         }
 
