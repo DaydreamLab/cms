@@ -45,7 +45,7 @@ class ItemAdminContentStorePost extends AdminRequest
             'category_id'           => 'nullable|integer',
             'state'                 => [
                 'required',
-                Rule::in([0,1])
+                Rule::in([0,1,-1,-2])
             ],
             'introimage'            => 'nullable|string',
             'introtext'             => 'nullable|string',

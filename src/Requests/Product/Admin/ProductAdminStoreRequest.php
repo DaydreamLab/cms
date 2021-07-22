@@ -43,7 +43,7 @@ class ProductAdminStoreRequest extends AdminRequest
             'params'                => 'nullable|array',
             'state'                 => [
                 'required',
-                Rule::in([0,1])
+                Rule::in([0,1,-1,-2])
             ],
             'publish_up'            => 'nullable|date_format:Y-m-d H:i:s',
             'publish_down'          => 'nullable|date_format:Y-m-d H:i:s',
