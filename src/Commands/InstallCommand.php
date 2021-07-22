@@ -37,6 +37,7 @@ class InstallCommand extends Command
         'ExtrafieldsTableSeeder',
         'ProductsTableSeeder',
         'ItemsTableSeeder',
+        'FilesTableSeeder',
         'SitesTableSeeder',
         'LanguagesTableSeeder',
         'MenusTableSeeder',
