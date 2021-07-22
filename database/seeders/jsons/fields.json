@@ -1,4 +1,4 @@
- [
+[
    {
      "content_type": "solution",
      "title": "副標題",
@@ -86,9 +86,9 @@
    {
      "content_type": "bulletin",
      "title": "活動對象",
+     "value": "所有對象",
      "alias": "target_user",
      "type": "select",
-     "value": "所有對象",
      "params": {
        "option": [
          {
@@ -112,9 +112,9 @@
    {
      "content_type": "bulletin",
      "title": "首頁顯示",
+     "value": "0",
      "alias": "top_page_show",
      "type": "radio",
-     "value": 0,
      "params": {
        "option": [
          {
@@ -134,9 +134,9 @@
    {
      "content_type": "bulletin",
      "title": "品牌頁顯示",
+     "value": "0",
      "alias": "brand_page_show",
      "type": "radio",
-     "value": 0,
      "params": {
        "option": [
          {
@@ -201,9 +201,9 @@
    {
      "content_type": "promotion",
      "title": "活動對象",
+     "value": "所有對象",
      "alias": "target_user",
      "type": "select",
-     "value": "所有對象",
      "params": {
        "option": [
          {
@@ -227,9 +227,9 @@
    {
      "content_type": "promotion",
      "title": "首頁顯示",
+     "value": "0",
      "alias": "top_page_show",
      "type": "radio",
-     "value": 0,
      "params": {
        "option": [
          {
@@ -249,9 +249,9 @@
    {
      "content_type": "promotion",
      "title": "品牌頁顯示",
+     "value": "0",
      "alias": "brand_page_show",
      "type": "radio",
-     "value": 0,
      "params": {
        "option": [
          {
@@ -271,9 +271,9 @@
    {
      "content_type": "promotion",
      "title": "經銷限定",
+     "value": "0",
      "alias": "dealer_only",
      "type": "radio",
-     "value": 0,
      "params": {
        "option": [
          {
@@ -343,6 +343,7 @@
    {
      "content_type": "video",
      "title": "品牌頁顯示",
+     "value": "0",
      "alias": "brand_page_show",
      "type": "radio",
      "params": {
