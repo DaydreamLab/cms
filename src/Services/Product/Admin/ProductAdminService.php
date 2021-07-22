@@ -6,15 +6,19 @@ use DaydreamLab\Cms\Models\ProductCategory\Admin\ProductCategoryAdmin;
 use DaydreamLab\Cms\Repositories\Product\Admin\ProductAdminRepository;
 use DaydreamLab\Cms\Services\Product\ProductService;
 use DaydreamLab\Cms\Services\ProductCategory\Admin\ProductCategoryAdminService;
+use DaydreamLab\JJAJ\Exceptions\NotFoundException;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
 use Illuminate\Support\Collection;
 
 class ProductAdminService extends ProductService
 {
-    public function __construct(ProductAdminRepository $repo)
+    protected $pcService;
+
+    public function __construct(ProductAdminRepository $repo, ProductCategoryAdminService $pcService)
     {
         parent::__construct($repo);
         $this->repo = $repo;
+        $this->pcService = $pcService;
     }
 
 
@@ -53,5 +57,18 @@ class ProductAdminService extends ProductService
         }
 
         return parent::search($input);
+    }
+
+
+    public function store(Collection $input)
+    {
+        $category = $this->pcService->find($input->get('product_category_id'));
+        if (!$category) {
+            throw new NotFoundException('ItemNotExist', [
+                'categoryId' => (int)$input->get('product_category_id')
+            ], null, 'ProductCategory');
+        }
+
+        return parent::store($input);
     }
 }

@@ -673,8 +673,8 @@
                 "state": 1,
                 "showNav": 1,
                 "apis": [
-                    "getItem",
-                    "editItem"
+                    "getSetting",
+                    "editSetting"
                 ]
             }
         ],

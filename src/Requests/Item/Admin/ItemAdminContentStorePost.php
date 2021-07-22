@@ -71,18 +71,18 @@ class ItemAdminContentStorePost extends AdminRequest
             'extrafields.*.value'   => 'nullable',
             'tags'                  => 'nullable|array',
             'tags.*'                => 'nullable|array',
-            'tags.*.id'             => 'nullable|integer',
+            'tags.*.id'             => 'required|integer',
             'tags.*.title'          => 'nullable|string',
             'publish_up'            => 'nullable|date_format:Y-m-d H:i:s',
             'publish_down'          => 'nullable|date_format:Y-m-d H:i:s',
 
             'products'              => 'nullable|array',
             'products.*'            => 'nullable|array',
-            'products.*.id'         => 'nullable|integer',
+            'products.*.id'         => 'required|integer',
 
             'brands'                => 'nullable|array',
             'brands.*'              => 'nullable|array',
-            'brands.*.id'           => 'nullable|integer',
+            'brands.*.id'           => 'required|integer',
 
             'newsletterUserGroupIds'    => 'nullable|array',
             'newsletterUserGroupIds.*'  => 'nullable|integer',
