@@ -28,8 +28,6 @@ class ProductAdminController extends cmsController
 
     public function import(ProductAdminImportRequest $request)
     {
-        $product = $this->service->checkItem(collect(['id' => $request->id]));
-
         $file = $request->file;
         $csv_rows = str_getcsv($file->get(), "\n");
 
@@ -46,10 +44,7 @@ class ProductAdminController extends cmsController
             $data[] = $p;
         }
 
-        $product->product_data = $data;
-        $product->save();
-
-        return $this->response('ImportSuccess', $product->refresh());
+        return $this->response('ImportSuccess', $data);
     }
 
 

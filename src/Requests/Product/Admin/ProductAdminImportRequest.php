@@ -29,7 +29,6 @@ class ProductAdminImportRequest extends AdminRequest
     public function rules()
     {
         $rules = [
-            'id'                    => 'required|integer',
             'file'                  => 'required|file'
         ];
 
