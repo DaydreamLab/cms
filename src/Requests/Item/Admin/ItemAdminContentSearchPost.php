@@ -2,6 +2,8 @@
 
 namespace DaydreamLab\Cms\Requests\Item\Admin;
 
+use DaydreamLab\Cms\Models\Extrafield\Extrafield;
+use DaydreamLab\Cms\Models\Extrafield\ExtrafieldValue;
 use DaydreamLab\Cms\Requests\CmsSearchPost;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
@@ -75,6 +77,7 @@ class ItemAdminContentSearchPost extends CmsSearchPost
                 ])
             ],
             'brand_id'      => 'nullable|integer',
+            'year'          => 'nullable|string'
         ];
         return array_merge(parent::rules(), $rules);
     }
@@ -119,6 +122,15 @@ class ItemAdminContentSearchPost extends CmsSearchPost
         if ( $validated->get('access') == '' ) {
             $validated->forget('access');
         }
+
+        if ( $year = $validated->get('year') ) {
+            $ex = Extrafield::where('content_type', $validated->get('content_type'))->where('alias', 'year')->first();
+            $evs = ExtrafieldValue::where('extrafield_id', $ex->id)->where('value', $year)->get();
+            $validated['q'] = $this->q->whereIn('id', $evs->map(function ($e) {
+                return $e->item_id;
+            })->toArray());
+        }
+        $validated->forget('year');
 
         return $validated;
     }
