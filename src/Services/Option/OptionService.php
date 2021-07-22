@@ -66,6 +66,7 @@ class OptionService
         $this->map['user_group']            = $groupAdminService;
         $this->map['viewlevel']             = $viewlevelAdminService;
         $this->map['memorabilia_year']      = $extrafieldGroupAdminService;
+        $this->map['document_type']         = $extrafieldGroupAdminService;
     }
 
 
@@ -154,6 +155,13 @@ class OptionService
                     $data[$type] = $years->map(function ($y) {
                         return $y->value;
                     })->unique()->values();
+                } else {
+                    $data[$type] = [];
+                }
+            } elseif ($type == 'document_type') {
+                $ex = Extrafield::where('content_type', 'stockholder')->where('alias', 'document_type')->first();
+                if ($ex) {
+                    $data[$type] = $ex->params['option'];
                 } else {
                     $data[$type] = [];
                 }

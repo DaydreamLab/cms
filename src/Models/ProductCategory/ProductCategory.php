@@ -2,13 +2,14 @@
 
 namespace DaydreamLab\Cms\Models\ProductCategory;
 
-use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\JJAJ\Models\BaseModel;
+use DaydreamLab\JJAJ\Traits\RecordChanger;
+use DaydreamLab\JJAJ\Traits\UserInfo;
 use Kalnoy\Nestedset\NodeTrait;
 
 class ProductCategory extends BaseModel
 {
-    use NodeTrait, RecordChanger {
+    use NodeTrait, RecordChanger, UserInfo {
         RecordChanger::boot as traitBoot;
     }
     /**
