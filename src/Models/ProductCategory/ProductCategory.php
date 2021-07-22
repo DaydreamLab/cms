@@ -38,7 +38,11 @@ class ProductCategory extends BaseModel
         'memo',
         'params',
         'state',
+        'featured',
+        'featured_ordering',
         'ordering',
+        'locked_by',
+        'locked_at',
         'created_by',
         'updated_by'
     ];
@@ -65,7 +69,8 @@ class ProductCategory extends BaseModel
 
 
     protected $casts = [
-        'params' => 'array'
+        'params' => 'array',
+        'locked_at' => 'datetime:Y-m-d H:i:s'
     ];
 
 

@@ -6,6 +6,7 @@ use DaydreamLab\Cms\Repositories\ProductCategory\Admin\ProductCategoryAdminRepos
 use DaydreamLab\Cms\Resources\ProductCategory\Admin\Models\ProductCategoryAdminListResource;
 use DaydreamLab\Cms\Services\ProductCategory\ProductCategoryService;
 use Illuminate\Support\Collection;
+use Kalnoy\Nestedset\Collection as NestCollection;
 
 class ProductCategoryAdminService extends ProductCategoryService
 {
@@ -32,7 +33,13 @@ class ProductCategoryAdminService extends ProductCategoryService
 
     public function tree()
     {
-        $all = $this->all();
+        $all = $this->all()->map(function ($p) {
+            $locker = ($p->locker) ? $p->locker->only(['id', 'uuid', 'name']) : [];
+            unset($p->locker);
+            $p->locker = $locker;
+            return $p;
+        });
+        $all = new NestCollection($all);
 
         $tree = $all->toTree();
 
