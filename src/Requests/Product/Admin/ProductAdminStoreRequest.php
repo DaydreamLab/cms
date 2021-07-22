@@ -38,7 +38,7 @@ class ProductAdminStoreRequest extends AdminRequest
             'product_data.*'            => 'nullable|array',
             'product_data.*.name'       => 'nullable|string',
             'product_data.*.description'=> 'nullable|string',
-            'product_data.*.price'      => 'nullable|integer',
+            'product_data.*.price'      => 'nullable|string',
             'files'                 => 'nullable|string',
             'params'                => 'nullable|array',
             'state'                 => [
