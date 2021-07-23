@@ -56,7 +56,8 @@ class OptionAdminGetListPost extends AdminRequest
                     'viewlevel',
                     'memorabilia_year',
                     'document_type',
-                    'company_category'
+                    'company_category',
+                    'newsletter_category'
                 ])
             ]
         ];

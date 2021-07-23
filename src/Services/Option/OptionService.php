@@ -69,6 +69,7 @@ class OptionService
         $this->map['memorabilia_year']      = $extrafieldGroupAdminService;
         $this->map['document_type']         = $extrafieldGroupAdminService;
         $this->map['company_category']      = '';
+        $this->map['newsletter_category']   = $itemAdminService;
     }
 
 
@@ -170,6 +171,14 @@ class OptionService
             } elseif ($type == 'company_category') {
                 $cc = CompanyCategory::all()->toTree();
                 $data[$type] = $cc;
+            } elseif ($type == 'newsletter_category') {
+                $q = $q->orderBy('id', 'asc');
+                $data[$type] = $this->getOptionList($service, 'list', collect(
+                    [
+                        'q' => $q->where('state', 1),
+                        'content_type' => 'newsletter_category',
+                    ]
+                ));
             }
         }
 
