@@ -88,16 +88,27 @@ class ItemAdminContentSearchPost extends CmsSearchPost
     {
         $validated = parent::validated();
 
-        if ( $content_type = $this->route('content_type') ) {
+        if ($content_type = $this->route('content_type') ) {
             $validated->put('content_type', $content_type);
         }
 
-        if ( $brand_id = $validated->get('brand_id') ) {
-            $validated['q'] = $this->q->whereHas('brands', function ($query) use ($brand_id) {
+        $q = $validated->get('q');
+        if ($brand_id = $validated->get('brand_id') ) {
+            $q = $q->whereHas('brands', function ($query) use ($brand_id) {
                 $query->where('brands_items_maps.brand_id', '=', $brand_id);
             });
         }
         $validated->forget('brand_id');
+
+        if (in_array($this->route('content_type'), ['solution', 'case', 'bulletin', 'promotion', 'video']))
+        # 過濾可觀看的品牌
+        if (!$this->user()->isSuperUser && $this->user()->isAdmin) {
+            $q = $q->whereHas('brands', function ($q) {
+                $q->whereIn('brands_items_maps.brand_id', $this->user()->brands->pluck('id'));
+            });
+        }
+
+        $validated->put('q', $q);
 
         if ( $validated->get('category_id') == '' ) {
             $validated->forget('category_id');

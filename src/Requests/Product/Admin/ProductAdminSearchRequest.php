@@ -46,21 +46,26 @@ class ProductAdminSearchRequest extends CmsSearchPost
     {
         $validated = parent::validated();
 
-        if ( $brand_id = $validated->get('brand_id') ) {
-            $validated['q'] = $this->q->whereHas('brands', function ($query) use ($brand_id) {
+        $q = $validated->get('q');
+        if ($brand_id = $validated->get('brand_id') ) {
+            $q = $q->whereHas('brands', function ($query) use ($brand_id) {
                 $query->where('brands_products_maps.brand_id', '=', $brand_id);
             });
         }
         $validated->forget('brand_id');
 
-        if ($validated->get('state') == '') {
-            $validated->forget('state');
-            $validated['q'] = $this->q->whereIn('state', [0, 1]);
-        }
-
         if ($validated->get('product_category_id') == '') {
             $validated->forget('product_category_id');
         }
+
+        # 過濾可觀看的品牌
+        if (!$this->user()->isSuperUser && $this->user()->isAdmin) {
+            $q = $q->whereHas('brands', function ($q) {
+                $q->whereIn('brands_products_maps.brand_id', $this->user()->brands->pluck('id'));
+            });
+        }
+
+        $validated->put('q', $q);
 
         return $validated;
     }

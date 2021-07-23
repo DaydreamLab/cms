@@ -44,9 +44,10 @@ class BrandAdminSearchRequest extends CmsSearchPost
     public function validated()
     {
         $validated = parent::validated();
-        if ($validated->get('state') == '') {
-            $validated->forget('state');
-            $validated['q'] = $this->q->whereIn('state', [0, 1]);
+
+        # 過濾可觀看的品牌
+        if (!$this->user()->isSuperUser && $this->user()->isAdmin) {
+            $validated->put('q', $validated->get('q')->whereIn('id', $this->user()->brands->pluck('id')));
         }
 
         return $validated;
