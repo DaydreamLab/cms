@@ -15,6 +15,7 @@ use DaydreamLab\Cms\Services\ProductCategory\Admin\ProductCategoryAdminService;
 use DaydreamLab\Cms\Services\Site\Admin\SiteAdminService;
 use DaydreamLab\JJAJ\Database\QueryCapsule;
 use DaydreamLab\JJAJ\Traits\LoggedIn;
+use DaydreamLab\User\Models\Company\CompanyCategory;
 use DaydreamLab\User\Services\Asset\Admin\AssetAdminService;
 use DaydreamLab\User\Services\User\Admin\UserGroupAdminService;
 use DaydreamLab\User\Services\Viewlevel\Admin\ViewlevelAdminService;
@@ -67,6 +68,7 @@ class OptionService
         $this->map['viewlevel']             = $viewlevelAdminService;
         $this->map['memorabilia_year']      = $extrafieldGroupAdminService;
         $this->map['document_type']         = $extrafieldGroupAdminService;
+        $this->map['company_category']      = '';
     }
 
 
@@ -165,6 +167,9 @@ class OptionService
                 } else {
                     $data[$type] = [];
                 }
+            } elseif ($type == 'company_category') {
+                $cc = CompanyCategory::all()->toTree();
+                $data[$type] = $cc;
             }
         }
 
