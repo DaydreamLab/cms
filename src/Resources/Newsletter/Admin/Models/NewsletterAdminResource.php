@@ -20,6 +20,7 @@ class NewsletterAdminResource extends BaseJsonResource
             'newsletter_category_id' => $this->newsletter_category_id,
             'alias'             => $this->alias,
             'title'             => $this->title,
+            'image'             => $this->image,
             'description'       => $this->description,
             'number'            => $this->number,
             'display_topic'     => $this->display_topic,
@@ -27,6 +28,9 @@ class NewsletterAdminResource extends BaseJsonResource
             'information'       => ($this->information) ? : [],
             'params'            => $this->params,
             'state'             => $this->state,
+
+            'course'            => [],
+
 
             'created_at'        => $this->getDateTimeString($this->created_at, $tz),
             'updated_at'        => $this->getDateTimeString($this->updated_at, $tz),

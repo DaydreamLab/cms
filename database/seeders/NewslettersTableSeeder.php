@@ -21,7 +21,14 @@ class NewslettersTableSeeder extends Seeder
             'alias' => 'testNewsletter',
             'newsletter_category_id' => 24,
             'state' => 1,
-            'number' => 400
+            'number' => 400,
+            'params' => [
+                'display_topic' => 1,
+                'display_information' => 0,
+                'display_course' => 0,
+                'display_promotion' => 0,
+                'display_bulletin' => 0
+            ]
         ]));
     }
 
