@@ -24,7 +24,7 @@ class NewsletterAdminResource extends BaseJsonResource
             'number'            => $this->number,
             'display_topic'     => $this->display_topic,
             'url'               => $this->url,
-            'information'       => $this->information,
+            'information'       => ($this->information) ? : [],
             'params'            => $this->params,
             'state'             => $this->state,
 
