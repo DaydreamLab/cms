@@ -32,7 +32,7 @@ class ProductCategoryAdminStoreRequest extends AdminRequest
             'id'                => 'nullable|integer',
             'parent_id'         => 'nullable|integer',
             'title'             => 'required|string',
-            'alias'             => 'required|string',
+            'alias'             => 'nullable|string',
             'description'       => 'nullable|string',
             'memo'              => 'nullable|string',
             'params'            => 'nullable|array',

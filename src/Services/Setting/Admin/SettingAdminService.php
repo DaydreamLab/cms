@@ -33,7 +33,7 @@ class SettingAdminService extends SettingService
         $config = array_merge($config, $input->toArray());
         $tz = $this->user->timezone;
         $config['updated_at'] = Carbon::parse(now(), config('app.timezone'))->tz($tz)->format('Y-m-d H:i:s');
-        $config['updated_by'] = $this->user->name;
+        $config['updaterName'] = $this->user->name;
 
         $file_str = '<?php return [' . PHP_EOL;
 

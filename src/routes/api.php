@@ -63,7 +63,7 @@ Route::post('api/customer/message/send', [CustomerMessageFrontController::class,
 # 電子報訂閱
 Route::post('api/newsletter/subscribe', [NewsletterSubscriptionFrontController::class, 'store']);
 
-# 品牌前台API
+# 品牌
 Route::get('api/brand/{alias}', [BrandFrontController::class, 'getBrandByAlias']);
 
 # 解決方案
