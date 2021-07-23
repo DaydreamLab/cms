@@ -77,7 +77,8 @@ class ItemAdminContentSearchPost extends CmsSearchPost
                 ])
             ],
             'brand_id'      => 'nullable|integer',
-            'year'          => 'nullable|string'
+            'year'          => 'nullable|string',
+            'document_type' => 'nullable|string'
         ];
         return array_merge(parent::rules(), $rules);
     }
@@ -131,6 +132,15 @@ class ItemAdminContentSearchPost extends CmsSearchPost
             })->toArray());
         }
         $validated->forget('year');
+
+        if ( $document_type = $validated->get('document_type') ) {
+            $ex = Extrafield::where('content_type', $validated->get('content_type'))->where('alias', 'document_type')->first();
+            $evs = ExtrafieldValue::where('extrafield_id', $ex->id)->where('value', $document_type)->get();
+            $validated['q'] = $this->q->whereIn('id', $evs->map(function ($e) {
+                return $e->item_id;
+            })->toArray());
+        }
+        $validated->forget('document_type');
 
         return $validated;
     }
