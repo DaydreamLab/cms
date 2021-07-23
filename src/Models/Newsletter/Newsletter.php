@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Models\Newsletter;
 
+use DaydreamLab\Cms\Models\Item\Item;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\User\Models\User\UserGroup;
@@ -86,5 +87,11 @@ class Newsletter extends BaseModel
     {
         return $this->belongsToMany(UserGroup::class, 'newsletter_category_user_group_maps', 'category_id', 'group_id')
             ->withTimestamps();
+    }
+
+
+    public function newsletterCategory()
+    {
+        return $this->belongsTo(Item::class, 'newsletter_category_id', 'id');
     }
 }

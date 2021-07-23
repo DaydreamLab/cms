@@ -17,9 +17,16 @@ class NewsletterAdminResource extends BaseJsonResource
         $tz = $request->user('api')->timezone;
         return [
             'id'                => $this->id,
-
+            'newsletter_category_id' => $this->newsletter_category_id,
+            'alias'             => $this->alias,
             'title'             => $this->title,
             'description'       => $this->description,
+            'number'            => $this->number,
+            'display_topic'     => $this->display_topic,
+            'url'               => $this->url,
+            'information'       => $this->information,
+            'params'            => $this->params,
+            'state'             => $this->state,
 
             'created_at'        => $this->getDateTimeString($this->created_at, $tz),
             'updated_at'        => $this->getDateTimeString($this->updated_at, $tz),
