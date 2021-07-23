@@ -28,6 +28,16 @@ class NewslettersTableSeeder extends Seeder
                 'display_course' => 0,
                 'display_promotion' => 0,
                 'display_bulletin' => 0
+            ],
+            'bulletin' => [
+                [
+                    'id' => 5
+                ]
+            ],
+            'promotion' => [
+                [
+                    'id' => 6
+                ]
             ]
         ]));
     }

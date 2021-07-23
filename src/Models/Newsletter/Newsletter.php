@@ -94,4 +94,23 @@ class Newsletter extends BaseModel
     {
         return $this->belongsTo(Item::class, 'newsletter_category_id', 'id');
     }
+
+
+    public function items()
+    {
+        return $this->belongsToMany(Item::class, 'newsletters_items_maps', 'newsletter_id', 'item_id')
+            ->withTimestamps();
+    }
+
+
+    public function getItemsAttribute()
+    {
+        $items = $this->items()->get();
+        $data = [];
+        foreach ($items as $item) {
+            $data[$item->category->content_type][] = $item;
+        }
+
+        return $data;
+    }
 }

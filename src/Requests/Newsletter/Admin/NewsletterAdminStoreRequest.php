@@ -29,6 +29,7 @@ class NewsletterAdminStoreRequest extends AdminRequest
     public function rules()
     {
         $rules = [
+            'id'                    => 'nullable|integer',
             'newsletter_category_id' => 'required|integer',
             'title'                 => 'required|string',
             'number'                => 'required|string',
@@ -41,6 +42,15 @@ class NewsletterAdminStoreRequest extends AdminRequest
             'information.*.title'   => 'nullable|string',
             'information.*.url'     => 'nullable|string',
             'params'                => 'nullable|array',
+
+            'course'                => 'nullable|array',
+            'promotion'             => 'nullable|array',
+            'promotion.*'           => 'nullable|array',
+            'promotion.*.id'        => 'required|integer',
+            'bulletin'              => 'nullable|array',
+            'bulletin.*'            => 'nullable|array',
+            'bulletin.*.id'         => 'required|integer',
+
             'state'                 => [
                 'required',
                 Rule::in([0,1,-1,-2])
