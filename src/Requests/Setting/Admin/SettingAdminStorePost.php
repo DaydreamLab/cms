@@ -28,13 +28,25 @@ class SettingAdminStorePost extends AdminRequest
     public function rules()
     {
         $rules = [
-            'sitename'      => 'required|string',
-            'locale'        => 'required|string',
-            'locale_admin'  => 'required|string',
-            'custom_head'   => 'nullable|string',
-            'custom_body'   => 'nullable|string',
-            'custom_footer' => 'nullable|string',
+            'sitename'          => 'required|string',
+            'siteurl'           => 'nullable|string',
+            'seo_title'         => 'nullable|string',
+            'seo_keyword'       => 'nullable|string',
+            'seo_description'   => 'nullable|string'
+            //'locale'        => 'required|string',
+            //'locale_admin'  => 'required|string',
+            //'custom_head'   => 'nullable|string',
+            //'custom_body'   => 'nullable|string',
+            //'custom_footer' => 'nullable|string',
         ];
         return array_merge(parent::rules(), $rules);
+    }
+
+
+    public function validated()
+    {
+        $validated = parent::validated();
+        $validated->forget('q');
+        return $validated;
     }
 }

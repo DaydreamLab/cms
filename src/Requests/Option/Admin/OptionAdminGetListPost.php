@@ -48,10 +48,16 @@ class OptionAdminGetListPost extends AdminRequest
                     'module',
                     'module_category',
                     'product_category',
+                    'product_parent_category',
+                    'product_child_category',
                     'solution_category',
                     'industry_category',
                     'user_group',
                     'viewlevel',
+                    'memorabilia_year',
+                    'document_type',
+                    'company_category',
+                    'newsletter_category'
                 ])
             ]
         ];

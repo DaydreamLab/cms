@@ -2,6 +2,8 @@
 
 namespace DaydreamLab\Cms\Services\Option;
 
+use DaydreamLab\Cms\Models\Extrafield\Extrafield;
+use DaydreamLab\Cms\Models\Extrafield\ExtrafieldValue;
 use DaydreamLab\Cms\Services\Brand\Admin\BrandAdminService;
 use DaydreamLab\Cms\Services\Category\Admin\CategoryAdminService;
 use DaydreamLab\Cms\Services\Extrafield\Admin\ExtrafieldGroupAdminService;
@@ -13,6 +15,7 @@ use DaydreamLab\Cms\Services\ProductCategory\Admin\ProductCategoryAdminService;
 use DaydreamLab\Cms\Services\Site\Admin\SiteAdminService;
 use DaydreamLab\JJAJ\Database\QueryCapsule;
 use DaydreamLab\JJAJ\Traits\LoggedIn;
+use DaydreamLab\User\Models\Company\CompanyCategory;
 use DaydreamLab\User\Services\Asset\Admin\AssetAdminService;
 use DaydreamLab\User\Services\User\Admin\UserGroupAdminService;
 use DaydreamLab\User\Services\Viewlevel\Admin\ViewlevelAdminService;
@@ -55,12 +58,18 @@ class OptionService
         $this->map['menu_category']         = $categoryAdminService;
         $this->map['module']                = $moduleAdminService;
         $this->map['module_category']       = $categoryAdminService;
+        $this->map['product_parent_category'] = $productCategoryAdminService;
+        $this->map['product_child_category']  = $productCategoryAdminService;
         $this->map['product_category']      = $productCategoryAdminService;
         $this->map['solution_category']     = $itemAdminService;
         $this->map['industry_category']     = $itemAdminService;
         $this->map['site']                  = $siteAdminService;
         $this->map['user_group']            = $groupAdminService;
         $this->map['viewlevel']             = $viewlevelAdminService;
+        $this->map['memorabilia_year']      = $extrafieldGroupAdminService;
+        $this->map['document_type']         = $extrafieldGroupAdminService;
+        $this->map['company_category']      = '';
+        $this->map['newsletter_category']   = $itemAdminService;
     }
 
 
@@ -109,6 +118,14 @@ class OptionService
                 $data[$type] = $this->getOptionList($service, 'tree', collect(
                     ['q' => $q->where('state', 1)]
                 ));
+            } elseif ($type == 'product_parent_category') {
+                $data[$type] = $this->getOptionList($service, 'list', collect(
+                    ['q' => $q->where('state', 1)->where('parent_id', null)]
+                ));
+            } elseif ($type == 'product_child_category') {
+                $data[$type] = $this->getOptionList($service, 'list', collect(
+                    ['q' => $q->where('state', 1)->where('parent_id', '!=', null)]
+                ));
             } elseif ($type == 'solution_category') {
                 $q = $q->orderBy('id', 'asc');
                 $data[$type] = $this->getOptionList($service, 'list', collect(
@@ -134,6 +151,34 @@ class OptionService
                 $user = $this->getUser();
                 $q = $q->whereIn('id', $user->accessIds);
                 $data[$type] = $this->getOptionList($service, 'list', collect(['q' => $q]));
+            } elseif ($type == 'memorabilia_year') {
+                $ex = Extrafield::where('content_type', 'memorabilia')->where('alias', 'year')->first();
+                if ($ex) {
+                    $years = ExtrafieldValue::where('extrafield_id', $ex->id)->get();
+                    $data[$type] = $years->map(function ($y) {
+                        return $y->value;
+                    })->unique()->values();
+                } else {
+                    $data[$type] = [];
+                }
+            } elseif ($type == 'document_type') {
+                $ex = Extrafield::where('content_type', 'stockholder')->where('alias', 'document_type')->first();
+                if ($ex) {
+                    $data[$type] = $ex->params['option'];
+                } else {
+                    $data[$type] = [];
+                }
+            } elseif ($type == 'company_category') {
+                $cc = CompanyCategory::all()->toTree();
+                $data[$type] = $cc;
+            } elseif ($type == 'newsletter_category') {
+                $q = $q->orderBy('id', 'asc');
+                $data[$type] = $this->getOptionList($service, 'list', collect(
+                    [
+                        'q' => $q->where('state', 1),
+                        'content_type' => 'newsletter_category',
+                    ]
+                ));
             }
         }
 

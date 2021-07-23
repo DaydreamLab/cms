@@ -2,13 +2,14 @@
 
 namespace DaydreamLab\Cms\Models\ProductCategory;
 
-use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\JJAJ\Models\BaseModel;
+use DaydreamLab\JJAJ\Traits\RecordChanger;
+use DaydreamLab\JJAJ\Traits\UserInfo;
 use Kalnoy\Nestedset\NodeTrait;
 
 class ProductCategory extends BaseModel
 {
-    use NodeTrait, RecordChanger {
+    use NodeTrait, RecordChanger, UserInfo {
         RecordChanger::boot as traitBoot;
     }
     /**
@@ -37,7 +38,11 @@ class ProductCategory extends BaseModel
         'memo',
         'params',
         'state',
+        'featured',
+        'featured_ordering',
         'ordering',
+        'locked_by',
+        'locked_at',
         'created_by',
         'updated_by'
     ];
@@ -64,7 +69,10 @@ class ProductCategory extends BaseModel
 
 
     protected $casts = [
-        'params' => 'array'
+        'params' => 'array',
+        'locked_at' => 'datetime:Y-m-d H:i:s',
+        'created_at' => 'datetime:Y-m-d H:i:s',
+        'updated_at' => 'datetime:Y-m-d H:i:s'
     ];
 
 

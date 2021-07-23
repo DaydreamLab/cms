@@ -29,6 +29,7 @@ class TagAdminListResource extends BaseJsonResource
             'show_in_search'            => isset($params['show_in_search']) ? $params['show_in_search'] : 0,
             'access'                    => $this->access,
             'language_title'            => $this->language_title,
+            'locker'                    => ($this->locker) ? $this->locker->only(['id', 'uuid', 'name']) : []
         ];
     }
 }

@@ -109,6 +109,54 @@
         "userGroups": ["Administrator", "Super User"]
     },
     {
+        "title": "共同供應契約採購管理",
+        "state": 1,
+        "assets": [
+            {
+                "title": "類別管理",
+                "path": "/contract-category",
+                "full_path": "/contract-category",
+                "component": "contract-category/list",
+                "type": "menu",
+                "state": 1,
+                "showNav": 1,
+                "apis": [
+                    "getFileCategory",
+                    "addFileCategory",
+                    "editFileCategory",
+                    "deleteFileCategory",
+                    "searchFileCategory",
+                    "restoreFileCategory",
+                    "stateFileCategory",
+                    "orderingFileCategory"
+                ]
+            },
+            {
+                "title": "檔案管理",
+                "path": "/contract",
+                "full_path": "/contract",
+                "component": "contract/list",
+                "type": "menu",
+                "state": 1,
+                "showNav": 1,
+                "apis": [
+                    "getFile",
+                    "addFile",
+                    "editFile",
+                    "deleteFile",
+                    "searchFile",
+                    "restoreFile",
+                    "stateFile",
+                    "orderingFile"
+                ],
+                "defaultApis": {
+                    "getOption": ["checked", "hidden"]
+                }
+            }
+        ],
+        "userGroups": ["Administrator", "Super User"]
+    },
+    {
         "title": "產業分類",
         "state": 1,
         "assets": [
@@ -234,7 +282,7 @@
         "state": 1,
         "assets": [
             {
-                "title": "檔案類別管理",
+                "title": "類別管理",
                 "path": "/file-category",
                 "full_path": "/file-category",
                 "component": "file-category/list",
@@ -653,8 +701,9 @@
                 "showNav": 1,
                 "apis": [
                     "getCustomerMessage",
-                    "editItem",
-                    "searchItem"
+                    "editCustomerMessage",
+                    "searchCustomerMessage",
+                    "restoreCustomerMessage"
                 ]
             }
         ],
@@ -673,8 +722,8 @@
                 "state": 1,
                 "showNav": 1,
                 "apis": [
-                    "getItem",
-                    "editItem"
+                    "getSetting",
+                    "editSetting"
                 ]
             }
         ],

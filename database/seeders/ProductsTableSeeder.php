@@ -36,6 +36,7 @@ class ProductsTableSeeder extends Seeder
                 $product_category_data['parent_id'] = $parent->id;
             }
 
+            $product_category_data['params'] = RequestHelper::handleParams([]);
             $product_category = $this->categoryService->store(collect($product_category_data));
             if ($parent) {
                 $parent->appendNode($product_category);
@@ -43,6 +44,7 @@ class ProductsTableSeeder extends Seeder
             # products
             foreach ($products as $product) {
                 $product['product_category_id'] = $product_category->id;
+                $product['params'] = RequestHelper::handleParams([]);
                 $this->productService->store(collect($product));
             }
 

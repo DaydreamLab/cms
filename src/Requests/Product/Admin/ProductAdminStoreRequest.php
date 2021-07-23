@@ -38,18 +38,18 @@ class ProductAdminStoreRequest extends AdminRequest
             'product_data.*'            => 'nullable|array',
             'product_data.*.name'       => 'nullable|string',
             'product_data.*.description'=> 'nullable|string',
-            'product_data.*.price'      => 'nullable|integer',
+            'product_data.*.price'      => 'nullable|string',
             'files'                 => 'nullable|string',
             'params'                => 'nullable|array',
             'state'                 => [
                 'required',
-                Rule::in([0,1])
+                Rule::in([0,1,-1,-2])
             ],
             'publish_up'            => 'nullable|date_format:Y-m-d H:i:s',
             'publish_down'          => 'nullable|date_format:Y-m-d H:i:s',
             'brands'                => 'nullable|array',
             'brands.*'              => 'nullable|array',
-            'brands.*.id'           => 'nullable|integer'
+            'brands.*.id'           => 'required|integer'
         ];
 
         return array_merge(parent::rules(), $rules);

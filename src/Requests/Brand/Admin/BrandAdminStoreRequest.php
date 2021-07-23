@@ -43,7 +43,7 @@ class BrandAdminStoreRequest extends AdminRequest
             'params'                    => 'nullable|array',
             'state'                     => [
                 'required',
-                Rule::in([0,1])
+                Rule::in([0,1,-1,-2])
             ],
 
             'tags'                  => 'nullable|array',

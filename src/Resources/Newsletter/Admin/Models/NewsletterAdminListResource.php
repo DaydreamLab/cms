@@ -17,8 +17,11 @@ class NewsletterAdminListResource extends BaseJsonResource
         $tz = $request->user('api')->timezone;
         return [
             'id'                => $this->id,
-
+            'number'            => $this->number,
+            'category_title'    => $this->newsletterCategory->title,
+            'state'             => $this->state,
             'title'             => $this->title,
+            'publish_up'        => $this->getDateTimeString($this->locked_at, config('daydreamlab.cms.timezone')),
             'locker'            => ($this->locker) ? $this->locker->only(['id', 'uuid', 'name']) : []
         ];
     }
