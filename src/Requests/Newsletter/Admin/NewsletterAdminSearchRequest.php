@@ -32,7 +32,8 @@ class NewsletterAdminSearchRequest extends CmsSearchPost
                 'nullable',
                 'integer',
                 Rule::in([0,1,-1,-2])
-            ]
+            ],
+            'newsletter_category'   => 'nullable|integer'
         ];
 
         return array_merge(parent::rules(), $rules);
@@ -46,6 +47,11 @@ class NewsletterAdminSearchRequest extends CmsSearchPost
         if ($validated->get('state') == '') {
             $validated->forget('state');
             $validated['q'] = $this->q->whereIn('state', [0, 1]);
+        }
+
+        if ( $validated->get('newsletter_category') ) {
+            $validated->put('newsletter_category_id', $validated->get('newsletter_category'));
+            $validated->forget('newsletter_category');
         }
 
         return $validated;
