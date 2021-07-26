@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Requests\Newsletter\Admin;
 
+use Carbon\Carbon;
 use DaydreamLab\Cms\Helpers\RequestHelper;
 use DaydreamLab\JJAJ\Requests\AdminRequest;
 use Illuminate\Validation\Rule;
