@@ -32,7 +32,9 @@ class SettingAdminStorePost extends AdminRequest
             'siteurl'           => 'nullable|string',
             'seo_title'         => 'nullable|string',
             'seo_keyword'       => 'nullable|string',
-            'seo_description'   => 'nullable|string'
+            'seo_description'   => 'nullable|string',
+            'fb_fanpage_id'     => 'nullable|string',
+            'ga'                => 'nullable|string'
             //'locale'        => 'required|string',
             //'locale_admin'  => 'required|string',
             //'custom_head'   => 'nullable|string',
