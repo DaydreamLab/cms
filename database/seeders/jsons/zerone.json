@@ -52,7 +52,13 @@
                     "stateBrand",
                     "restoreBrand",
                     "orderingBrand"
-                ]
+                ],
+                "defaultApis": {
+                    "getOption": ["checked", "hidden"],
+                    "uploadMedia": ["checked", "hidden"],
+                    "getMediaAllItems": ["checked", "hidden"],
+                    "getMediaAllFolders": ["checked", "hidden"]
+                }
             }
         ],
         "userGroups": ["Administrator", "Super User"]
@@ -78,7 +84,13 @@
                     "stateProductCategory",
                     "restoreProductCategory",
                     "orderingProductCategory"
-                ]
+                ],
+                "defaultApis": {
+                    "getOption": ["checked", "hidden"],
+                    "uploadMedia": ["checked", "hidden"],
+                    "getMediaAllItems": ["checked", "hidden"],
+                    "getMediaAllFolders": ["checked", "hidden"]
+                }
             },
             {
                 "title": "產品資料管理",
@@ -129,7 +141,13 @@
                     "restoreFileCategory",
                     "stateFileCategory",
                     "orderingFileCategory"
-                ]
+                ],
+                "defaultApis": {
+                    "getOption": ["checked", "hidden"],
+                    "uploadMedia": ["checked", "hidden"],
+                    "getMediaAllItems": ["checked", "hidden"],
+                    "getMediaAllFolders": ["checked", "hidden"]
+                }
             },
             {
                 "title": "檔案管理",

@@ -646,5 +646,215 @@
         "method": "restoreProduct",
         "url": "/admin/product/restore",
         "created_by": 1
+    },
+    {
+        "name": "取得slideshow",
+        "method": "getSlideshow",
+        "url": "/admin/item/slideshow/{id}",
+        "created_by": 1
+    },
+    {
+        "name": "新增slideshow",
+        "method": "addSlideshow",
+        "url": "/admin/item/slideshow/store",
+        "created_by": 1
+    },
+    {
+        "name": "編輯slideshow",
+        "method": "editSlideshow",
+        "url": "/admin/item/slideshow/store",
+        "created_by": 1
+    },
+    {
+        "name": "刪除slideshow",
+        "method": "deleteSlideshow",
+        "url": "/admin/item/slideshow/remove",
+        "created_by": 1
+    },
+    {
+        "name": "搜尋slideshow",
+        "method": "searchSlideshow",
+        "url": "/admin/item/slideshow/search",
+        "created_by": 1
+    },
+    {
+        "name": "更新slideshow狀態",
+        "method": "stateSlideshow",
+        "url": "/admin/item/slideshow/state",
+        "created_by": 1
+    },
+    {
+        "name": "回存slideshow",
+        "method": "restoreSlideshow",
+        "url": "/admin/item/slideshow/restore",
+        "created_by": 1
+    },
+    {
+        "name": "取得產業分類",
+        "method": "getIndustryCategory",
+        "url": "/admin/item/industry_category/{id}",
+        "created_by": 1
+    },
+    {
+        "name": "新增產業分類",
+        "method": "addIndustryCategory",
+        "url": "/admin/item/industry_category/store",
+        "created_by": 1
+    },
+    {
+        "name": "編輯產業分類",
+        "method": "editIndustryCategory",
+        "url": "/admin/item/industry_category/store",
+        "created_by": 1
+    },
+    {
+        "name": "刪除產業分類",
+        "method": "deleteIndustryCategory",
+        "url": "/admin/item/industry_category/remove",
+        "created_by": 1
+    },
+    {
+        "name": "搜尋產業分類",
+        "method": "searchIndustryCategory",
+        "url": "/admin/item/industry_category/search",
+        "created_by": 1
+    },
+    {
+        "name": "更新產業分類狀態",
+        "method": "stateIndustryCategory",
+        "url": "/admin/item/industry_category/state",
+        "created_by": 1
+    },
+    {
+        "name": "回存產業分類",
+        "method": "restoreIndustryCategory",
+        "url": "/admin/item/industry_category/restore",
+        "created_by": 1
+    },
+    {
+        "name": "取得解決方案",
+        "method": "getSolution",
+        "url": "/admin/item/solution/{id}",
+        "created_by": 1
+    },
+    {
+        "name": "新增解決方案",
+        "method": "addSolution",
+        "url": "/admin/item/solution/store",
+        "created_by": 1
+    },
+    {
+        "name": "編輯解決方案",
+        "method": "editSolution",
+        "url": "/admin/item/solution/store",
+        "created_by": 1
+    },
+    {
+        "name": "刪除解決方案",
+        "method": "deleteSolution",
+        "url": "/admin/item/solution/remove",
+        "created_by": 1
+    },
+    {
+        "name": "搜尋解決方案",
+        "method": "searchSolution",
+        "url": "/admin/item/solution/search",
+        "created_by": 1
+    },
+    {
+        "name": "更新解決方案狀態",
+        "method": "stateSolution",
+        "url": "/admin/item/solution/state",
+        "created_by": 1
+    },
+    {
+        "name": "回存解決方案",
+        "method": "restoreSolution",
+        "url": "/admin/item/solution/restore",
+        "created_by": 1
+    },
+    {
+        "name": "取得方案類別",
+        "method": "getSolutionCategory",
+        "url": "/admin/item/solution_category/{id}",
+        "created_by": 1
+    },
+    {
+        "name": "新增方案類別",
+        "method": "addSolutionCategory",
+        "url": "/admin/item/solution_category/store",
+        "created_by": 1
+    },
+    {
+        "name": "編輯方案類別",
+        "method": "editSolutionCategory",
+        "url": "/admin/item/solution_category/store",
+        "created_by": 1
+    },
+    {
+        "name": "刪除方案類別",
+        "method": "deleteSolutionCategory",
+        "url": "/admin/item/solution_category/remove",
+        "created_by": 1
+    },
+    {
+        "name": "搜尋方案類別",
+        "method": "searchSolutionCategory",
+        "url": "/admin/item/solution_category/search",
+        "created_by": 1
+    },
+    {
+        "name": "更新方案類別狀態",
+        "method": "stateSolutionCategory",
+        "url": "/admin/item/solution_category/state",
+        "created_by": 1
+    },
+    {
+        "name": "回存方案類別",
+        "method": "restoreSolutionCategory",
+        "url": "/admin/item/solution_category/restore",
+        "created_by": 1
+    },
+    {
+        "name": "取得成功案例",
+        "method": "getCase",
+        "url": "/admin/item/case/{id}",
+        "created_by": 1
+    },
+    {
+        "name": "新增成功案例",
+        "method": "addCase",
+        "url": "/admin/item/case/store",
+        "created_by": 1
+    },
+    {
+        "name": "編輯成功案例",
+        "method": "editCase",
+        "url": "/admin/item/case/store",
+        "created_by": 1
+    },
+    {
+        "name": "刪除成功案例",
+        "method": "deleteCase",
+        "url": "/admin/item/case/remove",
+        "created_by": 1
+    },
+    {
+        "name": "搜尋成功案例",
+        "method": "searchCase",
+        "url": "/admin/item/case/search",
+        "created_by": 1
+    },
+    {
+        "name": "更新成功案例狀態",
+        "method": "stateCase",
+        "url": "/admin/item/case/state",
+        "created_by": 1
+    },
+    {
+        "name": "回存成功案例",
+        "method": "restoreCase",
+        "url": "/admin/item/case/restore",
+        "created_by": 1
     }
 ]
