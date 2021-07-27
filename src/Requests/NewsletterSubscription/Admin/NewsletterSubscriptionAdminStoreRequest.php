@@ -36,7 +36,8 @@ class NewsletterSubscriptionAdminStoreRequest extends AdminRequest
             'state'                 => [
                 'required',
                 Rule::in([0,1,-1,-2])
-            ]
+            ],
+            'contact'                   => 'nullable|string'
         ];
 
         return array_merge(parent::rules(), $rules);

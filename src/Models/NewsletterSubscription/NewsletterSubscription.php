@@ -32,6 +32,7 @@ class NewsletterSubscription extends BaseModel
     protected $fillable = [
         'user_id',
         'email',
+        'contact',
         'state',
         'locked_by',
         'locked_at'

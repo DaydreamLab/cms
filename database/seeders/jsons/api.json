@@ -856,5 +856,131 @@
         "method": "restoreCase",
         "url": "/admin/item/case/restore",
         "created_by": 1
+    },
+    {
+        "name": "取得最新消息",
+        "method": "getBulletin",
+        "url": "/admin/item/bulletin/{id}",
+        "created_by": 1
+    },
+    {
+        "name": "新增最新消息",
+        "method": "addBulletin",
+        "url": "/admin/item/bulletin/store",
+        "created_by": 1
+    },
+    {
+        "name": "編輯最新消息",
+        "method": "editBulletin",
+        "url": "/admin/item/bulletin/store",
+        "created_by": 1
+    },
+    {
+        "name": "刪除最新消息",
+        "method": "deleteBulletin",
+        "url": "/admin/item/bulletin/remove",
+        "created_by": 1
+    },
+    {
+        "name": "搜尋最新消息",
+        "method": "searchBulletin",
+        "url": "/admin/item/bulletin/search",
+        "created_by": 1
+    },
+    {
+        "name": "更新最新消息狀態",
+        "method": "stateBulletin",
+        "url": "/admin/item/bulletin/state",
+        "created_by": 1
+    },
+    {
+        "name": "回存最新消息",
+        "method": "restoreBulletin",
+        "url": "/admin/item/bulletin/restore",
+        "created_by": 1
+    },
+    {
+        "name": "取得促銷訊息",
+        "method": "getPromotion",
+        "url": "/admin/item/promotion/{id}",
+        "created_by": 1
+    },
+    {
+        "name": "新增促銷訊息",
+        "method": "addPromotion",
+        "url": "/admin/item/promotion/store",
+        "created_by": 1
+    },
+    {
+        "name": "編輯促銷訊息",
+        "method": "editPromotion",
+        "url": "/admin/item/promotion/store",
+        "created_by": 1
+    },
+    {
+        "name": "刪除促銷訊息",
+        "method": "deletePromotion",
+        "url": "/admin/item/promotion/remove",
+        "created_by": 1
+    },
+    {
+        "name": "搜尋促銷訊息",
+        "method": "searchPromotion",
+        "url": "/admin/item/promotion/search",
+        "created_by": 1
+    },
+    {
+        "name": "更新促銷訊息狀態",
+        "method": "statePromotion",
+        "url": "/admin/item/promotion/state",
+        "created_by": 1
+    },
+    {
+        "name": "回存促銷訊息",
+        "method": "restorePromotion",
+        "url": "/admin/item/promotion/restore",
+        "created_by": 1
+    },
+    {
+        "name": "取得零壹影片",
+        "method": "getVideo",
+        "url": "/admin/item/video/{id}",
+        "created_by": 1
+    },
+    {
+        "name": "新增零壹影片",
+        "method": "addVideo",
+        "url": "/admin/item/video/store",
+        "created_by": 1
+    },
+    {
+        "name": "編輯零壹影片",
+        "method": "editVideo",
+        "url": "/admin/item/video/store",
+        "created_by": 1
+    },
+    {
+        "name": "刪除零壹影片",
+        "method": "deleteVideo",
+        "url": "/admin/item/video/remove",
+        "created_by": 1
+    },
+    {
+        "name": "搜尋零壹影片",
+        "method": "searchVideo",
+        "url": "/admin/item/video/search",
+        "created_by": 1
+    },
+    {
+        "name": "更新零壹影片狀態",
+        "method": "stateVideo",
+        "url": "/admin/item/video/state",
+        "created_by": 1
+    },
+    {
+        "name": "回存零壹影片",
+        "method": "restoreVideo",
+        "url": "/admin/item/video/restore",
+        "created_by": 1
     }
 ]
