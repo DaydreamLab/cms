@@ -5,11 +5,12 @@ namespace DaydreamLab\Cms\Models\Newsletter;
 use DaydreamLab\Cms\Models\Item\Item;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
+use DaydreamLab\JJAJ\Traits\UserInfo;
 use DaydreamLab\User\Models\User\UserGroup;
 
 class Newsletter extends BaseModel
 {
-    use RecordChanger {
+    use RecordChanger, UserInfo {
         RecordChanger::boot as traitBoot;
     }
     /**

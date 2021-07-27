@@ -5,10 +5,11 @@ namespace DaydreamLab\Cms\Models\NewsletterSubscription;
 use DaydreamLab\Cms\Models\Item\Item;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
+use DaydreamLab\JJAJ\Traits\UserInfo;
 
 class NewsletterSubscription extends BaseModel
 {
-    use RecordChanger {
+    use RecordChanger, UserInfo {
         RecordChanger::boot as traitBoot;
     }
     /**
@@ -29,7 +30,9 @@ class NewsletterSubscription extends BaseModel
      */
     protected $fillable = [
         'user_id',
-        'email'
+        'email',
+        'locked_by',
+        'locked_at'
     ];
 
 
@@ -48,6 +51,11 @@ class NewsletterSubscription extends BaseModel
      * @var array
      */
     protected $appends = [
+    ];
+
+
+    protected $casts = [
+        'locked_at' => 'datetime:Y-m-d H:i:s',
     ];
 
 

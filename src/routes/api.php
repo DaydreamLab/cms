@@ -13,6 +13,7 @@ use DaydreamLab\Cms\Controllers\Menu\Admin\MenuAdminController;
 use DaydreamLab\Cms\Controllers\Module\Front\ModuleFrontController;
 use DaydreamLab\Cms\Controllers\Module\Admin\ModuleAdminController;
 use DaydreamLab\Cms\Controllers\Newsletter\Admin\NewsletterAdminController;
+use DaydreamLab\Cms\Controllers\NewsletterSubscription\Admin\NewsletterSubscriptionAdminController;
 use DaydreamLab\Cms\Controllers\Product\Admin\ProductAdminController;
 use DaydreamLab\Cms\Controllers\ProductCategory\Admin\ProductCategoryAdminController;
 use DaydreamLab\Cms\Controllers\Setting\Front\SettingFrontController;
@@ -162,6 +163,20 @@ Route::post('api/admin/newsletter/state', [NewsletterAdminController::class, 'st
 Route::post('api/admin/newsletter/store', [NewsletterAdminController::class, 'store'])
     ->middleware(['expired', 'admin']);
 Route::get('api/admin/newsletter/{id}', [NewsletterAdminController::class, 'getItem'])
+    ->middleware(['expired', 'admin']);
+
+# 電子報訂閱
+Route::post('api/admin/newsletter/subscription/remove', [NewsletterSubscriptionAdminController::class, 'remove'])
+    ->middleware(['expired', 'admin']);
+Route::post('api/admin/newsletter/subscription/restore', [NewsletterSubscriptionAdminController::class, 'restore'])
+    ->middleware(['expired', 'admin']);
+Route::post('api/admin/newsletter/subscription/search', [NewsletterSubscriptionAdminController::class, 'search'])
+    ->middleware(['expired', 'admin']);
+Route::post('api/admin/newsletter/subscription/state', [NewsletterSubscriptionAdminController::class, 'state'])
+    ->middleware(['expired', 'admin']);
+Route::post('api/admin/newsletter/subscription/store', [NewsletterSubscriptionAdminController::class, 'store'])
+    ->middleware(['expired', 'admin']);
+Route::get('api/admin/newsletter/subscription/{id}', [NewsletterSubscriptionAdminController::class, 'getItem'])
     ->middleware(['expired', 'admin']);
 
 # 分類 Category

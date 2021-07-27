@@ -17,6 +17,8 @@ class CreateNewsletterSubscriptionsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('email')->nullable();
+            $table->unsignedInteger('locked_by')->nullable()->default(0);
+            $table->timestamp('locked_at')->nullable();
             $table->unsignedInteger('created_by');
             $table->unsignedInteger('updated_by')->nullable();
             $table->timestamps();

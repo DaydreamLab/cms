@@ -5,6 +5,8 @@ namespace DaydreamLab\Cms\Controllers\NewsletterSubscription\Admin;
 use DaydreamLab\Cms\Controllers\CmsController;
 use DaydreamLab\Cms\Requests\NewsletterSubscription\Admin\NewsletterSubscriptionAdminGetItemRequest;
 use DaydreamLab\Cms\Requests\NewsletterSubscription\Admin\NewsletterSubscriptionAdminSearchRequest;
+use DaydreamLab\Cms\Resources\NewsletterSubscription\Admin\Collections\NewsletterSubscriptionAdminListResourceCollection;
+use DaydreamLab\Cms\Resources\NewsletterSubscription\Admin\Models\NewsletterSubscriptionAdminResource;
 use DaydreamLab\Cms\Services\NewsletterSubscription\Admin\NewsletterSubscriptionAdminService;
 use Throwable;
 
@@ -28,7 +30,7 @@ class NewsletterSubscriptionAdminController extends CmsController
             $this->handleException($t);
         }
 
-        return $this->response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response, [], NewsletterSubscriptionAdminResource::class);
     }
 
 
@@ -41,6 +43,6 @@ class NewsletterSubscriptionAdminController extends CmsController
             $this->handleException($t);
         }
 
-        return $this->response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response, [], NewsletterSubscriptionAdminListResourceCollection::class);
     }
 }
