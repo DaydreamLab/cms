@@ -982,5 +982,173 @@
         "method": "restoreVideo",
         "url": "/admin/item/video/restore",
         "created_by": 1
+    },
+    {
+        "name": "取得零壹大事紀",
+        "method": "getMemorabilia",
+        "url": "/admin/item/memorabilia/{id}",
+        "created_by": 1
+    },
+    {
+        "name": "新增零壹大事紀",
+        "method": "addMemorabilia",
+        "url": "/admin/item/memorabilia/store",
+        "created_by": 1
+    },
+    {
+        "name": "編輯零壹大事紀",
+        "method": "editMemorabilia",
+        "url": "/admin/item/memorabilia/store",
+        "created_by": 1
+    },
+    {
+        "name": "刪除零壹大事紀",
+        "method": "deleteMemorabilia",
+        "url": "/admin/item/memorabilia/remove",
+        "created_by": 1
+    },
+    {
+        "name": "搜尋零壹大事紀",
+        "method": "searchMemorabilia",
+        "url": "/admin/item/memorabilia/search",
+        "created_by": 1
+    },
+    {
+        "name": "更新零壹大事紀狀態",
+        "method": "stateMemorabilia",
+        "url": "/admin/item/memorabilia/state",
+        "created_by": 1
+    },
+    {
+        "name": "回存零壹大事紀",
+        "method": "restoreMemorabilia",
+        "url": "/admin/item/memorabilia/restore",
+        "created_by": 1
+    },
+    {
+        "name": "取得財務資訊",
+        "method": "getFinance",
+        "url": "/admin/item/finance/{id}",
+        "created_by": 1
+    },
+    {
+        "name": "新增財務資訊",
+        "method": "addFinance",
+        "url": "/admin/item/finance/store",
+        "created_by": 1
+    },
+    {
+        "name": "編輯財務資訊",
+        "method": "editFinance",
+        "url": "/admin/item/finance/store",
+        "created_by": 1
+    },
+    {
+        "name": "刪除財務資訊",
+        "method": "deleteFinance",
+        "url": "/admin/item/finance/remove",
+        "created_by": 1
+    },
+    {
+        "name": "搜尋財務資訊",
+        "method": "searchFinance",
+        "url": "/admin/item/finance/search",
+        "created_by": 1
+    },
+    {
+        "name": "更新財務資訊狀態",
+        "method": "stateFinance",
+        "url": "/admin/item/finance/state",
+        "created_by": 1
+    },
+    {
+        "name": "回存財務資訊",
+        "method": "restoreFinance",
+        "url": "/admin/item/finance/restore",
+        "created_by": 1
+    },
+    {
+        "name": "取得重要規章",
+        "method": "getRules",
+        "url": "/admin/item/rules/{id}",
+        "created_by": 1
+    },
+    {
+        "name": "新增重要規章",
+        "method": "addRules",
+        "url": "/admin/item/rules/store",
+        "created_by": 1
+    },
+    {
+        "name": "編輯重要規章",
+        "method": "editRules",
+        "url": "/admin/item/rules/store",
+        "created_by": 1
+    },
+    {
+        "name": "刪除重要規章",
+        "method": "deleteRules",
+        "url": "/admin/item/rules/remove",
+        "created_by": 1
+    },
+    {
+        "name": "搜尋重要規章",
+        "method": "searchRules",
+        "url": "/admin/item/rules/search",
+        "created_by": 1
+    },
+    {
+        "name": "更新重要規章狀態",
+        "method": "stateRules",
+        "url": "/admin/item/rules/state",
+        "created_by": 1
+    },
+    {
+        "name": "回存重要規章",
+        "method": "restoreRules",
+        "url": "/admin/item/rules/restore",
+        "created_by": 1
+    },
+    {
+        "name": "取得股東專欄",
+        "method": "getStockholder",
+        "url": "/admin/item/stockholder/{id}",
+        "created_by": 1
+    },
+    {
+        "name": "新增股東專欄",
+        "method": "addStockholder",
+        "url": "/admin/item/stockholder/store",
+        "created_by": 1
+    },
+    {
+        "name": "編輯股東專欄",
+        "method": "editStockholder",
+        "url": "/admin/item/stockholder/store",
+        "created_by": 1
+    },
+    {
+        "name": "刪除股東專欄",
+        "method": "deleteStockholder",
+        "url": "/admin/item/stockholder/remove",
+        "created_by": 1
+    },
+    {
+        "name": "搜尋股東專欄",
+        "method": "searchStockholder",
+        "url": "/admin/item/stockholder/search",
+        "created_by": 1
+    },
+    {
+        "name": "更新股東專欄狀態",
+        "method": "stateStockholder",
+        "url": "/admin/item/stockholder/state",
+        "created_by": 1
+    },
+    {
+        "name": "回存股東專欄",
+        "method": "restoreStockholder",
+        "url": "/admin/item/stockholder/restore",
+        "created_by": 1
     }
 ]
