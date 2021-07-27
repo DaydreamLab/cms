@@ -6,6 +6,7 @@ use DaydreamLab\Cms\Models\Item\Item;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\JJAJ\Traits\UserInfo;
+use DaydreamLab\User\Models\User\User;
 
 class NewsletterSubscription extends BaseModel
 {
@@ -31,6 +32,7 @@ class NewsletterSubscription extends BaseModel
     protected $fillable = [
         'user_id',
         'email',
+        'state',
         'locked_by',
         'locked_at'
     ];
@@ -69,5 +71,17 @@ class NewsletterSubscription extends BaseModel
     {
         return $this->belongsToMany(Item::class, 'newsletter_subscription_newsletter_category_maps', 'subscription_id', 'category_id')
             ->withTimestamps();
+    }
+
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+
+    public function getCompanyAttribute()
+    {
+        return ($this->user) ? $this->user->company : null;
     }
 }

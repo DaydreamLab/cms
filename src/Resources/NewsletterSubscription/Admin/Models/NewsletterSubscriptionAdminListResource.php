@@ -18,6 +18,14 @@ class NewsletterSubscriptionAdminListResource extends BaseJsonResource
         return [
             'id'                => $this->id,
             'email'             => $this->email,
+            'user_group'        => ($this->user) ? $this->user->groups->map(function ($g) {
+                return $g->only(['id', 'title']);
+            }) : [],
+            'name'              => ($this->user) ? $this->user->name : '',
+            'phone'             => ($this->user) ? $this->user->phoneCode.$this->user->phone : '',
+            'newsletterCategories' => $this->newsletterCategories->map(function ($n) {
+                return $n->only(['id', 'alias', 'title']);
+            }),
             'created_at'        => $this->getDateTimeString($this->created_at, $tz),
             'updated_at'        => $this->getDateTimeString($this->updated_at, $tz),
             'locked_at'         => $this->getDateTimeString($this->locked_at, $tz),

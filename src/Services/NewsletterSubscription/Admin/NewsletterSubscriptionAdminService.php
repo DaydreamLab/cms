@@ -15,4 +15,22 @@ class NewsletterSubscriptionAdminService extends NewsletterSubscriptionService
         parent::__construct($repo);
         $this->repo = $repo;
     }
+
+
+    public function addMapping($item, $input)
+    {
+        $item->newsletterCategories()->attach($input->get('newsletterCategoryIds') ?: []);
+    }
+
+
+    public function modifyMapping($item, $input)
+    {
+        $item->newsletterCategories()->sync($input->get('newsletterCategoryIds') ?: [], true);
+    }
+
+
+    public function removeMapping($item)
+    {
+        $item->newsletterCategories()->detach();
+    }
 }
