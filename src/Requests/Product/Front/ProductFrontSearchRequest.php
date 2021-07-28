@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Product\Front;
 
-use DaydreamLab\Cms\Requests\cmsSearchRequest;
+use DaydreamLab\Cms\Requests\CmsSearchPost;
 
-class ProductFrontSearchRequest extends cmsSearchRequest
+class ProductFrontSearchRequest extends CmsSearchPost
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +23,7 @@ class ProductFrontSearchRequest extends cmsSearchRequest
      */
     public function rules()
     {
-        $rules =[
+        $rules = [
             //
         ];
 

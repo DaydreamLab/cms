@@ -12,7 +12,7 @@
             "title": "IT基礎架構產品1",
             "brands": [
               {
-                "id": 1
+                "id": 20
               }
             ],
             "products": [
@@ -37,7 +37,21 @@
         "alias": "1",
         "children": [],
         "products": [
-
+          {
+            "title": "網路暨資訊安全產品1",
+            "brands": [
+              {
+                "id": 20
+              }
+            ],
+            "products": [
+              {
+                "name": "產品型號",
+                "description": "產品說明",
+                "price": 1000
+              }
+            ]
+          }
         ]
       }
     ],

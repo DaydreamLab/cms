@@ -15,6 +15,7 @@ use DaydreamLab\Cms\Controllers\Module\Admin\ModuleAdminController;
 use DaydreamLab\Cms\Controllers\Newsletter\Admin\NewsletterAdminController;
 use DaydreamLab\Cms\Controllers\NewsletterSubscription\Admin\NewsletterSubscriptionAdminController;
 use DaydreamLab\Cms\Controllers\Product\Admin\ProductAdminController;
+use DaydreamLab\Cms\Controllers\Product\Front\ProductFrontController;
 use DaydreamLab\Cms\Controllers\ProductCategory\Admin\ProductCategoryAdminController;
 use DaydreamLab\Cms\Controllers\Setting\Front\SettingFrontController;
 use DaydreamLab\Cms\Controllers\Tag\Front\TagFrontController;
@@ -66,6 +67,9 @@ Route::post('api/newsletter/subscribe', [NewsletterSubscriptionFrontController::
 
 # 品牌
 Route::get('api/brand/{alias}', [BrandFrontController::class, 'getBrandByAlias']);
+
+# 產品
+Route::post('api/product/search', [ProductFrontController::class, 'search']);
 
 # 解決方案
 # 成功案例
