@@ -34,7 +34,7 @@ class CustomerMessageReplyAdminService extends CustomerMessageReplyService
         }
 
         $reply = parent::add($input);
-
+/*
         foreach ($input->get('channels') as $channel) {
             if ($channel == 'mail') {
                 $to = $message->backupEmail
@@ -54,7 +54,7 @@ class CustomerMessageReplyAdminService extends CustomerMessageReplyService
                 )
             );
         }
-
+*/
         return $this->response;
     }
 }
