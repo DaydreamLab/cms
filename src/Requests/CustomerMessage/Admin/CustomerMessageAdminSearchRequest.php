@@ -48,13 +48,13 @@ class CustomerMessageAdminSearchRequest extends CmsSearchRequest
 
         $q = $validated->get('q');
         if ($startDate = $validated->get('startDate')) {
-            $q = $q->where('created_at', '>=', Carbon::parse($startDate, $this->user->timezone)
+            $q = $q->where('created_at', '>=', Carbon::parse($startDate, $this->user()->timezone)
                 ->tz(config('app.timezone'))
                 ->toDateTimeString());
         }
 
         if ($endDate = $validated->get('endDate')) {
-            $q = $q->where('created_at', '<=', Carbon::parse($endDate, $this->user->timezone)
+            $q = $q->where('created_at', '<=', Carbon::parse($endDate, $this->user()->timezone)
                 ->tz(config('app.timezone'))
                 ->toDateTimeString());
         }
