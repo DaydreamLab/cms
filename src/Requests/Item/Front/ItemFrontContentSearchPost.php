@@ -44,11 +44,10 @@ class ItemFrontContentSearchPost extends ListRequest
                     'updated_by',
                 ])
             ],
-            'split_categories_result'   => [
-                'nullable',
-                'integer',
-                Rule::in([0,1])
-            ]
+            'content_type'  => 'nullable|string',
+            'brand_id'      => 'nullable|integer',
+            'year'          => 'nullable|string',
+            'document_type' => 'nullable|string'
         ];
 
         return array_merge(parent::rules(), $rules);
@@ -66,6 +65,13 @@ class ItemFrontContentSearchPost extends ListRequest
             })->toArray();
             $validated['q'] = $this->q->whereIn('category_id', $category_ids);
         }
+
+        if ($brand_id = $validated->get('brand_id') ) {
+            $validated['q'] = $this->q->whereHas('brands', function ($query) use ($brand_id) {
+                $query->where('brands_items_maps.brand_id', '=', $brand_id);
+            });
+        }
+        $validated->forget('brand_id');
 
         return $validated;
     }

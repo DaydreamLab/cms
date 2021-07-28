@@ -1,5 +1,6 @@
 [
     {
+        "id": 6,
         "title": "經銷會員",
         "canDelete": 0,
         "groups": [
@@ -9,6 +10,7 @@
         ]
     },
     {
+        "id": 7,
         "title": "一般會員",
         "canDelete": 0,
         "groups": [

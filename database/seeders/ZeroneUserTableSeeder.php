@@ -107,8 +107,8 @@ class ZeroneUserTableSeeder extends Seeder
         foreach ($data as $json) {
             $json['groupIds'] = $groups->whereIn('title', $json['groups'])->pluck('id')->all();
             $viewlevel = app(ViewlevelAdminService::class)->store(collect($json));
-            $targetGroup = $groups->where('title', $viewlevel->title)->first();
-            $targetGroup->access = $viewlevel->id;
+            $targetGroup = $groups->where('title', $json['title'])->first();
+            $targetGroup->access = $json['id'];
             $targetGroup->save();
         }
 
