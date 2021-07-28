@@ -408,61 +408,61 @@
         "created_by": 1
     },
     {
-        "name": "取得標籤",
+        "name": "取得關鍵字",
         "method": "getTag",
         "url": "/admin/tag/{id}",
         "created_by": 1
     },
     {
-        "name": "新增標籤",
+        "name": "新增關鍵字",
         "method": "addTag",
         "url": "/admin/tag/store",
         "created_by": 1
     },
     {
-        "name": "編輯標籤",
+        "name": "編輯關鍵字",
         "method": "editTag",
         "url": "/admin/tag/store",
         "created_by": 1
     },
     {
-        "name": "刪除標籤",
+        "name": "刪除關鍵字",
         "method": "deleteTag",
         "url": "/admin/tag/remove",
         "created_by": 1
     },
     {
-        "name": "搜尋標籤",
+        "name": "搜尋關鍵字",
         "method": "searchTag",
         "url": "/admin/tag/search",
         "created_by": 1
     },
     {
-        "name": "更新標籤狀態",
+        "name": "更新關鍵字狀態",
         "method": "stateTag",
         "url": "/admin/tag/state",
         "created_by": 1
     },
     {
-        "name": "回存標籤",
+        "name": "回存關鍵字",
         "method": "restoreTag",
         "url": "/admin/tag/restore",
         "created_by": 1
     },
     {
-        "name": "排序標籤",
+        "name": "排序關鍵字",
         "method": "orderingTag",
         "url": "/admin/tag/ordering",
         "created_by": 1
     },
     {
-        "name": "精選標籤",
+        "name": "精選關鍵字",
         "method": "featuredTag",
         "url": "/admin/tag/featured",
         "created_by": 1
     },
     {
-        "name": "排序精選標籤",
+        "name": "排序精選關鍵字",
         "method": "featuredOrderingTag",
         "url": "/admin/tag/featured/ordering",
         "created_by": 1
@@ -1149,6 +1149,132 @@
         "name": "回存股東專欄",
         "method": "restoreStockholder",
         "url": "/admin/item/stockholder/restore",
+        "created_by": 1
+    },
+    {
+        "name": "取得電子報類別",
+        "method": "getNewsletterCategory",
+        "url": "/admin/item/newsletter_category/{id}",
+        "created_by": 1
+    },
+    {
+        "name": "新增電子報類別",
+        "method": "addNewsletterCategory",
+        "url": "/admin/item/newsletter_category/store",
+        "created_by": 1
+    },
+    {
+        "name": "編輯電子報類別",
+        "method": "editNewsletterCategory",
+        "url": "/admin/item/newsletter_category/store",
+        "created_by": 1
+    },
+    {
+        "name": "刪除電子報類別",
+        "method": "deleteNewsletterCategory",
+        "url": "/admin/item/newsletter_category/remove",
+        "created_by": 1
+    },
+    {
+        "name": "搜尋電子報類別",
+        "method": "searchNewsletterCategory",
+        "url": "/admin/item/newsletter_category/search",
+        "created_by": 1
+    },
+    {
+        "name": "更新電子報類別狀態",
+        "method": "stateNewsletterCategory",
+        "url": "/admin/item/newsletter_category/state",
+        "created_by": 1
+    },
+    {
+        "name": "回存電子報類別",
+        "method": "restoreNewsletterCategory",
+        "url": "/admin/item/newsletter_category/restore",
+        "created_by": 1
+    },
+    {
+        "name": "取得電子報",
+        "method": "getNewsletter",
+        "url": "/admin/newsletter/{id}",
+        "created_by": 1
+    },
+    {
+        "name": "新增電子報",
+        "method": "addNewsletter",
+        "url": "/admin/newsletter/store",
+        "created_by": 1
+    },
+    {
+        "name": "編輯電子報",
+        "method": "editNewsletter",
+        "url": "/admin/newsletter/store",
+        "created_by": 1
+    },
+    {
+        "name": "刪除電子報",
+        "method": "deleteNewsletter",
+        "url": "/admin/newsletter/remove",
+        "created_by": 1
+    },
+    {
+        "name": "搜尋電子報",
+        "method": "searchNewsletter",
+        "url": "/admin/newsletter/search",
+        "created_by": 1
+    },
+    {
+        "name": "更新電子報狀態",
+        "method": "stateNewsletter",
+        "url": "/admin/newsletter/state",
+        "created_by": 1
+    },
+    {
+        "name": "回存電子報",
+        "method": "restoreNewsletter",
+        "url": "/admin/newsletter/restore",
+        "created_by": 1
+    },
+    {
+        "name": "取得電子報訂閱",
+        "method": "getNewsletterSubscription",
+        "url": "/admin/newsletter/subscription/{id}",
+        "created_by": 1
+    },
+    {
+        "name": "新增電子報訂閱",
+        "method": "addNewsletterSubscription",
+        "url": "/admin/newsletter/subscription/store",
+        "created_by": 1
+    },
+    {
+        "name": "編輯電子報訂閱",
+        "method": "editNewsletterSubscription",
+        "url": "/admin/newsletter/subscription/store",
+        "created_by": 1
+    },
+    {
+        "name": "刪除電子報訂閱",
+        "method": "deleteNewsletterSubscription",
+        "url": "/admin/newsletter/subscription/remove",
+        "created_by": 1
+    },
+    {
+        "name": "搜尋電子報訂閱",
+        "method": "searchNewsletterSubscription",
+        "url": "/admin/newsletter/subscription/search",
+        "created_by": 1
+    },
+    {
+        "name": "更新電子報訂閱狀態",
+        "method": "stateNewsletterSubscription",
+        "url": "/admin/newsletter/subscription/state",
+        "created_by": 1
+    },
+    {
+        "name": "回存電子報訂閱",
+        "method": "restoreNewsletterSubscription",
+        "url": "/admin/newsletter/subscription/restore",
         "created_by": 1
     }
 ]

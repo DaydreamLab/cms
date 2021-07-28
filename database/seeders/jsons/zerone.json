@@ -572,8 +572,7 @@
                     "deleteNewsletterCategory",
                     "searchNewsletterCategory",
                     "restoreNewsletterCategory",
-                    "stateNewsletterCategory",
-                    "orderingNewsletterCategory"
+                    "stateNewsletterCategory"
                 ],
                 "defaultApis": {
                     "getOption": ["checked", "hidden"],
@@ -597,8 +596,7 @@
                     "deleteNewsletter",
                     "searchNewsletter",
                     "restoreNewsletter",
-                    "stateNewsletter",
-                    "orderingNewsletter"
+                    "stateNewsletter"
                 ],
                 "defaultApis": {
                     "getOption": ["checked", "hidden"],
@@ -622,8 +620,7 @@
                     "deleteNewsletterSubscription",
                     "searchNewsletterSubscription",
                     "restoreNewsletterSubscription",
-                    "stateNewsletterSubscription",
-                    "orderingNewsletterSubscription"
+                    "stateNewsletterSubscription"
                 ]
             }
         ],
