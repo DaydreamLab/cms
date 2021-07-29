@@ -1,15 +1,23 @@
 [
     {
-        "title": "首頁",
+        "title": "COM_HOME_TITLE",
         "state": 1,
+        "params": {
+            "path": "/home",
+            "component": "",
+            "type": "alias",
+            "redirect": "",
+            "icon": "copy"
+        },
         "assets": [
             {
-                "title": "slideshow",
+                "title": "COM_SLIDESHOW_MANAGER_TITLE",
                 "path": "/slideshow",
                 "full_path": "/slideshow",
-                "component": "slideshow/list",
+                "component": "home/slideshow/list",
                 "type": "menu",
                 "state": 1,
+                "icon": "images",
                 "showNav": 1,
                 "apis": [
                     "getSlideshow",
@@ -32,16 +40,24 @@
         "userGroups": ["Administrator", "Super User"]
     },
     {
-        "title": "代理品牌",
+        "title": "COM_BRANDS_TITLE",
         "state": 1,
+        "params": {
+            "path": "/brands",
+            "component": "",
+            "type": "alias",
+            "redirect": "",
+            "icon": "copy"
+        },
         "assets": [
             {
-                "title": "品牌管理",
-                "path": "/brand",
-                "full_path": "/brand",
-                "component": "brand/list",
+                "title": "COM_BRANDS_MANAGER_TITLE",
+                "path": "/manager",
+                "full_path": "/manager",
+                "component": "brands/manager/list",
                 "type": "menu",
                 "state": 1,
+                "icon": "sliders-h",
                 "showNav": 1,
                 "apis": [
                     "getBrand",
@@ -64,16 +80,24 @@
         "userGroups": ["Administrator", "Super User"]
     },
     {
-        "title": "產品管理",
+        "title": "COM_PRODUCTS_TITLE",
         "state": 1,
+        "params": {
+            "path": "/products",
+            "component": "",
+            "type": "alias",
+            "redirect": "",
+            "icon": "copy"
+        },
         "assets": [
             {
-                "title": "產品類別管理",
-                "path": "/product-category",
-                "full_path": "/product-category",
-                "component": "product-category/list",
+                "title": "COM_PRODUCTS_CATEGORY_MANAGER_TITLE",
+                "path": "/category",
+                "full_path": "/category",
+                "component": "products/category/list",
                 "type": "menu",
                 "state": 1,
+                "icon": "file-alt",
                 "showNav": 1,
                 "apis": [
                     "getProductCategory",
@@ -93,12 +117,13 @@
                 }
             },
             {
-                "title": "產品資料管理",
-                "path": "/product-series",
-                "full_path": "/product-series",
-                "component": "product-series/list",
+                "title": "COM_PRODUCTS_DATA_MANAGER_TITLE",
+                "path": "/data",
+                "full_path": "/data",
+                "component": "products/data/list",
                 "type": "menu",
                 "state": 1,
+                "icon": "file-alt",
                 "showNav": 1,
                 "apis": [
                     "getProduct",
@@ -175,16 +200,24 @@
         "userGroups": ["Administrator", "Super User"]
     },
     {
-        "title": "產業分類",
+        "title": "COM_INDUSTRY_TITLE",
         "state": 1,
+        "params": {
+            "path": "/industry",
+            "component": "",
+            "type": "alias",
+            "redirect": "",
+            "icon": "copy"
+        },
         "assets": [
             {
-                "title": "產業分類管理",
-                "path": "/industry-category",
-                "full_path": "/industry-category",
-                "component": "/industry-category/list",
+                "title": "COM_INDUSTRY_MANAGER_TITLE",
+                "path": "/manager",
+                "full_path": "/manager",
+                "component": "industry/manager/list",
                 "type": "menu",
                 "state": 1,
+                "icon": "folder-open",
                 "showNav": 1,
                 "apis": [
                     "getIndustryCategory",
@@ -207,16 +240,24 @@
         "userGroups": ["Administrator", "Super User"]
     },
     {
-        "title": "解決方案",
+        "title": "COM_SOLUTIONS_TITLE",
         "state": 1,
+        "params": {
+            "path": "/solutions",
+            "component": "",
+            "type": "alias",
+            "redirect": "",
+            "icon": "copy"
+        },
         "assets": [
             {
-                "title": "解決方案管理",
-                "path": "/solution",
-                "full_path": "/solution",
-                "component": "solution/list",
+                "title": "COM_SOLUTIONS_MANAGER_TITLE",
+                "path": "/manager",
+                "full_path": "/manager",
+                "component": "solutions/manager/list",
                 "type": "menu",
                 "state": 1,
+                "icon": "folder-open",
                 "showNav": 1,
                 "apis": [
                     "getSolution",
@@ -236,12 +277,13 @@
                 }
             },
             {
-                "title": "類別分類管理",
-                "path": "/solution-category",
-                "full_path": "/solution-category",
-                "component": "solution-category/list",
+                "title": "COM_SOLUTIONS_CATEGORY_MANAGER_TITLE",
+                "path": "/category",
+                "full_path": "/category",
+                "component": "solutions/category/list",
                 "type": "menu",
                 "state": 1,
+                "icon": "folder-open",
                 "showNav": 1,
                 "apis": [
                     "getSolutionCategory",
@@ -264,14 +306,21 @@
         "userGroups": ["Administrator", "Super User"]
     },
     {
-        "title": "成功案例",
+        "title": "COM_SUCCESS_TITLE",
         "state": 1,
+        "params": {
+            "path": "/success",
+            "component": "",
+            "type": "alias",
+            "redirect": "",
+            "icon": "copy"
+        },
         "assets": [
             {
-                "title": "成功案例管理",
-                "path": "/success-case",
-                "full_path": "/success-case",
-                "component": "success-case/list",
+                "title": "COM_SUCCESS_MANAGER_TITLE",
+                "path": "/manager",
+                "full_path": "/manager",
+                "component": "success/manager/list",
                 "type": "menu",
                 "state": 1,
                 "showNav": 1,
@@ -296,16 +345,93 @@
         "userGroups": ["Administrator", "Super User"]
     },
     {
-        "title": "下載檔案管理",
+        "title": "COM_COURSE_ACTIVITY_MANAGER_TITLE",
         "state": 1,
+        "params": {
+            "path": "/course_activity",
+            "component": "",
+            "type": "alias",
+            "redirect": "",
+            "icon": "copy"
+        },
         "assets": [
             {
-                "title": "類別管理",
-                "path": "/file-category",
-                "full_path": "/file-category",
-                "component": "file-category/list",
+                "title": "COM_COURSE_MANAGER_TITLE",
+                "path": "/course",
+                "full_path": "/course",
+                "component": "course_activity/course/list",
                 "type": "menu",
                 "state": 1,
+                "icon": "sitemap",
+                "showNav": 1,
+                "apis": []
+            },
+            {
+                "title": "COM_ACTIVITY_MANAGER_TITLE",
+                "path": "/activity",
+                "full_path": "/activity",
+                "component": "course_activity/activity/list",
+                "type": "menu",
+                "state": 1,
+                "icon": "sitemap",
+                "showNav": 1,
+                "apis": []
+            },
+            {
+                "title": "COM_SIGNUP_MANAGER_TITLE",
+                "path": "/signup",
+                "full_path": "/signup",
+                "component": "course_activity/signup/list",
+                "type": "menu",
+                "state": 1,
+                "icon": "sitemap",
+                "showNav": 1,
+                "apis": []
+            },
+            {
+                "title": "COM_PERSONNEL_MANAGER_TITLE",
+                "path": "/personnel",
+                "full_path": "/personnel",
+                "component": "course_activity/personnel/edit",
+                "type": "menu",
+                "state": 1,
+                "icon": "sitemap",
+                "showNav": 1,
+                "apis": []
+            },
+            {
+                "title": "COM_COURSE_ACTIVITY_TICKET_MANAGER_TITLE",
+                "path": "/ticket",
+                "full_path": "/ticket",
+                "component": "course_activity/ticket/list",
+                "type": "menu",
+                "state": 1,
+                "icon": "sitemap",
+                "showNav": 1,
+                "apis": []
+            }
+        ],
+        "userGroups": ["Administrator", "Super User"]
+    },
+    {
+        "title": "COM_DOWNLOAD_FILES_TITLE",
+        "state": 1,
+        "params": {
+            "path": "/download_files",
+            "component": "",
+            "type": "alias",
+            "redirect": "",
+            "icon": "copy"
+        },
+        "assets": [
+            {
+                "title": "COM_FILES_CATEGORY_MANAGER_TITLE",
+                "path": "/category",
+                "full_path": "/category",
+                "component": "files/category/list",
+                "type": "menu",
+                "state": 1,
+                "icon": "copy",
                 "showNav": 1,
                 "apis": [
                     "getFileCategory",
@@ -319,12 +445,13 @@
                 ]
             },
             {
-                "title": "檔案管理",
-                "path": "/file",
-                "full_path": "/file",
-                "component": "file/list",
+                "title": "COM_FILES_MANAGER_TITLE",
+                "path": "/files",
+                "full_path": "/files",
+                "component": "files/manager/list",
                 "type": "menu",
                 "state": 1,
+                "icon": "copy",
                 "showNav": 1,
                 "apis": [
                     "getFile",
@@ -344,16 +471,24 @@
         "userGroups": ["Administrator", "Super User"]
     },
     {
-        "title": "零壹新訊",
+        "title": "COM_NEWS_TITLE",
         "state": 1,
+        "params": {
+            "path": "/news",
+            "component": "",
+            "type": "alias",
+            "redirect": "",
+            "icon": "copy"
+        },
         "assets": [
             {
-                "title": "最新消息",
-                "path": "/bulletin",
-                "full_path": "/bulletin",
-                "component": "bulletin/list",
+                "title": "COM_NEWS_MANAGER_TITLE",
+                "path": "/manager",
+                "full_path": "/manager",
+                "component": "news/manager/list",
                 "type": "menu",
                 "state": 1,
+                "icon": "copy",
                 "showNav": 1,
                 "apis": [
                     "getBulletin",
@@ -373,12 +508,13 @@
                 }
             },
             {
-                "title": "促銷訊息",
+                "title": "COM_NEWS_PROMOTION_MANAGER_TITLE",
                 "path": "/promotion",
                 "full_path": "/promotion",
-                "component": "promotion/list",
+                "component": "news/promotion/list",
                 "type": "menu",
                 "state": 1,
+                "icon": "copy",
                 "showNav": 1,
                 "apis": [
                     "getPromotion",
@@ -401,16 +537,24 @@
         "userGroups": ["Administrator", "Super User"]
     },
     {
-        "title": "零壹影片管理",
+        "title": "COM_VIDEOS_TITLE",
         "state": 1,
+        "params": {
+            "path": "/videos",
+            "component": "",
+            "type": "alias",
+            "redirect": "",
+            "icon": "copy"
+        },
         "assets": [
             {
-                "title": "零壹影片",
-                "path": "/video",
-                "full_path": "/video",
-                "component": "video/list",
+                "title": "COM_VIDEOS_MANAGER_TITLE",
+                "path": "/manager",
+                "full_path": "/manager",
+                "component": "videos/manager/list",
                 "type": "menu",
                 "state": 1,
+                "icon": "copy",
                 "showNav": 1,
                 "apis": [
                     "getVideo",
@@ -427,16 +571,24 @@
         "userGroups": ["Administrator", "Super User"]
     },
     {
-        "title": "靜態頁面",
+        "title": "COM_STATIC_TITLE",
         "state": 1,
+        "params": {
+            "path": "/static",
+            "component": "",
+            "type": "alias",
+            "redirect": "",
+            "icon": "copy"
+        },
         "assets": [
             {
-                "title": "零壹大事紀",
+                "title": "COM_MEMORABILIA_MANAGER_TITLE",
                 "path": "/memorabilia",
                 "full_path": "/memorabilia",
-                "component": "memorabilia/list",
+                "component": "static/memorabilia/list",
                 "type": "menu",
                 "state": 1,
+                "icon": "sitemap",
                 "showNav": 1,
                 "apis": [
                     "getMemorabilia",
@@ -450,12 +602,13 @@
                 ]
             },
             {
-                "title": "財務資訊",
+                "title": "COM_FINANCE_MANAGER_TITLE",
                 "path": "/finance",
                 "full_path": "/finance",
-                "component": "finance/list",
+                "component": "static/finance/list",
                 "type": "menu",
                 "state": 1,
+                "icon": "sitemap",
                 "showNav": 1,
                 "apis": [
                     "getFinance",
@@ -475,12 +628,13 @@
                 }
             },
             {
-                "title": "重要規章",
+                "title": "COM_RULES_MANAGER_TITLE",
                 "path": "/rules",
                 "full_path": "/rules",
-                "component": "rules/list",
+                "component": "static/rules/list",
                 "type": "menu",
                 "state": 1,
+                "icon": "sitemap",
                 "showNav": 1,
                 "apis": [
                     "getRules",
@@ -500,12 +654,13 @@
                 }
             },
             {
-                "title": "股東專欄",
+                "title": "COM_STOCKHOLDER_MANAGER_TITLE",
                 "path": "/stockholder",
                 "full_path": "/stockholder",
-                "component": "stockholder/list",
+                "component": "static/stockholder/list",
                 "type": "menu",
                 "state": 1,
+                "icon": "sitemap",
                 "showNav": 1,
                 "apis": [
                     "getStockholder",
@@ -528,16 +683,24 @@
         "userGroups": ["Administrator", "Super User"]
     },
     {
-        "title": "熱搜管理",
+        "title": "COM_KEYWORDS_TITLE",
         "state": 1,
+        "params": {
+            "path": "/keywords",
+            "component": "",
+            "type": "alias",
+            "redirect": "",
+            "icon": "copy"
+        },
         "assets": [
             {
-                "title": "熱搜關鍵字管理",
-                "path": "/search-keywords",
-                "full_path": "/search-keywords",
-                "component": "search-keywords/list",
+                "title": "COM_KEYWORDS_MANAGER_TITLE",
+                "path": "/manager",
+                "full_path": "/manager",
+                "component": "keywords/manager/list",
                 "type": "menu",
                 "state": 1,
+                "icon": "copy",
                 "showNav": 1,
                 "apis": [
                     "getTag",
@@ -554,16 +717,24 @@
         "userGroups": ["Administrator", "Super User"]
     },
     {
-        "title": "電子報管理",
+        "title": "COM_SUBSCRIPTION_TITLE",
         "state": 1,
+        "params": {
+            "path": "/subscription",
+            "component": "",
+            "type": "alias",
+            "redirect": "",
+            "icon": "copy"
+        },
         "assets": [
             {
-                "title": "電子報類別管理",
-                "path": "/newsletter",
-                "full_path": "/newsletter",
-                "component": "newsletter/list",
+                "title": "COM_SUBSCRIPTION_CATEGORY_MANAGER_TITLE",
+                "path": "/category",
+                "full_path": "/category",
+                "component": "subscription/category/list",
                 "type": "menu",
                 "state": 1,
+                "icon": "copy",
                 "showNav": 1,
                 "apis": [
                     "getNewsletterCategory",
@@ -582,12 +753,13 @@
                 }
             },
             {
-                "title": "電子報內容管理",
-                "path": "/news",
-                "full_path": "/news",
-                "component": "news/list",
+                "title": "COM_SUBSCRIPTION_CONTENT_MANAGER_TITLE",
+                "path": "/content",
+                "full_path": "/content",
+                "component": "subscription/content/list",
                 "type": "menu",
                 "state": 1,
+                "icon": "copy",
                 "showNav": 1,
                 "apis": [
                     "getNewsletter",
@@ -606,12 +778,13 @@
                 }
             },
             {
-                "title": "訂閱管理",
-                "path": "/newsletter-subscription",
-                "full_path": "/newsletter-subscription",
-                "component": "newsletter-subscription/list",
+                "title": "COM_SUBSCRIPTION_MANAGER_TITLE",
+                "path": "/manager",
+                "full_path": "/manager",
+                "component": "subscription/manager/list",
                 "type": "menu",
                 "state": 1,
+                "icon": "copy",
                 "showNav": 1,
                 "apis": [
                     "getNewsletterSubscription",
@@ -627,16 +800,24 @@
         "userGroups": ["Administrator", "Super User"]
     },
     {
-        "title": "會員管理",
+        "title": "COM_MEMBERS_TITLE",
         "state": 1,
+        "params": {
+            "path": "/members",
+            "component": "",
+            "type": "alias",
+            "redirect": "",
+            "icon": "copy"
+        },
         "assets": [
             {
-                "title": "會員管理",
-                "path": "/user",
-                "full_path": "/user",
-                "component": "user/list",
+                "title": "COM_MEMBERS_MANAGER_TITLE",
+                "path": "/manager",
+                "full_path": "/manager",
+                "component": "members/manager/list",
                 "type": "menu",
                 "state": 1,
+                "icon": "copy",
                 "showNav": 1,
                 "apis": [
                     "getUser",
@@ -644,12 +825,13 @@
                 ]
             },
             {
-                "title": "統編資料管理",
-                "path": "/company",
-                "full_path": "/company",
-                "component": "company/list",
+                "title": "COM_MEMBERS_TAX_MANAGER_TITLE",
+                "path": "/tax",
+                "full_path": "/tax",
+                "component": "members/tax/list",
                 "type": "menu",
                 "state": 1,
+                "icon": "copy",
                 "showNav": 1,
                 "apis": [
                     "getCompany",
@@ -663,16 +845,24 @@
         "userGroups": ["Administrator", "Super User"]
     },
     {
-        "title": "權限管理",
+        "title": "COM_PERMISSIONS_TITLE",
         "state": 1,
+        "params": {
+            "path": "/permissions",
+            "component": "",
+            "type": "alias",
+            "redirect": "",
+            "icon": "copy"
+        },
         "assets": [
             {
-                "title": "權限群組管理",
-                "path": "/user-groups",
-                "full_path": "/user-groups",
-                "component": "user-groups/list",
+                "title": "COM_PERMISSIONS_GROUP_MANAGER_TITLE",
+                "path": "/group",
+                "full_path": "/group",
+                "component": "permissions/group/list",
                 "type": "menu",
                 "state": 1,
+                "icon": "copy",
                 "showNav": 1,
                 "apis": [
                     "getUserGroup",
@@ -683,12 +873,13 @@
                 ]
             },
             {
-                "title": "權限群組管理",
-                "path": "/user-groups",
-                "full_path": "/user-groups",
-                "component": "user-groups/list",
+                "title": "COM_PERMISSIONS_ACCOUNT_MANAGER_TITLE",
+                "path": "/account",
+                "full_path": "/account",
+                "component": "permissions/account/list",
                 "type": "menu",
                 "state": 1,
+                "icon": "copy",
                 "showNav": 1,
                 "apis": [
                     "getUser",
@@ -703,16 +894,24 @@
         "userGroups": ["Administrator", "Super User"]
     },
     {
-        "title": "客服留言",
+        "title": "COM_COMMENTS_TITLE",
         "state": 1,
+        "params": {
+            "path": "/comments",
+            "component": "",
+            "type": "alias",
+            "redirect": "",
+            "icon": "copy"
+        },
         "assets": [
             {
-                "title": "客服留言管理",
-                "path": "/customer-message",
-                "full_path": "/customer-message",
-                "component": "customer-message/list",
+                "title": "COM_COMMENTS_MANAGER_TITLE",
+                "path": "/manager",
+                "full_path": "/manager",
+                "component": "comments/manager/list",
                 "type": "menu",
                 "state": 1,
+                "icon": "copy",
                 "showNav": 1,
                 "apis": [
                     "getCustomerMessage",
@@ -725,14 +924,21 @@
         "userGroups": ["Administrator", "Super User"]
     },
     {
-        "title": "全站SEO設定",
+        "title": "COM_SEO_TITLE",
         "state": 1,
+        "params": {
+            "path": "/seo",
+            "component": "",
+            "type": "alias",
+            "redirect": "",
+            "icon": "copy"
+        },
         "assets": [
             {
-                "title": "SEO設定",
-                "path": "/settings",
-                "full_path": "/settings",
-                "component": "settings/list",
+                "title": "COM_SEO_EDIT_TITLE",
+                "path": "",
+                "full_path": "",
+                "component": "seo/manager/edit",
                 "type": "menu",
                 "state": 1,
                 "showNav": 1,
