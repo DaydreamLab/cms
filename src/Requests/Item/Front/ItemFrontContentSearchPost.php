@@ -46,7 +46,7 @@ class ItemFrontContentSearchPost extends ListRequest
             ],
             'content_type'  => 'nullable|string',
             'brand_id'      => 'nullable|integer',
-            'year'          => 'nullable|string',
+            'register_time' => 'nullable|date',
             'document_type' => 'nullable|string'
         ];
 

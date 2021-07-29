@@ -15,6 +15,7 @@ use DaydreamLab\Cms\Services\ProductCategory\Admin\ProductCategoryAdminService;
 use DaydreamLab\Cms\Services\Site\Admin\SiteAdminService;
 use DaydreamLab\JJAJ\Database\QueryCapsule;
 use DaydreamLab\JJAJ\Traits\LoggedIn;
+use DaydreamLab\Media\Services\FileCategory\Admin\FileCategoryAdminService;
 use DaydreamLab\User\Models\Company\CompanyCategory;
 use DaydreamLab\User\Services\Asset\Admin\AssetAdminService;
 use DaydreamLab\User\Services\User\Admin\UserGroupAdminService;
@@ -44,7 +45,8 @@ class OptionService
                                 ModuleAdminService $moduleAdminService,
                                 ProductCategoryAdminService $productCategoryAdminService,
                                 BrandAdminService $brandAdminService,
-                                SiteAdminService $siteAdminService)
+                                SiteAdminService $siteAdminService,
+                                FileCategoryAdminService $fileCategoryAdminService)
     {
         $this->map['asset']                 = $assetAdminService;
         $this->map['brand']                 = $brandAdminService;
@@ -70,6 +72,8 @@ class OptionService
         $this->map['document_type']         = $extrafieldGroupAdminService;
         $this->map['company_category']      = '';
         $this->map['newsletter_category']   = $itemAdminService;
+        $this->map['download_file_category'] = $fileCategoryAdminService;
+        $this->map['contract_file_category'] = $fileCategoryAdminService;
     }
 
 
@@ -179,6 +183,12 @@ class OptionService
                         'content_type' => 'newsletter_category',
                     ]
                 ));
+            } elseif ($type == 'download_file_category') {
+                $q = $q->where('contentType', 'file');
+                $data[$type] = $this->getOptionList($service, 'list', collect(['q' => $q]));
+            } elseif ($type == 'contract_file_category') {
+                $q = $q->where('contentType', 'contract');
+                $data[$type] = $this->getOptionList($service, 'list', collect(['q' => $q]));
             }
         }
 
