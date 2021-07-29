@@ -12,7 +12,7 @@
         "assets": [
             {
                 "title": "COM_SLIDESHOW_MANAGER_TITLE",
-                "path": "/slideshow",
+                "path": "slideshow",
                 "full_path": "/slideshow",
                 "component": "home/slideshow/list",
                 "type": "menu",
@@ -52,7 +52,7 @@
         "assets": [
             {
                 "title": "COM_BRANDS_MANAGER_TITLE",
-                "path": "/manager",
+                "path": "manager",
                 "full_path": "/manager",
                 "component": "brands/manager/list",
                 "type": "menu",
@@ -92,7 +92,7 @@
         "assets": [
             {
                 "title": "COM_PRODUCTS_CATEGORY_MANAGER_TITLE",
-                "path": "/category",
+                "path": "category",
                 "full_path": "/category",
                 "component": "products/category/list",
                 "type": "menu",
@@ -118,7 +118,7 @@
             },
             {
                 "title": "COM_PRODUCTS_DATA_MANAGER_TITLE",
-                "path": "/data",
+                "path": "data",
                 "full_path": "/data",
                 "component": "products/data/list",
                 "type": "menu",
@@ -158,7 +158,7 @@
         "assets": [
             {
                 "title": "類別管理",
-                "path": "/contract-category",
+                "path": "contract-category",
                 "full_path": "/contract-category",
                 "component": "contract-category/list",
                 "type": "menu",
@@ -184,7 +184,7 @@
             },
             {
                 "title": "檔案管理",
-                "path": "/contract",
+                "path": "contract",
                 "full_path": "/contract",
                 "component": "contract/list",
                 "type": "menu",
@@ -221,7 +221,7 @@
         "assets": [
             {
                 "title": "COM_INDUSTRY_MANAGER_TITLE",
-                "path": "/manager",
+                "path": "manager",
                 "full_path": "/manager",
                 "component": "industry/manager/list",
                 "type": "menu",
@@ -261,7 +261,7 @@
         "assets": [
             {
                 "title": "COM_SOLUTIONS_MANAGER_TITLE",
-                "path": "/manager",
+                "path": "manager",
                 "full_path": "/manager",
                 "component": "solutions/manager/list",
                 "type": "menu",
@@ -287,7 +287,7 @@
             },
             {
                 "title": "COM_SOLUTIONS_CATEGORY_MANAGER_TITLE",
-                "path": "/category",
+                "path": "category",
                 "full_path": "/category",
                 "component": "solutions/category/list",
                 "type": "menu",
@@ -327,7 +327,7 @@
         "assets": [
             {
                 "title": "COM_SUCCESS_MANAGER_TITLE",
-                "path": "/manager",
+                "path": "manager",
                 "full_path": "/manager",
                 "component": "success/manager/list",
                 "type": "menu",
@@ -366,7 +366,7 @@
         "assets": [
             {
                 "title": "COM_COURSE_MANAGER_TITLE",
-                "path": "/course",
+                "path": "course",
                 "full_path": "/course",
                 "component": "course_activity/course/list",
                 "type": "menu",
@@ -377,7 +377,7 @@
             },
             {
                 "title": "COM_ACTIVITY_MANAGER_TITLE",
-                "path": "/activity",
+                "path": "activity",
                 "full_path": "/activity",
                 "component": "course_activity/activity/list",
                 "type": "menu",
@@ -388,7 +388,7 @@
             },
             {
                 "title": "COM_SIGNUP_MANAGER_TITLE",
-                "path": "/signup",
+                "path": "signup",
                 "full_path": "/signup",
                 "component": "course_activity/signup/list",
                 "type": "menu",
@@ -399,7 +399,7 @@
             },
             {
                 "title": "COM_PERSONNEL_MANAGER_TITLE",
-                "path": "/personnel",
+                "path": "personnel",
                 "full_path": "/personnel",
                 "component": "course_activity/personnel/edit",
                 "type": "menu",
@@ -410,7 +410,7 @@
             },
             {
                 "title": "COM_COURSE_ACTIVITY_TICKET_MANAGER_TITLE",
-                "path": "/ticket",
+                "path": "ticket",
                 "full_path": "/ticket",
                 "component": "course_activity/ticket/list",
                 "type": "menu",
@@ -435,7 +435,7 @@
         "assets": [
             {
                 "title": "COM_FILES_CATEGORY_MANAGER_TITLE",
-                "path": "/category",
+                "path": "category",
                 "full_path": "/category",
                 "component": "files/category/list",
                 "type": "menu",
@@ -455,7 +455,7 @@
             },
             {
                 "title": "COM_FILES_MANAGER_TITLE",
-                "path": "/files",
+                "path": "files",
                 "full_path": "/files",
                 "component": "files/manager/list",
                 "type": "menu",
@@ -492,7 +492,7 @@
         "assets": [
             {
                 "title": "COM_NEWS_MANAGER_TITLE",
-                "path": "/manager",
+                "path": "manager",
                 "full_path": "/manager",
                 "component": "news/manager/list",
                 "type": "menu",
@@ -518,7 +518,7 @@
             },
             {
                 "title": "COM_NEWS_PROMOTION_MANAGER_TITLE",
-                "path": "/promotion",
+                "path": "promotion",
                 "full_path": "/promotion",
                 "component": "news/promotion/list",
                 "type": "menu",
@@ -558,7 +558,7 @@
         "assets": [
             {
                 "title": "COM_VIDEOS_MANAGER_TITLE",
-                "path": "/manager",
+                "path": "manager",
                 "full_path": "/manager",
                 "component": "videos/manager/list",
                 "type": "menu",
@@ -592,7 +592,7 @@
         "assets": [
             {
                 "title": "COM_MEMORABILIA_MANAGER_TITLE",
-                "path": "/memorabilia",
+                "path": "memorabilia",
                 "full_path": "/memorabilia",
                 "component": "static/memorabilia/list",
                 "type": "menu",
@@ -612,7 +612,7 @@
             },
             {
                 "title": "COM_FINANCE_MANAGER_TITLE",
-                "path": "/finance",
+                "path": "finance",
                 "full_path": "/finance",
                 "component": "static/finance/list",
                 "type": "menu",
@@ -638,7 +638,7 @@
             },
             {
                 "title": "COM_RULES_MANAGER_TITLE",
-                "path": "/rules",
+                "path": "rules",
                 "full_path": "/rules",
                 "component": "static/rules/list",
                 "type": "menu",
@@ -664,7 +664,7 @@
             },
             {
                 "title": "COM_STOCKHOLDER_MANAGER_TITLE",
-                "path": "/stockholder",
+                "path": "stockholder",
                 "full_path": "/stockholder",
                 "component": "static/stockholder/list",
                 "type": "menu",
@@ -704,7 +704,7 @@
         "assets": [
             {
                 "title": "COM_KEYWORDS_MANAGER_TITLE",
-                "path": "/manager",
+                "path": "manager",
                 "full_path": "/manager",
                 "component": "keywords/manager/list",
                 "type": "menu",
@@ -738,7 +738,7 @@
         "assets": [
             {
                 "title": "COM_SUBSCRIPTION_CATEGORY_MANAGER_TITLE",
-                "path": "/category",
+                "path": "category",
                 "full_path": "/category",
                 "component": "subscription/category/list",
                 "type": "menu",
@@ -763,7 +763,7 @@
             },
             {
                 "title": "COM_SUBSCRIPTION_CONTENT_MANAGER_TITLE",
-                "path": "/content",
+                "path": "content",
                 "full_path": "/content",
                 "component": "subscription/content/list",
                 "type": "menu",
@@ -788,7 +788,7 @@
             },
             {
                 "title": "COM_SUBSCRIPTION_MANAGER_TITLE",
-                "path": "/manager",
+                "path": "manager",
                 "full_path": "/manager",
                 "component": "subscription/manager/list",
                 "type": "menu",
@@ -821,7 +821,7 @@
         "assets": [
             {
                 "title": "COM_MEMBERS_MANAGER_TITLE",
-                "path": "/manager",
+                "path": "manager",
                 "full_path": "/manager",
                 "component": "members/manager/list",
                 "type": "menu",
@@ -835,7 +835,7 @@
             },
             {
                 "title": "COM_MEMBERS_TAX_MANAGER_TITLE",
-                "path": "/tax",
+                "path": "tax",
                 "full_path": "/tax",
                 "component": "members/tax/list",
                 "type": "menu",
@@ -866,7 +866,7 @@
         "assets": [
             {
                 "title": "COM_PERMISSIONS_GROUP_MANAGER_TITLE",
-                "path": "/group",
+                "path": "group",
                 "full_path": "/group",
                 "component": "permissions/group/list",
                 "type": "menu",
@@ -883,7 +883,7 @@
             },
             {
                 "title": "COM_PERMISSIONS_ACCOUNT_MANAGER_TITLE",
-                "path": "/account",
+                "path": "account",
                 "full_path": "/account",
                 "component": "permissions/account/list",
                 "type": "menu",
@@ -915,7 +915,7 @@
         "assets": [
             {
                 "title": "COM_COMMENTS_MANAGER_TITLE",
-                "path": "/manager",
+                "path": "manager",
                 "full_path": "/manager",
                 "component": "comments/manager/list",
                 "type": "menu",
