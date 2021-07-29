@@ -148,6 +148,13 @@
     {
         "title": "共同供應契約採購管理",
         "state": 1,
+        "params": {
+            "path": "/contract",
+            "component": "",
+            "type": "alias",
+            "redirect": "",
+            "icon": "copy"
+        },
         "assets": [
             {
                 "title": "類別管理",
@@ -156,6 +163,7 @@
                 "component": "contract-category/list",
                 "type": "menu",
                 "state": 1,
+                "icon": "copy",
                 "showNav": 1,
                 "apis": [
                     "getFileCategory",
@@ -181,6 +189,7 @@
                 "component": "contract/list",
                 "type": "menu",
                 "state": 1,
+                "icon": "copy",
                 "showNav": 1,
                 "apis": [
                     "getFile",
