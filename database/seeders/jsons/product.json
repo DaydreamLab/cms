@@ -1,6 +1,6 @@
 [
   {
-    "title": "IT基礎架構",
+    "title": "IT管理及效能監控",
     "alias": "A",
     "children": [
       {
@@ -29,7 +29,7 @@
     "products": []
   },
   {
-    "title": "網路暨資訊安全",
+    "title": "資訊安全",
     "alias": "B",
     "children": [
       {
@@ -58,7 +58,7 @@
     "products": []
   },
   {
-    "title": "雲平台與應用",
+    "title": "基礎架構網路",
     "alias": "C",
     "children": [
       {
@@ -73,7 +73,7 @@
     "products": []
   },
   {
-    "title": "大數據與應用",
+    "title": "儲存系統",
     "alias": "D",
     "children": [
       {
@@ -88,7 +88,7 @@
     "products": []
   },
   {
-    "title": "供契投標採購",
+    "title": "備份備援",
     "alias": "E",
     "children": [
       {
@@ -103,7 +103,7 @@
     "products": []
   },
   {
-    "title": "雲端服務網",
+    "title": "虛擬化",
     "alias": "F",
     "children": [
       {
@@ -118,8 +118,98 @@
     "products": []
   },
   {
-    "title": "ZOiPS數位監控",
+    "title": "視訊監控",
     "alias": "G",
+    "children": [
+      {
+        "title": "1",
+        "alias": "1",
+        "children": [],
+        "products": [
+
+        ]
+      }
+    ],
+    "products": []
+  },
+  {
+    "title": "雲端服務",
+    "alias": "H",
+    "children": [
+      {
+        "title": "1",
+        "alias": "1",
+        "children": [],
+        "products": [
+
+        ]
+      }
+    ],
+    "products": []
+  },
+  {
+    "title": "AI 大數據",
+    "alias": "I",
+    "children": [
+      {
+        "title": "1",
+        "alias": "1",
+        "children": [],
+        "products": [
+
+        ]
+      }
+    ],
+    "products": []
+  },
+  {
+    "title": "容器及DevOps",
+    "alias": "J",
+    "children": [
+      {
+        "title": "1",
+        "alias": "1",
+        "children": [],
+        "products": [
+
+        ]
+      }
+    ],
+    "products": []
+  },
+  {
+    "title": "遠距應用",
+    "alias": "K",
+    "children": [
+      {
+        "title": "1",
+        "alias": "1",
+        "children": [],
+        "products": [
+
+        ]
+      }
+    ],
+    "products": []
+  },
+  {
+    "title": "超融合基礎架構",
+    "alias": "L",
+    "children": [
+      {
+        "title": "1",
+        "alias": "1",
+        "children": [],
+        "products": [
+
+        ]
+      }
+    ],
+    "products": []
+  },
+  {
+    "title": "商業應用軟體",
+    "alias": "M",
     "children": [
       {
         "title": "1",
