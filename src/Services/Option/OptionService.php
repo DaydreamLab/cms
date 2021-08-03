@@ -74,6 +74,8 @@ class OptionService
         $this->map['newsletter_category']   = $itemAdminService;
         $this->map['download_file_category'] = $fileCategoryAdminService;
         $this->map['contract_file_category'] = $fileCategoryAdminService;
+        $this->map['front_user_group']            = $groupAdminService;
+        $this->map['admin_user_group']            = $groupAdminService;
     }
 
 
@@ -189,6 +191,20 @@ class OptionService
             } elseif ($type == 'contract_file_category') {
                 $q = $q->where('contentType', 'contract');
                 $data[$type] = $this->getOptionList($service, 'list', collect(['q' => $q]));
+            } elseif ($type == 'front_user_group') {
+                $register = $service->findBy('title', '=', 'Registered')->first();
+                $root = $register->only(['id', 'title']);
+                foreach ($register->descendants as $descendant) {
+                    $root['children'][] = $descendant->only(['id', 'title']);
+                }
+                $data[$type] = $root;
+            } elseif ($type == 'admin_user_group') {
+                $admin = $service->findBy('title', '=', 'Administrator')->first();
+                $temp = [];
+                foreach ($admin->descendants as $descendant) {
+                    $temp[] = $descendant->only(['id', 'title']);
+                }
+                $data[$type] = $temp;
             }
         }
 
