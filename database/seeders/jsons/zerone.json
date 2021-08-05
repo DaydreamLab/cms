@@ -146,7 +146,7 @@
         "userGroups": ["Administrator", "Super User"]
     },
     {
-        "title": "共同供應契約採購管理",
+        "title": "COM_CONTRACT_FILES_TITLE",
         "state": 1,
         "params": {
             "path": "/contract",
@@ -157,10 +157,10 @@
         },
         "assets": [
             {
-                "title": "類別管理",
-                "path": "contract-category",
-                "full_path": "/contract-category",
-                "component": "contract-category/list",
+                "title": "COM_CONTRACT_FILES_CATEGORY_MANAGER_TITLE",
+                "path": "category",
+                "full_path": "category",
+                "component": "contract_files/category/list",
                 "type": "menu",
                 "state": 1,
                 "icon": "copy",
@@ -183,10 +183,10 @@
                 }
             },
             {
-                "title": "檔案管理",
-                "path": "contract",
-                "full_path": "/contract",
-                "component": "contract/list",
+                "title": "COM_CONTRACT_FILES_MANAGER_TITLE",
+                "path": "manager",
+                "full_path": "/manager",
+                "component": "contract_files/manager/list",
                 "type": "menu",
                 "state": 1,
                 "icon": "copy",
