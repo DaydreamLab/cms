@@ -510,8 +510,62 @@
         "created_by": 1
     },
     {
-        "name": "上傳檔案",
-        "method": "storeFile",
+        "name": "取得檔案類型",
+        "method": "getFileCategory",
+        "url": "/admin/file/category/{id}",
+        "created_by": 1
+    },
+    {
+        "name": "新增檔案類型",
+        "method": "addFileCategory",
+        "url": "/admin/file/category/store",
+        "created_by": 1
+    },
+    {
+        "name": "編輯檔案類型",
+        "method": "editFileCategory",
+        "url": "/admin/file/category/store",
+        "created_by": 1
+    },
+    {
+        "name": "刪除檔案類型",
+        "method": "removeFileCategory",
+        "url": "/admin/file/category/remove",
+        "created_by": 1
+    },
+    {
+        "name": "搜尋檔案類型",
+        "method": "searchFileCategory",
+        "url": "/admin/file/category/search",
+        "created_by": 1
+    },
+    {
+        "name": "更新檔案類型狀態",
+        "method": "stateFileCategory",
+        "url": "/admin/file/category/state",
+        "created_by": 1
+    },
+    {
+        "name": "回存檔案類型",
+        "method": "restoreFileCategory",
+        "url": "/admin/file/category/restore",
+        "created_by": 1
+    },
+    {
+        "name": "取得檔案",
+        "method": "getFile",
+        "url": "/admin/file/{id}",
+        "created_by": 1
+    },
+    {
+        "name": "新增檔案",
+        "method": "addFile",
+        "url": "/admin/file/store",
+        "created_by": 1
+    },
+    {
+        "name": "編輯檔案",
+        "method": "editFile",
         "url": "/admin/file/store",
         "created_by": 1
     },
@@ -519,6 +573,24 @@
         "name": "刪除檔案",
         "method": "removeFile",
         "url": "/admin/file/remove",
+        "created_by": 1
+    },
+    {
+        "name": "搜尋檔案",
+        "method": "searchFile",
+        "url": "/admin/file/search",
+        "created_by": 1
+    },
+    {
+        "name": "更新檔案狀態",
+        "method": "stateFile",
+        "url": "/admin/file/state",
+        "created_by": 1
+    },
+    {
+        "name": "回存檔案",
+        "method": "restoreFile",
+        "url": "/admin/file/restore",
         "created_by": 1
     },
     {

@@ -24,6 +24,7 @@ class ZeroneAssetsGroupTableSeeder extends Seeder
             unset($inputData['assets']);
             $inputUserGroups = $inputData['userGroups'];
             unset($inputData['userGroups']);
+            $userGroups = UserGroup::whereIn('title', $inputUserGroups)->get();
 
             $assetGroup = app(AssetGroupAdminService::class)->store(collect($inputData));
             $assetIds = [];
@@ -55,14 +56,13 @@ class ZeroneAssetsGroupTableSeeder extends Seeder
                         $asset->apis()->attach($api->id, $data);
                     }
                 }
-
+                $asset->userGroups()->attach($userGroups->pluck('id'));
                 $assetIds[] = $asset->id;
             }
             # 套用到Asset
             $assetGroup->assets()->attach($assetIds);
 
             # 套用到使用者群組
-            $userGroups = UserGroup::whereIn('title', $inputUserGroups)->get();
             $assetGroup->userGroups()->attach($userGroups->pluck('id'));
         }
     }
