@@ -1348,5 +1348,35 @@
         "method": "restoreNewsletterSubscription",
         "url": "/admin/newsletter/subscription/restore",
         "created_by": 1
+    },
+    {
+        "name": "取得顧客留言",
+        "method": "getCustomerMessage",
+        "url": "/admin/customer/message/{id}",
+        "created_by": 1
+    },
+    {
+        "name": "編輯顧客留言",
+        "method": "editCustomerMessage",
+        "url": "/admin/customer/message/store",
+        "created_by": 1
+    },
+    {
+        "name": "搜尋顧客留言",
+        "method": "searchCustomerMessage",
+        "url": "/admin/customer/message/search",
+        "created_by": 1
+    },
+    {
+        "name": "回存顧客留言",
+        "method": "restoreCustomerMessage",
+        "url": "/admin/customer/message/restore",
+        "created_by": 1
+    },
+    {
+        "name": "回覆顧客留言",
+        "method": "storeCustomerMessageReply",
+        "url": "/admin/customer/message/reply",
+        "created_by": 1
     }
 ]

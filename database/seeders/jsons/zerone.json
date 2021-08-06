@@ -33,7 +33,11 @@
                     "getOption": ["checked", "hidden"],
                     "uploadMedia": ["checked", "hidden"],
                     "getMediaAllItems": ["checked", "hidden"],
-                    "getMediaAllFolders": ["checked", "hidden"]
+                    "getMediaAllFolders": ["checked", "hidden"],
+                    "deleteMedia": ["checked", "hidden"],
+                    "renameMedia": ["checked", "hidden"],
+                    "moveMedia": ["checked", "hidden"],
+                    "createMediaFolder": ["checked", "hidden"]
                 }
             }
         ],
@@ -73,7 +77,11 @@
                     "getOption": ["checked", "hidden"],
                     "uploadMedia": ["checked", "hidden"],
                     "getMediaAllItems": ["checked", "hidden"],
-                    "getMediaAllFolders": ["checked", "hidden"]
+                    "getMediaAllFolders": ["checked", "hidden"],
+                    "deleteMedia": ["checked", "hidden"],
+                    "renameMedia": ["checked", "hidden"],
+                    "moveMedia": ["checked", "hidden"],
+                    "createMediaFolder": ["checked", "hidden"]
                 }
             }
         ],
@@ -113,7 +121,11 @@
                     "getOption": ["checked", "hidden"],
                     "uploadMedia": ["checked", "hidden"],
                     "getMediaAllItems": ["checked", "hidden"],
-                    "getMediaAllFolders": ["checked", "hidden"]
+                    "getMediaAllFolders": ["checked", "hidden"],
+                    "deleteMedia": ["checked", "hidden"],
+                    "renameMedia": ["checked", "hidden"],
+                    "moveMedia": ["checked", "hidden"],
+                    "createMediaFolder": ["checked", "hidden"]
                 }
             },
             {
@@ -139,7 +151,11 @@
                     "getOption": ["checked", "hidden"],
                     "uploadMedia": ["checked", "hidden"],
                     "getMediaAllItems": ["checked", "hidden"],
-                    "getMediaAllFolders": ["checked", "hidden"]
+                    "getMediaAllFolders": ["checked", "hidden"],
+                    "deleteMedia": ["checked", "hidden"],
+                    "renameMedia": ["checked", "hidden"],
+                    "moveMedia": ["checked", "hidden"],
+                    "createMediaFolder": ["checked", "hidden"]
                 }
             }
         ],
@@ -176,10 +192,7 @@
                     "orderingFileCategory"
                 ],
                 "defaultApis": {
-                    "getOption": ["checked", "hidden"],
-                    "uploadMedia": ["checked", "hidden"],
-                    "getMediaAllItems": ["checked", "hidden"],
-                    "getMediaAllFolders": ["checked", "hidden"]
+                    "getOption": ["checked", "hidden"]
                 }
             },
             {
@@ -202,7 +215,14 @@
                     "orderingFile"
                 ],
                 "defaultApis": {
-                    "getOption": ["checked", "hidden"]
+                    "getOption": ["checked", "hidden"],
+                    "uploadMedia": ["checked", "hidden"],
+                    "getMediaAllItems": ["checked", "hidden"],
+                    "getMediaAllFolders": ["checked", "hidden"],
+                    "deleteMedia": ["checked", "hidden"],
+                    "renameMedia": ["checked", "hidden"],
+                    "moveMedia": ["checked", "hidden"],
+                    "createMediaFolder": ["checked", "hidden"]
                 }
             }
         ],
@@ -239,10 +259,7 @@
                     "orderingIndustryCategory"
                 ],
                 "defaultApis": {
-                    "getOption": ["checked", "hidden"],
-                    "uploadMedia": ["checked", "hidden"],
-                    "getMediaAllItems": ["checked", "hidden"],
-                    "getMediaAllFolders": ["checked", "hidden"]
+                    "getOption": ["checked", "hidden"]
                 }
             }
         ],
@@ -282,7 +299,11 @@
                     "getOption": ["checked", "hidden"],
                     "uploadMedia": ["checked", "hidden"],
                     "getMediaAllItems": ["checked", "hidden"],
-                    "getMediaAllFolders": ["checked", "hidden"]
+                    "getMediaAllFolders": ["checked", "hidden"],
+                    "deleteMedia": ["checked", "hidden"],
+                    "renameMedia": ["checked", "hidden"],
+                    "moveMedia": ["checked", "hidden"],
+                    "createMediaFolder": ["checked", "hidden"]
                 }
             },
             {
@@ -308,7 +329,11 @@
                     "getOption": ["checked", "hidden"],
                     "uploadMedia": ["checked", "hidden"],
                     "getMediaAllItems": ["checked", "hidden"],
-                    "getMediaAllFolders": ["checked", "hidden"]
+                    "getMediaAllFolders": ["checked", "hidden"],
+                    "deleteMedia": ["checked", "hidden"],
+                    "renameMedia": ["checked", "hidden"],
+                    "moveMedia": ["checked", "hidden"],
+                    "createMediaFolder": ["checked", "hidden"]
                 }
             }
         ],
@@ -347,7 +372,11 @@
                     "getOption": ["checked", "hidden"],
                     "uploadMedia": ["checked", "hidden"],
                     "getMediaAllItems": ["checked", "hidden"],
-                    "getMediaAllFolders": ["checked", "hidden"]
+                    "getMediaAllFolders": ["checked", "hidden"],
+                    "deleteMedia": ["checked", "hidden"],
+                    "renameMedia": ["checked", "hidden"],
+                    "moveMedia": ["checked", "hidden"],
+                    "createMediaFolder": ["checked", "hidden"]
                 }
             }
         ],
@@ -473,7 +502,14 @@
                     "orderingFile"
                 ],
                 "defaultApis": {
-                    "getOption": ["checked", "hidden"]
+                    "getOption": ["checked", "hidden"],
+                    "uploadMedia": ["checked", "hidden"],
+                    "getMediaAllItems": ["checked", "hidden"],
+                    "getMediaAllFolders": ["checked", "hidden"],
+                    "deleteMedia": ["checked", "hidden"],
+                    "renameMedia": ["checked", "hidden"],
+                    "moveMedia": ["checked", "hidden"],
+                    "createMediaFolder": ["checked", "hidden"]
                 }
             }
         ],
@@ -513,7 +549,12 @@
                     "getOption": ["checked", "hidden"],
                     "uploadMedia": ["checked", "hidden"],
                     "getMediaAllItems": ["checked", "hidden"],
-                    "getMediaAllFolders": ["checked", "hidden"]
+                    "getMediaAllFolders": ["checked", "hidden"],
+                    "deleteMedia": ["checked", "hidden"],
+                    "renameMedia": ["checked", "hidden"],
+                    "moveMedia": ["checked", "hidden"],
+                    "createMediaFolder": ["checked", "hidden"],
+                    "searchProduct": ["checked", "hidden"]
                 }
             },
             {
@@ -539,7 +580,11 @@
                     "getOption": ["checked", "hidden"],
                     "uploadMedia": ["checked", "hidden"],
                     "getMediaAllItems": ["checked", "hidden"],
-                    "getMediaAllFolders": ["checked", "hidden"]
+                    "getMediaAllFolders": ["checked", "hidden"],
+                    "deleteMedia": ["checked", "hidden"],
+                    "renameMedia": ["checked", "hidden"],
+                    "moveMedia": ["checked", "hidden"],
+                    "createMediaFolder": ["checked", "hidden"]
                 }
             }
         ],
@@ -574,7 +619,17 @@
                     "restoreVideo",
                     "stateVideo",
                     "orderingVideo"
-                ]
+                ],
+                "defaultApis": {
+                    "getOption": ["checked", "hidden"],
+                    "uploadMedia": ["checked", "hidden"],
+                    "getMediaAllItems": ["checked", "hidden"],
+                    "getMediaAllFolders": ["checked", "hidden"],
+                    "deleteMedia": ["checked", "hidden"],
+                    "renameMedia": ["checked", "hidden"],
+                    "moveMedia": ["checked", "hidden"],
+                    "createMediaFolder": ["checked", "hidden"]
+                }
             }
         ],
         "userGroups": ["Administrator", "Super User"]
@@ -608,7 +663,10 @@
                     "restoreMemorabilia",
                     "stateMemorabilia",
                     "orderingMemorabilia"
-                ]
+                ],
+                "defaultApis": {
+                    "getOption": ["checked", "hidden"]
+                }
             },
             {
                 "title": "COM_FINANCE_MANAGER_TITLE",
@@ -633,7 +691,11 @@
                     "getOption": ["checked", "hidden"],
                     "uploadMedia": ["checked", "hidden"],
                     "getMediaAllItems": ["checked", "hidden"],
-                    "getMediaAllFolders": ["checked", "hidden"]
+                    "getMediaAllFolders": ["checked", "hidden"],
+                    "deleteMedia": ["checked", "hidden"],
+                    "renameMedia": ["checked", "hidden"],
+                    "moveMedia": ["checked", "hidden"],
+                    "createMediaFolder": ["checked", "hidden"]
                 }
             },
             {
@@ -659,7 +721,11 @@
                     "getOption": ["checked", "hidden"],
                     "uploadMedia": ["checked", "hidden"],
                     "getMediaAllItems": ["checked", "hidden"],
-                    "getMediaAllFolders": ["checked", "hidden"]
+                    "getMediaAllFolders": ["checked", "hidden"],
+                    "deleteMedia": ["checked", "hidden"],
+                    "renameMedia": ["checked", "hidden"],
+                    "moveMedia": ["checked", "hidden"],
+                    "createMediaFolder": ["checked", "hidden"]
                 }
             },
             {
@@ -685,7 +751,11 @@
                     "getOption": ["checked", "hidden"],
                     "uploadMedia": ["checked", "hidden"],
                     "getMediaAllItems": ["checked", "hidden"],
-                    "getMediaAllFolders": ["checked", "hidden"]
+                    "getMediaAllFolders": ["checked", "hidden"],
+                    "deleteMedia": ["checked", "hidden"],
+                    "renameMedia": ["checked", "hidden"],
+                    "moveMedia": ["checked", "hidden"],
+                    "createMediaFolder": ["checked", "hidden"]
                 }
             }
         ],
@@ -758,7 +828,11 @@
                     "getOption": ["checked", "hidden"],
                     "uploadMedia": ["checked", "hidden"],
                     "getMediaAllItems": ["checked", "hidden"],
-                    "getMediaAllFolders": ["checked", "hidden"]
+                    "getMediaAllFolders": ["checked", "hidden"],
+                    "deleteMedia": ["checked", "hidden"],
+                    "renameMedia": ["checked", "hidden"],
+                    "moveMedia": ["checked", "hidden"],
+                    "createMediaFolder": ["checked", "hidden"]
                 }
             },
             {
@@ -783,7 +857,13 @@
                     "getOption": ["checked", "hidden"],
                     "uploadMedia": ["checked", "hidden"],
                     "getMediaAllItems": ["checked", "hidden"],
-                    "getMediaAllFolders": ["checked", "hidden"]
+                    "getMediaAllFolders": ["checked", "hidden"],
+                    "deleteMedia": ["checked", "hidden"],
+                    "renameMedia": ["checked", "hidden"],
+                    "moveMedia": ["checked", "hidden"],
+                    "createMediaFolder": ["checked", "hidden"],
+                    "searchBulletin": ["checked", "hidden"],
+                    "searchPromotion": ["checked", "hidden"]
                 }
             },
             {
@@ -803,7 +883,10 @@
                     "searchNewsletterSubscription",
                     "restoreNewsletterSubscription",
                     "stateNewsletterSubscription"
-                ]
+                ],
+                "defaultApis": {
+                    "getOption": ["checked", "hidden"]
+                }
             }
         ],
         "userGroups": ["Administrator", "Super User"]
@@ -831,7 +914,10 @@
                 "apis": [
                     "getUser",
                     "searchUserGroup"
-                ]
+                ],
+                "defaultApis": {
+                    "getOption": ["checked", "hidden"]
+                }
             },
             {
                 "title": "COM_MEMBERS_TAX_MANAGER_TITLE",
@@ -848,7 +934,10 @@
                     "editCompany",
                     "deleteCompany",
                     "searchCompany"
-                ]
+                ],
+                "defaultApis": {
+                    "getOption": ["checked", "hidden"]
+                }
             }
         ],
         "userGroups": ["Administrator", "Super User"]
@@ -897,7 +986,10 @@
                     "deleteUser",
                     "searchUser",
                     "blockUser"
-                ]
+                ],
+                "defaultApis": {
+                    "getOption": ["checked", "hidden"]
+                }
             }
         ],
         "userGroups": ["Administrator", "Super User"]
@@ -926,7 +1018,8 @@
                     "getCustomerMessage",
                     "editCustomerMessage",
                     "searchCustomerMessage",
-                    "restoreCustomerMessage"
+                    "restoreCustomerMessage",
+                    "storeCustomerMessageReply"
                 ]
             }
         ],
