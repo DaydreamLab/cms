@@ -24,6 +24,7 @@ class BrandAdminService extends BrandService
         if (count($tagIds)) {
             $item->tags()->attach($tagIds);
         }
+        $item->users()->attach($this->user->id);
     }
 
 

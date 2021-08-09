@@ -9,6 +9,7 @@ use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\UserInfo;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\Media\Models\File\File;
+use DaydreamLab\User\Models\User\User;
 
 class Brand extends BaseModel
 {
@@ -110,6 +111,13 @@ class Brand extends BaseModel
     public function files()
     {
         return $this->belongsToMany(File::class, 'brands_files_maps', 'brand_id', 'file_id')
+            ->withTimestamps();
+    }
+
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'brands_users_maps', 'brand_id', 'user_id')
             ->withTimestamps();
     }
 }
