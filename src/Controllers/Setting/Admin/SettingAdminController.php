@@ -31,6 +31,14 @@ class SettingAdminController extends CmsController
     }
 
 
+    public function siteInfo()
+    {
+        $this->service->siteInfo();
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
+
     public function store(SettingAdminStorePost $request)
     {
         $this->service->setUser($request->user('api'));

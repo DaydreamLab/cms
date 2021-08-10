@@ -24,25 +24,15 @@ class SettingFrontService extends SettingService
     {
         $global = config('daydreamlab.global');
 
-        $site_setting = $this->siteService->findByChain(
-            ['sef', 'url'],
-            ['=', '='],
-            [$locale ?: $global['locale'], $host]
-        )->first();
+        $item = $this->siteService->find(1);
 
-        if($site_setting)
-        {
-            $data['sitename']       = $site_setting->sitename       ?: $global['sitename'];
-            $data['locale']         = $global['locale'];
-            $data['custom_header']  = $global['custom_head'];
-            $data['custom_body']    = $global['custom_body'];
-            $data['custom_footer']  = $global['custom_footer'];
-
-            $this->status   = 'GetItemSuccess';
-            $this->response = $data;
-        }
-        else
-        {
+        if ($item) {
+            $response = $item->params;
+            $response['sitename'] = $item->sitename;
+            $response['siteurl'] = $item->url;
+            $this->status = 'GetItemSuccess';
+            $this->response = $response;
+        } else {
             $this->status   = 'ItemNotExist';
             $this->response = null;
         }

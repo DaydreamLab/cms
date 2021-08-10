@@ -320,6 +320,8 @@ Route::post('api/admin/option/list', [OptionController::class, 'mergeList'])
 # 全站設定 Setting
 Route::post('api/admin/setting/store', [SettingAdminController::class, 'store'])
     ->middleware(['expired','admin']);
+Route::get('api/admin/siteInfo', [SettingAdminController::class, 'siteInfo'])
+    ->middleware(['expired','admin']);
 Route::get('api/admin/setting', [SettingAdminController::class, 'getItem'])
     ->middleware(['expired','admin']);
 
