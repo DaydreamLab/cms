@@ -84,8 +84,9 @@ class ItemAdminContentStorePost extends AdminRequest
             'brands.*'              => 'nullable|array',
             'brands.*.id'           => 'required|integer',
 
-            'fileIds'               => 'nullable|array',
-            'fileIds.*'             => 'required|integer',
+            'files'                 => 'nullable|array',
+            'files.*'               => 'nullable|array',
+            'files.*.id'            => 'required|integer',
 
             'newsletterUserGroupIds'    => 'nullable|array',
             'newsletterUserGroupIds.*'  => 'nullable|integer',

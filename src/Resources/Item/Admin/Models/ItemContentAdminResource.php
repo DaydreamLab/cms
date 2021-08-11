@@ -41,7 +41,9 @@ class ItemContentAdminResource extends BaseJsonResource
                 return $b->only(['id', 'title']);
             }),
             'products'                  => $this->products,
-
+            'files'                     => $this->files->map(function ($f) {
+                return $f->only(['id', 'name', 'size', 'downloadLink']);
+            }),
             'extrafields'               => $this->extrafields,
             'created_at'                => $this->getDateTimeString($this->created_at, $tz),
             'updated_at'                => $this->getDateTimeString($this->updated_at, $tz),

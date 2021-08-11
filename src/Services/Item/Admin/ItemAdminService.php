@@ -62,8 +62,12 @@ class ItemAdminService extends ItemService
             $item->products()->attach($product_ids);
         }
 
-        if (count($fileIds = $input->get('fileIds') ?: [])) {
-            $item->files()->attach($fileIds);
+        $files = $input->get('files') ? $input->get('files') : [];
+        $files_ids = array_map(function($file) {
+            return $file['id'];
+        }, $files);
+        if (count($files_ids)) {
+            $item->files()->attach($files_ids);
         }
 
         $newsletterUserGroupIds = $input->get('newsletterUserGroupIds') ?: [];
@@ -96,8 +100,11 @@ class ItemAdminService extends ItemService
             $item->products()->sync($product_ids);
         }
 
-        if (count($fileIds = $input->get('fileIds') ?: [])) {
-            $item->files()->sync($fileIds);
+        if ( $input->get('files') !== null ) {
+            $file_ids = array_map(function($file) {
+                return $file['id'];
+            }, $input->get('files'));
+            $item->files()->sync($file_ids);
         }
 
         $newsletterUserGroupIds = $input->get('newsletterUserGroupIds') ?: [];
