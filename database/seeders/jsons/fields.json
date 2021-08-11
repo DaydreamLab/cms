@@ -412,24 +412,6 @@
    },
    {
      "content_type": "finance",
-     "title": "上傳檔案url",
-     "alias": "file_url",
-     "type": "text",
-     "required": 0,
-     "access": 1,
-     "created_by": 1
-   },
-   {
-     "content_type": "finance",
-     "title": "連結網址url",
-     "alias": "web_url",
-     "type": "text",
-     "required": 0,
-     "access": 1,
-     "created_by": 1
-   },
-   {
-     "content_type": "finance",
      "title": "年份",
      "alias": "year",
      "type": "text",
@@ -459,24 +441,6 @@
      "created_by": 1
    },
    {
-     "content_type": "rules",
-     "title": "上傳檔案url",
-     "alias": "file_url",
-     "type": "text",
-     "required": 0,
-     "access": 1,
-     "created_by": 1
-   },
-   {
-     "content_type": "rules",
-     "title": "連結網址url",
-     "alias": "web_url",
-     "type": "text",
-     "required": 0,
-     "access": 1,
-     "created_by": 1
-   },
-   {
      "content_type": "stockholder",
      "title": "檔案上傳",
      "alias": "file_upload",
@@ -493,24 +457,6 @@
          }
        ]
      },
-     "required": 0,
-     "access": 1,
-     "created_by": 1
-   },
-   {
-     "content_type": "stockholder",
-     "title": "上傳檔案url",
-     "alias": "file_url",
-     "type": "text",
-     "required": 0,
-     "access": 1,
-     "created_by": 1
-   },
-   {
-     "content_type": "stockholder",
-     "title": "連結網址url",
-     "alias": "web_url",
-     "type": "text",
      "required": 0,
      "access": 1,
      "created_by": 1

@@ -66,6 +66,7 @@ Route::post('api/customer/message/send', [CustomerMessageFrontController::class,
 Route::post('api/newsletter/subscribe', [NewsletterSubscriptionFrontController::class, 'store']);
 
 # 品牌
+Route::post('api/brand/search', [BrandFrontController::class, 'search']);
 Route::get('api/brand/{alias}', [BrandFrontController::class, 'getBrandByAlias']);
 
 # 產品

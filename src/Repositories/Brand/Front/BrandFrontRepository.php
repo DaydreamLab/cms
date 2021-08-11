@@ -12,4 +12,10 @@ class BrandFrontRepository extends BrandRepository
         parent::__construct($model);
         $this->model = $model;
     }
+
+
+    public function getAllBrands()
+    {
+        return $this->model->where('state', 1)->get();
+    }
 }

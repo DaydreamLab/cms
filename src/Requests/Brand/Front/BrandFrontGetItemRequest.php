@@ -23,7 +23,7 @@ class BrandFrontGetItemRequest extends CmsGetItemGet
      */
     public function rules()
     {
-        $rules =[
+        $rules = [
             //
         ];
 

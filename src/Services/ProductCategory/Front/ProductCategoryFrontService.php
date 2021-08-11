@@ -12,4 +12,9 @@ class ProductCategoryFrontService extends ProductCategoryService
         parent::__construct($repo);
         $this->repo = $repo;
     }
+
+    public function findSubTreeIds($id)
+    {
+        return $this->repo->findSubTreeIds($id);
+    }
 }

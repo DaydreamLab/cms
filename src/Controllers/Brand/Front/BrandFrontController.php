@@ -31,4 +31,17 @@ class BrandFrontController extends CmsController
 
         return $this->response($this->service->status, $this->service->response, [], BrandFrontResource::class);
     }
+
+
+    public function search(BrandFrontSearchRequest $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->search($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
 }

@@ -87,12 +87,11 @@ class OptionService
         {
             $service = $this->map[$type];
             $q = new QueryCapsule();
-            //$q = $q->where('paginate', 0);
             if ($type == 'asset') {
                 $data[$type] = $this->getOptionList($service, 'tree', collect(['q' => $q]), []);
             } elseif ($type == 'brand') {
                 $data[$type] = $this->getOptionList($service, 'list', collect(
-                    ['q' => $q->where('state', 1)]
+                    ['q' => $q->where('state', 1), 'limit' => 0]
                 ));
             } elseif ($type == 'extension') {
                 $data[$type] = $service;
@@ -122,15 +121,15 @@ class OptionService
                 $data[$type] = $this->getOptionList($service, 'tree', collect(['q' => $q]) , ['alias']);
             } elseif ($type == 'product_category') {
                 $data[$type] = $this->getOptionList($service, 'tree', collect(
-                    ['q' => $q->where('state', 1)]
+                    ['q' => $q->where('state', 1), 'limit' => 0]
                 ));
             } elseif ($type == 'product_parent_category') {
                 $data[$type] = $this->getOptionList($service, 'list', collect(
-                    ['q' => $q->where('state', 1)->where('parent_id', null)]
+                    ['q' => $q->where('state', 1)->where('parent_id', null), 'limit' => 0]
                 ));
             } elseif ($type == 'product_child_category') {
                 $data[$type] = $this->getOptionList($service, 'list', collect(
-                    ['q' => $q->where('state', 1)->where('parent_id', '!=', null)]
+                    ['q' => $q->where('state', 1)->where('parent_id', '!=', null), 'limit' => 0]
                 ));
             } elseif ($type == 'solution_category') {
                 $q = $q->orderBy('id', 'asc');
@@ -138,6 +137,7 @@ class OptionService
                     [
                         'q' => $q->where('state', 1),
                         'content_type' => 'solution_category',
+                        'limit' => 0
                     ]
                 ));
             } elseif ($type == 'industry_category') {
@@ -146,17 +146,18 @@ class OptionService
                     [
                         'q' => $q->where('state', 1),
                         'content_type' => 'industry_category',
+                        'limit' => 0
                     ]
                 ));
             } elseif ($type == 'site') {
                 $data[$type] = $this->getOptionList($service, 'list', collect(['q' => $q]), ['url']);
             } elseif ($type == 'user_group') {
                 $q = $q->where('title', '!=', 'ROOT');
-                $data[$type] = $this->getOptionList($service, 'tree', collect(['q' => $q]));
+                $data[$type] = $this->getOptionList($service, 'tree', collect(['q' => $q, 'limit' => 0]));
             } elseif ($type == 'viewlevel') {
                 $user = $this->getUser();
                 $q = $q->whereIn('id', $user->accessIds);
-                $data[$type] = $this->getOptionList($service, 'list', collect(['q' => $q]));
+                $data[$type] = $this->getOptionList($service, 'list', collect(['q' => $q, 'limit' => 0]));
             } elseif ($type == 'memorabilia_year') {
                 $ex = Extrafield::where('content_type', 'memorabilia')->where('alias', 'year')->first();
                 if ($ex) {
@@ -183,14 +184,15 @@ class OptionService
                     [
                         'q' => $q->where('state', 1),
                         'content_type' => 'newsletter_category',
+                        'limit' => 0
                     ]
                 ));
             } elseif ($type == 'download_file_category') {
                 $q = $q->where('contentType', 'file');
-                $data[$type] = $this->getOptionList($service, 'list', collect(['q' => $q]));
+                $data[$type] = $this->getOptionList($service, 'list', collect(['q' => $q, 'limit' => 0]));
             } elseif ($type == 'contract_file_category') {
                 $q = $q->where('contentType', 'contract');
-                $data[$type] = $this->getOptionList($service, 'list', collect(['q' => $q]));
+                $data[$type] = $this->getOptionList($service, 'list', collect(['q' => $q, 'limit' => 0]));
             } elseif ($type == 'front_user_group') {
                 $register = $service->findBy('title', '=', 'Registered')->first();
                 $root = $register->only(['id', 'title']);

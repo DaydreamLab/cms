@@ -6,6 +6,7 @@ use DaydreamLab\Cms\Requests\CmsSearchPost;
 
 class BrandFrontSearchRequest extends CmsSearchPost
 {
+    protected $searchKeys = ['title', 'title_zhtw', 'description'];
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -23,8 +24,8 @@ class BrandFrontSearchRequest extends CmsSearchPost
      */
     public function rules()
     {
-        $rules =[
-            //
+        $rules = [
+            'product_category_alias'   => 'nullable|string'
         ];
 
         return array_merge(parent::rules(), $rules);
