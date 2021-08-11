@@ -62,6 +62,10 @@ class ItemAdminService extends ItemService
             $item->products()->attach($product_ids);
         }
 
+        if (count($fileIds = $input->get('fileIds') ?: [])) {
+            $item->files()->attach($fileIds);
+        }
+
         $newsletterUserGroupIds = $input->get('newsletterUserGroupIds') ?: [];
         if (count($newsletterUserGroupIds)) {
             $item->newsletterUserGroups()->attach($newsletterUserGroupIds);
@@ -92,10 +96,24 @@ class ItemAdminService extends ItemService
             $item->products()->sync($product_ids);
         }
 
+        if (count($fileIds = $input->get('fileIds') ?: [])) {
+            $item->files()->sync($fileIds);
+        }
+
         $newsletterUserGroupIds = $input->get('newsletterUserGroupIds') ?: [];
         if (count($newsletterUserGroupIds)) {
             $item->newsletterUserGroups()->sync($newsletterUserGroupIds);
         }
+    }
+
+
+    public function removeMapping($item)
+    {
+        $item->tags()->detach();
+        $item->brands()->detach();
+        $item->products()->detach();
+        $item->files()->detach();
+        $item->newsletterUserGroups()->detach();
     }
 
 

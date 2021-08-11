@@ -10,6 +10,7 @@ use DaydreamLab\Cms\Traits\Model\WithLanguage;
 use DaydreamLab\Cms\Traits\WithExtrafield;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
+use DaydreamLab\Media\Models\File\File;
 use DaydreamLab\User\Models\User\UserGroup;
 use DaydreamLab\User\Traits\Model\WithAccess;
 
@@ -66,7 +67,8 @@ class Item extends BaseModel
 
     protected $with = [
         'category',
-        'tags'
+        'tags',
+        'files'
     ];
 
 
@@ -129,6 +131,13 @@ class Item extends BaseModel
     public function brands()
     {
         return $this->belongsToMany(Brand::class, 'brands_items_maps', 'item_id', 'brand_id')
+            ->withTimestamps();
+    }
+
+
+    public function files()
+    {
+        return $this->belongsToMany(File::class, 'items_files_maps', 'itemId', 'fileId', 'id', 'id')
             ->withTimestamps();
     }
 

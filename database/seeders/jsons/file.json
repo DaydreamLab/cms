@@ -18,5 +18,23 @@
     "title": "測試文件",
     "state": 1,
     "contentType": "file"
+  },
+  {
+    "title": "財務資訊",
+    "state": 1,
+    "contentType": "file",
+    "extension": "finance"
+  },
+  {
+    "title": "重要規章",
+    "state": 1,
+    "contentType": "file",
+    "extension": "rule"
+  },
+  {
+    "title": "股東專欄",
+    "state": 1,
+    "contentType": "file",
+    "extension": "stockholder"
   }
 ]
