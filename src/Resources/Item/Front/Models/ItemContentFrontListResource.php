@@ -16,7 +16,6 @@ class ItemContentFrontListResource extends BaseJsonResource
     {
 
         return [
-            'id'                        => $this->id,
             'title'                     => $this->title,
             'alias'                     => $this->alias,
             'state'                     => $this->state,

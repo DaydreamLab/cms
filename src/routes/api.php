@@ -71,7 +71,7 @@ Route::get('api/brand/{alias}', [BrandFrontController::class, 'getBrandByAlias']
 
 # 產品
 Route::post('api/product/search', [ProductFrontController::class, 'search']);
-
+Route::get('api/product/{alias}', [ProductFrontController::class, 'getByAlias']);
 # 解決方案
 # 成功案例
 # 最新消息

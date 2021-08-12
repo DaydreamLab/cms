@@ -15,7 +15,6 @@ class BrandFrontResource extends BaseJsonResource
     public function toArray($request)
     {
         return [
-            'id'                    => $this->id,
             'alias'                 => $this->alias,
             'title'                 => $this->title,
             'title_zhtw'            => $this->title_zhtw,

@@ -17,6 +17,8 @@ class ProductFront extends Product
 
     protected $hidden = [
         'id',
+        'product_category_id',
+        'state',
         'created_by',
         'updated_by'
     ];

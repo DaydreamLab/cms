@@ -3,7 +3,9 @@
 namespace DaydreamLab\Cms\Controllers\Product\Front;
 
 use DaydreamLab\Cms\Controllers\cmsController;
+use DaydreamLab\Cms\Requests\Product\Front\ProductFrontGetItemRequest;
 use DaydreamLab\Cms\Requests\Product\Front\ProductFrontSearchRequest;
+use DaydreamLab\Cms\Resources\Product\Front\Models\ProductFrontResource;
 use DaydreamLab\Cms\Resources\Product\Front\Collections\ProductFrontListResourceCollection;
 use DaydreamLab\Cms\Services\Product\Front\ProductFrontService;
 use Throwable;
@@ -16,6 +18,19 @@ class ProductFrontController extends cmsController
     {
         parent::__construct($service);
         $this->service = $service;
+    }
+
+
+    public function getByAlias(ProductFrontGetItemRequest $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->getByAlias($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response, [], ProductFrontResource::class);
     }
 
 

@@ -4,7 +4,7 @@ namespace DaydreamLab\Cms\Resources\Product\Front\Models;
 
 use DaydreamLab\JJAJ\Resources\BaseJsonResource;
 
-class ProductFrontListResource extends BaseJsonResource
+class ProductFrontResource extends BaseJsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,7 +18,7 @@ class ProductFrontListResource extends BaseJsonResource
         return [
             'title'                     => $this->title,
             'alias'                     => $this->alias,
-
+            'product_data'              => $this->product_data
         ];
     }
 }

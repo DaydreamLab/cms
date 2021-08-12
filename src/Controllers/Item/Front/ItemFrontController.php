@@ -5,6 +5,7 @@ namespace DaydreamLab\Cms\Controllers\Item\Front;
 use DaydreamLab\Cms\Controllers\CmsController;
 use DaydreamLab\Cms\Requests\Item\Front\ItemFrontGetItemGet;
 use DaydreamLab\Cms\Requests\Item\Front\ItemFrontSearchPost;
+use DaydreamLab\Cms\Requests\Item\Front\ItemFrontContentGetItemGet;
 use DaydreamLab\Cms\Requests\Item\Front\ItemFrontContentSearchPost;
 use DaydreamLab\Cms\Resources\Item\Front\Collections\ItemFrontListResourceCollection;
 use DaydreamLab\Cms\Resources\Item\Front\Collections\ItemContentFrontListResourceCollection;
@@ -25,13 +26,11 @@ class ItemFrontController extends CmsController
     }
 
 
-    public function getContentByAlias(ItemFrontGetItemGet $request)
+    public function getContentByAlias(ItemFrontContentGetItemGet $request)
     {
         $this->service->setUser($request->user('api'));
         try {
-            $this->service->getItemByAlias(Helper::collect([
-                'alias'     => $request->route('alias')
-            ]));
+            $this->service->getItemByAlias($request->validated());
         } catch (Throwable $t) {
             $this->handleException($t);
         }

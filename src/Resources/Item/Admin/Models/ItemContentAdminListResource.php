@@ -19,6 +19,7 @@ class ItemContentAdminListResource extends BaseJsonResource
             'id'                        => $this->id,
             'title'                     => $this->title,
             'alias'                     => $this->alias,
+            'introtext'                 => $this->introtext,
             'state'                     => $this->state,
             'ordering'                  => $this->ordering,
             'featured'                  => $this->featured,

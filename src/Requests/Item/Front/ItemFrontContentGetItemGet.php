@@ -1,11 +1,12 @@
 <?php
 
-namespace DaydreamLab\Cms\Requests\Product\Front;
+namespace DaydreamLab\Cms\Requests\Item\Front;
 
-use DaydreamLab\Cms\Requests\cmsGetItemRequest;
+use DaydreamLab\Cms\Requests\CmsGetItemGet;
 
-class ProductFrontGetItemRequest extends cmsGetItemRequest
+class ItemFrontContentGetItemGet extends CmsGetItemGet
 {
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -23,11 +24,7 @@ class ProductFrontGetItemRequest extends cmsGetItemRequest
      */
     public function rules()
     {
-        $rules = [
-            //
-        ];
-
-        return array_merge(parent::rules(), $rules);
+        return parent::rules();
     }
 
 

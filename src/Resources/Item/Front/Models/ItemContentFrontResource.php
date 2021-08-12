@@ -16,7 +16,6 @@ class ItemContentFrontResource extends BaseJsonResource
     {
 
         return [
-            'id'                        => $this->id,
             'title'                     => $this->title,
             'alias'                     => $this->alias,
             'category_id'               => $this->category->id,
@@ -37,9 +36,6 @@ class ItemContentFrontResource extends BaseJsonResource
             'language'                  => $this->language,
             'params'                    => $this->params,
             'tags'                      => $this->tags,
-
-
-
             'extrafields'               => $this->extrafields,
 
         ];
