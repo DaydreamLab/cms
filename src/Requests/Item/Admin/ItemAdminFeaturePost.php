@@ -3,7 +3,6 @@
 namespace DaydreamLab\Cms\Requests\Item\Admin;
 
 use DaydreamLab\Cms\Requests\CmsFeaturedPost;
-use DaydreamLab\Cms\Requests\Item\ItemFeaturePost;
 
 class ItemAdminFeaturePost extends CmsFeaturedPost
 {

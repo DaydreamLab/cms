@@ -618,6 +618,7 @@
                     "searchVideo",
                     "restoreVideo",
                     "stateVideo",
+                    "featuredVideo",
                     "orderingVideo"
                 ],
                 "defaultApis": {

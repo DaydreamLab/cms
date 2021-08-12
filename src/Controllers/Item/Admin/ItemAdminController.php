@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Controllers\Item\Admin;
 
 use DaydreamLab\Cms\Controllers\CmsController;
 use DaydreamLab\Cms\Models\Item\Item;
+use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminContentFeaturePost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminContentGetItemGet;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminContentRemovePost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminContentRestorePost;
@@ -38,6 +39,19 @@ class ItemAdminController extends CmsController
 
 
     public function featured(ItemAdminFeaturePost $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->featured($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
+
+    public function featuredContent(ItemAdminContentFeaturePost $request)
     {
         $this->service->setUser($request->user('api'));
         try {

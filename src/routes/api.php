@@ -138,12 +138,12 @@ Route::get('api/admin/product/category/{id}', [ProductCategoryAdminController::c
 # 最新消息
 # 促銷消息
 # 01影片
-Route::post('api/admin/item/video/featured', [ItemAdminController::class, 'featured'])
-    ->middleware(['expired','admin']);
 # 大事紀
 # 財務資訊
 # 重要規章
 # 股東專欄
+Route::post('api/admin/item/{content_type}/featured', [ItemAdminController::class, 'featuredContent'])
+    ->middleware(['expired','admin']);
 Route::post('api/admin/item/{content_type}/remove', [ItemAdminController::class, 'removeContent'])
     ->middleware(['expired','admin']);
 Route::post('api/admin/item/{content_type}/restore', [ItemAdminController::class, 'restoreContent'])

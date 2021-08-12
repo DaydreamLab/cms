@@ -21,6 +21,11 @@ class ProductFrontService extends ProductService
     {
 
         if ( $brand_alias = $input->get('brand_alias') ) {
+
+            foreach ($brand_alias as $ba) {
+
+            }
+
             $brand = Brand::where('alias', $brand_alias)->first();
             if ($brand) {
                 $q = $input->get('q');

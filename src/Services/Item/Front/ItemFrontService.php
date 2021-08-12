@@ -336,22 +336,10 @@ class ItemFrontService extends ItemService
 
         $input->put('paginate', $paginate);
         $input->put('state', 1);
-        $copy = Helper::collect($input->toArray());
 
         $items = parent::search($input);
 
-        $data = $this->paginationFormat($items->toArray());
-
-        if (config('cms.item.front.search_filter'))
-        {
-            $copy->forget('paginate');
-            $copy->forget('search');
-            $copy->put('paginate', false);
-            $temp = parent::search($copy);
-            $data['filter'] = $this->getSearchfilter($temp);
-        }
-
-        $this->response = $data;
+        $this->response = $items;
 
         event(new Search($input, $this->user));
 

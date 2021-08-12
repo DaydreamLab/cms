@@ -25,8 +25,10 @@ class ProductFrontSearchRequest extends CmsSearchPost
     public function rules()
     {
         $rules = [
-            'brand_alias'              => 'nullable|string',
-            'product_category_alias'   => 'nullable|string'
+            'brand_alias'              => 'nullable|array',
+            'brand_alias.*'            => 'required|string',
+            'product_category_alias'   => 'nullable|array',
+            'product_category_alias.*' => 'required|string'
         ];
 
         return array_merge(parent::rules(), $rules);

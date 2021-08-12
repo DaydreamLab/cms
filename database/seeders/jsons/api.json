@@ -1056,6 +1056,12 @@
         "created_by": 1
     },
     {
+        "name": "精選零壹影片",
+        "method": "featuredVideo",
+        "url": "/admin/item/video/featured",
+        "created_by": 1
+    },
+    {
         "name": "取得零壹大事紀",
         "method": "getMemorabilia",
         "url": "/admin/item/memorabilia/{id}",

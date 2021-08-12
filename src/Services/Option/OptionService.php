@@ -191,7 +191,7 @@ class OptionService
                 $q = $q->where('contentType', 'file');
                 $data[$type] = $this->getOptionList($service, 'list', collect(['q' => $q, 'limit' => 0]));
             } elseif ($type == 'contract_file_category') {
-                $q = $q->where('contentType', 'contract');
+                $q = $q->where('contentType', 'contract')->where('extension', null);
                 $data[$type] = $this->getOptionList($service, 'list', collect(['q' => $q, 'limit' => 0]));
             } elseif ($type == 'front_user_group') {
                 $register = $service->findBy('title', '=', 'Registered')->first();

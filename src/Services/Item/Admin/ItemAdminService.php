@@ -133,7 +133,6 @@ class ItemAdminService extends ItemService
             $content_type = '';
         }
 
-
         if (!InputHelper::null($input, 'category_id')) {
             $category_ids = $this->categoryAdminService->findSubTreeIds($input->get('category_id'));
         } else {
