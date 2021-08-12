@@ -26,7 +26,7 @@ class ItemFrontContentSearchPost extends ListRequest
     public function rules()
     {
         $rules = [
-            'language'          => 'nullable|string|max:5',
+            'language'      => 'nullable|string|max:5',
             'order_by'      => [
                 'nullable',
                 'string',
@@ -45,9 +45,8 @@ class ItemFrontContentSearchPost extends ListRequest
                 ])
             ],
             'content_type'  => 'nullable|string',
-            'brand_id'      => 'nullable|integer',
-            'register_time' => 'nullable|date',
-            'document_type' => 'nullable|string'
+            'brand_alias'   => 'nullable|string',
+            'register_time' => 'nullable|date'
         ];
 
         return array_merge(parent::rules(), $rules);
@@ -65,13 +64,6 @@ class ItemFrontContentSearchPost extends ListRequest
             })->toArray();
             $validated['q'] = $this->q->whereIn('category_id', $category_ids);
         }
-
-        if ($brand_id = $validated->get('brand_id') ) {
-            $validated['q'] = $this->q->whereHas('brands', function ($query) use ($brand_id) {
-                $query->where('brands_items_maps.brand_id', '=', $brand_id);
-            });
-        }
-        $validated->forget('brand_id');
 
         return $validated;
     }

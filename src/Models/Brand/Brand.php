@@ -74,9 +74,9 @@ class Brand extends BaseModel
 
 
     protected $casts = [
-        'contact' => 'array',
+        'contact'   => 'array',
         'params'    => 'array',
-        'tracking' => 'array',
+        'tracking'  => 'array',
         'locked_at' => 'datetime:Y-m-d H:i:s',
     ];
 

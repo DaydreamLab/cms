@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Services\Item\Front;
 
 use Carbon\Carbon;
 use DaydreamLab\Cms\Events\Search;
+use DaydreamLab\Cms\Models\Brand\Brand;
 use DaydreamLab\Cms\Repositories\Item\Front\ItemFrontRepository;
 use DaydreamLab\Cms\Services\Category\Front\CategoryFrontService;
 use DaydreamLab\Cms\Services\Item\ItemService;
@@ -51,7 +52,6 @@ class ItemFrontService extends ItemService
                        $result[$key][$index] = $objects;
                    }
                }
-
             }
         }
         else
@@ -297,6 +297,45 @@ class ItemFrontService extends ItemService
 
         $input->put('state', 1);
         $input->put('q', $q);
+        $copy = Helper::collect($input->toArray());
+
+        $items = parent::search($input);
+
+        $data = $this->paginationFormat($items->toArray());
+
+        if (config('cms.item.front.search_filter'))
+        {
+            $copy->forget('paginate');
+            $copy->forget('search');
+            $copy->put('paginate', false);
+            $temp = parent::search($copy);
+            $data['filter'] = $this->getSearchfilter($temp);
+        }
+
+        $this->response = $data;
+
+        event(new Search($input, $this->user));
+
+        return $items;
+    }
+
+
+    public function searchContent(Collection $input, $paginate = true)
+    {
+        if ( $brand_alias = $input->get('brand_alias') ) {
+            $brand = Brand::where('alias', $brand_alias)->first();
+            if ($brand) {
+                $q = $input->get('q');
+                $q = $q->whereHas('brands', function ($query) use ($brand) {
+                    $query->where('brands_items_maps.brand_id', '=', $brand->id);
+                });
+                $input->put('q', $q);
+            }
+            $input->forget('brand_alias');
+        }
+
+        $input->put('paginate', $paginate);
+        $input->put('state', 1);
         $copy = Helper::collect($input->toArray());
 
         $items = parent::search($input);

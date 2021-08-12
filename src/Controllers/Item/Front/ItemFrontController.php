@@ -30,10 +30,7 @@ class ItemFrontController extends CmsController
         $this->service->setUser($request->user('api'));
         try {
             $this->service->getItemByAlias(Helper::collect([
-                'alias'     => $request->route('alias'),
-                'language'  => $request->get('language') != ''
-                    ? $request->get('language')
-                    : config('daydreamlab.global.locale')
+                'alias'     => $request->route('alias')
             ]));
         } catch (Throwable $t) {
             $this->handleException($t);
@@ -78,7 +75,7 @@ class ItemFrontController extends CmsController
     {
         $this->service->setUser($request->user('api'));
         try {
-            $this->service->search($request->validated());
+            $this->service->searchContent($request->validated());
         } catch (Throwable $t) {
             $this->handleException($t);
         }

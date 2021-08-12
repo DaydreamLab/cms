@@ -2,6 +2,7 @@
 namespace DaydreamLab\Cms\Models\Brand\Front;
 
 use DaydreamLab\Cms\Models\Brand\Brand;
+use DaydreamLab\Cms\Models\Item\Front\ItemFront;
 
 class BrandFront extends Brand
 {
@@ -15,6 +16,11 @@ class BrandFront extends Brand
     protected $model_type = 'front';
 
 
+    protected $hidden = [
+        'id',
+        'updated_by',
+        'created_by'
+    ];
     /**
      * The attributes that should be append for arrays
      *
@@ -23,6 +29,13 @@ class BrandFront extends Brand
     protected $appends = [
 
     ];
+
+
+    public function items()
+    {
+        return $this->belongsToMany(ItemFront::class, 'brands_items_maps', 'brand_id', 'item_id')
+            ->withTimestamps();
+    }
 
 
     public function getItemsAttribute()

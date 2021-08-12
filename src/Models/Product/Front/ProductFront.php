@@ -14,4 +14,10 @@ class ProductFront extends Product
 
     protected $model_type = 'front';
 
+
+    protected $hidden = [
+        'id',
+        'created_by',
+        'updated_by'
+    ];
 }
