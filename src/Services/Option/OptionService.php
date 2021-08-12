@@ -188,10 +188,10 @@ class OptionService
                     ]
                 ));
             } elseif ($type == 'download_file_category') {
-                $q = $q->where('contentType', 'file');
+                $q = $q->where('contentType', 'file')->where('extension', null);
                 $data[$type] = $this->getOptionList($service, 'list', collect(['q' => $q, 'limit' => 0]));
             } elseif ($type == 'contract_file_category') {
-                $q = $q->where('contentType', 'contract')->where('extension', null);
+                $q = $q->where('contentType', 'contract');
                 $data[$type] = $this->getOptionList($service, 'list', collect(['q' => $q, 'limit' => 0]));
             } elseif ($type == 'front_user_group') {
                 $register = $service->findBy('title', '=', 'Registered')->first();
