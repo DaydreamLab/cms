@@ -115,6 +115,22 @@ class ItemFrontService extends ItemService
     }
 
 
+    public function getContentByAlias(Collection $input)
+    {
+        $content = $this->repo->findBy('alias', '=', $input->get('alias'))->first();
+        if ($content) {
+            $prevAndNext = $this->repo->getPreviousAndNext($content);
+            $content->previous = $prevAndNext['previous'];
+            $content->next     = $prevAndNext['next'];
+            $this->status   = 'GetItemSuccess';
+            $this->response = $content;
+        } else {
+            $this->throwResponse('ItemNotExist', ['alias' => $input->get('alias')]);
+        }
+        return $this->response;
+    }
+
+
     public function getItem($id)
     {
         $item = parent::getItem($id);

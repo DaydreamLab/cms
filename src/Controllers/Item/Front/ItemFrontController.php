@@ -30,7 +30,7 @@ class ItemFrontController extends CmsController
     {
         $this->service->setUser($request->user('api'));
         try {
-            $this->service->getItemByAlias($request->validated());
+            $this->service->getContentByAlias($request->validated());
         } catch (Throwable $t) {
             $this->handleException($t);
         }

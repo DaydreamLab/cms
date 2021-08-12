@@ -17,6 +17,15 @@ class ProductFrontService extends ProductService
     }
 
 
+    public function getByAlias(Collection $input)
+    {
+        $product = $this->repo->findBy('alias', '=', $input->get('alias'))->first();
+        $this->status = 'GetItemSuccess';
+        $this->response = $product;
+        return $product;
+    }
+
+
     public function search(Collection $input)
     {
         if ( $brand_alias = $input->get('brand_alias') ) {

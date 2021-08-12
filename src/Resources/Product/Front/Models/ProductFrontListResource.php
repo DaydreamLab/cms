@@ -14,11 +14,10 @@ class ProductFrontListResource extends BaseJsonResource
      */
     public function toArray($request)
     {
-
         return [
-            'title'                     => $this->title,
-            'alias'                     => $this->alias,
-
+            'title'             => $this->title,
+            'alias'             => $this->alias,
+            'brandTitle'        => $this->brand_title
         ];
     }
 }
