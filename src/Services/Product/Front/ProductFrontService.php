@@ -19,18 +19,19 @@ class ProductFrontService extends ProductService
 
     public function search(Collection $input)
     {
-
         if ( $brand_alias = $input->get('brand_alias') ) {
-
+            $brand_ids = [];
             foreach ($brand_alias as $ba) {
-
+                $brand = Brand::where('alias', $ba)->first();
+                if ($brand) {
+                    $brand_ids[] = $brand->id;
+                }
             }
 
-            $brand = Brand::where('alias', $brand_alias)->first();
-            if ($brand) {
+            if ( count($brand_ids) ) {
                 $q = $input->get('q');
-                $q = $q->whereHas('brands', function ($query) use ($brand) {
-                    $query->where('brands_products_maps.brand_id', '=', $brand->id);
+                $q = $q->whereHas('brands', function ($query) use ($brand_ids) {
+                    $query->whereIn('brands_products_maps.brand_id', $brand_ids);
                 });
                 $input->put('q', $q);
             }
@@ -39,11 +40,18 @@ class ProductFrontService extends ProductService
 
         if ( $productCategoryAlias = $input->get('product_category_alias') ) {
             $categoryFS = app(ProductCategoryFrontService::class);
-            $pc = $categoryFS->findBy('alias', '=', $productCategoryAlias)->first();
-            if ($pc) {
-                $category_ids = $categoryFS->findSubTreeIds($pc->id);
+            $pc_ids = [];
+            foreach ($productCategoryAlias as $pca) {
+                $pc = $categoryFS->findBy('alias', '=', $pca)->first();
+                if ($pc) {
+                    $category_ids = $categoryFS->findSubTreeIds($pc->id);
+                    $pc_ids = array_merge($pc_ids, $category_ids);
+                }
+            }
+
+            if ( count($pc_ids) ) {
                 $q = $input->get('q');
-                $q = $q->whereIn('product_category_id', $category_ids);
+                $q = $q->whereIn('product_category_id', $pc_ids);
                 $input->put('q', $q);
             }
             $input->forget('product_category_alias');
