@@ -78,6 +78,7 @@ Route::get('api/product/{alias}', [ProductFrontController::class, 'getByAlias'])
 # 促銷消息
 # 01影片
 # 大事紀
+Route::get('api/item/memorabilia/list', [ItemFrontController::class, 'getMemorabilia']);
 # 財務資訊
 # 重要規章
 # 股東專欄

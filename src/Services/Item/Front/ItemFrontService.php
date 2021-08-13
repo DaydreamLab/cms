@@ -115,22 +115,6 @@ class ItemFrontService extends ItemService
     }
 
 
-    public function getContentByAlias(Collection $input)
-    {
-        $content = $this->repo->findBy('alias', '=', $input->get('alias'))->first();
-        if ($content) {
-            $prevAndNext = $this->repo->getPreviousAndNext($content);
-            $content->previous = $prevAndNext['previous'];
-            $content->next     = $prevAndNext['next'];
-            $this->status   = 'GetItemSuccess';
-            $this->response = $content;
-        } else {
-            $this->throwResponse('ItemNotExist', ['alias' => $input->get('alias')]);
-        }
-        return $this->response;
-    }
-
-
     public function getItem($id)
     {
         $item = parent::getItem($id);
@@ -336,8 +320,61 @@ class ItemFrontService extends ItemService
     }
 
 
+    public function pureSearch(Collection $input)
+    {
+        return parent::search($input);
+    }
+
+
+    public function getContentByAlias(Collection $input)
+    {
+        $content = $this->repo->findBy('alias', '=', $input->get('alias'))->first();
+        if ($content) {
+            $prevAndNext = $this->repo->getPreviousAndNext($content);
+            $content->previous = $prevAndNext['previous'];
+            $content->next     = $prevAndNext['next'];
+            $this->status   = 'GetItemSuccess';
+            $this->response = $content;
+        } else {
+            $this->throwResponse('ItemNotExist', ['alias' => $input->get('alias')]);
+        }
+        return $this->response;
+    }
+
+
+    public function getMemorabilia()
+    {
+        $mems = $this->searchContent(collect(['content_type' => 'memorabilia', 'limit' => 0, 'q' => new QueryCapsule()]));
+        $filter_list = [];
+        foreach ($mems as $mem) {
+            $year = $mem->extrafields['year']['value'];
+            $month = $mem->extrafields['month']['value'];
+            $filter_list[$year][$month][] = $mem->only(['title', 'description', 'extrafields']);
+        }
+
+        foreach ($filter_list as &$year_col) {
+            ksort($year_col);
+        }
+        ksort($filter_list);
+
+        $this->response = $filter_list;
+        return $filter_list;
+    }
+
+
     public function searchContent(Collection $input, $paginate = true)
     {
+        if ( $content_type = $input->get('content_type') ) {
+            $q = $input->get('q');
+            $categories = $this->categoryFrontService->findBy('alias', '=', $content_type);
+            $category_ids = $categories->map(function ($c) {
+                return $c->id;
+            })->toArray();
+            $q = $q->whereIn('category_id', $category_ids);
+            $input->put('q', $q);
+        }
+        $input->forget('content_type');
+
         if ( $brand_alias = $input->get('brand_alias') ) {
             $brand = Brand::where('alias', $brand_alias)->first();
             if ($brand) {
@@ -347,8 +384,8 @@ class ItemFrontService extends ItemService
                 });
                 $input->put('q', $q);
             }
-            $input->forget('brand_alias');
         }
+        $input->forget('brand_alias');
 
         $input->put('paginate', $paginate);
         $input->put('state', 1);
@@ -360,11 +397,5 @@ class ItemFrontService extends ItemService
         event(new Search($input, $this->user));
 
         return $items;
-    }
-
-
-    public function pureSearch(Collection $input)
-    {
-        return parent::search($input);
     }
 }

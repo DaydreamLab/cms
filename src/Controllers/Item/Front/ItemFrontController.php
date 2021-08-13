@@ -57,6 +57,18 @@ class ItemFrontController extends CmsController
     }
 
 
+    public function getMemorabilia()
+    {
+        try {
+            $this->service->getMemorabilia();
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
+
     public function search(ItemFrontSearchPost $request)
     {
         $this->service->setUser($request->user('api'));

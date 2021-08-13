@@ -58,11 +58,7 @@ class ItemFrontContentSearchPost extends ListRequest
         $validated = parent::validated();
 
         if ( $content_type = $this->route('content_type') ) {
-            $categories = Category::where('content_type', $content_type)->where('state', 1)->get();
-            $category_ids = $categories->map(function ($c) {
-                return $c->id;
-            })->toArray();
-            $validated['q'] = $this->q->whereIn('category_id', $category_ids);
+            $validated['content_type'] = $content_type;
         }
 
         return $validated;

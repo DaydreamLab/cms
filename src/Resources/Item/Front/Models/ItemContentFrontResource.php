@@ -14,11 +14,9 @@ class ItemContentFrontResource extends BaseJsonResource
      */
     public function toArray($request)
     {
-
         return [
             'title'                     => $this->title,
             'alias'                     => $this->alias,
-            'category_id'               => $this->category->id,
             'category_alias'            => $this->category->alias,
             'category_title'            => $this->category->title,
             'state'                     => $this->state,
