@@ -129,4 +129,17 @@ class ItemFrontController extends CmsController
 
         return $this->response($this->service->status, $this->service->response, [], ItemContentFrontListResourceCollection::class);
     }
+
+
+    public function searchSolution(ItemFrontContentSearchPost $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->searchSolution($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response, [], ItemContentFrontListResourceCollection::class);
+    }
 }

@@ -421,16 +421,23 @@ class ItemFrontService extends ItemService
         $input->forget('content_type');
 
         if ( $brand_alias = $input->get('brand_alias') ) {
-            $brand = Brand::where('alias', $brand_alias)->first();
-            if ($brand) {
+            $brand_ids = [];
+            foreach ($brand_alias as $ba) {
+                $brand = Brand::where('alias', $ba)->first();
+                if ($brand) {
+                    $brand_ids[] = $brand->id;
+                }
+            }
+
+            if ( count($brand_ids) ) {
                 $q = $input->get('q');
-                $q = $q->whereHas('brands', function ($query) use ($brand) {
-                    $query->where('brands_items_maps.brand_id', '=', $brand->id);
+                $q = $q->whereHas('brands', function ($query) use ($brand_ids) {
+                    $query->whereIn('brands_items_maps.brand_id', $brand_ids);
                 });
                 $input->put('q', $q);
             }
+            $input->forget('brand_alias');
         }
-        $input->forget('brand_alias');
 
         $input->put('paginate', $paginate);
         $input->put('state', 1);
@@ -442,5 +449,11 @@ class ItemFrontService extends ItemService
         event(new Search($input, $this->user));
 
         return $items;
+    }
+
+
+    public function searchSolution(Collection $input)
+    {
+
     }
 }

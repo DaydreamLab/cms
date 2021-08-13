@@ -45,8 +45,12 @@ class ItemFrontContentSearchPost extends ListRequest
                 ])
             ],
             'content_type'  => 'nullable|string',
-            'brand_alias'   => 'nullable|string',
-            'register_time' => 'nullable|date'
+            'brand_alias'   => 'nullable|array',
+            'brand_alias.*' => 'required|string',
+            'solution_category_alias' => 'nullable|array',
+            'solution_category_alias.*' => 'required|string',
+            'industry_category_alias' => 'nullable|array',
+            'industry_category_alias.*' => 'required|string'
         ];
 
         return array_merge(parent::rules(), $rules);
@@ -59,6 +63,9 @@ class ItemFrontContentSearchPost extends ListRequest
 
         if ( $content_type = $this->route('content_type') ) {
             $validated['content_type'] = $content_type;
+            if ( $content_type != 'solution' ) {
+                $validated->forget(['solution_category_alias', 'industry_category_alias']);
+            }
         }
 
         return $validated;

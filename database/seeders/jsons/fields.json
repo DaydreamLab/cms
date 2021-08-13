@@ -11,7 +11,7 @@
    {
      "content_type": "solution",
      "title": "產品分類",
-     "alias": "product_category",
+     "alias": "solution_category",
      "type": "select",
      "params": {
        "type": "category",
