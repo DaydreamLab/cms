@@ -82,7 +82,10 @@ Route::get('api/item/memorabilia/list', [ItemFrontController::class, 'getMemorab
 # 財務資訊
 Route::get('api/item/finance/list', [ItemFrontController::class, 'getFinance']);
 # 重要規章
+Route::get('api/item/rules/list', [ItemFrontController::class, 'getRules']);
 # 股東專欄
+Route::get('api/item/stockholder/list', [ItemFrontController::class, 'getStockholder']);
+#
 Route::post('api/item/{content_type}/search', [ItemFrontController::class, 'searchContent']);
 Route::get('api/item/{content_type}/{alias}', [ItemFrontController::class, 'getContentByAlias']);
 

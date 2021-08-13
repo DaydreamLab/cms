@@ -377,6 +377,24 @@ class ItemFrontService extends ItemService
     }
 
 
+    public function getRules()
+    {
+        $rules = $this->searchContent(collect(['content_type' => 'rules', 'limit' => 0, 'q' => new QueryCapsule()]));
+        $this->response = $rules->map(function ($r) {
+            return $r->only(['title', 'files']);
+        });
+        return $this->response;
+    }
+
+
+    public function getStockholder()
+    {
+        $stocks = $this->searchContent(collect(['content_type' => 'stockholder', 'limit' => 0, 'q' => new QueryCapsule()]));
+        $filter_list = [];
+
+    }
+
+
     public function searchContent(Collection $input, $paginate = true)
     {
         if ( $content_type = $input->get('content_type') ) {

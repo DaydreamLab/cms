@@ -81,6 +81,30 @@ class ItemFrontController extends CmsController
     }
 
 
+    public function getRules()
+    {
+        try {
+            $this->service->getRules();
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
+
+    public function getStockholder()
+    {
+        try {
+            $this->service->getStockholder();
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
+
     public function search(ItemFrontSearchPost $request)
     {
         $this->service->setUser($request->user('api'));

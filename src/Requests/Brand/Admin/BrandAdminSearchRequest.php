@@ -50,6 +50,11 @@ class BrandAdminSearchRequest extends CmsSearchPost
             $validated->put('q', $validated->get('q')->whereIn('id', $this->user()->brands->pluck('id')));
         }
 
+        if ( $validated->get('state') == '' ) {
+            $validated->forget('state');
+            $validated['q'] = $this->q->whereIn('state', [0, 1]);
+        }
+
         return $validated;
     }
 }
