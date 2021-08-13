@@ -80,6 +80,7 @@ Route::get('api/product/{alias}', [ProductFrontController::class, 'getByAlias'])
 # 大事紀
 Route::get('api/item/memorabilia/list', [ItemFrontController::class, 'getMemorabilia']);
 # 財務資訊
+Route::get('api/item/finance/list', [ItemFrontController::class, 'getFinance']);
 # 重要規章
 # 股東專欄
 Route::post('api/item/{content_type}/search', [ItemFrontController::class, 'searchContent']);

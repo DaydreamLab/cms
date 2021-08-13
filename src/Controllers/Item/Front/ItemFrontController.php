@@ -57,6 +57,18 @@ class ItemFrontController extends CmsController
     }
 
 
+    public function getFinance()
+    {
+        try {
+            $this->service->getFinance();
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
+
     public function getMemorabilia()
     {
         try {

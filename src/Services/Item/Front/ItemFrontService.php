@@ -342,6 +342,21 @@ class ItemFrontService extends ItemService
     }
 
 
+    public function getFinance()
+    {
+        $fins = $this->searchContent(collect(['content_type' => 'finance', 'limit' => 0, 'q' => new QueryCapsule()]));
+        $filter_list = [];
+        foreach ($fins as $fin) {
+            $year = $fin->extrafields['year']['value'];
+            $filter_list[$year][] = $fin->only(['title', 'description', 'extrafields', 'files']);
+        }
+        ksort($filter_list);
+
+        $this->response = $filter_list;
+        return $filter_list;
+    }
+
+
     public function getMemorabilia()
     {
         $mems = $this->searchContent(collect(['content_type' => 'memorabilia', 'limit' => 0, 'q' => new QueryCapsule()]));
