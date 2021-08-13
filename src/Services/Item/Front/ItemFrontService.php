@@ -5,6 +5,8 @@ namespace DaydreamLab\Cms\Services\Item\Front;
 use Carbon\Carbon;
 use DaydreamLab\Cms\Events\Search;
 use DaydreamLab\Cms\Models\Brand\Brand;
+use DaydreamLab\Cms\Models\Extrafield\Extrafield;
+use DaydreamLab\Cms\Models\Extrafield\ExtrafieldValue;
 use DaydreamLab\Cms\Repositories\Item\Front\ItemFrontRepository;
 use DaydreamLab\Cms\Services\Category\Front\CategoryFrontService;
 use DaydreamLab\Cms\Services\Item\ItemService;
@@ -454,6 +456,28 @@ class ItemFrontService extends ItemService
 
     public function searchSolution(Collection $input)
     {
+        if ( $solution_category_alias = $input->get('solution_category_alias') ) {
+            $item_ids = [];
+            $sca_ex = Extrafield::where('alias', 'solution_category')->where('content_type', 'solution')->first();
+            foreach ($solution_category_alias as $sca) {
+                $sc = $this->repo->findBy('alias', '=', $sca)->first();
+                if ($sc) {
+                    $exvs = ExtrafieldValue::where('extrafield_id', $sca_ex->id)->where('value', $sc->id)->get();
+                    $item_ids = array_merge($item_ids, $exvs->pluck(['item_id'])->toArray());
+                }
+            }
+            $q = $input->get('q');
+            $q = $q->whereIn('id', $item_ids);
+            $input->put('q', $q);
+            $input->forget('solution_category_alias');
+        }
 
+        if ( $industry_category_alias = $input->get('industry_category_alias') ) {
+
+        }
+
+        $input->put('content_type', 'solution');
+
+        return $this->searchContent($input);
     }
 }
