@@ -391,7 +391,19 @@ class ItemFrontService extends ItemService
     {
         $stocks = $this->searchContent(collect(['content_type' => 'stockholder', 'limit' => 0, 'q' => new QueryCapsule()]));
         $filter_list = [];
+        foreach ($stocks as $stock) {
+            $document_type = $stock->extrafields['document_type']['value'];
+            $year = $stock->extrafields['year']['value'];
+            $filter_list[$document_type][] = array_merge($stock->only(['title', 'files']), ['year' => (int)$year]);
+        }
+        foreach ($filter_list as &$type) {
+            usort($type, function($a, $b) {
+                return ($a['year'] - $b['year']);
+            });
+        }
 
+        $this->response = $filter_list;
+        return $filter_list;
     }
 
 
