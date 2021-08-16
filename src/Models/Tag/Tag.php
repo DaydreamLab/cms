@@ -2,7 +2,9 @@
 
 namespace DaydreamLab\Cms\Models\Tag;
 
+use DaydreamLab\Cms\Models\Brand\Brand;
 use DaydreamLab\Cms\Models\Item\Item;
+use DaydreamLab\Media\Models\File\File;
 use DaydreamLab\User\Traits\Model\WithAccess;
 use DaydreamLab\Cms\Traits\Model\WithLanguage;
 use DaydreamLab\JJAJ\Models\BaseModel;
@@ -108,6 +110,18 @@ class Tag extends BaseModel
                 ? $item->parent->path . '/' . $item->alias
                 : '/' . $item->alias;
         });
+    }
+
+
+    public function brands()
+    {
+        return $this->belongsToMany(Brand::class, 'brands_tags_maps', 'tag_id', 'brand_id');
+    }
+
+
+    public function files()
+    {
+        return $this->belongsToMany(File::class, 'files_tags_maps', 'tag_id', 'file_id');
     }
 
 

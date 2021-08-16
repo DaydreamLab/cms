@@ -11,7 +11,7 @@ use DaydreamLab\Cms\Resources\Tag\Front\Collections\TagFrontListResourceCollecti
 use DaydreamLab\Cms\Resources\Item\Front\Collections\ItemFrontListResourceCollection;
 use DaydreamLab\Cms\Services\Tag\Front\TagFrontService;
 use DaydreamLab\JJAJ\Helpers\Helper;
-
+use Throwable;
 
 class TagFrontController extends CmsController
 {
@@ -29,27 +29,38 @@ class TagFrontController extends CmsController
     public function getItemByAlias(TagFrontGetItemGet $request)
     {
         $this->service->setUser($request->user('api'));
-        $this->service->getItemByAlias(Helper::collect(['alias' => $request->route('alias')]));
+        try {
+            $this->service->getItemByAlias(Helper::collect(['alias' => $request->route('alias')]));
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
 
-        return $this->response($this->service->status,
-            gettype($this->service->response) == 'object' ? new TagFrontResource($this->service->response) : null);
+        return $this->response($this->service->status, $this->service->response, [], TagFrontResource::class);
     }
 
     
     public function search(TagFrontSearchPost $request)
     {
         $this->service->setUser($request->user('api'));
-        $this->service->search($request->validated());
+        try {
+            $this->service->search($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
 
-        return $this->response($this->service->status, new TagFrontListResourceCollection($this->service->response));
+        return $this->response($this->service->status, $this->service->response, [], TagFrontListResourceCollection::class);
     }
 
 
     public function searchItems(TagFrontSearchItemPost $request)
     {
         $this->service->setUser($request->user('api'));
-        $this->service->searchItems($request->validated());
+        try {
+            $this->service->searchItems($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
 
-        return $this->response($this->service->status, new ItemFrontListResourceCollection($this->service->response));
+        return $this->response($this->service->status, $this->service->response, [], TagFrontListResourceCollection::class);
     }
 }

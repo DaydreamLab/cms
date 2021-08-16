@@ -55,9 +55,9 @@ Route::get('api/menu/{path}', [MenuFrontController::class, 'getItem'])->where('p
 Route::get('api/module/{alias}', [ModuleFrontController::class, 'getItemByAlias']);
 Route::get('api/setting/{locale}', [SettingFrontController::class, 'getItem']);
 Route::post('api/tag/search', [TagFrontController::class, 'search']);
+# 全站關鍵字搜尋
 Route::post('api/tag/search/items', [TagFrontController::class, 'searchItems']);
 Route::get('api/tag/{alias}', [TagFrontController::class, 'getItemByAlias']);
-
 
 # 顧客留言
 Route::post('api/customer/message/send', [CustomerMessageFrontController::class, 'store']);

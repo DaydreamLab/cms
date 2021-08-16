@@ -21,6 +21,19 @@ class TagFrontSearchItemPost extends ListRequest
     public function rules()
     {
         $rules = [
+            'type' => [
+                'nullable',
+                'string',
+                Rule::in([
+                    'brand',
+                    'solution',
+                    'case',
+                    'course',
+                    'file',
+                    'news',
+                    'video'
+                ])
+            ]
         ];
 
         return array_merge(parent::rules(), $rules);

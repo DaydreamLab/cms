@@ -23,6 +23,62 @@ class TagFrontService extends TagService
     }
 
 
+    public function getRelatedData($tags, $type = null)
+    {
+        $data = [
+            'brand' => collect([]),
+            'solution' => collect([]),
+            'case' => collect([]),
+            'course' => collect([]),
+            'file' => collect([]),
+            'news' => collect([]),
+            'video' => collect([])
+        ];
+        foreach ($tags as $tag) {
+            $brands = $tag->brands;
+            foreach ($brands as $brand) {
+                if ( !$data['brand']->contains('id', $brand->id) ) {
+                    $data['brand']->push($brand);
+                }
+            }
+
+            $files = $tag->files;
+            foreach ($files as $file) {
+                $data['file']->push($file);
+            }
+
+            $items = $tag->items;
+            foreach ($items as $item) {
+                $content_type = $item->category->content_type;
+                if (in_array($content_type, ['bulletin', 'promotion'])) {
+                    if ( !$data['news']->contains('id', $item->id) ) {
+                        $data['news']->push($item);
+                    }
+                } else {
+                    if ( isset($data[$content_type]) ) {
+                        if ( !$data[$content_type]->contains('id', $item->id) ) {
+                            $data[$content_type]->push($item);
+                        }
+                    }
+                }
+            }
+        }
+
+        if ($type) {
+            $finalData = $data[$type];
+        } else {
+            $finalData = collect([]);
+            foreach ($data as $key => $typeData) {
+                if ($typeData->count() > 0) {
+                    $finalData = $finalData->merge($typeData);
+                }
+            }
+        }
+
+        return $finalData;
+    }
+
+
     public function getRelatedItems($tags)
     {
         $items_data = collect([]);
@@ -52,14 +108,17 @@ class TagFrontService extends TagService
     {
         $input->put('paginate', $paginate);
         $limit = $input->get('limit') ?: $this->repo->getModel()->getPerPage();
+        $type = $input->get('type');
+        $input->forget('type');
 
         $tags = $this->search($input);
 
-        $items = $this->getRelatedItems($tags);
+        //$items = $this->getRelatedItems($tags);
+        $data = $this->getRelatedData($tags, $type);
 
         $this->status = 'SearchItemsSuccess';
-        $this->response = $paginate ? $this->repo->paginate($items, $limit, $input->get('page') ?: 1, []) : $items;
+        $this->response = $paginate ? $this->repo->paginate($data, $limit, $input->get('page') ?: 1, []) : $data;
 
-        return $items;
+        return $data;
     }
 }
