@@ -18,7 +18,10 @@ class BrandsTableSeeder extends Seeder
 
         foreach ($data as $brand) {
             $brand['params'] = RequestHelper::handleParams([]);
-            $this->brandService->store(collect($brand));
+            $userIds = $brand['user'];
+            unset($brand['user']);
+            $b = $this->brandService->store(collect($brand));
+            $b->users()->attach($userIds);
         }
     }
 

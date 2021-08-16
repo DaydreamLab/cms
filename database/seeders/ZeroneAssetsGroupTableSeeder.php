@@ -44,6 +44,10 @@ class ZeroneAssetsGroupTableSeeder extends Seeder
                     $asset->apis()->attach($api->id, [
                         'asset_group_id' => $assetGroup->id,
                     ]);
+                    $api->userGroups()->attach($userGroups->pluck('id'), [
+                        'asset_group_id' => $assetGroup->id,
+                        'asset_id' => $asset->id
+                    ]);
                 }
 
                 foreach ($inputDefaultApis as $key => $rules) {
@@ -54,6 +58,10 @@ class ZeroneAssetsGroupTableSeeder extends Seeder
                     }
                     if ($api) {
                         $asset->apis()->attach($api->id, $data);
+                        $api->userGroups()->attach($userGroups->pluck('id'), [
+                            'asset_group_id' => $assetGroup->id,
+                            'asset_id' => $asset->id
+                        ]);
                     }
                 }
                 $asset->userGroups()->attach($userGroups->pluck('id'));
