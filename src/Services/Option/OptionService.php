@@ -273,9 +273,9 @@ class OptionService
                     });
                     break;
                 case 'solution_category':
-                    $ifs = app(ItemFrontService::class);
-                    $scs = $ifs->searchContent(collect(['content_type' => 'solution_category', 'q' => new QueryCapsule(), 'limit' => 0]), false);
-                    $ics = $ifs->searchContent(collect(['content_type' => 'industry_category', 'q' => new QueryCapsule(), 'limit' => 0]), false);
+                    $ifser = app(ItemFrontService::class);
+                    $scs = $ifser->searchContent(collect(['content_type' => 'solution_category', 'q' => new QueryCapsule(), 'limit' => 0]), false);
+                    $ics = $ifser->searchContent(collect(['content_type' => 'industry_category', 'q' => new QueryCapsule(), 'limit' => 0]), false);
                     $icsData = [];
                     foreach ($ics as $ic) {
                         $icsData[$ic->id] = $ic->only(['alias', 'title']);
@@ -290,10 +290,26 @@ class OptionService
                     });
                     break;
                 case 'industry_category':
-                    $ifs = app(ItemFrontService::class);
-                    $ics = $ifs->searchContent(collect(['content_type' => 'industry_category', 'q' => new QueryCapsule(), 'limit' => 0]), false);
+                    $ifser = app(ItemFrontService::class);
+                    $ics = $ifser->searchContent(collect(['content_type' => 'industry_category', 'q' => new QueryCapsule(), 'limit' => 0]), false);
                     $data[$type] = $ics->map(function ($ic) {
                         return $ic->only(['alias', 'title']);
+                    });
+                    break;
+                case 'download_file_category':
+                    $fcser = app(FileCategoryAdminService::class);
+                    $q = new QueryCapsule();
+                    $fcs = $fcser->search(collect(['q' => $q->where('contentType', 'file')->where('extension', null), 'limit' => 0]), false);
+                    $data[$type] = $fcs->map(function ($fc) {
+                        return $fc->only(['alias', 'title']);
+                    });
+                    break;
+                case 'contract_file_category':
+                    $fcser = app(FileCategoryAdminService::class);
+                    $q = new QueryCapsule();
+                    $fcs = $fcser->search(collect(['q' => $q->where('contentType', 'contract'), 'limit' => 0]), false);
+                    $data[$type] = $fcs->map(function ($fc) {
+                        return $fc->only(['alias', 'title']);
                     });
                     break;
                 default:
