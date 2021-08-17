@@ -290,6 +290,7 @@ class OptionService
                     });
                     break;
                 default:
+                    $data[$type] = [];
                     break;
             }
         }
