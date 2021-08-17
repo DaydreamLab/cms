@@ -5,6 +5,7 @@ namespace DaydreamLab\Cms\Services\Option;
 use DaydreamLab\Cms\Models\Extrafield\Extrafield;
 use DaydreamLab\Cms\Models\Extrafield\ExtrafieldValue;
 use DaydreamLab\Cms\Services\Brand\Admin\BrandAdminService;
+use DaydreamLab\Cms\Services\Brand\Front\BrandFrontService;
 use DaydreamLab\Cms\Services\Category\Admin\CategoryAdminService;
 use DaydreamLab\Cms\Services\Extrafield\Admin\ExtrafieldGroupAdminService;
 use DaydreamLab\Cms\Services\Item\Admin\ItemAdminService;
@@ -13,6 +14,7 @@ use DaydreamLab\Cms\Services\Language\Admin\LanguageAdminService;
 use DaydreamLab\Cms\Services\Menu\Admin\MenuAdminService;
 use DaydreamLab\Cms\Services\Module\Admin\ModuleAdminService;
 use DaydreamLab\Cms\Services\ProductCategory\Admin\ProductCategoryAdminService;
+use DaydreamLab\Cms\Services\ProductCategory\Front\ProductCategoryFrontService;
 use DaydreamLab\Cms\Services\Site\Admin\SiteAdminService;
 use DaydreamLab\JJAJ\Database\QueryCapsule;
 use DaydreamLab\JJAJ\Traits\LoggedIn;
@@ -245,23 +247,51 @@ class OptionService
     public function frontOptionList(Collection $input)
     {
         $data = [];
-        $q = new QueryCapsule();
         foreach ($input->get('types') as $type) {
             switch ($type) {
+                case 'brand':
+                    $bser = app(BrandFrontService::class);
+                    $brands = $bser->getAllBrands();
+                    $data[$type] = $brands->map(function ($b) {
+                        return $b->only(['alias', 'title']);
+                    });
+                    break;
+                case 'product_parent_category':
+                    $pcser = app(ProductCategoryFrontService::class);
+                    $q = new QueryCapsule();
+                    $ppcs = $pcser->search(collect(['q' => $q->where('state', 1)->where('parent_id', null), 'limit' => 0]), false);
+                    $data[$type] = $ppcs->map(function ($pp) {
+                        return $pp->only(['alias', 'title']);
+                    });
+                    break;
+                case 'product_child_category':
+                    $pcser = app(ProductCategoryFrontService::class);
+                    $q = new QueryCapsule();
+                    $pccs = $pcser->search(collect(['q' => $q->where('state', 1)->where('parent_id', '!=', null), 'limit' => 0]), false);
+                    $data[$type] = $pccs->map(function ($pc) {
+                        return $pc->only(['alias', 'title']);
+                    });
+                    break;
                 case 'solution_category':
                     $ifs = app(ItemFrontService::class);
-                    $scs = $ifs->searchContent(collect(['content_type' => 'solution_category', 'q' => $q]), false);
-                    $data = $scs->map(function ($sc) {
+                    $scs = $ifs->searchContent(collect(['content_type' => 'solution_category', 'q' => new QueryCapsule(), 'limit' => 0]), false);
+                    $ics = $ifs->searchContent(collect(['content_type' => 'industry_category', 'q' => new QueryCapsule(), 'limit' => 0]), false);
+                    $icsData = [];
+                    foreach ($ics as $ic) {
+                        $icsData[$ic->id] = $ic->only(['alias', 'title']);
+                    }
+                    $data[$type] = $scs->map(function ($sc) use ($icsData) {
                         $d = $sc->only(['alias', 'title']);
-
+                        $icsArray = $sc->extrafields['industry_category']['value'];
+                        $d['industry_category'] = array_map(function ($i) use ($icsData) {
+                            return $icsData[$i['id']];
+                        }, $icsArray);
                         return $d;
                     });
                     break;
                 default:
                     break;
             }
-
-
         }
 
         $this->status = 'GetListSuccess';

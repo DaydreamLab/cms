@@ -17,6 +17,12 @@ class BrandFrontService extends BrandService
     }
 
 
+    public function getAllBrands()
+    {
+        return $this->repo->getAllBrands();
+    }
+
+
     public function getBrandByAlias(Collection $input)
     {
         $brand = $this->findBy('alias', '=', $input->get('alias'))->first();
