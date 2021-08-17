@@ -8,6 +8,7 @@ use DaydreamLab\Cms\Services\Brand\Admin\BrandAdminService;
 use DaydreamLab\Cms\Services\Category\Admin\CategoryAdminService;
 use DaydreamLab\Cms\Services\Extrafield\Admin\ExtrafieldGroupAdminService;
 use DaydreamLab\Cms\Services\Item\Admin\ItemAdminService;
+use DaydreamLab\Cms\Services\Item\Front\ItemFrontService;
 use DaydreamLab\Cms\Services\Language\Admin\LanguageAdminService;
 use DaydreamLab\Cms\Services\Menu\Admin\MenuAdminService;
 use DaydreamLab\Cms\Services\Module\Admin\ModuleAdminService;
@@ -238,5 +239,33 @@ class OptionService
                     return $item->only($default_field);
                 });
         }
+    }
+
+
+    public function frontOptionList(Collection $input)
+    {
+        $data = [];
+        $q = new QueryCapsule();
+        foreach ($input->get('types') as $type) {
+            switch ($type) {
+                case 'solution_category':
+                    $ifs = app(ItemFrontService::class);
+                    $scs = $ifs->searchContent(collect(['content_type' => 'solution_category', 'q' => $q]), false);
+                    $data = $scs->map(function ($sc) {
+                        $d = $sc->only(['alias', 'title']);
+
+                        return $d;
+                    });
+                    break;
+                default:
+                    break;
+            }
+
+
+        }
+
+        $this->status = 'GetListSuccess';
+        $this->response = $data;
+        return true;
     }
 }

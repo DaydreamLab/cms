@@ -59,6 +59,9 @@ Route::post('api/tag/search', [TagFrontController::class, 'search']);
 Route::post('api/tag/search/items', [TagFrontController::class, 'searchItems']);
 Route::get('api/tag/{alias}', [TagFrontController::class, 'getItemByAlias']);
 
+# 前台 option list
+Route::post('api/option/list', [OptionController::class, 'frontOptionList']);
+
 # 顧客留言
 Route::post('api/customer/message/send', [CustomerMessageFrontController::class, 'store']);
 
@@ -320,7 +323,7 @@ Route::post('api/admin/module/store', [ModuleAdminController::class, 'store'])
 Route::get('api/admin/module/{id}', [ModuleAdminController::class, 'getItem'])
     ->middleware(['expired','admin']);
 
-# 下單選單 Option
+# 下拉選單 Option
 Route::post('api/admin/option/list', [OptionController::class, 'mergeList'])
     ->middleware(['expired','admin']);
 
