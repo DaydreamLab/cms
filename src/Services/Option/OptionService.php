@@ -289,6 +289,13 @@ class OptionService
                         return $d;
                     });
                     break;
+                case 'industry_category':
+                    $ifs = app(ItemFrontService::class);
+                    $ics = $ifs->searchContent(collect(['content_type' => 'industry_category', 'q' => new QueryCapsule(), 'limit' => 0]), false);
+                    $data[$type] = $ics->map(function ($ic) {
+                        return $ic->only(['alias', 'title']);
+                    });
+                    break;
                 default:
                     $data[$type] = [];
                     break;
