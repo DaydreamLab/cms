@@ -392,7 +392,11 @@ class ItemFrontService extends ItemService
     public function getStockholder()
     {
         $stocks = $this->searchContent(collect(['content_type' => 'stockholder', 'limit' => 0, 'q' => new QueryCapsule()]));
+        $ex_dt = Extrafield::where('alias', 'document_type')->where('content_type', 'stockholder')->first();
         $filter_list = [];
+        foreach ($ex_dt->params['option'] as $option) {
+            $filter_list[$option['value']] = [];
+        }
         foreach ($stocks as $stock) {
             $document_type = $stock->extrafields['document_type']['value'];
             $year = $stock->extrafields['year']['value'];
