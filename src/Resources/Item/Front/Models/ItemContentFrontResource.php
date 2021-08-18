@@ -37,6 +37,7 @@ class ItemContentFrontResource extends BaseJsonResource
             'language'                  => $this->language,
             'params'                    => $this->params,
             'tags'                      => $this->tags,
+            'products'                  => $this->products,
             'extrafields'               => $this->extrafields,
             'prev'                      => $this->previous,
             'next'                      => $this->next
