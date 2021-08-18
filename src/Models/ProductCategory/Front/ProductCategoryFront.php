@@ -13,4 +13,11 @@ class ProductCategoryFront extends ProductCategory
     protected $table = 'product_categories';
 
     protected $model_type = 'front';
+
+    protected $hidden = [
+        'id',
+        'state',
+        'created_by',
+        'updated_by'
+    ];
 }

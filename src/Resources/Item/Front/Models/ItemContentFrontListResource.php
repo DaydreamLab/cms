@@ -21,6 +21,8 @@ class ItemContentFrontListResource extends BaseJsonResource
             'brands'                    => $this->brands->map(function ($b) {
                 return $b->only(['id', 'title']);
             }),
+            'featured'                  => $this->featured,
+            'featured_ordering'         => $this->featured_ordering,
             'extrafields'               => $this->extrafields,
             'category'                  => [
                 'title' => $this->category->title,
