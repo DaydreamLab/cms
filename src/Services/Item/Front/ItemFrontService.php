@@ -384,7 +384,7 @@ class ItemFrontService extends ItemService
         $rules = $this->searchContent(collect(['content_type' => 'rules', 'limit' => 0, 'q' => new QueryCapsule()]));
         $this->response = $rules->map(function ($r) {
             return $r->only(['title', 'files']);
-        });
+        })->toArray();
         return $this->response;
     }
 
