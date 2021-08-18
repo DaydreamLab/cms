@@ -19,6 +19,9 @@ class ItemContentFrontResource extends BaseJsonResource
             'alias'                     => $this->alias,
             'category_alias'            => $this->category->alias,
             'category_title'            => $this->category->title,
+            'brands'                    => $this->brands->map(function ($b) {
+                return $b->only(['alias', 'title', 'logo_image', 'contact']);
+            }),
             'state'                     => $this->state,
             'ordering'                  => $this->ordering,
             'featured'                  => $this->featured,
