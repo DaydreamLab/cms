@@ -25,7 +25,7 @@ class CreateCustomerMessagesTable extends Migration
             $table->string('phone')->nullable();
             $table->string('extNumber')->nullable();
             $table->string('mobilePhoneCode')->nullable();
-            $table->string('mobilePhone');
+            $table->string('mobilePhone')->nullable();
             $table->string('faxCode')->nullable();
             $table->string('fax')->nullable();
             $table->string('city')->nullable();
