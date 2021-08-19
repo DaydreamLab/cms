@@ -100,7 +100,20 @@ class TagFrontService extends TagService
 
     public function search(Collection $input)
     {
-        return parent::search($input);
+        $input->put('paginate', false);
+        $input->put('limit', 0);
+        $hot = $input->get('hot');
+        $input->forget('hot');
+        $tags = parent::search($input);
+
+        if ($hot) {
+            $tags = $tags->filter(function ($t) {
+                return isset($t->params['hot']) && ($t->params['hot'] == 1);
+            })->values();
+        }
+
+        $this->response = $tags;
+        return $tags;
     }
 
 

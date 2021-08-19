@@ -33,6 +33,18 @@ class BrandFrontService extends BrandService
     }
 
 
+    public function getContact()
+    {
+        $brands = $this->all();
+        $this->status = 'GetItemSuccess';
+        $this->response = $brands->map(function ($b) {
+            return $b->contact;
+        });
+
+        return $this->response;
+    }
+
+
     public function search(Collection $input)
     {
         if ( $productCategoryAlias = $input->get('product_category_alias') ) {

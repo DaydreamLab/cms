@@ -33,6 +33,18 @@ class BrandFrontController extends CmsController
     }
 
 
+    public function getContact()
+    {
+        try {
+            $this->service->getContact();
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
+
     public function search(BrandFrontSearchRequest $request)
     {
         $this->service->setUser($request->user('api'));

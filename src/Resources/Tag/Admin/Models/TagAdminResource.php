@@ -16,10 +16,9 @@ class TagAdminResource extends BaseJsonResource
     public function toArray($request)
     {
         $tz = $request->user('api')->timezone;
-
         return [
             'id'                        => $this->id,
-            'parent_id'                 => $this->parent_id,
+//            'parent_id'                 => $this->parent_id,
             'title'                     => $this->title,
             'alias'                     => $this->alias,
             'path'                      => $this->path,
