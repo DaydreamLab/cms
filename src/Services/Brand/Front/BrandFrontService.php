@@ -76,9 +76,7 @@ class BrandFrontService extends BrandService
             })->values();
         }
 
-        $this->response = $brands->map(function ($b) {
-            return $b->only(['title', 'title_zhtw', 'alias']);
-        });
+        $this->response = $brands;
         $this->status = 'SearchSuccess';
         return $this->response;
     }

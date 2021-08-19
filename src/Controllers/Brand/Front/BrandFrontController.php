@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Controllers\Brand\Front;
 
 use DaydreamLab\Cms\Controllers\CmsController;
+use DaydreamLab\Cms\Requests\CmsGetItemGet;
 use DaydreamLab\Cms\Requests\Brand\Front\BrandFrontGetItemRequest;
 use DaydreamLab\Cms\Requests\Brand\Front\BrandFrontSearchRequest;
 use DaydreamLab\Cms\Resources\Brand\Front\Models\BrandFrontResource;
@@ -33,8 +34,9 @@ class BrandFrontController extends CmsController
     }
 
 
-    public function getContact()
+    public function getContact(CmsGetItemGet $request)
     {
+        $this->service->setUser($request->user('api'));
         try {
             $this->service->getContact();
         } catch (Throwable $t) {

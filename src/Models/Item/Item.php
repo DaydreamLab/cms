@@ -142,20 +142,6 @@ class Item extends BaseModel
     }
 
 
-    public function getCreatorGroupsAttribute()
-    {
-        $creator = $this->creator()->first();
-
-        if ($creator) {
-            return $creator->groups->map(function ($item, $key) {
-                return $item->title;
-            });
-        } else {
-            return [];
-        }
-    }
-
-
     public function newsletterUserGroups()
     {
         return $this->belongsToMany(UserGroup::class, 'newsletter_category_user_group_maps', 'category_id', 'group_id')
@@ -174,5 +160,19 @@ class Item extends BaseModel
     {
         return $this->belongsToMany(Tag::class, 'items_tags_maps', 'item_id', 'tag_id')
             ->where('state', 1)->withTimestamps();
+    }
+
+
+    public function getCreatorGroupsAttribute()
+    {
+        $creator = $this->creator()->first();
+
+        if ($creator) {
+            return $creator->groups->map(function ($item, $key) {
+                return $item->title;
+            });
+        } else {
+            return [];
+        }
     }
 }

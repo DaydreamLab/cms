@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Models\Tag;
 
 use DaydreamLab\Cms\Models\Brand\Brand;
 use DaydreamLab\Cms\Models\Item\Item;
+use DaydreamLab\Cms\Models\Product\Product;
 use DaydreamLab\Media\Models\File\File;
 use DaydreamLab\User\Traits\Model\WithAccess;
 use DaydreamLab\Cms\Traits\Model\WithLanguage;
@@ -128,5 +129,11 @@ class Tag extends BaseModel
     public function items()
     {
         return $this->belongsToMany(Item::class, 'items_tags_maps', 'tag_id', 'item_id');
+    }
+
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'products_tags_maps', 'tag_id', 'product_id');
     }
 }

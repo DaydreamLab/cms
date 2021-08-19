@@ -3,8 +3,10 @@
 namespace DaydreamLab\Cms\Controllers\Item\Front;
 
 use DaydreamLab\Cms\Controllers\CmsController;
+use DaydreamLab\Cms\Requests\CmsGetItemGet;
 use DaydreamLab\Cms\Requests\Item\Front\ItemFrontGetItemGet;
 use DaydreamLab\Cms\Requests\Item\Front\ItemFrontSearchPost;
+use DaydreamLab\Cms\Requests\Item\Front\ItemFrontSearchSitePost;
 use DaydreamLab\Cms\Requests\Item\Front\ItemFrontContentGetItemGet;
 use DaydreamLab\Cms\Requests\Item\Front\ItemFrontContentSearchPost;
 use DaydreamLab\Cms\Resources\Item\Front\Collections\ItemFrontListResourceCollection;
@@ -57,8 +59,9 @@ class ItemFrontController extends CmsController
     }
 
 
-    public function getFinance()
+    public function getFinance(CmsGetItemGet $request)
     {
+        $this->service->setUser($request->user('api'));
         try {
             $this->service->getFinance();
         } catch (Throwable $t) {
@@ -69,8 +72,9 @@ class ItemFrontController extends CmsController
     }
 
 
-    public function getMemorabilia()
+    public function getMemorabilia(CmsGetItemGet $request)
     {
+        $this->service->setUser($request->user('api'));
         try {
             $this->service->getMemorabilia();
         } catch (Throwable $t) {
@@ -81,8 +85,9 @@ class ItemFrontController extends CmsController
     }
 
 
-    public function getRules()
+    public function getRules(CmsGetItemGet $request)
     {
+        $this->service->setUser($request->user('api'));
         try {
             $this->service->getRules();
         } catch (Throwable $t) {
@@ -93,8 +98,9 @@ class ItemFrontController extends CmsController
     }
 
 
-    public function getStockholder()
+    public function getStockholder(CmsGetItemGet $request)
     {
+        $this->service->setUser($request->user('api'));
         try {
             $this->service->getStockholder();
         } catch (Throwable $t) {
@@ -128,6 +134,19 @@ class ItemFrontController extends CmsController
         }
 
         return $this->response($this->service->status, $this->service->response, [], ItemContentFrontListResourceCollection::class);
+    }
+
+
+    public function searchSite(ItemFrontSearchSitePost $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->searchSite($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
     }
 
 

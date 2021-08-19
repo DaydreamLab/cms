@@ -57,7 +57,7 @@ class ItemFront extends Item
 
     public function tags()
     {
-        return $this->belongsToMany(TagFront::class, 'items_tags_maps', 'item_id', 'tag_id');
+        return $this->belongsToMany(TagFront::class, 'items_tags_maps', 'item_id', 'tag_id')->where('state', 1);
     }
 
 }

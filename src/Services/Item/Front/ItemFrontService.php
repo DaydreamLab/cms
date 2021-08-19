@@ -8,8 +8,11 @@ use DaydreamLab\Cms\Models\Brand\Brand;
 use DaydreamLab\Cms\Models\Extrafield\Extrafield;
 use DaydreamLab\Cms\Models\Extrafield\ExtrafieldValue;
 use DaydreamLab\Cms\Repositories\Item\Front\ItemFrontRepository;
+use DaydreamLab\Cms\Services\Brand\Front\BrandFrontService;
 use DaydreamLab\Cms\Services\Category\Front\CategoryFrontService;
 use DaydreamLab\Cms\Services\Item\ItemService;
+use DaydreamLab\Cms\Services\Product\Front\ProductFrontService;
+use DaydreamLab\Media\Services\File\Front\FileFrontService;
 use DaydreamLab\JJAJ\Database\QueryCapsule;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
@@ -495,5 +498,84 @@ class ItemFrontService extends ItemService
         $input->put('content_type', 'solution');
 
         return $this->searchContent($input);
+    }
+
+
+    public function searchSite(Collection $input)
+    {
+        $brandSer = app(BrandFrontService::class);
+        $productSer = app(ProductFrontService::class);
+        $fileSer = app(FileFrontService::class);
+
+        $tag = $input->get('tag');
+        $input->forget('tag');
+        $type = $input->get('type');
+        $input->forget('type');
+        $input->put('limit', 0);
+
+        $response = collect([]);
+        if ($type) {
+            if ($type == 'brand') {
+                $response = $brandSer->search($input);
+            } elseif ($type == 'file') {
+                $input->put('searchKeys', ['name', 'description']);
+                $response = $fileSer->search($input, false);
+            } elseif ($type == 'course') {
+
+            } else {
+                $items = $this->searchContent($input, false);
+                foreach ($items as $item) {
+                    $content_type = $item->category->content_type;
+                    if ($type == 'news') {
+                        if (in_array($content_type, ['bulletin', 'promotion'])) {
+                            $response->push($item);
+                        }
+                    } else {
+                        if ($content_type == $type) {
+                            $response->push($item);
+                        }
+                    }
+                }
+            }
+
+        } else {
+            $items = $this->searchContent(collect($input->toArray()), false);
+            $brands = $brandSer->search(collect($input->toArray()));
+            $products = $productSer->search(collect($input->toArray()), false);
+            $input->put('searchKeys', ['name', 'description']);
+            $files = $fileSer->search(collect($input->toArray()), false);
+
+            $response = $response->merge($items);
+            $response = $response->merge($brands);
+            $response = $response->merge($products);
+            $response = $response->merge($files);
+        }
+
+        # 過濾 tag
+        if ($tag) {
+            $response = $response->filter(function ($r) use ($tag) {
+                $tagAlias = $r->tags->pluck('alias')->toArray();
+                return in_array($tag, $tagAlias);
+            });
+        }
+
+        $response = $response->map(function ($i) {
+            $data = $i->only(['title', 'alias', 'description']);
+            $table = $i->getTable();
+            if ($table == 'files') {
+                $data['title'] = $i->name;
+                $data['contentType'] = 'file';
+            } elseif ($table == 'brands') {
+                $data['contentType'] = 'brand';
+            } elseif ($table == 'products') {
+                $data['contentType'] = 'product';
+            } elseif ($table == 'items') {
+                $data['contentType'] = $i->category->content_type;
+            }
+            return $data;
+        });
+
+        $this->response = $response;
+        return $this->response;
     }
 }

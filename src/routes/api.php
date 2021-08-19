@@ -43,6 +43,8 @@ use DaydreamLab\Cms\Controllers\CustomerMessageReply\Admin\CustomerMessageReplyA
 */
 
 /************************************  前台 API  ************************************/
+# 搜尋全站內容
+Route::post('api/site/search', [ItemFrontController::class, 'searchSite']);
 
 Route::post('api/category/search', [CategoryFrontController::class, 'search']);
 Route::post('api/category/search/items', [CategoryFrontController::class, 'searchItems']);
@@ -70,7 +72,6 @@ Route::post('api/newsletter/subscribe', [NewsletterSubscriptionFrontController::
 
 # 品牌
 Route::post('api/brand/search', [BrandFrontController::class, 'search']);
-# 業務洽詢
 Route::get('api/brand/contact', [BrandFrontController::class, 'getContact']);
 Route::get('api/brand/{alias}', [BrandFrontController::class, 'getBrandByAlias']);
 

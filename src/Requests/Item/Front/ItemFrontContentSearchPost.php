@@ -8,6 +8,7 @@ use Illuminate\Validation\Rule;
 
 class ItemFrontContentSearchPost extends ListRequest
 {
+    protected $searchKeys = ['title', 'description'];
     /**
      * Determine if the user is authorized to make this request.
      *

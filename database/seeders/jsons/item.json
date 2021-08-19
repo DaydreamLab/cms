@@ -162,88 +162,74 @@
     "alias": "solution_category",
     "item": [
       {
-        "alias": "IT基礎架構",
-        "title": "IT基礎架構",
+        "title": "IT管理及效能監控",
         "language": "*",
-        "access": 1,
-        "extrafields": [
-          {
-            "id": 35,
-            "value": [{"id":19}, {"id":20}, {"id":21}, {"id":22}, {"id":23}]
-          }
-        ]
+        "access": 1
       },
       {
-        "alias": "網路資訊安全",
-        "title": "網路資訊安全",
+        "title": "資訊安全",
         "language": "*",
-        "access": 1,
-        "extrafields": [
-          {
-            "id": 35,
-            "value": [{"id":19}, {"id":20}, {"id":21}, {"id":22}, {"id":23}]
-          }
-        ]
+        "access": 1
       },
       {
-        "alias": "雲平台與應用",
-        "title": "雲平台與應用",
+        "title": "基礎架構網路",
         "language": "*",
-        "access": 1,
-        "extrafields": [
-          {
-            "id": 35,
-            "value": [{"id":19}, {"id":20}, {"id":21}, {"id":22}, {"id":23}]
-          }
-        ]
+        "access": 1
       },
       {
-        "alias": "大數據與應用",
-        "title": "大數據與應用",
+        "title": "儲存系統",
         "language": "*",
-        "access": 1,
-        "extrafields": [
-          {
-            "id": 35,
-            "value": [{"id":19}, {"id":20}, {"id":21}, {"id":22}, {"id":23}]
-          }
-        ]
+        "access": 1
       },
       {
-        "alias": "資料安全防護",
-        "title": "資料安全防護",
+        "title": "備份備援",
         "language": "*",
-        "access": 1,
-        "extrafields": [
-          {
-            "id": 35,
-            "value": [{"id":19}, {"id":20}, {"id":21}, {"id":22}, {"id":23}]
-          }
-        ]
+        "access": 1
       },
       {
-        "alias": "資安事件管理",
-        "title": "資安事件管理",
+        "title": "虛擬化",
         "language": "*",
-        "access": 1,
-        "extrafields": [
-          {
-            "id": 35,
-            "value": [{"id":19}, {"id":20}, {"id":21}, {"id":22}, {"id":23}]
-          }
-        ]
+        "access": 1
       },
       {
-        "alias": "MetaDefenderCore",
-        "title": "MetaDefender Core",
+        "title": "視訊監控",
         "language": "*",
-        "access": 1,
-        "extrafields": [
-          {
-            "id": 35,
-            "value": [{"id":19}, {"id":20}, {"id":21}, {"id":22}, {"id":23}]
-          }
-        ]
+        "access": 1
+      },
+      {
+        "title": "雲端服務",
+        "language": "*",
+        "access": 1
+      },
+      {
+        "title": "AI 大數據",
+        "language": "*",
+        "access": 1
+      },
+      {
+        "title": "容器及DevOps",
+        "language": "*",
+        "access": 1
+      },
+      {
+        "title": "遠距應用",
+        "language": "*",
+        "access": 1
+      },
+      {
+        "title": "超融合基礎架構",
+        "language": "*",
+        "access": 1
+      },
+      {
+        "title": "商業應用軟體",
+        "language": "*",
+        "access": 1
+      },
+      {
+        "title": "顧問服務",
+        "language": "*",
+        "access": 1
       }
     ]
   },
@@ -251,32 +237,97 @@
     "alias": "industry_category",
     "item": [
       {
-        "alias": "公共行政與國防",
-        "title": "公共行政與國防",
+        "title": "金融/投顧/保險",
         "language": "*",
         "access": 1
       },
       {
-        "alias": "其他服務業",
-        "title": "其他服務業",
+        "title": "醫療/生技/健康",
         "language": "*",
         "access": 1
       },
       {
-        "alias": "資訊及通訊業",
-        "title": "資訊及通訊業",
+        "title": "建築/營造",
         "language": "*",
         "access": 1
       },
       {
-        "alias": "網路視訊會議系統",
-        "title": "網路視訊會議系統",
+        "title": "出版/媒體",
         "language": "*",
         "access": 1
       },
       {
-        "alias": "教育業",
-        "title": "教育業",
+        "title": "非營利組織",
+        "language": "*",
+        "access": 1
+      },
+      {
+        "title": "資通訊/網路服務",
+        "language": "*",
+        "access": 1
+      },
+      {
+        "title": "觀光旅宿/娛樂",
+        "language": "*",
+        "access": 1
+      },
+      {
+        "title": "零售通路/民生服務",
+        "language": "*",
+        "access": 1
+      },
+      {
+        "title": "傳播/藝文",
+        "language": "*",
+        "access": 1
+      },
+      {
+        "title": "整合行銷/廣告公關",
+        "language": "*",
+        "access": 1
+      },
+      {
+        "title": "貿易/批發",
+        "language": "*",
+        "access": 1
+      },
+      {
+        "title": "政府機關/公營事業/軍公教",
+        "language": "*",
+        "access": 1
+      },
+      {
+        "title": "自由業",
+        "language": "*",
+        "access": 1
+      },
+      {
+        "title": "設計/創意生活產業",
+        "language": "*",
+        "access": 1
+      },
+      {
+        "title": "高科技製造",
+        "language": "*",
+        "access": 1
+      },
+      {
+        "title": "傳產製造",
+        "language": "*",
+        "access": 1
+      },
+      {
+        "title": "交通運輸/物流倉儲",
+        "language": "*",
+        "access": 1
+      },
+      {
+        "title": "學生",
+        "language": "*",
+        "access": 1
+      },
+      {
+        "title": "其他",
         "language": "*",
         "access": 1
       }

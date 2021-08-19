@@ -26,7 +26,7 @@ class ProductFrontService extends ProductService
     }
 
 
-    public function search(Collection $input)
+    public function search(Collection $input, $paginate = true)
     {
         if ( $brand_alias = $input->get('brand_alias') ) {
             $brand_ids = [];
@@ -66,6 +66,8 @@ class ProductFrontService extends ProductService
             $input->forget('product_category_alias');
         }
 
+        $input->put('paginate', $paginate);
+        $input->put('state', 1);
         return parent::search($input);
     }
 }
