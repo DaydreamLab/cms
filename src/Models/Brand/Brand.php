@@ -96,8 +96,7 @@ class Brand extends BaseModel
 
     public function tags()
     {
-        return $this->belongsToMany(Tag::class, 'brands_tags_maps', 'brand_id', 'tag_id')
-            ->where('state', 1);
+        return $this->belongsToMany(Tag::class, 'brands_tags_maps', 'brand_id', 'tag_id');
     }
 
 

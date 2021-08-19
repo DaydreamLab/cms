@@ -539,7 +539,9 @@ class ItemFrontService extends ItemService
             }
 
         } else {
-            $items = $this->searchContent(collect($input->toArray()), false);
+            $items = $this->searchContent(collect($input->toArray()), false)->filter(function ($i) {
+                return in_array($i->category->content_type, ['solution', 'case', 'video', 'bulletin', 'promotion']);
+            })->values();
             $brands = $brandSer->search(collect($input->toArray()));
             $products = $productSer->search(collect($input->toArray()), false);
             $input->put('searchKeys', ['name', 'description']);
