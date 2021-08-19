@@ -70,9 +70,10 @@ Route::post('api/newsletter/subscribe', [NewsletterSubscriptionFrontController::
 
 # 品牌
 Route::post('api/brand/search', [BrandFrontController::class, 'search']);
-Route::get('api/brand/{alias}', [BrandFrontController::class, 'getBrandByAlias']);
 # 業務洽詢
 Route::get('api/brand/contact', [BrandFrontController::class, 'getContact']);
+Route::get('api/brand/{alias}', [BrandFrontController::class, 'getBrandByAlias']);
+
 # 產品
 Route::post('api/product/search', [ProductFrontController::class, 'search']);
 Route::get('api/product/{alias}', [ProductFrontController::class, 'getByAlias']);

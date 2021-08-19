@@ -35,10 +35,10 @@ class BrandFrontService extends BrandService
 
     public function getContact()
     {
-        $brands = $this->all();
+        $brands = $this->findBy('state', '=', 1);
         $this->status = 'GetItemSuccess';
         $this->response = $brands->map(function ($b) {
-            return $b->contact;
+            return $b->only(['title', 'contact']);
         });
 
         return $this->response;
