@@ -556,7 +556,7 @@ class ItemFrontService extends ItemService
             $response = $response->filter(function ($r) use ($tag) {
                 $tagAlias = $r->tags->pluck('alias')->toArray();
                 return in_array($tag, $tagAlias);
-            });
+            })->values();
         }
 
         $response = $response->map(function ($i) {

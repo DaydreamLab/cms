@@ -28,6 +28,7 @@ class ProductAdminResource extends BaseJsonResource
             'brands'            => $this->brands->map(function($b) {
                 return $b->only(['id', 'title']);
             }),
+            'tags'              => $this->tags,
             'created_at'        => $this->getDateTimeString($this->created_at, $tz),
             'updated_at'        => $this->getDateTimeString($this->updated_at, $tz),
             'locked_at'         => $this->getDateTimeString($this->locked_at, $tz),
