@@ -511,7 +511,10 @@ class ItemFrontService extends ItemService
         $input->forget('tag');
         $type = $input->get('type');
         $input->forget('type');
+        $limit = $input->get('limit');
         $input->put('limit', 0);
+        $page = $input->get('page');
+        $input->forget('page');
 
         $response = collect([]);
         if ($type) {
@@ -577,7 +580,8 @@ class ItemFrontService extends ItemService
             return $data;
         });
 
-        $this->response = $response;
+        $this->status = 'SearchSuccess';
+        $this->response = $this->repo->paginate($response, $limit, $page ?: 1, []);
         return $this->response;
     }
 }

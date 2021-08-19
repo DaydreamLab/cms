@@ -2,7 +2,6 @@
 
 namespace DaydreamLab\Cms\Resources\Item\Front\Collections;
 
-use DaydreamLab\Cms\Resources\Category\Admin\Models\CategoryAdminListResource;
 use DaydreamLab\Cms\Resources\Item\Front\Models\ItemFrontListResource;
 use DaydreamLab\JJAJ\Resources\BaseResourceCollection;
 

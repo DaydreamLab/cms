@@ -11,6 +11,7 @@ use DaydreamLab\Cms\Requests\Item\Front\ItemFrontContentGetItemGet;
 use DaydreamLab\Cms\Requests\Item\Front\ItemFrontContentSearchPost;
 use DaydreamLab\Cms\Resources\Item\Front\Collections\ItemFrontListResourceCollection;
 use DaydreamLab\Cms\Resources\Item\Front\Collections\ItemContentFrontListResourceCollection;
+use DaydreamLab\Cms\Resources\Item\Front\Collections\ItemFrontSearchResourceCollection;
 use DaydreamLab\Cms\Resources\Item\Front\Models\ItemFrontResource;
 use DaydreamLab\Cms\Resources\Item\Front\Models\ItemContentFrontResource;
 use DaydreamLab\JJAJ\Helpers\Helper;
@@ -146,7 +147,7 @@ class ItemFrontController extends CmsController
             $this->handleException($t);
         }
 
-        return $this->response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response, [], ItemFrontSearchResourceCollection::class);
     }
 
 
