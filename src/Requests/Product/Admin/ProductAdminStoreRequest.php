@@ -50,7 +50,11 @@ class ProductAdminStoreRequest extends AdminRequest
             'publish_down'          => 'nullable|date_format:Y-m-d H:i:s',
             'brands'                => 'nullable|array',
             'brands.*'              => 'nullable|array',
-            'brands.*.id'           => 'required|integer'
+            'brands.*.id'           => 'required|integer',
+            'tags'                  => 'nullable|array',
+            'tags.*'                => 'nullable|array',
+            'tags.*.id'             => 'nullable|integer',
+            'tags.*.title'          => 'nullable|string'
         ];
 
         return array_merge(parent::rules(), $rules);

@@ -24,6 +24,14 @@ class ProductAdminService extends ProductService
 
     public function addMapping($item, $input)
     {
+        $tags = $input->get('tags') ? $input->get('tags') : [];
+        $tagIds = array_map(function($tag) {
+            return $tag['id'];
+        }, $tags);
+        if (count($tagIds)) {
+            $item->tags()->attach($tagIds);
+        }
+
         $brands = $input->get('brands') ? $input->get('brands') : [];
         $brand_ids = array_map(function($brand) {
             return $brand['id'];
@@ -36,6 +44,13 @@ class ProductAdminService extends ProductService
 
     public function modifyMapping($item, $input)
     {
+        if ( $input->get('tags') !== null ) {
+            $tagIds = array_map(function($tag) {
+                return $tag['id'];
+            }, $input->get('tags'));
+            $item->tags()->sync($tagIds);
+        }
+
         if ( $input->get('brands') !== null ) {
             $brand_ids = array_map(function($brand) {
                 return $brand['id'];
