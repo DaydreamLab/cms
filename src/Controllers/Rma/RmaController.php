@@ -16,11 +16,11 @@ class RmaController extends Controller
         $client = new SoapClient("http://webservice.zerone.com.tw/RMA/rmaWebservice.asmx?WSDL");
 
         $params = array(
-            $input->get('id'),
-            $input->get('email'),
-            $input->get('phoneCode'),
-            $input->get('phoneNumber'),
-            $input->get('phoneExtension')
+            'srmano' => $input->get('id'),
+            'semail' => $input->get('email'),
+            'scode' => $input->get('phoneCode'),
+            'stel' => $input->get('phoneNumber'),
+            'sext' => $input->get('phoneExtension')
         );
 
         $res = $client->__soapCall('checkProcess', ['parameters' => $params]);
