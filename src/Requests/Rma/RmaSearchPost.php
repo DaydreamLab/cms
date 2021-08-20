@@ -27,10 +27,10 @@ class RmaSearchPost extends ListRequest
     public function rules()
     {
         $rules = [
-            'id'        => 'required|string',
-            'email'     => 'required|email',
+            'id'        => 'nullable|string',
+            'email'     => 'nullable|email',
             'phoneCode' => 'nullable|string',
-            'phoneNumber'   => 'required|string',
+            'phoneNumber'   => 'nullable|string',
             'phoneExtension'=> 'nullable|string'
         ];
 
