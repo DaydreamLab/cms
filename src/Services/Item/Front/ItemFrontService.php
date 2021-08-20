@@ -16,6 +16,7 @@ use DaydreamLab\Media\Services\File\Front\FileFrontService;
 use DaydreamLab\JJAJ\Database\QueryCapsule;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
+use DaydreamLab\JJAJ\Exceptions\NotFoundException;
 use DaydreamLab\User\Services\User\Front\UserGroupFrontService;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
@@ -345,7 +346,9 @@ class ItemFrontService extends ItemService
             $this->status   = 'GetItemSuccess';
             $this->response = $content;
         } else {
-            $this->throwResponse('ItemNotExist', ['alias' => $input->get('alias')]);
+            throw new NotFoundException('ItemNotExist', [
+                $this->repo->getModel()->getPrimaryKey() => $input->get('id')
+            ], null, $this->modelName);
         }
         return $this->response;
     }
