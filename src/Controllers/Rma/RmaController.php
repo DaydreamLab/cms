@@ -28,13 +28,15 @@ class RmaController extends Controller
             $repairList = explode(',', $res->checkProcessResult);
             foreach ($repairList as $repair) {
                 $p = explode(';', $repair);
-                print_r('編號：'.$p[0].'日期：'.$p[1]);
+                print_r('編號：'.$p[0].'日期：'.$p[1]."\n");
+                $detail = $client->__soapCall('checkDetail', ['parameters' => ['srmano' => $p[0]]]);
+                print_r($detail->checkDetailResult."\n");
             }
         }
         /*
         $slice = explode(',', $res->checkProcessResult);
         $qno = explode(';', $slice[1])[0];
-        $detail = $client->__soapCall('checkDetail', ['parameters' => ['srmano' => $qno]]);
+
         $detail_array = explode('@#', $detail->checkDetailResult);
      */
     }
