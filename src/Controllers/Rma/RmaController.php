@@ -23,7 +23,7 @@ class RmaController extends Controller
             'sext' => $input->get('phoneExtension')
         );
 
-        $res = $client->__soapCall('checkProcess', $params);
+        $res = $client->__soapCall('checkProcess', ['parameters' => $params]);
         print_r($res->checkProcessResult);
     }
 
