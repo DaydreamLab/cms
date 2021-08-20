@@ -16,8 +16,13 @@ class ProductCategoryFront extends ProductCategory
 
     protected $hidden = [
         'id',
+        '_lft',
+        '_rgt',
         'state',
         'created_by',
-        'updated_by'
+        'updated_by',
+        'locked_by',
+        'locked_at',
+        'locker'
     ];
 }

@@ -31,7 +31,11 @@ class ItemFrontContentGetItemGet extends CmsGetItemGet
     public function validated()
     {
         $validated = parent::validated();
-        $validated['alias'] = $this->route('alias');
+        $validated->forget('q');
+        $validated->put('alias', $this->route('alias'));
+        if ($brand = $this->get('brand')) {
+            $validated['brand'] = $brand;
+        }
 
         return $validated;
     }

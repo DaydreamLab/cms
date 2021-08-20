@@ -364,4 +364,35 @@ class ItemFrontRepository extends ItemRepository
 
         return $data;
     }
+
+
+    public function getPreviousAndNextInBrand($item, $brand)
+    {
+        $previous = $this->model
+            ->whereHas('brands', function ($q) use ($brand) {
+                $q->where('alias', '=', $brand);
+            })
+            ->where('category_id', $item->category_id)
+            ->where('state', 1)
+            ->where('id', '!=', $item->id)
+            ->orderBy('publish_up', 'asc')
+            ->limit(1)
+            ->first();
+
+        $next = $this->model
+            ->whereHas('brands', function ($q) use ($brand) {
+                $q->where('alias', '=', $brand);
+            })
+            ->where('category_id', $item->category_id)
+            ->where('state', 1)
+            ->where('id', '!=', $item->id)
+            ->orderBy('publish_up', 'desc')
+            ->limit(1)
+            ->first();
+
+        $data['previous'] = ($previous) ? $previous->only(['title', 'alias']) : null;
+        $data['next'] = ($next) ? $next->only(['title', 'alias']) : null;
+
+        return $data;
+    }
 }

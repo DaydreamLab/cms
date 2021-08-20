@@ -3,6 +3,8 @@ namespace DaydreamLab\Cms\Models\Brand\Front;
 
 use DaydreamLab\Cms\Models\Brand\Brand;
 use DaydreamLab\Cms\Models\Item\Front\ItemFront;
+use DaydreamLab\Cms\Models\Tag\Front\TagFront;
+use DaydreamLab\Cms\Models\Product\Front\ProductFront;
 
 class BrandFront extends Brand
 {
@@ -18,8 +20,13 @@ class BrandFront extends Brand
 
     protected $hidden = [
         'id',
+        'state',
         'updated_by',
-        'created_by'
+        'created_by',
+        'locked_by',
+        'locked_at',
+        'locker',
+        'pivot'
     ];
     /**
      * The attributes that should be append for arrays
@@ -34,6 +41,19 @@ class BrandFront extends Brand
     public function items()
     {
         return $this->belongsToMany(ItemFront::class, 'brands_items_maps', 'brand_id', 'item_id')
+            ->withTimestamps();
+    }
+
+
+    public function tags()
+    {
+        return $this->belongsToMany(TagFront::class, 'brands_tags_maps', 'brand_id', 'tag_id');
+    }
+
+
+    public function products()
+    {
+        return $this->belongsToMany(ProductFront::class, 'brands_products_maps', 'brand_id', 'product_id')
             ->withTimestamps();
     }
 

@@ -2,6 +2,8 @@
 namespace DaydreamLab\Cms\Models\Product\Front;
 
 use DaydreamLab\Cms\Models\Product\Product;
+use DaydreamLab\Cms\Models\Brand\Front\BrandFront;
+use DaydreamLab\Cms\Models\ProductCategory\Front\ProductCategoryFront;
 
 class ProductFront extends Product
 {
@@ -20,6 +22,23 @@ class ProductFront extends Product
         'product_category_id',
         'state',
         'created_by',
-        'updated_by'
+        'updated_by',
+        'locked_by',
+        'locked_at',
+        'locker',
+        'pivot'
     ];
+
+
+    public function brands()
+    {
+        return $this->belongsToMany(BrandFront::class, 'brands_products_maps', 'product_id', 'brand_id')
+            ->withTimestamps();
+    }
+
+
+    public function productCategory()
+    {
+        return $this->belongsTo(ProductCategoryFront::class, 'product_category_id', 'id');
+    }
 }

@@ -5,6 +5,7 @@ use DaydreamLab\Cms\Models\Category\Front\CategoryFront;
 use DaydreamLab\Cms\Models\Extrafield\Front\ExtrafieldFront;
 use DaydreamLab\Cms\Models\Item\Item;
 use DaydreamLab\Cms\Models\Tag\Front\TagFront;
+use DaydreamLab\Cms\Models\Product\Front\ProductFront;
 use DaydreamLab\JJAJ\Helpers\Helper;
 
 class ItemFront extends Item
@@ -30,7 +31,7 @@ class ItemFront extends Item
         //'ordering',
         //'featured_ordering',
         //'language',
-        'params',
+        //'params',
         'creator_groups',
         'extrafield_group_id',
         //'extrafields',
@@ -60,4 +61,10 @@ class ItemFront extends Item
         return $this->belongsToMany(TagFront::class, 'items_tags_maps', 'item_id', 'tag_id')->where('state', 1);
     }
 
+
+    public function products()
+    {
+        return $this->belongsToMany(ProductFront::class, 'items_products_maps', 'item_id', 'product_id')
+            ->withTimestamps();
+    }
 }

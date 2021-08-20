@@ -107,17 +107,17 @@ class Product extends BaseModel
     }
 
 
+    public function productCategory()
+    {
+        return $this->belongsTo(ProductCategory::class, 'product_category_id', 'id');
+    }
+
+
     public function getBrandTitleAttribute()
     {
         return $this->brands->map(function($b) {
             return $b->title;
         });
-    }
-
-
-    public function productCategory()
-    {
-        return $this->belongsTo(ProductCategory::class, 'product_category_id', 'id');
     }
 
 

@@ -330,12 +330,16 @@ class ItemFrontService extends ItemService
         return parent::search($input);
     }
 
-
+    /** 新加的 */
     public function getContentByAlias(Collection $input)
     {
         $content = $this->repo->findBy('alias', '=', $input->get('alias'))->first();
         if ($content) {
-            $prevAndNext = $this->repo->getPreviousAndNext($content);
+            if ($brand = $input->get('brand')) {
+                $prevAndNext = $this->repo->getPreviousAndNextInBrand($content, $brand);
+            } else {
+                $prevAndNext = $this->repo->getPreviousAndNext($content);
+            }
             $content->previous = $prevAndNext['previous'];
             $content->next     = $prevAndNext['next'];
             $this->status   = 'GetItemSuccess';
