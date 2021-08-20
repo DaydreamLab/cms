@@ -17,6 +17,7 @@ use DaydreamLab\Cms\Controllers\NewsletterSubscription\Admin\NewsletterSubscript
 use DaydreamLab\Cms\Controllers\Product\Admin\ProductAdminController;
 use DaydreamLab\Cms\Controllers\Product\Front\ProductFrontController;
 use DaydreamLab\Cms\Controllers\ProductCategory\Admin\ProductCategoryAdminController;
+use DaydreamLab\Cms\Controllers\Rma\RmaController;
 use DaydreamLab\Cms\Controllers\Setting\Front\SettingFrontController;
 use DaydreamLab\Cms\Controllers\Tag\Front\TagFrontController;
 use DaydreamLab\Cms\Controllers\Tag\Admin\TagAdminController;
@@ -95,6 +96,9 @@ Route::get('api/item/stockholder/list', [ItemFrontController::class, 'getStockho
 #
 Route::post('api/item/{content_type}/search', [ItemFrontController::class, 'searchContent']);
 Route::get('api/item/{content_type}/{alias}', [ItemFrontController::class, 'getContentByAlias']);
+
+# 報修
+Route::post('api/rma/search', [RmaController::class, 'search']);
 
 /************************************  後台 API  ************************************/
 # 品牌 Brand
