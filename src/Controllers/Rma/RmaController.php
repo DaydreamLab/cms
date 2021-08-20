@@ -27,7 +27,7 @@ class RmaController extends Controller
         $slice = explode(',', $res->checkProcessResult);
         $qno = explode(';', $slice[1])[0];
         print_r($qno);
-        $detail = $client->__soapCall('checkDetail', ['parameters' => $qno]);
+        $detail = $client->__soapCall('checkDetail', ['parameters' => ['srmano' => $qno]]);
         print_r($detail->checkDetailResult);
     }
 
