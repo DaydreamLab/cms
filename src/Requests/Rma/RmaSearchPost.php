@@ -30,7 +30,7 @@ class RmaSearchPost extends ListRequest
             'id'        => 'nullable|string',
             'email'     => 'nullable|email',
             'phoneCode' => 'nullable|string',
-            'phoneNumber'   => 'nullable|string',
+            'phoneNumber'   => 'required|string',
             'phoneExtension'=> 'nullable|string'
         ];
 

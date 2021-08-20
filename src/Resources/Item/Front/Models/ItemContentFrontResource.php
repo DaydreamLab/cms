@@ -46,6 +46,9 @@ class ItemContentFrontResource extends BaseJsonResource
             $scId = $this->extrafields['solution_category']['value'];
             $sc = Item::where('id', $scId)->first();
             $data['solutionCategory'] = $sc->title;
+        }
+
+        if ( ($this->category->content_type == 'solution') || ($this->category->content_type == 'case') ) {
             $icId = $this->extrafields['industry_category']['value'];
             $ic = Item::where('id', $icId)->first();
             $data['industryCategory'] = $ic->title;
