@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Resources\Item\Front\Models;
 
+use DaydreamLab\Cms\Models\Item\Item;
 use DaydreamLab\JJAJ\Resources\BaseJsonResource;
 
 class ItemContentFrontResource extends BaseJsonResource
@@ -14,7 +15,7 @@ class ItemContentFrontResource extends BaseJsonResource
      */
     public function toArray($request)
     {
-        return [
+        $data = [
             'title'                     => $this->title,
             'alias'                     => $this->alias,
             'category_alias'            => $this->category->alias,
@@ -22,10 +23,8 @@ class ItemContentFrontResource extends BaseJsonResource
             'brands'                    => $this->brands->map(function ($b) {
                 return $b->only(['alias', 'title', 'logo_image', 'contact']);
             }),
+            'publish_up'                => $this->getDateTimeString($this->publish_up),
             'state'                     => $this->state,
-            'ordering'                  => $this->ordering,
-            'featured'                  => $this->featured,
-            'featured_ordering'         => $this->featured_ordering,
             'introimage'                => $this->introimage,
             'introtext'                 => $this->introtext,
             'image'                     => $this->image,
@@ -42,5 +41,16 @@ class ItemContentFrontResource extends BaseJsonResource
             'prev'                      => $this->previous,
             'next'                      => $this->next
         ];
+
+        if ($this->category->content_type == 'solution') {
+            $scId = $this->extrafields['solution_category']['value'];
+            $sc = Item::where('id', $scId)->first();
+            $data['solutionCategory'] = $sc->title;
+            $icId = $this->extrafields['industry_category']['value'];
+            $ic = Item::where('id', $icId)->first();
+            $data['industryCategory'] = $ic->title;
+        }
+
+        return $data;
     }
 }

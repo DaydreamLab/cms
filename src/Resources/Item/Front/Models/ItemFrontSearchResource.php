@@ -15,10 +15,11 @@ class ItemFrontSearchResource extends BaseJsonResource
     public function toArray($request)
     {
         return [
-            'title'                     => $this['title'],
-            'alias'                     => $this['alias'],
-            'description'               => $this['description'],
-            'contentType'               => $this['contentType']
+            'title'             => $this['title'],
+            'alias'             => $this['alias'],
+            'description'       => $this['description'],
+            'brands'            => $this['brands'],
+            'contentType'       => $this['contentType']
         ];
     }
 }

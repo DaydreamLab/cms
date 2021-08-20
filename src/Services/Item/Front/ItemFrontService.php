@@ -570,12 +570,16 @@ class ItemFrontService extends ItemService
             if ($table == 'files') {
                 $data['title'] = $i->name;
                 $data['contentType'] = 'file';
+                $data['brands'] = $i->brands->map(function ($b) { return $b->alias; });
             } elseif ($table == 'brands') {
                 $data['contentType'] = 'brand';
+                $data['brands'] = [];
             } elseif ($table == 'products') {
                 $data['contentType'] = 'product';
+                $data['brands'] = $i->brands->map(function ($b) { return $b->alias; });
             } elseif ($table == 'items') {
                 $data['contentType'] = $i->category->content_type;
+                $data['brands'] = $i->brands->map(function ($b) { return $b->alias; });
             }
             return $data;
         });
