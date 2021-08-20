@@ -278,10 +278,10 @@ class OptionService
                     $ics = $ifser->searchContent(collect(['content_type' => 'industry_category', 'q' => new QueryCapsule(), 'limit' => 0]), false);
                     $icsData = [];
                     foreach ($ics as $ic) {
-                        $icsData[$ic->id] = $ic->only(['alias', 'title', 'description']);
+                        $icsData[$ic->id] = $ic->only(['alias', 'title']);
                     }
                     $data[$type] = $scs->map(function ($sc) use ($icsData) {
-                        $d = $sc->only(['alias', 'title']);
+                        $d = $sc->only(['alias', 'title', 'description']);
                         $icsArray = $sc->extrafields['industry_category']['value'];
                         $d['industry_category'] = array_map(function ($i) use ($icsData) {
                             return $icsData[$i['id']];
