@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Models\Item\Front;
 use DaydreamLab\Cms\Models\Category\Front\CategoryFront;
 use DaydreamLab\Cms\Models\Extrafield\Front\ExtrafieldFront;
 use DaydreamLab\Cms\Models\Item\Item;
+use DaydreamLab\Cms\Models\Brand\Front\BrandFront;
 use DaydreamLab\Cms\Models\Tag\Front\TagFront;
 use DaydreamLab\Cms\Models\Product\Front\ProductFront;
 use DaydreamLab\JJAJ\Helpers\Helper;
@@ -28,6 +29,7 @@ class ItemFront extends Item
         'category_id',
         'state',
         'access',
+        'pivot',
         //'ordering',
         //'featured_ordering',
         //'language',
@@ -59,6 +61,13 @@ class ItemFront extends Item
     public function tags()
     {
         return $this->belongsToMany(TagFront::class, 'items_tags_maps', 'item_id', 'tag_id')->where('state', 1);
+    }
+
+
+    public function brands()
+    {
+        return $this->belongsToMany(BrandFront::class, 'brands_items_maps', 'item_id', 'brand_id')
+            ->withTimestamps();
     }
 
 
