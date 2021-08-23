@@ -34,9 +34,9 @@ class RmaController extends Controller
             $response = [];
             foreach ($repairList as $repair) {
                 $p = explode(';', $repair);
-                print_r('編號：'.$p[0].'日期：'.$p[1]."\n");
+                //print_r('編號：'.$p[0].'日期：'.$p[1]."\n");
                 $detail = $client->__soapCall('checkDetail', ['parameters' => ['srmano' => $p[0]]]);
-                print_r($detail->checkDetailResult."\n");
+                //print_r($detail->checkDetailResult."\n");
                 if (strpos($detail->checkDetailResult, '@#') !== false) {
                     $detailList = explode('@#', $detail->checkDetailResult);
                     $formedData = [];
@@ -45,10 +45,56 @@ class RmaController extends Controller
                             case 0:
                                 $formedData['date'] = $item;
                                 break;
+                            case 1:
+                                $formedData['number'] = $item;
+                                break;
+                            case 2:
+                                $formedData['companyName'] = $item;
+                                break;
+                            case 3:
+                                $formedData['contact'] = $item;
+                                break;
+                            case 4:
+                                $formedData['phoneNumber'] = $item;
+                                break;
+                            case 5:
+                                $formedData['fax'] = $item;
+                                break;
+                            case 6:
+                                $formedData['address'] = $item;
+                                break;
+                            case 7:
+                                $formedData['email'] = $item;
+                                break;
+                            case 8:
+                                $formedData['otherInfo'] = $item;
+                                break;
+                            case 9:
+                                $formedData['brand'] = $item;
+                                break;
+                            case 10:
+                                $formedData['productSeries'] = $item;
+                                break;
+                            case 11:
+                                $formedData['seriesNumber'] = $item;
+                                break;
+                            case 12:
+                                $formedData['sendMethod'] = $item;
+                                break;
+                            case 13:
+                                $formedData['objectStatus'] = $item;
+                                break;
+                            case 14:
+                                $formedData['description'] = $item;
+                                break;
+                            case 15:
+                                $formedData['note'] = $item;
+                                break;
                             default:
                                 break;
                         }
                     }
+                    $formedData['originalResponse'] = $detail->checkDetailResult;
                     $response[] = $formedData;
                 }
             }
