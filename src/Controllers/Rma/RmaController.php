@@ -7,6 +7,7 @@ use DaydreamLab\Cms\Requests\Rma\RmaSearchPost;
 use DaydreamLab\JJAJ\Traits\ApiJsonResponse;
 use Illuminate\Routing\Controller;
 use SoapClient;
+use SoapFault;
 use Throwable;
 
 class RmaController extends Controller
@@ -18,16 +19,16 @@ class RmaController extends Controller
         $input = $request->validated();
         $client = new SoapClient("http://webservice.zerone.com.tw/RMA/rmaWebservice.asmx?WSDL");
 
-
-        return $client->__getFunctions();
-        /*
-
         $params = array(
-            'custom' => $input->get('customer')
+            $input->get('customer')
         );
 
-        $res = $client->__soapCall('insertDB', ['parameters' => $params]);
-        print_r($res->insertDBResult);*/
+        try {
+            $res = $client->__soapCall('insertDB', ['parameters' => $params]);
+
+        } catch (SoapFault $e) {
+            print_r($e);
+        }
     }
 
 
