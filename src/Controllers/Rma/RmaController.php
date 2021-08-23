@@ -16,21 +16,39 @@ class RmaController extends Controller
 
     public function add(RmaAddPost $request)
     {
-        $file = base_path('rma.wsdl');
-        file_put_contents($file, file_get_contents('http://webservice.zerone.com.tw/RMA/rmaWebservice.asmx?WSDL'));
-//        $input = $request->validated();
-//        $client = new SoapClient("http://webservice.zerone.com.tw/RMA/rmaWebservice.asmx?WSDL", ['exceptions' => true]);
-//
-//        $params = array(
-//            $input->get('customer')
-//        );
-//
-//        try {
-//            $res = $client->__soapCall('insertDB', ['parameters' => $params]);
-//            print_r($res);
-//        } catch (SoapFault $e) {
-//            print_r($e);
-//        }
+        $input = $request->validated();
+        $client = new SoapClient("http://webservice.zerone.com.tw/RMA/rmaWebservice.asmx?WSDL");
+
+        $params = array(
+            "scompellation" => $input->get('companyName'),
+            "sattribute"    => $input->get('customer'),
+            "sname"         => $input->get('contactName'),
+            "stelcode"      => $input->get('phoneCode'),
+            "stel"          => $input->get('phoneNumber'),
+            "stelext"       => $input->get('phoneExt') ? : '',
+            "sfaxcode"      => $input->get('faxCode') ? : '',
+            "sfax"          => $input->get('faxMobile') ? : '',
+            "szip"          => $input->get('zipCode'),
+            "saddress"      => $input->get('address'),
+            "semail"        => $input->get('email'),
+            "semail2"       => $input->get('backEmail') ? : '',
+            "smemo"         => $input->get('otherInfo') ? : '',
+            "sproductid"    => $input->get('brand'),
+            "sproductmodel" => $input->get('productModel'),
+            "smodelseirano" => $input->get('serialNumber'),
+            "ssendway"      => $input->get('sendWay'),
+            "sproductstateid" => $input->get('objectStatus'),
+            "sfaultid"      => $input->get('faultId') ? : '',
+            "sfaultaccount" => $input->get('description'),
+            "sfaultmemo"    => $input->get('memo') ? : ''
+        );
+
+        try {
+            $res = $client->__soapCall('insertDB', ['parameters' => $params]);
+            print_r($res->insertDBResult);
+        } catch (SoapFault $e) {
+            print_r($e);
+        }
     }
 
 
@@ -74,7 +92,7 @@ class RmaController extends Controller
                                 $formedData['companyName'] = $item;
                                 break;
                             case 3:
-                                $formedData['contact'] = $item;
+                                $formedData['contactName'] = $item;
                                 break;
                             case 4:
                                 $formedData['phoneNumber'] = $item;
@@ -95,13 +113,13 @@ class RmaController extends Controller
                                 $formedData['brand'] = $item;
                                 break;
                             case 10:
-                                $formedData['productSeries'] = $item;
+                                $formedData['productModel'] = $item;
                                 break;
                             case 11:
-                                $formedData['seriesNumber'] = $item;
+                                $formedData['serialNumber'] = $item;
                                 break;
                             case 12:
-                                $formedData['sendMethod'] = $item;
+                                $formedData['sendWay'] = $item;
                                 break;
                             case 13:
                                 $formedData['objectStatus'] = $item;
@@ -110,7 +128,7 @@ class RmaController extends Controller
                                 $formedData['description'] = $item;
                                 break;
                             case 15:
-                                $formedData['note'] = $item;
+                                $formedData['memo'] = $item;
                                 break;
                             default:
                                 break;
