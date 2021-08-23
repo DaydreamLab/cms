@@ -24,6 +24,7 @@ class RmaController extends Controller
 
         try {
             $res = $client->__soapCall('insertDB', ['parameters' => $params]);
+            print_r($res->insertDBResult);
         } catch (\Exception $e) {
             print_r($e->getMessage());
         }
