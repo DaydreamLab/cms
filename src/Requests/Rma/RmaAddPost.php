@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Requests\Rma;
 
 use DaydreamLab\JJAJ\Requests\BaseRequest;
+use Illuminate\Validation\Rule;
 
 class RmaAddPost extends BaseRequest
 {
@@ -27,7 +28,11 @@ class RmaAddPost extends BaseRequest
     public function rules()
     {
         $rules = [
-
+            'customer'     => [
+                'required',
+                'integer',
+                Rule::in([0,1,2])
+            ],
         ];
 
         return array_merge(parent::rules(), $rules);
