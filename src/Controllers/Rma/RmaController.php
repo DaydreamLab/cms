@@ -22,7 +22,7 @@ class RmaController extends Controller
             'custom' => $input->get('customer')
         );
 
-        $res = $client->__soapCall('insertDB', ['parameters' => $params]);
+        $res = $client->__soapCall('insertDB', $params);
         print_r($res->insertDBResult);
     }
 
