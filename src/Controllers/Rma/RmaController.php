@@ -19,7 +19,7 @@ class RmaController extends Controller
         $client = new SoapClient("http://webservice.zerone.com.tw/RMA/rmaWebservice.asmx?WSDL");
 
         $params = array(
-            $input->get('customer')
+            'custom' => $input->get('customer')
         );
 
         $res = $client->__soapCall('insertDB', ['parameters' => $params]);
