@@ -19,34 +19,34 @@ class RmaController extends Controller
         $client = new SoapClient("http://webservice.zerone.com.tw/RMA/rmaWebservice.asmx?WSDL");
 
         $params = array(
-//            "scompellation" => $input->get('companyName'),
-//            "sattribute"    => $input->get('customer'),
-//            "sname"         => $input->get('contactName'),
-//            "stelcode"      => $input->get('phoneCode'),
-//            "stel"          => $input->get('phoneNumber'),
-//            "stelext"       => $input->get('phoneExt') ? : '',
-//            "sfaxcode"      => $input->get('faxCode') ? : '',
-//            "sfax"          => $input->get('faxMobile') ? : '',
-//            "szip"          => $input->get('zipCode'),
-//            "saddress"      => $input->get('address'),
-//            "semail"        => $input->get('email'),
-//            "semail2"       => $input->get('backEmail') ? : '',
-//            "smemo"         => $input->get('otherInfo') ? : '',
-//            "sproductid"    => $input->get('brand'),
-//            "sproductmodel" => $input->get('productModel'),
-//            "smodelseirano" => $input->get('serialNumber'),
-//            "ssendway"      => $input->get('sendWay'),
-//            "sproductstateid" => $input->get('objectStatus'),
-//            "sfaultid"      => $input->get('faultId') ? : '',
-//            "sfaultaccount" => $input->get('description'),
-//            "sfaultmemo"    => $input->get('memo') ? : ''
+            "scompellation" => $input->get('companyName'),
+            "sattribute"    => $input->get('customer'),
+            "sname"         => $input->get('contactName'),
+            "stelcode"      => $input->get('phoneCode'),
+            "stel"          => $input->get('phoneNumber'),
+            "stelext"       => $input->get('phoneExt') ? : '',
+            "sfaxcode"      => $input->get('faxCode') ? : '',
+            "sfax"          => $input->get('faxMobile') ? : '',
+            "szip"          => $input->get('zipCode'),
+            "saddress"      => $input->get('address'),
+            "semail"        => $input->get('email'),
+            "semail2"       => $input->get('backEmail') ? : '',
+            "smemo"         => $input->get('otherInfo') ? : '',
+            "sproductid"    => $input->get('brand'),
+            "sproductmodel" => $input->get('productModel'),
+            "smodelseirano" => $input->get('serialNumber'),
+            "ssendway"      => $input->get('sendWay'),
+            "sproductstateid" => $input->get('objectStatus'),
+            "sfaultid"      => $input->get('faultId') ? : '',
+            "sfaultaccount" => $input->get('description'),
+            "sfaultmemo"    => $input->get('memo') ? : ''
         );
 
         try {
             $res = $client->__soapCall('insertDB', ['parameters' => $params]);
-            print_r($res->insertDBResult);
+            return $this->response('CreateSuccess', ['serialNumber' => $res->insertDBResult]);
         } catch (Throwable $e) {
-            print_r($e);
+            return $this->response('CreateFail', ['message' => $e->getMessage()]);
         }
     }
 
