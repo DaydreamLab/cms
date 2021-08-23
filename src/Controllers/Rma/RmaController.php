@@ -7,7 +7,6 @@ use DaydreamLab\Cms\Requests\Rma\RmaSearchPost;
 use DaydreamLab\JJAJ\Traits\ApiJsonResponse;
 use Illuminate\Routing\Controller;
 use SoapClient;
-use SoapFault;
 use Throwable;
 
 class RmaController extends Controller
@@ -44,9 +43,9 @@ class RmaController extends Controller
         );
 
         try {
-            $res = $client->__soapCall('insertDB', ['parameters' => $params]);
+            $res = $client->__soapCall('insertDB', [$params]);
             print_r($res->insertDBResult);
-        } catch (SoapFault $e) {
+        } catch (Throwable $e) {
             print_r($e);
         }
     }
