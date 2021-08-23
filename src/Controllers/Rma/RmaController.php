@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Controllers\Rma;
 
+use DaydreamLab\Cms\Requests\Rma\RmaAddPost;
 use DaydreamLab\Cms\Requests\Rma\RmaSearchPost;
 use DaydreamLab\JJAJ\Traits\ApiJsonResponse;
 use Illuminate\Routing\Controller;
@@ -12,13 +13,30 @@ class RmaController extends Controller
 {
     use ApiJsonResponse;
 
+    public function add(RmaAddPost $request)
+    {
+        $input = $request->validated();
+        $client = new SoapClient("http://webservice.zerone.com.tw/RMA/rmaWebservice.asmx?WSDL");
+
+        $params = array(
+
+        );
+
+        try {
+            $res = $client->__soapCall('insertDB', ['parameters' => $params]);
+        } catch (\Exception $e) {
+            print_r($e->getMessage());
+        }
+    }
+
+
     public function search(RmaSearchPost $request)
     {
         $input = $request->validated();
         $client = new SoapClient("http://webservice.zerone.com.tw/RMA/rmaWebservice.asmx?WSDL");
 
         $params = array(
-            'srmano' => $input->get('id') ? : '',
+            'srmano' => $input->get('number') ? : '',
             'semail' => $input->get('email') ? : '',
             'scode' => $input->get('phoneCode') ? : '',
             'stel' => $input->get('phoneNumber') ? : '',
@@ -27,7 +45,7 @@ class RmaController extends Controller
 
         $res = $client->__soapCall('checkProcess', ['parameters' => $params]);
         if ($res->checkProcessResult == '查無資料') {
-
+            $response = [];
         } else {
             $repairList = explode(',', $res->checkProcessResult);
             unset($repairList[0]); # test;test
@@ -94,7 +112,7 @@ class RmaController extends Controller
                                 break;
                         }
                     }
-                    $formedData['originalResponse'] = $detail->checkDetailResult;
+                    $formedData['__originalResponse'] = $detail->checkDetailResult;
                     $response[] = $formedData;
                 }
             }

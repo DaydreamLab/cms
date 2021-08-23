@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Rma;
 
-use DaydreamLab\JJAJ\Requests\ListRequest;
+use DaydreamLab\JJAJ\Requests\BaseRequest;
 
-class RmaSearchPost extends ListRequest
+class RmaSearchPost extends BaseRequest
 {
     protected $package = 'Cms';
 
@@ -27,9 +27,9 @@ class RmaSearchPost extends ListRequest
     public function rules()
     {
         $rules = [
-            'id'        => 'nullable|string',
-            'email'     => 'nullable|email',
-            'phoneCode' => 'nullable|string',
+            'number'        => 'nullable|string',
+            'email'         => 'nullable|email',
+            'phoneCode'     => 'nullable|string',
             'phoneNumber'   => 'required|string',
             'phoneExtension'=> 'nullable|string'
         ];

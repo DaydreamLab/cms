@@ -98,6 +98,7 @@ Route::post('api/item/{content_type}/search', [ItemFrontController::class, 'sear
 Route::get('api/item/{content_type}/{alias}', [ItemFrontController::class, 'getContentByAlias']);
 
 # 報修
+Route::post('api/rma/add', [RmaController::class, 'add']);
 Route::post('api/rma/search', [RmaController::class, 'search']);
 
 /************************************  後台 API  ************************************/
