@@ -17,7 +17,7 @@ class RmaController extends Controller
     public function add(RmaAddPost $request)
     {
         $input = $request->validated();
-        $client = new SoapClient("http://webservice.zerone.com.tw/RMA/rmaWebservice.asmx?WSDL", ['exceptions' => true]);
+        $client = new SoapClient("http://webservice.zerone.com.tw/RMA/rmaWebservice.asmx?WSDL", ['exceptions' => false]);
 
         $params = array(
             $input->get('customer')
@@ -25,7 +25,7 @@ class RmaController extends Controller
 
         try {
             $res = $client->__soapCall('insertDB', ['parameters' => $params]);
-
+            print_r($res);
         } catch (SoapFault $e) {
             print_r($e);
         }
