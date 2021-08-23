@@ -26,7 +26,7 @@ class RmaController extends Controller
         $res = $client->__soapCall('checkProcess', ['parameters' => $params]);
         if ($res->checkProcessResult != '查無資料') {
             $repairList = explode(',', $res->checkProcessResult);
-            unset($repairList[0]);
+            unset($repairList[0]); # test;test
             foreach ($repairList as $repair) {
                 $p = explode(';', $repair);
                 print_r('編號：'.$p[0].'日期：'.$p[1]."\n");
@@ -34,12 +34,7 @@ class RmaController extends Controller
                 print_r($detail->checkDetailResult."\n");
             }
         }
-        /*
-        $slice = explode(',', $res->checkProcessResult);
-        $qno = explode(';', $slice[1])[0];
 
-        $detail_array = explode('@#', $detail->checkDetailResult);
-     */
     }
 
 }

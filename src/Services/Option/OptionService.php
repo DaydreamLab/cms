@@ -281,7 +281,7 @@ class OptionService
                         $icsData[$ic->id] = $ic->only(['alias', 'title']);
                     }
                     $data[$type] = $scs->map(function ($sc) use ($icsData) {
-                        $d = $sc->only(['alias', 'title', 'description']);
+                        $d = $sc->only(['alias', 'title', 'description', 'introimage']);
                         $icsArray = $sc->extrafields['industry_category']['value'];
                         $d['industry_category'] = array_map(function ($i) use ($icsData) {
                             return $icsData[$i['id']];
