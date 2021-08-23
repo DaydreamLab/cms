@@ -61,10 +61,10 @@ class RmaController extends Controller
                                 $formedData['fax'] = $item;
                                 break;
                             case 6:
-                                $formedData['address'] = $item;
+                                $formedData['email'] = $item;
                                 break;
                             case 7:
-                                $formedData['email'] = $item;
+                                $formedData['address'] = $item;
                                 break;
                             case 8:
                                 $formedData['otherInfo'] = $item;
