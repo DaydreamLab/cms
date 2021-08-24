@@ -5,6 +5,7 @@ namespace DaydreamLab\Cms\Services\NewsletterSubscription\Admin;
 use DaydreamLab\Cms\Repositories\NewsletterSubscription\Admin\NewsletterSubscriptionAdminRepository;
 use DaydreamLab\Cms\Services\NewsletterSubscription\NewsletterSubscriptionService;
 use DaydreamLab\JJAJ\Traits\LoggedIn;
+use Illuminate\Support\Collection;
 
 class NewsletterSubscriptionAdminService extends NewsletterSubscriptionService
 {

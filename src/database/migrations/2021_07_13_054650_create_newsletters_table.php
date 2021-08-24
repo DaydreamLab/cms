@@ -20,7 +20,7 @@ class CreateNewslettersTable extends Migration
             $table->string('alias');
             $table->string('image')->nullable();
             $table->string('number')->nullable();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->string('url')->nullable();
             $table->tinyInteger('display_topic')->default(0);
             $table->text('information')->nullable();

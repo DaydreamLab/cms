@@ -2,9 +2,11 @@
 
 namespace DaydreamLab\Cms\Services\Newsletter\Admin;
 
+use Carbon\Carbon;
 use DaydreamLab\Cms\Repositories\Newsletter\Admin\NewsletterAdminRepository;
 use DaydreamLab\Cms\Services\Newsletter\NewsletterService;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Storage;
 
 class NewsletterAdminService extends NewsletterService
 {
@@ -65,6 +67,27 @@ class NewsletterAdminService extends NewsletterService
             $result = $this->find($input->get('id'));
         }
         $this->response = $result;
+
+        # 製作電子報html
+        $filePath = 'newsletter/';
+        $category = ($result->newsletterCategory->alias == '01_newsletter') ? 'z' : 'p';
+        $filePath = $filePath . $category . '/' . $category . $result->number . '.html';
+        $viewFile = ($result->newsletterCategory->alias == '01_newsletter') ? 'newsletter.01Newsletter' : 'newsletter.01DealNewsletter';
+
+        $html = view($viewFile, [
+            'title' => $result->title,
+            'number' => $result->number,
+            'publishDate' => Carbon::parse($result->publish_up, config('app.timezone'))->tz('Asia/Taipei')->format('Y/m/d'),
+            'image' => $result->image,
+            'description' => $result->description,
+            'params' => $result->params,
+            'url' => $result->url,
+            'information' => $result->information,
+            'bulletin' => $result->bulletin,
+            'promotion' => $result->promotion
+        ])->render();
+
+        Storage::disk('media-public')->put($filePath, $html);
 
         return $this->response;
     }

@@ -19,7 +19,7 @@ class NewslettersTableSeeder extends Seeder
         $this->letterAdminService->store(collect([
             'title' => '測試電子報',
             'alias' => 'testNewsletter',
-            'newsletter_category_id' => 24,
+            'newsletter_category_id' => 45,
             'state' => 1,
             'number' => 400,
             'params' => [

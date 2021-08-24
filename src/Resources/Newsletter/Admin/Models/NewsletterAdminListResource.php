@@ -21,12 +21,12 @@ class NewsletterAdminListResource extends BaseJsonResource
             'category_title'    => $this->newsletterCategory->title,
             'state'             => $this->state,
             'title'             => $this->title,
-            'created_at'                => $this->getDateTimeString($this->created_at, $tz),
-            'updated_at'                => $this->getDateTimeString($this->updated_at, $tz),
-            'locked_at'                 => $this->getDateTimeString($this->locked_at, $tz),
-            'creatorName'               => $this->creatorName,
-            'updaterName'               => $this->updaterName,
-            'lockerName'                => $this->lockerName,
+            'created_at'        => $this->getDateTimeString($this->created_at, $tz),
+            'updated_at'        => $this->getDateTimeString($this->updated_at, $tz),
+            'locked_at'         => $this->getDateTimeString($this->locked_at, $tz),
+            'creatorName'       => $this->creatorName,
+            'updaterName'       => $this->updaterName,
+            'lockerName'        => $this->lockerName,
             'locker'            => ($this->locker) ? $this->locker->only(['id', 'uuid', 'name']) : []
         ];
     }

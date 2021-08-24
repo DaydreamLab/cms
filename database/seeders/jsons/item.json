@@ -344,7 +344,7 @@
         "newsletterUserGroupIds": [1,7]
       },
       {
-        "alias": "01_sale_newsletter",
+        "alias": "01_deal_newsletter",
         "title": "零壹經銷電子報",
         "language": "*",
         "access": 1,
