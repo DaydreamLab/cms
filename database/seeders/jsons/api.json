@@ -972,6 +972,12 @@
         "created_by": 1
     },
     {
+        "name": "精選最新消息",
+        "method": "featuredBulletin",
+        "url": "/admin/item/bulletin/featured",
+        "created_by": 1
+    },
+    {
         "name": "取得促銷訊息",
         "method": "getPromotion",
         "url": "/admin/item/promotion/{id}",
@@ -1011,6 +1017,12 @@
         "name": "回存促銷訊息",
         "method": "restorePromotion",
         "url": "/admin/item/promotion/restore",
+        "created_by": 1
+    },
+    {
+        "name": "精選促銷訊息",
+        "method": "featuredPromotion",
+        "url": "/admin/item/promotion/featured",
         "created_by": 1
     },
     {

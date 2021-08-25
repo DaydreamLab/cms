@@ -543,6 +543,7 @@
                     "searchBulletin",
                     "restoreBulletin",
                     "stateBulletin",
+                    "featuredBulletin",
                     "orderingBulletin"
                 ],
                 "defaultApis": {
@@ -574,6 +575,7 @@
                     "searchPromotion",
                     "restorePromotion",
                     "statePromotion",
+                    "featuredPromotion",
                     "orderingPromotion"
                 ],
                 "defaultApis": {
