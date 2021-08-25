@@ -24,10 +24,8 @@ class ItemContentFrontListResource extends BaseJsonResource
             'featured'                  => $this->featured,
             'featured_ordering'         => $this->featured_ordering,
             'extrafields'               => $this->extrafields,
-            'category'                  => [
-                'title' => $this->category->title,
-                'alias' => $this->category->alias
-            ],
+            'category_alias'            => $this->category->alias,
+            'category_title'            => $this->category->title,
             'publish_up'                => $this->getDateTimeString($this->publish_up)
         ];
     }

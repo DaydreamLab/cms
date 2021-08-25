@@ -153,6 +153,28 @@
      "access": 1,
      "created_by": 1
    },
+  {
+    "content_type": "bulletin",
+    "title": "經銷限定",
+    "value": "0",
+    "alias": "dealer_only",
+    "type": "radio",
+    "params": {
+      "option": [
+        {
+          "name": "是",
+          "value": "1"
+        },
+        {
+          "name": "否",
+          "value": "0"
+        }
+      ]
+    },
+    "required": 0,
+    "access": 1,
+    "created_by": 1
+  },
    {
      "content_type": "promotion",
      "title": "副標題",

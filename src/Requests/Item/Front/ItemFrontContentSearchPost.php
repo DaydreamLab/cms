@@ -51,7 +51,8 @@ class ItemFrontContentSearchPost extends ListRequest
             'solution_category_alias' => 'nullable|array',
             'solution_category_alias.*' => 'required|string',
             'industry_category_alias' => 'nullable|array',
-            'industry_category_alias.*' => 'required|string'
+            'industry_category_alias.*' => 'required|string',
+            'search_date'   => 'nullable|string'
         ];
 
         return array_merge(parent::rules(), $rules);

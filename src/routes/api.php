@@ -83,8 +83,11 @@ Route::get('api/product/{alias}', [ProductFrontController::class, 'getByAlias'])
 Route::post('api/item/solution/search', [ItemFrontController::class, 'searchSolution']);
 # 成功案例
 # 最新消息
+Route::post('api/item/bulletin/search', [ItemFrontController::class, 'searchBulletin']);
 # 促銷消息
+Route::post('api/item/promotion/search', [ItemFrontController::class, 'searchPromotion']);
 # 01影片
+Route::post('api/item/video/search', [ItemFrontController::class, 'searchVideo']);
 # 大事紀
 Route::get('api/item/memorabilia/list', [ItemFrontController::class, 'getMemorabilia']);
 # 財務資訊

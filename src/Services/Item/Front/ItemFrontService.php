@@ -455,6 +455,15 @@ class ItemFrontService extends ItemService
             $input->forget('brand_alias');
         }
 
+        if ( $search_date = $input->get('search_date') ) {
+            if ( in_array($content_type, ['bulletin', 'promotion']) ) {
+
+            } else {
+
+            }
+            $input->forget('search_date');
+        }
+
         $input->put('paginate', $paginate);
         $input->put('state', 1);
 
@@ -505,6 +514,96 @@ class ItemFrontService extends ItemService
         $input->put('content_type', 'solution');
 
         return $this->searchContent($input);
+    }
+
+
+    public function searchBulletin(Collection $input)
+    {
+        $search_date = $input->get('search_date');
+        $input->forget('search_date');
+        $limit = $input->get('limit');
+        $page = $input->get('page');
+
+        list($featured, $notFeatured) = $this->searchFeatureContent($input, 'bulletin');
+
+        if ($search_date) {
+            $split = explode('/', $search_date, 2);
+            $searchYear = (int)$split[0];
+            $searchMonth = (int)$split[1];
+            $notFeatured = $notFeatured->filter(function ($v) use ($searchYear, $searchMonth) {
+                $registerStart = $v['extrafields']['register_start']['value'];
+                if ($registerStart) {
+                    $registerStart = Carbon::parse($registerStart, 'Asia/Taipei');
+                    return $registerStart->year == $searchYear && $registerStart->month == $searchMonth;
+                }
+                return true;
+            })->values();
+        }
+
+        $p = $this->repo->paginate($notFeatured, $limit, $page ?: 1, [])->toArray();
+        $data = $p['data'];
+        unset($p['data']);
+        $this->response = collect(['featured' => $featured, 'items' => $data, 'pagination' => $p]);
+        return $this->response;
+    }
+
+
+    public function searchPromotion(Collection $input)
+    {
+        $search_date = $input->get('search_date');
+        $input->forget('search_date');
+        $limit = $input->get('limit');
+        $page = $input->get('page');
+
+        list($featured, $notFeatured) = $this->searchFeatureContent($input, 'promotion');
+
+        if ($search_date) {
+            $split = explode('/', $search_date, 2);
+            $searchYear = (int)$split[0];
+            $searchMonth = (int)$split[1];
+            $notFeatured = $notFeatured->filter(function ($v) use ($searchYear, $searchMonth) {
+                $registerStart = $v['extrafields']['register_start']['value'];
+                if ($registerStart) {
+                    $registerStart = Carbon::parse($registerStart, 'Asia/Taipei');
+                    return $registerStart->year == $searchYear && $registerStart->month == $searchMonth;
+                }
+                return true;
+            })->values();
+        }
+
+        $p = $this->repo->paginate($notFeatured, $limit, $page ?: 1, [])->toArray();
+        $data = $p['data'];
+        unset($p['data']);
+        $this->response = collect(['featured' => $featured, 'items' => $data, 'pagination' => $p]);
+        return $this->response;
+    }
+
+
+    public function searchVideo(Collection $input)
+    {
+        $search_date = $input->get('search_date');
+        $input->forget('search_date');
+        $limit = $input->get('limit');
+        $page = $input->get('page');
+
+        list($featured, $notFeatured) = $this->searchFeatureContent($input, 'video');
+
+        if ($search_date) {
+            $split = explode('/', $search_date, 2);
+            $searchYear = (int)$split[0];
+            $searchMonth = (int)$split[1];
+            $notFeatured = $notFeatured->filter(function ($v) use ($searchYear, $searchMonth) {
+                $publishUp = Carbon::parse($v['publish_up'], 'Asia/Taipei');
+
+                return $publishUp->year == $searchYear && $publishUp->month == $searchMonth;
+            })->values();
+        }
+
+        $p = $this->repo->paginate($notFeatured, $limit, $page ?: 1, [])->toArray();
+        $data = $p['data'];
+        unset($p['data']);
+        $this->response = collect(['featured' => $featured, 'items' => $data, 'pagination' => $p]);
+        return $this->response;
     }
 
 
@@ -594,5 +693,36 @@ class ItemFrontService extends ItemService
         $this->status = 'SearchSuccess';
         $this->response = $this->repo->paginate($response, $limit, $page ?: 1, []);
         return $this->response;
+    }
+
+
+    protected function searchFeatureContent(Collection $input, $content_type)
+    {
+        $input->put('content_type', $content_type);
+        $limit = $input->get('limit');
+        $input->put('limit', 0);
+        $page = $input->get('page');
+        $input->forget('page');
+
+        $items = $this->searchContent(collect($input->toArray()), false)->map(function ($i) {
+            $map = $i->only(['title', 'alias', 'featured', 'featured_ordering', 'extrafields', 'category_alias', 'category_title']);
+            $map['brands'] = $i->brands->map(function ($b) {
+                return $b->only(['alias', 'title', 'logo_image', 'contact']);
+            });
+            $map['publish_up'] = Carbon::parse($i->publish_up, config('app.timezone'))->tz('Asia/Taipei')->format('Y-m-d H:i:s');
+            return $map;
+        });
+
+        $notFeatured = collect([]);
+        $featured = collect([]);
+        foreach ($items as $item) {
+            if ($item['featured']) {
+                $featured->push($item);
+            } else {
+                $notFeatured->push($item);
+            }
+        }
+
+        return [$featured, $notFeatured];
     }
 }

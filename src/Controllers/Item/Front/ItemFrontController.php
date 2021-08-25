@@ -162,4 +162,43 @@ class ItemFrontController extends CmsController
 
         return $this->response($this->service->status, $this->service->response, [], ItemContentFrontListResourceCollection::class);
     }
+
+
+    public function searchBulletin(ItemFrontContentSearchPost $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->searchBulletin($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
+
+    public function searchPromotion(ItemFrontContentSearchPost $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->searchPromotion($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
+
+    public function searchVideo(ItemFrontContentSearchPost $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->searchVideo($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
 }
