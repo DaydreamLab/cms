@@ -455,15 +455,6 @@ class ItemFrontService extends ItemService
             $input->forget('brand_alias');
         }
 
-        if ( $search_date = $input->get('search_date') ) {
-            if ( in_array($content_type, ['bulletin', 'promotion']) ) {
-
-            } else {
-
-            }
-            $input->forget('search_date');
-        }
-
         $input->put('paginate', $paginate);
         $input->put('state', 1);
 
@@ -704,7 +695,9 @@ class ItemFrontService extends ItemService
         $page = $input->get('page');
         $input->forget('page');
 
-        $items = $this->searchContent(collect($input->toArray()), false)->map(function ($i) {
+        $params = $input->toArray();
+        $params['featured'] = 0;
+        $notFeatured = $this->searchContent(collect($params), false)->map(function ($i) {
             $map = $i->only(['title', 'alias', 'featured', 'featured_ordering', 'extrafields', 'category_alias', 'category_title']);
             $map['brands'] = $i->brands->map(function ($b) {
                 return $b->only(['alias', 'title', 'logo_image', 'contact']);
@@ -713,15 +706,17 @@ class ItemFrontService extends ItemService
             return $map;
         });
 
-        $notFeatured = collect([]);
-        $featured = collect([]);
-        foreach ($items as $item) {
-            if ($item['featured']) {
-                $featured->push($item);
-            } else {
-                $notFeatured->push($item);
-            }
-        }
+        unset($params['brand_alias']);
+        $params['q'] = new QueryCapsule();
+        $params['featured'] = 1;
+        $featured = $this->searchContent(collect($params), false)->map(function ($i) {
+            $map = $i->only(['title', 'alias', 'featured', 'featured_ordering', 'extrafields', 'category_alias', 'category_title']);
+            $map['brands'] = $i->brands->map(function ($b) {
+                return $b->only(['alias', 'title', 'logo_image', 'contact']);
+            });
+            $map['publish_up'] = Carbon::parse($i->publish_up, config('app.timezone'))->tz('Asia/Taipei')->format('Y-m-d H:i:s');
+            return $map;
+        });
 
         return [
             $featured->sortBy(function ($f) {
