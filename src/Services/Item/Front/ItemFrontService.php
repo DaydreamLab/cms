@@ -723,6 +723,11 @@ class ItemFrontService extends ItemService
             }
         }
 
-        return [$featured, $notFeatured];
+        return [
+            $featured->sortBy(function ($f) {
+                return $f['featured_ordering'];
+            })->values(),
+            $notFeatured
+        ];
     }
 }
