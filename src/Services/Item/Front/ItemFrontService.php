@@ -452,8 +452,8 @@ class ItemFrontService extends ItemService
                 });
                 $input->put('q', $q);
             }
-            $input->forget('brand_alias');
         }
+        $input->forget('brand_alias');
 
         $input->put('paginate', $paginate);
         $input->put('state', 1);

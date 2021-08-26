@@ -44,8 +44,8 @@ class ProductFrontService extends ProductService
                 });
                 $input->put('q', $q);
             }
-            $input->forget('brand_alias');
         }
+        $input->forget('brand_alias');
 
         if ( $productCategoryAlias = $input->get('product_category_alias') ) {
             $categoryFS = app(ProductCategoryFrontService::class);
@@ -63,8 +63,8 @@ class ProductFrontService extends ProductService
                 $q = $q->whereIn('product_category_id', $pc_ids);
                 $input->put('q', $q);
             }
-            $input->forget('product_category_alias');
         }
+        $input->forget('product_category_alias');
 
         $input->put('paginate', $paginate);
         $input->put('state', 1);
