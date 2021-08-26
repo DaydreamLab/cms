@@ -523,11 +523,25 @@ class ItemFrontService extends ItemService
             $searchMonth = (int)$split[1];
             $notFeatured = $notFeatured->filter(function ($v) use ($searchYear, $searchMonth) {
                 $registerStart = $v['extrafields']['register_start']['value'];
+                $registerEnd = $v['extrafields']['register_end']['value'];
                 if ($registerStart) {
                     $registerStart = Carbon::parse($registerStart, 'Asia/Taipei');
-                    return $registerStart->year == $searchYear && $registerStart->month == $searchMonth;
+                    if ($registerEnd) {
+                        $registerEnd = Carbon::parse($registerEnd, 'Asia/Taipei');
+                        return ($registerStart->year <= $searchYear && $registerStart->month <= $searchMonth)
+                            && ($registerEnd->year >= $searchYear && $registerEnd->month >= $searchMonth);
+                    } else {
+                        return ($registerStart->year <= $searchYear && $registerStart->month <= $searchMonth);
+                    }
+                } else {
+                    if ($registerEnd) {
+                        $registerEnd = Carbon::parse($registerEnd, 'Asia/Taipei');
+                        return ($registerEnd->year >= $searchYear && $registerEnd->month >= $searchMonth);
+                    } else {
+                        return false;
+                    }
                 }
-                return true;
+                return false;
             })->values();
         }
 
@@ -554,11 +568,25 @@ class ItemFrontService extends ItemService
             $searchMonth = (int)$split[1];
             $notFeatured = $notFeatured->filter(function ($v) use ($searchYear, $searchMonth) {
                 $registerStart = $v['extrafields']['register_start']['value'];
+                $registerEnd = $v['extrafields']['register_end']['value'];
                 if ($registerStart) {
                     $registerStart = Carbon::parse($registerStart, 'Asia/Taipei');
-                    return $registerStart->year == $searchYear && $registerStart->month == $searchMonth;
+                    if ($registerEnd) {
+                        $registerEnd = Carbon::parse($registerEnd, 'Asia/Taipei');
+                        return ($registerStart->year <= $searchYear && $registerStart->month <= $searchMonth)
+                            && ($registerEnd->year >= $searchYear && $registerEnd->month >= $searchMonth);
+                    } else {
+                        return ($registerStart->year <= $searchYear && $registerStart->month <= $searchMonth);
+                    }
+                } else {
+                    if ($registerEnd) {
+                        $registerEnd = Carbon::parse($registerEnd, 'Asia/Taipei');
+                        return ($registerEnd->year >= $searchYear && $registerEnd->month >= $searchMonth);
+                    } else {
+                        return false;
+                    }
                 }
-                return true;
+                return false;
             })->values();
         }
 
