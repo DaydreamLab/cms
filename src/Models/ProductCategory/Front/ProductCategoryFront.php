@@ -16,6 +16,7 @@ class ProductCategoryFront extends ProductCategory
 
     protected $hidden = [
         'id',
+        'parent_id',
         '_lft',
         '_rgt',
         'state',

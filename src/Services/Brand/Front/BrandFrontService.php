@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Services\Brand\Front;
 
+use DaydreamLab\Cms\Models\ProductCategory\ProductCategory;
 use DaydreamLab\Cms\Repositories\Brand\Front\BrandFrontRepository;
 use DaydreamLab\Cms\Services\Brand\BrandService;
 use DaydreamLab\Cms\Services\Product\Front\ProductFrontService;
@@ -26,6 +27,15 @@ class BrandFrontService extends BrandService
     public function getBrandByAlias(Collection $input)
     {
         $brand = $this->findBy('alias', '=', $input->get('alias'))->first();
+        # 需要把 products 按照產品小類分類
+        $products = $brand->products;
+        $filter_products = [];
+        foreach ($products as $product) {
+            $pData = $product->only(['alias', 'title']);
+            $filter_products[$product->productCategory->title] = $pData;
+        }
+        $brand->products = $filter_products;
+
         $this->status = 'GetItemSuccess';
         $this->response = $brand;
 
