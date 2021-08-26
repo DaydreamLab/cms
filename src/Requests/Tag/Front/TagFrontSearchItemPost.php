@@ -7,6 +7,7 @@ use Illuminate\Validation\Rule;
 
 class TagFrontSearchItemPost extends ListRequest
 {
+    protected $needAuth = false;
 
     public function authorize()
     {

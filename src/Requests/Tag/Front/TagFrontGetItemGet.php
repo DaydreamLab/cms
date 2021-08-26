@@ -6,6 +6,7 @@ use DaydreamLab\Cms\Requests\CmsGetItemGet;
 
 class TagFrontGetItemGet extends CmsGetItemGet
 {
+    protected $needAuth = false;
     /**
      * Determine if the user is authorized to make this request.
      *
