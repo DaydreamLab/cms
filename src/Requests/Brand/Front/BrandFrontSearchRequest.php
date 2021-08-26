@@ -7,6 +7,8 @@ use DaydreamLab\Cms\Requests\CmsSearchPost;
 class BrandFrontSearchRequest extends CmsSearchPost
 {
     protected $searchKeys = ['title', 'title_zhtw', 'description'];
+
+    protected $needAuth = false;
     /**
      * Determine if the user is authorized to make this request.
      *

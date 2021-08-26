@@ -6,6 +6,7 @@ use DaydreamLab\Cms\Requests\CmsSearchRequest;
 
 class NewsletterFrontSearchRequest extends CmsSearchRequest
 {
+    protected $needAuth = false;
     /**
      * Determine if the user is authorized to make this request.
      *

@@ -6,6 +6,7 @@ use DaydreamLab\Cms\Requests\cmsGetItemRequest;
 
 class ProductFrontGetItemRequest extends cmsGetItemRequest
 {
+    protected $needAuth = false;
     /**
      * Determine if the user is authorized to make this request.
      *

@@ -2,11 +2,11 @@
 
 namespace DaydreamLab\Cms\Requests\Product\Front;
 
-use DaydreamLab\Cms\Models\ProductCategory\ProductCategory;
 use DaydreamLab\Cms\Requests\CmsSearchPost;
 
 class ProductFrontSearchRequest extends CmsSearchPost
 {
+    protected $needAuth = false;
     /**
      * Determine if the user is authorized to make this request.
      *

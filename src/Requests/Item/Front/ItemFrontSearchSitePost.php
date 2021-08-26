@@ -2,11 +2,12 @@
 
 namespace DaydreamLab\Cms\Requests\Item\Front;
 
-use DaydreamLab\JJAJ\Requests\ListRequest;
+use DaydreamLab\Cms\Requests\CmsSearchPost;
 use Illuminate\Validation\Rule;
 
-class ItemFrontSearchSitePost extends ListRequest
+class ItemFrontSearchSitePost extends CmsSearchPost
 {
+    protected $needAuth = false;
     /**
      * Determine if the user is authorized to make this request.
      *

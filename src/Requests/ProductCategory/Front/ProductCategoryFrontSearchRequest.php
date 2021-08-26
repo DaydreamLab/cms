@@ -6,6 +6,7 @@ use DaydreamLab\Cms\Requests\cmsSearchRequest;
 
 class ProductCategoryFrontSearchRequest extends cmsSearchRequest
 {
+    protected $needAuth = false;
     /**
      * Determine if the user is authorized to make this request.
      *

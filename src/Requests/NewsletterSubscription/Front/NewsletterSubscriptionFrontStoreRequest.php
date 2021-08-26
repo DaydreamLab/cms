@@ -9,6 +9,8 @@ class NewsletterSubscriptionFrontStoreRequest extends CmsStoreRequest
     protected $modelName = 'NewsletterSubscription';
 
     protected $apiMethod = 'storeNewsletterSubscription';
+
+    protected $needAuth = false;
     /**
      * Determine if the user is authorized to make this request.
      *

@@ -2,13 +2,14 @@
 
 namespace DaydreamLab\Cms\Requests\Item\Front;
 
-use DaydreamLab\Cms\Models\Category\Category;
-use DaydreamLab\JJAJ\Requests\ListRequest;
+use DaydreamLab\Cms\Requests\CmsSearchPost;
 use Illuminate\Validation\Rule;
 
-class ItemFrontContentSearchPost extends ListRequest
+class ItemFrontContentSearchPost extends CmsSearchPost
 {
     protected $searchKeys = ['title', 'description'];
+
+    protected $needAuth = false;
     /**
      * Determine if the user is authorized to make this request.
      *
