@@ -32,7 +32,7 @@ class BrandFrontService extends BrandService
         $filter_products = [];
         foreach ($products as $product) {
             $pData = $product->only(['alias', 'title']);
-            $filter_products[$product->productCategory->title] = $pData;
+            $filter_products[$product->productCategory->title][] = $pData;
         }
         $brand->products = $filter_products;
 
