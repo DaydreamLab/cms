@@ -5,6 +5,7 @@ use DaydreamLab\Cms\Models\Brand\Brand;
 use DaydreamLab\Cms\Models\Item\Front\ItemFront;
 use DaydreamLab\Cms\Models\Tag\Front\TagFront;
 use DaydreamLab\Cms\Models\Product\Front\ProductFront;
+use DaydreamLab\Media\Models\File\Front\FileFront;
 
 class BrandFront extends Brand
 {
@@ -41,6 +42,13 @@ class BrandFront extends Brand
     public function items()
     {
         return $this->belongsToMany(ItemFront::class, 'brands_items_maps', 'brand_id', 'item_id')
+            ->withTimestamps();
+    }
+
+
+    public function files()
+    {
+        return $this->belongsToMany(FileFront::class, 'brands_files_maps', 'brand_id', 'file_id')
             ->withTimestamps();
     }
 
