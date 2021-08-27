@@ -44,7 +44,11 @@ class RmaController extends Controller
 
         try {
             $res = $client->__soapCall('insertDB', ['parameters' => $params]);
-            return $this->response('CreateSuccess', ['number' => $res->insertDBResult]);
+            if (is_numeric($res->insertDBResult)) {
+                return $this->response('CreateSuccess', ['number' => $res->insertDBResult]);
+            } else {
+                return $this->response('CreateFail', ['message' => $res->insertDBResult]);
+            }
         } catch (Throwable $e) {
             return $this->response('CreateFail', ['message' => $e->getMessage()]);
         }
