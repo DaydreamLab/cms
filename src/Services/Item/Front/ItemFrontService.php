@@ -726,7 +726,7 @@ class ItemFrontService extends ItemService
         $params = $input->toArray();
         $params['featured'] = 0;
         $notFeatured = $this->searchContent(collect($params), false)->map(function ($i) {
-            $map = $i->only(['title', 'alias', 'description', 'featured', 'featured_ordering', 'extrafields', 'category_alias', 'category_title']);
+            $map = $i->only(['title', 'alias', 'introtext', 'description', 'featured', 'featured_ordering', 'extrafields', 'category_alias', 'category_title']);
             $map['brands'] = $i->brands->map(function ($b) {
                 return $b->only(['alias', 'title', 'logo_image', 'contact']);
             });
@@ -738,7 +738,7 @@ class ItemFrontService extends ItemService
         $params['q'] = new QueryCapsule();
         $params['featured'] = 1;
         $featured = $this->searchContent(collect($params), false)->map(function ($i) {
-            $map = $i->only(['title', 'alias', 'description', 'featured', 'featured_ordering', 'extrafields', 'category_alias', 'category_title']);
+            $map = $i->only(['title', 'alias', 'introtext', 'description', 'featured', 'featured_ordering', 'extrafields', 'category_alias', 'category_title']);
             $map['brands'] = $i->brands->map(function ($b) {
                 return $b->only(['alias', 'title', 'logo_image', 'contact']);
             });
