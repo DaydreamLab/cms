@@ -690,7 +690,7 @@ class ItemFrontService extends ItemService
         }
 
         $response = $response->map(function ($i) {
-            $data = $i->only(['title', 'alias', 'description']);
+            $data = $i->only(['title', 'alias', 'introtext', 'description']);
             $table = $i->getTable();
             if ($table == 'files') {
                 $data['title'] = $i->name;
