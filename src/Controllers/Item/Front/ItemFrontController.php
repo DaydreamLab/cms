@@ -3,7 +3,6 @@
 namespace DaydreamLab\Cms\Controllers\Item\Front;
 
 use DaydreamLab\Cms\Controllers\CmsController;
-use DaydreamLab\Cms\Requests\CmsGetItemGet;
 use DaydreamLab\Cms\Requests\Item\Front\ItemFrontGetItemGet;
 use DaydreamLab\Cms\Requests\Item\Front\ItemFrontSearchPost;
 use DaydreamLab\Cms\Requests\Item\Front\ItemFrontSearchSitePost;
@@ -60,7 +59,7 @@ class ItemFrontController extends CmsController
     }
 
 
-    public function getFinance(CmsGetItemGet $request)
+    public function getFinance(ItemFrontGetItemGet $request)
     {
         $this->service->setUser($request->user('api'));
         try {
@@ -73,7 +72,7 @@ class ItemFrontController extends CmsController
     }
 
 
-    public function getMemorabilia(CmsGetItemGet $request)
+    public function getMemorabilia(ItemFrontGetItemGet $request)
     {
         $this->service->setUser($request->user('api'));
         try {
@@ -86,7 +85,7 @@ class ItemFrontController extends CmsController
     }
 
 
-    public function getRules(CmsGetItemGet $request)
+    public function getRules(ItemFrontGetItemGet $request)
     {
         $this->service->setUser($request->user('api'));
         try {
@@ -99,7 +98,7 @@ class ItemFrontController extends CmsController
     }
 
 
-    public function getStockholder(CmsGetItemGet $request)
+    public function getStockholder(ItemFrontGetItemGet $request)
     {
         $this->service->setUser($request->user('api'));
         try {
