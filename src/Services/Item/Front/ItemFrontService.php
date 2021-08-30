@@ -508,6 +508,30 @@ class ItemFrontService extends ItemService
     }
 
 
+    public function searchCase(Collection $input)
+    {
+        if ( $industry_category_alias = $input->get('industry_category_alias') ) {
+            $item_ids = [];
+            $ica_ex = Extrafield::where('alias', 'industry_category')->where('content_type', 'case')->first();
+            foreach ($industry_category_alias as $ica) {
+                $ic = $this->repo->findBy('alias', '=', $ica)->first();
+                if ($ic) {
+                    $exvs = ExtrafieldValue::where('extrafield_id', $ica_ex->id)->where('value', $ic->id)->get();
+                    $item_ids = array_merge($item_ids, $exvs->pluck(['item_id'])->toArray());
+                }
+            }
+            $q = $input->get('q');
+            $q = $q->whereIn('id', $item_ids);
+            $input->put('q', $q);
+            $input->forget('industry_category_alias');
+        }
+
+        $input->put('content_type', 'case');
+
+        return $this->searchContent($input);
+    }
+
+
     public function searchBulletin(Collection $input)
     {
         $search_date = $input->get('search_date');

@@ -82,6 +82,7 @@ Route::get('api/product/{alias}', [ProductFrontController::class, 'getByAlias'])
 # 解決方案
 Route::post('api/item/solution/search', [ItemFrontController::class, 'searchSolution']);
 # 成功案例
+Route::post('api/item/case/search', [ItemFrontController::class, 'searchCase']);
 # 最新消息
 Route::post('api/item/bulletin/search', [ItemFrontController::class, 'searchBulletin']);
 # 促銷消息

@@ -66,7 +66,7 @@ class ItemFrontContentSearchPost extends CmsSearchPost
 
         if ( $content_type = $this->route('content_type') ) {
             $validated['content_type'] = $content_type;
-            if ( $content_type != 'solution' ) {
+            if ( $content_type != 'solution' && $content_type != 'case' ) {
                 $validated->forget(['solution_category_alias', 'industry_category_alias']);
             }
         }
