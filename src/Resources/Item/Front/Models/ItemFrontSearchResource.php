@@ -14,7 +14,7 @@ class ItemFrontSearchResource extends BaseJsonResource
      */
     public function toArray($request)
     {
-        return [
+        $data = [
             'title'             => $this['title'],
             'alias'             => $this['alias'],
             'introtext'         => $this['introtext'],
@@ -22,5 +22,11 @@ class ItemFrontSearchResource extends BaseJsonResource
             'brands'            => $this['brands'],
             'contentType'       => $this['contentType']
         ];
+
+        if ($data['contentType'] == 'file') {
+            $data['downloadLink'] = $this['downloadLink'];
+        }
+
+        return $data;
     }
 }

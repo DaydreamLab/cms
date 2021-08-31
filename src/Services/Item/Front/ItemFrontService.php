@@ -720,6 +720,7 @@ class ItemFrontService extends ItemService
                 $data['title'] = $i->name;
                 $data['contentType'] = 'file';
                 $data['brands'] = $i->brands->map(function ($b) { return $b->alias; });
+                $data['downloadLink'] = $i->downloadLink;
             } elseif ($table == 'brands') {
                 $data['contentType'] = 'brand';
                 $data['brands'] = [];
