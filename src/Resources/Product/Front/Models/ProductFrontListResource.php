@@ -17,8 +17,9 @@ class ProductFrontListResource extends BaseJsonResource
         return [
             'title'             => $this->title,
             'alias'             => $this->alias,
-            'brandTitle'        => $this->brand_title,
-            'categoryTitle'     => $this->category
+            'brands'            => $this->brands,
+            'categoryTitle'     => $this->category,
+            'categoryAlias'     => ($this->productCategory) ? $this->productCategory->alias : ''
         ];
     }
 }
