@@ -1,6 +1,6 @@
 <?php
 
-namespace DaydreamLab\Cms\Requests\Language\Admin;
+namespace DaydreamLab\Cms\Requests\Language;
 
 
 use DaydreamLab\JJAJ\Requests\AdminRequest;

@@ -1,8 +1,8 @@
 <?php
 
-namespace DaydreamLab\Cms\Requests\Item\Admin;
+namespace DaydreamLab\Cms\Requests\Category\Admin;
 
-use DaydreamLab\Cms\Requests\Item\CategoryOrderingPost;
+use DaydreamLab\Cms\Requests\Category\CategoryOrderingPost;
 
 class CategoryAdminOrderingPost extends CategoryOrderingPost
 {
