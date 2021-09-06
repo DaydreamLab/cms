@@ -179,6 +179,8 @@ Route::get('api/admin/item/{content_type}/{id}', [ItemAdminController::class, 'g
     ->middleware(['expired','admin']);
 
 # 電子報
+Route::get('api/admin/newsletter/{id}/publish', [NewsletterAdminController::class, 'publish'])
+    ->middleware(['expired', 'admin']);
 Route::post('api/admin/newsletter/remove', [NewsletterAdminController::class, 'remove'])
     ->middleware(['expired', 'admin']);
 Route::post('api/admin/newsletter/restore', [NewsletterAdminController::class, 'restore'])

@@ -60,6 +60,35 @@ class NewsletterAdminService extends NewsletterService
     }
 
 
+    public function publish(Collection $input)
+    {
+        $newsletter = $this->find($input->get('id'));
+        # 製作電子報html
+        $filePath = 'newsletter/';
+        $category = ($newsletter->newsletterCategory->alias == '01_newsletter') ? 'z' : 'p';
+        $filePath = $filePath . $category . '/' . $category . $newsletter->number . '.html';
+        $viewFile = ($newsletter->newsletterCategory->alias == '01_newsletter') ? 'newsletter.01Newsletter' : 'newsletter.01DealNewsletter';
+
+        $html = view($viewFile, [
+            'title' => $newsletter->title,
+            'number' => $newsletter->number,
+            'publishDate' => Carbon::parse($newsletter->publish_up, config('app.timezone'))->tz('Asia/Taipei')->format('Y/m/d'),
+            'image' => $newsletter->image,
+            'description' => $newsletter->description,
+            'params' => $newsletter->params,
+            'url' => $newsletter->url,
+            'information' => $newsletter->information,
+            'bulletin' => $newsletter->bulletin,
+            'promotion' => $newsletter->promotion
+        ])->render();
+
+        Storage::disk('media-public')->put($filePath, $html);
+        $this->status = 'GetItemSuccess';
+        $this->response = ['url' => url('storage/media/'.$filePath)];
+        return $this->response;
+    }
+
+
     public function store(Collection $input)
     {
         $result = parent::store($input);
@@ -67,27 +96,6 @@ class NewsletterAdminService extends NewsletterService
             $result = $this->find($input->get('id'));
         }
         $this->response = $result;
-
-        # 製作電子報html
-        $filePath = 'newsletter/';
-        $category = ($result->newsletterCategory->alias == '01_newsletter') ? 'z' : 'p';
-        $filePath = $filePath . $category . '/' . $category . $result->number . '.html';
-        $viewFile = ($result->newsletterCategory->alias == '01_newsletter') ? 'newsletter.01Newsletter' : 'newsletter.01DealNewsletter';
-
-        $html = view($viewFile, [
-            'title' => $result->title,
-            'number' => $result->number,
-            'publishDate' => Carbon::parse($result->publish_up, config('app.timezone'))->tz('Asia/Taipei')->format('Y/m/d'),
-            'image' => $result->image,
-            'description' => $result->description,
-            'params' => $result->params,
-            'url' => $result->url,
-            'information' => $result->information,
-            'bulletin' => $result->bulletin,
-            'promotion' => $result->promotion
-        ])->render();
-
-        Storage::disk('media-public')->put($filePath, $html);
 
         return $this->response;
     }

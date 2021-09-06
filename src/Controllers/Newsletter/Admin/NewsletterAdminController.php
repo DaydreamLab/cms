@@ -9,6 +9,7 @@ use DaydreamLab\Cms\Requests\Newsletter\Admin\NewsletterAdminRestoreRequest;
 use DaydreamLab\Cms\Requests\Newsletter\Admin\NewsletterAdminSearchRequest;
 use DaydreamLab\Cms\Requests\Newsletter\Admin\NewsletterAdminStateRequest;
 use DaydreamLab\Cms\Requests\Newsletter\Admin\NewsletterAdminStoreRequest;
+use DaydreamLab\Cms\Requests\Newsletter\Admin\NewsletterAdminPublishRequest;
 use DaydreamLab\Cms\Resources\Newsletter\Admin\Collections\NewsletterAdminListResourceCollection;
 use DaydreamLab\Cms\Resources\Newsletter\Admin\Models\NewsletterAdminResource;
 use DaydreamLab\Cms\Services\Newsletter\Admin\NewsletterAdminService;
@@ -35,6 +36,19 @@ class NewsletterAdminController extends CmsController
         }
 
         return $this->response($this->service->status, $this->service->response, [], NewsletterAdminResource::class);
+    }
+
+
+    public function publish(NewsletterAdminPublishRequest $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->publish(collect(['id' => $request->route('id')]));
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
