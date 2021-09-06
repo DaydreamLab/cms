@@ -116,13 +116,13 @@ class Newsletter extends BaseModel
     }
 
 
-    public function getBulletinAttribute()
+    public function getPromotionAttribute()
     {
         return isset($this->items['promotion']) ? $this->items['promotion'] : [];
     }
 
 
-    public function getPromotionAttribute()
+    public function getBulletinAttribute()
     {
         return isset($this->items['bulletin']) ? $this->items['bulletin'] : [];
     }
