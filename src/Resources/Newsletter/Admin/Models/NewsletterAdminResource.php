@@ -30,8 +30,8 @@ class NewsletterAdminResource extends BaseJsonResource
             'state'             => $this->state,
 
             'course'            => [],
-            'promotion'         => $this->bulletin,
-            'bulletin'          => $this->promotion,
+            'promotion'         => $this->promotion,
+            'bulletin'          => $this->bulletin,
 
             'created_at'        => $this->getDateTimeString($this->created_at, $tz),
             'updated_at'        => $this->getDateTimeString($this->updated_at, $tz),
