@@ -12,4 +12,10 @@ class NewsletterAdminRepository extends NewsletterRepository
         parent::__construct($model);
         $this->model = $model;
     }
+
+
+    public function findByNumberAndCategory($number, $categoryId)
+    {
+        return $this->model->where('number', $number)->where('newsletter_category_id', $categoryId)->first();
+    }
 }

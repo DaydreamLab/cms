@@ -5,6 +5,7 @@ namespace DaydreamLab\Cms\Services\Newsletter\Admin;
 use Carbon\Carbon;
 use DaydreamLab\Cms\Repositories\Newsletter\Admin\NewsletterAdminRepository;
 use DaydreamLab\Cms\Services\Newsletter\NewsletterService;
+use DaydreamLab\JJAJ\Exceptions\ForbiddenException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 
@@ -35,6 +36,15 @@ class NewsletterAdminService extends NewsletterService
 
         if (count($item_ids)) {
             $item->items()->attach($item_ids);
+        }
+    }
+
+
+    public function checkNumberExist(Collection $input)
+    {
+        $n = $this->repo->findByNumberAndCategory($input->get('number'), $input->get('newsletter_category_id'));
+        if ( $n && ($n->id != $input->get('id')) ) {
+            throw new ForbiddenException('StoreWithExistNumber', ['number' => $input->get('number')]);
         }
     }
 
@@ -91,6 +101,7 @@ class NewsletterAdminService extends NewsletterService
 
     public function store(Collection $input)
     {
+        $this->checkNumberExist($input);
         $result = parent::store($input);
         if ($input->has('id')) {
             $result = $this->find($input->get('id'));
