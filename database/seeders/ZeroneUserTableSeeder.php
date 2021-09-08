@@ -160,6 +160,7 @@ class ZeroneUserTableSeeder extends Seeder
                 $companyResult['jobTitle'] = $userInput['MemberProfessional'];
                 $companyResult['vat'] = $userInput['統編'];
                 $data['company'] = $companyResult;
+                $data['activateToken'] = 'importedUser';
 
                 Passport::actingAs(User::find(1));
                 $userService = app(UserAdminService::class);
