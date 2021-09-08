@@ -2,11 +2,11 @@
 
 namespace DaydreamLab\Cms\Controllers\ProductCategory\Front;
 
-use DaydreamLab\Cms\Controllers\cmsController;
+use DaydreamLab\Cms\Controllers\CmsController;
 use DaydreamLab\Cms\Services\ProductCategory\Front\ProductCategoryFrontService;
 use Throwable;
 
-class ProductCategoryFrontController extends cmsController
+class ProductCategoryFrontController extends CmsController
 {
     protected $modelName = 'ProductCategory';
 
