@@ -8,6 +8,7 @@ use DaydreamLab\Cms\Services\Newsletter\NewsletterService;
 use DaydreamLab\JJAJ\Exceptions\ForbiddenException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
+use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
 
 class NewsletterAdminService extends NewsletterService
 {
@@ -46,6 +47,37 @@ class NewsletterAdminService extends NewsletterService
         if ( $n && ($n->id != $input->get('id')) ) {
             throw new ForbiddenException('StoreWithExistNumber', ['number' => $input->get('number')]);
         }
+    }
+
+
+    protected function generateInlineCssHtml($html)
+    {
+        $cssResources = [];
+        $dom = new \DOMDocument();
+        $dom->loadHTML($html);
+        $link_tags = $dom->getElementsByTagName('link');
+        /** @var \DOMElement $link */
+        foreach ($link_tags as $link) {
+            if ($link->getAttribute('rel') === 'stylesheet') {
+                array_push($cssResources, $link->getAttribute('href'));
+            }
+        }
+        $link_tags = $dom->getElementsByTagName('link');
+        for ($i = $link_tags->length; --$i >= 0;) {
+            $link = $link_tags->item($i);
+            if ($link->getAttribute('rel') === 'stylesheet') {
+                $link->parentNode->removeChild($link);
+            }
+        }
+        $html = $dom->saveHTML();
+
+        $css = '';
+        foreach ($cssResources as $cssResource) {
+            $css.= file_get_contents($cssResource);
+        }
+
+        $converter = new CssToInlineStyles();
+        return $converter->convert($html, $css);
     }
 
 
@@ -92,7 +124,9 @@ class NewsletterAdminService extends NewsletterService
             'promotion' => $newsletter->promotion
         ])->render();
 
-        Storage::disk('media-public')->put($filePath, $html);
+        $inlineCssHtml = $this->generateInlineCssHtml($html);
+
+        Storage::disk('media-public')->put($filePath, $inlineCssHtml);
         $this->status = 'GetItemSuccess';
         $this->response = ['url' => url('storage/media/'.$filePath)];
         return $this->response;
