@@ -15,6 +15,7 @@ use DaydreamLab\Cms\Services\Menu\Admin\MenuAdminService;
 use DaydreamLab\Cms\Services\Module\Admin\ModuleAdminService;
 use DaydreamLab\Cms\Services\ProductCategory\Admin\ProductCategoryAdminService;
 use DaydreamLab\Cms\Services\ProductCategory\Front\ProductCategoryFrontService;
+use DaydreamLab\Cms\Services\Product\Front\ProductFrontService;
 use DaydreamLab\Cms\Services\Site\Admin\SiteAdminService;
 use DaydreamLab\JJAJ\Database\QueryCapsule;
 use DaydreamLab\JJAJ\Traits\LoggedIn;
@@ -77,8 +78,8 @@ class OptionService
         $this->map['newsletter_category']   = $itemAdminService;
         $this->map['download_file_category'] = $fileCategoryAdminService;
         $this->map['contract_file_category'] = $fileCategoryAdminService;
-        $this->map['front_user_group']            = $groupAdminService;
-        $this->map['admin_user_group']            = $groupAdminService;
+        $this->map['front_user_group']      = $groupAdminService;
+        $this->map['admin_user_group']      = $groupAdminService;
     }
 
 
@@ -261,7 +262,21 @@ class OptionService
                     $q = new QueryCapsule();
                     $ppcs = $pcser->search(collect(['q' => $q->where('state', 1)->where('parent_id', null), 'limit' => 0]), false);
                     $data[$type] = $ppcs->map(function ($pp) {
-                        return $pp->only(['alias', 'title']);
+                        $productFS = app(ProductFrontService::class);
+                        $products = $productFS->search(collect(['q' => new QueryCapsule(), 'product_category_alias' => [$pp->alias], 'limit' => 0]));
+                        # map 出這些產品屬於的品牌
+                        $brandsWithDuplicate = collect([]);
+                        $products->each(function ($p) use (&$brandsWithDuplicate) {
+                            $brandsWithDuplicate = $brandsWithDuplicate->merge($p->brands);
+                        });
+                        $brands = $brandsWithDuplicate->unique(function ($b) {
+                            return $b->id;
+                        })->map(function ($m) {
+                            return $m->only(['alias', 'title']);
+                        })->values();
+                        $pData = $pp->only(['alias', 'title']);
+                        $pData['brands'] = $brands;
+                        return $pData;
                     });
                     break;
                 case 'product_child_category':

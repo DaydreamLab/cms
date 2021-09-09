@@ -382,7 +382,7 @@ class ItemFrontService extends ItemService
         foreach ($filter_list as &$year_col) {
             ksort($year_col);
         }
-        ksort($filter_list);
+        krsort($filter_list); # 年份近到遠
 
         $this->response = $filter_list;
         return $filter_list;
