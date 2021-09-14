@@ -2,7 +2,7 @@
 
 namespace DaydreamLab\Cms\Controllers\Product\Front;
 
-use DaydreamLab\Cms\Controllers\cmsController;
+use DaydreamLab\Cms\Controllers\CmsController;
 use DaydreamLab\Cms\Requests\Product\Front\ProductFrontGetItemRequest;
 use DaydreamLab\Cms\Requests\Product\Front\ProductFrontSearchRequest;
 use DaydreamLab\Cms\Resources\Product\Front\Models\ProductFrontResource;
@@ -10,7 +10,7 @@ use DaydreamLab\Cms\Resources\Product\Front\Collections\ProductFrontListResource
 use DaydreamLab\Cms\Services\Product\Front\ProductFrontService;
 use Throwable;
 
-class ProductFrontController extends cmsController
+class ProductFrontController extends CmsController
 {
     protected $modelName = 'Product';
 

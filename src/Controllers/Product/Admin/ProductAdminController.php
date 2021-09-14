@@ -2,7 +2,7 @@
 
 namespace DaydreamLab\Cms\Controllers\Product\Admin;
 
-use DaydreamLab\Cms\Controllers\cmsController;
+use DaydreamLab\Cms\Controllers\CmsController;
 use DaydreamLab\Cms\Requests\Product\Admin\ProductAdminGetItemRequest;
 use DaydreamLab\Cms\Requests\Product\Admin\ProductAdminImportRequest;
 use DaydreamLab\Cms\Requests\Product\Admin\ProductAdminRemoveRequest;
@@ -15,7 +15,7 @@ use DaydreamLab\Cms\Resources\Product\Admin\Models\ProductAdminResource;
 use DaydreamLab\Cms\Services\Product\Admin\ProductAdminService;
 use Throwable;
 
-class ProductAdminController extends cmsController
+class ProductAdminController extends CmsController
 {
     protected $modelName = 'Product';
 
