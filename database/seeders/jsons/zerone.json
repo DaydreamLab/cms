@@ -357,6 +357,7 @@
                 "component": "success/manager/list",
                 "type": "menu",
                 "state": 1,
+                "icon": "copy",
                 "showNav": 1,
                 "apis": [
                     "getCase",
@@ -1046,6 +1047,7 @@
                 "component": "seo/manager/edit",
                 "type": "menu",
                 "state": 1,
+                "icon": "copy",
                 "showNav": 1,
                 "apis": [
                     "getSetting",
