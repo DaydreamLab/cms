@@ -39,6 +39,17 @@ class ItemFrontService extends ItemService
 
         parent::__construct($repo);
         $this->repo = $repo;
+
+        Collection::macro('buildContentResourceData', function () {
+            return $this->map(function ($i) {
+                $map = $i->only(['title', 'alias', 'introimage', 'introtext', 'description', 'featured', 'featured_ordering', 'extrafields', 'category_alias', 'category_title']);
+                $map['brands'] = $i->brands->map(function ($b) {
+                    return $b->only(['alias', 'title', 'logo_image', 'contact']);
+                });
+                $map['publish_up'] = Carbon::parse($i->publish_up, config('app.timezone'))->tz('Asia/Taipei')->format('Y-m-d H:i:s');
+                return $map;
+            });
+        });
     }
 
 
@@ -331,7 +342,7 @@ class ItemFrontService extends ItemService
         return parent::search($input);
     }
 
-    /** 新加的 */
+    /** ------------------------------------------- 新加的 ------------------------------------------- */
     public function getContentByAlias(Collection $input)
     {
         $content = $this->repo->findBy('alias', '=', $input->get('alias'))->first();
@@ -427,13 +438,15 @@ class ItemFrontService extends ItemService
     {
         Collection::macro('filterHomepageShow', function () {
             return $this->filter(function ($c) {
-                 return ($c->extrafields['top_page_show']['value'] == 1);
+                return ($c->extrafields['top_page_show']['value'] == 1);
             })->values();
         });
 
         $slideshow = $this->searchContent(collect(['content_type' => 'slideshow', 'limit' => 0, 'q' => new QueryCapsule()]));
-        $promotion = $this->searchContent(collect(['content_type' => 'promotion', 'limit' => 0, 'q' => new QueryCapsule()]))->filterHomepageShow();
-        $bulletin = $this->searchContent(collect(['content_type' => 'bulletin', 'limit' => 0, 'q' => new QueryCapsule()]))->filterHomepageShow();
+        $promotion = $this->searchContent(collect(['content_type' => 'promotion', 'limit' => 0, 'q' => new QueryCapsule()]))
+            ->filterHomepageShow()->buildContentResourceData();
+        $bulletin = $this->searchContent(collect(['content_type' => 'bulletin', 'limit' => 0, 'q' => new QueryCapsule()]))
+            ->filterHomepageShow()->buildContentResourceData();
         $this->response = [
             'slideshow' => $slideshow,
             'promotion' => $promotion,
@@ -769,12 +782,12 @@ class ItemFrontService extends ItemService
 
         $params = $input->toArray();
         $params['featured'] = 0;
-        $notFeatured = $this->searchAndBuildContentResourceData(collect($params));
+        $notFeatured = $this->searchContent(collect($params), false)->buildContentResourceData();
 
         unset($params['brand_alias']);
         $params['q'] = new QueryCapsule();
         $params['featured'] = 1;
-        $featured = $this->searchAndBuildContentResourceData(collect($params));
+        $featured = $this->searchContent(collect($params), false)->buildContentResourceData();
 
         return [
             $featured->sortBy(function ($f) {
@@ -782,17 +795,5 @@ class ItemFrontService extends ItemService
             })->values(),
             $notFeatured
         ];
-    }
-
-    protected function searchAndBuildContentResourceData(Collection $input)
-    {
-        return $this->searchContent($input, false)->map(function ($i) {
-            $map = $i->only(['title', 'alias', 'introimage', 'introtext', 'description', 'featured', 'featured_ordering', 'extrafields', 'category_alias', 'category_title']);
-            $map['brands'] = $i->brands->map(function ($b) {
-                return $b->only(['alias', 'title', 'logo_image', 'contact']);
-            });
-            $map['publish_up'] = Carbon::parse($i->publish_up, config('app.timezone'))->tz('Asia/Taipei')->format('Y-m-d H:i:s');
-            return $map;
-        });
     }
 }
