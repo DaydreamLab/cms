@@ -750,26 +750,12 @@ class ItemFrontService extends ItemService
 
         $params = $input->toArray();
         $params['featured'] = 0;
-        $notFeatured = $this->searchContent(collect($params), false)->map(function ($i) {
-            $map = $i->only(['title', 'alias', 'introtext', 'description', 'featured', 'featured_ordering', 'extrafields', 'category_alias', 'category_title']);
-            $map['brands'] = $i->brands->map(function ($b) {
-                return $b->only(['alias', 'title', 'logo_image', 'contact']);
-            });
-            $map['publish_up'] = Carbon::parse($i->publish_up, config('app.timezone'))->tz('Asia/Taipei')->format('Y-m-d H:i:s');
-            return $map;
-        });
+        $notFeatured = $this->searchAndBuildContentResourceData(collect($params));
 
         unset($params['brand_alias']);
         $params['q'] = new QueryCapsule();
         $params['featured'] = 1;
-        $featured = $this->searchContent(collect($params), false)->map(function ($i) {
-            $map = $i->only(['title', 'alias', 'introtext', 'description', 'featured', 'featured_ordering', 'extrafields', 'category_alias', 'category_title']);
-            $map['brands'] = $i->brands->map(function ($b) {
-                return $b->only(['alias', 'title', 'logo_image', 'contact']);
-            });
-            $map['publish_up'] = Carbon::parse($i->publish_up, config('app.timezone'))->tz('Asia/Taipei')->format('Y-m-d H:i:s');
-            return $map;
-        });
+        $featured = $this->searchAndBuildContentResourceData(collect($params));
 
         return [
             $featured->sortBy(function ($f) {
@@ -777,5 +763,17 @@ class ItemFrontService extends ItemService
             })->values(),
             $notFeatured
         ];
+    }
+
+    protected function searchAndBuildContentResourceData(Collection $input)
+    {
+        return $this->searchContent($input, false)->map(function ($i) {
+            $map = $i->only(['title', 'alias', 'introimage', 'introtext', 'description', 'featured', 'featured_ordering', 'extrafields', 'category_alias', 'category_title']);
+            $map['brands'] = $i->brands->map(function ($b) {
+                return $b->only(['alias', 'title', 'logo_image', 'contact']);
+            });
+            $map['publish_up'] = Carbon::parse($i->publish_up, config('app.timezone'))->tz('Asia/Taipei')->format('Y-m-d H:i:s');
+            return $map;
+        });
     }
 }
