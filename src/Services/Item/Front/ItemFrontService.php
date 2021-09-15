@@ -423,6 +423,25 @@ class ItemFrontService extends ItemService
     }
 
 
+    public function homepage()
+    {
+        Collection::macro('filterHomepageShow', function () {
+            return $this->filter(function ($c) {
+                 return ($c->extrafields['top_page_show']['value'] == 1);
+            });
+        });
+
+        $slideshow = $this->searchContent(collect(['content_type' => 'slideshow', 'limit' => 0, 'q' => new QueryCapsule()]));
+        $promotion = $this->searchContent(collect(['content_type' => 'promotion', 'limit' => 0, 'q' => new QueryCapsule()]))->filterHomepageShow();
+        $bulletin = $this->searchContent(collect(['content_type' => 'bulletin', 'limit' => 0, 'q' => new QueryCapsule()]))->filterHomepageShow();
+        $this->response = [
+            'slideshow' => $slideshow,
+            'promotion' => $promotion,
+            'bulletin' => $bulletin
+        ];
+    }
+
+
     public function searchContent(Collection $input, $paginate = true)
     {
         if ( $content_type = $input->get('content_type') ) {

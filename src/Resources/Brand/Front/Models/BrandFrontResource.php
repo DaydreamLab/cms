@@ -14,6 +14,14 @@ class BrandFrontResource extends BaseJsonResource
      */
     public function toArray($request)
     {
+        # 過濾 bulletin, promotion, video 是否在品牌頁顯示
+        $todo = ['bulletin', 'promotion', 'video'];
+        $items = $this->items;
+        foreach ($todo as $t) {
+            $tempCol = collect($items[$t]);
+            $items[$t] = $tempCol->filter(function ($i) { return ($i->extrafields['brand_page_show']['value'] == 1); })->values();
+        }
+
         return [
             'alias'                 => $this->alias,
             'title'                 => $this->title,
@@ -27,7 +35,7 @@ class BrandFrontResource extends BaseJsonResource
             'banner_image'          => $this->banner_image,
             'banner_link'           => $this->banner_link,
             'params'                => $this->params,
-            'items'                 => $this->items,
+            'items'                 => $items,
             'products'              => $this->products,
             'tags'                  => $this->tags,
             'files'                 => $this->files

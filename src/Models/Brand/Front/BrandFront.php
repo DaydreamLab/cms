@@ -69,7 +69,14 @@ class BrandFront extends Brand
     public function getItemsAttribute()
     {
         $items = $this->items()->with('brands')->get();
-        $data = [];
+        $data = [
+            'slideshow' => [],
+            'solution' => [],
+            'case' => [],
+            'bulletin' => [],
+            'promotion' => [],
+            'video' => []
+        ];
         foreach ($items as $item) {
             $data[$item->category->content_type][] = $item;
         }

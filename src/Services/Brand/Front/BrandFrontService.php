@@ -32,9 +32,17 @@ class BrandFrontService extends BrandService
         $filter_products = [];
         foreach ($products as $product) {
             $pData = $product->only(['alias', 'title']);
-            $filter_products[$product->productCategory->title][] = $pData;
+            $filter_products[$product->productCategory->alias]['title'] = $product->productCategory->title;
+            $filter_products[$product->productCategory->alias]['products'][] = $pData;
         }
-        $brand->products = $filter_products;
+        $filter_products_array = [];
+        foreach ($filter_products as $key => $filter_product) {
+            $temp['product_category_alias'] = $key;
+            $temp['product_category_title'] = $filter_product['title'];
+            $temp['products'] = $filter_product['products'];
+            $filter_products_array[] = $temp;
+        }
+        $brand->products = $filter_products_array;
 
         $this->status = 'GetItemSuccess';
         $this->response = $brand;

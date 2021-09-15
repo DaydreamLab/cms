@@ -50,7 +50,8 @@ class ItemFront extends Item
         'viewlevel',
         'access_title',
         'extrafields_search',
-        'extrafield_group_title'
+        'extrafield_group_title',
+        'category'
     ];
 
 

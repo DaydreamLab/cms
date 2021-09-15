@@ -44,6 +44,8 @@ use DaydreamLab\Cms\Controllers\CustomerMessageReply\Admin\CustomerMessageReplyA
 */
 
 /************************************  前台 API  ************************************/
+# 首頁內容
+Route::get('api/homepage', [ItemFrontController::class, 'homepage']);
 # 搜尋全站內容
 Route::post('api/site/search', [ItemFrontController::class, 'searchSite']);
 
