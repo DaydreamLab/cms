@@ -428,7 +428,7 @@ class ItemFrontService extends ItemService
         Collection::macro('filterHomepageShow', function () {
             return $this->filter(function ($c) {
                  return ($c->extrafields['top_page_show']['value'] == 1);
-            });
+            })->values();
         });
 
         $slideshow = $this->searchContent(collect(['content_type' => 'slideshow', 'limit' => 0, 'q' => new QueryCapsule()]));
