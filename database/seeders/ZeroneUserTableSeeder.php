@@ -168,7 +168,7 @@ class ZeroneUserTableSeeder extends Seeder
                 if ($existPhone) {
                     $invalid[] = $userInput;
                 } else {
-                    $data['activation'] = 1;
+                    $data['activation'] = 0;
                     $user = app(UserAdminService::class)->store(collect($data));
                     $allNewsletterCategories = Item::whereHas('category', function ($q) {
                         $q->where('content_type', 'newsletter_category');
