@@ -259,8 +259,8 @@ class ItemFrontRepository extends ItemRepository
             ->where('category_id', $item->category_id)
             ->where('state', 1)
             ->where('id', '!=', $item->id)
-            //->where('publish_up', '>', $item->publish_up)
-            ->orderBy('publish_up', 'asc')
+            ->where('publish_up', '<', $item->publish_up)
+            ->orderBy('publish_up', 'desc')
             ->limit(1)
             ->first();
 
@@ -268,8 +268,8 @@ class ItemFrontRepository extends ItemRepository
             ->where('category_id', $item->category_id)
             ->where('state', 1)
             ->where('id', '!=', $item->id)
-            //->where('publish_up', '<', $item->publish_up )
-            ->orderBy('publish_up', 'desc')
+            ->where('publish_up', '>', $item->publish_up)
+            ->orderBy('publish_up', 'asc')
             ->limit(1)
             ->first();
 
@@ -375,7 +375,8 @@ class ItemFrontRepository extends ItemRepository
             ->where('category_id', $item->category_id)
             ->where('state', 1)
             ->where('id', '!=', $item->id)
-            ->orderBy('publish_up', 'asc')
+            ->where('publish_up', '<', $item->publish_up)
+            ->orderBy('publish_up', 'desc')
             ->limit(1)
             ->first();
 
@@ -386,7 +387,8 @@ class ItemFrontRepository extends ItemRepository
             ->where('category_id', $item->category_id)
             ->where('state', 1)
             ->where('id', '!=', $item->id)
-            ->orderBy('publish_up', 'desc')
+            ->where('publish_up', '>', $item->publish_up)
+            ->orderBy('publish_up', 'asc')
             ->limit(1)
             ->first();
 
