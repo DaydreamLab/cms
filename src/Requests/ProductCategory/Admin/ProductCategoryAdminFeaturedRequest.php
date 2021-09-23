@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\ProductCategory\Admin;
 
-use DaydreamLab\Cms\Requests\cmsFeaturedRequest;
+use DaydreamLab\Cms\Requests\CmsFeaturedRequest;
 
-class ProductCategoryAdminFeaturedRequest extends cmsFeaturedRequest
+class ProductCategoryAdminFeaturedRequest extends CmsFeaturedRequest
 {
     /**
      * Determine if the user is authorized to make this request.

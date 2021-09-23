@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Product\Front;
 
-use DaydreamLab\Cms\Requests\cmsGetItemRequest;
+use DaydreamLab\Cms\Requests\CmsGetItemRequest;
 
-class ProductFrontGetItemRequest extends cmsGetItemRequest
+class ProductFrontGetItemRequest extends CmsGetItemRequest
 {
     protected $needAuth = false;
     /**

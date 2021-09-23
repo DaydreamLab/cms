@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\ProductCategory\Admin;
 
-use DaydreamLab\Cms\Requests\cmsOrderingRequest;
+use DaydreamLab\Cms\Requests\CmsOrderingRequest;
 
-class ProductCategoryAdminOrderingRequest extends cmsOrderingRequest
+class ProductCategoryAdminOrderingRequest extends CmsOrderingRequest
 {
     /**
      * Determine if the user is authorized to make this request.

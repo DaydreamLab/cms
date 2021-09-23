@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\ProductCategory\Front;
 
-use DaydreamLab\Cms\Requests\cmsSearchRequest;
+use DaydreamLab\Cms\Requests\CmsSearchRequest;
 
-class ProductCategoryFrontSearchRequest extends cmsSearchRequest
+class ProductCategoryFrontSearchRequest extends CmsSearchRequest
 {
     protected $needAuth = false;
     /**
