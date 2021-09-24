@@ -3,10 +3,10 @@
 namespace DaydreamLab\Cms\Services\ProductCategory;
 
 use DaydreamLab\Cms\Repositories\ProductCategory\ProductCategoryRepository;
-use DaydreamLab\Cms\Services\cmsService;
+use DaydreamLab\Cms\Services\CmsService;
 use Illuminate\Support\Collection;
 
-class ProductCategoryService extends cmsService
+class ProductCategoryService extends CmsService
 {
     protected $modelName = 'ProductCategory';
 

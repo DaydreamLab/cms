@@ -3,9 +3,9 @@
 namespace DaydreamLab\Cms\Repositories\ProductCategory;
 
 use DaydreamLab\Cms\Models\ProductCategory\ProductCategory;
-use DaydreamLab\Cms\Repositories\cmsRepository;
+use DaydreamLab\Cms\Repositories\CmsRepository;
 
-class ProductCategoryRepository extends cmsRepository
+class ProductCategoryRepository extends CmsRepository
 {
     protected $modelName = 'ProductCategory';
 
