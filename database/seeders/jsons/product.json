@@ -14,7 +14,7 @@
                 "id": 20
               }
             ],
-            "products": [
+            "product_data": [
               {
                 "name": "產品型號",
                 "description": "產品說明",
@@ -39,10 +39,10 @@
             "title": "網路暨資訊安全產品1",
             "brands": [
               {
-                "id": 20
+                "id": 19
               }
             ],
-            "products": [
+            "product_data": [
               {
                 "name": "產品型號",
                 "description": "產品說明",
@@ -63,7 +63,21 @@
         "title": "網路",
         "children": [],
         "products": [
-
+          {
+            "title": "基礎架構網路產品1",
+            "brands": [
+              {
+                "id": 18
+              }
+            ],
+            "product_data": [
+              {
+                "name": "產品型號",
+                "description": "產品說明",
+                "price": 1000
+              }
+            ]
+          }
         ]
       }
     ],
@@ -77,7 +91,21 @@
         "title": "系統",
         "children": [],
         "products": [
-
+          {
+            "title": "儲存系統產品1",
+            "brands": [
+              {
+                "id": 17
+              }
+            ],
+            "product_data": [
+              {
+                "name": "產品型號",
+                "description": "產品說明",
+                "price": 1000
+              }
+            ]
+          }
         ]
       }
     ],
@@ -91,7 +119,21 @@
         "title": "備援",
         "children": [],
         "products": [
-
+          {
+            "title": "備份備援產品1",
+            "brands": [
+              {
+                "id": 16
+              }
+            ],
+            "product_data": [
+              {
+                "name": "產品型號",
+                "description": "產品說明",
+                "price": 1000
+              }
+            ]
+          }
         ]
       }
     ],
@@ -105,7 +147,21 @@
         "title": "虛擬",
         "children": [],
         "products": [
-
+          {
+            "title": "虛擬化產品1",
+            "brands": [
+              {
+                "id": 15
+              }
+            ],
+            "product_data": [
+              {
+                "name": "產品型號",
+                "description": "產品說明",
+                "price": 1000
+              }
+            ]
+          }
         ]
       }
     ],
@@ -119,7 +175,21 @@
         "title": "監控",
         "children": [],
         "products": [
-
+          {
+            "title": "視訊監控產品1",
+            "brands": [
+              {
+                "id": 14
+              }
+            ],
+            "product_data": [
+              {
+                "name": "產品型號",
+                "description": "產品說明",
+                "price": 1000
+              }
+            ]
+          }
         ]
       }
     ],
@@ -133,7 +203,21 @@
         "title": "服務",
         "children": [],
         "products": [
-
+          {
+            "title": "雲端服務產品1",
+            "brands": [
+              {
+                "id": 13
+              }
+            ],
+            "product_data": [
+              {
+                "name": "產品型號",
+                "description": "產品說明",
+                "price": 1000
+              }
+            ]
+          }
         ]
       }
     ],
@@ -147,7 +231,21 @@
         "title": "大數據",
         "children": [],
         "products": [
-
+          {
+            "title": "AI大數據產品1",
+            "brands": [
+              {
+                "id": 12
+              }
+            ],
+            "product_data": [
+              {
+                "name": "產品型號",
+                "description": "產品說明",
+                "price": 1000
+              }
+            ]
+          }
         ]
       }
     ],
@@ -161,7 +259,21 @@
         "title": "DevOps",
         "children": [],
         "products": [
-
+          {
+            "title": "容器及DevOps產品1",
+            "brands": [
+              {
+                "id": 11
+              }
+            ],
+            "product_data": [
+              {
+                "name": "產品型號",
+                "description": "產品說明",
+                "price": 1000
+              }
+            ]
+          }
         ]
       }
     ],
@@ -175,7 +287,21 @@
         "title": "應用",
         "children": [],
         "products": [
-
+          {
+            "title": "遠距應用產品1",
+            "brands": [
+              {
+                "id": 10
+              }
+            ],
+            "product_data": [
+              {
+                "name": "產品型號",
+                "description": "產品說明",
+                "price": 1000
+              }
+            ]
+          }
         ]
       }
     ],
@@ -189,7 +315,21 @@
         "title": "架構",
         "children": [],
         "products": [
-
+          {
+            "title": "超融合基礎架構產品1",
+            "brands": [
+              {
+                "id": 9
+              }
+            ],
+            "product_data": [
+              {
+                "name": "產品型號",
+                "description": "產品說明",
+                "price": 1000
+              }
+            ]
+          }
         ]
       }
     ],
@@ -203,7 +343,21 @@
         "title": "軟體",
         "children": [],
         "products": [
-
+          {
+            "title": "商業應用軟體產品1",
+            "brands": [
+              {
+                "id": 8
+              }
+            ],
+            "product_data": [
+              {
+                "name": "產品型號",
+                "description": "產品說明",
+                "price": 1000
+              }
+            ]
+          }
         ]
       }
     ],
@@ -217,7 +371,21 @@
         "title": "顧問",
         "children": [],
         "products": [
-
+          {
+            "title": "顧問服務產品1",
+            "brands": [
+              {
+                "id": 3
+              }
+            ],
+            "product_data": [
+              {
+                "name": "產品型號",
+                "description": "產品說明",
+                "price": 1000
+              }
+            ]
+          }
         ]
       }
     ],

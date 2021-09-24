@@ -6,6 +6,8 @@
         "alias": "slideshow-001",
         "title": "企業IT解決方案",
         "introtext": "企業發展競爭力最大關鍵",
+        "description": "slidershow敘述敘述敘述敘述敘述敘述",
+        "introimage": "/storage/media/abc.png",
         "language": "*",
         "state": 1,
         "access": 1,
@@ -30,6 +32,27 @@
         "brands": [
           {
             "id": 1
+          },
+          {
+            "id": 2
+          }
+        ],
+        "extrafields": [
+          {
+            "alias": "industry_category",
+            "value": 26
+          },
+          {
+            "alias": "solution_category",
+            "value": 12
+          }
+        ],
+        "products": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
           }
         ]
       },
@@ -43,6 +66,27 @@
         "brands": [
           {
             "id": 1
+          },
+          {
+            "id": 20
+          }
+        ],
+        "extrafields": [
+          {
+            "alias": "industry_category",
+            "value": 42
+          },
+          {
+            "alias": "solution_category",
+            "value": 25
+          }
+        ],
+        "products": [
+          {
+            "id": 3
+          },
+          {
+            "id": 4
           }
         ]
       }
@@ -61,6 +105,23 @@
         "brands": [
           {
             "id": 1
+          },
+          {
+            "id": 20
+          }
+        ],
+        "extrafields": [
+          {
+            "alias": "industry_category",
+            "value": 42
+          }
+        ],
+        "products": [
+          {
+            "id": 5
+          },
+          {
+            "id": 6
           }
         ]
       }
@@ -78,7 +139,37 @@
         "access": 1,
         "brands": [
           {
+            "id": 20
+          }
+        ],
+        "extrafields": [
+          {
+            "alias": "brand_page_show",
+            "value": 0
+          },
+          {
+            "alias": "top_page_show",
+            "value": 0
+          },
+          {
+            "alias": "register_start",
+            "value": "2021-09-30 00:00:00"
+          },
+          {
+            "alias": "register_end",
+            "value": "2021-10-08 00:00:00"
+          },
+          {
+            "alias": "dealer_only",
+            "value": 0
+          }
+        ],
+        "products": [
+          {
             "id": 1
+          },
+          {
+            "id": 6
           }
         ]
       }
@@ -96,7 +187,37 @@
         "access": 1,
         "brands": [
           {
-            "id": 1
+            "id": 20
+          }
+        ],
+        "extrafields": [
+          {
+            "alias": "brand_page_show",
+            "value": 0
+          },
+          {
+            "alias": "top_page_show",
+            "value": 0
+          },
+          {
+            "alias": "register_start",
+            "value": "2021-09-30 00:00:00"
+          },
+          {
+            "alias": "register_end",
+            "value": "2021-10-08 00:00:00"
+          },
+          {
+            "alias": "dealer_only",
+            "value": 0
+          }
+        ],
+        "products": [
+          {
+            "id": 5
+          },
+          {
+            "id": 11
           }
         ]
       }
@@ -116,6 +237,20 @@
           {
             "id": 1
           }
+        ],
+        "extrafields": [
+          {
+            "alias": "brand_page_show",
+            "value": 0
+          },
+          {
+            "alias": "video_url",
+            "value": ""
+          },
+          {
+            "alias": "youtube_url",
+            "value": ""
+          }
         ]
       }
     ]
@@ -129,7 +264,17 @@
         "description": "大事記大事記大事記大事記大事記大事記大事記大事記大事記",
         "language": "*",
         "state": 1,
-        "access": 1
+        "access": 1,
+        "extrafields": [
+          {
+            "alias": "year",
+            "value": 2018
+          },
+          {
+            "alias": "month",
+            "value": 6
+          }
+        ]
       }
     ]
   },
@@ -141,7 +286,13 @@
         "title": "財務資訊1",
         "language": "*",
         "state": 1,
-        "access": 1
+        "access": 1,
+        "extrafields": [
+          {
+            "alias": "year",
+            "value": 2018
+          }
+        ]
       }
     ]
   },
@@ -165,7 +316,17 @@
         "title": "股東專欄1",
         "language": "*",
         "state": 1,
-        "access": 1
+        "access": 1,
+        "extrafields": [
+          {
+            "alias": "year",
+            "value": 2018
+          },
+          {
+            "alias": "document_type",
+            "value": "股東會議事手冊"
+          }
+        ]
       }
     ]
   },

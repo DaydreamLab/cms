@@ -23,6 +23,7 @@ class ItemsTableSeeder extends Seeder
             $category = $this->categoryService->findBy('alias', '=', $category_data['alias'])->first();
             foreach ($category_data['item'] as $item_data) {
                 $item_data['category_id'] = $category->id;
+                $item_data['content_type'] = $category_data['alias'];
                 $item_data['params'] = RequestHelper::handleParams([]);
                 $i = $this->itemAdminService->store(collect($item_data));
             }
