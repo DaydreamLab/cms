@@ -65,7 +65,6 @@ class Product extends BaseModel
      */
     protected $appends = [
         'brand_title',
-        'parent_category',
         'category'
     ];
 
@@ -130,6 +129,6 @@ class Product extends BaseModel
     public function getParentCategoryAttribute()
     {
         $category = $this->productCategory;
-        return ($category && $category->parent) ? $category->parent->title : '';
+        return ($category && $category->parent) ? $category->parent : null;
     }
 }

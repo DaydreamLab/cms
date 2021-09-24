@@ -17,6 +17,7 @@ class ProductFrontResource extends BaseJsonResource
         return [
             'title'             => $this->title,
             'alias'             => $this->alias,
+            'description'       => $this->description,
             'brands'            => $this->brands,
             'category'          => $this->category,
             'product_data'      => $this->product_data

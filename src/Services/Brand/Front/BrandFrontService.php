@@ -27,13 +27,14 @@ class BrandFrontService extends BrandService
     public function getBrandByAlias(Collection $input)
     {
         $brand = $this->findBy('alias', '=', $input->get('alias'))->first();
-        # 需要把 products 按照產品小類分類
+        # 需要把 products 按照產品大類分類
         $products = $brand->products;
         $filter_products = [];
         foreach ($products as $product) {
             $pData = $product->only(['alias', 'title']);
-            $filter_products[$product->productCategory->alias]['title'] = $product->productCategory->title;
-            $filter_products[$product->productCategory->alias]['products'][] = $pData;
+            $targetCategory = $product->parentCategory ? : $product->productCategory;
+            $filter_products[$targetCategory->alias]['title'] = $targetCategory->title;
+            $filter_products[$targetCategory->alias]['products'][] = $pData;
         }
         $filter_products_array = [];
         foreach ($filter_products as $key => $filter_product) {
