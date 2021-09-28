@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Category\Admin;
 
-use DaydreamLab\Cms\Requests\CmsOrderingNestedPost;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsOrderingNestedRequest;
 
-class CategoryAdminOrderingNestedPost extends CmsOrderingNestedPost
+class CategoryAdminOrderingNestedPost extends CmsOrderingNestedRequest
 {
     protected $apiMethod = 'orderingCategory';
 

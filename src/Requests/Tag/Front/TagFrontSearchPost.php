@@ -2,10 +2,10 @@
 
 namespace DaydreamLab\Cms\Requests\Tag\Front;
 
-use DaydreamLab\JJAJ\Requests\ListRequest;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsSearchRequest;
 use Illuminate\Validation\Rule;
 
-class TagFrontSearchPost extends ListRequest
+class TagFrontSearchPost extends CmsSearchRequest
 {
     protected $needAuth = false;
     /**

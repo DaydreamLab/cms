@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Extrafield\Admin;
 
-use DaydreamLab\Cms\Requests\CmsRestoreRemovePost;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsRemoveRequest;
 
-class ExtrafieldAdminRemovePost extends CmsRestoreRemovePost
+class ExtrafieldAdminRemovePost extends CmsRemoveRequest
 {
     protected $apiMethod = 'deleteExtrafield';
 

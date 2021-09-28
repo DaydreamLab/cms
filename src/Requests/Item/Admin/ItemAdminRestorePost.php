@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Item\Admin;
 
-use DaydreamLab\Cms\Requests\CmsRestoreRemovePost;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsRestoreRequest;
 
-class ItemAdminRestorePost extends CmsRestoreRemovePost
+class ItemAdminRestorePost extends CmsRestoreRequest
 {
     protected $apiMethod = 'restoreItem';
 

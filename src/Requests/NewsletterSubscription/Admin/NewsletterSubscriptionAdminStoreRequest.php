@@ -4,10 +4,10 @@ namespace DaydreamLab\Cms\Requests\NewsletterSubscription\Admin;
 
 use Carbon\Carbon;
 use DaydreamLab\Cms\Helpers\RequestHelper;
-use DaydreamLab\JJAJ\Requests\AdminRequest;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsStoreRequest;
 use Illuminate\Validation\Rule;
 
-class NewsletterSubscriptionAdminStoreRequest extends AdminRequest
+class NewsletterSubscriptionAdminStoreRequest extends CmsStoreRequest
 {
     protected $apiMethod = 'storeNewsletterSubscription';
 

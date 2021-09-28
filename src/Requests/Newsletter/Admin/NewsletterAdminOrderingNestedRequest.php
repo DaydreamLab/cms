@@ -2,7 +2,7 @@
 
 namespace DaydreamLab\Cms\Requests\Newsletter\Admin;
 
-use DaydreamLab\Cms\Requests\CmsOrderingNestedRequest;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsOrderingNestedRequest;
 
 class NewsletterAdminOrderingNestedRequest extends CmsOrderingNestedRequest
 {

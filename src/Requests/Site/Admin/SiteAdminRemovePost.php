@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Site\Admin;
 
-use DaydreamLab\Cms\Requests\CmsRestoreRemovePost;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsRemoveRequest;
 
-class SiteAdminRemovePost extends CmsRestoreRemovePost
+class SiteAdminRemovePost extends CmsRemoveRequest
 {
     protected $apiMethod = 'deleteSite';
 

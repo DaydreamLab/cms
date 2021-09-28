@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Tag\Admin;
 
-use DaydreamLab\Cms\Requests\CmsGetItemGet;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsGetItemRequest;
 
-class TagAdminGetItemGet extends CmsGetItemGet
+class TagAdminGetItemGet extends CmsGetItemRequest
 {
     protected $apiMethod = 'getTag';
 

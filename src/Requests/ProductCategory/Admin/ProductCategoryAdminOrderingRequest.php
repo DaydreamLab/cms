@@ -2,7 +2,7 @@
 
 namespace DaydreamLab\Cms\Requests\ProductCategory\Admin;
 
-use DaydreamLab\Cms\Requests\CmsOrderingRequest;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsOrderingRequest;
 
 class ProductCategoryAdminOrderingRequest extends CmsOrderingRequest
 {

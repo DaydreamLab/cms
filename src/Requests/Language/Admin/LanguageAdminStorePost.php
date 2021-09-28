@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Language\Admin;
 
-use DaydreamLab\JJAJ\Requests\AdminRequest;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsStoreRequest;
 
-class LanguageAdminStorePost extends AdminRequest
+class LanguageAdminStorePost extends CmsStoreRequest
 {
     protected $apiMethod = 'storeLanguage';
 

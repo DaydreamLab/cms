@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Category\Admin;
 
-use DaydreamLab\Cms\Requests\CmsStatePost;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsStateRequest;
 
-class CategoryAdminStatePost extends CmsStatePost
+class CategoryAdminStatePost extends CmsStateRequest
 {
     protected $apiMethod = 'stateCategory';
 

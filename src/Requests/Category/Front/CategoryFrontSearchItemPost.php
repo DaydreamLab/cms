@@ -2,10 +2,10 @@
 
 namespace DaydreamLab\Cms\Requests\Category\Front;
 
-use DaydreamLab\JJAJ\Requests\ListRequest;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsSearchRequest;
 use Illuminate\Validation\Rule;
 
-class CategoryFrontSearchItemPost extends ListRequest
+class CategoryFrontSearchItemPost extends CmsSearchRequest
 {
 
     public function authorize()

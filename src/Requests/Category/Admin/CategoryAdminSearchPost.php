@@ -2,10 +2,10 @@
 
 namespace DaydreamLab\Cms\Requests\Category\Admin;
 
-use DaydreamLab\JJAJ\Requests\ListRequest;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsSearchRequest;
 use Illuminate\Validation\Rule;
 
-class CategoryAdminSearchPost extends ListRequest
+class CategoryAdminSearchPost extends CmsSearchRequest
 {
     protected $apiMethod = 'searchCategory';
 

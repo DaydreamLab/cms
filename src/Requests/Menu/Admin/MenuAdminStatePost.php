@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Menu\Admin;
 
-use DaydreamLab\Cms\Requests\CmsStatePost;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsStateRequest;
 
-class MenuAdminStatePost extends CmsStatePost
+class MenuAdminStatePost extends CmsStateRequest
 {
     protected $apiMethod = 'stateMenu';
 

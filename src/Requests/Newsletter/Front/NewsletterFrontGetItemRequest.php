@@ -2,7 +2,7 @@
 
 namespace DaydreamLab\Cms\Requests\Newsletter\Front;
 
-use DaydreamLab\Cms\Requests\CmsGetItemRequest;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsGetItemRequest;
 
 class NewsletterFrontGetItemRequest extends CmsGetItemRequest
 {

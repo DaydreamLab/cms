@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Item\Admin;
 
-use DaydreamLab\Cms\Requests\CmsFeaturedPost;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsFeaturedRequest;
 
-class ItemAdminFeaturePost extends CmsFeaturedPost
+class ItemAdminFeaturePost extends CmsFeaturedRequest
 {
     protected $apiMethod = 'featuredItem';
 

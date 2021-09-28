@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Extrafield\Admin;
 
-use DaydreamLab\Cms\Requests\CmsOrderingPost;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsOrderingRequest;
 
-class ExtrafieldAdminOrderingPost extends CmsOrderingPost
+class ExtrafieldAdminOrderingPost extends CmsOrderingRequest
 {
     protected $apiMethod = 'deleteExtrafield';
 

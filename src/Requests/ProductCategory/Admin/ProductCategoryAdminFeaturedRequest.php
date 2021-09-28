@@ -2,7 +2,7 @@
 
 namespace DaydreamLab\Cms\Requests\ProductCategory\Admin;
 
-use DaydreamLab\Cms\Requests\CmsFeaturedRequest;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsFeaturedRequest;
 
 class ProductCategoryAdminFeaturedRequest extends CmsFeaturedRequest
 {

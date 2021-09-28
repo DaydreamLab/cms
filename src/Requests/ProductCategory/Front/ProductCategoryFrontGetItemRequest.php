@@ -2,7 +2,7 @@
 
 namespace DaydreamLab\Cms\Requests\ProductCategory\Front;
 
-use DaydreamLab\Cms\Requests\CmsGetItemRequest;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsGetItemRequest;
 
 class ProductCategoryFrontGetItemRequest extends CmsGetItemRequest
 {

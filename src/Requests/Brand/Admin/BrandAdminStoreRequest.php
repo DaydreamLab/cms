@@ -3,10 +3,10 @@
 namespace DaydreamLab\Cms\Requests\Brand\Admin;
 
 use DaydreamLab\Cms\Helpers\RequestHelper;
-use DaydreamLab\JJAJ\Requests\AdminRequest;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsStoreRequest;
 use Illuminate\Validation\Rule;
 
-class BrandAdminStoreRequest extends AdminRequest
+class BrandAdminStoreRequest extends CmsStoreRequest
 {
     protected $apiMethod = 'storeBrand';
 

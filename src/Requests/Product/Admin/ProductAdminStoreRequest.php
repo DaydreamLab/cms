@@ -4,10 +4,10 @@ namespace DaydreamLab\Cms\Requests\Product\Admin;
 
 use Carbon\Carbon;
 use DaydreamLab\Cms\Helpers\RequestHelper;
-use DaydreamLab\JJAJ\Requests\AdminRequest;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsStoreRequest;
 use Illuminate\Validation\Rule;
 
-class ProductAdminStoreRequest extends AdminRequest
+class ProductAdminStoreRequest extends CmsStoreRequest
 {
     protected $apiMethod = 'storeProduct';
 
@@ -39,7 +39,7 @@ class ProductAdminStoreRequest extends AdminRequest
             'product_data.*'            => 'nullable|array',
             'product_data.*.name'       => 'nullable|string',
             'product_data.*.description'=> 'nullable|string',
-            'product_data.*.price'      => 'nullable|string',
+            'product_data.*.price'      => 'nullable|integer',
             'files'                 => 'nullable|array',
             'params'                => 'nullable|array',
             'state'                 => [

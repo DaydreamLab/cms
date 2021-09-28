@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Form\Admin;
 
-use DaydreamLab\Cms\Requests\CmsRestoreRemovePost;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsRemoveRequest;
 
-class FormAdminRemovePost extends CmsRestoreRemovePost
+class FormAdminRemovePost extends CmsRemoveRequest
 {
     protected $apiMethod = 'deleteForm';
 

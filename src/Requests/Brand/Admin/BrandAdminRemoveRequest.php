@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Brand\Admin;
 
-use DaydreamLab\Cms\Requests\CmsRestoreRemovePost;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsRemoveRequest;
 
-class BrandAdminRemoveRequest extends CmsRestoreRemovePost
+class BrandAdminRemoveRequest extends CmsRemoveRequest
 {
     protected $apiMethod = 'deleteBrand';
 

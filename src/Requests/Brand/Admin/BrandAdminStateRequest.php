@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Brand\Admin;
 
-use DaydreamLab\Cms\Requests\CmsStatePost;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsStateRequest;
 
-class BrandAdminStateRequest extends CmsStatePost
+class BrandAdminStateRequest extends CmsStateRequest
 {
     protected $apiMethod = 'stateBrand';
 

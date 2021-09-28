@@ -2,7 +2,7 @@
 
 namespace DaydreamLab\Cms\Requests\NewsletterSubscription\Admin;
 
-use DaydreamLab\Cms\Requests\CmsGetItemRequest;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsGetItemRequest;
 
 class NewsletterSubscriptionAdminGetItemRequest extends CmsGetItemRequest
 {

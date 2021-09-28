@@ -2,10 +2,10 @@
 
 namespace DaydreamLab\Cms\Requests\Item\Admin;
 
-use DaydreamLab\Cms\Requests\CmsRestoreRemovePost;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsRemoveRequest;
 use Illuminate\Support\Str;
 
-class ItemAdminContentRemovePost extends CmsRestoreRemovePost
+class ItemAdminContentRemovePost extends CmsRemoveRequest
 {
     protected $apiMethod = 'deleteItem';
 

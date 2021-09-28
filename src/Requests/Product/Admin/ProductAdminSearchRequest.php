@@ -2,10 +2,10 @@
 
 namespace DaydreamLab\Cms\Requests\Product\Admin;
 
-use DaydreamLab\Cms\Requests\CmsSearchPost;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsSearchRequest;
 use Illuminate\Validation\Rule;
 
-class ProductAdminSearchRequest extends CmsSearchPost
+class ProductAdminSearchRequest extends CmsSearchRequest
 {
     protected $apiMethod = 'searchProduct';
 

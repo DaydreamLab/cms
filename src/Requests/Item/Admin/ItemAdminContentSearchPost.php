@@ -4,11 +4,11 @@ namespace DaydreamLab\Cms\Requests\Item\Admin;
 
 use DaydreamLab\Cms\Models\Extrafield\Extrafield;
 use DaydreamLab\Cms\Models\Extrafield\ExtrafieldValue;
-use DaydreamLab\Cms\Requests\CmsSearchPost;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsSearchRequest;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
-class ItemAdminContentSearchPost extends CmsSearchPost
+class ItemAdminContentSearchPost extends CmsSearchRequest
 {
     protected $apiMethod = 'searchItem';
 

@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Newsletter\Admin;
 
-use DaydreamLab\Cms\Requests\CmsGetItemGet;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsGetItemRequest;
 
-class NewsletterAdminPublishRequest extends CmsGetItemGet
+class NewsletterAdminPublishRequest extends CmsGetItemRequest
 {
 
     protected $modelName = 'Newsletter';

@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Site\Admin;
 
-use DaydreamLab\Cms\Requests\CmsOrderingPost;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsOrderingRequest;
 
-class SiteAdminOrderingPost extends CmsOrderingPost
+class SiteAdminOrderingPost extends CmsOrderingRequest
 {
     protected $apiMethod = 'orderingSite';
 

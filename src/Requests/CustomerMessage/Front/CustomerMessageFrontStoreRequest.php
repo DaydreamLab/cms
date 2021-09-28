@@ -3,7 +3,7 @@
 namespace DaydreamLab\Cms\Requests\CustomerMessage\Front;
 
 use DaydreamLab\Cms\Helpers\DataHelper;
-use DaydreamLab\Cms\Requests\CmsStoreRequest;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsStoreRequest;
 use Illuminate\Validation\Rule;
 
 class CustomerMessageFrontStoreRequest extends CmsStoreRequest

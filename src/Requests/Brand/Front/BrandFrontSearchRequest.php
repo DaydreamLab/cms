@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Brand\Front;
 
-use DaydreamLab\Cms\Requests\CmsSearchPost;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsSearchRequest;
 
-class BrandFrontSearchRequest extends CmsSearchPost
+class BrandFrontSearchRequest extends CmsSearchRequest
 {
     protected $searchKeys = ['title', 'title_zhtw', 'description'];
 

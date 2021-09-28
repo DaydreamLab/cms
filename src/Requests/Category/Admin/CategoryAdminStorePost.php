@@ -4,10 +4,10 @@ namespace DaydreamLab\Cms\Requests\Category\Admin;
 
 use Carbon\Carbon;
 use DaydreamLab\Cms\Helpers\RequestHelper;
-use DaydreamLab\JJAJ\Requests\AdminRequest;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsStoreRequest;
 use Illuminate\Validation\Rule;
 
-class CategoryAdminStorePost extends AdminRequest
+class CategoryAdminStorePost extends CmsStoreRequest
 {
     protected $apiMethod = 'storeCategory';
 

@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Menu\Front;
 
-use DaydreamLab\Cms\Requests\CmsGetItemGet;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsGetItemRequest;
 
-class MenuFrontGetTreeGet extends CmsGetItemGet
+class MenuFrontGetTreeGet extends CmsGetItemRequest
 {
     /**
      * Determine if the user is authorized to make this request.

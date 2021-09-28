@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Tag\Admin;
 
-use DaydreamLab\Cms\Requests\CmsOrderingNestedPost;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsOrderingRequest;
 
-class TagAdminOrderingPost extends CmsOrderingNestedPost
+class TagAdminOrderingPost extends CmsOrderingRequest
 {
     protected $apiMethod = 'orderingTag';
 

@@ -2,7 +2,7 @@
 
 namespace DaydreamLab\Cms\Requests\NewsletterSubscription\Front;
 
-use DaydreamLab\Cms\Requests\CmsStoreRequest;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsStoreRequest;
 
 class NewsletterSubscriptionFrontStoreRequest extends CmsStoreRequest
 {

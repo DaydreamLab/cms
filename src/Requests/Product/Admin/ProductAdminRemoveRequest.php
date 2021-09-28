@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Product\Admin;
 
-use DaydreamLab\Cms\Requests\CmsRestoreRemovePost;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsRemoveRequest;
 
-class ProductAdminRemoveRequest extends CmsRestoreRemovePost
+class ProductAdminRemoveRequest extends CmsRemoveRequest
 {
     protected $apiMethod = 'deleteProduct';
 

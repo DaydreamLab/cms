@@ -2,7 +2,7 @@
 
 namespace DaydreamLab\Cms\Requests\Brand\Admin;
 
-use DaydreamLab\Cms\Requests\CmsOrderingNestedRequest;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsOrderingNestedRequest;
 
 class BrandAdminOrderingNestedRequest extends CmsOrderingNestedRequest
 {

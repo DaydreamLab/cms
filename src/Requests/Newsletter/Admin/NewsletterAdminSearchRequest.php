@@ -2,10 +2,10 @@
 
 namespace DaydreamLab\Cms\Requests\Newsletter\Admin;
 
-use DaydreamLab\Cms\Requests\CmsSearchPost;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsSearchRequest;
 use Illuminate\Validation\Rule;
 
-class NewsletterAdminSearchRequest extends CmsSearchPost
+class NewsletterAdminSearchRequest extends CmsSearchRequest
 {
     protected $apiMethod = 'searchNewsletter';
 

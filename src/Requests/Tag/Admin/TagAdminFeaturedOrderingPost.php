@@ -2,10 +2,10 @@
 
 namespace DaydreamLab\Cms\Requests\Tag\Admin;
 
-use DaydreamLab\Cms\Requests\CmsFeaturedOrderingPost;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsFeaturedOrderingRequest;
 use function Psy\sh;
 
-class TagAdminFeaturedOrderingPost extends CmsFeaturedOrderingPost
+class TagAdminFeaturedOrderingPost extends CmsFeaturedOrderingRequest
 {
     protected $apiMethod = 'featuredOrderingTag';
 

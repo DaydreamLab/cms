@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\NewsletterSubscription\Admin;
 
-use DaydreamLab\Cms\Requests\CmsStatePost;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsStateRequest;
 
-class NewsletterSubscriptionAdminStateRequest extends CmsStatePost
+class NewsletterSubscriptionAdminStateRequest extends CmsStateRequest
 {
     protected $apiMethod = 'stateNewsletterSubscription';
 

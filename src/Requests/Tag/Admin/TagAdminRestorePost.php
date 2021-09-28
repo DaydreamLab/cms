@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Tag\Admin;
 
-use DaydreamLab\Cms\Requests\CmsRestoreRemovePost;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsRestoreRequest;
 
-class TagAdminRestorePost extends CmsRestoreRemovePost
+class TagAdminRestorePost extends CmsRestoreRequest
 {
     protected $apiMethod = 'restoreTag';
 

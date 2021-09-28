@@ -2,11 +2,11 @@
 
 namespace DaydreamLab\Cms\Requests\ProductCategory\Admin;
 
-use DaydreamLab\Cms\Requests\CmsGetItemGet;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsGetItemRequest;
 
-class ProductCategoryAdminGetTreeRequest extends CmsGetItemGet
+class ProductCategoryAdminGetTreeRequest extends CmsGetItemRequest
 {
-    protected $apiMethod = 'getProductCategoryTree';
+    protected $apiMethod = 'searchProductCategory';
 
     protected $modelName = 'ProductCategory';
     /**

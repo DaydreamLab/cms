@@ -2,10 +2,10 @@
 
 namespace DaydreamLab\Cms\Requests\NewsletterSubscription\Admin;
 
-use DaydreamLab\Cms\Requests\CmsSearchPost;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsSearchRequest;
 use Illuminate\Validation\Rule;
 
-class NewsletterSubscriptionAdminSearchRequest extends CmsSearchPost
+class NewsletterSubscriptionAdminSearchRequest extends CmsSearchRequest
 {
     protected $modelName = 'NewsletterSubscription';
 

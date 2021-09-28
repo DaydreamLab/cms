@@ -2,10 +2,10 @@
 
 namespace DaydreamLab\Cms\Requests\Setting\Admin;
 
-use DaydreamLab\JJAJ\Requests\AdminRequest;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsStoreRequest;
 use Illuminate\Validation\Rule;
 
-class SettingAdminStorePost extends AdminRequest
+class SettingAdminStorePost extends CmsStoreRequest
 {
     protected $apiMethod = 'editSetting';
 

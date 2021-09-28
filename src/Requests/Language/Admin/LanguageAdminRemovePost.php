@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Language\Admin;
 
-use DaydreamLab\Cms\Requests\CmsRestoreRemovePost;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsRemoveRequest;
 
-class LanguageAdminRemovePost extends CmsRestoreRemovePost
+class LanguageAdminRemovePost extends CmsRemoveRequest
 {
     protected $apiMethod = 'deleteLanguage';
 

@@ -2,7 +2,7 @@
 
 namespace DaydreamLab\Cms\Requests\Newsletter\Admin;
 
-use DaydreamLab\Cms\Requests\CmsFeaturedOrderingRequest;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsFeaturedOrderingRequest;
 
 class NewsletterAdminFeaturedOrderingRequest extends CmsFeaturedOrderingRequest
 {

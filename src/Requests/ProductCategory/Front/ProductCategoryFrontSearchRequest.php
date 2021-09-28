@@ -2,7 +2,7 @@
 
 namespace DaydreamLab\Cms\Requests\ProductCategory\Front;
 
-use DaydreamLab\Cms\Requests\CmsSearchRequest;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsSearchRequest;
 
 class ProductCategoryFrontSearchRequest extends CmsSearchRequest
 {

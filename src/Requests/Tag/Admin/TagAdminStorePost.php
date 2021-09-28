@@ -4,10 +4,10 @@ namespace DaydreamLab\Cms\Requests\Tag\Admin;
 
 use Carbon\Carbon;
 use DaydreamLab\Cms\Helpers\RequestHelper;
-use DaydreamLab\JJAJ\Requests\AdminRequest;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsStoreRequest;
 use Illuminate\Validation\Rule;
 
-class TagAdminStorePost extends AdminRequest
+class TagAdminStorePost extends CmsStoreRequest
 {
     protected $apiMethod = 'storeTag';
 

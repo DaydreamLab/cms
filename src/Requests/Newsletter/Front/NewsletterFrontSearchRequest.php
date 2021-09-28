@@ -2,7 +2,7 @@
 
 namespace DaydreamLab\Cms\Requests\Newsletter\Front;
 
-use DaydreamLab\Cms\Requests\CmsSearchRequest;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsSearchRequest;
 
 class NewsletterFrontSearchRequest extends CmsSearchRequest
 {

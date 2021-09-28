@@ -2,10 +2,10 @@
 
 namespace DaydreamLab\Cms\Requests\Item\Front;
 
-use DaydreamLab\Cms\Requests\CmsSearchPost;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsSearchRequest;
 use Illuminate\Validation\Rule;
 
-class ItemFrontSearchSitePost extends CmsSearchPost
+class ItemFrontSearchSitePost extends CmsSearchRequest
 {
     protected $needAuth = false;
     /**

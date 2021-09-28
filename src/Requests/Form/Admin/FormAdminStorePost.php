@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Form\Admin;
 
-use DaydreamLab\JJAJ\Requests\AdminRequest;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsStoreRequest;
 
-class FormAdminStorePost extends AdminRequest
+class FormAdminStorePost extends CmsStoreRequest
 {
     protected $apiMethod = 'storeForm';
 

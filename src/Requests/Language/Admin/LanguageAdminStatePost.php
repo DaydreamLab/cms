@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Language\Admin;
 
-use DaydreamLab\Cms\Requests\CmsStatePost;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsStateRequest;
 
-class LanguageAdminStatePost extends CmsStatePost
+class LanguageAdminStatePost extends CmsStateRequest
 {
     protected $apiMethod = 'stateLanguage';
 

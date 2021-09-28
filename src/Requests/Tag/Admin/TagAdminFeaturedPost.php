@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Tag\Admin;
 
-use DaydreamLab\Cms\Requests\CmsFeaturedPost;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsFeaturedRequest;
 
-class TagAdminFeaturedPost extends CmsFeaturedPost
+class TagAdminFeaturedPost extends CmsFeaturedRequest
 {
     protected $apiMethod = 'featuredTag';
 

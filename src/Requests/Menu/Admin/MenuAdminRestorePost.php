@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Menu\Admin;
 
-use DaydreamLab\Cms\Requests\CmsRestoreRemovePost;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsRestoreRequest;
 
-class MenuAdminRestorePost extends CmsRestoreRemovePost
+class MenuAdminRestorePost extends CmsRestoreRequest
 {
     protected $apiMethod = 'restoreMenu';
 

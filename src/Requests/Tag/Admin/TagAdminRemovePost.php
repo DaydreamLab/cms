@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Tag\Admin;
 
-use DaydreamLab\Cms\Requests\CmsRestoreRemovePost;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsRemoveRequest;
 
-class TagAdminRemovePost extends CmsRestoreRemovePost
+class TagAdminRemovePost extends CmsRemoveRequest
 {
     protected $apiMethod = 'deleteTag';
 

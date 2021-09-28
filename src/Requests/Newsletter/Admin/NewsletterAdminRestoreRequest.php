@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Newsletter\Admin;
 
-use DaydreamLab\Cms\Requests\CmsRestoreRemovePost;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsRestoreRequest;
 
-class NewsletterAdminRestoreRequest extends CmsRestoreRemovePost
+class NewsletterAdminRestoreRequest extends CmsRestoreRequest
 {
     protected $apiMethod = 'restoreNewsletter';
 
