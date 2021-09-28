@@ -2,7 +2,7 @@
 
 namespace DaydreamLab\Cms\Resources\Tag\Admin\Collections;
 
-use DaydreamLab\Cms\Resources\Tag\admin\Models\TagAdminListResource;
+use DaydreamLab\Cms\Resources\Tag\Admin\Models\TagAdminListResource;
 use DaydreamLab\JJAJ\Resources\BaseResourceCollection;
 
 class TagAdminListResourceCollection extends BaseResourceCollection
