@@ -740,7 +740,7 @@ class ItemFrontService extends ItemService
         # 過濾 tag
         if ($tag) {
             $response = $response->filter(function ($r) use ($tag) {
-                $hasTag = $r->tags()->where('alias', $tag->alias)->first();
+                $hasTag = $r->tags()->where('alias', $tag)->first();
                 return ($hasTag) ? true : false;
             })->values();
         }
