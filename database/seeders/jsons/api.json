@@ -1396,5 +1396,41 @@
         "method": "storeCustomerMessageReply",
         "url": "/admin/customer/message/reply",
         "created_by": 1
+    },
+    {
+        "name": "取得統編資料",
+        "method": "getCompany",
+        "url": "/admin/company/{id}",
+        "created_by": 1
+    },
+    {
+        "name": "新增統編資料",
+        "method": "addCompany",
+        "url": "/admin/company/store",
+        "created_by": 1
+    },
+    {
+        "name": "編輯統編資料",
+        "method": "editCompany",
+        "url": "/admin/company/store",
+        "created_by": 1
+    },
+    {
+        "name": "刪除統編資料",
+        "method": "deleteCompany",
+        "url": "/admin/company/remove",
+        "created_by": 1
+    },
+    {
+        "name": "搜尋統編資料",
+        "method": "searchCompany",
+        "url": "/admin/company/search",
+        "created_by": 1
+    },
+    {
+        "name": "回存統編資料",
+        "method": "restoreCompany",
+        "url": "/admin/company/restore",
+        "created_by": 1
     }
 ]

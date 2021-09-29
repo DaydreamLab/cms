@@ -917,6 +917,8 @@
                 "showNav": 1,
                 "apis": [
                     "getUser",
+                    "searchUser",
+                    "blockUser",
                     "searchUserGroup"
                 ],
                 "defaultApis": {
@@ -937,7 +939,8 @@
                     "addCompany",
                     "editCompany",
                     "deleteCompany",
-                    "searchCompany"
+                    "searchCompany",
+                    "restoreCompany"
                 ],
                 "defaultApis": {
                     "getOption": ["checked", "hidden"]
