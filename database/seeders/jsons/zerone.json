@@ -140,7 +140,7 @@
                 "apis": [
                     "getProduct",
                     "addProduct",
-                    "editProduc",
+                    "editProduct",
                     "deleteProduct",
                     "searchProduct",
                     "stateProduct",
@@ -303,7 +303,8 @@
                     "deleteMedia": ["checked", "hidden"],
                     "renameMedia": ["checked", "hidden"],
                     "moveMedia": ["checked", "hidden"],
-                    "createMediaFolder": ["checked", "hidden"]
+                    "createMediaFolder": ["checked", "hidden"],
+                    "searchProduct": ["checked", "hidden"]
                 }
             },
             {
@@ -377,7 +378,8 @@
                     "deleteMedia": ["checked", "hidden"],
                     "renameMedia": ["checked", "hidden"],
                     "moveMedia": ["checked", "hidden"],
-                    "createMediaFolder": ["checked", "hidden"]
+                    "createMediaFolder": ["checked", "hidden"],
+                    "searchProduct": ["checked", "hidden"]
                 }
             }
         ],
@@ -556,6 +558,7 @@
                     "renameMedia": ["checked", "hidden"],
                     "moveMedia": ["checked", "hidden"],
                     "createMediaFolder": ["checked", "hidden"],
+                    "searchProduct": ["checked", "hidden"],
                     "searchProduct": ["checked", "hidden"]
                 }
             },
@@ -587,7 +590,8 @@
                     "deleteMedia": ["checked", "hidden"],
                     "renameMedia": ["checked", "hidden"],
                     "moveMedia": ["checked", "hidden"],
-                    "createMediaFolder": ["checked", "hidden"]
+                    "createMediaFolder": ["checked", "hidden"],
+                    "searchProduct": ["checked", "hidden"]
                 }
             }
         ],
