@@ -2,6 +2,9 @@
 
 namespace DaydreamLab\Cms\Helpers;
 
+use DaydreamLab\User\Models\Asset\Asset;
+use DaydreamLab\User\Models\Asset\AssetGroup;
+
 class RequestHelper
 {
     public static function handleParams($inputParams): array
@@ -38,5 +41,32 @@ class RequestHelper
         $params['seo'] = $seo;
 
         return $params;
+    }
+
+
+    public static function isBrandAdminPage($pageGroupId, $pageId, $modelName)
+    {
+        $assetGroup = AssetGroup::where('id', $pageGroupId)->first();
+        $asset = Asset::where('id', $pageId)->first();
+        if ( ($assetGroup && $assetGroup->title == 'COM_BRANDS_TITLE') &&
+            ($asset && $asset->title == 'COM_BRANDS_MANAGER_TITLE') &&
+            ($modelName != 'Brand') ) {
+            return true;
+        }
+        return false;
+    }
+
+
+    public static function brandAdminPageAuthorize($apis, $apiMethod, $modelName)
+    {
+        if ($apiMethod == 'store'. $modelName) {
+            $apiMethod = $request->get('id')
+                ? 'edit' . $modelName
+                : 'add' . $modelName;
+        }
+
+        return $apis->filter(function ($api) use ($apiMethod) {
+            return $api->method == $apiMethod;
+        })->count();
     }
 }

@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Requests\ComponentBase;
 
+use DaydreamLab\Cms\Helpers\RequestHelper;
 use DaydreamLab\JJAJ\Requests\BaseOrderingRequest;
 
 abstract class CmsOrderingRequest extends BaseOrderingRequest
@@ -15,6 +16,15 @@ abstract class CmsOrderingRequest extends BaseOrderingRequest
      */
     public function authorize()
     {
+        if (RequestHelper::isBrandAdminPage(
+            $this->get('pageGroupId'),
+            $this->get('pageId'),
+            $this->modelName)) {
+            return RequestHelper::brandAdminPageAuthorize(
+                $this->user()->apis,
+                $this->apiMethod,
+                $this->modelName);
+        }
         return parent::authorize();
     }
 
