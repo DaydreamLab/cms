@@ -1,1 +1,18 @@
-.list-pagination{margin-top:20px;text-align:center}.sortable-handler{cursor:move!important}.sortable-ghost td{background-color:#b0b8d3}.sortable-disabled{opacity:.3}.sortable-disabled td{background-color:gray}.editable_title{cursor:pointer;color:#2f3855}.editable_title:focus,.editable_title:hover{color:#596077}.list-searchbar[data-v-5a9048be]{text-align:right}
+
+.list-pagination{margin-top:20px;text-align:center
+}
+.sortable-handler{cursor:move !important
+}
+.sortable-ghost td{background-color:#b0b8d3
+}
+.sortable-disabled{opacity:0.3
+}
+.sortable-disabled td{background-color:gray
+}
+.editable_title{cursor:pointer;color:#2f3855
+}
+.editable_title:hover,.editable_title:focus{color:#596077
+}
+
+.list-searchbar[data-v-3d41c12a]{text-align:right
+}
