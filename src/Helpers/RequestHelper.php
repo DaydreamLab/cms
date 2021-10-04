@@ -57,10 +57,10 @@ class RequestHelper
     }
 
 
-    public static function brandAdminPageAuthorize($apis, $apiMethod, $modelName)
+    public static function brandAdminPageAuthorize($apis, $apiMethod, $modelName, $id = null)
     {
         if ($apiMethod == 'store'. $modelName) {
-            $apiMethod = $request->get('id')
+            $apiMethod = $id
                 ? 'edit' . $modelName
                 : 'add' . $modelName;
         }
