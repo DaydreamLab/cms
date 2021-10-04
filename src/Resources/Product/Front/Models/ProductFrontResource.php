@@ -20,7 +20,8 @@ class ProductFrontResource extends BaseJsonResource
             'description'       => $this->description,
             'brands'            => $this->brands,
             'category'          => $this->category,
-            'product_data'      => $this->product_data
+            'product_data'      => $this->product_data,
+            'params'            => $this->params
         ];
     }
 }
