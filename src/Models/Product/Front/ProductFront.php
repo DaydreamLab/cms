@@ -33,12 +33,14 @@ class ProductFront extends Product
     public function brands()
     {
         return $this->belongsToMany(BrandFront::class, 'brands_products_maps', 'product_id', 'brand_id')
+            ->where('state', 1)
             ->withTimestamps();
     }
 
 
     public function productCategory()
     {
-        return $this->belongsTo(ProductCategoryFront::class, 'product_category_id', 'id');
+        return $this->belongsTo(ProductCategoryFront::class, 'product_category_id', 'id')
+            ->where('state', 1);
     }
 }

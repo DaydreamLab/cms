@@ -41,6 +41,12 @@ class BrandAdminService extends BrandService
     }
 
 
+    public function removeMapping($item)
+    {
+        $item->tags()->detach();
+    }
+
+
     public function store(Collection $input)
     {
         $result = parent::store($input);

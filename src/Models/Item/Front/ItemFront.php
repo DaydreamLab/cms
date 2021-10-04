@@ -63,13 +63,15 @@ class ItemFront extends Item
 
     public function tags()
     {
-        return $this->belongsToMany(TagFront::class, 'items_tags_maps', 'item_id', 'tag_id')->where('state', 1);
+        return $this->belongsToMany(TagFront::class, 'items_tags_maps', 'item_id', 'tag_id')->where('state', 1)
+            ->where('state', 1);
     }
 
 
     public function brands()
     {
         return $this->belongsToMany(BrandFront::class, 'brands_items_maps', 'item_id', 'brand_id')
+            ->where('state', 1)
             ->withTimestamps();
     }
 
@@ -77,6 +79,7 @@ class ItemFront extends Item
     public function products()
     {
         return $this->belongsToMany(ProductFront::class, 'items_products_maps', 'item_id', 'product_id')
+            ->where('state', 1)
             ->withTimestamps();
     }
 }

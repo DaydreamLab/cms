@@ -42,6 +42,7 @@ class BrandFront extends Brand
     public function items()
     {
         return $this->belongsToMany(ItemFront::class, 'brands_items_maps', 'brand_id', 'item_id')
+            ->where('state', 1)
             ->withTimestamps();
     }
 
@@ -49,19 +50,22 @@ class BrandFront extends Brand
     public function files()
     {
         return $this->belongsToMany(FileFront::class, 'brands_files_maps', 'brand_id', 'file_id')
+            ->where('state', 1)
             ->withTimestamps();
     }
 
 
     public function tags()
     {
-        return $this->belongsToMany(TagFront::class, 'brands_tags_maps', 'brand_id', 'tag_id');
+        return $this->belongsToMany(TagFront::class, 'brands_tags_maps', 'brand_id', 'tag_id')
+            ->where('state', 1);
     }
 
 
     public function products()
     {
         return $this->belongsToMany(ProductFront::class, 'brands_products_maps', 'brand_id', 'product_id')
+            ->where('state', 1)
             ->withTimestamps();
     }
 
