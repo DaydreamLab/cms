@@ -60,6 +60,13 @@ class ProductAdminService extends ProductService
     }
 
 
+    public function removeMapping($item)
+    {
+        $item->brands()->detach();
+        $item->tags()->detach();
+    }
+
+
     public function search(Collection $input)
     {
         if (!InputHelper::null($input, 'product_category_id')) {
