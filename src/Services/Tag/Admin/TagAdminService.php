@@ -33,7 +33,7 @@ class TagAdminService extends TagService
     {
         $result = parent::store($input);
 
-        $this->setCronJob($input, $result);
+        //$this->setCronJob($input, $result);
 
         return $result;
     }
