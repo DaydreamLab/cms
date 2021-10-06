@@ -23,7 +23,7 @@ class ProductCategory extends BaseModel
     protected $model_type = 'parent';
 
 
-    protected $order_by = 'id';
+    protected $order_by = 'ordering';
 
     protected $order = 'asc';
     /**

@@ -140,6 +140,8 @@ Route::get('api/admin/product/{id}', [ProductAdminController::class, 'getItem'])
     ->middleware(['expired', 'admin']);
 
 # 產品分類
+Route::post('api/admin/product/category/ordering', [ProductCategoryAdminController::class, 'ordering'])
+    ->middleware(['expired','admin']);
 Route::post('api/admin/product/category/remove', [ProductCategoryAdminController::class, 'remove'])
     ->middleware(['expired', 'admin']);
 Route::post('api/admin/product/category/restore', [ProductCategoryAdminController::class, 'restore'])

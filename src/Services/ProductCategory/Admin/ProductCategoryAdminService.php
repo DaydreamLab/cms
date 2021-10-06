@@ -54,6 +54,8 @@ class ProductCategoryAdminService extends ProductCategoryService
             $p->locked_at = $locked_at;
 
             return $p;
+        })->sortBy(function ($sp) {
+            return $sp->ordering;
         });
         $all = new NestCollection($all);
 

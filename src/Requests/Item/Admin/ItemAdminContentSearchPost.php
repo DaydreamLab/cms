@@ -78,7 +78,8 @@ class ItemAdminContentSearchPost extends CmsSearchRequest
             ],
             'brand_id'      => 'nullable|integer',
             'year'          => 'nullable|string',
-            'document_type' => 'nullable|string'
+            'document_type' => 'nullable|string',
+            'publish_up'    => 'nullable|date_format:Y-m'
         ];
         return array_merge(parent::rules(), $rules);
     }
