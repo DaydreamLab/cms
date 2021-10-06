@@ -24,10 +24,11 @@ class ItemAdminContentStorePost extends CmsStoreRequest
         $content_type = $this->route('content_type');
         $parts = explode('_', $content_type);
         $typeString = 'store';
+        $this->modelName = '';
         foreach ($parts as $part) {
-            $typeString .= Str::ucfirst($part);
+            $this->modelName .= Str::ucfirst($part);
         }
-        $this->apiMethod = $typeString;
+        $this->apiMethod = $typeString.$this->modelName;
         return parent::authorize();
     }
 
