@@ -158,7 +158,12 @@ class ItemAdminContentSearchPost extends CmsSearchRequest
             })->toArray());
         }
         $validated->forget('document_type');
-
+        
+        if ( $publish_up = $validated->get('publish_up') ) {
+            
+        }
+        $validated->forget('publish_up');
+        
         return $validated;
     }
 }
