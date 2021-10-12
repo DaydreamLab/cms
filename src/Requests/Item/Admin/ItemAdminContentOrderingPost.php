@@ -1,11 +1,15 @@
 <?php
 
-namespace DaydreamLab\Cms\Requests\ProductCategory\Admin;
+namespace DaydreamLab\Cms\Requests\Item\Admin;
 
 use DaydreamLab\Cms\Requests\ComponentBase\CmsOrderingRequest;
 
-class ProductCategoryAdminOrderingRequest extends CmsOrderingRequest
+class ItemAdminContentOrderingPost extends CmsOrderingRequest
 {
+    protected $apiMethod = 'orderingItem';
+
+    protected $modelName = 'Item';
+    
     protected $needAuth = false;
     /**
      * Determine if the user is authorized to make this request.
@@ -14,6 +18,14 @@ class ProductCategoryAdminOrderingRequest extends CmsOrderingRequest
      */
     public function authorize()
     {
+        $content_type = $this->route('content_type');
+        $parts = explode('_', $content_type);
+        $typeString = 'ordering';
+        $this->modelName = '';
+        foreach ($parts as $part) {
+            $this->modelName .= Str::ucfirst($part);
+        }
+        $this->apiMethod = $typeString.$this->modelName;
         return parent::authorize();
     }
 
@@ -24,9 +36,7 @@ class ProductCategoryAdminOrderingRequest extends CmsOrderingRequest
      */
     public function rules()
     {
-        $rules =[
-            //
-        ];
+        $rules = [];
 
         return array_merge(parent::rules(), $rules);
     }

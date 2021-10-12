@@ -25,7 +25,7 @@
      "content_type": "solution",
      "title": "產業分類",
      "alias": "industry_category",
-     "type": "select",
+     "type": "multiSelect",
      "params": {
        "type": "category",
        "category_id": 14

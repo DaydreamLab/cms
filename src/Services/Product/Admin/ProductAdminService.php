@@ -6,12 +6,15 @@ use DaydreamLab\Cms\Models\ProductCategory\Admin\ProductCategoryAdmin;
 use DaydreamLab\Cms\Repositories\Product\Admin\ProductAdminRepository;
 use DaydreamLab\Cms\Services\Product\ProductService;
 use DaydreamLab\Cms\Services\ProductCategory\Admin\ProductCategoryAdminService;
+use DaydreamLab\Cms\Traits\Service\CmsCronJob;
 use DaydreamLab\JJAJ\Exceptions\NotFoundException;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
 use Illuminate\Support\Collection;
 
 class ProductAdminService extends ProductService
 {
+    use CmsCronJob;
+
     protected $pcService;
 
     public function __construct(ProductAdminRepository $repo, ProductCategoryAdminService $pcService)
@@ -91,6 +94,15 @@ class ProductAdminService extends ProductService
             ], null, 'ProductCategory');
         }
 
-        return parent::store($input);
+        $result = parent::store($input);
+        if ($input->has('id')) {
+            $result = $this->find($input->get('id'));
+        }
+
+        $this->setCronJob($input, $result);
+
+        $this->response = $result;
+
+        return $this->response;
     }
 }

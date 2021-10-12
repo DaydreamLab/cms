@@ -93,10 +93,6 @@ class OptionService
             $q = new QueryCapsule();
             if ($type == 'asset') {
                 $data[$type] = $this->getOptionList($service, 'tree', collect(['q' => $q]), []);
-            } elseif ($type == 'brand') {
-                $data[$type] = $this->getOptionList($service, 'list', collect(
-                    ['q' => $q->where('state', 1), 'limit' => 0]
-                ));
             } elseif ($type == 'extension') {
                 $data[$type] = $service;
             } elseif ($type == 'extrafield_group') {
@@ -123,6 +119,11 @@ class OptionService
                 $q = $q->where('extension', 'module')
                     ->where('title', '!=', 'ROOT');
                 $data[$type] = $this->getOptionList($service, 'tree', collect(['q' => $q]) , ['alias']);
+            }
+            elseif ($type == 'brand') {
+                $data[$type] = $this->getOptionList($service, 'list', collect(
+                    ['q' => $q->where('state', 1), 'limit' => 0]
+                ));
             } elseif ($type == 'product_category') {
                 $data[$type] = $this->getOptionList($service, 'tree', collect(
                     ['q' => $q->where('state', 1), 'limit' => 0]
@@ -231,7 +232,7 @@ class OptionService
     {
         if ($type == 'tree') {
             $default_field = array_merge($extra_fields, ['id', 'tree_list_title']);
-            return $service->search($input)//->toFlatTree()
+            return $service->search($input)->toFlatTree()
                 ->map( function($item, $key) use ($default_field){
                     return $item->only($default_field);
                 });

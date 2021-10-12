@@ -59,12 +59,12 @@ class RequestHelper
 
     public static function brandAdminPageAuthorize($apis, $apiMethod, $modelName, $id = null)
     {
-        if ($apiMethod == 'store'. $modelName) {
+        if (strpos($apiMethod, 'store') === 0) {
             $apiMethod = $id
-                ? 'edit' . $modelName
-                : 'add' . $modelName;
+                ? str_replace('store', 'edit', $apiMethod)
+                : str_replace('store', 'add', $apiMethod);
         }
-
+        
         return $apis->filter(function ($api) use ($apiMethod) {
             return $api->method == $apiMethod;
         })->count();

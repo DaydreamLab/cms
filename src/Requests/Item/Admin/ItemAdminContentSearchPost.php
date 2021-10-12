@@ -78,7 +78,8 @@ class ItemAdminContentSearchPost extends CmsSearchRequest
             ],
             'brand_id'      => 'nullable|integer',
             'year'          => 'nullable|string',
-            'document_type' => 'nullable|string'
+            'document_type' => 'nullable|string',
+            'publish_up'    => 'nullable|date_format:Y-m'
         ];
         return array_merge(parent::rules(), $rules);
     }
@@ -100,12 +101,17 @@ class ItemAdminContentSearchPost extends CmsSearchRequest
         }
         $validated->forget('brand_id');
 
-        if (in_array($this->route('content_type'), ['solution', 'case', 'bulletin', 'promotion', 'video']))
-        # 過濾可觀看的品牌
-        if (!$this->user()->isSuperUser && $this->user()->isAdmin) {
-            $q = $q->whereHas('brands', function ($q) {
-                $q->whereIn('brands_items_maps.brand_id', $this->user()->brands->pluck('id'));
-            });
+        if (in_array($this->route('content_type'), ['solution', 'case', 'bulletin', 'promotion', 'video'])) {
+            # 過濾可觀看的品牌
+            if (!$this->user()->isSuperUser && $this->user()->isAdmin) {
+                $q = $q->whereHas('brands', function ($q) {
+                    $q->whereIn('brands_items_maps.brand_id', $this->user()->brands->pluck('id'));
+                });
+            }
+        }
+
+        if ($validated->get('content_type') == 'industry_category') {
+            $q = $q->orderBy('ordering', 'asc');
         }
 
         $validated->put('q', $q);
@@ -152,7 +158,12 @@ class ItemAdminContentSearchPost extends CmsSearchRequest
             })->toArray());
         }
         $validated->forget('document_type');
-
+        
+        if ( $publish_up = $validated->get('publish_up') ) {
+            
+        }
+        $validated->forget('publish_up');
+        
         return $validated;
     }
 }
