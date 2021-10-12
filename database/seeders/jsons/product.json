@@ -1,394 +1,86 @@
 [
   {
     "title": "IT管理及效能監控",
-    "alias": "A",
-    "children": [
-      {
-        "title": "效能",
-        "children": [],
-        "products": [
-          {
-            "title": "IT基礎架構產品1",
-            "brands": [
-              {
-                "id": 20
-              }
-            ],
-            "product_data": [
-              {
-                "name": "產品型號",
-                "description": "產品說明",
-                "price": "1000"
-              }
-            ]
-          }
-        ]
-      }
-    ],
+    "alias": "it-management",
+    "children": [],
     "products": []
   },
   {
     "title": "資訊安全",
-    "alias": "B",
-    "children": [
-      {
-        "title": "安全",
-        "children": [],
-        "products": [
-          {
-            "title": "網路暨資訊安全產品1",
-            "brands": [
-              {
-                "id": 19
-              }
-            ],
-            "product_data": [
-              {
-                "name": "產品型號",
-                "description": "產品說明",
-                "price": "1000"
-              }
-            ]
-          }
-        ]
-      }
-    ],
+    "alias": "information-security",
+    "children": [],
     "products": []
   },
   {
     "title": "基礎架構網路",
-    "alias": "C",
-    "children": [
-      {
-        "title": "網路",
-        "children": [],
-        "products": [
-          {
-            "title": "基礎架構網路產品1",
-            "brands": [
-              {
-                "id": 18
-              }
-            ],
-            "product_data": [
-              {
-                "name": "產品型號",
-                "description": "產品說明",
-                "price": "1000"
-              }
-            ]
-          }
-        ]
-      }
-    ],
+    "alias": "infrastructure",
+    "children": [],
     "products": []
   },
   {
     "title": "儲存系統",
-    "alias": "D",
-    "children": [
-      {
-        "title": "系統",
-        "children": [],
-        "products": [
-          {
-            "title": "儲存系統產品1",
-            "brands": [
-              {
-                "id": 17
-              }
-            ],
-            "product_data": [
-              {
-                "name": "產品型號",
-                "description": "產品說明",
-                "price": "1000"
-              }
-            ]
-          }
-        ]
-      }
-    ],
+    "alias": "storage",
+    "children": [],
     "products": []
   },
   {
     "title": "備份備援",
-    "alias": "E",
-    "children": [
-      {
-        "title": "備援",
-        "children": [],
-        "products": [
-          {
-            "title": "備份備援產品1",
-            "brands": [
-              {
-                "id": 16
-              }
-            ],
-            "product_data": [
-              {
-                "name": "產品型號",
-                "description": "產品說明",
-                "price": "1000"
-              }
-            ]
-          }
-        ]
-      }
-    ],
+    "alias": "backup",
+    "children": [],
     "products": []
   },
   {
     "title": "虛擬化",
-    "alias": "F",
-    "children": [
-      {
-        "title": "虛擬",
-        "children": [],
-        "products": [
-          {
-            "title": "虛擬化產品1",
-            "brands": [
-              {
-                "id": 15
-              }
-            ],
-            "product_data": [
-              {
-                "name": "產品型號",
-                "description": "產品說明",
-                "price": "1000"
-              }
-            ]
-          }
-        ]
-      }
-    ],
+    "alias": "virtualization",
+    "children": [],
     "products": []
   },
   {
     "title": "視訊監控",
-    "alias": "G",
-    "children": [
-      {
-        "title": "監控",
-        "children": [],
-        "products": [
-          {
-            "title": "視訊監控產品1",
-            "brands": [
-              {
-                "id": 14
-              }
-            ],
-            "product_data": [
-              {
-                "name": "產品型號",
-                "description": "產品說明",
-                "price": "1000"
-              }
-            ]
-          }
-        ]
-      }
-    ],
+    "alias": "video-surveillance",
+    "children": [],
     "products": []
   },
   {
     "title": "雲端服務",
-    "alias": "H",
-    "children": [
-      {
-        "title": "服務",
-        "children": [],
-        "products": [
-          {
-            "title": "雲端服務產品1",
-            "brands": [
-              {
-                "id": 13
-              }
-            ],
-            "product_data": [
-              {
-                "name": "產品型號",
-                "description": "產品說明",
-                "price": "1000"
-              }
-            ]
-          }
-        ]
-      }
-    ],
+    "alias": "cloud-service",
+    "children": [],
     "products": []
   },
   {
     "title": "AI 大數據",
-    "alias": "I",
-    "children": [
-      {
-        "title": "大數據",
-        "children": [],
-        "products": [
-          {
-            "title": "AI大數據產品1",
-            "brands": [
-              {
-                "id": 12
-              }
-            ],
-            "product_data": [
-              {
-                "name": "產品型號",
-                "description": "產品說明",
-                "price": "1000"
-              }
-            ]
-          }
-        ]
-      }
-    ],
+    "alias": "ai-bigdata",
+    "children": [],
     "products": []
   },
   {
     "title": "容器及DevOps",
-    "alias": "J",
-    "children": [
-      {
-        "title": "DevOps",
-        "children": [],
-        "products": [
-          {
-            "title": "容器及DevOps產品1",
-            "brands": [
-              {
-                "id": 11
-              }
-            ],
-            "product_data": [
-              {
-                "name": "產品型號",
-                "description": "產品說明",
-                "price": "1000"
-              }
-            ]
-          }
-        ]
-      }
-    ],
+    "alias": "devops",
+    "children": [],
     "products": []
   },
   {
     "title": "遠距應用",
-    "alias": "K",
-    "children": [
-      {
-        "title": "應用",
-        "children": [],
-        "products": [
-          {
-            "title": "遠距應用產品1",
-            "brands": [
-              {
-                "id": 10
-              }
-            ],
-            "product_data": [
-              {
-                "name": "產品型號",
-                "description": "產品說明",
-                "price": "1000"
-              }
-            ]
-          }
-        ]
-      }
-    ],
+    "alias": "distance-application",
+    "children": [],
     "products": []
   },
   {
     "title": "超融合基礎架構",
-    "alias": "L",
-    "children": [
-      {
-        "title": "架構",
-        "children": [],
-        "products": [
-          {
-            "title": "超融合基礎架構產品1",
-            "brands": [
-              {
-                "id": 9
-              }
-            ],
-            "product_data": [
-              {
-                "name": "產品型號",
-                "description": "產品說明",
-                "price": "1000"
-              }
-            ]
-          }
-        ]
-      }
-    ],
+    "alias": "super-infrastructure",
+    "children": [],
     "products": []
   },
   {
     "title": "商業應用軟體",
-    "alias": "M",
-    "children": [
-      {
-        "title": "軟體",
-        "children": [],
-        "products": [
-          {
-            "title": "商業應用軟體產品1",
-            "brands": [
-              {
-                "id": 8
-              }
-            ],
-            "product_data": [
-              {
-                "name": "產品型號",
-                "description": "產品說明",
-                "price": "1000"
-              }
-            ]
-          }
-        ]
-      }
-    ],
+    "alias": "business-software",
+    "children": [],
     "products": []
   },
   {
     "title": "顧問服務",
-    "alias": "O",
-    "children": [
-      {
-        "title": "顧問",
-        "children": [],
-        "products": [
-          {
-            "title": "顧問服務產品1",
-            "brands": [
-              {
-                "id": 3
-              }
-            ],
-            "product_data": [
-              {
-                "name": "產品型號",
-                "description": "產品說明",
-                "price": "1000"
-              }
-            ]
-          }
-        ]
-      }
-    ],
+    "alias": "consultant",
+    "children": [],
     "products": []
   }
 ]
