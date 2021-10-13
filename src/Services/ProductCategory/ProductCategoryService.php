@@ -48,7 +48,7 @@ class ProductCategoryService extends CmsService
 
     public function ordering(Collection $input)
     {
-        $result = parent::orderingNested($input);
+        $result = parent::ordering($input);
 
         //event(new Ordering($this->model_name, $result, $input, $orderingKey, $this->user));
 
