@@ -75,6 +75,10 @@ class ImportBrand implements ShouldQueue
             if (! $oldProductBrand) {
                 $product->brands()->attach($brand->id);
             }
+
+            if (! $product->productCategories->where('id', $productCategory->id)->first()) {
+                $product->productCategories()->attach($productCategory->id);
+            }
         }
 
         // 刪除暫存檔

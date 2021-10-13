@@ -112,6 +112,13 @@ class Product extends BaseModel
     }
 
 
+    public function productCategories()
+    {
+        return $this->belongsToMany(ProductCategory::class, 'products_categories_map', 'product_id', 'category_id')
+            ->withTimestamps();
+    }
+
+
     public function getBrandTitleAttribute()
     {
         return $this->brands->map(function($b) {
