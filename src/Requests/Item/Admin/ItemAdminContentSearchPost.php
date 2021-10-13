@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Requests\Item\Admin;
 
+use Carbon\Carbon;
 use DaydreamLab\Cms\Models\Extrafield\Extrafield;
 use DaydreamLab\Cms\Models\Extrafield\ExtrafieldValue;
 use DaydreamLab\Cms\Requests\ComponentBase\CmsSearchRequest;
@@ -160,7 +161,9 @@ class ItemAdminContentSearchPost extends CmsSearchRequest
         $validated->forget('document_type');
         
         if ( $publish_up = $validated->get('publish_up') ) {
-            
+            $start = Carbon::createFromFormat('Y-m', $publish_up, $this->user()->timezone)->startOfMonth()->setTimezone('UTC');
+            $end = Carbon::createFromFormat('Y-m', $publish_up, $this->user()->timezone)->endOfMonth()->setTimezone('UTC');
+            $validated['q'] = $this->q->where('publish_up', '>=', $start)->where('publish_up', '<', $end);
         }
         $validated->forget('publish_up');
         
