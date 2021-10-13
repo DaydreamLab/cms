@@ -2,16 +2,37 @@
 
 namespace DaydreamLab\Cms\Services\Brand\Admin;
 
+use DaydreamLab\Cms\Jobs\ImportBrand;
 use DaydreamLab\Cms\Repositories\Brand\Admin\BrandAdminRepository;
+use DaydreamLab\Cms\Repositories\ProductCategory\ProductCategoryRepository;
 use DaydreamLab\Cms\Services\Brand\BrandService;
+use DaydreamLab\Cms\Services\Product\ProductService;
+use DaydreamLab\Cms\Services\ProductCategory\ProductCategoryService;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Storage;
 
 class BrandAdminService extends BrandService
 {
-    public function __construct(BrandAdminRepository $repo)
+    protected $productCategoryRepo;
+
+    protected $productCategoryService;
+
+    protected $productService;
+
+    protected $brandService;
+
+    public function __construct(
+        BrandAdminRepository $repo,
+        ProductCategoryService $productCategoryService,
+        ProductService $productService,
+        BrandService  $brandService
+    )
     {
         parent::__construct($repo);
         $this->repo = $repo;
+        $this->productCategoryService = $productCategoryService;
+        $this->productService = $productService;
+        $this->brandService = $brandService;
     }
 
 
@@ -29,6 +50,19 @@ class BrandAdminService extends BrandService
         }
     }
 
+
+    public function import($input)
+    {
+        $file = $input->file('file');
+        $temp = $file->move('tmp', $file->hashName());
+        $filePath = $temp->getRealPath();
+
+        $job = new ImportBrand($filePath, $this->repo, $this->productCategoryService, $this->productService, $this->brandService);
+
+        dispatch($job);
+
+        $this->status = 'ImportSuccess';
+    }
 
     public function modifyMapping($item, $input)
     {
