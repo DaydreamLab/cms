@@ -34,8 +34,10 @@ class ProductCategoryAdminStoreRequest extends CmsStoreRequest
             'title'             => 'required|string',
             'alias'             => 'nullable|string',
             'description'       => 'nullable|string',
+            'image'             => 'nullable|string',
             'memo'              => 'nullable|string',
             'params'            => 'nullable|array',
+            'ordering'          => 'nullable|integer',
             'state'             => ['nullable', Rule::in([0,1,-1,-2])]
         ];
 

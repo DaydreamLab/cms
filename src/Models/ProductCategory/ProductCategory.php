@@ -35,6 +35,7 @@ class ProductCategory extends BaseModel
         'title',
         'alias',
         'description',
+        'image',
         'memo',
         'params',
         'state',

@@ -19,6 +19,7 @@ class CreateProductCategoriesTable extends Migration
             $table->string('title');
             $table->string('alias');
             $table->text('description')->nullable();
+            $table->string('image')->nullable();
             $table->text('memo')->nullable();
             $table->text('params')->nullable();
 

@@ -275,7 +275,7 @@ class OptionService
                         })->map(function ($m) {
                             return $m->only(['alias', 'title']);
                         })->values();
-                        $pData = $pp->only(['alias', 'title']);
+                        $pData = $pp->only(['alias', 'title', 'image']);
                         $pData['brands'] = $brands;
                         return $pData;
                     });
