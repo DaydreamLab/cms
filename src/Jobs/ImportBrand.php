@@ -159,8 +159,8 @@ class ImportBrand implements ShouldQueue
             }
             $product = $product->first();
         } else {
-//            dump('產品系列產品已存在 插入產品資訊');
-            $productData = json_decode($product->productData);
+            dump('產品系列已存在 插入產品資訊');
+            $productData = $product->product_data;
             $productData[] = $productRecord['product_data'][0];
             $product->product_data = $productData;
             $product->save();
