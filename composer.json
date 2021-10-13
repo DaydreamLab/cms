@@ -19,7 +19,8 @@
     "require": {
         "daydreamlab/user": "dev-01/dev",
         "daydreamlab/media": "dev-01/dev",
-        "fedeisas/laravel-mail-css-inliner": "^4.0"
+        "fedeisas/laravel-mail-css-inliner": "^4.0",
+        "phpoffice/phpspreadsheet": "^1.18"
     },
     "repositories" : [
         {

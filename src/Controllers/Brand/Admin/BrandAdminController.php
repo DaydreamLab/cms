@@ -12,6 +12,7 @@ use DaydreamLab\Cms\Requests\Brand\Admin\BrandAdminStoreRequest;
 use DaydreamLab\Cms\Resources\Brand\Admin\Collections\BrandAdminListResourceCollection;
 use DaydreamLab\Cms\Resources\Brand\Admin\Models\BrandAdminResource;
 use DaydreamLab\Cms\Services\Brand\Admin\BrandAdminService;
+use Illuminate\Http\Request;
 use Throwable;
 
 class BrandAdminController extends CmsController
@@ -35,6 +36,19 @@ class BrandAdminController extends CmsController
         }
 
         return $this->response($this->service->status, $this->service->response, [], BrandAdminResource::class);
+    }
+
+
+    public function import(Request $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->import($request);
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
