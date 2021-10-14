@@ -138,29 +138,25 @@ class ImportBrand implements ShouldQueue
                 'unlimitPhoneSupportAmt' => $rowData[15],
                 'level' => $rowData[16],
                 'renew' => $rowData[17]
-            ]]
+            ]],
+            'params' => [
+                'meta' => [
+                    'title' => '',
+                    'keywords' => '',
+                    'description' => '',
+                ],
+                'seo' => []
+            ]
         ];
 
-        $product = $this->productService->getModel();
-        foreach ($productRecord as $key => $value) {
-            if ($key != 'product_data') {
-                $product = $product->where($key, $value);
-            }
-        }
-        $product = $product->first();
+        $product = $this->productService->getModel()->where('title', $productRecord['title'])->first();
 
         if (! $product) {
 //            dump('產品系列不存在 建立一比新紀錄');
             // 新增紀錄
             $productRecord['alias'] = Str::uuid()->getHex();
             $this->productService->store(collect($productRecord));
-            $product = $this->productService->getModel();
-            foreach ($productRecord as $key => $value) {
-                if ($key != 'product_data') {
-                    $product = $product->where($key, $value);
-                }
-            }
-            $product = $product->first();
+            $product = $this->productService->getModel()->where('title', $productRecord['title'])->first();;
         } else {
 //            dump('產品系列已存在 插入產品資訊');
             $productData = $product->product_data;
