@@ -97,7 +97,8 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
                     })
                     ->whereHas('newsletterUserGroups', function ($q) {
                         $q->whereIn('title', ['Public', 'Guest']);
-                    })->get();
+                    })
+                    ->get();
 
                 # 找出是否有訂閱紀錄
                 $subscription = $this->findBy('email', '=', $inputEmail)->first();
@@ -113,9 +114,9 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
             $data['id'] = $subscription->id;
             $this->modify(collect($data));
         } else {
-            $this->add(collect($data));
+            $subscription = $this->add(collect($data));
         }
-
+        $this->edmProcessSubscription($inputEmail, $subscription); # 串接edm訂閱管理
         $this->response = null;
     }
 

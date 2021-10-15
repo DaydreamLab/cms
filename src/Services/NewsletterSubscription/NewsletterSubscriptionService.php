@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Services\NewsletterSubscription;
 
+use DaydreamLab\Cms\Models\Item\Item;
 use DaydreamLab\Cms\Repositories\NewsletterSubscription\NewsletterSubscriptionRepository;
 use DaydreamLab\Cms\Services\CmsService;
 use Illuminate\Support\Collection;
@@ -9,6 +10,9 @@ use Illuminate\Support\Collection;
 class NewsletterSubscriptionService extends CmsService
 {
     protected $modelName = 'NewsletterSubscription';
+
+    protected $omiLogin = 'Zerone01_BU5';
+    protected $omiPass = 'Zer01bu5';
 
     public function __construct(NewsletterSubscriptionRepository $repo)
     {
@@ -104,5 +108,88 @@ class NewsletterSubscriptionService extends CmsService
         //event(new State($this->model_name, $result, $input, $this->user));
 
         return $result;
+    }
+
+
+    public function edmProcessSubscription($email, $subscription)
+    {
+        $allCategories = Item::query()->whereHas('category', function ($q) {
+                $q->where('content_type', 'newsletter_category');
+        })->get()->pluck('alias');
+
+        $subCats = $subscription->newsletterCategories->pluck('alias');
+        $unSubCats = $allCategories->diff($subCats);
+
+        foreach ($subCats as $subCat) {
+            if ($subCat == '01_deal_newsletter') {
+                $newsletterId = 7;
+            } else {
+                $newsletterId = 6;
+            }
+            $this->edmAddSubscription($email, $newsletterId);
+        }
+
+        foreach ($unSubCats as $unSubCat) {
+            if ($unSubCat == '01_deal_newsletter') {
+                $newsletterId = 7;
+            } else {
+                $newsletterId = 6;
+            }
+            $this->edmRemoveSubscription($email, $newsletterId);
+        }
+    }
+
+
+    public function edmAddSubscription($email, $id)
+    {
+        $url = 'http://zcrm.itpison.com/WebAPI/Subscribe.aspx';
+        $this->processEdmSubscriptionApi($url, $email, $id);
+    }
+
+
+    public function edmRemoveSubscription($email, $id)
+    {
+        $url = 'http://zcrm.itpison.com/WebAPI/UnSubscribe.aspx';
+        $this->processEdmSubscriptionApi($url, $email, $id);
+    }
+
+
+    protected function processEdmSubscriptionApi($url, $email, $id)
+    {
+        $postdata = array(
+            'ManagerLoginName' => $this->omiLogin,
+            'ManagerPassword' => $this->omiPass,
+            'Option' => '1',
+            'NewsLetterID' => $id,
+            'EmailAddress' => $email
+        );
+        $opts = array( 'http' => array(
+            'method' => 'POST',
+            'header' => 'Content-type: application/x-www-form-urlencoded',
+            'content' => http_build_query($postdata)
+        ) );
+        $context = stream_context_create($opts);
+
+        $result = file_get_contents($url, false, $context);
+    }
+
+
+    public function edmAddBlackList($email)
+    {
+        $url = 'http://zcrm.itpison.com/WebAPI/ListManager.aspx';
+        $postdata = array(
+            'ManagerLoginName' => $this->omiLogin,
+            'ManagerPassword' => $this->omiPass,
+            'Option' => '1',
+            'ListName' => 'EmailSystemBlackList',
+            'EmailAddress' => $email
+        );
+        $opts = array( 'http' => array(
+            'method' => 'POST',
+            'header' => 'Content-type: application/x-www-form-urlencoded',
+            'content' => http_build_query($postdata)
+        ) );
+        $context = stream_context_create($opts);
+        $result = file_get_contents($url, false, $context);
     }
 }
