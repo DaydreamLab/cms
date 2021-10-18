@@ -185,6 +185,8 @@ Route::post('api/admin/item/{content_type}/store', [ItemAdminController::class, 
     ->middleware(['expired','admin']);
 Route::get('api/admin/item/{content_type}/{id}', [ItemAdminController::class, 'getContentItem'])
     ->middleware(['expired','admin']);
+Route::post('api/admin/item/importVideo', [ItemAdminController::class, 'importVideo'])
+    ->middleware(['expired', 'admin']);
 
 # 電子報
 Route::get('api/admin/newsletter/{id}/publish', [NewsletterAdminController::class, 'publish'])

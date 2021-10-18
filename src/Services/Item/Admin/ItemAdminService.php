@@ -2,9 +2,11 @@
 
 namespace DaydreamLab\Cms\Services\Item\Admin;
 
+use DaydreamLab\Cms\Jobs\ImportVideo;
 use DaydreamLab\Cms\Models\Extrafield\Extrafield;
 use DaydreamLab\Cms\Models\Extrafield\ExtrafieldValue;
 use DaydreamLab\Cms\Repositories\Item\Admin\ItemAdminRepository;
+use DaydreamLab\Cms\Services\Brand\BrandService;
 use DaydreamLab\Cms\Services\Category\Admin\CategoryAdminService;
 use DaydreamLab\Cms\Services\Cms\CmsCronJobService;
 use DaydreamLab\Cms\Services\Tag\Admin\TagAdminService;
@@ -24,17 +26,31 @@ class ItemAdminService extends ItemService
 
     protected $categoryAdminService;
 
+    protected $brandService;
+
     public function __construct(ItemAdminRepository     $repo,
                                 TagAdminService         $tagAdminService,
-                                CategoryAdminService    $categoryAdminService)
+                                CategoryAdminService    $categoryAdminService,
+                                BrandService            $brandService)
     {
         parent::__construct($repo);
         $this->repo                     = $repo;
         $this->tagAdminService          = $tagAdminService;
         $this->categoryAdminService     = $categoryAdminService;
         $this->cmsCronJobService        = app(CmsCronJobService::class);
+        $this->brandService             = $brandService;
     }
 
+
+    public function videoImport($input)
+    {
+        $file = $input->file('file');
+        $temp = $file->move('tmp', $file->hashName());
+        $filepath = $temp->getRealPath();
+
+        $job = new ImportVideo($filepath, $this, $this->brandService);
+        dispatch($job);
+    }
 
     public function addMapping($item, $input)
     {

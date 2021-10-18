@@ -25,6 +25,7 @@ use DaydreamLab\Cms\Resources\Item\Admin\Models\ItemContentAdminResource;
 use DaydreamLab\Cms\Resources\Item\Admin\Collections\ItemAdminListResourceCollection;
 use DaydreamLab\Cms\Resources\Item\Admin\Collections\ItemContentAdminListResourceCollection;
 use DaydreamLab\Cms\Services\Item\Admin\ItemAdminService;
+use Illuminate\Http\Request;
 use Throwable;
 
 class ItemAdminController extends CmsController
@@ -37,6 +38,18 @@ class ItemAdminController extends CmsController
         $this->service = $service;
     }
 
+
+    public function importVideo(Request $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->videoImport($request);
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
 
     public function featured(ItemAdminFeaturePost $request)
     {
