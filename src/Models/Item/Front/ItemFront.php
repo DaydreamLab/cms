@@ -8,6 +8,7 @@ use DaydreamLab\Cms\Models\Brand\Front\BrandFront;
 use DaydreamLab\Cms\Models\Tag\Front\TagFront;
 use DaydreamLab\Cms\Models\Product\Front\ProductFront;
 use DaydreamLab\JJAJ\Helpers\Helper;
+use DaydreamLab\Media\Models\File\Front\FileFront;
 
 class ItemFront extends Item
 {
@@ -72,6 +73,13 @@ class ItemFront extends Item
     {
         return $this->belongsToMany(BrandFront::class, 'brands_items_maps', 'item_id', 'brand_id')
             ->where('state', 1)
+            ->withTimestamps();
+    }
+
+
+    public function files()
+    {
+        return $this->belongsToMany(FileFront::class, 'items_files_maps', 'itemId', 'fileId', 'id', 'id')
             ->withTimestamps();
     }
 

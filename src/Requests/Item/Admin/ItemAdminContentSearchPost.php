@@ -80,7 +80,8 @@ class ItemAdminContentSearchPost extends CmsSearchRequest
             'brand_id'      => 'nullable|integer',
             'year'          => 'nullable|string',
             'document_type' => 'nullable|string',
-            'publish_up'    => 'nullable|date_format:Y-m'
+            'publish_up_start'  => 'nullable|date_format:Y-m-d',
+            'publish_up_end'    => 'nullable|date_format:Y-m-d'
         ];
         return array_merge(parent::rules(), $rules);
     }
@@ -160,12 +161,21 @@ class ItemAdminContentSearchPost extends CmsSearchRequest
         }
         $validated->forget('document_type');
         
-        if ( $publish_up = $validated->get('publish_up') ) {
-            $start = Carbon::createFromFormat('Y-m', $publish_up, $this->user()->timezone)->startOfMonth()->setTimezone('UTC');
-            $end = Carbon::createFromFormat('Y-m', $publish_up, $this->user()->timezone)->endOfMonth()->setTimezone('UTC');
-            $validated['q'] = $this->q->where('publish_up', '>=', $start)->where('publish_up', '<', $end);
+        if ( $publish_up_start = $validated->get('publish_up_start') ) {
+            $start = Carbon::createFromFormat('Y-m-d', $publish_up_start, $this->user()->timezone)->startOfDay()->setTimezone('UTC');
+            $validated['q'] = $this->q->where('publish_up', '>=', $start);
+            if ( $publish_up_end = $validated->get('publish_up_end') ) {
+                $end = Carbon::createFromFormat('Y-m-d', $publish_up_end, $this->user()->timezone)->endOfDay()->setTimezone('UTC');
+                $validated['q'] = $this->q->where('publish_up', '<', $end);
+            }
         }
-        $validated->forget('publish_up');
+
+        if ( !$publish_up_start && $publish_up_end = $validated->get('publish_up_end') ) {
+            $end = Carbon::createFromFormat('Y-m-d', $publish_up_end, $this->user()->timezone)->endOfDay()->setTimezone('UTC');
+            $validated['q'] = $this->q->where('publish_up', '<', $end);
+        }
+        $validated->forget('publish_up_start');
+        $validated->forget('publish_up_end');
         
         return $validated;
     }
