@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Services\Item\Admin;
 
+use DaydreamLab\Cms\Jobs\ImportPromation;
 use DaydreamLab\Cms\Jobs\ImportVideo;
 use DaydreamLab\Cms\Models\Extrafield\Extrafield;
 use DaydreamLab\Cms\Models\Extrafield\ExtrafieldValue;
@@ -42,7 +43,7 @@ class ItemAdminService extends ItemService
     }
 
 
-    public function videoImport($input)
+    public function importVideo($input)
     {
         $file = $input->file('file');
         $temp = $file->move('tmp', $file->hashName());
@@ -51,6 +52,19 @@ class ItemAdminService extends ItemService
         $job = new ImportVideo($filepath, $this, $this->brandService);
         dispatch($job);
     }
+
+
+    public function importPromotion($input)
+    {
+
+        $file = $input->file('file');
+        $temp = $file->move('tmp', $file->hashName());
+        $filepath = $temp->getRealPath();
+
+        $job = new ImportPromation($filepath, $this, $this->brandService);
+        dispatch($job);
+    }
+
 
     public function addMapping($item, $input)
     {
