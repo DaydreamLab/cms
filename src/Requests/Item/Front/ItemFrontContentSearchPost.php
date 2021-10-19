@@ -49,9 +49,9 @@ class ItemFrontContentSearchPost extends CmsSearchRequest
             'content_type'  => 'nullable|string',
             'brand_alias'   => 'nullable|array',
             'brand_alias.*' => 'required|string',
-            'solution_category_alias' => 'nullable|array',
+            'solution_category_alias'   => 'nullable|array',
             'solution_category_alias.*' => 'required|string',
-            'industry_category_alias' => 'nullable|array',
+            'industry_category_alias'   => 'nullable|array',
             'industry_category_alias.*' => 'required|string',
             'search_date'   => 'nullable|string'
         ];

@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Resources\Brand\Front\Models;
 
 use DaydreamLab\JJAJ\Resources\BaseJsonResource;
+use DaydreamLab\Media\Resources\File\Front\Collections\FileFrontSearchResourceCollection;
 
 class BrandFrontResource extends BaseJsonResource
 {
@@ -38,7 +39,7 @@ class BrandFrontResource extends BaseJsonResource
             'items'                 => $items,
             'products'              => $this->products,
             'tags'                  => $this->tags,
-            'files'                 => $this->files
+            'files'                 => (new FileFrontSearchResourceCollection($this->files))->collection
         ];
     }
 }
