@@ -15,7 +15,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Str;
 
-class ImportVideo implements ShouldQueue
+class ImportBulletin implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -54,15 +54,15 @@ class ImportVideo implements ShouldQueue
         $sheet = $spreadsheet->getSheet(0);
         $rows = $sheet->getHighestRow();
 
-        for ($i = 4; $i <= $rows; $i++) {
+        for ($i = 3; $i <= $rows; $i++) {
             $rowData = $this->getXlsxRowData($sheet, $i);
 
             // 創建獲取的資料
-            $brand = $this->firstOrCreateBrand($rowData[1]);
-            $videoItem = $this->firstOrCreateVideoItem($rowData);
+            $brand = $this->firstOrCreateBrand($rowData[2]);
+            $bulletin = $this->firstOrCreateBulletinItem($rowData);
 
             // 更新關聯
-            $videoItem->brands()->sync([$brand->id]);
+            $bulletin->brands()->sync([$brand->id]);
         }
 
         // 刪除暫存檔
@@ -84,34 +84,35 @@ class ImportVideo implements ShouldQueue
         return $brand;
     }
 
-    private function firstOrCreateVideoItem($rowData)
+    private function firstOrCreateBulletinItem($rowData)
     {
-
-        $video = $this->itemAdminService->getModel()
+        $bulletin = $this->itemAdminService->getModel()
             ->where('title', $rowData[0])
-            ->where('category_id', 8)
+            ->where('category_id', 6)
             ->first();
 
-        if (! $video) {
-            $video = $this->itemAdminService->store(collect([
-                'content_type' => 'video',
+
+        if (! $bulletin) {
+            $bulletin = $this->itemAdminService->store(collect([
+                'content_type' => 'bulletin',
+                "language" => "*",
                 'title' => $rowData[0],
                 'alias' => Str::uuid()->getHex(),
-                'category_id' => 8,
-                'state' =>  $rowData[5] == '發佈中' ? 1 : 0,
+                'category_id' => 6,
+                'state' =>  $rowData[4] == '發佈中' ? 1 : 0,
                 'params' => ["meta" => [ "titel" => "", "keyword" => "", "description" => ""], "seo" => []],
-                'publish_up' => substr($rowData[4], 0, 4) . '-' . substr($rowData[4], 4, 2) . '-' . substr($rowData[4], 6, 2),
-                'description' => html_entity_decode(preg_replace('/_x([0-9a-fA-F]{4})_/', '&#x$1;', $rowData[3])),
+                'publish_up' => substr($rowData[3], 0, 4) . '-' . substr($rowData[3], 4, 2) . '-' . substr($rowData[3], 6, 2),
+                'description' => html_entity_decode(preg_replace('/_x([0-9a-fA-F]{4})_/', '&#x$1;', $rowData[5])),
                 'extrafields' => [
                     [
-                    'alias' => 'youtube_url',
-                    'value' => $rowData[2]
-                        ]
+                        'alias' => 'subtitle',
+                        'value' => $rowData[1]
+                    ]
                 ]
             ]));
         }
 
-        return $video;
+        return $bulletin;
     }
 
 

@@ -136,7 +136,7 @@ class ItemFrontService extends ItemService
     {
         $item = parent::getItem($id);
 
-        $this->canAccess($item->access, $this->access_ids);
+        $this->canAccess($item->access);
 
         if ($item)
         {
@@ -172,7 +172,7 @@ class ItemFrontService extends ItemService
             $this->status   = 'GetItemSuccess';
             $this->response = $item;
         } else {
-            $this->throwResponse('ItemNotExist', ['alias' => $input->get('alias')]);
+            throw new NotFoundException('ItemNotExist', ['alias' => $input->get('alias')]);
         }
 
         return $this->response;
@@ -434,6 +434,33 @@ class ItemFrontService extends ItemService
     }
 
 
+    /**
+     * 處理精選文章耕非精選文章 response and paginate 資料
+     * @param $featured
+     * @param $notFeatured
+     * @param $page
+     * @param $limit
+     * @return Collection
+     */
+    public function handleFeaturedAndNotFeaturedResponse($featured, $notFeatured, $page, $limit)
+    {
+        $paginateFeatured = $this->repo->paginate($featured, $limit, $page ?: 1, []);
+        $featuredData = collect($paginateFeatured->items())->buildContentResourceData();
+
+        $paginateNotFeatured = $this->repo->paginate($notFeatured, $limit, $page ?: 1, []);
+        $notFeaturedData = collect($paginateNotFeatured->items())->buildContentResourceData();
+
+        $paginateNotFeaturedToArray = $paginateNotFeatured->toArray();
+        unset($paginateNotFeaturedToArray['data']);
+
+        return collect([
+            'featured' => $featuredData,
+            'items' => $notFeaturedData,
+            'pagination' => $paginateNotFeaturedToArray
+        ]);
+    }
+
+
     public function homepage()
     {
         Collection::macro('filterHomepageShow', function () {
@@ -443,10 +470,13 @@ class ItemFrontService extends ItemService
         });
 
         $slideshow = $this->searchContent(collect(['content_type' => 'slideshow', 'limit' => 0, 'q' => new QueryCapsule()]));
-        $promotion = $this->searchContent(collect(['content_type' => 'promotion', 'limit' => 0, 'q' => new QueryCapsule()]))
-            ->filterHomepageShow()->buildContentResourceData();
-        $bulletin = $this->searchContent(collect(['content_type' => 'bulletin', 'limit' => 0, 'q' => new QueryCapsule()]))
-            ->filterHomepageShow()->buildContentResourceData();
+        $promotion = $this->searchContent(collect(['content_type' => 'promotion', 'limit' => 6, 'q' => new QueryCapsule()]))
+            ->filterHomepageShow()
+            ->buildContentResourceData();
+        $bulletin = $this->searchContent(collect(['content_type' => 'bulletin', 'limit' => 6, 'q' => new QueryCapsule()]))
+            ->filterHomepageShow()
+            ->buildContentResourceData();
+
         $this->response = [
             'slideshow' => $slideshow,
             'promotion' => $promotion,
@@ -601,10 +631,8 @@ class ItemFrontService extends ItemService
             })->values();
         }
 
-        $p = $this->repo->paginate($notFeatured, $limit, $page ?: 1, [])->toArray();
-        $data = $p['data'];
-        unset($p['data']);
-        $this->response = collect(['featured' => $featured, 'items' => $data, 'pagination' => $p]);
+        $this->response = $this->handleFeaturedAndNotFeaturedResponse($featured, $notFeatured, $page ?: 1, $limit);
+
         return $this->response;
     }
 
@@ -646,10 +674,8 @@ class ItemFrontService extends ItemService
             })->values();
         }
 
-        $p = $this->repo->paginate($notFeatured, $limit, $page ?: 1, [])->toArray();
-        $data = $p['data'];
-        unset($p['data']);
-        $this->response = collect(['featured' => $featured, 'items' => $data, 'pagination' => $p]);
+        $this->response = $this->handleFeaturedAndNotFeaturedResponse($featured, $notFeatured, $page ?: 1, $limit);
+
         return $this->response;
     }
 
@@ -674,10 +700,8 @@ class ItemFrontService extends ItemService
             })->values();
         }
 
-        $p = $this->repo->paginate($notFeatured, $limit, $page ?: 1, [])->toArray();
-        $data = $p['data'];
-        unset($p['data']);
-        $this->response = collect(['featured' => $featured, 'items' => $data, 'pagination' => $p]);
+        $this->response = $this->handleFeaturedAndNotFeaturedResponse($featured, $notFeatured, $page ?: 1, $limit);
+
         return $this->response;
     }
 
@@ -782,12 +806,13 @@ class ItemFrontService extends ItemService
 
         $params = $input->toArray();
         $params['featured'] = 0;
-        $notFeatured = $this->searchContent(collect($params), false)->buildContentResourceData();
+
+        $notFeatured = $this->searchContent(collect($params), false);
 
         unset($params['brand_alias']);
         $params['q'] = new QueryCapsule();
         $params['featured'] = 1;
-        $featured = $this->searchContent(collect($params), false)->buildContentResourceData();
+        $featured = $this->searchContent(collect($params), false);
 
         return [
             $featured->sortBy(function ($f) {

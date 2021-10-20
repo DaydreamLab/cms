@@ -70,14 +70,10 @@ class ImportBrand implements ShouldQueue
             $product = $this->firstOrCreateProduct($rowData, $productCategory);
 
             // 更新關聯
-            $oldProductBrand = $product->brands()->first();
-
-            if (! $oldProductBrand) {
-                $product->brands()->attach($brand->id);
-            }
+            $product->brands()->sync([$brand->id]);
 
             if (! $product->productCategories->where('id', $productCategory->id)->first()) {
-                $product->productCategories()->attach($productCategory->id);
+                $product->productCategories()->sync([$productCategory->id]);
             }
         }
 

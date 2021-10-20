@@ -43,13 +43,40 @@ class ItemAdminController extends CmsController
     {
         $this->service->setUser($request->user('api'));
         try {
-            $this->service->videoImport($request);
+            $this->service->importVideo($request);
         } catch (Throwable $t) {
             $this->handleException($t);
         }
 
         return $this->response($this->service->status, $this->service->response);
     }
+
+
+    public function importPromotion(Request $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->importPromotion($request);
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
+
+    public function importBulletin(Request $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->importBulletin($request);
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
 
     public function featured(ItemAdminFeaturePost $request)
     {

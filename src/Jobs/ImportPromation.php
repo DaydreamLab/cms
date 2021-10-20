@@ -15,7 +15,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Str;
 
-class ImportVideo implements ShouldQueue
+class ImportPromation implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -53,16 +53,15 @@ class ImportVideo implements ShouldQueue
         $spreadsheet = $reader->load($this->filePath);
         $sheet = $spreadsheet->getSheet(0);
         $rows = $sheet->getHighestRow();
-
-        for ($i = 4; $i <= $rows; $i++) {
+        for ($i = 3; $i <= $rows; $i++) {
             $rowData = $this->getXlsxRowData($sheet, $i);
 
             // 創建獲取的資料
-            $brand = $this->firstOrCreateBrand($rowData[1]);
-            $videoItem = $this->firstOrCreateVideoItem($rowData);
+            $brand = $this->firstOrCreateBrand($rowData[2]);
+            $promotion = $this->firstOrCreatePromotionItem($rowData);
 
             // 更新關聯
-            $videoItem->brands()->sync([$brand->id]);
+            $promotion->brands()->sync([$brand->id]);
         }
 
         // 刪除暫存檔
@@ -84,34 +83,49 @@ class ImportVideo implements ShouldQueue
         return $brand;
     }
 
-    private function firstOrCreateVideoItem($rowData)
+    private function firstOrCreatePromotionItem($rowData)
     {
-
-        $video = $this->itemAdminService->getModel()
+        $promotion = $this->itemAdminService->getModel()
             ->where('title', $rowData[0])
-            ->where('category_id', 8)
+            ->where('category_id', 7)
             ->first();
+        if ($rowData[5] != null) {
+            $rowData[5]  = str_replace('/', '-', $rowData[5]) . ' 00:00:00';
+        }
 
-        if (! $video) {
-            $video = $this->itemAdminService->store(collect([
-                'content_type' => 'video',
+        if ($rowData[6] != null) {
+            $rowData[6] = str_replace('/', '-', $rowData[6]) . ' 00:00:00';
+        }
+
+        if (! $promotion) {
+            $promotion = $this->itemAdminService->store(collect([
+                'content_type' => 'promotion',
+                "language" => "*",
                 'title' => $rowData[0],
                 'alias' => Str::uuid()->getHex(),
-                'category_id' => 8,
-                'state' =>  $rowData[5] == '發佈中' ? 1 : 0,
+                'category_id' => 7,
+                'state' =>  $rowData[3] == '發佈中' ? 1 : 0,
                 'params' => ["meta" => [ "titel" => "", "keyword" => "", "description" => ""], "seo" => []],
                 'publish_up' => substr($rowData[4], 0, 4) . '-' . substr($rowData[4], 4, 2) . '-' . substr($rowData[4], 6, 2),
-                'description' => html_entity_decode(preg_replace('/_x([0-9a-fA-F]{4})_/', '&#x$1;', $rowData[3])),
+                'description' => html_entity_decode(preg_replace('/_x([0-9a-fA-F]{4})_/', '&#x$1;', $rowData[7])),
                 'extrafields' => [
                     [
-                    'alias' => 'youtube_url',
-                    'value' => $rowData[2]
-                        ]
+                        'alias' => 'subtitle',
+                        'value' => $rowData[2]
+                    ],
+                    [
+                        "alias" => "register_start",
+                        "value" => $rowData[5]
+                    ],
+                    [
+                        "alias" => "register_end",
+                        "value" => $rowData[6]
+                    ]
                 ]
             ]));
         }
 
-        return $video;
+        return $promotion;
     }
 
 
