@@ -92,24 +92,43 @@ class ImportVideo implements ShouldQueue
             ->where('category_id', 8)
             ->first();
 
-        if (! $video) {
-            $video = $this->itemAdminService->store(collect([
-                'content_type' => 'video',
-                'title' => $rowData[0],
-                'alias' => Str::uuid()->getHex(),
-                'category_id' => 8,
-                'state' =>  $rowData[5] == '發佈中' ? 1 : 0,
-                'params' => ["meta" => [ "titel" => "", "keyword" => "", "description" => ""], "seo" => []],
-                'publish_up' => substr($rowData[4], 0, 4) . '-' . substr($rowData[4], 4, 2) . '-' . substr($rowData[4], 6, 2),
-                'description' => html_entity_decode(preg_replace('/_x([0-9a-fA-F]{4})_/', '&#x$1;', $rowData[3])),
-                'extrafields' => [
-                    [
+        $data = collect([
+            'content_type' => 'video',
+            'title' => $rowData[0],
+            'category_id' => 8,
+            'state' =>  $rowData[5] == '發佈中' ? 1 : 0,
+            'publish_up' => substr($rowData[4], 0, 4) . '-' . substr($rowData[4], 4, 2) . '-' . substr($rowData[4], 6, 2),
+            'description' => html_entity_decode(preg_replace('/_x([0-9a-fA-F]{4})_/', '&#x$1;', $rowData[3])),
+            'extrafields' => [
+                [
                     'alias' => 'youtube_url',
                     'value' => $rowData[2]
-                        ]
                 ]
-            ]));
+            ]
+        ]);
+
+        // 如果有抓到舊資料改成更新舊資料資訊
+        if ($video) {
+            $data->put('id', $video->id);
+            $data->put('params', $video->params);
+        } else {
+            $data->put('alias', Str::uuid()->getHex());
+            $data->put('params', [
+                'meta' => [
+                    'title' => '',
+                    'keywords' => '',
+                    'description' => '',
+                ],
+                'seo' => []
+            ]);
         }
+
+        $this->itemAdminService->store($data);
+
+        $video = $this->itemAdminService->getModel()
+            ->where('title', $rowData[0])
+            ->where('category_id', 8)
+            ->first();
 
         return $video;
     }

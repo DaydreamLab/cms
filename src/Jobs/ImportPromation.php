@@ -97,34 +97,51 @@ class ImportPromation implements ShouldQueue
             $rowData[6] = str_replace('/', '-', $rowData[6]) . ' 00:00:00';
         }
 
-        if (! $promotion) {
-            $promotion = $this->itemAdminService->store(collect([
-                'content_type' => 'promotion',
-                "language" => "*",
-                'title' => $rowData[0],
-                'alias' => Str::uuid()->getHex(),
-                'category_id' => 7,
-                'state' =>  $rowData[3] == '發佈中' ? 1 : 0,
-                'params' => ["meta" => [ "titel" => "", "keyword" => "", "description" => ""], "seo" => []],
-                'publish_up' => substr($rowData[4], 0, 4) . '-' . substr($rowData[4], 4, 2) . '-' . substr($rowData[4], 6, 2),
-                'description' => html_entity_decode(preg_replace('/_x([0-9a-fA-F]{4})_/', '&#x$1;', $rowData[7])),
-                'extrafields' => [
-                    [
-                        'alias' => 'subtitle',
-                        'value' => $rowData[2]
-                    ],
-                    [
-                        "alias" => "register_start",
-                        "value" => $rowData[5]
-                    ],
-                    [
-                        "alias" => "register_end",
-                        "value" => $rowData[6]
-                    ]
+        $data = collect([
+            'content_type' => 'promotion',
+            "language" => "*",
+            'title' => $rowData[0],
+            'category_id' => 7,
+            'state' =>  $rowData[3] == '發佈中' ? 1 : 0,
+            'publish_up' => substr($rowData[4], 0, 4) . '-' . substr($rowData[4], 4, 2) . '-' . substr($rowData[4], 6, 2),
+            'description' => html_entity_decode(preg_replace('/_x([0-9a-fA-F]{4})_/', '&#x$1;', $rowData[7])),
+            'extrafields' => [
+                [
+                    'alias' => 'subtitle',
+                    'value' => $rowData[2]
+                ],
+                [
+                    "alias" => "register_start",
+                    "value" => $rowData[5]
+                ],
+                [
+                    "alias" => "register_end",
+                    "value" => $rowData[6]
                 ]
-            ]));
+            ]
+        ]);
+
+        // 如果有抓到舊資料改成更新舊資料資訊
+        if ($promotion) {
+            $data->put('id', $promotion->id);
+            $data->put('params', $promotion->params);
+        } else {
+            $data->put('alias', Str::uuid()->getHex());
+            $data->put('params', [
+                'meta' => [
+                    'title' => '',
+                    'keywords' => '',
+                    'description' => '',
+                ],
+                'seo' => []
+            ]);
         }
 
+        $this->itemAdminService->store($data);
+        $promotion = $this->itemAdminService->getModel()
+            ->where('title', $rowData[0])
+            ->where('category_id', 7)
+            ->first();
         return $promotion;
     }
 

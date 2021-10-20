@@ -115,8 +115,7 @@ class ImportBrand implements ShouldQueue
 
     private function firstOrCreateProduct($rowData, $productCategory)
     {
-//        dump('processing ' . $rowData[3]);
-        $productRecord = [
+        $data = collect([
             'title' => $rowData[2],
             'product_category_id' => $productCategory->id,
             'product_data' => [[
@@ -134,32 +133,34 @@ class ImportBrand implements ShouldQueue
                 'unlimitPhoneSupportAmt' => $rowData[15],
                 'level' => $rowData[16],
                 'renew' => $rowData[17]
-            ]],
-            'params' => [
+            ]]
+        ]);
+
+        $product = $this->productService->getModel()
+            ->where('title', $data['title'])
+            ->first();
+
+        // 如果有抓到舊資料改成更新舊資料資訊
+        if ($product) {
+            $data->put('id', $product->id);
+            $data->put('params', $product->params);
+        } else {
+            $data->put('alias', Str::uuid()->getHex());
+            $data->put('params', [
                 'meta' => [
                     'title' => '',
                     'keywords' => '',
                     'description' => '',
                 ],
                 'seo' => []
-            ]
-        ];
-
-        $product = $this->productService->getModel()->where('title', $productRecord['title'])->first();
-
-        if (! $product) {
-//            dump('產品系列不存在 建立一比新紀錄');
-            // 新增紀錄
-            $productRecord['alias'] = Str::uuid()->getHex();
-            $this->productService->store(collect($productRecord));
-            $product = $this->productService->getModel()->where('title', $productRecord['title'])->first();;
-        } else {
-//            dump('產品系列已存在 插入產品資訊');
-            $productData = $product->product_data;
-            $productData[] = $productRecord['product_data'][0];
-            $product->product_data = $productData;
-            $product->save();
+            ]);
         }
+
+        $this->productService->store($data);
+
+        $product = $this->productService->getModel()
+            ->where('title', $data['title'])
+            ->first();
 
         return $product;
     }
