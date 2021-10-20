@@ -65,6 +65,19 @@ class ItemAdminController extends CmsController
     }
 
 
+    public function importBulletin(Request $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->importBulletin($request);
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
+
     public function featured(ItemAdminFeaturePost $request)
     {
         $this->service->setUser($request->user('api'));

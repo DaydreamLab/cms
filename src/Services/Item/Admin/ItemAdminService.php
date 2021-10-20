@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Services\Item\Admin;
 
+use DaydreamLab\Cms\Jobs\ImportBulletin;
 use DaydreamLab\Cms\Jobs\ImportPromation;
 use DaydreamLab\Cms\Jobs\ImportVideo;
 use DaydreamLab\Cms\Models\Extrafield\Extrafield;
@@ -62,6 +63,18 @@ class ItemAdminService extends ItemService
         $filepath = $temp->getRealPath();
 
         $job = new ImportPromation($filepath, $this, $this->brandService);
+        dispatch($job);
+    }
+
+
+    public function importBulletin($input)
+    {
+
+        $file = $input->file('file');
+        $temp = $file->move('tmp', $file->hashName());
+        $filepath = $temp->getRealPath();
+
+        $job = new ImportBulletin($filepath, $this, $this->brandService);
         dispatch($job);
     }
 
