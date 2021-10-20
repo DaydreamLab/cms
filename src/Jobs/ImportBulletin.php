@@ -62,7 +62,7 @@ class ImportBulletin implements ShouldQueue
             $bulletin = $this->firstOrCreateBulletinItem($rowData);
 
             // 更新關聯
-            $brand->items()->attach($bulletin->id);
+            $bulletin->brands()->sync([$brand->id]);
         }
 
         // 刪除暫存檔
@@ -86,7 +86,10 @@ class ImportBulletin implements ShouldQueue
 
     private function firstOrCreateBulletinItem($rowData)
     {
-        $bulletin = $this->itemAdminService->getModel()->where('title', $rowData[0])->first();
+        $bulletin = $this->itemAdminService->getModel()
+            ->where('title', $rowData[0])
+            ->where('category_id', 6)
+            ->first();
 
 
         if (! $bulletin) {

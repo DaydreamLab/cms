@@ -62,7 +62,7 @@ class ImportVideo implements ShouldQueue
             $videoItem = $this->firstOrCreateVideoItem($rowData);
 
             // 更新關聯
-            $brand->items()->attach($videoItem->id);
+            $videoItem->brands()->sync([$brand->id]);
         }
 
         // 刪除暫存檔
@@ -87,7 +87,10 @@ class ImportVideo implements ShouldQueue
     private function firstOrCreateVideoItem($rowData)
     {
 
-        $video = $this->itemAdminService->getModel()->where('title', $rowData[0])->first();
+        $video = $this->itemAdminService->getModel()
+            ->where('title', $rowData[0])
+            ->where('category_id', 8)
+            ->first();
 
         if (! $video) {
             $video = $this->itemAdminService->store(collect([

@@ -61,7 +61,7 @@ class ImportPromation implements ShouldQueue
             $promotion = $this->firstOrCreatePromotionItem($rowData);
 
             // 更新關聯
-            $brand->items()->attach($promotion->id);
+            $promotion->brands()->sync([$promotion->id]);
         }
 
         // 刪除暫存檔
@@ -85,7 +85,10 @@ class ImportPromation implements ShouldQueue
 
     private function firstOrCreatePromotionItem($rowData)
     {
-        $promotion = $this->itemAdminService->getModel()->where('title', $rowData[0])->first();
+        $promotion = $this->itemAdminService->getModel()
+            ->where('title', $rowData[0])
+            ->where('category_id', 7)
+            ->first();
         if ($rowData[5] != null) {
             $rowData[5]  = str_replace('/', '-', $rowData[5]) . ' 00:00:00';
         }
