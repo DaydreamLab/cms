@@ -102,7 +102,7 @@ class ImportBulletin implements ShouldQueue
                 'state' =>  $rowData[4] == '發佈中' ? 1 : 0,
                 'params' => ["meta" => [ "titel" => "", "keyword" => "", "description" => ""], "seo" => []],
                 'publish_up' => substr($rowData[3], 0, 4) . '-' . substr($rowData[3], 4, 2) . '-' . substr($rowData[3], 6, 2),
-                'description' => html_entity_decode($rowData[5]),
+                'description' => html_entity_decode(preg_replace('/_x([0-9a-fA-F]{4})_/', '&#x$1;', $rowData[5])),
                 'extrafields' => [
                     [
                         'alias' => 'subtitle',

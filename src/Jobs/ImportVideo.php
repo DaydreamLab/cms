@@ -101,7 +101,7 @@ class ImportVideo implements ShouldQueue
                 'state' =>  $rowData[5] == '發佈中' ? 1 : 0,
                 'params' => ["meta" => [ "titel" => "", "keyword" => "", "description" => ""], "seo" => []],
                 'publish_up' => substr($rowData[4], 0, 4) . '-' . substr($rowData[4], 4, 2) . '-' . substr($rowData[4], 6, 2),
-                'description' => $rowData[3],
+                'description' => html_entity_decode(preg_replace('/_x([0-9a-fA-F]{4})_/', '&#x$1;', $rowData[3])),
                 'extrafields' => [
                     [
                     'alias' => 'youtube_url',
