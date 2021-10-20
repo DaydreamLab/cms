@@ -22,7 +22,7 @@ class NewsletterSubscriptionAdminListResource extends BaseJsonResource
                 return $g->only(['id', 'title']);
             }) : [],
             'name'              => ($this->user) ? $this->user->name : '',
-            'phone'             => ($this->user) ? $this->user->phoneCode.$this->user->phone : '',
+            'phone'             => ($this->user) ? $this->user->mobilePhoneCode.$this->user->mobilePhone : '',
             'newsletterCategories' => $this->newsletterCategories->map(function ($n) {
                 return $n->only(['id', 'alias', 'title']);
             }),

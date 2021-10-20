@@ -209,6 +209,8 @@ Route::get('api/admin/newsletter/{id}', [NewsletterAdminController::class, 'getI
     ->middleware(['expired', 'admin']);
 
 # 電子報訂閱
+Route::post('api/admin/newsletter/subscription/export', [NewsletterSubscriptionAdminController::class, 'export'])
+    ->middleware(['expired', 'admin']);
 Route::post('api/admin/newsletter/subscription/remove', [NewsletterSubscriptionAdminController::class, 'remove'])
     ->middleware(['expired', 'admin']);
 Route::post('api/admin/newsletter/subscription/restore', [NewsletterSubscriptionAdminController::class, 'restore'])
