@@ -67,8 +67,8 @@ class Extrafield extends BaseModel
      * @var array
      */
     protected $appends = [
-        'access_title',
-        'group_title',
+        //'access_title',
+        //'group_title',
         //'creator',
         //'updater',
         //'locker',

@@ -136,7 +136,7 @@ class ItemFrontService extends ItemService
     {
         $item = parent::getItem($id);
 
-        $this->canAccess($item->access, $this->access_ids);
+        $this->canAccess($item->access);
 
         if ($item)
         {
@@ -172,7 +172,7 @@ class ItemFrontService extends ItemService
             $this->status   = 'GetItemSuccess';
             $this->response = $item;
         } else {
-            $this->throwResponse('ItemNotExist', ['alias' => $input->get('alias')]);
+            throw new NotFoundException('ItemNotExist', ['alias' => $input->get('alias')]);
         }
 
         return $this->response;
@@ -443,10 +443,13 @@ class ItemFrontService extends ItemService
         });
 
         $slideshow = $this->searchContent(collect(['content_type' => 'slideshow', 'limit' => 0, 'q' => new QueryCapsule()]));
-        $promotion = $this->searchContent(collect(['content_type' => 'promotion', 'limit' => 0, 'q' => new QueryCapsule()]))
-            ->filterHomepageShow()->buildContentResourceData();
-        $bulletin = $this->searchContent(collect(['content_type' => 'bulletin', 'limit' => 0, 'q' => new QueryCapsule()]))
-            ->filterHomepageShow()->buildContentResourceData();
+        $promotion = $this->searchContent(collect(['content_type' => 'promotion', 'limit' => 6, 'q' => new QueryCapsule()]))
+            ->filterHomepageShow()
+            ->buildContentResourceData();
+        $bulletin = $this->searchContent(collect(['content_type' => 'bulletin', 'limit' => 6, 'q' => new QueryCapsule()]))
+            ->filterHomepageShow()
+            ->buildContentResourceData();
+
         $this->response = [
             'slideshow' => $slideshow,
             'promotion' => $promotion,
