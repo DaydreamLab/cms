@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Controllers\NewsletterSubscription\Admin;
 
 use DaydreamLab\Cms\Controllers\CmsController;
+use DaydreamLab\Cms\Requests\NewsletterSubscription\Admin\NewsletterSubscriptionAdminExportRequest;
 use DaydreamLab\Cms\Requests\NewsletterSubscription\Admin\NewsletterSubscriptionAdminGetItemRequest;
 use DaydreamLab\Cms\Requests\NewsletterSubscription\Admin\NewsletterSubscriptionAdminSearchRequest;
 use DaydreamLab\Cms\Requests\NewsletterSubscription\Admin\NewsletterSubscriptionAdminRemoveRequest;
@@ -22,6 +23,12 @@ class NewsletterSubscriptionAdminController extends CmsController
     {
         parent::__construct($service);
         $this->service = $service;
+    }
+
+
+    public function export(NewsletterSubscriptionAdminExportRequest $request)
+    {
+        return $this->service->export($request->validated());
     }
 
 

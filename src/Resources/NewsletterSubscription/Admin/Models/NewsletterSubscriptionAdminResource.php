@@ -27,7 +27,6 @@ class NewsletterSubscriptionAdminResource extends BaseJsonResource
             'district'          => ($this->user) ? $this->user->district : '',
             'address'           => ($this->user) ? $this->user->address : '',
             'zipcode'           => ($this->user) ? $this->user->zipcode : '',
-            'phone'             => ($this->user) ? $this->user->phoneCode.$this->user->phone : '',
             'mobilePhone'       => ($this->user) ? $this->user->mobilePhoneCode.$this->user->mobilePhone : '',
             'newsletterCategories' => $this->newsletterCategories->map(function ($n) {
                 return $n->only(['id', 'alias', 'title']);
