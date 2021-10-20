@@ -43,7 +43,7 @@ class ItemAdminController extends CmsController
     {
         $this->service->setUser($request->user('api'));
         try {
-            $this->service->videoImport($request);
+            $this->service->importVideo($request);
         } catch (Throwable $t) {
             $this->handleException($t);
         }
