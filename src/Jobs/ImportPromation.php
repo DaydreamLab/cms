@@ -61,7 +61,7 @@ class ImportPromation implements ShouldQueue
             $promotion = $this->firstOrCreatePromotionItem($rowData);
 
             // 更新關聯
-            $promotion->brands()->sync([$promotion->id]);
+            $promotion->brands()->sync([$brand->id]);
         }
 
         // 刪除暫存檔
