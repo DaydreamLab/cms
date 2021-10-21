@@ -69,7 +69,6 @@ class ImportCase implements ShouldQueue
 
             // 更新關聯
             $case->brands()->sync($brands->pluck('id'));
-            dd('success');
         }
 
         // 刪除暫存檔
