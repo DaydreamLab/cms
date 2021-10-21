@@ -49,9 +49,8 @@ class ImportMemorabilia implements ShouldQueue
         $spreadsheet = $reader->load($this->filePath);
         $sheet = $spreadsheet->getSheet(0);
         $rows = $sheet->getHighestRow();
-        for ($i = 2; $i <= $rows; $i++) {
+        for ($i = 3; $i <= $rows; $i++) {
             $rowData = $this->getXlsxRowData($sheet, $i);
-
             // 創建或更新資料
             $this->firstOrCreateMemorabilia($rowData);
         }
