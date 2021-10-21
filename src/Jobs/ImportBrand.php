@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Jobs;
 
 use DaydreamLab\Cms\Repositories\Brand\Admin\BrandAdminRepository;
+use DaydreamLab\Cms\Services\Brand\Admin\BrandAdminService;
 use DaydreamLab\Cms\Services\Brand\BrandService;
 use DaydreamLab\Cms\Services\Product\ProductService;
 use DaydreamLab\Cms\Services\ProductCategory\ProductCategoryService;
@@ -19,8 +20,6 @@ class ImportBrand implements ShouldQueue
 
     protected $filePath;
 
-    protected $repo;
-
     protected $productCategoryRepo;
 
     protected $productCategoryService;
@@ -36,17 +35,17 @@ class ImportBrand implements ShouldQueue
      */
     public function __construct(
         $filePath,
-        BrandAdminRepository $repo,
         ProductCategoryService $productCategoryService,
         ProductService $productService,
-        BrandService  $brandService
+        BrandAdminService  $brandService
     )
     {
         $this->filePath = $filePath;
-        $this->repo = $repo;
+        $this->brandService = $brandService;
         $this->productCategoryService = $productCategoryService;
         $this->productService = $productService;
-        $this->brandService = $brandService;
+        $this->productCategoryService->setUser($this->brandService->getUser());
+        $this->productService->setUser($this->brandService->getUser());
     }
 
     /**
@@ -84,7 +83,6 @@ class ImportBrand implements ShouldQueue
     private function firstOrCreateBrand($title)
     {
         $brand = $this->brandService->getModel()->where('title', $title)->first();
-
         if (! $brand) {
             $brand = $this->brandService->store(collect([
                 'title' => $title,
@@ -140,10 +138,23 @@ class ImportBrand implements ShouldQueue
             ->where('title', $data['title'])
             ->first();
 
-        // 如果有抓到舊資料改成更新舊資料資訊
+        // 系列存在
         if ($product) {
             $data->put('id', $product->id);
             $data->put('params', $product->params);
+
+            $oldProductIndex = array_search($data->get('product_data')[0]['title'], array_column($product->product_data, 'title'));
+            $product_data = $product->product_data;
+            if ($oldProductIndex === false) {
+                // 產品不存在使用 append
+                $product_data[] = $data->get('product_data')[0];
+
+            } else {
+                // 產品存在使用 update
+                $product_data[$oldProductIndex] = $data->get('product_data')[0];
+            }
+            $data->put('product_data', $product_data);
+
         } else {
             $data->put('alias', Str::uuid()->getHex());
             $data->put('params', [

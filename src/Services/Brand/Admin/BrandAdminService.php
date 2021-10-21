@@ -19,20 +19,17 @@ class BrandAdminService extends BrandService
 
     protected $productService;
 
-    protected $brandService;
 
     public function __construct(
         BrandAdminRepository $repo,
         ProductCategoryService $productCategoryService,
-        ProductService $productService,
-        BrandService  $brandService
+        ProductService $productService
     )
     {
         parent::__construct($repo);
         $this->repo = $repo;
         $this->productCategoryService = $productCategoryService;
         $this->productService = $productService;
-        $this->brandService = $brandService;
     }
 
 
@@ -56,8 +53,7 @@ class BrandAdminService extends BrandService
         $file = $input->file('file');
         $temp = $file->move('tmp', $file->hashName());
         $filePath = $temp->getRealPath();
-
-        $job = new ImportBrand($filePath, $this->repo, $this->productCategoryService, $this->productService, $this->brandService);
+        $job = new ImportBrand($filePath, $this->productCategoryService, $this->productService, $this);
 
         dispatch($job);
 

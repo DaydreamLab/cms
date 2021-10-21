@@ -39,6 +39,7 @@ class ImportVideo implements ShouldQueue
         $this->filePath = $filePath;
         $this->itemAdminService = $itemAdminService;
         $this->brandService = $brandService;
+        $this->brandService->setUser($this->itemAdminService->getUser());
     }
 
     /**
@@ -111,6 +112,7 @@ class ImportVideo implements ShouldQueue
         if ($video) {
             $data->put('id', $video->id);
             $data->put('params', $video->params);
+            $data->put('ordering', $video->ordering);
         } else {
             $data->put('alias', Str::uuid()->getHex());
             $data->put('params', [

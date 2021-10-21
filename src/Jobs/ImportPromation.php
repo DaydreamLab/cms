@@ -39,6 +39,7 @@ class ImportPromation implements ShouldQueue
         $this->filePath = $filePath;
         $this->itemAdminService = $itemAdminService;
         $this->brandService = $brandService;
+        $this->brandService->setUser($this->itemAdminService->getUser());
     }
 
     /**
@@ -125,6 +126,7 @@ class ImportPromation implements ShouldQueue
         if ($promotion) {
             $data->put('id', $promotion->id);
             $data->put('params', $promotion->params);
+            $data->put('ordering', $promotion->ordering);
         } else {
             $data->put('alias', Str::uuid()->getHex());
             $data->put('params', [
