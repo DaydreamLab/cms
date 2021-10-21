@@ -70,10 +70,7 @@ class ImportBrand implements ShouldQueue
 
             // 更新關聯
             $product->brands()->sync([$brand->id]);
-
-            if (! $product->productCategories->where('id', $productCategory->id)->first()) {
-                $product->productCategories()->sync([$productCategory->id]);
-            }
+            $product->productCategories()->sync([$productCategory->id]);
         }
 
         // 刪除暫存檔
@@ -86,8 +83,8 @@ class ImportBrand implements ShouldQueue
         if (! $brand) {
             $brand = $this->brandService->store(collect([
                 'title' => $title,
-                'alias' => $title,
-                'params' => ["meta" => [ "titel" => "", "keyword" => "", "description" => ""], "seo" => []],
+                'alias' => Str::uuid()->getHex(),
+                'params' => ["meta" => [ "title" => "", "keywords" => "", "description" => ""], "seo" => []],
             ]));
         }
 
@@ -102,8 +99,8 @@ class ImportBrand implements ShouldQueue
         if (! $productCategory) {
             $productCategory = $this->productCategoryService->store(collect([
                 'title' => $title,
-                'alias' => $title,
-                'params' => ["meta" => [ "titel" => "", "keyword" => "", "description" => ""], "seo" => []],
+                'alias' => Str::uuid()->getHex(),
+                'params' => ["meta" => [ "title" => "", "keywords" => "", "description" => ""], "seo" => []],
             ]));
         }
 
@@ -165,6 +162,7 @@ class ImportBrand implements ShouldQueue
                 ],
                 'seo' => []
             ]);
+            $data->put('publish_up', now()->timezone('UTC')->format('Y-m-d H:i:s'));
         }
 
         $this->productService->store($data);

@@ -77,8 +77,8 @@ class ImportVideo implements ShouldQueue
         if (! $brand) {
             $brand = $this->brandService->store(collect([
                 'title' => $title,
-                'alias' => $title,
-                'params' => ["meta" => [ "titel" => "", "keyword" => "", "description" => ""], "seo" => []]
+                'alias' => Str::uuid()->getHex(),
+                'params' => ["meta" => [ "title" => "", "keywords" => "", "description" => ""], "seo" => []]
             ]));
         }
 

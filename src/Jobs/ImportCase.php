@@ -80,13 +80,14 @@ class ImportCase implements ShouldQueue
     {
         $result = new Collection();
         $titles = explode(',', $brandTitles);
+
         foreach ($titles as $title) {
             $brand = $this->brandService->getModel()->where('title', $title)->first();
             if (! $brand) {
                 $brand = $this->brandService->store(collect([
                     'title' => $title,
-                    'alias' => $title,
-                    'params' => ["meta" => [ "titel" => "", "keyword" => "", "description" => ""], "seo" => []]
+                    'alias' => Str::uuid()->getHex(),
+                    'params' => ["meta" => [ "title" => "", "keywords" => "", "description" => ""], "seo" => []]
                 ]));
             }
 
@@ -107,10 +108,10 @@ class ImportCase implements ShouldQueue
         if (! $industryCategory) {
             $industryCategory = $this->itemAdminService->store(collect([
                 'title' => $title,
-                'alias' => $title,
+                'alias' => Str::uuid()->getHex(),
                 'category_id' => 14,
                 "language" => "*",
-                'params' => ["meta" => [ "titel" => "", "keyword" => "", "description" => ""], "seo" => []],
+                'params' => ["meta" => [ "title" => "", "keywords" => "", "description" => ""], "seo" => []],
                 'publish_up' => now()->timezone('UTC')->format('Y-m-d H:i:s')
             ]));
         }

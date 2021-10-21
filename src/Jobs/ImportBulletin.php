@@ -77,7 +77,7 @@ class ImportBulletin implements ShouldQueue
             $brand = $this->brandService->store(collect([
                 'title' => $title,
                 'alias' => $title,
-                'params' => ["meta" => [ "titel" => "", "keyword" => "", "description" => ""], "seo" => []]
+                'params' => ["meta" => [ "title" => "", "keywords" => "", "description" => ""], "seo" => []]
             ]));
         }
         return $brand;

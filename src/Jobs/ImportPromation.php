@@ -76,8 +76,8 @@ class ImportPromation implements ShouldQueue
         if (! $brand) {
             $brand = $this->brandService->store(collect([
                 'title' => $title,
-                'alias' => $title,
-                'params' => ["meta" => [ "titel" => "", "keyword" => "", "description" => ""], "seo" => []]
+                'alias' => Str::uuid()->getHex(),
+                'params' => ["meta" => [ "title" => "", "keywords" => "", "description" => ""], "seo" => []]
             ]));
         }
 
@@ -90,6 +90,7 @@ class ImportPromation implements ShouldQueue
             ->where('title', $rowData[0])
             ->where('category_id', 7)
             ->first();
+
         if ($rowData[5] != null) {
             $rowData[5]  = str_replace('/', '-', $rowData[5]) . ' 00:00:00';
         }
@@ -140,10 +141,12 @@ class ImportPromation implements ShouldQueue
         }
 
         $this->itemAdminService->store($data);
+
         $promotion = $this->itemAdminService->getModel()
             ->where('title', $rowData[0])
             ->where('category_id', 7)
             ->first();
+
         return $promotion;
     }
 
