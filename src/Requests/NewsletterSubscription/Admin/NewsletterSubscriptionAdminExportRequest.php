@@ -7,6 +7,8 @@ use Illuminate\Validation\Rule;
 
 class NewsletterSubscriptionAdminExportRequest extends CmsSearchRequest
 {
+    protected $searchKeys = ['email'];
+
     protected $modelName = 'NewsletterSubscription';
 
     protected $needAuth = false;

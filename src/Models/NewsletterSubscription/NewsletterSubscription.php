@@ -85,4 +85,28 @@ class NewsletterSubscription extends BaseModel
     {
         return ($this->user) ? $this->user->company : null;
     }
+
+
+    public function getCompanyNameAttribute()
+    {
+        return ($this->company) ? $this->company->name : '';
+    }
+
+
+    public function getUserNameAttribute()
+    {
+        return ($this->user) ? $this->user->name : '';
+    }
+
+
+    public function getUserGroupNameAttribute()
+    {
+        return ($this->user) ? $this->user->groups->first()->title : '';
+    }
+
+
+    public function getUserMobilePhoneAttribute()
+    {
+        return ($this->user) ? $this->user->mobilePhoneCode.$this->user->mobilePhone : '';
+    }
 }

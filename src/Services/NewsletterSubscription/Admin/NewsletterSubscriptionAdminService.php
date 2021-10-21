@@ -38,8 +38,18 @@ class NewsletterSubscriptionAdminService extends NewsletterSubscriptionService
 
     public function export(Collection $input)
     {
+        $search = $input->get('search');
+        $input->forget('search');
         $input->put('limit', 0);
         $subscriptions = $this->search($input);
+
+        if ($search) {
+            $subscriptions = $subscriptions->filter(function ($s) {
+                return (strpos($s->email, $search) !== false)
+                    || (strpos($s->companyName, $search) !== false)
+                    || (strpos($s->userName, $search) !== false);
+            })->values();
+        }
 
         $spreedsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
         $sheet = $spreedsheet->getActiveSheet();
@@ -56,19 +66,20 @@ class NewsletterSubscriptionAdminService extends NewsletterSubscriptionService
             for ($i =1; $i<=count($headers); $i+=1) {
                 switch ($i) {
                     case 1:
-                        $v = ($subscription->user) ? $subscription->user->groups->first()->title : '';
+                        $v = $subscription->userGroupName;
                         break;
                     case 2:
-                        $v = ($subscription->company) ? $subscription->company->name : '';
+                        $v = $subscription->companyName;
                         break;
                     case 3:
-                        $v = ($subscription->user) ? $subscription->user->name : '';
+                        $v = $subscription->userName;
                         break;
                     case 4:
                         $v = $subscription->email;
                         break;
                     case 5:
-                        $v = ($subscription->user) ? $subscription->user->mobilePhoneCode.$subscription->user->mobilePhone : '';
+                        $v = $subscription->userMobilePhone;
+                        $sheet->getCellByColumnAndRow($i, $r);
                         break;
                     case 6:
                         $category = $subscription->newsletterCategories->map(function ($n) {
@@ -80,7 +91,8 @@ class NewsletterSubscriptionAdminService extends NewsletterSubscriptionService
                         $v = '';
                         break;
                 }
-                $sheet->setCellValueByColumnAndRow($i, $r, $v);
+                # 電話號碼也當成字串硬存
+                $sheet->setCellValueExplicitByColumnAndRow($i, $r, $v, 's');
             }
             $r+=1;
         }
