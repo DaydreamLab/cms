@@ -193,6 +193,8 @@ Route::post('api/admin/item/importBulletin', [ItemAdminController::class, 'impor
     ->middleware(['expired', 'admin']);
 Route::post('api/admin/item/importCase', [ItemAdminController::class, 'importCase'])
     ->middleware(['expired', 'admin']);
+Route::post('api/admin/item/importSolution', [ItemAdminController::class, 'importSolution'])
+    ->middleware(['expired', 'admin']);
 
 # 電子報
 Route::get('api/admin/newsletter/{id}/publish', [NewsletterAdminController::class, 'publish'])

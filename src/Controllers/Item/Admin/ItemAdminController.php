@@ -39,6 +39,19 @@ class ItemAdminController extends CmsController
     }
 
 
+    public function importSolution(Request $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->importSolution($request);
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
+
     public function importCase(Request $request)
     {
         $this->service->setUser($request->user('api'));

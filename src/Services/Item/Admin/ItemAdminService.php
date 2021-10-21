@@ -5,6 +5,7 @@ namespace DaydreamLab\Cms\Services\Item\Admin;
 use DaydreamLab\Cms\Jobs\ImportBulletin;
 use DaydreamLab\Cms\Jobs\ImportCase;
 use DaydreamLab\Cms\Jobs\ImportPromation;
+use DaydreamLab\Cms\Jobs\ImportSolution;
 use DaydreamLab\Cms\Jobs\ImportVideo;
 use DaydreamLab\Cms\Models\Extrafield\Extrafield;
 use DaydreamLab\Cms\Models\Extrafield\ExtrafieldValue;
@@ -42,6 +43,17 @@ class ItemAdminService extends ItemService
         $this->categoryAdminService     = $categoryAdminService;
         $this->cmsCronJobService        = app(CmsCronJobService::class);
         $this->brandService             = $brandService;
+    }
+
+
+    public function importSolution($input)
+    {
+        $file = $input->file('file');
+        $temp = $file->move('tmp', $file->hashName());
+        $filepath = $temp->getRealPath();
+
+        $job = new ImportSolution($filepath, $this, $this->brandService);
+        dispatch($job);
     }
 
 
