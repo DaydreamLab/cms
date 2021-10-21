@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Services\Item\Admin;
 
 use DaydreamLab\Cms\Jobs\ImportBulletin;
 use DaydreamLab\Cms\Jobs\ImportCase;
+use DaydreamLab\Cms\Jobs\ImportMemorabilia;
 use DaydreamLab\Cms\Jobs\ImportPromation;
 use DaydreamLab\Cms\Jobs\ImportSolution;
 use DaydreamLab\Cms\Jobs\ImportVideo;
@@ -43,6 +44,17 @@ class ItemAdminService extends ItemService
         $this->categoryAdminService     = $categoryAdminService;
         $this->cmsCronJobService        = app(CmsCronJobService::class);
         $this->brandService             = $brandService;
+    }
+
+
+    public function importMemorabilia($input)
+    {
+        $file = $input->file('file');
+        $temp = $file->move('tmp', $file->hashName());
+        $filepath = $temp->getRealPath();
+
+        $job = new ImportMemorabilia($filepath, $this);
+        dispatch($job);
     }
 
 
