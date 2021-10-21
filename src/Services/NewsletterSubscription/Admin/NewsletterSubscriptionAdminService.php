@@ -41,12 +41,13 @@ class NewsletterSubscriptionAdminService extends NewsletterSubscriptionService
         $search = $input->get('search');
         $input->forget('search');
         $input->put('limit', 0);
-        $subscriptions = $this->search($input);
+        $subscriptions = parent::search($input);
 
         if ($search) {
-            $subscriptions = $subscriptions->filter(function ($s) {
+            $subscriptions = $subscriptions->filter(function ($s) use ($search) {
                 return (strpos($s->email, $search) !== false)
                     || (strpos($s->companyName, $search) !== false)
+                    || (strpos($s->userMobilePhone, $search) !== false)
                     || (strpos($s->userName, $search) !== false);
             })->values();
         }
@@ -103,5 +104,28 @@ class NewsletterSubscriptionAdminService extends NewsletterSubscriptionService
         header('Content-Disposition: attachment; filename="'. urlencode($filename).'"');
         ob_clean();
         $writer->save('php://output');
+    }
+
+
+    public function search(Collection $input)
+    {
+        $page = $input->get('page');
+        $input->forget('page');
+        $search = $input->get('search');
+        $input->forget('search');
+        $limit = $input->get('limit');
+        $input->put('limit', 0);
+        $subscriptions = parent::search($input);
+
+        if ($search) {
+            $subscriptions = $subscriptions->filter(function ($s) use ($search) {
+                return (strpos($s->email, $search) !== false)
+                    || (strpos($s->companyName, $search) !== false)
+                    || (strpos($s->userMobilePhone, $search) !== false)
+                    || (strpos($s->userName, $search) !== false);
+            })->values();
+        }
+
+        $this->response = $this->repo->paginate($subscriptions, $limit, $page);
     }
 }

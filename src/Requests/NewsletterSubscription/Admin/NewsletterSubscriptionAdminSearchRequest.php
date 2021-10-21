@@ -7,6 +7,8 @@ use Illuminate\Validation\Rule;
 
 class NewsletterSubscriptionAdminSearchRequest extends CmsSearchRequest
 {
+    protected $searchKeys = ['email'];
+
     protected $modelName = 'NewsletterSubscription';
 
     protected $apiMethod = 'searchNewsletterSubscription';
