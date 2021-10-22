@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Services\Item\Admin;
 
 use DaydreamLab\Cms\Jobs\ImportBulletin;
 use DaydreamLab\Cms\Jobs\ImportCase;
+use DaydreamLab\Cms\Jobs\ImportFinance;
 use DaydreamLab\Cms\Jobs\ImportMemorabilia;
 use DaydreamLab\Cms\Jobs\ImportPromation;
 use DaydreamLab\Cms\Jobs\ImportSolution;
@@ -44,6 +45,17 @@ class ItemAdminService extends ItemService
         $this->categoryAdminService     = $categoryAdminService;
         $this->cmsCronJobService        = app(CmsCronJobService::class);
         $this->brandService             = $brandService;
+    }
+
+
+    public function importFinance($input)
+    {
+        $file = $input->file('file');
+        $temp = $file->move('tmp', $file->hashName());
+        $filepath = $temp->getRealPath();
+
+        $job = new ImportFinance($filepath, $this);
+        dispatch($job);
     }
 
 
