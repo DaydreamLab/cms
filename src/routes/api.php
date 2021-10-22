@@ -200,6 +200,10 @@ Route::post('api/admin/item/importMemorabilia', [ItemAdminController::class, 'im
     ->middleware(['expired', 'admin']);
 Route::post('api/admin/item/importFinance', [ItemAdminController::class, 'importFinance'])
     ->middleware(['expired', 'admin']);
+Route::post('api/admin/item/importStockHolder', [ItemAdminController::class, 'importStockHolder'])
+    ->middleware(['expired', 'admin']);
+Route::post('api/admin/item/importRule', [ItemAdminController::class, 'importRule'])
+    ->middleware(['expired', 'admin']);
 
 # 電子報
 Route::get('api/admin/newsletter/{id}/publish', [NewsletterAdminController::class, 'publish'])

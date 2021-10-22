@@ -7,7 +7,9 @@ use DaydreamLab\Cms\Jobs\ImportCase;
 use DaydreamLab\Cms\Jobs\ImportFinance;
 use DaydreamLab\Cms\Jobs\ImportMemorabilia;
 use DaydreamLab\Cms\Jobs\ImportPromation;
+use DaydreamLab\Cms\Jobs\ImportRule;
 use DaydreamLab\Cms\Jobs\ImportSolution;
+use DaydreamLab\Cms\Jobs\ImportStockHolder;
 use DaydreamLab\Cms\Jobs\ImportVideo;
 use DaydreamLab\Cms\Models\Extrafield\Extrafield;
 use DaydreamLab\Cms\Models\Extrafield\ExtrafieldValue;
@@ -45,6 +47,28 @@ class ItemAdminService extends ItemService
         $this->categoryAdminService     = $categoryAdminService;
         $this->cmsCronJobService        = app(CmsCronJobService::class);
         $this->brandService             = $brandService;
+    }
+
+
+    public function importRule($input)
+    {
+        $file = $input->file('file');
+        $temp = $file->move('tmp', $file->hashName());
+        $filepath = $temp->getRealPath();
+
+        $job = new ImportRule($filepath, $this);
+        dispatch($job);
+    }
+
+
+    public function importStockHolder($input)
+    {
+        $file = $input->file('file');
+        $temp = $file->move('tmp', $file->hashName());
+        $filepath = $temp->getRealPath();
+
+        $job = new ImportStockHolder($filepath, $this);
+        dispatch($job);
     }
 
 

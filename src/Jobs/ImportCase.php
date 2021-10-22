@@ -56,7 +56,7 @@ class ImportCase implements ShouldQueue
         $sheet = $spreadsheet->getSheet(0);
         $rows = $sheet->getHighestRow();
 
-        for ($i = 4; $i <= $rows; $i++) {
+        for ($i = 2; $i <= $rows; $i++) {
             $rowData = $this->getXlsxRowData($sheet, $i);
             // 創建或獲取的品牌資料
             $brands = $this->firstOrCreateBrand($rowData[2]);

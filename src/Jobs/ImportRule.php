@@ -8,6 +8,7 @@ use DaydreamLab\Cms\Services\Brand\BrandService;
 use DaydreamLab\Cms\Services\Item\Admin\ItemAdminService;
 use DaydreamLab\Cms\Services\Product\ProductService;
 use DaydreamLab\Cms\Services\ProductCategory\ProductCategoryService;
+use DaydreamLab\Media\Models\File\File;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -15,7 +16,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Str;
 
-class ImportPromation implements ShouldQueue
+class ImportRule implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -32,14 +33,11 @@ class ImportPromation implements ShouldQueue
      */
     public function __construct(
         $filePath,
-        ItemAdminService $itemAdminService,
-        BrandService  $brandService
+        ItemAdminService $itemAdminService
     )
     {
         $this->filePath = $filePath;
         $this->itemAdminService = $itemAdminService;
-        $this->brandService = $brandService;
-        $this->brandService->setUser($this->itemAdminService->getUser());
     }
 
     /**
@@ -54,80 +52,43 @@ class ImportPromation implements ShouldQueue
         $spreadsheet = $reader->load($this->filePath);
         $sheet = $spreadsheet->getSheet(0);
         $rows = $sheet->getHighestRow();
+
         for ($i = 2; $i <= $rows; $i++) {
             $rowData = $this->getXlsxRowData($sheet, $i);
 
             // 創建獲取的資料
-            $brand = $this->firstOrCreateBrand($rowData[2]);
-            $promotion = $this->firstOrCreatePromotionItem($rowData);
+            $rule = $this->firstOrCreateRuleItem($rowData);
+            $file = $this->firstOrCreateFileRecord($rowData);
 
             // 更新關聯
-            $promotion->brands()->sync([$brand->id]);
+            $rule->files()->sync([$file->id]);
         }
 
         // 刪除暫存檔
         unlink($this->filePath);
     }
 
-    private function firstOrCreateBrand($title)
+    private function firstOrCreateRuleItem($rowData)
     {
-        $brand = $this->brandService->getModel()->where('title', $title)->first();
-
-        if (! $brand) {
-            $brand = $this->brandService->store(collect([
-                'title' => $title,
-                'alias' => Str::uuid()->getHex(),
-                'params' => ["meta" => [ "title" => "", "keywords" => "", "description" => ""], "seo" => []]
-            ]));
-        }
-
-        return $brand;
-    }
-
-    private function firstOrCreatePromotionItem($rowData)
-    {
-        $promotion = $this->itemAdminService->getModel()
+        $rule = $this->itemAdminService->getModel()
             ->where('title', $rowData[0])
-            ->where('category_id', 7)
+            ->where('category_id', 11)
             ->first();
 
-        if ($rowData[5] != null) {
-            $rowData[5]  = str_replace('/', '-', $rowData[5]) . ' 00:00:00';
-        }
-
-        if ($rowData[6] != null) {
-            $rowData[6] = str_replace('/', '-', $rowData[6]) . ' 00:00:00';
-        }
-
         $data = collect([
-            'content_type' => 'promotion',
-            "language" => "*",
+            'content_type' => 'rules',
             'title' => $rowData[0],
-            'category_id' => 7,
-            'state' =>  $rowData[3] == '發佈中' ? 1 : 0,
-            'publish_up' => substr($rowData[4], 0, 4) . '-' . substr($rowData[4], 4, 2) . '-' . substr($rowData[4], 6, 2),
-            'description' => html_entity_decode(preg_replace('/_x([0-9a-fA-F]{4})_/', '&#x$1;', $rowData[7])),
-            'extrafields' => [
-                [
-                    'alias' => 'subtitle',
-                    'value' => $rowData[2]
-                ],
-                [
-                    "alias" => "register_start",
-                    "value" => $rowData[5]
-                ],
-                [
-                    "alias" => "register_end",
-                    "value" => $rowData[6]
-                ]
-            ]
+            'language' => "*",
+            'category_id' => 11,
+            'state' => 1,
+            'publish_up' => now()->timezone('UTC')->format('Y-m-d H:i:s'),
         ]);
 
         // 如果有抓到舊資料改成更新舊資料資訊
-        if ($promotion) {
-            $data->put('id', $promotion->id);
-            $data->put('params', $promotion->params);
-            $data->put('ordering', $promotion->ordering);
+        if ($rule) {
+            $data->put('id', $rule->id);
+            $data->put('params', $rule->params);
+            $data->put('ordering', $rule->ordering);
         } else {
             $data->put('alias', Str::uuid()->getHex());
             $data->put('params', [
@@ -142,12 +103,44 @@ class ImportPromation implements ShouldQueue
 
         $this->itemAdminService->store($data);
 
-        $promotion = $this->itemAdminService->getModel()
+        $rule = $this->itemAdminService->getModel()
             ->where('title', $rowData[0])
-            ->where('category_id', 7)
+            ->where('category_id', 11)
             ->first();
 
-        return $promotion;
+        return $rule;
+    }
+
+
+    private function firstOrCreateFileRecord($rowData)
+    {
+        $file = File::where(['uuid' => $rowData[2]])
+                    ->where('category_id', 6)
+                    ->first();
+
+        if (! $file) {
+            $file =  File::create([
+                'ordering' => File::max('id') + 1,
+                'uuid' => $rowData[1],
+                'name' => $rowData[2],
+                'category_id' => 6,
+                'userGroupId' => 0,
+                'state' => 1,
+                'blobName' => $rowData[3],
+                'contentType' => $rowData[4],
+                'extension' => $rowData[5],
+                'size' => $rowData[6],
+                'url' => $rowData[7],
+                'access' => 1,
+                'encrypted' => 0,
+                'params' => [
+                    'upload' => 'file'
+                ],
+                'publish_up' => now()->timezone('UTC')->format('Y-m-d H:i:s')
+            ]);
+        }
+
+        return $file;
     }
 
 
@@ -155,7 +148,7 @@ class ImportPromation implements ShouldQueue
     {
         $data = [];
 
-        for($j = 'B'; $j <= 'S'; $j++) {
+        for($j = 'A'; $j <= 'S'; $j++) {
             $key = $j.$rowNum;
             $data[] = $sheet->getCell($key)->getValue();
         }
