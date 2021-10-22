@@ -47,7 +47,7 @@ class ImportMemorabilia implements ShouldQueue
         $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
         $reader->setReadDataOnly(true);
         $spreadsheet = $reader->load($this->filePath);
-        $sheet = $spreadsheet->getSheet(0);
+        $sheet = $spreadsheet->getSheetByName('大事記');
         $rows = $sheet->getHighestRow();
         for ($i = 2; $i <= $rows; $i++) {
             $rowData = $this->getXlsxRowData($sheet, $i);

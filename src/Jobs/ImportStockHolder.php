@@ -50,7 +50,7 @@ class ImportStockHolder implements ShouldQueue
         $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
         $reader->setReadDataOnly(true);
         $spreadsheet = $reader->load($this->filePath);
-        $sheet = $spreadsheet->getSheet(0);
+        $sheet = $spreadsheet->getSheetByName('股東專欄');
         $rows = $sheet->getHighestRow();
 
         for ($i = 2; $i <= $rows; $i++) {
