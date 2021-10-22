@@ -39,6 +39,19 @@ class BrandAdminController extends CmsController
     }
 
 
+    public function importContact(Request $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->importContact($request);
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
+
     public function import(Request $request)
     {
         $this->service->setUser($request->user('api'));

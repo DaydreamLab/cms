@@ -124,7 +124,8 @@ Route::get('api/admin/brand/{id}', [BrandAdminController::class, 'getItem'])
     ->middleware(['expired', 'admin']);
 Route::post('api/admin/brand/import', [BrandAdminController::class, 'import'])
     ->middleware(['expired', 'admin']);
-
+Route::post('api/admin/brand/importContact', [BrandAdminController::class, 'importContact'])
+    ->middleware(['expired', 'admin']);
 # 產品
 Route::post('api/admin/product/import', [ProductAdminController::class, 'import'])
     ->middleware(['expired', 'admin']);
