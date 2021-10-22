@@ -84,13 +84,14 @@ class ImportBrandContact implements ShouldQueue
         $data = collect([
             'title' => $rowData[0],
             'contact' => $contact,
+            'params'  => ["meta" => [ "title" => "", "keywords" => "", "description" => ""], "seo" => []]
         ]);
 
         if ($brand) {
             $data->put('id', $brand->id);
+            $data->put('parmas', $brand->parmas);
         } else {
             $data->put('alias', Str::uuid()->getHex());
-            $data->put('params' , ["meta" => [ "title" => "", "keywords" => "", "description" => ""], "seo" => []]);
         }
 
         $brand = $this->brandService->store($data);
