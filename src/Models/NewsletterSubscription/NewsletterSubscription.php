@@ -107,6 +107,6 @@ class NewsletterSubscription extends BaseModel
 
     public function getUserMobilePhoneAttribute()
     {
-        return ($this->user) ? $this->user->mobilePhoneCode.$this->user->mobilePhone : '';
+        return ($this->user) ? $this->user->fullMobilePhone : '';
     }
 }
