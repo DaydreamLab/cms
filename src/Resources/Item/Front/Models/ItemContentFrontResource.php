@@ -49,20 +49,20 @@ class ItemContentFrontResource extends BaseJsonResource
             $data['solutionCategory'] = $sc->title;
         }
 
-        if ( ($this->category->content_type == 'solution') || ($this->category->content_type == 'case') ) {
+        if ( $this->category->content_type == 'solution' ) {
             $data['industryCategory'] = [];
             $ics = $this->extrafields['industry_category']['value'];
-
-            $tmp = [];
-            if (! is_array($ics) && ! $ics instanceof Collection) {
-                $tmp[] = ['id' => $ics];
-            }
-            $ics = $tmp;
 
             foreach ($ics as $ic) {
                 $i = Item::where('id', $ic['id'])->first();
                 $data['industryCategory'][] = $i->title;
             }
+        }
+
+        if ( $this->category->content_type == 'case' ) {
+            $ic = $this->extrafields['industry_category']['value'];
+            $i = Item::where('id', $ic)->first();
+            $data['industryCategory'] = $i->title;
         }
 
         return $data;
