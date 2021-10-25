@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Resources\Item\Front\Models;
 
 use DaydreamLab\Cms\Models\Item\Item;
 use DaydreamLab\JJAJ\Resources\BaseJsonResource;
+use Illuminate\Support\Collection;
 
 class ItemContentFrontResource extends BaseJsonResource
 {
@@ -51,6 +52,13 @@ class ItemContentFrontResource extends BaseJsonResource
         if ( ($this->category->content_type == 'solution') || ($this->category->content_type == 'case') ) {
             $data['industryCategory'] = [];
             $ics = $this->extrafields['industry_category']['value'];
+
+            $tmp = [];
+            if (! is_array($ics) && ! $ics instanceof Collection) {
+                $tmp[] = ['id' => $ics];
+            }
+            $ics = $tmp;
+
             foreach ($ics as $ic) {
                 $i = Item::where('id', $ic['id'])->first();
                 $data['industryCategory'][] = $i->title;
