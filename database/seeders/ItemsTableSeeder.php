@@ -8,6 +8,7 @@ use DaydreamLab\Cms\Helpers\RequestHelper;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class ItemsTableSeeder extends Seeder
 {
@@ -31,6 +32,7 @@ class ItemsTableSeeder extends Seeder
         }
 
         // 靜態資源 回復
+        Storage::deleteDirectory('public/media');
         $source = base_path('vendor/daydreamlab/cms/database/seeders/resource/media');
         $dest = storage_path('app/public/media');
         File::copyDirectory($source, $dest);
