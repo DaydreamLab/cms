@@ -7,6 +7,7 @@ use DaydreamLab\Cms\Services\Item\Admin\ItemAdminService;
 use DaydreamLab\Cms\Helpers\RequestHelper;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\File;
 
 class ItemsTableSeeder extends Seeder
 {
@@ -28,6 +29,11 @@ class ItemsTableSeeder extends Seeder
                 $i = $this->itemAdminService->store(collect($item_data));
             }
         }
+
+        // 靜態資源 回復
+        $source = base_path('vendor/daydreamlab/cms/database/seeders/resource/media');
+        $dest = storage_path('app/public/media');
+        File::copyDirectory($source, $dest);
     }
 
 
