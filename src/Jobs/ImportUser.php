@@ -69,7 +69,7 @@ class ImportUser implements ShouldQueue
         $data = [
             'vat' => $rowData[4],
             'name' => $rowData[5],
-            'category_id' => 4 // 預設都是用原廠
+            'category_id' => $rowData[2] == '經銷會員' ? 3 : 5// 如果是非經銷會員此公司指定成一般會員
         ];
 
         // 判斷是否需要創建compnay
@@ -117,6 +117,8 @@ class ImportUser implements ShouldQueue
             '經銷會員' => 6,
         ];
 
+        $user->groups()->sync($groups[$rowData[2]]);
+
         // 電子報是否訂閱
         $nsfs = app(NewsletterSubscriptionFrontService::class);
         if ($rowData[16] == '是') {
@@ -129,7 +131,7 @@ class ImportUser implements ShouldQueue
             $nsfs->store(collect(['newsletterCategoriesAlias' => [], 'email' => $user->email]), true);
         }
 
-        $user->groups()->sync($groups[$rowData[2]]);
+
 
         return $user;
     }
