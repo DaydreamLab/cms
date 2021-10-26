@@ -38,6 +38,17 @@ class ItemAdminController extends CmsController
         $this->service = $service;
     }
 
+    public function importUser(Request $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->importUser($request);
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
 
     public function importRule(Request $request)
     {
