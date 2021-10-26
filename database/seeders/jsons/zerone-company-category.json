@@ -62,5 +62,21 @@
         "params": [],
         "created_by": 1,
         "children": []
+    },
+    {
+        "title": "一般會員",
+        "alias": "normal",
+        "path": "/normal",
+        "state": 1,
+        "introimage": "",
+        "introtext": "",
+        "image": "",
+        "description": "",
+        "ordering": 5,
+        "access": 1,
+        "extrafields": [],
+        "params": [],
+        "created_by": 1,
+        "children": []
     }
 ]
