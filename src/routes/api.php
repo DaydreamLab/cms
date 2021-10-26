@@ -209,6 +209,8 @@ Route::post('api/admin/item/importUser', [ItemAdminController::class, 'importUse
     ->middleware(['expired', 'admin']);
 Route::post('api/admin/brand/importContact', [BrandAdminController::class, 'importContact'])
     ->middleware(['expired', 'admin']);
+Route::post('api/admin/brand/importBrandInfo', [BrandAdminController::class, 'importBrandInfo'])
+    ->middleware(['expired', 'admin']);
 
 # 電子報
 Route::get('api/admin/newsletter/{id}/publish', [NewsletterAdminController::class, 'publish'])
