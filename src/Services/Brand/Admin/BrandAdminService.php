@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Services\Brand\Admin;
 
 use DaydreamLab\Cms\Jobs\ImportBrand;
 use DaydreamLab\Cms\Jobs\ImportBrandContact;
+use DaydreamLab\Cms\Jobs\ImportBrandInfo;
 use DaydreamLab\Cms\Repositories\Brand\Admin\BrandAdminRepository;
 use DaydreamLab\Cms\Repositories\ProductCategory\ProductCategoryRepository;
 use DaydreamLab\Cms\Services\Brand\BrandService;
@@ -55,6 +56,19 @@ class BrandAdminService extends BrandService
         $temp = $file->move('tmp', $file->hashName());
         $filePath = $temp->getRealPath();
         $job = new ImportBrand($filePath, $this->productCategoryService, $this->productService, $this);
+
+        dispatch($job);
+
+        $this->status = 'ImportSuccess';
+    }
+
+
+    public function importBrandInfo($input)
+    {
+        $file = $input->file('file');
+        $temp = $file->move('tmp', $file->hashName());
+        $filePath = $temp->getRealPath();
+        $job = new ImportBrandInfo($filePath, $this);
 
         dispatch($job);
 
