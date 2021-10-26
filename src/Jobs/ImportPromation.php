@@ -110,7 +110,7 @@ class ImportPromation implements ShouldQueue
             'extrafields' => [
                 [
                     'alias' => 'subtitle',
-                    'value' => $rowData[2]
+                    'value' => $rowData[1]
                 ],
                 [
                     "alias" => "register_start",
