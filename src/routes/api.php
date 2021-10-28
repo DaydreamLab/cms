@@ -185,11 +185,31 @@ Route::post('api/admin/item/{content_type}/store', [ItemAdminController::class, 
     ->middleware(['expired','admin']);
 Route::get('api/admin/item/{content_type}/{id}', [ItemAdminController::class, 'getContentItem'])
     ->middleware(['expired','admin']);
+
+# 內部用 匯入資料
 Route::post('api/admin/item/importVideo', [ItemAdminController::class, 'importVideo'])
     ->middleware(['expired', 'admin']);
 Route::post('api/admin/item/importPromotion', [ItemAdminController::class, 'importPromotion'])
     ->middleware(['expired', 'admin']);
 Route::post('api/admin/item/importBulletin', [ItemAdminController::class, 'importBulletin'])
+    ->middleware(['expired', 'admin']);
+Route::post('api/admin/item/importCase', [ItemAdminController::class, 'importCase'])
+    ->middleware(['expired', 'admin']);
+Route::post('api/admin/item/importSolution', [ItemAdminController::class, 'importSolution'])
+    ->middleware(['expired', 'admin']);
+Route::post('api/admin/item/importMemorabilia', [ItemAdminController::class, 'importMemorabilia'])
+    ->middleware(['expired', 'admin']);
+Route::post('api/admin/item/importFinance', [ItemAdminController::class, 'importFinance'])
+    ->middleware(['expired', 'admin']);
+Route::post('api/admin/item/importStockHolder', [ItemAdminController::class, 'importStockHolder'])
+    ->middleware(['expired', 'admin']);
+Route::post('api/admin/item/importRule', [ItemAdminController::class, 'importRule'])
+    ->middleware(['expired', 'admin']);
+Route::post('api/admin/item/importUser', [ItemAdminController::class, 'importUser'])
+    ->middleware(['expired', 'admin']);
+Route::post('api/admin/brand/importContact', [BrandAdminController::class, 'importContact'])
+    ->middleware(['expired', 'admin']);
+Route::post('api/admin/brand/importBrandInfo', [BrandAdminController::class, 'importBrandInfo'])
     ->middleware(['expired', 'admin']);
 
 # 電子報

@@ -39,6 +39,7 @@ class ImportVideo implements ShouldQueue
         $this->filePath = $filePath;
         $this->itemAdminService = $itemAdminService;
         $this->brandService = $brandService;
+        $this->brandService->setUser($this->itemAdminService->getUser());
     }
 
     /**
@@ -51,10 +52,10 @@ class ImportVideo implements ShouldQueue
         $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
         $reader->setReadDataOnly(true);
         $spreadsheet = $reader->load($this->filePath);
-        $sheet = $spreadsheet->getSheet(0);
+        $sheet = $spreadsheet->getSheetByName('零壹影片');
         $rows = $sheet->getHighestRow();
 
-        for ($i = 4; $i <= $rows; $i++) {
+        for ($i = 2; $i <= $rows; $i++) {
             $rowData = $this->getXlsxRowData($sheet, $i);
 
             // 創建獲取的資料
@@ -76,8 +77,8 @@ class ImportVideo implements ShouldQueue
         if (! $brand) {
             $brand = $this->brandService->store(collect([
                 'title' => $title,
-                'alias' => $title,
-                'params' => ["meta" => [ "titel" => "", "keyword" => "", "description" => ""], "seo" => []]
+                'alias' => Str::uuid()->getHex(),
+                'params' => ["meta" => [ "title" => "", "keywords" => "", "description" => ""], "seo" => []]
             ]));
         }
 
@@ -111,6 +112,7 @@ class ImportVideo implements ShouldQueue
         if ($video) {
             $data->put('id', $video->id);
             $data->put('params', $video->params);
+            $data->put('ordering', $video->ordering);
         } else {
             $data->put('alias', Str::uuid()->getHex());
             $data->put('params', [

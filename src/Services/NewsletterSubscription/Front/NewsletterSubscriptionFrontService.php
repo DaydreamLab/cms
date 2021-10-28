@@ -33,10 +33,10 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
     }
 
 
-    public function store(Collection $input)
+    public function store(Collection $input, $isImoprt = false)
     {
         $user = Auth::guard('api')->user();
-        if ($user) {
+        if ($user && $isImoprt == false) {
             $wantCategories = Item::whereIn('alias', $input->get('newsletterCategoriesAlias') ?: [])
                 ->whereHas('category', function ($q) {
                     $q->where('content_type', 'newsletter_category');

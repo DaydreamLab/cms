@@ -38,6 +38,96 @@ class ItemAdminController extends CmsController
         $this->service = $service;
     }
 
+    public function importUser(Request $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->importUser($request);
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
+    public function importRule(Request $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->importRule($request);
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
+
+    public function importStockHolder(Request $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->importStockHolder($request);
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
+
+
+    public function importFinance(Request $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->importFinance($request);
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
+
+    public function importMemorabilia(Request $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->importMemorabilia($request);
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
+
+    public function importSolution(Request $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->importSolution($request);
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
+
+    public function importCase(Request $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->importCase($request);
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
 
     public function importVideo(Request $request)
     {

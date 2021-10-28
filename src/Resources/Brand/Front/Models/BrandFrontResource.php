@@ -39,7 +39,7 @@ class BrandFrontResource extends BaseJsonResource
             'items'                 => $items,
             'products'              => $this->products,
             'tags'                  => $this->tags,
-            'files'                 => (new FileFrontSearchResourceCollection($this->files))->collection
+            'files'                 => (new FileFrontSearchResourceCollection($this->files))->collection->take(3)
         ];
     }
 }

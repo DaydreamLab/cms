@@ -39,6 +39,7 @@ class ImportBulletin implements ShouldQueue
         $this->filePath = $filePath;
         $this->itemAdminService = $itemAdminService;
         $this->brandService = $brandService;
+        $this->brandService->setUser($this->itemAdminService->getUser());
     }
 
     /**
@@ -51,22 +52,21 @@ class ImportBulletin implements ShouldQueue
         $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
         $reader->setReadDataOnly(true);
         $spreadsheet = $reader->load($this->filePath);
-        $sheet = $spreadsheet->getSheet(0);
+        $sheet = $spreadsheet->getSheetByName('品牌新訊');
         $rows = $sheet->getHighestRow();
 
-        for ($i = 3; $i <= $rows; $i++) {
+        for ($i = 2; $i <= $rows; $i++) {
             $rowData = $this->getXlsxRowData($sheet, $i);
-
             // 創建獲取的資料
             $brand = $this->firstOrCreateBrand($rowData[2]);
             $bulletin = $this->firstOrCreateBulletinItem($rowData);
-
             // 更新關聯
             $bulletin->brands()->sync([$brand->id]);
         }
 
         // 刪除暫存檔
         unlink($this->filePath);
+
     }
 
     private function firstOrCreateBrand($title)
@@ -77,10 +77,9 @@ class ImportBulletin implements ShouldQueue
             $brand = $this->brandService->store(collect([
                 'title' => $title,
                 'alias' => $title,
-                'params' => ["meta" => [ "titel" => "", "keyword" => "", "description" => ""], "seo" => []]
+                'params' => ["meta" => [ "title" => "", "keywords" => "", "description" => ""], "seo" => []]
             ]));
         }
-
         return $brand;
     }
 
@@ -111,6 +110,7 @@ class ImportBulletin implements ShouldQueue
         if ($bulletin) {
             $data->put('id', $bulletin->id);
             $data->put('params', $bulletin->params);
+            $data->put('ordering', $bulletin->ordering);
         } else {
             $data->put('alias', Str::uuid()->getHex());
             $data->put('params', [

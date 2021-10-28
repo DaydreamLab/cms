@@ -39,6 +39,7 @@ class ImportPromation implements ShouldQueue
         $this->filePath = $filePath;
         $this->itemAdminService = $itemAdminService;
         $this->brandService = $brandService;
+        $this->brandService->setUser($this->itemAdminService->getUser());
     }
 
     /**
@@ -51,9 +52,9 @@ class ImportPromation implements ShouldQueue
         $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
         $reader->setReadDataOnly(true);
         $spreadsheet = $reader->load($this->filePath);
-        $sheet = $spreadsheet->getSheet(0);
+        $sheet = $spreadsheet->getSheetByName('促銷訊息');
         $rows = $sheet->getHighestRow();
-        for ($i = 3; $i <= $rows; $i++) {
+        for ($i = 2; $i <= $rows; $i++) {
             $rowData = $this->getXlsxRowData($sheet, $i);
 
             // 創建獲取的資料
@@ -75,8 +76,8 @@ class ImportPromation implements ShouldQueue
         if (! $brand) {
             $brand = $this->brandService->store(collect([
                 'title' => $title,
-                'alias' => $title,
-                'params' => ["meta" => [ "titel" => "", "keyword" => "", "description" => ""], "seo" => []]
+                'alias' => Str::uuid()->getHex(),
+                'params' => ["meta" => [ "title" => "", "keywords" => "", "description" => ""], "seo" => []]
             ]));
         }
 
@@ -89,6 +90,7 @@ class ImportPromation implements ShouldQueue
             ->where('title', $rowData[0])
             ->where('category_id', 7)
             ->first();
+
         if ($rowData[5] != null) {
             $rowData[5]  = str_replace('/', '-', $rowData[5]) . ' 00:00:00';
         }
@@ -108,7 +110,7 @@ class ImportPromation implements ShouldQueue
             'extrafields' => [
                 [
                     'alias' => 'subtitle',
-                    'value' => $rowData[2]
+                    'value' => $rowData[1]
                 ],
                 [
                     "alias" => "register_start",
@@ -125,6 +127,7 @@ class ImportPromation implements ShouldQueue
         if ($promotion) {
             $data->put('id', $promotion->id);
             $data->put('params', $promotion->params);
+            $data->put('ordering', $promotion->ordering);
         } else {
             $data->put('alias', Str::uuid()->getHex());
             $data->put('params', [
@@ -138,10 +141,12 @@ class ImportPromation implements ShouldQueue
         }
 
         $this->itemAdminService->store($data);
+
         $promotion = $this->itemAdminService->getModel()
             ->where('title', $rowData[0])
             ->where('category_id', 7)
             ->first();
+
         return $promotion;
     }
 
