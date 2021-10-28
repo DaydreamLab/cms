@@ -6,6 +6,7 @@ use DaydreamLab\Cms\Models\ProductCategory\ProductCategory;
 use DaydreamLab\Cms\Repositories\Brand\Front\BrandFrontRepository;
 use DaydreamLab\Cms\Services\Brand\BrandService;
 use DaydreamLab\Cms\Services\Product\Front\ProductFrontService;
+use DaydreamLab\Dsth\Services\EventSession\Front\EventSessionFrontService;
 use DaydreamLab\JJAJ\Database\QueryCapsule;
 use Illuminate\Support\Collection;
 
@@ -44,6 +45,9 @@ class BrandFrontService extends BrandService
             $filter_products_array[] = $temp;
         }
         $brand->products = $filter_products_array;
+        $brand->events = $brandEvents = app(EventSessionFrontService::class)->searchEvent(
+            collect(['limit' => 6, 'brandAlias' => $brand->alias])
+        );
 
         $this->status = 'GetItemSuccess';
         $this->response = $brand;

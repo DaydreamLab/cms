@@ -2,6 +2,8 @@
 
 namespace DaydreamLab\Cms\Resources\Brand\Front\Models;
 
+use DaydreamLab\Dsth\Resources\Event\Front\Collections\EventFrontSearchResourceCollection;
+use DaydreamLab\Dsth\Resources\Event\Front\Models\EventFrontSearchResource;
 use DaydreamLab\JJAJ\Resources\BaseJsonResource;
 use DaydreamLab\Media\Resources\File\Front\Collections\FileFrontSearchResourceCollection;
 
@@ -39,7 +41,10 @@ class BrandFrontResource extends BaseJsonResource
             'items'                 => $items,
             'products'              => $this->products,
             'tags'                  => $this->tags,
-            'files'                 => (new FileFrontSearchResourceCollection($this->files))->collection->take(3)
+            'files'                 => (new FileFrontSearchResourceCollection($this->files))->collection->take(3),
+            'events'                => $this->events->map(function ($event) {
+                return new EventFrontSearchResource($event);
+            })
         ];
     }
 }
