@@ -12,6 +12,10 @@ use DaydreamLab\Cms\Services\Brand\Front\BrandFrontService;
 use DaydreamLab\Cms\Services\Category\Front\CategoryFrontService;
 use DaydreamLab\Cms\Services\Item\ItemService;
 use DaydreamLab\Cms\Services\Product\Front\ProductFrontService;
+use DaydreamLab\Dsth\Resources\Event\Front\Collections\EventFrontSearchResourceCollection;
+use DaydreamLab\Dsth\Resources\Event\Front\Models\EventFrontSearchResource;
+use DaydreamLab\Dsth\Services\Event\Front\EventFrontService;
+use DaydreamLab\Dsth\Services\EventSession\Front\EventSessionFrontService;
 use DaydreamLab\Media\Services\File\Front\FileFrontService;
 use DaydreamLab\JJAJ\Database\QueryCapsule;
 use DaydreamLab\JJAJ\Helpers\Helper;
@@ -477,10 +481,15 @@ class ItemFrontService extends ItemService
             ->filterHomepageShow()
             ->buildContentResourceData();
 
+        $events = app(EventSessionFrontService::class)->searchEvent(collect(['limit' => 6]));
+
         $this->response = [
             'slideshow' => $slideshow,
             'promotion' => $promotion,
-            'bulletin' => $bulletin
+            'bulletin' => $bulletin,
+            'events'   => $events->map(function ($event) {
+                return new EventFrontSearchResource($event);
+            })
         ];
     }
 
@@ -527,6 +536,13 @@ class ItemFrontService extends ItemService
         event(new Search($input, $this->user));
 
         return $items;
+    }
+
+
+    public function searchEvents()
+    {
+        $q = new QueryCapsule();
+
     }
 
 

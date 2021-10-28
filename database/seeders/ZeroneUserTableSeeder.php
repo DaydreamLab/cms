@@ -119,7 +119,7 @@ class ZeroneUserTableSeeder extends Seeder
         $invalid = [];
         foreach ($data as $index => $userInput) {
 
-            if ($index < 10) {
+            if ($index < 50) {
                 $data = [
                     'email'     => Str::lower($userInput['MemberID']),
                     'name'      => $userInput['MemberName'],
