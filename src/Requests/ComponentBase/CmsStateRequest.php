@@ -16,15 +16,6 @@ abstract class CmsStateRequest extends BaseStateRequest
      */
     public function authorize()
     {
-        if (RequestHelper::isBrandAdminPage(
-            $this->get('pageGroupId'),
-            $this->get('pageId'),
-            $this->modelName)) {
-            return RequestHelper::brandAdminPageAuthorize(
-                $this->user()->apis,
-                $this->apiMethod,
-                $this->modelName);
-        }
         return parent::authorize();
     }
 

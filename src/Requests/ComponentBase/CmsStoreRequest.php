@@ -16,16 +16,6 @@ abstract class CmsStoreRequest extends BaseStoreRequest
      */
     public function authorize()
     {
-        if (RequestHelper::isBrandAdminPage(
-            $this->get('pageGroupId'),
-            $this->get('pageId'),
-            $this->modelName)) {
-            return RequestHelper::brandAdminPageAuthorize(
-                $this->user()->apis,
-                $this->apiMethod,
-                $this->modelName,
-                $this->post('id'));
-        }
         return parent::authorize();
     }
 
