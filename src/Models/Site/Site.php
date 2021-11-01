@@ -84,6 +84,29 @@ class Site extends BaseModel
     }
 
 
+    public function getParamsAttribute($params)
+    {
+        $params = json_decode($params, true);
+        if (!isset($params['fb_fanpage_id'])) {
+            $params['fb_fanpage_id'] = '';
+        }
+        if (!isset($params['fbFanpageUrl'])) {
+            $params['fbFanpageUrl'] = '';
+        }
+        if (!isset($params['lineId'])) {
+            $params['lineId'] = '';
+        }
+        if (!isset($params['liffid'])) {
+            $params['liffid'] = '';
+        }
+        if (!isset($params['youtubeUrl'])) {
+            $params['youtubeUrl'] = '';
+        }
+
+        return $params;
+    }
+
+
     public function language()
     {
         return $this->belongsTo(Language::class, 'sef', 'sef')->where('type', '=', 'content');

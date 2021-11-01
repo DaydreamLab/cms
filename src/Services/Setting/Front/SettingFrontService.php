@@ -22,7 +22,6 @@ class SettingFrontService extends SettingService
 
     public function getItem($input, $locale = null, $host = null)
     {
-        $global = config('daydreamlab.global');
 
         $item = $this->siteService->find(1);
 
