@@ -539,13 +539,6 @@ class ItemFrontService extends ItemService
     }
 
 
-    public function searchEvents()
-    {
-        $q = new QueryCapsule();
-
-    }
-
-
     public function searchSolution(Collection $input)
     {
         if ( $solution_category_alias = $input->get('solution_category_alias') ) {
@@ -643,7 +636,6 @@ class ItemFrontService extends ItemService
                         return false;
                     }
                 }
-                return false;
             })->values();
         }
 
@@ -686,7 +678,6 @@ class ItemFrontService extends ItemService
                         return false;
                     }
                 }
-                return false;
             })->values();
         }
 

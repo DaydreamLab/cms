@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use DaydreamLab\Cms\Services\Setting\SettingService;
 use DaydreamLab\Cms\Services\Site\Admin\SiteAdminService;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\File;
 
 class SettingAdminService extends SettingService
 {
@@ -18,7 +17,6 @@ class SettingAdminService extends SettingService
 
     public function getItem($locale = '')
     {
-//        $global = config('daydreamlab.global');
         $item = $this->siteService->find(1);
         if ($item) {
             $response = $item->params;
@@ -63,6 +61,10 @@ class SettingAdminService extends SettingService
                 'seo_keyword'       => $input->get('seo_keyword'),
                 'seo_description'   => $input->get('seo_description'),
                 'fb_fanpage_id'     => $input->get('fb_fanpage_id'),
+                'fbFanpageUrl'      => $input->get('fbFanpageUrl'),
+                'lineId'            => $input->get('lineId'),
+                'liffid'            => $input->get('liffid'),
+                'youtubeUrl'        => $input->get('youtubeUrl'),
                 'ga'                => $input->get('ga'),
             ]
         ]);

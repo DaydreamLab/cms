@@ -34,12 +34,11 @@ class SettingAdminStorePost extends CmsStoreRequest
             'seo_keyword'       => 'nullable|string',
             'seo_description'   => 'nullable|string',
             'fb_fanpage_id'     => 'nullable|string',
+            'fbFanpageUrl'      => 'nullable|string',
+            'lineId'            => 'nullable|string',
+            'liffid'            => 'nullable|string',
+            'youtubeUrl'        => 'nullable|string',
             'ga'                => 'nullable|string'
-            //'locale'        => 'required|string',
-            //'locale_admin'  => 'required|string',
-            //'custom_head'   => 'nullable|string',
-            //'custom_body'   => 'nullable|string',
-            //'custom_footer' => 'nullable|string',
         ];
         return array_merge(parent::rules(), $rules);
     }
