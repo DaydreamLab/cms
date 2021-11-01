@@ -386,75 +386,6 @@
         "userGroups": ["Administrator", "Super User"]
     },
     {
-        "title": "COM_COURSE_ACTIVITY_MANAGER_TITLE",
-        "state": 1,
-        "params": {
-            "path": "/course_activity",
-            "component": "",
-            "type": "alias",
-            "redirect": "",
-            "icon": "copy"
-        },
-        "assets": [
-            {
-                "title": "COM_COURSE_MANAGER_TITLE",
-                "path": "course",
-                "full_path": "/course",
-                "component": "course_activity/course/list",
-                "type": "menu",
-                "state": 1,
-                "icon": "sitemap",
-                "showNav": 1,
-                "apis": []
-            },
-            {
-                "title": "COM_ACTIVITY_MANAGER_TITLE",
-                "path": "activity",
-                "full_path": "/activity",
-                "component": "course_activity/activity/list",
-                "type": "menu",
-                "state": 1,
-                "icon": "sitemap",
-                "showNav": 1,
-                "apis": []
-            },
-            {
-                "title": "COM_SIGNUP_MANAGER_TITLE",
-                "path": "signup",
-                "full_path": "/signup",
-                "component": "course_activity/signup/list",
-                "type": "menu",
-                "state": 1,
-                "icon": "sitemap",
-                "showNav": 1,
-                "apis": []
-            },
-            {
-                "title": "COM_PERSONNEL_MANAGER_TITLE",
-                "path": "personnel",
-                "full_path": "/personnel",
-                "component": "course_activity/personnel/edit",
-                "type": "menu",
-                "state": 1,
-                "icon": "sitemap",
-                "showNav": 1,
-                "apis": []
-            },
-            {
-                "title": "COM_COURSE_ACTIVITY_TICKET_MANAGER_TITLE",
-                "path": "ticket",
-                "full_path": "/ticket",
-                "component": "course_activity/ticket/list",
-                "type": "menu",
-                "state": 1,
-                "icon": "sitemap",
-                "showNav": 1,
-                "apis": []
-            }
-        ],
-        "userGroups": ["Administrator", "Super User"]
-    },
-    {
         "title": "COM_DOWNLOAD_FILES_TITLE",
         "state": 1,
         "params": {
@@ -558,7 +489,6 @@
                     "renameMedia": ["checked", "hidden"],
                     "moveMedia": ["checked", "hidden"],
                     "createMediaFolder": ["checked", "hidden"],
-                    "searchProduct": ["checked", "hidden"],
                     "searchProduct": ["checked", "hidden"]
                 }
             },
