@@ -3,15 +3,12 @@
 namespace DaydreamLab\Cms\Controllers\Tag\Admin;
 
 use DaydreamLab\Cms\Controllers\CmsController;
-use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminFeaturedOrderingPost;
-use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminFeaturedPost;
 use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminGetItemGet;
 use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminRestorePost;
 use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminStorePost;
 use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminStatePost;
 use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminSearchPost;
 use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminRemovePost;
-use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminOrderingPost;
 use DaydreamLab\Cms\Resources\Tag\Admin\Models\TagAdminResource;
 use DaydreamLab\Cms\Resources\Tag\Admin\Collections\TagAdminListResourceCollection;
 use DaydreamLab\Cms\Services\Tag\Admin\TagAdminService;
@@ -28,32 +25,6 @@ class TagAdminController extends CmsController
     }
 
 
-    public function featured(TagAdminFeaturedPost $request)
-    {
-        $this->service->setUser($request->user('api'));
-        try {
-            $this->service->featured($request->validated());
-        } catch (Throwable $t) {
-            $this->handleException($t);
-        }
-
-        return $this->response($this->service->status, $this->service->response);
-    }
-
-
-    public function featuredOrdering(TagAdminFeaturedOrderingPost $request)
-    {
-        $this->service->setUser($request->user('api'));
-        try {
-            $this->service->featuredOrdering($request->validated());
-        } catch (Throwable $t) {
-            $this->handleException($t);
-        }
-
-        return $this->response($this->service->status, $this->service->response);
-    }
-
-
     public function getItem(TagAdminGetItemGet $request)
     {
         $this->service->setUser($request->user('api'));
@@ -64,19 +35,6 @@ class TagAdminController extends CmsController
         }
 
         return $this->response($this->service->status, $this->service->response, [], TagAdminResource::class);
-    }
-
-
-    public function ordering(TagAdminOrderingPost $request)
-    {
-        $this->service->setUser($request->user('api'));
-        try {
-            $this->service->ordering($request->validated());
-        } catch (Throwable $t) {
-            $this->handleException($t);
-        }
-
-        return $this->response($this->service->status, $this->service->response);
     }
 
 

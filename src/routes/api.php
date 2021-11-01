@@ -400,12 +400,6 @@ Route::get('api/admin/site/{id}', [SiteAdminController::class, 'getItem'])
     ->middleware(['expired','admin']);
 
 # 標籤 Tag
-Route::post('api/admin/tag/featured', [TagAdminController::class, 'featured'])
-    ->middleware(['expired','admin']);
-Route::post('api/admin/tag/featured/ordering', [TagAdminController::class, 'featuredOrdering'])
-    ->middleware(['expired','admin']);
-Route::post('api/admin/tag/ordering', [TagAdminController::class, 'ordering'])
-    ->middleware(['expired','admin']);
 Route::post('api/admin/tag/remove', [TagAdminController::class, 'remove'])
     ->middleware(['expired','admin']);
 Route::post('api/admin/tag/restore',[TagAdminController::class, 'restore'])

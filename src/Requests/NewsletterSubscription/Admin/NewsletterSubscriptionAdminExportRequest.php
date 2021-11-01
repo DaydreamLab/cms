@@ -11,6 +11,8 @@ class NewsletterSubscriptionAdminExportRequest extends CmsSearchRequest
 
     protected $modelName = 'NewsletterSubscription';
 
+    protected $apiMethod = 'exportNewsletterSubscription';
+
     protected $needAuth = false;
     /**
      * Determine if the user is authorized to make this request.

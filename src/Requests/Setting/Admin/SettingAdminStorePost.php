@@ -36,7 +36,7 @@ class SettingAdminStorePost extends CmsStoreRequest
             'fb_fanpage_id'     => 'nullable|string',
             'fbFanpageUrl'      => 'nullable|string',
             'lineId'            => 'nullable|string',
-            'liffid'            => 'nullable|string',
+            'liffId'            => 'nullable|string',
             'youtubeUrl'        => 'nullable|string',
             'ga'                => 'nullable|string'
         ];

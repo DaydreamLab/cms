@@ -63,7 +63,7 @@ class SettingAdminService extends SettingService
                 'fb_fanpage_id'     => $input->get('fb_fanpage_id'),
                 'fbFanpageUrl'      => $input->get('fbFanpageUrl'),
                 'lineId'            => $input->get('lineId'),
-                'liffid'            => $input->get('liffid'),
+                'liffId'            => $input->get('liffId'),
                 'youtubeUrl'        => $input->get('youtubeUrl'),
                 'ga'                => $input->get('ga'),
             ]

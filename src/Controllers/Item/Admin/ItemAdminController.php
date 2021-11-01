@@ -11,7 +11,6 @@ use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminContentRestorePost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminContentSearchPost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminContentStatePost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminContentStorePost;
-use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminFeaturedOrderingPost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminGetItemGet;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminRemovePost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminStorePost;
@@ -186,18 +185,6 @@ class ItemAdminController extends CmsController
         $this->service->setUser($request->user('api'));
         try {
             $this->service->featured($request->validated());
-        } catch (Throwable $t) {
-            $this->handleException($t);
-        }
-
-        return $this->response($this->service->status, $this->service->response);
-    }
-
-
-    public function featuredOrdering(ItemAdminFeaturedOrderingPost $request)
-    {
-        try {
-            $this->service->featuredOrdering($request->validated());
         } catch (Throwable $t) {
             $this->handleException($t);
         }

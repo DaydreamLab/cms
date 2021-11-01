@@ -96,8 +96,8 @@ class Site extends BaseModel
         if (!isset($params['lineId'])) {
             $params['lineId'] = '';
         }
-        if (!isset($params['liffid'])) {
-            $params['liffid'] = '';
+        if (!isset($params['liffId'])) {
+            $params['liffId'] = '';
         }
         if (!isset($params['youtubeUrl'])) {
             $params['youtubeUrl'] = '';

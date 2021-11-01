@@ -8,7 +8,7 @@ use Illuminate\Validation\Rule;
 
 class ProductAdminImportRequest extends AdminRequest
 {
-
+    protected $apiMethod = 'importProduct';
 
     protected $modelName = 'Product';
     /**

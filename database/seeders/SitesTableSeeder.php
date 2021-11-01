@@ -29,7 +29,7 @@ class SitesTableSeeder extends Seeder
                 'fb_fanpage_id' => '485528961457510qeqeqw',
                 'fbFanpageUrl'      => '',
                 'lineId'            => '',
-                'liffid'            => '',
+                'liffId'            => '',
                 'youtubeUrl'        => '',
                 'ga' => 'UA-2133',
             ],

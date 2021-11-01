@@ -6,7 +6,7 @@ use DaydreamLab\Cms\Requests\ComponentBase\CmsGetItemRequest;
 
 class ProductCategoryAdminGetTreeRequest extends CmsGetItemRequest
 {
-    protected $apiMethod = 'searchProductCategory';
+    protected $apiMethod = 'getTreeProductCategory';
 
     protected $modelName = 'ProductCategory';
     /**

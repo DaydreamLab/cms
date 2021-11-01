@@ -6,6 +6,7 @@ use DaydreamLab\Cms\Requests\ComponentBase\CmsGetItemRequest;
 
 class NewsletterAdminPublishRequest extends CmsGetItemRequest
 {
+    protected $apiMethod = 'publishNewsletter';
 
     protected $modelName = 'Newsletter';
 

@@ -6,7 +6,9 @@ use DaydreamLab\Cms\Requests\ComponentBase\CmsOrderingRequest;
 
 class ProductCategoryAdminOrderingRequest extends CmsOrderingRequest
 {
-    protected $needAuth = false;
+    protected $apiMethod = 'orderingProductCategory';
+
+    protected $modelName = 'ProductCategory';
     /**
      * Determine if the user is authorized to make this request.
      *

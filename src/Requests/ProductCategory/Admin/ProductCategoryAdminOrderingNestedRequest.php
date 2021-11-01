@@ -6,6 +6,9 @@ use DaydreamLab\Cms\Requests\ComponentBase\CmsOrderingNestedRequest;
 
 class ProductCategoryAdminOrderingNestedRequest extends CmsOrderingNestedRequest
 {
+    protected $apiMethod = 'orderingProductCategory';
+
+    protected $modelName = 'ProductCategory';
     /**
      * Determine if the user is authorized to make this request.
      *
