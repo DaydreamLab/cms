@@ -109,6 +109,7 @@
                 "showNav": 1,
                 "apis": [
                     "getProductCategory",
+                    "getTreeProductCategory",
                     "addProductCategory",
                     "editProductCategory",
                     "deleteProductCategory",
@@ -789,7 +790,8 @@
                     "deleteNewsletter",
                     "searchNewsletter",
                     "restoreNewsletter",
-                    "stateNewsletter"
+                    "stateNewsletter",
+                    "publishNewsletter"
                 ],
                 "defaultApis": {
                     "getOption": ["checked", "hidden"],
@@ -820,7 +822,8 @@
                     "deleteNewsletterSubscription",
                     "searchNewsletterSubscription",
                     "restoreNewsletterSubscription",
-                    "stateNewsletterSubscription"
+                    "stateNewsletterSubscription",
+                    "exportNewsletterSubscription"
                 ],
                 "defaultApis": {
                     "getOption": ["checked", "hidden"]

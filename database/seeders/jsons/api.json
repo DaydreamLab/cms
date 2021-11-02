@@ -642,6 +642,12 @@
         "created_by": 1
     },
     {
+        "name": "取得產品類別列表",
+        "method": "getTreeProductCategory",
+        "url": "/admin/product/category/tree",
+        "created_by": 1
+    },
+    {
         "name": "新增產品類別",
         "method": "addProductCategory",
         "url": "/admin/product/category/store",
@@ -675,6 +681,12 @@
         "name": "回存產品類別",
         "method": "restoreProductCategory",
         "url": "/admin/product/category/restore",
+        "created_by": 1
+    },
+    {
+        "name": "排序產品類別",
+        "method": "orderingProductCategory",
+        "url": "/admin/product/category/ordering",
         "created_by": 1
     },
     {
@@ -1326,6 +1338,12 @@
         "created_by": 1
     },
     {
+        "name": "發佈電子報",
+        "method": "publishNewsletter",
+        "url": "/admin/newsletter/{id}/publish",
+        "created_by": 1
+    },
+    {
         "name": "取得電子報訂閱",
         "method": "getNewsletterSubscription",
         "url": "/admin/newsletter/subscription/{id}",
@@ -1365,6 +1383,12 @@
         "name": "回存電子報訂閱",
         "method": "restoreNewsletterSubscription",
         "url": "/admin/newsletter/subscription/restore",
+        "created_by": 1
+    },
+    {
+        "name": "匯出電子報訂閱",
+        "method": "exportNewsletterSubscription",
+        "url": "/admin/newsletter/subscription/export",
         "created_by": 1
     },
     {
