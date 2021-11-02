@@ -1,5 +1,18 @@
 [
     {
+        "title": "COM_CONCOLE_MANAGER_TITLE",
+        "state": 1,
+        "params": {
+            "path": "/console",
+            "component": "console/edit",
+            "type": "menu",
+            "redirect": "",
+            "icon": "home"
+        },
+        "assets": [],
+        "userGroups": ["Administrator", "Super User"]
+    },
+    {
         "title": "COM_HOME_TITLE",
         "state": 1,
         "params": {
