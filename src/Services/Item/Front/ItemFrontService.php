@@ -458,7 +458,7 @@ class ItemFrontService extends ItemService
         unset($paginateNotFeaturedToArray['data']);
 
         return collect([
-            'featured' => $featuredData,
+            'featured' => $featuredData->take(2),
             'items' => $notFeaturedData,
             'pagination' => $paginateNotFeaturedToArray
         ]);
