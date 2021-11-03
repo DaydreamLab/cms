@@ -563,7 +563,13 @@ class ItemFrontService extends ItemService
             foreach ($industry_category_alias as $ica) {
                 $ic = $this->repo->findBy('alias', '=', $ica)->first();
                 if ($ic) {
-                    $exvs = ExtrafieldValue::where('extrafield_id', $ica_ex->id)->where('value', $ic->id)->get();
+                    $exvs = ExtrafieldValue::where('extrafield_id', $ica_ex->id)->get();
+                    $exvs = $exvs->filter(function ($e) use ($ic) {
+                        $values = array_map(function ($i) {
+                            return $i['id'];
+                        }, json_decode($e->value, true));
+                        return in_array($ic->id, $values);
+                    });
                     $item_ids = array_merge($item_ids, $exvs->pluck(['item_id'])->toArray());
                 }
             }
@@ -587,7 +593,13 @@ class ItemFrontService extends ItemService
             foreach ($industry_category_alias as $ica) {
                 $ic = $this->repo->findBy('alias', '=', $ica)->first();
                 if ($ic) {
-                    $exvs = ExtrafieldValue::where('extrafield_id', $ica_ex->id)->where('value', $ic->id)->get();
+                    $exvs = ExtrafieldValue::where('extrafield_id', $ica_ex->id)->get();
+                    $exvs = $exvs->filter(function ($e) use ($ic) {
+                        $values = array_map(function ($i) {
+                            return $i['id'];
+                        }, json_decode($e->value, true));
+                        return in_array($ic->id, $values);
+                    });
                     $item_ids = array_merge($item_ids, $exvs->pluck(['item_id'])->toArray());
                 }
             }
