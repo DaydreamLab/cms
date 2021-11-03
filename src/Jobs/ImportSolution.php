@@ -107,7 +107,7 @@ class ImportSolution implements ShouldQueue
     private function firstOrCreateIndustryCategory($industryCategoryTitles)
     {
         $result = new Collection();
-        $titles = explode(',', $industryCategoryTitles);
+        $titles = explode(',', trim($industryCategoryTitles, ','));
 
         foreach ($titles as $title) {
             $industryCategory = $this->itemAdminService->getModel()
