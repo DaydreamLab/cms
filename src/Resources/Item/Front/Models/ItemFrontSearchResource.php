@@ -18,7 +18,7 @@ class ItemFrontSearchResource extends BaseJsonResource
             'title'             => $this['title'],
             'alias'             => $this['alias'],
             'introtext'         => $this['introtext'],
-            'description'       => $this['description'],
+            'description'       => strip_tags($this['description']),
             'brands'            => $this['brands'],
             'contentType'       => $this['contentType']
         ];
