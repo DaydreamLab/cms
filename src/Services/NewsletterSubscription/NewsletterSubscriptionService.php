@@ -13,11 +13,20 @@ class NewsletterSubscriptionService extends CmsService
 
     protected $omiLogin = 'Zerone01_BU5';
     protected $omiPass = 'Zer01bu5';
+    protected $newsletterId = 6;
+    protected $dealNewsletterId = 7;
+
 
     public function __construct(NewsletterSubscriptionRepository $repo)
     {
         parent::__construct($repo);
         $this->repo = $repo;
+        if (in_array(config('app.env'), ['production', 'staging'])) {
+            $this->omiLogin = 'Zerone01';
+            $this->omiPass = 'Zerone01admin';
+            $this->newsletterId = 8;
+            $this->dealNewsletterId = 9;
+        }
     }
 
 
@@ -122,18 +131,18 @@ class NewsletterSubscriptionService extends CmsService
 
         foreach ($subCats as $subCat) {
             if ($subCat == '01_deal_newsletter') {
-                $newsletterId = 7;
+                $newsletterId = $this->dealNewsletterId;
             } else {
-                $newsletterId = 6;
+                $newsletterId = $this->newsletterId;
             }
             $this->edmAddSubscription($email, $newsletterId);
         }
 
         foreach ($unSubCats as $unSubCat) {
             if ($unSubCat == '01_deal_newsletter') {
-                $newsletterId = 7;
+                $newsletterId = $this->dealNewsletterId;
             } else {
-                $newsletterId = 6;
+                $newsletterId = $this->newsletterId;
             }
             $this->edmRemoveSubscription($email, $newsletterId);
         }
@@ -169,7 +178,6 @@ class NewsletterSubscriptionService extends CmsService
             'content' => http_build_query($postdata)
         ) );
         $context = stream_context_create($opts);
-
         $result = file_get_contents($url, false, $context);
     }
 
