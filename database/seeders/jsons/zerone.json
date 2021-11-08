@@ -867,6 +867,7 @@
                 "showNav": 1,
                 "apis": [
                     "getUser",
+                    "editUser",
                     "searchUser",
                     "blockUser",
                     "searchUserGroup"
