@@ -36,7 +36,7 @@ class RequestHelper
                     $temp['code'] = isset($inputSeo['code']) ? $inputSeo['code'] : '';
                     $seo[] = $temp;
                 } else {
-                    $seo = $inputSeo;
+                    $seo[] = $inputSeo;
                 }
             }
         }
