@@ -35,6 +35,8 @@ class RequestHelper
                     $temp['type'] = $inputSeo['type'];
                     $temp['code'] = isset($inputSeo['code']) ? $inputSeo['code'] : '';
                     $seo[] = $temp;
+                } else {
+                    $seo = $inputSeo;
                 }
             }
         }
@@ -64,7 +66,7 @@ class RequestHelper
                 ? str_replace('store', 'edit', $apiMethod)
                 : str_replace('store', 'add', $apiMethod);
         }
-        
+
         return $apis->filter(function ($api) use ($apiMethod) {
             return $api->method == $apiMethod;
         })->count();
