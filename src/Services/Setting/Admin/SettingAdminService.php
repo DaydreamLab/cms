@@ -5,7 +5,10 @@ namespace DaydreamLab\Cms\Services\Setting\Admin;
 use Carbon\Carbon;
 use DaydreamLab\Cms\Services\Setting\SettingService;
 use DaydreamLab\Cms\Services\Site\Admin\SiteAdminService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class SettingAdminService extends SettingService
 {
@@ -71,31 +74,6 @@ class SettingAdminService extends SettingService
 
         $result = $this->siteService->store($data);
 
-//        $config = config('daydreamlab.global');
-//        $config = array_merge($config, $input->toArray());
-//        $tz = $this->user->timezone;
-//        $config['updated_at'] = Carbon::parse(now(), config('app.timezone'))->tz($tz)->format('Y-m-d H:i:s');
-//        $config['updaterName'] = $this->user->name;
-//
-//        $file_str = '<?php return [' . PHP_EOL;
-//
-//        foreach ($config as $key => $value)
-//        {
-//            if ($input->has($key)) {
-//                $output = $input->get("{$key}");
-//            }
-//            else {
-//                $output = $config[$key];
-//            }
-//
-//            $file_str .= '\'' . $key . '\' => ' .  '\'' . $output . '\', '. PHP_EOL;
-//        }
-//
-//        $file_str .= '];';
-//
-//        $result = File::put(config_path('daydreamlab/global.php'), $file_str);
-
-
         if ($result) {
             $this->status = 'UpdateSuccess';
         }
@@ -104,5 +82,29 @@ class SettingAdminService extends SettingService
         }
 
         return $this->getItem();
+    }
+
+
+    public function restoreAllLockData(Request $request)
+    {
+        $db = "Tables_in_".env('DB_DATABASE');
+        $tables = array_map(function($t) use ($db) {
+            return $t->{$db};
+        }, DB::select('SHOW TABLES'));
+
+        $log = [];
+        foreach ($tables as $table) {
+            if (Schema::hasColumn($table, 'locked_by')) {
+                $log[$table] = [];
+                $affects = DB::table($table)->where('locked_by', '!=', 0)->get();
+                DB::table($table)->where('locked_by', '!=', 0)->update(['locked_by' => 0]);
+                foreach ($affects as $affect) {
+                    $log[$table][] = $affect->id;
+                }
+            }
+        }
+
+        $this->status = "RestoreSuccess";
+        $this->response = $log;
     }
 }
