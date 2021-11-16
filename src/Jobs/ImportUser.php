@@ -18,6 +18,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use PhpOffice\PhpSpreadsheet\Reader\IReadFilter;
 
@@ -75,6 +76,7 @@ class ImportUser implements ShouldQueue
             $spreadsheet->disconnectWorksheets();
             unset($spreadsheet);
         }
+        Log::error('import user error:'. $errorRow);
         // 刪除暫存檔
         unlink($this->filePath);
 
@@ -135,19 +137,17 @@ class ImportUser implements ShouldQueue
 
         $user->groups()->sync($groups[$rowData[2]]);
 
-//        // 電子報是否訂閱
-//        $nsfs = app(NewsletterSubscriptionFrontService::class);
-//        if ($rowData[16] == '是') {
-//            if ($rowData[2] == '一般會員') {
-//                $nsfs->store(collect(['newsletterCategoriesAlias' => ['01_newsletter'], 'email' => $user->email]), true);
-//            } else {
-//                $nsfs->store(collect(['newsletterCategoriesAlias' => ['01_newsletter', '01_deal_newsletter'], 'email' => $user->email]), true);
-//            }
-//        } else {
-//            $nsfs->store(collect(['newsletterCategoriesAlias' => [], 'email' => $user->email]), true);
-//        }
-
-
+        // 電子報是否訂閱
+        $nsfs = app(NewsletterSubscriptionFrontService::class);
+        if ($rowData[16] == '是') {
+            if ($rowData[2] == '一般會員') {
+                $nsfs->store(collect(['newsletterCategoriesAlias' => ['01_newsletter'], 'email' => $user->email]), true);
+            } else {
+                $nsfs->store(collect(['newsletterCategoriesAlias' => ['01_newsletter', '01_deal_newsletter'], 'email' => $user->email]), true);
+            }
+        } else {
+            $nsfs->store(collect(['newsletterCategoriesAlias' => [], 'email' => $user->email]), true);
+        }
 
         return $user;
     }
