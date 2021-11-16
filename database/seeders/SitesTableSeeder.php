@@ -26,12 +26,12 @@ class SitesTableSeeder extends Seeder
                 'seo_title' => '企業IT解決方案首選代理商 | 零壹科技 Zero One Tech.',
                 'seo_keyword' => '系統管理, 資訊安全, 網路設備, 儲存, 備份備援, 虛擬化, 視訊監控, 雲端服務, 大數據與人工智慧, Aimetis, Akamai, AXIS, Carbonite(Double-Take), CISCO, F5, FireEye, Gemalto-SafeNet, Ipswitch, ixia, Microsoft, NetApp, Nutanix, NVIDIA, ORing, PaloAlto Networks, QNAP, Splunk, Symantec, Synology, Tintri, Trend Micro, TrustView, Veeam, Veritas, VIVOTEK, VMware',
                 'seo_description' => '零壹科技專注於企業資訊設備代理與銷售通路建立，提供系統管理、資訊安全、網路設備、儲存、備份備援、虛擬化、視訊監控、雲端服務、大數據與人工智慧等軟/硬體解決方案。以「專業服務、邁向卓越」為指標，致力成為企業解決方案首選代理商。',
-                'fb_fanpage_id' => '485528961457510qeqeqw',
-                'fbFanpageUrl'      => '',
-                'lineId'            => '',
-                'liffId'            => '',
-                'youtubeUrl'        => '',
-                'ga' => 'UA-2133',
+                'fb_fanpage_id'     => '485528961457510',
+                'fbFanpageUrl'      => 'https://www.facebook.com/zeronetech',
+                'lineId'            => '@zeronetech',
+                'liffId'            => '1656636624-8ePYMXXn',
+                'youtubeUrl'        => 'https://www.youtube.com/c/%E9%9B%B6%E5%A3%B9%E7%A7%91%E6%8A%80',
+                'ga'                => 'UA-2133',
             ],
             'access'        => 1
         ]));

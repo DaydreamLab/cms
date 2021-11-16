@@ -16,13 +16,15 @@ class FilesTableSeeder extends Seeder
 
     public function run()
     {
-        $data = json_decode(file_get_contents(__DIR__.'/jsons/file.json'), true);
-        $this->categoryService = app(FileCategoryAdminService::class);
-        $this->fileAdminService = app(FileAdminService::class);
+        if (config('app.env') != 'production') {
+            $data = json_decode(file_get_contents(__DIR__.'/jsons/file.json'), true);
+            $this->categoryService = app(FileCategoryAdminService::class);
+            $this->fileAdminService = app(FileAdminService::class);
 
-        foreach ($data as $category) {
-            $category['params'] = RequestHelper::handleParams([]);
-            $this->categoryService->store(collect($category));
+            foreach ($data as $category) {
+                $category['params'] = RequestHelper::handleParams([]);
+                $this->categoryService->store(collect($category));
+            }
         }
     }
 

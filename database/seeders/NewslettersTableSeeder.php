@@ -16,30 +16,30 @@ class NewslettersTableSeeder extends Seeder
         $data = json_decode(file_get_contents(__DIR__.'/jsons/item.json'), true);
 
         $this->letterAdminService = app(NewsletterAdminService::class);
-        $this->letterAdminService->store(collect([
-            'title' => '測試電子報',
-            'alias' => 'testNewsletter',
-            'newsletter_category_id' => 45,
-            'state' => 1,
-            'number' => 400,
-            'params' => [
-                'display_topic' => 1,
-                'display_information' => 0,
-                'display_course' => 0,
-                'display_promotion' => 0,
-                'display_bulletin' => 0
-            ],
-            'bulletin' => [
-                [
-                    'id' => 5
-                ]
-            ],
-            'promotion' => [
-                [
-                    'id' => 6
-                ]
-            ]
-        ]));
+//        $this->letterAdminService->store(collect([
+//            'title' => '測試電子報',
+//            'alias' => 'testNewsletter',
+//            'newsletter_category_id' => 45,
+//            'state' => 1,
+//            'number' => 400,
+//            'params' => [
+//                'display_topic' => 1,
+//                'display_information' => 0,
+//                'display_course' => 0,
+//                'display_promotion' => 0,
+//                'display_bulletin' => 0
+//            ],
+//            'bulletin' => [
+//                [
+//                    'id' => 5
+//                ]
+//            ],
+//            'promotion' => [
+//                [
+//                    'id' => 6
+//                ]
+//            ]
+//        ]));
     }
 
 
