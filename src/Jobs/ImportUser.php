@@ -19,6 +19,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use PhpOffice\PhpSpreadsheet\Reader\IReadFilter;
 
 class ImportUser implements ShouldQueue
 {
@@ -46,22 +47,37 @@ class ImportUser implements ShouldQueue
     public function handle()
     {
         $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+
+        $chunkSize = 1000;
+
+        $chunkFilter = new Chunk();
+
+        $reader->setReadFilter($chunkFilter);
+
         $reader->setReadDataOnly(true);
-        $spreadsheet = $reader->load($this->filePath);
-        $sheet = $spreadsheet->getSheet(0);
-        $rows = $sheet->getHighestRow();
 
-        for ($i = 3; $i <= $rows; $i++) {
-            $rowData = $this->getXlsxRowData($sheet, $i);
-
-            // 創建獲取的資料
-            $company = $this->firstOrCreateCompany($rowData);
-            $user = $this->firstOrCreateUser($rowData);
-            $userCompany = $this->firstOrCreateuserCompany($rowData, $company, $user);
+        for ($startRow = 2; $startRow <= 30459; $startRow += $chunkSize) {
+            $chunkFilter->setRows($startRow, $chunkSize);
+            $spreadsheet = $reader->load($this->filePath);
+            $sheet = $spreadsheet->getSheetByName('會員資料');
+            $rows = $sheet->getHighestRow();
+            for ($i = $startRow; $i <= $rows; $i++) {
+                $rowData = $this->getXlsxRowData($sheet, $i);
+                try {
+                    //創建獲取的資料
+                    $company = $this->firstOrCreateCompany($rowData);
+                    $user = $this->firstOrCreateUser($rowData);
+                    $userCompany = $this->firstOrCreateuserCompany($rowData, $company, $user);
+                } catch (\Throwable $e) {
+                    $errorRow[] = $i;
+                }
+            }
+            $spreadsheet->disconnectWorksheets();
+            unset($spreadsheet);
         }
-
         // 刪除暫存檔
         unlink($this->filePath);
+
     }
 
     private function firstOrCreateCompany($rowData)
@@ -97,7 +113,7 @@ class ImportUser implements ShouldQueue
             'mobilePhone' => $rowData[0],
             'password' => bcrypt($rowData[1]),
             'name' => $rowData[3],
-            'email' => $rowData[9],
+            'email' => $rowData[8],
             'activateToken' => 'importedUser',
         ];
 
@@ -119,17 +135,17 @@ class ImportUser implements ShouldQueue
 
         $user->groups()->sync($groups[$rowData[2]]);
 
-        // 電子報是否訂閱
-        $nsfs = app(NewsletterSubscriptionFrontService::class);
-        if ($rowData[16] == '是') {
-            if ($rowData[2] == '一般會員') {
-                $nsfs->store(collect(['newsletterCategoriesAlias' => ['01_newsletter'], 'email' => $user->email]), true);
-            } else {
-                $nsfs->store(collect(['newsletterCategoriesAlias' => ['01_newsletter', '01_deal_newsletter'], 'email' => $user->email]), true);
-            }
-        } else {
-            $nsfs->store(collect(['newsletterCategoriesAlias' => [], 'email' => $user->email]), true);
-        }
+//        // 電子報是否訂閱
+//        $nsfs = app(NewsletterSubscriptionFrontService::class);
+//        if ($rowData[16] == '是') {
+//            if ($rowData[2] == '一般會員') {
+//                $nsfs->store(collect(['newsletterCategoriesAlias' => ['01_newsletter'], 'email' => $user->email]), true);
+//            } else {
+//                $nsfs->store(collect(['newsletterCategoriesAlias' => ['01_newsletter', '01_deal_newsletter'], 'email' => $user->email]), true);
+//            }
+//        } else {
+//            $nsfs->store(collect(['newsletterCategoriesAlias' => [], 'email' => $user->email]), true);
+//        }
 
 
 
@@ -182,5 +198,34 @@ class ImportUser implements ShouldQueue
         }
 
         return $data;
+    }
+}
+
+class Chunk implements IReadFilter
+{
+    private $startRow = 0;
+
+    private $endRow = 0;
+
+    /**
+     * Set the list of rows that we want to read.
+     *
+     * @param mixed $startRow
+     * @param mixed $chunkSize
+     */
+    public function setRows($startRow, $chunkSize)
+    {
+        $this->startRow = $startRow;
+        $this->endRow = $startRow + $chunkSize;
+    }
+
+    public function readCell($column, $row, $worksheetName = '')
+    {
+        //  Only read the heading row, and the rows that are configured in $this->_startRow and $this->_endRow
+        if (($row == 1) || ($row >= $this->startRow && $row < $this->endRow)) {
+            return true;
+        }
+
+        return false;
     }
 }

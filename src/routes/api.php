@@ -108,6 +108,8 @@ Route::post('api/rma/add', [RmaController::class, 'add']);
 Route::post('api/rma/search', [RmaController::class, 'search']);
 
 /************************************  後台 API  ************************************/
+# 全站回存
+Route::post('api/admin/restoreAllLockData', [SettingAdminController::class, 'restoreAllLockData'])->middleware(['expired', 'admin']);
 # 品牌 Brand
 
 Route::post('api/admin/brand/remove', [BrandAdminController::class, 'remove'])
