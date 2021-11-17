@@ -62,6 +62,7 @@ class ImportBrand implements ShouldQueue
         $sheet = $spreadsheet->getSheet(0);
         $rows = $sheet->getHighestRow();
         for ($i = 3; $i <= $rows; $i++) {
+            dump($i);
             $rowData = $this->getXlsxRowData($sheet, $i);
             // 創建獲取的資料
             $brand = $this->firstOrCreateBrand($rowData[0]);
@@ -86,6 +87,7 @@ class ImportBrand implements ShouldQueue
                 'alias' => Str::uuid()->getHex(),
                 'params' => ["meta" => [ "title" => "", "keywords" => "", "description" => ""], "seo" => []],
             ]));
+            dump('create: '. $title);
         }
 
         return $brand;
