@@ -8,6 +8,7 @@ use DaydreamLab\Cms\Services\Brand\BrandService;
 use DaydreamLab\Cms\Services\Item\Admin\ItemAdminService;
 use DaydreamLab\Cms\Services\Product\ProductService;
 use DaydreamLab\Cms\Services\ProductCategory\ProductCategoryService;
+use DaydreamLab\User\Models\User\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -81,6 +82,11 @@ class ImportPromation implements ShouldQueue
             ]));
         }
 
+        $user = User::whereHas('groups', function ($q) {
+            $q->where('users_groups.id', 4);
+        })->get()->each(function ($user) use ($brand) {
+            $user->brands()->syncWithoutDetaching($brand->id);
+        });
         return $brand;
     }
 

@@ -7,6 +7,7 @@ use DaydreamLab\Cms\Services\Brand\Admin\BrandAdminService;
 use DaydreamLab\Cms\Services\Brand\BrandService;
 use DaydreamLab\Cms\Services\Product\ProductService;
 use DaydreamLab\Cms\Services\ProductCategory\ProductCategoryService;
+use DaydreamLab\User\Models\User\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -76,7 +77,11 @@ class ImportBrandInfo implements ShouldQueue
             $data['params'] =  ["meta" => [ "title" => "", "keywords" => "", "description" => ""], "seo" => []];
         }
         $brand = $this->brandService->store(collect($data));
-
+        $user = User::whereHas('groups', function ($q) {
+            $q->where('users_groups.id', 4);
+        })->get()->each(function ($user) use ($brand) {
+            $user->brands()->syncWithoutDetaching($brand->id);
+        });
         return $brand;
     }
 
