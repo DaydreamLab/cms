@@ -51,6 +51,7 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
                 'email'   => $user->email,
                 'newsletterCategoryIds' => $wantCategories->pluck('id')->all()
             ];
+            $inputEmail = $user->email;
         } else {
             $inputEmail =  $input->get('email');
             # 沒有登入會員一定要填 email
