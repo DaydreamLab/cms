@@ -81,6 +81,7 @@ class ImportBrand implements ShouldQueue
     private function firstOrCreateBrand($title)
     {
         $brand = $this->brandService->getModel()->where('title', $title)->first();
+        dump($brand->title);
         if (! $brand) {
             $brand = $this->brandService->store(collect([
                 'title' => $title,
