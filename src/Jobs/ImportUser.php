@@ -115,7 +115,7 @@ class ImportUser implements ShouldQueue
             'mobilePhone' => $rowData[0],
             'password' => bcrypt($rowData[1]),
             'name' => $rowData[3],
-            'email' => $rowData[8],
+            'email' => strtolower($rowData[8]),
             'activateToken' => 'importedUser',
         ];
 
@@ -167,7 +167,7 @@ class ImportUser implements ShouldQueue
             'vat' => $rowData[4],
             'phone' => $rowData[6],
             'extNumber' => $rowData[7],
-            'email' => $rowData[8],
+            'email' => strtolower($rowData[8]),
             'department' => $rowData[10],
             'jobTitle' => $rowData[11],
             'industry' => $rowData[12],
