@@ -76,7 +76,7 @@ class ImportUser implements ShouldQueue
             $spreadsheet->disconnectWorksheets();
             unset($spreadsheet);
         }
-        Log::error('import user error:'. $errorRow);
+        Log::error('import user error:'. json_encode($errorRow));
         // 刪除暫存檔
         unlink($this->filePath);
 
