@@ -818,9 +818,7 @@ class ItemFrontService extends ItemService
     protected function searchFeatureContent(Collection $input, $content_type)
     {
         $input->put('content_type', $content_type);
-        $limit = $input->get('limit');
         $input->put('limit', 0);
-        $page = $input->get('page');
         $input->forget('page');
 
         $params = $input->toArray();
@@ -829,6 +827,8 @@ class ItemFrontService extends ItemService
         $notFeatured = $this->searchContent(collect($params), false);
 
         unset($params['brand_alias']);
+        unset($params['search']);
+        unset($params['search_date']);
         $params['q'] = new QueryCapsule();
         $params['featured'] = 1;
         $featured = $this->searchContent(collect($params), false);
