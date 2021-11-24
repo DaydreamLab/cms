@@ -21,11 +21,11 @@ class CustomerMessageReplyAdminController extends CmsController
 
     public function store(CustomerMessageReplyAdminStoreRequest $request)
     {
-        //try {
+        try {
             $this->service->store($request->validated());
-        //} catch (Throwable $t) {
-            //$this->handleException($t);
-        //}
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
 
         return $this->response($this->service->status, $this->service->response, [], CustomerMessageReplyAdminResource::class);
     }

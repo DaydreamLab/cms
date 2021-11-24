@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Notifications\CustomerMessage;
 
 use DaydreamLab\User\Notifications\BaseNotification;
 use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Messages\MailMessage;
 
 class SendCustomerMessageNotification extends BaseNotification
 {
@@ -13,7 +14,7 @@ class SendCustomerMessageNotification extends BaseNotification
 
     protected $type = 'send';
 
-    protected $view = 'emails.CustomerMessage.Send';
+    protected $view = 'emails.CustomerMessage.New';
 
     protected $message;
 
@@ -37,7 +38,7 @@ class SendCustomerMessageNotification extends BaseNotification
 
     public function defaultMailContent()
     {
-        return $this->content;
+        return '感謝您的留言，我們會儘速回覆您，謝謝。';
     }
 
 
@@ -51,9 +52,20 @@ class SendCustomerMessageNotification extends BaseNotification
     public function getMailParams()
     {
         return [
-            'content' => $this->content
+            'customerMessage'   => $this->message,
+            'subject'   => $this->defaultSubject(),
+            'content'   => $this->defaultMailContent()
         ];
     }
+
+
+    public function toMail($notifiable)
+    {
+        return (new MailMessage)
+            ->subject($this->defaultSubject())
+            ->view($this->view, $this->getMailParams());
+    }
+
 
     /**
      * Get the notification's delivery channels.

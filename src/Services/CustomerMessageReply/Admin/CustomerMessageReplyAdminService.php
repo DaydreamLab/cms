@@ -34,12 +34,12 @@ class CustomerMessageReplyAdminService extends CustomerMessageReplyService
         }
 
         $reply = parent::add($input);
-/*
+
         foreach ($input->get('channels') as $channel) {
             if ($channel == 'mail') {
                 $to = $message->backupEmail
                     ? [$message->email, $message->backupEmail]
-                    : [$message->backupEmail];
+                    : [$message->email];
             } else {
                 $to = $message->mobilePhoneCode . '-' . $message->mobilePhone;
             }
@@ -47,14 +47,11 @@ class CustomerMessageReplyAdminService extends CustomerMessageReplyService
                 $channel,
                 $to,
                 new ReplyCustomerMessageNotification(
-                    $message,
-                    $input->get('subject'),
-                    $input->get('content'),
+                    $reply,
                     $this->getUser()->id
                 )
             );
         }
-*/
         return $this->response;
     }
 }

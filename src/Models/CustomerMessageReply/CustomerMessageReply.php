@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Models\CustomerMessageReply;
 
 use DaydreamLab\Cms\Models\CmsModel;
+use DaydreamLab\Cms\Models\CustomerMessage\CustomerMessage;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\JJAJ\Traits\UserInfo;
 
@@ -59,8 +60,15 @@ class CustomerMessageReply extends CmsModel
         'channels' => 'array'
     ];
 
+
     public static function boot()
     {
         self::traitBoot();
+    }
+
+
+    public function message()
+    {
+        return $this->belongsTo(CustomerMessage::class, 'messageId', 'id');
     }
 }

@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Notifications\CustomerMessageReply;
 
 use DaydreamLab\User\Notifications\BaseNotification;
 use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Messages\MailMessage;
 
 class ReplyCustomerMessageNotification extends BaseNotification
 {
@@ -15,40 +16,35 @@ class ReplyCustomerMessageNotification extends BaseNotification
 
     protected $view = 'emails.CustomerMessageReply.Reply';
 
-    protected $message;
+    protected $reply;
 
-    protected $subject;
-
-    protected $content;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($message, $subject, $content, $creatorId = null)
+    public function __construct($reply, $creatorId = null)
     {
         parent::__construct($creatorId);
-        $this->message = $message;
-        $this->subject = $subject;
-        $this->content = $content;
+        $this->reply = $reply;
     }
 
 
     public function defaultSubject()
     {
-        return $this->subject;
+        return $this->reply->subject;
     }
 
 
     public function defaultMailContent()
     {
-        return $this->content;
+        return $this->reply->content;
     }
 
 
     public function defaultSmsContent($channelType)
     {
-        return $this->content;
+        return $this->reply->content;
     }
 
 
@@ -56,9 +52,21 @@ class ReplyCustomerMessageNotification extends BaseNotification
     public function getMailParams()
     {
         return [
-            'content' => $this->content
+            'subject' => $this->subject,
+            'customerMessage' => $this->reply->message,
+            'customerMessageReply' => $this->reply
         ];
     }
+
+
+
+    public function toMail($notifiable)
+    {
+        return (new MailMessage)
+            ->subject($this->defaultSubject())
+            ->view($this->view, $this->getMailParams());
+    }
+
 
     /**
      * Get the notification's delivery channels.

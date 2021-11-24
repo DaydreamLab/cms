@@ -25,7 +25,7 @@ use DaydreamLab\JJAJ\Helpers\InputHelper;
 use DaydreamLab\Cms\Services\Item\ItemService;
 use Illuminate\Support\Collection;
 
-class ItemAdminService extends ItemService
+class  ItemAdminService extends ItemService
 {
     use CmsCronJob;
 
