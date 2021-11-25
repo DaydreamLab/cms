@@ -595,10 +595,7 @@ class ItemFrontService extends ItemService
                 if ($ic) {
                     $exvs = ExtrafieldValue::where('extrafield_id', $ica_ex->id)->get();
                     $exvs = $exvs->filter(function ($e) use ($ic) {
-                        $values = array_map(function ($i) {
-                            return $i['id'];
-                        }, json_decode($e->value, true));
-                        return in_array($ic->id, $values);
+                        return ($ic->id == $e->value);
                     });
                     $item_ids = array_merge($item_ids, $exvs->pluck(['item_id'])->toArray());
                 }
