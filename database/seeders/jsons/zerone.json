@@ -9,6 +9,9 @@
             "redirect": "",
             "icon": "home"
         },
+      "apis": [
+        "searchCustomerMessage"
+      ],
         "assets": [],
         "userGroups": ["Administrator", "Super User"]
     },
