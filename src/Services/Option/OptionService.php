@@ -122,7 +122,7 @@ class OptionService
             }
             elseif ($type == 'brand') {
                 $data[$type] = $this->getOptionList($service, 'list', collect(
-                    ['q' => $q->where('state', 1), 'limit' => 0]
+                    ['q' => $q->where('state', 1)->orderBy('title', 'asc'), 'limit' => 0]
                 ));
             } elseif ($type == 'product_category') {
                 $data[$type] = $this->getOptionList($service, 'tree', collect(

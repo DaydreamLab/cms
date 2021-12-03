@@ -40,7 +40,8 @@ class ProductFrontService extends ProductService
             if ( count($brand_ids) ) {
                 $q = $input->get('q');
                 $q = $q->whereHas('brands', function ($query) use ($brand_ids) {
-                    $query->whereIn('brands_products_maps.brand_id', $brand_ids);
+                    $query->whereIn('brands_products_maps.brand_id', $brand_ids)
+                        ->where('brands.state', 1);
                 });
                 $input->put('q', $q);
             }
