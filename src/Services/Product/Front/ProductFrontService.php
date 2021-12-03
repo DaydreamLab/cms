@@ -58,11 +58,9 @@ class ProductFrontService extends ProductService
                 }
             }
 
-            if ( count($pc_ids) ) {
-                $q = $input->get('q');
-                $q = $q->whereIn('product_category_id', $pc_ids);
-                $input->put('q', $q);
-            }
+            $q = $input->get('q');
+            $q = $q->whereIn('product_category_id', $pc_ids);
+            $input->put('q', $q);
         }
         $input->forget('product_category_alias');
 
