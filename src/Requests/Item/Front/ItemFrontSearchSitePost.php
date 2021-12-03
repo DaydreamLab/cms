@@ -27,7 +27,8 @@ class ItemFrontSearchSitePost extends CmsSearchRequest
     {
         $rules = [
             'tag'       => 'nullable|string',
-            'type'      => [
+            'type'      => 'nullable|array',
+            'type.*'    => [
                 'nullable',
                 'string',
                 Rule::in([
