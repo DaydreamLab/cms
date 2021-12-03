@@ -256,7 +256,7 @@ class OptionService
                     $brands = $bser->getAllBrands();
                     $data[$type] = $brands->map(function ($b) {
                         return $b->only(['alias', 'title']);
-                    });
+                    })->sortBy('title')->values();
                     break;
                 case 'product_parent_category':
                     $pcser = app(ProductCategoryFrontService::class);
