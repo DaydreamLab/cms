@@ -61,7 +61,10 @@ class ProductFrontService extends ProductService
             }
 
             $q = $input->get('q');
-            $q = $q->whereIn('product_category_id', $pc_ids);
+            $q = $q->whereIn('product_category_id', $pc_ids)
+                ->whereHas('brands', function ($q) {
+                    $q->where('brands.state', 1);
+                });
             $input->put('q', $q);
         }
         $input->forget('product_category_alias');
