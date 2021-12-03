@@ -730,7 +730,7 @@ class ItemFrontService extends ItemService
 
         $tag = $input->get('tag');
         $input->forget('tag');
-        $type = $input->get('type');
+        $types = $input->get('type');
         $input->forget('type');
         $limit = $input->get('limit');
         $input->put('limit', 0);
@@ -738,25 +738,26 @@ class ItemFrontService extends ItemService
         $input->forget('page');
 
         $response = collect([]);
-        if ($type) {
-            if ($type == 'brand') {
-                $response = $brandSer->search($input);
-            } elseif ($type == 'file') {
-                $input->put('searchKeys', ['name', 'description']);
-                $response = $fileSer->search($input, false);
-            } elseif ($type == 'course') {
+        if ( count($types) ) {
 
-            } else {
-                $items = $this->searchContent($input, false);
-                foreach ($items as $item) {
-                    $content_type = $item->category->content_type;
-                    if ($type == 'news') {
-                        if (in_array($content_type, ['bulletin', 'promotion'])) {
-                            $response->push($item);
-                        }
-                    } else {
-                        if ($content_type == $type) {
-                            $response->push($item);
+            foreach ($types as $type) {
+                if ($type == 'brand') {
+                    $response = $response->merge($brandSer->search($input));
+                } elseif ($type == 'file') {
+                    $input->put('searchKeys', ['name', 'description']);
+                    $response = $response->merge($fileSer->search($input, false));
+                } else {
+                    $items = $this->searchContent($input, false);
+                    foreach ($items as $item) {
+                        $content_type = $item->category->content_type;
+                        if ($type == 'news') {
+                            if (in_array($content_type, ['bulletin', 'promotion'])) {
+                                $response->push($item);
+                            }
+                        } else {
+                            if ($content_type == $type) {
+                                $response->push($item);
+                            }
                         }
                     }
                 }
