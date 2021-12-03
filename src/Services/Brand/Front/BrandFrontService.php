@@ -75,7 +75,7 @@ class BrandFrontService extends BrandService
             $productFS = app(ProductFrontService::class);
             $q = new QueryCapsule();
             $q->with('brands');
-            $products = $productFS->search(collect(['q' => $q, 'product_category_alias' => [$productCategoryAlias], 'limit' => 0]));
+            $products = $productFS->search(collect(['q' => $q, 'product_category_alias' => $productCategoryAlias, 'limit' => 0]));
             # map 出這些產品屬於的品牌
             $brandsWithDuplicate = collect([]);
             $products->each(function ($p) use (&$brandsWithDuplicate) {

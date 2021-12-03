@@ -27,7 +27,8 @@ class BrandFrontSearchRequest extends CmsSearchRequest
     public function rules()
     {
         $rules = [
-            'product_category_alias'   => 'nullable|string'
+            'product_category_alias'   => 'nullable|array',
+            'product_category_alias.*' => 'nullable|string'
         ];
 
         return array_merge(parent::rules(), $rules);
