@@ -31,7 +31,9 @@ class ProductFrontService extends ProductService
         if ( $brand_alias = $input->get('brand_alias') ) {
             $brand_ids = [];
             foreach ($brand_alias as $ba) {
-                $brand = Brand::where('alias', $ba)->first();
+                $brand = Brand::where('alias', $ba)
+                    ->where('state', 1)
+                    ->first();
                 if ($brand) {
                     $brand_ids[] = $brand->id;
                 }
@@ -40,8 +42,7 @@ class ProductFrontService extends ProductService
             if ( count($brand_ids) ) {
                 $q = $input->get('q');
                 $q = $q->whereHas('brands', function ($query) use ($brand_ids) {
-                    $query->whereIn('brands_products_maps.brand_id', $brand_ids)
-                        ->where('brands.state', 1);
+                    $query->whereIn('brands_products_maps.brand_id', $brand_ids);
                 });
                 $input->put('q', $q);
             }
