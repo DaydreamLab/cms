@@ -9,6 +9,7 @@ use DaydreamLab\Cms\Services\Item\Front\ItemFrontService;
 use DaydreamLab\Cms\Services\Product\Front\ProductFrontService;
 use DaydreamLab\Dsth\Services\EventSession\Front\EventSessionFrontService;
 use DaydreamLab\JJAJ\Database\QueryCapsule;
+use DaydreamLab\JJAJ\Exceptions\NotFoundException;
 use DaydreamLab\Media\Services\File\Front\FileFrontService;
 use Illuminate\Support\Collection;
 
@@ -30,6 +31,10 @@ class BrandFrontService extends BrandService
     public function getBrandByAlias(Collection $input)
     {
         $brand = $this->findBy('alias', '=', $input->get('alias'))->first();
+        if (!$brand) {
+            throw new NotFoundException('ItemNotExist');
+        }
+
         # 需要把 products 按照產品大類分類
         $products = $brand->products;
         $filter_products = [];
