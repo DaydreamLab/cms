@@ -74,6 +74,14 @@ class BrandFrontResource extends BaseJsonResource
             $data->push($temp);
         }
 
+        if ($tabs->event) {
+            $temp = [
+                'title' => '課程活動',
+                'alias' => 'event',
+            ];
+            $data->push($temp);
+        }
+
         if ($tabs->promotion || $tabs->bulletin) {
             $temp = [
                 'title' => '最新消息',
