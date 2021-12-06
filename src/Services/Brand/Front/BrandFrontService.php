@@ -69,14 +69,14 @@ class BrandFrontService extends BrandService
             'limit' => 1,
             'brand_alias' => [$input->get('alias')],
             'q' => new QueryCapsule()
-        ]))->count();
+        ]))->get('items')->count();
 
         # 品牌新訊
         $tabs->bulletin = $itemFrontService->searchBulletin(collect([
             'limit' => 1,
             'brand_alias' => [$input->get('alias')],
             'q' => new QueryCapsule()
-        ]))->count();
+        ]))->get('items')->count();
 
         # 成功案例
         $tabs->case = $itemFrontService->searchCase(collect([
