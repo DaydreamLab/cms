@@ -95,7 +95,7 @@ class BrandFrontService extends BrandService
             'limit' => 1,
             'brand_alias' => [$input->get('alias')],
             'q' => new QueryCapsule()
-        ]))->count();
+        ]))->get('items')->count();
 
         # 檔案下載
         $tabs->file = app(FileFrontService::class)->search(collect([
