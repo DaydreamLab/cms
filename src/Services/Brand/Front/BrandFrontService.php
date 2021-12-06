@@ -5,9 +5,11 @@ namespace DaydreamLab\Cms\Services\Brand\Front;
 use DaydreamLab\Cms\Models\ProductCategory\ProductCategory;
 use DaydreamLab\Cms\Repositories\Brand\Front\BrandFrontRepository;
 use DaydreamLab\Cms\Services\Brand\BrandService;
+use DaydreamLab\Cms\Services\Item\Front\ItemFrontService;
 use DaydreamLab\Cms\Services\Product\Front\ProductFrontService;
 use DaydreamLab\Dsth\Services\EventSession\Front\EventSessionFrontService;
 use DaydreamLab\JJAJ\Database\QueryCapsule;
+use DaydreamLab\Media\Services\File\Front\FileFrontService;
 use Illuminate\Support\Collection;
 
 class BrandFrontService extends BrandService
@@ -44,10 +46,61 @@ class BrandFrontService extends BrandService
             $temp['products'] = $filter_product['products'];
             $filter_products_array[] = $temp;
         }
+
+        $tabs = (object) [];
         $brand->products = $filter_products_array;
+        $tabs->product = count($filter_products_array) ? 1 : 0;
         $brand->events = $brandEvents = app(EventSessionFrontService::class)->searchEvent(
             collect(['limit' => 6, 'brandAlias' => $brand->alias])
         );
+        $tabs->event = $brand->events->count() ? 1 : 0;
+
+        $itemFrontService = app(ItemFrontService::class);
+
+        # 解決方案
+        $tabs->solution = $itemFrontService->searchSolution(collect([
+            'limit' => 1,
+            'brand_alias' => [$input->get('alias')],
+            'q' => new QueryCapsule()
+        ]))->count();
+
+        # 促銷訊息
+        $tabs->promotion = $itemFrontService->searchPromotion(collect([
+            'limit' => 1,
+            'brand_alias' => [$input->get('alias')],
+            'q' => new QueryCapsule()
+        ]))->count();
+
+        # 品牌新訊
+        $tabs->bulletin = $itemFrontService->searchBulletin(collect([
+            'limit' => 1,
+            'brand_alias' => [$input->get('alias')],
+            'q' => new QueryCapsule()
+        ]))->count();
+
+        # 成功案例
+        $tabs->case = $itemFrontService->searchCase(collect([
+            'limit' => 1,
+            'brand_alias' => [$input->get('alias')],
+            'q' => new QueryCapsule()
+        ]))->count();
+
+        # 產品影片
+        $tabs->video = $itemFrontService->searchVideo(collect([
+            'limit' => 1,
+            'brand_alias' => [$input->get('alias')],
+            'q' => new QueryCapsule()
+        ]))->count();
+
+        # 檔案下載
+        $tabs->file = app(FileFrontService::class)->search(collect([
+            'limit' => 1,
+            'contentType' => 'file',
+            'brand_alias' => $input->get('alias'),
+            'q' => new QueryCapsule()
+        ]))->count();
+
+        $brand->tabs = $tabs;
 
         $this->status = 'GetItemSuccess';
         $this->response = $brand;

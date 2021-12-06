@@ -48,7 +48,82 @@ class BrandFrontResource extends BaseJsonResource
             'files'                 => (new FileFrontSearchResourceCollection($this->files))->collection->take(3),
             'events'                => $this->events->map(function ($event) {
                 return new EventFrontSearchResource($event);
-            })
+            }),
+            'tabs'                  => $this->handleTabs()
         ];
+    }
+
+
+    public function handleTabs()
+    {
+        $tabs = $this->tabs;
+        $data = collect();
+        if ($tabs->solution) {
+            $temp = [
+                'title' => '解決方案',
+                'alias' => 'solution',
+            ];
+            $data->push($temp);
+        }
+
+        if ($tabs->product) {
+            $temp = [
+                'title' => '產品系列',
+                'alias' => 'product',
+            ];
+            $data->push($temp);
+        }
+
+        if ($tabs->promotion || $tabs->bulletin) {
+            $temp = [
+                'title' => '最新消息',
+                'alias' => 'news',
+            ];
+
+            $children = [];
+            if ($tabs->promotion) {
+                $t = [
+                    'title' => '促銷訊息',
+                    'alias' => 'promotion',
+                ];
+                $children[] = $t;
+            }
+
+            if ($tabs->bulletin) {
+                $t = [
+                    'title' => '品牌新訊',
+                    'alias' => 'bulletin',
+                ];
+                $children[] = $t;
+            }
+            $temp['children'] = $children;
+            $data->push($temp);
+        }
+
+        if ($tabs->case) {
+            $temp = [
+                'title' => '成功案例',
+                'alias' => 'case',
+            ];
+            $data->push($temp);
+        }
+
+        if ($tabs->file) {
+            $temp = [
+                'title' => '檔案下載',
+                'alias' => 'file',
+            ];
+            $data->push($temp);
+        }
+
+        if ($tabs->video) {
+            $temp = [
+                'title' => '產品影片',
+                'alias' => 'video',
+            ];
+            $data->push($temp);
+        }
+
+        return $data;
     }
 }
