@@ -282,6 +282,48 @@ class  ItemAdminService extends ItemService
     }
 
 
+    public function searchContent(Collection $input)
+    {
+        $extension = $input->get('extension') ?: 'item';
+        $content_type = $input->get('content_type');
+
+        if (!InputHelper::null($input, 'category_id')) {
+            $category_ids = $this->categoryAdminService->findSubTreeIds($input->get('category_id'));
+        } else {
+            $categories = $this->categoryAdminService->search(Helper::collect([
+                'extension'     => $extension,
+                'content_type'  => $content_type,
+                'paginate'  => false
+            ]));
+            $category_ids = $categories->pluck('id');
+        }
+
+        $q = $input->get('q');
+        $q = $q->whereIn('category_id', $category_ids);
+        $input->put('q', $q);
+
+        $input->forget(['extension', 'content_type', 'category_id']);
+
+        if ( in_array($content_type, ['memorabilia', 'finance', 'stockholder']) ) {
+            $page = $input->get('page');
+            $limit = $input->get('limit');
+            $input->put('limit', 0);
+            $input->put('paginate', false);
+            $input->forget('page');
+
+            $result = parent::search($input);
+            $result = $result->sortByDesc(function ($i) {
+                return $i->extrafields['year']['value'];
+            })->values();
+
+            $this->response = $this->repo->paginate($result, $limit, ($page) ?: 1);
+            return $this->response;
+        }
+
+        return parent::search($input);
+    }
+
+
     public function store(Collection $input)
     {
         if ($input->get('state') == 1

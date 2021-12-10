@@ -301,7 +301,7 @@ class ItemAdminController extends CmsController
     {
         $this->service->setUser($request->user('api'));
         try {
-            $this->service->search($request->validated());
+            $this->service->searchContent($request->validated());
         } catch (Throwable $t) {
             $this->handleException($t);
         }
