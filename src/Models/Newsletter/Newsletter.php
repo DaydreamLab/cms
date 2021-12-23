@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Models\Newsletter;
 
 use DaydreamLab\Cms\Models\Item\Item;
+use DaydreamLab\Dsth\Models\Event\Event;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\JJAJ\Traits\UserInfo;
@@ -100,6 +101,13 @@ class Newsletter extends BaseModel
     public function items()
     {
         return $this->belongsToMany(Item::class, 'newsletters_items_maps', 'newsletter_id', 'item_id')
+            ->withTimestamps();
+    }
+
+
+    public function events()
+    {
+        return $this->belongsToMany(Event::class, 'newsletters_events_maps', 'newsletter_id', 'event_id')
             ->withTimestamps();
     }
 

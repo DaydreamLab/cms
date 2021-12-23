@@ -44,7 +44,9 @@ class NewsletterAdminStoreRequest extends CmsStoreRequest
             'information.*.url'     => 'nullable|string',
             'params'                => 'nullable|array',
 
-            'course'                => 'nullable|array',
+            'event'                 => 'nullable|array',
+            'event.*'               => 'nullable|array',
+            'event.*.id'            => 'required|integer',
             'promotion'             => 'nullable|array',
             'promotion.*'           => 'nullable|array',
             'promotion.*.id'        => 'required|integer',

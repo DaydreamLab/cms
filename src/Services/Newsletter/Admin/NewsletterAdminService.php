@@ -38,6 +38,12 @@ class NewsletterAdminService extends NewsletterService
         if (count($item_ids)) {
             $item->items()->attach($item_ids);
         }
+
+        $events = $input->get('event') ? $input->get('event') : [];
+        $event_ids = array_map(function($event) {
+            return $event['id'];
+        }, $events);
+        $item->events()->attach($event_ids);
     }
 
 
@@ -99,6 +105,13 @@ class NewsletterAdminService extends NewsletterService
         }
 
         $item->items()->sync($item_ids);
+
+        if ( $input->get('event') !== null ) {
+            $event_ids = array_map(function($event) {
+                return $event['id'];
+            }, $input->get('event'));
+            $item->events()->sync($event_ids);
+        }
     }
 
 
@@ -121,7 +134,8 @@ class NewsletterAdminService extends NewsletterService
             'url' => $newsletter->url,
             'information' => $newsletter->information,
             'bulletin' => $newsletter->bulletin,
-            'promotion' => $newsletter->promotion
+            'promotion' => $newsletter->promotion,
+            'event' => $newsletter->events
         ])->render();
 
         $inlineCssHtml = $this->generateInlineCssHtml($html);

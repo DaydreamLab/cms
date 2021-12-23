@@ -29,7 +29,7 @@ class NewsletterAdminResource extends BaseJsonResource
             'params'            => $this->params,
             'state'             => $this->state,
 
-            'course'            => [],
+            'event'             => $this->events,
             'promotion'         => $this->promotion,
             'bulletin'          => $this->bulletin,
 
