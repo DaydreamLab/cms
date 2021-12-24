@@ -38,22 +38,7 @@ class NewsletterSubscriptionAdminService extends NewsletterSubscriptionService
 
     public function export(Collection $input)
     {
-        $subscriptions = parent::search($input);
-        $subscriptions->transform(function ($s) {
-            $temp = [];
-            $temp[] = $s->userGroupName;
-            $temp[] = $s->companyName;
-            $temp[] = $s->userName;
-            $temp[] = $s->email;
-            $temp[] = $s->userMobilePhone;
-            $category = $s->newsletterCategories->map(function ($n) {
-                return $n->title;
-            });
-            $temp[] = implode(',', $category->toArray());
-            return $temp;
-        });
-
-        return $subscriptions;
+        return parent::search($input);
         /*
         $search = $input->get('search');
         $input->forget('search');

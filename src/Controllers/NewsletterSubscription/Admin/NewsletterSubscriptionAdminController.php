@@ -11,6 +11,7 @@ use DaydreamLab\Cms\Requests\NewsletterSubscription\Admin\NewsletterSubscription
 use DaydreamLab\Cms\Requests\NewsletterSubscription\Admin\NewsletterSubscriptionAdminStateRequest;
 use DaydreamLab\Cms\Requests\NewsletterSubscription\Admin\NewsletterSubscriptionAdminStoreRequest;
 use DaydreamLab\Cms\Resources\NewsletterSubscription\Admin\Collections\NewsletterSubscriptionAdminListResourceCollection;
+use DaydreamLab\Cms\Resources\NewsletterSubscription\Admin\Collections\NewsletterSubscriptionAdminExportResourceCollection;
 use DaydreamLab\Cms\Resources\NewsletterSubscription\Admin\Models\NewsletterSubscriptionAdminResource;
 use DaydreamLab\Cms\Services\NewsletterSubscription\Admin\NewsletterSubscriptionAdminService;
 use Throwable;
@@ -28,7 +29,14 @@ class NewsletterSubscriptionAdminController extends CmsController
 
     public function export(NewsletterSubscriptionAdminExportRequest $request)
     {
-        return $this->service->export($request->validated());
+        $this->service->setUser($request->user());
+        try {
+            $this->service->export($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response, [], NewsletterSubscriptionAdminExportResourceCollection::class);
     }
 
 
