@@ -136,7 +136,7 @@ class NewsletterAdminService extends NewsletterService
             'information' => $newsletter->information,
             'bulletin' => $newsletter->bulletin,
             'promotion' => $newsletter->promotion,
-            'event' => (new EventAdminSearchResourceCollection($newsletter->events, false))->toArray(null)
+            'event' => (new EventAdminSearchResourceCollection($newsletter->events, false))->collection->toArray()
         ])->render();
 
         $inlineCssHtml = $this->generateInlineCssHtml($html);
