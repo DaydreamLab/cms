@@ -30,7 +30,7 @@ class NewsletterAdminResource extends BaseJsonResource
             'params'            => $this->params,
             'state'             => $this->state,
 
-            'event'             => new EventAdminSearchResourceCollection($this->events),
+            'event'             => new EventAdminSearchResourceCollection($this->events, false),
             'promotion'         => $this->promotion,
             'bulletin'          => $this->bulletin,
 
