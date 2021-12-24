@@ -38,6 +38,23 @@ class NewsletterSubscriptionAdminService extends NewsletterSubscriptionService
 
     public function export(Collection $input)
     {
+        $subscriptions = parent::search($input);
+        $subscriptions->transform(function ($s) {
+            $temp = [];
+            $temp[] = $s->userGroupName;
+            $temp[] = $s->companyName;
+            $temp[] = $s->userName;
+            $temp[] = $s->email;
+            $temp[] = $s->userMobilePhone;
+            $category = $s->newsletterCategories->map(function ($n) {
+                return $n->title;
+            });
+            $temp[] = implode(',', $category->toArray());
+            return $temp;
+        });
+
+        return $subscriptions;
+        /*
         $search = $input->get('search');
         $input->forget('search');
         $input->put('limit', 0);
@@ -104,6 +121,7 @@ class NewsletterSubscriptionAdminService extends NewsletterSubscriptionService
         header('Content-Disposition: attachment; filename="'. urlencode($filename).'"');
         ob_clean();
         $writer->save('php://output');
+        */
     }
 
 

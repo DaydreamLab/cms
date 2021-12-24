@@ -47,7 +47,6 @@ class NewsletterSubscriptionAdminExportRequest extends CmsSearchRequest
     public function validated()
     {
         $validated = parent::validated();
-
         $validated['q'] = $this->q->with('user', 'user.company', 'user.groups');
 
         if ($validated->get('state') == '') {
