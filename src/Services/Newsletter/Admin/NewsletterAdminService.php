@@ -5,7 +5,7 @@ namespace DaydreamLab\Cms\Services\Newsletter\Admin;
 use Carbon\Carbon;
 use DaydreamLab\Cms\Repositories\Newsletter\Admin\NewsletterAdminRepository;
 use DaydreamLab\Cms\Services\Newsletter\NewsletterService;
-use DaydreamLab\Dsth\Resources\Event\Admin\Collections\EventAdminSearchResourceCollection;
+use DaydreamLab\Dsth\Resources\Event\Admin\Models\EventAdminSearchResource;
 use DaydreamLab\JJAJ\Exceptions\ForbiddenException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
@@ -136,7 +136,9 @@ class NewsletterAdminService extends NewsletterService
             'information' => $newsletter->information,
             'bulletin' => $newsletter->bulletin,
             'promotion' => $newsletter->promotion,
-            'event' => (new EventAdminSearchResourceCollection($newsletter->events, false))->collection->toArray()
+            'event' => $newsletter->events->transform(function ($e) use ($input) {
+                return json_decode((new EventAdminSearchResource((object)$e))->toJson(), true);
+            })
         ])->render();
 
         $inlineCssHtml = $this->generateInlineCssHtml($html);
