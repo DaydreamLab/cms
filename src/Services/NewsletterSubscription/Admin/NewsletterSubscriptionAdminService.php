@@ -38,7 +38,7 @@ class NewsletterSubscriptionAdminService extends NewsletterSubscriptionService
 
     public function export(Collection $input)
     {
-        return parent::search($input);
+        return $this->search($input);
         /*
         $search = $input->get('search');
         $input->forget('search');
