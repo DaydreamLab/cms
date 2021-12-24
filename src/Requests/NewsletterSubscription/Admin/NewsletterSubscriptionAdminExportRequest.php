@@ -48,6 +48,8 @@ class NewsletterSubscriptionAdminExportRequest extends CmsSearchRequest
     {
         $validated = parent::validated();
 
+        $validated['q'] = $this->q->with('user');
+
         if ($validated->get('state') == '') {
             $validated->forget('state');
             $validated['q'] = $this->q->whereIn('state', [0, 1]);

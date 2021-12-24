@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Resources\Newsletter\Admin\Models;
 
 use DaydreamLab\JJAJ\Resources\BaseJsonResource;
+use DaydreamLab\Dsth\Resources\Event\Admin\Collections\EventAdminSearchResourceCollection;
 
 class NewsletterAdminResource extends BaseJsonResource
 {
@@ -29,7 +30,7 @@ class NewsletterAdminResource extends BaseJsonResource
             'params'            => $this->params,
             'state'             => $this->state,
 
-            'event'             => $this->events,
+            'event'             => new EventAdminSearchResourceCollection($this->events),
             'promotion'         => $this->promotion,
             'bulletin'          => $this->bulletin,
 
