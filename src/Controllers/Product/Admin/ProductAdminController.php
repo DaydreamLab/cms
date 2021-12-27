@@ -29,6 +29,7 @@ class ProductAdminController extends CmsController
 
     public function export(ProductAdminExportRequest $request)
     {
+        $this->service->setUser($request->user('api'));
         return $this->service->export($request->validated());
     }
 

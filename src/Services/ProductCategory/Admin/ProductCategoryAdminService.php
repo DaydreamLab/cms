@@ -18,6 +18,55 @@ class ProductCategoryAdminService extends ProductCategoryService
     }
 
 
+    public function export(Collection $input)
+    {
+
+        $product_categories = $this->tree();
+
+        $spreedsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
+        $sheet = $spreedsheet->getActiveSheet();
+
+        $headers = ['分類名稱', '分類代號', '分類描述', '圖片'];
+        $h = 1;
+        foreach ($headers as $header) {
+            $sheet->setCellValueByColumnAndRow($h, 1, $header);
+            $h+=1;
+        }
+
+        $r = 2;
+        foreach ($product_categories as $product) {
+            for ($i =1; $i<=count($headers); $i+=1) {
+                switch ($i) {
+                    case 1:
+                        $v = $product->title;
+                        break;
+                    case 2:
+                        $v = $product->alias;
+                        break;
+                    case 3:
+                        $v = $product->description;
+                        break;
+                    case 4:
+                        $v = $product->image;
+                        break;
+                    default:
+                        $v = '';
+                        break;
+                }
+                $sheet->setCellValueExplicitByColumnAndRow($i, $r, $v, 's');
+            }
+            $r+=1;
+        }
+
+        $filename = 'product_category_export.xlsx';
+        $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreedsheet);
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="'. urlencode($filename).'"');
+        ob_clean();
+        $writer->save('php://output');
+    }
+
+
     public function findSubTreeIds($id)
     {
         return $this->repo->findSubTreeIds($id);

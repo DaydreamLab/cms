@@ -34,7 +34,7 @@ class ProductAdminService extends ProductService
         $spreedsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
         $sheet = $spreedsheet->getActiveSheet();
 
-        $headers = ['系列名稱', '系列描述', '所屬品牌', '產品類別', '產品名稱', '產品說明', '建議售價(未稅)', '經銷價'];
+        $headers = ['系列名稱', '別名', '系列描述', '所屬品牌', '產品類別', '產品名稱', '產品說明', '建議售價(未稅)', '經銷價'];
         $h = 1;
         foreach ($headers as $header) {
             $sheet->setCellValueByColumnAndRow($h, 1, $header);
@@ -50,24 +50,27 @@ class ProductAdminService extends ProductService
                             $v = $product->title;
                             break;
                         case 2:
-                            $v = $product->description;
+                            $v = $product->alias;
                             break;
                         case 3:
-                            $v = $product->brand_title[0];
+                            $v = $product->description;
                             break;
                         case 4:
-                            $v = $product->category;
+                            $v = $product->brand_title[0];
                             break;
                         case 5:
-                            $v = $data['title'];
+                            $v = $product->category;
                             break;
                         case 6:
-                            $v = $data['description'];
+                            $v = $data['title'];
                             break;
                         case 7:
-                            $v = $data['recommandPrice'];
+                            $v = $data['description'];
                             break;
                         case 8:
+                            $v = $data['recommandPrice'];
+                            break;
+                        case 9:
                             $v = $data['distributePrice'];
                             break;
                         default:

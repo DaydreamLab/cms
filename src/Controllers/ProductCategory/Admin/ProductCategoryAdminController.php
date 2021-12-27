@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Controllers\ProductCategory\Admin;
 
 use DaydreamLab\Cms\Controllers\CmsController;
+use DaydreamLab\Cms\Requests\ProductCategory\Admin\ProductCategoryAdminExportRequest;
 use DaydreamLab\Cms\Requests\ProductCategory\Admin\ProductCategoryAdminGetItemRequest;
 use DaydreamLab\Cms\Requests\ProductCategory\Admin\ProductCategoryAdminGetTreeRequest;
 use DaydreamLab\Cms\Requests\ProductCategory\Admin\ProductCategoryAdminOrderingRequest;
@@ -24,6 +25,13 @@ class ProductCategoryAdminController extends CmsController
     {
         parent::__construct($service);
         $this->service = $service;
+    }
+
+
+    public function export(ProductCategoryAdminExportRequest $request)
+    {
+        $this->service->setUser($request->user('api'));
+        return $this->service->export($request->validated());
     }
 
 
