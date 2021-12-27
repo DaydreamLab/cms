@@ -25,6 +25,70 @@ class ProductAdminService extends ProductService
     }
 
 
+    public function export(Collection $input)
+    {
+        $input->put('limit', 0);
+        $input->put('paginate', 0);
+        $product_series = $this->search($input);
+
+        $spreedsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
+        $sheet = $spreedsheet->getActiveSheet();
+
+        $headers = ['系列名稱', '系列描述', '所屬品牌', '產品類別', '產品名稱', '產品說明', '建議售價(未稅)', '經銷價'];
+        $h = 1;
+        foreach ($headers as $header) {
+            $sheet->setCellValueByColumnAndRow($h, 1, $header);
+            $h+=1;
+        }
+
+        $r = 2;
+        foreach ($product_series as $product) {
+            foreach ($product->product_data as $data) {
+                for ($i =1; $i<=count($headers); $i+=1) {
+                    switch ($i) {
+                        case 1:
+                            $v = $product->title;
+                            break;
+                        case 2:
+                            $v = $product->description;
+                            break;
+                        case 3:
+                            $v = $product->brand_title[0];
+                            break;
+                        case 4:
+                            $v = $product->category;
+                            break;
+                        case 5:
+                            $v = $data['title'];
+                            break;
+                        case 6:
+                            $v = $data['description'];
+                            break;
+                        case 7:
+                            $v = $data['recommandPrice'];
+                            break;
+                        case 8:
+                            $v = $data['distributePrice'];
+                            break;
+                        default:
+                            $v = '';
+                            break;
+                    }
+                    $sheet->setCellValueExplicitByColumnAndRow($i, $r, $v, 's');
+                }
+                $r+=1;
+            }
+        }
+
+        $filename = 'product_export.xlsx';
+        $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreedsheet);
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="'. urlencode($filename).'"');
+        ob_clean();
+        $writer->save('php://output');
+    }
+
+
     public function addMapping($item, $input)
     {
         $tags = $input->get('tags') ? $input->get('tags') : [];

@@ -128,6 +128,8 @@ Route::post('api/admin/brand/import', [BrandAdminController::class, 'import'])
     ->middleware(['expired', 'admin']);
 
 # 產品
+Route::post('api/admin/product/export', [ProductAdminController::class, 'export'])
+    ->middleware(['expired', 'admin']);
 Route::post('api/admin/product/import', [ProductAdminController::class, 'import'])
     ->middleware(['expired', 'admin']);
 Route::post('api/admin/product/remove', [ProductAdminController::class, 'remove'])

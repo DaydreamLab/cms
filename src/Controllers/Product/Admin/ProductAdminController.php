@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Controllers\Product\Admin;
 
 use DaydreamLab\Cms\Controllers\CmsController;
 use DaydreamLab\Cms\Requests\Product\Admin\ProductAdminGetItemRequest;
+use DaydreamLab\Cms\Requests\Product\Admin\ProductAdminExportRequest;
 use DaydreamLab\Cms\Requests\Product\Admin\ProductAdminImportRequest;
 use DaydreamLab\Cms\Requests\Product\Admin\ProductAdminRemoveRequest;
 use DaydreamLab\Cms\Requests\Product\Admin\ProductAdminRestoreRequest;
@@ -23,6 +24,12 @@ class ProductAdminController extends CmsController
     {
         parent::__construct($service);
         $this->service = $service;
+    }
+
+
+    public function export(ProductAdminExportRequest $request)
+    {
+        return $this->service->export($request->validated());
     }
 
 
