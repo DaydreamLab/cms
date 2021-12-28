@@ -16,11 +16,13 @@ use DaydreamLab\Dsth\Resources\Event\Front\Collections\EventFrontSearchResourceC
 use DaydreamLab\Dsth\Resources\Event\Front\Models\EventFrontSearchResource;
 use DaydreamLab\Dsth\Services\Event\Front\EventFrontService;
 use DaydreamLab\Dsth\Services\EventSession\Front\EventSessionFrontService;
+use DaydreamLab\JJAJ\Exceptions\ForbiddenException;
 use DaydreamLab\Media\Services\File\Front\FileFrontService;
 use DaydreamLab\JJAJ\Database\QueryCapsule;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
 use DaydreamLab\JJAJ\Exceptions\NotFoundException;
+use DaydreamLab\User\Models\User\UserGroup;
 use DaydreamLab\User\Services\User\Front\UserGroupFrontService;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
@@ -346,11 +348,31 @@ class ItemFrontService extends ItemService
         return parent::search($input);
     }
 
-    /** ------------------------------------------- 新加的 ------------------------------------------- */
+    /* ------------------------------------------- 新加的 ------------------------------------------- */
+    public function checkDealerOnly($item)
+    {
+        if ( $item->extrafields && isset($item->extrafields['dealer_only']) && $item->extrafields['dealer_only']['value'] == 1 ) {
+            $user = $this->getUser();
+            if (!$user) {
+                return false;
+            }
+            $userGroup = UserGroup::where('title', '經銷會員')->first();
+            if (!in_array($userGroup->id, $user->accessIds)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public function getContentByAlias(Collection $input)
     {
         $content = $this->repo->findBy('alias', '=', $input->get('alias'))->first();
         if ($content) {
+            if ( !$this->checkDealerOnly($content) ) {
+                throw new ForbiddenException('InsufficientPermissionView', [
+                    $this->repo->getModel()->getPrimaryKey() => $input->get('alias')
+                ], null, $this->modelName);
+            }
             if ($brand = $input->get('brand')) {
                 $prevAndNext = $this->repo->getPreviousAndNextInBrand($content, $brand);
             } else {
@@ -362,7 +384,7 @@ class ItemFrontService extends ItemService
             $this->response = $content;
         } else {
             throw new NotFoundException('ItemNotExist', [
-                $this->repo->getModel()->getPrimaryKey() => $input->get('id')
+                $this->repo->getModel()->getPrimaryKey() => $input->get('alias')
             ], null, $this->modelName);
         }
         return $this->response;
