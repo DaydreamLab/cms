@@ -26,8 +26,8 @@ class OptionGetListPost extends AdminRequest
     public function rules()
     {
         $rules = [
-            'types'      => 'nullable|array',
-            'types.*'    => [
+            'types'         => 'nullable|array',
+            'types.*'       => [
                 'nullable',
                 Rule::in([
                     'brand',
@@ -40,7 +40,8 @@ class OptionGetListPost extends AdminRequest
                     'download_file_category',
                     'contract_file_category'
                 ])
-            ]
+            ],
+            'brand_alias'   => 'nullable|string'
         ];
 
         return array_merge(parent::rules(), $rules);
