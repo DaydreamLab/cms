@@ -58,29 +58,6 @@ class BrandFrontResource extends BaseJsonResource
     {
         $tabs = $this->tabs;
         $data = collect();
-        if ($tabs->solution) {
-            $temp = [
-                'title' => '解決方案',
-                'alias' => 'solution',
-            ];
-            $data->push($temp);
-        }
-
-        if ($tabs->product) {
-            $temp = [
-                'title' => '產品系列',
-                'alias' => 'product',
-            ];
-            $data->push($temp);
-        }
-
-        if ($tabs->event) {
-            $temp = [
-                'title' => '課程活動',
-                'alias' => 'event',
-            ];
-            $data->push($temp);
-        }
 
         if ($tabs->promotion || $tabs->bulletin) {
             $temp = [
@@ -105,6 +82,30 @@ class BrandFrontResource extends BaseJsonResource
                 $children[] = $t;
             }
             $temp['children'] = $children;
+            $data->push($temp);
+        }
+
+        if ($tabs->event) {
+            $temp = [
+                'title' => '課程活動',
+                'alias' => 'event',
+            ];
+            $data->push($temp);
+        }
+
+        if ($tabs->product) {
+            $temp = [
+                'title' => '產品系列',
+                'alias' => 'product',
+            ];
+            $data->push($temp);
+        }
+
+        if ($tabs->solution) {
+            $temp = [
+                'title' => '解決方案',
+                'alias' => 'solution',
+            ];
             $data->push($temp);
         }
 
