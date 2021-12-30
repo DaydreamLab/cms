@@ -451,7 +451,7 @@ class ItemFrontService extends ItemService
         }
         foreach ($filter_list as &$type) {
             usort($type, function($a, $b) {
-                return ($a['year'] - $b['year']);
+                return ($b['year'] - $a['year']);
             });
         }
 
