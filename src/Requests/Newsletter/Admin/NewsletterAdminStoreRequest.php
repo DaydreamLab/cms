@@ -38,7 +38,7 @@ class NewsletterAdminStoreRequest extends CmsStoreRequest
             'description'           => 'nullable|string',
             'url'                   => 'nullable|string',
             'display_topic'         => 'nullable|boolean',
-            'information'           => 'required|array',
+            'information'           => 'nullable|array',
             'information.*'         => 'nullable|array',
             'information.*.title'   => 'nullable|string',
             'information.*.url'     => 'nullable|string',
