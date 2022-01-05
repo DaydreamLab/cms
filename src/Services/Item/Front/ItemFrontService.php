@@ -761,7 +761,6 @@ class ItemFrontService extends ItemService
 
         $response = collect([]);
         if ( count($types) ) {
-
             foreach ($types as $type) {
                 if ($type == 'brand') {
                     $response = $response->merge($brandSer->search($input));
@@ -769,6 +768,7 @@ class ItemFrontService extends ItemService
                     $input->put('searchKeys', ['name', 'description']);
                     $response = $response->merge($fileSer->search($input, false));
                 } else {
+                    $input->put('q', (new QueryCapsule())->with('category'));
                     $items = $this->searchContent($input, false);
                     foreach ($items as $item) {
                         $content_type = $item->category->content_type;
@@ -784,9 +784,10 @@ class ItemFrontService extends ItemService
                     }
                 }
             }
-
         } else {
-            $items = $this->searchContent(collect($input->toArray()), false)->filter(function ($i) {
+            $itemSearchData = $input->toArray();
+            $itemSearchData['q'] = (new QueryCapsule())->with('category');
+            $items = $this->searchContent(collect(), false)->filter(function ($i) {
                 return in_array($i->category->content_type, ['solution', 'case', 'video', 'bulletin', 'promotion']);
             })->values();
             $brands = $brandSer->search(collect($input->toArray()));
