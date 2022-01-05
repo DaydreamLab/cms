@@ -38,6 +38,7 @@ class SettingAdminStorePost extends CmsStoreRequest
             'lineId'            => 'nullable|string',
             'liffId'            => 'nullable|string',
             'youtubeUrl'        => 'nullable|string',
+            'podcast'           => 'nullable|string',
             'ga'                => 'nullable|string'
         ];
         return array_merge(parent::rules(), $rules);

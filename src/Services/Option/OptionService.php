@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Services\Option;
 
+use DaydreamLab\Cms\Models\Brand\Front\BrandFront;
 use DaydreamLab\Cms\Models\Extrafield\Extrafield;
 use DaydreamLab\Cms\Models\Extrafield\ExtrafieldValue;
 use DaydreamLab\Cms\Services\Brand\Admin\BrandAdminService;
@@ -307,8 +308,34 @@ class OptionService
                     break;
                 case 'industry_category':
                     $ifser = app(ItemFrontService::class);
+                    if ( $brand_alias = $input->get('brand_alias') ) {
+                        $brand = BrandFront::where('alias', '=', $brand_alias)->first();
+                        if ($brand) {
+                            $case_ind_ids = array_unique( array_map(function ($c) {
+                                return $c->extrafields['industry_category']['value'];
+                            }, $brand->items['case']) );
+                            $q = new QueryCapsule();
+                            $q->whereIn('id', $case_ind_ids);
+                            $case_ics = $ifser->searchContent(collect(['content_type' => 'industry_category', 'q' => $q, 'limit' => 0]), false);
+                            $data[$type]['case'] = $case_ics->map(function ($ic) {
+                                return $ic->only(['alias', 'title']);
+                            });
+
+                            $sol_ind_ids = (new Collection( array_map(function ($c) {
+                                return  array_map(function ($v) {
+                                    return $v['id'];
+                                }, $c->extrafields['industry_category']['value']);
+                            }, $brand->items['solution']) ))->flatten()->unique()->values()->toArray();
+                            $q = new QueryCapsule();
+                            $q->whereIn('id', $sol_ind_ids);
+                            $sol_ics = $ifser->searchContent(collect(['content_type' => 'industry_category', 'q' => $q, 'limit' => 0]), false);
+                            $data[$type]['solution'] = $sol_ics->map(function ($ic) {
+                                return $ic->only(['alias', 'title']);
+                            });
+                        }
+                    }
                     $ics = $ifser->searchContent(collect(['content_type' => 'industry_category', 'q' => new QueryCapsule(), 'limit' => 0]), false);
-                    $data[$type] = $ics->map(function ($ic) {
+                    $data[$type]['all'] = $ics->map(function ($ic) {
                         return $ic->only(['alias', 'title']);
                     });
                     break;

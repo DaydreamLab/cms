@@ -68,6 +68,7 @@ class SettingAdminService extends SettingService
                 'lineId'            => $input->get('lineId'),
                 'liffId'            => $input->get('liffId'),
                 'youtubeUrl'        => $input->get('youtubeUrl'),
+                'podcast'           => $input->get('podcast'),
                 'ga'                => $input->get('ga'),
             ]
         ]);
