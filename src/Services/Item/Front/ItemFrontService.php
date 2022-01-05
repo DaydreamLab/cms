@@ -787,7 +787,7 @@ class ItemFrontService extends ItemService
         } else {
             $itemSearchData = $input->toArray();
             $itemSearchData['q'] = (new QueryCapsule())->with('category');
-            $items = $this->searchContent(collect(), false)->filter(function ($i) {
+            $items = $this->searchContent(collect($itemSearchData), false)->filter(function ($i) {
                 return in_array($i->category->content_type, ['solution', 'case', 'video', 'bulletin', 'promotion']);
             })->values();
             $brands = $brandSer->search(collect($input->toArray()));
