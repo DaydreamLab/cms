@@ -786,14 +786,23 @@ class ItemFrontService extends ItemService
             }
         } else {
             $itemSearchData = $input->toArray();
-            $itemSearchData['q'] = (new QueryCapsule())->with('category');
+            $itemSearchData['q'] = (new QueryCapsule())->with('category', 'brands');
             $items = $this->searchContent(collect($itemSearchData), false)->filter(function ($i) {
                 return in_array($i->category->content_type, ['solution', 'case', 'video', 'bulletin', 'promotion']);
             })->values();
-            $brands = $brandSer->search(collect($input->toArray()));
-            $products = $productSer->search(collect($input->toArray()), false);
+
+            $brandSearchData = $input->toArray();
+            $brandSearchData['q'] = (new QueryCapsule())->with('items');
+            $brands = $brandSer->search(collect($brandSearchData));
+
+            $productSearchData = $input->toArray();;
+            $productSearchData['q'] =  (new QueryCapsule())->with('brands');
+            $products = $productSer->search(collect($productSearchData), false);
             $input->put('searchKeys', ['name', 'description']);
-            $files = $fileSer->search(collect($input->toArray()), false);
+
+            $filesSearchData = $input->toArray();
+            $filesSearchData['q'] =  (new QueryCapsule())->with('brands');
+            $files = $fileSer->search(collect($filesSearchData), false);
 
             $response = $response->merge($items);
             $response = $response->merge($brands);
