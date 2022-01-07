@@ -16,7 +16,6 @@ use DaydreamLab\Cms\Services\Menu\Admin\MenuAdminService;
 use DaydreamLab\Cms\Services\Module\Admin\ModuleAdminService;
 use DaydreamLab\Cms\Services\ProductCategory\Admin\ProductCategoryAdminService;
 use DaydreamLab\Cms\Services\ProductCategory\Front\ProductCategoryFrontService;
-use DaydreamLab\Cms\Services\Product\Front\ProductFrontService;
 use DaydreamLab\Cms\Services\Site\Admin\SiteAdminService;
 use DaydreamLab\JJAJ\Database\QueryCapsule;
 use DaydreamLab\JJAJ\Traits\LoggedIn;
@@ -260,26 +259,34 @@ class OptionService
                     })->sortBy('title')->values();
                     break;
                 case 'product_parent_category':
-                    $pcser = app(ProductCategoryFrontService::class);
-                    $q = new QueryCapsule();
-                    $ppcs = $pcser->search(collect(['q' => $q->where('state', 1)->where('parent_id', null), 'limit' => 0]), false);
-                    $data[$type] = $ppcs->map(function ($pp) {
-                        $productFS = app(ProductFrontService::class);
-                        $products = $productFS->search(collect(['q' => new QueryCapsule(), 'product_category_alias' => [$pp->alias], 'limit' => 0]));
-                        # map 出這些產品屬於的品牌
-                        $brandsWithDuplicate = collect([]);
-                        $products->each(function ($p) use (&$brandsWithDuplicate) {
-                            $brandsWithDuplicate = $brandsWithDuplicate->merge($p->brands);
+                    $brand_alias = $input->get('brand_alias');
+                    if ( $brand_alias != null ) {
+                        $brand = BrandFront::where('alias', '=', $brand_alias)->first();
+                        $data[$type] = $brand->products->unique(function ($p) {
+                            return $p->productCategory->id;
+                        })->map(function ($p) {
+                            return $p->productCategory->only(['alias', 'title']);
+                        })->sortBy('id')->values();
+                    } else {
+                        $pcser = app(ProductCategoryFrontService::class);
+                        $q = new QueryCapsule();
+                        $ppcs = $pcser->search(collect(['q' => $q->with('products')->where('state', 1)->where('parent_id', null), 'limit' => 0]), false);
+                        $data[$type] = $ppcs->map(function ($pp) {
+                            # map 出這些產品屬於的品牌
+                            $brandsWithDuplicate = collect([]);
+                            $pp->products->each(function ($p) use (&$brandsWithDuplicate) {
+                                $brandsWithDuplicate = $brandsWithDuplicate->merge($p->brands);
+                            });
+                            $brands = $brandsWithDuplicate->unique(function ($b) {
+                                return $b->id;
+                            })->map(function ($m) {
+                                return $m->only(['alias', 'title']);
+                            })->sortBy('title')->values();
+                            $pData = $pp->only(['alias', 'title', 'image']);
+                            $pData['brands'] = $brands;
+                            return $pData;
                         });
-                        $brands = $brandsWithDuplicate->unique(function ($b) {
-                            return $b->id;
-                        })->map(function ($m) {
-                            return $m->only(['alias', 'title']);
-                        })->sortBy('title')->values();
-                        $pData = $pp->only(['alias', 'title', 'image']);
-                        $pData['brands'] = $brands;
-                        return $pData;
-                    });
+                    }
                     break;
                 case 'product_child_category':
                     $pcser = app(ProductCategoryFrontService::class);

@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Models\ProductCategory;
 
+use DaydreamLab\Cms\Models\Product\Product;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\JJAJ\Traits\UserInfo;
@@ -82,4 +83,9 @@ class ProductCategory extends BaseModel
         self::traitBoot();
     }
 
+
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'product_category_id', 'id');
+    }
 }
