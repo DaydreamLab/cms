@@ -254,6 +254,20 @@ class OptionService
                 case 'brand':
                     $bser = app(BrandFrontService::class);
                     $brands = $bser->getAllBrands();
+                    $product_category_alias = $input->get('product_category_alias');
+                    if ( is_array($product_category_alias) && count($product_category_alias) ) {
+                        $brands = $brands->filter(function ($b) use ($product_category_alias) {
+                            $pcs = $b->products->unique(function ($p) {
+                                return $p->productCategory->id;
+                            })->map(function ($p) {
+                                return $p->productCategory->alias;
+                            })->values()->toArray();
+                            if ( count( array_intersect($product_category_alias, $pcs) ) ) {
+                                return true;
+                            }
+                            return false;
+                        });
+                    }
                     $data[$type] = $brands->map(function ($b) {
                         return $b->only(['alias', 'title']);
                     })->sortBy('title')->values();

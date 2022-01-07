@@ -42,7 +42,8 @@ class OptionGetListPost extends AdminRequest
                 ])
             ],
             'brand_alias'   => 'nullable|string',
-            'product_category_alias' => 'nullable|string',
+            'product_category_alias' => 'nullable|array',
+            'product_category_alias.*' => 'nullable|string',
             'content_type'  => 'nullable|string'
         ];
 
