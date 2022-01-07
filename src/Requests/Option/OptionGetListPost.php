@@ -41,7 +41,8 @@ class OptionGetListPost extends AdminRequest
                     'contract_file_category'
                 ])
             ],
-            'brand_alias'   => 'nullable|string'
+            'brand_alias'   => 'nullable|string',
+            'content_type'  => 'nullable|string'
         ];
 
         return array_merge(parent::rules(), $rules);
