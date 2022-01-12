@@ -114,7 +114,7 @@ class NewsletterAdminService extends NewsletterService
         if ( $input->get('video') !== null ) {
             $video_ids = array_map(function($video) {
                 return $video['id'];
-            }, $input->get('bulletin'));
+            }, $input->get('video'));
             $item_ids = array_merge($item_ids, $video_ids);
         }
 
