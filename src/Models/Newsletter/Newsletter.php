@@ -134,4 +134,10 @@ class Newsletter extends BaseModel
     {
         return isset($this->items['bulletin']) ? $this->items['bulletin'] : [];
     }
+
+
+    public function getVideoAttribute()
+    {
+        return isset($this->items['video']) ? $this->items['video'] : [];
+    }
 }

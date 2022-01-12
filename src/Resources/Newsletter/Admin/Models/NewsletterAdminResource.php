@@ -33,6 +33,7 @@ class NewsletterAdminResource extends BaseJsonResource
             'event'             => new EventAdminSearchResourceCollection($this->events, false),
             'promotion'         => $this->promotion,
             'bulletin'          => $this->bulletin,
+            'video'             => $this->video,
 
             'created_at'        => $this->getDateTimeString($this->created_at, $tz),
             'updated_at'        => $this->getDateTimeString($this->updated_at, $tz),

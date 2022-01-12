@@ -36,6 +36,12 @@ class NewsletterAdminService extends NewsletterService
         }, $bulletins);
         $item_ids = array_merge($item_ids, $bulletin_ids);
 
+        $videos = $input->get('video') ? $input->get('video') : [];
+        $video_ids = array_map(function($video) {
+            return $video['id'];
+        }, $videos);
+        $item_ids = array_merge($item_ids, $video_ids);
+
         if (count($item_ids)) {
             $item->items()->attach($item_ids);
         }
@@ -105,6 +111,13 @@ class NewsletterAdminService extends NewsletterService
             $item_ids = array_merge($item_ids, $bulletin_ids);
         }
 
+        if ( $input->get('video') !== null ) {
+            $video_ids = array_map(function($video) {
+                return $video['id'];
+            }, $input->get('bulletin'));
+            $item_ids = array_merge($item_ids, $video_ids);
+        }
+
         $item->items()->sync($item_ids);
 
         if ( $input->get('event') !== null ) {
@@ -136,6 +149,7 @@ class NewsletterAdminService extends NewsletterService
             'information' => $newsletter->information,
             'bulletin' => $newsletter->bulletin,
             'promotion' => $newsletter->promotion,
+            'video' => $newsletter->video,
             'event' => $newsletter->events->transform(function ($e) use ($input) {
                 return json_decode((new EventAdminSearchResource((object)$e))->toJson(), true);
             })

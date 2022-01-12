@@ -53,6 +53,9 @@ class NewsletterAdminStoreRequest extends CmsStoreRequest
             'bulletin'              => 'nullable|array',
             'bulletin.*'            => 'nullable|array',
             'bulletin.*.id'         => 'required|integer',
+            'video'                 => 'nullable|array',
+            'video.*'               => 'nullable|array',
+            'video.*.id'            => 'required|integer',
 
             'state'                 => [
                 'required',
