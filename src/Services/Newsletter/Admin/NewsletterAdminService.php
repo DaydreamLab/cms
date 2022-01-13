@@ -139,6 +139,7 @@ class NewsletterAdminService extends NewsletterService
         $viewFile = ($newsletter->newsletterCategory->alias == '01_newsletter') ? 'newsletter.01Newsletter' : 'newsletter.01DealNewsletter';
 
         $html = view($viewFile, [
+            'newsletter_url' => url('storage/media/'.$filePath),
             'title' => $newsletter->title,
             'number' => $newsletter->number,
             'publishDate' => Carbon::parse($newsletter->publish_up, config('app.timezone'))->tz('Asia/Taipei')->format('Y/m/d'),
