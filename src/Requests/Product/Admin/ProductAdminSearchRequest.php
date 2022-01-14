@@ -10,6 +10,7 @@ class ProductAdminSearchRequest extends CmsSearchRequest
     protected $apiMethod = 'searchProduct';
 
     protected $modelName = 'Product';
+
     /**
      * Determine if the user is authorized to make this request.
      *
