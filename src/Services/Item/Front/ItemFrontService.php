@@ -840,6 +840,7 @@ class ItemFrontService extends ItemService
             } elseif ($table == 'events') {
                 $data['contentType'] = 'event';
                 $data['brands'] = $i->brands->map(function ($b) { return $b->alias; });
+                $data['seriesNum'] = $i->dates->pluck('seriesNum')->first();
             } elseif ($table == 'products') {
                 $data['contentType'] = 'product';
                 $data['brands'] = $i->brands->map(function ($b) { return $b->alias; });

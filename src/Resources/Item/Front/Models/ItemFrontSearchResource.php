@@ -23,6 +23,10 @@ class ItemFrontSearchResource extends BaseJsonResource
             'contentType'       => $this['contentType']
         ];
 
+        if (isset($this['seriesNum'])) {
+            $data['seriesNum'] = $this['seriesNum'];
+        }
+
         if ($data['contentType'] == 'file') {
             $data['downloadLink'] = $this['downloadLink'];
         }
