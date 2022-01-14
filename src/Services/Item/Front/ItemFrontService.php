@@ -749,6 +749,7 @@ class ItemFrontService extends ItemService
         $brandSer = app(BrandFrontService::class);
         $productSer = app(ProductFrontService::class);
         $fileSer = app(FileFrontService::class);
+        $eventSer = app(EventFrontService::class);
 
         $tag = $input->get('tag');
         $input->forget('tag');
@@ -767,6 +768,8 @@ class ItemFrontService extends ItemService
                 } elseif ($type == 'file') {
                     $input->put('searchKeys', ['name', 'description']);
                     $response = $response->merge($fileSer->search($input, false));
+                } elseif ($type == 'event' || $type == 'course') {
+                    $response = $response->merge($eventSer->search($input, false));
                 } else {
                     $input->put('q', (new QueryCapsule())->with('category'));
                     $items = $this->searchContent($input, false);
@@ -795,6 +798,10 @@ class ItemFrontService extends ItemService
             $brandSearchData['q'] = (new QueryCapsule())->with('items');
             $brands = $brandSer->search(collect($brandSearchData));
 
+            $eventSearchData = $input->toArray();
+            $eventSearchData['q'] = (new QueryCapsule())->with('brands');
+            $events = $eventSer->search(collect($eventSearchData));
+
             $productSearchData = $input->toArray();;
             $productSearchData['q'] =  (new QueryCapsule())->with('brands');
             $products = $productSer->search(collect($productSearchData), false);
@@ -806,6 +813,7 @@ class ItemFrontService extends ItemService
 
             $response = $response->merge($items);
             $response = $response->merge($brands);
+            $response = $response->merge($events);
             $response = $response->merge($products);
             $response = $response->merge($files);
         }
@@ -829,6 +837,9 @@ class ItemFrontService extends ItemService
             } elseif ($table == 'brands') {
                 $data['contentType'] = 'brand';
                 $data['brands'] = [];
+            } elseif ($table == 'events') {
+                $data['contentType'] = 'event';
+                $data['brands'] = $i->brands->map(function ($b) { return $b->alias; });
             } elseif ($table == 'products') {
                 $data['contentType'] = 'product';
                 $data['brands'] = $i->brands->map(function ($b) { return $b->alias; });

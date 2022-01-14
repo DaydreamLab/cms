@@ -7,6 +7,8 @@ use Illuminate\Validation\Rule;
 
 class ItemFrontSearchSitePost extends CmsSearchRequest
 {
+    protected $searchKeys = ['title', 'introtext', 'description'];
+
     protected $needAuth = false;
     /**
      * Determine if the user is authorized to make this request.
@@ -35,6 +37,7 @@ class ItemFrontSearchSitePost extends CmsSearchRequest
                     'brand',
                     'solution',
                     'case',
+                    'event',
                     'course',
                     'file',
                     'news',
