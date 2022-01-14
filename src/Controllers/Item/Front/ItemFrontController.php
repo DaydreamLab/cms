@@ -153,7 +153,7 @@ class ItemFrontController extends CmsController
     {
         $this->service->setUser($request->user('api'));
         try {
-            $this->service->searchSite($request->validated());
+            $this->service->searchSite($request->validated());;
         } catch (Throwable $t) {
             $this->handleException($t);
         }

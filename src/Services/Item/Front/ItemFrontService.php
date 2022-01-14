@@ -798,7 +798,7 @@ class ItemFrontService extends ItemService
             $brandSearchData['q'] = (new QueryCapsule())->with('items');
             $brands = $brandSer->search(collect($brandSearchData));
 
-            $eventSearchData = $input->toArray();
+            $eventSearchData = (clone $input)->toArray();
             $eventSearchData['q'] = (new QueryCapsule())->with('brands');
             $events = $eventSer->search(collect($eventSearchData));
 
