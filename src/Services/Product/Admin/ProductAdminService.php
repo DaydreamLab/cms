@@ -29,49 +29,84 @@ class ProductAdminService extends ProductService
     {
         $input->put('limit', 0);
         $input->put('paginate', 0);
+        $q = $input->get('q');
+        $q->orderBy('id', 'asc');
         $product_series = $this->search($input);
 
         $spreedsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
         $sheet = $spreedsheet->getActiveSheet();
 
-        $headers = ['系列名稱', '別名', '系列描述', '所屬品牌', '產品類別', '產品名稱', '產品說明', '建議售價(未稅)', '經銷價'];
+        $headers = ['', '所屬品牌', '產品分類', '系列名稱', '產品名稱', '產品說明', '建議售價(未稅)', '經銷價(未稅)',
+            '保固-年', '產品名稱', '尺寸規格(最小配置)', '支援通訊協定(需配合相對應的SFP)', '最大擴充硬碟數量(單/雙控制器)',
+            '最大Raw空間', '作業系統(最小配置)', '備註', '一年無限次電話技術支援（台幣未稅）          Remote Technology Support',
+            '購買授權數級距', '競升續約/競升|續約', '上下架'];
         $h = 1;
         foreach ($headers as $header) {
             $sheet->setCellValueByColumnAndRow($h, 1, $header);
             $h+=1;
         }
 
-        $r = 2;
+        $r = 3;
         foreach ($product_series as $product) {
             foreach ($product->product_data as $data) {
-                for ($i =1; $i<=count($headers); $i+=1) {
+                for ($i =2; $i<=count($headers); $i+=1) {
                     switch ($i) {
-                        case 1:
-                            $v = $product->title;
-                            break;
                         case 2:
-                            $v = $product->alias;
-                            break;
-                        case 3:
-                            $v = $product->description;
-                            break;
-                        case 4:
                             $v = $product->brand_title[0];
                             break;
-                        case 5:
+                        case 3:
                             $v = $product->category;
                             break;
-                        case 6:
+                        case 4:
+                            $v = $product->title;
+                            break;
+                        case 5:
                             $v = $data['title'];
                             break;
-                        case 7:
+                        case 6:
                             $v = $data['description'];
                             break;
-                        case 8:
+                        case 7:
                             $v = $data['recommandPrice'];
                             break;
-                        case 9:
+                        case 8:
                             $v = $data['distributePrice'];
+                            break;
+                        case 9:
+                            $v = $data['warranty'];
+                            break;
+                        case 10:
+                            $v = $data['title'];
+                            break;
+                        case 11:
+                            $v = $data['size'];
+                            break;
+                        case 12:
+                            $v = $data['protocal'];
+                            break;
+                        case 13:
+                            $v = $data['maxExtendHddNum'];
+                            break;
+                        case 14:
+                            $v = $data['maxRawSpace'];
+                            break;
+                        case 15:
+                            $v = $data['system'];
+                            break;
+                        case 16:
+                            $v = $data['note'];
+                            break;
+                        case 17:
+                            $v = $data['unlimitPhoneSupportAmt'];
+                            break;
+                        case 18:
+                            $v = $data['level'];
+                            break;
+                        case 19:
+                            $v = $data['renew'];
+                            break;
+                        case 20:
+                            $v = 'Y';
                             break;
                         default:
                             $v = '';
