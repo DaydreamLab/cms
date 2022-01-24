@@ -150,13 +150,21 @@ class ImportBrand implements ShouldQueue
 
             $oldProductIndex = array_search($data->get('product_data')[0]['title'], array_column($product->product_data, 'title'));
             $product_data = $product->product_data;
+
             if ($oldProductIndex === false) {
                 // 產品不存在使用 append
-                $product_data[] = $data->get('product_data')[0];
+                if ($rowData[18] != 'N') {
+                    $product_data[] = $data->get('product_data')[0];
+                }
 
             } else {
                 // 產品存在使用 update
-                $product_data[$oldProductIndex] = $data->get('product_data')[0];
+                if ($rowData[18] == 'N') {
+                    # 下架刪除
+                    array_splice($product_data, $oldProductIndex, 1);
+                } else {
+                    $product_data[$oldProductIndex] = $data->get('product_data')[0];
+                }
             }
             $data->put('product_data', $product_data);
 
@@ -187,7 +195,7 @@ class ImportBrand implements ShouldQueue
     {
         $data = [];
 
-        for($j = 'B'; $j <= 'S'; $j++) {
+        for($j = 'B'; $j <= 'T'; $j++) {
             $key = $j.$rowNum;
             $data[] = $sheet->getCell($key)->getValue();
         }
