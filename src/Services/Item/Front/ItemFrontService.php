@@ -399,7 +399,12 @@ class ItemFrontService extends ItemService
             $year = $fin->extrafields['year']['value'];
             $filter_list[$year][] = $fin->only(['title', 'description', 'extrafields', 'files']);
         }
+
         ksort($filter_list);
+
+        foreach ($filter_list as $k => $data) {
+            $filter_list[$k] = collect($data)->sortByDesc('title')->values()->all();
+        }
 
         $this->response = $filter_list;
         return $filter_list;
@@ -801,6 +806,7 @@ class ItemFrontService extends ItemService
             $eventSearchData = (clone $input)->toArray();
             $eventSearchData['q'] = (new QueryCapsule())->with('brands');
             $events = $eventSer->search(collect($eventSearchData));
+
 
             $productSearchData = (clone $input)->toArray();
             $productSearchData['searchKeys'] = ['title', 'description'];
