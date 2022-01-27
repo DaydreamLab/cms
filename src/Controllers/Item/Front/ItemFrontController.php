@@ -1,5 +1,4 @@
 <?php
-
 namespace DaydreamLab\Cms\Controllers\Item\Front;
 
 use DaydreamLab\Cms\Controllers\CmsController;
