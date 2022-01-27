@@ -1,5 +1,4 @@
 <?php
-
 namespace DaydreamLab\Cms\Services\Item\Front;
 
 use Carbon\Carbon;
