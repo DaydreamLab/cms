@@ -168,6 +168,12 @@ class ImportBrand implements ShouldQueue
             }
             $data->put('product_data', $product_data);
 
+            if ($product_data == []) {
+                $data->put('state', 0);
+            } else {
+                $data->put('state', 1);
+            }
+
         } else {
             $data->put('alias', Str::uuid()->getHex());
             $data->put('params', [
