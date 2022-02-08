@@ -57,7 +57,7 @@ class RmaController extends Controller
     public function search(RmaSearchPost $request)
     {
         $input = $request->validated();
-        $client = new SoapClient("http://webservice.zerone.com.tw/RMA/rmaWebservice.asmx?WSDL");
+        $client = new \SoapClient("http://webservice.zerone.com.tw/RMA/rmaWebservice.asmx?WSDL");
 
         $params = array(
             'srmano' => $input->get('number') ? : '',
