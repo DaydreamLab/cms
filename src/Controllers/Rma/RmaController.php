@@ -15,7 +15,7 @@ class RmaController extends Controller
     public function add(RmaAddPost $request)
     {
         $input = $request->validated();
-        $client = new SoapClient("http://webservice.zerone.com.tw/RMA/rmaWebservice.asmx?WSDL");
+        $client = new \SoapClient("http://webservice.zerone.com.tw/RMA/rmaWebservice.asmx?WSDL");
 
         $params = array(
             "scompellation" => $input->get('companyName'),
