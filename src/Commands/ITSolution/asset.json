@@ -1,0 +1,101 @@
+[
+    {
+        "title": "COM_HOME_TITLE",
+        "site_id":2,
+        "state": 1,
+        "params": {
+            "path": "/sub/home",
+            "component": "",
+            "type": "alias",
+            "redirect": "",
+            "icon": "copy"
+        },
+        "assets": [
+            {
+                "title": "COM_SLIDESHOW_MANAGER_TITLE",
+                "path": "slideshow",
+                "full_path": "/slideshow",
+                "component": "/sub/home/slideshow/list",
+                "type": "menu",
+                "state": 1,
+                "icon": "images",
+                "showNav": 1,
+                "apis": [
+
+                ],
+                "defaultApis": {
+                    "getOption": ["checked", "hidden"],
+                    "uploadMedia": ["checked", "hidden"],
+                    "getMediaAllItems": ["checked", "hidden"],
+                    "getMediaAllFolders": ["checked", "hidden"],
+                    "deleteMedia": ["checked", "hidden"],
+                    "renameMedia": ["checked", "hidden"],
+                    "moveMedia": ["checked", "hidden"],
+                    "createMediaFolder": ["checked", "hidden"]
+                }
+            }
+        ],
+        "userGroups": ["Administrator", "Super User"]
+    },
+    {
+        "title": "COM_SOLUTIONS_TITLE",
+        "site_id":2,
+        "state": 1,
+        "params": {
+            "path": "/sub/solutions",
+            "component": "",
+            "type": "alias",
+            "redirect": "",
+            "icon": "copy"
+        },
+        "assets": [
+            {
+                "title": "COM_SOLUTIONS_MANAGER_TITLE",
+                "path": "manager",
+                "full_path": "/manager",
+                "component": "sub/solutions/manager/list",
+                "type": "menu",
+                "state": 1,
+                "icon": "folder-open",
+                "showNav": 1,
+                "apis": [
+
+                ],
+                "defaultApis": {
+                    "getOption": ["checked", "hidden"],
+                    "uploadMedia": ["checked", "hidden"],
+                    "getMediaAllItems": ["checked", "hidden"],
+                    "getMediaAllFolders": ["checked", "hidden"],
+                    "deleteMedia": ["checked", "hidden"],
+                    "renameMedia": ["checked", "hidden"],
+                    "moveMedia": ["checked", "hidden"],
+                    "createMediaFolder": ["checked", "hidden"]
+                }
+            },
+            {
+                "title": "COM_SOLUTIONS_CATEGORY_MANAGER_TITLE",
+                "path": "category",
+                "full_path": "/category",
+                "component": "sub/solutions/category/list",
+                "type": "menu",
+                "state": 1,
+                "icon": "folder-open",
+                "showNav": 1,
+                "apis": [
+
+                ],
+                "defaultApis": {
+                    "getOption": ["checked", "hidden"],
+                    "uploadMedia": ["checked", "hidden"],
+                    "getMediaAllItems": ["checked", "hidden"],
+                    "getMediaAllFolders": ["checked", "hidden"],
+                    "deleteMedia": ["checked", "hidden"],
+                    "renameMedia": ["checked", "hidden"],
+                    "moveMedia": ["checked", "hidden"],
+                    "createMediaFolder": ["checked", "hidden"]
+                }
+            }
+        ],
+        "userGroups": ["Administrator", "Super User"]
+    }
+]

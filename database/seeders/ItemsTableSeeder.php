@@ -32,10 +32,10 @@ class ItemsTableSeeder extends Seeder
         }
 
         // 靜態資源 回復
-        Storage::deleteDirectory('public/storage/app/public/media');
-        $source = base_path('vendor/daydreamlab/cms/database/seeders/resource/media');
-        $dest = storage_path('app/public/media');
-        File::copyDirectory($source, $dest);
+//        Storage::deleteDirectory('public/storage/app/public/media');
+//        $source = base_path('vendor/daydreamlab/cms/database/seeders/resource/media');
+//        $dest = storage_path('app/public/media');
+//        File::copyDirectory($source, $dest);
     }
 
 
