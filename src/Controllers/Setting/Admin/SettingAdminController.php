@@ -25,7 +25,7 @@ class SettingAdminController extends CmsController
     public function getItem(SettingAdminGetItemGet $request)
     {
         $this->service->setUser($request->user('api'));
-        $this->service->getItem();
+        $this->service->getItem($request->get('site_id') ? :1);
 
         return $this->response($this->service->status, $this->service->response);
     }

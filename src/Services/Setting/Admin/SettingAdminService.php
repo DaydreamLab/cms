@@ -18,9 +18,9 @@ class SettingAdminService extends SettingService
     }
 
 
-    public function getItem($locale = '')
+    public function getItem($site_id)
     {
-        $item = $this->siteService->find(1);
+        $item = $this->siteService->find($site_id);
         if ($item) {
             $response = $item->params;
             $response['sitename'] = $item->sitename;
@@ -57,8 +57,9 @@ class SettingAdminService extends SettingService
 
     public function store(Collection $input)
     {
+        $site_id = $input->get('site_id') ? :1;
         $data = collect([
-            'id'        => 1,
+            'id'        => $site_id,
             'sitename'  => $input->get('sitename'),
             'params'    => [
                 'seo_title'         => $input->get('seo_title'),
@@ -83,7 +84,7 @@ class SettingAdminService extends SettingService
             $this->status = 'UpdateFail';
         }
 
-        return $this->getItem();
+        return $this->getItem($site_id);
     }
 
 

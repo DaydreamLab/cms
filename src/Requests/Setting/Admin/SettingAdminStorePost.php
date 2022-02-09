@@ -28,6 +28,7 @@ class SettingAdminStorePost extends CmsStoreRequest
     public function rules()
     {
         $rules = [
+            'site_id'           => 'nullable|integer',
             'sitename'          => 'required|string',
             'siteurl'           => 'nullable|string',
             'seo_title'         => 'nullable|string',
