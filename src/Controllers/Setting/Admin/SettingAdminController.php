@@ -7,6 +7,7 @@ use DaydreamLab\Cms\Requests\Setting\Admin\SettingAdminGetItemGet;
 use DaydreamLab\Cms\Requests\Setting\Admin\SettingAdminRestoreAllRequest;
 use DaydreamLab\Cms\Requests\Setting\Admin\SettingAdminStorePost;
 use DaydreamLab\Cms\Services\Setting\Admin\SettingAdminService;
+use Illuminate\Http\Request;
 
 class SettingAdminController extends CmsController
 {
@@ -30,9 +31,9 @@ class SettingAdminController extends CmsController
     }
 
 
-    public function siteInfo()
+    public function siteInfo(Request $request)
     {
-        $this->service->siteInfo();
+        $this->service->siteInfo($request);
 
         return $this->response($this->service->status, $this->service->response);
     }

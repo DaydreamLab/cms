@@ -39,9 +39,10 @@ class SettingAdminService extends SettingService
     }
 
 
-    public function siteInfo()
+    public function siteInfo(Request $request)
     {
-        $item = $this->siteService->find(1);
+        $site_id = $request->get('site_id') ? :1;
+        $item = $this->siteService->find($site_id);
         if ($item) {
             $this->status = 'GetItemSuccess';
             $this->response = ['sitename' => $item->sitename, 'siteurl' => $item->url];
