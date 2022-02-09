@@ -15,7 +15,7 @@
                 "title": "COM_SLIDESHOW_MANAGER_TITLE",
                 "path": "slideshow",
                 "full_path": "/slideshow",
-                "component": "/sub/home/slideshow/list",
+                "component": "sub/home/slideshow/list",
                 "type": "menu",
                 "state": 1,
                 "icon": "images",

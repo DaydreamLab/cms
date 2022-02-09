@@ -33,7 +33,7 @@ class SettingAdminController extends CmsController
 
     public function siteInfo(Request $request)
     {
-        $this->service->siteInfo($request);
+        $this->service->siteInfo($request->get('site_id') ? :1);
 
         return $this->response($this->service->status, $this->service->response);
     }
