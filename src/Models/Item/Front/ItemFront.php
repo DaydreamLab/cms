@@ -81,8 +81,14 @@ class ItemFront extends Item
     public function getAliasAttribute($value)
     {
         // 對 alias如 aliaska(ak)進行處理變成 Alaska(AK)
-        if (preg_match('/([a-zA-Z]+)\(([a-zA-Z]+)\)/', $value, $matches)) {
-            return ucfirst($matches[1]) . '(' . strtoupper($matches[2]) . ')';
+        if (preg_match('/([a-zA-Z]*\s*[a-zA-Z]+)\(([a-zA-Z]+)\)/', $value, $matches)) {
+            $parts = explode(' ', $matches[1]);
+            $upper_parts = [];
+            foreach ($parts as $part) {
+                $upper_parts[] = ucfirst($part);
+            }
+            $upper = implode(' ', $upper_parts);
+            return ucfirst($upper) . '(' . strtoupper($matches[2]) . ')';
         }
 
         return $value;
