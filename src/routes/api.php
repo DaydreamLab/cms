@@ -436,7 +436,7 @@ Route::post('api/admin/customer/message/reply', [CustomerMessageReplyAdminContro
 Route::get('api/admin/customer/message/{id}', [CustomerMessageAdminController::class, 'getItem'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 
-/******************* IT Solution 子站API *******************/
+/******************* IoT Solution 子站API *******************/
 use DaydreamLab\Cms\Controllers\Solution\Admin\SolutionAdminController;
 use DaydreamLab\Cms\Controllers\Resource\Admin\ResourceAdminController;
 

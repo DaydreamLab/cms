@@ -3,14 +3,14 @@
 namespace DaydreamLab\Cms\Controllers\Solution\Admin;
 
 use DaydreamLab\Cms\Controllers\CmsController;
-use DaydreamLab\Cms\Requests\Solution\Admin\SolutionAdminFeaturedRequest;
 use DaydreamLab\Cms\Requests\Solution\Admin\SolutionAdminGetItemRequest;
 use DaydreamLab\Cms\Requests\Solution\Admin\SolutionAdminRemoveRequest;
 use DaydreamLab\Cms\Requests\Solution\Admin\SolutionAdminRestoreRequest;
 use DaydreamLab\Cms\Requests\Solution\Admin\SolutionAdminSearchRequest;
 use DaydreamLab\Cms\Requests\Solution\Admin\SolutionAdminStateRequest;
 use DaydreamLab\Cms\Requests\Solution\Admin\SolutionAdminStoreRequest;
-use DaydreamLab\Cms\Resources\Solution\Admin\Collections\ResourceAdminSearchResourceCollection;
+use DaydreamLab\Cms\Resources\Solution\Admin\Collections\SolutionAdminSearchResourceCollection;
+use DaydreamLab\Cms\Resources\Solution\Admin\Models\SolutionAdminResource;
 use DaydreamLab\Cms\Services\Solution\Admin\SolutionAdminService;
 use Throwable;
 
@@ -25,19 +25,6 @@ class SolutionAdminController extends CmsController
     }
 
 
-    public function featured(SolutionAdminFeaturedRequest $request)
-    {
-        $this->service->setUser($request->user('api'));
-        try {
-            $this->service->featured($request->validated());
-        } catch (Throwable $t) {
-            $this->handleException($t);
-        }
-
-        return $this->response($this->service->status, $this->service->response);
-    }
-
-
     public function getItem(SolutionAdminGetItemRequest $request)
     {
         $this->service->setUser($request->user('api'));
@@ -47,7 +34,7 @@ class SolutionAdminController extends CmsController
             $this->handleException($t);
         }
 
-        return $this->response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response, [], SolutionAdminResource::class);
     }
 
 
@@ -86,7 +73,7 @@ class SolutionAdminController extends CmsController
             $this->handleException($t);
         }
 
-        return $this->response($this->service->status, $this->service->response, [], ResourceAdminSearchResourceCollection::class);
+        return $this->response($this->service->status, $this->service->response, [], SolutionAdminSearchResourceCollection::class);
     }
 
 

@@ -34,6 +34,7 @@ class Solution extends CmsModel
         'description',
         'state',
         'featured',
+        'featured_ordering',
         'params',
         'locked_by',
         'locked_at',

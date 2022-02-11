@@ -2,12 +2,12 @@
 
 namespace DaydreamLab\Cms\Resources\Solution\Admin\Collections;
 
-use DaydreamLab\Cms\Resources\Solution\Admin\Models\ResourceAdminSearchResource;
+use DaydreamLab\Cms\Resources\Solution\Admin\Models\SolutionAdminSearchResource;
 use DaydreamLab\JJAJ\Resources\BaseResourceCollection;
 
 class SolutionAdminSearchResourceCollection extends BaseResourceCollection
 {
-    public $collects = ResourceAdminSearchResource::class;
+    public $collects = SolutionAdminSearchResource::class;
 
     /**
      * Transform the resource collection into an array.

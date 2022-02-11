@@ -10,6 +10,7 @@ use DaydreamLab\Cms\Requests\Resource\Admin\ResourceAdminSearchRequest;
 use DaydreamLab\Cms\Requests\Resource\Admin\ResourceAdminStateRequest;
 use DaydreamLab\Cms\Requests\Resource\Admin\ResourceAdminStoreRequest;
 use DaydreamLab\Cms\Resources\Resource\Admin\Collections\ResourceAdminSearchResourceCollection;
+use DaydreamLab\Cms\Resources\Resource\Admin\Models\ResourceAdminResource;
 use DaydreamLab\Cms\Services\Resource\Admin\ResourceAdminService;
 use Throwable;
 
@@ -33,7 +34,7 @@ class ResourceAdminController extends CmsController
             $this->handleException($t);
         }
 
-        return $this->response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response, [], ResourceAdminResource::class);
     }
 
 

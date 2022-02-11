@@ -4,7 +4,7 @@ namespace DaydreamLab\Cms\Resources\Resource\Admin\Models;
 
 use DaydreamLab\JJAJ\Resources\BaseJsonResource;
 
-class ResourceAdminSearchResource extends BaseJsonResource
+class ResourceAdminResource extends BaseJsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,8 +17,17 @@ class ResourceAdminSearchResource extends BaseJsonResource
         $tz = $request->user('api')->timezone;
         return [
             'id'            => $this->id,
+            'alias'         => $this->alias,
             'title'         => $this->title,
+            'introimage'    => $this->introimage,
+            'introtext'     => $this->introtext,
+            'images'        => $this->images,
+            'description'   => $this->description,
+            'points'        => $this->points,
+            'video'         => $this->video,
+            'documents'     => $this->documents,
             'state'         => $this->state,
+            'params'        => $this->params,
             'locker'        => ($this->locker) ? $this->locker->only(['id', 'uuid', 'name']) : [],
             'locked_at'     => $this->getDateTimeString($this->locked_at, $tz),
             'created_at'    => $this->getDateTimeString($this->created_at, $tz),
