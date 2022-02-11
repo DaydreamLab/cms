@@ -368,7 +368,7 @@ class OptionService
                 case 'download_file_category':
                     $fcser = app(FileCategoryAdminService::class);
                     $q = new QueryCapsule();
-                    $fcs = $fcser->search(collect(['q' => $q->where('contentType', 'file')->where('extension', null), 'limit' => 0]), false);
+                    $fcs = $fcser->search(collect(['q' => $q->where('contentType', 'file')->where('extension', null)->where('state', 1), 'limit' => 0]), false);
                     $data[$type] = $fcs->map(function ($fc) {
                         return $fc->only(['alias', 'title']);
                     });
@@ -376,7 +376,7 @@ class OptionService
                 case 'contract_file_category':
                     $fcser = app(FileCategoryAdminService::class);
                     $q = new QueryCapsule();
-                    $fcs = $fcser->search(collect(['q' => $q->where('contentType', 'contract'), 'limit' => 0]), false);
+                    $fcs = $fcser->search(collect(['q' => $q->where('contentType', 'contract')->where('state', 1), 'limit' => 0]), false);
                     $data[$type] = $fcs->map(function ($fc) {
                         return $fc->only(['alias', 'title']);
                     });
