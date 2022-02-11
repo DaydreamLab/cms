@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSolutionCategoriesTable extends Migration
+class CreateResourcesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,17 @@ class CreateSolutionCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('solution_categories', function (Blueprint $table) {
+        Schema::create('resources', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->nestedSet();
             $table->string('alias');
             $table->string('title');
+            $table->text('introimage')->nullable();
+            $table->text('introtext')->nullable();
+            $table->text('images')->nullable();
+            $table->mediumText('description')->nullable();
+            $table->text('video')->nullable();
+            $table->tinyInteger('state')->default(1);
+            $table->text('params')->nullable();
             $table->unsignedInteger('locked_by')->nullable()->default(0);
             $table->timestamp('locked_at')->nullable();
             $table->timestamp('publish_up')->nullable();
@@ -35,6 +41,6 @@ class CreateSolutionCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('solution_categories');
+        Schema::dropIfExists('resources');
     }
 }

@@ -435,3 +435,20 @@ Route::post('api/admin/customer/message/reply', [CustomerMessageReplyAdminContro
 # 取得顧客留言
 Route::get('api/admin/customer/message/{id}', [CustomerMessageAdminController::class, 'getItem'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
+
+/******************* IT Solution 子站API *******************/
+use DaydreamLab\Cms\Controllers\Solution\Admin\SolutionAdminController;
+
+# 解決方案
+Route::post('api/admin/solution/store', [SolutionAdminController::class, 'store'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::post('api/admin/solution/search', [SolutionAdminController::class, 'search'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::post('api/admin/solution/reStore', [SolutionAdminController::class, 'reStore'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::post('api/admin/solution/state', [SolutionAdminController::class, 'state'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::get('api/admin/solution/{id}', [SolutionAdminController::class, 'getItem'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+
+# 原廠資源

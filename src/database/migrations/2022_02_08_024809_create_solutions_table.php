@@ -17,7 +17,13 @@ class CreateSolutionsTable extends Migration
             $table->bigIncrements('id');
             $table->string('alias');
             $table->string('title');
+            $table->text('introimage')->nullable();
+            $table->text('introtext')->nullable();
+            $table->text('images')->nullable();
             $table->mediumText('description')->nullable();
+            $table->tinyInteger('state')->default(1);
+            $table->unsignedTinyInteger('featured')->default(0);
+            $table->text('params')->nullable();
             $table->unsignedInteger('locked_by')->nullable()->default(0);
             $table->timestamp('locked_at')->nullable();
             $table->timestamp('publish_up')->nullable();

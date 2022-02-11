@@ -19,7 +19,7 @@ class Solution extends CmsModel
     protected $table = 'solutions';
 
 
-    protected $name = 'Solution';
+    protected $model_type = 'parent';
 
 
     /**
@@ -28,19 +28,35 @@ class Solution extends CmsModel
      * @var array
      */
     protected $fillable = [
+        'alias',
         'title',
-        'category_id',
-        'state',
+        'introimage',
+        'introtext',
+        'images',
         'description',
+        'state',
+        'featured',
+        'params',
         'locked_by',
-        'created_by',
-        'updated_by',
         'locked_at',
+        'publish_up',
+        'publish_down',
+        'created_by',
+        'updated_by'
+    ];
+
+    protected $hidden = [
+        'created_by',
+        'updated_by'
     ];
 
 
     protected $casts = [
-        'params'    => 'array'
+        'images'    => 'array',
+        'params'    => 'array',
+        'locked_at'     => 'datetime:Y-m-d H:i:s',
+        'publish_up'    => 'datetime:Y-m-d H:i:s',
+        'publish_down'  => 'datetime:Y-m-d H:i:s',
     ];
 
 
