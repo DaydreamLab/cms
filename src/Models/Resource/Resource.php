@@ -1,12 +1,12 @@
 <?php
 
-namespace DaydreamLab\Cms\Models\Solution;
+namespace DaydreamLab\Cms\Models\Resource;
 
 use DaydreamLab\Cms\Models\CmsModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\JJAJ\Traits\UserInfo;
 
-class Solution extends CmsModel
+class Resource extends CmsModel
 {
     use UserInfo, RecordChanger {
         RecordChanger::boot as traitBoot;
@@ -16,7 +16,7 @@ class Solution extends CmsModel
      *
      * @var string
      */
-    protected $table = 'solutions';
+    protected $table = 'resources';
 
     protected $model_type = 'parent';
 
@@ -32,8 +32,10 @@ class Solution extends CmsModel
         'introtext',
         'images',
         'description',
+        'points',
+        'video',
+        'documents',
         'state',
-        'featured',
         'params',
         'locked_by',
         'locked_at',
@@ -43,14 +45,12 @@ class Solution extends CmsModel
         'updated_by'
     ];
 
-    protected $hidden = [
-        'created_by',
-        'updated_by'
-    ];
-
 
     protected $casts = [
         'images'    => 'array',
+        'points'    => 'array',
+        'video'     => 'array',
+        'documents' => 'array',
         'params'    => 'array',
         'locked_at'     => 'datetime:Y-m-d H:i:s',
         'publish_up'    => 'datetime:Y-m-d H:i:s',

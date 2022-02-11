@@ -20,8 +20,10 @@ class CreateResourcesTable extends Migration
             $table->text('introimage')->nullable();
             $table->text('introtext')->nullable();
             $table->text('images')->nullable();
-            $table->mediumText('description')->nullable();
+            $table->text('description')->nullable();
+            $table->text('points')->nullable();
             $table->text('video')->nullable();
+            $table->text('documents')->nullable();
             $table->tinyInteger('state')->default(1);
             $table->text('params')->nullable();
             $table->unsignedInteger('locked_by')->nullable()->default(0);

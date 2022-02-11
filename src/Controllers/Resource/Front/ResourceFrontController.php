@@ -1,32 +1,32 @@
 <?php
 
-namespace DaydreamLab\Cms\Controllers\Solution;
+namespace DaydreamLab\Cms\Controllers\Resource\Front;
 
 use DaydreamLab\Cms\Controllers\CmsController;
-use DaydreamLab\Cms\Requests\Solution\SolutionFeaturedOrderingRequest;
-use DaydreamLab\Cms\Requests\Solution\SolutionFeaturedRequest;
-use DaydreamLab\Cms\Requests\Solution\SolutionGetItemRequest;
-use DaydreamLab\Cms\Requests\Solution\SolutionOrderingRequest;
-use DaydreamLab\Cms\Requests\Solution\SolutionRemoveRequest;
-use DaydreamLab\Cms\Requests\Solution\SolutionRestoreRequest;
-use DaydreamLab\Cms\Requests\Solution\SolutionSearchRequest;
-use DaydreamLab\Cms\Requests\Solution\SolutionStateRequest;
-use DaydreamLab\Cms\Requests\Solution\SolutionStoreRequest;
-use DaydreamLab\Cms\Services\Solution\SolutionService;
+use DaydreamLab\Cms\Requests\Resource\Front\ResourceFrontFeaturedOrderingRequest;
+use DaydreamLab\Cms\Requests\Resource\Front\ResourceFrontFeaturedRequest;
+use DaydreamLab\Cms\Requests\Resource\Front\ResourceFrontGetItemRequest;
+use DaydreamLab\Cms\Requests\Resource\Front\ResourceFrontOrderingRequest;
+use DaydreamLab\Cms\Requests\Resource\Front\ResourceFrontRemoveRequest;
+use DaydreamLab\Cms\Requests\Resource\Front\ResourceFrontRestoreRequest;
+use DaydreamLab\Cms\Requests\Resource\Front\ResourceFrontSearchRequest;
+use DaydreamLab\Cms\Requests\Resource\Front\ResourceFrontStateRequest;
+use DaydreamLab\Cms\Requests\Resource\Front\ResourceFrontStoreRequest;
+use DaydreamLab\Cms\Services\Resource\Front\ResourceFrontService;
 use Throwable;
 
-class SolutionController extends CmsController
+class ResourceFrontController extends CmsController
 {
-    protected $modelName = 'Solution';
+    protected $modelName = 'Resource';
 
-    public function __construct(SolutionService $service)
+    public function __construct(ResourceFrontService $service)
     {
         parent::__construct($service);
         $this->service = $service;
     }
 
 
-    public function featured(SolutionFeaturedRequest $request)
+    public function featured(ResourceFrontFeaturedRequest $request)
     {
         try {
             $this->service->featured($request->validated());
@@ -38,7 +38,7 @@ class SolutionController extends CmsController
     }
 
 
-    public function featuredOrdering(SolutionFeaturedOrderingRequest $request)
+    public function featuredOrdering(ResourceFrontFeaturedOrderingRequest $request)
     {
         try {
             $this->service->ordering($request->validated());
@@ -50,7 +50,7 @@ class SolutionController extends CmsController
     }
 
 
-    public function getItem(SolutionGetItemRequest $request)
+    public function getItem(ResourceFrontGetItemRequest $request)
     {
         try {
             $this->service->getItem(collect(['id' => $request->route('id')]));
@@ -62,7 +62,7 @@ class SolutionController extends CmsController
     }
 
 
-    public function ordering(SolutionOrderingRequest $request)
+    public function ordering(ResourceFrontOrderingRequest $request)
     {
         try {
             $this->service->ordering($request->validated());
@@ -74,7 +74,7 @@ class SolutionController extends CmsController
     }
 
 
-    public function remove(SolutionRemoveRequest $request)
+    public function remove(ResourceFrontRemoveRequest $request)
     {
         try {
             $this->service->remove($request->validated());
@@ -86,7 +86,7 @@ class SolutionController extends CmsController
     }
 
 
-    public function restore(SolutionRestoreRequest $request)
+    public function restore(ResourceFrontRestoreRequest $request)
     {
         try {
             $this->service->restore($request->validated());
@@ -98,7 +98,7 @@ class SolutionController extends CmsController
     }
 
 
-    public function search(SolutionSearchRequest $request)
+    public function search(ResourceFrontSearchRequest $request)
     {
         try {
             $this->service->search($request->validated());
@@ -110,7 +110,7 @@ class SolutionController extends CmsController
     }
 
 
-    public function state(SolutionStateRequest $request)
+    public function state(ResourceFrontStateRequest $request)
     {
         try {
             $this->service->state($request->validated());
@@ -122,7 +122,7 @@ class SolutionController extends CmsController
     }
 
 
-    public function store(SolutionStoreRequest $request)
+    public function store(ResourceFrontStoreRequest $request)
     {
         try {
             $this->service->store($request->validated());

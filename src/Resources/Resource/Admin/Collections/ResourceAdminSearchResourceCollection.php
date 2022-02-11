@@ -1,11 +1,11 @@
 <?php
 
-namespace DaydreamLab\Cms\Resources\Solution\Admin\Collections;
+namespace DaydreamLab\Cms\Resources\Resource\Admin\Collections;
 
-use DaydreamLab\Cms\Resources\Solution\Admin\Models\ResourceAdminSearchResource;
+use DaydreamLab\Cms\Resources\Resource\Admin\Models\ResourceAdminSearchResource;
 use DaydreamLab\JJAJ\Resources\BaseResourceCollection;
 
-class SolutionAdminSearchResourceCollection extends BaseResourceCollection
+class ResourceAdminSearchResourceCollection extends BaseResourceCollection
 {
     public $collects = ResourceAdminSearchResource::class;
 

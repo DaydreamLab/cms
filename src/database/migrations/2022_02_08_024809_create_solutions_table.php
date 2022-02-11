@@ -20,7 +20,7 @@ class CreateSolutionsTable extends Migration
             $table->text('introimage')->nullable();
             $table->text('introtext')->nullable();
             $table->text('images')->nullable();
-            $table->mediumText('description')->nullable();
+            $table->text('description')->nullable();
             $table->tinyInteger('state')->default(1);
             $table->unsignedTinyInteger('featured')->default(0);
             $table->text('params')->nullable();

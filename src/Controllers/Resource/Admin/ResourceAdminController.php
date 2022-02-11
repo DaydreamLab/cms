@@ -1,44 +1,30 @@
 <?php
 
-namespace DaydreamLab\Cms\Controllers\Solution\Admin;
+namespace DaydreamLab\Cms\Controllers\Resource\Admin;
 
 use DaydreamLab\Cms\Controllers\CmsController;
-use DaydreamLab\Cms\Requests\Solution\Admin\SolutionAdminFeaturedRequest;
-use DaydreamLab\Cms\Requests\Solution\Admin\SolutionAdminGetItemRequest;
-use DaydreamLab\Cms\Requests\Solution\Admin\SolutionAdminRemoveRequest;
-use DaydreamLab\Cms\Requests\Solution\Admin\SolutionAdminRestoreRequest;
-use DaydreamLab\Cms\Requests\Solution\Admin\SolutionAdminSearchRequest;
-use DaydreamLab\Cms\Requests\Solution\Admin\SolutionAdminStateRequest;
-use DaydreamLab\Cms\Requests\Solution\Admin\SolutionAdminStoreRequest;
-use DaydreamLab\Cms\Resources\Solution\Admin\Collections\ResourceAdminSearchResourceCollection;
-use DaydreamLab\Cms\Services\Solution\Admin\SolutionAdminService;
+use DaydreamLab\Cms\Requests\Resource\Admin\ResourceAdminGetItemRequest;
+use DaydreamLab\Cms\Requests\Resource\Admin\ResourceAdminRemoveRequest;
+use DaydreamLab\Cms\Requests\Resource\Admin\ResourceAdminRestoreRequest;
+use DaydreamLab\Cms\Requests\Resource\Admin\ResourceAdminSearchRequest;
+use DaydreamLab\Cms\Requests\Resource\Admin\ResourceAdminStateRequest;
+use DaydreamLab\Cms\Requests\Resource\Admin\ResourceAdminStoreRequest;
+use DaydreamLab\Cms\Resources\Resource\Admin\Collections\ResourceAdminSearchResourceCollection;
+use DaydreamLab\Cms\Services\Resource\Admin\ResourceAdminService;
 use Throwable;
 
-class SolutionAdminController extends CmsController
+class ResourceAdminController extends CmsController
 {
-    protected $modelName = 'Solution';
+    protected $modelName = 'Resource';
 
-    public function __construct(SolutionAdminService $service)
+    public function __construct(ResourceAdminService $service)
     {
         parent::__construct($service);
         $this->service = $service;
     }
 
 
-    public function featured(SolutionAdminFeaturedRequest $request)
-    {
-        $this->service->setUser($request->user('api'));
-        try {
-            $this->service->featured($request->validated());
-        } catch (Throwable $t) {
-            $this->handleException($t);
-        }
-
-        return $this->response($this->service->status, $this->service->response);
-    }
-
-
-    public function getItem(SolutionAdminGetItemRequest $request)
+    public function getItem(ResourceAdminGetItemRequest $request)
     {
         $this->service->setUser($request->user('api'));
         try {
@@ -51,7 +37,7 @@ class SolutionAdminController extends CmsController
     }
 
 
-    public function remove(SolutionAdminRemoveRequest $request)
+    public function remove(ResourceAdminRemoveRequest $request)
     {
         $this->service->setUser($request->user('api'));
         try {
@@ -64,7 +50,7 @@ class SolutionAdminController extends CmsController
     }
 
 
-    public function restore(SolutionAdminRestoreRequest $request)
+    public function restore(ResourceAdminRestoreRequest $request)
     {
         $this->service->setUser($request->user('api'));
         try {
@@ -77,7 +63,7 @@ class SolutionAdminController extends CmsController
     }
 
 
-    public function search(SolutionAdminSearchRequest $request)
+    public function search(ResourceAdminSearchRequest $request)
     {
         $this->service->setUser($request->user('api'));
         try {
@@ -90,7 +76,7 @@ class SolutionAdminController extends CmsController
     }
 
 
-    public function state(SolutionAdminStateRequest $request)
+    public function state(ResourceAdminStateRequest $request)
     {
         $this->service->setUser($request->user('api'));
         try {
@@ -103,7 +89,7 @@ class SolutionAdminController extends CmsController
     }
 
 
-    public function store(SolutionAdminStoreRequest $request)
+    public function store(ResourceAdminStoreRequest $request)
     {
         $this->service->setUser($request->user('api'));
         try {
