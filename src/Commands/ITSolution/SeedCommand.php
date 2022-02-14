@@ -8,7 +8,7 @@ use DaydreamLab\User\Models\User\UserGroup;
 use DaydreamLab\User\Services\Asset\Admin\AssetAdminService;
 use DaydreamLab\User\Services\Asset\Admin\AssetGroupAdminService;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\File;
+
 
 class SeedCommand extends Command
 {
@@ -45,6 +45,7 @@ class SeedCommand extends Command
     public function handle()
     {
         $this->sitesSeeder();
+        $this->apiSeeder();
         $this->assetsSeeder();
     }
 
@@ -72,6 +73,17 @@ class SeedCommand extends Command
             ],
             'access'        => 1
         ]));
+    }
+
+
+    public function apiSeeder()
+    {
+        $data = getJson(__DIR__ . '/api.json', true);
+        $counter = Api::all()->count();
+        foreach ($data as $apiData) {
+            $apiData['ordering'] = ++$counter;
+            Api::create($apiData);
+        }
     }
 
 

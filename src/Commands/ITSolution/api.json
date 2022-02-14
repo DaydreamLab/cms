@@ -1,0 +1,74 @@
+[
+  {
+    "name": "取得解決方案",
+    "method": "getIoTSolution",
+    "url": "/admin/iot/solution/{id}",
+    "created_by": 1
+  },
+  {
+    "name": "新增解決方案",
+    "method": "addIoTSolution",
+    "url": "/admin/iot/solution/store",
+    "created_by": 1
+  },
+  {
+    "name": "編輯解決方案",
+    "method": "editIoTSolution",
+    "url": "/admin/iot/solution/store",
+    "created_by": 1
+  },
+  {
+    "name": "刪除解決方案",
+    "method": "deleteIoTSolution",
+    "url": "/admin/iot/solution/remove",
+    "created_by": 1
+  },
+  {
+    "name": "搜尋解決方案",
+    "method": "searchIoTSolution",
+    "url": "/admin/iot/solution/search",
+    "created_by": 1
+  },
+  {
+    "name": "回存解決方案",
+    "method": "restoreIoTSolution",
+    "url": "/admin/iot/solution/restore",
+    "created_by": 1
+  },
+  {
+    "name": "取得原廠資源",
+    "method": "getIoTResource",
+    "url": "/admin/iot/resource/{id}",
+    "created_by": 1
+  },
+  {
+    "name": "新增原廠資源",
+    "method": "addIoTResource",
+    "url": "/admin/iot/resource/store",
+    "created_by": 1
+  },
+  {
+    "name": "編輯原廠資源",
+    "method": "editIoTResource",
+    "url": "/admin/iot/resource/store",
+    "created_by": 1
+  },
+  {
+    "name": "刪除原廠資源",
+    "method": "deleteIoTResource",
+    "url": "/admin/iot/resource/remove",
+    "created_by": 1
+  },
+  {
+    "name": "搜尋原廠資源",
+    "method": "searchIoTResource",
+    "url": "/admin/iot/resource/search",
+    "created_by": 1
+  },
+  {
+    "name": "回存原廠資源",
+    "method": "restoreIoTResource",
+    "url": "/admin/iot/resource/restore",
+    "created_by": 1
+  }
+]

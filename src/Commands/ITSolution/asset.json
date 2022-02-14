@@ -1,10 +1,10 @@
 [
   {
-    "title": "COM_HOME_TITLE",
+    "title": "COM_IOT_HOME_TITLE",
     "site_id":2,
     "state": 1,
     "params": {
-      "path": "/sub/home",
+      "path": "/iot/home",
       "component": "",
       "type": "alias",
       "redirect": "",
@@ -12,10 +12,10 @@
     },
     "assets": [
       {
-        "title": "COM_SLIDESHOW_MANAGER_TITLE",
+        "title": "COM_IOT_SLIDESHOW_MANAGER_TITLE",
         "path": "slideshow",
         "full_path": "/slideshow",
-        "component": "sub/home/slideshow/list",
+        "component": "iot/home/slideshow/list",
         "type": "menu",
         "state": 1,
         "icon": "images",
@@ -38,11 +38,11 @@
     "userGroups": ["Administrator", "Super User"]
   },
   {
-    "title": "COM_SOLUTIONS_TITLE",
-    "site_id":2,
+    "title": "COM_IOT_NEWS_TITLE",
     "state": 1,
+    "site_id":2,
     "params": {
-      "path": "/sub/solutions",
+      "path": "/iot/news",
       "component": "",
       "type": "alias",
       "redirect": "",
@@ -50,10 +50,96 @@
     },
     "assets": [
       {
-        "title": "COM_SOLUTIONS_MANAGER_TITLE",
+        "title": "COM_IOT_NEWS_MANAGER_TITLE",
         "path": "manager",
         "full_path": "/manager",
-        "component": "sub/solutions/manager/list",
+        "component": "iot/news/manager/list",
+        "type": "menu",
+        "state": 1,
+        "icon": "copy",
+        "showNav": 1,
+        "apis": [
+        ],
+        "defaultApis": {
+          "getOption": ["checked", "hidden"],
+          "uploadMedia": ["checked", "hidden"],
+          "getMediaAllItems": ["checked", "hidden"],
+          "getMediaAllFolders": ["checked", "hidden"],
+          "deleteMedia": ["checked", "hidden"],
+          "renameMedia": ["checked", "hidden"],
+          "moveMedia": ["checked", "hidden"],
+          "createMediaFolder": ["checked", "hidden"],
+          "searchProduct": ["checked", "hidden"],
+          "searchTag": ["checked", "hidden"]
+        }
+      },
+      {
+        "title": "COM_IOT_NEWS_ACTIVITY_MANAGER_TITLE",
+        "path": "activity",
+        "full_path": "/activity",
+        "component": "iot/news/activity/list",
+        "type": "menu",
+        "state": 1,
+        "icon": "copy",
+        "showNav": 1,
+        "apis": [
+        ],
+        "defaultApis": {
+          "getOption": ["checked", "hidden"],
+          "uploadMedia": ["checked", "hidden"],
+          "getMediaAllItems": ["checked", "hidden"],
+          "getMediaAllFolders": ["checked", "hidden"],
+          "deleteMedia": ["checked", "hidden"],
+          "renameMedia": ["checked", "hidden"],
+          "moveMedia": ["checked", "hidden"],
+          "createMediaFolder": ["checked", "hidden"],
+          "searchProduct": ["checked", "hidden"],
+          "searchTag": ["checked", "hidden"]
+        }
+      }
+    ],
+    "userGroups": ["Administrator", "Super User"]
+  },
+  {
+    "title": "COM_IOT_CATEGORIES_TITLE",
+    "site_id":2,
+    "state": 1,
+    "params": {
+      "path": "/iot/categories",
+      "component": "",
+      "type": "alias",
+      "redirect": "",
+      "icon": "copy"
+    },
+    "assets": [
+      {
+        "title": "COM_IOT_CATEGORIES_MANAGER_TITLE",
+        "path": "manager",
+        "full_path": "/manager",
+        "component": "iot/categories/manager/list",
+        "type": "menu",
+        "state": 1,
+        "icon": "folder-open",
+        "showNav": 1,
+        "apis": [
+
+        ],
+        "defaultApis": {
+          "getOption": ["checked", "hidden"],
+          "uploadMedia": ["checked", "hidden"],
+          "getMediaAllItems": ["checked", "hidden"],
+          "getMediaAllFolders": ["checked", "hidden"],
+          "deleteMedia": ["checked", "hidden"],
+          "renameMedia": ["checked", "hidden"],
+          "moveMedia": ["checked", "hidden"],
+          "createMediaFolder": ["checked", "hidden"]
+        }
+      },
+      {
+        "title": "COM_IOT_CATEGORIES_INDUSTRY_MANAGER_TITLE",
+        "path": "industry",
+        "full_path": "/industry",
+        "component": "iot/categories/industry/list",
         "type": "menu",
         "state": 1,
         "icon": "folder-open",
@@ -76,11 +162,11 @@
     "userGroups": ["Administrator", "Super User"]
   },
   {
-    "title": "COM_RESOURCES_TITLE",
+    "title": "COM_IOT_SOLUTIONS_TITLE",
     "site_id":2,
     "state": 1,
     "params": {
-      "path": "/sub/resources",
+      "path": "/iot/solutions",
       "component": "",
       "type": "alias",
       "redirect": "",
@@ -88,16 +174,64 @@
     },
     "assets": [
       {
-        "title": "COM_RESOURCES_MANAGER_TITLE",
+        "title": "COM_IOT_SOLUTIONS_MANAGER_TITLE",
         "path": "manager",
         "full_path": "/manager",
-        "component": "sub/resources/manager/list",
+        "component": "iot/solutions/manager/list",
         "type": "menu",
         "state": 1,
         "icon": "folder-open",
         "showNav": 1,
         "apis": [
-
+          "getIoTSolution",
+          "addIoTSolution",
+          "editIoTSolution",
+          "deleteIoTSolution",
+          "searchIoTSolution",
+          "restoreIoTSolution"
+        ],
+        "defaultApis": {
+          "getOption": ["checked", "hidden"],
+          "uploadMedia": ["checked", "hidden"],
+          "getMediaAllItems": ["checked", "hidden"],
+          "getMediaAllFolders": ["checked", "hidden"],
+          "deleteMedia": ["checked", "hidden"],
+          "renameMedia": ["checked", "hidden"],
+          "moveMedia": ["checked", "hidden"],
+          "createMediaFolder": ["checked", "hidden"]
+        }
+      }
+    ],
+    "userGroups": ["Administrator", "Super User"]
+  },
+  {
+    "title": "COM_IOT_RESOURCES_TITLE",
+    "site_id":2,
+    "state": 1,
+    "params": {
+      "path": "/iot/resources",
+      "component": "",
+      "type": "alias",
+      "redirect": "",
+      "icon": "copy"
+    },
+    "assets": [
+      {
+        "title": "COM_IOT_RESOURCES_MANAGER_TITLE",
+        "path": "manager",
+        "full_path": "/manager",
+        "component": "iot/resources/manager/list",
+        "type": "menu",
+        "state": 1,
+        "icon": "folder-open",
+        "showNav": 1,
+        "apis": [
+          "getIoTResource",
+          "addIoTResource",
+          "editIoTResource",
+          "deleteIoTResource",
+          "searchIoTResource",
+          "restoreIoTResource"
         ],
         "defaultApis": {
           "getOption": ["checked", "hidden"],
@@ -115,7 +249,7 @@
   },
   {
     "title": "COM_SEO_TITLE",
-    "site_id":2,
+    "site_id": 2,
     "state": 1,
     "params": {
       "path": "/seo",
@@ -134,8 +268,7 @@
         "state": 1,
         "icon": "copy",
         "showNav": 1,
-        "apis": [
-        ]
+        "apis": []
       }
     ],
     "userGroups": ["Administrator", "Super User"]
