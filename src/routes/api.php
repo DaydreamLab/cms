@@ -437,29 +437,33 @@ Route::get('api/admin/customer/message/{id}', [CustomerMessageAdminController::c
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 
 /******************* IoT Solution 子站API *******************/
-use DaydreamLab\Cms\Controllers\Solution\Admin\SolutionAdminController;
-use DaydreamLab\Cms\Controllers\Resource\Admin\ResourceAdminController;
+use DaydreamLab\Cms\Controllers\IoTSolution\Admin\IoTSolutionAdminController;
+use DaydreamLab\Cms\Controllers\IotResource\Admin\IotResourceAdminController;
 
 # 解決方案
-Route::post('api/admin/solution/store', [SolutionAdminController::class, 'store'])
+Route::post('api/admin/iot/solution/store', [IoTSolutionAdminController::class, 'store'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
-Route::post('api/admin/solution/search', [SolutionAdminController::class, 'search'])
+Route::post('api/admin/iot/solution/search', [IoTSolutionAdminController::class, 'search'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
-Route::post('api/admin/solution/reStore', [SolutionAdminController::class, 'reStore'])
+Route::post('api/admin/iot/solution/reStore', [IoTSolutionAdminController::class, 'reStore'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
-Route::post('api/admin/solution/state', [SolutionAdminController::class, 'state'])
+Route::post('api/admin/iot/solution/state', [IoTSolutionAdminController::class, 'state'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
-Route::get('api/admin/solution/{id}', [SolutionAdminController::class, 'getItem'])
+Route::get('api/admin/iot/solution/{id}', [IoTSolutionAdminController::class, 'getItem'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 
 # 原廠資源
-Route::post('api/admin/resource/store', [ResourceAdminController::class, 'store'])
+Route::post('api/admin/iot/resource/store', [IotResourceAdminController::class, 'store'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
-Route::post('api/admin/resource/search', [ResourceAdminController::class, 'search'])
+Route::post('api/admin/iot/resource/search', [IotResourceAdminController::class, 'search'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
-Route::post('api/admin/resource/reStore', [ResourceAdminController::class, 'reStore'])
+Route::post('api/admin/iot/resource/reStore', [IotResourceAdminController::class, 'reStore'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
-Route::post('api/admin/resource/state', [ResourceAdminController::class, 'state'])
+Route::post('api/admin/iot/resource/state', [IotResourceAdminController::class, 'state'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
-Route::get('api/admin/resource/{id}', [ResourceAdminController::class, 'getItem'])
+Route::get('api/admin/iot/resource/{id}', [IotResourceAdminController::class, 'getItem'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
+
+# 分類
+
+# 產業
