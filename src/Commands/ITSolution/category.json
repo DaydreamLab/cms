@@ -1,9 +1,47 @@
 [
   {
-
+    "title"         : "AI+ML",
+    "alias"         : "ai+ml",
+    "state"         : 1,
+    "description"   : "",
+    "access"        : 1,
+    "params"        : {},
+    "children"      : []
   },
-  {},
-  {},
-  {},
-  {}
+  {
+    "title"         : "IoT & Data Analytics",
+    "alias"         : "iot&data_analytics",
+    "state"         : 1,
+    "description"   : "",
+    "access"        : 1,
+    "params"        : {},
+    "children"      : []
+  },
+  {
+    "title"         : "DevOps",
+    "alias"         : "devops",
+    "state"         : 1,
+    "description"   : "",
+    "access"        : 1,
+    "params"        : {},
+    "children"      : []
+  },
+  {
+    "title"         : "Infrastructure",
+    "alias"         : "infrastructure",
+    "state"         : 1,
+    "description"   : "",
+    "access"        : 1,
+    "params"        : {},
+    "children"      : []
+  },
+  {
+    "title"         : "Business Application",
+    "alias"         : "business_application",
+    "state"         : 1,
+    "description"   : "",
+    "access"        : 1,
+    "params"        : {},
+    "children"      : []
+  }
 ]

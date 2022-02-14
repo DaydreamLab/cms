@@ -15,13 +15,20 @@ class CreateIoTCategoriesTable extends Migration
     {
         Schema::create('iot_categories', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->nestedSet();
+            $table->string('alias');
             $table->string('title');
-            $table->unsignedInteger('category_id')->nullable();
             $table->tinyInteger('state')->default(1);
             $table->text('description')->nullable();
+            $table->unsignedInteger('access');
+            $table->text('params')->nullable();
             $table->unsignedInteger('created_by');
             $table->unsignedInteger('updated_by')->nullable();
+            $table->unsignedInteger('locked_by')->nullable()->default(0);
+            $table->timestamp('locked_at')->nullable();
             $table->timestamps();
+            $table->timestamp('publish_up')->nullable();
+            $table->timestamp('publish_down')->nullable();
         });
     }
 

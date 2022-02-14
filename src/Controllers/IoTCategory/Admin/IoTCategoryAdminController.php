@@ -3,10 +3,7 @@
 namespace DaydreamLab\Cms\Controllers\IoTCategory\Admin;
 
 use DaydreamLab\Cms\Controllers\CmsController;
-use DaydreamLab\Cms\Requests\IoTCategory\Admin\IoTCategoryAdminFeaturedOrderingRequest;
-use DaydreamLab\Cms\Requests\IoTCategory\Admin\IoTCategoryAdminFeaturedRequest;
 use DaydreamLab\Cms\Requests\IoTCategory\Admin\IoTCategoryAdminGetItemRequest;
-use DaydreamLab\Cms\Requests\IoTCategory\Admin\IoTCategoryAdminOrderingRequest;
 use DaydreamLab\Cms\Requests\IoTCategory\Admin\IoTCategoryAdminRemoveRequest;
 use DaydreamLab\Cms\Requests\IoTCategory\Admin\IoTCategoryAdminRestoreRequest;
 use DaydreamLab\Cms\Requests\IoTCategory\Admin\IoTCategoryAdminSearchRequest;
@@ -26,46 +23,10 @@ class IoTCategoryAdminController extends CmsController
     }
 
 
-    public function featured(IoTCategoryAdminFeaturedRequest $request)
-    {
-        try {
-            $this->service->featured($request->validated());
-        } catch (Throwable $t) {
-            $this->handleException($t);
-        }
-
-        return $this->response($this->service->status, $this->service->response);
-    }
-
-
-    public function featuredOrdering(IoTCategoryAdminFeaturedOrderingRequest $request)
-    {
-        try {
-            $this->service->ordering($request->validated());
-        } catch (Throwable $t) {
-            $this->handleException($t);
-        }
-
-        return $this->response($this->service->status, $this->service->response);
-    }
-
-
     public function getItem(IoTCategoryAdminGetItemRequest $request)
     {
         try {
             $this->service->getItem(collect(['id' => $request->route('id')]));
-        } catch (Throwable $t) {
-            $this->handleException($t);
-        }
-
-        return $this->response($this->service->status, $this->service->response);
-    }
-
-
-    public function ordering(IoTCategoryAdminOrderingRequest $request)
-    {
-        try {
-            $this->service->ordering($request->validated());
         } catch (Throwable $t) {
             $this->handleException($t);
         }

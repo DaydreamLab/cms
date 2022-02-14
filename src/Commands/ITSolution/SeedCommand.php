@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Commands\ITSolution;
 
+use DaydreamLab\Cms\Models\IoTCategory\IoTCategory;
 use DaydreamLab\Cms\Services\Site\Admin\SiteAdminService;
 use DaydreamLab\User\Models\Api\Api;
 use DaydreamLab\User\Models\User\UserGroup;
@@ -47,6 +48,7 @@ class SeedCommand extends Command
         $this->sitesSeeder();
         $this->apiSeeder();
         $this->assetsSeeder();
+        $this->categorySeeder();
     }
 
 
@@ -144,6 +146,36 @@ class SeedCommand extends Command
 
             # 套用到使用者群組
             $assetGroup->userGroups()->attach($userGroups->pluck('id'));
+        }
+    }
+
+
+    public function categorySeeder()
+    {
+        $data = getJson(__DIR__ . '/category.json', true);
+        $this->migrateCategory($data, null);
+    }
+
+
+    public function migrateCategory($data, $parent)
+    {
+        foreach ($data as $category) {
+            $children = $category['children'];
+            unset($category['children']);
+            if ($parent) {
+                $category['parent_id'] = $parent->id;
+            }
+
+            $c = IoTCategory::create($category);
+
+            if ($parent) {
+                $parent->appendNode($c);
+            }
+
+            if (count($children))
+            {
+                self::migrateCategory($children, $c);
+            }
         }
     }
 }

@@ -29,18 +29,29 @@ class IoTCategory extends CmsModel
      */
     protected $fillable = [
         'title',
-        'category_id',
+        'alias',
         'state',
         'description',
-        'locked_by',
+        'access',
+        'params',
         'created_by',
         'updated_by',
+        'locked_by',
         'locked_at',
+        'publish_up',
+        'publish_down'
     ];
 
+    protected $hidden = [
+        '_lft',
+        '_rgt'
+    ];
 
     protected $casts = [
-        'params'    => 'array'
+        'params'    => 'array',
+        'locked_at'     => 'datetime:Y-m-d H:i:s',
+        'publish_up'    => 'datetime:Y-m-d H:i:s',
+        'publish_down'  => 'datetime:Y-m-d H:i:s'
     ];
 
 
