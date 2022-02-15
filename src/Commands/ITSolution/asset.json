@@ -226,12 +226,12 @@
         "icon": "folder-open",
         "showNav": 1,
         "apis": [
-          "getIoTResource",
-          "addIoTResource",
-          "editIoTResource",
-          "deleteIoTResource",
-          "searchIoTResource",
-          "restoreIoTResource"
+          "getIotResource",
+          "addIotResource",
+          "editIotResource",
+          "deleteIotResource",
+          "searchIotResource",
+          "restoreIotResource"
         ],
         "defaultApis": {
           "getOption": ["checked", "hidden"],

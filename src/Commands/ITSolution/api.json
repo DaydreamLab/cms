@@ -37,37 +37,37 @@
   },
   {
     "name": "取得原廠資源",
-    "method": "getIoTResource",
+    "method": "getIotResource",
     "url": "/admin/iot/resource/{id}",
     "created_by": 1
   },
   {
     "name": "新增原廠資源",
-    "method": "addIoTResource",
+    "method": "addIotResource",
     "url": "/admin/iot/resource/store",
     "created_by": 1
   },
   {
     "name": "編輯原廠資源",
-    "method": "editIoTResource",
+    "method": "editIotResource",
     "url": "/admin/iot/resource/store",
     "created_by": 1
   },
   {
     "name": "刪除原廠資源",
-    "method": "deleteIoTResource",
+    "method": "deleteIotResource",
     "url": "/admin/iot/resource/remove",
     "created_by": 1
   },
   {
     "name": "搜尋原廠資源",
-    "method": "searchIoTResource",
+    "method": "searchIotResource",
     "url": "/admin/iot/resource/search",
     "created_by": 1
   },
   {
     "name": "回存原廠資源",
-    "method": "restoreIoTResource",
+    "method": "restoreIotResource",
     "url": "/admin/iot/resource/restore",
     "created_by": 1
   }
