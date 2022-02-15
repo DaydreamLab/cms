@@ -2,7 +2,7 @@
 
 namespace DaydreamLab\Cms\Commands\ITSolution;
 
-use DaydreamLab\Cms\Services\IoTCategory\Admin\IoTCategoryAdminService;
+use DaydreamLab\Cms\Services\IotCategory\Admin\IotCategoryAdminService;
 use DaydreamLab\Cms\Services\Site\Admin\SiteAdminService;
 use DaydreamLab\User\Models\Api\Api;
 use DaydreamLab\User\Models\User\UserGroup;
@@ -160,7 +160,7 @@ class SeedCommand extends Command
 
     public function migrateCategory($data, $parent)
     {
-        $categoryService = app(IoTCategoryAdminService::class);
+        $categoryService = app(IotCategoryAdminService::class);
         foreach ($data as $category) {
             $children = $category['children'];
             unset($category['children']);

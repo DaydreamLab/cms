@@ -1,37 +1,37 @@
 [
   {
     "name": "取得解決方案",
-    "method": "getIoTSolution",
+    "method": "getIotSolution",
     "url": "/admin/iot/solution/{id}",
     "created_by": 1
   },
   {
     "name": "新增解決方案",
-    "method": "addIoTSolution",
+    "method": "addIotSolution",
     "url": "/admin/iot/solution/store",
     "created_by": 1
   },
   {
     "name": "編輯解決方案",
-    "method": "editIoTSolution",
+    "method": "editIotSolution",
     "url": "/admin/iot/solution/store",
     "created_by": 1
   },
   {
     "name": "刪除解決方案",
-    "method": "deleteIoTSolution",
+    "method": "deleteIotSolution",
     "url": "/admin/iot/solution/remove",
     "created_by": 1
   },
   {
     "name": "搜尋解決方案",
-    "method": "searchIoTSolution",
+    "method": "searchIotSolution",
     "url": "/admin/iot/solution/search",
     "created_by": 1
   },
   {
     "name": "回存解決方案",
-    "method": "restoreIoTSolution",
+    "method": "restoreIotSolution",
     "url": "/admin/iot/solution/restore",
     "created_by": 1
   },

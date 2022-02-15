@@ -183,12 +183,12 @@
         "icon": "folder-open",
         "showNav": 1,
         "apis": [
-          "getIoTSolution",
-          "addIoTSolution",
-          "editIoTSolution",
-          "deleteIoTSolution",
-          "searchIoTSolution",
-          "restoreIoTSolution"
+          "getIotSolution",
+          "addIotSolution",
+          "editIotSolution",
+          "deleteIotSolution",
+          "searchIotSolution",
+          "restoreIotSolution"
         ],
         "defaultApis": {
           "getOption": ["checked", "hidden"],

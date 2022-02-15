@@ -1,16 +1,16 @@
 <?php
 
-namespace DaydreamLab\Cms\Services\IotResource;
+namespace DaydreamLab\Cms\Services\IotSolution;
 
-use DaydreamLab\Cms\Repositories\IotResource\IotResourceRepository;
+use DaydreamLab\Cms\Repositories\IotSolution\IotSolutionRepository;
 use DaydreamLab\Cms\Services\CmsService;
 use Illuminate\Support\Collection;
 
-class IotResourceService extends CmsService
+class IotSolutionService extends CmsService
 {
-    protected $modelName = 'Resource';
+    protected $modelName = 'Solution';
 
-    public function __construct(IotResourceRepository $repo)
+    public function __construct(IotSolutionRepository $repo)
     {
         parent::__construct($repo);
         $this->repo = $repo;
@@ -20,6 +20,26 @@ class IotResourceService extends CmsService
     public function add(Collection $input)
     {
         $item = parent::add($input);
+
+        //event(new Add($item, $this->model_name, $input, $this->user));
+
+        return $item;
+    }
+
+
+    public function featured(Collection $input)
+    {
+        $item = parent::featured($input);
+
+        //event(new Add($item, $this->model_name, $input, $this->user));
+
+        return $item;
+    }
+
+
+    public function featuredOrdering(Collection $input)
+    {
+        $item = parent::featuredOrdering($input);
 
         //event(new Add($item, $this->model_name, $input, $this->user));
 

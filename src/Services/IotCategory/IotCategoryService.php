@@ -1,25 +1,31 @@
 <?php
 
-namespace DaydreamLab\Cms\Services\IotResource;
+namespace DaydreamLab\Cms\Services\IotCategory;
 
-use DaydreamLab\Cms\Repositories\IotResource\IotResourceRepository;
+use DaydreamLab\Cms\Repositories\IotCategory\IotCategoryRepository;
 use DaydreamLab\Cms\Services\CmsService;
 use Illuminate\Support\Collection;
 
-class IotResourceService extends CmsService
+class IotCategoryService extends CmsService
 {
-    protected $modelName = 'Resource';
+    protected $modelName = 'IotCategory';
 
-    public function __construct(IotResourceRepository $repo)
+    public function __construct(IotCategoryRepository $repo)
     {
         parent::__construct($repo);
         $this->repo = $repo;
     }
 
 
+    public function findDescendantOf($id)
+    {
+        return $this->repo->findDescendantOf($id);
+    }
+
+
     public function add(Collection $input)
     {
-        $item = parent::add($input);
+        $item = parent::addNested($input);
 
         //event(new Add($item, $this->model_name, $input, $this->user));
 
@@ -29,7 +35,9 @@ class IotResourceService extends CmsService
 
     public function modify(Collection $input)
     {
-        $result =  parent::modify($input);
+        $item = parent::checkItem($input);
+
+        $result = parent::modifyNested($input, $item->parent, $item);
 
         //event(new Modify($this->find($input->id), $this->model_name, $result, $input, $this->user));
 
@@ -59,7 +67,7 @@ class IotResourceService extends CmsService
 
     public function remove(Collection $input)
     {
-        $result =  parent::remove($input);
+        $result =  parent::removeNested($input);
 
         //event(new Remove($this->model_name, $result, $input, $this->user));
 
@@ -84,5 +92,11 @@ class IotResourceService extends CmsService
         //event(new State($this->model_name, $result, $input, $this->user));
 
         return $result;
+    }
+
+
+    public function store(Collection $input)
+    {
+        return parent::storeNested($input);
     }
 }
