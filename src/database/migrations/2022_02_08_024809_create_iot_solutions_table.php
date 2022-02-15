@@ -22,6 +22,8 @@ class CreateIotSolutionsTable extends Migration
             $table->text('images')->nullable();
             $table->text('description')->nullable();
             $table->tinyInteger('state')->default(1);
+            $table->unsignedInteger('access');
+            $table->unsignedInteger('ordering')->nullable();
             $table->unsignedTinyInteger('featured')->default(0);
             $table->unsignedInteger('featured_ordering')->nullable();
             $table->text('params')->nullable();

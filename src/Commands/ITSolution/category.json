@@ -6,7 +6,62 @@
     "description"   : "",
     "access"        : 1,
     "params"        : {},
-    "children"      : []
+    "children"      : [
+      {
+        "title"         : "影像辨識",
+        "alias"         : "1",
+        "state"         : 1,
+        "description"   : "",
+        "access"        : 1,
+        "params"        : {},
+        "children"      : []
+      },
+      {
+        "title"         : "語音辨識",
+        "alias"         : "2",
+        "state"         : 1,
+        "description"   : "",
+        "access"        : 1,
+        "params"        : {},
+        "children"      : []
+      },
+      {
+        "title"         : "自然語意",
+        "alias"         : "3",
+        "state"         : 1,
+        "description"   : "",
+        "access"        : 1,
+        "params"        : {},
+        "children"      : []
+      },
+      {
+        "title"         : "搜尋索引",
+        "alias"         : "4",
+        "state"         : 1,
+        "description"   : "",
+        "access"        : 1,
+        "params"        : {},
+        "children"      : []
+      },
+      {
+        "title"         : "深度學習",
+        "alias"         : "5",
+        "state"         : 1,
+        "description"   : "",
+        "access"        : 1,
+        "params"        : {},
+        "children"      : []
+      },
+      {
+        "title"         : "整合開發",
+        "alias"         : "6",
+        "state"         : 1,
+        "description"   : "",
+        "access"        : 1,
+        "params"        : {},
+        "children"      : []
+      }
+    ]
   },
   {
     "title"         : "IoT & Data Analytics",

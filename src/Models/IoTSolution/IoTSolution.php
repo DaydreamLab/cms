@@ -33,6 +33,8 @@ class IoTSolution extends CmsModel
         'images',
         'description',
         'state',
+        'access',
+        'ordering',
         'featured',
         'featured_ordering',
         'params',
@@ -51,8 +53,8 @@ class IoTSolution extends CmsModel
 
 
     protected $casts = [
-        'images'    => 'array',
-        'params'    => 'array',
+        'images'        => 'array',
+        'params'        => 'array',
         'locked_at'     => 'datetime:Y-m-d H:i:s',
         'publish_up'    => 'datetime:Y-m-d H:i:s',
         'publish_down'  => 'datetime:Y-m-d H:i:s'

@@ -5,10 +5,11 @@ namespace DaydreamLab\Cms\Models\IoTCategory;
 use DaydreamLab\Cms\Models\CmsModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\JJAJ\Traits\UserInfo;
+use Kalnoy\Nestedset\NodeTrait;
 
 class IoTCategory extends CmsModel
 {
-    use UserInfo, RecordChanger {
+    use NodeTrait, UserInfo, RecordChanger {
         RecordChanger::boot as traitBoot;
     }
     /**
@@ -30,9 +31,10 @@ class IoTCategory extends CmsModel
     protected $fillable = [
         'title',
         'alias',
-        'state',
         'description',
+        'state',
         'access',
+        'ordering',
         'params',
         'created_by',
         'updated_by',
@@ -48,7 +50,7 @@ class IoTCategory extends CmsModel
     ];
 
     protected $casts = [
-        'params'    => 'array',
+        'params'        => 'array',
         'locked_at'     => 'datetime:Y-m-d H:i:s',
         'publish_up'    => 'datetime:Y-m-d H:i:s',
         'publish_down'  => 'datetime:Y-m-d H:i:s'

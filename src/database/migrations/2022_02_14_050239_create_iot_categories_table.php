@@ -18,9 +18,10 @@ class CreateIoTCategoriesTable extends Migration
             $table->nestedSet();
             $table->string('alias');
             $table->string('title');
-            $table->tinyInteger('state')->default(1);
             $table->text('description')->nullable();
+            $table->tinyInteger('state')->default(1);
             $table->unsignedInteger('access');
+            $table->unsignedInteger('ordering')->nullable();
             $table->text('params')->nullable();
             $table->unsignedInteger('created_by');
             $table->unsignedInteger('updated_by')->nullable();

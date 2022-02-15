@@ -36,6 +36,8 @@ class IotResource extends CmsModel
         'video',
         'documents',
         'state',
+        'access',
+        'ordering',
         'params',
         'locked_by',
         'locked_at',
@@ -47,11 +49,11 @@ class IotResource extends CmsModel
 
 
     protected $casts = [
-        'images'    => 'array',
-        'points'    => 'array',
-        'video'     => 'array',
-        'documents' => 'array',
-        'params'    => 'array',
+        'images'        => 'array',
+        'points'        => 'array',
+        'video'         => 'array',
+        'documents'     => 'array',
+        'params'        => 'array',
         'locked_at'     => 'datetime:Y-m-d H:i:s',
         'publish_up'    => 'datetime:Y-m-d H:i:s',
         'publish_down'  => 'datetime:Y-m-d H:i:s'

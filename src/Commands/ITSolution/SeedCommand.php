@@ -2,13 +2,14 @@
 
 namespace DaydreamLab\Cms\Commands\ITSolution;
 
-use DaydreamLab\Cms\Models\IoTCategory\IoTCategory;
+use DaydreamLab\Cms\Services\IoTCategory\Admin\IoTCategoryAdminService;
 use DaydreamLab\Cms\Services\Site\Admin\SiteAdminService;
 use DaydreamLab\User\Models\Api\Api;
 use DaydreamLab\User\Models\User\UserGroup;
 use DaydreamLab\User\Services\Asset\Admin\AssetAdminService;
 use DaydreamLab\User\Services\Asset\Admin\AssetGroupAdminService;
 use Illuminate\Console\Command;
+use Illuminate\Support\Str;
 
 
 class SeedCommand extends Command
@@ -159,6 +160,7 @@ class SeedCommand extends Command
 
     public function migrateCategory($data, $parent)
     {
+        $categoryService = app(IoTCategoryAdminService::class);
         foreach ($data as $category) {
             $children = $category['children'];
             unset($category['children']);
@@ -166,7 +168,8 @@ class SeedCommand extends Command
                 $category['parent_id'] = $parent->id;
             }
 
-            $c = IoTCategory::create($category);
+            $category['alias'] = Str::random();
+            $c = $categoryService->store(collect($category));
 
             if ($parent) {
                 $parent->appendNode($c);

@@ -50,6 +50,8 @@ class IotResourceAdminStoreRequest extends CmsStoreRequest
             'documents.*.category'  => 'nullable|string',
             'documents.*.title'     => 'nullable|string',
             'state'                 => [ 'required', Rule::in([0, 1, -1, -2]) ],
+            'access'                => 'nullable|integer',
+            'ordering'              => 'nullable|integer',
             'params'                => 'nullable|array',
             'publish_up'            => 'nullable|date_format:Y-m-d H:i:s',
             'publish_down'          => 'nullable|date_format:Y-m-d H:i:s',

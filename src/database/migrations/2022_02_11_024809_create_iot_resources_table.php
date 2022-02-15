@@ -25,6 +25,8 @@ class CreateIotResourcesTable extends Migration
             $table->text('video')->nullable();
             $table->text('documents')->nullable();
             $table->tinyInteger('state')->default(1);
+            $table->unsignedInteger('access');
+            $table->unsignedInteger('ordering')->nullable();
             $table->text('params')->nullable();
             $table->unsignedInteger('locked_by')->nullable()->default(0);
             $table->timestamp('locked_at')->nullable();
