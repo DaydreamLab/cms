@@ -9,6 +9,8 @@ use DaydreamLab\Cms\Requests\IotCategory\Admin\IotCategoryAdminRestoreRequest;
 use DaydreamLab\Cms\Requests\IotCategory\Admin\IotCategoryAdminSearchRequest;
 use DaydreamLab\Cms\Requests\IotCategory\Admin\IotCategoryAdminStateRequest;
 use DaydreamLab\Cms\Requests\IotCategory\Admin\IotCategoryAdminStoreRequest;
+use DaydreamLab\Cms\Resources\IotCategory\Admin\Collections\IotCategoryAdminSearchResourceCollection;
+use DaydreamLab\Cms\Resources\IotCategory\Admin\Models\IotCategoryAdminResource;
 use DaydreamLab\Cms\Services\IotCategory\Admin\IotCategoryAdminService;
 use Throwable;
 
@@ -31,7 +33,7 @@ class IotCategoryAdminController extends CmsController
             $this->handleException($t);
         }
 
-        return $this->response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response, [], IotCategoryAdminResource::class);
     }
 
 
@@ -67,7 +69,31 @@ class IotCategoryAdminController extends CmsController
             $this->handleException($t);
         }
 
-        return $this->response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response, [], IotCategoryAdminSearchResourceCollection::class);
+    }
+
+
+    public function searchParent(IotCategoryAdminSearchRequest $request)
+    {
+        try {
+            $this->service->searchParent($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response, [], IotCategoryAdminSearchResourceCollection::class);
+    }
+
+
+    public function searchChild(IotCategoryAdminSearchRequest $request)
+    {
+        try {
+            $this->service->searchChild($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response, [], IotCategoryAdminSearchResourceCollection::class);
     }
 
 
@@ -91,6 +117,6 @@ class IotCategoryAdminController extends CmsController
             $this->handleException($t);
         }
 
-        return $this->response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response, [], IotCategoryAdminResource::class);
     }
 }

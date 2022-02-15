@@ -122,7 +122,12 @@
         "icon": "folder-open",
         "showNav": 1,
         "apis": [
-
+          "getIotCategory",
+          "addIotCategory",
+          "editIotCategory",
+          "deleteIotCategory",
+          "searchIotCategory",
+          "restoreIotCategory"
         ],
         "defaultApis": {
           "getOption": ["checked", "hidden"],

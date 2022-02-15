@@ -441,7 +441,7 @@ use DaydreamLab\Cms\Controllers\IotSolution\Admin\IotSolutionAdminController;
 use DaydreamLab\Cms\Controllers\IotResource\Admin\IotResourceAdminController;
 use DaydreamLab\Cms\Controllers\IotCategory\Admin\IotCategoryAdminController;
 
-# 解決方案
+# 解決方案 後台
 Route::post('api/admin/iot/solution/store', [IotSolutionAdminController::class, 'store'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 Route::post('api/admin/iot/solution/search', [IotSolutionAdminController::class, 'search'])
@@ -453,7 +453,7 @@ Route::post('api/admin/iot/solution/state', [IotSolutionAdminController::class, 
 Route::get('api/admin/iot/solution/{id}', [IotSolutionAdminController::class, 'getItem'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 
-# 原廠資源
+# 原廠資源 後台
 Route::post('api/admin/iot/resource/store', [IotResourceAdminController::class, 'store'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 Route::post('api/admin/iot/resource/search', [IotResourceAdminController::class, 'search'])
@@ -465,10 +465,14 @@ Route::post('api/admin/iot/resource/state', [IotResourceAdminController::class, 
 Route::get('api/admin/iot/resource/{id}', [IotResourceAdminController::class, 'getItem'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 
-# 分類
+# 分類 後台
 Route::post('api/admin/iot/category/store', [IotCategoryAdminController::class, 'store'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 Route::post('api/admin/iot/category/search', [IotCategoryAdminController::class, 'search'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::post('api/admin/iot/category/parent/search', [IotCategoryAdminController::class, 'searchParent'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::post('api/admin/iot/category/child/search', [IotCategoryAdminController::class, 'searchChild'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 Route::post('api/admin/iot/category/reStore', [IotCategoryAdminController::class, 'reStore'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);

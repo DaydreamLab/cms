@@ -14,6 +14,7 @@ class IotResourceAdminService extends IotResourceService
         $this->repo = $repo;
     }
 
+
     public function addMapping($item, $input)
     {
     }
@@ -26,6 +27,17 @@ class IotResourceAdminService extends IotResourceService
 
     public function removeMapping($item)
     {
+    }
+
+
+    public function search(Collection $input)
+    {
+        if ($input->get('state') == null) {
+            $q = $input->get('q');
+            $q = $q->whereIn('state', [0, 1]);
+            $input->put('q', $q);
+        }
+        return parent::search($input);
     }
 
 

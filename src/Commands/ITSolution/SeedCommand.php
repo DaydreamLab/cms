@@ -154,31 +154,10 @@ class SeedCommand extends Command
     public function categorySeeder()
     {
         $data = getJson(__DIR__ . '/category.json', true);
-        $this->migrateCategory($data, null);
-    }
-
-
-    public function migrateCategory($data, $parent)
-    {
         $categoryService = app(IotCategoryAdminService::class);
         foreach ($data as $category) {
-            $children = $category['children'];
-            unset($category['children']);
-            if ($parent) {
-                $category['parent_id'] = $parent->id;
-            }
-
-            $category['alias'] = Str::random();
-            $c = $categoryService->store(collect($category));
-
-            if ($parent) {
-                $parent->appendNode($c);
-            }
-
-            if (count($children))
-            {
-                self::migrateCategory($children, $c);
-            }
+            $categoryService->store(collect($category));
         }
     }
+
 }

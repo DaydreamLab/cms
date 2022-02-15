@@ -5,11 +5,10 @@ namespace DaydreamLab\Cms\Models\IotCategory;
 use DaydreamLab\Cms\Models\CmsModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\JJAJ\Traits\UserInfo;
-use Kalnoy\Nestedset\NodeTrait;
 
 class IotCategory extends CmsModel
 {
-    use NodeTrait, UserInfo, RecordChanger {
+    use UserInfo, RecordChanger {
         RecordChanger::boot as traitBoot;
     }
     /**
@@ -19,10 +18,11 @@ class IotCategory extends CmsModel
      */
     protected $table = 'iot_categories';
 
-
     protected $name = 'IotCategory';
 
+    protected $order_by = 'ordering';
 
+    protected $order = 'asc';
     /**
      * The attributes that are mass assignable.
      *
@@ -32,6 +32,7 @@ class IotCategory extends CmsModel
         'title',
         'alias',
         'description',
+        'floor',
         'state',
         'access',
         'ordering',
@@ -45,8 +46,7 @@ class IotCategory extends CmsModel
     ];
 
     protected $hidden = [
-        '_lft',
-        '_rgt'
+
     ];
 
     protected $casts = [
@@ -65,6 +65,12 @@ class IotCategory extends CmsModel
 
     public static function newFactory()
     {
+    }
 
+
+    public function childCategories()
+    {
+        return $this->belongsToMany(IotCategory::class, 'iot_categories_maps', 'parent_id', 'child_id')
+            ->withTimestamps();
     }
 }

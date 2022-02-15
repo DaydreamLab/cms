@@ -9,6 +9,8 @@ class IotCategoryAdminSearchRequest extends CmsSearchRequest
     protected $modelName = 'IotCategory';
 
     protected $apiMethod = 'searchIotCategory';
+
+    protected $searchKeys = ['title'];
     /**
      * Determine if the user is authorized to make this request.
      *

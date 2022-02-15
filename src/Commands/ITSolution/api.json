@@ -70,5 +70,41 @@
     "method": "restoreIotResource",
     "url": "/admin/iot/resource/restore",
     "created_by": 1
+  },
+  {
+    "name": "取得IoT分類",
+    "method": "getIotCategory",
+    "url": "/admin/iot/category/{id}",
+    "created_by": 1
+  },
+  {
+    "name": "新增IoT分類",
+    "method": "addIotCategory",
+    "url": "/admin/iot/category/store",
+    "created_by": 1
+  },
+  {
+    "name": "編輯IoT分類",
+    "method": "editIotCategory",
+    "url": "/admin/iot/category/store",
+    "created_by": 1
+  },
+  {
+    "name": "刪除IoT分類",
+    "method": "deleteIotCategory",
+    "url": "/admin/iot/category/remove",
+    "created_by": 1
+  },
+  {
+    "name": "搜尋IoT分類",
+    "method": "searchIotCategory",
+    "url": "/admin/iot/category/search",
+    "created_by": 1
+  },
+  {
+    "name": "回存IoT分類",
+    "method": "restoreIotCategory",
+    "url": "/admin/iot/category/restore",
+    "created_by": 1
   }
 ]

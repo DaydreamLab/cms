@@ -2,88 +2,52 @@
   {
     "title"         : "AI+ML",
     "alias"         : "ai+ml",
+    "floor"         : 1,
     "state"         : 1,
     "description"   : "",
     "access"        : 1,
-    "params"        : {},
-    "children"      : [
-      {
-        "title"         : "影像辨識",
-        "alias"         : "1",
-        "state"         : 1,
-        "description"   : "",
-        "access"        : 1,
-        "params"        : {},
-        "children"      : []
-      },
-      {
-        "title"         : "語音辨識",
-        "alias"         : "2",
-        "state"         : 1,
-        "description"   : "",
-        "access"        : 1,
-        "params"        : {},
-        "children"      : []
-      },
-      {
-        "title"         : "自然語意",
-        "alias"         : "3",
-        "state"         : 1,
-        "description"   : "",
-        "access"        : 1,
-        "params"        : {},
-        "children"      : []
-      },
-      {
-        "title"         : "搜尋索引",
-        "alias"         : "4",
-        "state"         : 1,
-        "description"   : "",
-        "access"        : 1,
-        "params"        : {},
-        "children"      : []
-      },
-      {
-        "title"         : "深度學習",
-        "alias"         : "5",
-        "state"         : 1,
-        "description"   : "",
-        "access"        : 1,
-        "params"        : {},
-        "children"      : []
-      },
-      {
-        "title"         : "整合開發",
-        "alias"         : "6",
-        "state"         : 1,
-        "description"   : "",
-        "access"        : 1,
-        "params"        : {},
-        "children"      : []
-      }
-    ]
+    "params"        : {}
   },
   {
     "title"         : "IoT & Data Analytics",
     "alias"         : "iot&data_analytics",
+    "floor"         : 1,
     "state"         : 1,
     "description"   : "",
     "access"        : 1,
-    "params"        : {},
-    "children"      : []
+    "params"        : {}
   },
   {
     "title"         : "DevOps",
     "alias"         : "devops",
+    "floor"         : 1,
     "state"         : 1,
     "description"   : "",
     "access"        : 1,
-    "params"        : {},
-    "children"      : []
+    "params"        : {}
   },
   {
     "title"         : "Infrastructure",
     "alias"         : "infrastructure",
+    "floor"         : 1,
+    "state"         : 1,
+    "description"   : "",
+    "access"        : 1,
+    "params"        : {}
+  },
+  {
+    "title"         : "Business Application",
+    "alias"         : "business_application",
+    "floor"         : 1,
+    "state"         : 1,
+    "description"   : "",
+    "access"        : 1,
+    "params"        : {}
+  },
+  {
+    "title"         : "影像辨識",
+    "alias"         : "1",
+    "floor"         : 2,
     "state"         : 1,
     "description"   : "",
     "access"        : 1,
@@ -91,8 +55,49 @@
     "children"      : []
   },
   {
-    "title"         : "Business Application",
-    "alias"         : "business_application",
+    "title"         : "語音辨識",
+    "alias"         : "2",
+    "floor"         : 2,
+    "state"         : 1,
+    "description"   : "",
+    "access"        : 1,
+    "params"        : {},
+    "children"      : []
+  },
+  {
+    "title"         : "自然語意",
+    "alias"         : "3",
+    "floor"         : 2,
+    "state"         : 1,
+    "description"   : "",
+    "access"        : 1,
+    "params"        : {},
+    "children"      : []
+  },
+  {
+    "title"         : "搜尋索引",
+    "alias"         : "4",
+    "floor"         : 2,
+    "state"         : 1,
+    "description"   : "",
+    "access"        : 1,
+    "params"        : {},
+    "children"      : []
+  },
+  {
+    "title"         : "深度學習",
+    "alias"         : "5",
+    "floor"         : 2,
+    "state"         : 1,
+    "description"   : "",
+    "access"        : 1,
+    "params"        : {},
+    "children"      : []
+  },
+  {
+    "title"         : "整合開發",
+    "alias"         : "6",
+    "floor"         : 2,
     "state"         : 1,
     "description"   : "",
     "access"        : 1,

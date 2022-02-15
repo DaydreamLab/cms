@@ -99,6 +99,6 @@ class IotSolutionAdminController extends CmsController
             $this->handleException($t);
         }
 
-        return $this->response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response, [], IotSolutionAdminResource::class);
     }
 }

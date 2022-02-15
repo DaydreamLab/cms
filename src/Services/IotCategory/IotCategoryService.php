@@ -17,15 +17,9 @@ class IotCategoryService extends CmsService
     }
 
 
-    public function findDescendantOf($id)
-    {
-        return $this->repo->findDescendantOf($id);
-    }
-
-
     public function add(Collection $input)
     {
-        $item = parent::addNested($input);
+        $item = parent::add($input);
 
         //event(new Add($item, $this->model_name, $input, $this->user));
 
@@ -35,9 +29,7 @@ class IotCategoryService extends CmsService
 
     public function modify(Collection $input)
     {
-        $item = parent::checkItem($input);
-
-        $result = parent::modifyNested($input, $item->parent, $item);
+        $result =  parent::modify($input);
 
         //event(new Modify($this->find($input->id), $this->model_name, $result, $input, $this->user));
 
@@ -67,7 +59,7 @@ class IotCategoryService extends CmsService
 
     public function remove(Collection $input)
     {
-        $result =  parent::removeNested($input);
+        $result =  parent::remove($input);
 
         //event(new Remove($this->model_name, $result, $input, $this->user));
 
@@ -92,11 +84,5 @@ class IotCategoryService extends CmsService
         //event(new State($this->model_name, $result, $input, $this->user));
 
         return $result;
-    }
-
-
-    public function store(Collection $input)
-    {
-        return parent::storeNested($input);
     }
 }
