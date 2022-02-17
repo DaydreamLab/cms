@@ -12,5 +12,5 @@ class IotCategoryFront extends IotCategory
      */
     protected $table = 'iot_categories';
 
-
+    protected $model_type = 'front';
 }

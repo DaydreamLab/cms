@@ -12,5 +12,5 @@ class IotResourceAdmin extends IotResource
      */
     protected $table = 'iot_resources';
 
-
+    protected $model_type = 'admin';
 }

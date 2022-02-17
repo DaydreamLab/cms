@@ -56,12 +56,15 @@ class IotResourceAdminStoreRequest extends CmsStoreRequest
             'publish_up'            => 'nullable|date_format:Y-m-d H:i:s',
             'publish_down'          => 'nullable|date_format:Y-m-d H:i:s',
 
-            'category_ids'          => 'nullable|array',
-            'category_ids.*'        => 'nullable|integer',
-            'industry_ids'          => 'nullable|array',
-            'industry_ids.*'        => 'nullable|integer',
-            'tag_ids'               => 'nullable|array',
-            'tag_ids.*'             => 'nullable|integer'
+            'categories'            => 'nullable|array',
+            'categories.*'          => 'nullable|array',
+            'categories.*.id'       => 'nullable|integer',
+            'industries'            => 'nullable|array',
+            'industries.*'          => 'nullable|array',
+            'industries.*.id'       => 'nullable|integer',
+            'tags'                  => 'nullable|array',
+            'tags.*'                => 'nullable|array',
+            'tags.*.id'             => 'nullable|integer'
         ];
 
         return array_merge(parent::rules(), $rules);

@@ -106,5 +106,41 @@
     "method": "restoreIotCategory",
     "url": "/admin/iot/category/restore",
     "created_by": 1
+  },
+  {
+    "name": "取得IoT產業",
+    "method": "getIotIndustry",
+    "url": "/admin/iot/industry/{id}",
+    "created_by": 1
+  },
+  {
+    "name": "新增IoT產業",
+    "method": "addIotIndustry",
+    "url": "/admin/iot/industry/store",
+    "created_by": 1
+  },
+  {
+    "name": "編輯IoT產業",
+    "method": "editIotIndustry",
+    "url": "/admin/iot/industry/store",
+    "created_by": 1
+  },
+  {
+    "name": "刪除IoT產業",
+    "method": "deleteIotIndustry",
+    "url": "/admin/iot/industry/remove",
+    "created_by": 1
+  },
+  {
+    "name": "搜尋IoT產業",
+    "method": "searchIotIndustry",
+    "url": "/admin/iot/industry/search",
+    "created_by": 1
+  },
+  {
+    "name": "回存IoT產業",
+    "method": "restoreIotIndustry",
+    "url": "/admin/iot/industry/restore",
+    "created_by": 1
   }
 ]

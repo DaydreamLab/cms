@@ -12,4 +12,5 @@ class IotSolutionAdmin extends IotSolution
      */
     protected $table = 'iot_solutions';
 
+    protected $model_type = 'admin';
 }

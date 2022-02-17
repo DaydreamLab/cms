@@ -12,5 +12,5 @@ class IotCategoryAdmin extends IotCategory
      */
     protected $table = 'iot_categories';
 
-
+    protected $model_type = 'admin';
 }
