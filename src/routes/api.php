@@ -446,7 +446,7 @@ Route::post('api/admin/iot/solution/store', [IotSolutionAdminController::class, 
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 Route::post('api/admin/iot/solution/search', [IotSolutionAdminController::class, 'search'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
-Route::post('api/admin/iot/solution/reStore', [IotSolutionAdminController::class, 'reStore'])
+Route::post('api/admin/iot/solution/restore', [IotSolutionAdminController::class, 'restore'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 Route::post('api/admin/iot/solution/state', [IotSolutionAdminController::class, 'state'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
@@ -458,7 +458,7 @@ Route::post('api/admin/iot/resource/store', [IotResourceAdminController::class, 
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 Route::post('api/admin/iot/resource/search', [IotResourceAdminController::class, 'search'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
-Route::post('api/admin/iot/resource/reStore', [IotResourceAdminController::class, 'reStore'])
+Route::post('api/admin/iot/resource/restore', [IotResourceAdminController::class, 'restore'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 Route::post('api/admin/iot/resource/state', [IotResourceAdminController::class, 'state'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
@@ -474,7 +474,7 @@ Route::post('api/admin/iot/category/parent/search', [IotCategoryAdminController:
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 Route::post('api/admin/iot/category/child/search', [IotCategoryAdminController::class, 'searchChild'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
-Route::post('api/admin/iot/category/reStore', [IotCategoryAdminController::class, 'reStore'])
+Route::post('api/admin/iot/category/restore', [IotCategoryAdminController::class, 'restore'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 Route::post('api/admin/iot/category/state', [IotCategoryAdminController::class, 'state'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
