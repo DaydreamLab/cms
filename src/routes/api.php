@@ -470,15 +470,35 @@ Route::post('api/admin/iot/category/store', [IotCategoryAdminController::class, 
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 Route::post('api/admin/iot/category/search', [IotCategoryAdminController::class, 'search'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
-Route::post('api/admin/iot/category/parent/search', [IotCategoryAdminController::class, 'searchParent'])
-    ->middleware(['expired','admin', 'restrict-ip:admin']);
-Route::post('api/admin/iot/category/child/search', [IotCategoryAdminController::class, 'searchChild'])
-    ->middleware(['expired','admin', 'restrict-ip:admin']);
 Route::post('api/admin/iot/category/restore', [IotCategoryAdminController::class, 'restore'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 Route::post('api/admin/iot/category/state', [IotCategoryAdminController::class, 'state'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 Route::get('api/admin/iot/category/{id}', [IotCategoryAdminController::class, 'getItem'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+
+# 大分類 後台
+Route::post('api/admin/iot/category/parent/store', [IotCategoryAdminController::class, 'storeParent'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::post('api/admin/iot/category/parent/search', [IotCategoryAdminController::class, 'searchParent'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::post('api/admin/iot/category/parent/restore', [IotCategoryAdminController::class, 'restore'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::post('api/admin/iot/category/parent/state', [IotCategoryAdminController::class, 'state'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::get('api/admin/iot/category/parent/{id}', [IotCategoryAdminController::class, 'getItem'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+
+# 小分類 後台
+Route::post('api/admin/iot/category/child/store', [IotCategoryAdminController::class, 'storeChild'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::post('api/admin/iot/category/child/search', [IotCategoryAdminController::class, 'searchChild'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::post('api/admin/iot/category/child/restore', [IotCategoryAdminController::class, 'restore'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::post('api/admin/iot/category/child/state', [IotCategoryAdminController::class, 'state'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::get('api/admin/iot/category/child/{id}', [IotCategoryAdminController::class, 'getItem'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 
 # 產業

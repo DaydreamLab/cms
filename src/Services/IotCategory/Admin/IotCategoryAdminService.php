@@ -81,4 +81,18 @@ class IotCategoryAdminService extends IotCategoryService
 
         return parent::store($input);
     }
+
+
+    public function storeParent(Collection $input)
+    {
+        $input->put('floor', 1);
+        return $this->store($input);
+    }
+
+
+    public function storeChild(Collection $input)
+    {
+        $input->put('floor', 2);
+        return $this->store($input);
+    }
 }

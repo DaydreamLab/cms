@@ -27,6 +27,7 @@ class IotCategoryAdminController extends CmsController
 
     public function getItem(IotCategoryAdminGetItemRequest $request)
     {
+        $this->service->setUser($request->user('api'));
         try {
             $this->service->getItem(collect(['id' => $request->route('id')]));
         } catch (Throwable $t) {
@@ -39,6 +40,7 @@ class IotCategoryAdminController extends CmsController
 
     public function remove(IotCategoryAdminRemoveRequest $request)
     {
+        $this->service->setUser($request->user('api'));
         try {
             $this->service->remove($request->validated());
         } catch (Throwable $t) {
@@ -51,6 +53,7 @@ class IotCategoryAdminController extends CmsController
 
     public function restore(IotCategoryAdminRestoreRequest $request)
     {
+        $this->service->setUser($request->user('api'));
         try {
             $this->service->restore($request->validated());
         } catch (Throwable $t) {
@@ -63,6 +66,7 @@ class IotCategoryAdminController extends CmsController
 
     public function search(IotCategoryAdminSearchRequest $request)
     {
+        $this->service->setUser($request->user('api'));
         try {
             $this->service->search($request->validated());
         } catch (Throwable $t) {
@@ -75,6 +79,7 @@ class IotCategoryAdminController extends CmsController
 
     public function searchParent(IotCategoryAdminSearchRequest $request)
     {
+        $this->service->setUser($request->user('api'));
         try {
             $this->service->searchParent($request->validated());
         } catch (Throwable $t) {
@@ -87,6 +92,7 @@ class IotCategoryAdminController extends CmsController
 
     public function searchChild(IotCategoryAdminSearchRequest $request)
     {
+        $this->service->setUser($request->user('api'));
         try {
             $this->service->searchChild($request->validated());
         } catch (Throwable $t) {
@@ -99,6 +105,7 @@ class IotCategoryAdminController extends CmsController
 
     public function state(IotCategoryAdminStateRequest $request)
     {
+        $this->service->setUser($request->user('api'));
         try {
             $this->service->state($request->validated());
         } catch (Throwable $t) {
@@ -111,8 +118,33 @@ class IotCategoryAdminController extends CmsController
 
     public function store(IotCategoryAdminStoreRequest $request)
     {
+        $this->service->setUser($request->user('api'));
         try {
             $this->service->store($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response, [], IotCategoryAdminResource::class);
+    }
+
+    public function storeParent(IotCategoryAdminStoreRequest $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->storeParent($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response, [], IotCategoryAdminResource::class);
+    }
+
+    public function storeChild(IotCategoryAdminStoreRequest $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->storeChild($request->validated());
         } catch (Throwable $t) {
             $this->handleException($t);
         }
