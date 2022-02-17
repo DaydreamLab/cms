@@ -3,15 +3,14 @@
 namespace DaydreamLab\Cms\Controllers\IotIndustry\Admin;
 
 use DaydreamLab\Cms\Controllers\CmsController;
-use DaydreamLab\Cms\Requests\IotIndustry\Admin\IotIndustryAdminFeaturedOrderingRequest;
-use DaydreamLab\Cms\Requests\IotIndustry\Admin\IotIndustryAdminFeaturedRequest;
 use DaydreamLab\Cms\Requests\IotIndustry\Admin\IotIndustryAdminGetItemRequest;
-use DaydreamLab\Cms\Requests\IotIndustry\Admin\IotIndustryAdminOrderingRequest;
 use DaydreamLab\Cms\Requests\IotIndustry\Admin\IotIndustryAdminRemoveRequest;
 use DaydreamLab\Cms\Requests\IotIndustry\Admin\IotIndustryAdminRestoreRequest;
 use DaydreamLab\Cms\Requests\IotIndustry\Admin\IotIndustryAdminSearchRequest;
 use DaydreamLab\Cms\Requests\IotIndustry\Admin\IotIndustryAdminStateRequest;
 use DaydreamLab\Cms\Requests\IotIndustry\Admin\IotIndustryAdminStoreRequest;
+use DaydreamLab\Cms\Resources\IotIndustry\Admin\Collections\IotIndustryAdminSearchResourceCollection;
+use DaydreamLab\Cms\Resources\IotIndustry\Admin\Models\IotIndustryAdminResource;
 use DaydreamLab\Cms\Services\IotIndustry\Admin\IotIndustryAdminService;
 use Throwable;
 
@@ -26,30 +25,6 @@ class IotIndustryAdminController extends CmsController
     }
 
 
-    public function featured(IotIndustryAdminFeaturedRequest $request)
-    {
-        try {
-            $this->service->featured($request->validated());
-        } catch (Throwable $t) {
-            $this->handleException($t);
-        }
-
-        return $this->response($this->service->status, $this->service->response);
-    }
-
-
-    public function featuredOrdering(IotIndustryAdminFeaturedOrderingRequest $request)
-    {
-        try {
-            $this->service->ordering($request->validated());
-        } catch (Throwable $t) {
-            $this->handleException($t);
-        }
-
-        return $this->response($this->service->status, $this->service->response);
-    }
-
-
     public function getItem(IotIndustryAdminGetItemRequest $request)
     {
         try {
@@ -58,19 +33,7 @@ class IotIndustryAdminController extends CmsController
             $this->handleException($t);
         }
 
-        return $this->response($this->service->status, $this->service->response);
-    }
-
-
-    public function ordering(IotIndustryAdminOrderingRequest $request)
-    {
-        try {
-            $this->service->ordering($request->validated());
-        } catch (Throwable $t) {
-            $this->handleException($t);
-        }
-
-        return $this->response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response, [], IotIndustryAdminResource::class);
     }
 
 
@@ -106,7 +69,7 @@ class IotIndustryAdminController extends CmsController
             $this->handleException($t);
         }
 
-        return $this->response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response, [], IotIndustryAdminSearchResourceCollection::class);
     }
 
 
@@ -130,6 +93,6 @@ class IotIndustryAdminController extends CmsController
             $this->handleException($t);
         }
 
-        return $this->response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response, [], IotIndustryAdminResource::class);
     }
 }
