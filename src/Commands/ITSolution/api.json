@@ -142,5 +142,41 @@
     "method": "restoreIotIndustry",
     "url": "/admin/iot/industry/restore",
     "created_by": 1
+  },
+  {
+    "name": "取得IoT標籤",
+    "method": "getIotTag",
+    "url": "/admin/iot/tag/{id}",
+    "created_by": 1
+  },
+  {
+    "name": "新增IoT標籤",
+    "method": "addIotTag",
+    "url": "/admin/iot/tag/store",
+    "created_by": 1
+  },
+  {
+    "name": "編輯IoT標籤",
+    "method": "editIotTag",
+    "url": "/admin/iot/tag/store",
+    "created_by": 1
+  },
+  {
+    "name": "刪除IoT標籤",
+    "method": "deleteIotTag",
+    "url": "/admin/iot/tag/remove",
+    "created_by": 1
+  },
+  {
+    "name": "搜尋IoT標籤",
+    "method": "searchIotTag",
+    "url": "/admin/iot/tag/search",
+    "created_by": 1
+  },
+  {
+    "name": "回存IoT標籤",
+    "method": "restoreIotTag",
+    "url": "/admin/iot/tag/restore",
+    "created_by": 1
   }
 ]

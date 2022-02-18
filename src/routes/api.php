@@ -441,6 +441,7 @@ use DaydreamLab\Cms\Controllers\IotSolution\Admin\IotSolutionAdminController;
 use DaydreamLab\Cms\Controllers\IotResource\Admin\IotResourceAdminController;
 use DaydreamLab\Cms\Controllers\IotCategory\Admin\IotCategoryAdminController;
 use DaydreamLab\Cms\Controllers\IotIndustry\Admin\IotIndustryAdminController;
+use DaydreamLab\Cms\Controllers\IotTag\Admin\IotTagAdminController;
 
 # 解決方案 後台
 Route::post('api/admin/iot/solution/store', [IotSolutionAdminController::class, 'store'])
@@ -514,4 +515,14 @@ Route::post('api/admin/iot/industry/state', [IotIndustryAdminController::class, 
 Route::get('api/admin/iot/industry/{id}', [IotIndustryAdminController::class, 'getItem'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 
-# slideshow
+# 標籤
+Route::post('api/admin/iot/tag/store', [IotTagAdminController::class, 'store'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::post('api/admin/iot/tag/search', [IotTagAdminController::class, 'search'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::post('api/admin/iot/tag/restore', [IotTagAdminController::class, 'restore'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::post('api/admin/iot/tag/state', [IotTagAdminController::class, 'state'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::get('api/admin/iot/tag/{id}', [IotTagAdminController::class, 'getItem'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);

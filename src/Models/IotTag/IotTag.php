@@ -1,12 +1,12 @@
 <?php
 
-namespace DaydreamLab\Cms\Models\IotCategory;
+namespace DaydreamLab\Cms\Models\IotTag;
 
 use DaydreamLab\Cms\Models\CmsModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\JJAJ\Traits\UserInfo;
 
-class IotCategory extends CmsModel
+class IotTag extends CmsModel
 {
     use UserInfo, RecordChanger {
         RecordChanger::boot as traitBoot;
@@ -16,7 +16,7 @@ class IotCategory extends CmsModel
      *
      * @var string
      */
-    protected $table = 'iot_categories';
+    protected $table = 'iot_tags';
 
     protected $model_type = 'parent';
 
@@ -29,7 +29,6 @@ class IotCategory extends CmsModel
         'alias',
         'title',
         'description',
-        'floor',
         'state',
         'access',
         'ordering',
@@ -42,9 +41,6 @@ class IotCategory extends CmsModel
         'publish_down'
     ];
 
-    protected $hidden = [
-
-    ];
 
     protected $casts = [
         'params'        => 'array',
@@ -62,12 +58,6 @@ class IotCategory extends CmsModel
 
     public static function newFactory()
     {
-    }
 
-
-    public function childCategories()
-    {
-        return $this->belongsToMany(IotCategory::class, 'iot_categories_maps', 'parent_id', 'child_id')
-            ->withTimestamps();
     }
 }

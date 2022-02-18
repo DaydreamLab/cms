@@ -1,14 +1,14 @@
 <?php
 
-namespace DaydreamLab\Cms\Services\IotIndustry\Admin;
+namespace DaydreamLab\Cms\Services\IotTag\Admin;
 
-use DaydreamLab\Cms\Repositories\IotIndustry\Admin\IotIndustryAdminRepository;
-use DaydreamLab\Cms\Services\IotIndustry\IotIndustryService;
+use DaydreamLab\Cms\Repositories\IotTag\Admin\IotTagAdminRepository;
+use DaydreamLab\Cms\Services\IotTag\IotTagService;
 use Illuminate\Support\Collection;
 
-class IotIndustryAdminService extends IotIndustryService
+class IotTagAdminService extends IotTagService
 {
-    public function __construct(IotIndustryAdminRepository $repo)
+    public function __construct(IotTagAdminRepository $repo)
     {
         parent::__construct($repo);
         $this->repo = $repo;

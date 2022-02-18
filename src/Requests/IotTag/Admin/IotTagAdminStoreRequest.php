@@ -1,15 +1,15 @@
 <?php
 
-namespace DaydreamLab\Cms\Requests\IotIndustry\Admin;
+namespace DaydreamLab\Cms\Requests\IotTag\Admin;
 
 use DaydreamLab\Cms\Requests\ComponentBase\CmsStoreRequest;
 use Illuminate\Validation\Rule;
 
-class IotIndustryAdminStoreRequest extends CmsStoreRequest
+class IotTagAdminStoreRequest extends CmsStoreRequest
 {
-    protected $modelName = 'IotIndustry';
+    protected $modelName = 'IotTag';
 
-    protected $apiMethod = 'storeIotIndustry';
+    protected $apiMethod = 'storeIotTag';
     /**
      * Determine if the user is authorized to make this request.
      *
