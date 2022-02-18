@@ -2,6 +2,9 @@
 
 namespace DaydreamLab\Cms\Resources\IotResource\Admin\Models;
 
+use DaydreamLab\Cms\Resources\IotCategory\Admin\Collections\IotCategoryAdminSearchResourceCollection;
+use DaydreamLab\Cms\Resources\IotIndustry\Admin\Collections\IotIndustryAdminSearchResourceCollection;
+use DaydreamLab\Cms\Resources\IotTag\Admin\Collections\IotTagAdminSearchResourceCollection;
 use DaydreamLab\JJAJ\Resources\BaseJsonResource;
 
 class IotResourceAdminResource extends BaseJsonResource
@@ -33,7 +36,11 @@ class IotResourceAdminResource extends BaseJsonResource
             'created_at'    => $this->getDateTimeString($this->created_at, $tz),
             'updated_at'    => $this->getDateTimeString($this->updated_at, $tz),
             'publish_up'    => $this->getDateTimeString($this->publish_up, $tz),
-            'publish_down'  => $this->getDateTimeString($this->publish_down, $tz)
+            'publish_down'  => $this->getDateTimeString($this->publish_down, $tz),
+
+            'categories'    => new IotCategoryAdminSearchResourceCollection($this->categories, false),
+            'industries'    => new IotIndustryAdminSearchResourceCollection($this->industries, false),
+            'tags'          => new IotTagAdminSearchResourceCollection($this->tags, false)
         ];
     }
 }

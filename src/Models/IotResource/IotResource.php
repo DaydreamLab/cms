@@ -3,6 +3,9 @@
 namespace DaydreamLab\Cms\Models\IotResource;
 
 use DaydreamLab\Cms\Models\CmsModel;
+use DaydreamLab\Cms\Models\IotCategory\IotCategory;
+use DaydreamLab\Cms\Models\IotIndustry\IotIndustry;
+use DaydreamLab\Cms\Models\IotTag\IotTag;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\JJAJ\Traits\UserInfo;
 
@@ -68,5 +71,23 @@ class IotResource extends CmsModel
 
     public static function newFactory()
     {
+    }
+
+
+    public function categories()
+    {
+        return $this->belongsToMany(IotCategory::class, 'iot_resources_categories_maps', 'resource_id', 'category_id')->withTimestamps();
+    }
+
+
+    public function industries()
+    {
+        return $this->belongsToMany(IotIndustry::class, 'iot_resources_industries_maps', 'resource_id', 'industry_id')->withTimestamps();
+    }
+
+
+    public function tags()
+    {
+        return $this->belongsToMany(IotTag::class, 'iot_resources_tags_maps', 'resource_id', 'tag_id')->withTimestamps();
     }
 }

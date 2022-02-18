@@ -68,10 +68,4 @@ class IotCategory extends CmsModel
     {
     }
 
-
-    public function childCategories()
-    {
-        return $this->belongsToMany(IotCategory::class, 'iot_categories_maps', 'parent_id', 'child_id')
-            ->withTimestamps();
-    }
 }

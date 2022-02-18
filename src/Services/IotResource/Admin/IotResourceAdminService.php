@@ -17,16 +17,56 @@ class IotResourceAdminService extends IotResourceService
 
     public function addMapping($item, $input)
     {
+        $categories = $input->get('categories') ? $input->get('categories') : [];
+        if (count($categories)) {
+            $item->categories()->attach(array_map(function($i) {
+                return $i['id'];
+            }, $categories));
+        }
+
+        $industries = $input->get('industries') ? $input->get('industries') : [];
+        if (count($industries)) {
+            $item->industries()->attach(array_map(function($i) {
+                return $i['id'];
+            }, $industries));
+        }
+
+        $tags = $input->get('tags') ? $input->get('tags') : [];
+        if (count($tags)) {
+            $item->tags()->attach(array_map(function($i) {
+                return $i['id'];
+            }, $tags));
+        }
     }
 
 
     public function modifyMapping($item, $input)
     {
+        if ( $input->get('categories') !== null ) {
+            $item->categories()->sync(array_map(function($i) {
+                return $i['id'];
+            }, $input->get('categories')));
+        }
+
+        if ( $input->get('industries') !== null ) {
+            $item->industries()->sync(array_map(function($i) {
+                return $i['id'];
+            }, $input->get('industries')));
+        }
+
+        if ( $input->get('tags') !== null ) {
+            $item->tags()->sync(array_map(function($i) {
+                return $i['id'];
+            }, $input->get('tags')));
+        }
     }
 
 
     public function removeMapping($item)
     {
+        $item->categories()->detach();
+        $item->industries()->detach();
+        $item->tags()->detach();
     }
 
 
