@@ -29,7 +29,7 @@ class IotCategoryAdminStoreRequest extends CmsStoreRequest
     {
         $rules = [
             'id'                    => 'nullable|integer',
-            'floor'                 => 'nullable|integer',
+            'parent_id'             => 'nullable|integer',
             'alias'                 => 'nullable|string',
             'title'                 => 'required|string',
             'description'           => 'nullable|string',
@@ -38,11 +38,7 @@ class IotCategoryAdminStoreRequest extends CmsStoreRequest
             'ordering'              => 'nullable|integer',
             'params'                => 'nullable|array',
             'publish_up'            => 'nullable|date_format:Y-m-d H:i:s',
-            'publish_down'          => 'nullable|date_format:Y-m-d H:i:s',
-
-            'children'              => 'nullable|array',
-            'children.*'            => 'nullable|array',
-            'children.*.id'         => 'nullable|integer'
+            'publish_down'          => 'nullable|date_format:Y-m-d H:i:s'
         ];
 
         return array_merge(parent::rules(), $rules);

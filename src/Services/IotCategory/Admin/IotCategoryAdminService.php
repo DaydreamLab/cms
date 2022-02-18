@@ -16,30 +16,20 @@ class IotCategoryAdminService extends IotCategoryService
 
 
     public function addMapping($item, $input)
-    {   // TODO: 檢查 floor 避免 下層變成上層的 parent
-        $child_ids = array_map(function($child) {
-            return $child['id'];
-        }, $input->get('children') ? $input->get('children') : []);
-        if (count($child_ids)) {
-            $item->childCategories()->attach($child_ids);
-        }
+    {
+
     }
 
 
     public function modifyMapping($item, $input)
     {
-        if ( $input->get('children') !== null ) {
-            $child_ids = array_map(function($child) {
-                return $child['id'];
-            }, $input->get('children'));
-            $item->childCategories()->sync($child_ids);
-        }
+
     }
 
 
     public function removeMapping($item)
     {
-        $item->childCategories()->detach();
+
     }
 
 
@@ -58,7 +48,7 @@ class IotCategoryAdminService extends IotCategoryService
     public function searchParent(Collection $input)
     {
         $q = $input->get('q');
-        $q = $q->where('floor', 1);
+        $q = $q->where('parent_id', null);
         $input->put('q', $q);
         return $this->search($input);
     }
@@ -66,9 +56,6 @@ class IotCategoryAdminService extends IotCategoryService
 
     public function searchChild(Collection $input)
     {
-        $q = $input->get('q');
-        $q = $q->where('floor', 2);
-        $input->put('q', $q);
         return $this->search($input);
     }
 
@@ -85,14 +72,12 @@ class IotCategoryAdminService extends IotCategoryService
 
     public function storeParent(Collection $input)
     {
-        $input->put('floor', 1);
         return $this->store($input);
     }
 
 
     public function storeChild(Collection $input)
     {
-        $input->put('floor', 2);
         return $this->store($input);
     }
 }

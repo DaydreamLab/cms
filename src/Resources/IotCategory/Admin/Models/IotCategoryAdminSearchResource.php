@@ -18,7 +18,7 @@ class IotCategoryAdminSearchResource extends BaseJsonResource
         return [
             'id'            => $this->id,
             'title'         => $this->title,
-            'floor'         => $this->floor,
+            'parent_id'     => $this->parent_id,
             'state'         => $this->state,
             'locker'        => ($this->locker) ? $this->locker->only(['id', 'uuid', 'name']) : [],
             'locked_at'     => $this->getDateTimeString($this->locked_at, $tz),

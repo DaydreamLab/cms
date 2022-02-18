@@ -1,8 +1,7 @@
 [
   {
     "title"         : "AI+ML",
-    "alias"         : "ai+ml",
-    "floor"         : 1,
+    "parent_id"     : null,
     "state"         : 1,
     "description"   : "",
     "access"        : 1,
@@ -10,8 +9,7 @@
   },
   {
     "title"         : "IoT & Data Analytics",
-    "alias"         : "iot&data_analytics",
-    "floor"         : 1,
+    "parent_id"     : null,
     "state"         : 1,
     "description"   : "",
     "access"        : 1,
@@ -19,8 +17,7 @@
   },
   {
     "title"         : "DevOps",
-    "alias"         : "devops",
-    "floor"         : 1,
+    "parent_id"     : null,
     "state"         : 1,
     "description"   : "",
     "access"        : 1,
@@ -28,8 +25,7 @@
   },
   {
     "title"         : "Infrastructure",
-    "alias"         : "infrastructure",
-    "floor"         : 1,
+    "parent_id"     : null,
     "state"         : 1,
     "description"   : "",
     "access"        : 1,
@@ -37,8 +33,7 @@
   },
   {
     "title"         : "Business Application",
-    "alias"         : "business_application",
-    "floor"         : 1,
+    "parent_id"     : null,
     "state"         : 1,
     "description"   : "",
     "access"        : 1,
@@ -46,8 +41,7 @@
   },
   {
     "title"         : "影像辨識",
-    "alias"         : "1",
-    "floor"         : 2,
+    "parent_id"     : 1,
     "state"         : 1,
     "description"   : "",
     "access"        : 1,
@@ -56,8 +50,7 @@
   },
   {
     "title"         : "語音辨識",
-    "alias"         : "2",
-    "floor"         : 2,
+    "parent_id"     : 1,
     "state"         : 1,
     "description"   : "",
     "access"        : 1,
@@ -66,8 +59,7 @@
   },
   {
     "title"         : "自然語意",
-    "alias"         : "3",
-    "floor"         : 2,
+    "parent_id"     : 1,
     "state"         : 1,
     "description"   : "",
     "access"        : 1,
@@ -76,8 +68,7 @@
   },
   {
     "title"         : "搜尋索引",
-    "alias"         : "4",
-    "floor"         : 2,
+    "parent_id"     : 1,
     "state"         : 1,
     "description"   : "",
     "access"        : 1,
@@ -86,8 +77,7 @@
   },
   {
     "title"         : "深度學習",
-    "alias"         : "5",
-    "floor"         : 2,
+    "parent_id"     : 1,
     "state"         : 1,
     "description"   : "",
     "access"        : 1,
@@ -96,8 +86,7 @@
   },
   {
     "title"         : "整合開發",
-    "alias"         : "6",
-    "floor"         : 2,
+    "parent_id"     : 1,
     "state"         : 1,
     "description"   : "",
     "access"        : 1,

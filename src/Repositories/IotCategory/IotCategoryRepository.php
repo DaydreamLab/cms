@@ -14,4 +14,20 @@ class IotCategoryRepository extends CmsRepository
         parent::__construct($model);
         $this->model = $model;
     }
+
+
+    public function findDescendantOf($id)
+    {
+        return $this->model->whereDescendantOf($id)->get();
+    }
+
+
+    public function findSubTreeIds($id)
+    {
+        $category = $this->find($id);
+        $descendants = $category->descendants->pluck('id')->all();
+        $descendants[] = $id;
+
+        return $descendants;
+    }
 }

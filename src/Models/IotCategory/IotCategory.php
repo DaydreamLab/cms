@@ -5,10 +5,11 @@ namespace DaydreamLab\Cms\Models\IotCategory;
 use DaydreamLab\Cms\Models\CmsModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\JJAJ\Traits\UserInfo;
+use Kalnoy\Nestedset\NodeTrait;
 
 class IotCategory extends CmsModel
 {
-    use UserInfo, RecordChanger {
+    use NodeTrait, UserInfo, RecordChanger {
         RecordChanger::boot as traitBoot;
     }
     /**
@@ -20,6 +21,9 @@ class IotCategory extends CmsModel
 
     protected $model_type = 'parent';
 
+    protected $order_by = 'ordering';
+
+    protected $order = 'asc';
     /**
      * The attributes that are mass assignable.
      *
@@ -29,7 +33,6 @@ class IotCategory extends CmsModel
         'alias',
         'title',
         'description',
-        'floor',
         'state',
         'access',
         'ordering',
@@ -43,7 +46,8 @@ class IotCategory extends CmsModel
     ];
 
     protected $hidden = [
-
+        '_lft',
+        '_rgt'
     ];
 
     protected $casts = [

@@ -29,7 +29,7 @@ class IotCategoryAdminSearchRequest extends CmsSearchRequest
     public function rules()
     {
         $rules = [
-            //
+            'parent_id'             => 'nullable|integer'
         ];
 
         return array_merge(parent::rules(), $rules);

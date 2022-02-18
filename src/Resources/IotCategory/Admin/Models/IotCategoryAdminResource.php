@@ -20,7 +20,7 @@ class IotCategoryAdminResource extends BaseJsonResource
             'alias'         => $this->alias,
             'title'         => $this->title,
             'description'   => $this->description,
-            'floor'         => $this->floor,
+            'parent_id'     => $this->parent_id,
             'state'         => $this->state,
             'params'        => $this->params,
             'locker'        => ($this->locker) ? $this->locker->only(['id', 'uuid', 'name']) : [],
