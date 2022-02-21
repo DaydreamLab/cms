@@ -452,6 +452,8 @@ Route::post('api/admin/iot/solution/restore', [IotSolutionAdminController::class
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 Route::post('api/admin/iot/solution/state', [IotSolutionAdminController::class, 'state'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::post('api/admin/iot/solution/remove', [IotSolutionAdminController::class, 'remove'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
 Route::get('api/admin/iot/solution/{id}', [IotSolutionAdminController::class, 'getItem'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 
@@ -463,6 +465,8 @@ Route::post('api/admin/iot/resource/search', [IotResourceAdminController::class,
 Route::post('api/admin/iot/resource/restore', [IotResourceAdminController::class, 'restore'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 Route::post('api/admin/iot/resource/state', [IotResourceAdminController::class, 'state'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::post('api/admin/iot/resource/remove', [IotResourceAdminController::class, 'remove'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 Route::get('api/admin/iot/resource/{id}', [IotResourceAdminController::class, 'getItem'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
@@ -476,6 +480,8 @@ Route::post('api/admin/iot/category/restore', [IotCategoryAdminController::class
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 Route::post('api/admin/iot/category/state', [IotCategoryAdminController::class, 'state'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::post('api/admin/iot/category/remove', [IotCategoryAdminController::class, 'remove'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
 Route::get('api/admin/iot/category/{id}', [IotCategoryAdminController::class, 'getItem'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 
@@ -487,6 +493,8 @@ Route::post('api/admin/iot/category/parent/search', [IotCategoryAdminController:
 Route::post('api/admin/iot/category/parent/restore', [IotCategoryAdminController::class, 'restore'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 Route::post('api/admin/iot/category/parent/state', [IotCategoryAdminController::class, 'state'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::post('api/admin/iot/category/parent/remove', [IotCategoryAdminController::class, 'remove'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 Route::get('api/admin/iot/category/parent/{id}', [IotCategoryAdminController::class, 'getItem'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
@@ -500,6 +508,8 @@ Route::post('api/admin/iot/category/child/restore', [IotCategoryAdminController:
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 Route::post('api/admin/iot/category/child/state', [IotCategoryAdminController::class, 'state'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::post('api/admin/iot/category/child/remove', [IotCategoryAdminController::class, 'remove'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
 Route::get('api/admin/iot/category/child/{id}', [IotCategoryAdminController::class, 'getItem'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 
@@ -512,6 +522,8 @@ Route::post('api/admin/iot/industry/restore', [IotIndustryAdminController::class
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 Route::post('api/admin/iot/industry/state', [IotIndustryAdminController::class, 'state'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::post('api/admin/iot/industry/remove', [IotIndustryAdminController::class, 'remove'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
 Route::get('api/admin/iot/industry/{id}', [IotIndustryAdminController::class, 'getItem'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 
@@ -523,6 +535,8 @@ Route::post('api/admin/iot/tag/search', [IotTagAdminController::class, 'search']
 Route::post('api/admin/iot/tag/restore', [IotTagAdminController::class, 'restore'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 Route::post('api/admin/iot/tag/state', [IotTagAdminController::class, 'state'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::post('api/admin/iot/tag/remove', [IotTagAdminController::class, 'remove'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 Route::get('api/admin/iot/tag/{id}', [IotTagAdminController::class, 'getItem'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
