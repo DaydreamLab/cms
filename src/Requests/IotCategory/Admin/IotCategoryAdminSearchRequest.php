@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Requests\IotCategory\Admin;
 
 use DaydreamLab\Cms\Requests\ComponentBase\CmsSearchRequest;
+use Illuminate\Validation\Rule;
 
 class IotCategoryAdminSearchRequest extends CmsSearchRequest
 {
@@ -29,7 +30,8 @@ class IotCategoryAdminSearchRequest extends CmsSearchRequest
     public function rules()
     {
         $rules = [
-            'parent_id'             => 'nullable|integer'
+            'parent_id' => 'nullable|integer',
+            'state'     => [ 'nullable', Rule::in([0, 1, -1, -2]) ],
         ];
 
         return array_merge(parent::rules(), $rules);
