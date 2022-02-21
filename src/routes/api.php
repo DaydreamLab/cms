@@ -482,6 +482,8 @@ Route::post('api/admin/iot/category/state', [IotCategoryAdminController::class, 
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 Route::post('api/admin/iot/category/remove', [IotCategoryAdminController::class, 'remove'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::get('api/admin/iot/category/getTree', [IotCategoryAdminController::class, 'getTree'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
 Route::get('api/admin/iot/category/{id}', [IotCategoryAdminController::class, 'getItem'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 

@@ -5,6 +5,7 @@ namespace DaydreamLab\Cms\Services\IotCategory\Admin;
 use DaydreamLab\Cms\Repositories\IotCategory\Admin\IotCategoryAdminRepository;
 use DaydreamLab\Cms\Services\IotCategory\IotCategoryService;
 use Illuminate\Support\Collection;
+use Kalnoy\Nestedset\Collection as NestCollection;
 
 class IotCategoryAdminService extends IotCategoryService
 {
@@ -30,6 +31,22 @@ class IotCategoryAdminService extends IotCategoryService
     public function removeMapping($item)
     {
 
+    }
+
+
+    public function getTree()
+    {
+        $all = $this->all()->sortBy(function ($p) {
+            return $p->ordering;
+        });
+        $all = new NestCollection($all);
+
+        $tree = $all->toTree();
+
+        $this->status = 'GetTreeListSuccess';
+        $this->response = $tree;
+
+        return $tree;
     }
 
 

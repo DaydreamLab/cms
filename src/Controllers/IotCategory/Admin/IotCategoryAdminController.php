@@ -9,6 +9,7 @@ use DaydreamLab\Cms\Requests\IotCategory\Admin\IotCategoryAdminRestoreRequest;
 use DaydreamLab\Cms\Requests\IotCategory\Admin\IotCategoryAdminSearchRequest;
 use DaydreamLab\Cms\Requests\IotCategory\Admin\IotCategoryAdminStateRequest;
 use DaydreamLab\Cms\Requests\IotCategory\Admin\IotCategoryAdminStoreRequest;
+use DaydreamLab\Cms\Resources\IotCategory\Admin\Collections\IotCategoryAdminTreeResourceCollection;
 use DaydreamLab\Cms\Resources\IotCategory\Admin\Collections\IotCategoryAdminSearchResourceCollection;
 use DaydreamLab\Cms\Resources\IotCategory\Admin\Models\IotCategoryAdminResource;
 use DaydreamLab\Cms\Services\IotCategory\Admin\IotCategoryAdminService;
@@ -35,6 +36,19 @@ class IotCategoryAdminController extends CmsController
         }
 
         return $this->response($this->service->status, $this->service->response, [], IotCategoryAdminResource::class);
+    }
+
+
+    public function getTree(IotCategoryAdminGetItemRequest $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->getTree();
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response, [], IotCategoryAdminTreeResourceCollection::class);
     }
 
 
