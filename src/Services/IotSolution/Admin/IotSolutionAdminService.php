@@ -37,6 +37,13 @@ class IotSolutionAdminService extends IotSolutionService
                 return $i['id'];
             }, $tags));
         }
+
+        $resources = $input->get('resources') ? $input->get('resources') : [];
+        if (count($resources)) {
+            $item->resources()->attach(array_map(function($i) {
+                return $i['id'];
+            }, $resources));
+        }
     }
 
 
@@ -58,6 +65,12 @@ class IotSolutionAdminService extends IotSolutionService
             $item->tags()->sync(array_map(function($i) {
                 return $i['id'];
             }, $input->get('tags')));
+        }
+
+        if ( $input->get('resources') !== null ) {
+            $item->resources()->sync(array_map(function($i) {
+                return $i['id'];
+            }, $input->get('resources')));
         }
     }
 

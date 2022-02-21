@@ -5,6 +5,7 @@ namespace DaydreamLab\Cms\Models\IotResource;
 use DaydreamLab\Cms\Models\CmsModel;
 use DaydreamLab\Cms\Models\IotCategory\IotCategory;
 use DaydreamLab\Cms\Models\IotIndustry\IotIndustry;
+use DaydreamLab\Cms\Models\IotSolution\IotSolution;
 use DaydreamLab\Cms\Models\IotTag\IotTag;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\JJAJ\Traits\UserInfo;
@@ -89,5 +90,11 @@ class IotResource extends CmsModel
     public function tags()
     {
         return $this->belongsToMany(IotTag::class, 'iot_resources_tags_maps', 'resource_id', 'tag_id')->withTimestamps();
+    }
+
+
+    public function solutions()
+    {
+        return $this->belongsToMany(IotSolution::class, 'iot_solutions_resources_maps', 'resource_id', 'solution_id')->withTimestamps();
     }
 }

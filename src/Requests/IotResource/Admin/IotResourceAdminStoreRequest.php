@@ -64,7 +64,10 @@ class IotResourceAdminStoreRequest extends CmsStoreRequest
             'industries.*.id'       => 'nullable|integer',
             'tags'                  => 'nullable|array',
             'tags.*'                => 'nullable|array',
-            'tags.*.id'             => 'nullable|integer'
+            'tags.*.id'             => 'nullable|integer',
+            'solutions'             => 'nullable|array',
+            'solutions.*'           => 'nullable|array',
+            'solutions.*.id'        => 'nullable|integer'
         ];
 
         return array_merge(parent::rules(), $rules);

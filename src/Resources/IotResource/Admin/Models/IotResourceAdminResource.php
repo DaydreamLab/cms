@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Resources\IotResource\Admin\Models;
 
 use DaydreamLab\Cms\Resources\IotCategory\Admin\Collections\IotCategoryAdminSearchResourceCollection;
 use DaydreamLab\Cms\Resources\IotIndustry\Admin\Collections\IotIndustryAdminSearchResourceCollection;
+use DaydreamLab\Cms\Resources\IotSolution\Admin\Collections\IotSolutionAdminSearchResourceCollection;
 use DaydreamLab\Cms\Resources\IotTag\Admin\Collections\IotTagAdminSearchResourceCollection;
 use DaydreamLab\JJAJ\Resources\BaseJsonResource;
 
@@ -40,7 +41,8 @@ class IotResourceAdminResource extends BaseJsonResource
 
             'categories'    => new IotCategoryAdminSearchResourceCollection($this->categories, false),
             'industries'    => new IotIndustryAdminSearchResourceCollection($this->industries, false),
-            'tags'          => new IotTagAdminSearchResourceCollection($this->tags, false)
+            'tags'          => new IotTagAdminSearchResourceCollection($this->tags, false),
+            'solutions'     => new IotSolutionAdminSearchResourceCollection($this->solutions, false)
         ];
     }
 }
