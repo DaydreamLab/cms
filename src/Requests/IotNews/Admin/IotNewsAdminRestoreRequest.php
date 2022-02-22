@@ -1,15 +1,14 @@
 <?php
 
-namespace DaydreamLab\Cms\Requests\IotSlideshow\Admin;
+namespace DaydreamLab\Cms\Requests\IotNews\Admin;
 
-use DaydreamLab\Cms\Requests\ComponentBase\CmsSearchRequest;
-use Illuminate\Validation\Rule;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsRestoreRequest;
 
-class IotSlideshowAdminSearchRequest extends CmsSearchRequest
+class IotNewsAdminRestoreRequest extends CmsRestoreRequest
 {
-    protected $modelName = 'IotSlideshow';
+    protected $modelName = 'IotNews';
 
-    protected $apiMethod = 'searchIotSlideshow';
+    protected $apiMethod = 'restoreIotNews';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -28,7 +27,7 @@ class IotSlideshowAdminSearchRequest extends CmsSearchRequest
     public function rules()
     {
         $rules = [
-            'state' => [ 'nullable', Rule::in([0, 1, -1, -2]) ],
+            //
         ];
 
         return array_merge(parent::rules(), $rules);

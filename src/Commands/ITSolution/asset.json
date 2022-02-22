@@ -64,6 +64,12 @@
         "icon": "copy",
         "showNav": 1,
         "apis": [
+          "getIotNews",
+          "addIotNews",
+          "editIotNews",
+          "deleteIotNews",
+          "searchIotNews",
+          "restoreIotNews"
         ],
         "defaultApis": {
           "getOption": ["checked", "hidden"],

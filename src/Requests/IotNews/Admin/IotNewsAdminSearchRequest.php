@@ -1,15 +1,15 @@
 <?php
 
-namespace DaydreamLab\Cms\Requests\IotSlideshow\Admin;
+namespace DaydreamLab\Cms\Requests\IotNews\Admin;
 
 use DaydreamLab\Cms\Requests\ComponentBase\CmsSearchRequest;
 use Illuminate\Validation\Rule;
 
-class IotSlideshowAdminSearchRequest extends CmsSearchRequest
+class IotNewsAdminSearchRequest extends CmsSearchRequest
 {
-    protected $modelName = 'IotSlideshow';
+    protected $modelName = 'IotNews';
 
-    protected $apiMethod = 'searchIotSlideshow';
+    protected $apiMethod = 'searchIotNews';
     /**
      * Determine if the user is authorized to make this request.
      *

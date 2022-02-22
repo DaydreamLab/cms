@@ -445,6 +445,7 @@ Route::post('api/iot/solution/search', [IotSolutionFrontController::class, 'sear
 
 use DaydreamLab\Cms\Controllers\IotCategory\Admin\IotCategoryAdminController;
 use DaydreamLab\Cms\Controllers\IotIndustry\Admin\IotIndustryAdminController;
+use DaydreamLab\Cms\Controllers\IotNews\Admin\IotNewsAdminController;
 use DaydreamLab\Cms\Controllers\IotResource\Admin\IotResourceAdminController;
 use DaydreamLab\Cms\Controllers\IotSolution\Admin\IotSolutionAdminController;
 use DaydreamLab\Cms\Controllers\IotSlideshow\Admin\IotSlideshowAdminController;
@@ -462,6 +463,20 @@ Route::post('api/admin/iot/slideshow/state', [IotSlideshowAdminController::class
 Route::post('api/admin/iot/slideshow/remove', [IotSlideshowAdminController::class, 'remove'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 Route::get('api/admin/iot/slideshow/{id}', [IotSlideshowAdminController::class, 'getItem'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+
+# 新訊 後台
+Route::post('api/admin/iot/news/store', [IotNewsAdminController::class, 'store'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::post('api/admin/iot/news/search', [IotNewsAdminController::class, 'search'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::post('api/admin/iot/news/restore', [IotNewsAdminController::class, 'restore'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::post('api/admin/iot/news/state', [IotNewsAdminController::class, 'state'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::post('api/admin/iot/news/remove', [IotNewsAdminController::class, 'remove'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::get('api/admin/iot/news/{id}', [IotNewsAdminController::class, 'getItem'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 
 # 解決方案 後台

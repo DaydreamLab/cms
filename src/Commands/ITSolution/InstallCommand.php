@@ -40,6 +40,9 @@ class InstallCommand extends Command
      */
     public function handle()
     {
+        if (in_array(config('app.env'), ['production', 'staging'])) {
+            return;
+        }
         $this->call('dsth:install');
         $this->info('Start seeding solution');
         $this->call('solution:seed');

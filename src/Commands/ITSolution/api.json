@@ -214,5 +214,41 @@
     "method": "restoreIotTag",
     "url": "/admin/iot/tag/restore",
     "created_by": 1
+  },
+  {
+    "name": "取得IoT新訊",
+    "method": "getIotNews",
+    "url": "/admin/iot/news/{id}",
+    "created_by": 1
+  },
+  {
+    "name": "新增IoT新訊",
+    "method": "addIotNews",
+    "url": "/admin/iot/news/store",
+    "created_by": 1
+  },
+  {
+    "name": "編輯IoT新訊",
+    "method": "editIotNews",
+    "url": "/admin/iot/news/store",
+    "created_by": 1
+  },
+  {
+    "name": "刪除IoT新訊",
+    "method": "deleteIotNews",
+    "url": "/admin/iot/news/remove",
+    "created_by": 1
+  },
+  {
+    "name": "搜尋IoT新訊",
+    "method": "searchIotNews",
+    "url": "/admin/iot/news/search",
+    "created_by": 1
+  },
+  {
+    "name": "回存IoT新訊",
+    "method": "restoreIotNews",
+    "url": "/admin/iot/news/restore",
+    "created_by": 1
   }
 ]
