@@ -27,6 +27,7 @@ class IotTagAdminController extends CmsController
 
     public function getItem(IotTagAdminGetItemRequest $request)
     {
+        $this->service->setUser($request->user('api'));
         try {
             $this->service->getItem(collect(['id' => $request->route('id')]));
         } catch (Throwable $t) {
@@ -39,6 +40,7 @@ class IotTagAdminController extends CmsController
 
     public function remove(IotTagAdminRemoveRequest $request)
     {
+        $this->service->setUser($request->user('api'));
         try {
             $this->service->remove($request->validated());
         } catch (Throwable $t) {
@@ -51,6 +53,7 @@ class IotTagAdminController extends CmsController
 
     public function restore(IotTagAdminRestoreRequest $request)
     {
+        $this->service->setUser($request->user('api'));
         try {
             $this->service->restore($request->validated());
         } catch (Throwable $t) {
@@ -63,6 +66,7 @@ class IotTagAdminController extends CmsController
 
     public function search(IotTagAdminSearchRequest $request)
     {
+        $this->service->setUser($request->user('api'));
         try {
             $this->service->search($request->validated());
         } catch (Throwable $t) {
@@ -75,6 +79,7 @@ class IotTagAdminController extends CmsController
 
     public function state(IotTagAdminStateRequest $request)
     {
+        $this->service->setUser($request->user('api'));
         try {
             $this->service->state($request->validated());
         } catch (Throwable $t) {
@@ -87,6 +92,7 @@ class IotTagAdminController extends CmsController
 
     public function store(IotTagAdminStoreRequest $request)
     {
+        $this->service->setUser($request->user('api'));
         try {
             $this->service->store($request->validated());
         } catch (Throwable $t) {

@@ -1,31 +1,29 @@
 <?php
 
-namespace DaydreamLab\Cms\Controllers\IotIndustry\Admin;
+namespace DaydreamLab\Cms\Controllers\IotSlideshow\Admin;
 
 use DaydreamLab\Cms\Controllers\CmsController;
-use DaydreamLab\Cms\Requests\IotIndustry\Admin\IotIndustryAdminGetItemRequest;
-use DaydreamLab\Cms\Requests\IotIndustry\Admin\IotIndustryAdminRemoveRequest;
-use DaydreamLab\Cms\Requests\IotIndustry\Admin\IotIndustryAdminRestoreRequest;
-use DaydreamLab\Cms\Requests\IotIndustry\Admin\IotIndustryAdminSearchRequest;
-use DaydreamLab\Cms\Requests\IotIndustry\Admin\IotIndustryAdminStateRequest;
-use DaydreamLab\Cms\Requests\IotIndustry\Admin\IotIndustryAdminStoreRequest;
-use DaydreamLab\Cms\Resources\IotIndustry\Admin\Collections\IotIndustryAdminSearchResourceCollection;
-use DaydreamLab\Cms\Resources\IotIndustry\Admin\Models\IotIndustryAdminResource;
-use DaydreamLab\Cms\Services\IotIndustry\Admin\IotIndustryAdminService;
+use DaydreamLab\Cms\Requests\IotSlideshow\Admin\IotSlideshowAdminGetItemRequest;
+use DaydreamLab\Cms\Requests\IotSlideshow\Admin\IotSlideshowAdminRemoveRequest;
+use DaydreamLab\Cms\Requests\IotSlideshow\Admin\IotSlideshowAdminRestoreRequest;
+use DaydreamLab\Cms\Requests\IotSlideshow\Admin\IotSlideshowAdminSearchRequest;
+use DaydreamLab\Cms\Requests\IotSlideshow\Admin\IotSlideshowAdminStateRequest;
+use DaydreamLab\Cms\Requests\IotSlideshow\Admin\IotSlideshowAdminStoreRequest;
+use DaydreamLab\Cms\Services\IotSlideshow\Admin\IotSlideshowAdminService;
 use Throwable;
 
-class IotIndustryAdminController extends CmsController
+class IotSlideshowAdminController extends CmsController
 {
-    protected $modelName = 'IotIndustry';
+    protected $modelName = 'IotSlideshow';
 
-    public function __construct(IotIndustryAdminService $service)
+    public function __construct(IotSlideshowAdminService $service)
     {
         parent::__construct($service);
         $this->service = $service;
     }
 
 
-    public function getItem(IotIndustryAdminGetItemRequest $request)
+    public function getItem(IotSlideshowAdminGetItemRequest $request)
     {
         $this->service->setUser($request->user('api'));
         try {
@@ -34,11 +32,11 @@ class IotIndustryAdminController extends CmsController
             $this->handleException($t);
         }
 
-        return $this->response($this->service->status, $this->service->response, [], IotIndustryAdminResource::class);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
-    public function remove(IotIndustryAdminRemoveRequest $request)
+    public function remove(IotSlideshowAdminRemoveRequest $request)
     {
         $this->service->setUser($request->user('api'));
         try {
@@ -51,7 +49,7 @@ class IotIndustryAdminController extends CmsController
     }
 
 
-    public function restore(IotIndustryAdminRestoreRequest $request)
+    public function restore(IotSlideshowAdminRestoreRequest $request)
     {
         $this->service->setUser($request->user('api'));
         try {
@@ -64,7 +62,7 @@ class IotIndustryAdminController extends CmsController
     }
 
 
-    public function search(IotIndustryAdminSearchRequest $request)
+    public function search(IotSlideshowAdminSearchRequest $request)
     {
         $this->service->setUser($request->user('api'));
         try {
@@ -73,11 +71,11 @@ class IotIndustryAdminController extends CmsController
             $this->handleException($t);
         }
 
-        return $this->response($this->service->status, $this->service->response, [], IotIndustryAdminSearchResourceCollection::class);
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
-    public function state(IotIndustryAdminStateRequest $request)
+    public function state(IotSlideshowAdminStateRequest $request)
     {
         $this->service->setUser($request->user('api'));
         try {
@@ -90,7 +88,7 @@ class IotIndustryAdminController extends CmsController
     }
 
 
-    public function store(IotIndustryAdminStoreRequest $request)
+    public function store(IotSlideshowAdminStoreRequest $request)
     {
         $this->service->setUser($request->user('api'));
         try {
@@ -99,6 +97,6 @@ class IotIndustryAdminController extends CmsController
             $this->handleException($t);
         }
 
-        return $this->response($this->service->status, $this->service->response, [], IotIndustryAdminResource::class);
+        return $this->response($this->service->status, $this->service->response);
     }
 }

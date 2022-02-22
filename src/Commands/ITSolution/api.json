@@ -1,5 +1,41 @@
 [
   {
+    "name": "取得slideshow",
+    "method": "getIotSlideshow",
+    "url": "/admin/iot/slideshow/{id}",
+    "created_by": 1
+  },
+  {
+    "name": "新增slideshow",
+    "method": "addIotSlideshow",
+    "url": "/admin/iot/slideshow/store",
+    "created_by": 1
+  },
+  {
+    "name": "編輯slideshow",
+    "method": "editIotSlideshow",
+    "url": "/admin/iot/slideshow/store",
+    "created_by": 1
+  },
+  {
+    "name": "刪除slideshow",
+    "method": "deleteIotSlideshow",
+    "url": "/admin/iot/slideshow/remove",
+    "created_by": 1
+  },
+  {
+    "name": "搜尋slideshow",
+    "method": "searchIotSlideshow",
+    "url": "/admin/iot/slideshow/search",
+    "created_by": 1
+  },
+  {
+    "name": "回存slideshow",
+    "method": "restoreIotSlideshow",
+    "url": "/admin/iot/slideshow/restore",
+    "created_by": 1
+  },
+  {
     "name": "取得解決方案",
     "method": "getIotSolution",
     "url": "/admin/iot/solution/{id}",

@@ -21,7 +21,12 @@
         "icon": "images",
         "showNav": 1,
         "apis": [
-
+          "getIotSlideshow",
+          "addIotSlideshow",
+          "editIotSlideshow",
+          "deleteIotSlideshow",
+          "searchIotSlideshow",
+          "restoreIotSlideshow"
         ],
         "defaultApis": {
           "getOption": ["checked", "hidden"],
@@ -208,7 +213,10 @@
           "deleteMedia": ["checked", "hidden"],
           "renameMedia": ["checked", "hidden"],
           "moveMedia": ["checked", "hidden"],
-          "createMediaFolder": ["checked", "hidden"]
+          "createMediaFolder": ["checked", "hidden"],
+          "searchIotResource": ["checked", "hidden"],
+          "searchIotIndustry": ["checked", "hidden"],
+          "getIotCategory": ["checked", "hidden"]
         }
       }
     ],
@@ -251,7 +259,10 @@
           "deleteMedia": ["checked", "hidden"],
           "renameMedia": ["checked", "hidden"],
           "moveMedia": ["checked", "hidden"],
-          "createMediaFolder": ["checked", "hidden"]
+          "createMediaFolder": ["checked", "hidden"],
+          "searchIotSolution": ["checked", "hidden"],
+          "searchIotIndustry": ["checked", "hidden"],
+          "getIotCategory": ["checked", "hidden"]
         }
       }
     ],

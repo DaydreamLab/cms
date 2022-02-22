@@ -87,6 +87,7 @@ class IotCategoryAdminService extends IotCategoryService
         if ( $id = $input->get('id') ) {
             $result = $this->find($id);
         }
+        $this->response = $result;
         return $result;
     }
 

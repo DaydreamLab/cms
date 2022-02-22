@@ -442,11 +442,27 @@ use DaydreamLab\Cms\Controllers\IotSolution\Front\IotSolutionFrontController;
 # 解決方案 前台
 Route::post('api/iot/solution/search', [IotSolutionFrontController::class, 'search']);
 
-use DaydreamLab\Cms\Controllers\IotSolution\Admin\IotSolutionAdminController;
-use DaydreamLab\Cms\Controllers\IotResource\Admin\IotResourceAdminController;
+
 use DaydreamLab\Cms\Controllers\IotCategory\Admin\IotCategoryAdminController;
 use DaydreamLab\Cms\Controllers\IotIndustry\Admin\IotIndustryAdminController;
+use DaydreamLab\Cms\Controllers\IotResource\Admin\IotResourceAdminController;
+use DaydreamLab\Cms\Controllers\IotSolution\Admin\IotSolutionAdminController;
+use DaydreamLab\Cms\Controllers\IotSlideshow\Admin\IotSlideshowAdminController;
 use DaydreamLab\Cms\Controllers\IotTag\Admin\IotTagAdminController;
+
+# slideshow 後台
+Route::post('api/admin/iot/slideshow/store', [IotSlideshowAdminController::class, 'store'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::post('api/admin/iot/slideshow/search', [IotSlideshowAdminController::class, 'search'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::post('api/admin/iot/slideshow/restore', [IotSlideshowAdminController::class, 'restore'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::post('api/admin/iot/slideshow/state', [IotSlideshowAdminController::class, 'state'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::post('api/admin/iot/slideshow/remove', [IotSlideshowAdminController::class, 'remove'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::get('api/admin/iot/slideshow/{id}', [IotSlideshowAdminController::class, 'getItem'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
 
 # 解決方案 後台
 Route::post('api/admin/iot/solution/store', [IotSolutionAdminController::class, 'store'])

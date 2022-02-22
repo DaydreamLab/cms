@@ -80,6 +80,7 @@ class IotSolutionAdminService extends IotSolutionService
         $item->categories()->detach();
         $item->industries()->detach();
         $item->tags()->detach();
+        $item->resources()->detach();
     }
 
 
@@ -104,6 +105,7 @@ class IotSolutionAdminService extends IotSolutionService
         if ( $id = $input->get('id') ) {
             $result = $this->find($id);
         }
+        $this->response = $result;
         return $result;
     }
 }

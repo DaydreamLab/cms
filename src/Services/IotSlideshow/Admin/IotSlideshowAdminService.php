@@ -1,14 +1,14 @@
 <?php
 
-namespace DaydreamLab\Cms\Services\IotIndustry\Admin;
+namespace DaydreamLab\Cms\Services\IotSlideshow\Admin;
 
-use DaydreamLab\Cms\Repositories\IotIndustry\Admin\IotIndustryAdminRepository;
-use DaydreamLab\Cms\Services\IotIndustry\IotIndustryService;
+use DaydreamLab\Cms\Repositories\IotSlideshow\Admin\IotSlideshowAdminRepository;
+use DaydreamLab\Cms\Services\IotSlideshow\IotSlideshowService;
 use Illuminate\Support\Collection;
 
-class IotIndustryAdminService extends IotIndustryService
+class IotSlideshowAdminService extends IotSlideshowService
 {
-    public function __construct(IotIndustryAdminRepository $repo)
+    public function __construct(IotSlideshowAdminRepository $repo)
     {
         parent::__construct($repo);
         $this->repo = $repo;

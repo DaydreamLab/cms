@@ -67,7 +67,6 @@ class IotResourceAdminService extends IotResourceService
             }, $input->get('tags')));
         }
 
-
         if ( $input->get('solutions') !== null ) {
             $item->solutions()->sync(array_map(function($i) {
                 return $i['id'];
@@ -81,6 +80,7 @@ class IotResourceAdminService extends IotResourceService
         $item->categories()->detach();
         $item->industries()->detach();
         $item->tags()->detach();
+        $item->solutions()->detach();
     }
 
 
@@ -105,6 +105,7 @@ class IotResourceAdminService extends IotResourceService
         if ( $id = $input->get('id') ) {
             $result = $this->find($id);
         }
+        $this->response = $result;
         return $result;
     }
 }
