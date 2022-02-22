@@ -12,5 +12,5 @@ class IotTagAdmin extends IotTag
      */
     protected $table = 'iot_tags';
 
-
+    protected $model_type = 'admin';
 }

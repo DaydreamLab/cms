@@ -12,5 +12,5 @@ class IotSlideshowFront extends IotSlideshow
      */
     protected $table = 'iot_slideshows';
 
-
+    protected $model_type = 'front';
 }

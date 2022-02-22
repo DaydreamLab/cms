@@ -9,6 +9,8 @@ use DaydreamLab\Cms\Requests\IotSlideshow\Admin\IotSlideshowAdminRestoreRequest;
 use DaydreamLab\Cms\Requests\IotSlideshow\Admin\IotSlideshowAdminSearchRequest;
 use DaydreamLab\Cms\Requests\IotSlideshow\Admin\IotSlideshowAdminStateRequest;
 use DaydreamLab\Cms\Requests\IotSlideshow\Admin\IotSlideshowAdminStoreRequest;
+use DaydreamLab\Cms\Resources\IotSlideshow\Admin\Collections\IotSlideshowAdminSearchResourceCollection;
+use DaydreamLab\Cms\Resources\IotSlideshow\Admin\Models\IotSlideshowAdminResource;
 use DaydreamLab\Cms\Services\IotSlideshow\Admin\IotSlideshowAdminService;
 use Throwable;
 
@@ -32,7 +34,7 @@ class IotSlideshowAdminController extends CmsController
             $this->handleException($t);
         }
 
-        return $this->response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response, [], IotSlideshowAdminResource::class);
     }
 
 
@@ -71,7 +73,7 @@ class IotSlideshowAdminController extends CmsController
             $this->handleException($t);
         }
 
-        return $this->response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response, [], IotSlideshowAdminSearchResourceCollection::class);
     }
 
 
@@ -97,6 +99,6 @@ class IotSlideshowAdminController extends CmsController
             $this->handleException($t);
         }
 
-        return $this->response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response, [], IotSlideshowAdminResource::class);
     }
 }

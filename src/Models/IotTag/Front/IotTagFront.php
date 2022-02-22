@@ -12,5 +12,5 @@ class IotTagFront extends IotTag
      */
     protected $table = 'iot_tags';
 
-
+    protected $model_type = 'front';
 }
