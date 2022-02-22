@@ -9,6 +9,8 @@ class IotSolutionFrontSearchRequest extends CmsSearchRequest
     protected $modelName = 'IotSolution';
 
     protected $apiMethod = 'searchIotSolution';
+
+    protected $needAuth = false;
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -27,7 +29,9 @@ class IotSolutionFrontSearchRequest extends CmsSearchRequest
     public function rules()
     {
         $rules = [
-            //
+            'category'          => 'required|string',
+            'industries'        => 'nullable|array',
+            'industires.*'      => 'nullable|string'
         ];
 
         return array_merge(parent::rules(), $rules);

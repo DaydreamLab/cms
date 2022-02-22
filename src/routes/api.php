@@ -437,6 +437,11 @@ Route::get('api/admin/customer/message/{id}', [CustomerMessageAdminController::c
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 
 /******************* IoT Solution 子站API *******************/
+use DaydreamLab\Cms\Controllers\IotSolution\Front\IotSolutionFrontController;
+
+# 解決方案 前台
+Route::post('api/iot/solution/search', [IotSolutionFrontController::class, 'search']);
+
 use DaydreamLab\Cms\Controllers\IotSolution\Admin\IotSolutionAdminController;
 use DaydreamLab\Cms\Controllers\IotResource\Admin\IotResourceAdminController;
 use DaydreamLab\Cms\Controllers\IotCategory\Admin\IotCategoryAdminController;

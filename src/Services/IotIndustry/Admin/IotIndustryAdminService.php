@@ -33,6 +33,10 @@ class IotIndustryAdminService extends IotIndustryService
             $input->put('publish_up', now());
         }
 
-        return parent::store($input);
+        $result = parent::store($input);
+        if ( $id = $input->get('id') ) {
+            $result = $this->find($id);
+        }
+        return $result;
     }
 }
