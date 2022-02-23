@@ -24,7 +24,10 @@ class CreateIotEventsTable extends Migration
             $table->timestamp('end_date')->nullable();
             $table->string('status')->nullable();
             $table->text('contacts')->nullable();
-            $table->string('location')->nullable();
+            $table->string('city')->nullable();
+            $table->string('district')->nullable();
+            $table->string('address')->nullable();
+            $table->string('locationName')->nullable();
             $table->string('permission')->nullable();
             $table->text('sponsors')->nullable();
             $table->text('url')->nullable();

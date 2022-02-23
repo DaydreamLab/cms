@@ -301,7 +301,10 @@
         "state": 1,
         "icon": "copy",
         "showNav": 1,
-        "apis": []
+        "apis": [
+          "getSetting",
+          "editSetting"
+        ]
       }
     ],
     "userGroups": ["Administrator", "Super User"]

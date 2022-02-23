@@ -436,11 +436,17 @@ Route::post('api/admin/customer/message/reply', [CustomerMessageReplyAdminContro
 Route::get('api/admin/customer/message/{id}', [CustomerMessageAdminController::class, 'getItem'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 
+
 /******************* IoT Solution 子站API *******************/
+use DaydreamLab\Cms\Controllers\IotResource\Front\IotResourceFrontController;
 use DaydreamLab\Cms\Controllers\IotSolution\Front\IotSolutionFrontController;
 
 # 解決方案 前台
 Route::post('api/iot/solution/search', [IotSolutionFrontController::class, 'search']);
+
+# 原廠資源 前台
+Route::post('api/iot/resource/file/download', [IotResourceFrontController::class, 'downloadFile']);
+Route::post('api/iot/resource/search', [IotResourceFrontController::class, 'search']);
 
 
 use DaydreamLab\Cms\Controllers\IotCategory\Admin\IotCategoryAdminController;
