@@ -280,6 +280,42 @@
     ],
     "userGroups": ["Administrator", "Super User"]
   },
+  Tim Wang
+  {
+    "title": "COM_IOT_TAG_TITLE",
+    "site_id": 2,
+    "state": 1,
+    "params": {
+      "path": "/iot/tag",
+      "component": "",
+      "type": "alias",
+      "redirect": "",
+      "icon": "copy"
+    },
+    "assets": [
+      {
+        "title": "COM_IOT_TAG_MANAGER_TITLE",
+        "path": "manager",
+        "full_path": "/manager",
+        "component": "iot/tag/manager/list",
+        "type": "menu",
+        "state": 1,
+        "icon": "copy",
+        "showNav": 1,
+        "apis": [
+          "getIotTag",
+          "addIotTag",
+          "editIotTag",
+          "deleteIotTag",
+          "searchIotTag",
+          "restoreIotTag",
+          "stateIotTag",
+          "orderingIotTag"
+        ]
+      }
+    ],
+    "userGroups": ["Administrator", "Super User"]
+  },
   {
     "title": "COM_SEO_TITLE",
     "site_id": 2,
