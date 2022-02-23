@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
-class CreateIotSolutionsTable extends Migration
+class CreateIotEventsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,21 @@ class CreateIotSolutionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('iot_solutions', function (Blueprint $table) {
+        Schema::create('iot_events', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('alias');
             $table->string('title');
             $table->text('introimage')->nullable();
             $table->text('introtext')->nullable();
-            $table->text('images')->nullable();
             $table->mediumText('description')->nullable();
+            $table->timestamp('start_date')->nullable();
+            $table->timestamp('end_date')->nullable();
+            $table->string('status')->nullable();
+            $table->text('contacts')->nullable();
+            $table->string('location')->nullable();
+            $table->string('permission')->nullable();
+            $table->text('sponsors')->nullable();
+            $table->text('url')->nullable();
             $table->tinyInteger('state')->default(1);
             $table->unsignedInteger('access');
             $table->unsignedInteger('ordering')->nullable();
@@ -44,6 +51,6 @@ class CreateIotSolutionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('iot_solutions');
+        Schema::dropIfExists('iot_events');
     }
 }

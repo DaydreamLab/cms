@@ -250,5 +250,41 @@
     "method": "restoreIotNews",
     "url": "/admin/iot/news/restore",
     "created_by": 1
+  },
+  {
+    "name": "取得IoT活動",
+    "method": "getIotEvent",
+    "url": "/admin/iot/event/{id}",
+    "created_by": 1
+  },
+  {
+    "name": "新增IoT活動",
+    "method": "addIotEvent",
+    "url": "/admin/iot/event/store",
+    "created_by": 1
+  },
+  {
+    "name": "編輯IoT活動",
+    "method": "editIotEvent",
+    "url": "/admin/iot/event/store",
+    "created_by": 1
+  },
+  {
+    "name": "刪除IoT活動",
+    "method": "deleteIotEvent",
+    "url": "/admin/iot/event/remove",
+    "created_by": 1
+  },
+  {
+    "name": "搜尋IoT活動",
+    "method": "searchIotEvent",
+    "url": "/admin/iot/event/search",
+    "created_by": 1
+  },
+  {
+    "name": "回存IoT活動",
+    "method": "restoreIotEvent",
+    "url": "/admin/iot/event/restore",
+    "created_by": 1
   }
 ]

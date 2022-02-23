@@ -17,7 +17,7 @@ class CreateIotTagsTable extends Migration
             $table->bigIncrements('id');
             $table->string('alias');
             $table->string('title');
-            $table->text('description')->nullable();
+            $table->mediumText('description')->nullable();
             $table->tinyInteger('state')->default(1);
             $table->unsignedInteger('access');
             $table->unsignedInteger('ordering')->nullable();

@@ -94,6 +94,12 @@
         "icon": "copy",
         "showNav": 1,
         "apis": [
+          "getIotEvent",
+          "addIotEvent",
+          "editIotEvent",
+          "deleteIotEvent",
+          "searchIotEvent",
+          "restoreIotEvent"
         ],
         "defaultApis": {
           "getOption": ["checked", "hidden"],

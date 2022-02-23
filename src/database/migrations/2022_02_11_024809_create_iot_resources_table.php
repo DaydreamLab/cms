@@ -20,7 +20,7 @@ class CreateIotResourcesTable extends Migration
             $table->text('introimage')->nullable();
             $table->text('introtext')->nullable();
             $table->text('images')->nullable();
-            $table->text('description')->nullable();
+            $table->mediumText('description')->nullable();
             $table->text('points')->nullable();
             $table->text('video')->nullable();
             $table->text('documents')->nullable();

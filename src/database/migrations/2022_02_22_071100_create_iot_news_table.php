@@ -20,7 +20,7 @@ class CreateIotNewsTable extends Migration
             $table->text('introimage')->nullable();
             $table->text('introtext')->nullable();
             $table->text('image')->nullable();
-            $table->text('description')->nullable();
+            $table->mediumText('description')->nullable();
             $table->tinyInteger('state')->default(1);
             $table->unsignedInteger('access');
             $table->unsignedInteger('ordering')->nullable();

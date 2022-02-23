@@ -18,7 +18,7 @@ class CreateIotSlideshowsTable extends Migration
             $table->string('alias');
             $table->string('title');
             $table->string('sub_title')->nullable();
-            $table->text('description')->nullable();
+            $table->mediumText('description')->nullable();
             $table->text('url')->nullable();
             $table->text('image')->nullable();
             $table->tinyInteger('state')->default(1);

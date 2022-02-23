@@ -444,6 +444,7 @@ Route::post('api/iot/solution/search', [IotSolutionFrontController::class, 'sear
 
 
 use DaydreamLab\Cms\Controllers\IotCategory\Admin\IotCategoryAdminController;
+use DaydreamLab\Cms\Controllers\IotEvent\Admin\IotEventAdminController;
 use DaydreamLab\Cms\Controllers\IotIndustry\Admin\IotIndustryAdminController;
 use DaydreamLab\Cms\Controllers\IotNews\Admin\IotNewsAdminController;
 use DaydreamLab\Cms\Controllers\IotResource\Admin\IotResourceAdminController;
@@ -477,6 +478,20 @@ Route::post('api/admin/iot/news/state', [IotNewsAdminController::class, 'state']
 Route::post('api/admin/iot/news/remove', [IotNewsAdminController::class, 'remove'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 Route::get('api/admin/iot/news/{id}', [IotNewsAdminController::class, 'getItem'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+
+# 活動 後台
+Route::post('api/admin/iot/event/store', [IotEventAdminController::class, 'store'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::post('api/admin/iot/event/search', [IotEventAdminController::class, 'search'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::post('api/admin/iot/event/restore', [IotEventAdminController::class, 'restore'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::post('api/admin/iot/event/state', [IotEventAdminController::class, 'state'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::post('api/admin/iot/event/remove', [IotEventAdminController::class, 'remove'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::get('api/admin/iot/event/{id}', [IotEventAdminController::class, 'getItem'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 
 # 解決方案 後台
