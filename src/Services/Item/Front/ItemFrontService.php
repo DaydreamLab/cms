@@ -841,6 +841,8 @@ class ItemFrontService extends ItemService
                 $data['contentType'] = 'file';
                 $data['brands'] = $i->brands->map(function ($b) { return $b->alias; });
                 $data['downloadLink'] = $i->downloadLink;
+                $data['linkType'] = $i->params['upload'];
+                $data['webLink'] = $i->web_url;
                 if ( in_array($i->category->extension, ['finance', 'rules', 'stockholder']) ) {
                     $data['userGroupId'] = 1;
                 } else {
