@@ -30,6 +30,8 @@ class ItemFrontSearchResource extends BaseJsonResource
 
         if ($data['contentType'] == 'file') {
             $data['downloadLink'] = $this['downloadLink'];
+            $data['linkType'] = $this['linkType'];
+            $data['webLink'] = $this['webLink'];
         }
 
         return $data;
