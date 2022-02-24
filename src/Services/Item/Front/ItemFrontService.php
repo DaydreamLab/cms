@@ -864,7 +864,7 @@ class ItemFrontService extends ItemService
                 $data['brands'] = $i->brands->map(function ($b) { return $b->alias; });
                 $data['userGroupId'] = 1;
                 if (in_array($data['contentType'], ['bulletin', 'promotion'])) {
-                    $data['userGroupId'] = ( $i->extrafields['dealer_only'] == 1 ) ? 6 : 7;
+                    $data['userGroupId'] = ( $i->extrafields['dealer_only']['value'] == 1 ) ? 6 : 7;
                 }
             }
             return $data;
