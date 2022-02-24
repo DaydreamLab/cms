@@ -20,7 +20,8 @@ class ItemFrontSearchResource extends BaseJsonResource
             'introtext'         => $this['introtext'],
             'description'       => strip_tags($this['description']),
             'brands'            => $this['brands'],
-            'contentType'       => $this['contentType']
+            'contentType'       => $this['contentType'],
+            'userGroupId'       => $this['userGroupId']
         ];
 
         if (isset($this['seriesNum'])) {
