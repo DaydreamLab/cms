@@ -767,6 +767,7 @@ class ItemFrontService extends ItemService
         $response = collect([]);
         if ( count($types) ) {
             foreach ($types as $type) {
+                $input->put('q', new QueryCapsule()); // 要重置q 不然會留著上一個for loop search 用到的
                 if ($type == 'brand') {
                     $response = $response->merge($brandSer->search($input));
                 } elseif ($type == 'file') {
@@ -840,19 +841,27 @@ class ItemFrontService extends ItemService
                 $data['contentType'] = 'file';
                 $data['brands'] = $i->brands->map(function ($b) { return $b->alias; });
                 $data['downloadLink'] = $i->downloadLink;
+                $data['userGroupId'] = $i->userGroupId;
             } elseif ($table == 'brands') {
                 $data['contentType'] = 'brand';
                 $data['brands'] = [];
+                $data['userGroupId'] = 1;
             } elseif ($table == 'events') {
                 $data['contentType'] = 'event';
                 $data['brands'] = $i->brands->map(function ($b) { return $b->alias; });
                 $data['seriesNum'] = $i->dates->pluck('seriesNum')->first();
+                $data['userGroupId'] = $i->canRegisterGroup;
             } elseif ($table == 'products') {
                 $data['contentType'] = 'product';
                 $data['brands'] = $i->brands->map(function ($b) { return $b->alias; });
+                $data['userGroupId'] = 1;
             } elseif ($table == 'items') {
                 $data['contentType'] = $i->category->content_type;
                 $data['brands'] = $i->brands->map(function ($b) { return $b->alias; });
+                $data['userGroupId'] = 1;
+                if (in_array($data['contentType'], ['bulletin', 'promotion'])) {
+                    $data['userGroupId'] = ( $i->extrafields['dealer_only'] == 1 ) ? 6 : 7;
+                }
             }
             return $data;
         });
