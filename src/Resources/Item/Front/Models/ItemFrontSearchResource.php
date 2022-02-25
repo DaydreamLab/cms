@@ -32,6 +32,7 @@ class ItemFrontSearchResource extends BaseJsonResource
             $data['downloadLink'] = $this['downloadLink'];
             $data['linkType'] = $this['linkType'];
             $data['webLink'] = $this['webLink'];
+            $data['size'] = $this['size'];
         }
 
         return $data;
