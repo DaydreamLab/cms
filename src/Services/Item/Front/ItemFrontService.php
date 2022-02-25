@@ -843,6 +843,7 @@ class ItemFrontService extends ItemService
                 $data['downloadLink'] = $i->downloadLink;
                 $data['linkType'] = $i->params['upload'];
                 $data['webLink'] = $i->web_url;
+                $data['size'] = $i->size;
                 if ( in_array($i->category->extension, ['finance', 'rules', 'stockholder']) ) {
                     $data['userGroupId'] = 1;
                 } else {
