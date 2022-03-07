@@ -11,6 +11,7 @@ class IotSolutionFrontSearchRequest extends CmsSearchRequest
     protected $apiMethod = 'searchIotSolution';
 
     protected $needAuth = false;
+
     /**
      * Determine if the user is authorized to make this request.
      *

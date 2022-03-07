@@ -26,7 +26,6 @@ class IotSolutionFrontService extends IotSolutionService
 
         $iot_ifs = app(IotIndustryFrontService::class);
         $response['industry'] = $iot_ifs->frontList()->map(function ($i) {
-            //$i->resource_count = count($i->resources);
             $i->solution_count = count($i->solutions);
             unset($i->resources);
             unset($i->solutions);

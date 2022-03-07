@@ -2,6 +2,8 @@
 
 namespace DaydreamLab\Cms\Services\IotResource\Front;
 
+use DaydreamLab\Cms\Models\IotCategory\IotCategory;
+use DaydreamLab\Cms\Models\IotIndustry\IotIndustry;
 use DaydreamLab\Cms\Repositories\IotResource\Front\IotResourceFrontRepository;
 use DaydreamLab\Cms\Services\IotCategory\Front\IotCategoryFrontService;
 use DaydreamLab\Cms\Services\IotIndustry\Front\IotIndustryFrontService;
@@ -71,5 +73,32 @@ class IotResourceFrontService extends IotResourceService
         $this->status = 'getItemSuccess';
         $this->response = $response;
         return $response;
+    }
+
+
+    public function search(Collection $input)
+    {
+        $categories = $input->get('categories') ? : [];
+        if ( count($categories) ) {
+            $cats = IotCategory::whereIn('alias', $categories)->get();
+            $q = $input->get('q');
+            $q = $q->whereHas('categories', function ($query) use ($cats) {
+                $query->whereIn('iot_resources_categories_maps.category_id', $cats->map(function ($i) { return $i->id; }));
+            });
+        }
+        $input->forget('categories');
+
+        $industries = $input->get('industries') ? : [];
+        if ( count($industries) ) {
+            $inds = IotIndustry::whereIn('alias', $industries)->get();
+            $q = $input->get('q');
+            $q = $q->whereHas('industries', function ($query) use ($inds) {
+                $query->whereIn('iot_resources_industries_maps.industry_id', $inds->map(function ($i) { return $i->id; }));
+            });
+        }
+        $input->forget('industries');
+
+        $input->put('state', 1);
+        return parent::search($input);
     }
 }
