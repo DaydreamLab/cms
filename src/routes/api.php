@@ -442,10 +442,12 @@ use DaydreamLab\Cms\Controllers\IotResource\Front\IotResourceFrontController;
 use DaydreamLab\Cms\Controllers\IotSolution\Front\IotSolutionFrontController;
 
 # 解決方案 前台
+Route::get('api/iot/solution/search/option', [IotSolutionFrontController::class, 'optionList']);
 Route::post('api/iot/solution/search', [IotSolutionFrontController::class, 'search']);
 
 # 原廠資源 前台
 Route::post('api/iot/resource/file/download', [IotResourceFrontController::class, 'downloadFile']);
+Route::get('api/iot/resource/search/option', [IotResourceFrontController::class, 'optionList']);
 Route::post('api/iot/resource/search', [IotResourceFrontController::class, 'search']);
 
 

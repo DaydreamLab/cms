@@ -9,6 +9,9 @@ class IotCategoryFrontGetItemRequest extends CmsGetItemRequest
     protected $modelName = 'IotCategory';
 
     protected $apiMethod = 'getIotCategory';
+
+    protected $needAuth = false;
+
     /**
      * Determine if the user is authorized to make this request.
      *

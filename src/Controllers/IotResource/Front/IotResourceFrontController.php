@@ -52,6 +52,18 @@ class IotResourceFrontController extends CmsController
     }
 
 
+    public function optionList()
+    {
+        try {
+            $this->service->optionList();
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
+
     public function search(IotResourceFrontSearchRequest $request)
     {
         try {

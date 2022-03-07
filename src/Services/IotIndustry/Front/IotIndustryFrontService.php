@@ -12,4 +12,14 @@ class IotIndustryFrontService extends IotIndustryService
         parent::__construct($repo);
         $this->repo = $repo;
     }
+
+
+    public function frontList()
+    {
+        $all = $this->repo->frontList();
+
+        $this->status = 'getItemSuccess';
+        $this->response = $all;
+        return $this->response;
+    }
 }

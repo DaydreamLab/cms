@@ -12,4 +12,10 @@ class IotIndustryFrontRepository extends IotIndustryRepository
         parent::__construct($model);
         $this->model = $model;
     }
+
+
+    public function frontList()
+    {
+        return $this->model->where('state', 1)->with(['resources', 'solutions'])->get();
+    }
 }

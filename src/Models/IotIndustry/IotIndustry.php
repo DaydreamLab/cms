@@ -59,6 +59,5 @@ class IotIndustry extends CmsModel
 
     public static function newFactory()
     {
-
     }
 }

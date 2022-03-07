@@ -41,5 +41,4 @@ class IotCategoryFrontController extends CmsController
 
         return $this->response($this->service->status, $this->service->response);
     }
-
 }

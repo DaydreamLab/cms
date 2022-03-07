@@ -30,7 +30,8 @@ class IotSolutionFrontSearchRequest extends CmsSearchRequest
     {
         $rules = [
             'featured'          => 'nullable|integer',
-            'category'          => 'nullable|string',
+            'categories'        => 'nullable|array',
+            'categories.*'      => 'nullable|string',
             'industries'        => 'nullable|array',
             'industires.*'      => 'nullable|string'
         ];

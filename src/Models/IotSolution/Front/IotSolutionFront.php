@@ -13,4 +13,13 @@ class IotSolutionFront extends IotSolution
     protected $table = 'iot_solutions';
 
     protected $model_type = 'front';
+
+    protected $hidden = [
+        'id',
+        'state',
+        'access',
+        'locked_by',
+        'locked_at',
+        'pivot'
+    ];
 }

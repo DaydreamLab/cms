@@ -12,4 +12,10 @@ class IotCategoryFrontRepository extends IotCategoryRepository
         parent::__construct($model);
         $this->model = $model;
     }
+
+
+    public function all()
+    {
+        return $this->model->where('state', 1)->get();
+    }
 }
