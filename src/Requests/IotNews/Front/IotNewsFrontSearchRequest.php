@@ -9,6 +9,9 @@ class IotNewsFrontSearchRequest extends CmsSearchRequest
     protected $modelName = 'IotNews';
 
     protected $apiMethod = 'searchIotNews';
+
+    protected $needAuth = false;
+
     /**
      * Determine if the user is authorized to make this request.
      *

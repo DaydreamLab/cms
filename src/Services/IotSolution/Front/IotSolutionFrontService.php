@@ -5,9 +5,11 @@ namespace DaydreamLab\Cms\Services\IotSolution\Front;
 use DaydreamLab\Cms\Models\IotCategory\IotCategory;
 use DaydreamLab\Cms\Models\IotIndustry\IotIndustry;
 use DaydreamLab\Cms\Repositories\IotSolution\Front\IotSolutionFrontRepository;
+use DaydreamLab\Cms\Resources\IotSolution\Front\Collections\IotSolutionFrontSearchResourceCollection;
 use DaydreamLab\Cms\Services\IotCategory\Front\IotCategoryFrontService;
 use DaydreamLab\Cms\Services\IotIndustry\Front\IotIndustryFrontService;
 use DaydreamLab\Cms\Services\IotSolution\IotSolutionService;
+use DaydreamLab\JJAJ\Database\QueryCapsule;
 use Illuminate\Support\Collection;
 
 class IotSolutionFrontService extends IotSolutionService
@@ -61,6 +63,21 @@ class IotSolutionFrontService extends IotSolutionService
         $input->forget('industries');
 
         $input->put('state', 1);
-        return parent::search($input);
+        //$input->put('featured', 0);
+        $result = parent::search($input);
+        $featured = parent::search(collect([
+            'state' => 1,
+            'featured' => 1,
+            'q' => new QueryCapsule()
+        ]));
+
+        $pagination = $result->toArray();
+        unset($pagination['data']);
+        $this->response = collect([
+            'featured' => (new IotSolutionFrontSearchResourceCollection($featured, false)),
+            'items' => (new IotSolutionFrontSearchResourceCollection($result->items(), false)),
+            'pagination' => $pagination
+        ]);
+        return $this->response;
     }
 }

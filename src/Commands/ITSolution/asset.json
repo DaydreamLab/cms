@@ -80,7 +80,7 @@
           "renameMedia": ["checked", "hidden"],
           "moveMedia": ["checked", "hidden"],
           "createMediaFolder": ["checked", "hidden"],
-          "searchProduct": ["checked", "hidden"],
+          "searchIotSolution": ["checked", "hidden"],
           "searchTag": ["checked", "hidden"]
         }
       },
@@ -110,7 +110,6 @@
           "renameMedia": ["checked", "hidden"],
           "moveMedia": ["checked", "hidden"],
           "createMediaFolder": ["checked", "hidden"],
-          "searchProduct": ["checked", "hidden"],
           "searchTag": ["checked", "hidden"]
         }
       }

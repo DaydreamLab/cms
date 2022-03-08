@@ -438,6 +438,8 @@ Route::get('api/admin/customer/message/{id}', [CustomerMessageAdminController::c
 
 
 /******************* IoT Solution 子站API *******************/
+use DaydreamLab\Cms\Controllers\IotEvent\Front\IotEventFrontController;
+use DaydreamLab\Cms\Controllers\IotNews\Front\IotNewsFrontController;
 use DaydreamLab\Cms\Controllers\IotResource\Front\IotResourceFrontController;
 use DaydreamLab\Cms\Controllers\IotSolution\Front\IotSolutionFrontController;
 
@@ -450,6 +452,10 @@ Route::post('api/iot/resource/file/download', [IotResourceFrontController::class
 Route::get('api/iot/resource/search/option', [IotResourceFrontController::class, 'optionList']);
 Route::post('api/iot/resource/search', [IotResourceFrontController::class, 'search']);
 
+# 新訊活動 前台
+Route::post('api/iot/news/searchAll', [IotNewsFrontController::class, 'searchAll']);
+Route::post('api/iot/news/search', [IotNewsFrontController::class, 'search']);
+Route::post('api/iot/event/search', [IotEventFrontController::class, 'search']);
 
 use DaydreamLab\Cms\Controllers\IotCategory\Admin\IotCategoryAdminController;
 use DaydreamLab\Cms\Controllers\IotEvent\Admin\IotEventAdminController;

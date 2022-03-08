@@ -5,6 +5,7 @@ namespace DaydreamLab\Cms\Controllers\IotNews\Front;
 use DaydreamLab\Cms\Controllers\CmsController;
 use DaydreamLab\Cms\Requests\IotNews\Front\IotNewsFrontGetItemRequest;
 use DaydreamLab\Cms\Requests\IotNews\Front\IotNewsFrontSearchRequest;
+use DaydreamLab\Cms\Resources\IotNews\Front\Collections\IotNewsFrontSearchResourceCollection;
 use DaydreamLab\Cms\Services\IotNews\Front\IotNewsFrontService;
 use Throwable;
 
@@ -39,7 +40,18 @@ class IotNewsFrontController extends CmsController
             $this->handleException($t);
         }
 
-        return $this->response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response, [], IotNewsFrontSearchResourceCollection::class);
     }
 
+
+    public function searchAll(IotNewsFrontSearchRequest $request)
+    {
+        try {
+            $this->service->searchAll($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response, [], IotNewsFrontSearchResourceCollection::class);
+    }
 }

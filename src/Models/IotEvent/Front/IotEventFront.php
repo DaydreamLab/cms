@@ -13,4 +13,12 @@ class IotEventFront extends IotEvent
     protected $table = 'iot_events';
 
     protected $model_type = 'front';
+
+    protected $hidden = [
+        'id',
+        'state',
+        'access',
+        'locked_by',
+        'locked_at'
+    ];
 }

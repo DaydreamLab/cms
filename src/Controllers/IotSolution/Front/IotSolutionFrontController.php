@@ -52,6 +52,6 @@ class IotSolutionFrontController extends CmsController
             $this->handleException($t);
         }
 
-        return $this->response($this->service->status, $this->service->response, [], IotSolutionFrontSearchResourceCollection::class);
+        return $this->response($this->service->status, $this->service->response);
     }
 }

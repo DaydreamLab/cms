@@ -13,4 +13,12 @@ class IotNewsFront extends IotNews
     protected $table = 'iot_news';
 
     protected $model_type = 'front';
+
+    protected $hidden = [
+        'id',
+        'state',
+        'access',
+        'locked_by',
+        'locked_at'
+    ];
 }
