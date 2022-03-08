@@ -2,6 +2,7 @@
 namespace DaydreamLab\Cms\Models\IotCategory\Front;
 
 use DaydreamLab\Cms\Models\IotCategory\IotCategory;
+use DaydreamLab\Cms\Models\IotSolution\Front\IotSolutionFront;
 
 class IotCategoryFront extends IotCategory
 {
@@ -32,4 +33,10 @@ class IotCategoryFront extends IotCategory
         'publish_up',
         'publish_down'
     ];
+
+
+    public function solutions()
+    {
+        return $this->belongsToMany(IotSolutionFront::class, 'iot_solutions_categories_maps', 'category_id', 'solution_id')->withTimestamps();
+    }
 }

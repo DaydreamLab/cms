@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Resources\IotSolution\Front\Models;
 
 use DaydreamLab\Cms\Resources\IotResource\Front\Collections\IotResourceFrontSearchResourceCollection;
+use DaydreamLab\Cms\Resources\IotSolution\Front\Collections\IotSolutionFrontSearchResourceCollection;
 use DaydreamLab\JJAJ\Resources\BaseJsonResource;
 
 class IotSolutionFrontResource extends BaseJsonResource
@@ -31,6 +32,7 @@ class IotSolutionFrontResource extends BaseJsonResource
             'resources'     => new IotResourceFrontSearchResourceCollection($this->resources, false),
             'categories'    => $this->categories->map(function ($c) { return $c->only(['alias', 'title']); }),
             'tags'          => $this->tags->map(function ($t) { return $t->only(['alias', 'title']); }),
+            'related_solution'  => new IotSolutionFrontSearchResourceCollection($this->relatedSolutions, false),
             'previous'      => $this->previous,
             'next'          => $this->next
         ];

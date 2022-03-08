@@ -54,8 +54,13 @@ class IotSolutionFront extends IotSolution
     }
 
 
-    public function relatedSolutions()
+    public function getRelatedSolutionsAttribute()
     {
-
+        $categories = $this->categories()->get();
+        $related_solutions = $categories->map(function ($c) {
+            $category_solutions = $c->solutions;
+            return $category_solutions;
+        })->flatten()->unique('id')->values();
+        return $related_solutions;
     }
 }
