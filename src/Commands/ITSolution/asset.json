@@ -81,7 +81,8 @@
           "moveMedia": ["checked", "hidden"],
           "createMediaFolder": ["checked", "hidden"],
           "searchIotSolution": ["checked", "hidden"],
-          "searchTag": ["checked", "hidden"]
+          "searchIotTag": ["checked", "hidden"],
+          "addIotTag": ["checked", "hidden"]
         }
       },
       {
@@ -110,7 +111,8 @@
           "renameMedia": ["checked", "hidden"],
           "moveMedia": ["checked", "hidden"],
           "createMediaFolder": ["checked", "hidden"],
-          "searchTag": ["checked", "hidden"]
+          "searchIotTag": ["checked", "hidden"],
+          "addIotTag": ["checked", "hidden"]
         }
       }
     ],
@@ -227,7 +229,9 @@
           "createMediaFolder": ["checked", "hidden"],
           "searchIotResource": ["checked", "hidden"],
           "searchIotIndustry": ["checked", "hidden"],
-          "getIotCategory": ["checked", "hidden"]
+          "getIotCategory": ["checked", "hidden"],
+          "searchIotTag": ["checked", "hidden"],
+          "addIotTag": ["checked", "hidden"]
         }
       }
     ],
@@ -273,7 +277,9 @@
           "createMediaFolder": ["checked", "hidden"],
           "searchIotSolution": ["checked", "hidden"],
           "searchIotIndustry": ["checked", "hidden"],
-          "getIotCategory": ["checked", "hidden"]
+          "getIotCategory": ["checked", "hidden"],
+          "searchIotTag": ["checked", "hidden"],
+          "addIotTag": ["checked", "hidden"]
         }
       }
     ],

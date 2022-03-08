@@ -27,6 +27,8 @@ class CreateIotResourcesTable extends Migration
             $table->tinyInteger('state')->default(1);
             $table->unsignedInteger('access');
             $table->unsignedInteger('ordering')->nullable();
+            $table->unsignedTinyInteger('featured')->default(0);
+            $table->unsignedInteger('featured_ordering')->nullable();
             $table->text('params')->nullable();
             $table->unsignedInteger('locked_by')->nullable()->default(0);
             $table->timestamp('locked_at')->nullable();

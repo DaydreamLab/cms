@@ -23,7 +23,8 @@ class IotResourceFrontSearchResource extends BaseJsonResource
             'created_at'    => $this->getDateTimeString($this->created_at),
             'updated_at'    => $this->getDateTimeString($this->updated_at),
             'publish_up'    => $this->getDateTimeString($this->publish_up),
-            'publish_down'  => $this->getDateTimeString($this->publish_down)
+            'publish_down'  => $this->getDateTimeString($this->publish_down),
+            'categories'    => $this->categories->map(function ($c) { return $c->only(['alias', 'title']); })
         ];
     }
 }

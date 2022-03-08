@@ -5,7 +5,7 @@ namespace DaydreamLab\Cms\Controllers\IotSolution\Front;
 use DaydreamLab\Cms\Controllers\CmsController;
 use DaydreamLab\Cms\Requests\IotSolution\Front\IotSolutionFrontGetItemRequest;
 use DaydreamLab\Cms\Requests\IotSolution\Front\IotSolutionFrontSearchRequest;
-use DaydreamLab\Cms\Resources\IotSolution\Front\Collections\IotSolutionFrontSearchResourceCollection;
+use DaydreamLab\Cms\Resources\IotSolution\Front\Models\IotSolutionFrontResource;
 use DaydreamLab\Cms\Services\IotSolution\Front\IotSolutionFrontService;
 use Throwable;
 
@@ -20,15 +20,15 @@ class IotSolutionFrontController extends CmsController
     }
 
 
-    public function getItem(IotSolutionFrontGetItemRequest $request)
+    public function getItemByAlias(IotSolutionFrontGetItemRequest $request)
     {
         try {
-            $this->service->getItem(collect(['id' => $request->route('id')]));
+            $this->service->getItemByAlias(collect(['alias' => $request->route('alias')]));
         } catch (Throwable $t) {
             $this->handleException($t);
         }
 
-        return $this->response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response, [], IotSolutionFrontResource::class);
     }
 
 

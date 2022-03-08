@@ -2,9 +2,10 @@
 
 namespace DaydreamLab\Cms\Resources\IotSolution\Front\Models;
 
+use DaydreamLab\Cms\Resources\IotResource\Front\Collections\IotResourceFrontSearchResourceCollection;
 use DaydreamLab\JJAJ\Resources\BaseJsonResource;
 
-class IotSolutionFrontSearchResource extends BaseJsonResource
+class IotSolutionFrontResource extends BaseJsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,15 +18,21 @@ class IotSolutionFrontSearchResource extends BaseJsonResource
         return [
             'alias'         => $this->alias,
             'title'         => $this->title,
+            'description'   => $this->description,
             'introimage'    => $this->introimage,
             'introtext'     => $this->introtext,
-            'featured'      => $this->featured,
+            'images'        => $this->images,
+            'params'        => $this->params,
             'created_at'    => $this->getDateTimeString($this->created_at),
             'updated_at'    => $this->getDateTimeString($this->updated_at),
             'publish_up'    => $this->getDateTimeString($this->publish_up),
             'publish_down'  => $this->getDateTimeString($this->publish_down),
+            'creator'       => $this->creator->only(['name']),
+            'resources'     => new IotResourceFrontSearchResourceCollection($this->resources, false),
             'categories'    => $this->categories->map(function ($c) { return $c->only(['alias', 'title']); }),
-            'creator'       => $this->creator->only(['name'])
+            'tags'          => $this->tags->map(function ($t) { return $t->only(['alias', 'title']); }),
+            'previous'      => $this->previous,
+            'next'          => $this->next
         ];
     }
 }

@@ -14,6 +14,8 @@ class IotEventFront extends IotEvent
 
     protected $model_type = 'front';
 
+    protected $order_by = 'publish_up';
+
     protected $hidden = [
         'id',
         'state',

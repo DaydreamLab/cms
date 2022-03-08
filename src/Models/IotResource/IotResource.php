@@ -42,6 +42,8 @@ class IotResource extends CmsModel
         'state',
         'access',
         'ordering',
+        'featured',
+        'featured_ordering',
         'params',
         'locked_by',
         'locked_at',
