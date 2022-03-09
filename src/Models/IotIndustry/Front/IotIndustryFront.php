@@ -36,13 +36,13 @@ class IotIndustryFront extends IotIndustry
     public function resources()
     {
         return $this->belongsToMany(IotResourceFront::class, 'iot_resources_industries_maps', 'industry_id', 'resource_id')
-            ->where('state', 1);
+            ->where('state', '=', 1)->withTimestamps();
     }
 
 
     public function solutions()
     {
         return $this->belongsToMany(IotSolutionFront::class, 'iot_solutions_industries_maps', 'industry_id', 'solution_id')
-            ->where('state', 1);
+            ->where('state', '=', 1)->withTimestamps();
     }
 }

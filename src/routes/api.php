@@ -452,6 +452,7 @@ Route::get('api/iot/solution/{alias}', [IotSolutionFrontController::class, 'getI
 Route::post('api/iot/resource/file/download', [IotResourceFrontController::class, 'downloadFile']);
 Route::get('api/iot/resource/search/option', [IotResourceFrontController::class, 'optionList']);
 Route::post('api/iot/resource/search', [IotResourceFrontController::class, 'search']);
+Route::get('api/iot/resource/{alias}', [IotResourceFrontController::class, 'getItemByAlias']);
 
 # 新訊活動 前台
 Route::post('api/iot/news/searchAll', [IotNewsFrontController::class, 'searchAll']);

@@ -7,6 +7,7 @@ use DaydreamLab\Cms\Requests\IotResource\Front\IotResourceFrontDownloadRequest;
 use DaydreamLab\Cms\Requests\IotResource\Front\IotResourceFrontGetItemRequest;
 use DaydreamLab\Cms\Requests\IotResource\Front\IotResourceFrontSearchRequest;
 use DaydreamLab\Cms\Resources\IotResource\Front\Collections\IotResourceFrontSearchResourceCollection;
+use DaydreamLab\Cms\Resources\IotResource\Front\Models\IotResourceFrontResource;
 use DaydreamLab\Cms\Services\IotResource\Front\IotResourceFrontService;
 use Throwable;
 
@@ -41,15 +42,15 @@ class IotResourceFrontController extends CmsController
     }
 
 
-    public function getItem(IotResourceFrontGetItemRequest $request)
+    public function getItemByAlias(IotResourceFrontGetItemRequest $request)
     {
         try {
-            $this->service->getItem(collect(['id' => $request->route('id')]));
+            $this->service->getItemByAlias(collect(['alias' => $request->route('alias')]));
         } catch (Throwable $t) {
             $this->handleException($t);
         }
 
-        return $this->response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response, [], IotResourceFrontResource::class);
     }
 
 

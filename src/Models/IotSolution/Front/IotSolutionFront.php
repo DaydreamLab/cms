@@ -32,25 +32,29 @@ class IotSolutionFront extends IotSolution
 
     public function categories()
     {
-        return $this->belongsToMany(IotCategoryFront::class, 'iot_solutions_categories_maps', 'solution_id', 'category_id')->withTimestamps();
+        return $this->belongsToMany(IotCategoryFront::class, 'iot_solutions_categories_maps', 'solution_id', 'category_id')
+            ->where('state', '=', 1)->withTimestamps();
     }
 
 
     public function industries()
     {
-        return $this->belongsToMany(IotIndustryFront::class, 'iot_solutions_industries_maps', 'solution_id', 'industry_id')->withTimestamps();
+        return $this->belongsToMany(IotIndustryFront::class, 'iot_solutions_industries_maps', 'solution_id', 'industry_id')
+            ->where('state', '=', 1)->withTimestamps();
     }
 
 
     public function tags()
     {
-        return $this->belongsToMany(IotTagFront::class, 'iot_solutions_tags_maps', 'solution_id', 'tag_id')->withTimestamps();
+        return $this->belongsToMany(IotTagFront::class, 'iot_solutions_tags_maps', 'solution_id', 'tag_id')
+            ->where('state', '=', 1)->withTimestamps();
     }
 
 
     public function resources()
     {
-        return $this->belongsToMany(IotResourceFront::class, 'iot_solutions_resources_maps', 'solution_id', 'resource_id')->withTimestamps();
+        return $this->belongsToMany(IotResourceFront::class, 'iot_solutions_resources_maps', 'solution_id', 'resource_id')
+            ->where('state', '=', 1)->withTimestamps();
     }
 
 
@@ -60,7 +64,7 @@ class IotSolutionFront extends IotSolution
         $related_solutions = $categories->map(function ($c) {
             $category_solutions = $c->solutions;
             return $category_solutions;
-        })->flatten()->unique('id')->values();
+        })->flatten()->where('id', '!=', $this->getRawOriginal('id'))->unique('id')->values();
         return $related_solutions;
     }
 }

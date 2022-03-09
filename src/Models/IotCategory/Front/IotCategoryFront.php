@@ -37,6 +37,7 @@ class IotCategoryFront extends IotCategory
 
     public function solutions()
     {
-        return $this->belongsToMany(IotSolutionFront::class, 'iot_solutions_categories_maps', 'category_id', 'solution_id')->withTimestamps();
+        return $this->belongsToMany(IotSolutionFront::class, 'iot_solutions_categories_maps', 'category_id', 'solution_id')
+            ->where('state', '=', 1)->withTimestamps();
     }
 }
