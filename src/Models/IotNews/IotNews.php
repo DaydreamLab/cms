@@ -65,7 +65,6 @@ class IotNews extends CmsModel
 
     public static function newFactory()
     {
-
     }
 
 

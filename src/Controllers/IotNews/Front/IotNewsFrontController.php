@@ -6,6 +6,7 @@ use DaydreamLab\Cms\Controllers\CmsController;
 use DaydreamLab\Cms\Requests\IotNews\Front\IotNewsFrontGetItemRequest;
 use DaydreamLab\Cms\Requests\IotNews\Front\IotNewsFrontSearchRequest;
 use DaydreamLab\Cms\Resources\IotNews\Front\Collections\IotNewsFrontSearchResourceCollection;
+use DaydreamLab\Cms\Resources\IotNews\Front\Models\IotNewsFrontResource;
 use DaydreamLab\Cms\Services\IotNews\Front\IotNewsFrontService;
 use Throwable;
 
@@ -20,15 +21,15 @@ class IotNewsFrontController extends CmsController
     }
 
 
-    public function getItem(IotNewsFrontGetItemRequest $request)
+    public function getItemByAlias(IotNewsFrontGetItemRequest $request)
     {
         try {
-            $this->service->getItem(collect(['id' => $request->route('id')]));
+            $this->service->getItemByAlias(collect(['alias' => $request->route('alias')]));
         } catch (Throwable $t) {
             $this->handleException($t);
         }
 
-        return $this->response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response, [], IotNewsFrontResource::class);
     }
 
 

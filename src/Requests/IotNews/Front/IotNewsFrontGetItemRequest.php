@@ -9,6 +9,9 @@ class IotNewsFrontGetItemRequest extends CmsGetItemRequest
     protected $modelName = 'IotNews';
 
     protected $apiMethod = 'getIotNews';
+
+    protected $needAuth = false;
+
     /**
      * Determine if the user is authorized to make this request.
      *
