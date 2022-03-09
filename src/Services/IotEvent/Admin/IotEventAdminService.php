@@ -32,6 +32,18 @@ class IotEventAdminService extends IotEventService
             $input->put('publish_up', now());
         }
 
+        // 過濾掉不需要的欄位
+        $input_sponsors = $input->get('sponsors');
+        if ( count($input_sponsors) ) {
+            $input->put('sponsors', array_map(function ($s) {
+                $map_s['id'] = $s['id'];
+                $map_s['title'] = $s['title'];
+                $map_s['logo'] = $s['logo'];
+                $map_s['link'] = $s['link'];
+                return $map_s;
+            }, $input_sponsors));
+        }
+
         $result = parent::store($input);
         if ( $id = $input->get('id') ) {
             $result = $this->find($id);

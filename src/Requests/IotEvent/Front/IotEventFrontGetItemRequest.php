@@ -9,6 +9,9 @@ class IotEventFrontGetItemRequest extends CmsGetItemRequest
     protected $modelName = 'IotEvent';
 
     protected $apiMethod = 'getIotEvent';
+
+    protected $needAuth = false;
+
     /**
      * Determine if the user is authorized to make this request.
      *

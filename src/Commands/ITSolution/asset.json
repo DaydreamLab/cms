@@ -112,7 +112,8 @@
           "moveMedia": ["checked", "hidden"],
           "createMediaFolder": ["checked", "hidden"],
           "searchIotTag": ["checked", "hidden"],
-          "addIotTag": ["checked", "hidden"]
+          "addIotTag": ["checked", "hidden"],
+          "addSponsor": ["checked", "hidden"]
         }
       }
     ],

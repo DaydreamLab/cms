@@ -23,4 +23,5 @@ class IotEventFront extends IotEvent
         'locked_by',
         'locked_at'
     ];
+
 }

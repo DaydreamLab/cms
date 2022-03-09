@@ -73,6 +73,16 @@ class IotEventAdminStoreRequest extends CmsStoreRequest
     {
         $validated = parent::validated();
 
+        if ( $start_date = $validated->get('start_date') ) {
+            $utc_start_date = Carbon::parse($start_date, $this->user('api')->timezone);
+            $validated->put('start_date', $utc_start_date->tz(config('app.timezone'))->format('Y-m-d H:i:s'));
+        }
+
+        if ( $end_date = $validated->get('end_date') ) {
+            $utc_end_date = Carbon::parse($end_date, $this->user('api')->timezone);
+            $validated->put('end_date', $utc_end_date->tz(config('app.timezone'))->format('Y-m-d H:i:s'));
+        }
+
         if ( $publish_up = $validated->get('publish_up') ) {
             $utc_publish_up = Carbon::parse($publish_up, $this->user('api')->timezone);
             $validated->put('publish_up', $utc_publish_up->tz(config('app.timezone'))->format('Y-m-d H:i:s'));

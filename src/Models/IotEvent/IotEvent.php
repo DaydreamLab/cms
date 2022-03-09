@@ -77,6 +77,5 @@ class IotEvent extends CmsModel
 
     public static function newFactory()
     {
-
     }
 }

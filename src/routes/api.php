@@ -459,6 +459,7 @@ Route::post('api/iot/news/searchAll', [IotNewsFrontController::class, 'searchAll
 Route::post('api/iot/news/search', [IotNewsFrontController::class, 'search']);
 Route::get('api/iot/news/{alias}', [IotNewsFrontController::class, 'getItemByAlias']);
 Route::post('api/iot/event/search', [IotEventFrontController::class, 'search']);
+Route::get('api/iot/event/{alias}', [IotEventFrontController::class, 'getItemByAlias']);
 
 use DaydreamLab\Cms\Controllers\IotCategory\Admin\IotCategoryAdminController;
 use DaydreamLab\Cms\Controllers\IotEvent\Admin\IotEventAdminController;
