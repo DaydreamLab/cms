@@ -25,6 +25,7 @@ class IotResourceFrontResource extends BaseJsonResource
             'points'        => $this->points,
             'video'         => $this->video,
             'documents'     => $this->documents,
+            'featured'      => $this->featured,
             'params'        => $this->params,
             'created_at'    => $this->getDateTimeString($this->created_at),
             'updated_at'    => $this->getDateTimeString($this->updated_at),

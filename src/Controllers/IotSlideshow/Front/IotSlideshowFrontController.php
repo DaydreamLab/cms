@@ -19,6 +19,18 @@ class IotSlideshowFrontController extends CmsController
     }
 
 
+    public function homepage()
+    {
+        try {
+            $this->service->homepage();
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
+
     public function getItem(IotSlideshowFrontGetItemRequest $request)
     {
         try {

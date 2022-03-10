@@ -438,10 +438,14 @@ Route::get('api/admin/customer/message/{id}', [CustomerMessageAdminController::c
 
 
 /******************* IoT Solution 子站API *******************/
+use DaydreamLab\Cms\Controllers\IotSlideshow\Front\IotSlideshowFrontController;
 use DaydreamLab\Cms\Controllers\IotEvent\Front\IotEventFrontController;
 use DaydreamLab\Cms\Controllers\IotNews\Front\IotNewsFrontController;
 use DaydreamLab\Cms\Controllers\IotResource\Front\IotResourceFrontController;
 use DaydreamLab\Cms\Controllers\IotSolution\Front\IotSolutionFrontController;
+
+# 首頁
+Route::get('api/iot/homepage', [IotSlideshowFrontController::class, 'homepage']);
 
 # 解決方案 前台
 Route::get('api/iot/solution/search/option', [IotSolutionFrontController::class, 'optionList']);

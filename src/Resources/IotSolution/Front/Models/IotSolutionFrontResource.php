@@ -23,6 +23,7 @@ class IotSolutionFrontResource extends BaseJsonResource
             'introimage'    => $this->introimage,
             'introtext'     => $this->introtext,
             'images'        => $this->images,
+            'featured'      => $this->featured,
             'params'        => $this->params,
             'created_at'    => $this->getDateTimeString($this->created_at),
             'updated_at'    => $this->getDateTimeString($this->updated_at),

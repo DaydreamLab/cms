@@ -13,4 +13,15 @@ class IotSlideshowFront extends IotSlideshow
     protected $table = 'iot_slideshows';
 
     protected $model_type = 'front';
+
+    protected $hidden = [
+        'id',
+        'state',
+        'access',
+        'ordering',
+        'created_by',
+        'updated_by',
+        'locked_by',
+        'locked_at'
+    ];
 }

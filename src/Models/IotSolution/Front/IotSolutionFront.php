@@ -24,6 +24,10 @@ class IotSolutionFront extends IotSolution
         'id',
         'state',
         'access',
+        'ordering',
+        'featured_ordering',
+        'created_by',
+        'updated_by',
         'locked_by',
         'locked_at',
         'pivot'

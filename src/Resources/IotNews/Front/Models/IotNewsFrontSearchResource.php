@@ -19,6 +19,7 @@ class IotNewsFrontSearchResource extends BaseJsonResource
             'category'      => get_class($this->resource) == IotNewsFront::class ? '新訊' : '活動',
             'alias'         => $this->alias,
             'title'         => $this->title,
+            'description'   => $this->description,
             'introimage'    => $this->introimage,
             'introtext'     => $this->introtext,
             'featured'      => $this->featured,

@@ -49,24 +49,22 @@ class IotNewsFrontService extends IotNewsService
         $input->put('limit', 0);
         $page = $input->get('page');
         $input->forget('page');
-        $input->forget('paginate');
+        $input->put('paginate', false);
         $order = $input->get('order');
         $input->forget('order');
 
         $news = $this->search($input);
         $eventService = app(IotEventFrontService::class);
         $events = $eventService->search($input);
-        $merged = collect([]);
 
-        $merged = $merged->merge($news);
-        $merged = $merged->merge($events);
+        $merged = $news->concat($events);
         $merged = ($order == 'desc') ? $merged->sortByDesc(function ($i) {
             return $i->publish_up;
         }) : $merged->sortBy(function ($i) {
             return $i->publish_up;
         });
 
-        $this->response = $this->repo->paginate($merged, $limit, $page ?: 1, []);
+        $this->response = $this->repo->paginate($merged->values(), $limit, $page ?: 1, []);
         return $this->response;
     }
 }

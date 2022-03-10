@@ -2,6 +2,7 @@
 namespace DaydreamLab\Cms\Models\IotCategory\Front;
 
 use DaydreamLab\Cms\Models\IotCategory\IotCategory;
+use DaydreamLab\Cms\Models\IotResource\Front\IotResourceFront;
 use DaydreamLab\Cms\Models\IotSolution\Front\IotSolutionFront;
 
 class IotCategoryFront extends IotCategory
@@ -38,6 +39,13 @@ class IotCategoryFront extends IotCategory
     public function solutions()
     {
         return $this->belongsToMany(IotSolutionFront::class, 'iot_solutions_categories_maps', 'category_id', 'solution_id')
+            ->where('state', '=', 1)->withTimestamps();
+    }
+
+
+    public function resources()
+    {
+        return $this->belongsToMany(IotResourceFront::class, 'iot_resources_categories_maps', 'category_id', 'resource_id')
             ->where('state', '=', 1)->withTimestamps();
     }
 }

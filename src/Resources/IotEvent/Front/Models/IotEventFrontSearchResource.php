@@ -19,6 +19,7 @@ class IotEventFrontSearchResource extends BaseJsonResource
             'category'      => get_class($this->resource) == IotEventFront::class ? '活動' : '新訊',
             'alias'         => $this->alias,
             'title'         => $this->title,
+            'description'   => $this->description,
             'introimage'    => $this->introimage,
             'introtext'     => $this->introtext,
             'featured'      => $this->featured,

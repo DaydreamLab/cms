@@ -33,6 +33,7 @@ class IotEventFrontResource extends BaseJsonResource
             'permission'    => $this->permission,
             'sponsors'      => $this->sponsors,
             'url'           => $this->url,
+            'featured'      => $this->featured,
             'params'        => $this->params,
             'created_at'    => $this->getDateTimeString($this->created_at),
             'updated_at'    => $this->getDateTimeString($this->updated_at),
