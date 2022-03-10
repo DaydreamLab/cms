@@ -6,6 +6,7 @@ use DaydreamLab\Cms\Repositories\IotSlideshow\Front\IotSlideshowFrontRepository;
 use DaydreamLab\Cms\Resources\IotEvent\Front\Collections\IotEventFrontSearchResourceCollection;
 use DaydreamLab\Cms\Resources\IotNews\Front\Collections\IotNewsFrontSearchResourceCollection;
 use DaydreamLab\Cms\Resources\IotResource\Front\Collections\IotResourceFrontSearchResourceCollection;
+use DaydreamLab\Cms\Resources\IotSlideshow\Front\Collections\IotSlideshowFrontResourceCollection;
 use DaydreamLab\Cms\Services\IotCategory\Front\IotCategoryFrontService;
 use DaydreamLab\Cms\Services\IotEvent\Front\IotEventFrontService;
 use DaydreamLab\Cms\Services\IotNews\Front\IotNewsFrontService;
@@ -23,7 +24,7 @@ class IotSlideshowFrontService extends IotSlideshowService
     public function homepage()
     {
         # slideshows
-        $response['slideshows'] = $this->repo->all();
+        $response['slideshows'] = new IotSlideshowFrontResourceCollection($this->repo->all(), false);
         # resources
         $category_service = app(IotCategoryFrontService::class);
         $category_tree = $category_service->treeList();

@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Resources\IotEvent\Front\Models;
 
+use DaydreamLab\Cms\Helpers\DataHelper;
 use DaydreamLab\JJAJ\Resources\BaseJsonResource;
 use Illuminate\Support\Carbon;
 
@@ -20,7 +21,7 @@ class IotEventFrontResource extends BaseJsonResource
             'alias'         => $this->alias,
             'title'         => $this->title,
             'description'   => $this->description,
-            'introimage'    => $this->introimage,
+            'introimage'    => DataHelper::completeImageUrl($this->introimage),
             'introtext'     => $this->introtext,
             'start_date'    => $this->dateWeekDayFormat($this->start_date),
             'end_date'      => $this->dateWeekDayFormat($this->end_date),

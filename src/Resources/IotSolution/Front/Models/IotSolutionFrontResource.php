@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Resources\IotSolution\Front\Models;
 
+use DaydreamLab\Cms\Helpers\DataHelper;
 use DaydreamLab\Cms\Resources\IotResource\Front\Collections\IotResourceFrontSearchResourceCollection;
 use DaydreamLab\Cms\Resources\IotSolution\Front\Collections\IotSolutionFrontSearchResourceCollection;
 use DaydreamLab\JJAJ\Resources\BaseJsonResource;
@@ -20,9 +21,11 @@ class IotSolutionFrontResource extends BaseJsonResource
             'alias'         => $this->alias,
             'title'         => $this->title,
             'description'   => $this->description,
-            'introimage'    => $this->introimage,
+            'introimage'    => DataHelper::completeImageUrl($this->introimage),
             'introtext'     => $this->introtext,
-            'images'        => $this->images,
+            'images'        => array_map(function ($i) {
+                return DataHelper::completeImageUrl($i);
+            }, $this->images),
             'featured'      => $this->featured,
             'params'        => $this->params,
             'created_at'    => $this->getDateTimeString($this->created_at),

@@ -1,12 +1,11 @@
 <?php
 
-namespace DaydreamLab\Cms\Resources\IotNews\Front\Models;
+namespace DaydreamLab\Cms\Resources\IotSlideshow\Front\Models;
 
 use DaydreamLab\Cms\Helpers\DataHelper;
-use DaydreamLab\Cms\Models\IotNews\Front\IotNewsFront;
 use DaydreamLab\JJAJ\Resources\BaseJsonResource;
 
-class IotNewsFrontSearchResource extends BaseJsonResource
+class IotSlideshowFrontResource extends BaseJsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,13 +16,12 @@ class IotNewsFrontSearchResource extends BaseJsonResource
     public function toArray($request)
     {
         return [
-            'category'      => get_class($this->resource) == IotNewsFront::class ? '新訊' : '活動',
             'alias'         => $this->alias,
             'title'         => $this->title,
+            'sub_title'     => $this->sub_title,
             'description'   => $this->description,
-            'introimage'    => DataHelper::completeImageUrl($this->introimage),
-            'introtext'     => $this->introtext,
-            'featured'      => $this->featured,
+            'url'           => $this->url,
+            'image'         => DataHelper::completeImageUrl($this->image),
             'created_at'    => $this->getDateTimeString($this->created_at),
             'updated_at'    => $this->getDateTimeString($this->updated_at),
             'publish_up'    => $this->getDateTimeString($this->publish_up),
