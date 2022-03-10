@@ -34,7 +34,9 @@ class IotSolutionFrontSearchRequest extends CmsSearchRequest
             'categories'        => 'nullable|array',
             'categories.*'      => 'nullable|string',
             'industries'        => 'nullable|array',
-            'industires.*'      => 'nullable|string'
+            'industires.*'      => 'nullable|string',
+            'tags'              => 'nullable|array',
+            'tags.*'            => 'nullable|string'
         ];
 
         return array_merge(parent::rules(), $rules);

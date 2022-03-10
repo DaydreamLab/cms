@@ -59,7 +59,7 @@ class SeedCommand extends Command
 
         $service->store(collect([
             'title'         => 'IT Solution',
-            'url'           => 'sub.'.str_replace('http://', '',str_replace('https://', '', env('APP_URL'))),
+            'url'           => 'solution.'.str_replace('http://', '',str_replace('https://', '', env('APP_URL'))),
             'sitename'      => 'IT Solution',
             'sef'           => 'zh-TW',
             'metakeywords'  => '',

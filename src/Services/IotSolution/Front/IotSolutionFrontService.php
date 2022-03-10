@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Services\IotSolution\Front;
 
 use DaydreamLab\Cms\Models\IotCategory\IotCategory;
 use DaydreamLab\Cms\Models\IotIndustry\IotIndustry;
+use DaydreamLab\Cms\Models\IotTag\IotTag;
 use DaydreamLab\Cms\Repositories\IotSolution\Front\IotSolutionFrontRepository;
 use DaydreamLab\Cms\Resources\IotSolution\Front\Collections\IotSolutionFrontSearchResourceCollection;
 use DaydreamLab\Cms\Services\IotCategory\Front\IotCategoryFrontService;
@@ -81,6 +82,16 @@ class IotSolutionFrontService extends IotSolutionService
             });
         }
         $input->forget('industries');
+
+        $tags = $input->get('tags') ? : [];
+        if ( count($tags) ) {
+            $tag_models = IotTag::whereIn('alias', $tags)->get();
+            $q = $input->get('q');
+            $q = $q->whereHas('tags', function ($query) use ($tag_models) {
+                $query->whereIn('iot_solutions_tags_maps.tag_id', $tag_models->map(function ($i) { return $i->id; }));
+            });
+        }
+        $input->forget('tags');
 
         $input->put('state', 1);
         //$input->put('featured', 0);

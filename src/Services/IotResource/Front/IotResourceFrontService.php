@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Services\IotResource\Front;
 
 use DaydreamLab\Cms\Models\IotCategory\IotCategory;
 use DaydreamLab\Cms\Models\IotIndustry\IotIndustry;
+use DaydreamLab\Cms\Models\IotTag\IotTag;
 use DaydreamLab\Cms\Repositories\IotResource\Front\IotResourceFrontRepository;
 use DaydreamLab\Cms\Services\IotCategory\Front\IotCategoryFrontService;
 use DaydreamLab\Cms\Services\IotIndustry\Front\IotIndustryFrontService;
@@ -116,6 +117,16 @@ class IotResourceFrontService extends IotResourceService
             });
         }
         $input->forget('industries');
+
+        $tags = $input->get('tags') ? : [];
+        if ( count($tags) ) {
+            $tag_models = IotTag::whereIn('alias', $tags)->get();
+            $q = $input->get('q');
+            $q = $q->whereHas('tags', function ($query) use ($tag_models) {
+                $query->whereIn('iot_resources_tags_maps.tag_id', $tag_models->map(function ($i) { return $i->id; }));
+            });
+        }
+        $input->forget('tags');
 
         $input->put('state', 1);
         return parent::search($input);

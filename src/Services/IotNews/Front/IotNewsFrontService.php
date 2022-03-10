@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Services\IotNews\Front;
 
+use DaydreamLab\Cms\Models\IotTag\IotTag;
 use DaydreamLab\Cms\Repositories\IotNews\Front\IotNewsFrontRepository;
 use DaydreamLab\Cms\Services\IotEvent\Front\IotEventFrontService;
 use DaydreamLab\Cms\Services\IotNews\IotNewsService;
@@ -38,6 +39,16 @@ class IotNewsFrontService extends IotNewsService
 
     public function search(Collection $input)
     {
+        $tags = $input->get('tags') ? : [];
+        if ( count($tags) ) {
+            $tag_models = IotTag::whereIn('alias', $tags)->get();
+            $q = $input->get('q');
+            $q = $q->whereHas('tags', function ($query) use ($tag_models) {
+                $query->whereIn('iot_news_tags_maps.tag_id', $tag_models->map(function ($i) { return $i->id; }));
+            });
+        }
+        $input->forget('tags');
+
         $input->put('state', 1);
         return parent::search($input);
     }

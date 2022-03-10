@@ -30,7 +30,8 @@ class IotNewsFrontSearchRequest extends CmsSearchRequest
     public function rules()
     {
         $rules = [
-            //
+            'tags'              => 'nullable|array',
+            'tags.*'            => 'nullable|string'
         ];
 
         return array_merge(parent::rules(), $rules);
