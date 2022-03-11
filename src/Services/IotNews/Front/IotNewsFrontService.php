@@ -49,6 +49,11 @@ class IotNewsFrontService extends IotNewsService
         }
         $input->forget('tags');
 
+        if ( $order = $input->get('order') ) {
+            $q = $input->get('q');
+            $q->orderBy('publish_up', $order);
+        }
+        $input->forget('order');
         $input->put('state', 1);
         return parent::search($input);
     }

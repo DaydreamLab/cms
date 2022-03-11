@@ -37,6 +37,11 @@ class IotEventFrontService extends IotEventService
 
     public function search(Collection $input)
     {
+        if ( $order = $input->get('order') ) {
+            $q = $input->get('q');
+            $q->orderBy('publish_up', $order);
+        }
+        $input->forget('order');
         $input->put('state', 1);
         return parent::search($input);
     }
