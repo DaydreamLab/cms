@@ -2,6 +2,12 @@
 
 namespace DaydreamLab\Cms\Commands\ITSolution;
 
+use DaydreamLab\Cms\Models\IotEvent\IotEvent;
+use DaydreamLab\Cms\Models\IotIndustry\IotIndustry;
+use DaydreamLab\Cms\Models\IotNews\IotNews;
+use DaydreamLab\Cms\Models\IotResource\IotResource;
+use DaydreamLab\Cms\Models\IotSolution\IotSolution;
+use DaydreamLab\Cms\Models\IotTag\IotTag;
 use DaydreamLab\Cms\Services\IotEvent\Admin\IotEventAdminService;
 use DaydreamLab\Cms\Services\IotIndustry\Admin\IotIndustryAdminService;
 use DaydreamLab\Cms\Services\IotNews\Admin\IotNewsAdminService;
@@ -10,6 +16,7 @@ use DaydreamLab\Cms\Services\IotSolution\Admin\IotSolutionAdminService;
 use DaydreamLab\Cms\Services\IotTag\Admin\IotTagAdminService;
 use Faker\Generator;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 
 
 class FakeCommand extends Command
@@ -26,7 +33,7 @@ class FakeCommand extends Command
      *
      * @var string
      */
-    protected $description = 'install fake data';
+    protected $description = 'create fake data';
 
 
     /**
@@ -49,6 +56,23 @@ class FakeCommand extends Command
         if (in_array(config('app.env'), ['production', 'staging'])) {
             return;
         }
+
+        IotEvent::query()->delete();
+        IotIndustry::query()->delete();
+        DB::table('iot_solutions_industries_maps')->delete();
+        IotNews::query()->delete();
+        DB::table('iot_news_solutions_maps')->delete();
+        DB::table('iot_news_tags_maps')->delete();
+        IotResource::query()->delete();
+        DB::table('iot_resources_categories_maps')->delete();
+        DB::table('iot_resources_industries_maps')->delete();
+        DB::table('iot_resources_tags_maps')->delete();
+        IotSolution::query()->delete();
+        DB::table('iot_solutions_categories_maps')->delete();
+        DB::table('iot_solutions_industries_maps')->delete();
+        DB::table('iot_solutions_resources_maps')->delete();
+        DB::table('iot_solutions_tags_maps')->delete();
+        IotTag::query()->delete();
 
         $faker = app(Generator::class);
         for ($i=0;$i<5;$i++) {

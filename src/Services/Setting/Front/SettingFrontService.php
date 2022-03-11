@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Services\Setting\Front;
 
 use DaydreamLab\Cms\Services\Setting\SettingService;
 use DaydreamLab\Cms\Services\Site\Admin\SiteAdminService;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 
@@ -24,6 +25,26 @@ class SettingFrontService extends SettingService
     {
 
         $item = $this->siteService->find(1);
+
+        if ($item) {
+            $response = $item->params;
+            $response['sitename'] = $item->sitename;
+            $response['siteurl'] = $item->url;
+            $this->status = 'GetItemSuccess';
+            $this->response = $response;
+        } else {
+            $this->status   = 'ItemNotExist';
+            $this->response = null;
+        }
+
+        return $this->response;
+    }
+
+
+    public function search(Collection $input)
+    {
+        $url = str_replace( ['http://', 'https://'], '', $input->get('url') );
+        $item = $this->siteService->findBy('url', '=', $url)->first();
 
         if ($item) {
             $response = $item->params;

@@ -44,6 +44,7 @@ use DaydreamLab\Cms\Controllers\CustomerMessageReply\Admin\CustomerMessageReplyA
 */
 
 /************************************  前台 API  ************************************/
+Route::post('api/setting/search', [SettingFrontController::class, 'search']);
 # 首頁內容
 Route::get('api/homepage', [ItemFrontController::class, 'homepage']);
 # 搜尋全站內容
@@ -459,8 +460,8 @@ Route::post('api/iot/resource/search', [IotResourceFrontController::class, 'sear
 Route::get('api/iot/resource/{alias}', [IotResourceFrontController::class, 'getItemByAlias']);
 
 # 新訊活動 前台
-Route::post('api/iot/news/searchAll', [IotNewsFrontController::class, 'searchAll']);
-Route::post('api/iot/news/search', [IotNewsFrontController::class, 'search']);
+Route::post('api/iot/news/search', [IotNewsFrontController::class, 'searchAll']);
+Route::post('api/iot/bulletin/search', [IotNewsFrontController::class, 'search']);
 Route::get('api/iot/news/{alias}', [IotNewsFrontController::class, 'getItemByAlias']);
 Route::post('api/iot/event/search', [IotEventFrontController::class, 'search']);
 Route::get('api/iot/event/{alias}', [IotEventFrontController::class, 'getItemByAlias']);
