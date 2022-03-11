@@ -32,7 +32,10 @@ class IotEventFrontResource extends BaseJsonResource
             'address'       => $this->address,
             'locationName'  => $this->locationName,
             'permission'    => $this->permission,
-            'sponsors'      => $this->sponsors,
+            'sponsors'      => array_map(function ($i) {
+                $i['logo'] = DataHelper::completeImageUrl($i['logo']);
+                return $i;
+            }, $this->sponsors),
             'url'           => $this->url,
             'featured'      => $this->featured,
             'params'        => $this->params,
