@@ -462,7 +462,7 @@ Route::get('api/iot/resource/{alias}', [IotResourceFrontController::class, 'getI
 # 新訊活動 前台
 Route::post('api/iot/news/search', [IotNewsFrontController::class, 'searchAll']);
 Route::post('api/iot/bulletin/search', [IotNewsFrontController::class, 'search']);
-Route::get('api/iot/news/{alias}', [IotNewsFrontController::class, 'getItemByAlias']);
+Route::get('api/iot/bulletin/{alias}', [IotNewsFrontController::class, 'getItemByAlias']);
 Route::post('api/iot/event/search', [IotEventFrontController::class, 'search']);
 Route::get('api/iot/event/{alias}', [IotEventFrontController::class, 'getItemByAlias']);
 
