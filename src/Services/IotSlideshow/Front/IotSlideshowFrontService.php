@@ -49,9 +49,9 @@ class IotSlideshowFrontService extends IotSlideshowService
             return $i->publish_up;
         })->values();
 
-        $response['news']['news'] = new IotNewsFrontSearchResourceCollection($merged, false);
-        $response['news']['bulletin'] = new IotNewsFrontSearchResourceCollection($all_news, false);;
-        $response['news']['event'] = new IotEventFrontSearchResourceCollection($all_event, false);
+        $response['news']['news'] = new IotNewsFrontSearchResourceCollection($merged->take(3), false);
+        $response['news']['bulletin'] = new IotNewsFrontSearchResourceCollection($all_news->take(3), false);;
+        $response['news']['event'] = new IotEventFrontSearchResourceCollection($all_event->take(3), false);
         $this->status = 'getItemSuccess';
         $this->response = $response;
         return $this->response;
