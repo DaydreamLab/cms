@@ -40,18 +40,18 @@ class IotSlideshowFrontService extends IotSlideshowService
         $search_params = [ 'limit' => 0, 'paginate' => false ];
         $news_service = app(IotNewsFrontService::class);
         $all_news = $news_service->search(collect($search_params));
-        $response['news']['news'] = new IotNewsFrontSearchResourceCollection($all_news, false);;
         # events
         $event_service = app(IotEventFrontService::class);
         $all_event = $event_service->search(collect($search_params));
-        $response['news']['event'] = new IotEventFrontSearchResourceCollection($all_event, false);
         # all
         $merged = $all_news->concat($all_event);
         $merged = $merged->sortByDesc(function ($i) {
             return $i->publish_up;
         })->values();
-        $response['news']['all'] = new IotNewsFrontSearchResourceCollection($merged, false);
 
+        $response['news']['news'] = new IotNewsFrontSearchResourceCollection($merged, false);
+        $response['news']['bulletin'] = new IotNewsFrontSearchResourceCollection($all_news, false);;
+        $response['news']['event'] = new IotEventFrontSearchResourceCollection($all_event, false);
         $this->status = 'getItemSuccess';
         $this->response = $response;
         return $this->response;
