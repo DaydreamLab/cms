@@ -3,6 +3,9 @@
 namespace DaydreamLab\Cms\Models\IotTag;
 
 use DaydreamLab\Cms\Models\CmsModel;
+use DaydreamLab\Cms\Models\IotNews\IotNews;
+use DaydreamLab\Cms\Models\IotResource\IotResource;
+use DaydreamLab\Cms\Models\IotSolution\IotSolution;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\JJAJ\Traits\UserInfo;
 
@@ -58,6 +61,23 @@ class IotTag extends CmsModel
 
     public static function newFactory()
     {
+    }
 
+
+    public function news()
+    {
+        return $this->belongsToMany(IotNews::class, 'iot_news_tags_maps', 'tag_id', 'news_id')->withTimestamps();
+    }
+
+
+    public function resources()
+    {
+        return $this->belongsToMany(IotResource::class, 'iot_resources_tags_maps', 'tag_id', 'resource_id')->withTimestamps();
+    }
+
+
+    public function solutions()
+    {
+        return $this->belongsToMany(IotSolution::class, 'iot_solutions_tags_maps', 'tag_id', 'solution_id')->withTimestamps();
     }
 }

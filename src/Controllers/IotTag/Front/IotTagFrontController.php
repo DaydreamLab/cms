@@ -4,7 +4,9 @@ namespace DaydreamLab\Cms\Controllers\IotTag\Front;
 
 use DaydreamLab\Cms\Controllers\CmsController;
 use DaydreamLab\Cms\Requests\IotTag\Front\IotTagFrontGetItemRequest;
+use DaydreamLab\Cms\Requests\IotTag\Front\IotTagFrontSearchItemRequest;
 use DaydreamLab\Cms\Requests\IotTag\Front\IotTagFrontSearchRequest;
+use DaydreamLab\Cms\Resources\IotTag\Front\Collections\IotTagFrontSearchItemResourceCollection;
 use DaydreamLab\Cms\Services\IotTag\Front\IotTagFrontService;
 use Throwable;
 
@@ -42,4 +44,15 @@ class IotTagFrontController extends CmsController
         return $this->response($this->service->status, $this->service->response);
     }
 
+
+    public function searchItems(IotTagFrontSearchItemRequest $request)
+    {
+        try {
+            $this->service->searchItems($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response, [], IotTagFrontSearchItemResourceCollection::class);
+    }
 }

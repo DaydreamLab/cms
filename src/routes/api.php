@@ -444,6 +444,7 @@ use DaydreamLab\Cms\Controllers\IotEvent\Front\IotEventFrontController;
 use DaydreamLab\Cms\Controllers\IotNews\Front\IotNewsFrontController;
 use DaydreamLab\Cms\Controllers\IotResource\Front\IotResourceFrontController;
 use DaydreamLab\Cms\Controllers\IotSolution\Front\IotSolutionFrontController;
+use DaydreamLab\Cms\Controllers\IotTag\Front\IotTagFrontController;
 
 # 首頁
 Route::get('api/iot/homepage', [IotSlideshowFrontController::class, 'homepage']);
@@ -465,6 +466,9 @@ Route::post('api/iot/bulletin/search', [IotNewsFrontController::class, 'search']
 Route::get('api/iot/bulletin/{alias}', [IotNewsFrontController::class, 'getItemByAlias']);
 Route::post('api/iot/event/search', [IotEventFrontController::class, 'search']);
 Route::get('api/iot/event/{alias}', [IotEventFrontController::class, 'getItemByAlias']);
+
+# 標籤
+Route::post('api/iot/tag/items/search', [IotTagFrontController::class, 'searchItems']);
 
 use DaydreamLab\Cms\Controllers\IotCategory\Admin\IotCategoryAdminController;
 use DaydreamLab\Cms\Controllers\IotEvent\Admin\IotEventAdminController;
