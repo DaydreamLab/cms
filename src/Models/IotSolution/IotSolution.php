@@ -36,6 +36,7 @@ class IotSolution extends CmsModel
         'introtext',
         'images',
         'description',
+        'contacts',
         'state',
         'access',
         'ordering',
@@ -58,6 +59,7 @@ class IotSolution extends CmsModel
 
     protected $casts = [
         'images'        => 'array',
+        'contacts'      => 'array',
         'params'        => 'array',
         'locked_at'     => 'datetime:Y-m-d H:i:s',
         'publish_up'    => 'datetime:Y-m-d H:i:s',

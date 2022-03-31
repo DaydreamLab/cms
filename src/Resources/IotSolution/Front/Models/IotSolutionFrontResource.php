@@ -20,12 +20,13 @@ class IotSolutionFrontResource extends BaseJsonResource
         return [
             'alias'         => $this->alias,
             'title'         => $this->title,
-            'description'   => $this->description,
             'introimage'    => DataHelper::completeImageUrl($this->introimage),
             'introtext'     => $this->introtext,
             'images'        => array_map(function ($i) {
                 return DataHelper::completeImageUrl($i);
             }, $this->images),
+            'description'   => $this->description,
+            'contacts'      => $this->contacts,
             'featured'      => $this->featured,
             'params'        => $this->params,
             'created_at'    => $this->getDateTimeString($this->created_at),

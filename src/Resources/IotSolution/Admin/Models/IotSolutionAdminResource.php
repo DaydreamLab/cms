@@ -27,6 +27,7 @@ class IotSolutionAdminResource extends BaseJsonResource
             'introtext'     => $this->introtext,
             'images'        => $this->images,
             'description'   => $this->description,
+            'contacts'      => $this->contacts,
             'state'         => $this->state,
             'params'        => $this->params,
             'featured'      => $this->featured,
