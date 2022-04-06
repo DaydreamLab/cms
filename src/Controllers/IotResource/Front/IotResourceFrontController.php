@@ -34,21 +34,21 @@ class IotResourceFrontController extends CmsController
 
         if ($this->service->getProvider() == 'azure') {
             $filename = urlencode($input->get('name'));
-            header("Content-Type: {$input->get('contentType')}");
-            header("Content-Length: {$data->getProperties()->getContentLength()}");
-            header("Content-Disposition:attachment; filename={$filename}");
-            fpassthru($data->getContentStream());
-//            return response()->stream(
-//                function () use ($data) {
-//                    fpassthru($data->getContentStream());
-//                },
-//                200,
-//                [
-//                    "Content-Type" => $input->get('contentType'),
-//                    "Content-Disposition" => ":attachment; filename={$filename}",
-//                    "Content-Length" =>  $data->getProperties()->getContentLength(),
-//                ]
-//            );
+//            header("Content-Type: {$input->get('contentType')}");
+//            header("Content-Length: {$data->getProperties()->getContentLength()}");
+//            header("Content-Disposition:attachment; filename={$filename}");
+//            fpassthru($data->getContentStream());
+            return response()->stream(
+                function () use ($data) {
+                    fpassthru($data->getContentStream());
+                },
+                200,
+                [
+                    "Content-Type" => $input->get('contentType'),
+                    "Content-Disposition" => ":attachment; filename={$filename}",
+                    "Content-Length" =>  $data->getProperties()->getContentLength(),
+                ]
+            );
         }
     }
 
