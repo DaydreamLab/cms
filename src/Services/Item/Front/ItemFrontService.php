@@ -794,7 +794,8 @@ class ItemFrontService extends ItemService
             }
         } else {
             $itemSearchData = $input->toArray();
-            $itemSearchData['q'] = (new QueryCapsule())->with('category', 'brands');
+            $itemSearchData['q'] = (new QueryCapsule())->select('id', 'category_id','title', 'alias', 'introtext', 'description')
+                ->with('category', 'brands');
             $items = $this->searchContent(collect($itemSearchData), false)->filter(function ($i) {
                 return in_array($i->category->content_type, ['solution', 'case', 'video', 'bulletin', 'promotion']);
             })->values();
@@ -850,13 +851,13 @@ class ItemFrontService extends ItemService
             $data['contentType'] = $i->category->content_type;
             $data['brands'] = $i->brands->map(function ($b) { return $b->alias; });
             $data['userGroupId'] = 1;
-            $i->extrafieldsItems = $itemsExtrafields->filter(function ($extrafield) use ($i) {
-                return $extrafield->category_id == $i->category_id || $extrafield->content_type == $i->category->content_type;
-            })->values();
-
-            $i->extrafieldsItemsValues = $itemsExtrafieldsValues->where('item_id', $i->id);
 
             if (in_array($data['contentType'], ['bulletin', 'promotion'])) {
+                $i->extrafieldsItems = $itemsExtrafields->filter(function ($extrafield) use ($i) {
+                    return $extrafield->category_id == $i->category_id || $extrafield->content_type == $i->category->content_type;
+                })->values();
+
+                $i->extrafieldsItemsValues = $itemsExtrafieldsValues->where('item_id', $i->id);
                 $data['userGroupId'] = ( $i->extrafields['dealer_only']['value'] == 1 ) ? 6 : 7;
             }
 
