@@ -767,16 +767,22 @@ class ItemFrontService extends ItemService
         $response = collect([]);
         if ( count($types) ) {
             foreach ($types as $type) {
-                $input->put('q', new QueryCapsule()); // 要重置q 不然會留著上一個for loop search 用到的
+                $q = new QueryCapsule();
                 if ($type == 'brand') {
+                    $q->with('items');
+                    $input->put('q', $q);
                     $response = $response->merge($brandSer->search($input));
                 } elseif ($type == 'file') {
                     $input->put('searchKeys', ['name', 'description']);
                     $response = $response->merge($fileSer->search($input, false));
                 } elseif ($type == 'event' || $type == 'course') {
+                    $q->with('brands', 'dates');
+                    $input->put('q', $q);
                     $response = $response->merge($eventSer->search($input, false));
                 } else {
-                    $input->put('q', (new QueryCapsule())->with('category'));
+                    $q->select('id', 'category_id','title', 'alias', 'introtext', 'description')
+                        ->with('category', 'brands');
+                    $input->put('q', $q);
                     $items = $this->searchContent($input, false);
                     foreach ($items as $item) {
                         $content_type = $item->category->content_type;
