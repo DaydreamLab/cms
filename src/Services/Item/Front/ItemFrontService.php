@@ -755,9 +755,9 @@ class ItemFrontService extends ItemService
         $fileSer = app(FileFrontService::class);
         $eventSer = app(EventFrontService::class);
 
-        $tag = $input->get('tag');
+        $tag = $input->get('tag') ?: [];
         $input->forget('tag');
-        $types = $input->get('type');
+        $types = $input->get('type') ?: [];
         $input->forget('type');
         $limit = $input->get('limit');
         $input->put('limit', 0);
@@ -804,7 +804,7 @@ class ItemFrontService extends ItemService
             $brands = $brandSer->search(collect($brandSearchData));
 
             $eventSearchData = (clone $input)->toArray();
-            $eventSearchData['q'] = (new QueryCapsule())->with('brands');
+            $eventSearchData['q'] = (new QueryCapsule())->with('brands', 'dates');
             $events = $eventSer->search(collect($eventSearchData));
 
 
@@ -815,7 +815,7 @@ class ItemFrontService extends ItemService
             $input->put('searchKeys', ['name', 'description']);
 
             $filesSearchData = $input->toArray();
-            $filesSearchData['q'] =  (new QueryCapsule())->with('brands');
+            $filesSearchData['q'] =  (new QueryCapsule())->with('brands', 'category');
             $files = $fileSer->search(collect($filesSearchData), false);
 
             $response = $response->merge($items);
@@ -833,7 +833,41 @@ class ItemFrontService extends ItemService
             })->values();
         }
 
-        $response = $response->map(function ($i) {
+        $itemsData = $response->filter(function ($i) {
+            return $i->getTable() == 'items';
+        })->values();
+
+
+        $itemsExtrafields = Extrafield::where('category_id', $itemsData->pluck('category_id')->unique()->all())
+            ->orWhereIn('content_type', $itemsData->map(function ($i) {
+                return $i->category->content_type;
+            })->unique()->all())
+            ->get();
+        $itemsExtrafieldsValues = ExtrafieldValue::whereIn('item_id', $itemsData->pluck('id')->all())->get();
+
+        $itemsResponse = $itemsData->map(function ($i) use ($itemsExtrafields, $itemsExtrafieldsValues) {
+            $data = $i->only(['title', 'alias', 'introtext', 'description']);
+            $data['contentType'] = $i->category->content_type;
+            $data['brands'] = $i->brands->map(function ($b) { return $b->alias; });
+            $data['userGroupId'] = 1;
+            $i->extrafieldsItems = $itemsExtrafields->filter(function ($extrafield) use ($i) {
+                return $extrafield->category_id == $i->category_id || $extrafield->content_type == $i->category->content_type;
+            })->values();
+
+            $i->extrafieldsItemsValues = $itemsExtrafieldsValues->where('item_id', $i->id);
+
+            if (in_array($data['contentType'], ['bulletin', 'promotion'])) {
+                $data['userGroupId'] = ( $i->extrafields['dealer_only']['value'] == 1 ) ? 6 : 7;
+            }
+
+            return $data;
+        });
+
+        $otherData =  $response->filter(function ($i) {
+            return $i->getTable() != 'items';
+        })->values();
+
+        $otherResponse = $otherData->map(function ($i) {
             $data = $i->only(['title', 'alias', 'introtext', 'description']);
             $table = $i->getTable();
             if ($table == 'files') {
@@ -874,7 +908,8 @@ class ItemFrontService extends ItemService
         });
 
         $this->status = 'SearchSuccess';
-        $this->response = $this->repo->paginate($response, $limit, $page ?: 1, []);
+        $this->response = $this->repo->paginate($itemsResponse->merge($otherResponse), $limit, $page ?: 1, []);
+
         return $this->response;
     }
 

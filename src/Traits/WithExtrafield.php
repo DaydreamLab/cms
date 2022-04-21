@@ -25,13 +25,15 @@ trait WithExtrafield
 
     public function getExtrafieldsAttribute($value)
     {
-
         $json_data_field_type = ['multiSelect', 'repeater'];
         $data = [];
-        $extrafields = Extrafield::where('content_type', $this->category->content_type)->get()->toArray();
 
-        $extrafields = array_merge($extrafields, Extrafield::where('category_id', $this->category->id)->get()->toArray());
-        $extrafieldsValue = ExtrafieldValue::where('item_id', $this->id)->get();
+        $extrafields = $this->extrafieldsItems ?: Extrafield::where('category_id', $this->category->id)
+            ->orWhere('content_type', $this->category->content_type)
+            ->get()
+            ->toArray();
+
+        $extrafieldsValue =  $this->extrafieldsItemsValues ?: ExtrafieldValue::where('item_id', $this->id)->get();
         foreach ($extrafields as $extrafield) {
             $e['id'] = $extrafield['id'];
             $e['type'] = $extrafield['type'];
