@@ -16,6 +16,8 @@ class ProductFront extends Product
 
     protected $model_type = 'front';
 
+    protected $order = 'desc';
+
 
     protected $hidden = [
         'id',
