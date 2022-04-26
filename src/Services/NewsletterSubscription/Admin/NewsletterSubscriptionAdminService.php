@@ -119,6 +119,7 @@ class NewsletterSubscriptionAdminService extends NewsletterSubscriptionService
         $limit = $input->get('limit');
         $input->put('limit', 0);
         $input->put('paginate', 0);
+
         $subscriptions = parent::search($input);
 
         if ($search) {

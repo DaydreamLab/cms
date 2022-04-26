@@ -774,16 +774,25 @@ class ItemFrontService extends ItemService
                     $response = $response->merge($brandSer->search($input));
                 } elseif ($type == 'file') {
                     $input->put('searchKeys', ['name', 'description']);
-                    $response = $response->merge($fileSer->search($input, false));
+                    $copy = $input->toArray();
+                    if (!$input->get('search')) {
+                        $copy['limit'] = 200;
+                    }
+                    $response = $response->merge($fileSer->search(collect($copy), false));
                 } elseif ($type == 'event' || $type == 'course') {
                     $q->with('brands', 'dates');
                     $input->put('q', $q);
                     $response = $response->merge($eventSer->search($input, false));
                 } else {
+                    $copy = $input->toArray();
+                    if (!$input->get('search')) {
+                        $copy['limit'] = 200;
+                    }
                     $q->select('id', 'category_id','title', 'alias', 'introtext', 'description')
                         ->with('category', 'brands');
-                    $input->put('q', $q);
-                    $items = $this->searchContent($input, false);
+                    $copy['q'] = $q;
+
+                    $items = $this->searchContent(collect($copy), false);
                     foreach ($items as $item) {
                         $content_type = $item->category->content_type;
                         if ($type == 'news') {
@@ -800,8 +809,10 @@ class ItemFrontService extends ItemService
             }
         } else {
             $itemSearchData = $input->toArray();
+            $itemSearchData['limit'] = 200;
             $itemSearchData['q'] = (new QueryCapsule())->select('id', 'category_id','title', 'alias', 'introtext', 'description')
                 ->with('category', 'brands');
+
             $items = $this->searchContent(collect($itemSearchData), false)->filter(function ($i) {
                 return in_array($i->category->content_type, ['solution', 'case', 'video', 'bulletin', 'promotion']);
             })->values();
@@ -822,6 +833,7 @@ class ItemFrontService extends ItemService
             $input->put('searchKeys', ['name', 'description']);
 
             $filesSearchData = $input->toArray();
+            $filesSearchData['limit'] = 200;
             $filesSearchData['q'] =  (new QueryCapsule())->with('brands', 'category');
             $files = $fileSer->search(collect($filesSearchData), false);
 
@@ -831,6 +843,7 @@ class ItemFrontService extends ItemService
             $response = $response->merge($products);
             $response = $response->merge($files);
         }
+
 
         # 過濾 tag
         if ($tag) {
@@ -843,7 +856,6 @@ class ItemFrontService extends ItemService
         $itemsData = $response->filter(function ($i) {
             return $i->getTable() == 'items';
         })->values();
-
 
         $itemsExtrafields = Extrafield::where('category_id', $itemsData->pluck('category_id')->unique()->all())
             ->orWhereIn('content_type', $itemsData->map(function ($i) {
