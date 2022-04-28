@@ -3,6 +3,8 @@
 namespace DaydreamLab\Cms\Requests\NewsletterSubscription\Front;
 
 use DaydreamLab\Cms\Requests\ComponentBase\CmsStoreRequest;
+use DaydreamLab\Dsth\Helpers\EnumHelper;
+use Illuminate\Validation\Rule;
 
 class NewsletterSubscriptionFrontStoreRequest extends CmsStoreRequest
 {
@@ -32,6 +34,7 @@ class NewsletterSubscriptionFrontStoreRequest extends CmsStoreRequest
             'email'                       => 'nullable|email',
             #'newsletterCategoriesAlias'   => 'nullable|array',
             #'newsletterCategoriesAlias.*' => 'nullable|string',
+            'subscribeNewsletter'         => ['required', Rule::in(EnumHelper::BOOLEAN)]
         ];
 
         return array_merge(parent::rules(), $rules);

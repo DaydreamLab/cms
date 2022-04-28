@@ -49,7 +49,7 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
             $data = [
                 'user_id' => $user->id,
                 'email'   => $user->email,
-                'newsletterCategoryIds' => [$category->id]
+                'newsletterCategoryIds' => $input->get('subscribeNewsletter') ? [$category->id] : []
             ];
             $inputEmail = $user->email;
         } else {
@@ -81,7 +81,7 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
                 $data = [
                     'user_id' => $targetUser->id,
                     'email'   => $targetUser->email,
-                    'newsletterCategoryIds' => [$category->id]
+                    'newsletterCategoryIds' => $input->get('subscribeNewsletter') ? [$category->id] : []
                 ];
             } else {
                 # 找出是否有訂閱紀錄
@@ -90,7 +90,7 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
 
                 $data = [
                     'email'   => $inputEmail,
-                    'newsletterCategoryIds' => [$category->id]
+                    'newsletterCategoryIds' => $input->get('subscribeNewsletter') ? [$category->id] : []
                 ];
             }
         }
