@@ -69,6 +69,7 @@ class  ItemAdminService extends ItemService
     {
         $item = $this->findBy('alias', '=', $alias)->first();
         $item->description = json_encode($data);
+        $item->updated_by = $this->getUser()->id;
         $item->save();
         $this->status = 'UpdateSuccess';
         $this->response = null;
