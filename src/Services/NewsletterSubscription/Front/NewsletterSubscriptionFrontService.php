@@ -72,7 +72,7 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
                 # 找出是否有訂閱紀錄
                 $subscription = $this->search(collect(['q' => $q]))->first();
 
-                if ($user->groups->where('title', '經銷會員')->count()) {
+                if ($targetUser->groups->where('title', '經銷會員')->count()) {
                     $category = $newsletterCategories->where('alias', '01_dealer_newsletter')->first();
                 } else {
                     $category = $newsletterCategories->where('alias', '01_newsletter')->first();
