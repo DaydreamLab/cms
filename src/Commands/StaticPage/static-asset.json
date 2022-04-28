@@ -1,0 +1,44 @@
+[
+  {
+    "title": "COM_STATIC_TITLE",
+    "state": 1,
+    "params": {
+      "path": "/static",
+      "component": "",
+      "type": "alias",
+      "redirect": "",
+      "icon": "copy"
+    },
+    "assets": [
+      {
+        "title": "COM_ABOUT_MANAGER_TITLE",
+        "path": "",
+        "full_path": "",
+        "component": "static/about/edit",
+        "type": "menu",
+        "state": 1,
+        "icon": "sitemap",
+        "showNav": 1,
+        "apis": [],
+        "defaultApis": {
+          "getOption": ["checked", "hidden"]
+        }
+      },
+      {
+        "title": "COM_INVESTOR_MANAGER_TITLE",
+        "path": "",
+        "full_path": "",
+        "component": "static/investor/edit",
+        "type": "menu",
+        "state": 1,
+        "icon": "sitemap",
+        "showNav": 1,
+        "apis": [],
+        "defaultApis": {
+          "getOption": ["checked", "hidden"]
+        }
+      }
+    ],
+    "userGroups": ["Administrator", "Super User"]
+  }
+]

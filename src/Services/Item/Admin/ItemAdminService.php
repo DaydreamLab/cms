@@ -51,6 +51,31 @@ class  ItemAdminService extends ItemService
     }
 
 
+    public function getStatic($alias)
+    {
+        $item = $this->findBy('alias', '=', $alias)->first();
+
+        $this->status = 'GetItemSuccess';
+        $this->response = [
+            'data' => json_decode($item->description, true),
+            'updated_at' => $item->updated_at,
+            'updaterName' => $item->updaterName
+        ];
+        return $this->response;
+    }
+
+
+    public function storeStatic($alias, $data)
+    {
+        $item = $this->findBy('alias', '=', $alias)->first();
+        $item->description = json_encode($data);
+        $item->save();
+        $this->status = 'UpdateSuccess';
+        $this->response = null;
+        return $item;
+    }
+
+
     public function importUser($input)
     {
         $file = $input->file('file');

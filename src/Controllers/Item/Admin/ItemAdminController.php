@@ -12,6 +12,7 @@ use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminContentSearchPost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminContentStatePost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminContentStorePost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminGetItemGet;
+use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminGetStaticGet;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminRemovePost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminStorePost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminStatePost;
@@ -36,6 +37,33 @@ class ItemAdminController extends CmsController
         parent::__construct($service);
         $this->service = $service;
     }
+
+
+    public function getStatic(Request $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->getStatic($request->route('alias'));
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
+
+    public function storeStatic(Request $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->storeStatic($request->route('alias'), $request->get('data'));
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
 
     public function importUser(Request $request)
     {
