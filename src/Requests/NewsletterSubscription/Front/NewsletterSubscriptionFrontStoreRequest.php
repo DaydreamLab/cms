@@ -30,8 +30,8 @@ class NewsletterSubscriptionFrontStoreRequest extends CmsStoreRequest
     {
         $rules = [
             'email'                       => 'nullable|email',
-            'newsletterCategoriesAlias'   => 'nullable|array',
-            'newsletterCategoriesAlias.*' => 'nullable|string',
+            #'newsletterCategoriesAlias'   => 'nullable|array',
+            #'newsletterCategoriesAlias.*' => 'nullable|string',
         ];
 
         return array_merge(parent::rules(), $rules);

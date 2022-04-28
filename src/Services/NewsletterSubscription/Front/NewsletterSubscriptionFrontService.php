@@ -36,20 +36,20 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
     public function store(Collection $input, $isImoprt = false)
     {
         $user = Auth::guard('api')->user();
+        $newsletterCategories = Item::whereIn('alias', ['01_newsletter', '01_dealer_newsletter'])->get();
         if ($user && $isImoprt == false) {
-            $wantCategories = Item::whereIn('alias', $input->get('newsletterCategoriesAlias') ?: [])
-                ->whereHas('category', function ($q) {
-                    $q->where('content_type', 'newsletter_category');
-                })
-                ->get();
-
             # 找出是否有訂閱紀錄
             $subscription = $this->findBy('user_id', '=', $user->id)->first();
+            if ($user->groups->where('title', '經銷會員')->count()) {
+                $category = $newsletterCategories->where('alias', '01_dealer_newsletter')->first();
+            } else {
+                $category = $newsletterCategories->where('alias', '01_newsletter')->first();
+            }
 
             $data = [
                 'user_id' => $user->id,
                 'email'   => $user->email,
-                'newsletterCategoryIds' => $wantCategories->pluck('id')->all()
+                'newsletterCategoryIds' => [$category->id]
             ];
             $inputEmail = $user->email;
         } else {
@@ -66,47 +66,31 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
                 })->first();
 
             if ($targetUser) {
-                # 找出想要訂閱的電子報分類
-                $wantCategories = Item::whereIn('alias', $input->get('newsletterCategoriesAlias') ?: [])
-                    ->whereHas('category', function ($q) {
-                        $q->where('content_type', 'newsletter_category');
-                    })
-                    ->get();
-
-                # 比對使用者可訂閱的電子報，取出交集的部分
-                $availableCategoryIds = [];
-                foreach ($wantCategories as $wantCategory) {
-                    if ($wantCategory->newsletterUserGroups->pluck('id')->intersect($targetUser->accessGroupIds)->count()) {
-                        $availableCategoryIds[] = $wantCategory->id;
-                    }
-                }
-
                 $q = new QueryCapsule();
                 $q->where('user_id', $targetUser->id)
                     ->orWhere('email', $inputEmail);
                 # 找出是否有訂閱紀錄
                 $subscription = $this->search(collect(['q' => $q]))->first();
+
+                if ($user->groups->where('title', '經銷會員')->count()) {
+                    $category = $newsletterCategories->where('alias', '01_dealer_newsletter')->first();
+                } else {
+                    $category = $newsletterCategories->where('alias', '01_newsletter')->first();
+                }
+
                 $data = [
                     'user_id' => $targetUser->id,
                     'email'   => $targetUser->email,
-                    'newsletterCategoryIds' => $availableCategoryIds
+                    'newsletterCategoryIds' => [$category->id]
                 ];
             } else {
-                $availableCategories = Item::whereIn('alias', $input->get('newsletterCategoriesAlias') ?:[])
-                    ->whereHas('category', function ($q) {
-                        $q->where('content_type', 'newsletter_category');
-                    })
-                    ->whereHas('newsletterUserGroups', function ($q) {
-                        $q->whereIn('title', ['Public', 'Guest']);
-                    })
-                    ->get();
-
                 # 找出是否有訂閱紀錄
                 $subscription = $this->findBy('email', '=', $inputEmail)->first();
+                $category = $newsletterCategories->where('alias', '01_newsletter')->first();
 
                 $data = [
                     'email'   => $inputEmail,
-                    'newsletterCategoryIds' => $availableCategories->pluck('id')->all()
+                    'newsletterCategoryIds' => [$category->id]
                 ];
             }
         }
