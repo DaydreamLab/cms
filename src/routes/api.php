@@ -109,6 +109,12 @@ Route::post('api/rma/add', [RmaController::class, 'add']);
 Route::post('api/rma/search', [RmaController::class, 'search']);
 
 /************************************  後台 API  ************************************/
+# 關於零壹
+# 投資人專區
+Route::post('api/admin/static/{alias}/store', [ItemAdminController::class, 'storeStatic'])
+    ->middleware(['expired','admin', 'restrict-ip:admin']);
+Route::get('api/admin/static/{alias}', [ItemAdminController::class, 'getStatic'])
+    ->middleware(['expired', 'admin', 'restrict-ip:admin']);
 # 全站回存
 Route::post('api/admin/restoreAllLockData', [SettingAdminController::class, 'restoreAllLockData'])->middleware(['expired', 'admin']);
 # 品牌 Brand

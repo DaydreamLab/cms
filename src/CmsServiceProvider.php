@@ -12,7 +12,8 @@ class CmsServiceProvider extends ServiceProvider
         'DaydreamLab\Cms\Commands\CronCommand',
         'DaydreamLab\Cms\Commands\PublishCommand',
         'DaydreamLab\Cms\Commands\ITSolution\SeedCommand',
-        'DaydreamLab\Cms\Commands\ITSolution\InstallCommand'
+        'DaydreamLab\Cms\Commands\ITSolution\InstallCommand',
+        'DaydreamLab\Cms\Commands\StaticPage\SeedCommand'
     ];
     /**
      * Bootstrap services.

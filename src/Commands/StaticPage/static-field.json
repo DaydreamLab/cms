@@ -1,0 +1,258 @@
+{
+  "about01": {
+    "company": {
+      "slogan": "關於零壹 - 專業服務、邁向卓越",
+      "description": "零壹科技成立於1980年，全心投入企業資訊設備代理與銷售通路建立，提供系統管理、資訊安全、網路設備、儲存、備份備援、虛擬化、視訊監控、雲端服務、大數據與人工智慧等軟/硬體解決方案。2000年於OTC掛牌上櫃，2002年轉上市(股票代號:3029)，名列天下雜誌台灣500大服務業之一，並獲評選為前50家最佳資訊設備銷售與服務企業。零壹以「專業服務、邁向卓越」為指標，致力成為企業解決方案首選代理商；2017年更擴大集團投資成立朔宇科技與羽昇國際兩家子公司，結合專業與服務，並力行實踐，與合作夥伴達到雙贏的目標。",
+      "slider": [
+        {
+          "title": "企業宗旨",
+          "description": "零壹科技專注於企業IT軟硬體設備代理業務將近四十年，多年來零壹以專業的能力、熱情的態度、服務的精神，結合專業與服務，並力行實踐，與合作夥伴達到雙贏的目標；創造與客戶共生互利的價值，讓原廠、經銷夥伴，以及終端客戶，都能透過零壹提供的解決方案獲得最大價值與商機。"
+        },
+        {
+          "title": "營運策略",
+          "description": "零壹科技持續掌握市場脈動與原廠密切合作，提供領先市場、多元且確實的IT解決方案，因應快速多變的潮流，不斷地引進一流的產品，『以滿足企業成長需求為代理基礎、以解決方案為產品發展策略』，提供多元且確實的解決方案。"
+        }
+      ],
+      "compete": [
+        {
+          "icon": "data:image/png;base64,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",
+          "description": "成立最久的IT加值整合代理商"
+        },
+        {
+          "icon": "data:image/png;base64,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",
+          "description": "專注加值服務之經銷夥伴超過1000家"
+        },
+        {
+          "icon": "data:image/png;base64,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",
+          "description": "業界最專業傑出的產品經理團隊"
+        },
+        {
+          "icon": "data:image/png;base64,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",
+          "description": "擁有最完整的產品解決方案\n設備完善的教育訓練中心"
+        },
+        {
+          "icon": "data:image/png;base64,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",
+          "description": "專業顧問規劃服務及技術支援服務"
+        },
+        {
+          "icon": "data:image/png;base64,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",
+          "description": "創新行銷服務平台"
+        }
+      ]
+    },
+    "team": {
+      "member": [
+        {
+          "name": "林嘉勲",
+          "title": "董事長",
+          "career": "學歷：交通大學電子研究所\n經歷：本公司總經理"
+        },
+        {
+          "name": "姜有謨",
+          "title": "副董事長",
+          "career": "學歷：中國文化大學\n經歷：本公司執行長"
+        },
+        {
+          "name": "黃素娥",
+          "title": "總經理",
+          "career": "學歷：銘傳大學資管科\n經歷：本公司執行副總"
+        },
+        {
+          "name": "金可玫",
+          "title": "財務長兼發言人",
+          "career": "學歷：德明財經科技大學銀行管理科\n經歷：本公司財務長"
+        }
+      ],
+      "structure-image": "/site-build/img/team.e77551c7.jpg"
+    }
+  },
+  "investor": {
+    "finance": {
+      "revenue": "https://mops.twse.com.tw/mops/web/t146sb05"
+    },
+    "company": {
+      "structure-image": "/site-build/img/companypoilcy.c8931afa.jpg",
+      "board-of-director": {
+        "title": "零壹科技股份有限公司 董事會成員簡歷",
+        "description": "本公司董事會由八位具有傑出專業背景與豐富經驗的董事所組成。\n所選任之董事，皆按照相關法令及公司章程之要求執行職務，維護公司及股東權益，\n並對於公司經營策略與方針作審慎評估及決策，加強公司績效，保障股東權益。",
+        "policy-file": "/site-build/files/董事會成員多元化政策.pdf",
+        "member": [
+          {
+            "name": "林嘉勲",
+            "title": "董事長",
+            "career": "交通大學電子研究所碩士\n中文數位化技術推廣基金會董事長",
+            "concurrently": "兼任零宇投資(股)公司、愛就贏(股)公司及鋒一投資(股)公司董事長；亞諾法生技(股)公司獨立董事、薪酬委員及審計委員；彥陽科技(股)公司、潔客幫(股)公司及奇博科技(股)公司董事；愛微科(股)公司監察人"
+          },
+          {
+            "name": "姜有謨",
+            "title": "董事",
+            "career": "中國文化大學\n零壹科技(股)公司副總經理",
+            "concurrently": "兼任本公司執行長；朔宇科技(股)公司董事長"
+          },
+          {
+            "name": "陳睿緒",
+            "title": "董事",
+            "career": "交通大學電子工程糸\n交通大學管科研究所\n花旗銀行台灣分行\nAssistant Vice President\n波士頓銀行台灣分行副總\n友訊科技(股)公司總經理及財務長",
+            "concurrently": "兼任九康投資(股)公司及視傳科技(股)公司董事長；立端科技(股)公司董事"
+          },
+          {
+            "name": "亞洲世界電通(股)公司代表人：周植基",
+            "title": "董事",
+            "career": "台北市電腦公會理事",
+            "concurrently": "方元電子工業(股)公司董事長\n中國電器(股)公司董事"
+          },
+          {
+            "name": "凱衛資訊(股)公司代表人：曾正哲",
+            "title": "董事",
+            "career": "中原大學資訊系",
+            "concurrently": "凱衛資訊(股)公司董事長"
+          },
+          {
+            "name": "吳銘雄",
+            "title": "獨立董事",
+            "career": "交通大學電子計算機系\n彥陽科技(股)公司董事長",
+            "concurrently": "兼任彥陽科技(股)公司、酩陽實業(股)公司及衡陽投資有限公司董事長；Promaster(Brunei) Technology Corp. 董事"
+          },
+          {
+            "name": "林健正",
+            "title": "獨立董事",
+            "career": "依利諾大學材料博士\n國立交通大學材料科學與工程學系所教授",
+            "concurrently": "國立交通大學材料科學與工程學系所教授\n偉詮電子(股)公司薪酬委員"
+          },
+          {
+            "name": "林銘遠",
+            "title": "獨立董事",
+            "career": "美國喬治華盛頓大學MBA\n國立政治大學財稅系\n守護天使管理顧問(股)公司總經理及創辦人\n興利投資(股)公司總經理及創辦人",
+            "concurrently": "兼任守護天使管理顧問(股)公司、興利投資(股)公司、中泰陶瓷(股)公司及臺灣時尚發展(股)公司董事"
+          }
+        ]
+      }
+    },
+    "stock": {
+      "announce-link": "https://mops.twse.com.tw/mops/web/t05st01?step=1&firstin=true&year=108&co_id=3029",
+      "dividend": [
+        {
+          "year": "109",
+          "meeting-date": "110/08/14",
+          "dividend-stock": "",
+          "dividend-cash": "3.00066710元",
+          "ex-dividend-date": "110/07/16",
+          "ex-dividend-base-date": "110/07/24",
+          "payment-date": "110/08/11"
+        },
+        {
+          "year": "108",
+          "meeting-date": "109/06/10",
+          "dividend-stock": "",
+          "dividend-cash": "2.01013223元",
+          "ex-dividend-date": "109/06/10",
+          "ex-dividend-base-date": "109/06/16",
+          "payment-date": "109/07/03"
+        },
+        {
+          "year": "107",
+          "meeting-date": "108/06/13",
+          "dividend-stock": "",
+          "dividend-cash": "1.497073元",
+          "ex-dividend-date": "108/06/28",
+          "ex-dividend-base-date": "108/07/06",
+          "payment-date": "108/07/25"
+        },
+        {
+          "year": "106",
+          "meeting-date": "107/06/11",
+          "dividend-stock": "",
+          "dividend-cash": "1.2996398元",
+          "ex-dividend-date": "107/08/21",
+          "ex-dividend-base-date": "107/08/27",
+          "payment-date": "107/09/13"
+        },
+        {
+          "year": "105",
+          "meeting-date": "106/06/14",
+          "dividend-stock": "",
+          "dividend-cash": "1.19982678元",
+          "ex-dividend-date": "106/08/22",
+          "ex-dividend-base-date": "106/08/28",
+          "payment-date": "106/09/15"
+        }
+      ],
+      "market-link": "https://mis.twse.com.tw/stock/fibest.jsp?stock=3029&lang=zh_tw",
+      "shareholder-file": "/site-build/files/主要股東名單.pdf",
+      "investor-contact":{
+        "transfer-agency": {
+          "title": "元富證券股份有限公司股務代理部",
+          "address": "台北市光復北路十一巷三十五號地下一樓",
+          "phone": "(02)2768-6668",
+          "site": "https://www.masterlink.com.tw/"
+        },
+        "contact-person": {
+          "name": "金可玫小姐 (財務管理處資深協理)",
+          "phone": "(02)2656-5656",
+          "email": "cmichelle@zerone.com.tw"
+        }
+      }
+    },
+    "relation": {
+      "employee": {
+        "issue": "<ul><li>勞僱關係</li><li>員工關懷</li><li>員工健康照護</li><li>多元化與平等機會</li></ul>",
+        "response": "<ul><li>確保及尊重人權。</li><li>員工發展。</li><li>合法及公平的評價與待遇。</li><li>安全衛生的環境。</li><li>彈性福利與健康促進。</li></ul>",
+        "contact": {
+          "person": [
+            {
+              "name": "謝慧貞小姐",
+              "phone": "(02) 2656-5656，分機675",
+              "email": "katherine.hsieh@zerone.com.tw"
+            }
+          ],
+          "content": "<ul><li>主管與同仁定期及不定期進行溝通會議。</li><li>每年提供員工免費健康檢查及諮詢。</li></ul>"
+        },
+        "report": "/site-build/files/利害關係人董事會報告.pdf"
+      },
+      "supply": {
+        "issue": "<ul><li>品牌市場形象</li><li>合法與公平交易</li><li>無強迫勞動</li></ul>",
+        "response": "<ul><li>合法與公平交易</li></ul>",
+        "contact": {
+          "person": [
+            {
+              "name": "黃華明小姐",
+              "phone": "(02) 2656-5656，分機688",
+              "email": "candice.huang@zerone.com.tw"
+            }
+          ],
+          "content": "<ul><li>簽署環保承諾書。</li><li>QBR(Quarterly Business Review)。</li><li>供應商不定期稽核。</li></ul>"
+        },
+        "report": "/site-build/files/利害關係人董事會報告.pdf"
+      },
+      "customer": {
+        "issue": "<ul><li>客戶服務</li><li>產品責任法規遵循</li></ul>",
+        "response": "<ul><li>提供最具市場競爭力及高品質的產品與服務。</li><li>提供產品服務的整體解決方案，提高客戶滿意度。</li><li>與客戶建立長期緊密而互信的商業夥伴關係。</li></ul>",
+        "contact": {
+          "person": [],
+          "content": "<ul><li>請至網站上產品業務聯繫窗口查詢</li><li>QBR(Quarterly Business Review)。</li><li>不定期參與各式技術論壇、硏討會及演說。</li></ul>"
+        },
+        "report": "/site-build/files/利害關係人董事會報告.pdf"
+      },
+      "invest": {
+        "issue": "<ul><li>財務績效</li><li>公司治理</li><li>未來成長潛力及獲利動力</li></ul>",
+        "response": "<ul><li>遵循主管機關之各項最新法令規範與政策修訂，迅速回應並調整公司資訊揭露形態與內容，以符合法規要求。</li><li>適時提供即時、同步、正確之公司訊息，致力投資資訊之對稱揭露。</li><li>長期穩定的股利政策，提供適當的投資報酬。</li><li>穩健的財務策略，維護良好的公司信用與營運績效。</li></ul>",
+        "contact": {
+          "person": [
+            {
+              "name": "金可玫小姐 (財務管理處資深協理)",
+              "phone": "(02) 2656-5656，分機680",
+              "email": "cmichelle@zerone.com.tw"
+            },
+            {
+              "name": "周良一先生 (資訊管理處資深經理)",
+              "phone": "(02) 2656-5656，分機670",
+              "email": "ken.chou@zerone.com.tw"
+            }
+          ],
+          "content": "<ul><li>年度股東大會。</li><li>定期舉辦法人說明會公布財務報告及營運訊息。</li><li>將即時重大訊息同步公開於證交所公開資訊觀測站與公司網站。</li><li>針對重大事件之公佈，除揭露於公開資訊觀測站與公司網站之外，亦視情況需要不定期發佈新聞稿或召開記者會進行說明。</li><li>於公司網站設立電子郵件信箱與聯絡電話，為投資者與公司之間建立暢通的溝通管道。</li></ul>"
+        },
+        "report": "/site-build/files/利害關係人董事會報告.pdf"
+      }
+    }
+  }
+}
