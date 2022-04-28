@@ -56,7 +56,11 @@ class  ItemAdminService extends ItemService
         $item = $this->findBy('alias', '=', $alias)->first();
 
         $this->status = 'GetItemSuccess';
-        $this->response = json_decode($item->description, true);
+        $this->response = [
+            'data' => json_decode($item->description, true),
+            'updated_at' => $item->updated_at,
+            'updaterName' => $item->updaterName
+        ];
         return $this->response;
     }
 
