@@ -44,6 +44,10 @@ use DaydreamLab\Cms\Controllers\CustomerMessageReply\Admin\CustomerMessageReplyA
 */
 
 /************************************  前台 API  ************************************/
+# 關於零壹
+# 投資人專區
+Route::get('api/static/{alias}', [ItemFrontController::class, 'getStatic']);
+
 Route::post('api/setting/search', [SettingFrontController::class, 'search']);
 # 首頁內容
 Route::get('api/homepage', [ItemFrontController::class, 'homepage']);

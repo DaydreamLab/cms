@@ -12,7 +12,6 @@ use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminContentSearchPost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminContentStatePost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminContentStorePost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminGetItemGet;
-use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminGetStaticGet;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminRemovePost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminStorePost;
 use DaydreamLab\Cms\Requests\Item\Admin\ItemAdminStatePost;

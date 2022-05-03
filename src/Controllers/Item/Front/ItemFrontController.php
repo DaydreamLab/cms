@@ -14,6 +14,7 @@ use DaydreamLab\Cms\Resources\Item\Front\Models\ItemFrontResource;
 use DaydreamLab\Cms\Resources\Item\Front\Models\ItemContentFrontResource;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\Cms\Services\Item\Front\ItemFrontService;
+use Illuminate\Http\Request;
 use Throwable;
 
 class ItemFrontController extends CmsController
@@ -24,6 +25,19 @@ class ItemFrontController extends CmsController
     {
         parent::__construct($service);
         $this->service = $service;
+    }
+
+
+    public function getStatic(Request $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->getStatic($request->route('alias'));
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
     }
 
 

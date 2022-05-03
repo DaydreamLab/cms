@@ -58,6 +58,16 @@ class ItemFrontService extends ItemService
     }
 
 
+    public function getStatic($alias)
+    {
+        $item = $this->findBy('alias', '=', $alias)->first();
+
+        $this->status = 'GetItemSuccess';
+        $this->response = json_decode($item->description, true);
+        return $this->response;
+    }
+
+
     public function getCategoriesItemsModule($params)
     {
         $result  = $this->repo->getCategoriesItemsModule($params);

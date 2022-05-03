@@ -46,6 +46,7 @@ class SeedCommand extends Command
      */
     public function handle()
     {
+        $this->apiSeeder();
         $this->assetsSeeder();
         $data = getJson(__DIR__ . '/static-field.json', true);
         $category_service = app(CategoryAdminService::class);
@@ -97,6 +98,32 @@ class SeedCommand extends Command
             "extension" => "investor"
         ]));
     }
+
+
+    public function apiSeeder()
+    {
+        $data = [
+            [
+                'name' => '取得靜態頁面',
+                'method' => 'getStatic',
+                'url' => 'api/admin/static/{alias}',
+                'created_by' => 1
+            ],
+            [
+                'name' => '編輯靜態頁面',
+                'method' => 'editStatic',
+                'url' => 'api/admin/static/{alias}/store',
+                'created_by' => 1
+            ]
+        ];
+
+        $counter = Api::all()->count();
+        foreach ($data as $apiData) {
+            $apiData['ordering'] = ++$counter;
+            Api::create($apiData);
+        }
+    }
+
 
     public function assetsSeeder()
     {
