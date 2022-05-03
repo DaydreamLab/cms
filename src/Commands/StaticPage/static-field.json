@@ -195,48 +195,48 @@
       "dividend": [
         {
           "year": "109",
-          "meeting-date": "110/08/14",
+          "meeting-date": "2021/08/14",
           "dividend-stock": "",
           "dividend-cash": "3.00066710元",
-          "ex-dividend-date": "110/07/16",
-          "ex-dividend-base-date": "110/07/24",
-          "payment-date": "110/08/11"
+          "ex-dividend-date": "2021/07/16",
+          "ex-dividend-base-date": "2021/07/24",
+          "payment-date": "2021/08/11"
         },
         {
           "year": "108",
-          "meeting-date": "109/06/10",
+          "meeting-date": "2020/06/10",
           "dividend-stock": "",
           "dividend-cash": "2.01013223元",
-          "ex-dividend-date": "109/06/10",
-          "ex-dividend-base-date": "109/06/16",
-          "payment-date": "109/07/03"
+          "ex-dividend-date": "2020/06/10",
+          "ex-dividend-base-date": "2020/06/16",
+          "payment-date": "2020/07/03"
         },
         {
           "year": "107",
-          "meeting-date": "108/06/13",
+          "meeting-date": "2019/06/13",
           "dividend-stock": "",
           "dividend-cash": "1.497073元",
-          "ex-dividend-date": "108/06/28",
-          "ex-dividend-base-date": "108/07/06",
-          "payment-date": "108/07/25"
+          "ex-dividend-date": "2019/06/28",
+          "ex-dividend-base-date": "2019/07/06",
+          "payment-date": "2019/07/25"
         },
         {
           "year": "106",
-          "meeting-date": "107/06/11",
+          "meeting-date": "2018/06/11",
           "dividend-stock": "",
           "dividend-cash": "1.2996398元",
-          "ex-dividend-date": "107/08/21",
-          "ex-dividend-base-date": "107/08/27",
-          "payment-date": "107/09/13"
+          "ex-dividend-date": "2018/08/21",
+          "ex-dividend-base-date": "2018/08/27",
+          "payment-date": "2018/09/13"
         },
         {
           "year": "105",
-          "meeting-date": "106/06/14",
+          "meeting-date": "2017/06/14",
           "dividend-stock": "",
           "dividend-cash": "1.19982678元",
-          "ex-dividend-date": "106/08/22",
-          "ex-dividend-base-date": "106/08/28",
-          "payment-date": "106/09/15"
+          "ex-dividend-date": "2017/08/22",
+          "ex-dividend-base-date": "2017/08/28",
+          "payment-date": "2017/09/15"
         }
       ],
       "market-link": "https://mis.twse.com.tw/stock/fibest.jsp?stock=3029&lang=zh_tw",
