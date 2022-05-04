@@ -165,6 +165,36 @@
           ]
         }
       ],
+      "rules": {
+        "meeting-rule": [
+          {
+            "uuid": "",
+            "name": "股東會議事規則",
+            "contentType": "pdf",
+            "size": "",
+            "downloadLink" : "/site-build/files/股東會議事規則.pdf"
+          }
+        ],
+        "election": [
+          {
+            "uuid": "",
+            "name": "董事選舉辦法",
+            "contentType": "pdf",
+            "size": "",
+            "downloadLink" : "/site-build/files/董事選舉辦法.pdf"
+          }
+        ],
+        "communication": [
+          {
+            "uuid": "",
+            "name": "獨立董事與內部稽核主管及會計師之溝通情形",
+            "contentType": "pdf",
+            "size": "",
+            "downloadLink" : "/site-build/files/獨立董事與內部稽核主管及會計師之溝通情形.pdf"
+          }
+        ],
+        "description": ""
+      },
       "governance": {
         "benefits": [
           {
