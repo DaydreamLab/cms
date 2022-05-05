@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Commands\StaticPage;
 
 use DaydreamLab\Cms\Models\Item\Item;
 use DaydreamLab\Cms\Services\Category\Admin\CategoryAdminService;
+use DaydreamLab\Media\Services\FileCategory\Admin\FileCategoryAdminService;
 use DaydreamLab\User\Models\Api\Api;
 use DaydreamLab\User\Models\User\UserGroup;
 use DaydreamLab\User\Services\Asset\Admin\AssetAdminService;
@@ -45,6 +46,7 @@ class SeedCommand extends Command
      */
     public function handle()
     {
+        $this->apiSeeder();
         $this->assetsSeeder();
         $data = getJson(__DIR__ . '/static-field.json', true);
         $category_service = app(CategoryAdminService::class);
@@ -82,7 +84,46 @@ class SeedCommand extends Command
             'access' => 1,
             'created_by' => 1
         ]);
+        $fcas = app(FileCategoryAdminService::class);
+        $fcas->store(collect([
+            "title" => "關於零壹",
+            "state" => 1,
+            "contentType" => "file",
+            "extension" => "about01"
+        ]));
+        $fcas->store(collect([
+            "title" => "投資人專區",
+            "state" => 1,
+            "contentType" => "file",
+            "extension" => "investor"
+        ]));
     }
+
+
+    public function apiSeeder()
+    {
+        $data = [
+            [
+                'name' => '取得靜態頁面',
+                'method' => 'getStatic',
+                'url' => 'api/admin/static/{alias}',
+                'created_by' => 1
+            ],
+            [
+                'name' => '編輯靜態頁面',
+                'method' => 'editStatic',
+                'url' => 'api/admin/static/{alias}/store',
+                'created_by' => 1
+            ]
+        ];
+
+        $counter = Api::all()->count();
+        foreach ($data as $apiData) {
+            $apiData['ordering'] = ++$counter;
+            Api::create($apiData);
+        }
+    }
+
 
     public function assetsSeeder()
     {

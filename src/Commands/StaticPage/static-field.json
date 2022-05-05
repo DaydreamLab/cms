@@ -75,7 +75,15 @@
       "board-of-director": {
         "title": "零壹科技股份有限公司 董事會成員簡歷",
         "description": "本公司董事會由八位具有傑出專業背景與豐富經驗的董事所組成。\n所選任之董事，皆按照相關法令及公司章程之要求執行職務，維護公司及股東權益，\n並對於公司經營策略與方針作審慎評估及決策，加強公司績效，保障股東權益。",
-        "policy-file": "/site-build/files/董事會成員多元化政策.pdf",
+        "policy-file": [
+          {
+            "uuid": "",
+            "name": "董事會成員多元化政策",
+            "contentType": "pdf",
+            "size": "",
+            "downloadLink" : "/site-build/files/董事會成員多元化政策.pdf"
+          }
+        ],
         "member": [
           {
             "name": "林嘉勲",
@@ -126,6 +134,90 @@
             "concurrently": "兼任守護天使管理顧問(股)公司、興利投資(股)公司、中泰陶瓷(股)公司及臺灣時尚發展(股)公司董事"
           }
         ]
+      },
+      "committee": [
+        {
+          "title": "薪酬委員會",
+          "member": "依據本公司薪酬委員會組織章程，該委員會成員人數為三人，由本公司董事會決議委任之，目前，本公司薪酬委員會由全體三位獨立董事組成。",
+          "response": "<ul><li>訂定並定期檢討董事、監察人及經理人績效評估與薪資報酬之政策、制度、標準與結構。</li><li>定期評估董事、監察人及經理人之績效目標達成情形並訂定薪資報酬。</li><li>不定期檢討薪酬委員會組織規程並提出修正建議。</li></ul>",
+          "status": [
+            {
+              "uuid": "",
+              "name": "薪酬委員會運作情形資訊",
+              "contentType": "pdf",
+              "size": "",
+              "downloadLink" : "/site-build/files/薪酬委員會運作情形資訊.pdf"
+            }
+          ]
+        },
+        {
+          "title": "審計委員會",
+          "member": "本公司審計委員會依法由全體獨立董事組成。",
+          "response": "依本公司「審計委員會組織規程」運作，以下列事項之監督為主要目的：<ul><li>公司財務報表之允當表達。</li><li>簽證會計師之選（解）任及獨立性與績效。</li><li>公司內部控制之有效實施。</li><li>公司遵循相關法令及規則。</li><li>公司存在或潛在風險之管控。</li></ul>",
+          "status": [
+            {
+              "uuid": "",
+              "name": "審計委員會運作情形資訊",
+              "contentType": "pdf",
+              "size": "",
+              "downloadLink" : "/site-build/files/審計委員會運作情形資訊.pdf"
+            }
+          ]
+        }
+      ],
+      "rules": {
+        "meeting-rule": [
+          {
+            "uuid": "",
+            "name": "股東會議事規則",
+            "contentType": "pdf",
+            "size": "",
+            "downloadLink" : "/site-build/files/股東會議事規則.pdf"
+          }
+        ],
+        "election": [
+          {
+            "uuid": "",
+            "name": "董事選舉辦法",
+            "contentType": "pdf",
+            "size": "",
+            "downloadLink" : "/site-build/files/董事選舉辦法.pdf"
+          }
+        ],
+        "communication": [
+          {
+            "uuid": "",
+            "name": "獨立董事與內部稽核主管及會計師之溝通情形",
+            "contentType": "pdf",
+            "size": "",
+            "downloadLink" : "/site-build/files/獨立董事與內部稽核主管及會計師之溝通情形.pdf"
+          }
+        ],
+        "description": ""
+      },
+      "governance": {
+        "benefits": [
+          {
+            "uuid": "",
+            "name": "員工福利及工作環境",
+            "contentType": "pdf",
+            "size": "",
+            "downloadLink" : "/site-build/files/員工福利及工作環境.pdf"
+          }
+        ],
+        "audit": "本公司內部稽核為獨立單位，除在董事會例行會議報告外，每月或必要時向董事長報告。<br>內部稽核規程明訂內部稽核覆核公司作業程序的內部控制，並報告該等控制之設計及例行實務作業是否適當及其效果和效率；其範圍包涵公司所有作業及其子公司。<br>稽核工作主要是依據董事會通過的稽核計畫執行，該稽核計畫乃依據已辨識之風險擬訂，另視需要執行專案稽核或覆核。綜合上述一般性稽核及專案的執行提供管理階層內部控制功能運作狀況，並及時提供管理階層以便其了解已存在或潛在缺失的另外管道。<br>內部稽核覆核各單位所執行的自行檢查，包括檢查該作業是否執行並覆核文件以確保執行的品質，並綜合自行檢查結果，報告董事會。<br>本公司已於「員工績效考核管理辦法」第9條訂定，稽核人員之任免、考評、薪資報酬需提報至董事長核定。",
+        "risk": "(一） 由資訊單位主管負責推動、協調及督導機關資訊安全各項事宜；各業務單位主管負責督導所屬之資訊作業安全事宜。<br>(二） 由資訊單位主管成立跨單位資訊安全推行小組，推動資訊安全作業。<br>(三） 定期評估資訊安全風險並向董事會報告，近期向董事會報告日期為110年11月12日。",
+        "security": "<h5>資訊安全政策：</h5><p>為強化各單位資訊安全管理，建立安全及可信賴的公司資訊環境，確保資料、系統、設備及網路安全，特此於106年3月成立資訊安全小組。聘請具資訊安全防護專業之同仁加入，成員均為義務參與推動資訊安全政策，以確保本公司資料、資訊系統、設備及網路之安全維運，以達資訊持續營運的目標。</p><p>本政策旨在讓成員於日常工作時有一明確指導原則：<br>(1)落實資安管理，確保持續營運<br>由全體同仁貫徹資訊安全制度，落實執行，持續進行監控、審查及稽核各式資訊系統，確保其機密性、完整性及可用性。保護資訊資產免於因外在之威脅或內部人員不當的管理，遭受洩密、破壞或遺失等風險，並以『風險管理』為中心，瞭解資產威脅與弱點，選擇適切的保護措施，將風險降至可接受程度，建構安全網路環境，達持續營運之目標。<br>(2)加強資安訓練，提升服務品質<br>每季持續進行適當的資訊安全訓練，建立「資訊安全，人人有責」的觀念，提高同仁資訊安全意識與智能，加強應變能力，以提升服務品質。<br>(3)做好緊急應變，迅速阻擋，降低損失。<br>除了平日設備維運外，也隨時偵測系統弱點檢測服務、 Web 安全檢測服務。並因應急應變流程而調整設備政策規劃，且針對資安事件分析，定期每季執行檢討，以確保資訊系統失效或重大災害事件發生時，能迅速阻擋，確保關鍵性業務持續運作，並將損失降至最低。</p><h5>具體管理方案：</h5><p>為落實本公司之資訊安全，資訊管理處已建置防火牆，進一步阻擋病毒及駭客入侵攻擊公司內部網路，並安裝趨勢科技之防毒軟體，加強用戶端防護。另外，也透過 Deep Security2Agent (DSA)，提供入侵偵測及防禦、網站應用程式防護、網路應用程式控管，確保重要主機安全，並透過其具備之防火牆功能，縮小實體、虛擬與雲端伺服器的攻擊面，提供精細的過濾規則和網路政策，以防止病毒與駭客，因程式未定期更新修補而造成之漏洞攻擊。</p><p>資訊管理處亦擬視實際需求，評估未來是否投保資安險，以降低發生重大資安事件所造成的營運損失。同時，資訊安全小組則將後續目標，訂定為完備資安相關規範、定期資安評估、取得國際資安認證，並於未來持續強化資安防護機制，同時以教育訓練計畫，對員工宣導與資安相關之重要觀念。</p>",
+        "appoint": "本公司內部稽核為獨立單位，除在董事會例行會議報告外，每月或必要時向董事長報告。</p><p>內部稽核規程明訂內部稽核覆核公司作業程序的內部控制，並報告該等控制之設計及例行實務作業是否適當及其效果和效率；其範圍包涵公司所有作業及其子公司。</p><p>稽核工作主要是依據董事會通過的稽核計畫執行，該稽核計畫乃依據已辨識之風險擬訂，另視需要執行專案稽核或覆核。綜合上述一般性稽核及專案的執行提供管理階層內部控制功能運作狀況，並及時提供管理階層以便其了解已存在或潛在缺失的另外管道。</p><p>內部稽核覆核各單位所執行的自行檢查，包括檢查該作業是否執行並覆核文件以確保執行的品質，並綜合自行檢查結果，報告董事會。</p><p>本公司已於「員工績效考核管理辦法」第9條訂定，稽核人員之任免、考評、薪資報酬需提報至董事長核定。</p>",
+        "file": [
+          {
+            "uuid": "",
+            "name": "資訊安全政策及具體管理方案",
+            "contentType": "pdf",
+            "size": "",
+            "downloadLink" : "/site-build/files/資訊安全政策及具體管理方案.pdf"
+          }
+        ]
       }
     },
     "stock": {
@@ -133,52 +225,60 @@
       "dividend": [
         {
           "year": "109",
-          "meeting-date": "110/08/14",
+          "meeting-date": "2021/08/14",
           "dividend-stock": "",
           "dividend-cash": "3.00066710元",
-          "ex-dividend-date": "110/07/16",
-          "ex-dividend-base-date": "110/07/24",
-          "payment-date": "110/08/11"
+          "ex-dividend-date": "2021/07/16",
+          "ex-dividend-base-date": "2021/07/24",
+          "payment-date": "2021/08/11"
         },
         {
           "year": "108",
-          "meeting-date": "109/06/10",
+          "meeting-date": "2020/06/10",
           "dividend-stock": "",
           "dividend-cash": "2.01013223元",
-          "ex-dividend-date": "109/06/10",
-          "ex-dividend-base-date": "109/06/16",
-          "payment-date": "109/07/03"
+          "ex-dividend-date": "2020/06/10",
+          "ex-dividend-base-date": "2020/06/16",
+          "payment-date": "2020/07/03"
         },
         {
           "year": "107",
-          "meeting-date": "108/06/13",
+          "meeting-date": "2019/06/13",
           "dividend-stock": "",
           "dividend-cash": "1.497073元",
-          "ex-dividend-date": "108/06/28",
-          "ex-dividend-base-date": "108/07/06",
-          "payment-date": "108/07/25"
+          "ex-dividend-date": "2019/06/28",
+          "ex-dividend-base-date": "2019/07/06",
+          "payment-date": "2019/07/25"
         },
         {
           "year": "106",
-          "meeting-date": "107/06/11",
+          "meeting-date": "2018/06/11",
           "dividend-stock": "",
           "dividend-cash": "1.2996398元",
-          "ex-dividend-date": "107/08/21",
-          "ex-dividend-base-date": "107/08/27",
-          "payment-date": "107/09/13"
+          "ex-dividend-date": "2018/08/21",
+          "ex-dividend-base-date": "2018/08/27",
+          "payment-date": "2018/09/13"
         },
         {
           "year": "105",
-          "meeting-date": "106/06/14",
+          "meeting-date": "2017/06/14",
           "dividend-stock": "",
           "dividend-cash": "1.19982678元",
-          "ex-dividend-date": "106/08/22",
-          "ex-dividend-base-date": "106/08/28",
-          "payment-date": "106/09/15"
+          "ex-dividend-date": "2017/08/22",
+          "ex-dividend-base-date": "2017/08/28",
+          "payment-date": "2017/09/15"
         }
       ],
       "market-link": "https://mis.twse.com.tw/stock/fibest.jsp?stock=3029&lang=zh_tw",
-      "shareholder-file": "/site-build/files/主要股東名單.pdf",
+      "shareholder-file": [
+        {
+          "uuid": "",
+          "name": "主要股東名單",
+          "contentType": "pdf",
+          "size": "",
+          "downloadLink" : "/site-build/files/主要股東名單.pdf"
+        }
+      ],
       "investor-contact":{
         "transfer-agency": {
           "title": "元富證券股份有限公司股務代理部",
@@ -207,7 +307,15 @@
           ],
           "content": "<ul><li>主管與同仁定期及不定期進行溝通會議。</li><li>每年提供員工免費健康檢查及諮詢。</li></ul>"
         },
-        "report": "/site-build/files/利害關係人董事會報告.pdf"
+        "report": [
+          {
+            "uuid": "",
+            "name": "利害關係人董事會報告",
+            "contentType": "pdf",
+            "size": "",
+            "downloadLink" : "/site-build/files/利害關係人董事會報告.pdf"
+          }
+        ]
       },
       "supply": {
         "issue": "<ul><li>品牌市場形象</li><li>合法與公平交易</li><li>無強迫勞動</li></ul>",
@@ -222,7 +330,15 @@
           ],
           "content": "<ul><li>簽署環保承諾書。</li><li>QBR(Quarterly Business Review)。</li><li>供應商不定期稽核。</li></ul>"
         },
-        "report": "/site-build/files/利害關係人董事會報告.pdf"
+        "report": [
+          {
+            "uuid": "",
+            "name": "利害關係人董事會報告",
+            "contentType": "pdf",
+            "size": "",
+            "downloadLink" : "/site-build/files/利害關係人董事會報告.pdf"
+          }
+        ]
       },
       "customer": {
         "issue": "<ul><li>客戶服務</li><li>產品責任法規遵循</li></ul>",
@@ -231,7 +347,15 @@
           "person": [],
           "content": "<ul><li>請至網站上產品業務聯繫窗口查詢</li><li>QBR(Quarterly Business Review)。</li><li>不定期參與各式技術論壇、硏討會及演說。</li></ul>"
         },
-        "report": "/site-build/files/利害關係人董事會報告.pdf"
+        "report": [
+          {
+            "uuid": "",
+            "name": "利害關係人董事會報告",
+            "contentType": "pdf",
+            "size": "",
+            "downloadLink" : "/site-build/files/利害關係人董事會報告.pdf"
+          }
+        ]
       },
       "invest": {
         "issue": "<ul><li>財務績效</li><li>公司治理</li><li>未來成長潛力及獲利動力</li></ul>",
@@ -251,7 +375,15 @@
           ],
           "content": "<ul><li>年度股東大會。</li><li>定期舉辦法人說明會公布財務報告及營運訊息。</li><li>將即時重大訊息同步公開於證交所公開資訊觀測站與公司網站。</li><li>針對重大事件之公佈，除揭露於公開資訊觀測站與公司網站之外，亦視情況需要不定期發佈新聞稿或召開記者會進行說明。</li><li>於公司網站設立電子郵件信箱與聯絡電話，為投資者與公司之間建立暢通的溝通管道。</li></ul>"
         },
-        "report": "/site-build/files/利害關係人董事會報告.pdf"
+        "report": [
+          {
+            "uuid": "",
+            "name": "利害關係人董事會報告",
+            "contentType": "pdf",
+            "size": "",
+            "downloadLink" : "/site-build/files/利害關係人董事會報告.pdf"
+          }
+        ]
       }
     }
   }

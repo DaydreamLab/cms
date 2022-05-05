@@ -12,30 +12,50 @@
     "assets": [
       {
         "title": "COM_ABOUT_MANAGER_TITLE",
-        "path": "",
-        "full_path": "",
+        "path": "about",
+        "full_path": "/about",
         "component": "static/about/edit",
         "type": "menu",
         "state": 1,
         "icon": "sitemap",
         "showNav": 1,
-        "apis": [],
+        "apis": [
+          "editStatic",
+          "getStatic"
+        ],
         "defaultApis": {
-          "getOption": ["checked", "hidden"]
+          "getOption": ["checked", "hidden"],
+          "uploadMedia": ["checked", "hidden"],
+          "getMediaAllItems": ["checked", "hidden"],
+          "getMediaAllFolders": ["checked", "hidden"],
+          "deleteMedia": ["checked", "hidden"],
+          "renameMedia": ["checked", "hidden"],
+          "moveMedia": ["checked", "hidden"],
+          "createMediaFolder": ["checked", "hidden"]
         }
       },
       {
         "title": "COM_INVESTOR_MANAGER_TITLE",
-        "path": "",
-        "full_path": "",
+        "path": "investor",
+        "full_path": "/investor",
         "component": "static/investor/edit",
         "type": "menu",
         "state": 1,
         "icon": "sitemap",
         "showNav": 1,
-        "apis": [],
+        "apis": [
+          "editStatic",
+          "getStatic"
+        ],
         "defaultApis": {
-          "getOption": ["checked", "hidden"]
+          "getOption": ["checked", "hidden"],
+          "uploadMedia": ["checked", "hidden"],
+          "getMediaAllItems": ["checked", "hidden"],
+          "getMediaAllFolders": ["checked", "hidden"],
+          "deleteMedia": ["checked", "hidden"],
+          "renameMedia": ["checked", "hidden"],
+          "moveMedia": ["checked", "hidden"],
+          "createMediaFolder": ["checked", "hidden"]
         }
       }
     ],
