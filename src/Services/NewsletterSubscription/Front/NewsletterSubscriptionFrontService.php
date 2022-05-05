@@ -60,6 +60,7 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
                 $data['subscription'] = $subscription;
             }
             $datasets[] = $data;
+
             $inputEmail = $user->email;
         } else {
             $inputEmail =  $input->get('email');
@@ -116,6 +117,7 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
         }
 
         foreach ($datasets as $dataset) {
+            $dataset['sub_id'] = $dataset['subscription']->id;
             if (isset($dataset['id'])) {
                 $this->modify(collect($data));
                 $this->edmProcessSubscription($inputEmail, $dataset['subscription']); # 串接edm訂閱管理
@@ -131,6 +133,6 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
 
     public function modifyMapping($item, $input)
     {
-        $item->newsletterCategories()->sync($input->get('newsletterCategoryIds') ?: [], true);
+        $item->newsletterCategories()->sync($input->get('newsletterCategoryIds') ?: []);
     }
 }
