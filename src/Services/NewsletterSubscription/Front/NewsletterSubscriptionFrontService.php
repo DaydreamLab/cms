@@ -117,7 +117,6 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
         }
 
         foreach ($datasets as $dataset) {
-            $dataset['sub_id'] = $dataset['subscription']->id;
             if (isset($dataset['id'])) {
                 $this->modify(collect($data));
                 $this->edmProcessSubscription($inputEmail, $dataset['subscription']); # 串接edm訂閱管理
