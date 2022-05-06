@@ -45,9 +45,22 @@ class SeedCommand extends Command
      * @return mixed
      */
     public function handle()
-    {
+    {/*
         $this->apiSeeder();
         $this->assetsSeeder();
+        $fcas = app(FileCategoryAdminService::class);
+        $fcas->store(collect([
+            "title" => "關於零壹",
+            "state" => 1,
+            "contentType" => "file",
+            "extension" => "about01"
+        ]));
+        $fcas->store(collect([
+            "title" => "投資人專區",
+            "state" => 1,
+            "contentType" => "file",
+            "extension" => "investor"
+        ]));*/
         $data = getJson(__DIR__ . '/static-field.json', true);
         $category_service = app(CategoryAdminService::class);
         $about_cat = $category_service->store(collect([
@@ -84,19 +97,6 @@ class SeedCommand extends Command
             'access' => 1,
             'created_by' => 1
         ]);
-        $fcas = app(FileCategoryAdminService::class);
-        $fcas->store(collect([
-            "title" => "關於零壹",
-            "state" => 1,
-            "contentType" => "file",
-            "extension" => "about01"
-        ]));
-        $fcas->store(collect([
-            "title" => "投資人專區",
-            "state" => 1,
-            "contentType" => "file",
-            "extension" => "investor"
-        ]));
     }
 
 
