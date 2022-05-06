@@ -45,18 +45,20 @@ class NewsletterSubscriptionAdminSearchRequest extends CmsSearchRequest
     public function validated()
     {
         $validated = parent::validated();
-        $validated['q'] = $this->q->with('user', 'user.company', 'user.groups');
+        $q = $validated->get('q')
+            ->with('user', 'user.company', 'user.groups');
 
         if ($validated->get('state') == '') {
             $validated->forget('state');
-            $validated['q'] = $this->q->whereIn('state', [0, 1]);
+            $q->whereIn('state', [0, 1]);
         }
 
         if ( $category_id = $validated->get('newsletter_category') ) {
-            $validated['q'] = $this->q->whereHas('newsletterCategories', function ($query) use ($category_id) {
+            $q->whereHas('newsletterCategories', function ($query) use ($category_id) {
                 $query->where('newsletter_subscription_newsletter_category_maps.category_id', '=', $category_id);
             });
         }
+        $validated->put('q', $q);
         $validated->forget('newsletter_category');
 
         return $validated;
