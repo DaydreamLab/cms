@@ -56,6 +56,16 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
             ];
 
             if ($subscription) {
+                if ($subscription->email != $user->email) {
+                    # 更換 email 時取消舊 email 訂閱
+                    $ncs = $subscription->newsletterCategories->pluck('alias');
+                    foreach ($ncs as $nc) {
+                        $newsletterId = $nc == '01_deal_newsletter'
+                            ? $this->dealNewsletterId
+                            : $this->newsletterId;
+                        $this->edmRemoveSubscription($subscription->email , $newsletterId);
+                    }
+                }
                 $data['id'] = $subscription->id;
                 $data['subscription'] = $subscription;
             }
