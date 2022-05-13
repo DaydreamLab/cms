@@ -425,8 +425,9 @@ class ItemFrontService extends ItemService
         $mems = $this->searchContent(collect(['content_type' => 'memorabilia', 'limit' => 0, 'q' => new QueryCapsule()]));
         $filter_list = [];
         foreach ($mems as $mem) {
-            $year = $mem->extrafields['year']['value'];
-            $month = $mem->extrafields['month']['value'];
+            $fields = $mem->extrafields;
+            $year = $fields['year']['value'];
+            $month = $fields['month']['value'];
             $filter_list[$year][$month][] = $mem->only(['title', 'description']);
         }
 
