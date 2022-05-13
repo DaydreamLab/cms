@@ -2,6 +2,7 @@
 namespace DaydreamLab\Cms\Models\Item;
 
 use DaydreamLab\Cms\Models\Brand\Brand;
+use DaydreamLab\Cms\Models\Extrafield\ExtrafieldValue;
 use DaydreamLab\Cms\Models\Product\Product;
 use DaydreamLab\Cms\Models\Tag\Tag;
 use DaydreamLab\JJAJ\Traits\UserInfo;
@@ -68,7 +69,8 @@ class Item extends BaseModel
     protected $with = [
         'category',
         'tags',
-        'files'
+        'files',
+        'extrafieldValues'
     ];
 
 
@@ -160,6 +162,12 @@ class Item extends BaseModel
     {
         return $this->belongsToMany(Tag::class, 'items_tags_maps', 'item_id', 'tag_id')
             ->withTimestamps();
+    }
+
+
+    public function extrafieldValues()
+    {
+        return $this->hasMany(ExtrafieldValue::class, 'item_id', 'id');
     }
 
 

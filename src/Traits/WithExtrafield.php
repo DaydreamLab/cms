@@ -33,7 +33,7 @@ trait WithExtrafield
             ->get()
             ->toArray();
 
-        $extrafieldsValue =  $this->extrafieldsItemsValues ?: ExtrafieldValue::where('item_id', $this->id)->get();
+        $extrafieldsValue =  $this->extrafieldsItemsValues ?: $this->extrafieldValues;//ExtrafieldValue::where('item_id', $this->id)->get();
         foreach ($extrafields as $extrafield) {
             $e['id'] = $extrafield['id'];
             $e['type'] = $extrafield['type'];
