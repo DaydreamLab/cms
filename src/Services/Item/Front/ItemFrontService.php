@@ -427,7 +427,7 @@ class ItemFrontService extends ItemService
         foreach ($mems as $mem) {
             $year = $mem->extrafields['year']['value'];
             $month = $mem->extrafields['month']['value'];
-            $filter_list[$year][$month][] = $mem->only(['title', 'description', 'extrafields']);
+            $filter_list[$year][$month][] = $mem->only(['title', 'description']);
         }
 
         foreach ($filter_list as &$year_col) {
