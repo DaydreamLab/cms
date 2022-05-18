@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Services\IotSolution\Front;
 
+use DaydreamLab\Cms\Models\IotCategory\Front\IotCategoryFront;
 use DaydreamLab\Cms\Models\IotCategory\IotCategory;
 use DaydreamLab\Cms\Models\IotIndustry\IotIndustry;
 use DaydreamLab\Cms\Models\IotTag\IotTag;
@@ -13,6 +14,7 @@ use DaydreamLab\Cms\Services\IotSolution\IotSolutionService;
 use DaydreamLab\JJAJ\Database\QueryCapsule;
 use DaydreamLab\JJAJ\Exceptions\NotFoundException;
 use Illuminate\Support\Collection;
+use Kalnoy\Nestedset\Collection as NestCollection;
 
 class IotSolutionFrontService extends IotSolutionService
 {
@@ -44,8 +46,14 @@ class IotSolutionFrontService extends IotSolutionService
 
     public function optionList()
     {
-        $iot_cfs = app(IotCategoryFrontService::class);
-        $response['category'] = $iot_cfs->treeList();
+        $categories = IotCategoryFront::query()->where('state', '=', 1)->get();
+        // 過濾不是第一層而且沒有任何關連解決方案的分類
+        $categories = $categories->filter(function ($c) {
+            return !( ($c->parent_id != null) && ($c->solutions->count() == 0) );
+        })->values();
+        $response['category'] = (new NestCollection($categories))->toTree();
+        //$iot_cfs = app(IotCategoryFrontService::class);
+        //$response['category'] = $iot_cfs->treeList();
 
         $iot_ifs = app(IotIndustryFrontService::class);
         $response['industry'] = $iot_ifs->frontList()->map(function ($i) {

@@ -3,6 +3,8 @@
 namespace DaydreamLab\Cms\Models\IotCategory;
 
 use DaydreamLab\Cms\Models\CmsModel;
+use DaydreamLab\Cms\Models\IotResource\IotResource;
+use DaydreamLab\Cms\Models\IotSolution\IotSolution;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\JJAJ\Traits\UserInfo;
 use Kalnoy\Nestedset\NodeTrait;
@@ -68,4 +70,15 @@ class IotCategory extends CmsModel
     {
     }
 
+
+    public function resources()
+    {
+        return $this->belongsToMany(IotResource::class, 'iot_solutions_categories_map', 'category_id', 'resource_id')->withTimestamps();
+    }
+
+
+    public function solutions()
+    {
+        return $this->belongsToMany(IotSolution::class, 'iot_solutions_categories_map', 'category_id', 'solution_id')->withTimestamps();
+    }
 }
