@@ -43,7 +43,8 @@ class BrandFront extends Brand
     {
         return $this->belongsToMany(ItemFront::class, 'brands_items_maps', 'brand_id', 'item_id')
             ->where('state', 1)
-            ->withTimestamps();
+            ->withTimestamps()
+            ->orderBy('publish_up', 'desc');
     }
 
 
