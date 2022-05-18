@@ -24,7 +24,7 @@ class BrandFrontResource extends BaseJsonResource
             $tempCol = collect($items[$t]);
             $items[$t] = $tempCol->filter(function ($i) { return ($i->extrafields['brand_page_show']['value'] == 1); })->values();
         }
-        
+
         $items['solution'] = collect($items['solution'])->take(3);
         $items['case'] = collect($items['case'])->take(3);
         $items['video'] = collect($items['video'])->take(6);
