@@ -26,7 +26,10 @@ class BrandFrontResource extends BaseJsonResource
         }
 
         $items['solution'] = collect($items['solution'])->take(3);
-        $items['case'] = collect($items['case'])->take(3);
+        $items['case'] = collect($items['case'])->take(3)->map(function ($c) {
+            $c->description = strip_tags($c->description);
+            return $c;
+        });
         $items['video'] = collect($items['video'])->take(6);
 
         return [
