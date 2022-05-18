@@ -72,7 +72,7 @@ class BrandFront extends Brand
 
     public function getItemsAttribute()
     {
-        $items = $this->items()->with('brands')->get();
+        $items = $this->items()->with('brands')->get()->sortByDesc('publish_up')->values();
         $data = [
             'slideshow' => [],
             'solution' => [],
