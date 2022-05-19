@@ -511,12 +511,12 @@ class ItemFrontService extends ItemService
         });
 
         $slideshow = $this->searchContent(collect(['content_type' => 'slideshow', 'limit' => 0, 'q' => new QueryCapsule()]));
-        $promotion = $this->searchContent(collect(['content_type' => 'promotion', 'limit' => 6, 'q' => new QueryCapsule()]))
+        $promotion = $this->searchContent(collect(['content_type' => 'promotion', 'limit' => 0, 'q' => new QueryCapsule()]))
             ->filterHomepageShow()
-            ->buildContentResourceData();
-        $bulletin = $this->searchContent(collect(['content_type' => 'bulletin', 'limit' => 6, 'q' => new QueryCapsule()]))
+            ->take(6)->buildContentResourceData();
+        $bulletin = $this->searchContent(collect(['content_type' => 'bulletin', 'limit' => 0, 'q' => new QueryCapsule()]))
             ->filterHomepageShow()
-            ->buildContentResourceData();
+            ->take(6)->buildContentResourceData();
 
         $events = app(EventSessionFrontService::class)->searchEvent(collect(['limit' => 6]));
 
