@@ -32,6 +32,10 @@ class Item extends BaseModel
 
     protected $model_type = 'parent';
 
+    protected $order_by = 'publish_up';
+
+    protected $order = 'desc';
+
     /**
      * The attributes that are mass assignable.
      *
