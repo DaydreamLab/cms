@@ -15,7 +15,8 @@ class RmaController extends Controller
     public function add(RmaAddPost $request)
     {
         $input = $request->validated();
-        $client = new \SoapClient("http://webservice.zerone.com.tw/RMA/rmaWebservice.asmx?WSDL");
+        #$client = new \SoapClient("http://webservice.zerone.com.tw/RMA/rmaWebservice.asmx?WSDL");
+        $client = new \SoapClient("http://52.148.88.87/rmaWebservice.asmx?WSDL");
 
         $params = array(
             "scompellation" => $input->get('companyName'),
@@ -57,7 +58,8 @@ class RmaController extends Controller
     public function search(RmaSearchPost $request)
     {
         $input = $request->validated();
-        $client = new \SoapClient("http://webservice.zerone.com.tw/RMA/rmaWebservice.asmx?WSDL");
+        #$client = new \SoapClient("http://webservice.zerone.com.tw/RMA/rmaWebservice.asmx?WSDL");
+        $client = new \SoapClient("http://52.148.88.87/rmaWebservice.asmx?WSDL");
 
         $params = array(
             'srmano' => $input->get('number') ? : '',
