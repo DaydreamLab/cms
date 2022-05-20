@@ -284,7 +284,7 @@ class OptionService
                     } else {
                         $pcser = app(ProductCategoryFrontService::class);
                         $q = new QueryCapsule();
-                        $ppcs = $pcser->search(collect(['q' => $q->with('products')->where('state', 1)->where('parent_id', null), 'limit' => 0]), false);
+                        $ppcs = $pcser->search(collect(['q' => $q->with(['products', 'products.brands'])->where('state', 1)->where('parent_id', null), 'limit' => 0]), false);
                         $data[$type] = $ppcs->map(function ($pp) {
                             # map 出這些產品屬於的品牌
                             $brandsWithDuplicate = collect([]);
@@ -312,8 +312,8 @@ class OptionService
                     break;
                 case 'solution_category':
                     $ifser = app(ItemFrontService::class);
-                    $scs = $ifser->searchContent(collect(['content_type' => 'solution_category', 'q' => new QueryCapsule(), 'limit' => 0]), false);
-                    $ics = $ifser->searchContent(collect(['content_type' => 'industry_category', 'q' => new QueryCapsule(), 'limit' => 0]), false);
+                    $scs = $ifser->searchContent(collect(['content_type' => 'solution_category', 'q' => (new QueryCapsule())->with('category', 'extrafieldValues'), 'limit' => 0]), false);
+                    $ics = $ifser->searchContent(collect(['content_type' => 'industry_category', 'q' => (new QueryCapsule())->with('category', 'extrafieldValues'), 'limit' => 0]), false);
                     $icsData = [];
                     foreach ($ics as $ic) {
                         $icsData[$ic->id] = $ic->only(['alias', 'title']);
