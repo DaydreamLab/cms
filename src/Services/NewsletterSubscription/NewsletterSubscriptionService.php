@@ -126,7 +126,9 @@ class NewsletterSubscriptionService extends CmsService
                 $q->where('content_type', 'newsletter_category');
         })->get()->pluck('alias');
 
+        # 目前訂閱的
         $subCats = $subscription->newsletterCategories->pluck('alias');
+        # 目前沒有訂閱的
         $unSubCats = $allCategories->diff($subCats);
 
         foreach ($subCats as $subCat) {

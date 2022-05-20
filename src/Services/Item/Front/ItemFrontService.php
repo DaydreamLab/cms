@@ -1,4 +1,5 @@
 <?php
+
 namespace DaydreamLab\Cms\Services\Item\Front;
 
 use Carbon\Carbon;
@@ -11,7 +12,6 @@ use DaydreamLab\Cms\Services\Brand\Front\BrandFrontService;
 use DaydreamLab\Cms\Services\Category\Front\CategoryFrontService;
 use DaydreamLab\Cms\Services\Item\ItemService;
 use DaydreamLab\Cms\Services\Product\Front\ProductFrontService;
-use DaydreamLab\Dsth\Resources\Event\Front\Collections\EventFrontSearchResourceCollection;
 use DaydreamLab\Dsth\Resources\Event\Front\Models\EventFrontSearchResource;
 use DaydreamLab\Dsth\Services\Event\Front\EventFrontService;
 use DaydreamLab\Dsth\Services\EventSession\Front\EventSessionFrontService;
@@ -511,7 +511,7 @@ class ItemFrontService extends ItemService
         });
 
         $slideshow = $this->searchContent(collect(['content_type' => 'slideshow', 'limit' => 0, 'q' => new QueryCapsule()]));
-        $promotion = $this->searchContent(collect(['content_type' => 'promotion', 'limit' => 6, 'q' => new QueryCapsule()]))
+        $promotion = $this->searchContent(collect(['content_type' => 'promotion', 'limit' => 6, 'q' => (new QueryCapsule())]))
             ->filterHomepageShow()
             ->buildContentResourceData();
         $bulletin = $this->searchContent(collect(['content_type' => 'bulletin', 'limit' => 6, 'q' => new QueryCapsule()]))
