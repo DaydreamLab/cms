@@ -510,14 +510,26 @@ class ItemFrontService extends ItemService
             })->values();
         });
 
-        $slideshow = $this->searchContent(collect(['content_type' => 'slideshow', 'limit' => 0, 'q' => new QueryCapsule()]));
+        $contents = $this->searchContent(collect(['content_type' => ['promotion', 'bulletin', 'slideshow'], 'limit' => 0, 'q' => new QueryCapsule()]));
 
-        $promotion = $this->searchContent(collect(['content_type' => 'promotion', 'limit' => 0, 'q' => new QueryCapsule()]))
+        $slideshow = $contents->where('category.content_type', 'slideshow');
+        $promotion = $contents->where('category.content_type', 'promotion')
             ->filterHomepageShow()
-            ->take(6)->buildContentResourceData();
-        $bulletin = $this->searchContent(collect(['content_type' => 'bulletin', 'limit' => 0, 'q' => new QueryCapsule()]))
+            ->take(6)
+            ->buildContentResourceData();
+        $bulletin = $contents->where('category.content_type', 'bulletin')
             ->filterHomepageShow()
-            ->take(6)->buildContentResourceData();
+            ->take(6)
+            ->buildContentResourceData();;
+
+//        $slideshow = $this->searchContent(collect(['content_type' => 'slideshow', 'limit' => 0, 'q' => new QueryCapsule()]));
+//
+//        $promotion = $this->searchContent(collect(['content_type' => 'promotion', 'limit' => 0, 'q' => new QueryCapsule()]))
+//            ->filterHomepageShow()
+//            ->take(6)->buildContentResourceData();
+//        $bulletin = $this->searchContent(collect(['content_type' => 'bulletin', 'limit' => 0, 'q' => new QueryCapsule()]))
+//            ->filterHomepageShow()
+//            ->take(6)->buildContentResourceData();
 
         $events = app(EventSessionFrontService::class)->searchEvent(collect(['limit' => 6]));
 
