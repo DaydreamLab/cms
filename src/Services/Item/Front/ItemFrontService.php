@@ -510,9 +510,15 @@ class ItemFrontService extends ItemService
             })->values();
         });
 
-        $contents = $this->searchContent(collect(['content_type' => ['promotion', 'bulletin', 'slideshow'], 'limit' => 0, 'q' => new QueryCapsule()]));
+        # 直接找出首頁要顯示的文章id
+        $item_ids = ExtrafieldValue::where('extrafield_id', 19)->get()->pluck('item_id');
 
-        $slideshow = $contents->where('category.content_type', 'slideshow');
+        $slideshow = $this->searchContent(collect(['content_type' => 'slideshow', 'limit' => 0, 'q' => new QueryCapsule()]));
+
+        $q = new QueryCapsule();
+        $q->whereIn('id', $item_ids);
+        $contents = $this->searchContent(collect(['content_type' => ['promotion', 'bulletin'], 'limit' => 0, 'q' => $q]));
+
         $promotion = $contents->where('category.content_type', 'promotion')
             ->filterHomepageShow()
             ->take(6)
@@ -522,6 +528,7 @@ class ItemFrontService extends ItemService
             ->take(6)
             ->buildContentResourceData();;
 
+            # 原始寫法
 //        $slideshow = $this->searchContent(collect(['content_type' => 'slideshow', 'limit' => 0, 'q' => new QueryCapsule()]));
 //
 //        $promotion = $this->searchContent(collect(['content_type' => 'promotion', 'limit' => 0, 'q' => new QueryCapsule()]))
@@ -548,7 +555,14 @@ class ItemFrontService extends ItemService
     {
         if ( $content_type = $input->get('content_type') ) {
             $q = $input->get('q');
-            $categories = $this->categoryFrontService->findBy('alias', '=', $content_type);
+            if (is_array($content_type)) {
+                $qq = new QueryCapsule();
+                $qq->whereIn('alias', $content_type);
+                $categories = $this->categoryFrontService->search(collect(['q' => $qq]));
+            } else {
+                $categories = $this->categoryFrontService->findBy('alias', '=', $content_type);
+            }
+
             $category_ids = $categories->map(function ($c) {
                 return $c->id;
             })->toArray();
@@ -578,7 +592,7 @@ class ItemFrontService extends ItemService
 
         $input->put('paginate', $paginate);
         $input->put('state', 1);
-
+show($input);
         $items = parent::search($input);
 
         $this->response = $items;
