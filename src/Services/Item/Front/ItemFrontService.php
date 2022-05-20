@@ -511,7 +511,7 @@ class ItemFrontService extends ItemService
         });
 
         # 直接找出首頁要顯示的文章id
-        $item_ids = ExtrafieldValue::where('extrafield_id', 19)->where('value', 1)->get()->pluck('item_id');
+        $item_ids = ExtrafieldValue::whereIn('extrafield_id', [10, 19])->where('value', 1)->get()->pluck('item_id');
 
         $slideshow = $this->searchContent(collect(['content_type' => 'slideshow', 'limit' => 0, 'q' => new QueryCapsule()]));
 
@@ -562,10 +562,9 @@ class ItemFrontService extends ItemService
             } else {
                 $categories = $this->categoryFrontService->findBy('alias', '=', $content_type);
             }
-
             $category_ids = $categories->map(function ($c) {
                 return $c->id;
-            })->toArray();
+            })->all();
             $q = $q->whereIn('category_id', $category_ids);
             $input->put('q', $q);
         }
