@@ -592,7 +592,7 @@ class ItemFrontService extends ItemService
 
         $input->put('paginate', $paginate);
         $input->put('state', 1);
-show($input);
+
         $items = parent::search($input);
 
         $this->response = $items;
