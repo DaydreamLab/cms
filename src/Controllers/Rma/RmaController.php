@@ -142,10 +142,13 @@ class RmaController extends Controller
                     }
 
                     $client = new \SoapClient("{$this->baseUri}/rmaWebservice.asmx?WSDL");
-                    $detail = $client->__soapCall('checkProcess', ['parameters' => ['srmano' => $p[0]]]);
-                    show($detail);
+                    $stepDetail = $client->__soapCall('pr', ['parameters' => ['srmano' => $p[0]]]);
+                    if ($stepDetail) {
+                        $formedData['step'] = explode(',', $stepDetail->processDetailResult);
+                    }
 
                     $formedData['__originalResponse'] = $detail->checkDetailResult;
+                    $formedData['__stepOriginalResponse'] = $stepDetail->processDetailResult;
                     $response[] = $formedData;
                 }
             }
