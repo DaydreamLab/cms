@@ -12,7 +12,7 @@ class RmaController extends Controller
 {
     use ApiJsonResponse;
 
-    protected $baseUri = 'http://52.148.88.8';
+    protected $baseUri = 'http://52.148.88.87';
 
     public function add(RmaAddPost $request)
     {
