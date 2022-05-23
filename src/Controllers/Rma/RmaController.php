@@ -12,11 +12,13 @@ class RmaController extends Controller
 {
     use ApiJsonResponse;
 
+    protected $baseUri = 'http://52.148.88.8';
+
     public function add(RmaAddPost $request)
     {
         $input = $request->validated();
         #$client = new \SoapClient("http://webservice.zerone.com.tw/RMA/rmaWebservice.asmx?WSDL");
-        $client = new \SoapClient("http://52.148.88.87/rmaWebservice.asmx?WSDL");
+        $client = new \SoapClient("{$this->baseUri}/rmaWebservice.asmx?WSDL");
 
         $params = array(
             "scompellation" => $input->get('companyName'),
@@ -59,7 +61,7 @@ class RmaController extends Controller
     {
         $input = $request->validated();
         #$client = new \SoapClient("http://webservice.zerone.com.tw/RMA/rmaWebservice.asmx?WSDL");
-        $client = new \SoapClient("http://52.148.88.87/rmaWebservice.asmx?WSDL");
+        $client = new \SoapClient("{$this->baseUri}/rmaWebservice.asmx?WSDL");
 
         $params = array(
             'srmano' => $input->get('number') ? : '',
@@ -138,6 +140,11 @@ class RmaController extends Controller
                                 break;
                         }
                     }
+
+                    $client = new \SoapClient("{$this->baseUri}/rmaWebservice.asmx?WSDL");
+                    $detail = $client->__soapCall('checkProcess', ['parameters' => ['srmano' => $p[0]]]);
+                    show($detail);
+
                     $formedData['__originalResponse'] = $detail->checkDetailResult;
                     $response[] = $formedData;
                 }
