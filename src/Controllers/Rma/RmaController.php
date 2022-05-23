@@ -145,6 +145,10 @@ class RmaController extends Controller
                     $stepDetail = $client->__soapCall('processDetail', ['parameters' => ['srmano' => $p[0]]]);
                     if ($stepDetail) {
                         $formedData['step'] = explode(',', $stepDetail->processDetailResult);
+                    } else {
+                        for ($i = 0; $i < 13; $i++) {
+                            $formedData['step'][] = '';
+                        }
                     }
 
                     $formedData['__originalResponse'] = $detail->checkDetailResult;
