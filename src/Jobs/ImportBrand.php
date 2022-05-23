@@ -47,6 +47,7 @@ class ImportBrand implements ShouldQueue
         $this->productService = $productService;
         $this->productCategoryService->setUser($this->brandService->getUser());
         $this->productService->setUser($this->brandService->getUser());
+        $this->onQueue('batch-job');
     }
 
     /**
