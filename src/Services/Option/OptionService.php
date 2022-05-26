@@ -259,8 +259,8 @@ class OptionService
                         $brands = $brands->filter(function ($b) use ($product_category_alias) {
                             $pcs = $b->products->map(function ($p) {
                                 return ($p->productCategory) ? $p->productCategory->alias : '';
-                            })->unique(function ($p) {
-                                return $p->productCategory->id;
+                            })->unique(function ($p_alias) {
+                                return $p_alias;
                             })->values()->toArray();
                             if ( count( array_intersect($product_category_alias, $pcs) ) ) {
                                 return true;
