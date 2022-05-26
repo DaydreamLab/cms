@@ -41,8 +41,10 @@ class BrandFrontService extends BrandService
         foreach ($products as $product) {
             $pData = $product->only(['alias', 'title']);
             $targetCategory = $product->parentCategory ? : $product->productCategory;
-            $filter_products[$targetCategory->alias]['title'] = $targetCategory->title;
-            $filter_products[$targetCategory->alias]['products'][] = $pData;
+            if ($targetCategory) {
+                $filter_products[$targetCategory->alias]['title'] = $targetCategory->title;
+                $filter_products[$targetCategory->alias]['products'][] = $pData;
+            }
         }
         $filter_products_array = [];
         foreach ($filter_products as $key => $filter_product) {
