@@ -257,10 +257,10 @@ class OptionService
                     $product_category_alias = $input->get('product_category_alias');
                     if ( is_array($product_category_alias) && count($product_category_alias) ) {
                         $brands = $brands->filter(function ($b) use ($product_category_alias) {
-                            $pcs = $b->products->unique(function ($p) {
+                            $pcs = $b->products->map(function ($p) {
+                                return ($p->productCategory) ? $p->productCategory->alias : '';
+                            })->unique(function ($p) {
                                 return $p->productCategory->id;
-                            })->map(function ($p) {
-                                return $p->productCategory->alias;
                             })->values()->toArray();
                             if ( count( array_intersect($product_category_alias, $pcs) ) ) {
                                 return true;
