@@ -48,7 +48,7 @@ class BrandFrontResource extends BaseJsonResource
             'items'                 => $items,
             'products'              => $this->products,
             'tags'                  => $this->tags,
-            'files'                 => (new FileFrontSearchResourceCollection($this->files->sortByDesc('publish_up')))->collection->take(3),
+            'files'                 => (new FileFrontSearchResourceCollection($this->files->sortByDesc('publish_up')->values()))->collection->take(3),
             'events'                => $this->events->map(function ($event) {
                 return new EventFrontSearchResource($event);
             }),
