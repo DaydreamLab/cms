@@ -989,7 +989,7 @@ class ItemFrontService extends ItemService
         $featured = $this->searchContent(collect($params), false);
 
         return [
-            $featured->sortBy(function ($f) {
+            $featured->sortByDesc(function ($f) {
                 return $f['featured_ordering'];
             })->values(),
             $notFeatured
