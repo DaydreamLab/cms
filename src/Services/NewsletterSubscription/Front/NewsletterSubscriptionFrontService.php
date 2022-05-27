@@ -129,10 +129,10 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
         foreach ($datasets as $dataset) {
             if (isset($dataset['id'])) {
                 $this->modify(collect($data));
-                $this->edmProcessSubscription($inputEmail, $dataset['subscription']); # 串接edm訂閱管理
+                $this->edmProcessSubscription($inputEmail, $dataset['subscription']->refresh()); # 串接edm訂閱管理
             } else {
                 $subscription = $this->add(collect($data));
-                $this->edmProcessSubscription($inputEmail, $subscription); # 串接edm訂閱管理
+                $this->edmProcessSubscription($inputEmail, $subscription->refresh()); # 串接edm訂閱管理
             }
         }
 

@@ -137,6 +137,7 @@ class NewsletterSubscriptionService extends CmsService
             } else {
                 $newsletterId = $this->newsletterId;
             }
+            $subscription->touch();
             $this->edmAddSubscription($email, $newsletterId);
         }
 
@@ -146,6 +147,7 @@ class NewsletterSubscriptionService extends CmsService
             } else {
                 $newsletterId = $this->newsletterId;
             }
+            $subscription->touch();
             $this->edmRemoveSubscription($email, $newsletterId);
         }
     }
