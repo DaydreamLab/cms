@@ -86,8 +86,26 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
             $subCategoryId = $newsletterCategories->where('alias', '01_newsletter')->first()->id;
             $subs = $this->findBy('email', '=', $inputEmail);
             if ($subs->count()) {
-                $this->edmRemoveSubscription($inputEmail, $this->dealNewsletterId);
-                $this->edmAddSubscription($inputEmail, $this->newsletterId);
+                foreach ($subs as $sub) {
+                    if ($sub->user) {
+                        if ($sub->user->groups->whereIn('title', ['經銷會員', '零壹員工'])->count()) {
+                            $subCategoryId = $newsletterCategories->where('alias', '01_deal_newsletter')->first()->id;
+                            $this->edmRemoveSubscription($sub->email, $this->newsletterId);
+                            $this->edmAddSubscription($sub->email, $this->dealNewsletterId);
+                        } else {
+                            $this->edmRemoveSubscription($sub->email, $this->dealNewsletterId);
+                            $this->edmAddSubscription($sub->email, $this->newsletterId);
+                        }
+                    } else {
+                        $this->edmRemoveSubscription($sub->email, $this->dealNewsletterId);
+                        $this->edmAddSubscription($sub->email, $this->newsletterId);
+                    }
+
+                    $this->modify(collect([
+                        'id'    => $sub->id,
+                        'newsletterCategoryIds' => [$subCategoryId]
+                    ]));
+                }
             } else {
                 $data = [
                     'email'                 => $input->get('email'),
