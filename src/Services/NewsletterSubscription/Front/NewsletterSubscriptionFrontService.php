@@ -47,10 +47,10 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
         $newsletterCategories = Item::whereIn('alias', ['01_newsletter', '01_deal_newsletter'])->get();
 
         if ($user = $input->get('user')) {
-            $subscribeNewsletterId = $user->groups->where('title', '經銷會員')->count()
+            $subscribeNewsletterId = $user->groups->whereIn('title', ['經銷會員', '零壹員工'])->count()
                 ? $this->dealNewsletterId
                 : $this->newsletterId;
-            $subCategoryId =  $user->groups->where('title', '經銷會員')->count()
+            $subCategoryId =  $user->groups->whereIn('title', ['經銷會員', '零壹員工'])->count()
                 ? $newsletterCategories->where('alias', '01_deal_newsletter')->first()->id
                 : $newsletterCategories->where('alias', '01_newsletter')->first()->id;
 

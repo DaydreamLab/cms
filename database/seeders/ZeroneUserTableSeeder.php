@@ -115,7 +115,7 @@ class ZeroneUserTableSeeder extends Seeder
         Passport::actingAs(User::find(1));
 
         $normal = UserGroup::where('title', '一般會員')->first();
-        $dealer = UserGroup::where('title', '經銷會員')->first();
+        $dealer = UserGroup::whereIn('title', ['經銷會員', '零壹員工'])->first();
 
         if (!in_array(config('app.env'), ['staging', 'production'])) {
             # 建立會員
