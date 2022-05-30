@@ -8,6 +8,7 @@ use DaydreamLab\Cms\Services\NewsletterSubscription\NewsletterSubscriptionServic
 use DaydreamLab\JJAJ\Database\QueryCapsule;
 use DaydreamLab\JJAJ\Exceptions\BadRequestException;
 use DaydreamLab\User\Models\User\User;
+use DaydreamLab\User\Models\User\UserCompany;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,11 +22,6 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
         $this->repo = $repo;
     }
 
-    public function add(Collection $input)
-    {
-        return parent::add($input);
-    }
-
 
     public function addMapping($item, $input)
     {
@@ -35,108 +31,125 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
 
     public function store(Collection $input, $isImoprt = false)
     {
-        $user = Auth::guard('api')->user();
-        $user = $user ? $user : $input->get('user');
+        if ($input->get('subscribeNewsletter')) {
+            $this->subscribe($input);
+        } else {
+            $this->unsubscribe($input);
+        }
+
+        $this->response = null;
+
+        return $this->response;
+    }
+
+    public function subscribe(Collection $input)
+    {
         $newsletterCategories = Item::whereIn('alias', ['01_newsletter', '01_deal_newsletter'])->get();
 
-        $datasets = [];
-        if ($user && $isImoprt == false) {
-            # 找出是否有訂閱紀錄
-            $subscription = $this->findBy('user_id', '=', $user->id)->first();
-            if ($user->groups->where('title', '經銷會員')->count()) {
-                $category = $newsletterCategories->where('alias', '01_deal_newsletter')->first();
-            } else {
-                $category = $newsletterCategories->where('alias', '01_newsletter')->first();
+        if ($user = $input->get('user')) {
+            $subscribeNewsletterId = $user->groups->where('title', '經銷會員')->count()
+                ? $this->dealNewsletterId
+                : $this->newsletterId;
+            $subCategoryId =  $user->groups->where('title', '經銷會員')->count()
+                ? $newsletterCategories->where('alias', '01_deal_newsletter')->first()->id
+                : $newsletterCategories->where('alias', '01_newsletter')->first()->id;
+
+            $subscription = $user->newsletterSubscription;
+            # 更換 email
+            if ($subscription && $subscription->email != $user->email) {
+                # 取消本身的 email 訂閱
+                $ncs = $subscription->newsletterCategories->pluck('alias');
+                foreach ($ncs as $nc) {
+                    $newsletterId = $nc == '01_deal_newsletter'
+                        ? $this->dealNewsletterId
+                        : $this->newsletterId;
+                    $this->edmRemoveSubscription($subscription->email, $newsletterId);
+                }
             }
 
             $data = [
-                'user_id' => $user->id,
-                'email'   => $user->email,
-                'newsletterCategoryIds' => $input->get('subscribeNewsletter') ? [$category->id] : []
+                'id'                    => $subscription ? $subscription->id : null,
+                'user_id'               => $user->id,
+                'email'                 => $user->email,
+                'newsletterCategoryIds' => [$subCategoryId]
             ];
 
-            if ($subscription) {
-                if ($subscription->email != $user->email) {
-                    # 更換 email 時取消舊 email 訂閱
-                    $ncs = $subscription->newsletterCategories->pluck('alias');
-                    foreach ($ncs as $nc) {
-                        $newsletterId = $nc == '01_deal_newsletter'
-                            ? $this->dealNewsletterId
-                            : $this->newsletterId;
-                        $this->edmRemoveSubscription($subscription->email , $newsletterId);
-                    }
-                }
-                $data['id'] = $subscription->id;
-                $data['subscription'] = $subscription;
-            }
-            $datasets[] = $data;
-
-            $inputEmail = $user->email;
+            $this->modify(collect($data));
+            $this->edmAddSubscription($user->email, $subscribeNewsletterId); # 串接edm訂閱管理
         } else {
             $inputEmail =  $input->get('email');
             # 沒有登入會員一定要填 email
             if (!$inputEmail) {
                 throw new BadRequestException('InvalidInput');
             }
-            # 找出這個email相關的所有會員
-            $targetUsers = User::where('email', $input->get('email'))
-                ->orWhere(function ($q) use ($inputEmail) {
-                    $q->whereHas('company', function ($q) use($inputEmail) {
-                        $q->where('email', $inputEmail);
-                    });
-                })->get();
-            if ($targetUsers->count()) {
-                foreach ($targetUsers as $targetUser) {
-                    $q = new QueryCapsule();
-                    $q->where('user_id', $targetUser->id);
 
-                    # 找出會員是否有訂閱紀錄
-                    $subscription = $this->search(collect(['q' => $q]))->first();
-                    if ($targetUser->groups->where('title', '經銷會員')->count()) {
-                        $category = $newsletterCategories->where('alias', '01_deal_newsletter')->first();
-                    } else {
-                        $category = $newsletterCategories->where('alias', '01_newsletter')->first();
-                    }
-
-                    $data = [
-                        'user_id' => $targetUser->id,
-                        'email'   => $targetUser->email,
-                        'newsletterCategoryIds' => $input->get('subscribeNewsletter') ? [$category->id] : []
-                    ];
-                    if ($subscription) {
-                        $data['id'] = $subscription->id;
-                        $data['subscription'] = $subscription;
-                    }
-                    $datasets[] = $data;
-                }
+            $subCategoryId = $newsletterCategories->where('alias', '01_newsletter')->first()->id;
+            $subs = $this->findBy('email', '=', $inputEmail);
+            if ($subs->count()) {
+                $this->edmRemoveSubscription($inputEmail, $this->dealNewsletterId);
+                $this->edmAddSubscription($inputEmail, $this->newsletterId);
             } else {
-                # 找出是否有訂閱紀錄
-                $subscription = $this->findBy('email', '=', $inputEmail)->first();
-                $category = $newsletterCategories->where('alias', '01_newsletter')->first();
-
                 $data = [
-                    'email'   => $inputEmail,
-                    'newsletterCategoryIds' => $input->get('subscribeNewsletter') ? [$category->id] : []
+                    'email'                 => $input->get('email'),
+                    'newsletterCategoryIds' => [$subCategoryId]
                 ];
-                if ($subscription) {
-                    $data['id'] = $subscription->id;
-                    $data['subscription'] = $subscription;
+                $this->add(collect($data));
+                $this->edmAddSubscription($inputEmail, $this->newsletterId); # 串接edm訂閱管理
+            }
+        }
+        $this->status = 'SubscribeSuccess';
+
+        return;
+    }
+
+
+    public function unsubscribe(Collection $input)
+    {
+        if ($user = $input->get('user')) {
+            $subscription = $user->newsletterSubscription;
+            $categoryAlias = $subscription->newsletterCategories->pluck('alias');
+            foreach ($categoryAlias as $ca) {
+                $newsletterId = $ca == '01_deal_newsletter'
+                    ? $this->dealNewsletterId
+                    : $this->newsletterId;
+                $this->edmRemoveSubscription($subscription->email, $newsletterId);
+            }
+
+            $data = [
+                'id'                    => $subscription ? $subscription->id : null,
+                'user_id'               => $user->id,
+                'email'                 => $user->email,
+                'newsletterCategoryIds' => []
+            ];
+            $this->modify(collect($data));
+        } else {
+            $inputEmail =  $input->get('email');
+            # 沒有登入會員一定要填 email
+            if (!$inputEmail) {
+                throw new BadRequestException('InvalidInput');
+            }
+
+            $subs = $this->findBy('email', '=', $inputEmail);
+            if ($subs->count()) {
+                foreach ($subs as $sub) {
+                    foreach ($sub->newsletterCategories->pluck('alias') as $alias) {
+                        $newsletterId = $alias == '01_deal_newsletter'
+                            ? $this->dealNewsletterId
+                            : $this->newsletterId;
+                        $this->edmRemoveSubscription($sub->email, $newsletterId);
+                    }
+                    $data = [
+                        'id'                    => $sub->id,
+                        'newsletterCategoryIds' => []
+                    ];
+                    $this->modify(collect($data));
                 }
-                $datasets[] = $data;
             }
         }
 
-        foreach ($datasets as $dataset) {
-            if (isset($dataset['id'])) {
-                $this->modify(collect($data));
-                $this->edmProcessSubscription($inputEmail, $dataset['subscription']->refresh()); # 串接edm訂閱管理
-            } else {
-                $subscription = $this->add(collect($data));
-                $this->edmProcessSubscription($inputEmail, $subscription->refresh()); # 串接edm訂閱管理
-            }
-        }
+        $this->status = 'UnsubscribeSuccess';
 
-        $this->response = null;
+        return;
     }
 
 
