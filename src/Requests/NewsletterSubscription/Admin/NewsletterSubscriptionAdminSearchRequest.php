@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Requests\NewsletterSubscription\Admin;
 
 use DaydreamLab\Cms\Requests\ComponentBase\CmsSearchRequest;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 class NewsletterSubscriptionAdminSearchRequest extends CmsSearchRequest
@@ -54,9 +55,11 @@ class NewsletterSubscriptionAdminSearchRequest extends CmsSearchRequest
         }
 
         if ( $category_id = $validated->get('newsletter_category') ) {
-            $q->whereHas('newsletterCategories', function ($query) use ($category_id) {
-                $query->where('newsletter_subscription_newsletter_category_maps.category_id', '=', $category_id);
-            });
+            $subscription_ids = DB::table('newsletter_subscription_newsletter_category_maps')->where('category_id', $category_id)->get(['subscription_id'])->pluck('subscription_id');
+            $q->whereIn('id', $subscription_ids);
+//            $q->whereHas('newsletterCategories', function ($query) use ($category_id) {
+//                $query->where('newsletter_subscription_newsletter_category_maps.category_id', '=', $category_id);
+//            });
         }
         $validated->put('q', $q);
         $validated->forget('newsletter_category');
