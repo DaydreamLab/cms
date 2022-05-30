@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Requests\NewsletterSubscription\Front;
 
 use DaydreamLab\Cms\Requests\ComponentBase\CmsStoreRequest;
 use DaydreamLab\Dsth\Helpers\EnumHelper;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class NewsletterSubscriptionFrontStoreRequest extends CmsStoreRequest
@@ -44,6 +45,8 @@ class NewsletterSubscriptionFrontStoreRequest extends CmsStoreRequest
     public function validated()
     {
         $validated = parent::validated();
+
+        $validated->put('email', Str::lower($validated->get('email')));
 
         return $validated;
     }
