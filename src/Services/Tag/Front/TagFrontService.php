@@ -6,6 +6,7 @@ use DaydreamLab\Cms\Repositories\Tag\Front\TagFrontRepository;
 use DaydreamLab\Cms\Services\Item\Front\ItemFrontService;
 use DaydreamLab\Cms\Services\Tag\TagService;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class TagFrontService extends TagService
@@ -111,6 +112,28 @@ class TagFrontService extends TagService
                 return isset($t->params['hot']) && ($t->params['hot'] == 1);
             })->values();
         }
+
+        $tagIds = $tags->pluck('id');
+        $itemMaps = DB::table('items_tags_maps')->select('tag_id')
+            ->whereIn('tag_id', $tagIds->all())
+            ->distinct('tag_id')
+            ->get()
+            ->pluck('tag_id');
+        $brandMaps = DB::table('brands_tags_maps')->select('tag_id')
+            ->whereIn('tag_id', $tagIds->all())
+            ->distinct('tag_id')
+            ->get()
+            ->pluck('tag_id');
+        $fileMaps = DB::table('files_tags_maps')->select('tag_id')
+            ->whereIn('tag_id', $tagIds->all())
+            ->distinct('tag_id')
+            ->get()
+            ->pluck('tag_id');
+
+        $finalTagIds = $itemMaps->merge($brandMaps)->merge($fileMaps)->unique()->all();
+        $tags = $tags->filter(function ($tag) use ($finalTagIds) {
+            return in_array($tag->id, $finalTagIds);
+        })->values();
 
         $this->response = $tags;
         return $tags;
