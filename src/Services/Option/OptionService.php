@@ -296,6 +296,8 @@ class OptionService
                         } else {
                             $brands = $bser->getAllBrands();
                         }
+                    } else {
+                        $brands = $bser->getAllBrands();
                     }
 
                     $product_category_alias = $input->get('product_category_alias');
@@ -330,9 +332,7 @@ class OptionService
                         ->get()
                         ->pluck('city')
                         ->all();
-                    $cities = DataHelper::usort($cities, DataHelper::cities_order);
-                    show($cities);
-                    exit();
+                    $data[$type] = DataHelper::usort($cities, DataHelper::cities_order);
                     break;
                 case 'product_parent_category':
                     $brand_alias = $input->get('brand_alias');
