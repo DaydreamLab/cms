@@ -2,7 +2,10 @@
 
 namespace DaydreamLab\Cms\Services\Option;
 
+use DaydreamLab\Cms\Helpers\DataHelper;
+use DaydreamLab\Cms\Models\Brand\Brand;
 use DaydreamLab\Cms\Models\Brand\Front\BrandFront;
+use DaydreamLab\Cms\Models\Category\Category;
 use DaydreamLab\Cms\Models\Extrafield\Extrafield;
 use DaydreamLab\Cms\Models\Extrafield\ExtrafieldValue;
 use DaydreamLab\Cms\Services\Brand\Admin\BrandAdminService;
@@ -25,6 +28,7 @@ use DaydreamLab\User\Services\Asset\Admin\AssetAdminService;
 use DaydreamLab\User\Services\User\Admin\UserGroupAdminService;
 use DaydreamLab\User\Services\Viewlevel\Admin\ViewlevelAdminService;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class OptionService
 {
@@ -253,7 +257,47 @@ class OptionService
             switch ($type) {
                 case 'brand':
                     $bser = app(BrandFrontService::class);
-                    $brands = $bser->getAllBrands();
+                    if ($pageAlias = $input->get('pageAlias')) {
+                        if (in_array($pageAlias, ['promotion', 'bulletin', 'video'])) {
+                            $category = Category::where('alias', $pageAlias)->first();
+                            $brandMaps = DB::table('brands_items_maps')
+                                ->select('brand_id')
+                                ->whereIn('item_id', function ($q) use ($category) {{
+                                    $q->select('id')
+                                        ->from('items')
+                                        ->where('category_id', $category->id);
+                                }})
+                                ->orderBy('brand_id')
+                                ->get();
+
+                            $brandIds = $brandMaps
+                                ->pluck('brand_id')
+                                ->unique()
+                                ->all();
+                            $brands = Brand::whereIn('id', $brandIds)->where('state', 1)->get();
+                        } elseif ($pageAlias == 'event') {
+                            $eventIds = DB::table('event_sessions')
+                                ->select('eventId')
+                                ->where('startTime', '>=', now('Asia/Taipei')->startOfDay()->tz(config('app.timezone'))->toDateTimeString())
+                                ->groupBy('eventId')
+                                ->get()
+                                ->pluck('eventId')
+                                ->all();
+                            $brandMaps = DB::table('events_brands_maps')
+                                ->select('brandId')
+                                ->whereIn('eventId',$eventIds)
+                                ->groupBy('brandId')
+                                ->orderBy('brandId')
+                                ->get();
+                            $brandIds = $brandMaps
+                                ->pluck('brandId')
+                                ->all();
+                            $brands = Brand::whereIn('id', $brandIds)->where('state', 1)->get();
+                        } else {
+                            $brands = $bser->getAllBrands();
+                        }
+                    }
+
                     $product_category_alias = $input->get('product_category_alias');
                     if ( is_array($product_category_alias) && count($product_category_alias) ) {
                         $brands = $brands->filter(function ($b) use ($product_category_alias) {
@@ -271,6 +315,24 @@ class OptionService
                     $data[$type] = $brands->map(function ($b) {
                         return $b->only(['alias', 'title']);
                     })->sortBy('title')->values();
+                    break;
+                case 'city':
+                    $cities = DB::table('events')
+                        ->select('city')
+                        ->whereNotNull('city')
+                        ->whereIn('id', function ($q) {
+                            $q->select('eventId')
+                                ->from('event_sessions')
+                                ->where('startTime', '>=', now('Asia/Taipei')->startOfDay()->tz(config('app.timezone'))->toDateTimeString())
+                                ->groupBy('eventId');
+                        })
+                        ->groupBy('city')
+                        ->get()
+                        ->pluck('city')
+                        ->all();
+                    $cities = DataHelper::usort($cities, DataHelper::cities_order);
+                    show($cities);
+                    exit();
                     break;
                 case 'product_parent_category':
                     $brand_alias = $input->get('brand_alias');

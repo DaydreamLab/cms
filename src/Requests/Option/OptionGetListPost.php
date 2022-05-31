@@ -38,13 +38,15 @@ class OptionGetListPost extends AdminRequest
                     'industry_category',
                     'newsletter_category',
                     'download_file_category',
-                    'contract_file_category'
+                    'contract_file_category',
+                    'city'
                 ])
             ],
             'brand_alias'   => 'nullable|string',
             'product_category_alias' => 'nullable|array',
             'product_category_alias.*' => 'nullable|string',
-            'content_type'  => 'nullable|string'
+            'content_type'  => 'nullable|string',
+            'pageAlias' => ['nullable', Rule::in(['event', 'video', 'promotion', 'bulletin'])]
         ];
 
         return array_merge(parent::rules(), $rules);
