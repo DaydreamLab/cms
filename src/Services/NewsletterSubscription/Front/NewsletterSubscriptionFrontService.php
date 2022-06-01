@@ -73,8 +73,12 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
                 'email'                 => $user->email,
                 'newsletterCategoryIds' => [$subCategoryId]
             ];
+            if ($data['id']) {
+                $this->modify(collect($data));
+            } else {
+                $this->add(collect($data));
+            }
 
-            $this->modify(collect($data));
             $this->edmAddSubscription($user->email, $subscribeNewsletterId); # 串接edm訂閱管理
         } else {
             $inputEmail =  $input->get('email');
