@@ -46,6 +46,7 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
     {
         $newsletterCategories = Item::whereIn('alias', ['01_newsletter', '01_deal_newsletter'])->get();
 
+        show($input->get('user'));
         if ($user = $input->get('user')) {
             $subscribeNewsletterId = $user->groups->whereIn('title', ['經銷會員', '零壹員工'])->count()
                 ? $this->dealNewsletterId
@@ -125,21 +126,23 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
     {
         if ($user = $input->get('user')) {
             $subscription = $user->newsletterSubscription;
-            $categoryAlias = $subscription->newsletterCategories->pluck('alias');
-            foreach ($categoryAlias as $ca) {
-                $newsletterId = $ca == '01_deal_newsletter'
-                    ? $this->dealNewsletterId
-                    : $this->newsletterId;
-                $this->edmRemoveSubscription($subscription->email, $newsletterId);
-            }
+            if ($subscription) {
+                $categoryAlias = $subscription->newsletterCategories->pluck('alias');
+                foreach ($categoryAlias as $ca) {
+                    $newsletterId = $ca == '01_deal_newsletter'
+                        ? $this->dealNewsletterId
+                        : $this->newsletterId;
+                    $this->edmRemoveSubscription($subscription->email, $newsletterId);
+                }
 
-            $data = [
-                'id'                    => $subscription ? $subscription->id : null,
-                'user_id'               => $user->id,
-                'email'                 => $user->email,
-                'newsletterCategoryIds' => []
-            ];
-            $this->modify(collect($data));
+                $data = [
+                    'id'                    => $subscription ? $subscription->id : null,
+                    'user_id'               => $user->id,
+                    'email'                 => $user->email,
+                    'newsletterCategoryIds' => []
+                ];
+                $this->modify(collect($data));
+            }
         } else {
             $inputEmail =  $input->get('email');
             # 沒有登入會員一定要填 email
