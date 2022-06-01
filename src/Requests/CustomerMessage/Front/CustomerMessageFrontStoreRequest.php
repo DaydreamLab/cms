@@ -39,7 +39,7 @@ class CustomerMessageFrontStoreRequest extends CmsStoreRequest
             'phoneCode'     => 'nullable|numeric',
             'phone'         => 'nullable|numeric',
             'extNumber'     => 'nullable|numeric',
-            'mobilePhoneCode' => 'nullable|regex:/\+[0-9]+$/',
+            'mobilePhoneCode' => 'nullable|string',
             'mobilePhone'   => 'nullable|string',
             'faxCode'       => 'nullable|numeric',
             'fax'           => 'nullable|numeric',
