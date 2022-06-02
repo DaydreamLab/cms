@@ -339,7 +339,7 @@ class OptionService
                     if ( $brand_alias != null ) {
                         $brand = BrandFront::where('alias', '=', $brand_alias)->first();
                         $data[$type] = $brand->products->filter(function ($p) {
-                            return $p->productCateogry != null;
+                            return $p->productCateogry == null;
                         })->unique(function ($p) {
                             return $p->productCategory->id;
                         })->sortBy('id')->map(function ($p) {
