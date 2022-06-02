@@ -338,11 +338,13 @@ class OptionService
                     $brand_alias = $input->get('brand_alias');
                     if ( $brand_alias != null ) {
                         $brand = BrandFront::where('alias', '=', $brand_alias)->first();
-                        $data[$type] = $brand->products->unique(function ($p) {
+                        $data[$type] = $brand->products->filter(function ($p) {
+                            return $p->productCateogry != null;
+                        })->unique(function ($p) {
                             return $p->productCategory->id;
-                        })->map(function ($p) {
+                        })->sortBy('id')->map(function ($p) {
                             return $p->productCategory->only(['alias', 'title']);
-                        })->sortBy('id')->values();
+                        })->values();
                     } else {
                         $pcser = app(ProductCategoryFrontService::class);
                         $q = new QueryCapsule();
