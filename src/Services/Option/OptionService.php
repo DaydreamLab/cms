@@ -342,7 +342,7 @@ class OptionService
                             return $p->productCategory != null;
                         })->unique(function ($p) {
                             return $p->productCategory->id;
-                        })->sortBy('id')->map(function ($p) {
+                        })->sortBy('product_category_id')->map(function ($p) {
                             return $p->productCategory->only(['alias', 'title']);
                         })->values();
                     } else {
