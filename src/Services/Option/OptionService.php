@@ -355,7 +355,7 @@ class OptionService
                             $pp->products->each(function ($p) use (&$brandsWithDuplicate) {
                                 $brandsWithDuplicate = $brandsWithDuplicate->merge($p->brands);
                             });
-                            $brands = $brandsWithDuplicate->unique(function ($b) {
+                            $brands = $brandsWithDuplicate->where('state', 1)->unique(function ($b) {
                                 return $b->id;
                             })->map(function ($m) {
                                 return $m->only(['alias', 'title']);
