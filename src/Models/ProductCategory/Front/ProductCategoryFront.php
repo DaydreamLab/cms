@@ -1,6 +1,7 @@
 <?php
 namespace DaydreamLab\Cms\Models\ProductCategory\Front;
 
+use DaydreamLab\Cms\Models\Product\Front\ProductFront;
 use DaydreamLab\Cms\Models\ProductCategory\ProductCategory;
 
 class ProductCategoryFront extends ProductCategory
@@ -26,4 +27,10 @@ class ProductCategoryFront extends ProductCategory
         'locked_at',
         'locker'
     ];
+
+
+    public function products()
+    {
+        return $this->hasMany(ProductFront::class, 'product_category_id', 'id');
+    }
 }
