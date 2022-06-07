@@ -66,7 +66,7 @@ class CronCommand extends Command
            } elseif ($item->table == 'products') {
                $model = $this->productModel;
            } else {
-               $model_name = 'DaydreamLab\Cms\Models\\'.Str::studly(strtolower(Str::singular($item->table))).'\\'.Str::studly(strtolower(Str::singular($item->table))).'\\';
+               $model_name = 'DaydreamLab\Cms\Models\\'.Str::studly(strtolower(Str::singular($item->table))).'\\'.Str::studly(strtolower(Str::singular($item->table)));
                $model = new $model_name();
            }
 
