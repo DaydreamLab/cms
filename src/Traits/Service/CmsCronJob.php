@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Traits\Service;
 
 use DaydreamLab\Cms\Models\Cms\CmsCronJob as cmsModel;
+use DaydreamLab\Cms\Services\Cms\CmsCronJobService;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
 use Illuminate\Support\Collection;
 
@@ -10,10 +11,11 @@ trait CmsCronJob
 {
     public function setCronJob(Collection $input, $item)
     {
+        $cmsCronJobService = $this->cmsCronJobService ? : app(CmsCronJobService::class);
         cmsModel::where('table', $this->repo->getModel()->getTable())->where('item_id', $item->id)->delete();
         if (!InputHelper::null($input, 'publish_up') && $input->get('publish_up') > now())
         {
-            $this->cmsCronJobService->create([
+            $cmsCronJobService->create([
                 'table'     => $this->repo->getModel()->getTable(),
                 'item_id'   => $item->id,
                 'type'      => 'up',
@@ -23,7 +25,7 @@ trait CmsCronJob
 
         if (!InputHelper::null($input, 'publish_down') && $input->get('publish_down') > now())
         {
-            $this->cmsCronJobService->create([
+            $cmsCronJobService->create([
                 'table'     => $this->repo->getModel()->getTable(),
                 'item_id'   => $item->id,
                 'type'      => 'down',
