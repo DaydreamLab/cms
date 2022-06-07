@@ -4,10 +4,13 @@ namespace DaydreamLab\Cms\Services\IotSlideshow\Admin;
 
 use DaydreamLab\Cms\Repositories\IotSlideshow\Admin\IotSlideshowAdminRepository;
 use DaydreamLab\Cms\Services\IotSlideshow\IotSlideshowService;
+use DaydreamLab\Cms\Traits\Service\CmsCronJob;
 use Illuminate\Support\Collection;
 
 class IotSlideshowAdminService extends IotSlideshowService
 {
+    use CmsCronJob;
+
     public function __construct(IotSlideshowAdminRepository $repo)
     {
         parent::__construct($repo);
@@ -22,7 +25,6 @@ class IotSlideshowAdminService extends IotSlideshowService
             $q = $q->whereIn('state', [0, 1]);
             $input->put('q', $q);
         }
-
         return parent::search($input);
     }
 
@@ -38,6 +40,7 @@ class IotSlideshowAdminService extends IotSlideshowService
             $result = $this->find($id);
         }
         $this->response = $result;
+        $this->setCronJob($input, $result);
         return $result;
     }
 }

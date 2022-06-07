@@ -4,10 +4,13 @@ namespace DaydreamLab\Cms\Services\IotResource\Admin;
 
 use DaydreamLab\Cms\Repositories\IotResource\Admin\IotResourceAdminRepository;
 use DaydreamLab\Cms\Services\IotResource\IotResourceService;
+use DaydreamLab\Cms\Traits\Service\CmsCronJob;
 use Illuminate\Support\Collection;
 
 class IotResourceAdminService extends IotResourceService
 {
+    use CmsCronJob;
+
     public function __construct(IotResourceAdminRepository $repo)
     {
         parent::__construct($repo);
@@ -106,6 +109,7 @@ class IotResourceAdminService extends IotResourceService
             $result = $this->find($id);
         }
         $this->response = $result;
+        $this->setCronJob($input, $result);
         return $result;
     }
 }

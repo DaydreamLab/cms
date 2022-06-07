@@ -4,10 +4,13 @@ namespace DaydreamLab\Cms\Services\IotNews\Admin;
 
 use DaydreamLab\Cms\Repositories\IotNews\Admin\IotNewsAdminRepository;
 use DaydreamLab\Cms\Services\IotNews\IotNewsService;
+use DaydreamLab\Cms\Traits\Service\CmsCronJob;
 use Illuminate\Support\Collection;
 
 class IotNewsAdminService extends IotNewsService
 {
+    use CmsCronJob;
+
     public function __construct(IotNewsAdminRepository $repo)
     {
         parent::__construct($repo);
@@ -78,6 +81,7 @@ class IotNewsAdminService extends IotNewsService
             $result = $this->find($id);
         }
         $this->response = $result;
+        $this->setCronJob($input, $result);
         return $result;
     }
 }

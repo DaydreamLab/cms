@@ -4,11 +4,14 @@ namespace DaydreamLab\Cms\Services\IotCategory\Admin;
 
 use DaydreamLab\Cms\Repositories\IotCategory\Admin\IotCategoryAdminRepository;
 use DaydreamLab\Cms\Services\IotCategory\IotCategoryService;
+use DaydreamLab\Cms\Traits\Service\CmsCronJob;
 use Illuminate\Support\Collection;
 use Kalnoy\Nestedset\Collection as NestCollection;
 
 class IotCategoryAdminService extends IotCategoryService
 {
+    use CmsCronJob;
+
     public function __construct(IotCategoryAdminRepository $repo)
     {
         parent::__construct($repo);
@@ -57,7 +60,6 @@ class IotCategoryAdminService extends IotCategoryService
             $q = $q->whereIn('state', [0, 1]);
             $input->put('q', $q);
         }
-
         return parent::search($input);
     }
 
@@ -88,6 +90,7 @@ class IotCategoryAdminService extends IotCategoryService
             $result = $this->find($id);
         }
         $this->response = $result;
+        $this->setCronJob($input, $result);
         return $result;
     }
 

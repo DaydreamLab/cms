@@ -4,10 +4,13 @@ namespace DaydreamLab\Cms\Services\IotTag\Admin;
 
 use DaydreamLab\Cms\Repositories\IotTag\Admin\IotTagAdminRepository;
 use DaydreamLab\Cms\Services\IotTag\IotTagService;
+use DaydreamLab\Cms\Traits\Service\CmsCronJob;
 use Illuminate\Support\Collection;
 
 class IotTagAdminService extends IotTagService
 {
+    use CmsCronJob;
+
     public function __construct(IotTagAdminRepository $repo)
     {
         parent::__construct($repo);
@@ -22,7 +25,6 @@ class IotTagAdminService extends IotTagService
             $q = $q->whereIn('state', [0, 1]);
             $input->put('q', $q);
         }
-
         return parent::search($input);
     }
 
@@ -38,6 +40,7 @@ class IotTagAdminService extends IotTagService
             $result = $this->find($id);
         }
         $this->response = $result;
+        $this->setCronJob($input, $result);
         return $result;
     }
 }
