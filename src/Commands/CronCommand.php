@@ -76,6 +76,7 @@ class CronCommand extends Command
                        $up_item->save();
                    }
                    $item->delete();
+                   $this->info('up '.$item->table.' id:'.$item->item_id);
                }
            } else {
                if (Carbon::parse($item->time) < Carbon::now()) {
@@ -85,6 +86,7 @@ class CronCommand extends Command
                        $down_item->save();
                    }
                    $item->delete();
+                   $this->info('down '.$item->table.' id:'.$item->item_id);
                }
            }
         });
