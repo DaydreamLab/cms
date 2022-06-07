@@ -9,6 +9,7 @@ use DaydreamLab\Cms\Models\Item\Item;
 use DaydreamLab\Cms\Models\Product\Product;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use Illuminate\Console\Command;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 
 class CronCommand extends Command
@@ -65,7 +66,7 @@ class CronCommand extends Command
            } elseif ($item->table == 'products') {
                $model = $this->productModel;
            } else {
-               $model = DB::table($item->table);
+               $model = new Builder(DB::table($item->table));
            }
 
            if ($item->type == 'up') {
