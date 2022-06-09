@@ -63,6 +63,7 @@ class ReplyCustomerMessageNotification extends BaseNotification
     public function toMail($notifiable)
     {
         return (new MailMessage)
+            ->cc('marketing@zerone.com.tw')
             ->subject($this->defaultSubject())
             ->view($this->view, $this->getMailParams());
     }
