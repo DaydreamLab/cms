@@ -45,8 +45,9 @@ class CustomerMessageAdminResource extends BaseJsonResource
             'lockerName'    => $this->lockerName,
             'creatorName'   => $this->creatorName,
             'updaterName'   => $this->updaterName,
+            'handlerName'   => $this->replies->first() ? $this->replies->first()->creatorName : null,
             'locker'        => ($this->locker) ? $this->locker->only(['id', 'uuid', 'name']) : [],
-            'replies'       => new CustomerMessageReplyAdminListResourceCollection($this->replies, false)
+            'replies'       => new CustomerMessageReplyAdminListResourceCollection($this->replies, false),
         ];
     }
 }
