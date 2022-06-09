@@ -9,7 +9,7 @@ class CustomerMessageReplyAdminStoreRequest extends CmsStoreRequest
 {
     protected $modelName = 'CustomerMessageReply';
 
-    protected $apiMethod = 'storeCustomerMessageReply';
+    protected $apiMethod = 'addCustomerMessageReply';
     /**
      * Determine if the user is authorized to make this request.
      *
