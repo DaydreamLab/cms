@@ -15,6 +15,7 @@ class NewsletterSubscriptionAdminListResource extends BaseJsonResource
     public function toArray($request)
     {
         $tz = $request->user('api')->timezone;
+
         return [
             'id'                => $this->id,
             'email'             => $this->email,

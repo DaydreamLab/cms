@@ -15,17 +15,18 @@ class NewsletterSubscriptionAdminExportResource extends BaseJsonResource
     public function toArray($request)
     {
         $tz = $request->user('api')->timezone;
-        $category = $this->newsletterCategories->map(function ($n) {
-            return $n->title;
-        });
-        $temp[] = implode(',', $category->toArray());
+
         return [
-            $this->userGroupName,
+            $this->user
+                ? ($this->user->groups->count()
+                    ? collect(['一般會員', '經銷會員'])->intersect($this->user->groups->pluck('title'))->first()
+                    : '一般會員'
+            ) : '非會員',
             $this->companyName,
             $this->userName,
             $this->email,
             $this->userMobilePhone,
-            implode(',', $category->toArray())
+            implode(',', $this->newsletterCategories->pluck('title')->all())
         ];
     }
 }

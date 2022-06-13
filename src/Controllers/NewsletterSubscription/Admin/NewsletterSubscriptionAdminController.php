@@ -83,7 +83,7 @@ class NewsletterSubscriptionAdminController extends CmsController
     {
         $this->service->setUser($request->user());
         try {
-            $this->service->search($request->validated());
+            $this->service->search($request->validated());;
         } catch (Throwable $t) {
             $this->handleException($t);
         }

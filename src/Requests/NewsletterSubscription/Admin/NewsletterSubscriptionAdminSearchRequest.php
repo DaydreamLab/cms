@@ -13,6 +13,8 @@ class NewsletterSubscriptionAdminSearchRequest extends CmsSearchRequest
     protected $modelName = 'NewsletterSubscription';
 
     protected $apiMethod = 'searchNewsletterSubscription';
+
+    protected $needAuth = false;
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -47,7 +49,7 @@ class NewsletterSubscriptionAdminSearchRequest extends CmsSearchRequest
     {
         $validated = parent::validated();
         $q = $validated->get('q')
-            ->with('user', 'user.company', 'user.groups');
+            ->with(['user', 'user.company', 'user.groups', 'newsletterCategories', 'creator', 'updater', 'locker']);
 
         if ($validated->get('state') == '') {
             $validated->forget('state');
@@ -55,12 +57,31 @@ class NewsletterSubscriptionAdminSearchRequest extends CmsSearchRequest
         }
 
         if ( $category_id = $validated->get('newsletter_category') ) {
-            $subscription_ids = DB::table('newsletter_subscription_newsletter_category_maps')->where('category_id', $category_id)->get(['subscription_id'])->pluck('subscription_id');
-            $q->whereIn('id', $subscription_ids);
-//            $q->whereHas('newsletterCategories', function ($query) use ($category_id) {
-//                $query->where('newsletter_subscription_newsletter_category_maps.category_id', '=', $category_id);
-//            });
+            $q->whereIn('id', function ($query) use ($category_id) {
+                $query->select('subscription_id')
+                    ->from('newsletter_subscription_newsletter_category_maps')
+                    ->where('newsletter_subscription_newsletter_category_maps.category_id', '=', $category_id);
+            });
         }
+
+        if ($search = $validated->get('search')) {
+            $q->where(function ($q) use ($search) {
+               $q->whereIn('user_id', function ($q) use ($search) {
+                    $q->select('id')
+                        ->from('users')
+                        ->where('email', 'like', '%' . $search . '%')
+                        ->orWhere('name', 'like', '%' . $search . '%')
+                        ->orWhere('mobilePhone', 'like', '%' . $search . '%');
+               })->orWhere(function ($q) use ($search) {
+                   $q->whereIn('user_id', function ($q) use ($search) {
+                       $q->select('user_id')
+                           ->from('users_companies')
+                           ->where('name', 'like', '%' . $search . '%');
+                   });
+               });
+            });
+        }
+
         $validated->put('q', $q);
         $validated->forget('newsletter_category');
 
