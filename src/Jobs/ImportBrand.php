@@ -60,7 +60,6 @@ class ImportBrand implements ShouldQueue
         $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
         $reader->setReadDataOnly(true);
         $spreadsheet = $reader->load($this->filePath);
-
         $sheet = $spreadsheet->getSheet(0);
         $rows = $sheet->getHighestRow();
         for ($i = 3; $i <= $rows; $i++) {
@@ -69,12 +68,10 @@ class ImportBrand implements ShouldQueue
             $brand = $this->firstOrCreateBrand($rowData[0]);
             $productCategory = $this->firstOrCreateProductCategories($rowData[1]);
             $product = $this->firstOrCreateProduct($rowData, $productCategory);
-
             // 更新關聯
             $product->brands()->sync([$brand->id]);
             $product->productCategories()->sync([$productCategory->id]);
         }
-
         // 刪除暫存檔
         unlink($this->filePath);
     }
@@ -91,9 +88,11 @@ class ImportBrand implements ShouldQueue
             ]));
         }
 
-        $user = User::whereHas('groups', function ($q) {
-            $q->where('users_groups.id', 4);
-        })->get()->each(function ($user) use ($brand) {
+        $user = User::whereIn('id', function ($q) {
+            $q->select('user_id')
+                ->from('users_groups_maps')
+                ->where('users_groups_maps.group_id', 4);
+        })->with('brands')->get()->each(function ($user) use ($brand) {
             $user->brands()->syncWithoutDetaching($brand->id);
         });
 
