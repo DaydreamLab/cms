@@ -5,12 +5,8 @@ namespace DaydreamLab\Cms\Services\NewsletterSubscription\Front;
 use DaydreamLab\Cms\Models\Item\Item;
 use DaydreamLab\Cms\Repositories\NewsletterSubscription\Front\NewsletterSubscriptionFrontRepository;
 use DaydreamLab\Cms\Services\NewsletterSubscription\NewsletterSubscriptionService;
-use DaydreamLab\JJAJ\Database\QueryCapsule;
 use DaydreamLab\JJAJ\Exceptions\BadRequestException;
-use DaydreamLab\User\Models\User\User;
-use DaydreamLab\User\Models\User\UserCompany;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Auth;
 
 class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
 {
