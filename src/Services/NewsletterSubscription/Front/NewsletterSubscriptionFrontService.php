@@ -145,6 +145,16 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
                     'newsletterCategoryIds' => []
                 ];
                 $this->modify(collect($data));
+            } else {
+                if ($user->groups->where('title', '經銷會員')->count()) {
+                    $user->email
+                        ? $this->edmRemoveSubscription($user->email, 9)
+                        : null;
+                } else {
+                    $user->email
+                        ? $this->edmRemoveSubscription($user->email, 8)
+                        : null;
+                }
             }
         } else {
             $inputEmail =  $input->get('email');
