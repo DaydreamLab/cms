@@ -253,7 +253,7 @@ class OptionService
     public function frontOptionList(Collection $input)
     {
         $data = [];
-        foreach ($input->get('types') as $type) {
+        foreach ($input->get('types')?:[] as $type) {
             switch ($type) {
                 case 'brand':
                     $bser = app(BrandFrontService::class);

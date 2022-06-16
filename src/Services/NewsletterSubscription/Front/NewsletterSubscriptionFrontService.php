@@ -38,6 +38,7 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
         return $this->response;
     }
 
+
     public function subscribe(Collection $input)
     {
         $newsletterCategories = Item::whereIn('alias', ['01_newsletter', '01_deal_newsletter'])->get();
@@ -69,6 +70,7 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
                 'email'                 => $user->email,
                 'newsletterCategoryIds' => [$subCategoryId]
             ];
+
             if ($data['id']) {
                 $this->modify(collect($data));
             } else {

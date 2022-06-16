@@ -14,4 +14,11 @@ class NewsletterSubscriptionRepository extends CmsRepository
         parent::__construct($model);
         $this->model = $model;
     }
+
+
+    public function restore($item, $user)
+    {
+        # 前台更新會跟後台衝突 locked_by
+        return true;
+    }
 }
