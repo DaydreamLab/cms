@@ -168,6 +168,8 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
                     ];
                     $this->modify(collect($data));
                 }
+            } else {
+                $this->edmRemoveSubscription($inputEmail, 0);
             }
         }
 
