@@ -73,37 +73,37 @@ class ProductAdminService extends ProductService
                             $v = $data['distributePrice'];
                             break;
                         case 9:
-                            $v = $data['warranty'];
+                            $v = @$data['warranty'];
                             break;
                         case 10:
-                            $v = $data['title'];
+                            $v = @$data['title'];
                             break;
                         case 11:
-                            $v = $data['size'];
+                            $v = @$data['size'];
                             break;
                         case 12:
-                            $v = $data['protocal'];
+                            $v = @$data['protocal'];
                             break;
                         case 13:
-                            $v = $data['maxExtendHddNum'];
+                            $v = @$data['maxExtendHddNum'];
                             break;
                         case 14:
-                            $v = $data['maxRawSpace'];
+                            $v = @$data['maxRawSpace'];
                             break;
                         case 15:
-                            $v = $data['system'];
+                            $v = @$data['system'];
                             break;
                         case 16:
-                            $v = $data['note'];
+                            $v = @$data['note'];
                             break;
                         case 17:
-                            $v = $data['unlimitPhoneSupportAmt'];
+                            $v = @$data['unlimitPhoneSupportAmt'];
                             break;
                         case 18:
-                            $v = $data['level'];
+                            $v = @$data['level'];
                             break;
                         case 19:
-                            $v = $data['renew'];
+                            $v = @$data['renew'];
                             break;
                         case 20:
                             $v = 'Y';
