@@ -485,8 +485,9 @@ class ItemFrontService extends ItemService
      */
     public function handleFeaturedAndNotFeaturedResponse($featured, $notFeatured, $page, $limit)
     {
-        $paginateFeatured = $this->repo->paginate($featured, $limit, $page ?: 1, []);
-        $featuredData = collect($paginateFeatured->items())->buildContentResourceData();
+//        $paginateFeatured = $this->repo->paginate($featured, $limit, $page ?: 1, []);
+//        $featuredData = collect($paginateFeatured->items())->buildContentResourceData();
+        $featuredData = $featured->buildContentResourceData();
 
         $paginateNotFeatured = $this->repo->paginate($notFeatured, $limit, $page ?: 1, []);
         $notFeaturedData = collect($paginateNotFeatured->items())->buildContentResourceData();
@@ -990,7 +991,7 @@ class ItemFrontService extends ItemService
 
         return [
             $featured->sortByDesc(function ($f) {
-                return $f['featured_ordering'];
+                return $f->publish_up;
             })->values(),
             $notFeatured
         ];
