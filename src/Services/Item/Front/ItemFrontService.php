@@ -849,7 +849,8 @@ class ItemFrontService extends ItemService
             $itemSearchData = $input->toArray();
             $itemSearchData['limit'] = 200;
             $itemSearchData['q'] = (new QueryCapsule())->select('id', 'category_id','title', 'alias', 'introtext', 'description')
-                ->with('category', 'brands');
+                ->with('category', 'brands')
+                ->orderBy('created_at', 'desc');
 
             $items = $this->searchContent(collect($itemSearchData), false)->filter(function ($i) {
                 return in_array($i->category->content_type, ['solution', 'case', 'video', 'bulletin', 'promotion']);
@@ -862,7 +863,6 @@ class ItemFrontService extends ItemService
             $eventSearchData = (clone $input)->toArray();
             $eventSearchData['q'] = (new QueryCapsule())->with('brands', 'dates');
             $events = $eventSer->search(collect($eventSearchData));
-
 
             $productSearchData = (clone $input)->toArray();
             $productSearchData['searchKeys'] = ['title', 'description'];
