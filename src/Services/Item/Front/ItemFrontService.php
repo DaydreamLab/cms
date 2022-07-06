@@ -850,7 +850,7 @@ class ItemFrontService extends ItemService
             $itemSearchData['limit'] = 200;
             $itemSearchData['q'] = (new QueryCapsule())->select('id', 'category_id','title', 'alias', 'introtext', 'description')
                 ->with('category', 'brands')
-                ->orderBy('created_at', 'desc');
+                ->orderBy('publish_up', 'desc');
 
             $items = $this->searchContent(collect($itemSearchData), false)->filter(function ($i) {
                 return in_array($i->category->content_type, ['solution', 'case', 'video', 'bulletin', 'promotion']);
