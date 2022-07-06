@@ -816,9 +816,12 @@ class ItemFrontService extends ItemService
                     if (!$input->get('search')) {
                         $copy['limit'] = 200;
                     }
+                    $q->orderBy('publish_up', 'desc');
+                    $copy['q'] = $q;
                     $response = $response->merge($fileSer->search(collect($copy), false));
                 } elseif ($type == 'event' || $type == 'course') {
-                    $q->with('brands', 'dates');
+                    $q->with('brands', 'dates')
+                        ->orderBy('publish_up', 'desc');
                     $input->put('q', $q);
                     $response = $response->merge($eventSer->search($input, false));
                 } else {
@@ -827,7 +830,8 @@ class ItemFrontService extends ItemService
                         $copy['limit'] = 200;
                     }
                     $q->select('id', 'category_id','title', 'alias', 'introtext', 'description')
-                        ->with('category', 'brands');
+                        ->with('category', 'brands')
+                        ->orderBy('publish_up', 'desc');
                     $copy['q'] = $q;
 
                     $items = $this->searchContent(collect($copy), false);
@@ -861,7 +865,7 @@ class ItemFrontService extends ItemService
             $brands = $brandSer->search(collect($brandSearchData));
 
             $eventSearchData = (clone $input)->toArray();
-            $eventSearchData['q'] = (new QueryCapsule())->with('brands', 'dates');
+            $eventSearchData['q'] = (new QueryCapsule())->with('brands', 'dates') ->orderBy('publish_up', 'desc');
             $events = $eventSer->search(collect($eventSearchData));
 
             $productSearchData = (clone $input)->toArray();
@@ -872,7 +876,7 @@ class ItemFrontService extends ItemService
 
             $filesSearchData = $input->toArray();
             $filesSearchData['limit'] = 200;
-            $filesSearchData['q'] =  (new QueryCapsule())->with('brands', 'category');
+            $filesSearchData['q'] =  (new QueryCapsule())->with('brands', 'category')->orderBy('publish_up', 'desc');;
             $files = $fileSer->search(collect($filesSearchData), false);
 
             $response = $response->merge($items);
