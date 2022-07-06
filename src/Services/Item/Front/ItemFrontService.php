@@ -996,7 +996,8 @@ class ItemFrontService extends ItemService
         // 調整置頂內容數量，多餘的置頂放回非置頂的集合
         $featured_redundant = $featured->splice(2);
         $notFeatured = $notFeatured->merge($featured_redundant->filter(function ($r) use ($input) {
-            return $r->brands()->first()->alias == $input->get('brand_alias')[0];
+            $brand_alias = $input->get('brand_alias') ?: [];
+            return count($brand_alias) && $r->brands()->first()->alias == $input->get('brand_alias')[0];
         })->values())->sortByDesc(function ($f) {
             return $f->publish_up;
         })->values();
