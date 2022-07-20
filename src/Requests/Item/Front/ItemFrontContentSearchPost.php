@@ -70,6 +70,19 @@ class ItemFrontContentSearchPost extends CmsSearchRequest
                 $validated->forget(['solution_category_alias', 'industry_category_alias']);
             }
         }
+//
+        $q = $validated->get('q');
+        $q->where(function ($q) {
+            $q->whereNull('publish_up')
+                ->orWhere(function ($q) {
+                    $q->where('publish_up', '<', now()->toDateTimeString())
+                        ->where(function ($q) {
+                            $q->whereNull('publish_down')
+                                ->orWhere('publish_down', '>', now()->toDateTimeString());
+                        });
+                });
+        });
+        $validated->put('q', $q);
 
         return $validated;
     }

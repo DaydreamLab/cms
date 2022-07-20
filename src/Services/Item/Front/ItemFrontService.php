@@ -365,6 +365,7 @@ class ItemFrontService extends ItemService
             if (!$user) {
                 return false;
             }
+
             $userGroup = UserGroup::where('title', '經銷會員')->first();
             if (!in_array($userGroup->id, $user->accessIds)) {
                 return false;
@@ -375,7 +376,8 @@ class ItemFrontService extends ItemService
 
     public function getContentByAlias(Collection $input)
     {
-        $content = $this->repo->findBy('alias', '=', $input->get('alias'))->first();
+        $content = $this->repo->search($input->except('brand'))->first();
+
         if ($content) {
             if ( !$this->checkDealerOnly($content) ) {
                 throw new ForbiddenException('InsufficientPermissionView', [

@@ -259,6 +259,16 @@ class ItemFrontRepository extends ItemRepository
             ->where('category_id', $item->category_id)
             ->where('state', 1)
             ->where('id', '!=', $item->id)
+            ->where(function ($q) {
+                $q->whereNull('publish_up')
+                    ->orWhere(function ($q) {
+                        $q->where('publish_up', '<', now()->toDateTimeString())
+                            ->where(function ($q) {
+                                $q->whereNull('publish_down')
+                                    ->orWhere('publish_down', '>', now()->toDateTimeString());
+                            });
+                    });
+            })
             ->where('publish_up', '<', $item->publish_up)
             ->orderBy('publish_up', 'desc')
             ->limit(1)
@@ -269,6 +279,16 @@ class ItemFrontRepository extends ItemRepository
             ->where('state', 1)
             ->where('id', '!=', $item->id)
             ->where('publish_up', '>', $item->publish_up)
+            ->where(function ($q) {
+                $q->whereNull('publish_up')
+                    ->orWhere(function ($q) {
+                        $q->where('publish_up', '<', now()->toDateTimeString())
+                            ->where(function ($q) {
+                                $q->whereNull('publish_down')
+                                    ->orWhere('publish_down', '>', now()->toDateTimeString());
+                            });
+                    });
+            })
             ->orderBy('publish_up', 'asc')
             ->limit(1)
             ->first();
@@ -375,6 +395,16 @@ class ItemFrontRepository extends ItemRepository
             ->where('category_id', $item->category_id)
             ->where('state', 1)
             ->where('id', '!=', $item->id)
+            ->where(function ($q) {
+                $q->whereNull('publish_up')
+                    ->orWhere(function ($q) {
+                        $q->where('publish_up', '<', now()->toDateTimeString())
+                            ->where(function ($q) {
+                                $q->whereNull('publish_down')
+                                    ->orWhere('publish_down', '>', now()->toDateTimeString());
+                            });
+                    });
+            })
             ->where('publish_up', '<', $item->publish_up)
             ->orderBy('publish_up', 'desc')
             ->limit(1)
@@ -387,6 +417,16 @@ class ItemFrontRepository extends ItemRepository
             ->where('category_id', $item->category_id)
             ->where('state', 1)
             ->where('id', '!=', $item->id)
+            ->where(function ($q) {
+                $q->whereNull('publish_up')
+                    ->orWhere(function ($q) {
+                        $q->where('publish_up', '<', now()->toDateTimeString())
+                            ->where(function ($q) {
+                                $q->whereNull('publish_down')
+                                    ->orWhere('publish_down', '>', now()->toDateTimeString());
+                            });
+                    });
+            })
             ->where('publish_up', '>', $item->publish_up)
             ->orderBy('publish_up', 'asc')
             ->limit(1)

@@ -31,11 +31,23 @@ class ItemFrontContentGetItemGet extends CmsGetItemRequest
     public function validated()
     {
         $validated = parent::validated();
-        $validated->forget('q');
         $validated->put('alias', $this->route('alias'));
         if ($brand = $this->get('brand')) {
             $validated['brand'] = $brand;
         }
+
+        $q = $validated->get('q');
+        $q->where(function ($q) {
+            $q->whereNull('publish_up')
+                ->orWhere(function ($q) {
+                    $q->where('publish_up', '<', now()->toDateTimeString())
+                        ->where(function ($q) {
+                            $q->whereNull('publish_down')
+                                ->orWhere('publish_down', '>', now()->toDateTimeString());
+                        });
+                });
+        });
+        $validated->put('q', $q);
 
         return $validated;
     }
