@@ -519,7 +519,17 @@ class ItemFrontService extends ItemService
         $slideshow = $this->searchContent(collect(['content_type' => 'slideshow', 'limit' => 0, 'q' => new QueryCapsule()]));
 
         $q = new QueryCapsule();
-        $q->whereIn('id', $item_ids);
+        $q->whereIn('id', $item_ids)
+            ->where(function ($q) {
+                $q->whereNull('publish_up')
+                    ->orWhere(function ($q) {
+                        $q->where('publish_up', '<', now()->toDateTimeString())
+                            ->where(function ($q) {
+                                $q->whereNull('publish_down')
+                                    ->orWhere('publish_down', '>', now()->toDateTimeString());
+                            });
+                    });
+            });
         $contents = $this->searchContent(collect(['content_type' => ['promotion', 'bulletin'], 'limit' => 0, 'q' => $q]));
 
         $promotion = $contents->where('category.content_type', 'promotion')
