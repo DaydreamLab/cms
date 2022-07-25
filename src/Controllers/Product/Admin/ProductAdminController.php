@@ -14,6 +14,7 @@ use DaydreamLab\Cms\Requests\Product\Admin\ProductAdminStoreRequest;
 use DaydreamLab\Cms\Resources\Product\Admin\Collections\ProductAdminListResourceCollection;
 use DaydreamLab\Cms\Resources\Product\Admin\Models\ProductAdminResource;
 use DaydreamLab\Cms\Services\Product\Admin\ProductAdminService;
+use Illuminate\Support\Str;
 use Throwable;
 
 class ProductAdminController extends CmsController
@@ -37,6 +38,10 @@ class ProductAdminController extends CmsController
     public function import(ProductAdminImportRequest $request)
     {
         $file = $request->file;
+
+        $filename = Str::random(5) . '-importProduct-' . now('Asia/Taipei')->format('YmdHis') . '-' . $file->getClientOriginalName();
+        $file->storeAs('/uploads', $filename);
+
         $csv_rows = str_getcsv($file->get(), "\n");
 
         $header = str_getcsv($csv_rows[0]);
