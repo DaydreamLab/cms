@@ -43,7 +43,7 @@ class SettingFrontService extends SettingService
 
     public function search(Collection $input)
     {
-        $url = str_replace( ['http://', 'https://', '/'], '', $input->get('url') );
+        $url = str_replace( ['http://', 'https://'], '', $input->get('url') );
         $item = $this->siteService->findBy('url', '=', $url)->first();
 
         if ($item) {
