@@ -27,11 +27,13 @@ class CustomerMessageFrontService extends CustomerMessageService
 
     public function add(Collection $input)
     {
-        $brand = $this->brandFrontRepository->findBy('alias', '=', $input->get('brandAlias'))->first();
-        if (!$brand) {
-            throw new NotFoundException('ItemNotExist', null, null, 'Brand');
+        if ($input->get('brandAlias')) {
+            $brand = $this->brandFrontRepository->findBy('alias', '=', $input->get('brandAlias'))->first();
+            if (!$brand) {
+                throw new NotFoundException('ItemNotExist', null, null, 'Brand');
+            }
+            $input->put('brand_id', $brand->id);
         }
-        $input->put('brand_id', $brand->id);
 
         $message = parent::add($input);
 

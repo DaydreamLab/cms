@@ -31,7 +31,7 @@ class CustomerMessageFrontStoreRequest extends CmsStoreRequest
     public function rules()
     {
         $rules = [
-            'brandAlias'    => 'required|string',
+            'brandAlias'    => 'nullable|string',
             'name'          => 'required|string',
             'type'          => ['required', Rule::in(DataHelper::CUSTOMER_MESSAGE_TYPES)],
             'email'         => 'required|email',

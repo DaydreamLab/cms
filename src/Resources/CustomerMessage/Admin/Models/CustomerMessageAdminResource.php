@@ -20,7 +20,7 @@ class CustomerMessageAdminResource extends BaseJsonResource
         return [
             'id'            => $this->id,
             'brandId'       => $this->brand_id,
-            'brandTitle'    => $this->brand->title,
+            'brandTitle'    => $this->brand ? $this->brand->title : null,
             'name'          => $this->name,
             'type'          => $this->type,
             'status'        => $this->status,

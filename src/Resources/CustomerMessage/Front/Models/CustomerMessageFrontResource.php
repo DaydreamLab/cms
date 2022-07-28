@@ -18,7 +18,7 @@ class CustomerMessageFrontResource extends BaseJsonResource
         $tz = 'Asia/Taipei';
 
         return [
-            'brandTitle'    => $this->brand->title,
+            'brandTitle'    => $this->brand ? $this->brand->title : null,
             'name'          => $this->name,
             'type'          => $this->type,
             'email'         => $this->email,
