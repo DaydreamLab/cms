@@ -14,8 +14,7 @@
         ],
         "psr-4": {
             "App\\": "app/",
-            "DaydreamLab\\Cms\\": "src/",
-            "DaydreamLab\\Cms\\Database\\Seeds\\": "src/database/seeds"
+            "DaydreamLab\\Cms\\": "src/"
         }
     },
     "minimum-stability": "dev",
