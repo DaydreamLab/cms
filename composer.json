@@ -9,12 +9,11 @@
     ],
     "autoload": {
         "classmap": [
-            "src/database/seeds",
-            "src/database/factories"
+            "src/database/seeds"
         ],
         "psr-4": {
-            "App\\": "app/",
-            "DaydreamLab\\Cms\\": "src/"
+            "DaydreamLab\\Cms\\": "src/",
+            "DaydreamLab\\Cms\\Tests\\": "tests/"
         }
     },
     "minimum-stability": "dev",
