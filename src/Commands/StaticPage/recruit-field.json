@@ -3,97 +3,75 @@
     "join01": {
       "step": [
         {
-          "title": "應徵職缺",
-          "description": "請至最新職缺搜尋適合您的職缺，並投遞履歷表。"
-        },
-        {
-          "title": "履歷篩選",
-          "description": "我們將依職缺需求進行初步篩選，電話通知適合人選進行面試。"
-        },
-        {
-          "title": "邀約面試",
-          "description": "電話及E-mail通知應徵者確切面試時間及地點，並請應徵者回填面試基本資料。"
-        },
-        {
-          "title": "甄選面試",
-          "description": "(1)請應徵者著正式服裝，面試時間約為2小時。\n(2)依據不同職缺，近行人格特質測驗、筆試、HR及主管面談。\n(3)視職缺情況來決定是否進行第二次面試。"
-        },
-        {
-          "title": "錄取通知",
-          "description": "約一至兩週內E-mail通知面試結果，錄取者將會有專人電話通知，並E-mail提供錄取通知書。"
+          "title": "",
+          "description": ""
         }
       ]
     },
     "grow01": {
-      "career": "在零壹的職涯發展體系中、我們透過透明公開的績效考核制度，作為調薪、獎金發放及未來晉升的參考依據，另外致力追求員工在誠信正直、專業服務、團隊合作、樂在工作的核心價值下提供貢獻，並結合公司使命、願景，發展完整的人才培育體系。",
+      "career": "",
       "training-map": {
         "management": {
-          "image": "",
-          "content": "<div><ul><li>策略共識</li><li>管理思維</li><li>溝通與信賴</li></ul><ul><li>團隊領導</li><li>績效管理</li><li>部屬培育</li></ul><ul><li>管理職責認知</li><li>問題解決能力</li><li>Coaching技巧</li></ul></div>"
+          "image": ""
         },
         "profession": {
-          "icon": "",
-          "content": "<ul><li>業務面：強化全面企劃整合思維、顧問式銷售技巧</li><li>行政面：工作效率提升、流程優化、管理工具應用</li><li>其　他：Mentor培訓、內部講師培訓</li></ul>"
-        },
-        "softness": {
-          "icon": "",
-          "content": "<ul><li>講　座：根據員工訪談結果，規劃每月1場講座(生活、技能)</li><li>團體共識營：強化跨部門問題解決能力與凝聚團隊共識力</li></ul>"
-        },
-        "learning": {
-          "content": "我們重視員工的訓練與發展，致力塑造樂在學習的組織文化，從新進人員至各個階段，採取多元的培育計畫，透過持續學習、團隊分享與相互啟發的過程，增進彼此的知識與技能，讓每位員工都能成就更好的自己！",
           "items": [
             {
               "icon": "",
-              "title": "持續學習"
-            },
-            {
-              "icon": "",
-              "title": "團隊分享"
-            },
-            {
-              "icon": "",
-              "title": "知識與技能"
-            },
-            {
-              "icon": "",
-              "title": "相互啟發"
+              "title": "",
+              "description": ""
             }
-          ]
+          ],
+          "content": ""
+        },
+        "softness": {
+          "items": [
+            {
+              "icon": "",
+              "title": "",
+              "description": ""
+            }
+          ],
+          "content": ""
+        },
+        "learning": {
+          "items": [
+            {
+              "icon": "",
+              "title": "",
+              "description": ""
+            }
+          ],
+          "content": ""
         }
       },
       "training-photo": [
         {
-          "title": "每月樂活講座",
-          "image": ""
-        },
-        {
-          "title": "中高階主管訓練",
-          "image": ""
-        },
-        {
-          "title": "團體共識培訓",
-          "image": ""
-        },
-        {
-          "title": "專業訓練課程",
-          "image": ""
+          "image": "",
+          "title": "",
+          "description": ""
         }
       ]
     },
     "life01": {
       "environment": [
         {
-          "content": "",
-          "images": [
-
-          ]
+          "title": "",
+          "description": ""
         }
       ],
-      "diversity": {
-
-      },
+      "diversity": [
+        {
+          "image": "",
+          "title": "",
+          "description": ""
+        }
+      ],
       "welfare": {
-
+        "bonus": "",
+        "support": "",
+        "vacation": "",
+        "health": ""
       }
     }
   }
