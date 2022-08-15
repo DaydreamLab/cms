@@ -1,0 +1,78 @@
+{
+  "recruit": {
+    "join01": {
+      "step": [
+        {
+          "title": "",
+          "description": ""
+        }
+      ]
+    },
+    "grow01": {
+      "career": "",
+      "training-map": {
+        "management": {
+          "image": ""
+        },
+        "profession": {
+          "items": [
+            {
+              "icon": "",
+              "title": "",
+              "description": ""
+            }
+          ],
+          "content": ""
+        },
+        "softness": {
+          "items": [
+            {
+              "icon": "",
+              "title": "",
+              "description": ""
+            }
+          ],
+          "content": ""
+        },
+        "learning": {
+          "items": [
+            {
+              "icon": "",
+              "title": "",
+              "description": ""
+            }
+          ],
+          "content": ""
+        }
+      },
+      "training-photo": [
+        {
+          "image": "",
+          "title": "",
+          "description": ""
+        }
+      ]
+    },
+    "life01": {
+      "environment": [
+        {
+          "title": "",
+          "description": ""
+        }
+      ],
+      "diversity": [
+        {
+          "image": "",
+          "title": "",
+          "description": ""
+        }
+      ],
+      "welfare": {
+        "bonus": "",
+        "support": "",
+        "vacation": "",
+        "health": ""
+      }
+    }
+  }
+}

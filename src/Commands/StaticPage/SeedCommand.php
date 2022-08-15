@@ -45,58 +45,10 @@ class SeedCommand extends Command
      * @return mixed
      */
     public function handle()
-    {/*
-        $this->apiSeeder();
-        $this->assetsSeeder();
-        $fcas = app(FileCategoryAdminService::class);
-        $fcas->store(collect([
-            "title" => "關於零壹",
-            "state" => 1,
-            "contentType" => "file",
-            "extension" => "about01"
-        ]));
-        $fcas->store(collect([
-            "title" => "投資人專區",
-            "state" => 1,
-            "contentType" => "file",
-            "extension" => "investor"
-        ]));*/
-        $data = getJson(__DIR__ . '/static-field.json', true);
-        $category_service = app(CategoryAdminService::class);
-        $about_cat = $category_service->store(collect([
-            'title' => '關於零壹',
-            'alias' => 'about01',
-            'parent_id' => 1,
-            'state'  => 1,
-            'content_type' => 'about',
-            'description' => '',
-            'access'   => 1
-        ]));
-        Item::create([
-            'title' => '關於零壹',
-            'alias' => 'about01',
-            'category_id' => $about_cat->id,
-            'description' => json_encode($data['about01']),
-            'access' => 1,
-            'created_by' => 1
-        ]);
-        $invest_cat = $category_service->store(collect([
-            'title' => '投資人專區',
-            'alias' => 'investor',
-            'parent_id' => 1,
-            'state'  => 1,
-            'content_type' => 'investor',
-            'description' => '',
-            'access'   => 1
-        ]));
-        Item::create([
-            'title' => '投資人專區',
-            'alias' => 'investor',
-            'category_id' => $invest_cat->id,
-            'description' => json_encode($data['investor']),
-            'access' => 1,
-            'created_by' => 1
-        ]);
+    {
+//        $this->apiSeeder();
+//        $this->seedStaticPage();
+        $this->seedRecruitPage();
     }
 
 
@@ -125,10 +77,10 @@ class SeedCommand extends Command
     }
 
 
-    public function assetsSeeder()
+    public function assetsSeeder($file_name)
     {
         # 處理 AssetGroup、Asset、Api 間的關係
-        $data = getJson(__DIR__ . '/static-asset.json', true);
+        $data = getJson(__DIR__ . '/' . $file_name, true);
         foreach ($data as $inputData) {
             $inputAssets = $inputData['assets'];
             unset($inputData['assets']);
@@ -179,9 +131,86 @@ class SeedCommand extends Command
             }
             # 套用到Asset
             $assetGroup->assets()->attach($assetIds);
-
             # 套用到使用者群組
             $assetGroup->userGroups()->attach($userGroups->pluck('id'));
         }
+    }
+
+    public function seedStaticPage()
+    {
+        $this->assetsSeeder('static-asset.json');
+        $fcas = app(FileCategoryAdminService::class);
+        $fcas->store(collect([
+            "title" => "關於零壹",
+            "state" => 1,
+            "contentType" => "file",
+            "extension" => "about01"
+        ]));
+        $fcas->store(collect([
+            "title" => "投資人專區",
+            "state" => 1,
+            "contentType" => "file",
+            "extension" => "investor"
+        ]));
+        $data = getJson(__DIR__ . '/static-field.json', true);
+        $category_service = app(CategoryAdminService::class);
+        $about_cat = $category_service->store(collect([
+            'title' => '關於零壹',
+            'alias' => 'about01',
+            'parent_id' => 1,
+            'state'  => 1,
+            'content_type' => 'about',
+            'description' => '',
+            'access'   => 1
+        ]));
+        Item::create([
+            'title' => '關於零壹',
+            'alias' => 'about01',
+            'category_id' => $about_cat->id,
+            'description' => json_encode($data['about01']),
+            'access' => 1,
+            'created_by' => 1
+        ]);
+        $invest_cat = $category_service->store(collect([
+            'title' => '投資人專區',
+            'alias' => 'investor',
+            'parent_id' => 1,
+            'state'  => 1,
+            'content_type' => 'investor',
+            'description' => '',
+            'access'   => 1
+        ]));
+        Item::create([
+            'title' => '投資人專區',
+            'alias' => 'investor',
+            'category_id' => $invest_cat->id,
+            'description' => json_encode($data['investor']),
+            'access' => 1,
+            'created_by' => 1
+        ]);
+    }
+
+    public function seedRecruitPage()
+    {
+        $this->assetsSeeder('recruit-asset.json');
+        $data = getJson(__DIR__ . '/recruit-field.json', true);
+        $category_service = app(CategoryAdminService::class);
+        $recruit_cat = $category_service->store(collect([
+            'title' => '菁英招募',
+            'alias' => 'recruit',
+            'parent_id' => 1,
+            'state'  => 1,
+            'content_type' => 'recruit',
+            'description' => '',
+            'access'   => 1
+        ]));
+        Item::create([
+            'title' => '菁英招募',
+            'alias' => 'recruit',
+            'category_id' => $recruit_cat->id,
+            'description' => json_encode($data['recruit']),
+            'access' => 1,
+            'created_by' => 1
+        ]);
     }
 }

@@ -1,0 +1,40 @@
+[
+  {
+    "title": "COM_STATIC_TITLE",
+    "state": 1,
+    "params": {
+      "path": "/static",
+      "component": "",
+      "type": "alias",
+      "redirect": "",
+      "icon": "copy"
+    },
+    "assets": [
+      {
+        "title": "COM_RECRUIT_MANAGER_TITLE",
+        "path": "recruit",
+        "full_path": "/recruit",
+        "component": "static/recruit/edit",
+        "type": "menu",
+        "state": 1,
+        "icon": "sitemap",
+        "showNav": 1,
+        "apis": [
+          "editStatic",
+          "getStatic"
+        ],
+        "defaultApis": {
+          "getOption": ["checked", "hidden"],
+          "uploadMedia": ["checked", "hidden"],
+          "getMediaAllItems": ["checked", "hidden"],
+          "getMediaAllFolders": ["checked", "hidden"],
+          "deleteMedia": ["checked", "hidden"],
+          "renameMedia": ["checked", "hidden"],
+          "moveMedia": ["checked", "hidden"],
+          "createMediaFolder": ["checked", "hidden"]
+        }
+      }
+    ],
+    "userGroups": ["Administrator", "Super User"]
+  }
+]
