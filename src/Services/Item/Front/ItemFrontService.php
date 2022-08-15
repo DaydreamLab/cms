@@ -553,6 +553,17 @@ class ItemFrontService extends ItemService
 
         $events = app(EventSessionFrontService::class)->searchEvent(collect(['limit' => 6]));
 
+        # 處理 slideshow 資料
+        foreach ($slideshow as &$s) {
+            if ($s->title == '.') {
+                $s->title = null;
+            }
+
+            if ($s->description == '.') {
+                $s->description = null;
+            }
+        }
+
         $this->response = [
             'slideshow' => $slideshow,
             'promotion' => $promotion,

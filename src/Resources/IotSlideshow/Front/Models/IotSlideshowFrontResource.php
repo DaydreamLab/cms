@@ -17,9 +17,9 @@ class IotSlideshowFrontResource extends BaseJsonResource
     {
         return [
             'alias'         => $this->alias,
-            'title'         => $this->title,
+            'title'         => $this->title == '.' ? null : $this->title,
             'sub_title'     => $this->sub_title,
-            'description'   => $this->description,
+            'description'   => $this->description == '.' ? null : $this->description,
             'url'           => $this->url,
             'image'         => DataHelper::completeImageUrl($this->image),
             'created_at'    => $this->getDateTimeString($this->created_at),
