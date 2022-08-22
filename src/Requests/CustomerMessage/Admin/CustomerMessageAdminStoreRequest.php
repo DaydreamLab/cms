@@ -30,7 +30,7 @@ class CustomerMessageAdminStoreRequest extends CmsStoreRequest
     {
         $rules = [
             'id'            => 'nullable|integer',
-            'brandId'       => 'required|integer',
+            'brandId'       => 'nullable|integer',
             'name'          => 'required|string',
             'type'          => ['required', Rule::in(DataHelper::CUSTOMER_MESSAGE_TYPES)],
             'status'        => ['required', Rule::in(DataHelper::CUSTOMER_MESSAGE_STATUS)],
