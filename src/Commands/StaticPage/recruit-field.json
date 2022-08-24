@@ -6,7 +6,17 @@
           "title": "",
           "description": ""
         }
-      ]
+      ],
+      "opportunity": {
+        "items": [
+          {
+            "icon": "",
+            "title": "",
+            "text": "",
+            "href": ""
+          }
+        ]
+      }
     },
     "grow01": {
       "career": "",
