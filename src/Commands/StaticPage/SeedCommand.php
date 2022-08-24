@@ -19,7 +19,7 @@ class SeedCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'static:seed';
+    protected $signature = 'static:seed {--asset}';
 
     /**
      * The console command description.
@@ -48,6 +48,9 @@ class SeedCommand extends Command
     {
 //        $this->apiSeeder();
 //        $this->seedStaticPage();
+        if ($this->option('asset')) {
+            $this->assetsSeeder('recruit-asset.json');
+        }
         $this->seedRecruitPage();
     }
 
@@ -192,7 +195,6 @@ class SeedCommand extends Command
 
     public function seedRecruitPage()
     {
-        $this->assetsSeeder('recruit-asset.json');
         $data = getJson(__DIR__ . '/recruit-field.json', true);
         $category_service = app(CategoryAdminService::class);
         $recruit_cat = $category_service->store(collect([
@@ -204,13 +206,19 @@ class SeedCommand extends Command
             'description' => '',
             'access'   => 1
         ]));
-        Item::create([
-            'title' => '菁英招募',
-            'alias' => 'recruit',
-            'category_id' => $recruit_cat->id,
-            'description' => json_encode($data['recruit']),
-            'access' => 1,
-            'created_by' => 1
-        ]);
+        $item = Item::query()->where('alias', '=', 'recruit')->first();
+        if (!$item) {
+            Item::create([
+                'title' => '菁英招募',
+                'alias' => 'recruit',
+                'category_id' => $recruit_cat->id,
+                'description' => json_encode($data['recruit']),
+                'access' => 1,
+                'created_by' => 1
+            ]);
+        } else {
+            $item->description = json_encode($data['recruit']);
+            $item->save();
+        }
     }
 }
