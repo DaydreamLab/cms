@@ -12,12 +12,12 @@ class RmaController extends Controller
 {
     use ApiJsonResponse;
 
-    protected $baseUri = 'http://52.148.88.87';
+//    protected $baseUri = 'http://52.148.88.87';
+    protected $baseUri = 'http://webservice2.zerone.com.tw';
 
     public function add(RmaAddPost $request)
     {
         $input = $request->validated();
-        #$client = new \SoapClient("http://webservice.zerone.com.tw/RMA/rmaWebservice.asmx?WSDL");
         $client = new \SoapClient("{$this->baseUri}/rmaWebservice.asmx?WSDL");
 
         $params = array(
@@ -60,7 +60,6 @@ class RmaController extends Controller
     public function search(RmaSearchPost $request)
     {
         $input = $request->validated();
-        #$client = new \SoapClient("http://webservice.zerone.com.tw/RMA/rmaWebservice.asmx?WSDL");
         $client = new \SoapClient("{$this->baseUri}/rmaWebservice.asmx?WSDL");
 
         $params = array(
