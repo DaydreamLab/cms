@@ -25,6 +25,23 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
     }
 
 
+    public function specialCaseHandle($user)
+    {
+        # 黑名單直接加入黑名單裡面
+        if ($user->block) {
+            $this->edmAddBlackList($user->email);
+        }
+
+        # 零壹員工、原廠、競爭廠商 直接不訂閱電子報
+        if ($user->company && in_array($user->company->category->title, ['零壹員工', '原廠', '競爭廠商'])) {
+            $this->edmRemoveSubscription($user->email, 9);
+            $this->edmRemoveSubscription($user->email, 8);
+        }
+
+        return true;
+    }
+
+
     public function store(Collection $input, $isImoprt = false)
     {
         if ($input->get('subscribeNewsletter')) {
@@ -44,23 +61,26 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
         $newsletterCategories = Item::whereIn('alias', ['01_newsletter', '01_deal_newsletter'])->get();
 
         if ($user = $input->get('user')) {
-            $subscribeNewsletterId = $user->groups->whereIn('title', ['經銷會員', '零壹員工'])->count()
-                ? $this->dealNewsletterId
-                : $this->newsletterId;
-            $subCategoryId =  $user->groups->whereIn('title', ['經銷會員', '零壹員工'])->count()
-                ? $newsletterCategories->where('alias', '01_deal_newsletter')->first()->id
-                : $newsletterCategories->where('alias', '01_newsletter')->first()->id;
-
             $subscription = $user->newsletterSubscription;
-            # 更換 email
-            if ($subscription && $subscription->email != $user->email) {
-                # 取消本身的 email 訂閱
-                $ncs = $subscription->newsletterCategories->pluck('alias');
-                foreach ($ncs as $nc) {
-                    $newsletterId = $nc == '01_deal_newsletter'
-                        ? $this->dealNewsletterId
-                        : $this->newsletterId;
-                    $this->edmRemoveSubscription($subscription->email, $newsletterId);
+            if ($this->specialCaseHandle($user)) {
+                $this->status = 'SubscribeSuccess';
+            } else {
+                $subscribeNewsletterId = $user->groups->where('title', '經銷會員')->count()
+                    ? $this->dealNewsletterId
+                    : $this->newsletterId;
+                $subCategoryId =  $user->groups->where('title', '經銷會員')->count()
+                    ? $newsletterCategories->where('alias', '01_deal_newsletter')->first()->id
+                    : $newsletterCategories->where('alias', '01_newsletter')->first()->id;
+                # 更換 email
+                if ($subscription && $subscription->email != $user->email) {
+                    # 取消本身的 email 訂閱
+                    $ncs = $subscription->newsletterCategories->pluck('alias');
+                    foreach ($ncs as $nc) {
+                        $newsletterId = $nc == '01_deal_newsletter'
+                            ? $this->dealNewsletterId
+                            : $this->newsletterId;
+                        $this->edmRemoveSubscription($subscription->email, $newsletterId);
+                    }
                 }
             }
 
@@ -90,13 +110,19 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
             if ($subs->count()) {
                 foreach ($subs as $sub) {
                     if ($sub->user) {
-                        if ($sub->user->groups->whereIn('title', ['經銷會員', '零壹員工'])->count()) {
-                            $subCategoryId = $newsletterCategories->where('alias', '01_deal_newsletter')->first()->id;
-                            $this->edmRemoveSubscription($sub->email, $this->newsletterId);
-                            $this->edmAddSubscription($sub->email, $this->dealNewsletterId);
+                        if ($this->specialCaseHandle($sub->user)) {
                         } else {
-                            $this->edmRemoveSubscription($sub->email, $this->dealNewsletterId);
-                            $this->edmAddSubscription($sub->email, $this->newsletterId);
+                            if ($sub->user->groups->where('title', '經銷會員')->count()) {
+                                $subCategoryId = $newsletterCategories->where(
+                                    'alias',
+                                    '01_deal_newsletter'
+                                )->first()->id;
+                                $this->edmRemoveSubscription($sub->email, $this->newsletterId);
+                                $this->edmAddSubscription($sub->email, $this->dealNewsletterId);
+                            } else {
+                                $this->edmRemoveSubscription($sub->email, $this->dealNewsletterId);
+                                $this->edmAddSubscription($sub->email, $this->newsletterId);
+                            }
                         }
                     } else {
                         $this->edmRemoveSubscription($sub->email, $this->dealNewsletterId);
