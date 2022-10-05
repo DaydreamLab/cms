@@ -36,6 +36,7 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
         # 零壹員工、原廠、競爭廠商 直接不訂閱電子報
         if (
             $user->company
+            && $user->company->company
             && $user->company->company->category
             && in_array($user->company->company->category->title, ['零壹員工', '原廠', '競爭廠商'])
         ) {
