@@ -33,12 +33,14 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
             return true;
         }
 
-        # 零壹員工、原廠、競爭廠商 直接不訂閱電子報
+        # 原廠、競爭廠商 直接不訂閱電子報
         if (
             $user->company
-            && $user->company->company
-            && $user->company->company->category
-            && in_array($user->company->company->category->title, ['零壹員工', '原廠', '競爭廠商'])
+            && ($user->company->company
+                && ($user->company->company->category
+                    && in_array($user->company->company->category->title, ['原廠', '競爭廠商'])
+                )
+            )
         ) {
             $this->edmRemoveSubscription($user->email, 9);
             $this->edmRemoveSubscription($user->email, 8);
@@ -69,7 +71,7 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
 
         if ($user = $input->get('user')) {
             $subscription = $user->newsletterSubscription;
-            # 零壹員工、原廠、競爭廠商、黑名單處理
+            # 原廠、競爭廠商、黑名單處理
             if ($this->specialCaseHandle($user)) {
             } else {
                 $subscribeNewsletterId = $user->isDealer && $user->companyEmailIsDealer && $user->company->validated
