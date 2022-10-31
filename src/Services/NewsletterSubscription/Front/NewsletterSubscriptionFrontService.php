@@ -98,6 +98,7 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
                 'id'                    => $subscription ? $subscription->id : null,
                 'user_id'               => $user->id,
                 'email'                 => $user->email,
+                'cancelAt'              => null,
                 'newsletterCategoryIds' => [$subCategoryId ?? 8]
             ];
 
@@ -139,6 +140,7 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
 
                     $this->modify(collect([
                         'id'    => $sub->id,
+                        'cancelAt' => null,
                         'newsletterCategoryIds' => [$subCategoryId]
                     ]));
                 }
@@ -175,6 +177,7 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
                     'id'                    => $subscription ? $subscription->id : null,
                     'user_id'               => $user->id,
                     'email'                 => $user->email,
+                    'cancelAt'              => now()->toDateTimeString(),
                     'newsletterCategoryIds' => []
                 ];
                 $this->modify(collect($data));
@@ -207,6 +210,7 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
                     }
                     $data = [
                         'id'                    => $sub->id,
+                        'cancelAt'              => now()->toDateTimeString(),
                         'newsletterCategoryIds' => []
                     ];
                     $this->modify(collect($data));
