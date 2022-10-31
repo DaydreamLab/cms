@@ -74,10 +74,10 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
             # 原廠、競爭廠商、黑名單處理
             if ($this->specialCaseHandle($user)) {
             } else {
-                $subscribeNewsletterId = $user->isDealer && $user->companyEmailIsDealer
+                $subscribeNewsletterId = $user->isDealer && $user->companyEmailIsDealer && $user->company->validated
                         ? $this->dealNewsletterId
                         : $this->newsletterId;
-                $subCategoryId = $user->isDealer && $user->companyEmailIsDealer
+                $subCategoryId = $user->isDealer && $user->companyEmailIsDealer && $user->company->validated
                         ? $newsletterCategories->where('alias', '01_deal_newsletter')->first()->id
                         : $newsletterCategories->where('alias', '01_newsletter')->first()->id;
                 # 更換 email
