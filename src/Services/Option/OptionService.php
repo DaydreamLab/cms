@@ -185,7 +185,7 @@ class OptionService
                     $data[$type] = [];
                 }
             } elseif ($type == 'company_category') {
-                $cc = CompanyCategory::all()->toTree();
+                $cc = CompanyCategory::whereIn('state', [0, 1])->orderBy('id', 'desc')->get()->toTree();
                 $data[$type] = $cc;
             } elseif ($type == 'newsletter_category') {
                 $q = $q->orderBy('id', 'asc');
