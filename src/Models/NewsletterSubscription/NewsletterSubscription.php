@@ -94,12 +94,6 @@ class NewsletterSubscription extends BaseModel
     }
 
 
-    public function getNewsletterCategoriesAttribute()
-    {
-        return $this->newsletterCategories()->get() ?: collect([]);
-    }
-
-
     public function getUserNameAttribute()
     {
         return ($this->user) ? $this->user->name : '';
