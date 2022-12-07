@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Commands\Feat;
 
 use DaydreamLab\Cms\Models\NewsletterSubscription\NewsletterSubscription;
+use DaydreamLab\User\Helpers\EnumHelper;
 use Illuminate\Console\Command;
 
 class V2InstallCommand extends Command
@@ -32,6 +33,7 @@ class V2InstallCommand extends Command
         foreach ($subscriptions as $subscription) {
             if (!$subscription->newsletterCategories->count()) {
                 $subscription->cancelAt = $subscription->updated_at ?: now()->toDateTimeString();
+                $subscription->cancelReason = EnumHelper::SUBSCRIBE_SELF_CANCEL;
                 $subscription->save();
             };
         }
