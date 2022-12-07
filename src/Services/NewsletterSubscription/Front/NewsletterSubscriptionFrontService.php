@@ -6,6 +6,7 @@ use DaydreamLab\Cms\Models\Item\Item;
 use DaydreamLab\Cms\Repositories\NewsletterSubscription\Front\NewsletterSubscriptionFrontRepository;
 use DaydreamLab\Cms\Services\NewsletterSubscription\NewsletterSubscriptionService;
 use DaydreamLab\JJAJ\Exceptions\BadRequestException;
+use DaydreamLab\User\Helpers\EnumHelper;
 use Illuminate\Support\Collection;
 
 class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
@@ -178,6 +179,7 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
                     'user_id'               => $user->id,
                     'email'                 => $user->email,
                     'cancelAt'              => now()->toDateTimeString(),
+                    'cancelReason'          => EnumHelper::SUBSCRIBE_SELF_CANCEL,
                     'newsletterCategoryIds' => []
                 ];
                 $this->modify(collect($data));
