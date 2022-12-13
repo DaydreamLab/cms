@@ -366,6 +366,10 @@ class ItemFrontService extends ItemService
                 return false;
             }
 
+            if ($user->isDealer && $user->dealerExpired) {
+                return false;
+            }
+
             $userGroup = UserGroup::where('title', '經銷會員')->first();
             if (!in_array($userGroup->id, $user->accessIds)) {
                 return false;
