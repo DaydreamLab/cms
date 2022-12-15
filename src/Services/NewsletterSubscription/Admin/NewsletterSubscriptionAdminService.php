@@ -24,9 +24,25 @@ class NewsletterSubscriptionAdminService extends NewsletterSubscriptionService
     }
 
 
+    public function beforeModify(Collection &$input, &$item)
+    {
+        # 有修改 email 都會"取消"(移除)訂閱
+        if ($item->email != $input->get('email')) {
+            if ($input->has('newsletterCategories')) {
+                $newsletterId = ($item->newsletterCategories->first()->alias == '01_newsletter')
+                    ? $this->newsletterId
+                    : $this->dealNewsletterId;
+                $this->edmRemoveSubscription($item->email, $newsletterId);
+            }
+        }
+    }
+
     public function modifyMapping($item, $input)
     {
-        $item->newsletterCategories()->sync($input->get('newsletterCategoryIds') ?: [], true);
+        if ($input->has('newsletterCategoryIds')) {
+            $categoryIds = is_array($input->get('newsletterCategoryIds')) ? $input->get('newsletterCategoryIds') : [];
+            $item->newsletterCategories()->sync($categoryIds);
+        }
     }
 
 

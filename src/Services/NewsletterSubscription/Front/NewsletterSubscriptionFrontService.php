@@ -82,7 +82,7 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
                         ? $newsletterCategories->where('alias', '01_deal_newsletter')->first()->id
                         : $newsletterCategories->where('alias', '01_newsletter')->first()->id;
                 # 更換 email
-                if ($subscription && $subscription->email != $user->email) {
+                if ($subscription && $subscription->email != $user->company->email) {
                     # 取消本身的 email 訂閱
                     $ncs = $subscription->newsletterCategories->pluck('alias');
                     foreach ($ncs as $nc) {
@@ -92,15 +92,15 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
                         $this->edmRemoveSubscription($subscription->email, $newsletterId);
                     }
                 }
-                $this->edmAddSubscription($user->email, $subscribeNewsletterId); # 串接edm訂閱管理
+                $this->edmAddSubscription($user->company->email, $subscribeNewsletterId); # 串接edm訂閱管理
             }
 
             $data = [
                 'id'                    => $subscription ? $subscription->id : null,
                 'user_id'               => $user->id,
-                'email'                 => $user->email,
+                'email'                 => $user->company->email,
                 'cancelAt'              => null,
-                'newsletterCategoryIds' => [$subCategoryId ?? 8]
+                'newsletterCategoryIds' => [$subCategoryId ?? $this->newsletterId]
             ];
 
             if ($data['id']) {
@@ -177,7 +177,7 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
                 $data = [
                     'id'                    => $subscription ? $subscription->id : null,
                     'user_id'               => $user->id,
-                    'email'                 => $user->email,
+                    'email'                 => $user->company->email,
                     'cancelAt'              => now()->toDateTimeString(),
                     'cancelReason'          => EnumHelper::SUBSCRIBE_SELF_CANCEL,
                     'newsletterCategoryIds' => []
