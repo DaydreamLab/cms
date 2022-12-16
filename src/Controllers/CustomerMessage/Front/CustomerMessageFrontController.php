@@ -27,6 +27,11 @@ class CustomerMessageFrontController extends CmsController
             $this->handleException($t);
         }
 
-        return $this->response($this->service->status, $this->service->response, [], CustomerMessageFrontResource::class);
+        return $this->response(
+            $this->service->status,
+            $this->service->response,
+            [],
+            CustomerMessageFrontResource::class
+        );
     }
 }
