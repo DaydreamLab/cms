@@ -72,6 +72,7 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
 
         if ($user = $input->get('user')) {
             $subscription = $user->newsletterSubscription;
+
             # 原廠、競爭廠商、黑名單處理
             if ($this->specialCaseHandle($user)) {
             } else {
@@ -81,6 +82,7 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
                 $subCategoryId = $user->isDealer && $user->companyEmailIsDealer && $user->company->validated
                         ? $newsletterCategories->where('alias', '01_deal_newsletter')->first()->id
                         : $newsletterCategories->where('alias', '01_newsletter')->first()->id;
+
                 # 更換 email
                 if ($subscription && $subscription->email != $user->company->email) {
                     # 取消本身的 email 訂閱
@@ -100,7 +102,8 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
                 'user_id'               => $user->id,
                 'email'                 => $user->company->email,
                 'cancelAt'              => null,
-                'newsletterCategoryIds' => [$subCategoryId ?? $this->newsletterId]
+                'cancelReason'          => null,
+                'newsletterCategoryIds' => [$subCategoryId]
             ];
 
             if ($data['id']) {
@@ -193,6 +196,13 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
                         ? $this->edmRemoveSubscription($user->email, 8)
                         : null;
                 }
+                $data = [
+                    'user_id'               => $user->id,
+                    'email'                 => $user->company->email,
+                    'cancelAt'              => now()->toDateTimeString(),
+                    'newsletterCategoryIds' => []
+                ];
+                $this->add(collect($data));
             }
         } else {
             $inputEmail =  $input->get('email');

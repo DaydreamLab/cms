@@ -155,6 +155,9 @@ class NewsletterSubscriptionService extends CmsService
 
     public function edmAddSubscription($email, $id)
     {
+        if (config('app.env') == 'local') {
+            return;
+        }
         $url = 'http://zcrm.itpison.com/WebAPI/Subscribe.aspx';
         $this->processEdmSubscriptionApi($url, $email, $id);
     }
@@ -162,6 +165,9 @@ class NewsletterSubscriptionService extends CmsService
 
     public function edmRemoveSubscription($email, $id)
     {
+        if (config('app.env') == 'local') {
+            return;
+        }
         $url = 'http://zcrm.itpison.com/WebAPI/UnSubscribe.aspx';
         $this->processEdmSubscriptionApi($url, $email, $id);
     }
