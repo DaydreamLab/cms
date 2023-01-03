@@ -3,13 +3,16 @@
 namespace DaydreamLab\Cms\Services\Module\Front;
 
 use DaydreamLab\Cms\Models\Menu\Front\MenuFront;
+use DaydreamLab\Cms\Models\MenuLog\MenuLog;
 use DaydreamLab\Cms\Models\Site\Site;
 use DaydreamLab\Cms\Repositories\Menu\Front\MenuFrontRepository;
+use DaydreamLab\Cms\Repositories\MenuLog\MenuLogRepository;
 use DaydreamLab\Cms\Repositories\Module\Front\ModuleFrontRepository;
 use DaydreamLab\Cms\Repositories\Site\SiteRepository;
 use DaydreamLab\Cms\Services\Category\Front\CategoryFrontService;
 use DaydreamLab\Cms\Services\Item\Front\ItemFrontService;
 use DaydreamLab\Cms\Services\Menu\Front\MenuFrontService;
+use DaydreamLab\Cms\Services\MenuLog\MenuLogService;
 use DaydreamLab\Cms\Services\Module\ModuleService;
 use DaydreamLab\Cms\Services\Site\SiteService;
 use DaydreamLab\JJAJ\Helpers\Helper;
@@ -26,18 +29,23 @@ class ModuleFrontService extends ModuleService
 
     protected $menuFrontService;
 
-    public function __construct(ModuleFrontRepository $repo,
-                                CategoryFrontService $categoryFrontService,
-                                ItemFrontService $itemFrontService)
-    {
+    public function __construct(
+        ModuleFrontRepository $repo,
+        CategoryFrontService $categoryFrontService,
+        ItemFrontService $itemFrontService
+    ) {
         parent::__construct($repo);
         $this->repo                 = $repo;
         $this->itemFrontService     = $itemFrontService;
         $this->categoryFrontService = $categoryFrontService;
+
+
         $this->menuFrontService     = new MenuFrontService(
             new MenuFrontRepository(new MenuFront()),
-            $this ,
-            new SiteService(new SiteRepository(new Site())));
+            $this,
+            new SiteService(new SiteRepository(new Site())),
+            new MenuLogService(new MenuLogRepository(new MenuLog()))
+        );
     }
 
 

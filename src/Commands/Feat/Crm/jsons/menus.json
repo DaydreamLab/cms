@@ -1,0 +1,269 @@
+[
+  {
+    "title": "最新消息",
+    "alias": "news",
+    "path": "/news",
+    "site_id": 1,
+    "access": 1,
+    "language": "*",
+    "children": [
+      {
+        "title": "品牌新訊",
+        "alias": "bulletin",
+        "path": "/news/bulletin",
+        "site_id": 1,
+        "access": 1,
+        "language": "*",
+        "children": []
+      },
+      {
+        "title": "促銷訊息",
+        "alias": "promotion",
+        "path": "/news/promotion",
+        "site_id": 1,
+        "access": 1,
+        "language": "*",
+        "children": []
+      }
+    ]
+  },
+  {
+    "title": "產品服務",
+    "alias": "product",
+    "path": "/product",
+    "site_id": 1,
+    "access": 1,
+    "language": "*",
+    "children": [
+      {
+        "title": "代理品牌",
+        "alias": "brand",
+        "path": "/product/brand",
+        "site_id": 1,
+        "access": 1,
+        "language": "*",
+        "children": []
+      },
+      {
+        "title": "產品系列",
+        "alias": "list",
+        "path": "/product/list",
+        "site_id": 1,
+        "access": 1,
+        "language": "*",
+        "children": []
+      },
+      {
+        "title": "共同供應契約採購",
+        "alias": "bot",
+        "path": "/product/BOT",
+        "site_id": 1,
+        "access": 1,
+        "language": "*",
+        "children": []
+      }
+    ]
+  },
+  {
+    "title": "課程活動",
+    "alias": "event",
+    "path": "/event",
+    "site_id": 1,
+    "access": 1,
+    "language": "*",
+    "children": []
+  },
+  {
+    "title": "影片專區",
+    "alias": "video",
+    "path": "/video",
+    "site_id": 1,
+    "access": 1,
+    "language": "*",
+    "children": []
+  },
+  {
+    "title": "主題策展",
+    "alias": "campaign",
+    "path": "/campaign",
+    "site_id": 1,
+    "access": 1,
+    "language": "*",
+    "children": []
+  },
+  {
+    "title": "關於零壹",
+    "alias": "about",
+    "path": "/about",
+    "site_id": 1,
+    "access": 1,
+    "language": "*",
+    "children": [
+      {
+        "title": "公司簡介",
+        "alias": "zerone",
+        "path": "/about/zerone",
+        "site_id": 1,
+        "access": 1,
+        "language": "*",
+        "children": []
+      },
+      {
+        "title": "經營團隊",
+        "alias": "organization",
+        "path": "/about/organization",
+        "site_id": 1,
+        "access": 1,
+        "language": "*",
+        "children": []
+      },
+      {
+        "title": "大世紀",
+        "alias": "history",
+        "path": "/about/history",
+        "site_id": 1,
+        "access": 1,
+        "language": "*",
+        "children": []
+      }
+    ]
+  },
+  {
+    "title": "投資人專區",
+    "alias": "investor",
+    "path": "/investor",
+    "site_id": 1,
+    "access": 1,
+    "language": "*",
+    "children": [
+      {
+        "title": "財務資訊",
+        "alias": "finance",
+        "path": "/investor/finance",
+        "site_id": 1,
+        "access": 1,
+        "language": "*",
+        "children": []
+      },
+      {
+        "title": "公司治理",
+        "alias": "companypolicy",
+        "path": "/investor/companypolicy",
+        "site_id": 1,
+        "access": 1,
+        "language": "*",
+        "children": []
+      },
+      {
+        "title": "股東專欄",
+        "alias": "shareholders",
+        "path": "/investor/shareholders",
+        "site_id": 1,
+        "access": 1,
+        "language": "*",
+        "children": []
+      },
+      {
+        "title": "利害關係人專區",
+        "alias": "int",
+        "path": "/investor/int",
+        "site_id": 1,
+        "access": 1,
+        "language": "*",
+        "children": []
+      }
+    ]
+  },
+  {
+    "title": "菁英招募",
+    "alias": "elite",
+    "path": "/elite",
+    "site_id": 1,
+    "access": 1,
+    "language": "*",
+    "children": [
+      {
+        "title": "加入零壹",
+        "alias": "join",
+        "path": "/elite/join",
+        "site_id": 1,
+        "access": 1,
+        "language": "*",
+        "children": []
+      },
+      {
+        "title": "成長在零壹",
+        "alias": "grow",
+        "path": "/elite/grow",
+        "site_id": 1,
+        "access": 1,
+        "language": "*",
+        "children": []
+      },
+      {
+        "title": "生活在零壹",
+        "alias": "live",
+        "path": "/elite/live",
+        "site_id": 1,
+        "access": 1,
+        "language": "*",
+        "children": []
+      }
+    ]
+  },
+  {
+    "title": "聯絡我們",
+    "alias": "contact",
+    "path": "/contact",
+    "site_id": 1,
+    "access": 1,
+    "language": "*",
+    "children": [
+      {
+        "title": "業務洽詢",
+        "alias": "inquiry",
+        "path": "/contact/inquiry",
+        "site_id": 1,
+        "access": 1,
+        "language": "*",
+        "children": []
+      },
+      {
+        "title": "聯絡銷售人員",
+        "alias": "contact-sales",
+        "path": "/contact/contact-sales",
+        "site_id": 1,
+        "access": 1,
+        "language": "*",
+        "children": []
+      },
+      {
+        "title": "營業據點",
+        "alias": "location",
+        "path": "/contact/location",
+        "site_id": 1,
+        "access": 1,
+        "language": "*",
+        "children": []
+      },
+      {
+        "title": "維修服務",
+        "alias": "repair",
+        "path": "/contact/repair",
+        "site_id": 1,
+        "access": 1,
+        "language": "*",
+        "children": []
+      },
+      {
+        "title": "其他詢問",
+        "alias": "inquiryOther",
+        "path": "/contact/inquiryOther",
+        "site_id": 1,
+        "access": 1,
+        "language": "*",
+        "children": []
+      }
+    ]
+  }
+]

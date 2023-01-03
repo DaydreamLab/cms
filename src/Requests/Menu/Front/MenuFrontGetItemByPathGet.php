@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Requests\Menu\Front;
 
 use DaydreamLab\Cms\Requests\ComponentBase\CmsGetItemRequest;
+use Illuminate\Support\Facades\Auth;
 
 class MenuFrontGetItemByPathGet extends CmsGetItemRequest
 {
@@ -24,5 +25,16 @@ class MenuFrontGetItemByPathGet extends CmsGetItemRequest
     public function rules()
     {
         return parent::rules();
+    }
+
+    public function validated()
+    {
+        $validated = parent::validated();
+        $validated->put('alias', $this->route('alias'));
+        $validated->put('host', $this->getHttpHost());
+        $validated->put('referer', $this->headers->get('referer'));
+        $validated->put('user', Auth::guard('api')->user());
+
+        return $validated;
     }
 }
