@@ -61,13 +61,13 @@ class CrmInstallCommand extends Command
         foreach ($jsons as $json) {
             $children = $json['children'];
             unset($json['children']);
-            $json['categorey_id'] = $mainMenuCategory->id;
+            $json['category_id'] = $mainMenuCategory->id;
             $json['host'] = $host;
             $parent = Menu::create($json);
             foreach ($children as $childData) {
                 unset($children['children']);
                 $childData['parent_id'] = $parent->id;
-                $childData['categorey_id'] = $mainMenuCategory->id;
+                $childData['category_id'] = $mainMenuCategory->id;
                 $childData['host'] = $host;
                 $parent->children()->create($childData);
             }

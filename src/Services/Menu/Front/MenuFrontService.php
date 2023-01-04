@@ -68,7 +68,7 @@ class MenuFrontService extends MenuService
                 if (
                     $userLastLog
                     && !$userLastLog->leaveAt
-                    && Carbon::parse($userLastLog->created_at)->diffInSeconds(now()->toDateTimeString()) < 14400
+                    && Carbon::parse($userLastLog->created_at)->diffInSeconds(now()->toDateTimeString()) < 3600
                 ) {
                     $this->repo->update($userLastLog, [
                         'leaveAt' => now()->toDateTimeString(),
@@ -80,7 +80,7 @@ class MenuFrontService extends MenuService
             $q = new QueryCapsule();
             $q->whereNull('leaveAt')
                 ->where(function ($q) {
-                    $q->whereBetween('createdAt', now()->subHours(4)->toDateTimeString(), now()->toDateTimeString());
+                    $q->whereBetween('createdAt', now()->subHours(1)->toDateTimeString(), now()->toDateTimeString());
                 });
             $sameLog = $this->menuLogService->search(collect([
                 'userId' => $user->id,

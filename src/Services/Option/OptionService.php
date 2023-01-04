@@ -42,20 +42,21 @@ class OptionService
 
     protected $map = [];
 
-    public function __construct(CategoryAdminService $categoryAdminService,
-                                LanguageAdminService $languageAdminService,
-                                ViewlevelAdminService $viewlevelAdminService,
-                                AssetAdminService $assetAdminService,
-                                UserGroupAdminService $groupAdminService,
-                                MenuAdminService $menuAdminService,
-                                ExtrafieldGroupAdminService $extrafieldGroupAdminService,
-                                ItemAdminService $itemAdminService,
-                                ModuleAdminService $moduleAdminService,
-                                ProductCategoryAdminService $productCategoryAdminService,
-                                BrandAdminService $brandAdminService,
-                                SiteAdminService $siteAdminService,
-                                FileCategoryAdminService $fileCategoryAdminService)
-    {
+    public function __construct(
+        CategoryAdminService $categoryAdminService,
+        LanguageAdminService $languageAdminService,
+        ViewlevelAdminService $viewlevelAdminService,
+        AssetAdminService $assetAdminService,
+        UserGroupAdminService $groupAdminService,
+        MenuAdminService $menuAdminService,
+        ExtrafieldGroupAdminService $extrafieldGroupAdminService,
+        ItemAdminService $itemAdminService,
+        ModuleAdminService $moduleAdminService,
+        ProductCategoryAdminService $productCategoryAdminService,
+        BrandAdminService $brandAdminService,
+        SiteAdminService $siteAdminService,
+        FileCategoryAdminService $fileCategoryAdminService
+    ) {
         $this->map['asset']                 = $assetAdminService;
         $this->map['brand']                 = $brandAdminService;
         $this->map['extension']             = ['item, menu, module'];
@@ -91,8 +92,7 @@ class OptionService
     {
         $data = [];
 
-        foreach ($input->get('types') as $type)
-        {
+        foreach ($input->get('types') as $type) {
             $service = $this->map[$type];
             $q = new QueryCapsule();
             if ($type == 'asset') {
@@ -113,18 +113,25 @@ class OptionService
                 $q = $q->where('type', 'content');
                 $data[$type] = $this->getOptionList($service, 'list', collect(['q' => $q]), ['sef']);
             } elseif ($type == 'menu') {
-                $data[$type] = $this->getOptionList($service, 'tree', collect(['q' => $q]));
+                $data[$type] = $this->getOptionList($service, 'tree', collect([
+                    'q' => $q->orderBy('_lft', 'asc'),
+                    'limit' => 0,
+                    'paginate' => 0,
+                ]));
             } elseif ($type == 'menu_category') {
                 $q = $q->where('extension', 'menu');
                 $data[$type] = $this->getOptionList($service, 'tree', collect(['q' => $q]));
             } elseif ($type == 'module') {
-                $data[$type] = $this->getOptionList($service, 'list', collect(['q' => $q]));
+                $data[$type] = $this->getOptionList($service, 'list', collect([
+                    'q' => $q,
+                    'limit' => 0,
+                    'paginate' => 0,
+                ]));
             } elseif ($type == 'module_category') {
                 $q = $q->where('extension', 'module')
                     ->where('title', '!=', 'ROOT');
-                $data[$type] = $this->getOptionList($service, 'tree', collect(['q' => $q]) , ['alias']);
-            }
-            elseif ($type == 'brand') {
+                $data[$type] = $this->getOptionList($service, 'tree', collect(['q' => $q]), ['alias']);
+            } elseif ($type == 'brand') {
                 $data[$type] = $this->getOptionList($service, 'list', collect(
                     ['q' => $q->where('state', 1)->orderBy('title', 'asc'), 'limit' => 0]
                 ));
@@ -237,13 +244,13 @@ class OptionService
         if ($type == 'tree') {
             $default_field = array_merge($extra_fields, ['id', 'tree_list_title']);
             return $service->search($input)->toFlatTree()
-                ->map( function($item, $key) use ($default_field){
+                ->map(function ($item, $key) use ($default_field) {
                     return $item->only($default_field);
                 });
         } else {
             $default_field = array_merge($extra_fields, ['id', 'title']);
             return $service->search($input)
-                ->map( function($item, $key) use ($default_field) {
+                ->map(function ($item, $key) use ($default_field) {
                     return $item->only($default_field);
                 });
         }
@@ -253,7 +260,7 @@ class OptionService
     public function frontOptionList(Collection $input)
     {
         $data = [];
-        foreach ($input->get('types')?:[] as $type) {
+        foreach ($input->get('types') ?: [] as $type) {
             switch ($type) {
                 case 'brand':
                     $bser = app(BrandFrontService::class);
@@ -262,11 +269,13 @@ class OptionService
                             $category = Category::where('alias', $pageAlias)->first();
                             $brandMaps = DB::table('brands_items_maps')
                                 ->select('brand_id')
-                                ->whereIn('item_id', function ($q) use ($category) {{
+                                ->whereIn('item_id', function ($q) use ($category) {
+                                    {
                                     $q->select('id')
                                         ->from('items')
                                         ->where('category_id', $category->id);
-                                }})
+                                    }
+                                })
                                 ->orderBy('brand_id')
                                 ->get();
 
@@ -285,7 +294,7 @@ class OptionService
                                 ->all();
                             $brandMaps = DB::table('events_brands_maps')
                                 ->select('brandId')
-                                ->whereIn('eventId',$eventIds)
+                                ->whereIn('eventId', $eventIds)
                                 ->groupBy('brandId')
                                 ->orderBy('brandId')
                                 ->get();
@@ -301,14 +310,14 @@ class OptionService
                     }
 
                     $product_category_alias = $input->get('product_category_alias');
-                    if ( is_array($product_category_alias) && count($product_category_alias) ) {
+                    if (is_array($product_category_alias) && count($product_category_alias)) {
                         $brands = $brands->filter(function ($b) use ($product_category_alias) {
                             $pcs = $b->products->map(function ($p) {
                                 return ($p->productCategory) ? $p->productCategory->alias : '';
                             })->unique(function ($p_alias) {
                                 return $p_alias;
                             })->values()->toArray();
-                            if ( count( array_intersect($product_category_alias, $pcs) ) ) {
+                            if (count(array_intersect($product_category_alias, $pcs))) {
                                 return true;
                             }
                             return false;
@@ -336,7 +345,7 @@ class OptionService
                     break;
                 case 'product_parent_category':
                     $brand_alias = $input->get('brand_alias');
-                    if ( $brand_alias != null ) {
+                    if ($brand_alias != null) {
                         $brand = BrandFront::where('alias', '=', $brand_alias)->first();
                         $data[$type] = $brand->products->filter(function ($p) {
                             return $p->productCategory != null;
@@ -395,13 +404,13 @@ class OptionService
                     $ifser = app(ItemFrontService::class);
                     $brand_alias = $input->get('brand_alias');
                     $content_type = $input->get('content_type');
-                    if ( $brand_alias != null && $content_type != null ) {
+                    if ($brand_alias != null && $content_type != null) {
                         $brand = BrandFront::where('alias', '=', $brand_alias)->first();
                         if ($brand) {
                             if ($content_type == 'case') {
-                                $case_ind_ids = array_unique( array_map(function ($c) {
+                                $case_ind_ids = array_unique(array_map(function ($c) {
                                     return $c->extrafields['industry_category']['value'];
-                                }, $brand->items['case']) );
+                                }, $brand->items['case']));
                                 $q = new QueryCapsule();
                                 $q->whereIn('id', $case_ind_ids);
                                 $case_ics = $ifser->searchContent(collect(['content_type' => 'industry_category', 'q' => $q, 'limit' => 0]), false);
@@ -409,11 +418,11 @@ class OptionService
                                     return $ic->only(['alias', 'title']);
                                 });
                             } elseif ($content_type == 'solution') {
-                                $sol_ind_ids = (new Collection( array_map(function ($c) {
+                                $sol_ind_ids = (new Collection(array_map(function ($c) {
                                     return  array_map(function ($v) {
                                         return $v['id'];
                                     }, $c->extrafields['industry_category']['value']);
-                                }, $brand->items['solution']) ))->flatten()->unique()->values()->toArray();
+                                }, $brand->items['solution'])))->flatten()->unique()->values()->toArray();
                                 $q = new QueryCapsule();
                                 $q->whereIn('id', $sol_ind_ids);
                                 $sol_ics = $ifser->searchContent(collect(['content_type' => 'industry_category', 'q' => $q, 'limit' => 0]), false);

@@ -1,5 +1,14 @@
 [
   {
+    "title": "首頁",
+    "alias": "index",
+    "path": "/",
+    "site_id": 1,
+    "access": 1,
+    "language": "*",
+    "children": []
+  },
+  {
     "title": "最新消息",
     "alias": "news",
     "path": "/news",
