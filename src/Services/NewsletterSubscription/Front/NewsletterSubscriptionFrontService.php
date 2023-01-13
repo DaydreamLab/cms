@@ -6,6 +6,7 @@ use DaydreamLab\Cms\Models\Item\Item;
 use DaydreamLab\Cms\Repositories\NewsletterSubscription\Front\NewsletterSubscriptionFrontRepository;
 use DaydreamLab\Cms\Services\NewsletterSubscription\NewsletterSubscriptionService;
 use DaydreamLab\JJAJ\Exceptions\BadRequestException;
+use DaydreamLab\User\Helpers\EnumHelper;
 use Illuminate\Support\Collection;
 
 class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
@@ -71,17 +72,19 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
 
         if ($user = $input->get('user')) {
             $subscription = $user->newsletterSubscription;
+
             # 原廠、競爭廠商、黑名單處理
             if ($this->specialCaseHandle($user)) {
             } else {
-                $subscribeNewsletterId = $user->isDealer && $user->companyEmailIsDealer
+                $subscribeNewsletterId = $user->isDealer && $user->companyEmailIsDealer && $user->company->validated
                         ? $this->dealNewsletterId
                         : $this->newsletterId;
-                $subCategoryId = $user->isDealer && $user->companyEmailIsDealer
+                $subCategoryId = $user->isDealer && $user->companyEmailIsDealer && $user->company->validated
                         ? $newsletterCategories->where('alias', '01_deal_newsletter')->first()->id
                         : $newsletterCategories->where('alias', '01_newsletter')->first()->id;
+
                 # 更換 email
-                if ($subscription && $subscription->email != $user->email) {
+                if ($subscription && $subscription->email != $user->company->email) {
                     # 取消本身的 email 訂閱
                     $ncs = $subscription->newsletterCategories->pluck('alias');
                     foreach ($ncs as $nc) {
@@ -91,14 +94,16 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
                         $this->edmRemoveSubscription($subscription->email, $newsletterId);
                     }
                 }
-                $this->edmAddSubscription($user->email, $subscribeNewsletterId); # 串接edm訂閱管理
+                $this->edmAddSubscription($user->company->email, $subscribeNewsletterId); # 串接edm訂閱管理
             }
 
             $data = [
                 'id'                    => $subscription ? $subscription->id : null,
                 'user_id'               => $user->id,
-                'email'                 => $user->email,
-                'newsletterCategoryIds' => [$subCategoryId ?? 8]
+                'email'                 => $user->company->email,
+                'cancelAt'              => null,
+                'cancelReason'          => null,
+                'newsletterCategoryIds' => [$subCategoryId]
             ];
 
             if ($data['id']) {
@@ -139,6 +144,7 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
 
                     $this->modify(collect([
                         'id'    => $sub->id,
+                        'cancelAt' => null,
                         'newsletterCategoryIds' => [$subCategoryId]
                     ]));
                 }
@@ -174,7 +180,9 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
                 $data = [
                     'id'                    => $subscription ? $subscription->id : null,
                     'user_id'               => $user->id,
-                    'email'                 => $user->email,
+                    'email'                 => $user->company->email,
+                    'cancelAt'              => now()->toDateTimeString(),
+                    'cancelReason'          => EnumHelper::SUBSCRIBE_SELF_CANCEL,
                     'newsletterCategoryIds' => []
                 ];
                 $this->modify(collect($data));
@@ -188,6 +196,13 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
                         ? $this->edmRemoveSubscription($user->email, 8)
                         : null;
                 }
+                $data = [
+                    'user_id'               => $user->id,
+                    'email'                 => $user->company->email,
+                    'cancelAt'              => now()->toDateTimeString(),
+                    'newsletterCategoryIds' => []
+                ];
+                $this->add(collect($data));
             }
         } else {
             $inputEmail =  $input->get('email');
@@ -207,6 +222,7 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
                     }
                     $data = [
                         'id'                    => $sub->id,
+                        'cancelAt'              => now()->toDateTimeString(),
                         'newsletterCategoryIds' => []
                     ];
                     $this->modify(collect($data));

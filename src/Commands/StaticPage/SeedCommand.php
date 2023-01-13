@@ -46,8 +46,8 @@ class SeedCommand extends Command
      */
     public function handle()
     {
-//        $this->apiSeeder();
-//        $this->seedStaticPage();
+        $this->apiSeeder();
+        $this->seedStaticPage();
         if ($this->option('asset')) {
             $this->assetsSeeder('recruit-asset.json');
         }

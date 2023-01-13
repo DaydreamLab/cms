@@ -56,7 +56,7 @@ class NewsletterSubscriptionAdminSearchRequest extends CmsSearchRequest
             $q->whereIn('state', [0, 1]);
         }
 
-        if ( $category_id = $validated->get('newsletter_category') ) {
+        if ($category_id = $validated->get('newsletter_category')) {
             $q->whereIn('id', function ($query) use ($category_id) {
                 $query->select('subscription_id')
                     ->from('newsletter_subscription_newsletter_category_maps')
@@ -66,22 +66,22 @@ class NewsletterSubscriptionAdminSearchRequest extends CmsSearchRequest
 
         if ($search = $validated->get('search')) {
             $q->where(function ($q) use ($search) {
-               $q->whereIn('user_id', function ($q) use ($search) {
+                $q->whereIn('user_id', function ($q) use ($search) {
                     $q->select('id')
                         ->from('users')
                         ->where('email', 'like', '%' . $search . '%')
                         ->orWhere('name', 'like', '%' . $search . '%')
                         ->orWhere('mobilePhone', 'like', '%' . $search . '%');
-               })->orWhere(function ($q) use ($search) {
-                   $q->whereIn('user_id', function ($q) use ($search) {
-                       $q->select('user_id')
+                })->orWhere(function ($q) use ($search) {
+                    $q->whereIn('user_id', function ($q) use ($search) {
+                        $q->select('user_id')
                            ->from('users_companies')
                            ->where('name', 'like', '%' . $search . '%');
-                   });
-               });
+                    });
+                });
             });
         }
-
+        $q->whereNotNull('email');
         $validated->put('q', $q);
         $validated->forget('newsletter_category');
 

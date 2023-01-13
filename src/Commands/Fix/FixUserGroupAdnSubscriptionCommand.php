@@ -58,8 +58,10 @@ class FixUserGroupAdnSubscriptionCommand extends Command
             ->get()
             ->groupBy('user_id')
             ->each(function ($g) {
+                $g = $g->fillter(function ($i) {
+                    return in_array($i->id, [6,7]);
+                });
                 if ($g->count() > 1) {
-                    $g->shift();
                     DB::table('users_groups_maps')
                         ->whereIn('id', $g->pluck('id')->all())
                         ->delete();

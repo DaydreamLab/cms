@@ -6,7 +6,6 @@ use Illuminate\Support\ServiceProvider;
 
 class CmsServiceProvider extends ServiceProvider
 {
-
     protected $commands = [
         'DaydreamLab\Cms\Commands\InstallCommand',
         'DaydreamLab\Cms\Commands\CronCommand',
@@ -14,7 +13,9 @@ class CmsServiceProvider extends ServiceProvider
         'DaydreamLab\Cms\Commands\ITSolution\SeedCommand',
         'DaydreamLab\Cms\Commands\ITSolution\InstallCommand',
         'DaydreamLab\Cms\Commands\StaticPage\SeedCommand',
-        'DaydreamLab\Cms\Commands\Fix\FixUserGroupAdnSubscriptionCommand'
+        'DaydreamLab\Cms\Commands\Fix\FixUserGroupAdnSubscriptionCommand',
+        'DaydreamLab\Cms\Commands\Feat\V2InstallCommand',
+        'DaydreamLab\Cms\Commands\Fix\FixUserGroupAdnSubscriptionCommand',
     ];
     /**
      * Bootstrap services.
@@ -23,22 +24,22 @@ class CmsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->publishes([__DIR__. '/constants' => config_path('constants/cms')], 'cms-configs');
-        $this->publishes([__DIR__. '/Configs'   => config_path('daydreamlab')], 'cms-configs');
+        $this->publishes([__DIR__ . '/constants' => config_path('constants/cms')], 'cms-configs');
+        $this->publishes([__DIR__ . '/Configs'   => config_path('daydreamlab')], 'cms-configs');
 
         $this->publishes([
-            __DIR__. '/../public/admin'     => public_path('admin'),
-            __DIR__. '/../resources/admin'  => resource_path('views/admin'),
+            __DIR__ . '/../public/admin'     => public_path('admin'),
+            __DIR__ . '/../resources/admin'  => resource_path('views/admin'),
         ], 'cms-frontend-admin');
 
         $this->publishes([
-            __DIR__. '/../resources/site'   => resource_path('views/site'),
+            __DIR__ . '/../resources/site'   => resource_path('views/site'),
         ], 'cms-frontend-site');
 
         $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'cms');
-        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
-        $this->loadRoutesFrom(__DIR__.'/routes/api.php');
-        $this->loadRoutesFrom(__DIR__.'/routes/web.php');
+        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+        $this->loadRoutesFrom(__DIR__ . '/routes/api.php');
+        $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
     }
 
     /**
