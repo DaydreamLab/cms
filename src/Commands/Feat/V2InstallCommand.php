@@ -34,6 +34,7 @@ class V2InstallCommand extends Command
             if (!$subscription->newsletterCategories->count()) {
                 $subscription->cancelAt = $subscription->updated_at ?: now()->toDateTimeString();
                 $subscription->cancelReason = EnumHelper::SUBSCRIBE_SELF_CANCEL;
+                $subscription->timestamps = false;
                 $subscription->save();
             };
         }
