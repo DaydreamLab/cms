@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Requests\CustomerMessage\Front;
 
 use DaydreamLab\Cms\Helpers\DataHelper;
 use DaydreamLab\Cms\Requests\ComponentBase\CmsStoreRequest;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class CustomerMessageFrontStoreRequest extends CmsStoreRequest
@@ -59,6 +60,7 @@ class CustomerMessageFrontStoreRequest extends CmsStoreRequest
     public function validated()
     {
         $validated = parent::validated();
+        $validated->put('email', Str::lower($validated->get('email')));
         $validated->put('status', DataHelper::CUSTOMER_MESSAGE_STATUS[0]);
 
         return $validated;
