@@ -103,7 +103,7 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
                 'email'                 => $user->company->email,
                 'cancelAt'              => null,
                 'cancelReason'          => null,
-                'newsletterCategoryIds' => [$subCategoryId]
+                'newsletterCategoryIds' => $subCategoryId ? [$subCategoryId] : []
             ];
 
             if ($data['id']) {
