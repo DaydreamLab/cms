@@ -36,8 +36,8 @@ class NewsletterSubscription extends BaseModel
         'state',
         'cancelAt',
         'cancelReason',
-        'locked_by',
-        'locked_at'
+//        'locked_by',
+//        'locked_at'
     ];
 
 
