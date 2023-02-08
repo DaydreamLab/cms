@@ -14,7 +14,7 @@ class CreateLanguagesTable extends Migration
     public function up()
     {
         Schema::create('languages', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('title');
             $table->string('type');
             $table->string('code');
@@ -29,8 +29,8 @@ class CreateLanguagesTable extends Migration
 //            $table->string('sitename')->nullable();
 //            $table->unsignedInteger('site_id');
 //            $table->integer('order')->nullable()->default(1);
-            $table->unsignedInteger('created_by');
-            $table->unsignedInteger('updated_by')->nullable();
+            $table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
         });
     }

@@ -2,10 +2,10 @@
 
 namespace DaydreamLab\Cms\Requests\Language\Admin;
 
-use DaydreamLab\Cms\Requests\ComponentBase\CmsSearchRequest;
+use DaydreamLab\JJAJ\Requests\ListRequest;
 use Illuminate\Validation\Rule;
 
-class LanguageAdminSearchPost extends CmsSearchRequest
+class LanguageAdminSearchPost extends ListRequest
 {
     protected $apiMethod = 'searchLanguage';
 
@@ -33,6 +33,6 @@ class LanguageAdminSearchPost extends CmsSearchRequest
                 Rule::in(['content', 'system'])
             ]
         ];
-        return array_merge(parent::rules(), $rules);
+        return array_merge($rules, parent::rules());
     }
 }

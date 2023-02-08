@@ -1,11 +1,10 @@
 <?php
-
 namespace DaydreamLab\Cms\Models\Extrafield;
 
-use DaydreamLab\User\Traits\Model\WithAccess;
-use DaydreamLab\JJAJ\Traits\UserInfo;
+use DaydreamLab\Cms\Traits\Model\UserInfo;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\JJAJ\Models\BaseModel;
+use DaydreamLab\User\Traits\Model\WithAccess;
 
 class Extrafield extends BaseModel
 {
@@ -28,7 +27,6 @@ class Extrafield extends BaseModel
      */
     protected $fillable = [
         'title',
-        'content_type',
         'alias',
         'group_id',
         'state',
@@ -67,11 +65,11 @@ class Extrafield extends BaseModel
      * @var array
      */
     protected $appends = [
-        //'access_title',
-        //'group_title',
-        //'creator',
-        //'updater',
-        //'locker',
+        'access_title',
+        'group_title',
+        'creator',
+        'updater',
+        'locker',
     ];
 
 
@@ -98,6 +96,6 @@ class Extrafield extends BaseModel
 
     public function getGroupTitleAttribute()
     {
-        return '';//$this->group()->first()->title;
+        return $this->group()->first()->title;
     }
 }

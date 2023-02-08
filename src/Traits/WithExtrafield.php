@@ -2,12 +2,10 @@
 
 namespace DaydreamLab\Cms\Traits;
 
-use DaydreamLab\Cms\Models\Item\Item;
 use DaydreamLab\Cms\Models\Extrafield\Admin\ExtrafieldAdmin;
 use DaydreamLab\Cms\Models\Extrafield\Admin\ExtrafieldGroupAdmin;
 use DaydreamLab\Cms\Models\Extrafield\Extrafield;
 use DaydreamLab\Cms\Models\Extrafield\ExtrafieldGroup;
-use DaydreamLab\Cms\Models\Extrafield\ExtrafieldValue;
 use DaydreamLab\Cms\Models\Extrafield\Front\ExtrafieldFront;
 use DaydreamLab\Cms\Models\Extrafield\Front\ExtrafieldGroupFront;
 use DaydreamLab\JJAJ\Helpers\Helper;
@@ -25,46 +23,52 @@ trait WithExtrafield
 
     public function getExtrafieldsAttribute($value)
     {
+        $value = $value ? $value : json_encode([]);
+        $extrafield_ids = [];
+        foreach (json_decode($value) as $extrafield)
+        {
+            $extrafield_ids[] = $extrafield->id;
+        }
 
-        $json_data_field_type = ['multiSelect', 'repeater'];
-        $data = [];
-        $extrafields = Extrafield::where('content_type', $this->category->content_type)->get()->toArray();
 
-        $extrafields = array_merge($extrafields, Extrafield::where('category_id', $this->category->id)->get()->toArray());
-        $extrafieldsValue = ExtrafieldValue::where('item_id', $this->id)->get();
-        foreach ($extrafields as $extrafield) {
-            $e['id'] = $extrafield['id'];
-            $e['type'] = $extrafield['type'];
-            $e['alias'] = $extrafield['alias'];
-            $e['title'] = $extrafield['title'];
-            $e_v = $extrafieldsValue->where('extrafield_id', $extrafield['id'])->first();
-            if (!$e_v) {
-                if ( in_array($extrafield['type'], $json_data_field_type) ) {
-                    $e['value'] = ($extrafield['value']) ? json_decode($extrafield['value'], true) : [];
-                } else {
-                    $e['value'] = ($extrafield['value'] !== null) ? $extrafield['value'] : '';
-                }
-            } else {
-                if ( in_array($extrafield['type'], $json_data_field_type) ) {
-                    $e['value'] = json_decode($e_v->value, true);
-                } else {
-                    $e['value'] = $e_v->value;
+        if($this->model_type == 'parent')
+        {
+            $extrafields_data = Extrafield::whereIn('id', $extrafield_ids)->get();
+        }
+        elseif($this->model_type == 'front')
+        {
+            $extrafields_data = ExtrafieldFront::whereIn('id', $extrafield_ids)->get();
+        }
+        else
+        {
+            $extrafields_data = ExtrafieldAdmin::whereIn('id', $extrafield_ids)->get();
+        }
+
+        // 組合實際的資料與額外欄位的初始定義
+        $data = (object)[];
+        foreach ($extrafields_data as $extrafield_data)
+        {
+            foreach (json_decode($value) as $extrafield)
+            {
+                $extrafield_data->value = ($extrafield_data->type == 'multipleSelect') ? [] : $extrafield_data->value;
+                if($extrafield->id == $extrafield_data->id) {
+                    $extrafield_data->value  = $extrafield->value;
+                    $extrafield_data->params = empty($extrafield->params) ? $extrafield_data->params : $extrafield->params;
                 }
             }
-            if ( isset($extrafield['params']['type']) ) {
-                if ( $extrafield['params']['type'] == 'category' ) {
-                    $items = Item::where('category_id', $extrafield['params']['category_id'])->where('state', 1)->get();
-                    $options = $items->map(function ($i) {
-                        return ['name' => $i->title, 'value' => $i->id];
-                    })->toArray();
-                } else {
-                    $options = [];
-                }
-                $e['params'] = ['option' => $options];
-            } else {
-                $e['params'] = $extrafield['params'];
+
+            if($this->model_type == 'parent')
+            {
+                $data->{$extrafield_data->id} = (object) $extrafield_data;
             }
-            $data[$e['alias']] = $e;
+            elseif($this->model_type == 'front')
+            {
+                $data->{$extrafield_data->alias} = (object) $extrafield_data;
+            }
+            else
+            {
+                $data->{$extrafield_data->id} = (object) $extrafield_data;
+            }
         }
 
         return $data;
@@ -98,6 +102,19 @@ trait WithExtrafield
         }
 
         return $this->class_extrafield_group;
+    }
+
+
+    public function setExtrafieldsAttribute($value)
+    {
+        $data = [];
+
+        foreach ($value as $item)
+        {
+            $data[] = (object)$item;
+        }
+
+        $this->attributes['extrafields'] = json_encode($data);
     }
 
 }

@@ -2,11 +2,13 @@
 
 namespace DaydreamLab\Cms\Resources\Tag\Admin\Models;
 
+use DaydreamLab\Cms\Traits\Resource\CmsResource;
 use DaydreamLab\Dddream\Helpers\ResourceHelper;
-use DaydreamLab\JJAJ\Resources\BaseJsonResource;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-class TagAdminListResource extends BaseJsonResource
+class TagAdminListResource extends JsonResource
 {
+    use CmsResource;
     /**
      * Transform the resource into an array.
      *
@@ -15,21 +17,17 @@ class TagAdminListResource extends BaseJsonResource
      */
     public function toArray($request)
     {
-        $params = $this->params;
         return [
-            'id'                => $this->id,
-            'title'             => $this->title,
-            'alias'             => $this->alias,
-            'ordering'          => $this->ordering,
-            'state'             => $this->state,
-            'description'       => $this->description,
-            'content_type'      => $this->content_type,
-            'extension'         => $this->extension,
-            'hits'              => $this->hits,
-            'hot'               => isset($params['hot']) ? $params['hot'] : 0,
-            'access'            => $this->access,
-//            'language_title'    => $this->language_title,
-            'locker'            => ($this->locker) ? $this->locker->only(['id', 'uuid', 'name']) : []
+            'id'                        => $this->id,
+            'title'                     => $this->title,
+            'alias'                     => $this->alias,
+            'ordering'                  => $this->ordering,
+            'state'                     => $this->state,
+            'description'               => $this->description,
+            'content_type'              => $this->content_type,
+            'hits'                      => $this->hits,
+            'access'                    => $this->access,
+            'language_title'            => $this->language_title,
         ];
     }
 }

@@ -2,10 +2,12 @@
 
 namespace DaydreamLab\Cms\Resources\Menu\Admin\Models;
 
-use DaydreamLab\JJAJ\Resources\BaseJsonResource;
+use DaydreamLab\Cms\Traits\Resource\CmsResource;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-class MenuAdminResource extends BaseJsonResource
+class MenuAdminResource extends JsonResource
 {
+    use CmsResource;
     /**
      * Transform the resource into an array.
      *
@@ -14,7 +16,6 @@ class MenuAdminResource extends BaseJsonResource
      */
     public function toArray($request)
     {
-        $tz = $request->user('api')->timezone;
         return [
             'id'                    => $this->id,
             'title'                 => $this->title,
@@ -24,6 +25,8 @@ class MenuAdminResource extends BaseJsonResource
             'category_title'        => $this->category_title,
             'state'                 => $this->state,
             'description'           => $this->description,
+            'metadata'              => $this->metadata,
+            'metakeywords'          => $this->metakeywords,
             'site_id'               => $this->site,
             'host'                  => $this->host,
             'host_title'            => $this->host_title,
@@ -34,14 +37,14 @@ class MenuAdminResource extends BaseJsonResource
             'hidden'                => $this->hidden,
             'params'                => $this->params,
             'extrafields'           => $this->extrafields,
-            'created_at'            => $this->getDateTimeString($this->created_at, $tz),
-            'updated_at'            => $this->getDateTimeString($this->updated_at, $tz),
-            'locked_at'             => $this->getDateTimeString($this->locked_at, $tz),
-            'publish_up'            => $this->getDateTimeString($this->publish_up, $tz),
-            'publish_down'          => $this->getDateTimeString($this->publish_down, $tz),
-            'creatorName'           => $this->creatorName,
-            'updaterName'           => $this->updaterName,
-            'lockerName'            => $this->lockerName,
+            'created_at'            => $this->getDateTimeString($this->created_at, config('daydreamlab.cms.timezone')),
+            'updated_at'            => $this->getDateTimeString($this->updated_at, config('daydreamlab.cms.timezone')),
+            'locked_at'             => $this->getDateTimeString($this->locked_at, config('daydreamlab.cms.timezone')),
+            'publish_up'            => $this->getDateTimeString($this->locked_at, config('daydreamlab.cms.timezone')),
+            'publish_down'          => $this->getDateTimeString($this->publish_down, config('daydreamlab.cms.timezone')),
+            'creator'               => $this->creator,
+            'updater'               => $this->updater,
+            'locker'                => $this->locker,
         ];
     }
 }

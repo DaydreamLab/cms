@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Extrafield\Admin;
 
-use DaydreamLab\Cms\Requests\ComponentBase\CmsStoreRequest;
+use DaydreamLab\JJAJ\Requests\AdminRequest;
 
-class ExtrafieldGroupAdminStorePost extends CmsStoreRequest
+class ExtrafieldGroupAdminStorePost extends AdminRequest
 {
     protected $apiMethod = 'storeExtrafieldGroup';
 
@@ -30,7 +30,6 @@ class ExtrafieldGroupAdminStorePost extends CmsStoreRequest
             'id'            => 'nullable|integer',
             'title'         => 'required|string',
             'description'   => 'nullable|string',
-            'ordering'      => 'nullable|integer',
             'access'        => 'nullable|integer',
             'created_by'    => 'nullable|integer',
         ];

@@ -2,10 +2,12 @@
 
 namespace DaydreamLab\Cms\Resources\Module\Admin\Models;
 
-use DaydreamLab\JJAJ\Resources\BaseJsonResource;
+use DaydreamLab\Cms\Traits\Resource\CmsResource;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-class ModuleAdminListResource extends BaseJsonResource
+class ModuleAdminListResource extends JsonResource
 {
+    use CmsResource;
     /**
      * Transform the resource into an array.
      *

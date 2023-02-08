@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Commands;
 
+use DaydreamLab\JJAJ\Helpers\Helper;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 
@@ -26,27 +27,30 @@ class InstallCommand extends Command
 
 
     protected $constants = [
+        'category',
+        'cron',
+        'extrafield',
+        'item',
+        'language',
+        'menu',
+        'module',
+        'option',
+        'pagebuilder',
+        'setting',
+        'site',
+        'tag',
     ];
 
 
     protected $seeders = [
-        'ApisTableSeeder',
         'AssetsTableSeeder',
-        'BrandsTableSeeder',
-        'CategoriesTableSeeder',
-        'ExtrafieldsTableSeeder',
-        'ProductsTableSeeder',
         'ItemsTableSeeder',
-        'NewslettersTableSeeder',
-        'FilesTableSeeder',
         'SitesTableSeeder',
         'LanguagesTableSeeder',
         'MenusTableSeeder',
         'ModulesTableSeeder',
         'TagsTableSeeder',
-        'ZeroneAssetsGroupTableSeeder',
-        'ZeroneCompanyTableSeeder',
-        'ZeroneUserTableSeeder',
+        'CategoriesTableSeeder',
     ];
 
 
@@ -67,11 +71,6 @@ class InstallCommand extends Command
      */
     public function handle()
     {
-//        $this->call('db:seed', [
-//            '--class' => $this->seeder_namespace . 'ZeroneCompanyTableSeeder'
-//        ]);
-//        exit();
-
         $this->call('user:install');
 
         foreach ($this->seeders as $seeder) {
@@ -81,7 +80,10 @@ class InstallCommand extends Command
             ]);
         }
 
-        if ($this->option('publish')) {
+        $this->deleteConstants();
+
+        if ($this->option('publish'))
+        {
             $this->call('cms:publish');
         }
 
@@ -95,10 +97,19 @@ class InstallCommand extends Command
     }
 
 
+    public function deleteConstants()
+    {
+        $constants_path     = 'config/constants/';
+        foreach ($this->constants as $constant) {
+            File::delete($constants_path . $constant . '.php');
+        }
+    }
+
+
     public function deleteResources()
     {
-        File::deleteDirectory('Resources/js');
-        File::deleteDirectory('Resources/assets');
-        File::deleteDirectory('Resources/views');
+        File::deleteDirectory('resources/js');
+        File::deleteDirectory('resources/assets');
+        File::deleteDirectory('resources/views');
     }
 }

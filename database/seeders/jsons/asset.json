@@ -24,13 +24,11 @@
         "children": [],
         "apis": [
           {
-              "name": "取得全站設定",
             "method": "getSetting",
             "url": "/admin/setting",
             "created_by": 1
           },
           {
-              "name": "編輯全站設定",
             "method": "editSetting",
             "url": "/admin/setting/store",
             "created_by": 1
@@ -52,45 +50,43 @@
         "children": [],
         "apis": [
           {
-              "name": "取得語言",
             "method": "getLanguage",
             "url": "/admin/language/{id}",
             "created_by": 1
           },
           {
-              "name": "新增語言",
             "method": "addLanguage",
             "url": "/admin/language/store",
             "created_by": 1
           },
           {
-              "name": "編輯語言",
             "method": "editLanguage",
             "url": "/admin/language/store",
             "created_by": 1
           },
           {
-              "name": "刪除語言",
             "method": "deleteLanguage",
             "url": "/admin/language/remove",
             "created_by": 1
           },
           {
-              "name": "搜尋語言",
             "method": "searchLanguage",
             "url": "/admin/language/search",
             "created_by": 1
           },
           {
-              "name": "更新語言狀態",
             "method": "updateLanguageState",
             "url": "/admin/language/state",
             "created_by": 1
           },
           {
-              "name": "設定預設語言",
             "method": "setDefaultLanguage",
             "url": "/admin/language/default",
+            "created_by": 1
+          },
+          {
+            "method": "checkoutLanguage",
+            "url": "/admin/language/checkout",
             "created_by": 1
           }
         ]
@@ -122,49 +118,41 @@
         "children": [],
         "apis": [
           {
-              "name": "取得網站",
             "method": "getSite",
             "url": "/admin/site/{id}",
             "created_by": 1
           },
           {
-              "name": "取得網站清單",
             "method": "getSiteList",
             "url": "/admin/site/getList",
             "created_by": 1
           },
           {
-              "name": "新增網站",
             "method": "addSite",
             "url": "/admin/site/store",
             "created_by": 1
           },
           {
-              "name": "編輯網站",
             "method": "editSite",
             "url": "/admin/site/store",
             "created_by": 1
           },
           {
-              "name": "刪除網站",
             "method": "deleteSite",
             "url": "/admin/site/remove",
             "created_by": 1
           },
           {
-              "name": "搜尋網站",
             "method": "searchSite",
             "url": "/admin/site/search",
             "created_by": 1
           },
           {
-              "name": "更新網站狀態",
             "method": "updateSiteState",
             "url": "/admin/site/state",
             "created_by": 1
           },
           {
-              "name": "回存網站",
             "method": "checkoutSite",
             "url": "/admin/site/remove",
             "created_by": 1
@@ -226,43 +214,36 @@
         "children": [],
         "apis": [
           {
-              "name": "取得選單",
             "method": "getMenu",
             "url": "/admin/menu/{id}",
             "created_by": 1
           },
           {
-              "name": "新增選單",
             "method": "addMenu",
             "url": "/admin/menu/store",
             "created_by": 1
           },
           {
-              "name": "編輯選單",
             "method": "editMenu",
             "url": "/admin/menu/store",
             "created_by": 1
           },
           {
-              "name": "刪除選單",
             "method": "deleteMenu",
             "url": "/admin/menu/remove",
             "created_by": 1
           },
           {
-              "name": "搜尋選單",
             "method": "searchMenu",
             "url": "/admin/menu/search",
             "created_by": 1
           },
           {
-              "name": "更新選單狀態",
             "method": "updateMenuState",
             "url": "/admin/menu/state",
             "created_by": 1
           },
           {
-              "name": "回存選單",
             "method": "checkoutMenu",
             "url": "/admin/menu/checkout",
             "created_by": 1
@@ -310,43 +291,36 @@
         "children": [],
         "apis": [
           {
-              "name": "取得模組",
             "method": "getModule",
             "url": "/admin/module/{id}",
             "created_by": 1
           },
           {
-              "name": "新增模組",
             "method": "addModule",
             "url": "/admin/module/store",
             "created_by": 1
           },
           {
-              "name": "編輯模組",
             "method": "editModule",
             "url": "/admin/module/store",
             "created_by": 1
           },
           {
-              "name": "刪除模組",
             "method": "deleteModule",
             "url": "/admin/module/remove",
             "created_by": 1
           },
           {
-              "name": "搜尋模組",
             "method": "searchModule",
             "url": "/admin/module/search",
             "created_by": 1
           },
           {
-              "name": "更新模組狀態",
             "method": "updateModuleState",
             "url": "/admin/module/state",
             "created_by": 1
           },
           {
-              "name": "回存模組",
             "method": "checkoutModule",
             "url": "/admin/module/checkout",
             "created_by": 1
@@ -394,49 +368,41 @@
         "children": [],
         "apis": [
           {
-              "name": "取得項目",
             "method": "getItem",
             "url": "/admin/item/{id}",
             "created_by": 1
           },
           {
-              "name": "新增項目",
             "method": "addItem",
             "url": "/admin/item/store",
             "created_by": 1
           },
           {
-              "name": "編輯項目",
             "method": "editItem",
             "url": "/admin/item/store",
             "created_by": 1
           },
           {
-              "name": "刪除項目",
             "method": "deleteItem",
             "url": "/admin/item/remove",
             "created_by": 1
           },
           {
-              "name": "搜尋項目",
             "method": "searchItem",
             "url": "/admin/item/search",
             "created_by": 1
           },
           {
-              "name": "更新項目狀態",
             "method": "updateItemState",
             "url": "/admin/item/state",
             "created_by": 1
           },
           {
-              "name": "更新項目精選",
             "method": "updateItemFeatured",
             "url": "/admin/item/featured",
             "created_by": 1
           },
           {
-              "name": "回存項目",
             "method": "checkoutItem",
             "url": "/admin/item/checkout",
             "created_by": 1
@@ -471,43 +437,36 @@
         "children": [],
         "apis": [
           {
-              "name": "取得分類",
             "method": "getCategory",
             "url": "/admin/category/{id}",
             "created_by": 1
           },
           {
-              "name": "新增分類",
             "method": "addCategory",
             "url": "/admin/category/store",
             "created_by": 1
           },
           {
-              "name": "編輯分類",
             "method": "editCategory",
             "url": "/admin/category/store",
             "created_by": 1
           },
           {
-              "name": "刪除分類",
             "method": "deleteCategory",
             "url": "/admin/category/remove",
             "created_by": 1
           },
           {
-              "name": "搜尋分類",
             "method": "searchCategory",
             "url": "/admin/category/search",
             "created_by": 1
           },
           {
-              "name": "更新分類狀態",
             "method": "updateCategoryState",
             "url": "/admin/category/state",
             "created_by": 1
           },
           {
-              "name": "回存分類",
             "method": "checkoutCategory",
             "url": "/admin/category/checkout",
             "created_by": 1
@@ -542,43 +501,41 @@
         "children": [],
         "apis": [
           {
-              "name": "取得額外欄位",
             "method": "getExtrafield",
             "url": "/admin/extrafield/{id}",
             "created_by": 1
           },
           {
-              "name": "新增額外欄位",
             "method": "addExtrafield",
             "url": "/admin/extrafield/store",
             "created_by": 1
           },
           {
-              "name": "編輯額外欄位",
             "method": "editExtrafield",
             "url": "/admin/extrafield/store",
             "created_by": 1
           },
           {
-              "name": "刪除額外欄位",
             "method": "deleteExtrafield",
             "url": "/admin/extrafield/remove",
             "created_by": 1
           },
           {
-              "name": "搜尋額外欄位",
             "method": "searchExtrafield",
             "url": "/admin/extrafield/search",
             "created_by": 1
           },
           {
-              "name": "更新額外欄位狀態",
             "method": "updateExtrafieldState",
             "url": "/admin/extrafield/state",
             "created_by": 1
           },
           {
-              "name": "回存額外欄位",
+            "method": "updateStateOther",
+            "url": "/admin/extrafield/state",
+            "created_by": 1
+          },
+          {
             "method": "checkoutExtrafield",
             "url": "/admin/extrafield/checkout",
             "created_by": 1
@@ -612,43 +569,36 @@
         "children": [],
         "apis": [
           {
-              "name": "取得額外欄位群組",
             "method": "getExtrafieldGroup",
             "url": "/admin/extrafield_group/{id}",
             "created_by": 1
           },
           {
-              "name": "新增額外欄位群組",
             "method": "addExtrafieldGroup",
             "url": "/admin/extrafield_group/store",
             "created_by": 1
           },
           {
-              "name": "編輯額外欄位群組",
             "method": "editExtrafieldGroup",
             "url": "/admin/extrafield_group/store",
             "created_by": 1
           },
           {
-              "name": "刪除額外欄位群組",
             "method": "deleteExtrafieldGroup",
             "url": "/admin/extrafield_group/remove",
             "created_by": 1
           },
           {
-              "name": "搜尋額外欄位群組",
             "method": "searchExtrafieldGroup",
             "url": "/admin/extrafield_group/search",
             "created_by": 1
           },
           {
-              "name": "更新額外欄位群組狀態",
             "method": "updateExtrafieldGroupState",
             "url": "/admin/extrafield_group/state",
             "created_by": 1
           },
           {
-              "name": "回存額外欄位群組",
             "method": "checkoutExtrafieldGroup",
             "url": "/admin/extrafield_group/checkout",
             "created_by": 1
@@ -682,43 +632,36 @@
         "children": [],
         "apis": [
           {
-              "name": "取得標籤",
             "method": "getTag",
             "url": "/admin/tag/{id}",
             "created_by": 1
           },
           {
-              "name": "新增標籤",
             "method": "addTag",
             "url": "/admin/tag/store",
             "created_by": 1
           },
           {
-              "name": "編輯標籤",
             "method": "editTag",
             "url": "/admin/tag/store",
             "created_by": 1
           },
           {
-              "name": "刪除標籤",
             "method": "deleteTag",
             "url": "/admin/tag/remove",
             "created_by": 1
           },
           {
-              "name": "搜尋標籤",
             "method": "searchTag",
             "url": "/admin/tag/search",
             "created_by": 1
           },
           {
-              "name": "更新標籤狀態",
             "method": "updateTagState",
             "url": "/admin/tag/state",
             "created_by": 1
           },
           {
-              "name": "回存標籤",
             "method": "checkoutTag",
             "url": "/admin/tag/checkout",
             "created_by": 1
@@ -752,66 +695,38 @@
         "children": [],
         "apis": [
           {
-              "name": "上傳媒體檔案",
             "method": "uploadMedia",
             "url": "/admin/media/store",
             "created_by": 1
           },
           {
-              "name": "刪除媒體檔案",
             "method": "deleteMedia",
             "url": "/admin/media/remove",
             "created_by": 1
           },
           {
-              "name": "重新命名媒體檔案",
             "method": "renameMedia",
             "url": "/admin/media/rename",
             "created_by": 1
           },
           {
-              "name": "移動媒體檔案",
             "method": "moveMedia",
             "url": "/admin/media/move",
             "created_by": 1
           },
           {
-              "name": "取得所有媒體檔案",
             "method": "getMediaAllItems",
             "url": "/admin/media/getAllItems",
             "created_by": 1
           },
           {
-              "name": "取得所有媒體檔案目錄",
             "method": "getMediaAllFolder",
             "url": "/admin/media/getAllFolder",
             "created_by": 1
           },
           {
-              "name": "新增媒體檔案資料夾",
             "method": "createMediaFolder",
             "url": "/admin/media/createFolder",
-            "created_by": 1
-          }
-        ]
-      },
-      {
-        "title": "COM_CONTENT_SEARCH_STATISTICS_TITLE",
-        "path": "/search",
-        "component": "content/search",
-        "service": "SearchAdminService",
-        "type": "menu",
-        "redirect": "",
-        "icon": "search",
-        "state": 1,
-        "showNav": 1,
-        "created_by": 1,
-        "children": [],
-        "apis": [
-          {
-              "name": "搜尋關鍵字統計",
-            "method": "searchkeywordList",
-            "url": "/admin/search/keywordList",
             "created_by": 1
           }
         ]

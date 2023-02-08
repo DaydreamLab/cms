@@ -8,12 +8,15 @@ use DaydreamLab\Cms\Events\Modify;
 use DaydreamLab\Cms\Events\Remove;
 use DaydreamLab\Cms\Events\State;
 use DaydreamLab\Cms\Services\CmsService;
+use DaydreamLab\JJAJ\Helpers\InputHelper;
 use DaydreamLab\JJAJ\Services\BaseService;
 use Illuminate\Support\Collection;
 
 class ExtrafieldGroupService extends CmsService
 {
     protected $modelName = 'ExtrafieldGroup';
+
+    protected $modelType = 'Base';
 
     public function __construct(ExtrafieldGroupRepository $repo)
     {
@@ -57,5 +60,34 @@ class ExtrafieldGroupService extends CmsService
         event(new State($this->getServiceName(), $result, $input, $this->user));
 
         return $result;
+    }
+
+
+    public function store(Collection $input)
+    {
+        $input = $this->setStoreDefaultInput($input);
+
+        if ($input->has('extrafields')) {
+            $extrafields = $input->get('extrafields');
+            $extrafields_data = [];
+            foreach ($extrafields as $extrafield) {
+                $temp = [];
+                $temp['id'] = $extrafield['id'];
+                $temp['value'] = $extrafield['value'];
+                if (isset($extrafield['params'])) {
+                    $temp['params'] = $extrafield['params'];
+                } else {
+                    $temp['params'] = [];
+                }
+                $extrafields_data[] = $temp;
+            }
+            $input->put('extrafields', $extrafields_data);
+        }
+
+        if (InputHelper::null($input, 'id')) {
+            return $this->add($input);
+        } else {
+            return $this->modify($input);
+        }
     }
 }

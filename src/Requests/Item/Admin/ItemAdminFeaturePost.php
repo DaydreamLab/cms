@@ -2,11 +2,13 @@
 
 namespace DaydreamLab\Cms\Requests\Item\Admin;
 
-use DaydreamLab\Cms\Requests\ComponentBase\CmsFeaturedRequest;
+use DaydreamLab\Cms\Requests\Item\ItemFeaturePost;
+use DaydreamLab\JJAJ\Requests\AdminRequest;
+use Illuminate\Validation\Rule;
 
-class ItemAdminFeaturePost extends CmsFeaturedRequest
+class ItemAdminFeaturePost extends AdminRequest
 {
-    protected $apiMethod = 'featuredItem';
+    protected $apiMethod = 'updateItemFeatured';
 
     protected $modelName = 'Item';
     /**
@@ -27,6 +29,12 @@ class ItemAdminFeaturePost extends CmsFeaturedRequest
     public function rules()
     {
         $rules = [
+            'ids'       => 'required|array',
+            'ids.*'     => 'required|integer',
+            'featured'  => [
+                'required',
+                Rule::in([0,1])
+            ]
         ];
         return array_merge(parent::rules(), $rules);
     }

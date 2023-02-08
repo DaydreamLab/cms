@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Notification;
 
 class FormFrontService extends FormService
 {
+    protected $type = 'Front';
+
     public function __construct(FormFrontRepository $repo)
     {
         parent::__construct($repo);

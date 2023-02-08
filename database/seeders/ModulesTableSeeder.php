@@ -27,6 +27,8 @@ class ModulesTableSeeder extends Seeder
             'extension'     => 'module',
             'ordering'      => 1,
             'access'        => 1,
+            'metadesc'      => '',
+            'metakeywords'  => '',
             'extrafields'   => [],
             'params'        => (object)[],
             'created_by'    => 1,
@@ -47,8 +49,8 @@ class ModulesTableSeeder extends Seeder
             unset($category['modules']);
 
             $category['parent_id'] = $parent->id;
-
-            $category = $this->categoryAdminService->store(Helper::collect($category));
+            
+            $category = $this->categoryAdminService->store(collect($category));
 
             foreach ($modules as $module) {
                 $module['category_id'] = $category->id;

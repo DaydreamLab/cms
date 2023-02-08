@@ -3,18 +3,18 @@
 namespace DaydreamLab\Cms\Models\Category;
 
 use DaydreamLab\Cms\Models\Item\Item;
+use DaydreamLab\Cms\Traits\Model\UserInfo;
 use DaydreamLab\Cms\Traits\Model\WithLanguage;
 use DaydreamLab\Cms\Traits\WithExtrafield;
+use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
-use DaydreamLab\JJAJ\Traits\UserInfo;
 use DaydreamLab\User\Traits\Model\WithAccess;
-use Illuminate\Support\Str;
 use Kalnoy\Nestedset\NodeTrait;
 
 class Category extends BaseModel
 {
-    use NodeTrait, WithAccess, WithLanguage, /*WithExtrafield,*/ UserInfo,
+    use NodeTrait, WithAccess, WithLanguage, WithExtrafield, UserInfo,
         RecordChanger {
         RecordChanger::boot as traitBoot;
     }
@@ -51,11 +51,11 @@ class Category extends BaseModel
         'extension',
         'hits',
         'access',
+        'ordering',
         'language',
         'template',
-        'ordering',
-        'featured',
-        'featured_ordering',
+        'metadesc',
+        'metakeywords',
         'params',
         'item_extrafield_group_id',
         'extrafield_group_id',
@@ -69,7 +69,11 @@ class Category extends BaseModel
         'publish_down',
     ];
 
-
+//    protected $with = [
+//        'creator',
+//        'updater',
+//        'locker'
+//    ];
     /**
      * The attributes that should be hidden for arrays
      *
@@ -93,37 +97,29 @@ class Category extends BaseModel
      * @var array
      */
     protected $appends = [
+        'creator',
+        'updater',
+        'locker',
         'tree_title',
         'tree_list_title',
         'access_title',
         'language_title',
-        //'extrafield_group_title',
+        'extrafield_group_title',
     ];
 
 
     protected $casts = [
         'extrafields'   => 'array',
         'params'        => 'array',
+        'locked_at'     => 'datetime:Y-m-d H:i:s',
+        'publish_up'    => 'datetime:Y-m-d H:i:s',
+        'publish_down'  => 'datetime:Y-m-d H:i:s',
     ];
 
 
     public static function boot()
     {
         self::traitBoot();
-
-        static::creating(function ($item) {
-            if ($item->state && !$item->publish_up) {
-                $item->publish_up = now();
-            }
-
-            if (!$item->alias) {
-                $item->alias = Str::random(8);
-            }
-
-            $item->path = $item->parent
-                ? $item->parent->path . '/' . $item->alias
-                : '/' . $item->alias;
-        });
     }
 
 

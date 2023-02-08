@@ -72,5 +72,22 @@ class MenusTableSeeder extends Seeder
             'access'        => 1,
             'created_by'    => 1,
         ]);
+
+        $menu_root = Menu::create([
+            'title'         => 'ROOT',
+            'alias'         => 'menu',
+            'path'          => '/menu',
+            'host'          => '',
+            'category_id'   => $category_root->id,
+            'ordering'      => 1,
+            'state'         => 1,
+            'description'   => '',
+            'access'        => 1,
+            'language'      => '*',
+            'params'        => [],
+            'created_by'    => 1,
+        ]);
     }
+
+
 }

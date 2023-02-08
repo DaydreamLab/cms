@@ -17,6 +17,8 @@ class ItemService extends CmsService
 {
     protected $modelName = 'Item';
 
+    protected $modelType = 'Base';
+
     public function __construct(ItemRepository $repo)
     {
         parent::__construct($repo);
@@ -36,7 +38,22 @@ class ItemService extends CmsService
 
     public function featured(Collection $input)
     {
-        $result = parent::featured($input);
+        $result = false;
+        foreach ($input->get('ids') as $id) {
+            $item = $this->checkItem(collect(['id' => $id]));
+            $result =  $this->repo->featured($item, $input->get('featured'));
+            if(!$result) break;
+        }
+
+        $action = $input->get('featured') == 0
+            ? 'Unfeatured'
+            : 'Featured';
+        if ($result) {
+            $this->status   = $action.'Success';
+        } else {
+            $this->status   = $action.'Fail';
+            $this->response = null;
+        }
 
         event(new Featured($this->getServiceName(), $result, $input, $this->user));
 

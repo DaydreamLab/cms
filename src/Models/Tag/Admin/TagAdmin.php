@@ -12,4 +12,5 @@ class TagAdmin extends Tag
      */
     protected $table = 'tags';
 
+    protected $model_type = 'admin';
 }

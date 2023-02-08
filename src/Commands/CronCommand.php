@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use DaydreamLab\Cms\Models\Category\Category;
 use DaydreamLab\Cms\Models\Cms\CmsCronJob;
 use DaydreamLab\Cms\Models\Item\Item;
-use DaydreamLab\Cms\Models\Product\Product;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use Illuminate\Console\Command;
 
@@ -33,7 +32,6 @@ class CronCommand extends Command
 
     protected $categoryModel;
 
-    protected $productModel;
     /**
      * Create a new command instance.
      *
@@ -44,7 +42,6 @@ class CronCommand extends Command
         $this->cmsCronJobModel  = new CmsCronJob();
         $this->itemModel        = new Item();
         $this->categoryModel    = new Category();
-        $this->productModel     = new Product();
         parent::__construct();
     }
 
@@ -59,13 +56,13 @@ class CronCommand extends Command
         $items->each(function ($item, $key){
            if ($item->table == 'items') {
                $model = $this->itemModel;
-           } elseif ($item->table == 'categories') {
+           }
+           elseif ($item->table == 'categories') {
                $model = $this->categoryModel;
-           } elseif ($item->table == 'products') {
-               $model = $this->productModel;
            }
 
            if ($item->type == 'up') {
+
                if (Carbon::parse($item->time) < Carbon::now()) {
                    $up_item = $model->find($item->item_id);
                    if ($up_item) {
@@ -74,7 +71,8 @@ class CronCommand extends Command
                    }
                    $item->delete();
                }
-           } else {
+           }
+           else {
                if (Carbon::parse($item->time) < Carbon::now()) {
                    $down_item = $model->find($item->item_id);
                    if ($down_item) {

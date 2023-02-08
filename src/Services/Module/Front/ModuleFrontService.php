@@ -3,21 +3,24 @@
 namespace DaydreamLab\Cms\Services\Module\Front;
 
 use DaydreamLab\Cms\Models\Menu\Front\MenuFront;
+use DaydreamLab\Cms\Models\Item\Item;
 use DaydreamLab\Cms\Models\Site\Site;
-use DaydreamLab\Cms\Repositories\Menu\Front\MenuFrontRepository;
 use DaydreamLab\Cms\Repositories\Module\Front\ModuleFrontRepository;
 use DaydreamLab\Cms\Repositories\Site\SiteRepository;
 use DaydreamLab\Cms\Services\Category\Front\CategoryFrontService;
 use DaydreamLab\Cms\Services\Item\Front\ItemFrontService;
 use DaydreamLab\Cms\Services\Menu\Front\MenuFrontService;
 use DaydreamLab\Cms\Services\Module\ModuleService;
-use DaydreamLab\Cms\Services\Site\SiteService;
+use DaydreamLab\Cms\Traits\Service\WithAccessIds;
 use DaydreamLab\JJAJ\Helpers\Helper;
+use DaydreamLab\JJAJ\Traits\LoggedIn;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 class ModuleFrontService extends ModuleService
 {
+    use LoggedIn, WithAccessIds;
+
     protected $type = 'Front';
 
     protected $itemFrontService;
@@ -34,17 +37,11 @@ class ModuleFrontService extends ModuleService
         $this->repo                 = $repo;
         $this->itemFrontService     = $itemFrontService;
         $this->categoryFrontService = $categoryFrontService;
-        $this->menuFrontService     = new MenuFrontService(
-            new MenuFrontRepository(new MenuFront()),
-            $this ,
-            new SiteService(new SiteRepository(new Site())));
     }
 
 
     public function getCategoriesModule($params)
     {
-        $params['access_ids'] = $this->access_ids;
-
         $categories = $this->categoryFrontService->getItemsByIds($params);
 
         foreach ($categories as $category)
@@ -53,7 +50,7 @@ class ModuleFrontService extends ModuleService
 
             // 取出項目的搜尋條件
             $item_params['category_ids']    = $category_ids;
-            $item_params['access_ids']      = $this->access_ids;
+            $item_params['access_ids']      = $this->getAccessIds();
             $item_params['order_by']        = $params['item_order_by'];
             $item_params['order']           = $params['item_order'];
             $item_params['limit']           = $params['item_count'];
@@ -87,7 +84,7 @@ class ModuleFrontService extends ModuleService
 
     public function getCategoriesItemsModule($params)
     {
-        $params['access_ids'] = $this->access_ids;
+        $params['access_ids'] = $this->getAccessIds();
 
         $items = $this->itemFrontService->getCategoriesItemsModule($params);
 
@@ -104,8 +101,6 @@ class ModuleFrontService extends ModuleService
         if ($items->count())
         {
             $item = $items->first();
-
-            $this->canAccess($item->access, $this->access_ids);
 
             $item->items = $this->loadModule($item, $input->get('language'));
 
@@ -129,7 +124,7 @@ class ModuleFrontService extends ModuleService
         {
             $menu_ids[] = $menu->id;
         }
-
+        $this->menuFrontService = app(MenuFrontService::class);
         $menus = $this->menuFrontService->search(Helper::collect([
             'special_queries'   => [
                 [
@@ -148,7 +143,7 @@ class ModuleFrontService extends ModuleService
 
     public function getSelectedItemsModule($params)
     {
-        $params['access_ids'] = $this->access_ids;
+        $params['access_ids'] = $this->getAccessIds();
         $items = $this->itemFrontService->getSelectedItems($params);
 
         if ($items->count() == 1)
@@ -193,8 +188,11 @@ class ModuleFrontService extends ModuleService
             $items['category_alias'] = $category_alias;
             unset($items['category_ids']);
         }
+        elseif ($module->category->alias == 'advanced-search') {
+
+            $items = $this->categoryFrontService->getItemsByIds($module->params);
+        }
 
         return $items;
     }
-
 }

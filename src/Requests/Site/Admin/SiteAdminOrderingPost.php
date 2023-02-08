@@ -2,11 +2,11 @@
 
 namespace DaydreamLab\Cms\Requests\Site\Admin;
 
-use DaydreamLab\Cms\Requests\ComponentBase\CmsOrderingRequest;
+use DaydreamLab\Cms\Requests\CmsOrderingPost;
 
-class SiteAdminOrderingPost extends CmsOrderingRequest
+class SiteAdminOrderingPost extends CmsOrderingPost
 {
-    protected $apiMethod = 'orderingSite';
+    protected $apiMethod = 'editSite';
 
     protected $modelName = 'Site';
     /**
@@ -29,6 +29,6 @@ class SiteAdminOrderingPost extends CmsOrderingRequest
         $rules = [
             //
         ];
-        return array_merge(parent::rules(), $rules);
+        return array_merge($rules, parent::rules());
     }
 }

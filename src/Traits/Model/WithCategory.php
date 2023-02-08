@@ -15,16 +15,15 @@ trait WithCategory
     }
 
 
-//    public function getCategoryAttribute()
-//    {
-//        return $this->category()->first();
-//    }
+    public function getCategoryAttribute()
+    {
+        return $this->category()->first();
+    }
 
 
     public function getCategoryAliasAttribute()
     {
-        $category   = $this->category;
-//        $category   = $this->category()->first();
+        $category   = $this->category()->first();
         $path       = $category ? substr($category->path, strlen('/'.$category->extension.'/')) : null;
 
         return $path;
@@ -33,9 +32,11 @@ trait WithCategory
 
     public function getCategoryTitleAttribute()
     {
-        $category   = $this->category;
-//      $category   = $this->category()->first();
+        $category = $this->category()->first();
 
         return $category ? $category->title : null;
     }
+
+
+
 }

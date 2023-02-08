@@ -2,10 +2,10 @@
 
 namespace DaydreamLab\Cms\Requests\Extrafield\Admin;
 
-use DaydreamLab\Cms\Requests\ComponentBase\CmsSearchRequest;
+use DaydreamLab\JJAJ\Requests\ListRequest;
 use Illuminate\Validation\Rule;
 
-class ExtrafieldAdminSearchPost extends CmsSearchRequest
+class ExtrafieldAdminSearchPost extends ListRequest
 {
     protected $apiMethod = 'searchExtrafield';
 

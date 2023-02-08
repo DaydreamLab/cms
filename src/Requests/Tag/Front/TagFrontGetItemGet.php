@@ -2,11 +2,10 @@
 
 namespace DaydreamLab\Cms\Requests\Tag\Front;
 
-use DaydreamLab\Cms\Requests\ComponentBase\CmsGetItemRequest;
+use DaydreamLab\Cms\Requests\CmsGetItemGet;
 
-class TagFrontGetItemGet extends CmsGetItemRequest
+class TagFrontGetItemGet extends CmsGetItemGet
 {
-    protected $needAuth = false;
     /**
      * Determine if the user is authorized to make this request.
      *

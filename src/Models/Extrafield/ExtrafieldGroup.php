@@ -1,10 +1,10 @@
 <?php
 namespace DaydreamLab\Cms\Models\Extrafield;
 
-use DaydreamLab\JJAJ\Traits\UserInfo;
-use DaydreamLab\User\Traits\Model\WithAccess;
+use DaydreamLab\Cms\Traits\Model\UserInfo;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
+use DaydreamLab\User\Traits\Model\WithAccess;
 
 class ExtrafieldGroup extends BaseModel
 {
@@ -27,10 +27,10 @@ class ExtrafieldGroup extends BaseModel
      */
     protected $fillable = [
         'title',
+        'alias',
         'state',
         'description',
         'access',
-        'ordering',
         'locked_by',
         'locked_at',
         'created_by',

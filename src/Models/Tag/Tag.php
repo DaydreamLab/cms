@@ -1,16 +1,11 @@
 <?php
-
 namespace DaydreamLab\Cms\Models\Tag;
 
-use DaydreamLab\Cms\Models\Brand\Brand;
 use DaydreamLab\Cms\Models\Item\Item;
-use DaydreamLab\Cms\Models\Product\Product;
-use DaydreamLab\Media\Models\File\File;
-use DaydreamLab\User\Traits\Model\WithAccess;
 use DaydreamLab\Cms\Traits\Model\WithLanguage;
+use DaydreamLab\Cms\Traits\Model\UserInfo;
 use DaydreamLab\JJAJ\Models\BaseModel;
-use DaydreamLab\JJAJ\Traits\UserInfo;
-use Illuminate\Support\Str;
+use DaydreamLab\User\Traits\Model\WithAccess;
 use Kalnoy\Nestedset\NodeTrait;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 
@@ -28,7 +23,7 @@ class Tag extends BaseModel
     protected $table = 'tags';
 
     protected $model_type = 'parent';
-
+    
     protected $order_by = 'id';
 
     protected $order = 'asc';
@@ -39,27 +34,25 @@ class Tag extends BaseModel
      * @var array
      */
     protected $fillable = [
-        'parent_id',
         'title',
         'alias',
         'path',
         'state',
         'description',
-        'extension',
         'content_type',
         'hits',
         'access',
         'language',
         'ordering',
-        'featured',
-        'featured_ordering',
+        'metadata',
+        'metakeywords',
         'params',
-        'publish_up',
-        'publish_down',
         'locked_by',
         'locked_at',
         'created_by',
         'updated_by',
+        'publish_up',
+        'publish_down',
     ];
 
 
@@ -70,8 +63,10 @@ class Tag extends BaseModel
      */
     protected $hidden = [
         'pivot',
-//        '_lft',
-//        '_rgt',
+        '_lft',
+        '_rgt',
+        'viewlevel',
+        'viewlevels'
     ];
 
 
@@ -81,6 +76,10 @@ class Tag extends BaseModel
      * @var array
      */
     protected $appends = [
+        'creator',
+        'updater',
+        'locker',
+        'viewlevels',
         'access_title',
         'language_title'
     ];
@@ -98,42 +97,12 @@ class Tag extends BaseModel
     public static function boot()
     {
         self::traitBoot();
-
-        static::creating(function ($item) {
-            if ($item->state && !$item->publish_up) {
-                $item->publish_up = now();
-            }
-
-            if (!$item->alias) {
-                $item->alias = Str::random(8);
-            }
-            $item->path = $item->parent
-                ? $item->parent->path . '/' . $item->alias
-                : '/' . $item->alias;
-        });
     }
 
-
-    public function brands()
-    {
-        return $this->belongsToMany(Brand::class, 'brands_tags_maps', 'tag_id', 'brand_id');
-    }
-
-
-    public function files()
-    {
-        return $this->belongsToMany(File::class, 'files_tags_maps', 'tag_id', 'file_id');
-    }
 
 
     public function items()
     {
         return $this->belongsToMany(Item::class, 'items_tags_maps', 'tag_id', 'item_id');
-    }
-
-
-    public function products()
-    {
-        return $this->belongsToMany(Product::class, 'products_tags_maps', 'tag_id', 'product_id');
     }
 }

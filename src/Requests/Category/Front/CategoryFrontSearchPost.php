@@ -2,10 +2,10 @@
 
 namespace DaydreamLab\Cms\Requests\Category\Front;
 
-use DaydreamLab\Cms\Requests\ComponentBase\CmsSearchRequest;
+use DaydreamLab\JJAJ\Requests\ListRequest;
 use Illuminate\Validation\Rule;
 
-class CategoryFrontSearchPost extends CmsSearchRequest
+class CategoryFrontSearchPost extends ListRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -40,6 +40,6 @@ class CategoryFrontSearchPost extends CmsSearchRequest
                 ])
             ]
         ];
-        return array_merge(parent::rules(), $rules);
+        return array_merge($rules, parent::rules());
     }
 }

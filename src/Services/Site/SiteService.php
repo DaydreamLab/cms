@@ -17,6 +17,9 @@ class SiteService extends CmsService
 {
     protected $modelName = 'Site';
 
+    protected $modelType = 'Base';
+
+
     public function __construct(SiteRepository $repo)
     {
         parent::__construct($repo);
@@ -26,7 +29,7 @@ class SiteService extends CmsService
     public function add(Collection $input)
     {
         $item = parent::add($input);
-
+        
 //        if ($this->user) {
 //            event(new Add($item, $this->getServiceName(), $input, $this->user));
 //        }

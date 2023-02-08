@@ -2,10 +2,10 @@
 
 namespace DaydreamLab\Cms\Requests\Tag\Admin;
 
-use DaydreamLab\Cms\Requests\ComponentBase\CmsSearchRequest;
+use DaydreamLab\JJAJ\Requests\ListRequest;
 use Illuminate\Validation\Rule;
 
-class TagAdminSearchPost extends CmsSearchRequest
+class TagAdminSearchPost extends ListRequest
 {
     protected $apiMethod = 'searchTag';
 

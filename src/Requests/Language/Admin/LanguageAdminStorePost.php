@@ -2,13 +2,10 @@
 
 namespace DaydreamLab\Cms\Requests\Language\Admin;
 
-use DaydreamLab\Cms\Requests\ComponentBase\CmsStoreRequest;
+use DaydreamLab\JJAJ\Requests\AdminRequest;
 
-class LanguageAdminStorePost extends CmsStoreRequest
+class LanguageAdminStorePost extends AdminRequest
 {
-    protected $apiMethod = 'storeLanguage';
-
-    protected $modelName = 'Language';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -36,6 +33,8 @@ class LanguageAdminStorePost extends CmsStoreRequest
             'description'   => 'nullable|string',
             'image'         => 'nullable|string',
             //'order'         => 'nullable|integer',
+            //'metadesc'      => 'nullable|string',
+            //'metakeywords'  => 'nullable|string',
             //'sitename'      => 'nullable|string',
             //'access'        => 'nullable|integer'
         ];

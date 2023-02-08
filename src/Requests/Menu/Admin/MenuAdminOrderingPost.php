@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Menu\Admin;
 
-use DaydreamLab\Cms\Requests\ComponentBase\CmsOrderingRequest;
+use DaydreamLab\Cms\Requests\CmsOrderingPost;
 
-class MenuAdminOrderingPost extends CmsOrderingRequest
+class MenuAdminOrderingPost extends CmsOrderingPost
 {
     protected $apiMethod = 'orderingMenu';
 
@@ -29,6 +29,6 @@ class MenuAdminOrderingPost extends CmsOrderingRequest
         $rules = [
             //
         ];
-        return array_merge(parent::rules(), $rules);
+        return array_merge($rules, parent::rules());
     }
 }

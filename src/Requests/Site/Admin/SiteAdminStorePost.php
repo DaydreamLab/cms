@@ -2,11 +2,10 @@
 
 namespace DaydreamLab\Cms\Requests\Site\Admin;
 
-use DaydreamLab\Cms\Helpers\RequestHelper;
-use DaydreamLab\Cms\Requests\ComponentBase\CmsStoreRequest;
+use DaydreamLab\JJAJ\Requests\AdminRequest;
 use Illuminate\Validation\Rule;
 
-class SiteAdminStorePost extends CmsStoreRequest
+class SiteAdminStorePost extends AdminRequest
 {
     protected $apiMethod = 'storeSite';
 
@@ -34,7 +33,8 @@ class SiteAdminStorePost extends CmsStoreRequest
             'url'           => 'required|string',
             'sitename'      => 'required|string',
             'sef'           => 'required|string',
-            'params'        => 'nullable|array',
+            'metadesc'      => 'nullable|string',
+            'metakeywords'  => 'nullable|string',
             'state'         => [
                 'nullable',
                 Rule::in([0,1])
@@ -43,14 +43,5 @@ class SiteAdminStorePost extends CmsStoreRequest
             'ordering'      => 'nullable|integer',
         ];
         return array_merge(parent::rules(), $rules);
-    }
-
-
-    public function validated()
-    {
-        $validated = parent::validated();
-        $validated->put('params', RequestHelper::handleParams($validated->get('params')));
-
-        return $validated;
     }
 }

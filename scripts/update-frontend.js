@@ -25,7 +25,7 @@ let updatePublicDir = callback => {
 };
 
 let updateIndexFile = callback => {
-  //Empty Resources admin directory
+  //Empty resources admin directory
   fs.emptyDirSync(abs(project, config.targetViewPath));
 
   //Copy files from source directory

@@ -14,10 +14,11 @@ class CreateMenusTable extends Migration
     public function up()
     {
         Schema::create('menus', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('title');
             $table->string('alias');
             $table->nestedSet();
+            $table->unsignedInteger('ordering')->nullable();
             $table->string('path');
             $table->string('host');
             $table->unsignedInteger('site_id')->default(0);
@@ -25,14 +26,18 @@ class CreateMenusTable extends Migration
             $table->tinyInteger('state')->default(1);
             $table->text('description')->nullable();
             $table->unsignedTinyInteger('hidden')->default(0);
+            //$table->unsignedTinyInteger('is_link')->default(0);
+            //$table->string('redirect')->nullable();
             $table->unsignedInteger('access')->nullalbe()->default(1);
+
             $table->string('language')->nullable()->default('*');
             $table->text('params')->nullable();
-            $table->unsignedInteger('ordering')->nullable();
-            $table->unsignedInteger('locked_by')->nullable()->default(0);
+            $table->text('metadata')->nullable();
+            $table->text('metakeywords')->nullable();
+            $table->unsignedBigInteger('locked_by')->nullable()->default(0);
             $table->timestamp('locked_at')->nullable();
-            $table->unsignedInteger('created_by');
-            $table->unsignedInteger('updated_by')->nullable();
+            $table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
             $table->timestamp('publish_up')->nullable();
             $table->timestamp('publish_down')->nullable();

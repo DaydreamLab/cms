@@ -15,6 +15,8 @@ class LanguageService extends CmsService
 {
     protected $modelName = 'Language';
 
+    protected $modelType = 'Base';
+
     public function __construct(LanguageRepository $repo)
     {
         parent::__construct($repo);

@@ -35,6 +35,7 @@ class ItemFrontRepository extends ItemRepository
             ->whereIn('category_id', $category_ids)
             ->where('state', 1)
             ->whereIn('access', $params['access_ids'])
+            ->where('publish_up', '<', now())
             ->orderBy($params['item_order_by'], $params['item_order'])
             ->orderBy('publish_up', 'desc');
 
@@ -259,8 +260,8 @@ class ItemFrontRepository extends ItemRepository
             ->where('category_id', $item->category_id)
             ->where('state', 1)
             ->where('id', '!=', $item->id)
-            ->where('publish_up', '<', $item->publish_up)
-            ->orderBy('publish_up', 'desc')
+            //->where('publish_up', '>', $item->publish_up)
+            ->orderBy('publish_up', 'asc')
             ->limit(1)
             ->first();
 
@@ -268,8 +269,8 @@ class ItemFrontRepository extends ItemRepository
             ->where('category_id', $item->category_id)
             ->where('state', 1)
             ->where('id', '!=', $item->id)
-            ->where('publish_up', '>', $item->publish_up)
-            ->orderBy('publish_up', 'asc')
+            //->where('publish_up', '<', $item->publish_up )
+            ->orderBy('publish_up', 'desc')
             ->limit(1)
             ->first();
 
@@ -361,39 +362,6 @@ class ItemFrontRepository extends ItemRepository
             $data['data'] = $items;
             $data['paginate'] = [];
         }
-
-        return $data;
-    }
-
-
-    public function getPreviousAndNextInBrand($item, $brand)
-    {
-        $previous = $this->model
-            ->whereHas('brands', function ($q) use ($brand) {
-                $q->where('alias', '=', $brand);
-            })
-            ->where('category_id', $item->category_id)
-            ->where('state', 1)
-            ->where('id', '!=', $item->id)
-            ->where('publish_up', '<', $item->publish_up)
-            ->orderBy('publish_up', 'desc')
-            ->limit(1)
-            ->first();
-
-        $next = $this->model
-            ->whereHas('brands', function ($q) use ($brand) {
-                $q->where('alias', '=', $brand);
-            })
-            ->where('category_id', $item->category_id)
-            ->where('state', 1)
-            ->where('id', '!=', $item->id)
-            ->where('publish_up', '>', $item->publish_up)
-            ->orderBy('publish_up', 'asc')
-            ->limit(1)
-            ->first();
-
-        $data['previous'] = ($previous) ? $previous->only(['title', 'alias']) : null;
-        $data['next'] = ($next) ? $next->only(['title', 'alias']) : null;
 
         return $data;
     }

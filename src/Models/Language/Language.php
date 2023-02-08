@@ -1,8 +1,7 @@
 <?php
-
 namespace DaydreamLab\Cms\Models\Language;
 
-use DaydreamLab\JJAJ\Traits\UserInfo;
+use DaydreamLab\Cms\Traits\Model\UserInfo;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 

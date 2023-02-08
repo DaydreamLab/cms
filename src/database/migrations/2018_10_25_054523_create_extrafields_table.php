@@ -14,9 +14,7 @@ class CreateExtrafieldsTable extends Migration
     public function up()
     {
         Schema::create('extrafields', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('category_id')->nullable();
-            $table->string('content_type')->nullable();
+            $table->bigIncrements('id');
             $table->string('title');
             $table->string('alias')->nullable();
             $table->unsignedInteger('group_id')->nullable();
@@ -26,12 +24,12 @@ class CreateExtrafieldsTable extends Migration
             $table->string('value')->nullable();
             $table->text('description')->nullable();
             $table->text('params')->nullable();
-            $table->unsignedBigInteger('ordering')->nullable();
             $table->unsignedInteger('access')->nullable()->default(1);
-            $table->unsignedInteger('locked_by')->nullable()->default(0);
+            $table->unsignedBigInteger('ordering')->nullable();
+            $table->unsignedBigInteger('locked_by')->nullable()->default(0);
             $table->timestamp('locked_at')->nullable();
-            $table->unsignedInteger('created_by');
-            $table->unsignedInteger('updated_by')->nullable();
+            $table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
         });
     }

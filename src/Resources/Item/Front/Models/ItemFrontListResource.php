@@ -2,10 +2,12 @@
 
 namespace DaydreamLab\Cms\Resources\Item\Front\Models;
 
-use DaydreamLab\JJAJ\Resources\BaseJsonResource;
+use DaydreamLab\Cms\Traits\Resource\CmsResource;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-class ItemFrontListResource extends BaseJsonResource
+class ItemFrontListResource extends JsonResource
 {
+    use CmsResource;
     /**
      * Transform the resource into an array.
      *
@@ -30,7 +32,7 @@ class ItemFrontListResource extends BaseJsonResource
             'created_at'                => $this->getDateTimeString($this->created_at, config('daydreamlab.cms.timezone')),
             'updated_at'                => $this->getDateTimeString($this->updated_at, config('daydreamlab.cms.timezone')),
             'locked_at'                 => $this->getDateTimeString($this->locked_at, config('daydreamlab.cms.timezone')),
-            'publish_up'                => $this->getDateTimeString($this->locked_at, config('daydreamlab.cms.timezone')),
+            'publish_up'                => $this->getDateTimeString($this->publish_up, config('daydreamlab.cms.timezone')),
             'publish_down'              => $this->getDateTimeString($this->publish_down, config('daydreamlab.cms.timezone')),
             'creator'                   => $this->creator,
             'updater'                   => $this->updater,

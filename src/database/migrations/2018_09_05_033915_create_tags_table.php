@@ -15,28 +15,28 @@ class CreateTagsTable extends Migration
     {
         Schema::create('tags', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->nestedSet();
             $table->string('title');
             $table->string('alias');
             $table->string('path');
+
+            $table->nestedSet();
+            $table->unsignedInteger('ordering')->nullable()->default(1);
             $table->tinyInteger('state')->nullable()->default(1);
             $table->text('description')->nullable();
-            $table->string('extension')->nullable();
-            $table->string('content_type')->nullable();
+            $table->string('content_type')->nullable()->default('item');
             $table->unsignedInteger('hits')->nullable()->default(0);
             $table->unsignedInteger('access')->nullable()->default(1);
             $table->string('language')->nullable()->default('*');
+            $table->string('metadesc')->nullable();
+            $table->string('metakeywords')->nullable();
             $table->text('params')->nullable();
-            $table->unsignedInteger('ordering')->nullable()->default(1);
-            $table->unsignedTinyInteger('featured')->default(0)->nullable();
-            $table->unsignedBigInteger('featured_ordering')->nullable();
+            $table->unsignedBigInteger('locked_by')->nullable()->default(0);
+            $table->timestamp('locked_at')->nullable();
+            $table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('updated_by')->nullable();
+            $table->timestamps();
             $table->timestamp('publish_up')->nullable();
             $table->timestamp('publish_down')->nullable();
-            $table->unsignedInteger('locked_by')->nullable();
-            $table->timestamp('locked_at')->nullable();
-            $table->unsignedInteger('created_by');
-            $table->unsignedInteger('updated_by')->nullable();
-            $table->timestamps();
         });
     }
 

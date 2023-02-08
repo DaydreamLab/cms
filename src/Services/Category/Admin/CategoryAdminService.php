@@ -13,9 +13,13 @@ use Illuminate\Support\Collection;
 
 class CategoryAdminService extends CategoryService
 {
-    use CmsCronJob;
+    use CmsCronJob, LoggedIn;
+
+    protected $modelType = 'Admin';
 
     protected $cmsCronJobService;
+
+    protected $search_keys = ['title', 'introtext', 'description', 'extrafields_search'];
 
     public function __construct(CategoryAdminRepository $repo)
     {
@@ -29,18 +33,55 @@ class CategoryAdminService extends CategoryService
     {
         return $this->repo->findSubTreeIds($id);
     }
-
+    
 
     public function store(Collection $input)
     {
-        if (!$input->get('extension')){
+        if (InputHelper::null($input, 'extension')){
             $input->put('extension', 'item');
         }
 
-        $item = parent::store($input);
+        if (InputHelper::null($input, 'publish_up')) {
+            $input->put('publish_up', now()->toDateTimeString()) ;
+        }
+
+        $result = parent::store($input);
+
+        if ($input->get('id')) {
+            $item = $this->checkItem(collect(['id' => $input->get('id')]));
+        } else {
+            $item = $result->refresh();
+        }
 
         $this->setCronJob($input, $item);
 
-        return $item;
+        return $result;
+    }
+
+
+    public function search(Collection $input)
+    {
+        if (InputHelper::null($input, 'extension')) {
+            $input->forget('extension');
+            $input->put('extension', 'item');
+        }
+
+        $limit = $input->get('limit');
+        $paginate = $input->get('paginate');
+
+        $input->put('paginate', 0);
+        $input->put('limit', 99999999);
+
+        $result = parent::search($input);
+
+        $data = $result->toFlatTree();
+
+        if ($paginate) {
+            $this->response = $this->repo->paginate($data, $limit, $input->get('page') ?: 1);
+        } else {
+            $this->response = $data;
+        }
+
+        return $this->response;
     }
 }

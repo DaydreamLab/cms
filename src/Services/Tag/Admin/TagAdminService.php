@@ -6,11 +6,17 @@ use DaydreamLab\Cms\Repositories\Tag\Admin\TagAdminRepository;
 use DaydreamLab\Cms\Services\Cms\CmsCronJobService;
 use DaydreamLab\Cms\Services\Tag\TagService;
 use DaydreamLab\Cms\Traits\Service\CmsCronJob;
+use DaydreamLab\JJAJ\Traits\LoggedIn;
 use Illuminate\Support\Collection;
+
 
 class TagAdminService extends TagService
 {
-    use CmsCronJob;
+    use CmsCronJob, LoggedIn;
+
+    protected $modelType = 'Admin';
+
+    protected $search_keys = ['title', 'description'];
 
     protected $cmsCronJobService;
 
@@ -23,9 +29,29 @@ class TagAdminService extends TagService
     }
 
 
-    public function removeMapping($item)
+    public function checkout(Collection $input)
     {
-        $item->items()->detach();
+        return parent::checkout($input, true);
+    }
+
+
+    public function getItem($id)
+    {
+        $item = parent::getItem($id);
+
+        return $item;
+    }
+
+
+    public function ordering(Collection $input)
+    {
+        return parent::ordering($input);
+    }
+
+
+    public function state(Collection $input)
+    {
+        return parent::state($input);
     }
 
 
@@ -33,8 +59,31 @@ class TagAdminService extends TagService
     {
         $result = parent::store($input);
 
-        //$this->setCronJob($input, $result);
+        if (gettype($result) == 'boolean')
+        {
+            if ($result === true)
+            {
+                $item  = $this->find($input->get('id'));
+            }
+            else
+            {
+                // Something error 有可能是路徑已經存在
+                return $this->response;
+            }
+        }
+        else
+        {
+            $item = $this->find($result->id);
+        }
+
+        $this->setCronJob($input, $item);
 
         return $result;
+    }
+
+
+    public function remove(Collection $input)
+    {
+        return parent::remove($input);
     }
 }

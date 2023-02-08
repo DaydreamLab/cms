@@ -2,12 +2,11 @@
 
 namespace DaydreamLab\Cms\Requests\Tag\Front;
 
-use DaydreamLab\Cms\Requests\ComponentBase\CmsSearchRequest;
+use DaydreamLab\JJAJ\Requests\ListRequest;
 use Illuminate\Validation\Rule;
 
-class TagFrontSearchPost extends CmsSearchRequest
+class TagFrontSearchPost extends ListRequest
 {
-    protected $needAuth = false;
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -26,7 +25,20 @@ class TagFrontSearchPost extends CmsSearchRequest
     public function rules()
     {
         $rules = [
-            'hot'   => 'nullable|boolean'
+            'order_by'  => [
+                'nullable',
+                'string',
+                Rule::in([
+                    'id',
+                    'title',
+                    'access',
+                    'ordering',
+                    'created_at',
+                    'updated_at',
+                    'created_by',
+                    'updated_by',
+                ])
+            ]
         ];
         return array_merge(parent::rules(), $rules);
     }

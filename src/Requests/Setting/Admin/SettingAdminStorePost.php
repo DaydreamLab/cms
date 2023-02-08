@@ -2,10 +2,10 @@
 
 namespace DaydreamLab\Cms\Requests\Setting\Admin;
 
-use DaydreamLab\Cms\Requests\ComponentBase\CmsStoreRequest;
+use DaydreamLab\JJAJ\Requests\AdminRequest;
 use Illuminate\Validation\Rule;
 
-class SettingAdminStorePost extends CmsStoreRequest
+class SettingAdminStorePost extends AdminRequest
 {
     protected $apiMethod = 'editSetting';
 
@@ -28,27 +28,15 @@ class SettingAdminStorePost extends CmsStoreRequest
     public function rules()
     {
         $rules = [
-            'sitename'          => 'required|string',
-            'siteurl'           => 'nullable|string',
-            'seo_title'         => 'nullable|string',
-            'seo_keyword'       => 'nullable|string',
-            'seo_description'   => 'nullable|string',
-            'fb_fanpage_id'     => 'nullable|string',
-            'fbFanpageUrl'      => 'nullable|string',
-            'lineId'            => 'nullable|string',
-            'liffId'            => 'nullable|string',
-            'youtubeUrl'        => 'nullable|string',
-            'podcast'           => 'nullable|string',
-            'ga'                => 'nullable|string'
+            'sitename'      => 'required|string',
+            'metadesc'      => 'nullable|string',
+            'metakeywords'  => 'nullable|string',
+            'locale'        => 'required|string',
+            'locale_admin'  => 'required|string',
+            'custom_head'   => 'nullable|string',
+            'custom_body'   => 'nullable|string',
+            'custom_footer' => 'nullable|string',
         ];
         return array_merge(parent::rules(), $rules);
-    }
-
-
-    public function validated()
-    {
-        $validated = parent::validated();
-        $validated->forget('q');
-        return $validated;
     }
 }

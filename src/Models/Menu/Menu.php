@@ -2,17 +2,17 @@
 namespace DaydreamLab\Cms\Models\Menu;
 
 use DaydreamLab\Cms\Models\Site\Site;
-use DaydreamLab\User\Traits\Model\WithAccess;
 use DaydreamLab\Cms\Traits\Model\WithCategory;
 use DaydreamLab\Cms\Traits\Model\WithLanguage;
+use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
-use Illuminate\Support\Str;
+use DaydreamLab\User\Traits\Model\WithAccess;
 use Kalnoy\Nestedset\NodeTrait;
 
 class Menu extends BaseModel
 {
-    use NodeTrait, WithAccess, WithCategory, WithLanguage,
+    use NodeTrait, WithCategory, WithAccess, WithLanguage,
         RecordChanger {
         RecordChanger::boot as traitBoot;
     }
@@ -36,6 +36,7 @@ class Menu extends BaseModel
     protected $fillable = [
         'title',
         'alias',
+        'ordering',
         'path',
         'host',
         'site_id',
@@ -44,7 +45,8 @@ class Menu extends BaseModel
         'description',
         'language',
         'params',
-        'ordering',
+        'metadata',
+        'metakeywords',
         'locked_by',
         'locked_at',
         'created_by',
@@ -91,20 +93,6 @@ class Menu extends BaseModel
     public static function boot()
     {
         self::traitBoot();
-
-        static::creating(function ($item) {
-            if ($item->state && !$item->publish_up) {
-                $item->publish_up = now();
-            }
-
-            if (!$item->alias) {
-                $item->alias = Str::random(8);
-            }
-
-            $item->path = $item->parent
-                ? $item->parent->path . '/' . $item->alias
-                : '/' . $item->alias;
-        });
     }
 
 

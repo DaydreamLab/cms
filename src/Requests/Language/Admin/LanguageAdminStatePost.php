@@ -2,11 +2,11 @@
 
 namespace DaydreamLab\Cms\Requests\Language\Admin;
 
-use DaydreamLab\Cms\Requests\ComponentBase\CmsStateRequest;
+use DaydreamLab\Cms\Requests\CmStatePost;
 
-class LanguageAdminStatePost extends CmsStateRequest
+class LanguageAdminStatePost extends CmStatePost
 {
-    protected $apiMethod = 'stateLanguage';
+    protected $apiMethod = 'updateLanguageState';
 
     protected $modelName = 'Language';
     /**
@@ -29,6 +29,6 @@ class LanguageAdminStatePost extends CmsStateRequest
         $rules = [
             //
         ];
-        return array_merge(parent::rules(), $rules);
+        return array_merge($rules, parent::rules());
     }
 }

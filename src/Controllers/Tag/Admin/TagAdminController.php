@@ -4,19 +4,23 @@ namespace DaydreamLab\Cms\Controllers\Tag\Admin;
 
 use DaydreamLab\Cms\Controllers\CmsController;
 use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminGetItemGet;
-use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminRestorePost;
 use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminStorePost;
 use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminStatePost;
 use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminSearchPost;
 use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminRemovePost;
+use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminCheckoutPost;
+use DaydreamLab\Cms\Requests\Tag\Admin\TagAdminOrderingPost;
 use DaydreamLab\Cms\Resources\Tag\Admin\Models\TagAdminResource;
 use DaydreamLab\Cms\Resources\Tag\Admin\Collections\TagAdminListResourceCollection;
 use DaydreamLab\Cms\Services\Tag\Admin\TagAdminService;
-use Throwable;
+use DaydreamLab\JJAJ\Helpers\Helper;
+
 
 class TagAdminController extends CmsController
 {
     protected $modelName = 'Tag';
+
+    protected $modelType = 'Admin';
 
     public function __construct(TagAdminService $service)
     {
@@ -28,37 +32,35 @@ class TagAdminController extends CmsController
     public function getItem(TagAdminGetItemGet $request)
     {
         $this->service->setUser($request->user('api'));
-        try {
-            $this->service->getItem(collect(['id' => $request->route('id')]));
-        } catch (Throwable $t) {
-            $this->handleException($t);
-        }
+        $this->service->getItem(collect(['id' => $request->route('id')]));
 
-        return $this->response($this->service->status, $this->service->response, [], TagAdminResource::class);
+        return $this->response($this->service->status, new TagAdminResource($this->service->response));
+    }
+
+
+    public function store(TagAdminStorePost $request)
+    {
+        $this->service->setUser($request->user('api'));
+        $this->service->store($request->validated());
+
+        return $this->response($this->service->status,
+            gettype($this->service->response) == 'object' ? new TagAdminResource($this->service->response->refresh()) : null);
+    }
+
+
+    public function state(TagAdminStatePost $request)
+    {
+        $this->service->setUser($request->user('api'));
+        $this->service->state($request->validated());
+
+        return $this->response($this->service->status, $this->service->response);
     }
 
 
     public function remove(TagAdminRemovePost $request)
     {
         $this->service->setUser($request->user('api'));
-        try {
-            $this->service->remove($request->validated());
-        } catch (Throwable $t) {
-            $this->handleException($t);
-        }
-
-        return $this->response($this->service->status, $this->service->response);
-    }
-
-
-    public function restore(TagAdminRestorePost $request)
-    {
-        $this->service->setUser($request->user('api'));
-        try {
-            $this->service->restore($request->validated());
-        } catch (Throwable $t) {
-            $this->handleException($t);
-        }
+        $this->service->remove($request->validated());
 
         return $this->response($this->service->status, $this->service->response);
     }
@@ -67,38 +69,27 @@ class TagAdminController extends CmsController
     public function search(TagAdminSearchPost $request)
     {
         $this->service->setUser($request->user('api'));
-        try {
-            $this->service->search($request->validated());
-        } catch (Throwable $t) {
-            $this->handleException($t);
-        }
+        $this->service->search($request->validated());
 
-        return $this->response($this->service->status, $this->service->response, [], TagAdminListResourceCollection::class);
+        return $this->response($this->service->status, new TagAdminListResourceCollection($this->service->response));
     }
 
-
-    public function state(TagAdminStatePost $request)
+    
+    public function checkout(TagAdminCheckoutPost $request)
     {
         $this->service->setUser($request->user('api'));
-        try {
-            $this->service->state($request->validated());
-        } catch (Throwable $t) {
-            $this->handleException($t);
-        }
+        $this->service->checkout($request->validated());
 
         return $this->response($this->service->status, $this->service->response);
     }
 
 
-    public function store(TagAdminStorePost $request)
+    public function ordering(TagAdminOrderingPost $request)
     {
         $this->service->setUser($request->user('api'));
-        try {
-            $this->service->store($request->validated());
-        } catch (Throwable $t) {
-            $this->handleException($t);
-        }
+        $this->service->ordering($request->validated());
 
-        return $this->response($this->service->status, $this->service->response, [], TagAdminResource::class);
+        return $this->response($this->service->status, $this->service->response);
     }
+
 }

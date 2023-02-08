@@ -2,20 +2,7 @@
 
 namespace DaydreamLab\Cms\Services\Item\Admin;
 
-use DaydreamLab\Cms\Jobs\ImportBulletin;
-use DaydreamLab\Cms\Jobs\ImportCase;
-use DaydreamLab\Cms\Jobs\ImportFinance;
-use DaydreamLab\Cms\Jobs\ImportMemorabilia;
-use DaydreamLab\Cms\Jobs\ImportPromation;
-use DaydreamLab\Cms\Jobs\ImportRule;
-use DaydreamLab\Cms\Jobs\ImportSolution;
-use DaydreamLab\Cms\Jobs\ImportStockHolder;
-use DaydreamLab\Cms\Jobs\ImportUser;
-use DaydreamLab\Cms\Jobs\ImportVideo;
-use DaydreamLab\Cms\Models\Extrafield\Extrafield;
-use DaydreamLab\Cms\Models\Extrafield\ExtrafieldValue;
 use DaydreamLab\Cms\Repositories\Item\Admin\ItemAdminRepository;
-use DaydreamLab\Cms\Services\Brand\BrandService;
 use DaydreamLab\Cms\Services\Category\Admin\CategoryAdminService;
 use DaydreamLab\Cms\Services\Cms\CmsCronJobService;
 use DaydreamLab\Cms\Services\Tag\Admin\TagAdminService;
@@ -23,11 +10,14 @@ use DaydreamLab\Cms\Traits\Service\CmsCronJob;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
 use DaydreamLab\Cms\Services\Item\ItemService;
+use DaydreamLab\JJAJ\Traits\LoggedIn;
 use Illuminate\Support\Collection;
 
-class  ItemAdminService extends ItemService
+class ItemAdminService extends ItemService
 {
-    use CmsCronJob;
+    use CmsCronJob, LoggedIn;
+
+    protected $modelType = 'Admin';
 
     protected $tagAdminService;
 
@@ -35,227 +25,86 @@ class  ItemAdminService extends ItemService
 
     protected $categoryAdminService;
 
-    protected $brandService;
+    protected $search_keys = ['title', 'introtext', 'description', 'extrafields_search'];
 
     public function __construct(ItemAdminRepository     $repo,
                                 TagAdminService         $tagAdminService,
-                                CategoryAdminService    $categoryAdminService,
-                                BrandService            $brandService)
+                                CategoryAdminService    $categoryAdminService)
     {
         parent::__construct($repo);
         $this->repo                     = $repo;
         $this->tagAdminService          = $tagAdminService;
         $this->categoryAdminService     = $categoryAdminService;
         $this->cmsCronJobService        = app(CmsCronJobService::class);
-        $this->brandService             = $brandService;
     }
 
 
-    public function importUser($input)
+    public function add(Collection $input)
     {
-        $file = $input->file('file');
-        $temp = $file->move('tmp', $file->hashName());
-        $filepath = $temp->getRealPath();
+        if ((int)$input->get('featured') == 1) {
+            $newest = $this->repo->findNewestFeatured();
+            $input->put('featured_ordering', $newest
+                ? $newest->featured_ordering + 1
+                : 1
+            );
+        }
 
-        $job = new ImportUser($filepath);
-        dispatch($job);
-    }
-
-
-    public function importRule($input)
-    {
-        $file = $input->file('file');
-        $temp = $file->move('tmp', $file->hashName());
-        $filepath = $temp->getRealPath();
-
-        $job = new ImportRule($filepath, $this);
-        dispatch($job);
-    }
-
-
-    public function importStockHolder($input)
-    {
-        $file = $input->file('file');
-        $temp = $file->move('tmp', $file->hashName());
-        $filepath = $temp->getRealPath();
-
-        $job = new ImportStockHolder($filepath, $this);
-        dispatch($job);
-    }
-
-
-    public function importFinance($input)
-    {
-        $file = $input->file('file');
-        $temp = $file->move('tmp', $file->hashName());
-        $filepath = $temp->getRealPath();
-
-        $job = new ImportFinance($filepath, $this);
-        dispatch($job);
-    }
-
-
-    public function importMemorabilia($input)
-    {
-        $file = $input->file('file');
-        $temp = $file->move('tmp', $file->hashName());
-        $filepath = $temp->getRealPath();
-
-        $job = new ImportMemorabilia($filepath, $this);
-        dispatch($job);
-    }
-
-
-    public function importSolution($input)
-    {
-        $file = $input->file('file');
-        $temp = $file->move('tmp', $file->hashName());
-        $filepath = $temp->getRealPath();
-
-        $job = new ImportSolution($filepath, $this, $this->brandService);
-        dispatch($job);
-    }
-
-
-    public function importCase($input)
-    {
-        $file = $input->file('file');
-        $temp = $file->move('tmp', $file->hashName());
-        $filepath = $temp->getRealPath();
-
-        $job = new ImportCase($filepath, $this, $this->brandService);
-        dispatch($job);
-    }
-
-
-    public function importVideo($input)
-    {
-        $file = $input->file('file');
-        $temp = $file->move('tmp', $file->hashName());
-        $filepath = $temp->getRealPath();
-
-        $job = new ImportVideo($filepath, $this, $this->brandService);
-        dispatch($job);
-    }
-
-
-    public function importPromotion($input)
-    {
-
-        $file = $input->file('file');
-        $temp = $file->move('tmp', $file->hashName());
-        $filepath = $temp->getRealPath();
-
-        $job = new ImportPromation($filepath, $this, $this->brandService);
-        dispatch($job);
-    }
-
-
-    public function importBulletin($input)
-    {
-
-        $file = $input->file('file');
-        $temp = $file->move('tmp', $file->hashName());
-        $filepath = $temp->getRealPath();
-
-        $job = new ImportBulletin($filepath, $this, $this->brandService);
-        dispatch($job);
+        return parent::add($input);
     }
 
 
     public function addMapping($item, $input)
     {
-        $tags = $input->get('tags') ? $input->get('tags') : [];
-        $tagIds = array_map(function($tag) {
-            return $tag['id'];
-        }, $tags);
+        $tagIds = $input->get('tagIds');
         if (count($tagIds)) {
-            $item->tags()->attach($tagIds);
+            $item->tags()->attach($input->get('tagIds'));
+        }
+    }
+
+
+    public function modify(Collection $input)
+    {
+        $input_featured = $input->get('featured');
+        $item = $this->checkItem(collect(['id' => $input->get('id')]));
+        // 代表有修改到 featured 值
+        if ($item && $item->featured != $input_featured) {
+            if ((int)$input_featured == 1) {
+                $newest = $this->repo->findNewestFeatured();
+                $input->put('featured_ordering', $newest
+                    ? $newest->featured_ordering++
+                    : 1
+                );
+            } else {
+                $newer = $this->repo->findNewerFeatured($item);
+                $this->repo->updateOrdering($newer, '--');
+                $input->put('featured_ordering', null);
+            }
         }
 
-        $brands = $input->get('brands') ? $input->get('brands') : [];
-        $brand_ids = array_map(function($brand) {
-            return $brand['id'];
-        }, $brands);
-        if (count($brand_ids)) {
-            $item->brands()->attach($brand_ids);
-        }
-
-        $products = $input->get('products') ? $input->get('products') : [];
-        $product_ids = array_map(function($product) {
-            return $product['id'];
-        }, $products);
-        if (count($product_ids)) {
-            $item->products()->attach($product_ids);
-        }
-
-        $files = $input->get('files') ? $input->get('files') : [];
-        $files_ids = array_map(function($file) {
-            return $file['id'];
-        }, $files);
-        if (count($files_ids)) {
-            $item->files()->attach($files_ids);
-        }
-
-        $newsletterUserGroupIds = $input->get('newsletterUserGroupIds') ?: [];
-        if (count($newsletterUserGroupIds)) {
-            $item->newsletterUserGroups()->attach($newsletterUserGroupIds);
-        }
+        return parent::modify($input);
     }
 
 
     public function modifyMapping($item, $input)
     {
-        if ( $input->get('tags') !== null ) {
-            $tagIds = array_map(function($tag) {
-                return $tag['id'];
-            }, $input->get('tags'));
-            $item->tags()->sync($tagIds);
+        $tagIds = $input->get('tagIds');
+        if (count($tagIds)) {
+            $item->tags()->sync($tagIds, true);
         }
-
-        if ( $input->get('brands') !== null ) {
-            $brand_ids = array_map(function($brand) {
-                return $brand['id'];
-            }, $input->get('brands'));
-            $item->brands()->sync($brand_ids);
-        }
-
-        if ( $input->get('products') !== null ) {
-            $product_ids = array_map(function($product) {
-                return $product['id'];
-            }, $input->get('products'));
-            $item->products()->sync($product_ids);
-        }
-
-        if ( $input->get('files') !== null ) {
-            $file_ids = array_map(function($file) {
-                return $file['id'];
-            }, $input->get('files'));
-            $item->files()->sync($file_ids);
-        }
-
-        $newsletterUserGroupIds = $input->get('newsletterUserGroupIds') ?: [];
-        if (count($newsletterUserGroupIds)) {
-            $item->newsletterUserGroups()->sync($newsletterUserGroupIds);
-        }
-    }
-
-
-    public function removeMapping($item)
-    {
-        $item->tags()->detach();
-        $item->brands()->detach();
-        $item->products()->detach();
-        $item->files()->detach();
-        $item->newsletterUserGroups()->detach();
     }
 
 
     public function search(Collection $input)
     {
-        $extension = $input->get('extension') ?: 'item';
+        $extension = !InputHelper::null($input, 'extension')
+            ? $input->get('extension')
+            : 'item';
         if ($extension == 'item') {
-            $content_type = $input->get('content_type') ?: 'article';
+            if (InputHelper::null($input, 'content_type')) {
+                $content_type = 'article';
+            } else {
+                $content_type = $input->get('content_type');
+            }
         } else {
             $content_type = '';
         }
@@ -263,6 +112,8 @@ class  ItemAdminService extends ItemService
         if (!InputHelper::null($input, 'category_id')) {
             $category_ids = $this->categoryAdminService->findSubTreeIds($input->get('category_id'));
         } else {
+            $this->categoryAdminService->setUser($this->getUser());
+
             $categories = $this->categoryAdminService->search(Helper::collect([
                 'extension'     => $extension,
                 'content_type'  => $content_type,
@@ -272,9 +123,14 @@ class  ItemAdminService extends ItemService
             $category_ids = $categories->pluck('id');
         }
 
-        $q = $input->get('q');
-        $q = $q->whereIn('category_id', $category_ids);
-        $input->put('q', $q);
+        $input->put('special_queries', [
+            [
+                'type'  => 'whereIn',
+                'key'   => 'category_id',
+                'value' => $category_ids
+            ]
+        ]);
+
         // Item Search 沒有這兩個 column
         $input->forget(['extension', 'content_type', 'category_id']);
 
@@ -282,50 +138,12 @@ class  ItemAdminService extends ItemService
     }
 
 
-    public function searchContent(Collection $input)
-    {
-        $extension = $input->get('extension') ?: 'item';
-        $content_type = $input->get('content_type');
-
-        if (!InputHelper::null($input, 'category_id')) {
-            $category_ids = $this->categoryAdminService->findSubTreeIds($input->get('category_id'));
-        } else {
-            $categories = $this->categoryAdminService->search(Helper::collect([
-                'extension'     => $extension,
-                'content_type'  => $content_type,
-                'paginate'  => false
-            ]));
-            $category_ids = $categories->pluck('id');
-        }
-
-        $q = $input->get('q');
-        $q = $q->whereIn('category_id', $category_ids);
-        $input->put('q', $q);
-
-        $input->forget(['extension', 'content_type', 'category_id']);
-
-        if ( in_array($content_type, ['memorabilia', 'finance', 'stockholder']) ) {
-            $page = $input->get('page');
-            $limit = $input->get('limit');
-            $input->put('limit', 0);
-            $input->put('paginate', false);
-            $input->forget('page');
-
-            $result = parent::search($input);
-            $result = $result->sortByDesc(function ($i) {
-                return $i->extrafields['year']['value'];
-            })->values();
-
-            $this->response = $this->repo->paginate($result, $limit, ($page) ?: 1);
-            return $this->response;
-        }
-
-        return parent::search($input);
-    }
-
-
     public function store(Collection $input)
     {
+        if (InputHelper::null($input, 'hits')) {
+            $input->put('hits', 0);
+        }
+
         if ($input->get('state') == 1
             && InputHelper::null($input, 'publish_up')
         ) {
@@ -333,56 +151,30 @@ class  ItemAdminService extends ItemService
             $input->publish_up = now()->toDateTimeString();
         }
 
-        # 改用其他方法處理額外欄位
-        $json_data_field_type = ['multiSelect', 'repeater'];
-        $extrafields = $input->get('extrafields') ? : [];
-        $input->forget('extrafields');
-        $content_type = $input->get('content_type');
-        $input->forget('content_type');
+        $tags = $input->get('tags') ? $input->get('tags') : [];
+        $tagIds = array_map(function($tag) {
+            return $tag['id'];
+        }, $tags);
+        $input->put('tagIds', $tagIds);
 
         $result = parent::store($input);
 
-        # 存入額外欄位
-        if ($input->has('id')) {
-            $result = $this->find($input->get('id'));
-        }
-        $item_id = $result->id;
-
-        foreach ($extrafields as $extrafield) {
-            if (isset($extrafield['id'])) {
-                $e = Extrafield::where('id', $extrafield['id'])->first();
+        if (gettype($result) == 'boolean')
+        {
+            if ($result === true) {
+                $item = $this->find($input->get('id'));
             } else {
-                $e = Extrafield::where('content_type', $content_type)->where('alias', $extrafield['alias'])->first();
+                return $this->response;
             }
-            $e_v = ExtrafieldValue::where('item_id', $item_id)->where('extrafield_id', $e->id)->first();
-            if (!$e_v) {
-                if ( in_array($e->type, $json_data_field_type) ) {
-                    $e_v = ExtrafieldValue::create([
-                        'extrafield_id' => $e->id,
-                        'item_id' => $item_id,
-                        'value' => json_encode($extrafield['value'])
-                    ]);
-                } else {
-                    $e_v = ExtrafieldValue::create([
-                        'extrafield_id' => $e->id,
-                        'item_id' => $item_id,
-                        'value' => $extrafield['value']
-                    ]);
-                }
-            } else {
-                if ( in_array($e->type, $json_data_field_type) ) {
-                    $e_v->value = json_encode($extrafield['value']);
-                } else {
-                    $e_v->value = $extrafield['value'];
-                }
-                $e_v->save();
-            }
+        } else {
+            $item = $this->find($result->id);
         }
 
-        $this->setCronJob($input, $result);
 
-        $this->response = $result;
+        $this->setCronJob($input, $item);
 
-        return $this->response;
+        $this->response = $item;
+
+        return $item;
     }
 }

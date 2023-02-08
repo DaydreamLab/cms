@@ -14,20 +14,19 @@ class CreateModulesTable extends Migration
     public function up()
     {
         Schema::create('modules', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('title');
             $table->string('alias');
-            $table->unsignedInteger('category_id')->nullable();
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->tinyInteger('state')->default(1);
             $table->text('description')->nullable();
             $table->unsignedInteger('access')->nullalbe()->default(1);
             $table->string('language')->nullable()->default('*');
             $table->text('params')->nullable();
-            $table->unsignedBigInteger('ordering')->nullable();
-            $table->unsignedInteger('locked_by')->nullable()->default(0);
+            $table->unsignedBigInteger('locked_by')->nullable()->default(0);
             $table->timestamp('locked_at')->nullable();
-            $table->unsignedInteger('created_by');
-            $table->unsignedInteger('updated_by')->nullable();
+            $table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
             $table->timestamp('publish_up')->nullable();
             $table->timestamp('publish_down')->nullable();

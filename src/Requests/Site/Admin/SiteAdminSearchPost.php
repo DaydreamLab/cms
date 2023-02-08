@@ -2,15 +2,13 @@
 
 namespace DaydreamLab\Cms\Requests\Site\Admin;
 
-use DaydreamLab\Cms\Requests\ComponentBase\CmsSearchRequest;
+use DaydreamLab\JJAJ\Requests\ListRequest;
 
-class SiteAdminSearchPost extends CmsSearchRequest
+class SiteAdminSearchPost extends ListRequest
 {
     protected $apiMethod = 'searchSite';
 
     protected $modelName = 'Site';
-
-    protected $searchKeys = ['title'];
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -31,6 +29,6 @@ class SiteAdminSearchPost extends CmsSearchRequest
         $rules = [
             //
         ];
-        return array_merge(parent::rules(), $rules);
+        return array_merge($rules, parent::rules());
     }
 }

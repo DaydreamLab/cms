@@ -14,19 +14,20 @@ class CreateSitesTable extends Migration
     public function up()
     {
         Schema::create('sites', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('title');
             $table->string('url');
             $table->string('sitename');
             $table->string('sef');
+            $table->text('metakeywords')->nullable();
+            $table->text('metadesc')->nullable();
             $table->unsignedTinyInteger('state')->nulalble()->default(1);
             $table->unsignedInteger('access')->default(1);
-            $table->unsignedInteger('ordering')->nullable();
-            $table->text('params')->nullable();
-            $table->unsignedInteger('locked_by')->nullable()->default(0);
+            $table->unsignedBigInteger('ordering')->nullable();
+            $table->unsignedBigInteger('locked_by')->nullable()->default(0);
             $table->timestamp('locked_at')->nullable();
-            $table->unsignedInteger('created_by');
-            $table->unsignedInteger('updated_by')->nullable();
+            $table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
         });
     }

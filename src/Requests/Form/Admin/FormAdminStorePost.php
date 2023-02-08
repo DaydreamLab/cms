@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Form\Admin;
 
-use DaydreamLab\Cms\Requests\ComponentBase\CmsStoreRequest;
+use DaydreamLab\JJAJ\Requests\AdminRequest;
 
-class FormAdminStorePost extends CmsStoreRequest
+class FormAdminStorePost extends AdminRequest
 {
     protected $apiMethod = 'storeForm';
 
@@ -30,6 +30,6 @@ class FormAdminStorePost extends CmsStoreRequest
             'id'        => 'nullable|integer',
             'note'      => 'nullable|string'
         ];
-        return array_merge(parent::rules(), $rules);
+        return array_merge($rules, parent::rules());
     }
 }

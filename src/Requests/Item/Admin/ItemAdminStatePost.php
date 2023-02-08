@@ -2,11 +2,11 @@
 
 namespace DaydreamLab\Cms\Requests\Item\Admin;
 
-use DaydreamLab\Cms\Requests\ComponentBase\CmsStateRequest;
+use DaydreamLab\Cms\Requests\CmStatePost;
 
-class ItemAdminStatePost extends CmsStateRequest
+class ItemAdminStatePost extends CmStatePost
 {
-    protected $apiMethod = 'stateItem';
+    protected $apiMethod = 'updateItemState';
 
     protected $modelName = 'Item';
     /**
@@ -29,6 +29,6 @@ class ItemAdminStatePost extends CmsStateRequest
         $rules = [
             //
         ];
-        return array_merge(parent::rules(), $rules);
+        return array_merge($rules, parent::rules());
     }
 }

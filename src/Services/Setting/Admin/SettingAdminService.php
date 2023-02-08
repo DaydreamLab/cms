@@ -2,16 +2,22 @@
 
 namespace DaydreamLab\Cms\Services\Setting\Admin;
 
-use Carbon\Carbon;
 use DaydreamLab\Cms\Services\Setting\SettingService;
 use DaydreamLab\Cms\Services\Site\Admin\SiteAdminService;
-use Illuminate\Http\Request;
+use DaydreamLab\JJAJ\Traits\LoggedIn;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
+
 
 class SettingAdminService extends SettingService
 {
+    use LoggedIn;
+
+    protected $type = 'Admin';
+
+    protected $modelType = 'Admin';
+
     public function __construct(SiteAdminService $siteAdminService)
     {
         parent::__construct($siteAdminService);
@@ -20,35 +26,10 @@ class SettingAdminService extends SettingService
 
     public function getItem($locale = '')
     {
-        $item = $this->siteService->find(1);
-        if ($item) {
-            $response = $item->params;
-            $response['sitename'] = $item->sitename;
-            $response['siteurl'] = $item->url;
-            $tz = $this->user->timezone;
-            $response['updated_at'] = Carbon::parse($item->updated_at, config('app.timezone'))->tz($tz)->format('Y-m-d H:i:s');
-            $response['updaterName'] = $item->updaterName;
-            $this->status = 'GetItemSuccess';
-            $this->response = $response;
-        } else {
-            $this->status   = 'ItemNotExist';
-            $this->response = null;
-        }
+        $global = config('daydreamlab.global');
 
-        return $this->response;
-    }
-
-
-    public function siteInfo()
-    {
-        $item = $this->siteService->find(1);
-        if ($item) {
-            $this->status = 'GetItemSuccess';
-            $this->response = ['sitename' => $item->sitename, 'siteurl' => $item->url];
-        } else {
-            $this->status   = 'ItemNotExist';
-            $this->response = null;
-        }
+        $this->status   = 'GetItemSuccess';
+        $this->response = $global;
 
         return $this->response;
     }
@@ -56,56 +37,38 @@ class SettingAdminService extends SettingService
 
     public function store(Collection $input)
     {
-        $data = collect([
-            'id'        => 1,
-            'sitename'  => $input->get('sitename'),
-            'params'    => [
-                'seo_title'         => $input->get('seo_title'),
-                'seo_keyword'       => $input->get('seo_keyword'),
-                'seo_description'   => $input->get('seo_description'),
-                'fb_fanpage_id'     => $input->get('fb_fanpage_id'),
-                'fbFanpageUrl'      => $input->get('fbFanpageUrl'),
-                'lineId'            => $input->get('lineId'),
-                'liffId'            => $input->get('liffId'),
-                'youtubeUrl'        => $input->get('youtubeUrl'),
-                'podcast'           => $input->get('podcast'),
-                'ga'                => $input->get('ga'),
-            ]
-        ]);
+        $config     = config('daydreamlab.global');
 
-        $result = $this->siteService->store($data);
+        $file_str   = '<?php return [' . PHP_EOL;
 
-        if ($result) {
-            $this->status = 'UpdateSuccess';
-        }
-        else {
-            $this->status = 'UpdateFail';
-        }
-
-        return $this->getItem();
-    }
-
-
-    public function restoreAllLockData(Request $request)
-    {
-        $db = "Tables_in_".env('DB_DATABASE');
-        $tables = array_map(function($t) use ($db) {
-            return $t->{$db};
-        }, DB::select('SHOW TABLES'));
-
-        $log = [];
-        foreach ($tables as $table) {
-            if (Schema::hasColumn($table, 'locked_by')) {
-                $log[$table] = [];
-                $affects = DB::table($table)->where('locked_by', '!=', 0)->get();
-                DB::table($table)->where('locked_by', '!=', 0)->update(['locked_by' => 0]);
-                foreach ($affects as $affect) {
-                    $log[$table][] = $affect->id;
-                }
+        foreach ($config as $key => $value)
+        {
+            if ($input->has($key)) {
+                $output = $input->get("{$key}");
             }
+            else {
+                $output = $config[$key];
+            }
+
+            $file_str .= '\'' . $key . '\' => ' .  '\'' . $output . '\', '. PHP_EOL;
         }
 
-        $this->status = "RestoreSuccess";
-        $this->response = $log;
+        $file_str .= '];';
+
+        $result = File::put(config_path('daydreamlab/global.php'), $file_str);
+
+
+        if ($result)
+        {
+            $this->status = 'UpdateSuccess';
+            $this->response = null;
+        }
+        else
+        {
+            $this->status = 'UpdateFail';
+            $this->response = null;
+        }
+
+        return $result;
     }
 }

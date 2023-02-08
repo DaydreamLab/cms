@@ -23,7 +23,7 @@ class MenuFrontRepository extends MenuRepository
                         ->where('alias', $input->get('alias'))
                         ->where('site_id', $input->get('site_id'));
 
-        if (!$input->get('language')) {
+        if (InputHelper::null($input, 'language')) {
             $query = $query->where('language', '*');
         } else {
             $query = $query->whereIn('language', ['*', $input->get('language')]);
@@ -49,7 +49,7 @@ class MenuFrontRepository extends MenuRepository
             $query = $query->whereIn('language', ['*', $input->get('language')]);
         }
 
-
+        
         return $query->get()->toTree();
     }
 }

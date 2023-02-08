@@ -2,11 +2,11 @@
 
 namespace DaydreamLab\Cms\Requests\Module\Admin;
 
-use DaydreamLab\Cms\Requests\ComponentBase\CmsStateRequest;
+use DaydreamLab\Cms\Requests\CmStatePost;
 
-class ModuleAdminStatePost extends CmsStateRequest
+class ModuleAdminStatePost extends CmStatePost
 {
-    protected $apiMethod = 'stateModule';
+    protected $apiMethod = 'updateModuleState';
 
     protected $modelName = 'Module';
     /**
@@ -29,6 +29,6 @@ class ModuleAdminStatePost extends CmsStateRequest
         $rules = [
             //
         ];
-        return array_merge(parent::rules(), $rules);
+        return array_merge($rules, parent::rules());
     }
 }

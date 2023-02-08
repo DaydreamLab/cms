@@ -2,10 +2,10 @@
 
 namespace DaydreamLab\Cms\Requests\Item\Admin;
 
-use DaydreamLab\Cms\Requests\ComponentBase\CmsSearchRequest;
+use DaydreamLab\JJAJ\Requests\ListRequest;
 use Illuminate\Validation\Rule;
 
-class ItemAdminSearchPost extends CmsSearchRequest
+class ItemAdminSearchPost extends ListRequest
 {
     protected $apiMethod = 'searchItem';
 
@@ -38,8 +38,14 @@ class ItemAdminSearchPost extends CmsSearchRequest
                 'nullable',
                 Rule::in([0,1])
             ],
-            'content_type'  => 'nullable|string',
-            'extension'     => 'nullable|string',
+//            'content_type'  => [
+//                'nullable',
+//                Rule::in(['article', 'item', 'link', 'menu', 'slideshow', 'timeline'])
+//            ],
+//            'extension'     => [
+//                'nullable',
+//                Rule::in(['item', 'module', 'menu'])
+//            ],
             'access'        => 'nullable|integer',
             'language'      => 'nullable|string|max:5',
             'order_by'      => [
@@ -63,7 +69,8 @@ class ItemAdminSearchPost extends CmsSearchRequest
                     'created_by',
                     'updated_by',
                 ])
-            ]
+            ],
+            'tag_id' => 'nullable|integer'
         ];
         return array_merge(parent::rules(), $rules);
     }
@@ -72,6 +79,19 @@ class ItemAdminSearchPost extends CmsSearchRequest
     public function validated()
     {
         $validated = parent::validated();
+
+        if ($tag_id = $validated->get('tag_id')) {
+            $validated->put('whereHas', [
+                [
+                    'relation' => 'tags',
+                    'callback'  => function ($q) use ($tag_id) {
+                        $q->where('tags.id', $tag_id);
+                    }
+                ]
+            ]);
+        }
+
+        $validated->forget('tag_id');
 
         return $validated;
     }

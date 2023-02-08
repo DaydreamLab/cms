@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Category\Admin;
 
-use DaydreamLab\Cms\Requests\ComponentBase\CmsRemoveRequest;
+use DaydreamLab\Cms\Requests\CmsCheckoutRemovePost;
 
-class CategoryAdminRemovePost extends CmsRemoveRequest
+class CategoryAdminRemovePost extends CmsCheckoutRemovePost
 {
     protected $apiMethod = 'deleteCategory';
 
@@ -29,6 +29,6 @@ class CategoryAdminRemovePost extends CmsRemoveRequest
         $rules = [
             //
         ];
-        return array_merge(parent::rules(), $rules);
+        return array_merge($rules, parent::rules());
     }
 }

@@ -2,9 +2,10 @@
 
 namespace DaydreamLab\Cms\Requests\Extrafield\Admin;
 
-use DaydreamLab\Cms\Requests\ComponentBase\CmsRemoveRequest;
+use DaydreamLab\Cms\Requests\CmsCheckoutRemovePost;
+use DaydreamLab\Cms\Requests\Extrafield\ExtrafieldGroupRemovePost;
 
-class ExtrafieldGroupAdminRemovePost extends CmsRemoveRequest
+class ExtrafieldGroupAdminRemovePost extends CmsCheckoutRemovePost
 {
     protected $apiMethod = 'deleteExtrafieldGroup';
 
@@ -29,6 +30,6 @@ class ExtrafieldGroupAdminRemovePost extends CmsRemoveRequest
         $rules = [
             //
         ];
-        return array_merge(parent::rules(), $rules);
+        return array_merge($rules, parent::rules());
     }
 }

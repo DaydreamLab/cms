@@ -2,11 +2,11 @@
 
 namespace DaydreamLab\Cms\Requests\Menu\Admin;
 
-use DaydreamLab\Cms\Requests\ComponentBase\CmsStateRequest;
+use DaydreamLab\Cms\Requests\CmStatePost;
 
-class MenuAdminStatePost extends CmsStateRequest
+class MenuAdminStatePost extends CmStatePost
 {
-    protected $apiMethod = 'stateMenu';
+    protected $apiMethod = 'updateMenuState';
 
     protected $modelName = 'Menu';
     /**
@@ -29,6 +29,6 @@ class MenuAdminStatePost extends CmsStateRequest
         $rules = [
             //
         ];
-        return array_merge(parent::rules(), $rules);
+        return array_merge($rules, parent::rules());
     }
 }

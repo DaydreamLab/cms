@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Extrafield\Admin;
 
-use DaydreamLab\Cms\Requests\ComponentBase\CmsGetItemRequest;
+use DaydreamLab\Cms\Requests\CmsGetItemGet;
 
-class ExtrafieldAdminGetItemGet extends CmsGetItemRequest
+class ExtrafieldAdminGetItemGet extends CmsGetItemGet
 {
     protected $apiMethod = 'getExtrafield';
 

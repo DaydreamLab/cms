@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Setting\Admin;
 
-use DaydreamLab\Cms\Requests\ComponentBase\CmsGetItemRequest;
+use DaydreamLab\Cms\Requests\CmsGetItemGet;
 
-class SettingAdminGetItemGet extends CmsGetItemRequest
+class SettingAdminGetItemGet extends CmsGetItemGet
 {
     protected $apiMethod = 'getSetting';
 

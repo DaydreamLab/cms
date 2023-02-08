@@ -2,11 +2,11 @@
 
 namespace DaydreamLab\Cms\Requests\Extrafield\Admin;
 
-use DaydreamLab\Cms\Requests\ComponentBase\CmsStateRequest;
+use DaydreamLab\Cms\Requests\CmStatePost;
 
-class ExtrafieldGroupAdminStatePost extends CmsStateRequest
+class ExtrafieldGroupAdminStatePost extends CmStatePost
 {
-    protected $apiMethod = 'stateExtrafieldGroup';
+    protected $apiMethod = 'updateExtrafieldGroupState';
 
     protected $modelName = 'ExtrafieldGroup';
     /**
@@ -29,6 +29,6 @@ class ExtrafieldGroupAdminStatePost extends CmsStateRequest
         $rules = [
             //
         ];
-        return array_merge(parent::rules(), $rules);
+        return array_merge($rules, parent::rules());
     }
 }

@@ -2,10 +2,10 @@
 
 namespace DaydreamLab\Cms\Requests\Form\Front;
 
-use DaydreamLab\Cms\Requests\ComponentBase\CmsStoreRequest;
+use DaydreamLab\JJAJ\Requests\AdminRequest;
 use Illuminate\Validation\Rule;
 
-class FormFrontStorePost extends CmsStoreRequest
+class FormFrontStorePost extends AdminRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -43,6 +43,6 @@ class FormFrontStorePost extends CmsStoreRequest
                 ])
             ],
         ];
-        return array_merge(parent::rules(), $rules);
+        return array_merge($rules, parent::rules());
     }
 }

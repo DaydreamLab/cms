@@ -2,10 +2,10 @@
 
 namespace DaydreamLab\Cms\Requests\Item\Front;
 
-use DaydreamLab\Cms\Requests\ComponentBase\CmsSearchRequest;
+use DaydreamLab\JJAJ\Requests\ListRequest;
 use Illuminate\Validation\Rule;
 
-class ItemFrontSearchPost extends CmsSearchRequest
+class ItemFrontSearchPost extends ListRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -51,9 +51,30 @@ class ItemFrontSearchPost extends CmsSearchRequest
                 'nullable',
                 'integer',
                 Rule::in([0,1])
-            ]
+            ],
+            'tag_alias' => 'nullable|string'
         ];
 
         return array_merge(parent::rules(), $rules);
+    }
+
+    public function validated()
+    {
+        $validated = parent::validated();
+
+        if ($tag_alias = $validated->get('tag_alias')) {
+            $validated->put('whereHas', [
+                [
+                    'relation' => 'tags',
+                    'callback'  => function ($q) use ($tag_alias) {
+                        $q->where('tags.alias', $tag_alias);
+                    }
+                ]
+            ]);
+        }
+
+        $validated->forget('tag_alias');
+
+        return $validated;
     }
 }

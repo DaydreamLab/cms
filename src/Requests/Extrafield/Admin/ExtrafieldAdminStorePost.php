@@ -2,10 +2,10 @@
 
 namespace DaydreamLab\Cms\Requests\Extrafield\Admin;
 
-use DaydreamLab\Cms\Requests\ComponentBase\CmsStoreRequest;
+use DaydreamLab\JJAJ\Requests\AdminRequest;
 use Illuminate\Validation\Rule;
 
-class ExtrafieldAdminStorePost extends CmsStoreRequest
+class ExtrafieldAdminStorePost extends AdminRequest
 {
     protected $apiMethod = 'storeExtrafield';
 
@@ -41,10 +41,9 @@ class ExtrafieldAdminStorePost extends CmsStoreRequest
             'required'      => 'required|boolean',
             'value'         => 'nullable|string',
             'description'   => 'nullable|string',
-            'ordering'      => 'nullable|integer',
             'params'        => 'nullable|array',
-            'params.*'      => 'nullable|array',
-            'params.*.*'    => 'nullable|array',
+            //'params.*'      => 'nullable|array',
+            //'params.*.*'    => 'nullable|array',
             'access'        => 'nullable|integer',
             'ordering'      => 'nullable|integer',
             'created_by'    => 'nullable|integer',

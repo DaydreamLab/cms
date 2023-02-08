@@ -2,11 +2,11 @@
 
 namespace DaydreamLab\Cms\Requests\Tag\Admin;
 
-use DaydreamLab\Cms\Requests\ComponentBase\CmsStateRequest;
+use DaydreamLab\Cms\Requests\CmStatePost;
 
-class TagAdminStatePost extends CmsStateRequest
+class TagAdminStatePost extends CmStatePost
 {
-    protected $apiMethod = 'stateTag';
+    protected $apiMethod = 'updateTagState';
 
     protected $modelName = 'Tag';
     /**

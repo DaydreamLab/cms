@@ -15,6 +15,9 @@ class ExtrafieldService extends CmsService
 {
     protected $modelName = 'Extrafield';
 
+    protected $modelType = 'Base';
+
+
     public function __construct(ExtrafieldRepository $repo)
     {
         parent::__construct($repo);

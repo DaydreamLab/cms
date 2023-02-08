@@ -4,16 +4,13 @@ return [
 
     'sitename'  => '',
 
-    'meta' => [
-
-    ],
-
-
     'metadesc'  => '',
 
+    'metakeywords'  => [
+    ],
 
     'locale'            => 'zh-TW',
-
+    
     'locale_admin'      => 'zh-TW',
 
     'custom_head'       => '',

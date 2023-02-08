@@ -4,11 +4,9 @@ namespace DaydreamLab\Cms\Models\Item\Front;
 use DaydreamLab\Cms\Models\Category\Front\CategoryFront;
 use DaydreamLab\Cms\Models\Extrafield\Front\ExtrafieldFront;
 use DaydreamLab\Cms\Models\Item\Item;
-use DaydreamLab\Cms\Models\Brand\Front\BrandFront;
 use DaydreamLab\Cms\Models\Tag\Front\TagFront;
-use DaydreamLab\Cms\Models\Product\Front\ProductFront;
 use DaydreamLab\JJAJ\Helpers\Helper;
-use DaydreamLab\Media\Models\File\Front\FileFront;
+use Illuminate\Support\Facades\Storage;
 
 class ItemFront extends Item
 {
@@ -30,13 +28,10 @@ class ItemFront extends Item
         'category_id',
         'state',
         'access',
-        'pivot',
-        'ordering',
+        //'ordering',
         //'featured_ordering',
-        'hits',
-        'language',
-        'language_title',
-        //'params',
+        //'language',
+        'params',
         'creator_groups',
         'extrafield_group_id',
         //'extrafields',
@@ -64,30 +59,89 @@ class ItemFront extends Item
 
     public function tags()
     {
-        return $this->belongsToMany(TagFront::class, 'items_tags_maps', 'item_id', 'tag_id')->where('state', 1)
-            ->where('state', 1);
+        return $this->belongsToMany(TagFront::class, 'items_tags_maps', 'item_id', 'tag_id');
     }
 
 
-    public function brands()
+    public function categorySiblings()
     {
-        return $this->belongsToMany(BrandFront::class, 'brands_items_maps', 'item_id', 'brand_id')
-            ->where('state', 1)
-            ->withTimestamps();
+        return $this->where('category_id', '=', $this->category_id)->where('state', '=', 1)->orderBy('publish_up', 'asc');
     }
 
 
-    public function files()
+    public function getPrevSiblingAttribute()
     {
-        return $this->belongsToMany(FileFront::class, 'items_files_maps', 'itemId', 'fileId', 'id', 'id')
-            ->withTimestamps();
+        $siblings = $this->categorySiblings()->get();
+        $current_pos = $siblings->search(function ($i, $key) {
+            return $i->alias == $this->alias;
+        });
+        $prev_pos = $current_pos-1;
+        return $siblings->slice( ( ($prev_pos <= 0) ? $prev_pos+$siblings->count() : $prev_pos ) % $siblings->count(), 1)->first();
     }
 
 
-    public function products()
+    public function getNextSiblingAttribute()
     {
-        return $this->belongsToMany(ProductFront::class, 'items_products_maps', 'item_id', 'product_id')
-            ->where('state', 1)
-            ->withTimestamps();
+        $siblings = $this->categorySiblings()->get();
+        $current_pos = $siblings->search(function ($i, $key) {
+            return $i->alias == $this->alias;
+        });
+        $next_pos = $current_pos+1;
+        return $siblings->slice( $next_pos % $siblings->count(), 1)->first();
+    }
+
+
+    public function getGalleryAttribute()
+    {
+        $gallery = [];
+        $storage = Storage::disk('media-public');
+        $path = str_replace('/storage/media', '', $this->getRawOriginal('gallery'));
+        if ($path) {
+            $files = $storage->files($path);
+            foreach ($files as $file) {
+                $gallery[] = $storage->url($file);
+            }
+        }
+        return $gallery;
+    }
+
+
+    public function getBreadcrumbAttribute()
+    {
+        $ant_cats = CategoryFront::ancestorsOf($this->category_id);
+        return $ant_cats->map(function ($item) {
+            return $item->only(['title', 'alias']);
+        })->slice(1)->values();
+    }
+
+
+    public function getYearAttribute()
+    {
+        $tags = $this->tags;
+        if ( count($tags) ) {
+            foreach ($tags as $tag) {
+                if ( preg_match("/\d{4}/", $tag['title']) ) {
+                    return $tag['title'];
+                }
+            }
+        }
+
+        if ( $this->extrafield_group_id == 3) {
+            $extrafields = json_decode($this->getRawOriginal('extrafields'), true);
+            if( isset($extrafields[8]) ) {
+                if ( !empty($extrafields[8]['value']) ) {
+                    return '20'.substr(preg_replace('~\D~', '', $extrafields[8]['value']), 0, 2);
+                }
+            }
+        }
+
+        $ant_cats = $this->breadcrumb;
+        foreach ($ant_cats as $ant_cat) {
+            if ( preg_match("/\d{4}/", $ant_cat['title']) ) {
+                return $ant_cat['title'];
+            }
+        }
+
+        return '';
     }
 }

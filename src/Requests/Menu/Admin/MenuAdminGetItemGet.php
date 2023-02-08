@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Menu\Admin;
 
-use DaydreamLab\Cms\Requests\ComponentBase\CmsGetItemRequest;
+use DaydreamLab\Cms\Requests\CmsGetItemGet;
 
-class MenuAdminGetItemGet extends CmsGetItemRequest
+class MenuAdminGetItemGet extends CmsGetItemGet
 {
     protected $apiMethod = 'getMenu';
 

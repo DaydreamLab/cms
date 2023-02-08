@@ -10,6 +10,8 @@ class FormFrontController extends CmsController
 {
     protected $modelName = 'Form';
 
+    protected $modelType = 'Front';
+
     public function __construct(FormFrontService $service)
     {
         parent::__construct($service);

@@ -7,11 +7,6 @@ use Illuminate\Validation\Rule;
 
 class OptionAdminGetListPost extends AdminRequest
 {
-    protected $package = 'Cms';
-
-    protected $apiMethod = 'getOption';
-
-    protected $modelName = 'Option';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -29,13 +24,12 @@ class OptionAdminGetListPost extends AdminRequest
      */
     public function rules()
     {
-        $rules = [
+        return [
             'types'      => 'nullable|array',
             'types.*'    => [
                 'nullable',
                 Rule::in([
                     'asset',
-                    'brand',
                     'extension',
                     'extrafield_group',
                     'item_category',
@@ -47,25 +41,10 @@ class OptionAdminGetListPost extends AdminRequest
                     'menu_category',
                     'module',
                     'module_category',
-                    'product_category',
-                    'product_parent_category',
-                    'product_child_category',
-                    'solution_category',
-                    'industry_category',
                     'user_group',
                     'viewlevel',
-                    'memorabilia_year',
-                    'document_type',
-                    'company_category',
-                    'newsletter_category',
-                    'download_file_category',
-                    'contract_file_category',
-                    'front_user_group',
-                    'admin_user_group'
                 ])
             ]
         ];
-
-        return array_merge(parent::rules(), $rules);
     }
 }

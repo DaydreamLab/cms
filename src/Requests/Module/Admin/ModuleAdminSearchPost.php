@@ -2,10 +2,11 @@
 
 namespace DaydreamLab\Cms\Requests\Module\Admin;
 
-use DaydreamLab\Cms\Requests\ComponentBase\CmsSearchRequest;
+use DaydreamLab\Cms\Requests\Module\ModuleSearchPost;
+use DaydreamLab\JJAJ\Requests\ListRequest;
 use Illuminate\Validation\Rule;
 
-class ModuleAdminSearchPost extends CmsSearchRequest
+class ModuleAdminSearchPost extends ListRequest
 {
     protected $apiMethod = 'searchModule';
 
@@ -37,6 +38,6 @@ class ModuleAdminSearchPost extends CmsSearchRequest
             'language'      => 'nullable|string|max:5',
             'access'        => 'nullable|integer',
         ];
-        return array_merge(parent::rules(), $rules);
+        return array_merge($rules, parent::rules());
     }
 }

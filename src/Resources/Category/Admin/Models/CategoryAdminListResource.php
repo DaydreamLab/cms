@@ -22,6 +22,7 @@ class CategoryAdminListResource extends JsonResource
             'extension'             => $this->extension,
             'state'                 => $this->state,
             'introimage'            => $this->introimage,
+            'language'              => $this->language,
             'language_title'        => $this->language_title,
             'access_title'          => $this->access_title,
             'ordering'              => $this->ordering,

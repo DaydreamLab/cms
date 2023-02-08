@@ -2,13 +2,10 @@
 
 namespace DaydreamLab\Cms\Requests\Language\Admin;
 
-use DaydreamLab\Cms\Requests\ComponentBase\CmsRemoveRequest;
+use DaydreamLab\Cms\Requests\CmsCheckoutRemovePost;
 
-class LanguageAdminRemovePost extends CmsRemoveRequest
+class LanguageAdminRemovePost extends CmsCheckoutRemovePost
 {
-    protected $apiMethod = 'deleteLanguage';
-
-    protected $modelName = 'Language';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -29,6 +26,6 @@ class LanguageAdminRemovePost extends CmsRemoveRequest
         $rules = [
             //
         ];
-        return array_merge(parent::rules(), $rules);
+        return array_merge($rules, parent::rules());
     }
 }

@@ -2,9 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Form\Admin;
 
-use DaydreamLab\Cms\Requests\ComponentBase\CmsSearchRequest;
+use DaydreamLab\JJAJ\Requests\ListRequest;
 
-class FormAdminSearchPost extends CmsSearchRequest
+class FormAdminSearchPost extends ListRequest
 {
     protected $apiMethod = 'searchForm';
 
@@ -29,6 +29,6 @@ class FormAdminSearchPost extends CmsSearchRequest
         $rules = [
             //
         ];
-        return array_merge(parent::rules(), $rules);
+        return array_merge($rules, parent::rules());
     }
 }

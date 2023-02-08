@@ -2,7 +2,6 @@
 
 namespace DaydreamLab\Cms\Services\Tag;
 
-use Carbon\Carbon;
 use DaydreamLab\Cms\Services\CmsService;
 use DaydreamLab\Cms\Repositories\Tag\TagRepository;
 use DaydreamLab\Cms\Events\Add;
@@ -10,12 +9,25 @@ use DaydreamLab\Cms\Events\Modify;
 use DaydreamLab\Cms\Events\Ordering;
 use DaydreamLab\Cms\Events\Remove;
 use DaydreamLab\Cms\Events\State;
-use DaydreamLab\JJAJ\Exceptions\ForbiddenException;
+use DaydreamLab\JJAJ\Services\BaseService;
+use DaydreamLab\JJAJ\Traits\NestedServiceTrait;
 use Illuminate\Support\Collection;
 
 class TagService extends CmsService
 {
+    use NestedServiceTrait {
+        NestedServiceTrait::addNested       as traitAddNested;
+        NestedServiceTrait::modifyNested    as traitModifiedNested;
+        NestedServiceTrait::storeNested     as traitStoreNested;
+        NestedServiceTrait::removeNested    as traitRemoveNested;
+    }
+    
     protected $modelName = 'Tag';
+
+    protected $modelType = 'Base';
+
+    protected $type = 'Tag';
+
 
     public function __construct(TagRepository $repo)
     {
@@ -23,9 +35,9 @@ class TagService extends CmsService
     }
 
 
-    public function add(Collection $input)
+    public function addNested(Collection $input)
     {
-        $item = parent::addNested($input);
+        $item = $this->traitAddNested($input);
 
         event(new Add($item, $this->getServiceName(), $input, $this->user));
 
@@ -33,17 +45,15 @@ class TagService extends CmsService
     }
 
 
-    public function restore(Collection $input)
+    public function checkout(Collection $input)
     {
-        return parent::restore($input);
+        return parent::checkout($input);
     }
 
 
-    public function modify(Collection $input)
+    public function modifyNested(Collection $input, $parent, $item)
     {
-        $item = $this->checkItem($input);
-
-        $result = parent::modifyNested($input, $item->parent, $item);
+        $result = $this->traitModifiedNested($input, $parent, $item);
 
         event(new Modify($this->find($input->get('id')), $this->getServiceName(), $result, $input,$this->user));
 
@@ -53,7 +63,7 @@ class TagService extends CmsService
 
     public function remove(Collection $input)
     {
-        $result = parent::removeNested($input);
+        $result = $this->traitRemoveNested($input);
 
         event(new Remove($this->getServiceName(), $result, $input, $this->user));
 
@@ -73,7 +83,7 @@ class TagService extends CmsService
 
     public function ordering(Collection $input)
     {
-        $result =  parent::orderingNested($input);
+        $result =  parent::ordering($input);
 
         event(new Ordering($this->getServiceName(), $result, $input, $this->user));
 
@@ -83,8 +93,9 @@ class TagService extends CmsService
 
     public function store(Collection $input)
     {
-        $result = parent::storeNested($input);
+        $result = $this->traitStoreNested($input);
 
         return $result;
     }
+
 }

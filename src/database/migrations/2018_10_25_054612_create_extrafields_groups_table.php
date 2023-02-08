@@ -16,9 +16,9 @@ class CreateExtrafieldsGroupsTable extends Migration
         Schema::create('extrafields_groups', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
+            $table->string('alias')->nullable();
             $table->tinyInteger('state')->default(1);
             $table->text('description')->nullable();
-            $table->unsignedBigInteger('ordering')->nullable();
             $table->unsignedInteger('access')->nullable()->default(1);
             $table->unsignedInteger('locked_by')->nullable()->default(0);
             $table->timestamp('locked_at')->nullable();

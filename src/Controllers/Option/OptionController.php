@@ -3,16 +3,13 @@
 namespace DaydreamLab\Cms\Controllers\Option;
 
 use DaydreamLab\Cms\Controllers\CmsController;
-use DaydreamLab\Cms\Requests\Option\OptionGetListPost;
 use DaydreamLab\Cms\Requests\Option\Admin\OptionAdminGetListPost;
 use DaydreamLab\Cms\Services\Option\OptionService;
-use DaydreamLab\JJAJ\Traits\ApiJsonResponse;
-use Throwable;
+use DaydreamLab\JJAJ\Helpers\ResponseHelper;
+
 
 class OptionController extends CmsController
 {
-    use ApiJsonResponse;
-
     protected $service;
 
     public function __construct(OptionService $service)
@@ -22,23 +19,7 @@ class OptionController extends CmsController
 
     public function mergeList(OptionAdminGetListPost $request)
     {
-        try {
-            $this->service->mergeList($request->validated());
-        } catch (Throwable $t) {
-            $this->handleException($t);
-        }
-
-        return $this->response($this->service->status, $this->service->response);
-    }
-
-
-    public function frontOptionList(OptionGetListPost $request)
-    {
-        try {
-            $this->service->frontOptionList($request->validated());
-        } catch (Throwable $t) {
-            $this->handleException($t);
-        }
+        $this->service->mergeList($request->validated());
 
         return $this->response($this->service->status, $this->service->response);
     }

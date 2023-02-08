@@ -1,17 +1,13 @@
 <?php
 namespace DaydreamLab\Cms\Models\Item;
 
-use DaydreamLab\Cms\Models\Brand\Brand;
-use DaydreamLab\Cms\Models\Product\Product;
 use DaydreamLab\Cms\Models\Tag\Tag;
-use DaydreamLab\JJAJ\Traits\UserInfo;
+use DaydreamLab\Cms\Traits\Model\UserInfo;
 use DaydreamLab\Cms\Traits\Model\WithCategory;
 use DaydreamLab\Cms\Traits\Model\WithLanguage;
 use DaydreamLab\Cms\Traits\WithExtrafield;
 use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
-use DaydreamLab\Media\Models\File\File;
-use DaydreamLab\User\Models\User\UserGroup;
 use DaydreamLab\User\Traits\Model\WithAccess;
 
 class Item extends BaseModel
@@ -44,6 +40,7 @@ class Item extends BaseModel
         'introimage',
         'introtext',
         'image',
+        'gallery',
         'description',
         'video',
         'link',
@@ -53,6 +50,8 @@ class Item extends BaseModel
         'featured_ordering',
         'ordering',
         'language',
+        'metadesc',
+        'metakeywords',
         'params',
         'extrafield_group_id',
         'extrafields',
@@ -67,8 +66,7 @@ class Item extends BaseModel
 
     protected $with = [
         'category',
-        'tags',
-        'files'
+        'tags'
     ];
 
 
@@ -82,8 +80,7 @@ class Item extends BaseModel
         'updated_by',
         'viewlevels',
         'viewlevel',
-        'extrafields_search',
-        'extrafield_group_id'
+        'extrafields_search'
     ];
 
 
@@ -93,13 +90,16 @@ class Item extends BaseModel
      * @var array
      */
     protected $appends = [
+        'creator',
+        'updater',
+        'locker',
         'creator_groups',
         'viewlevels',
         'category_title',
         'category_alias',
         'access_title',
         'language_title',
-        //'extrafield_group_title'
+        'extrafield_group_title'
     ];
 
 
@@ -115,51 +115,6 @@ class Item extends BaseModel
     public static function boot()
     {
         self::traitBoot();
-
-        static::creating(function ($item) {
-            if ($item->state && !$item->publish_up) {
-                $item->publish_up = now();
-            }
-
-            if (!$item->hits) {
-                $item->hits = 0;
-            }
-        });
-    }
-
-
-    public function brands()
-    {
-        return $this->belongsToMany(Brand::class, 'brands_items_maps', 'item_id', 'brand_id')
-            ->withTimestamps();
-    }
-
-
-    public function files()
-    {
-        return $this->belongsToMany(File::class, 'items_files_maps', 'itemId', 'fileId', 'id', 'id')
-            ->withTimestamps();
-    }
-
-
-    public function newsletterUserGroups()
-    {
-        return $this->belongsToMany(UserGroup::class, 'newsletter_category_user_group_maps', 'category_id', 'group_id')
-            ->withTimestamps();
-    }
-
-
-    public function products()
-    {
-        return $this->belongsToMany(Product::class, 'items_products_maps', 'item_id', 'product_id')
-            ->withTimestamps();
-    }
-
-
-    public function tags()
-    {
-        return $this->belongsToMany(Tag::class, 'items_tags_maps', 'item_id', 'tag_id')
-            ->withTimestamps();
     }
 
 
@@ -174,5 +129,12 @@ class Item extends BaseModel
         } else {
             return [];
         }
+    }
+
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'items_tags_maps', 'item_id', 'tag_id')
+            ->where('state', 1);
     }
 }

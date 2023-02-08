@@ -2,10 +2,9 @@
 
 namespace DaydreamLab\Cms\Requests\Extrafield\Admin;
 
-use DaydreamLab\Cms\Requests\ComponentBase\CmsSearchRequest;
-use Illuminate\Validation\Rule;
+use DaydreamLab\JJAJ\Requests\ListRequest;
 
-class ExtrafieldGroupAdminSearchPost extends CmsSearchRequest
+class ExtrafieldGroupAdminSearchPost extends ListRequest
 {
     protected $apiMethod = 'searchExtrafieldGroup';
 
@@ -28,8 +27,7 @@ class ExtrafieldGroupAdminSearchPost extends CmsSearchRequest
     public function rules()
     {
         $rules = [
-            'state' => ['nullable', Rule::in([0, 1, -2])]
         ];
-        return array_merge(parent::rules(), $rules);
+        return array_merge($rules, parent::rules());
     }
 }

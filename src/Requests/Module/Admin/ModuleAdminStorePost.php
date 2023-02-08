@@ -2,11 +2,10 @@
 
 namespace DaydreamLab\Cms\Requests\Module\Admin;
 
-use Carbon\Carbon;
-use DaydreamLab\Cms\Requests\ComponentBase\CmsStoreRequest;
+use DaydreamLab\JJAJ\Requests\AdminRequest;
 use Illuminate\Validation\Rule;
 
-class ModuleAdminStorePost extends CmsStoreRequest
+class ModuleAdminStorePost extends AdminRequest
 {
     protected $apiMethod = 'storeModule';
 
@@ -40,13 +39,12 @@ class ModuleAdminStorePost extends CmsStoreRequest
             ],
             'description'   => 'nullable|string',
             'access'        => 'nullable|integer',
-            'ordering'      => 'nullable|integer',
             'language'      => 'required|string',
             'params'        => 'nullable|array',
             'publish_up'    => 'nullable|date',
             'publish_down'  => 'nullable|date',
         ];
-        return array_merge(parent::rules(), $rules);
+        return array_merge($rules, parent::rules());
     }
 
     public function validated()
@@ -77,16 +75,6 @@ class ModuleAdminStorePost extends CmsStoreRequest
                 $params['menu_ids'] = $items;
             }
             $validated->put('params', $params);
-        }
-
-        if ( $publish_up = $validated->get('publish_up') ) {
-            $utc_publish_up = Carbon::parse($publish_up, $this->user('api')->timezone);
-            $validated->put('publish_up', $utc_publish_up->tz(config('app.timezone'))->format('Y-m-d H:i:s'));
-        }
-
-        if ( $publish_down = $validated->get('publish_down') ) {
-            $utc_publish_down = Carbon::parse($publish_down, $this->user('api')->timezone);
-            $validated->put('publish_down', $utc_publish_down->tz(config('app.timezone'))->format('Y-m-d H:i:s'));
         }
 
         return $validated;

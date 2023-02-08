@@ -4,7 +4,8 @@ namespace DaydreamLab\Cms\Controllers\Site\Admin;
 
 use DaydreamLab\Cms\Controllers\CmsController;
 use DaydreamLab\Cms\Requests\Site\Admin\SiteAdminGetItemGet;
-use DaydreamLab\Cms\Requests\Site\Admin\SiteAdminRestorePost;
+use DaydreamLab\Cms\Requests\Site\Admin\SiteAdminGetListGet;
+use DaydreamLab\Cms\Requests\Site\Admin\SiteAdminCheckoutPost;
 use DaydreamLab\Cms\Requests\Site\Admin\SiteAdminStorePost;
 use DaydreamLab\Cms\Requests\Site\Admin\SiteAdminSearchPost;
 use DaydreamLab\Cms\Requests\Site\Admin\SiteAdminStatePost;
@@ -13,11 +14,14 @@ use DaydreamLab\Cms\Resources\Site\Admin\Models\SiteAdminResource;
 use DaydreamLab\Cms\Resources\Site\Admin\Collections\SiteAdminListResourceCollection;
 use DaydreamLab\Cms\Services\Site\Admin\SiteAdminService;
 use DaydreamLab\Cms\Requests\Site\Admin\SiteAdminRemovePost;
-use Throwable;
+
 
 class SiteAdminController extends CmsController
 {
     protected $modelName = 'Site';
+
+    protected $modelType = 'Admin';
+
 
     public function __construct(SiteAdminService $service)
     {
@@ -25,79 +29,28 @@ class SiteAdminController extends CmsController
         $this->service = $service;
     }
 
+
     public function getItem(SiteAdminGetItemGet $request)
     {
         $this->service->setUser($request->user('api'));
-        try {
-            $this->service->getItem(collect(['id' => $request->route('id')]));
-        } catch (Throwable $t) {
-            $this->handleException($t);
-        }
+        $this->service->getItem(collect(['id' => $request->route('id')]));
 
-        return $this->response($this->service->status, $this->service->response, [],  SiteAdminResource::class);
+        return $this->response($this->service->status, new SiteAdminResource($this->service->response));
     }
 
-
-    public function ordering(SiteAdminOrderingPost $request)
+    public function getList(SiteAdminGetListGet $request)
     {
         $this->service->setUser($request->user('api'));
-        try {
-            $this->service->ordering($request->validated());
-        } catch (Throwable $t) {
-            $this->handleException($t);
-        }
+        $this->service->getList(collect());
 
         return $this->response($this->service->status, $this->service->response);
     }
 
 
-    public function remove(SiteAdminRemovePost $request)
+    public function checkout(SiteAdminCheckoutPost $request)
     {
         $this->service->setUser($request->user('api'));
-        try {
-            $this->service->remove($request->validated());
-        } catch (Throwable $t) {
-            $this->handleException($t);
-        }
-
-        return $this->response($this->service->status, $this->service->response);
-    }
-
-
-    public function restore(SiteAdminRestorePost $request)
-    {
-        $this->service->setUser($request->user('api'));
-        try {
-            $this->service->restore($request->validated());
-        } catch (Throwable $t) {
-            $this->handleException($t);
-        }
-
-        return $this->response($this->service->status, $this->service->response);
-    }
-
-
-    public function search(SiteAdminSearchPost $request)
-    {
-        $this->service->setUser($request->user('api'));
-        try {
-            $this->service->search($request->validated());
-        } catch (Throwable $t) {
-            $this->handleException($t);
-        }
-
-        return $this->response($this->service->status, $this->service->response, [], SiteAdminListResourceCollection::class);
-    }
-
-
-    public function state(SiteAdminStatePost $request)
-    {
-        $this->service->setUser($request->user('api'));
-        try {
-            $this->service->state($request->validated());
-        } catch (Throwable $t) {
-            $this->handleException($t);
-        }
+        $this->service->checkout($request->validated());
 
         return $this->response($this->service->status, $this->service->response);
     }
@@ -106,12 +59,49 @@ class SiteAdminController extends CmsController
     public function store(SiteAdminStorePost $request)
     {
         $this->service->setUser($request->user('api'));
-        try {
-            $this->service->store($request->validated());
-        } catch (Throwable $t) {
-            $this->handleException($t);
-        }
+        $this->service->store($request->validated());
 
-        return $this->response($this->service->status, $this->service->response, [],  SiteAdminResource::class);
+        return $this->response($this->service->status,
+            gettype($this->service->response) == 'object'
+                ? new SiteAdminResource($this->service->response->refresh())
+                : null
+        );
     }
+
+
+    public function search(SiteAdminSearchPost $request)
+    {
+        $this->service->setUser($request->user('api'));
+        $this->service->search($request->validated());
+
+        return $this->response($this->service->status, new SiteAdminListResourceCollection($this->service->response));
+    }
+
+
+    public function state(SiteAdminStatePost $request)
+    {
+        $this->service->setUser($request->user('api'));
+        $this->service->state($request->validated());
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
+
+    public function remove(SiteAdminRemovePost $request)
+    {
+        $this->service->setUser($request->user('api'));
+        $this->service->remove($request->validated());
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
+
+    public function ordering(SiteAdminOrderingPost $request)
+    {
+        $this->service->setUser($request->user('api'));
+        $this->service->ordering($request->validated());
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+    
 }
