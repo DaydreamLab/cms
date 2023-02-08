@@ -1,4 +1,5 @@
 <?php
+
 namespace DaydreamLab\Cms\Models\Menu;
 
 use DaydreamLab\Cms\Models\Site\Site;
@@ -12,10 +13,14 @@ use Kalnoy\Nestedset\NodeTrait;
 
 class Menu extends BaseModel
 {
-    use NodeTrait, WithAccess, WithCategory, WithLanguage,
-        RecordChanger {
+    use NodeTrait;
+    use WithAccess;
+    use WithCategory;
+    use WithLanguage;
+    use RecordChanger {
         RecordChanger::boot as traitBoot;
     }
+
     /**
      * The table associated with the model.
      *
@@ -24,7 +29,7 @@ class Menu extends BaseModel
     protected $table = 'menus';
 
 
-    protected $order_by = 'ordering';
+    protected $order_by = '_lft';
 
     protected $order = 'asc';
 
@@ -101,9 +106,11 @@ class Menu extends BaseModel
                 $item->alias = Str::random(8);
             }
 
-            $item->path = $item->parent
-                ? $item->parent->path . '/' . $item->alias
-                : '/' . $item->alias;
+            if (!$item->path) {
+                $item->path = $item->parent
+                    ? $item->parent->path . '/' . $item->alias
+                    : '/' . $item->alias;
+            }
         });
     }
 

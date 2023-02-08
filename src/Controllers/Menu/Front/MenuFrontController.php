@@ -22,15 +22,16 @@ class MenuFrontController extends CmsController
     public function getItem(MenuFrontGetItemByPathGet $request)
     {
         $this->service->setUser($request->user('api'));
-        $this->service->getMenu(Helper::collect([
-            'page'      => $request->get('page'),
-            'category'  => $request->get('category'),
-            'alias'     => $request->route('path'),
-            'host'      => $request->getHttpHost(),
-            'language'  => isset($request->language)
-                ? $request->language
-                : config('daydreamlab.global.locale')
-        ]));
+        $this->service->getItem($request->validated());
+//        $this->service->getMenu(Helper::collect([
+//            'page'      => $request->get('page'),
+//            'category'  => $request->get('category'),
+//            'alias'     => $request->route('path'),
+//            'host'      => $request->getHttpHost(),
+//            'language'  => isset($request->language)
+//                ? $request->language
+//                : config('daydreamlab.global.locale')
+//        ]));
 
         return $this->response($this->service->status, $this->service->response);
     }
