@@ -19,7 +19,7 @@
     "require": {
         "daydreamlab/user": "dev-v2/main",
         "daydreamlab/media": "dev-v2/main",
-        "fedeisas/laravel-mail-css-inliner": "^5.0"
+        "fedeisas/laravel-mail-css-inliner": "^5.1"
     },
     "repositories" : [
         {
