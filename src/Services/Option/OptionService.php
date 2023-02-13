@@ -149,7 +149,7 @@ class OptionService
         else
         {
             $default_field = array_merge($extra_fields, ['id', 'title']);
-            return $service->search(Helper::collect($extra_rules))
+            return $service->search(Helper::collect(array_merge($extra_rules, ['paginate' => false])))
                 ->map( function($item, $key) use ($default_field) {
                     return $item->only($default_field);
                 });
