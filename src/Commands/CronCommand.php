@@ -7,6 +7,7 @@ use DaydreamLab\Cms\Models\Category\Category;
 use DaydreamLab\Cms\Models\Cms\CmsCronJob;
 use DaydreamLab\Cms\Models\Item\Item;
 use DaydreamLab\JJAJ\Helpers\Helper;
+use Exception;
 use Illuminate\Console\Command;
 
 class CronCommand extends Command
@@ -39,9 +40,14 @@ class CronCommand extends Command
      */
     public function __construct()
     {
-        $this->cmsCronJobModel  = new CmsCronJob();
-        $this->itemModel        = new Item();
-        $this->categoryModel    = new Category();
+        try {
+            $this->cmsCronJobModel  = new CmsCronJob();
+            $this->itemModel        = new Item();
+            $this->categoryModel    = new Category();
+        } catch (Exception $e) {
+
+        }
+
         parent::__construct();
     }
 
