@@ -4,7 +4,9 @@ namespace DaydreamLab\Cms\Commands\Feat\Crm;
 
 use DaydreamLab\Cms\Models\Category\Category;
 use DaydreamLab\Cms\Models\Menu\Menu;
+use DaydreamLab\Dsth\Models\Notification\NotificationCategory;
 use DaydreamLab\JJAJ\Helpers\Helper;
+use DaydreamLab\User\Models\NotificationTemplate\NotificationTemplate;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 
@@ -31,6 +33,16 @@ class CrmInstallCommand extends Command
      */
     public function handle()
     {
+        $this->info('建立主通知分類中...');
+        $marketingCategory = NotificationCategory::where('category', 'marketing')->first();
+        if (!$marketingCategory) {
+            NotificationCategory::create([
+                'category' => 'marketing',
+                'notifiableType' => NotificationTemplate::class
+            ]);
+        }
+        $this->info('建立主通知分類完成');
+
         $this->info('建立主選單分類中...');
         Category::where('extension', 'menu')
             ->where('title', '!=', 'ROOT')
