@@ -87,11 +87,13 @@ class InstallCommand extends Command
             '--tag' => 'cms-configs',
         ]);
 
-        $this->call('vendor:publish', [
-            '--tag' => 'cms-frontend-admin',
-            '--force'  => true,
-        ]);
 
+        if (! File::exists(public_path(). '/admin')) {
+            $this->call('vendor:publish', [
+                '--tag' => 'cms-frontend-admin',
+                '--force' => true,
+            ]);
+        }
     }
 
     public function deleteConstants()
