@@ -33,7 +33,7 @@ class ExtrafieldAdminService extends ExtrafieldService
 
     public function store(Collection $input, $diff = false)
     {
-        $this->checkItem($input->group_id, $diff);
+//        $this->checkItem($input->group_id, $diff);
 
         return parent::store($input, $diff);
     }
