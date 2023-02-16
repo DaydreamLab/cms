@@ -2,7 +2,7 @@
 
 namespace DaydreamLab\Cms\Controllers\Extrafield\Admin;
 
-use DaydreamLab\Cms\Requests\Extrafield\ExtrafieldGroupAdminCheckoutPost;
+use DaydreamLab\Cms\Requests\Extrafield\Admin\ExtrafieldGroupAdminCheckoutPost;
 use DaydreamLab\JJAJ\Controllers\BaseController;
 use DaydreamLab\JJAJ\Helpers\ResponseHelper;
 use Illuminate\Support\Collection;

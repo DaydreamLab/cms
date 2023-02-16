@@ -1,6 +1,6 @@
 <?php
 
-namespace DaydreamLab\Cms\Requests\Item;
+namespace DaydreamLab\Cms\Requests\Category;
 
 use DaydreamLab\JJAJ\Requests\AdminRequest;
 use Illuminate\Validation\Rule;

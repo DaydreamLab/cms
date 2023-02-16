@@ -1,7 +1,7 @@
 <?php
 namespace DaydreamLab\Cms\Controllers\Category;
 
-use DaydreamLab\Cms\Requests\Item\CategoryOrderingPost;
+use DaydreamLab\Cms\Requests\Category\CategoryOrderingPost;
 use DaydreamLab\JJAJ\Controllers\BaseController;
 use DaydreamLab\JJAJ\Helpers\ResponseHelper;
 use Illuminate\Support\Collection;
