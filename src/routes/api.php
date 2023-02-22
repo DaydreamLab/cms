@@ -31,6 +31,9 @@ use DaydreamLab\Cms\Controllers\NewsletterSubscription\Front\NewsletterSubscript
 use DaydreamLab\Cms\Controllers\CustomerMessage\Admin\CustomerMessageAdminController;
 use DaydreamLab\Cms\Controllers\CustomerMessage\Front\CustomerMessageFrontController;
 use DaydreamLab\Cms\Controllers\CustomerMessageReply\Admin\CustomerMessageReplyAdminController;
+use DaydreamLab\Cms\Controllers\Curation\Admin\CurationAdminController;
+use DaydreamLab\Cms\Controllers\Curation\Front\CurationFrontController;
+
 /*
  *
 |--------------------------------------------------------------------------
@@ -44,6 +47,7 @@ use DaydreamLab\Cms\Controllers\CustomerMessageReply\Admin\CustomerMessageReplyA
 */
 
 /************************************  前台 API  ************************************/
+
 # 關於零壹
 # 投資人專區
 Route::get('api/static/{alias}', [ItemFrontController::class, 'getStatic']);
@@ -111,6 +115,10 @@ Route::get('api/item/{content_type}/{alias}', [ItemFrontController::class, 'getC
 # 報修
 Route::post('api/rma/add', [RmaController::class, 'add']);
 Route::post('api/rma/search', [RmaController::class, 'search']);
+
+# 主題策展
+Route::get('api/curation', [CurationFrontController::class, 'getIndex']);
+Route::get('api/curation/{alias}', [CurationFrontController::class, 'getItemByAlias']);
 
 /************************************  後台 API  ************************************/
 # 關於零壹
@@ -419,7 +427,7 @@ Route::get('api/admin/site/{id}', [SiteAdminController::class, 'getItem'])
 # 標籤 Tag
 Route::post('api/admin/tag/remove', [TagAdminController::class, 'remove'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
-Route::post('api/admin/tag/restore',[TagAdminController::class, 'restore'])
+Route::post('api/admin/tag/restore', [TagAdminController::class, 'restore'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 Route::post('api/admin/tag/search', [TagAdminController::class, 'search'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
@@ -630,3 +638,15 @@ Route::post('api/admin/iot/tag/remove', [IotTagAdminController::class, 'remove']
     ->middleware(['expired','admin', 'restrict-ip:admin']);
 Route::get('api/admin/iot/tag/{id}', [IotTagAdminController::class, 'getItem'])
     ->middleware(['expired','admin', 'restrict-ip:admin']);
+
+# ----------------------------- Curation(主題策產) -----------------------------
+Route::post('api/admin/curation/remove', [CurationAdminController::class, 'remove'])
+    ->middleware(['expired', 'admin', 'restrict-ip:admin']);
+Route::post('api/admin/curation/state', [CurationAdminController::class, 'state'])
+    ->middleware(['expired', 'admin', 'restrict-ip:admin']);
+Route::post('api/admin/curation/store', [CurationAdminController::class, 'store'])
+    ->middleware(['expired', 'admin', 'restrict-ip:admin']);
+Route::post('api/admin/curation/search', [CurationAdminController::class, 'search'])
+    ->middleware(['expired', 'admin', 'restrict-ip:admin']);
+Route::get('api/admin/curation/{id}', [CurationAdminController::class, 'getItem'])
+    ->middleware(['expired', 'admin', 'restrict-ip:admin']);

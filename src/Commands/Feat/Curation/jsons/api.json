@@ -1,0 +1,38 @@
+[
+  {
+    "name": "取得單一策展",
+    "method": "getCuration",
+    "url": "/admin/option/list",
+    "created_by": 1
+  },
+  {
+    "name": "新增策展",
+    "method": "addCuration",
+    "url": "/admin/curation/store",
+    "created_by": 1
+  },
+  {
+    "name": "編輯策展",
+    "method": "editCuration",
+    "url": "/admin/curation/store",
+    "created_by": 1
+  },
+  {
+    "name": "更新策展狀態",
+    "method": "updateCurationState",
+    "url": "/admin/curation/state",
+    "created_by": 1
+  },
+  {
+    "name": "搜尋策展",
+    "method": "searchCuration",
+    "url": "/admin/curation/search",
+    "created_by": 1
+  },
+  {
+    "name": "刪除策展",
+    "method": "deleteCuration",
+    "url": "/admin/curation/remove",
+    "created_by": 1
+  }
+]

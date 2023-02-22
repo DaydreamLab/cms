@@ -1,0 +1,38 @@
+[
+  {
+    "title": "COM_CURATION_TITLE",
+    "state": 1,
+    "params": {
+      "path": "/curation",
+      "component": "",
+      "type": "alias",
+      "redirect": "",
+      "icon": "collection"
+    },
+    "assets": [
+      {
+        "title": "COM_CURATION_MANAGER_TITLE",
+        "path": "curation",
+        "full_path": "/curation",
+        "component": "curation/list",
+        "type": "menu",
+        "state": 1,
+        "icon": "tickets",
+        "showNav": 1,
+        "apis": [
+          "getCuration",
+          "addCuration",
+          "editCuration",
+          "updateCurationState",
+          "searchCuration",
+          "deleteCuration"
+        ],
+        "defaultApis": {
+          "searchItem": ["checked", "hidden"],
+          "searchEveny": ["checked", "hidden"]
+        }
+      }
+    ],
+    "userGroups": ["Administrator", "Super User"]
+  }
+]
