@@ -5,6 +5,7 @@ namespace DaydreamLab\Cms\Services\Curation\Front;
 use DaydreamLab\Cms\Repositories\Curation\Front\CurationFrontRepository;
 use DaydreamLab\Cms\Services\Curation\CurationService;
 use DaydreamLab\JJAJ\Exceptions\NotFoundException;
+use Illuminate\Support\Collection;
 
 class CurationFrontService extends CurationService
 {
@@ -22,7 +23,6 @@ class CurationFrontService extends CurationService
             'state' => 1,
             'limit' => 1,
         ]))->first();
-
         if (!$index) {
             throw new NotFoundException('ItemNotExist');
         }
@@ -31,5 +31,23 @@ class CurationFrontService extends CurationService
         $this->response = $index;
 
         return $this->response;
+    }
+
+
+    public function getItemByAlias(Collection $input)
+    {
+        $item = $this->search(collect([
+            'alias' => $input->get('alias'),
+            'state' => 1,
+            'limit' => 1
+        ]))->first();
+        if (!$item) {
+            throw new NotFoundException('ItemNotExist', null, null, $this->modelName);
+        }
+
+        $this->status = 'GetItemSuccess';
+        $this->response = $item;
+
+        return $item;
     }
 }

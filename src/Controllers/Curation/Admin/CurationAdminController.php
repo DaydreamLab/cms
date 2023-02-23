@@ -3,8 +3,10 @@
 namespace DaydreamLab\Cms\Controllers\Curation\Admin;
 
 use DaydreamLab\Cms\Controllers\CmsController;
+use DaydreamLab\Cms\Requests\Category\Admin\CategoryAdminRestorePost;
 use DaydreamLab\Cms\Requests\Curation\Admin\CurationAdminGetItemRequest;
 use DaydreamLab\Cms\Requests\Curation\Admin\CurationAdminRemoveRequest;
+use DaydreamLab\Cms\Requests\Curation\Admin\CurationAdminRestoreRequest;
 use DaydreamLab\Cms\Requests\Curation\Admin\CurationAdminSearchRequest;
 use DaydreamLab\Cms\Requests\Curation\Admin\CurationAdminStateRequest;
 use DaydreamLab\Cms\Requests\Curation\Admin\CurationAdminStoreRequest;
@@ -40,6 +42,18 @@ class CurationAdminController extends CmsController
     {
         try {
             $this->service->remove($request->validated());
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
+
+    public function restore(CurationAdminRestoreRequest $request)
+    {
+        try {
+            $this->service->restore($request->validated());
         } catch (Throwable $t) {
             $this->handleException($t);
         }

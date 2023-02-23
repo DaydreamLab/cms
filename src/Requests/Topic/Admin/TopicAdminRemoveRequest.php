@@ -1,14 +1,14 @@
 <?php
 
-namespace DaydreamLab\Cms\Requests\Curation\Admin;
+namespace DaydreamLab\Cms\Requests\Topic\Admin;
 
-use DaydreamLab\Cms\Requests\ComponentBase\CmsGetItemRequest;
+use DaydreamLab\Cms\Requests\ComponentBase\CmsRemoveRequest;
 
-class CurationAdminGetItemRequest extends CmsGetItemRequest
+class TopicAdminRemoveRequest extends CmsRemoveRequest
 {
-    protected $modelName = 'Curation';
+    protected $modelName = 'Topic';
 
-    protected $apiMethod = 'getCuration';
+    protected $apiMethod = 'removeTopic';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -37,9 +37,6 @@ class CurationAdminGetItemRequest extends CmsGetItemRequest
     public function validated()
     {
         $validated = parent::validated();
-        $q = $validated->get('q');
-        $q->with(['topics', 'topics.items', 'topics.events', 'topics.events.sessions']);
-        $validated->put('q', $q);
 
         return $validated;
     }

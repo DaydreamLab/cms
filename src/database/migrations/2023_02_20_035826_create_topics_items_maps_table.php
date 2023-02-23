@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCurationsItemsMapsTable extends Migration
+class CreateTopicsItemsMapsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateCurationsItemsMapsTable extends Migration
      */
     public function up()
     {
-        Schema::create('curations_items_maps', function (Blueprint $table) {
+        Schema::create('topics_items_maps', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('curationId');
+            $table->unsignedBigInteger('topicId');
             $table->unsignedBigInteger('itemId');
             $table->string('itemType');
             $table->timestamps();
@@ -29,6 +29,6 @@ class CreateCurationsItemsMapsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('curations_items_maps');
+        Schema::dropIfExists('topics_items_maps');
     }
 }

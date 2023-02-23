@@ -1,13 +1,13 @@
 <?php
 
-namespace DaydreamLab\Cms\Resources\Curation\Admin\Collections;
+namespace DaydreamLab\Cms\Resources\Topic\Admin\Collections;
 
-use DaydreamLab\Cms\Resources\Curation\Admin\Models\CurationAdminListResource;
+use DaydreamLab\Cms\Resources\Topic\Admin\Models\TopicAdminListResource;
 use DaydreamLab\JJAJ\Resources\BaseResourceCollection;
 
-class CurationAdminListResourceCollection extends BaseResourceCollection
+class TopicAdminListResourceCollection extends BaseResourceCollection
 {
-    public $collects = CurationAdminListResource::class;
+    public $collects = TopicAdminListResource::class;
 
     /**
      * Transform the resource collection into an array.

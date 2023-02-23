@@ -1,14 +1,16 @@
 <?php
 
-namespace DaydreamLab\Cms\Requests\Curation\Admin;
+namespace DaydreamLab\Cms\Requests\Topic\Front;
 
 use DaydreamLab\Cms\Requests\ComponentBase\CmsGetItemRequest;
 
-class CurationAdminGetItemRequest extends CmsGetItemRequest
+class TopicFrontGetItemByAliasRequest extends CmsGetItemRequest
 {
-    protected $modelName = 'Curation';
+    protected $modelName = 'Topic';
 
-    protected $apiMethod = 'getCuration';
+    protected $apiMethod = 'getTopic';
+
+    protected $needAuth = false;
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -37,9 +39,8 @@ class CurationAdminGetItemRequest extends CmsGetItemRequest
     public function validated()
     {
         $validated = parent::validated();
-        $q = $validated->get('q');
-        $q->with(['topics', 'topics.items', 'topics.events', 'topics.events.sessions']);
-        $validated->put('q', $q);
+        $validated->put('alias', $this->route('topicAlias'));
+        $validated->put('curationAlias', $this->route('curationAlias'));
 
         return $validated;
     }

@@ -33,6 +33,8 @@ use DaydreamLab\Cms\Controllers\CustomerMessage\Front\CustomerMessageFrontContro
 use DaydreamLab\Cms\Controllers\CustomerMessageReply\Admin\CustomerMessageReplyAdminController;
 use DaydreamLab\Cms\Controllers\Curation\Admin\CurationAdminController;
 use DaydreamLab\Cms\Controllers\Curation\Front\CurationFrontController;
+use DaydreamLab\Cms\Controllers\Topic\Admin\TopicAdminController;
+use DaydreamLab\Cms\Controllers\Topic\Front\TopicFrontController;
 
 /*
  *
@@ -119,6 +121,7 @@ Route::post('api/rma/search', [RmaController::class, 'search']);
 # 主題策展
 Route::get('api/curation', [CurationFrontController::class, 'getIndex']);
 Route::get('api/curation/{alias}', [CurationFrontController::class, 'getItemByAlias']);
+Route::get('api/curation/{curationAlias}/topic/{topicAlias}', [TopicFrontController::class, 'getItemByAlias']);
 
 /************************************  後台 API  ************************************/
 # 關於零壹
@@ -648,5 +651,21 @@ Route::post('api/admin/curation/store', [CurationAdminController::class, 'store'
     ->middleware(['expired', 'admin', 'restrict-ip:admin']);
 Route::post('api/admin/curation/search', [CurationAdminController::class, 'search'])
     ->middleware(['expired', 'admin', 'restrict-ip:admin']);
+Route::post('api/admin/curation/restore', [CurationAdminController::class, 'restore'])
+    ->middleware(['expired', 'admin', 'restrict-ip:admin']);
 Route::get('api/admin/curation/{id}', [CurationAdminController::class, 'getItem'])
+    ->middleware(['expired', 'admin', 'restrict-ip:admin']);
+
+# ----------------------------- Topic(策產主題) -----------------------------
+Route::post('api/admin/topic/remove', [TopicAdminController::class, 'remove'])
+    ->middleware(['expired', 'admin', 'restrict-ip:admin']);
+Route::post('api/admin/topic/state', [TopicAdminController::class, 'state'])
+    ->middleware(['expired', 'admin', 'restrict-ip:admin']);
+Route::post('api/admin/topic/store', [TopicAdminController::class, 'store'])
+    ->middleware(['expired', 'admin', 'restrict-ip:admin']);
+Route::post('api/admin/topic/search', [TopicAdminController::class, 'search'])
+    ->middleware(['expired', 'admin', 'restrict-ip:admin']);
+Route::post('api/admin/topic/restore', [TopicAdminController::class, 'restore'])
+    ->middleware(['expired', 'admin', 'restrict-ip:admin']);
+Route::get('api/admin/topic/{id}', [TopicAdminController::class, 'getItem'])
     ->middleware(['expired', 'admin', 'restrict-ip:admin']);

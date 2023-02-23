@@ -14,4 +14,9 @@ class CurationFront extends Curation
     protected $table = 'curations';
 
 
+    public function topics()
+    {
+        return parent::topics()->where('state', 1);
+    }
+
 }

@@ -2,7 +2,7 @@
   {
     "name": "取得單一策展",
     "method": "getCuration",
-    "url": "/admin/option/list",
+    "url": "/admin/curation/{id}",
     "created_by": 1
   },
   {
@@ -33,6 +33,54 @@
     "name": "刪除策展",
     "method": "deleteCuration",
     "url": "/admin/curation/remove",
+    "created_by": 1
+  },
+  {
+    "name": "回存策展",
+    "method": "restoreCuration",
+    "url": "/admin/curation/restore",
+    "created_by": 1
+  },
+  {
+    "name": "取得單一主題",
+    "method": "getTopic",
+    "url": "/admin/topic/{id}",
+    "created_by": 1
+  },
+  {
+    "name": "新增主題",
+    "method": "addTopic",
+    "url": "/admin/topic/store",
+    "created_by": 1
+  },
+  {
+    "name": "編輯主題",
+    "method": "editTopic",
+    "url": "/admin/topic/store",
+    "created_by": 1
+  },
+  {
+    "name": "更新主題狀態",
+    "method": "updateTopicState",
+    "url": "/admin/topic/state",
+    "created_by": 1
+  },
+  {
+    "name": "搜尋主題",
+    "method": "searchTopic",
+    "url": "/admin/topic/search",
+    "created_by": 1
+  },
+  {
+    "name": "刪除主題",
+    "method": "deleteTopic",
+    "url": "/admin/topic/remove",
+    "created_by": 1
+  },
+  {
+    "name": "回存主題",
+    "method": "restoreTopic",
+    "url": "/admin/topic/restore",
     "created_by": 1
   }
 ]

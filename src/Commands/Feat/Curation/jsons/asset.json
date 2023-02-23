@@ -25,11 +25,33 @@
           "editCuration",
           "updateCurationState",
           "searchCuration",
-          "deleteCuration"
+          "deleteCuration",
+          "restoreCuration"
+        ],
+        "defaultApis": {
+        }
+      },
+      {
+        "title": "COM_TOPIC_MANAGER_TITLE",
+        "path": "topic",
+        "full_path": "/topic",
+        "component": "topic/list",
+        "type": "menu",
+        "state": 1,
+        "icon": "tickets",
+        "showNav": 1,
+        "apis": [
+          "getTopic",
+          "addTopic",
+          "editTopic",
+          "updateTopicState",
+          "searchTopic",
+          "deleteTopic",
+          "restoreTopic"
         ],
         "defaultApis": {
           "searchItem": ["checked", "hidden"],
-          "searchEveny": ["checked", "hidden"]
+          "searchEvent": ["checked", "hidden"]
         }
       }
     ],

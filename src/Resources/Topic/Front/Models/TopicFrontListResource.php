@@ -1,11 +1,11 @@
 <?php
 
-namespace DaydreamLab\Cms\Resources\Curation\Front\Models;
+namespace DaydreamLab\Cms\Resources\Topic\Front\Models;
 
-use DaydreamLab\Cms\Resources\Topic\Front\Collections\TopicFrontListResourceCollection;
 use DaydreamLab\JJAJ\Resources\BaseJsonResource;
+use DaydreamLab\Dsth\Helpers\EnumHelper as DsthEnumHelper;
 
-class CurationFrontResource extends BaseJsonResource
+class TopicFrontListResource extends BaseJsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,10 +18,11 @@ class CurationFrontResource extends BaseJsonResource
         return [
             'title'         => $this->title,
             'alias'         => $this->alias,
-            'slideshow'     => $this->slideshow,
+            'subtitle'      => $this->subtitle,
+            'image'         => $this->image,
             'description'   => $this->description,
             'params'        => $this->params,
-            'topics'        => new TopicFrontListResourceCollection($this->topics, false)
+            'enabled'       => $this->enabled,
         ];
     }
 }

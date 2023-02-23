@@ -2,10 +2,9 @@
 
 namespace DaydreamLab\Cms\Resources\Curation\Admin\Models;
 
-use DaydreamLab\Cms\Resources\Topic\Admin\Collections\TopicAdminListResourceCollection;
 use DaydreamLab\JJAJ\Resources\BaseJsonResource;
 
-class CurationAdminResource extends BaseJsonResource
+class CurationAdminListResource extends BaseJsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,10 +18,8 @@ class CurationAdminResource extends BaseJsonResource
         return [
             'id'            => $this->id,
             'title'         => $this->title,
-            'alias'         => $this->alias,
             'slideshow'     => $this->slideshow,
             'description'   => $this->description,
-            'script'        => $this->script,
             'isIndex'       => $this->isIndex,
             'params'        => $this->params,
             'created_at'    => $this->getDateTimeString($this->created_at, $tz),

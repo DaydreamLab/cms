@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Models\Curation;
 
 use DaydreamLab\Cms\Models\CmsModel;
 use DaydreamLab\Cms\Models\Item\Item;
+use DaydreamLab\Cms\Models\Topic\Topic;
 use DaydreamLab\Dsth\Models\Event\Event;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\JJAJ\Traits\UserInfo;
@@ -70,34 +71,8 @@ class Curation extends CmsModel
     }
 
 
-    public function events()
+    public function topics()
     {
-        return $this->belongsToMany(Event::class, 'curations_events_maps', 'curationId', 'eventId')
-            ->withTimestamps();
-    }
-
-
-    public function items()
-    {
-        return $this->belongsToMany(Item::class, 'curations_items_maps', 'curationId', 'itemId')
-            ->withTimestamps();
-    }
-
-
-    public function promotions()
-    {
-        return $this->items()->wherePivot('itemType', 'promotion');
-    }
-
-
-    public function solutions()
-    {
-        return $this->items()->wherePivot('itemType', 'solution');
-    }
-
-
-    public function videos()
-    {
-        return $this->items()->wherePivot('itemType', 'video');
+        return $this->hasMany(Topic::class, 'curationId', 'id');
     }
 }

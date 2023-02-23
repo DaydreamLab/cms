@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCurationsTable extends Migration
+class CreateTopicsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,24 @@ class CreateCurationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('curations', function (Blueprint $table) {
+        Schema::create('topics', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
             $table->string('alias');
+            $table->unsignedBigInteger('curationId');
             $table->tinyInteger('state')->default(1);
-            $table->string('slideshow')->nullable();
+            $table->string('subtitle')->nullable();
+            $table->string('image')->nullable();
             $table->text('description')->nullable();
-            $table->text('script')->nullable();
-            $table->tinyInteger('isIndex')->default(0);
+            $table->unsignedTinyInteger('featured')->default(0);
+            $table->unsignedBigInteger('ordering')->default(1);
             $table->text('params')->nullable();
+            $table->unsignedBigInteger('hits')->default(0);
             $table->unsignedInteger('locked_by')->nullable();
             $table->unsignedInteger('created_by');
             $table->unsignedInteger('updated_by')->nullable();
+            $table->dateTime('publish_up')->nullable();
+            $table->dateTime('publish_down')->nullable();
             $table->timestamp('locked_at')->nullable();
             $table->timestamps();
         });
@@ -38,6 +43,6 @@ class CreateCurationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('curations');
+        Schema::dropIfExists('topics');
     }
 }

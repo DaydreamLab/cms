@@ -24,12 +24,13 @@ class RequestHelper
         $params['meta'] = $meta;
 
         $seo = [];
-        if(isset($inputParams['seo'])) {
+        if (isset($inputParams['seo'])) {
             $inputSeos = $inputParams['seo'] ;
-            $inputSeos = is_array($inputSeos) ? $inputSeos: [];
+            $inputSeos = is_array($inputSeos) ? $inputSeos : [];
             foreach ($inputSeos as $inputSeo) {
                 $temp = [];
-                if (isset($inputSeo['type'])
+                if (
+                    isset($inputSeo['type'])
                     && in_array($inputSeo['type'], ['Google Analytics', 'Facebook Pixel', 'Cloudflare Web Analytics'])
                 ) {
                     $temp['type'] = $inputSeo['type'];
@@ -41,6 +42,7 @@ class RequestHelper
             }
         }
         $params['seo'] = $seo;
+        $params['curationEnabled'] = $inputParams['curationEnabled'] ?? 0;
 
         return $params;
     }
@@ -50,9 +52,11 @@ class RequestHelper
     {
         $assetGroup = AssetGroup::where('id', $pageGroupId)->first();
         $asset = Asset::where('id', $pageId)->first();
-        if ( ($assetGroup && $assetGroup->title == 'COM_BRANDS_TITLE') &&
+        if (
+            ($assetGroup && $assetGroup->title == 'COM_BRANDS_TITLE') &&
             ($asset && $asset->title == 'COM_BRANDS_MANAGER_TITLE') &&
-            ($modelName != 'Brand') ) {
+            ($modelName != 'Brand')
+        ) {
             return true;
         }
         return false;

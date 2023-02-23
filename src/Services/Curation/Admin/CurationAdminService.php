@@ -4,7 +4,6 @@ namespace DaydreamLab\Cms\Services\Curation\Admin;
 
 use DaydreamLab\Cms\Repositories\Curation\Admin\CurationAdminRepository;
 use DaydreamLab\Cms\Services\Curation\CurationService;
-use DaydreamLab\Dsth\Models\Event\Event;
 use Illuminate\Support\Collection;
 
 class CurationAdminService extends CurationService
@@ -13,17 +12,6 @@ class CurationAdminService extends CurationService
     {
         parent::__construct($repo);
         $this->repo = $repo;
-    }
-
-
-    public function addMapping($item, $input)
-    {
-        $this->handleItemsMap($item, $input, 'add');
-
-        $eventIds = $input->get('eventIds') ?: [];
-        if (class_exists(Event::class) && count($eventIds)) {
-            $item->events()->attach($eventIds);
-        }
     }
 
 
@@ -53,46 +41,5 @@ class CurationAdminService extends CurationService
             $curation->isIndex = 0;
             $curation->save();
         });
-    }
-
-
-    public function handleItemsMap($item, $input, $action)
-    {
-        $itemTypes = ['video', 'promotion', 'solution'];
-        foreach ($itemTypes as $itemType) {
-            $inputData = $input->get($itemType . 'Ids') ?: [];
-            $map = [];
-            foreach ($inputData as $i) {
-                $map[$i] = ['itemType' => $itemType];
-            }
-            $relation = $itemType . 's';
-            if ($action == 'add') {
-                $item->{$relation}()->attach($map);
-            } else {
-                $item->{$relation}()->sync($map);
-            }
-        }
-    }
-
-
-    public function modifyMapping($item, $input)
-    {
-        $this->handleItemsMap($item, $input, 'modify');
-
-        $eventIds = $input->get('eventIds') ?: [];
-        if (class_exists(Event::class)) {
-            $item->events()->sync($eventIds);
-        }
-    }
-
-
-    public function removeMapping($item)
-    {
-        $item->videos()->detach();
-        $item->promotions()->detach();
-        $item->solutions()->detach();
-        if (class_exists(Event::class)) {
-            $item->events()->detach();
-        }
     }
 }
