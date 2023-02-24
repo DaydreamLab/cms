@@ -38,6 +38,14 @@ class TopicFrontResource extends BaseJsonResource
                         : null
                 ];
 
+                if ($event->regState == DsthEnumHelper::FINISHED && $event->type == 'online') {
+                    $data['youtube_url'] = $event->registrationType == 'impartial'
+                        ? $event->sessions->where('canRegistration', 0)->first()->link
+                        : $event->sessions->where('canRegistration', 1)->first()->link;
+                } else {
+                    $data['youtube_url'] = null;
+                }
+
                 return $data;
             }),
             'promotions'    => $this->promotions->map(function ($promotion) {
@@ -72,7 +80,7 @@ class TopicFrontResource extends BaseJsonResource
                     'title' => $video->title,
                     'url' =>  config('app.url') . '/video/' . $video->alias,
                     'youtube_url' => collect($video->extrafields)->filter(function ($extrafield, $key) {
-                        return $key ==  'youtube_url';
+                        return $key == 'youtube_url';
                     })->first()['value']
                 ];
             }),
