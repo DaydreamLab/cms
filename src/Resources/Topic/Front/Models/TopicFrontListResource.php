@@ -20,7 +20,6 @@ class TopicFrontListResource extends BaseJsonResource
             'alias'         => $this->alias,
             'subtitle'      => $this->subtitle,
             'image'         => $this->image,
-            'description'   => $this->description,
             'params'        => $this->params,
             'enabled'       => $this->enabled,
         ];

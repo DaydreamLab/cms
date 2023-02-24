@@ -19,6 +19,7 @@ class CurationFrontResource extends BaseJsonResource
             'title'         => $this->title,
             'alias'         => $this->alias,
             'slideshow'     => $this->slideshow,
+            'introtext'     => $this->introtext,
             'description'   => $this->description,
             'params'        => $this->params,
             'topics'        => new TopicFrontListResourceCollection($this->topics, false)

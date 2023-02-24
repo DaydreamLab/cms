@@ -19,6 +19,7 @@ class CreateCurationsTable extends Migration
             $table->string('alias');
             $table->tinyInteger('state')->default(1);
             $table->string('slideshow')->nullable();
+            $table->string('introtext')->nullable();
             $table->text('description')->nullable();
             $table->text('script')->nullable();
             $table->tinyInteger('isIndex')->default(0);

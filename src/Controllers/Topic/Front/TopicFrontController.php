@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Controllers\Topic\Front;
 
 use DaydreamLab\Cms\Controllers\CmsController;
 use DaydreamLab\Cms\Requests\Topic\Front\TopicFrontGetItemByAliasRequest;
+use DaydreamLab\Cms\Resources\Topic\Front\Models\TopicFrontResource;
 use DaydreamLab\Cms\Services\Topic\Front\TopicFrontService;
 use Throwable;
 
@@ -26,6 +27,6 @@ class TopicFrontController extends CmsController
             $this->handleException($t);
         }
 
-        return $this->response($this->service->status, $this->service->response);
+        return $this->response($this->service->status, $this->service->response, [], TopicFrontResource::class);
     }
 }

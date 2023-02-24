@@ -35,6 +35,7 @@ class TopicAdminStoreRequest extends CmsStoreRequest
             'state'         => ['required', Rule::in([0, 1, -1, -2])],
             'subtitle'      => 'nullable|string',
             'image'         => 'nullable|string',
+            'introtext'     => 'nullable|string',
             'description'   => 'nullable|string',
             'params'        => 'nullable|string',
             'featured'      => ['nullable', Rule::in([0, 1])],

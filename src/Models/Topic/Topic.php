@@ -39,6 +39,7 @@ class Topic extends CmsModel
         'curationId',
         'state',
         'subtitle',
+        'introtext',
         'description',
         'featured',
         'ordering',

@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Resources\Topic\Front\Models;
 
 use DaydreamLab\JJAJ\Resources\BaseJsonResource;
 use DaydreamLab\Dsth\Helpers\EnumHelper as DsthEnumHelper;
+use Illuminate\Support\Str;
 
 class TopicFrontResource extends BaseJsonResource
 {
@@ -25,8 +26,9 @@ class TopicFrontResource extends BaseJsonResource
             'events'        => $this->events->map(function ($event) {
                 $data = [
                     'title' => $event->title,
-                    'alias' => $event->alias,
                     'regState'  => $event->regState,
+                    'url'   => Str::lower(config('app.url') . '/product/brand/'
+                        . $event->brands->first()->title . '/event/' . $event->alias),
                     'description' => $event->description,
                     'date' => $this->getDateTimeString(
                         $event->sessions->where('canRegistration', 1)->first()->startTime
@@ -39,21 +41,36 @@ class TopicFrontResource extends BaseJsonResource
                 return $data;
             }),
             'promotions'    => $this->promotions->map(function ($promotion) {
-                return $promotion->only('title', 'alias', 'introimage');
-            }),
-            'articles'      => $this->articles->map(function ($solution) {
                 return [
-                    'title' => $solution->title,
-                    'alias' => $solution->alias,
-                    'brands' => $solution->brands->map(function ($brand) {
-                        return $brand->only('name', 'alias', 'logo_image');
-                    })
+                    'title' => $promotion->title,
+                    'url'   => config('app.url') . '/news/promotion/' . $promotion->alias,
+                    'introimage'    => $promotion->introimage
                 ];
+            }),
+            'articles'      => $this->articles->map(function ($article) {
+                $data = [
+                    'title' => $article->title,
+                    'description' => Str::words(strip_tags($article->description), 10),
+                    'url'   => config('app.rul') . '/',
+                ];
+
+                if ($article->category->alias == 'bulletin') {
+                    $data['url'] = config('app.url') . '/news/bulletin/' . $article->alias;
+                } elseif ($article->category->alias == 'solution') {
+                    $data['url'] = Str::lower(config('app.url') . '/product/brand/'
+                        . $article->brands->first()->title . '/solution/' . $article->alias);
+                } elseif ($article->category->alias == 'case') {
+                    $data['url'] = Str::lower(config('app.url') . '/product/brand/'
+                    . $article->brands->first()->title . '/case/' . $article->alias);
+                } else {
+                    $data['url'] = '#';
+                }
+                return $data;
             }),
             'videos'        => $this->videos->map(function ($video) {
                 return [
                     'title' => $video->title,
-                    'alias' => $video->alias,
+                    'url' =>  config('app.url') . '/video/' . $video->alias,
                     'youtube_url' => collect($video->extrafields)->filter(function ($extrafield, $key) {
                         return $key ==  'youtube_url';
                     })->first()['value']

@@ -34,7 +34,15 @@ class TopicFrontService extends TopicService
                                 ->orWhere('topics.publish_down', '>', now()->toDateTimeString());
                         });
                 });
-            })
+            })->with(
+                'events',
+                'events.brands',
+                'events.sessions',
+                'articles',
+                'articles.category',
+                'articles',
+                'articles.brands'
+            )
         ]))->first();
         if (!$item) {
             throw new NotFoundException('ItemNotExist', null, null, $this->modelName);

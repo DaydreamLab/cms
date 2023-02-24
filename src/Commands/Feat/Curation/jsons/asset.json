@@ -29,6 +29,7 @@
           "restoreCuration"
         ],
         "defaultApis": {
+          "getOption": ["checked", "hidden"]
         }
       },
       {
@@ -50,6 +51,8 @@
           "restoreTopic"
         ],
         "defaultApis": {
+          "getOption": ["checked", "hidden"],
+          "searchCuration": ["checked", "hidden"],
           "searchItem": ["checked", "hidden"],
           "searchEvent": ["checked", "hidden"]
         }

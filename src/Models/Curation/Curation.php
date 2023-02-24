@@ -38,6 +38,7 @@ class Curation extends CmsModel
         'alias',
         'state',
         'slideshow',
+        'introtext',
         'description',
         'script',
         'isIndex',

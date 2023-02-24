@@ -21,6 +21,7 @@ class CurationAdminResource extends BaseJsonResource
             'title'         => $this->title,
             'alias'         => $this->alias,
             'slideshow'     => $this->slideshow,
+            'introtext'     => $this->introtext,
             'description'   => $this->description,
             'script'        => $this->script,
             'isIndex'       => $this->isIndex,

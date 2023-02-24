@@ -33,6 +33,7 @@ class CurationAdminStoreRequest extends CmsStoreRequest
             'alias'         => 'nullable|string',
             'state'         => ['required', Rule::in([0, 1, -1, -2])],
             'slideshow'     => 'nullable|string',
+            'introtext'     => 'nullable|string',
             'description'   => 'nullable|string',
             'script'        => 'nullable|string',
             'isIndex'       => ['nullable', Rule::in([0,1])],
