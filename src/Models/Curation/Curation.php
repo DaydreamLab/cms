@@ -51,6 +51,7 @@ class Curation extends CmsModel
 
 
     protected $casts = [
+        'slideshow' => 'array',
         'params'    => 'array'
     ];
 
@@ -62,6 +63,15 @@ class Curation extends CmsModel
         self::creating(function ($item) {
             if (!$item->alias) {
                 $item->alias = Str::lower(Str::random(8));
+            }
+            if (!$item->slideshow || (is_array($item->slideshow) && count($item->slideshow) === 0)) {
+                $item->slideshow[] = [
+                    'title' => '',
+                    'subtitle' => '',
+                    'path'  => '',
+                    'featured' => 0,
+                    'link' => '',
+                ];
             }
         });
     }

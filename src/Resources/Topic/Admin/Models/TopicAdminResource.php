@@ -24,6 +24,8 @@ class TopicAdminResource extends BaseJsonResource
             'alias'         => $this->alias,
             'state'         => $this->state,
             'image'         => $this->image,
+            'color'         => $this->color,
+            'icon'          => $this->icon,
             'introtext'     => $this->introtext,
             'description'   => $this->description,
             'featured'      => $this->featured,

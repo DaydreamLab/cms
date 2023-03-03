@@ -21,6 +21,7 @@ class TopicFrontResource extends BaseJsonResource
             'alias'         => $this->alias,
             'subtitle'      => $this->subtitle,
             'image'         => $this->image,
+            'icon'          => $this->icon,
             'description'   => $this->description,
             'params'        => $this->params,
             'events'        => $this->events->map(function ($event) {

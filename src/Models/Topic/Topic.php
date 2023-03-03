@@ -39,6 +39,9 @@ class Topic extends CmsModel
         'curationId',
         'state',
         'subtitle',
+        'image',
+        'color',
+        'icon',
         'introtext',
         'description',
         'featured',
@@ -53,6 +56,7 @@ class Topic extends CmsModel
 
 
     protected $casts = [
+        'image' => 'array',
         'params'    => 'array'
     ];
 
