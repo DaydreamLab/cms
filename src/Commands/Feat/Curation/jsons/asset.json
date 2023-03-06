@@ -7,17 +7,17 @@
       "component": "",
       "type": "alias",
       "redirect": "",
-      "icon": "collection"
+      "icon": "copy"
     },
     "assets": [
       {
         "title": "COM_CURATION_MANAGER_TITLE",
-        "path": "curation",
-        "full_path": "/curation",
-        "component": "curation/list",
+        "path": "exhibition",
+        "full_path": "/exhibition",
+        "component": "curation/exhibition/list",
         "type": "menu",
         "state": 1,
-        "icon": "tickets",
+        "icon": "copy",
         "showNav": 1,
         "apis": [
           "getCuration",
@@ -36,10 +36,10 @@
         "title": "COM_TOPIC_MANAGER_TITLE",
         "path": "topic",
         "full_path": "/topic",
-        "component": "topic/list",
+        "component": "curation/topic/list",
         "type": "menu",
         "state": 1,
-        "icon": "tickets",
+        "icon": "copy",
         "showNav": 1,
         "apis": [
           "getTopic",
