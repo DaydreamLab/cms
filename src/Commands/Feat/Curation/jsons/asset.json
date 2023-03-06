@@ -48,8 +48,7 @@
           "updateTopicState",
           "searchTopic",
           "deleteTopic",
-          "restoreTopic",
-          "featuredTopic"
+          "restoreTopic"
         ],
         "defaultApis": {
           "getOption": ["checked", "hidden"],
