@@ -42,7 +42,7 @@ class CurationAdminStoreRequest extends CmsStoreRequest
             'description'   => 'nullable|string',
             'script'        => 'nullable|string',
             'isIndex'       => ['nullable', Rule::in([0,1])],
-            'params'        => 'nullable|string',
+            'params'        => 'nullable|array',
             'eventIds'      => 'nullable|array',
             'solutionIds'   => 'nullable|array',
             'promotionIds'  => 'nullable|array',

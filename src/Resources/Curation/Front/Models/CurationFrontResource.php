@@ -16,7 +16,7 @@ class CurationFrontResource extends BaseJsonResource
      */
     public function toArray($request)
     {
-        $featuredTopic = $this->topics->where('featured', 1)->sortBy('publish_up')->values()->first();
+        $featuredTopics = $this->topics->where('featured', 1)->sortBy('publish_up')->values();
         $pastTopics = $this->topics->where('featured', 0)
             ->where('publish_up', '<=', now()->toDateTimeString())
             ->sortBy('publish_up')
@@ -33,7 +33,7 @@ class CurationFrontResource extends BaseJsonResource
             'introtext'     => $this->introtext,
             'description'   => $this->description,
             'params'        => $this->params,
-            'featureTopic'  => new TopicFrontListResource($featuredTopic),
+            'featureTopics' => new TopicFrontListResource($featuredTopics),
             'pastTopics'    => new TopicFrontListResourceCollection($pastTopics, false),
             'futureTopics'  => new TopicFrontListResourceCollection($futureTopics, false),
         ];

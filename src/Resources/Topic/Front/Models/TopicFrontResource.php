@@ -22,7 +22,12 @@ class TopicFrontResource extends BaseJsonResource
             'subtitle'      => $this->subtitle,
             'image'         => $this->image,
             'icon'          => $this->icon,
+            'introTitle'    => $this->introTitle,
+            'introtext'     => $this->introtext,
             'description'   => $this->description,
+            'newsLink'      => $this->newsId
+                ? config('app.url') . '/news/bulletin/' . $this->news->alias
+                : null,
             'params'        => $this->params,
             'events'        => $this->events->map(function ($event) {
                 $data = [

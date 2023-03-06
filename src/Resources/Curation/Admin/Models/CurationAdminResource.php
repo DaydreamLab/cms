@@ -20,6 +20,7 @@ class CurationAdminResource extends BaseJsonResource
             'id'            => $this->id,
             'title'         => $this->title,
             'alias'         => $this->alias,
+            'state'         => $this->state,
             'slideshow'     => $this->slideshow,
             'introtext'     => $this->introtext,
             'description'   => $this->description,

@@ -42,8 +42,10 @@ class Topic extends CmsModel
         'image',
         'color',
         'icon',
+        'introTitle',
         'introtext',
         'description',
+        'newsId',
         'featured',
         'ordering',
         'params',
@@ -110,6 +112,12 @@ class Topic extends CmsModel
     {
         return $this->belongsToMany(Item::class, 'topics_items_maps', 'topicId', 'itemId')
             ->withTimestamps();
+    }
+
+
+    public function news()
+    {
+        return $this->hasOne(Item::class, 'id', 'newsId');
     }
 
 
