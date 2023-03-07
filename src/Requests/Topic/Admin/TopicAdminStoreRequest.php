@@ -29,7 +29,7 @@ class TopicAdminStoreRequest extends CmsStoreRequest
     {
         $rules = [
             'id'            => 'nullable|integer',
-            'curationId'    => 'required|string',
+            'curationId'    => 'required|integer',
             'title'         => 'required|string',
             'subtitle'      => 'nullable|string',
             'alias'         => 'nullable|string',
