@@ -37,6 +37,13 @@ class CurationOrderingFixCommand extends Command
                     $item->timestamps = false;
                     $item->save();
                 });
+
+                $index = 1;
+                $groupItems->where('featured', 1)->each(function ($item) use (&$index) {
+                    $item->featured_ordering = $index++;
+                    $item->timestamps = false;
+                    $item->save();
+                });
             });
     }
 }
