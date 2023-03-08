@@ -33,7 +33,7 @@ class CurationFrontResource extends BaseJsonResource
             'introtext'     => $this->introtext,
             'description'   => $this->description,
             'params'        => $this->params,
-            'featureTopics' => $featuredTopics->count() ? new TopicFrontListResource($featuredTopics, false) : [],
+            'featureTopics' => $featuredTopics->count() ? new TopicFrontListResourceCollection($featuredTopics, false) : [],
             'pastTopics'    => $pastTopics->count() ? new TopicFrontListResourceCollection($pastTopics, false) : [],
             'futureTopics'  => $futureTopics->count() ? new TopicFrontListResourceCollection($futureTopics, false) : [],
         ];
