@@ -36,15 +36,19 @@ class TopicAdminResource extends BaseJsonResource
             'events'        => $this->events->map(function ($event) {
                 return $event->only('id', 'title');
             }),
-            'promotion'     => $this->promotions->map(function ($promotion) {
+            'eventIds'  => $this->events->pluck('id')->all(),
+            'promotions'     => $this->promotions->map(function ($promotion) {
                 return $promotion->only('id', 'title');
             }),
+            'promotionIds'  => $this->promotions->pluck('id')->all(),
             'articles'      => $this->articles->map(function ($solution) {
                 return $solution->only('id', 'title');
             }),
+            'articleIds'    => $this->articles->pluck('id')->all(),
             'videos'        => $this->videos->map(function ($video) {
                 return $video->only('id', 'title');
             }),
+            'videoIds'  => $this->videos->pluck('id')->all(),
             'created_at'    => $this->getDateTimeString($this->created_at, $tz),
             'updated_at'    => $this->getDateTimeString($this->updated_at, $tz),
             'locked_at'     => $this->getDateTimeString($this->locked_at, $tz),
