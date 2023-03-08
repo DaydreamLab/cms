@@ -47,6 +47,7 @@ class Topic extends CmsModel
         'description',
         'newsId',
         'featured',
+        'featured_ordering',
         'ordering',
         'params',
         'hits',

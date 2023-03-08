@@ -22,19 +22,20 @@ class TopicAdminRepository extends TopicRepository
             ->where('curationId', $input->get('curationId'))
             ->max($key)
             ->exec($this->model);
-
+        $inputOrdering = $this->getInputOrderingValue($input->get($key), $maxOrdering);
         $q = new QueryCapsule();
-        $inputOrdering = $input->get($key) > $maxOrdering ? $maxOrdering + 1 : $input->get($key);
-        if ($inputOrdering !== null) {
+
+        if ($input->get('key') != 'featured_ordering' || $input->get('featured') != 0) {
             $q->where($key, '>=', $inputOrdering)
                 ->timestamps(false)
                 ->where('curationId', $input->get('curationId'))
                 ->orderBy($key, 'asc')
                 ->increment($key, 1)
                 ->exec($this->model);
+            $input->put($key, $inputOrdering);
+        } else {
+            $input->put($key, null);
         }
-
-        $input->put($key, $maxOrdering + 1);
     }
 
 
@@ -45,36 +46,42 @@ class TopicAdminRepository extends TopicRepository
             ->max($key)
             ->exec($this->model);
 
-        $inputOrdering = $input->get($key) === null
-            ? $maxOrdering + 1
-            : ($input->get($key) <= 1
-                ? 1
-                : ($input->get($key) > $maxOrdering ? $maxOrdering + 1 : $input->get($key))
-            );
+        $inputOrdering = $this->getInputOrderingValue($input->get($key), $maxOrdering);
         $nodeOrdering = $node->{$key};
-
         $q = new QueryCapsule();
-        if ($nodeOrdering > $inputOrdering) {
-            $q->where($key, '>=', $inputOrdering)
-                ->where('curationId', $input->get('curationId'))
-                ->where($key, '<', $nodeOrdering)
-                ->orderBy($key, 'asc')
-                ->timestamps(false)
-                ->increment($key, 1)
-                ->exec($this->model);
-        } elseif ($nodeOrdering < $inputOrdering) {
-            $q->where($key, '>', $nodeOrdering)
-                ->where('curationId', $input->get('curationId'))
-                ->where($key, '<=', $inputOrdering)
-                ->orderBy($key, 'asc')
-                ->timestamps(false)
-                ->decrement($key, 1)
-                ->exec($this->model);
+        if ($key == 'featured_ordering' &&  $input->get('featured') == 0) {
+            if ($nodeOrdering) {
+                $q ->where($key, '>', $nodeOrdering)
+                    ->where('curationId', $input->get('curationId'))
+                    ->orderBy($key, 'asc')
+                    ->timestamps(false)
+                    ->decrement($key, 1)
+                    ->exec($this->model);
+            }
+            $input->put($key, null);
         } else {
-            return ;
+            $nodeOrdering = $nodeOrdering ?? $maxOrdering;
+            if ($nodeOrdering > $inputOrdering) {
+                $q->where($key, '>=', $inputOrdering)
+                    ->where('curationId', $input->get('curationId'))
+                    ->where($key, '<', $nodeOrdering)
+                    ->orderBy($key, 'asc')
+                    ->timestamps(false)
+                    ->increment($key, 1)
+                    ->exec($this->model);
+            } elseif ($nodeOrdering < $inputOrdering) {
+                $q->where($key, '>', $nodeOrdering)
+                    ->where('curationId', $input->get('curationId'))
+                    ->where($key, '<=', $inputOrdering)
+                    ->orderBy($key, 'asc')
+                    ->timestamps(false)
+                    ->decrement($key, 1)
+                    ->exec($this->model);
+            } else {
+                return ;
+            }
+            $input->put($key, $inputOrdering);
         }
-
-        $input->put($key, $inputOrdering);
     }
 
 

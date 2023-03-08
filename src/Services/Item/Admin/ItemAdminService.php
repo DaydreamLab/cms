@@ -53,6 +53,12 @@ class ItemAdminService extends ItemService
     }
 
 
+    public function beforeModify(Collection &$input, &$item)
+    {
+        $input->put('category_id', $item->category_id);
+    }
+
+
     public function getStatic($alias)
     {
         $item = $this->findBy('alias', '=', $alias)->first();
@@ -230,6 +236,7 @@ class ItemAdminService extends ItemService
             $item->newsletterUserGroups()->attach($newsletterUserGroupIds);
         }
     }
+
 
 
     public function modifyMapping($item, $input)

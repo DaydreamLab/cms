@@ -48,6 +48,7 @@ class TopicAdminStoreRequest extends CmsStoreRequest
             'params'        => 'nullable|array',
             'featured'      => ['nullable', Rule::in([0, 1])],
             'ordering'      => 'nullable|integer',
+            'featured_ordering' => 'nullable|integer',
             'publish_up'    => 'required|date_format:Y-m-d H:i:s',
             'publish_down'  => 'nullable|date_format:Y-m-d H:i:s',
             'articleIds'    => 'nullable|array',

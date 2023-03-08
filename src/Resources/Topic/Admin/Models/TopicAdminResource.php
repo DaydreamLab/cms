@@ -31,6 +31,7 @@ class TopicAdminResource extends BaseJsonResource
             'description'   => $this->description,
             'newsId'        => $this->newsId,
             'featured'      => $this->featured,
+            'featured_ordering' => $this->featured_ordering,
             'ordering'      => $this->ordering,
             'params'        => $this->params,
             'events'        => $this->events->map(function ($event) {
