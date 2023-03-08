@@ -33,9 +33,9 @@ class CurationFrontResource extends BaseJsonResource
             'introtext'     => $this->introtext,
             'description'   => $this->description,
             'params'        => $this->params,
-            'featureTopics' => new TopicFrontListResource($featuredTopics),
-            'pastTopics'    => new TopicFrontListResourceCollection($pastTopics, false),
-            'futureTopics'  => new TopicFrontListResourceCollection($futureTopics, false),
+            'featureTopics' => $featuredTopics->count() ? new TopicFrontListResource($featuredTopics, false) : [],
+            'pastTopics'    => $pastTopics->count() ? new TopicFrontListResourceCollection($pastTopics, false) : [],
+            'futureTopics'  => $futureTopics->count() ? new TopicFrontListResourceCollection($futureTopics, false) : [],
         ];
     }
 }
