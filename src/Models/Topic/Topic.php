@@ -51,6 +51,8 @@ class Topic extends CmsModel
         'ordering',
         'params',
         'hits',
+        'publish_up',
+        'publish_down',
         'locked_by',
         'created_by',
         'updated_by',
