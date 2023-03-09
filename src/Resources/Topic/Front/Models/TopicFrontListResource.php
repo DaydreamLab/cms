@@ -24,6 +24,7 @@ class TopicFrontListResource extends BaseJsonResource
             'icon'          => $this->icon,
             'params'        => $this->params,
             'enabled'       => $this->enabled,
+            'featured'      => $this->featured
         ];
     }
 }
