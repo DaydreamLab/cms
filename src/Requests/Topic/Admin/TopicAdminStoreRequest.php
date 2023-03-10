@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Requests\Topic\Admin;
 
+use Carbon\Carbon;
 use DaydreamLab\Cms\Requests\ComponentBase\CmsStoreRequest;
 use Illuminate\Validation\Rule;
 
@@ -64,6 +65,14 @@ class TopicAdminStoreRequest extends CmsStoreRequest
     public function validated()
     {
         $validated = parent::validated();
+        if ($validated->get('publish_up')) {
+            $validated->put('publish_up', Carbon::parse($validated->get('publish_up'), 'Asia/Taipei')
+                ->tz(config('app.timezone'))->toDateTimeString());
+        }
+        if ($validated->get('publish_down')) {
+            $validated->put('publish_down', Carbon::parse($validated->get('publish_down'), 'Asia/Taipei')
+                ->tz(config('app.timezone'))->toDateTimeString());
+        }
 
         return $validated;
     }
