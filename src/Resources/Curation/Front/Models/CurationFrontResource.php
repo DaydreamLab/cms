@@ -20,12 +20,18 @@ class CurationFrontResource extends BaseJsonResource
         $pastTopics = $this->topics->where('featured', 0)
             ->where('publish_up', '<=', now()->toDateTimeString())
             ->sortBy('publish_up')
-            ->values();
+            ->values()
+            ->each(function (&$t) {
+                $t->isFuture = false;
+            });
+
         $futureTopics = $this->topics->where('featured', 0)
             ->where('publish_up', '>', now()->toDateTimeString())
             ->sortBy('publish_up')
-            ->values();
-
+            ->values()
+            ->each(function (&$t) {
+                $t->isFuture = true;
+            });
         return [
             'title'         => $this->title,
             'alias'         => $this->alias,
