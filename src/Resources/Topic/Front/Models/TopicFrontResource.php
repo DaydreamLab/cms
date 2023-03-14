@@ -21,6 +21,7 @@ class TopicFrontResource extends BaseJsonResource
             'alias'         => $this->alias,
             'subtitle'      => $this->subtitle,
             'image'         => $this->image,
+            'banner'        => $this->banner,
             'icon'          => $this->icon,
             'color'         => $this->color,
             'introTitle'    => $this->introTitle,
