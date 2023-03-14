@@ -44,7 +44,8 @@ class TopicAdminRepository extends TopicRepository
         $maxOrdering = (new QueryCapsule())
             ->where('curationId', $input->get('curationId'))
             ->max($key)
-            ->exec($this->model);
+            ->exec($this->model)
+            ?? 0;
 
         $inputOrdering = $this->getInputOrderingValue($input->get($key), $maxOrdering);
         $nodeOrdering = $node->{$key};
