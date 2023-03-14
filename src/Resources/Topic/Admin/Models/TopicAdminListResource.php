@@ -23,6 +23,7 @@ class TopicAdminListResource extends BaseJsonResource
             'title'                     => $this->title,
             'state'                     => $this->state,
             'subtitle'                  => $this->subtitle,
+            'featured'                  => $this->featured,
             'image'                     => $this->image,
             'description'               => Str::words($this->description, 1),
             'created_at'                => $this->getDateTimeString($this->created_at, $tz),
