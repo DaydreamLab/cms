@@ -40,7 +40,6 @@ class Topic extends CmsModel
         'state',
         'subtitle',
         'image',
-        'banner',
         'color',
         'icon',
         'introTitle',

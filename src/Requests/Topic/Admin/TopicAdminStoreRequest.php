@@ -40,7 +40,7 @@ class TopicAdminStoreRequest extends CmsStoreRequest
             'image.subtitle' => 'nullable|string',
             'image.path'     => 'nullable|string',
             'image.link'     => 'nullable|string',
-            'banner'        => 'nullable|string',
+            'image.banner'   => 'nullable|string',
             'color'         => 'required|string',
             'icon'          => 'nullable|string',
             'introTitle'    => 'nullable|string',
