@@ -54,6 +54,8 @@
           "getOption": ["checked", "hidden"],
           "searchCuration": ["checked", "hidden"],
           "searchItem": ["checked", "hidden"],
+          "searchVideo": ["checked", "hidden"],
+          "searchPromotion": ["checked", "hidden"],
           "searchEvent": ["checked", "hidden"]
         }
       }
