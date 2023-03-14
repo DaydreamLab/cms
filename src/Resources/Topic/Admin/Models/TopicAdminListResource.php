@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Resources\Topic\Admin\Models;
 
 use DaydreamLab\JJAJ\Resources\BaseJsonResource;
+use Illuminate\Support\Str;
 
 class TopicAdminListResource extends BaseJsonResource
 {
@@ -23,7 +24,7 @@ class TopicAdminListResource extends BaseJsonResource
             'state'                     => $this->state,
             'subtitle'                  => $this->subtitle,
             'image'                     => $this->image,
-            'description'               => $this->description,
+            'description'               => Str::words($this->description, 1),
             'created_at'                => $this->getDateTimeString($this->created_at, $tz),
             'updated_at'                => $this->getDateTimeString($this->updated_at, $tz),
             'locked_at'                 => $this->getDateTimeString($this->locked_at, $tz),
