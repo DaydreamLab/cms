@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Resources\Curation\Admin\Models;
 
 use DaydreamLab\JJAJ\Resources\BaseJsonResource;
+use Illuminate\Support\Str;
 
 class CurationAdminListResource extends BaseJsonResource
 {
@@ -19,7 +20,7 @@ class CurationAdminListResource extends BaseJsonResource
             'id'            => $this->id,
             'title'         => $this->title,
             'slideshow'     => $this->slideshow,
-            'description'   => $this->description,
+            'description'   => Str::words($this->description, 1),
             'isIndex'       => $this->isIndex,
             'params'        => $this->params,
             'created_at'    => $this->getDateTimeString($this->created_at, $tz),
