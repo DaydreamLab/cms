@@ -18,7 +18,7 @@ class CurationAdminService extends CurationService
 
     public function beforeAdd(Collection &$input)
     {
-        $this->cancelIsIndexCuration($id);
+        $this->cancelIsIndexCuration();
     }
 
 
