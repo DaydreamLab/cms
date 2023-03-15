@@ -5,6 +5,7 @@ namespace DaydreamLab\Cms\Services\Topic\Admin;
 use DaydreamLab\Cms\Repositories\Topic\Admin\TopicAdminRepository;
 use DaydreamLab\Cms\Services\Topic\TopicService;
 use DaydreamLab\Dsth\Models\Event\Event;
+use DaydreamLab\JJAJ\Database\QueryCapsule;
 use Illuminate\Support\Collection;
 
 class TopicAdminService extends TopicService
@@ -24,6 +25,38 @@ class TopicAdminService extends TopicService
         if (class_exists(Event::class) && count($eventIds)) {
             $item->events()->attach($eventIds);
         }
+    }
+
+
+    public function beforeAdd(Collection &$input)
+    {
+        $this->cancelFeaturedTopics($input);
+    }
+
+    public function beforeModify(Collection &$input, &$item)
+    {
+        $this->cancelFeaturedTopics($input, $item);
+        $input->put('featured_ordering', 1);
+    }
+
+
+    public function cancelFeaturedTopics(Collection $input, $topic = null)
+    {
+        $search = [
+            'curationId' => $input->get('curationId'),
+            'featured' => 1,
+            'limit' => 0,
+            'paginate' => 0
+        ];
+        if ($topic) {
+            $search['q'] = (new QueryCapsule())->where('id', '!=', $topic->id);
+        }
+        $this->search(collect($search))->each(function ($topic) {
+            $topic->featured = 0;
+            $topic->timestamps = false;
+            $topic->featured_ordering = null;
+            $topic->save();
+        });
     }
 
 

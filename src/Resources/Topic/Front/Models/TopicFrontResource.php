@@ -32,15 +32,19 @@ class TopicFrontResource extends BaseJsonResource
                 : null,
             'params'        => $this->params,
             'events'        => $this->events->map(function ($event) {
+                $canRegistrationSessions = $event->sessions->where('canRegistration', 1)->sortBy('startTime');
+                $seriesNum = $event->dates->count() ? $event->dates->first()->seriesNum : null;
                 $data = [
                     'title' => $event->title,
                     'regState'  => $event->regState,
-                    'url'   => Str::lower(config('app.url') . '/product/brand/'
-                        . $event->brands->first()->title . '/event/' . $event->alias),
+                    'url'   => $seriesNum
+                        ? Str::lower(config('app.url') . '/product/brand/' . $event->brands->first()->title
+                            . '/event/' . $event->alias) . '/' . $seriesNum
+                        : null,
                     'description' => $event->description,
-                    'date' => $this->getDateTimeString(
-                        $event->sessions->where('canRegistration', 1)->first()->startTime
-                    ),
+                    'date' => $canRegistrationSessions->count()
+                        ? $this->getDateTimeString($canRegistrationSessions->first()->startTime)
+                        : null,
                     'youtube_url' => $this->regState == DsthEnumHelper::CLOSED && $event->type == 'online'
                         ? $event->sessions->where('canRegistration', 1)->first()->link
                         : null
