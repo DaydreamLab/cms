@@ -48,7 +48,10 @@ class TopicFrontResource extends BaseJsonResource
                             : null,
                         'youtube_url' => $this->regState == DsthEnumHelper::CLOSED && $event->type == 'online'
                             ? $event->sessions->where('canRegistration', 1)->first()->link
-                            : null
+                            : null,
+                        'brands' => $event->brands->map(function ($brand) {
+                            return $brand->only('title', 'logo_image');
+                        })
                     ];
 
                     if ($event->regState == DsthEnumHelper::FINISHED && $event->type == 'online') {
