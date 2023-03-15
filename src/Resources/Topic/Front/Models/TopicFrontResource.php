@@ -31,35 +31,36 @@ class TopicFrontResource extends BaseJsonResource
                 ? config('app.url') . '/news/bulletin/' . $this->news->alias
                 : null,
             'params'        => $this->params,
-            'events'        => $this->events->map(function ($event) {
-                $canRegistrationSessions = $event->sessions->where('canRegistration', 1)->sortBy('startTime');
-                $seriesNum = $event->dates->count() ? $event->dates->first()->seriesNum : null;
-                $data = [
-                    'title' => $event->title,
-                    'regState'  => $event->regState,
-                    'url'   => $seriesNum
-                        ? Str::lower(config('app.url') . '/product/brand/' . $event->brands->first()->title
-                            . '/event/' . $event->alias) . '/' . $seriesNum
-                        : null,
-                    'description' => $event->description,
-                    'date' => $canRegistrationSessions->count()
-                        ? $this->getDateTimeString($canRegistrationSessions->first()->startTime)
-                        : null,
-                    'youtube_url' => $this->regState == DsthEnumHelper::CLOSED && $event->type == 'online'
-                        ? $event->sessions->where('canRegistration', 1)->first()->link
-                        : null
-                ];
+            'events'        => $this->events
+                ->map(function ($event) {
+                    $canRegistrationSessions = $event->sessions->where('canRegistration', 1)->sortBy('startTime');
+                    $seriesNum = $event->dates->count() ? $event->dates->first()->seriesNum : null;
+                    $data = [
+                        'title' => $event->title,
+                        'regState'  => $event->regState,
+                        'url'   => $seriesNum
+                            ? Str::lower(config('app.url') . '/product/brand/' . $event->brands->first()->title
+                                . '/event/' . $event->alias) . '/' . $seriesNum
+                            : null,
+                        'description' => $event->description,
+                        'date' => $canRegistrationSessions->count()
+                            ? $this->getDateTimeString($canRegistrationSessions->first()->startTime)
+                            : null,
+                        'youtube_url' => $this->regState == DsthEnumHelper::CLOSED && $event->type == 'online'
+                            ? $event->sessions->where('canRegistration', 1)->first()->link
+                            : null
+                    ];
 
-                if ($event->regState == DsthEnumHelper::FINISHED && $event->type == 'online') {
-                    $data['youtube_url'] = $event->registrationType == 'impartial'
-                        ? $event->sessions->where('canRegistration', 0)->first()->link
-                        : $event->sessions->where('canRegistration', 1)->first()->link;
-                } else {
-                    $data['youtube_url'] = null;
-                }
+                    if ($event->regState == DsthEnumHelper::FINISHED && $event->type == 'online') {
+                        $data['youtube_url'] = $event->registrationType == 'impartial'
+                            ? $event->sessions->where('canRegistration', 0)->first()->link
+                            : $event->sessions->where('canRegistration', 1)->first()->link;
+                    } else {
+                        $data['youtube_url'] = null;
+                    }
 
-                return $data;
-            }),
+                    return $data;
+                })->sortBy('date')->values(),
             'promotions'    => $this->promotions->map(function ($promotion) {
                 return [
                     'title' => $promotion->title,
