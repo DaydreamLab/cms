@@ -71,7 +71,7 @@ class TopicFrontResource extends BaseJsonResource
                     'url'   => config('app.url') . '/news/promotion/' . $promotion->alias,
                     'introimage'    => $promotion->introimage
                 ];
-            }),
+            })->values(),
             'articles'      => $this->articles->sortBy('publish_up')->map(function ($article) {
                 $data = [
                     'title' => $article->title,
@@ -91,7 +91,7 @@ class TopicFrontResource extends BaseJsonResource
                     $data['url'] = '#';
                 }
                 return $data;
-            }),
+            })->values(),
             'videos'        => $this->videos->sortBy('publish_up')->map(function ($video) {
                 return [
                     'title' => $video->title,
@@ -100,7 +100,7 @@ class TopicFrontResource extends BaseJsonResource
                         return $key == 'youtube_url';
                     })->first()['value']
                 ];
-            }),
+            })->values(),
         ];
     }
 }
