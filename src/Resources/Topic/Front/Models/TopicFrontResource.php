@@ -44,7 +44,7 @@ class TopicFrontResource extends BaseJsonResource
                             : null,
                         'description' => $event->description,
                         'date' => $canRegistrationSessions->count()
-                            ? $this->getDateTimeString($canRegistrationSessions->first()->startTime, 'Y-m-d H:i')
+                            ? $this->getDateTimeString($canRegistrationSessions->first()->startTime, 'Asia/Taipei', 'Y-m-d H:i')
                             : null,
                         'youtube_url' => $this->regState == DsthEnumHelper::CLOSED && $event->type == 'online'
                             ? $event->sessions->where('canRegistration', 1)->first()->link
