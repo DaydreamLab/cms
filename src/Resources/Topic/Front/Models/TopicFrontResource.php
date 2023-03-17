@@ -64,14 +64,14 @@ class TopicFrontResource extends BaseJsonResource
 
                     return $data;
                 })->sortBy('date')->values(),
-            'promotions'    => $this->promotions->map(function ($promotion) {
+            'promotions'    => $this->promotions->sortBy('publish_up')->map(function ($promotion) {
                 return [
                     'title' => $promotion->title,
                     'url'   => config('app.url') . '/news/promotion/' . $promotion->alias,
                     'introimage'    => $promotion->introimage
                 ];
             }),
-            'articles'      => $this->articles->map(function ($article) {
+            'articles'      => $this->articles->sortBy('publish_up')->map(function ($article) {
                 $data = [
                     'title' => $article->title,
                     'description' => Str::words(strip_tags($article->description), 10),
@@ -91,7 +91,7 @@ class TopicFrontResource extends BaseJsonResource
                 }
                 return $data;
             }),
-            'videos'        => $this->videos->map(function ($video) {
+            'videos'        => $this->videos->sortBy('publish_up')->map(function ($video) {
                 return [
                     'title' => $video->title,
                     'url' =>  config('app.url') . '/video/' . $video->alias,
