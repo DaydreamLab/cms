@@ -42,9 +42,13 @@ class TopicFrontResource extends BaseJsonResource
                             ? Str::lower(config('app.url') . '/product/brand/' . $event->brands->first()->title
                                 . '/event/' . $event->alias) . '/' . $seriesNum
                             : null,
-                        'description' => $event->description,
+                        'description' => $event->description ?: $event->introtext,
                         'date' => $canRegistrationSessions->count()
-                            ? $this->getDateTimeString($canRegistrationSessions->first()->startTime, 'Asia/Taipei', 'Y-m-d H:i')
+                            ? $this->getDateTimeString(
+                                $canRegistrationSessions->first()->startTime,
+                                'Asia/Taipei',
+                                'Y-m-d H:i'
+                            )
                             : null,
                         'youtube_url' => $this->regState == DsthEnumHelper::CLOSED && $event->type == 'online'
                             ? $event->sessions->where('canRegistration', 1)->first()->link
@@ -69,7 +73,9 @@ class TopicFrontResource extends BaseJsonResource
                 return [
                     'title' => $promotion->title,
                     'url'   => config('app.url') . '/news/promotion/' . $promotion->alias,
-                    'introimage'    => $promotion->introimage
+                    'introimage'    => $promotion->introimage,
+                    'startDate' => $this->getDateTimeString($promotion->extrafields['register_start']['value']),
+                    'endDate' => $this->getDateTimeString($promotion->extrafields['register_end']['value'])
                 ];
             })->values(),
             'articles'      => $this->articles->sortBy('publish_up')->map(function ($article) {
@@ -104,3 +110,4 @@ class TopicFrontResource extends BaseJsonResource
         ];
     }
 }
+
