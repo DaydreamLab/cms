@@ -75,6 +75,21 @@ class TopicAdminStoreRequest extends CmsStoreRequest
                 ->tz(config('app.timezone'))->toDateTimeString());
         }
 
+        $validated->put('eventIds', $this->uniqueIds($validated->get('eventIds')));
+        $validated->put('articleIds', $this->uniqueIds($validated->get('articleIds')));
+        $validated->put('promotionIds', $this->uniqueIds($validated->get('promotionIds')));
+        $validated->put('videoIds', $this->uniqueIds($validated->get('videoIds')));
+
         return $validated;
+    }
+
+
+    public function uniqueIds($inputIds)
+    {
+        if ($inputIds && is_array($inputIds) && count($inputIds)) {
+            return collect($inputIds)->unique()->values()->all();
+        }
+
+        return null;
     }
 }
