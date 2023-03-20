@@ -35,8 +35,10 @@ class TopicAdminService extends TopicService
 
     public function beforeModify(Collection &$input, &$item)
     {
-        $this->cancelFeaturedTopics($input, $item);
-        $input->put('featured_ordering', 1);
+        if ($input->get('featured')) {
+            $this->cancelFeaturedTopics($input, $item);
+            $input->put('featured_ordering', 1);
+        }
     }
 
 
