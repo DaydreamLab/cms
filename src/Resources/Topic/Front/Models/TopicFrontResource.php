@@ -42,7 +42,7 @@ class TopicFrontResource extends BaseJsonResource
                             ? Str::lower(config('app.url') . '/product/brand/' . $event->brands->first()->title
                                 . '/event/' . $event->alias) . '/' . $seriesNum
                             : null,
-                        'description' => $event->description ?: $event->introtext,
+                        'description' => $event->introtext,
                         'date' => $canRegistrationSessions->count()
                             ? $this->getDateTimeString(
                                 $canRegistrationSessions->first()->startTime,
