@@ -39,7 +39,7 @@ class TopicFrontResource extends BaseJsonResource
                         'title' => $event->title,
                         'regState'  => $event->regState,
                         'url'   => $seriesNum
-                            ? Str::lower(config('app.url') . '/product/brand/' . $event->brands->first()->title
+                            ? Str::lower(config('app.url') . '/product/brand/' . $event->brands->first()->alias
                                 . '/event/' . $event->alias) . '/' . $seriesNum
                             : null,
                         'description' => $event->introtext,
