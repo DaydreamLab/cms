@@ -16,6 +16,49 @@ class TopicFrontResource extends BaseJsonResource
      */
     public function toArray($request)
     {
+        $events = $this->events
+            ->map(function ($event) {
+                $canRegistrationSessions = $event->sessions->where('canRegistration', 1)->sortBy('startTime');
+                $seriesNum = $event->dates->count() ? $event->dates->first()->seriesNum : null;
+                $data = [
+                    'title' => $event->title,
+                    'regState'  => $event->regState,
+                    'url'   => $seriesNum
+                        ? Str::lower(config('app.url') . '/product/brand/' . $event->brands->first()->alias
+                            . '/event/' . $event->alias) . '/' . $seriesNum
+                        : null,
+                    'description' => $event->introtext,
+                    'date' => $canRegistrationSessions->count()
+                        ? $this->getDateTimeString(
+                            $canRegistrationSessions->first()->startTime,
+                            'Asia/Taipei',
+                            'Y-m-d H:i'
+                        )
+                        : null,
+                    'youtube_url' => $this->regState == DsthEnumHelper::CLOSED && $event->type == 'online'
+                        ? $event->sessions->where('canRegistration', 1)->first()->link
+                        : null,
+                    'thumbImage' => $event->thumbImage,
+                    'brands' => $event->brands->map(function ($brand) {
+                        return $brand->only('title', 'logo_image');
+                    })
+                ];
+
+                if ($event->regState == DsthEnumHelper::FINISHED && $event->type == 'online') {
+                    $data['youtube_url'] = $event->registrationType == 'impartial'
+                        ? $event->sessions->where('canRegistration', 0)->first()->link
+                        : $event->sessions->where('canRegistration', 1)->first()->link;
+                } else {
+                    $data['youtube_url'] = null;
+                }
+
+                return $data;
+            })->sortBy('date')->values();
+
+        $nowDate = now()->tz('Asia/Taipei')->startOfDay()->format('Y-m-d H:i:s');
+        $coming = $events->where('date', '>', $nowDate);
+        $past = $events->where('date', '<', $nowDate);
+
         return [
             'title'         => $this->title,
             'alias'         => $this->alias,
@@ -31,44 +74,7 @@ class TopicFrontResource extends BaseJsonResource
                 ? config('app.url') . '/news/bulletin/' . $this->news->alias
                 : null,
             'params'        => $this->params,
-            'events'        => $this->events
-                ->map(function ($event) {
-                    $canRegistrationSessions = $event->sessions->where('canRegistration', 1)->sortBy('startTime');
-                    $seriesNum = $event->dates->count() ? $event->dates->first()->seriesNum : null;
-                    $data = [
-                        'title' => $event->title,
-                        'regState'  => $event->regState,
-                        'url'   => $seriesNum
-                            ? Str::lower(config('app.url') . '/product/brand/' . $event->brands->first()->alias
-                                . '/event/' . $event->alias) . '/' . $seriesNum
-                            : null,
-                        'description' => $event->introtext,
-                        'date' => $canRegistrationSessions->count()
-                            ? $this->getDateTimeString(
-                                $canRegistrationSessions->first()->startTime,
-                                'Asia/Taipei',
-                                'Y-m-d H:i'
-                            )
-                            : null,
-                        'youtube_url' => $this->regState == DsthEnumHelper::CLOSED && $event->type == 'online'
-                            ? $event->sessions->where('canRegistration', 1)->first()->link
-                            : null,
-                        'thumbImage' => $event->thumbImage,
-                        'brands' => $event->brands->map(function ($brand) {
-                            return $brand->only('title', 'logo_image');
-                        })
-                    ];
-
-                    if ($event->regState == DsthEnumHelper::FINISHED && $event->type == 'online') {
-                        $data['youtube_url'] = $event->registrationType == 'impartial'
-                            ? $event->sessions->where('canRegistration', 0)->first()->link
-                            : $event->sessions->where('canRegistration', 1)->first()->link;
-                    } else {
-                        $data['youtube_url'] = null;
-                    }
-
-                    return $data;
-                })->sortBy('date')->values(),
+            'events'        => $coming->merge($past)->values(),
             'promotions'    => $this->promotions->sortBy('publish_up')->map(function ($promotion) {
                 return [
                     'title' => $promotion->title,
