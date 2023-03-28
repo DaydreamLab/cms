@@ -366,7 +366,7 @@ class ItemFrontService extends ItemService
                 return false;
             }
 
-            if ($user->isDealer && $user->dealerExpired) {
+            if (!$user->isDealer || ($user->isDealer && (!$user->company->validated || $user->dealerExpired))) {
                 return false;
             }
 
