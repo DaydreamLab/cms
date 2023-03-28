@@ -41,7 +41,10 @@ class TopicFrontResource extends BaseJsonResource
                     'thumbImage' => $event->thumbImage,
                     'brands' => $event->brands->map(function ($brand) {
                         return $brand->only('title', 'logo_image');
-                    })
+                    }),
+                    'dealerOnly' => $event->canRigisterGroup == 6
+                        ? 1
+                        : 0
                 ];
 
                 if ($event->regState == DsthEnumHelper::FINISHED && $event->type == 'online') {
@@ -76,13 +79,18 @@ class TopicFrontResource extends BaseJsonResource
             'params'        => $this->params,
             'events'        => $coming->merge($past)->values(),
             'promotions'    => $this->promotions->sortBy('publish_up')->map(function ($promotion) {
-                return [
+                $data = [
                     'title' => $promotion->title,
                     'url'   => config('app.url') . '/news/promotion/' . $promotion->alias,
                     'introimage'    => $promotion->introimage,
                     'startDate' => $this->getDateTimeString($promotion->extrafields['register_start']['value']),
                     'endDate' => $this->getDateTimeString($promotion->extrafields['register_end']['value'])
                 ];
+                $extrafileds = $promotion->extrafields;
+                $data['dealerOnly'] = isset($extrafileds['dealer_only'])
+                    ? (int) $extrafileds['dealer_only']['value']
+                    : 0;
+                return $data;
             })->values(),
             'articles'      => $this->articles->sortBy('publish_up')->map(function ($article) {
                 $data = [
@@ -102,6 +110,11 @@ class TopicFrontResource extends BaseJsonResource
                 } else {
                     $data['url'] = '#';
                 }
+
+                $extrafileds = $article->extrafields;
+                $data['dealerOnly'] = isset($extrafileds['dealer_only'])
+                    ? (int) $extrafileds['dealer_only']['value']
+                    : 0;
                 return $data;
             })->values(),
             'videos'        => $this->videos->sortBy('publish_up')->map(function ($video) {
