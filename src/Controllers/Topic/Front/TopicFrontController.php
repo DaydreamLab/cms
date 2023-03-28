@@ -27,8 +27,6 @@ class TopicFrontController extends CmsController
             $this->handleException($t);
         }
 
-
         return $this->response($this->service->status, $this->service->response, [], TopicFrontResource::class);
-        showLog();
     }
 }

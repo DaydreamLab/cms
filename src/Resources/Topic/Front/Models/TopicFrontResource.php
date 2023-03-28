@@ -42,10 +42,11 @@ class TopicFrontResource extends BaseJsonResource
                     'brands' => $event->brands->map(function ($brand) {
                         return $brand->only('title', 'logo_image');
                     }),
-                    'dealerOnly' => $event->canRigisterGroup == 6
+                    'dealerOnly' => $event->canRegisterGroup == 6
                         ? 1
                         : 0
                 ];
+
 
                 if ($event->regState == DsthEnumHelper::FINISHED && $event->type == 'online') {
                     $data['youtube_url'] = $event->registrationType == 'impartial'
