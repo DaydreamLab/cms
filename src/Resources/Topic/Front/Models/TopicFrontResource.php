@@ -107,7 +107,7 @@ class TopicFrontResource extends BaseJsonResource
                         . $article->brands->first()->alias . '/solution/' . $article->alias);
                 } elseif ($article->category->alias == 'case') {
                     $data['url'] = Str::lower(config('app.url') . '/product/brand/'
-                    . $article->brands->first()->title . '/case/' . $article->alias);
+                    . $article->brands->first()->alias . '/case/' . $article->alias);
                 } else {
                     $data['url'] = '#';
                 }
