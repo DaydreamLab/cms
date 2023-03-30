@@ -118,7 +118,7 @@ class TopicFrontResource extends BaseJsonResource
                     : 0;
                 return $data;
             })->values(),
-            'videos'        => $this->videos->sortBy('publish_up')->map(function ($video) {
+            'videos'        => $this->videos->sortByDesc('publish_up')->map(function ($video) {
                 return [
                     'title' => $video->title,
                     'url' =>  config('app.url') . '/video/' . $video->alias,
