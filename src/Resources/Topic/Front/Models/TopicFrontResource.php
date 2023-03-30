@@ -93,7 +93,7 @@ class TopicFrontResource extends BaseJsonResource
                     : 0;
                 return $data;
             })->values(),
-            'articles'      => $this->articles->sortBy('publish_up')->map(function ($article) {
+            'articles'      => $this->articles->sortByDesc('publish_up')->map(function ($article) {
                 $data = [
                     'title' => $article->title,
                     'description' => Str::words(strip_tags($article->description), 10),
