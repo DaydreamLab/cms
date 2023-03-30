@@ -104,7 +104,7 @@ class TopicFrontResource extends BaseJsonResource
                     $data['url'] = config('app.url') . '/news/bulletin/' . $article->alias;
                 } elseif ($article->category->alias == 'solution') {
                     $data['url'] = Str::lower(config('app.url') . '/product/brand/'
-                        . $article->brands->first()->title . '/solution/' . $article->alias);
+                        . $article->brands->first()->alias . '/solution/' . $article->alias);
                 } elseif ($article->category->alias == 'case') {
                     $data['url'] = Str::lower(config('app.url') . '/product/brand/'
                     . $article->brands->first()->title . '/case/' . $article->alias);
