@@ -62,6 +62,8 @@ class CustomerMessageFrontStoreRequest extends CmsStoreRequest
         $validated = parent::validated();
         $validated->put('email', Str::lower($validated->get('email')));
         $validated->put('status', DataHelper::CUSTOMER_MESSAGE_STATUS[0]);
+        $message = strip_tags($validated->get('message'), '<br>');
+        $validated->put('message', $message);
 
         return $validated;
     }
