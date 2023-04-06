@@ -3,8 +3,10 @@
 namespace DaydreamLab\Cms\Repositories\Item\Front;
 
 use DaydreamLab\Cms\Repositories\Category\Front\CategoryFrontRepository;
+use DaydreamLab\Cms\Repositories\Extrafield\Front\ExtrafieldFrontRepository;
 use DaydreamLab\Cms\Repositories\Item\ItemRepository;
 use DaydreamLab\Cms\Models\Item\Front\ItemFront;
+use DaydreamLab\Cms\Services\Extrafield\Front\ExtrafieldFrontService;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\User\Repositories\User\Front\UserGroupFrontRepository;
 use DaydreamLab\User\Repositories\User\Front\UserGroupMapFrontRepository;
@@ -20,11 +22,12 @@ class ItemFrontRepository extends ItemRepository
 
     protected $categoryFrontRepository;
 
-    public function __construct(ItemFront $model,
-                                UserGroupFrontRepository $userGroupRepository,
-                                UserGroupMapFrontRepository $userGroupMapRepository,
-                                CategoryFrontRepository $categoryFrontRepository)
-    {
+    public function __construct(
+        ItemFront $model,
+        UserGroupFrontRepository $userGroupRepository,
+        UserGroupMapFrontRepository $userGroupMapRepository,
+        CategoryFrontRepository $categoryFrontRepository
+    ) {
         parent::__construct($model);
         $this->userGroupRepository = $userGroupRepository;
         $this->userGroupMapRepository = $userGroupMapRepository;
@@ -38,9 +41,23 @@ class ItemFrontRepository extends ItemRepository
         $query = $this->model
             ->whereIn('category_id', $category_ids)
             ->where('state', 1)
+            ->where('publish_up', '<', now())
             ->whereIn('access', $params['access_ids'])
             ->orderBy($params['item_order_by'], $params['item_order'])
             ->orderBy('publish_up', 'desc');
+
+        if (@$params['after_days'] !== null) {
+            $query->where(function ($q) use ($params) {
+                // 即將進行的活動
+                $q->where('extrafields_search->event_start_date', '>=', now())
+                    ->where('extrafields_search->event_start_date', '<=', now()->addDays($params['after_days']));
+            })
+            ->orWhere(function ($q) use ($params) {
+                // 進行中的活動
+                $q->where('extrafields_search->event_start_date', '<=', now())
+                    ->where('extrafields_search->event_end_date', '>=', now());
+            });
+        }
 
         $query = !$mixed ? $query->where('featured', $featured) : $query;
 

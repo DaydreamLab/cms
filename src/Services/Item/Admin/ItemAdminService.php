@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Services\Item\Admin;
 
+use Carbon\Carbon;
 use DaydreamLab\Cms\Repositories\Item\Admin\ItemAdminRepository;
 use DaydreamLab\Cms\Services\Category\Admin\CategoryAdminService;
 use DaydreamLab\Cms\Services\Cms\CmsCronJobService;
@@ -144,6 +145,21 @@ class ItemAdminService extends ItemService
             $input->put('full_text_search', $tmp);
             unset($tmp);
         }
+
+        // 將 extrafields 轉換成 alias => value 存到 extrafileds_search
+        $extrafieldsSearch = [];
+        foreach ($input->get('extrafields') ?? [] as $extrafields) {
+            $alias = $extrafields['alias'];
+            $value = $extrafields['value'];
+            $type  = $extrafields['type'];
+
+            if ($type == 'datetime') {
+                $value = Carbon::parse($value)->tz(config('app.timezone'))->format($extrafields['params']['format']);
+            }
+            $extrafieldsSearch[$alias] = $value;
+        }
+
+        $input->put('extrafields_search', $extrafieldsSearch);
 
         $result = parent::store($input, $diff);
 

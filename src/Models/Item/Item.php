@@ -108,6 +108,7 @@ class Item extends BaseModel
     protected $casts = [
         'params'           => 'array',
         'extrafields'      => 'array',
+        'extrafields_search' => 'array',
         'created_at'       => 'datetime:Y-m-d H:i:s',
         'locked_at'        => 'datetime:Y-m-d H:i:s',
         'publish_up'       => 'datetime:Y-m-d H:i:s',
