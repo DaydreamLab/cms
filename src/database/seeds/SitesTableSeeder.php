@@ -19,9 +19,9 @@ class SitesTableSeeder extends Seeder
         $service = new SiteAdminService(new SiteAdminRepository(new SiteAdmin()));
 
         $service->store(Helper::collect([
-            'title'         => env('APP_NAME').' - 繁體中文',
+            'title'         =>  config('app.name') . ' - 繁體中文',
             'url'           => str_replace('http://', '',str_replace('https://', '', env('APP_URL'))),
-            'sitename'      => env('APP_NAME'),
+            'sitename'      => config('app.name'),
             'sef'           => 'zh-Hant',
             'metakeywords'  => '',
             'access'        => 1
