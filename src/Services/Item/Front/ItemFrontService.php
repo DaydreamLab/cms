@@ -268,7 +268,7 @@ class ItemFrontService extends ItemService
         $special_queries = $this->getSpecialQueries($input);
 
         $language = $input->get('language') != ''
-            ? [$input->get('language')]
+            ? ['*', $input->get('language')]
             : ['*', config('global.locale')];
 
         // 如果有傳 category_alias
