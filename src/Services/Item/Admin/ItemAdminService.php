@@ -65,7 +65,7 @@ class ItemAdminService extends ItemService
             if ((int) $input_featured == 1) {
                 $newest = $this->repo->findNewestFeatured();
                 if ($newest) {
-                    $input->put('featured_ordering', $newest->featured_ordering++);
+                    $input->put('featured_ordering', ($newest->featured_ordering ?? 0) + 1);
                 }
             } else {
                 $newer = $this->repo->findNewerFeatured($item);
@@ -146,6 +146,8 @@ class ItemAdminService extends ItemService
             unset($tmp);
         }
 
+
+
         // 將 extrafields 轉換成 alias => value 存到 extrafileds_search
         $extrafieldsSearch = [];
         foreach ($input->get('extrafields') ?? [] as $extrafields) {
@@ -158,6 +160,7 @@ class ItemAdminService extends ItemService
             }
             $extrafieldsSearch[$alias] = $value;
         }
+
 
         $input->put('extrafields_search', $extrafieldsSearch);
 
