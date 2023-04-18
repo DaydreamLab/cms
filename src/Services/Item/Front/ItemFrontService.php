@@ -300,11 +300,18 @@ class ItemFrontService extends ItemService
             $input->forget('category_alias');
         }
 
+        $special_queries[] = [
+            'type'  => 'whereIn',
+            'key'   => 'language',
+            'value' => $language
+        ];
+
         $input->forget('special_queries');
+        $input->forget('language');
+
         $input->put('special_queries', $special_queries);
         $input->put('state', 1);
         $copy = Helper::collect($input->toArray());
-
         $items = parent::search($input);
 
         $data = $this->paginationFormat($items->toArray());
