@@ -91,12 +91,12 @@ class ItemAdminContentSearchPost extends CmsSearchRequest
     {
         $validated = parent::validated();
 
-        if ($content_type = $this->route('content_type') ) {
+        if ($content_type = $this->route('content_type')) {
             $validated->put('content_type', $content_type);
         }
 
         $q = $validated->get('q');
-        if ($brand_id = $validated->get('brand_id') ) {
+        if ($brand_id = $validated->get('brand_id')) {
             $q = $q->whereHas('brands', function ($query) use ($brand_id) {
                 $query->where('brands_items_maps.brand_id', '=', $brand_id);
             });

@@ -20,12 +20,13 @@ use DaydreamLab\Cms\Services\Category\Admin\CategoryAdminService;
 use DaydreamLab\Cms\Services\Cms\CmsCronJobService;
 use DaydreamLab\Cms\Services\Tag\Admin\TagAdminService;
 use DaydreamLab\Cms\Traits\Service\CmsCronJob;
+use DaydreamLab\JJAJ\Database\QueryCapsule;
 use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Helpers\InputHelper;
 use DaydreamLab\Cms\Services\Item\ItemService;
 use Illuminate\Support\Collection;
 
-class  ItemAdminService extends ItemService
+class ItemAdminService extends ItemService
 {
     use CmsCronJob;
 
@@ -37,17 +38,24 @@ class  ItemAdminService extends ItemService
 
     protected $brandService;
 
-    public function __construct(ItemAdminRepository     $repo,
-                                TagAdminService         $tagAdminService,
-                                CategoryAdminService    $categoryAdminService,
-                                BrandService            $brandService)
-    {
+    public function __construct(
+        ItemAdminRepository $repo,
+        TagAdminService $tagAdminService,
+        CategoryAdminService $categoryAdminService,
+        BrandService $brandService
+    ) {
         parent::__construct($repo);
         $this->repo                     = $repo;
         $this->tagAdminService          = $tagAdminService;
         $this->categoryAdminService     = $categoryAdminService;
         $this->cmsCronJobService        = app(CmsCronJobService::class);
         $this->brandService             = $brandService;
+    }
+
+
+    public function beforeModify(Collection &$input, &$item)
+    {
+        $input->put('category_id', $item->category_id);
     }
 
 
@@ -192,7 +200,7 @@ class  ItemAdminService extends ItemService
     public function addMapping($item, $input)
     {
         $tags = $input->get('tags') ? $input->get('tags') : [];
-        $tagIds = array_map(function($tag) {
+        $tagIds = array_map(function ($tag) {
             return $tag['id'];
         }, $tags);
         if (count($tagIds)) {
@@ -200,7 +208,7 @@ class  ItemAdminService extends ItemService
         }
 
         $brands = $input->get('brands') ? $input->get('brands') : [];
-        $brand_ids = array_map(function($brand) {
+        $brand_ids = array_map(function ($brand) {
             return $brand['id'];
         }, $brands);
         if (count($brand_ids)) {
@@ -208,7 +216,7 @@ class  ItemAdminService extends ItemService
         }
 
         $products = $input->get('products') ? $input->get('products') : [];
-        $product_ids = array_map(function($product) {
+        $product_ids = array_map(function ($product) {
             return $product['id'];
         }, $products);
         if (count($product_ids)) {
@@ -216,7 +224,7 @@ class  ItemAdminService extends ItemService
         }
 
         $files = $input->get('files') ? $input->get('files') : [];
-        $files_ids = array_map(function($file) {
+        $files_ids = array_map(function ($file) {
             return $file['id'];
         }, $files);
         if (count($files_ids)) {
@@ -230,31 +238,32 @@ class  ItemAdminService extends ItemService
     }
 
 
+
     public function modifyMapping($item, $input)
     {
-        if ( $input->get('tags') !== null ) {
-            $tagIds = array_map(function($tag) {
+        if ($input->get('tags') !== null) {
+            $tagIds = array_map(function ($tag) {
                 return $tag['id'];
             }, $input->get('tags'));
             $item->tags()->sync($tagIds);
         }
 
-        if ( $input->get('brands') !== null ) {
-            $brand_ids = array_map(function($brand) {
+        if ($input->get('brands') !== null) {
+            $brand_ids = array_map(function ($brand) {
                 return $brand['id'];
             }, $input->get('brands'));
             $item->brands()->sync($brand_ids);
         }
 
-        if ( $input->get('products') !== null ) {
-            $product_ids = array_map(function($product) {
+        if ($input->get('products') !== null) {
+            $product_ids = array_map(function ($product) {
                 return $product['id'];
             }, $input->get('products'));
             $item->products()->sync($product_ids);
         }
 
-        if ( $input->get('files') !== null ) {
-            $file_ids = array_map(function($file) {
+        if ($input->get('files') !== null) {
+            $file_ids = array_map(function ($file) {
                 return $file['id'];
             }, $input->get('files'));
             $item->files()->sync($file_ids);
@@ -291,7 +300,9 @@ class  ItemAdminService extends ItemService
         } else {
             $categories = $this->categoryAdminService->search(Helper::collect([
                 'extension'     => $extension,
-                'content_type'  => $content_type,
+                'q'  => $content_type && is_array($content_type)
+                    ? (new QueryCapsule())->whereIn('alias', $content_type)
+                    : (new QueryCapsule())->where('alias', $content_type),
                 'paginate'  => false
             ]));
 
@@ -300,9 +311,14 @@ class  ItemAdminService extends ItemService
 
         $q = $input->get('q');
         $q = $q->whereIn('category_id', $category_ids);
+        if ($brand_id = $input->get('brand_id')) {
+            $q->whereHas('brands', function ($query) use ($brand_id) {
+                $query->where('brands_items_maps.brand_id', '=', $brand_id);
+            });
+        }
         $input->put('q', $q);
         // Item Search 沒有這兩個 column
-        $input->forget(['extension', 'content_type', 'category_id']);
+        $input->forget(['extension', 'content_type', 'category_id', 'brand_id']);
 
         return parent::search($input);
     }
@@ -330,7 +346,7 @@ class  ItemAdminService extends ItemService
 
         $input->forget(['extension', 'content_type', 'category_id']);
 
-        if ( in_array($content_type, ['memorabilia', 'finance', 'stockholder']) ) {
+        if (in_array($content_type, ['memorabilia', 'finance', 'stockholder'])) {
             $page = $input->get('page');
             $limit = $input->get('limit');
             $input->put('limit', 0);
@@ -352,7 +368,8 @@ class  ItemAdminService extends ItemService
 
     public function store(Collection $input)
     {
-        if ($input->get('state') == 1
+        if (
+            $input->get('state') == 1
             && InputHelper::null($input, 'publish_up')
         ) {
             $input->put('publish_up', now());
@@ -382,7 +399,7 @@ class  ItemAdminService extends ItemService
             }
             $e_v = ExtrafieldValue::where('item_id', $item_id)->where('extrafield_id', $e->id)->first();
             if (!$e_v) {
-                if ( in_array($e->type, $json_data_field_type) ) {
+                if (in_array($e->type, $json_data_field_type)) {
                     $e_v = ExtrafieldValue::create([
                         'extrafield_id' => $e->id,
                         'item_id' => $item_id,
@@ -396,7 +413,7 @@ class  ItemAdminService extends ItemService
                     ]);
                 }
             } else {
-                if ( in_array($e->type, $json_data_field_type) ) {
+                if (in_array($e->type, $json_data_field_type)) {
                     $e_v->value = json_encode($extrafield['value']);
                 } else {
                     $e_v->value = $extrafield['value'];

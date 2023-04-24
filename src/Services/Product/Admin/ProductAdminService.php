@@ -106,7 +106,7 @@ class ProductAdminService extends ProductService
                             $v = @$data['renew'];
                             break;
                         case 20:
-                            $v = 'Y';
+                            $v = $product->state == 1 ? 'Y' : 'N';
                             break;
                         default:
                             $v = '';

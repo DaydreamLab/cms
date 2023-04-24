@@ -42,6 +42,9 @@ class ItemAdminListResource extends BaseJsonResource
                 'title' => $this->category->title,
                 'alias' => $this->category->alias
             ],
+            'brands'                    => $this->brands->map(function ($b) {
+                return $b->only(['id', 'title']);
+            }),
         ];
     }
 }

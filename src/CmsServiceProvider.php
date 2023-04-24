@@ -17,7 +17,9 @@ class CmsServiceProvider extends ServiceProvider
         'DaydreamLab\Cms\Commands\Feat\V2InstallCommand',
         'DaydreamLab\Cms\Commands\Fix\FixUserGroupAdnSubscriptionCommand',
         'DaydreamLab\Cms\Commands\Feat\V2InstallCommand',
-        'DaydreamLab\Cms\Commands\Feat\Crm\CrmInstallCommand'
+        'DaydreamLab\Cms\Commands\Feat\Crm\CrmInstallCommand',
+        'DaydreamLab\Cms\Commands\Feat\Curation\CurationInstallCommand',
+        'DaydreamLab\Cms\Commands\Feat\Curation\CurationOrderingFixCommand',
     ];
     /**
      * Bootstrap services.

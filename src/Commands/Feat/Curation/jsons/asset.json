@@ -1,0 +1,65 @@
+[
+  {
+    "title": "COM_CURATION_TITLE",
+    "state": 1,
+    "params": {
+      "path": "/curation",
+      "component": "",
+      "type": "alias",
+      "redirect": "",
+      "icon": "copy"
+    },
+    "assets": [
+      {
+        "title": "COM_CURATION_MANAGER_TITLE",
+        "path": "exhibition",
+        "full_path": "/exhibition",
+        "component": "curation/exhibition/list",
+        "type": "menu",
+        "state": 1,
+        "icon": "copy",
+        "showNav": 1,
+        "apis": [
+          "getCuration",
+          "addCuration",
+          "editCuration",
+          "updateCurationState",
+          "searchCuration",
+          "deleteCuration",
+          "restoreCuration"
+        ],
+        "defaultApis": {
+          "getOption": ["checked", "hidden"]
+        }
+      },
+      {
+        "title": "COM_TOPIC_MANAGER_TITLE",
+        "path": "topic",
+        "full_path": "/topic",
+        "component": "curation/topic/list",
+        "type": "menu",
+        "state": 1,
+        "icon": "copy",
+        "showNav": 1,
+        "apis": [
+          "getTopic",
+          "addTopic",
+          "editTopic",
+          "updateTopicState",
+          "searchTopic",
+          "deleteTopic",
+          "restoreTopic"
+        ],
+        "defaultApis": {
+          "getOption": ["checked", "hidden"],
+          "searchCuration": ["checked", "hidden"],
+          "searchItem": ["checked", "hidden"],
+          "searchVideo": ["checked", "hidden"],
+          "searchPromotion": ["checked", "hidden"],
+          "searchEvent": ["checked", "hidden"]
+        }
+      }
+    ],
+    "userGroups": ["Administrator", "Super User"]
+  }
+]

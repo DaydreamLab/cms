@@ -1,4 +1,5 @@
 <?php
+
 namespace DaydreamLab\Cms\Models\Item;
 
 use DaydreamLab\Cms\Models\Brand\Brand;

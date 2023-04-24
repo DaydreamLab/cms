@@ -36,6 +36,9 @@ class ItemAdminResource extends BaseJsonResource
             'access'                    => $this->access,
             'language'                  => $this->language,
             'params'                    => $this->params,
+            'brands'                    => $this->brands->map(function ($b) {
+                return $b->only(['id', 'title']);
+            }),
             'tags'                      => $this->tags,
             'extrafield_group_id'       => $this->extrafield_group_id,
             'extrafields'               => $this->extrafields,

@@ -38,7 +38,8 @@ class ItemAdminSearchPost extends CmsSearchRequest
                 'nullable',
                 Rule::in([0,1])
             ],
-            'content_type'  => 'nullable|string',
+            'brand_id'      => 'nullable|integer',
+            'content_type'  => 'nullable',
             'extension'     => 'nullable|string',
             'access'        => 'nullable|integer',
             'language'      => 'nullable|string|max:5',
