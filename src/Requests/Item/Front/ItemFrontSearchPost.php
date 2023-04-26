@@ -70,6 +70,15 @@ class ItemFrontSearchPost extends ItemSearchPost
     {
         $rulesInput = parent::rulesInput();
 
+        // for 白痴 appscan 不要拿掉
+        $temp1 = $rulesInput->toArray();
+        $temp2 = $this->all();
+        ksort($temp1);
+        ksort($temp2);
+        if (json_encode($temp1) != json_encode($temp2)) {
+            throw new \Symfony\Component\HttpKernel\Exception\BadRequestHttpException();
+        }
+
         // 對搜尋關鍵字分詞
         if ($rulesInput->has('search') && config('cms.item.use_word_segmentation')) {
             $rulesInput->put('search', Cut::cutForSearch($rulesInput->get('search')));
