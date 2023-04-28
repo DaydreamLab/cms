@@ -61,6 +61,7 @@ class ItemFrontSearchPost extends ItemSearchPost
                 'integer',
                 Rule::in([0, 1])
             ],
+            'page',
         ];
 
         return array_merge($rules, parent::rules());
