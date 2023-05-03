@@ -12,7 +12,7 @@
  */
 
 
-Route::get('/dashboard/{vue?}', 'DaydreamLab\Cms\Controllers\HomeController@adminIndex')->where('vue', '.*');
+// Route::get('/dashboard/{vue?}', 'DaydreamLab\Cms\Controllers\HomeController@adminIndex')->where('vue', '.*');
 
 //Route::get('/{vue?}', 'DaydreamLab\Cms\Controllers\HomeController@siteIndex')->where('vue', '.*');
 
