@@ -148,6 +148,12 @@ Route::get('api/admin/brand/{id}', [BrandAdminController::class, 'getItem'])
     ->middleware(['expired', 'admin', 'restrict-ip:admin']);
 Route::post('api/admin/brand/import', [BrandAdminController::class, 'import'])
     ->middleware(['expired', 'admin', 'restrict-ip:admin']);
+Route::post('api/admin/brand/importContact', [BrandAdminController::class, 'importContact'])
+    ->middleware(['expired', 'admin', 'restrict-ip:admin']);
+Route::post('api/admin/brand/importBrandInfo', [BrandAdminController::class, 'importBrandInfo'])
+    ->middleware(['expired', 'admin', 'restrict-ip:admin']);
+Route::post('api/admin/brand/importCompanyOrder', [BrandAdminController::class, 'importCompanyOrder'])
+    ->middleware(['expired', 'admin', 'restrict-ip:admin']);
 
 # 產品
 Route::post('api/admin/product/export', [ProductAdminController::class, 'export'])
@@ -234,10 +240,6 @@ Route::post('api/admin/item/importStockHolder', [ItemAdminController::class, 'im
 Route::post('api/admin/item/importRule', [ItemAdminController::class, 'importRule'])
     ->middleware(['expired', 'admin', 'restrict-ip:admin']);
 Route::post('api/admin/item/importUser', [ItemAdminController::class, 'importUser'])
-    ->middleware(['expired', 'admin', 'restrict-ip:admin']);
-Route::post('api/admin/brand/importContact', [BrandAdminController::class, 'importContact'])
-    ->middleware(['expired', 'admin', 'restrict-ip:admin']);
-Route::post('api/admin/brand/importBrandInfo', [BrandAdminController::class, 'importBrandInfo'])
     ->middleware(['expired', 'admin', 'restrict-ip:admin']);
 
 # 電子報

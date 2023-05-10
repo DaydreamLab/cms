@@ -6,6 +6,7 @@
     "site_id": 1,
     "access": 1,
     "language": "*",
+    "ordering": 1,
     "children": []
   },
   {
@@ -15,6 +16,7 @@
     "site_id": 1,
     "access": 1,
     "language": "*",
+    "ordering": 2,
     "children": [
       {
         "title": "品牌新訊",
@@ -23,6 +25,7 @@
         "site_id": 1,
         "access": 1,
         "language": "*",
+        "ordering": 1,
         "children": []
       },
       {
@@ -32,6 +35,7 @@
         "site_id": 1,
         "access": 1,
         "language": "*",
+        "ordering": 2,
         "children": []
       }
     ]
@@ -43,6 +47,7 @@
     "site_id": 1,
     "access": 1,
     "language": "*",
+    "ordering": 3,
     "children": [
       {
         "title": "代理品牌",
@@ -51,6 +56,7 @@
         "site_id": 1,
         "access": 1,
         "language": "*",
+        "ordering": 1,
         "children": []
       },
       {
@@ -60,6 +66,7 @@
         "site_id": 1,
         "access": 1,
         "language": "*",
+        "ordering": 2,
         "children": []
       },
       {
@@ -69,6 +76,7 @@
         "site_id": 1,
         "access": 1,
         "language": "*",
+        "ordering": 3,
         "children": []
       }
     ]
@@ -80,6 +88,7 @@
     "site_id": 1,
     "access": 1,
     "language": "*",
+    "ordering": 4,
     "children": []
   },
   {
@@ -89,6 +98,7 @@
     "site_id": 1,
     "access": 1,
     "language": "*",
+    "ordering": 5,
     "children": []
   },
   {
@@ -98,6 +108,7 @@
     "site_id": 1,
     "access": 1,
     "language": "*",
+    "ordering": 6,
     "children": []
   },
   {
@@ -107,6 +118,7 @@
     "site_id": 1,
     "access": 1,
     "language": "*",
+    "ordering": 7,
     "children": [
       {
         "title": "公司簡介",
@@ -115,6 +127,7 @@
         "site_id": 1,
         "access": 1,
         "language": "*",
+        "ordering": 1,
         "children": []
       },
       {
@@ -124,6 +137,7 @@
         "site_id": 1,
         "access": 1,
         "language": "*",
+        "ordering": 2,
         "children": []
       },
       {
@@ -133,6 +147,7 @@
         "site_id": 1,
         "access": 1,
         "language": "*",
+        "ordering": 3,
         "children": []
       }
     ]
@@ -144,6 +159,7 @@
     "site_id": 1,
     "access": 1,
     "language": "*",
+    "ordering": 8,
     "children": [
       {
         "title": "財務資訊",
@@ -152,6 +168,7 @@
         "site_id": 1,
         "access": 1,
         "language": "*",
+        "ordering": 1,
         "children": []
       },
       {
@@ -161,6 +178,7 @@
         "site_id": 1,
         "access": 1,
         "language": "*",
+        "ordering": 2,
         "children": []
       },
       {
@@ -170,6 +188,7 @@
         "site_id": 1,
         "access": 1,
         "language": "*",
+        "ordering": 3,
         "children": []
       },
       {
@@ -179,6 +198,7 @@
         "site_id": 1,
         "access": 1,
         "language": "*",
+        "ordering": 4,
         "children": []
       }
     ]
@@ -190,6 +210,7 @@
     "site_id": 1,
     "access": 1,
     "language": "*",
+    "ordering": 9,
     "children": [
       {
         "title": "加入零壹",
@@ -198,6 +219,7 @@
         "site_id": 1,
         "access": 1,
         "language": "*",
+        "ordering": 1,
         "children": []
       },
       {
@@ -207,6 +229,7 @@
         "site_id": 1,
         "access": 1,
         "language": "*",
+        "ordering": 2,
         "children": []
       },
       {
@@ -216,6 +239,7 @@
         "site_id": 1,
         "access": 1,
         "language": "*",
+        "ordering": 3,
         "children": []
       }
     ]
@@ -227,6 +251,7 @@
     "site_id": 1,
     "access": 1,
     "language": "*",
+    "ordering": 10,
     "children": [
       {
         "title": "業務洽詢",
@@ -235,6 +260,7 @@
         "site_id": 1,
         "access": 1,
         "language": "*",
+        "ordering": 1,
         "children": []
       },
       {
@@ -244,6 +270,7 @@
         "site_id": 1,
         "access": 1,
         "language": "*",
+        "ordering": 2,
         "children": []
       },
       {
@@ -253,6 +280,7 @@
         "site_id": 1,
         "access": 1,
         "language": "*",
+        "ordering": 3,
         "children": []
       },
       {
@@ -262,6 +290,7 @@
         "site_id": 1,
         "access": 1,
         "language": "*",
+        "ordering": 4,
         "children": []
       },
       {
@@ -271,17 +300,9 @@
         "site_id": 1,
         "access": 1,
         "language": "*",
+        "ordering": 5,
         "children": []
       }
     ]
-  },
-  {
-    "title": "ˊ主題策展",
-    "alias": "campaign",
-    "path": "/campaign",
-    "site_id": 1,
-    "access": 1,
-    "language": "*",
-    "children": []
   }
 ]

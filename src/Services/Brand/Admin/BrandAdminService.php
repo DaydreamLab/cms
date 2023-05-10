@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Services\Brand\Admin;
 
 use DaydreamLab\Cms\Jobs\ImportBrand;
+use DaydreamLab\Cms\Jobs\ImportBrandCompanyOrder;
 use DaydreamLab\Cms\Jobs\ImportBrandContact;
 use DaydreamLab\Cms\Jobs\ImportBrandInfo;
 use DaydreamLab\Cms\Repositories\Brand\Admin\BrandAdminRepository;
@@ -26,8 +27,7 @@ class BrandAdminService extends BrandService
         BrandAdminRepository $repo,
         ProductCategoryService $productCategoryService,
         ProductService $productService
-    )
-    {
+    ) {
         parent::__construct($repo);
         $this->repo = $repo;
         $this->productCategoryService = $productCategoryService;
@@ -38,7 +38,7 @@ class BrandAdminService extends BrandService
     public function addMapping($item, $input)
     {
         $tags = $input->get('tags') ? $input->get('tags') : [];
-        $tagIds = array_map(function($tag) {
+        $tagIds = array_map(function ($tag) {
             return $tag['id'];
         }, $tags);
         if (count($tagIds)) {
@@ -89,12 +89,25 @@ class BrandAdminService extends BrandService
     }
 
 
+    public function importCompanyOrder($input)
+    {
+        $file = $input->file('file');
+        $temp = $file->move('tmp', $file->hashName());
+        $filePath = $temp->getRealPath();
+        $job = new ImportBrandCompanyOrder($filePath, $this->getUser()->id);
+
+        dispatch($job);
+
+        $this->status = 'ImportCompanyOrderSuccess';
+    }
+
+
     public function modifyMapping($item, $input)
     {
-        if ( $input->get('tags') !== null ) {
-            $tagIds = array_map(function($tag) {
+        if ($input->get('tags') !== null) {
+             $tagIds = array_map(function ($tag) {
                 return $tag['id'];
-            }, $input->get('tags'));
+             }, $input->get('tags'));
             $item->tags()->sync($tagIds);
         }
     }

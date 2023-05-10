@@ -6,6 +6,7 @@ use DaydreamLab\Cms\Models\Item\Item;
 use DaydreamLab\Cms\Traits\Model\WithLanguage;
 use DaydreamLab\Cms\Traits\WithExtrafield;
 use DaydreamLab\JJAJ\Models\BaseModel;
+use DaydreamLab\JJAJ\Traits\HasCustomRelation;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\JJAJ\Traits\UserInfo;
 use DaydreamLab\User\Traits\Model\WithAccess;
@@ -14,8 +15,13 @@ use Kalnoy\Nestedset\NodeTrait;
 
 class Category extends BaseModel
 {
-    use NodeTrait, WithAccess, WithLanguage, /*WithExtrafield,*/ UserInfo,
-        RecordChanger {
+    use NodeTrait;
+    use WithAccess;
+    use WithLanguage;
+    use HasCustomRelation;
+    /*use WithExtrafield,*/
+    use UserInfo;
+    use RecordChanger {
         RecordChanger::boot as traitBoot;
     }
     /**

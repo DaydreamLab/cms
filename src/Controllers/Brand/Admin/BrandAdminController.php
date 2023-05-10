@@ -4,6 +4,7 @@ namespace DaydreamLab\Cms\Controllers\Brand\Admin;
 
 use DaydreamLab\Cms\Controllers\CmsController;
 use DaydreamLab\Cms\Requests\Brand\Admin\BrandAdminGetItemRequest;
+use DaydreamLab\Cms\Requests\Brand\Admin\BrandAdminImportOrderRequest;
 use DaydreamLab\Cms\Requests\Brand\Admin\BrandAdminRemoveRequest;
 use DaydreamLab\Cms\Requests\Brand\Admin\BrandAdminRestoreRequest;
 use DaydreamLab\Cms\Requests\Brand\Admin\BrandAdminSearchRequest;
@@ -38,6 +39,20 @@ class BrandAdminController extends CmsController
         return $this->response($this->service->status, $this->service->response, [], BrandAdminResource::class);
     }
 
+
+    public function import(Request $request)
+    {
+        $this->service->setUser($request->user('api'));
+        try {
+            $this->service->import($request);
+        } catch (Throwable $t) {
+            $this->handleException($t);
+        }
+
+        return $this->response($this->service->status, $this->service->response);
+    }
+
+
     public function importBrandInfo(Request $request)
     {
         $this->service->setUser($request->user('api'));
@@ -64,11 +79,11 @@ class BrandAdminController extends CmsController
     }
 
 
-    public function import(Request $request)
+    public function importCompanyOrder(BrandAdminImportOrderRequest $request)
     {
         $this->service->setUser($request->user('api'));
         try {
-            $this->service->import($request);
+            $this->service->importCompanyOrder($request);
         } catch (Throwable $t) {
             $this->handleException($t);
         }

@@ -17,7 +17,7 @@ class CrmInstallCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'cms:crm-install';
+    protected $signature = 'cms:crm-seed';
 
     /**
      * The console command description.
