@@ -23,16 +23,19 @@ class ImportBrandCompanyOrder implements ShouldQueue
 
     protected $userId;
 
+    protected $brandId;
+
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($filePath, $userId)
+    public function __construct($filePath, $userId, $brandId)
     {
         $this->queue = 'import-job';
         $this->filePath = $filePath;
         $this->userId = $userId;
+        $this->brandId = $brandId;
     }
 
     /**
@@ -71,7 +74,8 @@ class ImportBrandCompanyOrder implements ShouldQueue
             if ($companies->count() == 1) {
                 $company = $companies->first();
                 foreach ($orders as $order) {
-                    $brand = Brand::where('title', $order['brand'])->first();
+//                    $brand = Brand::where('title', $order['brand'])->first();
+                    $brand = Brand::find($this->brandId);
                     if (!$brand) {
                         # throw error
                     } else {

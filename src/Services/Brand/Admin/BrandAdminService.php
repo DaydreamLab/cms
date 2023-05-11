@@ -94,7 +94,7 @@ class BrandAdminService extends BrandService
         $file = $input->file('file');
         $temp = $file->move('tmp', $file->hashName());
         $filePath = $temp->getRealPath();
-        $job = new ImportBrandCompanyOrder($filePath, $this->getUser()->id);
+        $job = new ImportBrandCompanyOrder($filePath, $this->getUser()->id, $input->get('id'));
 
         dispatch($job);
 
