@@ -824,7 +824,7 @@ class ItemFrontService extends ItemService
                 } else {
                     $copy = $input->toArray();
                     if (!$input->get('search')) {
-                        $copy['limit'] = 500;
+                        $copy['limit'] = 200;
                     }
                     $q->select('id', 'category_id', 'title', 'alias', 'introtext', 'description')
                         ->with('category', 'brands')
