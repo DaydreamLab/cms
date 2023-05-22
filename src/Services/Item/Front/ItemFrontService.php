@@ -824,7 +824,7 @@ class ItemFrontService extends ItemService
                 } else {
                     $copy = $input->toArray();
                     if (!$input->get('search')) {
-                        $copy['limit'] = 200;
+                        $copy['limit'] = 1000;
                     }
                     $q->select('id', 'category_id', 'title', 'alias', 'introtext', 'description')
                         ->with('category', 'brands')
@@ -848,7 +848,7 @@ class ItemFrontService extends ItemService
             }
         } else {
             $itemSearchData = $input->toArray();
-//            $itemSearchData['limit'] = 200;
+            $itemSearchData['limit'] = 500;
             $itemSearchData['q'] = (new QueryCapsule())
                 ->select('id', 'category_id', 'title', 'alias', 'introtext', 'description')
                 ->with('category', 'brands', 'tags')
@@ -856,7 +856,7 @@ class ItemFrontService extends ItemService
             if ($tag) {
                 $itemSearchData['q']->whereHas('tags', function ($q) use ($tag) {
                     $q->where('tags.alias', $tag);
-                }) ;
+                });
             }
 
             $items = $this->searchContent(collect($itemSearchData), false)->filter(function ($i) {
