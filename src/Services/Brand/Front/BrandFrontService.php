@@ -128,6 +128,12 @@ class BrandFrontService extends BrandService
     }
 
 
+    public function pureSearch(Collection $input)
+    {
+        return parent::search($input);
+    }
+
+
     public function search(Collection $input)
     {
         if ( $productCategoryAlias = $input->get('product_category_alias') ) {
