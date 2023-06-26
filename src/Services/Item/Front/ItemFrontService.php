@@ -35,10 +35,11 @@ class ItemFrontService extends ItemService
     protected $userGroupFrontService;
 
 
-    public function __construct(ItemFrontRepository $repo,
-                                CategoryFrontService $categoryFrontService,
-                                UserGroupFrontService $userGroupFrontService)
-    {
+    public function __construct(
+        ItemFrontRepository $repo,
+        CategoryFrontService $categoryFrontService,
+        UserGroupFrontService $userGroupFrontService
+    ) {
         $this->categoryFrontService = $categoryFrontService;
         $this->userGroupFrontService = $userGroupFrontService;
 
@@ -73,33 +74,22 @@ class ItemFrontService extends ItemService
         $result  = $this->repo->getCategoriesItemsModule($params);
 
         // 代表有分類的切割
-        if (gettype($result) == 'array')
-        {
-            foreach ($result as $key => $items)
-            {
-               if (!$items instanceof Collection)
-               {
-                   foreach ($items as $index => $objects)
-                   {
-                       $result[$key][$index] = $objects;
-                   }
-               }
+        if (gettype($result) == 'array') {
+            foreach ($result as $key => $items) {
+                if (!$items instanceof Collection) {
+                    foreach ($items as $index => $objects) {
+                        $result[$key][$index] = $objects;
+                    }
+                }
             }
-        }
-        else
-        {
-            if ($result->count() > 0)
-            {
+        } else {
+            if ($result->count() > 0) {
                 $content_type = $result[0]->category->content_type;
-                if ($content_type == 'timeline')
-                {
+                if ($content_type == 'timeline') {
                     $data = [];
-                    foreach ($result as $item)
-                    {
-                        foreach ($item->extrafields as $extrafield)
-                        {
-                            if (array_key_exists('timeline', $extrafield->params) && (int)$extrafield->params['timeline'] == 1)
-                            {
+                    foreach ($result as $item) {
+                        foreach ($item->extrafields as $extrafield) {
+                            if (array_key_exists('timeline', $extrafield->params) && (int)$extrafield->params['timeline'] == 1) {
                                 $time   = Carbon::parse($extrafield->value);
                                 $units  = explode('-', $extrafield->params['format']);
 
@@ -121,24 +111,19 @@ class ItemFrontService extends ItemService
     public function filterByDatetimeFormat(&$data, $units, $datetime, $item)
     {
         $unit = array_shift($units);
-        if (count($units) == 0)
-        {   $temp['title'] = $item['title'];
+        if (count($units) == 0) {
+            $temp['title'] = $item['title'];
             $temp['description'] = $item['description'];
-            foreach ($item->extrafields as $extrafield)
-            {
-                if (!array_key_exists('timeline', $extrafield->params) || (int)$extrafield->params['timeline'] == 0)
-                {
+            foreach ($item->extrafields as $extrafield) {
+                if (!array_key_exists('timeline', $extrafield->params) || (int)$extrafield->params['timeline'] == 0) {
                     $temp['extrafields'][] = $extrafield;
                 }
             }
             $data[(int)$datetime->format($unit)][] = $temp;
             krsort($data);
             return $data;
-        }
-        else
-        {
-            if (!array_key_exists($datetime->format($unit), $data))
-            {
+        } else {
+            if (!array_key_exists($datetime->format($unit), $data)) {
                 $date[$datetime->format($unit)] = [];
             }
 
@@ -153,8 +138,7 @@ class ItemFrontService extends ItemService
 
         $this->canAccess($item->access);
 
-        if ($item)
-        {
+        if ($item) {
             $prev_and_next  = $this->repo->getPreviousAndNext($item);
             $item->previous =  $prev_and_next['previous'];
             $item->next     =  $prev_and_next['next'];
@@ -197,13 +181,10 @@ class ItemFrontService extends ItemService
     public function getNext(Collection $input)
     {
         $next_id = $this->repo->getPreviousOrNext($input, false);
-        if ($next_id)
-        {
+        if ($next_id) {
             return $this->getItem($next_id);
-        }
-        else
-        {
-            $this->status = Str::upper(Str::snake($this->type.'ItemNotExist'));
+        } else {
+            $this->status = Str::upper(Str::snake($this->type . 'ItemNotExist'));
             $this->response = null;
             return false;
         }
@@ -214,13 +195,10 @@ class ItemFrontService extends ItemService
     {
         $previous_id = $this->repo->getPreviousOrNext($input, true);
 
-        if ($previous_id)
-        {
+        if ($previous_id) {
             return $this->getItem($previous_id);
-        }
-        else
-        {
-            $this->status = Str::upper(Str::snake($this->type.'ItemNotExist'));
+        } else {
+            $this->status = Str::upper(Str::snake($this->type . 'ItemNotExist'));
             $this->response = null;
             return false;
         }
@@ -261,24 +239,18 @@ class ItemFrontService extends ItemService
     {
         $filters = [];
 
-        foreach ($items as $item)
-        {
+        foreach ($items as $item) {
             $item_publish_up = Carbon::parse($item['publish_up']);
             $item_year       = (int)$item_publish_up->format('Y');
             $item_month      = (int)$item_publish_up->format('m');
 
             $find_year = false;
-            foreach ($filters as $key => $filter)
-            {
-                if($filter['year'] == $item_year)
-                {
+            foreach ($filters as $key => $filter) {
+                if ($filter['year'] == $item_year) {
                     $find_year  = true;
-                    if (in_array($item_month, $filter['month']))
-                    {
+                    if (in_array($item_month, $filter['month'])) {
                         break;
-                    }
-                    else
-                    {
+                    } else {
                         $filters[$key]['month'][] = $item_month;
                         break;
                     }
@@ -286,16 +258,15 @@ class ItemFrontService extends ItemService
             }
 
             $obj = [];
-            if (!$find_year)
-            {
+            if (!$find_year) {
                 $obj['year']    = $item_year;
                 $obj['month'][] = $item_month;
                 $filters[]      = $obj;
             }
         }
 
-        usort($filters, function ($a, $b){
-            return strcmp($b['year'],$a['year']);
+        usort($filters, function ($a, $b) {
+            return strcmp($b['year'], $a['year']);
         });
 
         return $filters;
@@ -312,7 +283,6 @@ class ItemFrontService extends ItemService
 
         // 如果有傳 category_alias
         if (!InputHelper::null($input, 'category_alias')) {
-
             $c_q = new QueryCapsule();
             $c_q = $c_q->whereIn('alias', $input->get('category_alias'))->whereIn('language', $language);
             $category_ids = $this->categoryFrontService->search(Helper::collect([
@@ -335,8 +305,7 @@ class ItemFrontService extends ItemService
 
         $data = $this->paginationFormat($items->toArray());
 
-        if (config('cms.item.front.search_filter'))
-        {
+        if (config('cms.item.front.search_filter')) {
             $copy->forget('paginate');
             $copy->forget('search');
             $copy->put('paginate', false);
@@ -360,7 +329,7 @@ class ItemFrontService extends ItemService
     /* ------------------------------------------- 新加的 ------------------------------------------- */
     public function checkDealerOnly($item)
     {
-        if ( $item->extrafields && isset($item->extrafields['dealer_only']) && $item->extrafields['dealer_only']['value'] == 1 ) {
+        if ($item->extrafields && isset($item->extrafields['dealer_only']) && $item->extrafields['dealer_only']['value'] == 1) {
             $user = $this->getUser();
             if (!$user) {
                 return false;
@@ -383,7 +352,7 @@ class ItemFrontService extends ItemService
         $content = $this->repo->search($input->except('brand'))->first();
 
         if ($content) {
-            if ( !$this->checkDealerOnly($content) ) {
+            if (!$this->checkDealerOnly($content)) {
                 throw new ForbiddenException('InsufficientPermissionView', [
                     $this->repo->getModel()->getPrimaryKey() => $input->get('alias')
                 ], null, $this->modelName);
@@ -471,7 +440,7 @@ class ItemFrontService extends ItemService
             $filter_list[$document_type][] = array_merge($stock->only(['title', 'files']), ['year' => (int)$year]);
         }
         foreach ($filter_list as &$type) {
-            usort($type, function($a, $b) {
+            usort($type, function ($a, $b) {
                 return ($b['year'] - $a['year']);
             });
         }
@@ -543,7 +512,8 @@ class ItemFrontService extends ItemService
         $bulletin = $contents->where('category.content_type', 'bulletin')
             ->filterHomepageShow()
             ->take(6)
-            ->buildContentResourceData();;
+            ->buildContentResourceData();
+        ;
 
             # 原始寫法
 //        $slideshow = $this->searchContent(collect(['content_type' => 'slideshow', 'limit' => 0, 'q' => new QueryCapsule()]));
@@ -581,7 +551,7 @@ class ItemFrontService extends ItemService
 
     public function searchContent(Collection $input, $paginate = true)
     {
-        if ( $content_type = $input->get('content_type') ) {
+        if ($content_type = $input->get('content_type')) {
             $q = $input->get('q');
             if (is_array($content_type)) {
                 $qq = new QueryCapsule();
@@ -598,7 +568,7 @@ class ItemFrontService extends ItemService
         }
         $input->forget('content_type');
 
-        if ( $brand_alias = $input->get('brand_alias') ) {
+        if ($brand_alias = $input->get('brand_alias')) {
             $brand_ids = [];
             foreach ($brand_alias as $ba) {
                 $brand = Brand::where('alias', $ba)->first();
@@ -607,7 +577,7 @@ class ItemFrontService extends ItemService
                 }
             }
 
-            if ( count($brand_ids) ) {
+            if (count($brand_ids)) {
                 $q = $input->get('q');
                 $q = $q->whereHas('brands', function ($query) use ($brand_ids) {
                     $query->whereIn('brands_items_maps.brand_id', $brand_ids);
@@ -632,7 +602,7 @@ class ItemFrontService extends ItemService
 
     public function searchSolution(Collection $input)
     {
-        if ( $solution_category_alias = $input->get('solution_category_alias') ) {
+        if ($solution_category_alias = $input->get('solution_category_alias')) {
             $item_ids = [];
             $sca_ex = Extrafield::where('alias', 'solution_category')->where('content_type', 'solution')->first();
             foreach ($solution_category_alias as $sca) {
@@ -648,7 +618,7 @@ class ItemFrontService extends ItemService
             $input->forget('solution_category_alias');
         }
 
-        if ( $industry_category_alias = $input->get('industry_category_alias') ) {
+        if ($industry_category_alias = $input->get('industry_category_alias')) {
             $item_ids = [];
             $ica_ex = Extrafield::where('alias', 'industry_category')->where('content_type', 'solution')->first();
             foreach ($industry_category_alias as $ica) {
@@ -678,7 +648,7 @@ class ItemFrontService extends ItemService
 
     public function searchCase(Collection $input)
     {
-        if ( $industry_category_alias = $input->get('industry_category_alias') ) {
+        if ($industry_category_alias = $input->get('industry_category_alias')) {
             $item_ids = [];
             $ica_ex = Extrafield::where('alias', 'industry_category')->where('content_type', 'case')->first();
             foreach ($industry_category_alias as $ica) {
@@ -830,35 +800,46 @@ class ItemFrontService extends ItemService
         $input->forget('page');
 
         $response = collect([]);
-        if ( count($types) ) {
+        if (count($types)) {
             foreach ($types as $type) {
                 $q = new QueryCapsule();
                 if ($type == 'brand') {
                     $q->with('items');
+                    if ($tag) {
+                        $this->searchTagAliasQuery($q, $tag);
+                    }
                     $input->put('q', $q);
                     $response = $response->merge($brandSer->search($input));
                 } elseif ($type == 'file') {
                     $input->put('searchKeys', ['name', 'description']);
                     $copy = $input->toArray();
                     if (!$input->get('search')) {
-                        $copy['limit'] = 200;
+                        $copy['limit'] = 250;
                     }
                     $q->orderBy('publish_up', 'desc');
+                    if ($tag) {
+                        $this->searchTagAliasQuery($q, $tag);
+                    }
                     $copy['q'] = $q;
                     $response = $response->merge($fileSer->search(collect($copy), false));
                 } elseif ($type == 'event' || $type == 'course') {
-                    $q->with('brands', 'dates')
-                        ->orderBy('publish_up', 'desc');
-                    $input->put('q', $q);
-                    $response = $response->merge($eventSer->search($input, false));
+                    if (!$tag) {
+                        $q->with('brands', 'dates')
+                            ->orderBy('publish_up', 'desc');
+                        $input->put('q', $q);
+                        $response = $response->merge($eventSer->search($input, false));
+                    }
                 } else {
                     $copy = $input->toArray();
                     if (!$input->get('search')) {
-                        $copy['limit'] = 200;
+                        $copy['limit'] = 250;
                     }
-                    $q->select('id', 'category_id','title', 'alias', 'introtext', 'description')
+                    $q->select('id', 'category_id', 'title', 'alias', 'introtext', 'description')
                         ->with('category', 'brands')
                         ->orderBy('publish_up', 'desc');
+                    if ($tag) {
+                        $this->searchTagAliasQuery($q, $tag);
+                    }
                     $copy['q'] = $q;
 
                     $items = $this->searchContent(collect($copy), false);
@@ -878,32 +859,54 @@ class ItemFrontService extends ItemService
             }
         } else {
             $itemSearchData = $input->toArray();
-            $itemSearchData['limit'] = 200;
-            $itemSearchData['q'] = (new QueryCapsule())->select('id', 'category_id','title', 'alias', 'introtext', 'description')
-                ->with('category', 'brands')
+            $itemSearchData['q'] = (new QueryCapsule())
+                ->select('id', 'category_id', 'title', 'alias', 'introtext', 'description')
+                ->with('category', 'brands', 'tags')
                 ->orderBy('publish_up', 'desc');
+            if ($tag) {
+                $itemSearchData['q'] = $this->searchTagAliasQuery($itemSearchData['q'], $tag);
+            }
 
+            $itemSearchData['limit'] = 250;
             $items = $this->searchContent(collect($itemSearchData), false)->filter(function ($i) {
                 return in_array($i->category->content_type, ['solution', 'case', 'video', 'bulletin', 'promotion']);
             })->values();
 
             $brandSearchData = $input->toArray();
-            $brandSearchData['q'] = (new QueryCapsule())->with('items');
-            $brands = $brandSer->search(collect($brandSearchData));
+            $brandSearchData['searchKeys'] = ['title', 'description'];
+            $brandSearchData['q'] = (new QueryCapsule())->with('items', 'tags');
+            if ($tag) {
+                $brandSearchData['q'] =  $this->searchTagAliasQuery($brandSearchData['q'], $tag);
+            }
+            $brands = $brandSer->pureSearch(collect($brandSearchData));
 
-            $eventSearchData = (clone $input)->toArray();
-            $eventSearchData['q'] = (new QueryCapsule())->with('brands', 'dates') ->orderBy('publish_up', 'desc');
-            $events = $eventSer->search(collect($eventSearchData));
+            if (!$tag) {
+                $eventSearchData = (clone $input)->toArray();
+                $eventSearchData['q'] = (new QueryCapsule())
+                    ->with('brands', 'dates')
+                    ->orderBy('publish_up', 'desc');
+                $events = $eventSer->search(collect($eventSearchData));
+            } else {
+                $events = collect();
+            }
 
             $productSearchData = (clone $input)->toArray();
             $productSearchData['searchKeys'] = ['title', 'description'];
-            $productSearchData['q'] =  (new QueryCapsule())->with('brands');
+            $productSearchData['q'] =  (new QueryCapsule())->with('brands', 'tags');
+            if ($tag) {
+                $productSearchData['q'] = $this->searchTagAliasQuery($productSearchData['q'], $tag);
+            }
             $products = $productSer->search(collect($productSearchData), false);
             $input->put('searchKeys', ['name', 'description']);
 
             $filesSearchData = $input->toArray();
-            $filesSearchData['limit'] = 200;
-            $filesSearchData['q'] =  (new QueryCapsule())->with('brands', 'category')->orderBy('publish_up', 'desc');;
+            $brandSearchData['searchKeys'] = ['title', 'description'];
+            $filesSearchData['q'] =  (new QueryCapsule())
+                ->with('brands', 'category', 'tags')
+                ->orderBy('publish_up', 'desc');
+            if ($tag) {
+                $filesSearchData['q'] = $this->searchTagAliasQuery($filesSearchData['q'], $tag);
+            }
             $files = $fileSer->search(collect($filesSearchData), false);
 
             $response = $response->merge($items);
@@ -911,15 +914,6 @@ class ItemFrontService extends ItemService
             $response = $response->merge($events);
             $response = $response->merge($products);
             $response = $response->merge($files);
-        }
-
-
-        # 過濾 tag
-        if ($tag) {
-            $response = $response->filter(function ($r) use ($tag) {
-                $hasTag = $r->isRelation('tags') ? $r->tags()->where('alias', $tag)->first() : null;
-                return ($hasTag) ? true : false;
-            })->values();
         }
 
         $itemsData = $response->filter(function ($i) {
@@ -936,7 +930,9 @@ class ItemFrontService extends ItemService
         $itemsResponse = $itemsData->map(function ($i) use ($itemsExtrafields, $itemsExtrafieldsValues) {
             $data = $i->only(['title', 'alias', 'introtext', 'description']);
             $data['contentType'] = $i->category->content_type;
-            $data['brands'] = $i->brands->map(function ($b) { return $b->alias; });
+            $data['brands'] = $i->brands->map(function ($b) {
+                return $b->alias;
+            });
             $data['userGroupId'] = 1;
 
             if (in_array($data['contentType'], ['bulletin', 'promotion'])) {
@@ -961,12 +957,14 @@ class ItemFrontService extends ItemService
             if ($table == 'files') {
                 $data['title'] = $i->name;
                 $data['contentType'] = 'file';
-                $data['brands'] = $i->brands->map(function ($b) { return $b->alias; });
+                $data['brands'] = $i->brands->map(function ($b) {
+                    return $b->alias;
+                });
                 $data['downloadLink'] = $i->downloadLink;
                 $data['linkType'] = $i->params['upload'];
                 $data['webLink'] = $i->web_url;
                 $data['size'] = $i->size;
-                if ( in_array($i->category->extension, ['finance', 'rules', 'stockholder']) ) {
+                if (in_array($i->category->extension, ['finance', 'rules', 'stockholder'])) {
                     $data['userGroupId'] = 1;
                 } else {
                     $data['userGroupId'] = $i->userGroupId;
@@ -977,16 +975,22 @@ class ItemFrontService extends ItemService
                 $data['userGroupId'] = 1;
             } elseif ($table == 'events') {
                 $data['contentType'] = 'event';
-                $data['brands'] = $i->brands->map(function ($b) { return $b->alias; });
+                $data['brands'] = $i->brands->map(function ($b) {
+                    return $b->alias;
+                });
                 $data['seriesNum'] = $i->dates->pluck('seriesNum')->first();
                 $data['userGroupId'] = $i->canRegisterGroup;
             } elseif ($table == 'products') {
                 $data['contentType'] = 'product';
-                $data['brands'] = $i->brands->map(function ($b) { return $b->alias; });
+                $data['brands'] = $i->brands->map(function ($b) {
+                    return $b->alias;
+                });
                 $data['userGroupId'] = 1;
             } elseif ($table == 'items') {
                 $data['contentType'] = $i->category->content_type;
-                $data['brands'] = $i->brands->map(function ($b) { return $b->alias; });
+                $data['brands'] = $i->brands->map(function ($b) {
+                    return $b->alias;
+                });
                 $data['userGroupId'] = 1;
                 if (in_array($data['contentType'], ['bulletin', 'promotion'])) {
                     $data['userGroupId'] = ( $i->extrafields['dealer_only']['value'] == 1 ) ? 6 : 7;
@@ -1035,5 +1039,19 @@ class ItemFrontService extends ItemService
             })->values(),
             $notFeatured
         ];
+    }
+
+
+    public function searchTagAliasQuery($q, $tag)
+    {
+        return $q->whereIn('id', function ($q) use ($tag) {
+                $q->select('items_tags_maps.item_id')
+                    ->from('items_tags_maps')
+                    ->whereIn('tag_id', function ($q) use ($tag) {
+                        $q->select('id')
+                            ->from('tags')
+                            ->where('tags.alias', $tag);
+                    });
+        });
     }
 }

@@ -42,7 +42,6 @@ class RequestHelper
             }
         }
         $params['seo'] = $seo;
-        $params['curationEnabled'] = $inputParams['curationEnabled'] ?? 0;
 
         return $params;
     }
