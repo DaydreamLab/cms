@@ -47,16 +47,23 @@ class ItemFrontRepository extends ItemRepository
             ->orderBy('publish_up', 'desc');
 
         if (@$params['after_days'] !== null) {
-            $query->where(function ($q) use ($params) {
-                // 即將進行的活動
-                $q->where('extrafields_search->event_start_date', '>=', now())
-                    ->where('extrafields_search->event_start_date', '<=', now()->addDays($params['after_days']));
-            })
-            ->orWhere(function ($q) use ($params) {
-                // 進行中的活動
-                $q->where('extrafields_search->event_start_date', '<=', now())
-                    ->where('extrafields_search->event_end_date', '>=', now());
-            });
+            if ($params['after_days'] == 'all') {
+                $query->where(function ($q) use ($params) {
+                    // 只顯示有活動日期
+                    $q->whereNotNull('extrafields_search->event_start_date');
+                });
+            } else {
+                $query->where(function ($q) use ($params) {
+                    // 即將進行的活動
+                    $q->where('extrafields_search->event_start_date', '>=', now())
+                        ->where('extrafields_search->event_start_date', '<=', now()->addDays($params['after_days']));
+                })
+                ->orWhere(function ($q) use ($params) {
+                    // 進行中的活動
+                    $q->where('extrafields_search->event_start_date', '<=', now())
+                        ->where('extrafields_search->event_end_date', '>=', now());
+                });
+            }
         }
 
         $query = !$mixed ? $query->where('featured', $featured) : $query;
