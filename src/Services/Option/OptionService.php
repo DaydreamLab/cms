@@ -206,9 +206,9 @@ class OptionService
                 $root = $register->only(['id', 'title']);
                 foreach ($register->descendants as $descendant) {
                     # 過濾掉無手機名單 (為了感覺好像是硬做的故意濾掉，未來如果加錢整合可以再拿掉)
-                    if ($descendant->title !== '無手機名單') {
+//                    if ($descendant->title !== '無手機名單') {
                         $root['children'][] = $descendant->only(['id', 'title']);
-                    }
+//                    }
                 }
                 $data[$type] = $root;
             } elseif ($type == 'admin_user_group') {
