@@ -304,5 +304,15 @@
         "children": []
       }
     ]
+  },
+  {
+    "title": "主題策展",
+    "alias": "curation",
+    "path": "/curation",
+    "site_id": 1,
+    "access": 1,
+    "language": "*",
+    "ordering": 11,
+    "children": []
   }
 ]
