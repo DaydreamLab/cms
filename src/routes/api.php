@@ -67,6 +67,7 @@ Route::post('api/form/post', [FormFrontController::class, 'store']);
 Route::post('api/item/search', [ItemFrontController::class, 'search']);
 Route::get('api/item/{alias}', [ItemFrontController::class, 'getItemByAlias']);
 Route::get('api/menu/getTree', [MenuFrontController::class, 'getTree']);
+Route::post('api/menu/search', [MenuFrontController::class, 'search']);
 Route::get('api/menu/{alias}', [MenuFrontController::class, 'getItem'])->where('alias', '.*');
 Route::get('api/module/{alias}', [ModuleFrontController::class, 'getItemByAlias']);
 Route::get('api/setting/{locale}', [SettingFrontController::class, 'getItem']);

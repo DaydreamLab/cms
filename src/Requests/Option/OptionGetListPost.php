@@ -39,7 +39,7 @@ class OptionGetListPost extends AdminRequest
                     'newsletter_category',
                     'download_file_category',
                     'contract_file_category',
-                    'city'
+                    'city',
                 ])
             ],
             'brand_alias'   => 'nullable|string',

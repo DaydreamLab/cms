@@ -1,4 +1,5 @@
 <?php
+
 namespace DaydreamLab\Cms\Models\Menu\Front;
 
 use DaydreamLab\Cms\Models\Menu\Menu;
