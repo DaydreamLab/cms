@@ -27,6 +27,7 @@ use DaydreamLab\Media\Services\FileCategory\Admin\FileCategoryAdminService;
 use DaydreamLab\User\Models\Company\CompanyCategory;
 use DaydreamLab\User\Services\Asset\Admin\AssetAdminService;
 use DaydreamLab\User\Services\User\Admin\UserGroupAdminService;
+use DaydreamLab\User\Services\UserTag\Admin\UserTagAdminService;
 use DaydreamLab\User\Services\Viewlevel\Admin\ViewlevelAdminService;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -56,7 +57,8 @@ class OptionService
         ProductCategoryAdminService $productCategoryAdminService,
         BrandAdminService $brandAdminService,
         SiteAdminService $siteAdminService,
-        FileCategoryAdminService $fileCategoryAdminService
+        FileCategoryAdminService $fileCategoryAdminService,
+        UserTagAdminService $userTagAdminService
     ) {
         $this->map['asset']                 = $assetAdminService;
         $this->map['brand']                 = $brandAdminService;
@@ -86,6 +88,7 @@ class OptionService
         $this->map['contract_file_category'] = $fileCategoryAdminService;
         $this->map['front_user_group']      = $groupAdminService;
         $this->map['admin_user_group']      = $groupAdminService;
+        $this->map['user_tag']              = $userTagAdminService;
     }
 
 
@@ -227,6 +230,11 @@ class OptionService
                     $temp[] = $descendant->only(['id', 'title']);
                 }
                 $data[$type] = $temp;
+            } elseif ($type == 'user_tag') {
+                $data[$type] = $this->getOptionList($service, 'list', collect([
+                    'paginate' => 0,
+                    'limit' => 0
+                ]));
             }
         }
 
