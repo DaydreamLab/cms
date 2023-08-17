@@ -320,7 +320,15 @@ class OptionService
                     }
                     $data[$type] = $brands->map(function ($b) {
                         return $b->only(['alias', 'title']);
-                    })->sortBy('title')->values();
+                    })->sort(function ($a, $b) {
+                        $aFirstLetter = strtoupper(substr($a['title'], 0, 1));
+                        $bFirstLetter = strtoupper(substr($b['title'], 0, 1));
+
+                        if ($aFirstLetter !== $bFirstLetter) {
+                            return strcmp($aFirstLetter, $bFirstLetter);
+                        }
+                        return strcmp($a['title'], $b['title']);
+                    })->values();
                     break;
                 case 'city':
                     $cities = DB::table('events')
