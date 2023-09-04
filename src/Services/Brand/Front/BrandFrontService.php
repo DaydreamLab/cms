@@ -136,7 +136,7 @@ class BrandFrontService extends BrandService
 
     public function search(Collection $input)
     {
-        if ( $productCategoryAlias = $input->get('product_category_alias') ) {
+        if ($productCategoryAlias = $input->get('product_category_alias')) {
             # 拿出所有產品分類（包括小類）下的產品
             $productFS = app(ProductFrontService::class);
             $q = new QueryCapsule();
@@ -155,11 +155,11 @@ class BrandFrontService extends BrandService
             $brands = $this->repo->getAllBrands()->sortBy('title')->values();
         }
 
-        if ( $search = $input->get('search') ) {
+        if ($search = $input->get('search')) {
             $searchKeys = $input->get('searchKeys');
             $brands = $brands->filter(function ($b) use ($search, $searchKeys) {
                 foreach ($searchKeys as $searchKey) {
-                    if ( stripos($b->{$searchKey}, $search) !== false ) {
+                    if (stripos($b->{$searchKey}, $search) !== false) {
                         return true;
                     }
                 }
@@ -167,7 +167,15 @@ class BrandFrontService extends BrandService
             })->values();
         }
 
-        $this->response = $brands;
+        $this->response = $brands->sort(function ($a, $b) {
+            $aFirstLetter = strtoupper(substr($a->title, 0, 1));
+            $bFirstLetter = strtoupper(substr($b->title, 0, 1));
+
+            if ($aFirstLetter !== $bFirstLetter) {
+                return strcmp($aFirstLetter, $bFirstLetter);
+            }
+            return strcmp($a->title, $b->title);
+        })->values();
         $this->status = 'SearchSuccess';
         return $this->response;
     }
