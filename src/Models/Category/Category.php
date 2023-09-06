@@ -9,6 +9,7 @@ use DaydreamLab\JJAJ\Models\BaseModel;
 use DaydreamLab\JJAJ\Traits\HasCustomRelation;
 use DaydreamLab\JJAJ\Traits\RecordChanger;
 use DaydreamLab\JJAJ\Traits\UserInfo;
+use DaydreamLab\User\Models\UserTag\UserTag;
 use DaydreamLab\User\Traits\Model\WithAccess;
 use Illuminate\Support\Str;
 use Kalnoy\Nestedset\NodeTrait;
@@ -136,5 +137,11 @@ class Category extends BaseModel
     public function items()
     {
         return $this->hasMany(Item::class, 'category_id', 'id');
+    }
+
+
+    public function userTags()
+    {
+        return $this->hasMany(UserTag::class, 'categoryId', 'id');
     }
 }
