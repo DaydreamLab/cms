@@ -153,8 +153,6 @@ Route::post('api/admin/brand/importContact', [BrandAdminController::class, 'impo
     ->middleware(['expired', 'admin', 'restrict-ip:admin']);
 Route::post('api/admin/brand/importBrandInfo', [BrandAdminController::class, 'importBrandInfo'])
     ->middleware(['expired', 'admin', 'restrict-ip:admin']);
-Route::post('api/admin/brand/importCompanyOrder', [BrandAdminController::class, 'importCompanyOrder'])
-    ->middleware(['expired', 'admin', 'restrict-ip:admin']);
 
 # 產品
 Route::post('api/admin/product/export', [ProductAdminController::class, 'export'])

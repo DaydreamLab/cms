@@ -85,5 +85,7 @@ class CrmInstallCommand extends Command
             }
         }
         $this->info('建立主選單完成');
+
+        $this->call('cms:sub-brand-extend');
     }
 }

@@ -3,16 +3,13 @@
 namespace DaydreamLab\Cms\Services\Brand\Admin;
 
 use DaydreamLab\Cms\Jobs\ImportBrand;
-use DaydreamLab\Cms\Jobs\ImportBrandCompanyOrder;
 use DaydreamLab\Cms\Jobs\ImportBrandContact;
 use DaydreamLab\Cms\Jobs\ImportBrandInfo;
 use DaydreamLab\Cms\Repositories\Brand\Admin\BrandAdminRepository;
-use DaydreamLab\Cms\Repositories\ProductCategory\ProductCategoryRepository;
 use DaydreamLab\Cms\Services\Brand\BrandService;
 use DaydreamLab\Cms\Services\Product\ProductService;
 use DaydreamLab\Cms\Services\ProductCategory\ProductCategoryService;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Storage;
 
 class BrandAdminService extends BrandService
 {
@@ -86,19 +83,6 @@ class BrandAdminService extends BrandService
         dispatch($job);
 
         $this->status = 'ImportSuccess';
-    }
-
-
-    public function importCompanyOrder($input)
-    {
-        $file = $input->file('file');
-        $temp = $file->move('tmp', $file->hashName());
-        $filePath = $temp->getRealPath();
-        $job = new ImportBrandCompanyOrder($filePath, $this->getUser()->id, $input->get('id'));
-
-        dispatch($job);
-
-        $this->status = 'ImportCompanyOrderSuccess';
     }
 
 
