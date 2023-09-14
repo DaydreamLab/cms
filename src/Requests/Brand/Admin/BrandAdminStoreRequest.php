@@ -61,7 +61,9 @@ class BrandAdminStoreRequest extends CmsStoreRequest
             'tracking'                  => 'nullable|array',
             'tracking.*'                => 'nullable|array',
             'tracking.*.type'           => 'nullable|string',
-            'tracking.*.code'           => 'nullable|string'
+            'tracking.*.code'           => 'nullable|string',
+            'subBrands'                 => 'nullable|array',
+            'subBrands.*'               => 'nullable|string',
         ];
 
         return array_merge(parent::rules(), $rules);
@@ -71,7 +73,11 @@ class BrandAdminStoreRequest extends CmsStoreRequest
     public function validated()
     {
         $validated = parent::validated();
-        $validated->put('params', RequestHelper::handleParams($validated->get('params')));
+        $params = RequestHelper::handleParams($validated->get('params'));
+        if (!isset($validated->get('params')['subBrands'])) {
+            $params['subBrands'] = [];
+        }
+        $validated->put('params', $params);
 
         return $validated;
     }

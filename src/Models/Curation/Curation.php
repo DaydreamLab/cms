@@ -43,10 +43,10 @@ class Curation extends CmsModel
         'script',
         'isIndex',
         'params',
-        'locked_by',
+//        'locked_by',
         'created_by',
         'updated_by',
-        'locked_at',
+//        'locked_at',
     ];
 
 
