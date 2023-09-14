@@ -45,6 +45,7 @@ class Category extends BaseModel
      * @var array
      */
     protected $fillable = [
+        'parent_id',
         'title',
         'alias',
         'state',

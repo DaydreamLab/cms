@@ -31,9 +31,15 @@ class CategoryAdminService extends CategoryService
     }
 
 
+    public function getRoot($extention)
+    {
+        return $this->repo->getRoot($extention);
+    }
+
+
     public function store(Collection $input)
     {
-        if (!$input->get('extension')){
+        if (!$input->get('extension')) {
             $input->put('extension', 'item');
         }
 

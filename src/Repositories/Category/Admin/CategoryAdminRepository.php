@@ -13,4 +13,11 @@ class CategoryAdminRepository extends CategoryRepository
         parent::__construct($model);
     }
 
+
+    public function getRoot($extension)
+    {
+        return $this->model->where('extension', $extension)
+            ->where('title', 'ROOT')
+            ->first();
+    }
 }
