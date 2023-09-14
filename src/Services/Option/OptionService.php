@@ -238,7 +238,7 @@ class OptionService
                     'paginate' => 0,
                     'limit' => 0
                 ]));
-            } elseif ($type == 'user_tag_category') {
+            } elseif ($type == 'usertag_category') {
                 $data[$type] = $this->getOptionList($service, 'tree', collect([
                     'paginate' => 0,
                     'limit' => 0
