@@ -242,7 +242,9 @@ class OptionService
                 $data[$type] = $this->getOptionList($service, 'tree', collect([
                     'paginate' => 0,
                     'limit' => 0
-                ]));
+                ]))->reject(function ($category) {
+                    return $category['tree_list_title'] == 'ROOT';
+                })->values();
             }
         }
 
