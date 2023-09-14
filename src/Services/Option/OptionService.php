@@ -28,6 +28,7 @@ use DaydreamLab\User\Models\Company\CompanyCategory;
 use DaydreamLab\User\Services\Asset\Admin\AssetAdminService;
 use DaydreamLab\User\Services\User\Admin\UserGroupAdminService;
 use DaydreamLab\User\Services\UserTag\Admin\UserTagAdminService;
+use DaydreamLab\User\Services\UserTagCategory\UserTagCategoryService;
 use DaydreamLab\User\Services\Viewlevel\Admin\ViewlevelAdminService;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -58,7 +59,8 @@ class OptionService
         BrandAdminService $brandAdminService,
         SiteAdminService $siteAdminService,
         FileCategoryAdminService $fileCategoryAdminService,
-        UserTagAdminService $userTagAdminService
+        UserTagAdminService $userTagAdminService,
+        UserTagCategoryService $userTagCategoryService
     ) {
         $this->map['asset']                 = $assetAdminService;
         $this->map['brand']                 = $brandAdminService;
@@ -89,6 +91,7 @@ class OptionService
         $this->map['front_user_group']      = $groupAdminService;
         $this->map['admin_user_group']      = $groupAdminService;
         $this->map['user_tag']              = $userTagAdminService;
+        $this->map['user_tag_category']     = $userTagCategoryService;
     }
 
 
@@ -96,7 +99,7 @@ class OptionService
     {
         $data = [];
 
-        foreach ($input->get('types') as $type) {
+        foreach ($input->get('types') ?: [] as $type) {
             $service = $this->map[$type];
             $q = new QueryCapsule();
             if ($type == 'asset') {
@@ -232,6 +235,11 @@ class OptionService
                 $data[$type] = $temp;
             } elseif ($type == 'user_tag') {
                 $data[$type] = $this->getOptionList($service, 'list', collect([
+                    'paginate' => 0,
+                    'limit' => 0
+                ]));
+            } elseif ($type == 'user_tag_category') {
+                $data[$type] = $this->getOptionList($service, 'tree', collect([
                     'paginate' => 0,
                     'limit' => 0
                 ]));
