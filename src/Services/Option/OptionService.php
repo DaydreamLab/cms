@@ -59,7 +59,6 @@ class OptionService
         BrandAdminService $brandAdminService,
         SiteAdminService $siteAdminService,
         FileCategoryAdminService $fileCategoryAdminService,
-        UserTagAdminService $userTagAdminService,
         UserTagCategoryService $userTagCategoryService
     ) {
         $this->map['asset']                 = $assetAdminService;
@@ -90,7 +89,6 @@ class OptionService
         $this->map['contract_file_category'] = $fileCategoryAdminService;
         $this->map['front_user_group']      = $groupAdminService;
         $this->map['admin_user_group']      = $groupAdminService;
-        $this->map['usertag']              = $userTagAdminService;
         $this->map['usertag_category']     = $userTagCategoryService;
     }
 
@@ -233,11 +231,6 @@ class OptionService
                     $temp[] = $descendant->only(['id', 'title']);
                 }
                 $data[$type] = $temp;
-            } elseif ($type == 'usertag') {
-                $data[$type] = $this->getOptionList($service, 'list', collect([
-                    'paginate' => 0,
-                    'limit' => 0
-                ]));
             } elseif ($type == 'usertag_category') {
                 $data[$type] = $this->getOptionList($service, 'tree', collect([
                     'paginate' => 0,
