@@ -91,7 +91,7 @@ class OptionService
         $this->map['front_user_group']      = $groupAdminService;
         $this->map['admin_user_group']      = $groupAdminService;
         $this->map['user_tag']              = $userTagAdminService;
-        $this->map['user_tag_category']     = $userTagCategoryService;
+        $this->map['usertag_category']     = $userTagCategoryService;
     }
 
 
