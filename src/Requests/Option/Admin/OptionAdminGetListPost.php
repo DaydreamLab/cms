@@ -62,7 +62,7 @@ class OptionAdminGetListPost extends AdminRequest
                     'contract_file_category',
                     'front_user_group',
                     'admin_user_group',
-                    'user_tag',
+                    'usertag',
                     'usertag_category',
                 ])
             ]

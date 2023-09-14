@@ -90,7 +90,7 @@ class OptionService
         $this->map['contract_file_category'] = $fileCategoryAdminService;
         $this->map['front_user_group']      = $groupAdminService;
         $this->map['admin_user_group']      = $groupAdminService;
-        $this->map['user_tag']              = $userTagAdminService;
+        $this->map['usertag']              = $userTagAdminService;
         $this->map['usertag_category']     = $userTagCategoryService;
     }
 
@@ -233,7 +233,7 @@ class OptionService
                     $temp[] = $descendant->only(['id', 'title']);
                 }
                 $data[$type] = $temp;
-            } elseif ($type == 'user_tag') {
+            } elseif ($type == 'usertag') {
                 $data[$type] = $this->getOptionList($service, 'list', collect([
                     'paginate' => 0,
                     'limit' => 0
