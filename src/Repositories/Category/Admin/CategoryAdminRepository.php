@@ -14,10 +14,10 @@ class CategoryAdminRepository extends CategoryRepository
     }
 
 
-    public function getRoot($extension)
+    public function getUncategory($extension)
     {
         return $this->model->where('extension', $extension)
-            ->where('title', 'ROOT')
+            ->where('alias', 'uncategory')
             ->first();
     }
 }
