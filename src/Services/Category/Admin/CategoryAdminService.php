@@ -31,9 +31,9 @@ class CategoryAdminService extends CategoryService
     }
 
 
-    public function getUncategory($extention)
+    public function getRoot($extention)
     {
-        return $this->repo->getUncategory($extention);
+        return $this->repo->getRoot($extention);
     }
 
 
