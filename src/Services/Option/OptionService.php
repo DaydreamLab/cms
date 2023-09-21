@@ -90,6 +90,7 @@ class OptionService
         $this->map['front_user_group']      = $groupAdminService;
         $this->map['admin_user_group']      = $groupAdminService;
         $this->map['usertag_category']     = $userTagCategoryService;
+        $this->map['notification_category'] = $categoryAdminService;
     }
 
 
@@ -233,6 +234,14 @@ class OptionService
                 $data[$type] = $temp;
             } elseif ($type == 'usertag_category') {
                 $data[$type] = $this->getOptionList($service, 'tree', collect([
+                    'paginate' => 0,
+                    'limit' => 0
+                ]))->reject(function ($category) {
+                    return $category['tree_list_title'] == 'ROOT';
+                })->values();
+            } elseif ($type == 'notification_category') {
+                $data[$type] = $this->getOptionList($service, 'tree', collect([
+                    'extension' => 'notification',
                     'paginate' => 0,
                     'limit' => 0
                 ]))->reject(function ($category) {
