@@ -234,11 +234,11 @@ class OptionService
                 }
                 $data[$type] = $temp;
             } elseif ($type == 'usertag_category') {
-                $data['type'] = $service->search(collect(['paginate' => 0, 'limit' => 0]))
+                $data[$type] = $service->search(collect(['paginate' => 0, 'limit' => 0]))
                     ->reject(function ($item) {
                         return $item->title == 'ROOT';
                     })->toTree();
-                $data['type'] = Helper::recursiveMap($data['type'], function ($item) {return $item->only('id', 'title', 'children');});
+                $data[$type] = Helper::recursiveMap($data[$type], function ($item) {return $item->only('id', 'title', 'children');});
             } elseif ($type == 'notification_category') {
                 $data[$type] = $this->getOptionList($service, 'tree', collect([
                     'extension' => 'notification',
