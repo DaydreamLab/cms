@@ -22,6 +22,7 @@ use DaydreamLab\Cms\Services\ProductCategory\Admin\ProductCategoryAdminService;
 use DaydreamLab\Cms\Services\ProductCategory\Front\ProductCategoryFrontService;
 use DaydreamLab\Cms\Services\Site\Admin\SiteAdminService;
 use DaydreamLab\JJAJ\Database\QueryCapsule;
+use DaydreamLab\JJAJ\Helpers\Helper;
 use DaydreamLab\JJAJ\Traits\LoggedIn;
 use DaydreamLab\Media\Services\FileCategory\Admin\FileCategoryAdminService;
 use DaydreamLab\User\Models\Company\CompanyCategory;
@@ -233,12 +234,11 @@ class OptionService
                 }
                 $data[$type] = $temp;
             } elseif ($type == 'usertag_category') {
-                $data[$type] = $this->getOptionList($service, 'tree', collect([
-                    'paginate' => 0,
-                    'limit' => 0
-                ]))->reject(function ($category) {
-                    return $category['tree_list_title'] == 'ROOT';
-                })->values();
+                $data['type'] = $service->search(collect(['paginate' => 0, 'limit' => 0]))
+                    ->reject(function ($item) {
+                        return $item->title == 'ROOT';
+                    })->toTree();
+                $data = Helper::recursiveMap($data['type'], function ($item) {return $item->only('id', 'title', 'children');});
             } elseif ($type == 'notification_category') {
                 $data[$type] = $this->getOptionList($service, 'tree', collect([
                     'extension' => 'notification',
