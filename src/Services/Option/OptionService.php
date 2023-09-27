@@ -238,7 +238,7 @@ class OptionService
                     ->reject(function ($item) {
                         return $item->title == 'ROOT';
                     })->toTree();
-                $data = Helper::recursiveMap($data['type'], function ($item) {return $item->only('id', 'title', 'children');});
+                $data['type'] = Helper::recursiveMap($data['type'], function ($item) {return $item->only('id', 'title', 'children');});
             } elseif ($type == 'notification_category') {
                 $data[$type] = $this->getOptionList($service, 'tree', collect([
                     'extension' => 'notification',
