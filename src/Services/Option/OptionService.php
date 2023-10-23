@@ -234,7 +234,7 @@ class OptionService
                 }
                 $data[$type] = $temp;
             } elseif ($type == 'usertag_category') {
-                $data[$type] = $service->search(collect(['paginate' => 0, 'limit' => 0]))
+                $data[$type] = $service->search(collect(['paginate' => 0, 'limit' => 0, 'state' => 1]))
                     ->reject(function ($item) {
                         return $item->title == 'ROOT';
                     })->toTree();
@@ -243,7 +243,8 @@ class OptionService
                 $data[$type] = $this->getOptionList($service, 'tree', collect([
                     'extension' => 'notification',
                     'paginate' => 0,
-                    'limit' => 0
+                    'limit' => 0,
+                    'state' => 1
                 ]))->reject(function ($category) {
                     return $category['tree_list_title'] == 'ROOT';
                 })->values();
