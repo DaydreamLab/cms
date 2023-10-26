@@ -2,6 +2,7 @@
 
 namespace DaydreamLab\Cms\Services\Brand\Front;
 
+use DaydreamLab\Cms\Helpers\SortHelper;
 use DaydreamLab\Cms\Models\ProductCategory\ProductCategory;
 use DaydreamLab\Cms\Repositories\Brand\Front\BrandFrontRepository;
 use DaydreamLab\Cms\Services\Brand\BrandService;
@@ -167,14 +168,21 @@ class BrandFrontService extends BrandService
             })->values();
         }
 
-        $this->response = $brands->sort(function ($a, $b) {
-            $aFirstLetter = strtoupper(substr($a->title, 0, 1));
-            $bFirstLetter = strtoupper(substr($b->title, 0, 1));
 
-            if ($aFirstLetter !== $bFirstLetter) {
-                return strcmp($aFirstLetter, $bFirstLetter);
-            }
-            return strcmp($a->title, $b->title);
+//        $this->response = $brands->sort(function ($a, $b) {
+//            $aFirstLetter = strtoupper(substr($a->title, 0, 1));
+//            $bFirstLetter = strtoupper(substr($b->title, 0, 1));
+//
+//            if ($aFirstLetter !== $bFirstLetter) {
+//                return strcmp($aFirstLetter, $bFirstLetter);
+//            }
+//            return strcmp($a->title, $b->title);
+//        })->values();
+
+
+
+        $this->response = $brands->sort(function ($a, $b) {
+            return SortHelper::brandTitleSort($a->title, $b->title, 1);
         })->values();
         $this->status = 'SearchSuccess';
         return $this->response;
