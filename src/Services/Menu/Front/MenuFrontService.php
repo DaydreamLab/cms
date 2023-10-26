@@ -51,8 +51,8 @@ class MenuFrontService extends MenuService
             $q = new QueryCapsule();
             $q->where(function ($q) use ($input) {
                 $q->whereIn('path', [
-                    str_replace('https://' . $input->get('host'), '', $input->get('referer')),
-                    str_replace('http://' . $input->get('host'), '', $input->get('referer'))
+                    str_replace('https://' . $input->get('host') . '/', '', $input->get('referer')),
+                    str_replace('http://' . $input->get('host') . '/', '', $input->get('referer'))
                 ]);
             });
             $refererMenu = $this->search(collect([
