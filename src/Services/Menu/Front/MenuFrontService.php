@@ -52,7 +52,7 @@ class MenuFrontService extends MenuService
             $httpsPath = str_replace('https://' . $input->get('host') . '/', '', $input->get('referer'));
             $httpPath = str_replace('http://' . $input->get('host') . '/', '', $input->get('referer'));
             $q->where(function ($q) use ($input, $httpsPath, $httpPath) {
-                $q->whereIn('path', [$httpsPath ?: '/index', $httpPath ?: '/index']);
+                $q->whereIn('path', [$httpsPath ?: '/', $httpPath ?: '/']);
             });
             $refererMenu = $this->search(collect([
                 'host'  => $input->get('host'),
