@@ -79,12 +79,13 @@ class MenuFrontService extends MenuService
             $q = new QueryCapsule();
             $q->whereNull('leaveAt')
                 ->where(function ($q) {
-                    $q->whereBetween('createdAt', now()->subHours(1)->toDateTimeString(), now()->toDateTimeString());
+                    $q->whereBetween('createdAt', [now()->subHour()->toDateTimeString(), now()->toDateTimeString()]);
                 });
             $sameLog = $this->menuLogService->search(collect([
                 'userId' => $user->id,
                 'menuId' => $menu->id,
-                'limit'  => 1
+                'limit'  => 1,
+                'q' => $q
             ]))->first();
             if (!$sameLog) {
                 $this->menuLogService->add(collect([
