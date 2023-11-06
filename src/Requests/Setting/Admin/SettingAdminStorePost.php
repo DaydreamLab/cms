@@ -40,7 +40,8 @@ class SettingAdminStorePost extends CmsStoreRequest
             'liffId'            => 'nullable|string',
             'youtubeUrl'        => 'nullable|string',
             'podcast'           => 'nullable|string',
-            'ga'                => 'nullable|string'
+            'ga'                => 'nullable|string',
+            'curationEnabled'   => 'nullable|boolean'
         ];
         return array_merge(parent::rules(), $rules);
     }

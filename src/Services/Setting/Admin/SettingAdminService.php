@@ -56,7 +56,7 @@ class SettingAdminService extends SettingService
 
     public function store(Collection $input)
     {
-        $site_id = $input->get('site_id') ? :1;
+        $site_id = $input->get('site_id') ? : 1;
         $data = collect([
             'id'        => $site_id,
             'sitename'  => $input->get('sitename'),
@@ -71,15 +71,14 @@ class SettingAdminService extends SettingService
                 'youtubeUrl'        => $input->get('youtubeUrl'),
                 'podcast'           => $input->get('podcast'),
                 'ga'                => $input->get('ga'),
+                'curationEnabled'   => $input->get('curationEnabled') ? 1 : 0
             ]
         ]);
 
         $result = $this->siteService->store($data);
-
         if ($result) {
             $this->status = 'UpdateSuccess';
-        }
-        else {
+        } else {
             $this->status = 'UpdateFail';
         }
 
@@ -89,8 +88,8 @@ class SettingAdminService extends SettingService
 
     public function restoreAllLockData(Request $request)
     {
-        $db = "Tables_in_".env('DB_DATABASE');
-        $tables = array_map(function($t) use ($db) {
+        $db = "Tables_in_" . env('DB_DATABASE');
+        $tables = array_map(function ($t) use ($db) {
             return $t->{$db};
         }, DB::select('SHOW TABLES'));
 
