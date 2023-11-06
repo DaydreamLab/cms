@@ -71,7 +71,7 @@ class SettingAdminService extends SettingService
                 'youtubeUrl'        => $input->get('youtubeUrl'),
                 'podcast'           => $input->get('podcast'),
                 'ga'                => $input->get('ga'),
-                'curationEnabled'   => $input->get('curationEnabled') ? true : false
+                'curationEnabled'   => (bool)$input->get('curationEnabled')
             ]
         ]);
 
