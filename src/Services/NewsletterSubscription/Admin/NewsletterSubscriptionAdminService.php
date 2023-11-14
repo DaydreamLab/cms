@@ -26,13 +26,13 @@ class NewsletterSubscriptionAdminService extends NewsletterSubscriptionService
 
     public function afterAdd(Collection $input, $item)
     {
-        $this->edmProcessSubscription($input->get('email'), $item);
+        $this->edmProcessSubscription($input->get('email'), $item->refresh());
     }
 
 
     public function afterModify(Collection $input, $item)
     {
-        $this->edmProcessSubscription($input->get('email'), $item);
+        $this->edmProcessSubscription($input->get('email'), $item->refresh());
     }
 
 
