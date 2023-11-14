@@ -159,7 +159,7 @@ class NewsletterSubscriptionService extends CmsService
             return;
         }
         $url = 'http://zcrm.itpison.com/WebAPI/Subscribe.aspx';
-        $this->processEdmSubscriptionApi($url, $email, $id);
+        return $this->processEdmSubscriptionApi($url, $email, $id);
     }
 
 
@@ -169,7 +169,8 @@ class NewsletterSubscriptionService extends CmsService
             return;
         }
         $url = 'http://zcrm.itpison.com/WebAPI/UnSubscribe.aspx';
-        $this->processEdmSubscriptionApi($url, $email, $id);
+
+        return $this->processEdmSubscriptionApi($url, $email, $id);
     }
 
 
@@ -188,7 +189,8 @@ class NewsletterSubscriptionService extends CmsService
             'content' => http_build_query($postdata)
         ) );
         $context = stream_context_create($opts);
-        $result = file_get_contents($url, false, $context);
+
+        return file_get_contents($url, false, $context);
     }
 
 
