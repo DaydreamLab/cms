@@ -130,7 +130,6 @@ class NewsletterSubscriptionService extends CmsService
         $subCats = $subscription->newsletterCategories->pluck('alias');
         # 目前沒有訂閱的
         $unSubCats = $allCategories->diff($subCats);
-
         foreach ($subCats as $subCat) {
             if ($subCat == '01_deal_newsletter') {
                 $newsletterId = $this->dealNewsletterId;
@@ -159,7 +158,7 @@ class NewsletterSubscriptionService extends CmsService
             return;
         }
         $url = 'http://zcrm.itpison.com/WebAPI/Subscribe.aspx';
-        $this->processEdmSubscriptionApi($url, $email, $id);
+        return $this->processEdmSubscriptionApi($url, $email, $id);
     }
 
 
@@ -169,7 +168,8 @@ class NewsletterSubscriptionService extends CmsService
             return;
         }
         $url = 'http://zcrm.itpison.com/WebAPI/UnSubscribe.aspx';
-        $this->processEdmSubscriptionApi($url, $email, $id);
+
+        return $this->processEdmSubscriptionApi($url, $email, $id);
     }
 
 
@@ -188,7 +188,8 @@ class NewsletterSubscriptionService extends CmsService
             'content' => http_build_query($postdata)
         ) );
         $context = stream_context_create($opts);
-        $result = file_get_contents($url, false, $context);
+
+        return file_get_contents($url, false, $context);
     }
 
 
@@ -208,6 +209,7 @@ class NewsletterSubscriptionService extends CmsService
             'content' => http_build_query($postdata)
         ) );
         $context = stream_context_create($opts);
-        $result = file_get_contents($url, false, $context);
+
+        return file_get_contents($url, false, $context);
     }
 }

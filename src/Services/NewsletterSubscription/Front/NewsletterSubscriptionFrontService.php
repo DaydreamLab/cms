@@ -164,6 +164,7 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
     }
 
 
+    # 這邊要注意因為取消訂閱後，分類會被清空，因此用分類 alias 要注意訂閱狀態
     public function unsubscribe(Collection $input)
     {
         if ($user = $input->get('user')) {
@@ -214,12 +215,22 @@ class NewsletterSubscriptionFrontService extends NewsletterSubscriptionService
             $subs = $this->findBy('email', '=', $inputEmail);
             if ($subs->count()) {
                 foreach ($subs as $sub) {
-                    foreach ($sub->newsletterCategories->pluck('alias') as $alias) {
-                        $newsletterId = $alias == '01_deal_newsletter'
-                            ? $this->dealNewsletterId
-                            : $this->newsletterId;
-                        $this->edmRemoveSubscription($sub->email, $newsletterId);
+                    if ($sub->newsletterCategories->count()) {
+                        foreach ($sub->newsletterCategories->pluck('alias') as $alias) {
+                            $newsletterId = $alias == '01_deal_newsletter'
+                                ? $this->dealNewsletterId
+                                : $this->newsletterId;
+                            $this->edmRemoveSubscription($sub->email, $newsletterId);
+                        }
+                    } else {
+                        $userGroups = $sub->user->groups;
+                        if (in_array('經銷會員', $userGroups->pluck('title')->all())) {
+                            $this->edmRemoveSubscription($sub->email, $this->dealNewsletterId);
+                        } else {
+                            $this->edmRemoveSubscription($sub->email, $this->newsletterId);
+                        }
                     }
+
                     $data = [
                         'id'                    => $sub->id,
                         'cancelAt'              => now()->toDateTimeString(),

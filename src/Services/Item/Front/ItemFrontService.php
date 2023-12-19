@@ -804,7 +804,7 @@ class ItemFrontService extends ItemService
             foreach ($types as $type) {
                 $q = new QueryCapsule();
                 if ($type == 'brand') {
-                    $q->with('items');
+                    $q->where('state', 1)->with('items');
                     if ($tag) {
                         $this->searchTagAliasQuery($q, $tag);
                     }
@@ -816,7 +816,7 @@ class ItemFrontService extends ItemService
                     if (!$input->get('search')) {
                         $copy['limit'] = 250;
                     }
-                    $q->orderBy('publish_up', 'desc');
+                    $q->where('state', 1)->orderBy('publish_up', 'desc');
                     if ($tag) {
                         $this->searchTagAliasQuery($q, $tag);
                     }
@@ -824,7 +824,7 @@ class ItemFrontService extends ItemService
                     $response = $response->merge($fileSer->search(collect($copy), false));
                 } elseif ($type == 'event' || $type == 'course') {
                     if (!$tag) {
-                        $q->with('brands', 'dates')
+                        $q->where('state', 1)->with('brands', 'dates')
                             ->orderBy('publish_up', 'desc');
                         $input->put('q', $q);
                         $response = $response->merge($eventSer->search($input, false));
@@ -835,6 +835,7 @@ class ItemFrontService extends ItemService
                         $copy['limit'] = 250;
                     }
                     $q->select('id', 'category_id', 'title', 'alias', 'introtext', 'description')
+                        ->where('state', 1)
                         ->with('category', 'brands')
                         ->orderBy('publish_up', 'desc');
                     if ($tag) {
@@ -869,12 +870,13 @@ class ItemFrontService extends ItemService
 
             $itemSearchData['limit'] = 250;
             $items = $this->searchContent(collect($itemSearchData), false)->filter(function ($i) {
-                return in_array($i->category->content_type, ['solution', 'case', 'video', 'bulletin', 'promotion']);
+                return in_array($i->category->content_type, ['solution', 'case', 'video', 'bulletin', 'promotion'])
+                    && ($i->brand && $i->brand->state);
             })->values();
 
             $brandSearchData = $input->toArray();
             $brandSearchData['searchKeys'] = ['title', 'description'];
-            $brandSearchData['q'] = (new QueryCapsule())->with('items', 'tags');
+            $brandSearchData['q'] = (new QueryCapsule())->with('items', 'tags')->where('state', 1);
             if ($tag) {
                 $brandSearchData['q'] =  $this->searchTagAliasQuery($brandSearchData['q'], $tag);
             }
@@ -892,7 +894,7 @@ class ItemFrontService extends ItemService
 
             $productSearchData = (clone $input)->toArray();
             $productSearchData['searchKeys'] = ['title', 'description'];
-            $productSearchData['q'] =  (new QueryCapsule())->with('brands', 'tags');
+            $productSearchData['q'] =  (new QueryCapsule())->with('brands', 'tags')->where('state', 1);
             if ($tag) {
                 $productSearchData['q'] = $this->searchTagAliasQuery($productSearchData['q'], $tag);
             }
@@ -902,6 +904,7 @@ class ItemFrontService extends ItemService
             $filesSearchData = $input->toArray();
             $brandSearchData['searchKeys'] = ['title', 'description'];
             $filesSearchData['q'] =  (new QueryCapsule())
+                ->where('state', 1)
                 ->with('brands', 'category', 'tags')
                 ->orderBy('publish_up', 'desc');
             if ($tag) {

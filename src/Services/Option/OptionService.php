@@ -3,6 +3,7 @@
 namespace DaydreamLab\Cms\Services\Option;
 
 use DaydreamLab\Cms\Helpers\DataHelper;
+use DaydreamLab\Cms\Helpers\SortHelper;
 use DaydreamLab\Cms\Models\Brand\Brand;
 use DaydreamLab\Cms\Models\Brand\Front\BrandFront;
 use DaydreamLab\Cms\Models\Category\Category;
@@ -351,13 +352,14 @@ class OptionService
                     $data[$type] = $brands->map(function ($b) {
                         return $b->only(['alias', 'title']);
                     })->sort(function ($a, $b) {
-                        $aFirstLetter = strtoupper(substr($a['title'], 0, 1));
-                        $bFirstLetter = strtoupper(substr($b['title'], 0, 1));
-
-                        if ($aFirstLetter !== $bFirstLetter) {
-                            return strcmp($aFirstLetter, $bFirstLetter);
-                        }
-                        return strcmp($a['title'], $b['title']);
+//                        $aFirstLetter = strtoupper(substr($a['title'], 0, 1));
+//                        $bFirstLetter = strtoupper(substr($b['title'], 0, 1));
+//
+//                        if ($aFirstLetter !== $bFirstLetter) {
+//                            return strcmp($aFirstLetter, $bFirstLetter);
+//                        }
+//                        return strcmp($a['title'], $b['title']);
+                        return SortHelper::brandTitleSort($a['title'], $b['title'], 1);
                     })->values();
                     break;
                 case 'city':
