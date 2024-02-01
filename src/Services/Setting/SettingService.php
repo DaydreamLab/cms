@@ -4,7 +4,6 @@ namespace DaydreamLab\Cms\Services\Setting;
 
 use DaydreamLab\Cms\Services\CmsService;
 use DaydreamLab\Cms\Services\Site\SiteService;
-use Illuminate\Support\Facades\Auth;
 
 class SettingService extends CmsService
 {
