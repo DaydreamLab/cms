@@ -422,4 +422,23 @@ class ItemFrontService extends ItemService
 
         return $result;
     }
+
+    public function plusDownloadCount(Collection $input)
+    {
+        $items = $this->search($input, false);
+
+        if ($items->count()) {
+            $item = $items->first();
+            $this->repo->update([
+                'download_count' => $item->download_count +1
+            ], $item);
+            $this->status   = Str::upper(Str::snake($this->type . 'GetItemSuccess'));
+            $this->response = ['download_count' => $item->download_count];
+        } else {
+            $this->status   = Str::upper(Str::snake($this->type . 'ItemNotExist'));
+            $this->response = null;
+        }
+
+        return $this->response;
+    }
 }

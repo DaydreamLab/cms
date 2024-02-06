@@ -124,4 +124,14 @@ class ItemFrontController extends BaseController
         $input->put('alias', $alias);
         return $this->service->download($input);
     }
+
+    public function plusDownloadCount(Request $request, $alias)
+    {
+        $this->service->plusDownloadCount(Helper::collect([
+            'alias'     =>$alias,
+            'language'  => $request->get('language') != '' ? $request->language : config('global.locale')
+        ]));
+
+        return ResponseHelper::response($this->service->status, $this->service->response);
+    }
 }

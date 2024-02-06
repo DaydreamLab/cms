@@ -30,6 +30,7 @@ Route::group(['middleware' => ['api'], 'prefix' => 'api'], function () {
         Route::post('search', 'DaydreamLab\Cms\Controllers\Item\Front\ItemFrontController@search');
         Route::get('{alias}', 'DaydreamLab\Cms\Controllers\Item\Front\ItemFrontController@getItemByAlias');
         Route::get('download/{alias}', 'DaydreamLab\Cms\Controllers\Item\Front\ItemFrontController@download');
+        Route::get('plusDownloadCount/{alias}', 'DaydreamLab\Cms\Controllers\Item\Front\ItemFrontController@plusDownloadCount');
     });
 
     Route::group(['prefix' => 'menu'], function (){

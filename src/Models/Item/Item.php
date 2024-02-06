@@ -46,6 +46,7 @@ class Item extends BaseModel
         'video',
         'link',
         'hits',
+        'download_count',
         'access',
         'featured',
         'featured_ordering',
