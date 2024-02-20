@@ -70,9 +70,9 @@ class BrandAdminStoreRequest extends CmsStoreRequest
     }
 
 
-    public function validated()
+    public function validated($key = null, $default = null)
     {
-        $validated = parent::validated();
+        $validated = parent::validated($key, $default);
         $params = RequestHelper::handleParams($validated->get('params'));
         if (!isset($validated->get('params')['subBrands'])) {
             $params['subBrands'] = [];

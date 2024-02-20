@@ -60,9 +60,9 @@ class ItemFrontContentSearchPost extends CmsSearchRequest
     }
 
 
-    public function validated()
+    public function validated($key = null, $default = null)
     {
-        $validated = parent::validated();
+        $validated = parent::validated($key, $default);
 
         if ( $content_type = $this->route('content_type') ) {
             $validated['content_type'] = $content_type;

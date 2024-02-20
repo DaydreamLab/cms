@@ -66,9 +66,9 @@ class CategoryAdminStorePost extends CmsStoreRequest
     }
 
 
-    public function validated()
+    public function validated($key = null, $default = null)
     {
-        $validated = parent::validated();
+        $validated = parent::validated($key, $default);
         $validated->put('params', RequestHelper::handleParams($validated->get('params')));
         if (!$validated->get('extension')) {
             $validated->put('extension', 'item');

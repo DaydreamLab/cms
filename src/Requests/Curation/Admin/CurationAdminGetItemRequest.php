@@ -34,9 +34,9 @@ class CurationAdminGetItemRequest extends CmsGetItemRequest
     }
 
 
-    public function validated()
+    public function validated($key = null, $default = null)
     {
-        $validated = parent::validated();
+        $validated = parent::validated($key, $default);
         $q = $validated->get('q');
         $q->with(['topics', 'topics.items', 'topics.events', 'topics.events.sessions']);
         $validated->put('q', $q);

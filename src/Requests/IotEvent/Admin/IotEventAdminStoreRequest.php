@@ -69,9 +69,9 @@ class IotEventAdminStoreRequest extends CmsStoreRequest
     }
 
 
-    public function validated()
+    public function validated($key = null, $default = null)
     {
-        $validated = parent::validated();
+        $validated = parent::validated($key, $default);
 
         if ( $start_date = $validated->get('start_date') ) {
             $utc_start_date = Carbon::parse($start_date, $this->user('api')->timezone);

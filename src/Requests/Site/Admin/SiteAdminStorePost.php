@@ -46,9 +46,9 @@ class SiteAdminStorePost extends CmsStoreRequest
     }
 
 
-    public function validated()
+    public function validated($key = null, $default = null)
     {
-        $validated = parent::validated();
+        $validated = parent::validated($key, $default);
         $params = RequestHelper::handleParams($validated->get('params'));
         $params['curationEnabled'] = $params['curationEnabled'] ?? 0;
         $validated->put('params', $params);

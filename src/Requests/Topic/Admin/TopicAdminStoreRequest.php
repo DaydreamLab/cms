@@ -63,9 +63,9 @@ class TopicAdminStoreRequest extends CmsStoreRequest
     }
 
 
-    public function validated()
+    public function validated($key = null, $default = null)
     {
-        $validated = parent::validated();
+        $validated = parent::validated($key, $default);
         if ($validated->get('publish_up')) {
             $validated->put('publish_up', Carbon::parse($validated->get('publish_up'), 'Asia/Taipei')
                 ->tz(config('app.timezone'))->toDateTimeString());

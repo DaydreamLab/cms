@@ -47,9 +47,9 @@ class SettingAdminStorePost extends CmsStoreRequest
     }
 
 
-    public function validated()
+    public function validated($key = null, $default = null)
     {
-        $validated = parent::validated();
+        $validated = parent::validated($key, $default);
         $validated->forget('q');
         return $validated;
     }

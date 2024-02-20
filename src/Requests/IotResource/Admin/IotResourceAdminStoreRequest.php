@@ -76,9 +76,9 @@ class IotResourceAdminStoreRequest extends CmsStoreRequest
     }
 
 
-    public function validated()
+    public function validated($key = null, $default = null)
     {
-        $validated = parent::validated();
+        $validated = parent::validated($key, $default);
 
         if ( $publish_up = $validated->get('publish_up') ) {
             $utc_publish_up = Carbon::parse($publish_up, $this->user('api')->timezone);

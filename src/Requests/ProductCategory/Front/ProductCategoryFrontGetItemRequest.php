@@ -32,9 +32,9 @@ class ProductCategoryFrontGetItemRequest extends CmsGetItemRequest
     }
 
 
-    public function validated()
+    public function validated($key = null, $default = null)
     {
-        $validated = parent::validated();
+        $validated = parent::validated($key, $default);
 
         return $validated;
     }

@@ -43,9 +43,9 @@ class ProductAdminSearchRequest extends CmsSearchRequest
     }
 
 
-    public function validated()
+    public function validated($key = null, $default = null)
     {
-        $validated = parent::validated();
+        $validated = parent::validated($key, $default);
 
         $q = $validated->get('q');
         if ($brand_id = $validated->get('brand_id') ) {

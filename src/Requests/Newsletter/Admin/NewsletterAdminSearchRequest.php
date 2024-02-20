@@ -40,9 +40,9 @@ class NewsletterAdminSearchRequest extends CmsSearchRequest
     }
 
 
-    public function validated()
+    public function validated($key = null, $default = null)
     {
-        $validated = parent::validated();
+        $validated = parent::validated($key, $default);
 
         if ($validated->get('state') == '') {
             $validated->forget('state');

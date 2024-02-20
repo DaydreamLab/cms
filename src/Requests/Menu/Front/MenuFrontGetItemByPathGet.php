@@ -27,9 +27,9 @@ class MenuFrontGetItemByPathGet extends CmsGetItemRequest
         return parent::rules();
     }
 
-    public function validated()
+    public function validated($key = null, $default = null)
     {
-        $validated = parent::validated();
+        $validated = parent::validated($key, $default);
         $validated->put('alias', $this->route('alias'));
         $validated->put('host', $this->getHttpHost());
         $validated->put('referer', $this->headers->get('referer'));
