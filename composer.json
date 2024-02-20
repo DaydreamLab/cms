@@ -17,9 +17,9 @@
     },
     "minimum-stability": "dev",
     "require": {
-        "daydreamlab/user": "dev-01/dev",
-        "daydreamlab/media": "dev-01/dev",
-        "fedeisas/laravel-mail-css-inliner": "^4.0",
+        "daydreamlab/user": "dev-01/main",
+        "daydreamlab/media": "dev-01/main",
+        "fedeisas/laravel-mail-css-inliner": "^5.0",
         "phpoffice/phpspreadsheet": "^1.18"
     },
     "repositories" : [
