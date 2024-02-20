@@ -32,7 +32,7 @@ class BrandFrontService extends BrandService
     public function getBrandByAlias(Collection $input)
     {
         $brand = $this->findBy('alias', '=', $input->get('alias'))->first();
-        if (!$brand) {
+        if (!$brand || $brand->state !== 1) {
             throw new NotFoundException('ItemNotExist');
         }
 
