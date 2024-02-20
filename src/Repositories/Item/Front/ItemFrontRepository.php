@@ -219,6 +219,13 @@ class ItemFrontRepository extends ItemRepository
                             $data['mixed']->push($item);
                         }
                     }
+                    // 精選文章不足用文章補
+                    while (count($data['featured']) < $featured_count)
+                    {
+                        $item = $data['mixed']->shift();
+                        $data['featured']->push($item);
+                    }
+
                     $data['pagination'] = $this->paginationFormat($all_items->toArray())['pagination'];
                 }
             }
