@@ -157,6 +157,12 @@ class ItemFrontRepository extends ItemRepository
                             $data['all']['mixed']->push($item);
                         }
                     }
+                    // 精選文章不足用文章補
+                    while (count($data['all']['featured']) < $featured_count)
+                    {
+                        $item = $data['all']['mixed']->shift();
+                        $data['all']['featured']->push($item);
+                    }
 
                     $data['all']['pagination'] = $this->paginationFormat($all_items->toArray())['pagination'];
 
@@ -197,6 +203,12 @@ class ItemFrontRepository extends ItemRepository
                             {
                                 $data[$category->title]['mixed']->push($item);
                             }
+                        }
+                        // 精選文章不足用文章補
+                        while (count($data[$category->title]['featured']) < $featured_count)
+                        {
+                            $item = $data[$category->title]['mixed']->shift();
+                            $data[$category->title]['featured']->push($item);
                         }
 
                         $data[$category->title]['pagination'] = $this->paginationFormat($sub_all_items->toArray())['pagination'];
