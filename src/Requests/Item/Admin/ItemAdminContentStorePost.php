@@ -70,6 +70,7 @@ class ItemAdminContentStorePost extends CmsStoreRequest
             'extrafields.*'         => 'nullable|array',
             'extrafields.*.id'      => 'nullable|integer',
             'extrafields.*.value'   => 'nullable',
+            'extrafields.*.alias'   => 'nullable',
             'tags'                  => 'nullable|array',
             'tags.*'                => 'nullable|array',
             'tags.*.id'             => 'required|integer',
