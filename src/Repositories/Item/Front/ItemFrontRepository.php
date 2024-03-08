@@ -121,6 +121,7 @@ class ItemFrontRepository extends ItemRepository
             else
             {
                 $featured_count     = $params['featured_count'];
+                $mixed_count        = $item_count - $featured_count;
                 $featured_items     = $this->getCategoriesItems($category_ids, $params, $featured_count, 1, false);
                 $featured_items_ids = $featured_items->map(function ($item){
                     return $item->id;
@@ -232,10 +233,13 @@ class ItemFrontRepository extends ItemRepository
                         }
                     }
                     // 精選文章不足用文章補
-                    while (count($data['featured']) < $featured_count)
-                    {
+                    if (!count($data['featured'])) {
                         $item = $data['mixed']->shift();
                         $data['featured']->push($item);
+                    }
+                    while (count($data['mixed']) > $mixed_count)
+                    {
+                        $item = $data['mixed']->pop();
                     }
 
                     $data['pagination'] = $this->paginationFormat($all_items->toArray())['pagination'];
