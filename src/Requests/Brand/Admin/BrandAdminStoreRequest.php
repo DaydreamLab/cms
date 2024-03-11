@@ -52,11 +52,11 @@ class BrandAdminStoreRequest extends CmsStoreRequest
 
             'contact'                   => 'nullable|array',
             'contact.*'                 => 'nullable|array',
-            'contact.*.last_name'       => 'nullable|string',
+            'contact.*.name'       => 'nullable|string',
             'contact.*.gender'          => 'nullable|string',
-            'contact.*.phone_code'      => 'nullable|string',
-            'contact.*.phone_number'    => 'nullable|string',
-            'contact.*.phone_extension' => 'nullable|string',
+            'contact.*.countryCode'     => 'nullable|string',
+            'contact.*.phone'           => 'nullable|string',
+            'contact.*.extension'       => 'nullable|string',
 
             'tracking'                  => 'nullable|array',
             'tracking.*'                => 'nullable|array',
