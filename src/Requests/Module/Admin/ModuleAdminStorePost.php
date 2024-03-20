@@ -48,6 +48,10 @@ class ModuleAdminStorePost extends ModuleStorePost
             $params['order'] = 'desc';
         }
 
+        if (isset($params['menu_ids'])) {
+            $params['menu_ids'] = collect($params['menu_ids'])->pluck('id')->all();
+        }
+
         if (isset($params['featured_display'])) {
             $params['featured_display'] = (int) $params['featured_display'];
         }
