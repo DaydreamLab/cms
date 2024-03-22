@@ -12,6 +12,7 @@ use DaydreamLab\Cms\Requests\Category\Front\CategoryFrontStorePost;
 use DaydreamLab\Cms\Requests\Category\Front\CategoryFrontStatePost;
 use DaydreamLab\Cms\Requests\Category\Front\CategoryFrontSearchPost;
 use DaydreamLab\Cms\Requests\Category\Front\CategoryFrontCheckoutPost;
+use Symfony\Component\HttpFoundation\Request;
 
 
 class CategoryFrontController extends BaseController
@@ -47,9 +48,12 @@ class CategoryFrontController extends BaseController
     }
 
 
-    public function getItemByAlias($alias)
+    public function getItemByAlias(Request $request, $alias)
     {
-        $this->service->getItemByAlias(Helper::collect(['alias'=>$alias]));
+        $this->service->getItemByAlias(Helper::collect([
+            'alias'=>$alias,
+            'language'  => $request->get('language') != '' ? $request->language : config('global.locale')
+        ]));
 
         return ResponseHelper::response($this->service->status, $this->service->response);
     }
