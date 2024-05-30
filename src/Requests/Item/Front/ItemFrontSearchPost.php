@@ -86,7 +86,15 @@ class ItemFrontSearchPost extends ItemSearchPost
         if ($rulesInput->has('search') && config('cms.item.use_word_segmentation')) {
             $rulesInput->put('search', Cut::cutForSearch($rulesInput->get('search')));
         }
-
+        $queries[] = function ($q) {
+            $q->where('publish_up', '<=', now());
+            $q->where(function ($q) {
+                $q->where('publish_down', '>=', now())
+                    ->orWhereNull('publish_down');
+            });
+        };
+        $rulesInput->put('queries', $queries);
+        
         return $rulesInput;
     }
 }
